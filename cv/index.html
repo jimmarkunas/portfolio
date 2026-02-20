@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV – Jim Markunas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* ── CV-page-specific styles ── */
+        .page { max-width: 1200px; margin: 0 auto; padding: 64px 40px 24px; position: relative; z-index: 1; }
+
+        .cv-hero { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 40px; padding-bottom: 48px; border-bottom: 1px solid var(--border); margin-bottom: 64px; }
+        .cv-name { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(52px, 6vw, 80px); line-height: 0.95; letter-spacing: -0.04em; font-weight: 700; }
+        .cv-name em { font-style: normal; color: var(--accent-blue); }
+        .cv-title { font-size: 15px; font-weight: 500; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 16px; }
+
+        .cv-meta { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+        .cv-meta a, .cv-meta span { font-size: 13px; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+        .cv-meta a:hover { color: var(--accent-blue); }
+        .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent-blue); flex-shrink: 0; }
+
+        .btn-download { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; background: var(--accent-blue); color: #fff !important; font-size: 14px; font-weight: 600; text-decoration: none; margin-top: 16px; transition: all 0.3s; box-shadow: 0 0 24px rgba(68,122,203,0.3); white-space: nowrap; }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(68,122,203,0.5); }
+
+        .cv-summary { font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 820px; margin-bottom: 72px; padding-left: 24px; border-left: 3px solid var(--accent-blue); }
+        .cv-summary strong { color: var(--text-primary); }
+
+        .cv-body { display: grid; grid-template-columns: 1fr 280px; gap: 64px; align-items: start; }
+
+        .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 28px; display: flex; align-items: center; gap: 12px; }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        /* Experience timeline */
+        .exp-list { display: flex; flex-direction: column; }
+        .exp-entry { position: relative; padding-left: 28px; padding-bottom: 48px; }
+        .exp-entry::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: linear-gradient(to bottom, rgba(68,122,203,0.3), transparent); }
+        .exp-entry::after { content: ''; position: absolute; left: -4px; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent-blue); box-shadow: 0 0 12px rgba(68,122,203,0.5); }
+        .exp-entry:last-child { padding-bottom: 0; }
+        .exp-entry:last-child::before { display: none; }
+
+        .exp-company { font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
+        .exp-role { font-size: 13px; font-weight: 500; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+        .exp-dates { font-size: 12px; color: var(--text-muted, #6b7280); margin-bottom: 14px; }
+
+        .sub-entry { margin-bottom: 20px; padding: 16px 18px; background: #1a1a24; border: 1px solid var(--border); border-left: 3px solid rgba(68,122,203,0.3); border-radius: 8px; transition: border-color 0.2s; }
+        .sub-entry:hover { border-left-color: var(--accent-blue); }
+        .sub-entry:last-child { margin-bottom: 0; }
+        .sub-client { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+        .sub-domain { font-weight: 400; color: var(--text-secondary); font-size: 12px; }
+
+        .exp-bullets { list-style: none; padding: 0; margin: 0; }
+        .exp-bullets li { font-size: 13.5px; color: var(--text-secondary); line-height: 1.65; padding-left: 16px; position: relative; margin-bottom: 6px; }
+        .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent-blue); font-size: 11px; top: 2px; }
+        .exp-bullets li:last-child { margin-bottom: 0; }
+
+        .cv-metric { display: inline-block; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.3); color: var(--accent-blue); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-left: 4px; white-space: nowrap; vertical-align: middle; }
+
+        /* Sidebar */
+        .cv-sidebar { display: flex; flex-direction: column; gap: 40px; }
+
+        .sidebar-item { padding: 14px 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; transition: border-color 0.2s; }
+        .sidebar-item:hover { border-color: rgba(68,122,203,0.3); }
+        .sidebar-item:last-child { margin-bottom: 0; }
+        .sidebar-item-label { font-size: 10px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+        .sidebar-item-value { font-size: 13px; color: var(--text-primary); font-weight: 500; line-height: 1.4; }
+
+        .cert-badge { display: flex; align-items: center; gap: 6px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; width: 100%; transition: border-color 0.2s; }
+        .cert-badge:hover { border-color: rgba(68,122,203,0.3); }
+        .cert-icon { font-size: 18px; }
+        .cert-text { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+        .cert-sub  { font-size: 10px; color: #6b7280; }
+
+        .tool-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+        .chip { background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.3); color: var(--accent-blue); padding: 5px 10px; border-radius: 5px; font-size: 11px; font-weight: 600; }
+
+        .award-card { background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(68,122,203,0.05)); border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; }
+        .award-name { font-size: 12px; font-weight: 700; color: #FFD700; margin-bottom: 2px; }
+        .award-ctx  { font-size: 11px; color: #6b7280; }
+
+        .addl-entry { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+        .addl-entry:last-child { border-bottom: none; padding-bottom: 0; }
+        .addl-company { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+        .addl-role    { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+        .addl-dates   { font-size: 11px; color: #6b7280; text-align: right; white-space: nowrap; }
+        .addl-desc    { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; margin-top: 6px; grid-column: 1 / -1; }
+
+        /* Footer override for CV page */
+        footer { padding: 48px 0; margin-top: 48px; }
+
+        @media (max-width: 960px) { .cv-body { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .page { padding: 40px 20px 24px; }
+            .cv-hero { grid-template-columns: 1fr; gap: 24px; }
+            .cv-meta { align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-gradient"></div>
+
+<!-- HEADER -->
+<header>
+    <nav class="container">
+        <div class="logo">
+            <a href="https://jimmarkunas.com/" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+                <img src="/images/logo/ujcg-logo-blue.png" alt="UJCG" style="width:32px;height:32px;object-fit:contain;">
+                JIM MARKUNAS
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/work/">Work</a></li>
+            <li><a href="/services/">Services</a></li>
+            <li><a href="/cv/" class="active">CV</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="/work/">Work</a>
+    <a href="/services/">Services</a>
+    <a href="/cv/">CV</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+</div>
+
+<!-- CV CONTENT -->
+<main class="page">
+
+    <!-- Hero -->
+    <div class="cv-hero fade-up">
+        <div>
+            <h1 class="cv-name">Jim <em>Markunas</em></h1>
+            <p class="cv-title">Sr. Technical Program Manager · Channel Product · Digital Transformation</p>
+        </div>
+        <div class="cv-meta">
+            <span><span class="dot"></span> jim@jimmarkunas.com</span>
+            <a href="https://linkedin.com/in/jimmarkunas" target="_blank" rel="noopener noreferrer"><span class="dot"></span> linkedin.com/in/jimmarkunas</a>
+            <a href="mailto:jim.com?subject=Resume%20Request" class="btn-download">↓ Download Resume</a>
+        </div>
+    </div>
+
+    <!-- Summary -->
+    <p class="cv-summary fade-up stagger-1">
+        Channel Product &amp; Program leader for <strong>regulated digital transformation</strong> and platform modernization.
+        Bridges IT + business to drive roadmaps, delivery, and KPIs/SLAs across customer channels and Martech/PXM.
+        Proven results: <strong>~$120M YoY uplift</strong> at DIRECTV, <strong>Smart 20 Award</strong> at CPS Energy,
+        and CXM workflow automation for <strong>12k+ New York Life agents</strong>.
+    </p>
+
+    <!-- Body -->
+    <div class="cv-body">
+
+        <!-- Main column -->
+        <div class="cv-main">
+            <div class="fade-up stagger-2">
+                <div class="section-label">Experience</div>
+                <div class="exp-list">
+
+                    <!-- TACG -->
+                    <div class="exp-entry">
+                        <div class="exp-company">The Austin Consulting Group</div>
+                        <div class="exp-role">Sr. Technical Project Manager · Consultant</div>
+                        <div class="exp-dates">03/2023 – Present</div>
+                        <div class="sub-entry">
+                            <div class="sub-client">DIRECTV <span class="sub-domain">— Customer Channels / Martech</span></div>
+                            <ul class="exp-bullets">
+                                <li>Drove end-to-end delivery of a cross-functional marketing/product/engineering program; translated executive goals into roadmap and release milestones; managed sprints, dependencies, and reporting to support <span class="cv-metric">~$120M YoY uplift</span></li>
+                            </ul>
+                        </div>
+                        <div class="sub-entry">
+                            <div class="sub-client">CPS Energy <span class="sub-domain">— Customer Experience / Service Channels</span></div>
+                            <ul class="exp-bullets">
+                                <li>Owned delivery of smart-grid and sustainability workflow enhancements; managed prioritized backlog and release plan; defined KPIs/OKRs driving <span class="cv-metric">+18% engagement</span> <span class="cv-metric">-12% support calls</span></li>
+                                <li>Recognized with the global <strong style="color:#FFD700;">Smart 20 Award</strong></li>
+                            </ul>
+                        </div>
+                        <div class="sub-entry">
+                            <div class="sub-client">New York Life / Fusion92 <span class="sub-domain">— CXM / Content Ops</span></div>
+                            <ul class="exp-bullets">
+                                <li>Led end-to-end delivery of a compliance-driven CMS/site builder for 12k+ agents; standardized intake and release-readiness processes delivering <span class="cv-metric">~40% faster time-to-value</span> <span class="cv-metric">~30% fewer defects</span></li>
+                            </ul>
+                        </div>
+                        <div class="sub-entry">
+                            <div class="sub-client">Modere <span class="sub-domain">— Health &amp; Beauty DTC / PIM-DAM</span></div>
+                            <ul class="exp-bullets">
+                                <li>Planned and delivered composable BigCommerce + Pimcore (PIM/DAM) + Azure program; managed product data, PDP/catalog, and cutover readiness; reduced infra costs <span class="cv-metric">35%</span> and accelerated GTM <span class="cv-metric">65%+</span> — MACH Impact Award nominee</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Boehringer -->
+                    <div class="exp-entry">
+                        <div class="exp-company">Boehringer Ingelheim <span style="font-size:13px;font-weight:400;color:#6b7280;">via Corra / Publicis Sapient</span></div>
+                        <div class="exp-role">Sr. Technical Project Manager</div>
+                        <div class="exp-dates">09/2020 – 03/2023</div>
+                        <ul class="exp-bullets">
+                            <li>Led multi-vendor product portfolio delivery, budgets, and timelines for global customer channel migrations across US &amp; EU; aligned roadmaps to business priorities during phased cutovers</li>
+                            <li>Owned release planning and sprint execution for Adobe Commerce Cloud programmes; delivered channel experience improvements driving <span class="cv-metric">~23%+ conversion uplift</span></li>
+                            <li>Led requirements elicitation for Oracle-to-SAP migration workstreams; wrote epics, stories, and acceptance criteria; reduced defects <span class="cv-metric">~30%</span></li>
+                            <li>Translated integration and regulatory constraints into delivery-ready scope; coordinated dependencies, UAT, and go-live with global stakeholders</li>
+                        </ul>
+                    </div>
+
+                    <!-- BigCommerce -->
+                    <div class="exp-entry">
+                        <div class="exp-company">BigCommerce</div>
+                        <div class="exp-role">Sr. Technical Project Manager</div>
+                        <div class="exp-dates">10/2018 – 08/2020</div>
+                        <ul class="exp-bullets">
+                            <li>Ran discovery and requirements workshops for enterprise B2B and DTC merchants across North America and EMEA; translated channel needs into user stories and delivery plans</li>
+                            <li>Managed integrations with FinTech, ERP, OMS, and logistics partners via REST APIs; coordinated release readiness to support <span class="cv-metric">50–75% higher MRR</span></li>
+                            <li>Delivered recurring catalog, checkout, and payments improvements; reduced time-to-value <span class="cv-metric">~25%</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Shopify -->
+                    <div class="exp-entry">
+                        <div class="exp-company">Shopify</div>
+                        <div class="exp-role">Sr. Technical Project Manager</div>
+                        <div class="exp-dates">06/2016 – 09/2018</div>
+                        <ul class="exp-bullets">
+                            <li>Led Shopify Plus launch for Frederick's of Hollywood; coordinated cross-functional execution; cut TCO <span class="cv-metric">25%</span> and improved time-to-value</li>
+                        </ul>
+                    </div>
+
+                    <!-- BCG -->
+                    <div class="exp-entry">
+                        <div class="exp-company">The Boston Consulting Group <span style="font-size:13px;font-weight:400;color:#6b7280;">· Client: LEGO</span></div>
+                        <div class="exp-role">Program Manager</div>
+                        <div class="exp-dates">06/2015 – 06/2016</div>
+                        <ul class="exp-bullets">
+                            <li>Defined system interactions and requirements for LEGO's omni-channel stack; partnered with architects &amp; business stakeholders; referenced in <strong style="color:#ffffff;">MIT/Harvard case studies</strong> on digital transformation</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Earlier Career -->
+            <div class="fade-up stagger-3" style="margin-top:56px;">
+                <div class="section-label">Earlier Career</div>
+                <div>
+                    <div class="addl-entry">
+                        <div><div class="addl-company">American Apparel</div><div class="addl-role">Program Manager</div></div>
+                        <div class="addl-dates">2013 – 2015</div>
+                        <div class="addl-desc">Expanded across 16+ countries; standardized content/catalog and fulfillment; boosted online-to-store conversion <span class="cv-metric">20%</span> and enabled BOPIS/ship-from-store.</div>
+                    </div>
+                    <div class="addl-entry">
+                        <div><div class="addl-company">DIRECTV</div><div class="addl-role">Product Manager</div></div>
+                        <div class="addl-dates">2012 – 2013</div>
+                        <div class="addl-desc">Led delivery of cross-platform streaming across web, mobile, and connected devices; partnered with engineering and ops on release readiness and post-incident improvements.</div>
+                    </div>
+                    <div class="addl-entry">
+                        <div><div class="addl-company">Warner Bros. / HBO</div><div class="addl-role">Product Manager</div></div>
+                        <div class="addl-dates">2010 – 2012</div>
+                        <div class="addl-desc">Defined features and acceptance criteria; coordinated engineering, UX, and content ops to ship high-impact releases across consumer channels.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="cv-sidebar fade-up stagger-4">
+            <div>
+                <div class="section-label">Recognition</div>
+                <div class="award-card"><div class="award-name">🏆 Global Smart 20 Award</div><div class="award-ctx">CPS Energy Smart Streetlights</div></div>
+                <div class="award-card"><div class="award-name">🏅 MACH Impact Award Nominee</div><div class="award-ctx">Modere Composable Commerce</div></div>
+                <div class="award-card"><div class="award-name">📚 MIT/Harvard Case Study</div><div class="award-ctx">BCG/LEGO Digital Transformation</div></div>
+                <div class="award-card"><div class="award-name">📰 Press</div><div class="award-ctx">Profiled by Adobe, Business Insider, Engadget; AWS Case Study</div></div>
+            </div>
+            <div>
+                <div class="section-label">Certifications</div>
+                <div class="cert-badge"><span class="cert-icon">🎓</span><div><div class="cert-text">PMP</div><div class="cert-sub">Project Management Professional</div></div></div>
+                <div class="cert-badge"><span class="cert-icon">🔄</span><div><div class="cert-text">CSM</div><div class="cert-sub">Certified Scrum Master</div></div></div>
+            </div>
+            <div>
+                <div class="section-label">Education</div>
+                <div class="sidebar-item"><div class="sidebar-item-label">Degree</div><div class="sidebar-item-value">B.A. Integrated Marketing Communications</div></div>
+                <div class="sidebar-item"><div class="sidebar-item-label">Institution</div><div class="sidebar-item-value">Roosevelt University — Chicago, IL</div></div>
+            </div>
+            <div>
+                <div class="section-label">Tools &amp; Platforms</div>
+                <div class="tool-chips">
+                    <span class="chip">Adobe Commerce</span><span class="chip">BigCommerce</span><span class="chip">Shopify Plus</span>
+                    <span class="chip">SAP</span><span class="chip">Oracle</span><span class="chip">Pimcore PIM/DAM</span>
+                    <span class="chip">Salsify</span><span class="chip">Azure</span><span class="chip">REST APIs</span>
+                    <span class="chip">SQL</span><span class="chip">Jira</span><span class="chip">Confluence</span>
+                    <span class="chip">Figma</span><span class="chip">Agile/Scrum</span><span class="chip">SAFe</span>
+                </div>
+            </div>
+            <div>
+                <div class="section-label">Impact Numbers</div>
+                <div class="sidebar-item"><div class="sidebar-item-label">Revenue Influence</div><div class="sidebar-item-value" style="font-size:20px;font-weight:700;color:var(--accent-blue);">~$120M YoY</div></div>
+                <div class="sidebar-item"><div class="sidebar-item-label">Agents Served</div><div class="sidebar-item-value" style="font-size:20px;font-weight:700;color:var(--accent-blue);">12,000+</div></div>
+                <div class="sidebar-item"><div class="sidebar-item-label">Infrastructure Savings</div><div class="sidebar-item-value" style="font-size:20px;font-weight:700;color:var(--accent-blue);">35%</div></div>
+                <div class="sidebar-item"><div class="sidebar-item-label">GTM Acceleration</div><div class="sidebar-item-value" style="font-size:20px;font-weight:700;color:var(--accent-blue);">65%+</div></div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<!-- FOOTER -->
+<footer id="contact">
+    <div class="container fade-up">
+        <h2>Let's Build Something <span class="gradient-text">Extraordinary</span></h2>
+        <p>Available for product leadership, platform architecture, and transformation program roles. Based in San Antonio, open to remote.</p>
+        <div class="footer-cta">
+            <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
+            <a href="/cv/" class="btn btn-secondary">View Full Resume</a>
+        </div>
+        <div class="footer-links">
+            <a href="https://linkedin.com/in/jimmarkunas" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/jimmarkunas" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="mailto:jim@jimmarkunas.com">Email</a>
+            <a href="https://x.com/jimmarkunas" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href="/freebies/">Freebies</a>
+        </div>
+    </div>
+</footer>
+
+<script src="/script.js"></script>
+</body>
+</html>
