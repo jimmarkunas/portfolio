@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBDistillery Fintech Product Launch - Jim Markunas | Case Study</title>
+    <meta name="description" content="Got a $15M CBD merchant banked when every processor said no, then built the Square + BigCommerce + OrderGroove stack that grew GMV to $40M with 89% subscription retention.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="CBDistillery Fintech Product Launch - Jim Markunas">
+    <meta property="og:description" content="Got a $15M CBD merchant banked when every processor said no, then built the Square + BigCommerce + OrderGroove stack that grew GMV to $40M with 89% subscription retention.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jimmarkunas.com/case-studies/cbdistillery">
+
+    <!-- Global Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" style="width:32px;height:32px;object-fit:contain;">
+                    JIM MARKUNAS
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/work/">Work</a></li>
+                <li><a href="/services/">Services</a></li>
+                <li><a href="/cv/">CV</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/work/">Work</a>
+        <a href="/services/">Services</a>
+        <a href="/cv/">CV</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+    </div>
+
+    <!-- Banner -->
+    <div class="case-banner">
+        <div class="banner-content">
+            <span class="banner-badge badge-company">CBDISTILLERY</span>
+            <span class="banner-badge badge-award">$15M → $40M GMV</span>
+            <span class="banner-badge badge-press">89% Subscription Retention</span>
+        </div>
+    </div>
+
+    <!-- Anchor Navigation -->
+    <nav class="anchor-nav" aria-label="Case study sections">
+        <div class="anchor-nav-inner">
+            <a href="#overview">Overview</a>
+            <a href="#context">Context</a>
+            <a href="#problem">Problem</a>
+            <a href="#ownership">Ownership</a>
+            <a href="#solution">Solution</a>
+            <a href="#delivery">Delivery</a>
+            <a href="#results">Results</a>
+            <a href="#proof">Proof</a>
+        </div>
+    </nav>
+
+    <!-- S0: Overview -->
+    <section class="case-hero" id="overview">
+        <div class="container">
+            <h1 class="fade-up">CBDistillery: Banking a <span style="color: var(--accent-blue);">High-Risk Brand</span></h1>
+            
+            <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
+                <div class="metric-card">
+                    <span class="metric-value">$15M→$40M</span>
+                    <span class="metric-label">GMV Growth</span>
+                    <div class="metric-breakdown">On the new stack</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value">18%+</span>
+                    <span class="metric-label">Subscription Order Share</span>
+                    <div class="metric-breakdown">From near zero</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value">89%</span>
+                    <span class="metric-label">Subscription Retention</span>
+                    <div class="metric-breakdown">LTV growing</div>
+                </div>
+            </div>
+            
+            <p class="subheadline fade-up stagger-2">Their payment provider dropped them overnight. A $15M CBD brand was suddenly at risk of not being able to process cards at all. I negotiated through 10+ banks and processors, secured Square as their long-term payments spine, and built the BigCommerce + OrderGroove stack that grew GMV to $40M.</p>
+
+            <div class="tldr-block fade-up stagger-3">
+                <div class="tldr-grid">
+                    <div class="tldr-item">
+                        <h4>Problem</h4>
+                        <ul>
+                            <li>Payment provider dropped them overnight</li>
+                            <li>10+ processors refused high-risk CBD volume</li>
+                            <li>Subscriptions broken without secure card vaulting</li>
+                            <li>WooCommerce couldn't support enterprise scale</li>
+                        </ul>
+                    </div>
+                    <div class="tldr-item">
+                        <h4>What I Owned</h4>
+                        <ul>
+                            <li>Fintech negotiation across 10+ banks & gateways</li>
+                            <li>Square deal architecture and contract terms</li>
+                            <li>BC + Square + OrderGroove integration design</li>
+                            <li>Reusable high-risk merchant blueprint</li>
+                        </ul>
+                    </div>
+                    <div class="tldr-item">
+                        <h4>What Shipped</h4>
+                        <ul>
+                            <li>Square as payments spine (no reserves, 3yr deal)</li>
+                            <li>BigCommerce re-platform from WooCommerce</li>
+                            <li>OrderGroove subscription engine on Square rails</li>
+                            <li>Unified token vault across all order types</li>
+                        </ul>
+                    </div>
+                    <div class="tldr-item">
+                        <h4>Results</h4>
+                        <ul>
+                            <li>GMV: $15M → $40M by 2022</li>
+                            <li>18%+ orders on subscription</li>
+                            <li>89% subscription retention rate</li>
+                            <li>BC + OG reference pattern for high-risk merchants</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-cta fade-up stagger-3">
+                <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
+                <a href="https://jimmarkunas.com/cv/" class="btn btn-secondary">Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- S1: Context -->
+    <section class="case-section" id="context" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2 style="text-align: center;">Context & Stakes</h2>
+                <p style="text-align: center;">CBDistillery wasn't coming to BigCommerce for a nicer theme. They were coming because their payments life had blown up. On WooCommerce, they were already straining the limits of a non-enterprise stack. Then their payment provider dropped them. Overnight, a $15M brand was at risk of not being able to process cards at all—and without solving payments first, nothing else mattered.</p>
+                
+                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
+                    <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Business Trajectory: Before vs. After</h4>
+                    <div style="display: flex; gap: 48px; align-items: flex-end; justify-content: center;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">BEFORE</div>
+                            <div style="width: 240px; height: 240px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 16px;">
+                                <div style="font-size: 32px; font-weight: 700; color: white; line-height: 1.2;">De-Banked</div>
+                                <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-top: 8px;">$15M GMV at risk</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 40px; color: var(--text-secondary); padding-bottom: 55px;">→</div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">AFTER</div>
+                            <div style="width: 240px; height: 160px; background: var(--accent-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; padding: 16px;">
+                                <div style="font-size: 28px; font-weight: 700; color: white; line-height: 1.2;">$40M GMV</div>
+                                <div style="font-size: 14px; color: rgba(255,255,255,0.8);">Stable · Subscriptions · Growing</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">Payments solved first — everything else followed</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+                    <div class="col-card">
+                        <h4>The Existential Threat</h4>
+                        <ul>
+                            <li>Processor dropped them with no warning</li>
+                            <li>Card networks treat high-volume CBD as radioactive</li>
+                            <li>Without payments, there's no business — full stop</li>
+                        </ul>
+                    </div>
+                    <div class="col-card">
+                        <h4>Why It Was Hard</h4>
+                        <ul>
+                            <li>10+ banks and gateways refused their volume</li>
+                            <li>Subscriptions required secure vaulting most processors wouldn't touch</li>
+                            <li>Any wrong move = another drop, possibly mid-campaign</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S2: Problem -->
+    <section class="case-section" id="problem" style="border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2>The Challenge</h2>
+                
+                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
+                    <div style="text-align: center; color: var(--text-secondary);">
+                        <div style="font-size: 48px; margin-bottom: 16px;">💳</div>
+                        <div style="font-size: 18px; font-weight: 600;">Payments-First Commerce for a High-Risk Brand</div>
+                        <div style="font-size: 14px; margin-top: 8px;">Secure the processor first—everything else is secondary</div>
+                    </div>
+                </div>
+
+                <figure class="lightbox-trigger" data-src="">
+                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
+                        <div style="font-size:15px;font-weight:600;opacity:0.8;">Square + BC + OrderGroove: Payments Architecture</div>
+                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                    </div>
+                    <figcaption>Square as the central payments spine — all order types, one token vault, one set of retry and dunning rules</figcaption>
+                    <ul class="notice-list">
+                        <li>Card networks treat CBD as high-risk — most processors won't touch $15M+ volume</li>
+                        <li>Subscriptions require secure card vaulting most gateways in this space refuse to support</li>
+                        <li>One-time, subscription, and repeat orders all needed to share the same rails</li>
+                    </ul>
+                </figure>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
+                    <div class="col-card" style="border-left: 4px solid #ef4444;">
+                        <h4 style="color: #ef4444;">Payments Blockers</h4>
+                        <ul>
+                            <li>Existing processor dropped them — no warning</li>
+                            <li>10+ banks and gateways refused their volume</li>
+                            <li>No vaulting = no subscriptions = no recurring revenue</li>
+                            <li>Predatory reserves and arbitrary volume caps from the few willing to talk</li>
+                        </ul>
+                    </div>
+                    <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
+                        <h4 style="color: var(--accent-blue);">Platform Blockers</h4>
+                        <ul>
+                            <li>WooCommerce couldn't scale to enterprise traffic and volume</li>
+                            <li>No native Square + BigCommerce tokenized integration existed</li>
+                            <li>OrderGroove subscriptions depended on reliable card vaulting</li>
+                            <li>Finance needed clean settlement reporting without manual gymnastics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout" style="margin-top: 24px;">
+                    <p><strong>The Core Problem:</strong> Without a processor willing to underwrite CBDistillery for the long term, there was no point discussing site design, UX, or campaigns. Payments were the existential problem — and that's where I started.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S3: Ownership -->
+    <section class="case-section" id="ownership" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2>What I Owned</h2>
+                
+                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(68, 122, 203, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
+                    <div style="text-align: center; color: var(--text-secondary);">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🏦</div>
+                        <div style="font-size: 18px; font-weight: 600;">Senior PM + Solutions Architect + Fintech Negotiator</div>
+                        <div style="font-size: 14px; margin-top: 8px;">I acted like a founder whose company would die if payments fell through</div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <div class="col-card">
+                        <h4>Fintech Negotiation & Deal Architecture</h4>
+                        <ul>
+                            <li>Personally worked through 10+ banks, gateways, and processors</li>
+                            <li>Negotiated Square deal: no predatory reserves, no arbitrary volume caps</li>
+                            <li>Secured a 3-year commitment so campaigns could be planned without fear of being dropped</li>
+                            <li>Contract terms and risk rules negotiated upfront with acquiring banks</li>
+                        </ul>
+                    </div>
+                    <div class="col-card">
+                        <h4>Integration Lead: BC + Square + OrderGroove</h4>
+                        <ul>
+                            <li>Led technical design for all three systems: flows, data mappings, edge cases</li>
+                            <li>Pushed BC engineering to prioritize the tokenized Square integration</li>
+                            <li>Designed unified token vault across one-time, subscription, and repeat orders</li>
+                            <li>Built retry logic and dunning rules into the same payment rails</li>
+                        </ul>
+                    </div>
+                    <div class="col-card">
+                        <h4>Risk & Compliance Architecture</h4>
+                        <ul>
+                            <li>Enforced product-level restrictions within the payment flow</li>
+                            <li>Gave acquiring banks the KYC and reporting they needed to stay comfortable</li>
+                            <li>Designed controls so CBDistillery could grow without triggering review</li>
+                            <li>Zero predatory terms — non-negotiable from day one</li>
+                        </ul>
+                    </div>
+                    <div class="col-card">
+                        <h4>Reusable Blueprint Thinking</h4>
+                        <ul>
+                            <li>Treated this as a reference pattern, not a one-off rescue</li>
+                            <li>Documented flows BC and OrderGroove could reuse for other high-risk merchants</li>
+                            <li>Integration architecture designed so future complex merchants could plug in</li>
+                            <li>BC now points to CBDistillery as the CBD reference pattern</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout" style="margin-top: 24px;">
+                    <p><strong>Adrian Sorapuru, Director of Client Partnership Sales, BigCommerce:</strong> "Jim, you really went to bat for your client. You made us and them a lot of money in the process, do the same thing for every account, and you'll continue to make more money than Fritz."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S4: Solution -->
+    <section class="case-section" id="solution" style="border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2>The Solution</h2>
+                
+                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.15) 0%, rgba(34, 211, 238, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
+                    <div style="text-align: center; color: var(--text-secondary);">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🏗️</div>
+                        <div style="font-size: 18px; font-weight: 600;">Payments-First Commerce Stack</div>
+                        <div style="font-size: 14px; margin-top: 8px;">Square as spine · BC for commerce · OrderGroove for subscriptions</div>
+                    </div>
+                </div>
+
+                <figure class="lightbox-trigger" data-src="">
+                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
+                        <div style="font-size:15px;font-weight:600;opacity:0.8;">CBDistillery Stack: Architecture Diagram</div>
+                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                    </div>
+                    <figcaption>Square at the center of every payment flow — BC handles catalog, cart, and checkout; Square handles authorization, capture, and refunds</figcaption>
+                    <ul class="notice-list">
+                        <li>All card details tokenized through Square — BC never touches raw card data</li>
+                        <li>OrderGroove billing events run through the same Square rails as one-time orders</li>
+                        <li>Finance gets clean settlement reporting without manual reconciliation</li>
+                    </ul>
+                </figure>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <div class="col-card">
+                        <h4>Commerce Stack</h4>
+                        <ul>
+                            <li>BigCommerce for catalog, cart, tax, and checkout</li>
+                            <li>Custom Square gateway integration — tokenized, not off-the-shelf</li>
+                            <li>Square handles all authorization, capture, and refunds via API</li>
+                            <li>WooCommerce fully retired; enterprise-grade traffic handling from day one</li>
+                        </ul>
+                    </div>
+                    <div class="col-card">
+                        <h4>Subscriptions & Retention</h4>
+                        <ul>
+                            <li>OrderGroove for recurring billing and subscription management</li>
+                            <li>All OG billing events run through Square rails — no separate vault</li>
+                            <li>Shared retry logic and dunning rules across all order types</li>
+                            <li>One-time and subscription orders reconcile into same finance reporting</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <figure class="lightbox-trigger" data-src="">
+                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
+                        <div style="font-size:15px;font-weight:600;opacity:0.8;">OrderGroove + Square: Subscription Billing Flow</div>
+                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                    </div>
+                    <figcaption>Unified token vault: one-time purchases, subscriptions, and high-value repeat orders share the same Square rails</figcaption>
+                    <ul class="notice-list">
+                        <li>Card vaulted once — reused across all future order types without re-entry</li>
+                        <li>Dunning and retry logic handles failed payments without manual intervention</li>
+                        <li>Pattern documented as reusable blueprint for other high-risk BC merchants</li>
+                    </ul>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- S5: Delivery -->
+    <section class="case-section" id="delivery" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2>Delivery Timeline</h2>
+                
+                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+                        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--border);"></div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #ef4444; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">Crisis</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">De-Banked</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">Processor drops them</div>
+                        </div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">Search</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">10+ Processors</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">All declined</div>
+                        </div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">Square</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Deal Signed</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">3yr · no reserves</div>
+                        </div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">Build</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Integration</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">BC + Square + OG</div>
+                        </div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #0a0a0f;">Launch</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">BC Goes Live</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">Stable payments</div>
+                        </div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #0a0a0f;">$40M</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">GMV by 2022</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">89% sub retention</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Crisis: Processor Drops Them</h4>
+                        <p>Existing payment provider terminates the account. $15M brand at immediate risk of not being able to process cards. Payments become the only thing that matters</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Fintech Search: 10+ Banks Declined</h4>
+                        <p>Worked through every realistic gateway and processor option. CBD volume at this scale was radioactive to most. Documented terms, reserves, and risk profiles across all conversations</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Square Deal Negotiated & Signed</h4>
+                        <p>Secured Square as long-term processor: no predatory rolling reserves, no arbitrary volume caps, 3-year commitment. Contract terms and risk controls negotiated upfront with acquiring banks</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Integration Build: BC + Square + OrderGroove</h4>
+                        <p>Led technical design for all three systems. Pushed BC engineering to build the tokenized Square integration. Designed unified token vault, retry logic, and dunning rules across all order types</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>BigCommerce Launch</h4>
+                        <p>Re-platformed from WooCommerce. Payments stable, subscriptions live, finance reporting clean. CMO Chris Van Dusen: "Jim saved the day with this Square deal. The team is happy."</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Scale: $40M GMV by 2022</h4>
+                        <p>GMV grew from $15M to $40M. 18%+ of orders on subscription, 89% retention rate. Silk and OrderGroove published case studies. BC uses CBDistillery as the high-risk merchant reference pattern</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S6: Results -->
+    <section class="case-section" id="results" style="border-top: 1px solid var(--border);">
+        <div class="container">
+            <div style="background: var(--bg-secondary); border: 2px solid var(--accent-blue); border-radius: 12px; padding: 40px;">
+                <div class="content-block fade-up">
+                    <h2>Results</h2>
+                
+                <div class="metrics-row">
+                    <div class="metric-card">
+                        <span class="metric-value">$15M→$40M</span>
+                        <span class="metric-label">GMV Growth</span>
+                        <div class="metric-breakdown">2020 → 2022</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">89%</span>
+                        <span class="metric-label">Subscription Retention</span>
+                        <div class="metric-breakdown">18%+ of orders on sub</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value" style="font-size: 22px;">BC Reference</span>
+                        <span class="metric-label">High-Risk Merchant Pattern</span>
+                        <div class="metric-breakdown">OG + Silk case studies</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch;">
+                    <div class="col-card" style="display: flex; flex-direction: column;">
+                        <h4>Before Re-Platform</h4>
+                        <ul style="flex: 1;">
+                            <li>Payments fragile — provider could pull the plug anytime (and did)</li>
+                            <li>No processor willing to underwrite high-GMV CBD at meaningful volume</li>
+                            <li>Subscriptions broken — card vaulting not wired to enterprise standards</li>
+                            <li>WooCommerce straining under volume; no path to scale</li>
+                        </ul>
+                    </div>
+                    <div class="col-card" style="display: flex; flex-direction: column;">
+                        <h4>After Re-Platform</h4>
+                        <ul style="flex: 1;">
+                            <li>Long-term payments home with Square — underwritten for volume and risk profile</li>
+                            <li>Subscriptions became a core revenue engine with 89% retention</li>
+                            <li>GMV climbed from $15M to $40M on the new architecture</li>
+                            <li>BC + OG gained a reusable reference pattern for high-risk merchants</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout" style="margin-top: 32px;">
+                    <p><strong>The Real Story:</strong> This wasn't "we launched a prettier store." It was de-risking the entire business model so growth could actually stick — and leaving BigCommerce with a blueprint for every complex, high-risk merchant that comes after.</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S7: Proof -->
+    <section class="case-section" id="proof">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2>Recognition & Impact</h2>
+                
+                <div class="recognition-card fade-up stagger-1">
+                    <span class="recognition-icon">💬</span>
+                    <div class="recognition-content">
+                        <h3>CMO: "Jim Saved the Day"</h3>
+                        <p>CBDistillery CMO Chris Van Dusen wrote to my VP: "Jim saved the day with this Square deal. The team is happy." Adrian Sorapuru (Director of Client Partnership Sales, BC) followed up: "Jim, you really went to bat for your client. You made us and them a lot of money in the process."</p>
+                    </div>
+                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-primary">Request Proof</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-2">
+                    <span class="recognition-icon">📰</span>
+                    <div class="recognition-content">
+                        <h3>Silk Commerce & OrderGroove Case Studies</h3>
+                        <p>Silk Commerce published two case studies on the CBDistillery implementation. OrderGroove published two more highlighting the subscription success and retention metrics. CBDistillery is now BC's reference pattern for high-risk, subscription-driven merchants.</p>
+                    </div>
+                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Request Docs</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-3">
+                    <span class="recognition-icon">📈</span>
+                    <div class="recognition-content">
+                        <h3>$40M GMV + 89% Subscription Retention</h3>
+                        <p>GMV grew from $15M to $40M by 2022 on the architecture I designed. 18%+ of all orders running on subscription. 89% retention rate as LTV grew. The payments-first approach didn't just stabilize the business — it unlocked the growth engine.</p>
+                    </div>
+                    <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-secondary">Book a Call</a>
+                </div>
+
+                <h2 style="margin-top: 60px;">Artifacts</h2>
+                <p>Public case studies and redacted samples available on request:</p>
+                
+                <div class="artifact-gallery">
+                    <div class="artifact-card">
+                        <div class="artifact-thumbnail">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="30" width="160" height="20" fill="#447ACB" opacity="0.3"/>
+                                <rect x="20" y="60" width="120" height="10" fill="#447ACB" opacity="0.2"/>
+                                <rect x="20" y="80" width="140" height="10" fill="#447ACB" opacity="0.2"/>
+                                <rect x="20" y="100" width="100" height="10" fill="#447ACB" opacity="0.2"/>
+                                <circle cx="30" cy="135" r="8" fill="#447ACB" opacity="0.3"/>
+                                <rect x="45" y="130" width="100" height="10" fill="#447ACB" opacity="0.2"/>
+                                <circle cx="30" cy="160" r="8" fill="#447ACB" opacity="0.3"/>
+                                <rect x="45" y="155" width="120" height="10" fill="#447ACB" opacity="0.2"/>
+                            </svg>
+                        </div>
+                        <h4>Silk Commerce Case Studies (×2)</h4>
+                        <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Request Full Packet</a>
+                    </div>
+                    
+                    <div class="artifact-card">
+                        <div class="artifact-thumbnail">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" y="20" width="180" height="30" fill="#447ACB" opacity="0.2" rx="4"/>
+                                <rect x="10" y="60" width="180" height="30" fill="#447ACB" opacity="0.15" rx="4"/>
+                                <rect x="10" y="100" width="180" height="30" fill="#447ACB" opacity="0.25" rx="4"/>
+                                <rect x="10" y="140" width="180" height="30" fill="#447ACB" opacity="0.15" rx="4"/>
+                                <line x1="50" y1="20" x2="50" y2="170" stroke="#447ACB" stroke-width="2" opacity="0.3"/>
+                                <line x1="100" y1="20" x2="100" y2="170" stroke="#447ACB" stroke-width="2" opacity="0.3"/>
+                                <line x1="150" y1="20" x2="150" y2="170" stroke="#447ACB" stroke-width="2" opacity="0.3"/>
+                            </svg>
+                        </div>
+                        <h4>OrderGroove Case Studies (×2)</h4>
+                        <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Request Full Packet</a>
+                    </div>
+                    
+                    <div class="artifact-card">
+                        <div class="artifact-thumbnail">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="30" y="30" width="140" height="140" fill="none" stroke="#447ACB" stroke-width="2" opacity="0.3"/>
+                                <text x="100" y="60" text-anchor="middle" fill="#447ACB" font-size="11" opacity="0.5">Payments Flow</text>
+                                <rect x="45" y="75" width="110" height="15" fill="#447ACB" opacity="0.2" rx="2"/>
+                                <rect x="45" y="95" width="90" height="10" fill="#447ACB" opacity="0.15" rx="2"/>
+                                <rect x="45" y="110" width="105" height="10" fill="#447ACB" opacity="0.15" rx="2"/>
+                                <rect x="45" y="125" width="85" height="10" fill="#447ACB" opacity="0.15" rx="2"/>
+                                <rect x="45" y="145" width="110" height="15" fill="#447ACB" opacity="0.2" rx="2"/>
+                            </svg>
+                        </div>
+                        <h4>Square + BC Integration Pattern</h4>
+                        <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Request Full Packet</a>
+                    </div>
+                    
+                    <div class="artifact-card">
+                        <div class="artifact-thumbnail">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="30" width="15" height="15" fill="none" stroke="#447ACB" stroke-width="2" opacity="0.3"/>
+                                <rect x="45" y="32" width="130" height="10" fill="#447ACB" opacity="0.2"/>
+                                <rect x="20" y="60" width="15" height="15" fill="none" stroke="#447ACB" stroke-width="2" opacity="0.3"/>
+                                <rect x="45" y="62" width="110" height="10" fill="#447ACB" opacity="0.2"/>
+                                <rect x="20" y="90" width="15" height="15" fill="#447ACB" opacity="0.4"/>
+                                <path d="M 23 97 L 28 102 L 33 92" stroke="white" stroke-width="2" fill="none"/>
+                                <rect x="45" y="92" width="120" height="10" fill="#447ACB" opacity="0.2"/>
+                                <rect x="20" y="120" width="15" height="15" fill="none" stroke="#447ACB" stroke-width="2" opacity="0.3"/>
+                                <rect x="45" y="122" width="100" height="10" fill="#447ACB" opacity="0.2"/>
+                            </svg>
+                        </div>
+                        <h4>High-Risk Merchant Blueprint</h4>
+                        <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Request Full Packet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container fade-up">
+            <h2>Let's Build Something <span class="gradient-text">Extraordinary</span></h2>
+            <p>Available for product leadership, platform architecture, and transformation program roles. Based in San Antonio, open to remote.</p>
+            <div class="footer-cta">
+                <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
+                <a href="/cv/" class="btn btn-secondary">View Full Resume</a>
+            </div>
+            <div class="footer-links">
+                <a href="https://linkedin.com/in/jimmarkunas" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/jimmarkunas" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:jim@jimmarkunas.com">Email</a>
+                <a href="https://x.com/jimmarkunas" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="/freebies/">Freebies</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer" aria-modal="true">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
+            <img id="lightboxImage" src="" alt="">
+        </div>
+    </div>
+    <!-- Global Scripts -->
+    <script src="/script.js"></script>
+</body>
+</html>

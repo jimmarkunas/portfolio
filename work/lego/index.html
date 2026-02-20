@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCG × LEGO Digital Transformation - Jim Markunas | Case Study</title>
+    <meta name="description" content="Built the global LEGO.com online shop on top of a world-class SAP enterprise platform — new IA, unified cart &amp; checkout, Design Authority governance, and the patterns that became LEGO's digital playbook.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="BCG × LEGO Digital Transformation - Jim Markunas">
+    <meta property="og:description" content="3x revenue uplift, $50M+ savings, Harvard &amp; MIT case studies. Built LEGO's global online shop on their enterprise platform.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jimmarkunas.com/case-studies/bcg-lego">
+
+    <!-- Global Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" style="width:32px;height:32px;object-fit:contain;">
+                    JIM MARKUNAS
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="https://jimmarkunas.com/work/">Work</a></li>
+                <li><a href="https://jimmarkunas.com/services/">Services</a></li>
+                <li><a href="/cv/">CV</a></li>
+                <li><a href="https://jimmarkunas.com/about/">About</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="https://jimmarkunas.com/work/">Work</a>
+        <a href="https://jimmarkunas.com/services/">Services</a>
+        <a href="/cv/">CV</a>
+        <a href="https://jimmarkunas.com/about/">About</a>
+        <a href="/contact/">Contact</a>
+    </div>
+
+    <!-- Banner -->
+    <div class="case-banner">
+        <div class="banner-content">
+            <span class="banner-badge badge-company">BCG · LEGO GROUP</span>
+            <span class="banner-badge badge-award">3x Revenue Uplift</span>
+            <span class="banner-badge badge-press">Harvard · MIT · HBR Case Studies</span>
+        </div>
+    </div>
+
+    <!-- Anchor Navigation -->
+    <nav class="anchor-nav" aria-label="Case study sections">
+        <div class="anchor-nav-inner">
+            <a href="#overview">Overview</a>
+            <a href="#context">Context</a>
+            <a href="#problem">Problem</a>
+            <a href="#ownership">Ownership</a>
+            <a href="#solution">Solution</a>
+            <a href="#delivery">Delivery</a>
+            <a href="#results">Results</a>
+            <a href="#proof">Proof</a>
+        </div>
+    </nav>
+
+    <!-- S0: Overview -->
+    <section class="case-hero" id="overview">
+        <div class="container">
+            <h1 class="fade-up">BCG × LEGO: Building the Global Online Shop on Top of <span style="color: var(--accent-blue);">a World-Class Enterprise Platform</span></h1>
+            
+            <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
+                <div class="metric-card">
+                    <span class="metric-value">3x</span>
+                    <span class="metric-label">Revenue Uplift</span>
+                    <div class="metric-breakdown">Post-transformation</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value">$50M+</span>
+                    <span class="metric-label">Cost Savings</span>
+                    <div class="metric-breakdown">Enterprise platform efficiencies</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value">70%+</span>
+                    <span class="metric-label">Gross Margin Uplift</span>
+                    <div class="metric-breakdown">33% operating margin improvement</div>
+                </div>
+            </div>
+            
+            <p class="subheadline fade-up stagger-2">When BCG was hired to rethink LEGO.com, the company was deep into a transformation that business schools now teach as a gold standard. My job was to turn that abstract strategy into something concrete: a new global online shop that felt unmistakably LEGO, worked on any device, and plugged cleanly into their massive SAP-based enterprise platform.</p>
+
+            <div class="tldr-block fade-up stagger-3">
+                <div class="tldr-grid">
+                    <div class="tldr-item">
+                        <h4>Problem</h4>
+                        <ul>
+                            <li>Four-row nav built on legacy taxonomy — shoppers fled to search</li>
+                            <li>Cart &amp; checkout had grown organically, different per region</li>
+                            <li>Mobile felt like a scaled-down desktop — not first-class</li>
+                            <li>Design decisions scattered across decks and emails</li>
+                        </ul>
+                    </div>
+                    <div class="tldr-item">
+                        <h4>What I Owned</h4>
+                        <ul>
+                            <li>Solutions Architect &amp; PM for nav, cart, checkout, promotions</li>
+                            <li>140+ page annotated cart &amp; checkout flow PRDs</li>
+                            <li>Global IA and information architecture</li>
+                            <li>Design Authority governance model</li>
+                        </ul>
+                    </div>
+                    <div class="tldr-item">
+                        <h4>What Shipped</h4>
+                        <ul>
+                            <li>New global two-row nav replacing four crowded rows</li>
+                            <li>Unified cart &amp; checkout across desktop, tablet, mobile</li>
+                            <li>Promotions, loyalty, gift card flows wired to SAP order-to-cash</li>
+                            <li>Design Authority pack — single source of truth for stakeholders</li>
+                        </ul>
+                    </div>
+                    <div class="tldr-item">
+                        <h4>Results</h4>
+                        <ul>
+                            <li>3x revenue uplift; $50M+ cost savings; 33% operating margin</li>
+                            <li>Shop became flagship consumer touchpoint on LEGO's enterprise platform</li>
+                            <li>Harvard, MIT, HBR case studies cite LEGO's digital transformation</li>
+                            <li>Nav, checkout, and governance patterns became LEGO's digital playbook</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-cta fade-up stagger-3">
+                <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
+                <a href="https://jimmarkunas.com/cv/" class="btn btn-secondary">Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- S1: Context -->
+    <section class="case-section" id="context" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2 style="text-align: center;">Context & Stakes</h2>
+                <p style="text-align: center;">LEGO was in the middle of a decade-long transformation from a toy manufacturer into a digital enterprise with tightly integrated global processes and platforms. On the back end, the enterprise platform was world-class. On the front end, the global online shop still felt like an afterthought — a patchwork of regional sites that didn't reflect the LEGO brand or how families actually shopped.</p>
+                
+                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
+                    <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Shop: Before vs. After</h4>
+                    <div style="display: flex; gap: 48px; align-items: flex-end; justify-content: center;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">BEFORE</div>
+                            <div style="width: 240px; height: 240px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 16px;">
+                                <div style="font-size: 22px; font-weight: 700; color: white; line-height: 1.3;">4-Row Nav · Region Silos</div>
+                                <div style="font-size: 13px; color: rgba(255,255,255,0.8); margin-top: 8px;">Shoppers fled to search · Mobile afterthought</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 40px; color: var(--text-secondary); padding-bottom: 55px;">→</div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">AFTER</div>
+                            <div style="width: 240px; height: 160px; background: var(--accent-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; padding: 16px;">
+                                <div style="font-size: 22px; font-weight: 700; color: white; line-height: 1.3;">One Global Shop</div>
+                                <div style="font-size: 13px; color: rgba(255,255,255,0.8);">Mobile-first · Platform-ready · Unmistakably LEGO</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">One global pattern for nav, checkout, and governance — built on the enterprise platform MIT and Harvard now teach as a model</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+                    <div class="col-card">
+                        <h4>What LEGO &amp; BCG Needed</h4>
+                        <ul>
+                            <li>A flagship shop worthy of the LEGO brand — not an afterthought</li>
+                            <li>One global pattern reusable across all markets and devices</li>
+                            <li>Front-end that respected SAP and enterprise platform constraints</li>
+                        </ul>
+                    </div>
+                    <div class="col-card">
+                        <h4>The Stakes</h4>
+                        <ul>
+                            <li>The shop was the most visible consumer face of a $1B+ transformation</li>
+                            <li>Decisions made here would ripple into order-to-cash, finance, and logistics globally</li>
+                            <li>The patterns we set would become LEGO's digital playbook for years</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S2: Problem -->
+    <section class="case-section" id="problem" style="border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2>The Challenge</h2>
+                
+                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
+                    <div style="text-align: center; color: var(--text-secondary);">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🧱</div>
+                        <div style="font-size: 18px; font-weight: 600;">Enterprise Platform · Global Scale · Brand Experience That Had to Match</div>
+                        <div style="font-size: 14px; margin-top: 8px;">The back end was world-class. The front end was an afterthought.</div>
+                    </div>
+                </div>
+
+                <figure class="lightbox-trigger" data-src="">
+                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
+                        <div style="font-size:15px;font-weight:600;opacity:0.8;">BCG LEGO System Architecture</div>
+                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                    </div>
+                    <figcaption>Global online shop sitting on top of LEGO's SAP-based enterprise platform — one pattern for nav, cart, checkout, and governance across all markets</figcaption>
+                    <ul class="notice-list">
+                        <li>Navigation spanned four crowded rows — shoppers abandoned browsing and fled to search</li>
+                        <li>Cart and checkout had grown organically per region — different rules, layouts, risks everywhere</li>
+                        <li>Mobile and tablet lagged behind desktop even as families shifted to phones</li>
+                    </ul>
+                </figure>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
+                    <div class="col-card" style="border-left: 4px solid #ef4444;">
+                        <h4 style="color: #ef4444;">UX &amp; Platform Blockers</h4>
+                        <ul>
+                            <li>Four-row nav with legacy taxonomy — "Themes / Categories / Age Range / Exclusives / What's New / Sales" — didn't match how people shopped</li>
+                            <li>Cart and checkout had different rules per region — fragile, hard to change</li>
+                            <li>Mobile felt like a scaled-down desktop, not a first-class experience</li>
+                        </ul>
+                    </div>
+                    <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
+                        <h4 style="color: var(--accent-blue);">Governance &amp; Scale Blockers</h4>
+                        <ul>
+                            <li>Design decisions lived in scattered decks and emails — no single source of truth</li>
+                            <li>Dozens of global stakeholders, shifting technical roadmap, no shared framework</li>
+                            <li>Promotions, loyalty, gift cards had no documented rules — lived in tribal knowledge</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout" style="margin-top: 24px;">
+                    <p><strong>The Core Tension:</strong> LEGO's enterprise platform was the transformation's backbone. The online shop had to respect those constraints completely — while finally feeling as playful and intuitive as LEGO itself.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S3: Ownership -->
+    <section class="case-section" id="ownership" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2>What I Owned</h2>
+                
+                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(68, 122, 203, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
+                    <div style="text-align: center; color: var(--text-secondary);">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🎯</div>
+                        <div style="font-size: 18px; font-weight: 600;">Solutions Architect &amp; Product Manager (via BCG) · June 2015 – June 2016</div>
+                        <div style="font-size: 14px; margin-top: 8px;">LEGO stakeholders · BCG team · external agencies · global engineering</div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <div class="col-card">
+                        <h4>Architecture &amp; PRD Ownership</h4>
+                        <ul>
+                            <li>Owned PRDs for nav, cart, checkout, and promotions — the most complex flows</li>
+                            <li>140+ page annotated working-team deck making complexity explicit</li>
+                            <li>Every field, state, and error mapped back to order-to-cash and finance processes</li>
+                            <li>Engineers could build to it; QA could test against it</li>
+                        </ul>
+                    </div>
+                    <div class="col-card">
+                        <h4>Enterprise ↔ UX Translator</h4>
+                        <ul>
+                            <li>Understood LEGO's SAP platform constraints and modern eCommerce UX simultaneously</li>
+                            <li>Explained to designers why ideas would break tax, inventory, or promos — and proposed alternatives</li>
+                            <li>Made "one global pattern" actually work without killing regional flexibility</li>
+                            <li>Proposed alternatives that still felt magical for shoppers</li>
+                        </ul>
+                    </div>
+                    <div class="col-card">
+                        <h4>Global IA &amp; Navigation</h4>
+                        <ul>
+                            <li>Collapsed four header rows into two — Sets / Bricks / Accessories / Explore</li>
+                            <li>Standardized search, account, region-switcher, wishlist, and bag preview across devices</li>
+                            <li>One global pattern instead of dozens of slightly different headers per market</li>
+                            <li>Built for kids, parents, and AFOLs to find what they want without fighting categories</li>
+                        </ul>
+                    </div>
+                    <div class="col-card">
+                        <h4>Design Authority Partner</h4>
+                        <ul>
+                            <li>Structured Design Authority materials for senior LEGO stakeholders</li>
+                            <li>Turned opinion-driven debates into structured decision points</li>
+                            <li>Got alignment on global strategy across LEGO, BCG, and external agencies</li>
+                            <li>Left behind reusable assets so LEGO could keep evolving after consultants left</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout" style="margin-top: 24px;">
+                    <p><strong>"I appreciated the level of detail you looked into these (even had some analysis/commentary) and the notes were easy to understand."</strong> — Geneson Rho, BCG</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S4: Solution -->
+    <section class="case-section" id="solution" style="border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2>The Solution</h2>
+                
+                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.15) 0%, rgba(34, 211, 238, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
+                    <div style="text-align: center; color: var(--text-secondary);">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🏗️</div>
+                        <div style="font-size: 18px; font-weight: 600;">One Global Online Shop · Mobile-First · Platform-Ready</div>
+                        <div style="font-size: 14px; margin-top: 8px;">Unmistakably LEGO · Works on any device · Plugs cleanly into SAP enterprise platform</div>
+                    </div>
+                </div>
+
+                <figure class="lightbox-trigger" data-src="">
+                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
+                        <div style="font-size:15px;font-weight:600;opacity:0.8;">BCG LEGO System Architecture</div>
+                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                    </div>
+                    <figcaption>New global shop on top of LEGO's enterprise platform — one pattern for nav, product listing, cart, checkout, and governance across all markets</figcaption>
+                    <ul class="notice-list">
+                        <li>Two-row nav replacing four — Sets / Bricks / Accessories / Explore, with embedded search and consistent account treatment</li>
+                        <li>Single cart and checkout pattern across desktop, tablet, mobile — with documented regional variations for shipping, tax, and payments</li>
+                        <li>Promotions, loyalty, and gift cards wired directly to SAP order-to-cash and finance rules</li>
+                    </ul>
+                </figure>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <div class="col-card">
+                        <h4>Navigation &amp; IA</h4>
+                        <ul>
+                            <li>Collapsed four header rows into two — Sets / Bricks / Accessories / Explore</li>
+                            <li>Search visible but not dominant; account, wishlist, bag preview standardized</li>
+                            <li>One global IA pattern reused across all markets instead of per-country layouts</li>
+                            <li>Designed for kids, parents, and AFOLs — not legacy taxonomy</li>
+                        </ul>
+                    </div>
+                    <div class="col-card">
+                        <h4>Cart &amp; Checkout</h4>
+                        <ul>
+                            <li>Unified flows for desktop, tablet, mobile — guest and signed-in states</li>
+                            <li>Promo, error, and regional shipping modules fully documented</li>
+                            <li>140+ page annotated deck making every state and edge case explicit</li>
+                            <li>Reduced one-off customizations — easier for marketing to run campaigns</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <figure class="lightbox-trigger" data-src="">
+                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
+                        <div style="font-size:15px;font-weight:600;opacity:0.8;">Design Authority Pack + PRD Library</div>
+                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                    </div>
+                    <figcaption>Principles, exemplars, and rationale in one place — LEGO, BCG, and external agencies could stay aligned and keep evolving the experience after we left</figcaption>
+                    <ul class="notice-list">
+                        <li>Promotions, loyalty IDs, and gift cards documented from UX through to order-to-cash and finance</li>
+                        <li>Design Authority deck turned opinion debates into structured, documented decisions</li>
+                        <li>PRDs, diagrams, and governance so LEGO could iterate without reinventing everything</li>
+                    </ul>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- S5: Delivery -->
+    <section class="case-section" id="delivery" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2>Delivery Timeline</h2>
+                
+                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+                        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--border);"></div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; text-align: center; padding: 8px;">Scope</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Jun 2015</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">Engagement starts</div>
+                        </div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; text-align: center; padding: 8px;">IA &amp; Nav</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Global IA</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">4 rows → 2</div>
+                        </div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; text-align: center; padding: 8px;">Cart &amp; PRDs</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">140+ Pages</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">All flows documented</div>
+                        </div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; text-align: center; padding: 8px;">Design Auth</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Governance</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">Stakeholder alignment</div>
+                        </div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #0a0a0f; text-align: center; padding: 8px;">Launch</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Jun 2016</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">New LEGO.com live</div>
+                        </div>
+                        
+                        <div style="z-index: 1; text-align: center; flex: 1;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #0a0a0f; text-align: center; padding: 8px;">Legacy</div>
+                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">MIT · Harvard</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">Case study standard</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Engagement Kickoff — June 2015</h4>
+                        <p>BCG engaged to rethink LEGO.com as part of the wider enterprise transformation. Scope defined: re-architect the global online shop across desktop, tablet, and mobile, aligned to LEGO's SAP platform and multi-country operations.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Global IA &amp; Navigation Architecture</h4>
+                        <p>Four header rows collapsed into two. New taxonomy — Sets / Bricks / Accessories / Explore — defined based on how customers actually browse. Search, account, region-switcher, wishlist, and bag preview standardized across all devices and markets.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Cart, Checkout &amp; PRD Development</h4>
+                        <p>Full PRD and flow ownership for shopping bag, sign-in, addresses, shipping, payments, and confirmation across desktop and mobile. 140+ page annotated working-team deck. Every promo, error, and regional variation documented explicitly — no tribal knowledge.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Promotions, Loyalty &amp; Gift Cards</h4>
+                        <p>Documented how discounts, loyalty IDs, and gift cards appear and calculate through cart and checkout, with connections to LEGO's order-to-cash and finance rules. Reduced one-off promos and made campaigns repeatable for marketing.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Design Authority &amp; Stakeholder Governance</h4>
+                        <p>Built Design Authority materials with BCG to walk senior LEGO stakeholders through objectives, principles, and UX decisions. Turned opinion-driven debates into structured decision points and got alignment across LEGO, BCG, and external agencies.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Launch &amp; Lasting Impact — June 2016</h4>
+                        <p>New global shop live. The patterns defined for navigation, checkout, and governance became LEGO's digital playbook. The wider transformation — including the online shop work — was later cited by MIT, Harvard, and HBR as a gold-standard model for digital strategy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S6: Results -->
+    <section class="case-section" id="results" style="border-top: 1px solid var(--border);">
+        <div class="container">
+            <div style="background: var(--bg-secondary); border: 2px solid var(--accent-blue); border-radius: 12px; padding: 40px;">
+                <div class="content-block fade-up">
+                    <h2>Results</h2>
+                
+                <div class="metrics-row">
+                    <div class="metric-card">
+                        <span class="metric-value">3x</span>
+                        <span class="metric-label">Revenue Uplift</span>
+                        <div class="metric-breakdown">Post-transformation</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">$50M+</span>
+                        <span class="metric-label">Cost Savings</span>
+                        <div class="metric-breakdown">Enterprise platform efficiencies</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value" style="font-size: 22px;">MIT · Harvard</span>
+                        <span class="metric-label">Academic Case Studies</span>
+                        <div class="metric-breakdown">Gold-standard digital transformation</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch;">
+                    <div class="col-card" style="display: flex; flex-direction: column;">
+                        <h4>Before the Revamp</h4>
+                        <ul style="flex: 1;">
+                            <li>Navigation crowded and inconsistent — shoppers relied on search just to find basic products</li>
+                            <li>Cart and checkout behaved differently by region — hidden rules made changes risky and slow</li>
+                            <li>Mobile felt like a scaled-down desktop, not a first-class experience</li>
+                            <li>Design decisions scattered in decks and emails — no way to enforce "one LEGO experience"</li>
+                        </ul>
+                    </div>
+                    <div class="col-card" style="display: flex; flex-direction: column;">
+                        <h4>After Our Work</h4>
+                        <ul style="flex: 1;">
+                            <li>Cart &amp; checkout standardized across desktop, tablet, and mobile — documented variations for major markets</li>
+                            <li>Single source of truth — Design Authority pack plus detailed PRDs — for how the shop should behave</li>
+                            <li>Redesigned shop became one of the flagship consumer experiences on LEGO's enterprise platform</li>
+                            <li>MIT, Harvard, and HBR later highlighted LEGO's transformation — the shop was its most visible face</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout" style="margin-top: 32px;">
+                    <p><strong>The Real Value:</strong> The patterns we defined for navigation, checkout, and governance became part of LEGO's wider digital playbook — the same transformation later written up in HBR and MIT case studies. My work on IA, flows, and decision frameworks helped make the online shop a dependable growth channel instead of a bottleneck.</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S7: Proof -->
+    <section class="case-section" id="proof">
+        <div class="container">
+            <div class="content-block fade-up">
+                <h2>Press Coverage &amp; Academic Recognition</h2>
+                
+                <div class="recognition-card fade-up stagger-1">
+                    <span class="recognition-icon">🎓</span>
+                    <div class="recognition-content">
+                        <h3>MIT &amp; Harvard Business School Case Studies</h3>
+                        <p>MIT's "Transforming the LEGO Group for the Digital Economy" and related teaching cases at MIT, Harvard, and other leading universities use LEGO's enterprise platform and digital transformation as a gold-standard model for how to execute digital strategy. The online shop — built on the architecture and governance frameworks I helped define — is one of the most visible consumer touchpoints of that transformation.</p>
+                    </div>
+                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-primary">Request Full Pack</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-2">
+                    <span class="recognition-icon">📰</span>
+                    <div class="recognition-content">
+                        <h3>Harvard Business Review &amp; MIS Quarterly</h3>
+                        <p>HBR and MIS Quarterly Executive both published analyses of LEGO's transformation, highlighting how the company used a disciplined enterprise platform to fuel growth rather than slow it down. The online shop — and the IA, checkout flows, and Design Authority model we shipped — was a key proof point in that story.</p>
+                    </div>
+                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Get in Touch</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-3">
+                    <span class="recognition-icon">🏆</span>
+                    <div class="recognition-content">
+                        <h3>Design Patterns That Outlived the Project</h3>
+                        <p>The two-row nav, embedded search, consistent account and VIP treatment, and global cart behaviors we defined became the standard for LEGO.com and influenced UX work across the brand for years. The Design Authority model we built gave LEGO a way to make decisions at scale — without reinventing everything every time a new market launched.</p>
+                    </div>
+                    <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-secondary">Book a Call</a>
+                </div>
+
+                <h2 style="margin-top: 60px;">Artifacts &amp; Press</h2>
+                <p>Academic case studies and redacted work samples available on request:</p>
+                
+                <div class="artifact-gallery">
+                    <div class="artifact-card">
+                        <div class="artifact-thumbnail">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="30" width="160" height="20" fill="#447ACB" opacity="0.3"/>
+                                <rect x="20" y="60" width="120" height="10" fill="#447ACB" opacity="0.2"/>
+                                <rect x="20" y="80" width="140" height="10" fill="#447ACB" opacity="0.2"/>
+                                <rect x="20" y="100" width="100" height="10" fill="#447ACB" opacity="0.2"/>
+                                <circle cx="30" cy="135" r="8" fill="#447ACB" opacity="0.3"/>
+                                <rect x="45" y="130" width="100" height="10" fill="#447ACB" opacity="0.2"/>
+                                <circle cx="30" cy="160" r="8" fill="#447ACB" opacity="0.3"/>
+                                <rect x="45" y="155" width="80" height="10" fill="#447ACB" opacity="0.2"/>
+                            </svg>
+                        </div>
+                        <h4>Harvard Business Review PDF</h4>
+                        <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Request Full Packet</a>
+                    </div>
+                    <div class="artifact-card">
+                        <div class="artifact-thumbnail">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="30" y="20" width="140" height="160" fill="none" stroke="#447ACB" stroke-width="2" opacity="0.3" rx="4"/>
+                                <rect x="45" y="40" width="110" height="12" fill="#447ACB" opacity="0.3" rx="2"/>
+                                <rect x="45" y="62" width="90" height="8" fill="#447ACB" opacity="0.15" rx="2"/>
+                                <rect x="45" y="78" width="100" height="8" fill="#447ACB" opacity="0.15" rx="2"/>
+                                <rect x="45" y="94" width="85" height="8" fill="#447ACB" opacity="0.15" rx="2"/>
+                                <rect x="45" y="115" width="110" height="12" fill="#447ACB" opacity="0.2" rx="2"/>
+                                <rect x="45" y="135" width="95" height="8" fill="#447ACB" opacity="0.15" rx="2"/>
+                                <rect x="45" y="151" width="105" height="8" fill="#447ACB" opacity="0.15" rx="2"/>
+                            </svg>
+                        </div>
+                        <h4>MIT Case Study PDF</h4>
+                        <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Request Full Packet</a>
+                    </div>
+                    <div class="artifact-card">
+                        <div class="artifact-thumbnail">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="30" width="15" height="15" fill="none" stroke="#447ACB" stroke-width="2" opacity="0.3"/>
+                                <rect x="45" y="32" width="130" height="10" fill="#447ACB" opacity="0.2"/>
+                                <rect x="20" y="60" width="15" height="15" fill="none" stroke="#447ACB" stroke-width="2" opacity="0.3"/>
+                                <rect x="45" y="62" width="110" height="10" fill="#447ACB" opacity="0.2"/>
+                                <rect x="20" y="90" width="15" height="15" fill="#447ACB" opacity="0.4"/>
+                                <path d="M 23 97 L 28 102 L 33 92" stroke="white" stroke-width="2" fill="none"/>
+                                <rect x="45" y="92" width="120" height="10" fill="#447ACB" opacity="0.2"/>
+                                <rect x="20" y="120" width="15" height="15" fill="none" stroke="#447ACB" stroke-width="2" opacity="0.3"/>
+                                <rect x="45" y="122" width="100" height="10" fill="#447ACB" opacity="0.2"/>
+                            </svg>
+                        </div>
+                        <h4>Cart &amp; Checkout PRD (Sample)</h4>
+                        <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Request Full Packet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container fade-up">
+            <h2>Let's Build Something <span class="gradient-text">Extraordinary</span></h2>
+            <p>Available for product leadership, platform architecture, and transformation program roles. Based in San Antonio, open to remote.</p>
+            <div class="footer-cta">
+                <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
+                <a href="/cv/" class="btn btn-secondary">View Full Resume</a>
+            </div>
+            <div class="footer-links">
+                <a href="https://linkedin.com/in/jimmarkunas" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/jimmarkunas" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:jim@jimmarkunas.com">Email</a>
+                <a href="https://x.com/jimmarkunas" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="/freebies/">Freebies</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer" aria-modal="true">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
+            <img id="lightboxImage" src="" alt="">
+        </div>
+    </div>
+    <!-- Global Scripts -->
+    <script src="/script.js"></script>
+</body>
+</html>

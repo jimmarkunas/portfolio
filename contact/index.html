@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact – Jim Markunas</title>
+    <meta name="description" content="Get in touch with Jim Markunas. Available for product leadership, platform architecture, and transformation programs.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contact – Jim Markunas">
+    <meta property="og:description" content="Available for product leadership, platform architecture, and transformation programs. Based in San Antonio, open to remote opportunities worldwide.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jimmarkunas.com/contact">
+
+    <!-- Global Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="page-contact">
+    <div class="bg-gradient"></div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="/" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" style="width:32px;height:32px;object-fit:contain;">
+                    JIM MARKUNAS
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/work/">Work</a></li>
+                <li><a href="/services/">Services</a></li>
+                <li><a href="/cv/">CV</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        </nav>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/work/">Work</a>
+        <a href="/services/">Services</a>
+        <a href="/cv/">CV</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <section style="padding:80px 0;">
+        <div class="container">
+            <div class="fade-up" style="max-width:800px;margin:0 auto;text-align:center;">
+                <div class="section-tag">Get In Touch</div>
+                <h1 style="font-size:56px;font-weight:700;line-height:1.1;letter-spacing:-0.03em;margin-bottom:24px;">
+                    Let's Build Something <span class="gradient-text">Extraordinary</span>
+                </h1>
+                <p style="font-size:18px;color:var(--text-secondary);line-height:1.5;max-width:700px;margin:0 auto 40px;">
+                    Available for product leadership, platform architecture, and transformation programs. Based in San Antonio, open to remote opportunities worldwide.
+                </p>
+                <div style="margin-bottom:40px;">
+                    <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary" style="font-size:18px;padding:20px 48px;">Schedule a Call</a>
+                </div>
+                <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;">
+                    <a href="mailto:jim@jimmarkunas.com" style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);text-decoration:none;font-size:16px;transition:color 0.3s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">
+                        <span style="font-size:20px;">📧</span> Email Me
+                    </a>
+                    <a href="https://linkedin.com/in/jimmarkunas" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);text-decoration:none;font-size:16px;transition:color 0.3s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">
+                        <span style="font-size:20px;">💼</span> LinkedIn
+                    </a>
+                    <a href="https://x.com/jimmarkunas" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);text-decoration:none;font-size:16px;transition:color 0.3s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">
+                        <span style="font-size:20px;">𝕏</span> Twitter
+                    </a>
+                </div>
+                <p style="font-size:14px;color:var(--text-secondary);margin-top:32px;">Response time: Typically within 24 hours</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section style="padding:0 0 80px;">
+        <div class="container">
+            <div style="max-width:680px;margin:0 auto;">
+                <form id="contactForm" class="fade-up" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:20px;padding:48px;position:relative;overflow:hidden;">
+                    <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(68,122,203,0.6),transparent);"></div>
+                    <h2 style="font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:-0.02em;">Send a Message</h2>
+                    <p style="font-size:15px;color:var(--text-secondary);margin-bottom:36px;">Prefer async? Fill this out and I'll reply within 24 hours.</p>
+
+                    <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+                        <div class="field-group">
+                            <label for="fname" class="field-label">Name</label>
+                            <input type="text" id="fname" name="fname" placeholder="Jane Smith" required class="field-input">
+                        </div>
+                        <div class="field-group">
+                            <label for="femail" class="field-label">Email</label>
+                            <input type="email" id="femail" name="femail" placeholder="jane@company.com" required class="field-input">
+                        </div>
+                    </div>
+
+                    <div class="field-group" style="margin-bottom:28px;">
+                        <label for="fmessage" class="field-label">Message</label>
+                        <textarea id="fmessage" name="fmessage" rows="5" placeholder="Tell me what you're working on and what kind of help you need…" required class="field-input" style="resize:vertical;min-height:120px;"></textarea>
+                    </div>
+
+                    <div class="field-group" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
+                        <label for="company_website">Website</label>
+                        <input type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%;font-size:16px;padding:18px;display:flex;align-items:center;justify-content:center;gap:10px;">
+                        <span id="btnText">Send Message</span>
+                        <span id="btnArrow" style="font-size:18px;transition:transform 0.3s;">→</span>
+                    </button>
+
+                    <div id="successMsg" style="display:none;text-align:center;padding:24px 0 8px;">
+                        <div style="font-size:40px;margin-bottom:12px;">✅</div>
+                        <p style="font-size:17px;font-weight:600;margin-bottom:6px;">Message sent!</p>
+                        <p style="font-size:14px;color:var(--text-secondary);">I'll get back to you within 24 hours.</p>
+                    </div>
+
+                    <div id="errorMsg" style="display:none;margin-top:16px;padding:14px 18px;border-radius:10px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:14px;text-align:center;">
+                        Something went wrong — please email <a href="mailto:jim@jimmarkunas.com" style="color:#f87171;font-weight:600;"><span class="__cf_email__" data-cfemail="3e5457537e545753535f4c554b505f4d105d5153">[email&#160;protected]</span></a> directly.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Scroller -->
+    <section class="recognition">
+        <div class="container">
+            <div class="recognition-grid">
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">Profiled by Adobe<br>Boehringer Ingelheim</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">AWS Case Study<br>New York Life</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">Profiled by<br>Business Insider</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">Profiled by<br>Engadget</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">Harvard Business<br>Review Research</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">MIT Research<br>BCG/LEGO</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">MACH Award<br>Nominee 2025</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">Winner, Global<br>Smart 20 Award</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">Profiled by Adobe<br>Boehringer Ingelheim</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">AWS Case Study<br>New York Life</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">Profiled by<br>Business Insider</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">Profiled by<br>Engadget</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">Harvard Business<br>Review Research</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">MIT Research<br>BCG/LEGO</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">MACH Award<br>Nominee 2025</div></div>
+                <div class="recognition-item"><img src="https://placehold.co/120x80/13131a/447ACB?text=Logo" class="recognition-logo"><div class="recognition-text">Winner, Global<br>Smart 20 Award</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Work With Me -->
+    <section style="padding:80px 0;">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-tag">Why Work Together</div>
+                <h2 class="section-title">What You Get</h2>
+                <p class="section-description">More than consulting—partnership that delivers results.</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:48px;max-width:1000px;margin-left:auto;margin-right:auto;">
+                <div class="fade-up stagger-1" style="text-align:center;">
+                    <div style="font-size:48px;margin-bottom:16px;">⚡</div>
+                    <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">Battle-Tested Experience</h3>
+                    <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;">20+ years shipping products that scale to millions of users and billions in revenue. I've seen what works—and what doesn't.</p>
+                </div>
+                <div class="fade-up stagger-2" style="text-align:center;">
+                    <div style="font-size:48px;margin-bottom:16px;">🎯</div>
+                    <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">Hands-On Execution</h3>
+                    <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;">I don't just advise—I roll up my sleeves and ship. From strategy to code, I'm in the trenches with your team.</p>
+                </div>
+                <div class="fade-up stagger-3" style="text-align:center;">
+                    <div style="font-size:48px;margin-bottom:16px;">🚀</div>
+                    <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">Results That Matter</h3>
+                    <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;">I'm measured by outcomes, not hours. Faster time to market, reduced costs, measurable revenue impact.</p>
+                </div>
+                <div class="fade-up stagger-4" style="text-align:center;">
+                    <div style="font-size:48px;margin-bottom:16px;">🤝</div>
+                    <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">No Bullshit Approach</h3>
+                    <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;">Straight talk, honest assessments, realistic timelines. I tell you what you need to hear, not what you want to hear.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="height:1px;background:var(--border);margin:0 40px;"></div>
+
+    <footer>
+        <div class="container fade-up">
+            <h2>Ready to Start?</h2>
+            <p>Book a call and let's discuss how I can help you build something extraordinary.</p>
+            <div class="footer-cta">
+                <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
+                <a href="/cv/" class="btn btn-secondary">View Full Resume</a>
+            </div>
+            <div class="footer-links">
+                <a href="https://linkedin.com/in/jimmarkunas" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/jimmarkunas" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:jim@jimmarkunas.com">Email</a>
+                <a href="https://x.com/jimmarkunas" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="/freebies/">Freebies</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global Scripts -->
+    <script src="/script.js"></script>
+    <!-- Page-specific: EmailJS contact form -->
+    <script src="/contact.js"></script>
+</body>
+</html>
