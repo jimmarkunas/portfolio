@@ -2,6 +2,8 @@
 // GLOBAL JAVASCRIPT — jimmarkunas.com
 // =====================================================
 
+document.documentElement.classList.add('js');
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // ── Hamburger Menu ────────────────────────────────
