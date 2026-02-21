@@ -21,6 +21,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ── Top Nav Active Link (all pages) ───────────────
+    const currentPathRaw = window.location.pathname || '/';
+    const currentPath = currentPathRaw.replace(/index\.html$/, '').replace(/\/+$/, '') || '/';
+    const topNavLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
+
+    function normalizeHrefPath(href) {
+        if (!href) return '';
+        try {
+            const path = new URL(href, window.location.origin).pathname;
+            return path.replace(/index\.html$/, '').replace(/\/+$/, '') || '/';
+        } catch {
+            return '';
+        }
+    }
+
+    function isActiveNavPath(linkPath) {
+        if (!linkPath) return false;
+        if (linkPath === '/work') {
+            return currentPath === '/work' ||
+                currentPath.startsWith('/work/') ||
+                currentPath.startsWith('/founder/');
+        }
+        return currentPath === linkPath;
+    }
+
+    topNavLinks.forEach(link => {
+        const linkPath = normalizeHrefPath(link.getAttribute('href'));
+        link.classList.toggle('active', isActiveNavPath(linkPath));
+    });
+
 
     // ── Fade-Up Animations ────────────────────────────
     const fadeObserver = new IntersectionObserver((entries) => {
