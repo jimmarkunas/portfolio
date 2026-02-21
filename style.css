@@ -116,6 +116,8 @@ nav {
 
 .nav-links a:hover { color: var(--text-primary); }
 .nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--text-primary); }
+.nav-links a.active::after { width: 100%; }
 
 .hamburger {
     display: none;
@@ -142,6 +144,7 @@ nav {
 .mobile-menu.active { display: flex; flex-direction: column; gap: 20px; }
 .mobile-menu a { color: var(--text-secondary); text-decoration: none; font-size: 16px; font-weight: 500; transition: color 0.3s; }
 .mobile-menu a:hover { color: var(--accent-blue); }
+.mobile-menu a.active { color: var(--accent-blue); }
 
 .hero { padding: 40px 0 60px; position: relative; }
 .hero-content { max-width: 100%; text-align: center; }
@@ -399,12 +402,7 @@ footer p { font-size: 20px; color: var(--text-secondary); margin-bottom: 50px; m
 }
 
 .case-banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-        repeating-linear-gradient(90deg, rgba(68, 122, 203, 0.03) 0px, rgba(68, 122, 203, 0.03) 1px, transparent 1px, transparent 40px),
-        repeating-linear-gradient(0deg, rgba(68, 122, 203, 0.03) 0px, rgba(68, 122, 203, 0.03) 1px, transparent 1px, transparent 40px);
+    content: none;
 }
 
 .banner-content {
@@ -417,10 +415,11 @@ footer p { font-size: 20px; color: var(--text-secondary); margin-bottom: 50px; m
 }
 
 .banner-badge {
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 700;
+    white-space: nowrap;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
