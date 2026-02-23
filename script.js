@@ -51,6 +51,66 @@ document.addEventListener('DOMContentLoaded', () => {
         link.classList.toggle('active', isActiveNavPath(linkPath));
     });
 
+    // ── Horizontal Orb Timelines: align all orbs inline ───────────
+    function alignOrbTimelines() {
+        function isOrbNode(node) {
+            const cs = window.getComputedStyle(node);
+            const w = parseFloat(cs.width);
+            const h = parseFloat(cs.height);
+            const radius = parseFloat(cs.borderTopLeftRadius);
+            return w >= 60 && w <= 120 &&
+                h >= 60 && h <= 120 &&
+                Math.abs(w - h) <= 2 &&
+                radius >= (Math.min(w, h) / 2) - 2;
+        }
+
+        const rows = Array.from(document.querySelectorAll('div')).filter(row => {
+            const rowStyle = window.getComputedStyle(row);
+            if (rowStyle.display !== 'flex' || rowStyle.position !== 'relative') return false;
+
+            const line = Array.from(row.children).find(child => {
+                const cs = window.getComputedStyle(child);
+                return cs.position === 'absolute' && parseFloat(cs.height) <= 4;
+            });
+            if (!line) return false;
+
+            const items = Array.from(row.children).filter(child => child !== line);
+            if (items.length < 3) return false;
+
+            const orbCount = items.filter(item => {
+                const orb = Array.from(item.querySelectorAll('div')).find(isOrbNode);
+                return Boolean(orb);
+            }).length;
+
+            return orbCount >= 3;
+        });
+
+        rows.forEach(row => {
+            const line = Array.from(row.children).find(child => {
+                const cs = window.getComputedStyle(child);
+                return cs.position === 'absolute' && parseFloat(cs.height) <= 4;
+            });
+            if (!line) return;
+
+            const items = Array.from(row.children).filter(child => child !== line);
+            row.style.alignItems = 'flex-start';
+
+            const firstOrb = items
+                .map(item => Array.from(item.querySelectorAll('div')).find(isOrbNode))
+                .find(Boolean);
+
+            if (!firstOrb) return;
+
+            // Anchor the horizontal line to the center of the orb row, not the full text block height.
+            const lineTop = firstOrb.offsetTop + (firstOrb.offsetHeight / 2);
+            line.style.top = `${Math.round(lineTop)}px`;
+            line.style.transform = 'translateY(-50%)';
+        });
+    }
+
+    alignOrbTimelines();
+    window.addEventListener('resize', alignOrbTimelines);
+
 
     // ── Fade-Up Animations ────────────────────────────
     const fadeObserver = new IntersectionObserver((entries) => {
@@ -88,32 +148,94 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Anchor Nav: Smooth Scroll + Scrollspy ─────────
     // Only runs on pages that have an anchor nav
-    const anchorLinks = document.querySelectorAll('.anchor-nav a');
-    const anchoredSections = document.querySelectorAll('section[id]');
+    const anchorNav = document.querySelector('.anchor-nav');
+    const anchorLinks = Array.from(document.querySelectorAll('.anchor-nav a'));
 
-    if (anchorLinks.length > 0) {
-
-        // Smooth scroll
-        anchorLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.getElementById(link.getAttribute('href').substring(1));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-
-        // Scrollspy via IntersectionObserver (more reliable than scrollY math)
-        const spyObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    anchorLinks.forEach(link => {
-                        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
-                    });
+    if (anchorNav && anchorLinks.length > 0) {
+        const navItems = anchorLinks
+            .map(link => {
+                const href = link.getAttribute('href') || '';
+                let hash = '';
+                try {
+                    hash = new URL(href, window.location.origin).hash;
+                } catch {
+                    hash = href.startsWith('#') ? href : '';
                 }
-            });
-        }, { threshold: 0.25, rootMargin: '-10% 0px -60% 0px' });
+                if (!hash || hash === '#') return null;
+                const section = document.querySelector(hash);
+                if (!section) return null;
+                return { link, hash, section };
+            })
+            .filter(Boolean);
 
-        anchoredSections.forEach(section => spyObserver.observe(section));
+        if (navItems.length > 0) {
+            const setActiveAnchor = (activeHash) => {
+                navItems.forEach(({ link, hash }) => {
+                    link.classList.toggle('active', hash === activeHash);
+                });
+            };
+
+            const getStickyOffset = () => {
+                const header = document.querySelector('header');
+                const headerHeight = header ? header.getBoundingClientRect().height : 0;
+                const anchorNavHeight = anchorNav.getBoundingClientRect().height || 0;
+                return Math.round(headerHeight + anchorNavHeight + 12);
+            };
+
+            const scrollToHashTarget = (hash, pushHash = true) => {
+                const target = document.querySelector(hash);
+                if (!target) return;
+                const top = target.getBoundingClientRect().top + window.scrollY - getStickyOffset();
+                window.scrollTo({ top, behavior: 'smooth' });
+                if (pushHash) history.replaceState(null, '', hash);
+                setActiveAnchor(hash);
+            };
+
+            // Jump to sections from middle nav
+            navItems.forEach(({ link, hash }) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToHashTarget(hash, true);
+                });
+            });
+
+            // Scrollspy based on the section currently under the sticky nav
+            const updateAnchorSpy = () => {
+                const probeY = window.scrollY + getStickyOffset() + 4;
+                let active = navItems[0].hash;
+
+                navItems.forEach(({ hash, section }) => {
+                    if (section.offsetTop <= probeY) active = hash;
+                });
+
+                const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+                if (nearBottom) active = navItems[navItems.length - 1].hash;
+
+                setActiveAnchor(active);
+            };
+
+            let anchorSpyTicking = false;
+            const queueAnchorSpy = () => {
+                if (anchorSpyTicking) return;
+                anchorSpyTicking = true;
+                requestAnimationFrame(() => {
+                    updateAnchorSpy();
+                    anchorSpyTicking = false;
+                });
+            };
+
+            window.addEventListener('scroll', queueAnchorSpy, { passive: true });
+            window.addEventListener('resize', queueAnchorSpy);
+            window.addEventListener('hashchange', queueAnchorSpy);
+
+            // Ensure correct state on load (and direct deep links)
+            if (window.location.hash && navItems.some(item => item.hash === window.location.hash)) {
+                setActiveAnchor(window.location.hash);
+                setTimeout(queueAnchorSpy, 0);
+            } else {
+                queueAnchorSpy();
+            }
+        }
     }
 
 
