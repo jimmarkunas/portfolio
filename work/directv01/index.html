@@ -79,6 +79,8 @@
         <div class="container">
             <h1 class="fade-up">DIRECTV Digital <span style="color: var(--accent-blue);">Revenue</span> Platform</h1>
             
+            <p class="subheadline fade-up stagger-2">Built the middleware and operating model that unified three disconnected channels and cut campaign launch time from 180 days to 120 days—delivering $55M in Q4 2025 revenue.</p>
+
             <!-- Metrics Row ABOVE subheadline -->
             <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
                 <div class="metric-card">
@@ -95,8 +97,6 @@
                     <span class="metric-label">Unified Platform</span>
                 </div>
             </div>
-            
-            <p class="subheadline fade-up stagger-2">Built the middleware and operating model that unified three disconnected channels and cut campaign launch time from 180 days to 120 days—delivering $55M in Q4 2025 revenue.</p>
 
             <!-- TL;DR Block -->
             <div class="tldr-block fade-up stagger-3">
@@ -206,26 +206,20 @@
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
                 
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">📊</div>
-                        <div style="font-size: 18px; font-weight: 600;">System Complexity Visualization</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Placeholder for actual diagram</div>
-                    </div>
-                </div>
-
-                <!-- Functional Diagram -->
-                <figure class="lightbox-trigger" data-src="/assets/directv/DTV_Ecosystem_Functional_Diagram.png">
-                    <img src="/assets/directv/DTV_Ecosystem_Functional_Diagram.png" 
-                         alt="Functional diagram showing disconnected campaign systems across STB, web, and mobile channels with no shared middleware" 
+                <!-- System Complexity Visualization -->
+                <figure class="diagram-static">
+                    <img src="images/Technical%20Diagram%20Original%2003.png"
+                         alt="System Complexity Visualization"
                          loading="lazy">
-                    <figcaption>Three disconnected systems, zero shared infrastructure</figcaption>
-                    <ul class="notice-list">
-                        <li>Each channel had its own database and rules</li>
-                        <li>Manual handoffs = 2-3 week delays per channel</li>
-                        <li>No single source of truth</li>
-                    </ul>
+                    <div class="diagram-caption-panel">
+                        <p class="diagram-caption-title">Technical diagram showing disconnected campaign systems across STB, web, and mobile channels</p>
+                        <figcaption>Three disconnected systems, minimal shared infrastructure</figcaption>
+                        <ul class="notice-list">
+                            <li>Each stack had its own database and rules</li>
+                            <li>Manual handoffs = 2-3 week delays per channel</li>
+                            <li>No single source of truth</li>
+                        </ul>
+                    </div>
                 </figure>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
@@ -262,14 +256,12 @@
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
                 
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(68, 122, 203, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">👥</div>
-                        <div style="font-size: 18px; font-weight: 600;">Cross-Functional Team Structure</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Placeholder for org chart or team diagram</div>
-                    </div>
-                </div>
+                <figure class="diagram-static">
+                    <img src="images/Functional%20Diagram%20Original%2002.webp"
+                         alt="Cross-functional team structure diagram"
+                         loading="lazy">
+                    <figcaption>Cross-functional team structure supporting delivery across product, engineering, and go-to-market teams</figcaption>
+                </figure>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                     <div class="col-card">
@@ -634,6 +626,6 @@
         </div>
     </div>
     <!-- Global Scripts -->
-    <script src="/script.js"></script>
+    <script src="/script.js?v=20260224-1"></script>
 </body>
 </html>
