@@ -6,6 +6,50 @@
     <title>Jim Markunas - Digital Product & Platform Architect</title>
     <script>document.documentElement.classList.add('js');</script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Homepage only: lock What I Do cards to 4/2/1 */
+        section.skills-tools#services .skills-grid {
+            display: grid !important;
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+            gap: 12px !important;
+            margin-top: 24px !important;
+            align-items: start !important;
+        }
+        section.skills-tools#services .skills-grid > .skill-card {
+            min-width: 0;
+            min-height: 0 !important;
+            height: auto !important;
+            padding: 12px 14px;
+            align-self: start !important;
+        }
+        section.skills-tools#services .skill-header,
+        section.skills-tools#services .skill-title {
+            min-width: 0;
+        }
+        section.skills-tools#services .skill-description {
+            margin: 0 !important;
+        }
+        @media (max-width: 1024px) {
+            section.skills-tools#services .skills-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+        }
+        @media (min-width: 1025px) {
+            section.skills-tools#services .skills-grid > .skill-card {
+                min-height: 0 !important;
+                height: auto !important;
+                padding: 12px 14px 8px !important;
+            }
+        }
+        @media (max-width: 768px) {
+            section.skills-tools#services .skills-grid {
+                grid-template-columns: 1fr !important;
+            }
+            section.skills-tools#services .skills-grid > .skill-card {
+                min-height: 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="bg-gradient"></div>
@@ -70,7 +114,7 @@
     </div>
 </section>
 
-<section class="recognition" id="recognition">
+<section class="recognition" id="recognition" style="padding: 24px 0;">
     <div class="container">
         <div class="recognition-grid">
             <div class="recognition-item"><a href="/work/bi/"><img src="/images/trust/01 adobe-logo-600.png" alt="Adobe" class="recognition-logo"><div class="recognition-text">Profiled by Adobe<br>Boehringer Ingelheim</div></a></div>
@@ -94,14 +138,14 @@
     </div>
 </section>
 
-<section class="skills-tools" id="services">
+<section class="skills-tools home-competencies" id="services" style="padding: 52px 0;">
     <div class="container">
         <div class="section-header fade-up">
             <a href="https://jimmarkunas.com/services/" style="text-decoration: none;"><div class="section-tag">What I Do</div></a>
             <h2 class="section-title">Core Competencies</h2>
             <p class="section-description">20+ years turning complex digital programs into working systems across product, platform, and program leadership.</p>
         </div>
-        <div class="skills-grid">
+        <div class="skills-grid" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
             <div class="skill-card fade-up stagger-1">
                 <div class="skill-header"><div class="skill-icon">🎯</div><h3 class="skill-title">Product Management</h3></div>
                 <p class="skill-description">End-to-end product ownership from vision to launch. PRDs, roadmaps, cross-functional leadership, and shipping products that scale to millions of users.</p>
@@ -114,14 +158,6 @@
                 <div class="skill-header"><div class="skill-icon">🏗️</div><h3 class="skill-title">Solutions Architecture</h3></div>
                 <p class="skill-description">Designing composable, headless, and MACH-certified commerce platforms. API-first architectures that handle $2B+ in GMV and millions of transactions.</p>
             </div>
-            <div class="skill-card fade-up stagger-4">
-                <div class="skill-header"><div class="skill-icon">💼</div><h3 class="skill-title">Sales Engineering</h3></div>
-                <p class="skill-description">Technical pre-sales for enterprise SaaS. Solution design, RFP responses, proof-of-concepts, and turning complex requirements into winning proposals.</p>
-            </div>
-            <div class="skill-card fade-up stagger-5">
-                <div class="skill-header"><div class="skill-icon">🎨</div><h3 class="skill-title">Product Design & UX</h3></div>
-                <p class="skill-description">User research, wireframing, prototyping, and design systems. Shipping interfaces used by millions across web, mobile, and connected devices.</p>
-            </div>
             <div class="skill-card fade-up stagger-6">
                 <div class="skill-header"><div class="skill-icon">🚀</div><h3 class="skill-title">Go-to-Market Strategy</h3></div>
                 <p class="skill-description">Launch strategy, positioning, pricing, and sales enablement. Taking products from 0-to-1 and scaling them to enterprise adoption.</p>
@@ -130,7 +166,7 @@
     </div>
 </section>
 
-<section class="work" id="work">
+<section class="work" id="work" style="padding: 44px 0 12px;">
     <div class="container">
         <div class="section-header fade-up">
             <a href="https://jimmarkunas.com/work/" style="text-decoration: none;"><div class="section-tag">Featured Work</div></a>
@@ -138,8 +174,8 @@
             <p class="section-description">Selected projects spanning eCommerce platforms, streaming products, and enterprise transformations.</p>
         </div>
         <div class="work-grid">
-            <!-- 1 -->
-            <div class="work-card fade-up" data-link="/work/directv02/" style="cursor: pointer;">
+            <!-- 14 -->
+            <div class="work-card fade-up" data-link="/work/directv01/" style="cursor: pointer;">
                 <div class="work-preview"><img src="/images/work/thumbnails/01-dtv-thumbnail-500.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
                 <div class="work-content">
                     <h3 class="work-title">DIRECTV Digital Revenue Platform</h3>
@@ -300,8 +336,8 @@
                     </div>
                 </div>
             </div>
-            <!-- 14 -->
-            <div class="work-card fade-up" data-link="/work/directv01/" style="cursor: pointer;">
+            <!-- 1 -->
+            <div class="work-card fade-up" data-link="/work/directv02/" style="cursor: pointer;">
                 <div class="work-preview"><img src="/images/work/thumbnails/14-dtv-01-thumbnail-500.png" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
                 <div class="work-content">
                     <h3 class="work-title">DIRECTV: Changing The Face of TV</h3>
@@ -318,7 +354,7 @@
 </section>
 
 <!-- Companies I've Founded -->
-<section class="founded" id="founded" style="padding: 60px 0 40px;">
+<section class="founded" id="founded" style="padding: 44px 0 24px;">
     <div class="container">
         <div style="border: 2px solid var(--accent-blue); border-radius: 20px; padding: 48px; box-shadow: 0 0 40px rgba(68,122,203,0.12);">
             <div class="section-header fade-up" style="margin-bottom: 40px;">
@@ -362,7 +398,7 @@
 
 <div style="height:1px;background:var(--border);margin:0 40px;"></div>
 
-<section class="skills-tools-tools" id="tools" style="padding: 20px 0 30px;">
+<section class="skills-tools-tools" id="tools" style="padding: 12px 0 20px;">
     <div class="container">
         <div class="section-header fade-up">
             <div class="section-tag">What I Use</div>
@@ -400,7 +436,7 @@
 
 <div style="height:1px;background:var(--border);margin:0 40px;"></div>
 
-<section id="press" style="padding: 60px 0 50px;">
+<section id="press" style="padding: 44px 0 32px;">
     <div class="container">
         <div class="section-header fade-up">
             <div class="section-tag">Recognition</div>

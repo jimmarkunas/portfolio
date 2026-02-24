@@ -111,6 +111,62 @@ document.addEventListener('DOMContentLoaded', () => {
     alignOrbTimelines();
     window.addEventListener('resize', alignOrbTimelines);
 
+    // ── Case Study Results: normalize card spacing (runtime override) ──
+    function normalizeResultsSectionSpacing() {
+        document.querySelectorAll('.case-section#results').forEach(resultsSection => {
+            const contentBlock = resultsSection.querySelector('.content-block');
+            if (contentBlock) contentBlock.style.marginBottom = '0';
+
+            const metricsRow = resultsSection.querySelector('.metrics-row');
+            if (!metricsRow) return;
+
+            metricsRow.style.marginTop = '20px';
+            metricsRow.style.gap = '16px';
+            metricsRow.style.alignItems = 'start';
+
+            metricsRow.querySelectorAll('.metric-card').forEach(card => {
+                card.style.padding = '22px 18px';
+                card.style.minHeight = '0';
+                card.style.height = 'auto';
+                card.style.display = 'flex';
+                card.style.flexDirection = 'column';
+                card.style.justifyContent = 'flex-start';
+                card.style.alignItems = 'center';
+            });
+
+            metricsRow.querySelectorAll('.metric-card .metric-value').forEach(el => {
+                el.style.lineHeight = '1.1';
+                el.style.marginBottom = '4px';
+            });
+            metricsRow.querySelectorAll('.metric-card .metric-label').forEach(el => {
+                el.style.marginBottom = '4px';
+            });
+
+            const nextBlock = metricsRow.nextElementSibling;
+            if (nextBlock) {
+                nextBlock.style.marginTop = '20px';
+                if (window.getComputedStyle(nextBlock).display === 'grid') {
+                    nextBlock.style.gap = '16px';
+                    nextBlock.style.alignItems = 'start';
+                }
+            }
+
+            resultsSection.querySelectorAll('.col-card h4').forEach(h4 => {
+                h4.style.marginTop = '0';
+                h4.style.marginBottom = '12px';
+            });
+            resultsSection.querySelectorAll('.col-card ul').forEach(ul => {
+                ul.style.margin = '0';
+            });
+            resultsSection.querySelectorAll('.col-card li:last-child').forEach(li => {
+                li.style.marginBottom = '0';
+            });
+        });
+    }
+
+    normalizeResultsSectionSpacing();
+    window.addEventListener('resize', normalizeResultsSectionSpacing);
+
 
     // ── Fade-Up Animations ────────────────────────────
     const fadeObserver = new IntersectionObserver((entries) => {
