@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="40" y1="30" x2="1560" y2="870" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#10172A"/>
+      <stop offset="1" stop-color="#090E1C"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6AA9FF"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE48A"/>
+      <stop offset="1" stop-color="#F4C242"/>
+    </linearGradient>
+    <style>
+      .h1{font:700 42px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .h2{font:500 18px Inter,Arial,sans-serif;fill:#B6C1D5}
+      .eyebrow{font:700 16px Inter,Arial,sans-serif;fill:#8FA4CF;letter-spacing:.18em}
+      .stage{font:700 30px Inter,Arial,sans-serif;fill:#F8FAFC}
+      .stageSub{font:500 17px Inter,Arial,sans-serif;fill:#D2D9E8}
+      .stageNum{font:700 14px Inter,Arial,sans-serif;fill:#C9D4EA;letter-spacing:.14em}
+      .panelTitle{font:700 24px Inter,Arial,sans-serif;fill:#F3F4F6}
+      .body{font:500 20px Inter,Arial,sans-serif;fill:#C7D0DF}
+      .chip{font:700 14px Inter,Arial,sans-serif;letter-spacing:.08em}
+      .touchHead{font:700 21px Inter,Arial,sans-serif;fill:#E5E7EB}
+      .touchBody{font:500 15px Inter,Arial,sans-serif;fill:#C5CEDD}
+    </style>
+  </defs>
+
+  <rect x="24" y="24" width="1552" height="852" rx="24" fill="url(#bg)" stroke="#24304A"/>
+
+  <g transform="translate(0,-64)">
+  <text x="72" y="168" class="eyebrow">JOURNEY</text>
+
+  <!-- Journey rail -->
+  <rect x="72" y="190" width="1456" height="180" rx="20" fill="#10182B" stroke="#27334D"/>
+  <path d="M148 286H1450" stroke="#2E3C5A" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Stage cards -->
+  <rect x="96" y="220" width="216" height="132" rx="18" fill="url(#blue)" stroke="#90BEFF"/>
+  <rect x="336" y="220" width="216" height="132" rx="18" fill="#162036" stroke="#334155"/>
+  <rect x="576" y="220" width="216" height="132" rx="18" fill="#162036" stroke="#334155"/>
+  <rect x="816" y="220" width="216" height="132" rx="18" fill="#162036" stroke="#334155"/>
+  <rect x="1056" y="220" width="216" height="132" rx="18" fill="#162036" stroke="#334155"/>
+  <rect x="1296" y="220" width="208" height="132" rx="18" fill="url(#gold)" stroke="#F7DE83"/>
+
+  <!-- Connector dots -->
+  <circle cx="324" cy="286" r="5" fill="#5EA0FF"/>
+  <circle cx="564" cy="286" r="5" fill="#5EA0FF"/>
+  <circle cx="804" cy="286" r="5" fill="#5EA0FF"/>
+  <circle cx="1044" cy="286" r="5" fill="#5EA0FF"/>
+  <circle cx="1284" cy="286" r="5" fill="#5EA0FF"/>
+
+  <!-- Stage copy -->
+  <text x="114" y="246" class="stageNum">01</text>
+  <text x="204" y="278" text-anchor="middle" class="stage">Discover</text>
+  <text x="204" y="309" text-anchor="middle" class="stageSub">TV, web, app entry points</text>
+
+  <text x="354" y="246" class="stageNum">02</text>
+  <text x="444" y="278" text-anchor="middle" class="stage">Evaluate</text>
+  <text x="444" y="309" text-anchor="middle" class="stageSub">Offer details + eligibility</text>
+
+  <text x="594" y="246" class="stageNum">03</text>
+  <text x="684" y="278" text-anchor="middle" class="stage">Select</text>
+  <text x="684" y="309" text-anchor="middle" class="stageSub">Same logic across channels</text>
+
+  <text x="834" y="246" class="stageNum">04</text>
+  <text x="924" y="278" text-anchor="middle" class="stage">Purchase</text>
+  <text x="924" y="309" text-anchor="middle" class="stageSub">Low-friction checkout flow</text>
+
+  <text x="1074" y="246" class="stageNum">05</text>
+  <text x="1164" y="278" text-anchor="middle" class="stage">Activate</text>
+  <text x="1164" y="309" text-anchor="middle" class="stageSub">Entitlement + confirmation</text>
+
+  <text x="1314" y="246" class="stageNum" style="fill:#111827;">06</text>
+  <text x="1400" y="278" text-anchor="middle" class="stage" style="fill:#111827;">Retain</text>
+  <text x="1400" y="309" text-anchor="middle" class="stageSub" style="fill:#111827;">Renewals, upsell, saves</text>
+
+  <!-- One premium summary panel -->
+  <text x="72" y="432" class="eyebrow">WHY IT WORKED</text>
+  <rect x="72" y="452" width="1456" height="162" rx="20" fill="#10182B" stroke="#27334D"/>
+
+  <rect x="104" y="486" width="8" height="94" rx="4" fill="#3B82F6"/>
+  <text x="132" y="512" class="panelTitle">Shared services, channel-native experiences</text>
+  <text x="132" y="542" class="body">DIRECTV kept native channel UX while centralizing eligibility and offer logic.</text>
+  <text x="132" y="572" class="body">That reduced channel drift, improved consistency, and lowered purchase friction.</text>
+
+  <rect x="1038" y="474" width="458" height="136" rx="16" fill="#0E1526" stroke="#3A4B6D"/>
+  <text x="1066" y="510" class="eyebrow">EXECUTIVE TAKEAWAY</text>
+  <text x="1066" y="540" class="body">Consistent offers across contexts</text>
+  <text x="1066" y="570" class="body">Clear eligibility messaging</text>
+  <text x="1066" y="600" class="body">Lower-friction purchase flow</text>
+
+  <!-- Minimal touchpoint chips -->
+  <text x="72" y="674" class="eyebrow">CHANNEL TOUCHPOINTS</text>
+  <rect x="72" y="694" width="1456" height="134" rx="20" fill="#10182B" stroke="#27334D"/>
+
+  <rect x="104" y="728" width="448" height="66" rx="16" fill="#121C30" stroke="#2E5EC0"/>
+  <rect x="124" y="747" width="66" height="22" rx="11" fill="#2563EB"/>
+  <text x="157" y="762" text-anchor="middle" class="chip" fill="#DBEAFE">STB</text>
+  <text x="210" y="767" class="touchHead">TV prompts and upgrade path</text>
+
+  <rect x="576" y="728" width="448" height="66" rx="16" fill="#121C30" stroke="#178FCE"/>
+  <rect x="596" y="747" width="72" height="22" rx="11" fill="#0284C7"/>
+  <text x="632" y="762" text-anchor="middle" class="chip" fill="#E0F2FE">WEB</text>
+  <text x="686" y="767" class="touchHead">Web banners and checkout</text>
+
+  <rect x="1048" y="728" width="448" height="66" rx="16" fill="#121C30" stroke="#D7A03C"/>
+  <rect x="1068" y="747" width="90" height="22" rx="11" fill="#D7A03C"/>
+  <text x="1113" y="762" text-anchor="middle" class="chip" fill="#1F2937">MOBILE</text>
+  <text x="1172" y="767" class="touchHead">In-app offers and confirmation</text>
+  </g>
+</svg>
