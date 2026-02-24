@@ -931,6 +931,45 @@ figcaption {
     left: 0;
 }
 
+.diagram-caption-panel {
+    margin-top: 18px;
+}
+
+.diagram-caption-title {
+    margin: 0 0 12px;
+    color: var(--text-primary);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.35;
+    font-weight: 600;
+}
+
+.diagram-caption-panel figcaption {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 15px;
+}
+
+.diagram-caption-panel .notice-list {
+    margin-top: 0;
+}
+
+figure.diagram-static {
+    cursor: default;
+}
+
+figure.diagram-static:hover {
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+figure.diagram-static .diagram-caption-panel,
+figure.diagram-static .diagram-caption-title,
+figure.diagram-static figcaption,
+figure.diagram-static .notice-list,
+figure.diagram-static .notice-list li {
+    user-select: text;
+}
+
 /* Lightbox modal */
 .lightbox {
     display: none;
