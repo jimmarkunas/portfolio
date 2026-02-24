@@ -355,6 +355,77 @@ nav {
 .skill-description, .tool-description { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
 .section-divider { height: 1px; background: var(--border); margin: 60px 0; }
 
+/* Homepage: compact "What I Do" competency cards */
+.skills-tools.home-competencies {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+}
+.skills-tools.home-competencies .section-header {
+    margin-bottom: 24px;
+}
+.skills-tools.home-competencies .section-tag {
+    margin-bottom: 8px;
+}
+.skills-tools.home-competencies .section-title {
+    margin-bottom: 10px;
+}
+.skills-tools.home-competencies .section-description {
+    max-width: 780px;
+    font-size: 16px;
+    line-height: 1.45;
+}
+.skills-tools.home-competencies .skills-grid,
+section.skills-tools#services .skills-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin-top: 24px !important;
+    align-items: stretch;
+}
+.skills-tools.home-competencies .skill-card,
+section.skills-tools#services .skill-card {
+    padding: 12px 14px;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.skills-tools.home-competencies .skill-header,
+section.skills-tools#services .skill-header {
+    margin-bottom: 4px;
+    min-width: 0;
+}
+.skills-tools.home-competencies .skill-title,
+section.skills-tools#services .skill-title {
+    font-size: 14px;
+    line-height: 1.2;
+    min-width: 0;
+}
+.skills-tools.home-competencies .skill-description,
+section.skills-tools#services .skill-description {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+    .skills-tools.home-competencies .skills-grid,
+    section.skills-tools#services .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-tools.home-competencies .skills-grid,
+    section.skills-tools#services .skills-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .skills-tools.home-competencies .skill-card,
+    section.skills-tools#services .skill-card {
+        min-height: 0;
+    }
+}
+
 footer { padding: 30px 0 100px; text-align: center; border-top: 1px solid var(--border); }
 footer h2 { font-size: 56px; font-weight: 700; margin-bottom: 25px; letter-spacing: -0.02em; }
 footer p { font-size: 20px; color: var(--text-secondary); margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto; }
@@ -564,6 +635,63 @@ section[id] {
     font-size: 14px;
     color: var(--text-secondary);
     margin-top: 4px;
+}
+
+/* Case study Results section spacing normalization */
+.case-section#results .content-block {
+    margin-bottom: 0 !important;
+}
+
+.case-section#results .metrics-row {
+    margin-top: 20px !important;
+    margin-bottom: 0 !important;
+    gap: 16px !important;
+    align-items: start !important;
+}
+
+.case-section#results .metric-card {
+    padding: 22px 18px !important;
+    min-height: 0 !important;
+    height: auto !important;
+    align-self: start !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+}
+
+.case-section#results .metric-card .metric-value {
+    line-height: 1.1 !important;
+    margin-bottom: 4px !important;
+}
+
+.case-section#results .metric-card .metric-label {
+    margin-bottom: 4px !important;
+}
+
+/* Most case-study result comparisons use inline grid styles directly after metrics-row */
+.case-section#results .metrics-row + * {
+    margin-top: 20px !important;
+    align-items: start !important;
+}
+
+.case-section#results .metrics-row + [style*="display: grid"] {
+    gap: 16px !important;
+    align-items: start !important;
+}
+
+.case-section#results .col-card h4 {
+    margin-top: 0 !important;
+    margin-bottom: 12px !important;
+}
+
+.case-section#results .col-card ul {
+    margin: 0 !important;
+    flex: 0 1 auto !important;
+}
+
+.case-section#results .col-card li:last-child {
+    margin-bottom: 0 !important;
 }
 
 .tldr-block {
