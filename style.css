@@ -12,6 +12,12 @@
     color: inherit !important;
     outline: none !important;
 }
+.recognition-item .recognition-text,
+.recognition-item .recognition-text * {
+    text-decoration: none !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+}
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 * {
