@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" fill="none">
+  <defs>
+    <linearGradient id="bgCard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#141A2A"/>
+      <stop offset="100%" stop-color="#0E1220"/>
+    </linearGradient>
+    <linearGradient id="stageGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="channelGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1A2237"/>
+      <stop offset="100%" stop-color="#12192B"/>
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#3B82F6" flood-opacity="0.25"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#3B82F6"/>
+    </marker>
+    <marker id="arrowMuted" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#6B7280"/>
+    </marker>
+    <style>
+      .title{font:700 32px Inter,Arial,sans-serif; fill:#F3F4F6}
+      .subtitle{font:500 16px Inter,Arial,sans-serif; fill:#A7AEC0}
+      .label{font:700 14px Inter,Arial,sans-serif; fill:#9CA3AF; letter-spacing:.12em}
+      .stage{font:700 18px Inter,Arial,sans-serif; fill:#EFF6FF}
+      .small{font:600 13px Inter,Arial,sans-serif; fill:#C9D0E0}
+      .tiny{font:500 12px Inter,Arial,sans-serif; fill:#9CA3AF}
+      .chip{font:700 12px Inter,Arial,sans-serif; letter-spacing:.06em}
+      .channel{font:700 15px Inter,Arial,sans-serif; fill:#E5E7EB}
+      .rowtext{font:600 13px Inter,Arial,sans-serif; fill:#CBD5E1}
+      .calloutHead{font:700 14px Inter,Arial,sans-serif}
+      .calloutText{font:500 13px Inter,Arial,sans-serif; fill:#D1D5DB}
+    </style>
+  </defs>
+
+  <rect x="24" y="24" width="1552" height="872" rx="20" fill="url(#bgCard)" stroke="#27304A"/>
+
+  <text x="64" y="84" class="title">DIRECTV Revenue Journey Map</text>
+  <text x="64" y="114" class="subtitle">Consistent premium add-on offers across STB, web, and mobile touchpoints powered by shared eligibility + offer services</text>
+
+  <text x="64" y="162" class="label">JOURNEY STAGES</text>
+
+  <!-- Stage boxes -->
+  <g filter="url(#softGlow)">
+    <rect x="64" y="184" width="220" height="74" rx="12" fill="url(#stageGrad)" stroke="#60A5FA"/>
+    <rect x="314" y="184" width="220" height="74" rx="12" fill="#1C253B" stroke="#334155"/>
+    <rect x="564" y="184" width="220" height="74" rx="12" fill="#1C253B" stroke="#334155"/>
+    <rect x="814" y="184" width="220" height="74" rx="12" fill="#1C253B" stroke="#334155"/>
+    <rect x="1064" y="184" width="220" height="74" rx="12" fill="#1C253B" stroke="#334155"/>
+    <rect x="1314" y="184" width="220" height="74" rx="12" fill="#1C253B" stroke="#334155"/>
+  </g>
+
+  <text x="174" y="214" text-anchor="middle" class="stage">Discover</text>
+  <text x="174" y="236" text-anchor="middle" class="tiny">Remote prompt / homepage placement</text>
+
+  <text x="424" y="214" text-anchor="middle" class="stage">Evaluate</text>
+  <text x="424" y="236" text-anchor="middle" class="tiny">Offer details + eligibility check</text>
+
+  <text x="674" y="214" text-anchor="middle" class="stage">Select</text>
+  <text x="674" y="236" text-anchor="middle" class="tiny">Plan/package decision</text>
+
+  <text x="924" y="214" text-anchor="middle" class="stage">Purchase</text>
+  <text x="924" y="236" text-anchor="middle" class="tiny">Checkout + auth + confirmation</text>
+
+  <text x="1174" y="214" text-anchor="middle" class="stage">Activate</text>
+  <text x="1174" y="236" text-anchor="middle" class="tiny">Entitlement + device sync</text>
+
+  <text x="1424" y="214" text-anchor="middle" class="stage">Retain</text>
+  <text x="1424" y="236" text-anchor="middle" class="tiny">Usage prompts + upsell/rescue</text>
+
+  <!-- stage connector arrows -->
+  <path d="M284 221H306" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <path d="M534 221H556" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <path d="M784 221H806" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <path d="M1034 221H1056" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <path d="M1284 221H1306" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <!-- Shared services rail -->
+  <text x="64" y="306" class="label">SHARED DECISIONING + OFFER SERVICES</text>
+  <rect x="64" y="326" width="1470" height="94" rx="14" fill="#111827" stroke="#2B364F"/>
+  <rect x="84" y="346" width="264" height="54" rx="10" fill="#1E3A8A" stroke="#60A5FA"/>
+  <text x="216" y="379" text-anchor="middle" class="small">Offer Catalog Service</text>
+
+  <rect x="366" y="346" width="264" height="54" rx="10" fill="#0F766E" stroke="#2DD4BF"/>
+  <text x="498" y="379" text-anchor="middle" class="small">Eligibility Rules Engine</text>
+
+  <rect x="648" y="346" width="264" height="54" rx="10" fill="#7C2D12" stroke="#FB923C"/>
+  <text x="780" y="379" text-anchor="middle" class="small">Pricing + Promo Logic</text>
+
+  <rect x="930" y="346" width="264" height="54" rx="10" fill="#4C1D95" stroke="#A78BFA"/>
+  <text x="1062" y="379" text-anchor="middle" class="small">Checkout / Order APIs</text>
+
+  <rect x="1212" y="346" width="302" height="54" rx="10" fill="#1F2937" stroke="#6B7280"/>
+  <text x="1363" y="379" text-anchor="middle" class="small">Telemetry + Funnel Reporting</text>
+
+  <!-- Channel rows -->
+  <text x="64" y="476" class="label">CHANNEL EXPERIENCES (SAME OFFER, DIFFERENT CONTEXTS)</text>
+
+  <!-- STB row -->
+  <rect x="64" y="496" width="1470" height="82" rx="14" fill="url(#channelGrad)" stroke="#273249"/>
+  <rect x="82" y="515" width="108" height="44" rx="10" fill="#111827" stroke="#3B82F6"/>
+  <text x="136" y="543" text-anchor="middle" class="channel">STB</text>
+  <text x="224" y="543" class="rowtext">Remote-triggered tile</text>
+  <path d="M382 537H460" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="480" y="543" class="rowtext">Offer detail screen</text>
+  <path d="M676 537H754" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="772" y="543" class="rowtext">1-click upgrade flow</text>
+  <path d="M984 537H1062" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="1082" y="543" class="rowtext">Entitlement confirmation</text>
+  <path d="M1320 537H1398" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="1418" y="543" class="rowtext">Usage nudge / renewal prompt</text>
+
+  <!-- Web row -->
+  <rect x="64" y="592" width="1470" height="82" rx="14" fill="url(#channelGrad)" stroke="#273249"/>
+  <rect x="82" y="611" width="108" height="44" rx="10" fill="#111827" stroke="#22C55E"/>
+  <text x="136" y="639" text-anchor="middle" class="channel">WEB</text>
+  <text x="224" y="639" class="rowtext">Homepage / account banner</text>
+  <path d="M426 633H504" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="524" y="639" class="rowtext">Eligibility messaging</text>
+  <path d="M706 633H784" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="804" y="639" class="rowtext">Checkout with saved billing</text>
+  <path d="M1048 633H1126" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="1146" y="639" class="rowtext">Order + email confirmation</text>
+  <path d="M1362 633H1440" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="1460" y="639" class="rowtext">Cross-sell recommendations</text>
+
+  <!-- Mobile row -->
+  <rect x="64" y="688" width="1470" height="82" rx="14" fill="url(#channelGrad)" stroke="#273249"/>
+  <rect x="82" y="707" width="108" height="44" rx="10" fill="#111827" stroke="#F59E0B"/>
+  <text x="136" y="735" text-anchor="middle" class="channel">MOBILE</text>
+  <text x="224" y="735" class="rowtext">In-app card / push deep link</text>
+  <path d="M428 729H506" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="526" y="735" class="rowtext">Plan compare + rules validation</text>
+  <path d="M764 729H842" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="862" y="735" class="rowtext">Mobile purchase flow</text>
+  <path d="M1044 729H1122" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="1142" y="735" class="rowtext">Instant account sync</text>
+  <path d="M1288 729H1366" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <text x="1386" y="735" class="rowtext">Retention / upgrade prompts</text>
+
+  <!-- Vertical shared-service connectors -->
+  <path d="M216 420V496" stroke="#334155" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M498 420V496" stroke="#334155" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M780 420V496" stroke="#334155" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M1062 420V496" stroke="#334155" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M1363 420V496" stroke="#334155" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <!-- callouts -->
+  <rect x="64" y="794" width="480" height="78" rx="12" fill="#0F172A" stroke="#1D4ED8"/>
+  <text x="86" y="822" class="calloutHead" fill="#93C5FD">Consistency Win</text>
+  <text x="86" y="847" class="calloutText">Same offer logic and eligibility messaging across remote, web, and app contexts.</text>
+
+  <rect x="560" y="794" width="480" height="78" rx="12" fill="#0F172A" stroke="#0EA5E9"/>
+  <text x="582" y="822" class="calloutHead" fill="#67E8F9">Friction Reduction</text>
+  <text x="582" y="847" class="calloutText">Shared checkout/order services reduced handoffs and channel-specific rework.</text>
+
+  <rect x="1056" y="794" width="478" height="78" rx="12" fill="#0F172A" stroke="#F59E0B"/>
+  <text x="1078" y="822" class="calloutHead" fill="#FCD34D">Revenue Impact Path</text>
+  <text x="1078" y="847" class="calloutText">More placements + reliable eligibility + cleaner purchase flows improved conversion throughput.</text>
+</svg>
