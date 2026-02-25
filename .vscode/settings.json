@@ -1,7 +1,4 @@
 {
-    "git.enableStaging": false,
-    "git.enableSmartCommit": true,
-    "scm.countBadge": "all",
     "liveServer.settings.port": 4173,
     "liveServer.settings.root": "/"
 }
