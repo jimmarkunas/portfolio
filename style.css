@@ -701,11 +701,12 @@ section[id] {
 }
 
 .tldr-block {
-    background: rgba(68, 122, 203, 0.05);
-    border: 2px solid var(--accent-blue);
-    border-radius: 12px;
-    padding: 24px;
+    background: linear-gradient(180deg, rgba(68, 122, 203, 0.04), rgba(68, 122, 203, 0.02));
+    border: 1px solid rgba(68, 122, 203, 0.25);
+    border-radius: 18px;
+    padding: 20px;
     margin: 32px 0 0 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .tldr-block h3 {
@@ -716,15 +717,32 @@ section[id] {
 
 .tldr-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.tldr-item {
+    background: rgba(7, 15, 35, 0.75);
+    border: 1px solid rgba(68, 122, 203, 0.18);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    min-width: 0;
+    height: 100%;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.tldr-item.tldr-item-results {
+    background: linear-gradient(180deg, rgba(68, 122, 203, 0.12), rgba(68, 122, 203, 0.05));
+    border-color: rgba(68, 122, 203, 0.45);
+    box-shadow: 0 0 0 1px rgba(68, 122, 203, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .tldr-item h4 {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     color: var(--text-primary);
+    letter-spacing: 0.01em;
 }
 
 .tldr-item p {
@@ -736,16 +754,20 @@ section[id] {
 .tldr-item ul {
     list-style: none;
     padding: 0;
-    margin: 8px 0 0 0;
+    margin: 0;
 }
 
 .tldr-item li {
     font-size: 14px;
     color: var(--text-secondary);
-    line-height: 1.6;
-    padding-left: 20px;
+    line-height: 1.45;
+    padding-left: 18px;
     position: relative;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
+}
+
+.tldr-item li:last-child {
+    margin-bottom: 0;
 }
 
 .tldr-item li::before {
@@ -753,6 +775,29 @@ section[id] {
     position: absolute;
     left: 0;
     color: var(--accent-blue);
+}
+
+@media (min-width: 1440px) {
+    .tldr-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+    }
+}
+
+@media (max-width: 900px) {
+    .tldr-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .tldr-block {
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .tldr-item {
+        padding: 16px;
+    }
 }
 
 .content-block {
@@ -1099,10 +1144,11 @@ figure.diagram-static .notice-list li {
     background: var(--bg-primary);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 32px;
-    display: flex;
-    align-items: center;
-    gap: 32px;
+    padding: 10px 22px 14px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 14px 18px;
     margin-bottom: 20px;
 }
 
@@ -1111,8 +1157,12 @@ figure.diagram-static .notice-list li {
 }
 
 .recognition-icon {
-    font-size: 32px;
+    font-size: 24px;
     flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
 }
 
 .recognition-content {
@@ -1120,21 +1170,28 @@ figure.diagram-static .notice-list li {
 }
 
 .recognition-content h3 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin: 0 0 4px;
+    line-height: 1.2;
 }
 
 .recognition-content p {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.45;
     margin: 0;
 }
 
 .recognition-card .btn {
     white-space: nowrap;
     flex-shrink: 0;
+    align-self: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 10px;
+    width: 220px;
+    text-align: center;
 }
 
 /* Additional media query updates for case studies */
@@ -1146,7 +1203,13 @@ figure.diagram-static .notice-list li {
     }
     .two-col-grid { grid-template-columns: 1fr; }
     .banner-content { left: 20px; flex-wrap: wrap; }
-    .recognition-card { flex-direction: column; text-align: center; }
+    .recognition-card {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 16px 18px;
+        gap: 12px;
+    }
     .artifact-gallery { grid-template-columns: 1fr; }
     .proof-bar { flex-direction: column; gap: 16px; }
 }        /* Press & Awards */
