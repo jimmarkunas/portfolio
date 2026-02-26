@@ -14,6 +14,64 @@
 
     <!-- Global Stylesheet -->
     <link rel="stylesheet" href="/style.css?v=20260224-1">
+    <style>
+        /* LEGO-only: normalize Results card heights and text alignment */
+        #results .metrics-row .metric-card {
+            display: grid;
+            grid-template-rows: 1.4em 2.6em 1.8em;
+            align-content: center;
+            justify-items: center;
+            row-gap: 8px;
+        }
+
+        #results .metrics-row .metric-card .metric-value {
+            min-height: 1.25em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.05;
+        }
+
+        #results .metrics-row .metric-card .metric-label {
+            min-height: 2.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.15;
+        }
+
+        #results .metrics-row .metric-card .metric-breakdown {
+            min-height: 1.6em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.15;
+        }
+
+        #results .content-block > div[style*="grid-template-columns: 1fr 1fr"] {
+            align-items: stretch !important;
+        }
+
+        #results .content-block > div[style*="grid-template-columns: 1fr 1fr"] .col-card {
+            display: flex !important;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        #results .content-block > div[style*="grid-template-columns: 1fr 1fr"] .col-card h4 {
+            min-height: 1.6em;
+            display: flex;
+            align-items: center;
+        }
+
+        #results .content-block > div[style*="grid-template-columns: 1fr 1fr"] .col-card ul {
+            flex: 1;
+            margin-bottom: 0;
+        }
+    </style>
 </head>
 <body>
     <div class="bg-gradient"></div>
@@ -474,7 +532,7 @@
                         <div class="metric-breakdown">Enterprise platform efficiencies</div>
                     </div>
                     <div class="metric-card">
-                        <span class="metric-value" style="font-size: 22px;">MIT · Harvard</span>
+                        <span class="metric-value">MIT · Harvard</span>
                         <span class="metric-label">Academic Case Studies</span>
                         <div class="metric-breakdown">Gold-standard digital transformation</div>
                     </div>
@@ -514,32 +572,44 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Press & Recognition</h2>
+                <div style="margin: 20px 0 24px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.55); padding: 12px;">
+                    <img src="/work/lego/images/kudos-rho.png" alt="LEGO kudos note" style="display:block; width:100%; height:auto; border-radius:10px; border:1px solid var(--border);">
+                </div>
                 
                 <div class="recognition-card fade-up stagger-1">
                     <span class="recognition-icon">🎓</span>
                     <div class="recognition-content">
-                        <h3>MIT &amp; Harvard Business School Case Studies</h3>
-                        <p>MIT's "Transforming the LEGO Group for the Digital Economy" and related teaching cases at MIT, Harvard, and other leading universities use LEGO's enterprise platform and digital transformation as a gold-standard model for how to execute digital strategy. The online shop — built on the architecture and governance frameworks I helped define — is one of the most visible consumer touchpoints of that transformation.</p>
+                        <h3>Harvard Business Review</h3>
+                        <p>Harvard Business Review coverage of LEGO’s digital transformation and operating model, documenting how platform strategy and disciplined execution enabled growth across channels and markets.</p>
                     </div>
-                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-primary">Request Full Pack</a>
+                    <a href="/work/lego/files/01%20Harvard%20Business%20Review.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
                 </div>
 
                 <div class="recognition-card fade-up stagger-2">
                     <span class="recognition-icon">📰</span>
                     <div class="recognition-content">
-                        <h3>Harvard Business Review &amp; MIS Quarterly</h3>
-                        <p>HBR and MIS Quarterly Executive both published analyses of LEGO's transformation, highlighting how the company used a disciplined enterprise platform to fuel growth rather than slow it down. The online shop — and the IA, checkout flows, and Design Authority model we shipped — was a key proof point in that story.</p>
+                        <h3>MIT Case Study</h3>
+                        <p>MIT teaching case material on LEGO’s enterprise and digital transformation, often cited as a model for aligning platform governance, product delivery, and organizational execution at scale.</p>
                     </div>
-                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Get in Touch</a>
+                    <a href="/work/lego/files/02%20MIT%20Case%20Study.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
                 </div>
 
                 <div class="recognition-card fade-up stagger-3">
-                    <span class="recognition-icon">🏆</span>
+                    <span class="recognition-icon">🌍</span>
                     <div class="recognition-content">
-                        <h3>Design Patterns That Outlived the Project</h3>
-                        <p>The two-row nav, embedded search, consistent account and VIP treatment, and global cart behaviors we defined became the standard for LEGO.com and influenced UX work across the brand for years. The Design Authority model we built gave LEGO a way to make decisions at scale — without reinventing everything every time a new market launched.</p>
+                        <h3>The Guardian: LEGO Digital</h3>
+                        <p>The Guardian coverage highlighting LEGO’s digital evolution and broader transformation story, including how digital platforms and commerce experiences supported the company’s renewed growth.</p>
                     </div>
-                    <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-secondary">Book a Call</a>
+                    <a href="/work/lego/files/03%20The%20Guardian%20LEGO%20Digital.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-4">
+                    <span class="recognition-icon">📊</span>
+                    <div class="recognition-content">
+                        <h3>MIS Quarterly Executive</h3>
+                        <p>MIS Quarterly Executive analysis of LEGO’s transformation, focusing on platform discipline, governance, and the organizational mechanisms that enabled digital execution across a global business.</p>
+                    </div>
+                    <a href="/work/lego/files/04%20MIS%20Quarterly%20Executive_compressed.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
                 </div>
             </div>
         </div>
