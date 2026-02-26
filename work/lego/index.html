@@ -15,6 +15,22 @@
     <!-- Global Stylesheet -->
     <link rel="stylesheet" href="/style.css?v=20260224-1">
     <style>
+        /* LEGO banner needs stronger neutral contrast on pink background */
+        .case-banner {
+            --badge-company-bg: rgba(19, 19, 26, 0.34);
+            --badge-company-border: rgba(255, 255, 255, 0.38);
+            --badge-company-text: #eef4ff;
+        }
+
+        /* Keep yellow text, but give badges 2 + 3 the same contrast-safe glass background */
+        .case-banner .banner-badge.badge-award,
+        .case-banner .banner-badge.badge-press {
+            background: rgba(19, 19, 26, 0.34);
+            border-color: rgba(255, 215, 0, 0.42);
+            color: #FFD700;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+        }
+
         /* LEGO-only: normalize Results card heights and text alignment */
         #results .metrics-row .metric-card {
             display: grid;
@@ -86,10 +102,10 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="https://jimmarkunas.com/work/">Work</a></li>
-                <li><a href="https://jimmarkunas.com/services/">Services</a></li>
+                <li><a href="/work/">Work</a></li>
+                <li><a href="/services/">Services</a></li>
                 <li><a href="/cv/">CV</a></li>
-                <li><a href="https://jimmarkunas.com/about/">About</a></li>
+                <li><a href="/about/">About</a></li>
                 <li><a href="/contact/">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -102,10 +118,10 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="https://jimmarkunas.com/work/">Work</a>
-        <a href="https://jimmarkunas.com/services/">Services</a>
+        <a href="/work/">Work</a>
+        <a href="/services/">Services</a>
         <a href="/cv/">CV</a>
-        <a href="https://jimmarkunas.com/about/">About</a>
+        <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
     </div>
 
@@ -202,7 +218,7 @@
 
             <div class="hero-cta fade-up stagger-3">
                 <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
-                <a href="https://jimmarkunas.com/cv/" class="btn btn-secondary">Download CV</a>
+                <a href="/cv/" class="btn btn-secondary">Download CV</a>
             </div>
         </div>
     </section>
@@ -212,28 +228,71 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2 style="text-align: center;">Context & Stakes</h2>
+                <div style="margin: 24px 0 20px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: rgba(7,15,35,0.55); padding: 12px;">
+                    <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(68,122,203,0.18);">
+                        <img src="/work/lego/images/banner-lego-04.jpg" alt="LEGO program context banner" style="display:block; width:100%; height:auto; margin-top:-300px;">
+                    </div>
+                </div>
                 <p style="text-align: center;">LEGO was in the middle of a decade-long transformation from a toy manufacturer into a digital enterprise with tightly integrated global processes and platforms. On the back end, the enterprise platform was world-class. On the front end, the global online shop still felt like an afterthought — a patchwork of regional sites that didn't reflect the LEGO brand or how families actually shopped.</p>
                 
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Shop: Before vs. After</h4>
-                    <div style="display: flex; gap: 48px; align-items: flex-end; justify-content: center;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">BEFORE</div>
-                            <div style="width: 240px; height: 240px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 16px;">
-                                <div style="font-size: 22px; font-weight: 700; color: white; line-height: 1.3;">4-Row Nav · Region Silos</div>
-                                <div style="font-size: 13px; color: rgba(255,255,255,0.8); margin-top: 8px;">Shoppers fled to search · Mobile afterthought</div>
+                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 32px 0;">
+                    <h4 style="text-align: center; margin-bottom: 18px; color: var(--text-primary);">Shop Transformation: UX System, Not a Cosmetic Redesign</h4>
+
+                    <div style="display:grid; grid-template-columns: 1.05fr auto 1.35fr; gap: 12px; align-items: stretch;">
+                        <div style="border: 1px solid rgba(239,68,68,0.22); border-radius: 10px; background: rgba(127,29,29,0.08); padding: 14px;">
+                            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #fca5a5; margin-bottom: 10px;">Before: Fragmented Shop UX</div>
+                            <div style="display:grid; gap: 8px;">
+                                <div style="border-radius: 8px; border: 1px solid rgba(239,68,68,0.14); background: rgba(7,15,35,0.5); padding: 10px;">
+                                    <div style="font-size: 12px; font-weight: 600; color: var(--text-primary);">4-row navigation</div>
+                                    <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Crowded wayfinding; search became the fallback</div>
+                                </div>
+                                <div style="border-radius: 8px; border: 1px solid rgba(239,68,68,0.14); background: rgba(7,15,35,0.5); padding: 10px;">
+                                    <div style="font-size: 12px; font-weight: 600; color: var(--text-primary);">Region silos</div>
+                                    <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Cart/checkout behavior changed by market</div>
+                                </div>
+                                <div style="border-radius: 8px; border: 1px solid rgba(239,68,68,0.14); background: rgba(7,15,35,0.5); padding: 10px;">
+                                    <div style="font-size: 12px; font-weight: 600; color: var(--text-primary);">Mobile afterthought</div>
+                                    <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Scaled desktop patterns, not device-native flows</div>
+                                </div>
                             </div>
                         </div>
-                        <div style="font-size: 40px; color: var(--text-secondary); padding-bottom: 55px;">→</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">AFTER</div>
-                            <div style="width: 240px; height: 160px; background: var(--accent-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; padding: 16px;">
-                                <div style="font-size: 22px; font-weight: 700; color: white; line-height: 1.3;">One Global Shop</div>
-                                <div style="font-size: 13px; color: rgba(255,255,255,0.8);">Mobile-first · Platform-ready · Unmistakably LEGO</div>
+
+                        <div style="display:flex; align-items:center; justify-content:center; color: var(--text-secondary); font-size: 26px; padding: 0 2px;">→</div>
+
+                        <div style="border: 1px solid rgba(68,122,203,0.18); border-radius: 10px; background: rgba(7,15,35,0.46); padding: 14px;">
+                            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); margin-bottom: 10px;">After: Global Shop System</div>
+
+                            <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 10px;">
+                                <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08); padding: 10px; text-align:center;">
+                                    <div style="font-size: 12px; font-weight: 600; color: var(--text-primary);">Global IA</div>
+                                    <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">2-row nav pattern</div>
+                                </div>
+                                <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08); padding: 10px; text-align:center;">
+                                    <div style="font-size: 12px; font-weight: 600; color: var(--text-primary);">Checkout PRDs</div>
+                                    <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Documented variations</div>
+                                </div>
+                                <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08); padding: 10px; text-align:center;">
+                                    <div style="font-size: 12px; font-weight: 600; color: var(--text-primary);">Design Authority</div>
+                                    <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Governance at scale</div>
+                                </div>
+                            </div>
+
+                            <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.7); padding: 12px; position: relative;">
+                                <div style="position:absolute; top:-1px; left:10px; right:10px; height:2px; background: linear-gradient(90deg, rgba(68,122,203,0.2), rgba(68,122,203,0.95), rgba(34,211,238,0.25)); border-radius:999px;"></div>
+                                <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); margin-bottom: 8px;">One Global Pattern Layer</div>
+                                <div style="display:flex; flex-wrap:wrap; gap: 6px; margin-bottom: 8px;">
+                                    <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(68,122,203,0.1); font-size: 11px; color: var(--text-primary);">Navigation</span>
+                                    <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(68,122,203,0.1); font-size: 11px; color: var(--text-primary);">Cart</span>
+                                    <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(68,122,203,0.1); font-size: 11px; color: var(--text-primary);">Checkout</span>
+                                    <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(68,122,203,0.1); font-size: 11px; color: var(--text-primary);">Promotions</span>
+                                    <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(68,122,203,0.1); font-size: 11px; color: var(--text-primary);">Account</span>
+                                </div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">Mobile-first, platform-ready UX system that preserved LEGO identity while scaling across markets.</div>
                             </div>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">One global pattern for nav, checkout, and governance — built on the enterprise platform MIT and Harvard now teach as a model</div>
+
+                    <div style="text-align: center; margin-top: 14px; color: var(--text-secondary); font-size: 14px;">One global pattern for nav, checkout, and governance — built on the enterprise platform MIT and Harvard now teach as a model.</div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
@@ -264,18 +323,75 @@
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
                 
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🧱</div>
-                        <div style="font-size: 18px; font-weight: 600;">Enterprise Platform · Global Scale · Brand Experience That Had to Match</div>
-                        <div style="font-size: 14px; margin-top: 8px;">The back end was world-class. The front end was an afterthought.</div>
-                    </div>
+                <div style="margin: 32px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: rgba(7,15,35,0.55); padding: 12px;">
+                    <img src="/work/lego/images/banner-lego-01.avif" alt="LEGO digital commerce challenge banner" style="display:block; width:100%; height:376px; object-fit:cover; object-position:center; border-radius:8px; border:1px solid rgba(68,122,203,0.18);">
                 </div>
 
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">BCG LEGO System Architecture</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                <figure>
+                    <div style="border-radius:10px; overflow:hidden; border:1px solid rgba(68,122,203,0.25); background:linear-gradient(180deg, rgba(10,20,44,0.98), rgba(8,14,32,0.98));">
+                        <div style="padding:14px 16px; border-bottom:1px solid rgba(68,122,203,0.16); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+                            <div style="font-size:15px; font-weight:700; color:#8fb5ff;">BCG LEGO System Architecture</div>
+                            <div style="font-size:12px; color:var(--text-muted);">Capability ownership matrix (simplified from enterprise diagram)</div>
+                        </div>
+                        <div style="padding:14px;">
+                            <div style="display:grid; grid-template-columns: 220px repeat(5, minmax(90px, 1fr)); gap:8px; align-items:stretch; overflow-x:auto;">
+                                <div style="font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); padding:10px 12px;">PEN / Capability Area</div>
+                                <div style="font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); padding:10px 8px; text-align:center;">Corp Finance</div>
+                                <div style="font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); padding:10px 8px; text-align:center;">Corp Center</div>
+                                <div style="font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); padding:10px 8px; text-align:center;">Supply Chain</div>
+                                <div style="font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); padding:10px 8px; text-align:center;">Markets &amp; Products</div>
+                                <div style="font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); padding:10px 8px; text-align:center;">CED</div>
+
+                                <div style="padding:10px 12px; border-radius:8px; background:rgba(255,255,255,0.02); color:var(--text-primary); font-size:13px;">Order-to-Cash</div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:12px;height:12px;border-radius:50%;background:#447ACB; box-shadow:0 0 0 4px rgba(68,122,203,0.14);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+
+                                <div style="padding:10px 12px; border-radius:8px; background:rgba(255,255,255,0.02); color:var(--text-primary); font-size:13px;">Planning &amp; Allocation</div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:12px;height:12px;border-radius:50%;background:#447ACB; box-shadow:0 0 0 4px rgba(68,122,203,0.14);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"></div>
+
+                                <div style="padding:10px 12px; border-radius:8px; background:rgba(255,255,255,0.02); color:var(--text-primary); font-size:13px;">Catalog &amp; Merchandising</div>
+                                <div style="display:flex; align-items:center; justify-content:center;"></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:12px;height:12px;border-radius:50%;background:#facc15; box-shadow:0 0 0 4px rgba(250,204,21,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:12px;height:12px;border-radius:50%;background:#447ACB; box-shadow:0 0 0 4px rgba(68,122,203,0.14);"></span></div>
+
+                                <div style="padding:10px 12px; border-radius:8px; background:rgba(255,255,255,0.02); color:var(--text-primary); font-size:13px;">Navigation / IA / Search</div>
+                                <div style="display:flex; align-items:center; justify-content:center;"></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:12px;height:12px;border-radius:50%;background:#447ACB; box-shadow:0 0 0 4px rgba(68,122,203,0.14);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:12px;height:12px;border-radius:50%;background:#facc15; box-shadow:0 0 0 4px rgba(250,204,21,0.12);"></span></div>
+
+                                <div style="padding:10px 12px; border-radius:8px; background:rgba(255,255,255,0.02); color:var(--text-primary); font-size:13px;">Checkout / Payments / Tax</div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:12px;height:12px;border-radius:50%;background:#f87171; box-shadow:0 0 0 4px rgba(248,113,113,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:12px;height:12px;border-radius:50%;background:#447ACB; box-shadow:0 0 0 4px rgba(68,122,203,0.14);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+
+                                <div style="padding:10px 12px; border-radius:8px; background:rgba(255,255,255,0.02); color:var(--text-primary); font-size:13px;">Master Data &amp; Governance</div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:12px;height:12px;border-radius:50%;background:#447ACB; box-shadow:0 0 0 4px rgba(68,122,203,0.14);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                                <div style="display:flex; align-items:center; justify-content:center;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,0.12);"></span></div>
+                            </div>
+
+                            <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:14px; padding-top:12px; border-top:1px solid rgba(68,122,203,0.12); font-size:12px; color:var(--text-muted);">
+                                <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:10px;height:10px;border-radius:50%;background:#447ACB;"></span> Primary design / product dependency</span>
+                                <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:10px;height:10px;border-radius:50%;background:#facc15;"></span> Shared stakeholder decision point</span>
+                                <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8;"></span> Enterprise dependency / oversight</span>
+                                <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:10px;height:10px;border-radius:50%;background:#f87171;"></span> Risk-heavy integration area</span>
+                            </div>
+                        </div>
                     </div>
                     <figcaption>Global online shop sitting on top of LEGO's SAP-based enterprise platform — one pattern for nav, cart, checkout, and governance across all markets</figcaption>
                     <ul class="notice-list">
@@ -317,11 +433,47 @@
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
                 
-                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(68, 122, 203, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🎯</div>
-                        <div style="font-size: 18px; font-weight: 600;">Solutions Architect &amp; Product Manager (via BCG) · June 2015 – June 2016</div>
-                        <div style="font-size: 14px; margin-top: 8px;">LEGO stakeholders · BCG team · external agencies · global engineering</div>
+                <div style="margin: 32px 0; border-radius: 12px; border: 1px solid var(--border); background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(68, 122, 203, 0.08) 100%); padding: 20px;">
+                    <div style="display:grid; grid-template-columns: 1.15fr 1.4fr; gap:18px; align-items:stretch;">
+                        <div style="border:1px solid rgba(68,122,203,0.18); border-radius:10px; background:rgba(8,14,32,0.55); padding:18px;">
+                            <div style="font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#8fb5ff; margin-bottom:8px;">Role &amp; Span</div>
+                            <div style="font-size:28px; font-weight:700; line-height:1.15; color:var(--text-primary);">Solutions Architect &amp;<br>Product Manager</div>
+                            <div style="margin-top:10px; font-size:14px; color:var(--text-secondary);">via BCG · June 2015 - June 2016</div>
+                            <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:8px;">
+                                <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.22); background:rgba(68,122,203,0.08); font-size:12px; color:#cfe0ff;">PRDs</span>
+                                <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.22); background:rgba(68,122,203,0.08); font-size:12px; color:#cfe0ff;">Architecture</span>
+                                <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.22); background:rgba(68,122,203,0.08); font-size:12px; color:#cfe0ff;">Global UX Patterns</span>
+                                <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.22); background:rgba(68,122,203,0.08); font-size:12px; color:#cfe0ff;">Decision Framing</span>
+                            </div>
+                        </div>
+                        <div style="border:1px solid rgba(68,122,203,0.18); border-radius:10px; background:rgba(8,14,32,0.45); padding:16px;">
+                            <div style="font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Operating Interfaces</div>
+                            <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px;">
+                                <div style="padding:12px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(68,122,203,0.12);">
+                                    <div style="font-size:12px; color:#8fb5ff; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px;">Business</div>
+                                    <div style="font-size:14px; color:var(--text-primary); font-weight:600;">LEGO Stakeholders</div>
+                                    <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Global eCom + market priorities</div>
+                                </div>
+                                <div style="padding:12px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(68,122,203,0.12);">
+                                    <div style="font-size:12px; color:#8fb5ff; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px;">Program</div>
+                                    <div style="font-size:14px; color:var(--text-primary); font-weight:600;">BCG Core Team</div>
+                                    <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Workstreams, alignment, sequencing</div>
+                                </div>
+                                <div style="padding:12px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(68,122,203,0.12);">
+                                    <div style="font-size:12px; color:#8fb5ff; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px;">Execution</div>
+                                    <div style="font-size:14px; color:var(--text-primary); font-weight:600;">External Agencies</div>
+                                    <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Design + content delivery partners</div>
+                                </div>
+                                <div style="padding:12px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(68,122,203,0.12);">
+                                    <div style="font-size:12px; color:#8fb5ff; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px;">Build</div>
+                                    <div style="font-size:14px; color:var(--text-primary); font-weight:600;">Global Engineering</div>
+                                    <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">SAP platform constraints + implementation</div>
+                                </div>
+                            </div>
+                            <div style="margin-top:12px; padding:10px 12px; border-radius:8px; border-left:3px solid #facc15; background:rgba(250,204,21,0.05); color:var(--text-secondary); font-size:13px;">
+                                Translated enterprise constraints into buildable UX patterns and PRDs across nav, cart, checkout, and promotions.
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -344,24 +496,6 @@
                             <li>Proposed alternatives that still felt magical for shoppers</li>
                         </ul>
                     </div>
-                    <div class="col-card">
-                        <h4>Global IA &amp; Navigation</h4>
-                        <ul>
-                            <li>Collapsed four header rows into two — Sets / Bricks / Accessories / Explore</li>
-                            <li>Standardized search, account, region-switcher, wishlist, and bag preview across devices</li>
-                            <li>One global pattern instead of dozens of slightly different headers per market</li>
-                            <li>Built for kids, parents, and AFOLs to find what they want without fighting categories</li>
-                        </ul>
-                    </div>
-                    <div class="col-card">
-                        <h4>Design Authority Partner</h4>
-                        <ul>
-                            <li>Structured Design Authority materials for senior LEGO stakeholders</li>
-                            <li>Turned opinion-driven debates into structured decision points</li>
-                            <li>Got alignment on global strategy across LEGO, BCG, and external agencies</li>
-                            <li>Left behind reusable assets so LEGO could keep evolving after consultants left</li>
-                        </ul>
-                    </div>
                 </div>
 
                 <div class="callout" style="margin-top: 24px;">
@@ -376,60 +510,96 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
-                
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.15) 0%, rgba(34, 211, 238, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🏗️</div>
-                        <div style="font-size: 18px; font-weight: 600;">One Global Online Shop · Mobile-First · Platform-Ready</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Unmistakably LEGO · Works on any device · Plugs cleanly into SAP enterprise platform</div>
-                    </div>
-                </div>
 
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">BCG LEGO System Architecture</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
-                    </div>
-                    <figcaption>New global shop on top of LEGO's enterprise platform — one pattern for nav, product listing, cart, checkout, and governance across all markets</figcaption>
-                    <ul class="notice-list">
-                        <li>Two-row nav replacing four — Sets / Bricks / Accessories / Explore, with embedded search and consistent account treatment</li>
-                        <li>Single cart and checkout pattern across desktop, tablet, mobile — with documented regional variations for shipping, tax, and payments</li>
-                        <li>Promotions, loyalty, and gift cards wired directly to SAP order-to-cash and finance rules</li>
-                    </ul>
-                </figure>
+                <figure style="margin: 32px 0 0;">
+                    <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); background:linear-gradient(135deg, rgba(68,122,203,0.08) 0%, rgba(34,211,238,0.05) 100%); padding:18px;">
+                        <div style="border-radius:10px; border:1px solid rgba(68,122,203,0.16); background:rgba(7,15,35,0.55); padding:16px;">
+                            <div style="text-align:center; margin-bottom:14px;">
+                                <div style="font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted);">Global Shop System</div>
+                                <div style="font-size:26px; font-weight:700; color:var(--text-primary); margin-top:6px;">One Global Online Shop</div>
+                                <div style="font-size:14px; color:var(--text-secondary); margin-top:6px;">Mobile-first UX patterns on top of LEGO's SAP enterprise platform, with governance built into delivery.</div>
+                            </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-                    <div class="col-card">
-                        <h4>Navigation &amp; IA</h4>
-                        <ul>
-                            <li>Collapsed four header rows into two — Sets / Bricks / Accessories / Explore</li>
-                            <li>Search visible but not dominant; account, wishlist, bag preview standardized</li>
-                            <li>One global IA pattern reused across all markets instead of per-country layouts</li>
-                            <li>Designed for kids, parents, and AFOLs — not legacy taxonomy</li>
-                        </ul>
-                    </div>
-                    <div class="col-card">
-                        <h4>Cart &amp; Checkout</h4>
-                        <ul>
-                            <li>Unified flows for desktop, tablet, mobile — guest and signed-in states</li>
-                            <li>Promo, error, and regional shipping modules fully documented</li>
-                            <li>140+ page annotated deck making every state and edge case explicit</li>
-                            <li>Reduced one-off customizations — easier for marketing to run campaigns</li>
-                        </ul>
-                    </div>
-                </div>
+                            <div style="display:grid; grid-template-columns: 1.05fr auto 1.15fr auto 1fr; gap:10px; align-items:stretch;">
+                                <div style="border-radius:10px; border:1px solid rgba(68,122,203,0.16); background:rgba(68,122,203,0.06); padding:12px;">
+                                    <div style="font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#8fb5ff; margin-bottom:8px;">Experience Layer</div>
+                                    <div style="display:grid; gap:8px;">
+                                        <div style="padding:10px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(68,122,203,0.12);">
+                                            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">2-row global IA</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Sets / Bricks / Accessories / Explore</div>
+                                        </div>
+                                        <div style="padding:10px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(68,122,203,0.12);">
+                                            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">Unified cart &amp; checkout</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Desktop, tablet, mobile + regional variants</div>
+                                        </div>
+                                        <div style="padding:10px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(68,122,203,0.12);">
+                                            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">Consistent account/search/bag</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Reusable across markets and devices</div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">Design Authority Pack + PRD Library</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                                <div style="display:flex; align-items:center; justify-content:center; color:var(--text-secondary); font-size:26px;">→</div>
+
+                                <div style="border-radius:10px; border:1px solid rgba(68,122,203,0.2); background:rgba(7,15,35,0.7); padding:12px; position:relative;">
+                                    <div style="position:absolute; top:-1px; left:10px; right:10px; height:2px; background:linear-gradient(90deg, rgba(68,122,203,0.2), rgba(68,122,203,0.95), rgba(34,211,238,0.25)); border-radius:999px;"></div>
+                                    <div style="font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:8px;">Enterprise Integration Spine</div>
+                                    <div style="display:grid; gap:8px;">
+                                        <div style="padding:10px; border-radius:8px; background:rgba(68,122,203,0.08); border:1px solid rgba(68,122,203,0.18);">
+                                            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">SAP order-to-cash alignment</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Tax, shipping, payments, finance rules</div>
+                                        </div>
+                                        <div style="padding:10px; border-radius:8px; background:rgba(68,122,203,0.08); border:1px solid rgba(68,122,203,0.18);">
+                                            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">Promo / loyalty / gift card logic</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Documented through UX and backend impacts</div>
+                                        </div>
+                                        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                                            <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(68,122,203,0.1); font-size:11px; color:var(--text-primary);">Nav</span>
+                                            <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(68,122,203,0.1); font-size:11px; color:var(--text-primary);">PLP/PDP</span>
+                                            <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(68,122,203,0.1); font-size:11px; color:var(--text-primary);">Cart</span>
+                                            <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(68,122,203,0.1); font-size:11px; color:var(--text-primary);">Checkout</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="display:flex; align-items:center; justify-content:center; color:var(--text-secondary); font-size:26px;">→</div>
+
+                                <div style="border-radius:10px; border:1px solid rgba(250,204,21,0.18); background:rgba(250,204,21,0.04); padding:12px;">
+                                    <div style="font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#facc15; margin-bottom:8px;">Governance + Reuse</div>
+                                    <div style="display:grid; gap:8px;">
+                                        <div style="padding:10px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(250,204,21,0.14);">
+                                            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">Design Authority Pack</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Structured decisions, not opinion debates</div>
+                                        </div>
+                                        <div style="padding:10px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(250,204,21,0.14);">
+                                            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">PRD Library + Diagrams</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">140+ page implementation-ready reference</div>
+                                        </div>
+                                        <div style="padding:10px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(250,204,21,0.14);">
+                                            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">Post-engagement continuity</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">LEGO, BCG, and agencies stayed aligned</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px; margin-top:12px;">
+                                <div style="border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(68,122,203,0.12); padding:10px;">
+                                    <div style="font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted);">Customer-facing result</div>
+                                    <div style="font-size:13px; color:var(--text-primary); font-weight:600; margin-top:4px;">Unmistakably LEGO on every device</div>
+                                </div>
+                                <div style="border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(68,122,203,0.12); padding:10px;">
+                                    <div style="font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted);">Operating result</div>
+                                    <div style="font-size:13px; color:var(--text-primary); font-weight:600; margin-top:4px;">One global pattern instead of per-market drift</div>
+                                </div>
+                                <div style="border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(68,122,203,0.12); padding:10px;">
+                                    <div style="font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted);">Program result</div>
+                                    <div style="font-size:13px; color:var(--text-primary); font-weight:600; margin-top:4px;">Reusable governance after consultants left</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <figcaption>Principles, exemplars, and rationale in one place — LEGO, BCG, and external agencies could stay aligned and keep evolving the experience after we left</figcaption>
-                    <ul class="notice-list">
-                        <li>Promotions, loyalty IDs, and gift cards documented from UX through to order-to-cash and finance</li>
-                        <li>Design Authority deck turned opinion debates into structured, documented decisions</li>
-                        <li>PRDs, diagrams, and governance so LEGO could iterate without reinventing everything</li>
-                    </ul>
+                    <figcaption>Combined architecture, UX system, and governance model: one visual showing how the global LEGO shop scaled across markets without losing brand consistency or enterprise compliance.</figcaption>
                 </figure>
             </div>
         </div>
@@ -573,6 +743,21 @@
             <div class="content-block fade-up">
                 <h2>Press & Recognition</h2>
                 <div style="margin: 20px 0 24px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.55); padding: 12px;">
+                    <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: #000;">
+                        <iframe
+                            width="560"
+                            height="315"
+                            src="https://www.youtube.com/embed/tZMtZI76uuU"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                            style="position:absolute; inset:0; width:100%; height:100%; border:0;"
+                        ></iframe>
+                    </div>
+                </div>
+                <div style="margin: 20px 0 24px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.55); padding: 12px;">
                     <img src="/work/lego/images/kudos-rho.png" alt="LEGO kudos note" style="display:block; width:100%; height:auto; border-radius:10px; border:1px solid var(--border);">
                 </div>
                 
@@ -610,6 +795,15 @@
                         <p>MIS Quarterly Executive analysis of LEGO’s transformation, focusing on platform discipline, governance, and the organizational mechanisms that enabled digital execution across a global business.</p>
                     </div>
                     <a href="/work/lego/files/04%20MIS%20Quarterly%20Executive_compressed.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-5">
+                    <span class="recognition-icon">🎙️</span>
+                    <div class="recognition-content">
+                        <h3>BCG Interview: LEGO CEO</h3>
+                        <p>BCG interview with LEGO CEO Jørgen Vig Knudstorp on growth, culture, and the operational discipline behind LEGO’s turnaround and digital-era scale.</p>
+                    </div>
+                    <a href="/work/lego/files/05%20BCG%20Interview%20Lego%20CEO.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
                 </div>
             </div>
         </div>
