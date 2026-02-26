@@ -252,13 +252,11 @@
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
                 
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(68, 122, 203, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">👥</div>
-                        <div style="font-size: 18px; font-weight: 600;">Stakeholder Alignment</div>
-                        <div style="font-size: 14px; margin-top: 8px;">CPS Energy ↔ Dalkia ↔ City of San Antonio</div>
-                    </div>
+                <div style="margin: 32px 0;">
+                    <img
+                        src="/work/cpsenergy/images/CPSE-KSAT-ScreenShot.png"
+                        alt="Stakeholder alignment coverage screenshot"
+                        style="display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border);">
                 </div>
                 
                 <div class="timeline">
@@ -292,63 +290,53 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Product Vision: Boringly Reliable & Transparently Green Lights</h2>
-                
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.15) 0%, rgba(34, 211, 238, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🏗️</div>
-                        <div style="font-size: 18px; font-weight: 600;">Unified Operations Platform</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Resident → Ops → Field → Close Loop</div>
-                    </div>
-                </div>
-
                 <p>The product vision was to make streetlights feel like a modern utility service instead of a mystery. Residents should have one simple place to report a problem and see that it is being fixed. CPS and Dalkia should share a single operational view that ties outages, work orders, and budget together.</p>
-
-                <!-- System Diagram FIRST -->
-                <figure class="lightbox-trigger" data-src="/assets/cps/cps-integration-dataflow.png">
-                    <img src="/assets/cps/cps-integration-dataflow.png" 
-                         alt="System integration diagram showing resident to operations to field crew loop" 
-                         loading="lazy">
-                    <figcaption>The complete loop: Resident → Operations → Field → Closure</figcaption>
-                    <ul class="notice-list">
-                        <li>Single data flow replaced three disconnected systems</li>
-                        <li>Enabled the 1-4 day repair window</li>
-                        <li>Real-time status for residents and operations</li>
-                    </ul>
-                </figure>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-                    <div class="col-card">
-                        <h4>For Residents</h4>
-                        <ul>
-                            <li>Geolocated map of all streetlights</li>
-                            <li>Single reporting flow on cpsenergy.com</li>
-                            <li>Status tracking: submitted → scheduled → fixed</li>
-                            <li>Email confirmation on completion</li>
-                        </ul>
-                    </div>
-                    <div class="col-card">
-                        <h4>For Operations</h4>
-                        <ul>
-                            <li>Shared dashboards (CPS + Dalkia)</li>
-                            <li>Work queues with SLAs and materials</li>
-                            <li>Integration with SAP and field tools</li>
-                            <li>City metrics: safety, energy, carbon</li>
-                        </ul>
-                    </div>
+                
+                <div style="margin: 32px 0;">
+                    <img
+                        src="/work/cpsenergy/images/csp-product-01.webp"
+                        alt="Unified Operations Platform"
+                        style="display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border);">
                 </div>
 
                 <!-- Customer Journey Diagram -->
-                <figure class="lightbox-trigger" data-src="/assets/cps/cps-resident-report-flow.png" style="margin-top: 48px;">
-                    <img src="/assets/cps/cps-resident-report-flow.png" 
-                         alt="Resident streetlight reporting flow showing step-by-step process from report to resolution" 
-                         loading="lazy">
-                    <figcaption>Resident reporting flow: from dark street to fixed light in 4 simple steps</figcaption>
-                    <ul class="notice-list">
-                        <li>Turned confusing multi-system reports into one clear path</li>
-                        <li>Guided form captures usable data on first try</li>
-                        <li>Cutting support calls 73%</li>
-                    </ul>
+                <figure class="lightbox-trigger" data-src="/work/cpsenergy/images/cps-product-02.webp" style="margin-top: 48px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; align-items: stretch;">
+                        <div style="position: relative; min-height: 320px; border-radius: 18px; background: rgba(0, 0, 0, 0.12); overflow: hidden;">
+                            <img src="/work/cpsenergy/images/cps-product-02.webp"
+                                 alt="Resident streetlight reporting flow showing step-by-step process from report to resolution"
+                                 loading="lazy"
+                                 style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top left; margin: 0; border-radius: 18px; clip-path: inset(0 round 18px);">
+                        </div>
+                        <div style="display: grid; gap: 16px; align-content: start;">
+                            <div class="col-card">
+                                <h4>For Residents</h4>
+                                <ul>
+                                    <li>Geolocated map of all streetlights</li>
+                                    <li>Single reporting flow on cpsenergy.com</li>
+                                    <li>Status tracking: submitted → scheduled → fixed</li>
+                                    <li>Email confirmation on completion</li>
+                                </ul>
+                            </div>
+                            <div class="col-card">
+                                <h4>For Operations</h4>
+                                <ul>
+                                    <li>Shared dashboards (CPS + Dalkia)</li>
+                                    <li>Work queues with SLAs and materials</li>
+                                    <li>Integration with SAP and field tools</li>
+                                    <li>City metrics: safety, energy, carbon</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="max-width: 760px; margin: 24px auto 0;">
+                        <figcaption style="margin-top: 0;">Resident reporting flow: from dark street to fixed light in 4 simple steps</figcaption>
+                        <ul class="notice-list" style="margin-bottom: 0;">
+                            <li>Turned confusing multi-system reports into one clear path</li>
+                            <li>Guided form captures usable data on first try</li>
+                            <li>Cutting support calls 73%</li>
+                        </ul>
+                    </div>
                 </figure>
             </div>
         </div>
@@ -411,19 +399,6 @@
                         </ul>
                     </div>
                 </div>
-
-                <!-- Operations Dashboard -->
-                <figure class="lightbox-trigger" data-src="/assets/cps/cps-ops-dashboard-map.png" style="margin-top: 48px;">
-                    <img src="/assets/cps/cps-ops-dashboard-map.png" 
-                         alt="Operations dashboard showing citywide outage map with status indicators" 
-                         loading="lazy">
-                    <figcaption>Citywide operations dashboard with real-time outage visibility</figcaption>
-                    <ul class="notice-list">
-                        <li>CPS and Dalkia work from one shared view</li>
-                        <li>Replaces dueling spreadsheets</li>
-                        <li>Tracks legacy vs solar LED rollout</li>
-                    </ul>
-                </figure>
 
                 <div class="callout" style="margin-top: 32px;">
                     <p><strong>For residents, the need wasn't "smart cities." It was "my block is dark and nobody fixes it."</strong> The resident-facing part of this program turns that into a simple, trackable flow instead of a guessing game.</p>
@@ -494,49 +469,80 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Press & Recognition</h2>
+                <div style="position: relative; width: 100%; max-width: 960px; padding-top: 56.25%; margin: 20px 0 24px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--bg-primary);">
+                    <iframe
+                        src="https://www.youtube.com/embed/GZMHsAIH1Os?si=1rP6qbRpNDqbjd3e"
+                        title="YouTube video player"
+                        style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p style="font-size: 1.05rem; color: var(--text-secondary); margin: 12px 0 32px; max-width: 900px;"><strong>What the External Story Proves:</strong> This wasn't just an internal tooling project. We took a public failure that was embarrassing the city on TV, built the product and process to fix it, and ended up with an award-winning smart-city program that CPS and San Antonio now point to as a success story.</p>
                 
-                <!-- Smart 20 Award -->
-                <div class="recognition-card fade-up stagger-1" style="background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 32px; display: flex; align-items: center; gap: 32px; margin-bottom: 20px;">
-                    <span style="font-size: 32px; flex-shrink: 0;">🏆</span>
-                    <div style="flex: 1;">
-                        <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 8px;">Smart 20 Award Winner</h3>
-                        <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin: 0;">"San Antonio Smart City and Streetlight Operations Systems" selected as a Smart 20 Award recipient, recognized for measurable impact on safety, reliability, sustainability. One of 20 smart-city projects worldwide.</p>
+                <!-- Press Documents (Chronological) -->
+                <div class="recognition-card fade-up stagger-1">
+                    <span class="recognition-icon">🌐</span>
+                    <div class="recognition-content">
+                        <h3>Feb 20, 2024 · DigiCity Coverage</h3>
+                        <p>Industry smart-city coverage documenting San Antonio/CPS Energy streetlight modernization and the operational model behind reliability, visibility, and scale improvements.</p>
                     </div>
-                    <a href="https://www.youtube.com/watch?v=GZMHsAIH1Os" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0;">Watch Video</a>
+                    <a href="/work/cpsenergy/pdf-viewer.html?doc=digicity" class="btn btn-primary">View Document</a>
                 </div>
 
-                <!-- NBC News Coverage -->
-                <div class="recognition-card fade-up stagger-2" style="background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 32px; display: flex; align-items: center; gap: 32px; margin-bottom: 20px;">
-                    <span style="font-size: 32px; flex-shrink: 0;">📰</span>
-                    <div style="flex: 1;">
-                        <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 8px;">NBC News San Antonio Feature</h3>
-                        <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin: 0;">Local news ran segments showing Northeast Side streets completely dark at night, with residents saying they felt unsafe and couldn't get CPS to fix the lights. Coverage put the problem on TV every night and forced CPS to treat streetlights as a top-of-mind safety issue.</p>
+                <div class="recognition-card fade-up stagger-2">
+                    <span class="recognition-icon">📰</span>
+                    <div class="recognition-content">
+                        <h3>Mar 18, 2024 · NBC San Antonio Coverage</h3>
+                        <p>Local TV coverage highlighting dark streets, resident safety concerns, and public pressure that elevated streetlight operations into a visible city-level delivery issue.</p>
                     </div>
-                    <a href="https://www.youtube.com/watch?v=Ch9cUuG95qI" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0;">Watch Video</a>
+                    <a href="/work/cpsenergy/pdf-viewer.html?doc=nbc" class="btn btn-primary">View Document</a>
                 </div>
 
-                <!-- City Council Approval -->
-                <div class="recognition-card fade-up stagger-3" style="background: var(--bg-primary); border: 1px solid var(--border); border-radius: 12px; padding: 32px; display: flex; align-items: center; gap: 32px; margin-bottom: 20px;">
-                    <span style="font-size: 32px; flex-shrink: 0;">📋</span>
-                    <div style="flex: 1;">
-                        <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 8px;">City Council Project Approval</h3>
-                        <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin: 0;">In follow-up coverage, CPS leadership and city officials publicly committed to fixing the backlog, modernizing streetlights, and expanding solar LEDs in underserved neighborhoods. My work became the operational backbone behind the promises made at the podium.</p>
+                <div class="recognition-card fade-up stagger-3">
+                    <span class="recognition-icon">🏛️</span>
+                    <div class="recognition-content">
+                        <h3>Mar 25, 2024 · San Antonio City Council Agenda</h3>
+                        <p>Public agenda documentation showing how the streetlight and smart-city work moved into formal city governance, approvals, and funding discussion.</p>
                     </div>
-                    <a href="/contact/" class="btn btn-secondary" style="white-space: nowrap; flex-shrink: 0;">View Document</a>
+                    <a href="/work/cpsenergy/pdf-viewer.html?doc=sa-city-council-agenda" class="btn btn-primary">View Document</a>
                 </div>
 
-                <div class="callout" style="margin-top: 32px;">
-                    <p><strong>What the External Story Proves:</strong> This wasn't just an internal tooling project. We took a public failure that was embarrassing the city on TV, built the product and process to fix it, and ended up with an award-winning smart-city program that CPS and San Antonio now point to as a success story.</p>
+                <div class="recognition-card fade-up stagger-4">
+                    <span class="recognition-icon">🗞️</span>
+                    <div class="recognition-content">
+                        <h3>Aug 30, 2024 · San Antonio Report Coverage</h3>
+                        <p>Local reporting capturing program progress, public accountability, and the broader impact of modernized streetlight operations on service reliability and community confidence.</p>
+                    </div>
+                    <a href="/work/cpsenergy/pdf-viewer.html?doc=sa-report" class="btn btn-primary">View Document</a>
                 </div>
 
-                <div style="text-align: center; max-width: 700px; margin: 48px auto 0;">
-                    <h3 style="font-size: 36px; font-weight: 700; margin-bottom: 16px;">Want this level of operational clarity and measurable delivery in your org?</h3>
-                    <p style="font-size: 18px; color: var(--text-secondary); margin-bottom: 32px;">I specialize in turning chaotic, cross-functional situations into clear roadmaps, working systems, and real results.</p>
-                    <div class="hero-cta">
-                        <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
-                        <a href="/cv/" class="btn btn-secondary">Download CV</a>
+                <div class="recognition-card fade-up stagger-5">
+                    <span class="recognition-icon">🛰️</span>
+                    <div class="recognition-content">
+                        <h3>Apr 15, 2025 · TerraGo Coverage</h3>
+                        <p>Vendor/industry coverage framing the CPS Energy program as a smart-infrastructure operations success, with emphasis on field execution, mapping, and measurable results.</p>
                     </div>
+                    <a href="/work/cpsenergy/pdf-viewer.html?doc=terrago" class="btn btn-primary">View Document</a>
                 </div>
+
+                <div class="recognition-card fade-up stagger-6">
+                    <span class="recognition-icon">🏆</span>
+                    <div class="recognition-content">
+                        <h3>Apr 23, 2025 · MSN Coverage</h3>
+                        <p>National syndication coverage reinforcing external recognition of the CPS Energy smart-city streetlight program and its outcomes in safety, modernization, and delivery credibility.</p>
+                    </div>
+                    <a href="/work/cpsenergy/pdf-viewer.html?doc=msn" class="btn btn-primary">View Document</a>
+                </div>
+
+                <div style="margin-top: 28px;">
+                    <img
+                        src="/work/cpsenergy/images/CPSE-Smart-20-Award2025.png"
+                        alt="CPS Energy Smart 20 Award 2025"
+                        style="display: block; width: 100%; max-width: 960px; height: auto; border-radius: 12px; border: 1px solid var(--border);">
+                </div>
+
             </div>
         </div>
     </section>
