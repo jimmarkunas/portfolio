@@ -671,43 +671,81 @@ section[id] {
     margin-top: 20px !important;
     margin-bottom: 0 !important;
     gap: 16px !important;
-    align-items: start !important;
+    align-items: stretch !important;
 }
 
 .case-section#results .metric-card {
     padding: 22px 18px !important;
     min-height: 0 !important;
-    height: auto !important;
-    align-self: start !important;
+    height: 100% !important;
+    align-self: stretch !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-start !important;
+    justify-content: center !important;
     align-items: center !important;
+    text-align: center !important;
 }
 
 .case-section#results .metric-card .metric-value {
     line-height: 1.1 !important;
     margin-bottom: 4px !important;
+    min-height: 1.25em !important;
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 }
 
 .case-section#results .metric-card .metric-label {
     margin-bottom: 4px !important;
+    min-height: 2.5em !important;
+    display: flex !important;
+    width: 100% !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    line-height: 1.15 !important;
+}
+
+.case-section#results .metric-card .metric-breakdown {
+    min-height: 1.6em !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    line-height: 1.15 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    font-size: clamp(12px, 0.82vw, 14px) !important;
 }
 
 /* Most case-study result comparisons use inline grid styles directly after metrics-row */
 .case-section#results .metrics-row + * {
     margin-top: 20px !important;
-    align-items: start !important;
+    align-items: stretch !important;
 }
 
 .case-section#results .metrics-row + [style*="display: grid"] {
     gap: 16px !important;
-    align-items: start !important;
+    align-items: stretch !important;
 }
 
 .case-section#results .col-card h4 {
     margin-top: 0 !important;
     margin-bottom: 12px !important;
+}
+
+.case-section#results .metrics-row + [style*="display: grid"] .col-card {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.case-section#results .metrics-row + [style*="display: grid"] .col-card ul {
+    flex: 1 !important;
+    margin-bottom: 0 !important;
 }
 
 .case-section#results .col-card ul {
