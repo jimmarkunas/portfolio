@@ -14,6 +14,38 @@
 
     <!-- Global Stylesheet -->
     <link rel="stylesheet" href="/style.css?v=20260224-1">
+    <style>
+        /* DIRECTV02-only: normalize mixed metric card text heights in Results */
+        #results .metrics-row .metric-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #results .metrics-row .metric-card .metric-value {
+            min-height: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #results .metrics-row .metric-card .metric-label {
+            min-height: 2.4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #results .metrics-row .metric-card .metric-breakdown {
+            min-height: 1.4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div class="bg-gradient"></div>
@@ -52,7 +84,7 @@
     </div>
 
     <!-- Banner -->
-    <div class="case-banner" style="background-image: url('/images/work/dtv1-2000.png'); background-size: cover; background-position: center;">
+    <div class="case-banner" style="background-image: url('/work/directv02/images/banner-directv-11.webp'); background-size: cover; background-repeat: no-repeat; background-position: center 58%;">
         <div class="banner-content">
             <span class="banner-badge badge-company">DIRECTV EVERYWHERE · 2012–2013</span>
             <span class="banner-badge badge-award">5M+ Downloads at Launch</span>
@@ -155,27 +187,64 @@
             <div class="content-block fade-up">
                 <h2 style="text-align: center;">Context & Stakes</h2>
                 <p style="text-align: center;">Before Everywhere, DIRECTV was still fundamentally a set-top-box business. Subscribers could watch on the TV the dish was wired to, maybe dabble with a clunky VOD experience — but there was no sense that your content followed you from screen to screen. Meanwhile, Netflix, HBO GO, and others were training customers to expect exactly that. Marketing had already launched a big national "Watch Anywhere" campaign before the product was ready, putting engineering — and me — in the hot seat.</p>
+                <div style="margin: 24px 0 28px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.55); padding: 12px;">
+                    <div style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: rgba(0,0,0,0.18);">
+                        <iframe
+                            src="https://www.youtube.com/embed/rhm-wbznRdo?start=1"
+                            title="DIRECTV Everywhere context video"
+                            style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
                 
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Streaming Experience: Before vs. After</h4>
-                    <div style="display: flex; gap: 48px; align-items: flex-end; justify-content: center;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">BEFORE</div>
-                            <div style="width: 240px; height: 240px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 16px;">
-                                <div style="font-size: 20px; font-weight: 700; color: white; line-height: 1.3;">Tethered to the Set-Top Box</div>
-                                <div style="font-size: 13px; color: rgba(255,255,255,0.8); margin-top: 8px;">Clunky VOD · No mobile · No single login · 30+ teams misaligned</div>
-                            </div>
+                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 32px 0;">
+                    <h4 style="text-align: center; margin-bottom: 18px; color: var(--text-primary);">Streaming Experience Shift</h4>
+
+                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: stretch;">
+                        <div class="col-card" style="border-left: 4px solid #ef4444; margin: 0; background: rgba(127,29,29,0.08);">
+                            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #fca5a5; margin-bottom: 10px;">Before</div>
+                            <h4 style="margin-top: 0;">Tethered to the Set-Top Box</h4>
+                            <ul style="margin-bottom: 0;">
+                                <li>Clunky VOD experience and limited portability</li>
+                                <li>No true mobile streaming expectation met</li>
+                                <li>No unified login/entitlement experience</li>
+                                <li>30+ teams working without one product model</li>
+                            </ul>
                         </div>
-                        <div style="font-size: 40px; color: var(--text-secondary); padding-bottom: 55px;">→</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">AFTER</div>
-                            <div style="width: 240px; height: 160px; background: var(--accent-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; padding: 16px;">
-                                <div style="font-size: 20px; font-weight: 700; color: white; line-height: 1.3;">TV That Follows You</div>
-                                <div style="font-size: 13px; color: rgba(255,255,255,0.8);">5 device families · SSO · Live + VOD · 5M+ downloads</div>
-                            </div>
+
+                        <div style="display:flex; align-items:center; justify-content:center; color: var(--text-secondary); font-size: 28px; padding: 0 4px;">→</div>
+
+                        <div class="col-card" style="border-left: 4px solid var(--accent-blue); margin: 0; background: rgba(68,122,203,0.08);">
+                            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #93c5fd; margin-bottom: 10px;">After</div>
+                            <h4 style="margin-top: 0;">TV That Follows You</h4>
+                            <ul style="margin-bottom: 0;">
+                                <li>Cross-device streaming across 5 device families</li>
+                                <li>Unified SSO and entitlement-aware access</li>
+                                <li>Live + VOD in one coherent product experience</li>
+                                <li>Launch traction proved demand at scale</li>
+                            </ul>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">DIRECTV's first true cross-platform streaming product — shipped before "streaming wars" was even a headline</div>
+
+                    <div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-top: 16px;">
+                        <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 12px; text-align: center;">
+                            <div style="font-size: 22px; font-weight: 700; color: var(--accent-blue);">5M+</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">Downloads in Year 1</div>
+                        </div>
+                        <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 12px; text-align: center;">
+                            <div style="font-size: 22px; font-weight: 700; color: var(--accent-blue);">5</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">Device Families Shipped</div>
+                        </div>
+                        <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 12px; text-align: center;">
+                            <div style="font-size: 22px; font-weight: 700; color: var(--accent-blue);">Foundation</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">For DIRECTV Stream</div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 14px; color: var(--text-secondary); font-size: 14px;">DIRECTV's first true cross-platform streaming product — shipped before "streaming wars" was even a headline.</div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
@@ -206,18 +275,18 @@
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
                 
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">📺</div>
-                        <div style="font-size: 18px; font-weight: 600;">Marketing Promise Already In Market · Product Still Half-Built · 30+ Teams Misaligned</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Networks, DRM, identity, devices, platform — all pulling in different directions</div>
-                    </div>
-                </div>
-
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">DIRECTV Everywhere: Cross-Platform Architecture</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                <figure>
+                    <div style="margin: 0 0 12px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.55); padding: 12px;">
+                        <div style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: rgba(0,0,0,0.18);">
+                            <iframe
+                                src="https://www.youtube.com/embed/nIKU56RgIZY"
+                                title="DIRECTV Everywhere challenge video"
+                                style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
                     <figcaption>Shared identity + entitlements · unified catalog (live + VOD) · consistent UX across web, iOS, Android, Roku, Fire TV, Apple TV</figcaption>
                     <ul class="notice-list">
@@ -261,11 +330,41 @@
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
                 
-                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(68, 122, 203, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🎯</div>
-                        <div style="font-size: 18px; font-weight: 600;">Product Manager · June 2012 – June 2013</div>
-                        <div style="font-size: 14px; margin-top: 8px;">30+ teams · web · iOS · Android · Roku · Fire TV · Apple TV</div>
+                <div style="margin: 32px 0; border-radius: 12px; border: 1px solid var(--border); background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(68, 122, 203, 0.08) 100%); padding: 22px;">
+                    <div style="display:grid; grid-template-columns: 1.2fr 1.8fr; gap: 16px; align-items: stretch;">
+                        <div style="border: 1px solid rgba(68,122,203,0.16); border-radius: 10px; background: rgba(7,15,35,0.55); padding: 18px; display:flex; flex-direction:column; justify-content:center;">
+                            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">Role Scope Snapshot</div>
+                            <div style="font-size: 28px; line-height: 1.1; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Product Manager</div>
+                            <div style="font-size: 15px; color: var(--text-secondary);">June 2012 - June 2013</div>
+                            <div style="margin-top: 14px; font-size: 13px; color: var(--text-secondary);">Cross-platform streaming launch orchestration across product, platform, identity, and device teams.</div>
+                        </div>
+
+                        <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px;">
+                            <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 14px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                                <div style="font-size: 24px; font-weight: 700; color: var(--accent-blue); line-height: 1;">30+</div>
+                                <div style="margin-top: 6px; font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">Teams Aligned</div>
+                            </div>
+                            <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 14px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                                <div style="font-size: 24px; font-weight: 700; color: var(--accent-blue); line-height: 1;">6</div>
+                                <div style="margin-top: 6px; font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">Surfaces / Devices</div>
+                            </div>
+                            <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 14px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                                <div style="font-size: 24px; font-weight: 700; color: var(--accent-blue); line-height: 1;">12 Mo</div>
+                                <div style="margin-top: 6px; font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">Delivery Window</div>
+                            </div>
+
+                            <div style="grid-column: 1 / -1; background: rgba(7,15,35,0.45); border: 1px solid rgba(68,122,203,0.12); border-radius: 10px; padding: 14px;">
+                                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;">Platform Coverage</div>
+                                <div style="display:flex; flex-wrap:wrap; gap: 8px;">
+                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">Web</span>
+                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">iOS</span>
+                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">Android</span>
+                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">Roku</span>
+                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">Fire TV</span>
+                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">Apple TV</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -321,26 +420,117 @@
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
                 
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.15) 0%, rgba(34, 211, 238, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">📡</div>
-                        <div style="font-size: 18px; font-weight: 600;">TV That Follows You — Shared Identity, Shared Catalog, Shared UX</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Web · iOS · Android · Roku · Fire TV · Apple TV · One product, not six experiments</div>
+                <div style="margin: 32px 0; border-radius: 12px; border: 1px solid var(--border); background: linear-gradient(135deg, rgba(68, 122, 203, 0.12) 0%, rgba(34, 211, 238, 0.06) 100%); padding: 20px;">
+                    <div style="text-align:center; margin-bottom: 16px;">
+                        <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);">Solution Architecture</div>
+                        <div style="font-size: 22px; font-weight: 700; color: var(--text-primary); margin-top: 6px;">TV That Follows You</div>
+                        <div style="font-size: 14px; color: var(--text-secondary); margin-top: 6px;">One shared platform model across identity, catalog, and UX</div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1.15fr 1.7fr; gap: 14px; align-items: stretch;">
+                        <div style="display:grid; grid-template-rows: repeat(3, minmax(0,1fr)); gap: 10px;">
+                            <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.58); padding: 12px;">
+                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px;">Shared Identity</div>
+                                <div style="font-size: 14px; font-weight: 600; color: var(--text-primary);">SSO + Entitlements</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Credentials, package access, device limits</div>
+                            </div>
+                            <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.58); padding: 12px;">
+                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px;">Shared Catalog</div>
+                                <div style="font-size: 14px; font-weight: 600; color: var(--text-primary);">Live + VOD in One Model</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Search, browse, and discovery stay coherent</div>
+                            </div>
+                            <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.58); padding: 12px;">
+                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px;">Shared UX Patterns</div>
+                                <div style="font-size: 14px; font-weight: 600; color: var(--text-primary);">One Product, Not 6 Experiments</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Browse, player, and nav parity across surfaces</div>
+                            </div>
+                        </div>
+
+                        <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.14); background: rgba(7,15,35,0.44); padding: 14px; display:flex; flex-direction:column; justify-content:space-between;">
+                            <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 12px;">
+                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
+                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="stroke: #8fb5ff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;">
+                                            <rect x="3" y="4" width="18" height="12" rx="1.8"></rect>
+                                            <path d="M8 20h8"></path>
+                                            <path d="M10 16l-1 4"></path>
+                                            <path d="M14 16l1 4"></path>
+                                        </svg>
+                                    </div>
+                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">Web</div>
+                                </div>
+                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
+                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
+                                        <svg width="18" height="22" viewBox="0 0 18 24" aria-hidden="true" style="stroke: #8fb5ff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;">
+                                            <rect x="2.5" y="1.5" width="13" height="21" rx="2.8"></rect>
+                                            <path d="M7 4h4"></path>
+                                            <circle cx="9" cy="19" r="0.8" style="fill:#8fb5ff; stroke:none;"></circle>
+                                        </svg>
+                                    </div>
+                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">iOS</div>
+                                </div>
+                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
+                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="stroke: #8fb5ff; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;">
+                                            <rect x="6" y="8" width="12" height="9" rx="2"></rect>
+                                            <path d="M8 8l-1.5-2"></path>
+                                            <path d="M16 8l1.5-2"></path>
+                                            <path d="M9 17v3"></path>
+                                            <path d="M15 17v3"></path>
+                                            <path d="M6 11H4"></path>
+                                            <path d="M20 11h-2"></path>
+                                            <circle cx="10" cy="12" r="0.7" style="fill:#8fb5ff; stroke:none;"></circle>
+                                            <circle cx="14" cy="12" r="0.7" style="fill:#8fb5ff; stroke:none;"></circle>
+                                        </svg>
+                                    </div>
+                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">Android</div>
+                                </div>
+                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
+                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
+                                        <svg width="24" height="22" viewBox="0 0 24 24" aria-hidden="true" style="stroke: #8fb5ff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;">
+                                            <rect x="3" y="5" width="18" height="11" rx="2"></rect>
+                                            <path d="M10 19h4"></path>
+                                            <path d="M8 22h8"></path>
+                                        </svg>
+                                    </div>
+                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">Roku</div>
+                                </div>
+                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
+                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
+                                        <svg width="18" height="22" viewBox="0 0 18 24" aria-hidden="true" style="fill: none; stroke: #8fb5ff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;">
+                                            <path d="M9 2c1.7 3-1 4.3 1.8 7.1 1.2 1.2 3 2.7 3 5.4A5.8 5.8 0 0 1 8 20.3a5.8 5.8 0 0 1-3.8-10c.7-.7 1.5-1.5 2-2.7.6-1.5.3-2.5.8-4 .9 1 1.4 1.8 2 3.4Z"></path>
+                                        </svg>
+                                    </div>
+                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">Fire TV</div>
+                                </div>
+                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
+                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
+                                        <svg width="18" height="22" viewBox="0 0 20 24" aria-hidden="true" style="fill: none; stroke: #8fb5ff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;">
+                                            <path d="M12.2 4.2c1-.8 1.7-2 1.6-3.2-1.2.1-2.4.8-3.1 1.7-.7.8-1.2 2-.9 3.1 1.1.1 2.2-.5 2.4-1.6Z"></path>
+                                            <path d="M10.1 8.2c1.3 0 2-.7 3.3-.7 1.6 0 2.8.8 3.6 2-.9.5-1.8 1.6-1.8 3.3 0 1.8 1 2.9 1.8 3.4-.4 1.1-.9 2-1.6 2.9-.9 1.1-1.8 2.2-3.2 2.2-1.3 0-1.7-.7-3.2-.7s-2 .7-3.2.7c-1.4 0-2.4-1.1-3.2-2.2-1.7-2.2-3-6.1-1.2-9 .9-1.4 2.4-2.3 4-2.3 1.3 0 2.4.7 3.2.7Z"></path>
+                                        </svg>
+                                    </div>
+                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">Apple TV</div>
+                                </div>
+                            </div>
+
+                            <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.68); padding: 14px; position: relative;">
+                                <div style="position:absolute; top:-1px; left:12px; right:12px; height:2px; background: linear-gradient(90deg, rgba(68,122,203,0.3), rgba(68,122,203,0.9), rgba(34,211,238,0.35)); border-radius: 999px;"></div>
+                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">Shared Platform Layer</div>
+                                <div style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">DIRECTV Everywhere Product Model</div>
+                                <div style="display:flex; flex-wrap:wrap; gap: 8px;">
+                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">Auth</span>
+                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">Entitlements</span>
+                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">Catalog</span>
+                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">Search</span>
+                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">Playback</span>
+                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">DRM</span>
+                                </div>
+                                <div style="margin-top: 10px; font-size: 12px; color: var(--text-secondary);">Ship once as a product system; adapt per surface without rebuilding the experience from scratch.</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">DIRECTV Everywhere: Platform Architecture</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
-                    </div>
-                    <figcaption>Streaming layer on top of DIRECTV's satellite service — shared identity, unified catalog, consistent UX patterns across all device families</figcaption>
-                    <ul class="notice-list">
-                        <li>Cross-device UX parity: web, iOS, Android, Roku, Fire TV, Apple TV all following same browse, search, and playback patterns</li>
-                        <li>Single sign-on: DIRECTV credentials, tokens, and device limits handled as one unified auth flow</li>
-                        <li>Live + VOD catalog integrated — content-first, not feature-first, not network-folder dumps</li>
-                    </ul>
-                </figure>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                     <div class="col-card">
@@ -363,10 +553,83 @@
                     </div>
                 </div>
 
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">Catalog Architecture + Launch Playbook</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                <figure>
+                    <div style="background: rgba(68,122,203,0.05); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
+                        <div style="display:grid; grid-template-columns: 1.3fr 1fr; gap: 14px; align-items: stretch;">
+                            <div style="border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; background: rgba(7,15,35,0.5); padding: 14px;">
+                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">Shared Catalog Model</div>
+                                <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; align-items:center;">
+                                    <div style="grid-column: 1 / -1; display:grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items:center;">
+                                        <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08); padding: 10px; text-align:center;">
+                                            <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em;">Inputs</div>
+                                            <div style="font-size: 13px; color: var(--text-primary); margin-top: 4px;">Linear + VOD feeds</div>
+                                        </div>
+                                        <div style="color: var(--text-secondary); font-size: 18px;">→</div>
+                                        <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.18); background: rgba(7,15,35,0.7); padding: 10px; text-align:center;">
+                                            <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em;">Core Layer</div>
+                                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-top: 4px;">Metadata + Entitlements</div>
+                                        </div>
+                                    </div>
+                                    <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(7,15,35,0.45); padding: 10px; text-align:center;">
+                                        <div style="font-size: 12px; color: var(--text-primary);">Search</div>
+                                        <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Unified indexing</div>
+                                    </div>
+                                    <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(7,15,35,0.45); padding: 10px; text-align:center;">
+                                        <div style="font-size: 12px; color: var(--text-primary);">Browse</div>
+                                        <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Carousels + rails</div>
+                                    </div>
+                                    <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(7,15,35,0.45); padding: 10px; text-align:center;">
+                                        <div style="font-size: 12px; color: var(--text-primary);">Continue Watching</div>
+                                        <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Stateful playback</div>
+                                    </div>
+                                    <div style="grid-column: 1 / -1; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.06); padding: 10px;">
+                                        <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;">Editorial Logic</div>
+                                        <div style="display:flex; flex-wrap:wrap; gap: 6px;">
+                                            <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.6); font-size: 11px; color: var(--text-primary);">Premium you already pay for</span>
+                                            <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.6); font-size: 11px; color: var(--text-primary);">Watch next</span>
+                                            <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.6); font-size: 11px; color: var(--text-primary);">Collections</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; background: rgba(7,15,35,0.5); padding: 14px; display:flex; flex-direction:column;">
+                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">Launch Playbook</div>
+                                <div style="display:grid; gap: 8px;">
+                                    <div style="display:grid; grid-template-columns: 20px 1fr; gap: 8px; align-items:start;">
+                                        <div style="width:20px;height:20px;border-radius:50%;background:rgba(68,122,203,0.14);border:1px solid rgba(68,122,203,0.24);display:flex;align-items:center;justify-content:center;color:var(--accent-blue);font-size:11px;">1</div>
+                                        <div>
+                                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Ownership map</div>
+                                            <div style="font-size: 11px; color: var(--text-secondary);">Who owns APIs, UX, device QA, content ops, and cutover decisions</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:grid; grid-template-columns: 20px 1fr; gap: 8px; align-items:start;">
+                                        <div style="width:20px;height:20px;border-radius:50%;background:rgba(68,122,203,0.14);border:1px solid rgba(68,122,203,0.24);display:flex;align-items:center;justify-content:center;color:var(--accent-blue);font-size:11px;">2</div>
+                                        <div>
+                                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Definition of ready</div>
+                                            <div style="font-size: 11px; color: var(--text-secondary);">Catalog, auth, rights, and playback checks before launch train moves</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:grid; grid-template-columns: 20px 1fr; gap: 8px; align-items:start;">
+                                        <div style="width:20px;height:20px;border-radius:50%;background:rgba(68,122,203,0.14);border:1px solid rgba(68,122,203,0.24);display:flex;align-items:center;justify-content:center;color:var(--accent-blue);font-size:11px;">3</div>
+                                        <div>
+                                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Trade-off protocol</div>
+                                            <div style="font-size: 11px; color: var(--text-secondary);">How to cut scope without breaking the shared product model</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:grid; grid-template-columns: 20px 1fr; gap: 8px; align-items:start;">
+                                        <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,215,0,0.14);border:1px solid rgba(255,215,0,0.24);display:flex;align-items:center;justify-content:center;color:#ffd700;font-size:11px;">4</div>
+                                        <div>
+                                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Cutover plan</div>
+                                            <div style="font-size: 11px; color: var(--text-secondary);">30+ teams operating on the same launch sequence and escalation path</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(68,122,203,0.12); font-size: 12px; color: var(--text-secondary);">
+                                    <strong style="color: var(--text-primary);">Outcome:</strong> coherent search/discovery + repeatable launch governance that outlived the first release.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <figcaption>Linear + VOD catalogs unified — "continue watching," "premium you already pay for" — governed by a release playbook keeping 30+ teams on the same cutover plan</figcaption>
                     <ul class="notice-list">
@@ -476,7 +739,7 @@
                         <div class="metric-breakdown">Web · iOS · Android · Roku · CTV</div>
                     </div>
                     <div class="metric-card">
-                        <span class="metric-value" style="font-size: 22px;">Foundation</span>
+                        <span class="metric-value">Foundation</span>
                         <span class="metric-label">For DIRECTV Stream</span>
                         <div class="metric-breakdown">Architecture still in use today</div>
                     </div>
@@ -503,7 +766,20 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 32px;">
+                <div style="margin: 32px 0 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.55); padding: 12px;">
+                    <div style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: rgba(0,0,0,0.18);">
+                        <iframe
+                            src="https://www.youtube.com/embed/AyIUhugmOSQ"
+                            title="DIRECTV Everywhere results video"
+                            style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="callout" style="margin-top: 24px;">
                     <p><strong>The Real Value:</strong> DIRECTV looked and behaved like a modern streaming company at a time when most pay-TV providers were still treating apps as side projects. The patterns we established — authenticated streaming tied to pay-TV subscriptions, cross-device parity, shared entitlement model — are what everyone else now takes for granted.</p>
                 </div>
                 </div>
@@ -518,30 +794,93 @@
                 <h2>Press & Recognition</h2>
                 
                 <div class="recognition-card fade-up stagger-1">
-                    <span class="recognition-icon">🎬</span>
+                    <span class="recognition-icon">📡</span>
                     <div class="recognition-content">
-                        <h3>The Hollywood Reporter</h3>
-                        <p>The Hollywood Reporter covered DIRECTV Everywhere as a significant milestone in the pay-TV industry's shift to streaming — framing it as one of the first true "TV Everywhere" launches from a major satellite provider, with the breadth of content and cross-device reach that competitors couldn't match at the time.</p>
+                        <h3>Mar 11, 2012 · Solid Signal</h3>
+                        <p>Early coverage of DIRECTV Everywhere rollout and feature availability, documenting the launch context and initial consumer-facing positioning.</p>
                     </div>
-                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-primary">Request Full Pack</a>
+                    <a href="/work/directv02/files/20120311_DTVE_Solid Signal.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
                 </div>
 
                 <div class="recognition-card fade-up stagger-2">
                     <span class="recognition-icon">💻</span>
                     <div class="recognition-content">
-                        <h3>Engadget &amp; MIT Technology Review</h3>
-                        <p>Engadget and MIT Technology Review both covered the launch as a streaming technology milestone — noting both the cross-device architecture and the entitlement model that let 20M+ subscribers sign in once and access their full package anywhere. Internally, leadership referenced Everywhere in town halls as proof DIRECTV could compete with streaming-first players.</p>
+                        <h3>Mar 21, 2012 · Engadget</h3>
+                        <p>Tech press coverage highlighting DIRECTV Everywhere as an important TV Everywhere milestone with cross-device streaming implications.</p>
                     </div>
-                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Get in Touch</a>
+                    <a href="/work/directv02/files/20120321_DTVE_Engadget.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
                 </div>
 
                 <div class="recognition-card fade-up stagger-3">
+                    <span class="recognition-icon">🧪</span>
+                    <div class="recognition-content">
+                        <h3>Apr 17, 2012 · MIT Technology Review</h3>
+                        <p>Coverage framing the launch as part of the industry’s technology transition toward authenticated streaming and multi-platform access.</p>
+                    </div>
+                    <a href="/work/directv02/files/20120417_DTVE_%20MIT Technology Review.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-4">
+                    <span class="recognition-icon">📡</span>
+                    <div class="recognition-content">
+                        <h3>Apr 26, 2012 · Solid Signal</h3>
+                        <p>Follow-on reporting covering rollout details and user-facing functionality as the platform expanded and matured post-launch.</p>
+                    </div>
+                    <a href="/work/directv02/files/20120426_DTVE_Solid Signal.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-5">
                     <span class="recognition-icon">📺</span>
                     <div class="recognition-content">
-                        <h3>Foundation for DIRECTV Stream</h3>
-                        <p>The patterns we established in 2012–2013 — authenticated streaming tied to pay-TV subscriptions, cross-device parity, shared identity and entitlement model — became the starting point for DIRECTV's later streaming-only boxes and services. We were doing this work before "streaming wars" was a headline. The architecture is still paying dividends today.</p>
+                        <h3>Feb 25, 2014 · Roku.com</h3>
+                        <p>Platform ecosystem coverage showing DIRECTV Everywhere’s presence in streaming-device channels and continued product distribution expansion.</p>
                     </div>
-                    <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-secondary">Book a Call</a>
+                    <a href="/work/directv02/files/20140225_DTVE_rokudotcom.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-6">
+                    <span class="recognition-icon">📰</span>
+                    <div class="recognition-content">
+                        <h3>Apr 26, 2014 · Yahoo News (Clipping)</h3>
+                        <p>News clipping capturing broader media pickup and mainstream visibility for DIRECTV’s streaming and TV Everywhere strategy.</p>
+                    </div>
+                    <a href="/work/directv02/files/20140426_DTVE_Yahoo News.png" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-7">
+                    <span class="recognition-icon">📡</span>
+                    <div class="recognition-content">
+                        <h3>Jun 9, 2014 · Solid Signal</h3>
+                        <p>Additional coverage tracking ongoing feature, device, and service evolution as DIRECTV Everywhere continued to scale.</p>
+                    </div>
+                    <a href="/work/directv02/files/20140609_DTVE_Solid Signal.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-8">
+                    <span class="recognition-icon">🎬</span>
+                    <div class="recognition-content">
+                        <h3>Dec 19, 2014 · The Hollywood Reporter</h3>
+                        <p>Entertainment trade coverage reflecting industry recognition of DIRECTV’s streaming distribution strategy and content experience positioning.</p>
+                    </div>
+                    <a href="/work/directv02/files/20141219_DTVE_Hollywood Reporter.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-9">
+                    <span class="recognition-icon">🎞️</span>
+                    <div class="recognition-content">
+                        <h3>Dec 19, 2014 · Variety</h3>
+                        <p>Trade press coverage documenting DIRECTV Everywhere within the broader media and distribution shift toward streaming-first behavior.</p>
+                    </div>
+                    <a href="/work/directv02/files/20141219_DTVE_Variety.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-10">
+                    <span class="recognition-icon">🐝</span>
+                    <div class="recognition-content">
+                        <h3>Apr 12, 2015 · Hive</h3>
+                        <p>Later-stage coverage showing the durability of the DIRECTV Everywhere model and its influence on how TV providers approached streaming access.</p>
+                    </div>
+                    <a href="/work/directv02/files/20150412_DTVE_Hive.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Article</a>
                 </div>
             </div>
         </div>
