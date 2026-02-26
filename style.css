@@ -637,10 +637,29 @@ section[id] {
     text-align: center;
 }
 
+.metrics-row .metric-card .metric-value {
+    font-size: clamp(28px, 2vw, 34px);
+    line-height: 1.1;
+    margin-bottom: 6px;
+    white-space: nowrap;
+}
+
+.metrics-row .metric-card .metric-label {
+    font-size: clamp(10px, 0.8vw, 13px);
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .metric-breakdown {
-    font-size: 14px;
+    font-size: clamp(16px, 1.15vw, 20px);
     color: var(--text-secondary);
     margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Case study Results section spacing normalization */
