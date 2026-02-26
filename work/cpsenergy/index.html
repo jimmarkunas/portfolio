@@ -209,12 +209,79 @@
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
                 
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🌃</div>
-                        <div style="font-size: 18px; font-weight: 600;">San Antonio Streetlight Complexity Map</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Placeholder: 135K+ lights, 3 disconnected systems</div>
+                <div style="margin: 32px 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background:
+                    radial-gradient(circle at 18% 24%, rgba(68,122,203,0.18), transparent 45%),
+                    radial-gradient(circle at 82% 76%, rgba(239,68,68,0.16), transparent 40%),
+                    linear-gradient(135deg, rgba(68, 122, 203, 0.06) 0%, rgba(239, 68, 68, 0.06) 100%);">
+                    <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 0; min-height: 420px;">
+                        <div style="position: relative; padding: 28px; border-right: 1px solid rgba(255,255,255,0.05);">
+                            <svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+                                <defs>
+                                    <linearGradient id="route" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#447acb" stop-opacity="0.9"/>
+                                        <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.7"/>
+                                    </linearGradient>
+                                </defs>
+                                <g opacity="0.18" stroke="#447acb" stroke-width="1">
+                                    <path d="M40 70 H720"/>
+                                    <path d="M40 130 H720"/>
+                                    <path d="M40 190 H720"/>
+                                    <path d="M40 250 H720"/>
+                                    <path d="M40 310 H720"/>
+                                    <path d="M90 30 V390"/>
+                                    <path d="M180 30 V390"/>
+                                    <path d="M270 30 V390"/>
+                                    <path d="M360 30 V390"/>
+                                    <path d="M450 30 V390"/>
+                                    <path d="M540 30 V390"/>
+                                    <path d="M630 30 V390"/>
+                                </g>
+                                <g fill="none" stroke="url(#route)" stroke-width="5" stroke-linecap="round" opacity="0.9">
+                                    <path d="M85 85 C160 70, 190 145, 260 130 S390 70, 450 120 S560 205, 635 190"/>
+                                    <path d="M120 265 C210 230, 260 290, 335 260 S475 205, 540 255 S620 315, 680 300"/>
+                                </g>
+                                <g>
+                                    <circle cx="85" cy="85" r="8" fill="#f8fafc"/>
+                                    <circle cx="260" cy="130" r="8" fill="#f8fafc"/>
+                                    <circle cx="450" cy="120" r="8" fill="#f8fafc"/>
+                                    <circle cx="635" cy="190" r="8" fill="#f8fafc"/>
+                                    <circle cx="120" cy="265" r="8" fill="#f8fafc"/>
+                                    <circle cx="335" cy="260" r="8" fill="#f8fafc"/>
+                                    <circle cx="540" cy="255" r="8" fill="#f8fafc"/>
+                                    <circle cx="680" cy="300" r="8" fill="#f8fafc"/>
+                                </g>
+                                <g fill="#ef4444">
+                                    <circle cx="318" cy="164" r="6"/>
+                                    <circle cx="487" cy="228" r="6"/>
+                                    <circle cx="596" cy="152" r="6"/>
+                                </g>
+                                <g font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1" opacity="0.95">
+                                    <text x="52" y="58">Resident reports</text>
+                                    <text x="214" y="112">Call center</text>
+                                    <text x="404" y="101">Dispatch queue</text>
+                                    <text x="592" y="174">Field crews</text>
+                                    <text x="95" y="246">Legacy records</text>
+                                    <text x="298" y="243">SAP / work orders</text>
+                                    <text x="507" y="238">City reporting</text>
+                                    <text x="612" y="287">Program metrics</text>
+                                </g>
+                            </svg>
+                            <div style="position: absolute; left: 28px; bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                                <span style="padding: 8px 12px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.28); color: #dbeafe; font-size: 12px;">135K+ lights</span>
+                                <span style="padding: 8px 12px; border-radius: 999px; background: rgba(239,68,68,0.10); border: 1px solid rgba(239,68,68,0.24); color: #fecaca; font-size: 12px;">3 disconnected systems</span>
+                                <span style="padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--text-secondary); font-size: 12px;">No shared status visibility</span>
+                            </div>
+                        </div>
+                        <div style="padding: 28px; display: grid; align-content: center; gap: 16px;">
+                            <div style="font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-blue); opacity: 0.9;">Challenge Map</div>
+                            <h3 style="margin: 0; font-size: clamp(22px, 3vw, 30px); line-height: 1.15;">San Antonio Streetlight Complexity</h3>
+                            <p style="margin: 0; color: var(--text-secondary); line-height: 1.6;">A citywide outage problem with fragmented handoffs across residents, support, dispatch, field crews, and reporting systems. The challenge was not a single broken tool, but a broken operating chain.</p>
+                            <div style="display: grid; gap: 10px; margin-top: 6px;">
+                                <div style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary);"><span style="width: 8px; height: 8px; border-radius: 999px; background: #447acb; box-shadow: 0 0 0 4px rgba(68,122,203,0.14);"></span>Multiple intake paths and inconsistent resident data</div>
+                                <div style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary);"><span style="width: 8px; height: 8px; border-radius: 999px; background: #22d3ee; box-shadow: 0 0 0 4px rgba(34,211,238,0.12);"></span>Disconnected operational systems and manual handoffs</div>
+                                <div style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary);"><span style="width: 8px; height: 8px; border-radius: 999px; background: #ef4444; box-shadow: 0 0 0 4px rgba(239,68,68,0.10);"></span>Bottlenecks created long repair delays and poor visibility</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
