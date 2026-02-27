@@ -297,6 +297,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Lightbox (single image) ───────────────────────
     // Used on case study pages for diagram/figure zoom
+    const modalTriggers = document.querySelectorAll('[data-modal-target]');
+    const modalCloseButtons = document.querySelectorAll('[data-modal-close]');
+    const managedModals = document.querySelectorAll('.modal');
+
+    function closeAnyModal() {
+        managedModals.forEach(modal => modal.classList.remove('active'));
+        document.body.style.overflow = '';
+    }
+
+    if (modalTriggers.length > 0 && managedModals.length > 0) {
+        modalTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const targetId = trigger.getAttribute('data-modal-target');
+                if (!targetId) return;
+                const modal = document.getElementById(targetId);
+                if (!modal) return;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        modalCloseButtons.forEach(button => {
+            button.addEventListener('click', closeAnyModal);
+        });
+
+        managedModals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeAnyModal();
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAnyModal();
+        });
+    }
+
     const lightbox      = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxClose = document.getElementById('lightboxClose');
