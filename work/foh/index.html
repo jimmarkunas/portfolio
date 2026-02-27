@@ -14,6 +14,367 @@
 
     <!-- Global Stylesheet -->
     <link rel="stylesheet" href="/style.css?v=20260224-1">
+    <style>
+        .foh-context-image img {
+            max-height: 460px;
+            object-fit: cover;
+        }
+        .foh-platform-shift {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            gap: 20px;
+            align-items: center;
+        }
+        .foh-shift-arrow {
+            font-size: 42px;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+        .foh-arch-diagram {
+            margin: 48px 0;
+            background: rgba(68, 122, 203, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .foh-arch-headline {
+            margin: 0 0 16px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .foh-arch-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+            align-items: stretch;
+        }
+        .foh-arch-col {
+            background: rgba(10, 10, 15, 0.55);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 12px;
+        }
+        .foh-arch-col h5 {
+            margin: 0 0 10px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+        }
+        .foh-arch-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 8px 9px;
+            font-size: 12px;
+            line-height: 1.35;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .foh-arch-item:last-child {
+            margin-bottom: 0;
+        }
+        .foh-arch-links {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .foh-arch-link {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: 8px 6px;
+            background: rgba(68, 122, 203, 0.08);
+            border: 1px dashed rgba(68, 122, 203, 0.35);
+            border-radius: 8px;
+        }
+        .foh-arch-link strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .foh-press-grid {
+            display: grid;
+            gap: 8px;
+            margin-top: 24px;
+        }
+        .foh-press-grid .recognition-card {
+            margin-bottom: 0;
+        }
+        .foh-press-modal .modal-box {
+            max-width: 860px;
+            padding: 26px 24px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .foh-press-modal .modal-title {
+            margin: 0;
+            padding-right: 40px;
+            line-height: 1.25;
+        }
+        .foh-press-meta {
+            color: var(--text-secondary);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        .foh-press-summary {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 68ch;
+            min-height: 3.2em;
+        }
+        .foh-press-panel {
+            width: 100%;
+            border: 1px solid rgba(68, 122, 203, 0.3);
+            border-radius: 10px;
+            background: rgba(68, 122, 203, 0.08);
+            padding: 14px 16px;
+        }
+        .foh-press-points {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--text-secondary);
+        }
+        .foh-press-points li {
+            margin-bottom: 6px;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+        .foh-press-points li:last-child {
+            margin-bottom: 0;
+        }
+        .foh-press-preview-img {
+            width: 100%;
+            max-height: 48vh;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            border: 1px solid var(--border);
+        }
+        .foh-press-fallback {
+            margin: 2px 0 0;
+            text-align: left;
+        }
+        .foh-press-fallback .btn {
+            width: auto;
+            min-width: 160px;
+            padding: 10px 18px;
+            font-size: 14px;
+            border-radius: 9px;
+        }
+        .foh-own-map {
+            margin: 32px 0;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(68, 122, 203, 0.08) 0%, rgba(10, 10, 15, 0.75) 55%, rgba(68, 122, 203, 0.08) 100%);
+            padding: 22px;
+        }
+        .foh-own-center {
+            text-align: center;
+            margin-bottom: 16px;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(68, 122, 203, 0.4);
+            background: rgba(68, 122, 203, 0.12);
+        }
+        .foh-own-center h4 {
+            margin: 0 0 4px;
+            font-size: 22px;
+            color: var(--text-primary);
+        }
+        .foh-own-center p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .foh-own-lanes {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .foh-own-lane {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            background: rgba(10, 10, 15, 0.55);
+        }
+        .foh-own-lane h5 {
+            margin: 0 0 8px;
+            font-size: 13px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .foh-own-line {
+            font-size: 13px;
+            line-height: 1.45;
+            margin-bottom: 7px;
+            color: var(--text-secondary);
+        }
+        .foh-own-line:last-child {
+            margin-bottom: 0;
+        }
+        .foh-own-line strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .foh-integration-map {
+            margin: 30px 0;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(68, 122, 203, 0.05);
+            padding: 18px;
+        }
+        .foh-integration-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            align-items: stretch;
+            margin-bottom: 12px;
+        }
+        .foh-integration-col {
+            border: 1px solid rgba(68, 122, 203, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            background: rgba(10, 10, 15, 0.58);
+        }
+        .foh-integration-col h5 {
+            margin: 0 0 8px;
+            font-size: 12px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .foh-integration-col p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.45;
+            color: var(--text-secondary);
+        }
+        .foh-integration-flows {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .foh-flow {
+            border: 1px dashed rgba(68, 122, 203, 0.35);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: rgba(68, 122, 203, 0.08);
+        }
+        .foh-flow strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .foh-delivery-image {
+            margin: 20px 0 28px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .foh-delivery-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .foh-solution-gallery {
+            margin: 28px 0 32px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .foh-solution-gallery .lightbox-trigger {
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            overflow: visible;
+            background: transparent;
+            aspect-ratio: auto;
+        }
+        .foh-solution-shot {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+            aspect-ratio: 3 / 4;
+        }
+        .foh-solution-shot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+        .foh-solution-gallery .shot-1 img { object-position: center 26%; }
+        .foh-solution-gallery .shot-2 img { object-position: center 18%; }
+        .foh-solution-gallery .shot-3 img { object-position: center 20%; }
+        .foh-solution-caption {
+            margin: 8px 0 0;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.03em;
+        }
+        @media (max-width: 900px) {
+            .foh-platform-shift {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .foh-shift-arrow {
+                transform: rotate(90deg);
+            }
+            .foh-arch-grid {
+                grid-template-columns: 1fr;
+            }
+            .foh-arch-links {
+                grid-template-columns: 1fr;
+            }
+            .foh-arch-headline {
+                text-align: left;
+                font-size: 17px;
+            }
+            .foh-press-modal .modal-box {
+                padding: 16px;
+            }
+            .foh-press-summary {
+                font-size: 14px;
+            }
+            .foh-own-lanes {
+                grid-template-columns: 1fr;
+            }
+            .foh-own-center h4 {
+                font-size: 19px;
+            }
+            .foh-integration-grid,
+            .foh-integration-flows {
+                grid-template-columns: 1fr;
+            }
+            .foh-solution-gallery {
+                grid-template-columns: 1fr;
+            }
+            .foh-solution-gallery .lightbox-trigger {
+                aspect-ratio: auto;
+            }
+            .foh-solution-shot {
+                aspect-ratio: auto;
+            }
+            .foh-solution-shot img {
+                height: auto;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="bg-gradient"></div>
@@ -77,9 +438,9 @@
     <!-- S0: Overview -->
     <section class="case-hero" id="overview">
         <div class="container">
-            <h1 class="fade-up">Frederick's of Hollywood: Brand Reboot, <span style="color: var(--accent-blue);">Megan Fox</span>, and a Platform That Had to Keep Up</h1>
+            <h1 class="fade-up">Frederick's of Hollywood: Brand Reboot, <span style="color: var(--accent-blue);">Megan Fox</span>, and an Early Enterprise Platform</h1>
             
-            <p class="subheadline fade-up stagger-2">When ABG bought Frederick's of Hollywood out of bankruptcy, the stores were gone and the tech stack was dated. The comeback would live or die online — with Megan Fox as co-owner driving the PR wave. My job was to get a Shopify Plus flagship live fast enough to ride that moment, stable enough to survive the spotlight, and lean enough for a small team to run.</p>
+            <p class="subheadline fade-up stagger-2">When ABG bought Frederick's of Hollywood out of bankruptcy, the stores were gone and the tech stack was dated. The comeback would live or die online, with Megan Fox as co-owner driving the PR wave. My job was to get a Shopify Plus flagship live fast enough to ride the moment, stable enough to survive the spotlight, and lean enough for a small team.</p>
 
             <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
                 <div class="metric-card">
@@ -90,7 +451,7 @@
                 <div class="metric-card">
                     <span class="metric-value">25%</span>
                     <span class="metric-label">Lower TCO</span>
-                    <div class="metric-breakdown">No license · less complexity</div>
+                    <div class="metric-breakdown">vs. legacy platform</div>
                 </div>
                 <div class="metric-card">
                     <span class="metric-value">1st</span>
@@ -106,10 +467,10 @@
                     <div class="tldr-item">
                         <h4>Problem</h4>
                         <ul>
-                            <li>Bankrupt brand, heavy legacy platform</li>
-                            <li>Megan Fox relaunch had a hard PR timeline</li>
-                            <li>Marketing couldn't move without IT tickets</li>
-                            <li>Shopify Plus was young — enterprise fit unproven</li>
+                            <li>Bankrupt brand, legacy platform</li>
+                            <li>Megan Fox relaunch w/ a hard PR timeline</li>
+                            <li>Marketing couldn't move without IT</li>
+                            <li>Shopify Plus was young, enterprise fit unproven</li>
                         </ul>
                     </div>
                     <div class="tldr-item">
@@ -124,7 +485,7 @@
                     <div class="tldr-item">
                         <h4>What Shipped</h4>
                         <ul>
-                            <li>Shopify Plus flagship — mobile-first, campaign-ready</li>
+                            <li>Shopify Plus flagship: mobile-first, campaign-ready</li>
                             <li>Marketing-owned content, look books & promo flows</li>
                             <li>3PL + ERP + email integrations fully wired</li>
                             <li>Reusable ABG portfolio blueprint</li>
@@ -133,7 +494,7 @@
                     <div class="tldr-item">
                         <h4>Results</h4>
                         <ul>
-                            <li>Launched in time for Fox PR wave</li>
+                            <li>Launched on time for Megan Fox PR wave</li>
                             <li>3x faster promo launches; 25% lower TCO</li>
                             <li>Press: NY Biz Journal, W Magazine, E!, Daily Mail</li>
                             <li>ABG proof point for Shopify Plus at portfolio scale</li>
@@ -154,35 +515,46 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2 style="text-align: center;">Context & Stakes</h2>
-                <p style="text-align: center;">ABG bought Frederick's of Hollywood out of bankruptcy with a clear thesis: bring it back as a digital-only brand with a sharper point of view. They brought in Megan Fox as co-owner and ambassador to reintroduce Frederick's to an audience that cared more about Instagram than malls. The problem was the tech stack — heavy, expensive, and built for a catalogue era, not for a social-driven celebrity relaunch with a hard PR deadline.</p>
+                <p style="text-align: center;">ABG bought Frederick's of Hollywood out of bankruptcy with a clear thesis: bring it back as a digital-only brand with a sharper point of view. They brought in Megan Fox as co-owner and ambassador to reintroduce Frederick's to an audience that cared more about Instagram than malls. The problem was the tech stack: heavy, expensive, and built for a catalogue era, not for a social-driven celebrity relaunch with a hard PR deadline.</p>
+
+                <figure class="lightbox-trigger foh-context-image" data-src="/work/foh/images/banner-foh-07.avif" style="margin-top: 24px; margin-bottom: 24px;">
+                    <img src="/work/foh/images/banner-foh-07.avif" alt="Frederick's of Hollywood relaunch campaign visual featuring Megan Fox">
+                    <figcaption>Campaign image from Megan Fox re-brand.</figcaption>
+                </figure>
                 
                 <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
                     <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Platform: Before vs. After</h4>
-                    <div style="display: flex; gap: 48px; align-items: flex-end; justify-content: center;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">BEFORE</div>
-                            <div style="width: 240px; height: 240px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 16px;">
-                                <div style="font-size: 26px; font-weight: 700; color: white; line-height: 1.2;">Legacy Platform</div>
-                                <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-top: 8px;">Heavy · Expensive · Slow</div>
+                    <div class="foh-platform-shift">
+                        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.45); border-radius: 12px; padding: 24px;">
+                            <div style="font-size: 13px; color: #fca5a5; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 12px;">BEFORE</div>
+                            <div style="font-size: 34px; font-weight: 700; color: #ef4444; line-height: 1.15; margin-bottom: 8px;">Legacy Platform</div>
+                            <div style="font-size: 15px; color: var(--text-primary); opacity: 0.9;">Heavy · Expensive · Slow</div>
+                            <div style="margin-top: 16px; display: grid; gap: 8px;">
+                                <div style="font-size: 13px; color: var(--text-secondary);">• Large dev team for routine changes</div>
+                                <div style="font-size: 13px; color: var(--text-secondary);">• Long release cycles for campaigns</div>
+                                <div style="font-size: 13px; color: var(--text-secondary);">• High fixed platform overhead</div>
                             </div>
                         </div>
-                        <div style="font-size: 40px; color: var(--text-secondary); padding-bottom: 55px;">→</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">AFTER</div>
-                            <div style="width: 240px; height: 160px; background: var(--accent-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; padding: 16px;">
-                                <div style="font-size: 24px; font-weight: 700; color: white; line-height: 1.2;">Shopify Plus</div>
-                                <div style="font-size: 14px; color: rgba(255,255,255,0.8);">Campaign-ready · Lean · Fast</div>
+                        <div class="foh-shift-arrow">→</div>
+                        <div style="background: rgba(68, 122, 203, 0.12); border: 1px solid rgba(68, 122, 203, 0.5); border-radius: 12px; padding: 24px;">
+                            <div style="font-size: 13px; color: #93c5fd; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 12px;">AFTER</div>
+                            <div style="font-size: 34px; font-weight: 700; color: var(--accent-blue); line-height: 1.15; margin-bottom: 8px;">Shopify Plus</div>
+                            <div style="font-size: 15px; color: var(--text-primary); opacity: 0.9;">Campaign-ready · Lean · Fast</div>
+                            <div style="margin-top: 16px; display: grid; gap: 8px;">
+                                <div style="font-size: 13px; color: var(--text-secondary);">• Marketing-owned campaign pages</div>
+                                <div style="font-size: 13px; color: var(--text-secondary);">• Faster promo cycles without ticket queues</div>
+                                <div style="font-size: 13px; color: var(--text-secondary);">• Lower TCO, simpler operations</div>
                             </div>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">Launched in time for the Megan Fox PR wave — no enterprise bloat required</div>
+                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">Launched in time for the Megan Fox PR wave with no enterprise bloat</div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
                     <div class="col-card">
                         <h4>What ABG Needed</h4>
                         <ul>
-                            <li>Launch fast enough to meet marketing and PR timelines</li>
+                            <li>Fast launch to meet marketing and PR timelines</li>
                             <li>Support spiky traffic from press and celebrity campaigns</li>
                             <li>Let brand teams own content without calling IT for every tweak</li>
                         </ul>
@@ -190,9 +562,9 @@
                     <div class="col-card">
                         <h4>The Stakes</h4>
                         <ul>
-                            <li>Megan Fox PR window was fixed — miss it and the moment was gone</li>
-                            <li>Shopify Plus was young; enterprise fit was unproven at ABG scale</li>
-                            <li>Frederick's reputation depended on the relaunch feeling real, not patched</li>
+                            <li>Megan Fox PR window was fixed, miss it and the moment was gone</li>
+                            <li>Shopify Plus was young; enterprise fit was unproven at scale</li>
+                            <li>Brand reputation depended on the relaunch feeling real, not patched</li>
                         </ul>
                     </div>
                 </div>
@@ -206,22 +578,53 @@
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
                 
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🎬</div>
-                        <div style="font-size: 18px; font-weight: 600;">Celebrity Relaunch · Hard Deadline · Unproven Platform</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Shopify Plus had to prove enterprise-grade on a very public stage</div>
-                    </div>
-                </div>
+                <figure class="lightbox-trigger" data-src="/work/foh/images/banner-foh-04-bottom200.jpg" style="margin: 32px 0; border: none; padding: 0; background: transparent; box-shadow: none;">
+                    <img src="/work/foh/images/banner-foh-04-bottom200.jpg" alt="Frederick's of Hollywood relaunch challenge visual">
+                </figure>
 
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">FOH Shopify Plus Stack: Architecture</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                <figure class="diagram-static foh-arch-diagram">
+                    <h4 class="foh-arch-headline">FOH Shopify Plus Stack: Architecture</h4>
+                    <div class="foh-arch-grid">
+                        <div class="foh-arch-col">
+                            <h5>Storefront</h5>
+                            <div class="foh-arch-item">Mobile-first theme</div>
+                            <div class="foh-arch-item">Collections + lookbooks</div>
+                            <div class="foh-arch-item">Campaign landing pages</div>
+                        </div>
+                        <div class="foh-arch-col">
+                            <h5>Shopify Plus Core</h5>
+                            <div class="foh-arch-item">Order orchestration</div>
+                            <div class="foh-arch-item">Catalog + pricing rules</div>
+                            <div class="foh-arch-item">Checkout + payments</div>
+                        </div>
+                        <div class="foh-arch-col">
+                            <h5>Integration Layer</h5>
+                            <div class="foh-arch-item">Custom sync adapters</div>
+                            <div class="foh-arch-item">Product + inventory mapping</div>
+                            <div class="foh-arch-item">Event webhooks + queues</div>
+                        </div>
+                        <div class="foh-arch-col">
+                            <h5>ABG Systems</h5>
+                            <div class="foh-arch-item">ERP/OMS backbone</div>
+                            <div class="foh-arch-item">3PL fulfillment network</div>
+                            <div class="foh-arch-item">Email + CRM platform</div>
+                        </div>
+                        <div class="foh-arch-col">
+                            <h5>Ops + Marketing</h5>
+                            <div class="foh-arch-item">Portfolio reporting</div>
+                            <div class="foh-arch-item">Campaign calendar ownership</div>
+                            <div class="foh-arch-item">Inventory + promo controls</div>
+                        </div>
+                    </div>
+                    <div class="foh-arch-links">
+                        <div class="foh-arch-link"><strong>Orders</strong> Shopify → OMS/3PL</div>
+                        <div class="foh-arch-link"><strong>Inventory</strong> ERP/3PL → Shopify</div>
+                        <div class="foh-arch-link"><strong>Customer Events</strong> Shopify → CRM</div>
+                        <div class="foh-arch-link"><strong>Campaign Content</strong> Marketing → Storefront</div>
                     </div>
                     <figcaption>Shopify Plus for commerce · ABG 3PL + OMS + email wired in · marketing-owned content and campaign flows</figcaption>
                     <ul class="notice-list">
-                        <li>In 2016, Shopify Plus was still proving its enterprise credentials — this was a high-visibility test</li>
+                        <li>In 2016, Shopify Plus was still proving its enterprise credentials, this was a high-visibility test</li>
                         <li>Monolithic architecture meant custom workarounds for back-office sync with Shopify's front end</li>
                         <li>Vendor lock-in risk had to be managed so ABG wasn't trapped if strategy changed</li>
                     </ul>
@@ -232,7 +635,7 @@
                         <h4 style="color: #ef4444;">Platform Blockers</h4>
                         <ul>
                             <li>Legacy platform required large dev teams for any change</li>
-                            <li>Shopify Plus (2016) had a monolithic architecture — less flexible for enterprise</li>
+                            <li>Shopify Plus (2016) had a monolithic architecture, less flexible for enterprise</li>
                             <li>Back-office sync required custom workarounds</li>
                             <li>Vendor lock-in risk for a PE portfolio brand</li>
                         </ul>
@@ -240,7 +643,7 @@
                     <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
                         <h4 style="color: var(--accent-blue);">Business Blockers</h4>
                         <ul>
-                            <li>Hard PR deadline — Megan Fox campaign couldn't wait for a slow migration</li>
+                            <li>Hard PR deadline: Megan Fox campaign couldn't wait for a slow migration</li>
                             <li>Marketing needed self-service; couldn't rely on IT for every campaign</li>
                             <li>Traffic spikes from press and celebrity coverage had to be handled without drama</li>
                             <li>ABG needed proof this could scale to other portfolio brands</li>
@@ -249,7 +652,7 @@
                 </div>
 
                 <div class="callout" style="margin-top: 24px;">
-                    <p><strong>The Core Tension:</strong> Shopify Plus was the right direction — lean, fast, campaign-friendly — but it was young, and this was a very public proof of concept. Getting it wrong would have set back Shopify's enterprise story and Frederick's relaunch simultaneously.</p>
+                    <p><strong>The Core Tension:</strong> Shopify Plus was the right direction: lean, fast, campaign-friendly, but it was young, and this was a very public proof of concept. Getting it wrong would have set back Shopify's enterprise story and Frederick's relaunch simultaneously.</p>
                 </div>
             </div>
         </div>
@@ -261,11 +664,36 @@
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
                 
-                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(68, 122, 203, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🎯</div>
-                        <div style="font-size: 18px; font-weight: 600;">Enterprise Solutions Consultant & Sales Engineer</div>
-                        <div style="font-size: 14px; margin-top: 8px;">ABG brand leadership · Frederick's digital team · Shopify engineering · implementation agency</div>
+                <div class="foh-own-map">
+                    <div class="foh-own-center">
+                        <h4>Solution Lead: Enterprise Consultant + Sales Engineer</h4>
+                        <p>Decision spine across ABG leadership, FOH digital, Shopify engineering, and implementation agency</p>
+                    </div>
+                    <div class="foh-own-lanes">
+                        <div class="foh-own-lane">
+                            <h5>ABG Leadership</h5>
+                            <div class="foh-own-line"><strong>Need:</strong> Fast, credible relaunch with portfolio repeatability.</div>
+                            <div class="foh-own-line"><strong>I owned:</strong> Platform direction and investment tradeoffs.</div>
+                            <div class="foh-own-line"><strong>Output:</strong> Shopify Plus blueprint ABG could reuse.</div>
+                        </div>
+                        <div class="foh-own-lane">
+                            <h5>FOH Digital Team</h5>
+                            <div class="foh-own-line"><strong>Need:</strong> Marketing agility without IT ticket bottlenecks.</div>
+                            <div class="foh-own-line"><strong>I owned:</strong> Theme/content model and promo operating patterns.</div>
+                            <div class="foh-own-line"><strong>Output:</strong> Campaign-ready workflows owned by brand team.</div>
+                        </div>
+                        <div class="foh-own-lane">
+                            <h5>Shopify Engineering</h5>
+                            <div class="foh-own-line"><strong>Need:</strong> Early enterprise implementation that could hold up publicly.</div>
+                            <div class="foh-own-line"><strong>I owned:</strong> Architecture boundaries and core-platform decisions.</div>
+                            <div class="foh-own-line"><strong>Output:</strong> Stable launch path with manageable platform risk.</div>
+                        </div>
+                        <div class="foh-own-lane">
+                            <h5>Implementation Agency</h5>
+                            <div class="foh-own-line"><strong>Need:</strong> Clear execution plan across build, QA, and launch.</div>
+                            <div class="foh-own-line"><strong>I owned:</strong> Integration specs, sequencing, and launch guardrails.</div>
+                            <div class="foh-own-line"><strong>Output:</strong> Coordinated delivery against fixed PR timeline.</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -282,7 +710,7 @@
                     <div class="col-card">
                         <h4>Sales Engineer + Product Partner</h4>
                         <ul>
-                            <li>Not just pre-sales demos — wrote the solution design and documented flows</li>
+                            <li>Not just pre-sales demos, wrote the solution design and documented flows</li>
                             <li>Stayed engaged through build and launch as product owner</li>
                             <li>Owned any platform decisions that touched Shopify core</li>
                             <li>Acted as translator between ABG brand vision and technical reality</li>
@@ -291,7 +719,7 @@
                     <div class="col-card">
                         <h4>Guarding the Launch</h4>
                         <ul>
-                            <li>Launch day was non-negotiable — Megan Fox PR wave had a fixed window</li>
+                            <li>Launch day was non-negotiable, Megan Fox PR wave had a fixed window</li>
                             <li>Pushed for configuration-first over risky customization</li>
                             <li>Built rollback plans and simple operational playbooks</li>
                             <li>Ensured the site held up when celebrity coverage hit</li>
@@ -309,7 +737,7 @@
                 </div>
 
                 <div class="callout" style="margin-top: 24px;">
-                    <p><strong>The Glue:</strong> I was the intersection of ABG, Shopify, creative, and engineering — turning the Megan Fox campaign vision into a launch-ready DTC stack without letting anyone's priorities blow up the timeline.</p>
+                    <p><strong>The Glue:</strong> I was the intersection of ABG, Shopify, creative, and engineering, turning the Megan Fox campaign vision into a launch-ready DTC stack without letting anyone's priorities blow up the timeline.</p>
                 </div>
             </div>
         </div>
@@ -320,27 +748,27 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
-                
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.15) 0%, rgba(34, 211, 238, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🏗️</div>
-                        <div style="font-size: 18px; font-weight: 600;">Campaign-Ready Shopify Plus DTC Flagship</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Mobile-first · Marketing-owned · Spike-proof</div>
-                    </div>
-                </div>
 
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">FOH Shopify Plus: Full Stack Overview</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
-                    </div>
-                    <figcaption>Shopify Plus for commerce · Sections/collections for marketing ownership · 3PL + OMS + email wired for automated ops</figcaption>
-                    <ul class="notice-list">
-                        <li>Mobile-first storefront with launch-ready theme and staging store for safe experimentation</li>
-                        <li>Marketing controls campaign pages, look books, and promo modules — no engineering tickets</li>
-                        <li>Global traffic support out of the box while keeping configuration lean</li>
-                    </ul>
-                </figure>
+                <div class="foh-solution-gallery">
+                    <figure class="lightbox-trigger shot-1" data-src="/work/foh/images/modal-foh-03.jpg">
+                        <div class="foh-solution-shot">
+                            <img src="/work/foh/images/modal-foh-03.jpg" alt="FOH solution artifact 1">
+                        </div>
+                        <figcaption class="foh-solution-caption">Mobile-first</figcaption>
+                    </figure>
+                    <figure class="lightbox-trigger shot-2" data-src="/work/foh/images/modal-foh-05.jpg">
+                        <div class="foh-solution-shot">
+                            <img src="/work/foh/images/modal-foh-05.jpg" alt="FOH solution artifact 2">
+                        </div>
+                        <figcaption class="foh-solution-caption">Marketing-owned</figcaption>
+                    </figure>
+                    <figure class="lightbox-trigger shot-3" data-src="/work/foh/images/modal-foh-06.jpg">
+                        <div class="foh-solution-shot">
+                            <img src="/work/foh/images/modal-foh-06.jpg" alt="FOH solution artifact 3">
+                        </div>
+                        <figcaption class="foh-solution-caption">Spike-proof</figcaption>
+                    </figure>
+                </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                     <div class="col-card">
@@ -363,10 +791,30 @@
                     </div>
                 </div>
 
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">ABG Integration Model: Shopify + ERP + 3PL + Email</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
+                <figure class="diagram-static foh-integration-map">
+                    <div class="foh-integration-grid">
+                        <div class="foh-integration-col">
+                            <h5>Shopify Core</h5>
+                            <p>Catalog, checkout, orders, customer events, and campaign merchandising source of truth.</p>
+                        </div>
+                        <div class="foh-integration-col">
+                            <h5>Integration Layer</h5>
+                            <p>Sync adapters and event routing to normalize catalog and operational data across systems.</p>
+                        </div>
+                        <div class="foh-integration-col">
+                            <h5>ABG Systems</h5>
+                            <p>ERP/OMS, 3PL, and email platform receiving and returning structured commerce signals.</p>
+                        </div>
+                        <div class="foh-integration-col">
+                            <h5>Portfolio Reporting</h5>
+                            <p>Shared dashboards roll Frederick's metrics into ABG-wide performance and planning views.</p>
+                        </div>
+                    </div>
+                    <div class="foh-integration-flows">
+                        <div class="foh-flow"><strong>Catalog</strong> Shopify → ERP/OMS</div>
+                        <div class="foh-flow"><strong>Inventory</strong> ERP/3PL → Shopify</div>
+                        <div class="foh-flow"><strong>Orders</strong> Shopify → OMS/3PL</div>
+                        <div class="foh-flow"><strong>Customer Events</strong> Shopify → Email/CRM</div>
                     </div>
                     <figcaption>Catalog, inventory, orders, and customer events flowing automatically — Frederick's rolls into ABG group-level dashboards</figcaption>
                     <ul class="notice-list">
@@ -426,6 +874,10 @@
                         </div>
                     </div>
                 </div>
+
+                <figure class="lightbox-trigger foh-delivery-image" data-src="/work/foh/images/banner-foh-08.jpg">
+                    <img src="/work/foh/images/banner-foh-08.jpg" alt="FOH delivery timeline support visual">
+                </figure>
                 
                 <div class="timeline">
                     <div class="timeline-item">
@@ -516,36 +968,218 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Press & Recognition</h2>
-                
-                <div class="recognition-card fade-up stagger-1">
-                    <span class="recognition-icon">📰</span>
-                    <div class="recognition-content">
-                        <h3>National & International Press</h3>
-                        <p>The relaunch generated coverage across NY Business Journal, W Magazine, E! Online, Daily Mail, Refinery29, The Cut, Stuff NZ, and The Sun — validating ABG's thesis that a bankrupt mall brand could re-enter culture as a digital-first label with the right platform and moment.</p>
-                    </div>
-                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-primary">Request Press Pack</a>
+                <div style="margin: 20px 0 24px; border-radius: 12px; overflow: hidden;">
+                    <img src="/work/foh/images/banner-foh-02-cropped.jpg" alt="Frederick's of Hollywood press montage" style="width: 100%; height: auto; display: block;">
                 </div>
 
-                <div class="recognition-card fade-up stagger-2">
-                    <span class="recognition-icon">🏆</span>
-                    <div class="recognition-content">
-                        <h3>ABG Internal Proof Point for Shopify Plus</h3>
-                        <p>The Frederick's build shifted how ABG thought about Shopify Plus for their portfolio: from "can this really handle an ABG brand?" to "this is our viable option for speed, creativity, and lower overhead." The integration patterns and campaign architecture became the reference for future portfolio launches.</p>
+                <div class="foh-press-grid">
+                    <div class="recognition-card fade-up stagger-1">
+                        <span class="recognition-icon">📰</span>
+                        <div class="recognition-content">
+                            <h3>New York Business Journal</h3>
+                            <p>Business coverage positioning the Frederick's reboot and ABG growth thesis. It framed the relaunch as an operating model shift with measurable upside, not just a creative reset. It also reinforced why a leaner platform foundation mattered for speed and margin discipline.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-modal-target="press-modal-01">Read Article</button>
                     </div>
-                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Get in Touch</a>
-                </div>
 
-                <div class="recognition-card fade-up stagger-3">
-                    <span class="recognition-icon">📈</span>
-                    <div class="recognition-content">
-                        <h3>Shopify Plus Enterprise Validation</h3>
-                        <p>Frederick's was one of the earliest proofs that you could take a bankrupt mall brand, give it a new story, plug it into a Shopify Plus stack, and make it relevant again — without returning to heavyweight enterprise software. The implementation informed how Shopify and partners talked about portfolio-brand use cases.</p>
+                    <div class="recognition-card fade-up stagger-2">
+                        <span class="recognition-icon">📰</span>
+                        <div class="recognition-content">
+                            <h3>Refinery29</h3>
+                            <p>Fashion and culture context around the relaunch and audience reintroduction. The story highlighted how the brand voice was rebuilt for social-era discovery behavior. It helped reposition Frederick's for younger shoppers without losing legacy recognition.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-modal-target="press-modal-02">Read Article</button>
                     </div>
-                    <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-secondary">Book a Call</a>
+
+                    <div class="recognition-card fade-up stagger-3">
+                        <span class="recognition-icon">📰</span>
+                        <div class="recognition-content">
+                            <h3>The Cut</h3>
+                            <p>Editorial coverage reinforcing the brand's return to cultural relevance. It signaled that the relaunch had moved beyond paid media into earned conversation. That cultural validation increased campaign credibility during the highest-visibility window.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-modal-target="press-modal-03">Read Article</button>
+                    </div>
+
+                    <div class="recognition-card fade-up stagger-4">
+                        <span class="recognition-icon">📰</span>
+                        <div class="recognition-content">
+                            <h3>W Magazine</h3>
+                            <p>High-profile feature coverage supporting the Megan Fox relaunch moment. It elevated perceived brand quality by placing Frederick's in premium editorial context. That lift in perception helped convert attention into stronger consideration.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-modal-target="press-modal-04">Read Article</button>
+                    </div>
+
+                    <div class="recognition-card fade-up stagger-5">
+                        <span class="recognition-icon">📰</span>
+                        <div class="recognition-content">
+                            <h3>Daily Mail</h3>
+                            <p>Mainstream amplification that drove broad awareness during launch. The coverage extended reach beyond core fashion readership into mass-market audiences. It also pressure-tested launch readiness under broader and less predictable demand.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-modal-target="press-modal-05">Read Article</button>
+                    </div>
+
+                    <div class="recognition-card fade-up stagger-6">
+                        <span class="recognition-icon">📰</span>
+                        <div class="recognition-content">
+                            <h3>E! Online</h3>
+                            <p>Entertainment press coverage aligned with celebrity-led campaign momentum. It connected personality-driven interest to in-market product and campaign messaging. That bridge helped turn PR buzz into qualified storefront sessions.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-modal-target="press-modal-06">Read Article</button>
+                    </div>
+
+                    <div class="recognition-card fade-up">
+                        <span class="recognition-icon">📰</span>
+                        <div class="recognition-content">
+                            <h3>Stuff NZ</h3>
+                            <p>International pickup validating cross-market interest in the relaunch. The article demonstrated that the narrative carried outside U.S. media cycles. That external validation supported confidence in a repeatable portfolio playbook.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-modal-target="press-modal-07">Read Article</button>
+                    </div>
+
+                    <div class="recognition-card fade-up">
+                        <span class="recognition-icon">📰</span>
+                        <div class="recognition-content">
+                            <h3>The Sun</h3>
+                            <p>Mass-market tabloid coverage extending reach beyond core fashion media. It sustained post-launch visibility after the initial announcement spike. That ongoing attention helped maintain momentum while operations stabilized.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-modal-target="press-modal-08">Read Article</button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="modal foh-press-modal" id="press-modal-01" role="dialog" aria-modal="true" aria-labelledby="press-title-01">
+        <div class="modal-box">
+            <button class="modal-close" type="button" aria-label="Close article modal" data-modal-close>&times;</button>
+            <h3 class="modal-title" id="press-title-01">New York Business Journal</h3>
+            <p class="foh-press-meta">Press clipping 1 of 8</p>
+            <p class="foh-press-summary">Business-side coverage framed the Frederick’s comeback as a disciplined transformation play, not a vanity rebrand. The piece emphasizes how ABG paired a high-visibility celebrity narrative with a leaner operating model that could actually support rapid campaign cycles. It reinforced the core strategic point: platform simplification was a growth lever, not just a cost-cutting decision, and that framing gave stakeholders confidence in the relaunch economics.</p>
+            <div class="foh-press-panel">
+                <ul class="foh-press-points">
+                    <li>Framed the relaunch as a business transformation, not just a marketing event.</li>
+                    <li>Connected celebrity momentum to measurable digital growth opportunities.</li>
+                    <li>Supported the thesis that leaner platform choices can accelerate brand recovery.</li>
+                </ul>
+            </div>
+            <p class="foh-press-fallback"><a href="/work/foh/files/01-foh-nybizjournal.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read Article</a></p>
+        </div>
+    </div>
+
+    <div class="modal foh-press-modal" id="press-modal-02" role="dialog" aria-modal="true" aria-labelledby="press-title-02">
+        <div class="modal-box">
+            <button class="modal-close" type="button" aria-label="Close article modal" data-modal-close>&times;</button>
+            <h3 class="modal-title" id="press-title-02">Refinery29</h3>
+            <p class="foh-press-meta">Press clipping 2 of 8</p>
+            <p class="foh-press-summary">This coverage anchored the relaunch in contemporary fashion and culture rather than legacy retail nostalgia. It highlighted how the brand voice, merchandising rhythm, and campaign presentation were rebuilt for digital-first discovery behaviors. The result was clearer audience repositioning: Frederick’s felt current again to shoppers who never experienced the original mall-era brand, while still preserving enough heritage to feel authentic.</p>
+            <div class="foh-press-panel">
+                <ul class="foh-press-points">
+                    <li>Validated the shift from mall-era identity to social-first relevance.</li>
+                    <li>Reinforced campaign aesthetics built for mobile discovery channels.</li>
+                    <li>Helped broaden awareness among trend-led consumer segments.</li>
+                </ul>
+            </div>
+            <p class="foh-press-fallback"><a href="/work/foh/files/02-foh-refinery29.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read Article</a></p>
+        </div>
+    </div>
+
+    <div class="modal foh-press-modal" id="press-modal-03" role="dialog" aria-modal="true" aria-labelledby="press-title-03">
+        <div class="modal-box">
+            <button class="modal-close" type="button" aria-label="Close article modal" data-modal-close>&times;</button>
+            <h3 class="modal-title" id="press-title-03">The Cut</h3>
+            <p class="foh-press-meta">Press clipping 3 of 8</p>
+            <p class="foh-press-summary">Editorial pickup here acted as cultural validation, signaling that the relaunch had entered active conversation beyond paid media. It strengthened the credibility of the Megan Fox partnership by tying celebrity visibility to a concrete brand comeback narrative. That kind of editorial context helped convert awareness spikes into deeper consideration, not just short-lived clicks, and gave the campaign more staying power across channels.</p>
+            <div class="foh-press-panel">
+                <img class="foh-press-preview-img" src="/work/foh/files/03-foh-thecut.png" alt="The Cut article clipping">
+            </div>
+            <p class="foh-press-fallback"><a href="/work/foh/files/03-foh-thecut.png" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read Article</a></p>
+        </div>
+    </div>
+
+    <div class="modal foh-press-modal" id="press-modal-04" role="dialog" aria-modal="true" aria-labelledby="press-title-04">
+        <div class="modal-box">
+            <button class="modal-close" type="button" aria-label="Close article modal" data-modal-close>&times;</button>
+            <h3 class="modal-title" id="press-title-04">W Magazine</h3>
+            <p class="foh-press-meta">Press clipping 4 of 8</p>
+            <p class="foh-press-summary">High-fashion press amplified the relaunch by positioning Frederick’s alongside premium editorial narratives instead of discount-era perceptions. The article context elevated brand quality signals at the exact moment top-of-funnel attention was peaking. In practical terms, this kind of placement supported stronger perceived value while campaign traffic and conversion windows were most sensitive, helping protect margin quality during a volatile launch window.</p>
+            <div class="foh-press-panel">
+                <ul class="foh-press-points">
+                    <li>Positioned the relaunch inside premium fashion conversation, not discount retail.</li>
+                    <li>Lifted perceived brand quality at the exact moment traffic spiked.</li>
+                    <li>Strengthened editorial trust around the new product and campaign narrative.</li>
+                </ul>
+            </div>
+            <p class="foh-press-fallback"><a href="/work/foh/files/04-foh-wmagazine.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read Article</a></p>
+        </div>
+    </div>
+
+    <div class="modal foh-press-modal" id="press-modal-05" role="dialog" aria-modal="true" aria-labelledby="press-title-05">
+        <div class="modal-box">
+            <button class="modal-close" type="button" aria-label="Close article modal" data-modal-close>&times;</button>
+            <h3 class="modal-title" id="press-title-05">Daily Mail</h3>
+            <p class="foh-press-meta">Press clipping 5 of 8</p>
+            <p class="foh-press-summary">Mainstream pickup expanded reach far beyond core fashion readers and pushed the story into high-volume consumer awareness channels. That broader visibility helped sustain traffic momentum after the initial specialist press wave. It also pressure-tested launch readiness, because generalized media attention can trigger larger and less predictable demand spikes than niche editorial coverage, exposing any weak points in merchandising and operations quickly.</p>
+            <div class="foh-press-panel">
+                <ul class="foh-press-points">
+                    <li>Drove mass visibility beyond core fashion and beauty audiences.</li>
+                    <li>Contributed to surge conditions the launch stack had to absorb.</li>
+                    <li>Extended campaign shelf life through repeated mainstream mentions.</li>
+                </ul>
+            </div>
+            <p class="foh-press-fallback"><a href="/work/foh/files/05-foh-dailymail.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read Article</a></p>
+        </div>
+    </div>
+
+    <div class="modal foh-press-modal" id="press-modal-06" role="dialog" aria-modal="true" aria-labelledby="press-title-06">
+        <div class="modal-box">
+            <button class="modal-close" type="button" aria-label="Close article modal" data-modal-close>&times;</button>
+            <h3 class="modal-title" id="press-title-06">E! Online</h3>
+            <p class="foh-press-meta">Press clipping 6 of 8</p>
+            <p class="foh-press-summary">Entertainment coverage aligned tightly with the celebrity-led campaign narrative and drove high-intent curiosity into the storefront. Unlike generic awareness mentions, this article context connected personality-driven interest to product and campaign messaging in-market. It helped bridge PR visibility and commerce outcomes during the most time-sensitive phase of launch execution, when response speed and clarity mattered most.</p>
+            <div class="foh-press-panel">
+                <ul class="foh-press-points">
+                    <li>Expanded entertainment audience reach during campaign launch week.</li>
+                    <li>Strengthened narrative continuity between PR and commerce touchpoints.</li>
+                    <li>Generated session quality from celebrity-aligned referral traffic.</li>
+                </ul>
+            </div>
+            <p class="foh-press-fallback"><a href="/work/foh/files/06-foh-eonline.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read Article</a></p>
+        </div>
+    </div>
+
+    <div class="modal foh-press-modal" id="press-modal-07" role="dialog" aria-modal="true" aria-labelledby="press-title-07">
+        <div class="modal-box">
+            <button class="modal-close" type="button" aria-label="Close article modal" data-modal-close>&times;</button>
+            <h3 class="modal-title" id="press-title-07">Stuff NZ</h3>
+            <p class="foh-press-meta">Press clipping 7 of 8</p>
+            <p class="foh-press-summary">International syndication demonstrated that the relaunch story had legs outside U.S. media cycles and could travel across markets. That external validation matters for portfolio operators because it signals reusable narrative strength, not one-off domestic hype. The coverage helped support the broader thesis that the new Frederick’s model could scale in relevance as well as operations, which is critical for portfolio-level repeatability.</p>
+            <div class="foh-press-panel">
+                <ul class="foh-press-points">
+                    <li>Added international proof that the campaign message had cross-market pull.</li>
+                    <li>Helped frame Frederick’s as a globally watchable digital comeback.</li>
+                    <li>Supported ABG’s portfolio-level confidence in repeatable launch playbooks.</li>
+                </ul>
+            </div>
+            <p class="foh-press-fallback"><a href="/work/foh/files/07-foh-stuffnz.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read Article</a></p>
+        </div>
+    </div>
+
+    <div class="modal foh-press-modal" id="press-modal-08" role="dialog" aria-modal="true" aria-labelledby="press-title-08">
+        <div class="modal-box">
+            <button class="modal-close" type="button" aria-label="Close article modal" data-modal-close>&times;</button>
+            <h3 class="modal-title" id="press-title-08">The Sun</h3>
+            <p class="foh-press-meta">Press clipping 8 of 8</p>
+            <p class="foh-press-summary">Mass-audience tabloid coverage increased total impression volume and extended attention after initial announcement-day peaks. It kept the relaunch visible to broader consumer segments that would not necessarily engage with fashion or business outlets first. This sustained visibility helped maintain narrative momentum while operational systems stabilized under ongoing campaign demand, reducing the risk of a short-lived launch spike.</p>
+            <div class="foh-press-panel">
+                <ul class="foh-press-points">
+                    <li>Maintained visibility after first-wave fashion and business headlines.</li>
+                    <li>Extended campaign awareness into broad consumer media channels.</li>
+                    <li>Reinforced momentum while traffic and conversion systems stabilized.</li>
+                </ul>
+            </div>
+            <p class="foh-press-fallback"><a href="/work/foh/files/08-foh-thesun.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read Article</a></p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
