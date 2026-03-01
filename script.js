@@ -225,10 +225,27 @@ document.addEventListener('DOMContentLoaded', () => {
             .filter(Boolean);
 
         if (navItems.length > 0) {
-            const setActiveAnchor = (activeHash) => {
+            const isCompactAnchorNav = () => window.matchMedia('(max-width: 1024px)').matches;
+
+            const scrollAnchorLinkIntoView = (link, smooth = false) => {
+                if (!link || !isCompactAnchorNav()) return;
+                link.scrollIntoView({
+                    behavior: smooth ? 'smooth' : 'auto',
+                    block: 'nearest',
+                    inline: 'nearest'
+                });
+            };
+
+            let currentActiveHash = '';
+
+            const setActiveAnchor = (activeHash, { force = false, smooth = false } = {}) => {
+                if (!force && activeHash === currentActiveHash) return;
                 navItems.forEach(({ link, hash }) => {
                     link.classList.toggle('active', hash === activeHash);
                 });
+                const activeItem = navItems.find(item => item.hash === activeHash);
+                if (activeItem) scrollAnchorLinkIntoView(activeItem.link, smooth);
+                currentActiveHash = activeHash;
             };
 
             const getStickyOffset = () => {
@@ -244,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const top = target.getBoundingClientRect().top + window.scrollY - getStickyOffset();
                 window.scrollTo({ top, behavior: 'smooth' });
                 if (pushHash) history.replaceState(null, '', hash);
-                setActiveAnchor(hash);
+                setActiveAnchor(hash, { smooth: true });
             };
 
             // Jump to sections from middle nav
@@ -286,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Ensure correct state on load (and direct deep links)
             if (window.location.hash && navItems.some(item => item.hash === window.location.hash)) {
-                setActiveAnchor(window.location.hash);
+                setActiveAnchor(window.location.hash, { force: true });
                 setTimeout(queueAnchorSpy, 0);
             } else {
                 queueAnchorSpy();

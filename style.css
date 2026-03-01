@@ -84,6 +84,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-width: 0;
 }
 
 .logo {
@@ -94,6 +95,15 @@ nav {
     display: flex;
     align-items: center;
     gap: 12px;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.logo a {
+    white-space: nowrap;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .nav-links {
@@ -453,6 +463,15 @@ footer p { font-size: 20px; color: var(--text-secondary); margin-bottom: 50px; m
     .section-title { font-size: 32px; }
     footer h2 { font-size: 36px; }
     .footer-cta { flex-direction: column; }
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 28px;
+    }
+    .footer-links a {
+        white-space: nowrap;
+        flex: 0 0 auto;
+    }
 }
 
 .fade-up { opacity: 1; transform: translateY(0); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
@@ -540,6 +559,16 @@ footer p { font-size: 20px; color: var(--text-secondary); margin-bottom: 50px; m
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 40px;
+}
+
+@media (max-width: 1024px) {
+    .anchor-nav-inner {
+        justify-content: flex-start;
+        gap: 18px;
+        padding: 0 16px;
+        width: max-content;
+        min-width: 100%;
+    }
 }
 
 .anchor-nav a {
@@ -680,6 +709,7 @@ section[id] {
     padding: 22px 18px !important;
     min-height: 0 !important;
     height: 100% !important;
+    min-width: 0 !important;
     align-self: stretch !important;
     display: flex !important;
     flex-direction: column !important;
@@ -734,6 +764,10 @@ section[id] {
     align-items: stretch !important;
 }
 
+.case-section#results .content-block > div[style*="grid-template-columns: 1fr 1fr"] {
+    align-items: stretch !important;
+}
+
 .case-section#results .col-card h4 {
     margin-top: 0 !important;
     margin-bottom: 12px !important;
@@ -745,7 +779,18 @@ section[id] {
     flex-direction: column !important;
 }
 
+.case-section#results .content-block > div[style*="grid-template-columns: 1fr 1fr"] .col-card {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
 .case-section#results .metrics-row + [style*="display: grid"] .col-card ul {
+    flex: 1 !important;
+    margin-bottom: 0 !important;
+}
+
+.case-section#results .content-block > div[style*="grid-template-columns: 1fr 1fr"] .col-card ul {
     flex: 1 !important;
     margin-bottom: 0 !important;
 }
@@ -1256,6 +1301,11 @@ figure.diagram-static .notice-list li {
 /* Additional media query updates for case studies */
 @media (max-width: 768px) {
     .case-hero h1 { font-size: 36px; }
+    .case-hero .subheadline {
+        font-size: clamp(16px, 4.4vw, 18px);
+        line-height: 1.5;
+        margin-bottom: 26px;
+    }
     .anchor-nav-inner { gap: 16px; font-size: 13px; }
     .metrics-row { 
         grid-template-columns: 1fr;
@@ -1269,9 +1319,150 @@ figure.diagram-static .notice-list li {
         padding: 16px 18px;
         gap: 12px;
     }
+    .recognition-icon,
+    .press-card-icon { display: none !important; }
+    .recognition-card .btn {
+        width: min(100%, 210px);
+        padding: 8px 14px;
+        font-size: clamp(12px, 3.2vw, 14px);
+        border-radius: 9px;
+    }
+    .case-section#proof .btn,
+    .case-section#results .btn,
+    .artifact-card .btn {
+        width: min(100%, 210px);
+        padding: 8px 14px;
+        font-size: clamp(12px, 3.2vw, 14px);
+        border-radius: 9px;
+    }
     .artifact-gallery { grid-template-columns: 1fr; }
     .proof-bar { flex-direction: column; gap: 16px; }
+
+    .logo { font-size: clamp(14px, 5.4vw, 20px); }
+    .logo a { max-width: calc(100vw - 112px); }
+
+    .case-section#results > .container > div[style*="border: 2px solid var(--accent-blue)"] {
+        padding: 22px 14px !important;
+    }
+
+    .case-section#results .metrics-row {
+        margin-top: 16px !important;
+        gap: 12px !important;
+    }
+
+    .case-section#results .metric-card {
+        padding: 16px 12px !important;
+    }
+
+    .case-section#results .metric-card .metric-value {
+        font-size: clamp(22px, 11vw, 40px) !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .case-section#results .metric-card .metric-label {
+        min-height: 0 !important;
+        white-space: normal !important;
+        text-wrap: balance;
+    }
+
+    .case-section#results .metric-card .metric-breakdown {
+        min-height: 0 !important;
+        white-space: normal !important;
+        text-wrap: balance;
+    }
+
+    .case-section#results .metrics-row + [style*="display: grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .case-section#results .content-block > div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* Case-study inline 2-col content grids: stack on mobile */
+    .case-section .content-block > div[style*="display: grid"][style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* Slightly reduce modal/card text size on mobile */
+    .case-section .col-card h4 {
+        font-size: 16px !important;
+        line-height: 1.25 !important;
+    }
+
+    .case-section .col-card li {
+        font-size: 14px !important;
+        line-height: 1.45 !important;
+    }
+
+    /* Case-study article images: show full image on mobile (no crop) */
+    .case-section .content-block img:not(#lightboxImage),
+    .case-hero .content-block img:not(#lightboxImage) {
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        object-fit: contain !important;
+        object-position: center center !important;
+    }
 }        /* Press & Awards */
+
+/* Global mobile fix for legacy case-study visual timelines
+   (inline flex rows with circular milestones). */
+@media (max-width: 960px) {
+    .content-block > div[style*="background: rgba(68, 122, 203, 0.05)"] {
+        overflow: hidden;
+        padding: 18px 14px !important;
+    }
+
+    .content-block > div[style*="background: rgba(68, 122, 203, 0.05)"] > div[style*="display: flex"][style*="position: relative"][style*="justify-content: space-between"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        align-items: stretch !important;
+    }
+
+    .content-block > div[style*="background: rgba(68, 122, 203, 0.05)"] > div[style*="display: flex"][style*="position: relative"][style*="justify-content: space-between"] > div[style*="position: absolute"] {
+        display: none !important;
+    }
+
+    .content-block > div[style*="background: rgba(68, 122, 203, 0.05)"] > div[style*="display: flex"][style*="position: relative"][style*="justify-content: space-between"] > div[style*="z-index: 1"] {
+        display: block !important;
+        position: relative;
+        text-align: left !important;
+        min-height: 72px;
+        padding-left: 86px !important;
+        flex: none !important;
+    }
+
+    .content-block > div[style*="background: rgba(68, 122, 203, 0.05)"] > div[style*="display: flex"][style*="position: relative"][style*="justify-content: space-between"] > div[style*="z-index: 1"] > div:first-child {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 72px !important;
+        height: 72px !important;
+        margin: 0 !important;
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+        padding: 6px !important;
+    }
+
+    .content-block > div[style*="background: rgba(68, 122, 203, 0.05)"] > div[style*="display: flex"][style*="position: relative"][style*="justify-content: space-between"] > div[style*="z-index: 1"] > div:nth-child(2) {
+        font-size: 14px !important;
+        line-height: 1.25 !important;
+    }
+
+    .content-block > div[style*="background: rgba(68, 122, 203, 0.05)"] > div[style*="display: flex"][style*="position: relative"][style*="justify-content: space-between"] > div[style*="z-index: 1"] > div:nth-child(3) {
+        margin-top: 2px !important;
+        font-size: 12px !important;
+        line-height: 1.25 !important;
+    }
+}
+
 .press-grid { display: flex; flex-direction: column; gap: 8px; }
 .press-group-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-secondary); margin-top: 24px; margin-bottom: 4px; padding-left: 4px; }
 .press-group-label:first-child { margin-top: 0; }
