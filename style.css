@@ -3111,7 +3111,7 @@ figure.diagram-static .notice-list li {
 /* ── Responsive additions for CWG ── */
 @media (max-width: 768px) {
     .lesson-grid  { grid-template-columns: 1fr; }
-    .photo-grid   { grid-template-columns: repeat(2, 1fr); }
+    .photo-grid   { grid-template-columns: 1fr; }
     .page-cwg .cwg-video-grid { grid-template-columns: 1fr; }
     .page-cwg .cwg-traction-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .page-cwg .cwg-traction-grid { grid-template-columns: 1fr; }
@@ -3242,7 +3242,11 @@ body.page-cwg .case-banner::after {
         rgba(232, 98, 42, 0.06) 38px, rgba(232, 98, 42, 0.06) 40px
     );
 }
-body.page-cwg .badge-company { background: rgba(232, 98, 42, 0.2); color: var(--cwg-accent); }
+body.page-cwg .badge-company {
+    background: #000;
+    color: var(--cwg-accent);
+    border-color: rgba(232, 98, 42, 0.55);
+}
 
 /* Anchor nav */
 body.page-cwg .anchor-nav a:hover,
@@ -3292,11 +3296,77 @@ body.page-cwg .photo-thumb:hover {
     border-color: var(--cwg-accent);
     box-shadow: 0 8px 30px rgba(232, 98, 42, 0.2);
 }
+body.page-cwg .photo-grid .photo-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    display: block;
+}
 body.page-cwg .photo-thumb:hover .photo-overlay { background: rgba(232, 98, 42, 0.15); }
 body.page-cwg .photo-overlay-icon { display: none; }
 
 /* Chips */
 body.page-cwg .chip { background: var(--cwg-accent-dim); border-color: var(--cwg-accent); color: var(--cwg-accent); }
+
+@media (max-width: 768px) {
+    body.page-cwg .case-section .content-block .photo-grid .photo-thumb img:not(#lightboxImage) {
+        width: 100% !important;
+        height: 100% !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        object-position: center center !important;
+    }
+
+    body.page-cwg .surface-chips {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    body.page-cwg .surface-chips .chip {
+        width: 100%;
+        min-height: 64px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 13px;
+        line-height: 1.25;
+    }
+
+    body.page-cwg #legacy .content-block h2 {
+        font-size: clamp(32px, 8.6vw, 38px);
+        line-height: 1.08;
+    }
+
+    body.page-cwg #legacy .content-block > p {
+        font-size: clamp(15px, 4.6vw, 18px);
+        line-height: 1.55;
+    }
+
+    body.page-cwg .case-hero .metric-card {
+        padding: 18px 14px;
+    }
+
+    body.page-cwg .case-hero .metric-card .metric-value {
+        font-size: clamp(30px, 11vw, 38px);
+        margin-bottom: 6px;
+    }
+
+    body.page-cwg .case-hero .metric-card .metric-label {
+        font-size: 11px;
+        letter-spacing: 0.07em;
+    }
+
+    body.page-cwg .case-hero .metric-card .metric-breakdown {
+        font-size: clamp(12px, 4vw, 15px);
+        line-height: 1.35;
+    }
+}
 
 /* Timeline bullets */
 body.page-cwg .timeline-item::before { background: var(--cwg-accent); }
@@ -3314,6 +3384,46 @@ body.page-cwg .cwg-play-btn { background: var(--cwg-accent); box-shadow: 0 0 16p
 body.page-cwg .cwg-play-btn:hover { box-shadow: 0 0 24px rgba(232, 98, 42, 0.55); }
 body.page-cwg .cwg-scrubber-fill { background: var(--cwg-accent); }
 body.page-cwg .cwg-player-src-note a { color: var(--cwg-accent); }
+
+/* Hero metrics containment (CWG only) */
+@media (max-width: 1024px) {
+    body.page-cwg .case-hero .metrics-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    body.page-cwg .case-hero .metric-card {
+        min-width: 0;
+        overflow: hidden;
+        padding: 22px 16px;
+    }
+
+    body.page-cwg .case-hero .metric-card .metric-value {
+        font-size: clamp(36px, 9vw, 48px);
+        white-space: nowrap;
+    }
+
+    body.page-cwg .case-hero .metric-card .metric-label {
+        font-size: 14px;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    body.page-cwg .case-hero .metric-card .metric-breakdown {
+        font-size: clamp(14px, 4.1vw, 18px);
+        line-height: 1.35;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        margin-top: 8px;
+    }
+}
 
 /* Gradient text & footer */
 body.page-cwg .gradient-text { color: var(--cwg-accent); }
