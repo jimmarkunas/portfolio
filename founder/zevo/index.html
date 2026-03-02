@@ -13,7 +13,16 @@
     <meta property="og:url" content="https://jimmarkunas.com/case-studies/zevo">
 
     <!-- Global Stylesheet -->
-    <link rel="stylesheet" href="/style.css?v=20260224-1">
+    <link rel="stylesheet" href="/style.css?v=20260302-zevo-1">
+    <style>
+        body.page-zevo {
+            --zevo-logo-green: #5CC93B;
+            --zevo-accent: #5CC93B;
+            --accent: #5CC93B;
+            --accent-blue: #5CC93B;
+            --zevo-accent-rgb: 92, 201, 59;
+        }
+    </style>
 </head>
 <body class="page-zevo">
     <div class="bg-gradient"></div>
@@ -22,17 +31,17 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <a href="https://jimmarkunas.com" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
-                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="JM" style="width:32px;height:32px;object-fit:contain;">
+                <a href="/" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+                    <span class="logo-mark" aria-hidden="true"></span>
                     JIM MARKUNAS
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="https://jimmarkunas.com/work/">Work</a></li>
-                <li><a href="https://jimmarkunas.com/services/">Services</a></li>
-                <li><a href="https://jimmarkunas.com/cv/">CV</a></li>
-                <li><a href="https://jimmarkunas.com/about/">About</a></li>
-                <li><a href="mailto:jim@jimmarkunas.com">Contact</a></li>
+                <li><a href="/work/">Work</a></li>
+                <li><a href="/services/">Services</a></li>
+                <li><a href="/cv/">CV</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/contact/">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
@@ -42,11 +51,11 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="https://jimmarkunas.com/work/">Work</a>
-        <a href="https://jimmarkunas.com/services/">Services</a>
-        <a href="https://jimmarkunas.com/cv/">CV</a>
-        <a href="https://jimmarkunas.com/about/">About</a>
-        <a href="mailto:jim@jimmarkunas.com">Contact</a>
+        <a href="/work/">Work</a>
+        <a href="/services/">Services</a>
+        <a href="/cv/">CV</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
     </div>
 
     <!-- Banner -->
@@ -76,8 +85,12 @@
     <section class="case-hero" id="founding">
         <div class="container">
             <h1 class="fade-up">
-                ZEVO: Building Interactive <span style="color:var(--accent);">Internet TV</span> Before Netflix
+                ZEVO: Building Interactive <span style="color:#5CC93B;">Internet TV</span> Before Netflix
             </h1>
+
+            <p class="subheadline fade-up stagger-2">
+                I co-founded ZEVO in 2010 — an interactive IPTV network that combined 24/7 linear broadcast, on-demand streaming, and shoppable video across TV, web, and mobile. We pitched Oak Investment Partners, Norwest, TCV, and Ashton Kutcher's team. We couldn't close a round. I shut it down. The lessons from that failure shaped how I lead product and program work today.
+            </p>
 
             <div class="metrics-row fade-up stagger-1">
                 <div class="metric-card">
@@ -97,16 +110,12 @@
                 </div>
             </div>
 
-            <p class="subheadline fade-up stagger-2">
-                I co-founded ZEVO in 2010 — an interactive IPTV network that combined 24/7 linear broadcast, on-demand streaming, and shoppable video across TV, web, and mobile. We pitched Oak Investment Partners, Norwest, TCV, and Ashton Kutcher's team. We couldn't close a round. I shut it down. The lessons from that failure shaped how I lead product and program work today.
-            </p>
-
             <div class="tldr-block fade-up stagger-3">
                 <div class="tldr-grid">
                     <div class="tldr-item">
                         <h4>The Bet</h4>
                         <ul>
-                            <li>Internet TV would replace cable — but needed a native product model, not a cable clone</li>
+                            <li>Internet TV would replace cable, but needed a native product model, not a cable clone</li>
                             <li>Linear + on-demand could co-exist in one unified experience</li>
                             <li>Interactive commerce inside content would replace interruptive ads</li>
                             <li>Your phone would become the remote and second screen for TV</li>
@@ -134,7 +143,7 @@
                         <h4>Why It Didn't Work</h4>
                         <ul>
                             <li>VCs liked the idea but worried about owning both platform and content</li>
-                            <li>Timing risk — too early, no proof of demand</li>
+                            <li>Timing risk: too early, no proof of demand</li>
                             <li>No traction or attached star to derisk the bet</li>
                             <li>I made the call to shut it down rather than grind indefinitely on fumes</li>
                         </ul>
@@ -144,7 +153,7 @@
 
             <div class="hero-cta fade-up stagger-3">
                 <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
-                <a href="https://jimmarkunas.com/cv/" class="btn btn-secondary">Download CV</a>
+                <a href="/cv/" class="btn btn-secondary">Download CV</a>
             </div>
         </div>
     </section>
@@ -156,7 +165,7 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Vision: Internet TV From Scratch</h2>
-                <p>ZEVO was an attempt to answer one question: what would television look like if you designed it for the internet from the beginning, instead of trying to cram cable TV into a browser? The concept was a unified network that felt the same across every device — TV, laptop, phone — where linear and on-demand lived side-by-side, and where the content itself was interactive.</p>
+                <p>ZEVO was an attempt to answer one question: what would television look like if you designed it for the internet from the beginning, instead of trying to cram cable TV into a browser? The concept was a unified network that felt the same across every device: TV, laptop, phone, where linear and on-demand lived side-by-side, and where the content itself was interactive.</p>
 
                 <!-- Concept video -->
                 <div class="zevo-video">
@@ -173,7 +182,7 @@
                             <li>24/7 linear stream for lean-back watching</li>
                             <li>On-demand catalog for catch-up and deep dives</li>
                             <li>Shared identity and state across TV, laptop, and phone</li>
-                            <li>HTML5-based UI — same front end across platforms</li>
+                            <li>HTML5-based UI, same front end across platforms</li>
                         </ul>
                     </div>
 
@@ -197,15 +206,11 @@
                             <li>Items in a scene were tagged and outlined subtly on screen</li>
                             <li>Tapping opened a panel with details, social comments, and buy action</li>
                             <li>Purchases tracked back to specific shows, scenes, and creators</li>
-                            <li>Product mentions lived permanently — long-tail ad inventory</li>
+                            <li>Product mentions lived permanently, long-tail ad inventory</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="image-placeholder">
-                    <div class="image-placeholder-text">Unified TV Platform</div>
-                    <div class="image-placeholder-sub">ZEVO on laptop, TV, and mobile — images available in full work packet</div>
-                </div>
             </div>
         </div>
     </section>
@@ -217,6 +222,13 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Platform Architecture</h2>
+                <img
+                    class="zevo-arch-banner"
+                    src="/founder/zevo/images/banner-zevo-07.jpg"
+                    alt="ZEVO platform architecture banner"
+                    loading="lazy"
+                    draggable="false"
+                >
                 <p>Behind the UX, ZEVO was an IPTV platform that delivered live-streaming and on-demand video over the open internet instead of through traditional cable or satellite. We chose an HTML5 and JavaScript front end for flexibility, layered on top of a LAMP-based backend and streaming infrastructure that looked more like a web platform than a traditional broadcast stack.</p>
 
                 <div class="two-col-grid">
@@ -241,7 +253,7 @@
                 </div>
 
                 <div class="device-frame" style="margin-top:32px;">
-                    <p style="font-size:15px; color:var(--text-secondary); line-height:1.7; margin:0;">We built a working UI POC to prove the concept before going into deep investor meetings. The architecture was explicitly chosen to avoid dependence on cable operators or set-top boxes — this was internet-first TV, not TV grafted onto the internet.</p>
+                    <p style="font-size:15px; color:var(--text-secondary); line-height:1.7; margin:0;">We built a working UI POC to prove the concept before going into deep investor meetings. The architecture was explicitly chosen to avoid dependence on cable operators or set-top boxes, this was internet-first TV, not TV grafted onto the internet.</p>
                 </div>
             </div>
         </div>
@@ -284,7 +296,7 @@
     <section class="case-section" id="fundraising" style="border-top:1px solid var(--border);">
         <div class="container">
             <div class="content-block fade-up">
-                <h2>Fundraising: What Silicon Valley Loved & Why We Didn't Close</h2>
+                <h2>Fundraising: What Silicon Valley Loved</h2>
                 <p>We took ZEVO into serious rooms: Oak Investment Partners, Norwest, TCV, and others. The concept video and product vision resonated; investors agreed that the idea and the economics were interesting; they pushed back on timing and risk.</p>
 
                 <div class="pitch-timeline">
@@ -329,7 +341,7 @@
 
                     <p>But the process of designing the product, building the team, and pitching Silicon Valley left me with a set of scars and skills I still use today.</p>
 
-                    <h3 style="margin-top:40px; color:var(--accent);">The Highlight Reel</h3>
+                    <h3 style="margin-top:40px; color:var(--zevo-accent);">The Highlight Reel</h3>
                     <ul class="highlight-list">
                         <li>Took a complex, first-of-its-kind TV product from loose idea to a fully specified experience</li>
                         <li>Led a senior cross-functional team through real milestones, trade-offs, and investor scrutiny with almost no budget</li>
@@ -347,7 +359,7 @@
 
                     <div class="hero-cta" style="justify-content:flex-start; margin-top:40px;">
                         <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
-                        <a href="https://jimmarkunas.com/work/" class="btn btn-secondary">View All Work</a>
+                        <a href="/work/" class="btn btn-secondary">View All Work</a>
                     </div>
                 </div>
             </div>
