@@ -14,8 +14,362 @@
 
     <!-- Global Stylesheet -->
     <link rel="stylesheet" href="/style.css?v=20260225-2">
+    <style>
+        .dtv01-launch-panel {
+            background: rgba(68, 122, 203, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+
+        .dtv01-launch-title {
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .dtv01-launch-flow {
+            display: flex;
+            gap: 48px;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .dtv01-launch-state {
+            text-align: center;
+        }
+
+        .dtv01-launch-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .dtv01-launch-box {
+            width: 240px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .dtv01-launch-box--before {
+            height: 240px;
+            background: #ef4444;
+        }
+
+        .dtv01-launch-box--after {
+            height: 160px;
+            background: var(--accent-blue);
+            gap: 4px;
+        }
+
+        .dtv01-launch-value {
+            font-size: 56px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .dtv01-launch-unit {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .dtv01-launch-arrow {
+            font-size: 40px;
+            color: var(--text-secondary);
+            padding-bottom: 55px;
+            line-height: 1;
+        }
+
+        .dtv01-launch-footnote {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .dtv01-journey-figure {
+            margin-top: 48px;
+        }
+
+        .dtv01-journey-board {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid rgba(68, 122, 203, 0.25);
+            border-radius: 16px;
+            background: linear-gradient(180deg, rgba(14, 26, 53, 0.78), rgba(10, 19, 39, 0.9));
+        }
+
+        .dtv01-journey-section-title {
+            font-size: 13px;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #9ab6e3;
+            margin-bottom: 12px;
+        }
+
+        .dtv01-journey-steps {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .dtv01-journey-step {
+            position: relative;
+            border: 1px solid rgba(88, 127, 196, 0.35);
+            border-radius: 12px;
+            padding: 12px 10px;
+            background: rgba(20, 36, 70, 0.55);
+        }
+
+        .dtv01-journey-step::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -7px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4f8ee7;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .dtv01-journey-step:last-child::after {
+            content: none;
+        }
+
+        .dtv01-journey-step--start {
+            background: linear-gradient(150deg, rgba(90, 155, 243, 0.94), rgba(63, 116, 203, 0.92));
+            border-color: rgba(153, 198, 255, 0.55);
+        }
+
+        .dtv01-journey-step--retain {
+            background: linear-gradient(150deg, rgba(245, 214, 109, 0.97), rgba(231, 186, 62, 0.95));
+            border-color: rgba(255, 222, 126, 0.75);
+            color: #15213d;
+        }
+
+        .dtv01-journey-step-number {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #c6d6f4;
+            margin-bottom: 2px;
+        }
+
+        .dtv01-journey-step--retain .dtv01-journey-step-number {
+            color: #243459;
+        }
+
+        .dtv01-journey-step-title {
+            font-size: 18px;
+            line-height: 1.1;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #f3f7ff;
+        }
+
+        .dtv01-journey-step--retain .dtv01-journey-step-title {
+            color: #13213f;
+        }
+
+        .dtv01-journey-step-subtitle {
+            font-size: 12px;
+            line-height: 1.35;
+            color: rgba(225, 234, 249, 0.92);
+        }
+
+        .dtv01-journey-step--retain .dtv01-journey-step-subtitle {
+            color: #1e2f56;
+            font-weight: 600;
+        }
+
+        .dtv01-journey-why {
+            margin-bottom: 18px;
+        }
+
+        .dtv01-journey-why-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 12px;
+        }
+
+        .dtv01-journey-card {
+            border: 1px solid rgba(88, 127, 196, 0.3);
+            border-radius: 12px;
+            background: rgba(15, 31, 62, 0.58);
+            padding: 14px 16px;
+        }
+
+        .dtv01-journey-card p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.45;
+            color: #d4e0f6;
+        }
+
+        .dtv01-journey-card strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #f3f7ff;
+            font-size: 16px;
+            line-height: 1.25;
+        }
+
+        .dtv01-journey-takeaway strong {
+            font-size: 12px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #9ab6e3;
+            margin-bottom: 8px;
+        }
+
+        .dtv01-journey-touchpoints-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .dtv01-journey-touchpoint {
+            border: 1px solid rgba(88, 127, 196, 0.4);
+            border-radius: 12px;
+            background: rgba(15, 31, 62, 0.58);
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #f3f7ff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .dtv01-journey-pill {
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            line-height: 1;
+            color: #fff;
+            background: #3e79e3;
+            flex-shrink: 0;
+        }
+
+        .dtv01-journey-pill--web {
+            background: #2a9fe8;
+        }
+
+        .dtv01-journey-pill--mobile {
+            background: #deae43;
+            color: #162547;
+        }
+
+        @media (max-width: 768px) {
+            .dtv01-launch-panel {
+                padding: 18px 14px;
+            }
+
+            .dtv01-launch-title {
+                margin-bottom: 16px;
+                font-size: 22px;
+            }
+
+            .dtv01-launch-flow {
+                gap: 12px;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .dtv01-launch-box {
+                width: 240px;
+            }
+
+            .dtv01-launch-value {
+                font-size: 28px;
+            }
+
+            .dtv01-launch-unit {
+                font-size: 12px;
+            }
+
+            .dtv01-launch-arrow {
+                padding-bottom: 0;
+                font-size: 28px;
+                transform: rotate(90deg);
+            }
+
+            .dtv01-launch-footnote {
+                margin-top: 14px;
+                font-size: 13px;
+            }
+
+            .dtv01-journey-figure h3 {
+                font-size: 18px !important;
+                line-height: 1.2 !important;
+            }
+
+            .dtv01-journey-figure p {
+                font-size: 14px !important;
+                line-height: 1.45 !important;
+            }
+
+            .dtv01-journey-board {
+                padding: 14px;
+                border-radius: 14px;
+            }
+
+            .dtv01-journey-steps {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .dtv01-journey-step {
+                padding: 10px 12px;
+            }
+
+            .dtv01-journey-step::after {
+                content: none;
+            }
+
+            .dtv01-journey-step-title {
+                font-size: 17px;
+            }
+
+            .dtv01-journey-step-subtitle {
+                font-size: 12px;
+            }
+
+            .dtv01-journey-why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dtv01-journey-card {
+                padding: 12px 13px;
+            }
+
+            .dtv01-journey-card strong {
+                font-size: 15px;
+            }
+
+            .dtv01-journey-touchpoints-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dtv01-journey-touchpoint {
+                font-size: 11px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="page-directv01">
     <div class="bg-gradient"></div>
     
     <!-- Header -->
@@ -52,7 +406,7 @@
     </div>
 
     <!-- Banner -->
-    <div class="case-banner" style="background-image: url('/images/work/dtv2-2000.png'); background-size: cover; background-position: center;">
+    <div class="case-banner" style="background-size: cover; background-position: center;">
         <div class="banner-content">
             <span class="banner-badge badge-company">DIRECTV</span>
             <span class="banner-badge badge-award">$55M Revenue Impact</span>
@@ -156,26 +510,26 @@
                 <p>DIRECTV was losing 400,000 subscribers per quarter. Leadership mandated a 15% ARPU increase through premium add-ons, but three disconnected systems meant 180-day launch cycles. Miss the NFL kickoff = lose $15M. Miss holiday bundles = lose $20M.</p>
                 
                 <!-- Visual: Before/After -->
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Campaign Launch Timeline</h4>
-                    <div style="display: flex; gap: 48px; align-items: flex-end; justify-content: center;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">BEFORE</div>
-                            <div style="width: 240px; height: 240px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                                <div style="font-size: 56px; font-weight: 700; color: white;">180</div>
-                                <div style="font-size: 16px; color: rgba(255,255,255,0.8);">days</div>
+                <div class="dtv01-launch-panel">
+                    <h4 class="dtv01-launch-title">Campaign Launch Timeline</h4>
+                    <div class="dtv01-launch-flow">
+                        <div class="dtv01-launch-state">
+                            <div class="dtv01-launch-label">BEFORE</div>
+                            <div class="dtv01-launch-box dtv01-launch-box--before">
+                                <div class="dtv01-launch-value">180</div>
+                                <div class="dtv01-launch-unit">days</div>
                             </div>
                         </div>
-                        <div style="font-size: 40px; color: var(--text-secondary); padding-bottom: 55px;">→</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">AFTER</div>
-                            <div style="width: 240px; height: 160px; background: var(--accent-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px;">
-                                <div style="font-size: 56px; font-weight: 700; color: white; line-height: 1;">120</div>
-                                <div style="font-size: 16px; color: rgba(255,255,255,0.8);">days</div>
+                        <div class="dtv01-launch-arrow" aria-hidden="true">→</div>
+                        <div class="dtv01-launch-state">
+                            <div class="dtv01-launch-label">AFTER</div>
+                            <div class="dtv01-launch-box dtv01-launch-box--after">
+                                <div class="dtv01-launch-value">120</div>
+                                <div class="dtv01-launch-unit">days</div>
                             </div>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">33% reduction in time-to-market</div>
+                    <div class="dtv01-launch-footnote">33% reduction in time-to-market</div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
@@ -319,14 +673,76 @@
                 </div>
 
                 <!-- Customer Journey Diagram -->
-                <figure class="lightbox-trigger" data-src="images/DIRECTV_Customer_Journey_Map_Exec.svg" style="margin-top: 48px;">
+                <figure class="dtv01-journey-figure">
                     <div style="margin-bottom: 18px;">
                         <h3 style="font-size: 32px; line-height: 1.15; margin: 0 0 10px; color: var(--text-primary);">Premium Add-On Customer Journey (Executive View)</h3>
                         <p style="margin: 0; color: var(--text-secondary); font-size: 16px; line-height: 1.5;">A simpler, consistent cross-channel path across STB, Web, and Mobile improved conversion throughput and retention saves.</p>
                     </div>
-                    <img src="images/DIRECTV_Customer_Journey_Map_Exec.svg" 
-                         alt="Customer journey map showing how subscribers discover, evaluate, and purchase premium add-ons across STB, web, and mobile touchpoints" 
-                         loading="lazy">
+                    <div class="dtv01-journey-board" role="img" aria-label="Customer journey flow from Discover through Retain, with shared services and channel touchpoints across STB, Web, and Mobile">
+                        <div class="dtv01-journey-section-title">Journey</div>
+                        <div class="dtv01-journey-steps">
+                            <article class="dtv01-journey-step dtv01-journey-step--start">
+                                <div class="dtv01-journey-step-number">01</div>
+                                <div class="dtv01-journey-step-title">Discover</div>
+                                <div class="dtv01-journey-step-subtitle">TV, web, app entry points</div>
+                            </article>
+                            <article class="dtv01-journey-step">
+                                <div class="dtv01-journey-step-number">02</div>
+                                <div class="dtv01-journey-step-title">Evaluate</div>
+                                <div class="dtv01-journey-step-subtitle">Offer details + eligibility</div>
+                            </article>
+                            <article class="dtv01-journey-step">
+                                <div class="dtv01-journey-step-number">03</div>
+                                <div class="dtv01-journey-step-title">Select</div>
+                                <div class="dtv01-journey-step-subtitle">Same logic across channels</div>
+                            </article>
+                            <article class="dtv01-journey-step">
+                                <div class="dtv01-journey-step-number">04</div>
+                                <div class="dtv01-journey-step-title">Purchase</div>
+                                <div class="dtv01-journey-step-subtitle">Low-friction checkout flow</div>
+                            </article>
+                            <article class="dtv01-journey-step">
+                                <div class="dtv01-journey-step-number">05</div>
+                                <div class="dtv01-journey-step-title">Activate</div>
+                                <div class="dtv01-journey-step-subtitle">Entitlement + confirmation</div>
+                            </article>
+                            <article class="dtv01-journey-step dtv01-journey-step--retain">
+                                <div class="dtv01-journey-step-number">06</div>
+                                <div class="dtv01-journey-step-title">Retain</div>
+                                <div class="dtv01-journey-step-subtitle">Renewals, upsell, saves</div>
+                            </article>
+                        </div>
+
+                        <div class="dtv01-journey-why">
+                            <div class="dtv01-journey-section-title">Why It Worked</div>
+                            <div class="dtv01-journey-why-grid">
+                                <div class="dtv01-journey-card">
+                                    <strong>Shared services, channel-native experiences</strong>
+                                    <p>DIRECTV kept native channel UX while centralizing eligibility and offer logic. That reduced channel drift, improved consistency, and lowered purchase friction.</p>
+                                </div>
+                                <div class="dtv01-journey-card dtv01-journey-takeaway">
+                                    <strong>Executive Takeaway</strong>
+                                    <p>Consistent offers across contexts<br>Clear eligibility messaging<br>Lower-friction purchase flow</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dtv01-journey-section-title">Channel Touchpoints</div>
+                        <div class="dtv01-journey-touchpoints-grid">
+                            <div class="dtv01-journey-touchpoint">
+                                <span class="dtv01-journey-pill">STB</span>
+                                TV prompts and upgrade path
+                            </div>
+                            <div class="dtv01-journey-touchpoint">
+                                <span class="dtv01-journey-pill dtv01-journey-pill--web">WEB</span>
+                                Web banners and checkout
+                            </div>
+                            <div class="dtv01-journey-touchpoint">
+                                <span class="dtv01-journey-pill dtv01-journey-pill--mobile">MOBILE</span>
+                                In-app offers and confirmation
+                            </div>
+                        </div>
+                    </div>
                     <figcaption>Revenue journey: consistent offers across all customer touchpoints</figcaption>
                     <ul class="notice-list">
                         <li>Same offer presented in multiple contexts (remote, web, app)</li>

@@ -492,9 +492,104 @@ footer p { font-size: 20px; color: var(--text-secondary); margin-bottom: 50px; m
     width: 100%;
     height: 200px;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background-image: var(--case-banner-image-web);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 1024px) {
+    .case-banner {
+        background-image: var(--case-banner-image-tablet, var(--case-banner-image-web));
+    }
+}
+
+@media (max-width: 768px) {
+    .case-banner {
+        background-image: var(--case-banner-image-mobile, var(--case-banner-image-tablet, var(--case-banner-image-web)));
+    }
+}
+
+body.page-aa {
+    --case-banner-image-web: url('/images/banners/logo-aa-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-aa-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-aa-mobile.png');
+}
+
+body.page-bi {
+    --case-banner-image-web: url('/images/banners/logo-bi-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-bi-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-bi-mobile.png');
+}
+
+body.page-cbd {
+    --case-banner-image-web: url('/images/banners/logo-cbd-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-cbd-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-cbd-mobile.png');
+}
+
+body.page-cpse {
+    --case-banner-image-web: url('/images/banners/logo-cpse-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-cpse-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-cpse-mobile.png');
+}
+
+body.page-directv01,
+body.page-directv02 {
+    --case-banner-image-web: url('/images/banners/logo-dtve-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-dtve-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-dtve-mobile.png');
+}
+
+body.page-foh {
+    --case-banner-image-web: url('/images/banners/logo-foh-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-foh-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-foh-mobile.png');
+}
+
+body.page-k2 {
+    --case-banner-image-web: url('/images/banners/logo-k2-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-k2-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-k2-mobile.png');
+}
+
+body.page-lego {
+    --case-banner-image-web: url('/images/banners/logo-lego-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-lego-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-lego-mobile.png');
+}
+
+body.page-method {
+    --case-banner-image-web: url('/images/banners/logo-method-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-method-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-method-mobile.png');
+}
+
+body.page-modere {
+    --case-banner-image-web: url('/images/banners/logo-modere-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-modere-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-modere-mobile.png');
+}
+
+body.page-murad {
+    --case-banner-image-web: url('/images/banners/logo-murad-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-murad-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-murad-mobile.png');
+}
+
+body.page-nyl {
+    --case-banner-image-web: url('/images/banners/logo-nyl-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-nyl-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-nyl-mobile.png');
+}
+
+body.page-scj {
+    --case-banner-image-web: url('/images/banners/logo-mm-web.png');
+    --case-banner-image-tablet: url('/images/banners/logo-mm-tablet.png');
+    --case-banner-image-mobile: url('/images/banners/logo-mm-mobile.png');
 }
 
 .case-banner::before {
@@ -1300,6 +1395,12 @@ figure.diagram-static .notice-list li {
 
 /* Additional media query updates for case studies */
 @media (max-width: 768px) {
+    .case-section .content-block h2 {
+        font-size: clamp(28px, 7.6vw, 32px);
+        line-height: 1.12;
+        letter-spacing: -0.015em;
+    }
+
     .case-hero h1 { font-size: 36px; }
     .case-hero .subheadline {
         font-size: clamp(16px, 4.4vw, 18px);
