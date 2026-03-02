@@ -14,6 +14,213 @@
 
     <!-- Global Stylesheet -->
     <link rel="stylesheet" href="/style.css?v=20260224-1">
+    <style>
+        .k2-challenge-board {
+            margin: 32px 0;
+            padding: 26px;
+            border-radius: 16px;
+            border: 1px solid rgba(82, 125, 198, 0.32);
+            background:
+                radial-gradient(circle at 82% 10%, rgba(218, 72, 84, 0.16), transparent 46%),
+                radial-gradient(circle at 12% 0%, rgba(77, 128, 214, 0.22), transparent 42%),
+                linear-gradient(150deg, rgba(16, 26, 52, 0.92), rgba(11, 20, 39, 0.94));
+            box-shadow: inset 0 0 0 1px rgba(158, 189, 242, 0.08), 0 14px 34px rgba(3, 7, 18, 0.42);
+        }
+
+        .k2-challenge-title {
+            margin: 0 0 6px;
+            font-size: 32px;
+            line-height: 1.2;
+            color: #f4f8ff;
+            text-align: center;
+            letter-spacing: -0.015em;
+        }
+
+        .k2-challenge-subtitle {
+            margin: 0 0 18px;
+            font-size: 14px;
+            color: #9bb6e4;
+            text-align: center;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .k2-challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .k2-challenge-pill {
+            border: 1px solid rgba(132, 167, 227, 0.36);
+            border-radius: 12px;
+            padding: 14px 12px 12px;
+            text-align: center;
+            background: linear-gradient(160deg, rgba(21, 40, 74, 0.82), rgba(16, 29, 55, 0.72));
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .k2-challenge-pill::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 3px;
+            background: #6ea4ee;
+            opacity: 0.95;
+        }
+
+        .k2-challenge-pill--scope::before {
+            background: #6ea4ee;
+        }
+
+        .k2-challenge-pill--core::before {
+            background: #54b8f2;
+        }
+
+        .k2-challenge-pill--experience::before {
+            background: #79c4f8;
+        }
+
+        .k2-challenge-pill--risk::before {
+            background: #f0878f;
+        }
+
+        .k2-challenge-pill-icon {
+            margin: 0 0 8px;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: 1px solid rgba(174, 200, 243, 0.42);
+            background: rgba(18, 34, 63, 0.75);
+            color: #cfe0ff;
+            display: grid;
+            place-items: center;
+            font-size: 16px;
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .k2-challenge-pill-label {
+            margin: 0 0 6px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #9ab6e3;
+        }
+
+        .k2-challenge-pill-value {
+            margin: 0;
+            font-size: 29px;
+            line-height: 1.1;
+            color: #f3f7ff;
+            font-weight: 700;
+        }
+
+        .k2-challenge-flow {
+            border: 1px solid rgba(139, 172, 227, 0.3);
+            border-radius: 12px;
+            background: linear-gradient(160deg, rgba(17, 33, 63, 0.78), rgba(13, 25, 48, 0.72));
+            padding: 14px 16px;
+            color: #c9d8f4;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .k2-challenge-flow-title {
+            margin: 0 0 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #9bb6e4;
+            font-weight: 700;
+        }
+
+        .k2-challenge-flow strong {
+            color: #f3f7ff;
+        }
+
+        .k2-dependency-track {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .k2-dependency-node {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(127, 163, 223, 0.35);
+            background: rgba(17, 34, 65, 0.72);
+            font-size: 13px;
+            color: #d9e5fb;
+            text-align: center;
+            line-height: 1.35;
+        }
+
+        .k2-dependency-node--critical {
+            border-color: rgba(238, 118, 127, 0.5);
+            background: rgba(75, 29, 37, 0.68);
+            color: #ffd9dd;
+        }
+
+        .k2-dependency-arrow {
+            color: #80a7e2;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        @media (max-width: 900px) {
+            .k2-challenge-board {
+                padding: 18px;
+            }
+
+            .k2-challenge-title {
+                font-size: 24px;
+                margin-bottom: 4px;
+            }
+
+            .k2-challenge-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .k2-challenge-pill-value {
+                font-size: 24px;
+            }
+
+            .k2-dependency-track {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .k2-dependency-arrow {
+                transform: rotate(90deg);
+                justify-self: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .k2-challenge-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .k2-challenge-flow {
+                font-size: 13px;
+            }
+
+            .k2-challenge-title {
+                font-size: 22px;
+            }
+        }
+    </style>
 </head>
 <body class="page-k2">
     <div class="bg-gradient"></div>
@@ -79,7 +286,7 @@
         <div class="container">
             <h1 class="fade-up">K2 Sports: One Commerce Engine Behind <span style="color: var(--accent-blue);">9 Global Brands</span></h1>
             
-            <p class="subheadline fade-up stagger-2">Re-platformed K2 Sports off a sunsetting Demandware stack onto a headless BigCommerce architecture—9 brands, one ERP, one CMS, one reusable blueprint. Now a public BigCommerce case study and the reference design for multi-brand headless commerce.</p>
+            <p class="subheadline fade-up stagger-2">Re-platformed K2 Sports off a sunsetting Demandware stack onto a headless BigCommerce stack: 9 brands, one ERP, one CMS, one reusable blueprint. Now a public BigCommerce case study and the reference design for multi-brand headless commerce.</p>
 
             <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
                 <div class="metric-card">
@@ -106,7 +313,7 @@
                     <div class="tldr-item">
                         <h4>Problem</h4>
                         <ul>
-                            <li>Demandware sunsetting — hard deadline</li>
+                            <li>Demandware sunsetting/hard deadline</li>
                             <li>9 brands, 9 integration tangles to ERP</li>
                             <li>SEO risk across seasonal search traffic</li>
                             <li>No agreed migration blueprint</li>
@@ -115,7 +322,7 @@
                     <div class="tldr-item">
                         <h4>What I Owned</h4>
                         <ul>
-                            <li>Solutions architecture & program lead</li>
+                            <li>Solutions architecture & program leadership</li>
                             <li>Headless multi-store BC design</li>
                             <li>ERP + fulfillment integration model</li>
                             <li>DNS proxy & SEO-safe routing strategy</li>
@@ -154,35 +361,18 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2 style="text-align: center;">Context & Stakes</h2>
-                <p style="text-align: center;">K2 Sports ran 9 global brand sites on Demandware—powerful but fragile, and heading for end-of-life. Avante handled ERP, Quivers handled omnichannel inventory and retailer fulfillment. Marketing loved the brand experiences. IT knew the party was over. The stakes were real: winter sports brands don't get do-overs on seasonal traffic, and any wrong move on domains or redirects would torch years of SEO equity.</p>
-                
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Architecture: Before vs. After</h4>
-                    <div style="display: flex; gap: 48px; align-items: flex-end; justify-content: center;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">BEFORE</div>
-                            <div style="width: 240px; height: 240px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 16px;">
-                                <div style="font-size: 26px; font-weight: 700; color: white; line-height: 1.2;">9 Demandware Silos</div>
-                                <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-top: 8px;">9 integration tangles</div>
-                            </div>
-                        </div>
-                        <div style="font-size: 40px; color: var(--text-secondary); padding-bottom: 55px;">→</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">AFTER</div>
-                            <div style="width: 240px; height: 160px; background: var(--accent-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; padding: 16px;">
-                                <div style="font-size: 24px; font-weight: 700; color: white; line-height: 1.2;">1 Headless Engine</div>
-                                <div style="font-size: 14px; color: rgba(255,255,255,0.8);">9 brands · 1 ERP · 1 CMS</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">One architecture, multiple brands — without sacrificing design or operational control</div>
-                </div>
+                <img
+                    src="/work/k2/images/banner-k2-02.jpg"
+                    alt="K2 architecture context visual"
+                    style="display:block;width:100%;height:auto;border-radius:12px;margin:32px 0;border:1px solid var(--border);"
+                >
+                <p style="text-align: center;">K2 Sports ran 9 global brand sites on Demandware; powerful but fragile, and heading for end-of-life. Avante handled ERP, Quivers handled omni-channel inventory and retailer fulfillment. Marketing loved the brand experiences. IT knew the party was over. The stakes were real: winter sports brands don't get do-overs on seasonal traffic, and any wrong move on domains or redirects would torch years of SEO equity.</p>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
                     <div class="col-card">
                         <h4>What Was Breaking</h4>
                         <ul>
-                            <li>Demandware sunsetting — non-negotiable deadline</li>
+                            <li>Demandware sunsetting (non-negotiable deadline)</li>
                             <li>Every integration maintained brand by brand</li>
                             <li>Manual reconciliation between storefronts and ERP</li>
                         </ul>
@@ -206,33 +396,51 @@
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
                 
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🏔️</div>
-                        <div style="font-size: 18px; font-weight: 600;">9 Brands · 1 ERP · 1 CMS · 1 Deadline</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Demandware sunsetting with no agreed migration path</div>
+                <div class="k2-challenge-board">
+                    <h3 class="k2-challenge-title">Migration Constraint Map</h3>
+                    <p class="k2-challenge-subtitle">Program Pressure Snapshot</p>
+                    <div class="k2-challenge-grid">
+                        <div class="k2-challenge-pill k2-challenge-pill--scope">
+                            <p class="k2-challenge-pill-icon" aria-hidden="true">◈</p>
+                            <p class="k2-challenge-pill-label">Brand Scope</p>
+                            <p class="k2-challenge-pill-value">9 Brands</p>
+                        </div>
+                        <div class="k2-challenge-pill k2-challenge-pill--core">
+                            <p class="k2-challenge-pill-icon" aria-hidden="true">◎</p>
+                            <p class="k2-challenge-pill-label">Core System</p>
+                            <p class="k2-challenge-pill-value">1 ERP</p>
+                        </div>
+                        <div class="k2-challenge-pill k2-challenge-pill--experience">
+                            <p class="k2-challenge-pill-icon" aria-hidden="true">▣</p>
+                            <p class="k2-challenge-pill-label">Experience Layer</p>
+                            <p class="k2-challenge-pill-value">1 CMS</p>
+                        </div>
+                        <div class="k2-challenge-pill k2-challenge-pill--risk">
+                            <p class="k2-challenge-pill-icon" aria-hidden="true">◴</p>
+                            <p class="k2-challenge-pill-label">Program Risk</p>
+                            <p class="k2-challenge-pill-value">Hard Deadline</p>
+                        </div>
+                    </div>
+                    <div class="k2-challenge-flow">
+                        <p class="k2-challenge-flow-title">Critical Dependency Chain</p>
+                        <div class="k2-dependency-track">
+                            <span class="k2-dependency-node k2-dependency-node--critical">Demandware end-of-life</span>
+                            <span class="k2-dependency-arrow" aria-hidden="true">→</span>
+                            <span class="k2-dependency-node">No migration blueprint</span>
+                            <span class="k2-dependency-arrow" aria-hidden="true">→</span>
+                            <span class="k2-dependency-node">9 brand cutovers</span>
+                            <span class="k2-dependency-arrow" aria-hidden="true">→</span>
+                            <span class="k2-dependency-node">SEO + seasonal revenue exposure</span>
+                        </div>
                     </div>
                 </div>
-
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">K2 Headless Architecture: System Diagram</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
-                    </div>
-                    <figcaption>9 BC storefronts fronted by WordPress/Contentstack, unified behind Avante ERP and Quivers fulfillment via a DNS proxy routing layer</figcaption>
-                    <ul class="notice-list">
-                        <li>Each brand needed its own identity — but IT needed one engine to maintain</li>
-                        <li>Quivers omnichannel inventory was non-negotiable; had to be preserved and integrated</li>
-                        <li>No existing blueprint for multi-brand headless BC at this scale</li>
-                    </ul>
-                </figure>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
                     <div class="col-card" style="border-left: 4px solid #ef4444;">
                         <h4 style="color: #ef4444;">Technical Blockers</h4>
                         <ul>
                             <li>9 separate integration tangles to Avante + Quivers</li>
-                            <li>No native BC–Quivers omnichannel integration</li>
+                            <li>No native BC/Quivers omni-channel integration</li>
                             <li>Domain changes risked SEO across seasonal peak traffic</li>
                             <li>Headless CMS + BC + ERP had never been combined at this scale</li>
                         </ul>
@@ -240,7 +448,7 @@
                     <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
                         <h4 style="color: var(--accent-blue);">Organizational Blockers</h4>
                         <ul>
-                            <li>Marketing wanted brand-distinct experiences — not a generic template</li>
+                            <li>Marketing wanted brand-distinct experiences, not a generic template</li>
                             <li>Finance wanted clean ERP data without nightly reconciliation heroics</li>
                             <li>IT needed one maintainable architecture, not 9 snowflakes</li>
                             <li>Executives needed confidence the migration wouldn't tank winter sales</li>
@@ -249,7 +457,7 @@
                 </div>
 
                 <div class="callout" style="margin-top: 24px;">
-                    <p><strong>The Core Tension:</strong> Marketing wanted beautiful, distinct brand sites. Operations wanted one engine. My job was to design an architecture that gave both sides exactly what they needed—without compromise.</p>
+                    <p><strong>The Core Tension:</strong> Marketing wanted beautiful, distinct brand sites. Operations wanted one engine. I designed an architecture that gave both sides exactly what they needed without compromise.</p>
                 </div>
             </div>
         </div>
@@ -261,13 +469,11 @@
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
                 
-                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(68, 122, 203, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🔗</div>
-                        <div style="font-size: 18px; font-weight: 600;">Solutions Architect + Program Lead</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Blueprint design, integration ownership, and brand team alignment across 9 simultaneous launches</div>
-                    </div>
-                </div>
+                <img
+                    src="/work/k2/images/banner-k2-04.jpg"
+                    alt="K2 ownership and architecture leadership visual"
+                    style="display:block;width:100%;height:auto;border-radius:12px;margin:32px 0;border:1px solid var(--border);"
+                >
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                     <div class="col-card">
@@ -275,7 +481,7 @@
                         <ul>
                             <li>Designed the headless multi-store BC pattern from scratch</li>
                             <li>9 BC stores wired to one ERP and one CMS</li>
-                            <li>Built the custom BC–Quivers omnichannel integration model</li>
+                            <li>Built the custom BC/Quivers omni-channel integration model</li>
                             <li>Defined data flows for orders, inventory, and fulfillment across all brands</li>
                         </ul>
                     </div>
@@ -300,7 +506,7 @@
                     <div class="col-card">
                         <h4>Multi-Brand Template Thinking</h4>
                         <ul>
-                            <li>Treated K2 as a template from day one — not 9 individual projects</li>
+                            <li>Treated K2 as composable, not 9 individual projects</li>
                             <li>Integration contracts, DNS pattern, and BC4WordPress all designed for reuse</li>
                             <li>Future brands or regions slot in with minimal new solutioning</li>
                             <li>BC now uses the pattern as their multi-brand reference architecture</li>
@@ -309,7 +515,7 @@
                 </div>
 
                 <div class="callout" style="margin-top: 24px;">
-                    <p><strong>My Edge:</strong> I owned the blueprint that made K2's multi-brand, multi-store setup run as a single engine — a pattern BigCommerce has since reused with other multi-brand clients.</p>
+                    <p><strong>My Edge:</strong> I owned the blueprint that made K2's multi-brand, multi-store setup run as a single engine: a pattern BigCommerce has since reused with other multi-brand clients.</p>
                 </div>
             </div>
         </div>
@@ -321,24 +527,13 @@
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
                 
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.15) 0%, rgba(34, 211, 238, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🏗️</div>
-                        <div style="font-size: 18px; font-weight: 600;">Headless BigCommerce: One Engine, 9 Brand Experiences</div>
-                        <div style="font-size: 14px; margin-top: 8px;">BC for cart/checkout · WordPress + Contentstack for CMS · Avante + Quivers for ops</div>
-                    </div>
-                </div>
-
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">K2 Multi-Store Architecture Diagram</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
-                    </div>
+                <figure class="lightbox-trigger" data-src="/work/k2/images/bc-headless-commerce-model-example.png">
+                    <img src="/work/k2/images/bc-headless-commerce-model-example.png" alt="K2 multi-store headless commerce model diagram" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--border);">
                     <figcaption>9 BC storefronts behind a DNS proxy, fronted by WordPress & Contentstack, with Avante and Quivers as the operational masters</figcaption>
                     <ul class="notice-list">
-                        <li>Merchandising and content managed once, pushed everywhere — each store keeps local tax, currency, and shipping</li>
+                        <li>Merchandising and content managed once, pushed everywhere, each store keeps local tax, currency, and shipping</li>
                         <li>Customers land on the right storefront from a single brand entry point</li>
-                        <li>Pattern documented as a blueprint — other K2 brands clone it without re-architecting</li>
+                        <li>Pattern documented as a blueprint; other K2 brands clone it without re-architecting</li>
                     </ul>
                 </figure>
 
@@ -356,25 +551,13 @@
                         <h4>ERP & Fulfillment</h4>
                         <ul>
                             <li>Avante as master for inventory, orders, and financials</li>
-                            <li>Custom BC–Quivers integration for omnichannel fulfillment</li>
+                            <li>Custom BC/Quivers integration for omnichannel fulfillment</li>
                             <li>Orders, returns, and allocations move predictably between BC, Quivers, and Avante</li>
                             <li>No overselling across DTC and retailer channels during peak season</li>
                         </ul>
                     </div>
                 </div>
 
-                <figure class="lightbox-trigger" data-src="">
-                    <div style="width:100%;height:280px;background:rgba(68,122,203,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#447ACB;border:1px dashed rgba(68,122,203,0.3);">
-                        <div style="font-size:15px;font-weight:600;opacity:0.8;">BC–Quivers Omnichannel Fulfillment Flow</div>
-                        <div style="font-size:13px;opacity:0.5;">Available in full work packet</div>
-                    </div>
-                    <figcaption>Custom integration enabling shared inventory across DTC and retailer channels — now a BC reference design</figcaption>
-                    <ul class="notice-list">
-                        <li>Quivers routes fulfillment to the right partner without double-selling</li>
-                        <li>Returns and allocations reconcile into Avante automatically</li>
-                        <li>Integration pattern reused by other brands relying on retailer fulfillment + modern DTC</li>
-                    </ul>
-                </figure>
             </div>
         </div>
     </section>
@@ -438,7 +621,7 @@
                     </div>
                     <div class="timeline-item">
                         <h4>Integration Build</h4>
-                        <p>Built custom BC–Quivers omnichannel integration. Wired Avante as master for orders and inventory. Defined data flows for all 9 brands through a single integration model</p>
+                        <p>Built custom BC/Quivers omnichannel integration. Wired Avante as master for orders and inventory. Defined data flows for all 9 brands through a single integration model</p>
                     </div>
                     <div class="timeline-item">
                         <h4>DNS Proxy & Routing</h4>
@@ -495,7 +678,7 @@
                     <div class="col-card" style="display: flex; flex-direction: column;">
                         <h4>After Re-Platform</h4>
                         <ul style="flex: 1;">
-                            <li>All 9 brands on one headless pattern — BC, CMS, Avante, Quivers</li>
+                            <li>All 9 brands on one headless pattern: BC, CMS, Avante, Quivers</li>
                             <li>Cleaner, predictable data flows significantly reduced manual reconciliation</li>
                             <li>DNS proxy delivered brand-safe URLs while protecting SEO through cutover</li>
                             <li>New brands slot into the blueprint without fresh architecture work</li>
@@ -504,7 +687,7 @@
                 </div>
 
                 <div class="callout" style="margin-top: 32px;">
-                    <p><strong>The Downstream Value:</strong> K2 kept selling while Demandware was retired. Now 9 brands run on a single architecture. BC turned it into their public showcase for multi-brand headless commerce — and their sales team still points to it.</p>
+                    <p><strong>The Downstream Value:</strong> K2 kept selling while Demandware was retired. Now 9 brands run on a single architecture. BC turned it into their public showcase for multi-brand headless commerce, and their sales team still points to it.</p>
                 </div>
                 </div>
             </div>
@@ -518,30 +701,48 @@
                 <h2>Press & Recognition</h2>
                 
                 <div class="recognition-card fade-up stagger-1">
-                    <span class="recognition-icon">📰</span>
+                    <span class="recognition-icon">📄</span>
                     <div class="recognition-content">
-                        <h3>BigCommerce Official Public Case Study</h3>
-                        <p>BC published an official case study positioning K2 as proof that one ERP and one CMS can successfully power many BigCommerce storefronts. It's now the reference build BC sales points to when multi-brand prospects ask "can we actually run all of this on one spine?"</p>
+                        <h3>BigCommerce Case Study 01</h3>
+                        <p>Primary BigCommerce case study documenting the K2 multi-brand headless commerce architecture and rollout pattern.</p>
                     </div>
-                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-primary">Request Docs</a>
+                    <a href="/work/k2/files/bc-casestudy-01.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Read Case Study</a>
                 </div>
 
                 <div class="recognition-card fade-up stagger-2">
-                    <span class="recognition-icon">🏆</span>
+                    <span class="recognition-icon">📄</span>
                     <div class="recognition-content">
-                        <h3>Contentstack & Industry Partner Case Studies</h3>
-                        <p>Contentstack published two case studies on the K2 program. Magenest and other industry partners followed. The headless, multi-store pattern became a widely cited reference across the BC partner ecosystem.</p>
+                        <h3>BigCommerce Case Study 02</h3>
+                        <p>Supplemental BigCommerce write-up covering implementation detail and reference architecture outcomes across K2 brands.</p>
                     </div>
-                    <a href="mailto:jim@jimmarkunas.com" class="btn btn-secondary">Request Docs</a>
+                    <a href="/work/k2/files/bc-casestudy-02.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Read Case Study</a>
                 </div>
 
                 <div class="recognition-card fade-up stagger-3">
-                    <span class="recognition-icon">📈</span>
+                    <span class="recognition-icon">📄</span>
                     <div class="recognition-content">
-                        <h3>Custom Quivers Integration: A Reference Design</h3>
-                        <p>The BC–Quivers omnichannel fulfillment integration became a reference design for other brands that rely on retailer fulfillment but still want modern DTC and centralized order visibility. It's been reused across subsequent implementations.</p>
+                        <h3>Contentstack Case Study 01</h3>
+                        <p>Contentstack case study focused on composable content operations across K2's multi-brand storefront portfolio.</p>
                     </div>
-                    <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-secondary">Book a Call</a>
+                    <a href="/work/k2/files/cs-casestudy-01.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Read Case Study</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-4">
+                    <span class="recognition-icon">📄</span>
+                    <div class="recognition-content">
+                        <h3>Contentstack Case Study 02</h3>
+                        <p>Partner case study highlighting the scalable CMS + commerce operating model used to support distinct brand experiences.</p>
+                    </div>
+                    <a href="/work/k2/files/cs-casestudy-02.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Read Case Study</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-5">
+                    <span class="recognition-icon">📄</span>
+                    <div class="recognition-content">
+                        <h3>Magenest Case Study</h3>
+                        <p>Implementation partner case study covering integration execution, delivery sequencing, and multi-brand launch mechanics.</p>
+                    </div>
+                    <a href="/work/k2/files/magenest-casestudy-01.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Read Case Study</a>
                 </div>
             </div>
         </div>

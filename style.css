@@ -622,6 +622,14 @@ body.page-scj {
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
 }
 
+.case-banner .badge-award,
+.case-banner .badge-press {
+    background: rgba(10, 22, 45, 0.56);
+    border-color: rgba(120, 166, 238, 0.56);
+    color: #dbe9ff;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+
 .badge-press {
     background: rgba(255, 215, 0, 0.15);
     border: 1px solid rgba(255, 215, 0, 0.4);
@@ -1412,7 +1420,27 @@ figure.diagram-static .notice-list li {
         grid-template-columns: 1fr;
     }
     .two-col-grid { grid-template-columns: 1fr; }
-    .banner-content { left: 20px; flex-wrap: wrap; }
+    .banner-content {
+        left: 12px;
+        right: 12px;
+        bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+    }
+    .banner-badge {
+        padding: 5px 10px;
+        border-radius: 9px;
+        font-size: 10px;
+        line-height: 1.2;
+    }
+    .case-banner .badge-award,
+    .case-banner .badge-press {
+        background: rgba(9, 20, 40, 0.68);
+        border-color: rgba(127, 171, 240, 0.62);
+        color: #e1edff;
+    }
     .recognition-card {
         display: flex;
         flex-direction: column;
