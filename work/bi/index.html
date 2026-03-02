@@ -79,7 +79,7 @@
         <div class="container">
             <h1 class="fade-up">Boehringer Ingelheim <span style="color: var(--accent-blue);">Global eCommerce</span> Platform</h1>
             
-            <p class="subheadline fade-up stagger-2">Unified Boehringer Ingelheim's fragmented regional webshops into a single Adobe Commerce Cloud ecosystem across five countries—while surviving a live Oracle-to-SAP ERP migration without taking stores offline.</p>
+            <p class="subheadline fade-up stagger-2">Unified Boehringer Ingelheim's fragmented regional webshops into a single Adobe Commerce Cloud ecosystem across 5 countries, while surviving a live Oracle-to-SAP ERP migration.</p>
 
             <!-- Metrics Row ABOVE subheadline -->
             <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
@@ -155,27 +155,30 @@
                 <h2 style="text-align: center;">Context & Stakes</h2>
                 <p style="text-align: center;">Boehringer Ingelheim was running a patchwork of legacy webshops across markets—each with its own pricing, tax, compliance, and fulfillment logic. Some markets were still heavily phone and fax-driven. At the same time, BI was planning a global Oracle-to-SAP migration. Any commerce downtime during that transition meant lost orders, broken vet relationships, and revenue risk across five countries.</p>
                 
-                <!-- Visual: Before/After -->
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Channel Shift: Orders by Type</h4>
-                    <div style="display: flex; gap: 48px; align-items: flex-end; justify-content: center;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">BEFORE</div>
-                            <div style="width: 240px; height: 240px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                                <div style="font-size: 36px; font-weight: 700; color: white;">Phone</div>
-                                <div style="font-size: 16px; color: rgba(255,255,255,0.8);">& Fax Dominant</div>
-                            </div>
+                <div class="bi-channel-shift-card">
+                    <h4>Channel Shift: Orders by Type</h4>
+                    <div class="bi-channel-shift-grid" role="group" aria-label="Before and after channel mix shift">
+                        <div class="bi-channel-state before">
+                            <div class="state-label">Before</div>
+                            <div class="state-title">Phone + Fax First</div>
+                            <ul>
+                                <li>Manual order capture</li>
+                                <li>Inconsistent country workflows</li>
+                                <li>High exception volume</li>
+                            </ul>
                         </div>
-                        <div style="font-size: 40px; color: var(--text-secondary); padding-bottom: 55px;">→</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">AFTER</div>
-                            <div style="width: 240px; height: 160px; background: var(--accent-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px;">
-                                <div style="font-size: 36px; font-weight: 700; color: white; line-height: 1;">Digital</div>
-                                <div style="font-size: 16px; color: rgba(255,255,255,0.8);">Self-Service Default</div>
-                            </div>
+                        <div class="bi-channel-arrow" aria-hidden="true">→</div>
+                        <div class="bi-channel-state after">
+                            <div class="state-label">After</div>
+                            <div class="state-title">Digital Self-Service Default</div>
+                            <ul>
+                                <li>Online ordering as primary path</li>
+                                <li>Shared storefront pattern across markets</li>
+                                <li>Cleaner handoff into Oracle/SAP</li>
+                            </ul>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">10x+ online sales growth across 5 countries</div>
+                    <p class="bi-channel-footnote">10x+ online sales growth across 5 countries</p>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
@@ -206,12 +209,40 @@
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
                 
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🌍</div>
-                        <div style="font-size: 18px; font-weight: 600;">Global Commerce Fragmentation Map</div>
-                        <div style="font-size: 14px; margin-top: 8px;">5 countries · 2 ERPs · 1 platform needed</div>
+                <div class="bi-fragmentation-map">
+                    <h3>Global Commerce Fragmentation Map</h3>
+                    <p class="map-subhead">5 countries and 2 ERP backbones converged into one global commerce platform.</p>
+                    <div class="map-country-grid" role="group" aria-label="Country stacks converging to shared platform">
+                        <div class="country-node">
+                            <span class="country-name">US</span>
+                            <span class="country-erp oracle">Oracle</span>
+                            <span class="country-note">Legacy webshop</span>
+                        </div>
+                        <div class="country-node">
+                            <span class="country-name">Germany</span>
+                            <span class="country-erp sap">SAP</span>
+                            <span class="country-note">Local pricing rules</span>
+                        </div>
+                        <div class="country-node">
+                            <span class="country-name">France</span>
+                            <span class="country-erp oracle">Oracle</span>
+                            <span class="country-note">Rx gating variance</span>
+                        </div>
+                        <div class="country-node">
+                            <span class="country-name">UK</span>
+                            <span class="country-erp sap">SAP</span>
+                            <span class="country-note">Manual order handoffs</span>
+                        </div>
+                        <div class="country-node">
+                            <span class="country-name">Spain</span>
+                            <span class="country-erp sap">SAP</span>
+                            <span class="country-note">Isolated catalog model</span>
+                        </div>
+                    </div>
+                    <div class="map-converge">↓</div>
+                    <div class="map-target">
+                        <strong>One Global Adobe Commerce Platform</strong>
+                        <span>Shared storefront core + country rule layers + ERP-agnostic integration</span>
                     </div>
                 </div>
 
@@ -249,12 +280,30 @@
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
                 
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(68, 122, 203, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🏗️</div>
-                        <div style="font-size: 18px; font-weight: 600;">Multi-Vendor Program Structure</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Corra · Publicis Sapient · BI Global Teams · Adobe</div>
+                <div class="bi-vendor-map">
+                    <h3>Multi-Vendor Program Structure</h3>
+                    <p class="vendor-subhead">Publicis Sapient (Corra) · BI Global Teams · Adobe</p>
+                    <div class="bi-vendor-layout" role="group" aria-label="BI multi-vendor operating model map">
+                        <div class="vendor-node node-sapient">
+                            <h5>Publicis Sapient (Corra)</h5>
+                            <p><strong>Owns:</strong> storefront build + integration tracks</p>
+                            <p><strong>Handoff:</strong> country execution plans</p>
+                        </div>
+                        <div class="vendor-node node-hub">
+                            <h5>Program Lead (Me)</h5>
+                            <p><strong>Role:</strong> roadmap, cutover, cross-vendor decisions</p>
+                            <p><strong>Accountable:</strong> zero-downtime migration</p>
+                        </div>
+                        <div class="vendor-node node-bi">
+                            <h5>BI Global Teams</h5>
+                            <p><strong>Owns:</strong> country rules + business approvals</p>
+                            <p><strong>Handoff:</strong> market localization sign-off</p>
+                        </div>
+                        <div class="vendor-node node-adobe">
+                            <h5>Adobe</h5>
+                            <p><strong>Owns:</strong> platform support + escalation</p>
+                            <p><strong>Handoff:</strong> critical issue resolution</p>
+                        </div>
                     </div>
                 </div>
                 
@@ -292,12 +341,9 @@
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
                 
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.15) 0%, rgba(34, 211, 238, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">☁️</div>
-                        <div style="font-size: 18px; font-weight: 600;">Adobe Commerce Cloud Architecture</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Global reference storefront · Local rules engines · ERP-agnostic backbone</div>
+                <div style="margin: 32px 0;">
+                    <div class="lightbox-trigger" data-src="/work/bi/images/BI-System-Design.png" style="cursor: zoom-in;">
+                        <img src="images/BI-System-Design.png" alt="Adobe Commerce Cloud architecture system design" style="display: block; width: 100%; height: auto; border: none; border-radius: 0;">
                     </div>
                 </div>
 
@@ -320,6 +366,12 @@
                             <li>Shared integration specs across vendors</li>
                         </ul>
                     </div>
+                </div>
+
+                <div class="bi-product-flow-grid">
+                    <img src="images/bi-uiux/bi-product-flow-01.png" alt="BI product flow diagram 1">
+                    <img src="images/bi-uiux/bi-product-flow-02.png" alt="BI product flow diagram 2">
+                    <img src="images/bi-uiux/bi-product-flow-04.png" alt="BI product flow diagram 4">
                 </div>
 
             </div>
@@ -461,27 +513,27 @@
                         <h3>Adobe Commerce Case Study</h3>
                         <p>Adobe published a formal case study on Boehringer Ingelheim's global eCommerce transformation, highlighting the unified platform architecture and multi-market rollout approach.</p>
                     </div>
-                    <a href="/contact/" class="btn btn-primary">View Case Study</a>
+                    <a href="/work/bi/pdf-viewer.html?doc=adobe-bi" class="btn btn-primary">View Case Study</a>
                 </div>
 
-                <!-- Publicis Sapient -->
+                <!-- Publicis Corra (Part 1) -->
                 <div class="recognition-card fade-up stagger-2">
                     <span class="recognition-icon">🏆</span>
                     <div class="recognition-content">
-                        <h3>Publicis Sapient Case Study</h3>
-                        <p>Publicis Sapient featured the BI engagement as a flagship example of global B2B commerce transformation, covering the ERP-agnostic architecture and phased country rollout.</p>
+                        <h3>Publicis Corra Case Study (Part 1)</h3>
+                        <p>Publicis Corra documented the BI engagement as a global B2B commerce transformation, focusing on ERP-agnostic architecture and phased market rollout execution.</p>
                     </div>
-                    <a href="/contact/" class="btn btn-secondary">View Case Study</a>
+                    <a href="/work/bi/pdf-viewer.html?doc=publicis-corra-bi-01" class="btn btn-primary">View Case Study</a>
                 </div>
 
-                <!-- Platform resilience -->
+                <!-- Publicis Corra (Part 2) -->
                 <div class="recognition-card fade-up stagger-3">
                     <span class="recognition-icon">⚙️</span>
                     <div class="recognition-content">
-                        <h3>Zero Downtime ERP Migration</h3>
-                        <p>BI kept all country storefronts trading throughout the Oracle-to-SAP migration — a result that validated the ERP-agnostic architecture and the cutover plan designed from the start.</p>
+                        <h3>Publicis Corra Case Study (Part 2)</h3>
+                        <p>Supplemental case-study documentation detailing BI program delivery, migration resilience, and cross-market transformation outcomes.</p>
                     </div>
-                    <a href="/contact/" class="btn btn-secondary">Program Overview</a>
+                    <a href="/work/bi/pdf-viewer.html?doc=publicis-corra-bi-02" class="btn btn-primary">View Case Study</a>
                 </div>
             </div>
         </div>

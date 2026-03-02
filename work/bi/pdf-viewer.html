@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEGO Press & Case Study Viewer | BCG × LEGO Case Study</title>
-    <meta name="description" content="Embedded PDF viewer for MIT, Harvard Business Review, and BCG interview materials referenced in the LEGO case study.">
+    <title>BI Case Study Viewer | Boehringer Ingelheim Case Study</title>
+    <meta name="description" content="Embedded PDF viewer for Boehringer Ingelheim case-study documents referenced in this portfolio case study.">
     <link rel="stylesheet" href="/style.css?v=20260225-2">
     <style>
         .pdf-page {
@@ -179,7 +179,7 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="/work/lego/#proof" id="pdfBackNavLink">Back to Case Study</a></li>
+                <li><a href="/work/bi/#proof">Back to Case Study</a></li>
                 <li><a href="/contact/">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -191,7 +191,7 @@
     </header>
 
     <div class="mobile-menu" id="mobileMenu">
-        <a href="/work/lego/#proof" id="pdfBackMobileLink">Back to Case Study</a>
+        <a href="/work/bi/#proof">Back to Case Study</a>
         <a href="/contact/">Contact</a>
     </div>
 
@@ -200,11 +200,11 @@
             <section class="pdf-shell">
                 <div class="pdf-header">
                     <div>
-                        <h1 id="pdfPageTitle">LEGO Press & Case Studies</h1>
-                        <p id="pdfPageSubtitle">Embedded document proof for the BCG × LEGO case study.</p>
+                        <h1 id="pdfPageTitle">BI Case Study Document</h1>
+                        <p id="pdfPageSubtitle">Embedded document proof for the Boehringer Ingelheim case study.</p>
                     </div>
                     <div class="pdf-actions">
-                        <a class="btn btn-secondary" id="pdfBackPrimaryLink" href="/work/lego/#proof">Back to Case Study</a>
+                        <a class="btn btn-secondary" href="/work/bi/#proof">Back to Case Study</a>
                         <a class="btn btn-primary" id="pdfOpenLink" href="#" target="_blank" rel="noopener">Open PDF in New Tab</a>
                     </div>
                 </div>
@@ -220,7 +220,7 @@
                 </div>
 
                 <div class="pdf-canvas-wrap">
-                    <div class="pdf-loading" id="pdfLoading">Loading document PDF...</div>
+                    <div class="pdf-loading" id="pdfLoading">Loading article PDF...</div>
                     <div class="pdf-error" id="pdfError" hidden>
                         Could not render the PDF in this viewer. Use
                         <a id="pdfErrorLink" href="#" target="_blank" rel="noopener">Open PDF in New Tab</a>.
@@ -241,36 +241,25 @@
     <script>
         (function () {
             var docs = {
-                "harvard": {
-                    title: "Harvard Business Review — LEGO Digital Transformation",
-                    subtitle: "HBR coverage of LEGO's digital transformation and operating model.",
-                    file: "/work/lego/files/01%20Harvard%20Business%20Review.pdf"
+                "adobe-bi": {
+                    title: "Adobe Case Study: Boehringer Ingelheim",
+                    subtitle: "Adobe's case study on BI's global commerce transformation.",
+                    file: "/work/bi/files/01%20AdobeCaseStudy-BI.pdf"
                 },
-                "mit": {
-                    title: "MIT Case Study — LEGO Transformation",
-                    subtitle: "MIT teaching case material on LEGO's enterprise and digital transformation.",
-                    file: "/work/lego/files/02%20MIT%20Case%20Study.pdf"
+                "publicis-corra-bi-01": {
+                    title: "Publicis Corra Case Study: Boehringer Ingelheim (Part 1)",
+                    subtitle: "Publicis Corra documentation of BI's phased transformation program.",
+                    file: "/work/bi/files/02%20Publicis-Corra-BoehringerIngelheim.pdf"
                 },
-                "bcg": {
-                    title: "BCG Interview — LEGO CEO (Knudstorp)",
-                    subtitle: "BCG interview with LEGO CEO Jorgen Vig Knudstorp on growth, culture, and operating discipline.",
-                    file: "/work/lego/files/05%20BCG%20Interview%20Lego%20CEO.pdf"
-                },
-                "guardian": {
-                    title: "The Guardian — LEGO Digital",
-                    subtitle: "The Guardian coverage highlighting LEGO's digital evolution and broader transformation story.",
-                    file: "/work/lego/files/03%20The%20Guardian%20LEGO%20Digital.pdf"
-                },
-                "misq": {
-                    title: "MIS Quarterly Executive — LEGO Transformation",
-                    subtitle: "MIS Quarterly Executive analysis of LEGO's transformation, governance, and digital execution.",
-                    file: "/work/lego/files/04%20MIS%20Quarterly%20Executive_compressed.pdf"
+                "publicis-corra-bi-02": {
+                    title: "Publicis Corra Case Study: Boehringer Ingelheim (Part 2)",
+                    subtitle: "Additional Publicis Corra case material covering execution and outcomes.",
+                    file: "/work/bi/files/03%20Publicis-Corra-BoehringerIngelheim02.pdf"
                 }
             };
             var params = new URLSearchParams(window.location.search);
-            var docKey = params.get("doc") || "harvard";
-            var from = params.get("from") || "case";
-            var selected = docs[docKey] || docs["harvard"];
+            var docKey = params.get("doc") || "adobe-bi";
+            var selected = docs[docKey] || docs["adobe-bi"];
             var pdfUrl = selected.file;
             var pagesEl = document.getElementById("pdfPages");
             var loadingEl = document.getElementById("pdfLoading");
@@ -278,9 +267,6 @@
             var statusEl = document.getElementById("pdfStatus");
             var titleEl = document.getElementById("pdfPageTitle");
             var subtitleEl = document.getElementById("pdfPageSubtitle");
-            var backNavLinkEl = document.getElementById("pdfBackNavLink");
-            var backMobileLinkEl = document.getElementById("pdfBackMobileLink");
-            var backPrimaryLinkEl = document.getElementById("pdfBackPrimaryLink");
             var openLinkEl = document.getElementById("pdfOpenLink");
             var errorLinkEl = document.getElementById("pdfErrorLink");
             var fallbackLinkEl = document.getElementById("pdfFallbackLink");
@@ -297,14 +283,7 @@
 
             titleEl.textContent = selected.title;
             subtitleEl.textContent = selected.subtitle;
-            document.title = selected.title + " | BCG × LEGO Case Study";
-            var backHref = from === "home" ? "/#press" : "/work/lego/#proof";
-            var backLabel = from === "home" ? "Back to Homepage" : "Back to Case Study";
-            [backNavLinkEl, backMobileLinkEl, backPrimaryLinkEl].forEach(function (el) {
-                if (!el) return;
-                el.href = backHref;
-                el.textContent = backLabel;
-            });
+            document.title = selected.title + " | Boehringer Ingelheim Case Study";
             openLinkEl.href = pdfUrl;
             errorLinkEl.href = pdfUrl;
             fallbackLinkEl.href = pdfUrl;
