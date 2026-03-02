@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Photo lightbox ──────────────────────────────────────────
     const photos = [
-        { src: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=1200&q=90', caption: 'Live photography — arena tour coverage' },
-        { src: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=90', caption: 'Linkin Park at Staples Center, Feb 2011' },
-        { src: 'https://images.unsplash.com/photo-1501386761578-eaa54b915123?w=1200&q=90', caption: 'Festival coverage — crowd and stage shots' },
+        { src: '/founder/cwg/images/banner-cwg-lp.jpg', caption: 'Linkin Park — Live Photography' },
+        { src: '/founder/cwg/images/banner-cwg-slash.jpg', caption: 'Slash — Live Photography' },
+        { src: '/founder/cwg/images/banner-cwg-sugarray.jpg', caption: 'Sugar Ray — Live Photography' },
     ];
     let currentPhoto = 0;
 

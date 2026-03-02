@@ -22,17 +22,17 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <a href="https://jimmarkunas.com" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+                <a href="/" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
                     <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="JM" style="width:32px;height:32px;object-fit:contain;">
                     JIM MARKUNAS
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="https://jimmarkunas.com/work/">Work</a></li>
-                <li><a href="https://jimmarkunas.com/services/">Services</a></li>
-                <li><a href="https://jimmarkunas.com/cv/">CV</a></li>
-                <li><a href="https://jimmarkunas.com/about/">About</a></li>
-                <li><a href="mailto:jim@jimmarkunas.com">Contact</a></li>
+                <li><a href="/work/">Work</a></li>
+                <li><a href="/services/">Services</a></li>
+                <li><a href="/cv/">CV</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/contact/">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
@@ -42,11 +42,11 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="https://jimmarkunas.com/work/">Work</a>
-        <a href="https://jimmarkunas.com/services/">Services</a>
-        <a href="https://jimmarkunas.com/cv/">CV</a>
-        <a href="https://jimmarkunas.com/about/">About</a>
-        <a href="mailto:jim@jimmarkunas.com">Contact</a>
+        <a href="/work/">Work</a>
+        <a href="/services/">Services</a>
+        <a href="/cv/">CV</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
     </div>
 
     <!-- ── Banner ── -->
@@ -76,8 +76,12 @@
     <section class="case-hero" id="founding">
         <div class="container">
             <h1 class="fade-up">
-                Chicks With Guns: Building a <span style="color:var(--accent);">Digital-First</span> Music Magazine From Zero
+                Chicks With Guns: <span style="color: var(--cwg-accent);">Building a Digital-First</span> Music Magazine From Zero
             </h1>
+
+            <p class="subheadline fade-up stagger-2">
+                In 2009, I founded Chicks With Guns — an online-only music magazine designed to do what Rolling Stone would look like if it had started on the internet. No funding, no office, no staff payroll. Just a product thesis, a global volunteer team, and an early bet that digital media needed to be built for the web, not adapted from print.
+            </p>
 
             <div class="metrics-row fade-up stagger-1">
                 <div class="metric-card">
@@ -96,10 +100,6 @@
                     <div class="metric-breakdown">Editors · writers · photographers · engineers</div>
                 </div>
             </div>
-
-            <p class="subheadline fade-up stagger-2">
-                In 2009, I founded Chicks With Guns — an online-only music magazine designed to do what Rolling Stone would look like if it had started on the internet. No funding, no office, no staff payroll. Just a product thesis, a global volunteer team, and an early bet that digital media needed to be built for the web, not adapted from print.
-            </p>
 
             <div class="tldr-block fade-up stagger-3">
                 <div class="tldr-grid">
@@ -193,37 +193,95 @@
                 <p>Photography was central to the CWG brand identity. Click any image to view full size.</p>
                 <div class="photo-grid" id="photoGrid">
                     <div class="photo-thumb" data-index="0">
-                        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&q=80" alt="Slash at CWG concert" loading="lazy">
+                        <img src="/founder/cwg/images/banner-cwg-lp.jpg" alt="Linkin Park live photography" loading="lazy">
                         <div class="photo-overlay"><span class="photo-overlay-icon">🔍</span></div>
                     </div>
                     <div class="photo-thumb" data-index="1">
-                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80" alt="Linkin Park at Staples Center" loading="lazy">
+                        <img src="/founder/cwg/images/banner-cwg-slash.jpg" alt="Slash live photography" loading="lazy">
                         <div class="photo-overlay"><span class="photo-overlay-icon">🔍</span></div>
                     </div>
                     <div class="photo-thumb" data-index="2">
-                        <img src="https://images.unsplash.com/photo-1501386761578-eaa54b915123?w=600&q=80" alt="Rage Against the Machine, Palladium 2010" loading="lazy">
+                        <img src="/founder/cwg/images/banner-cwg-sugarray.jpg" alt="Sugar Ray live photography" loading="lazy">
                         <div class="photo-overlay"><span class="photo-overlay-icon">🔍</span></div>
+                    </div>
+                </div>
+
+                <h3>Podcasts</h3>
+                <p>Long-form artist interviews and behind-the-scenes audio from CWG sessions.</p>
+                <h3>The Lemmy Moment</h3>
+                <p>Access was earned, not bought. The most memorable example: getting Lemmy from Motörhead to sit down backstage at the Key Club in Los Angeles and actually talk — not a red carpet thirty-second grab, a real conversation.</p>
+
+                <div class="cwg-player" id="cwgPlayer">
+                    <div class="cwg-player-header">
+                        <div class="cwg-player-icon">🎙️</div>
+                        <div class="cwg-player-info">
+                            <div class="cwg-player-title">Lemmy from Motörhead — Backstage Interview</div>
+                            <div class="cwg-player-meta">Key Club, Los Angeles · Recorded 2010 · Original CWG Audio</div>
+                        </div>
+                    </div>
+
+                    <div class="cwg-player-controls">
+                        <button class="cwg-play-btn" id="cwgPlayBtn" aria-label="Play">
+                            <svg id="cwgIconPlay"  viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <svg id="cwgIconPause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+
+                        <div class="cwg-progress-wrap">
+                            <div class="cwg-scrubber-track" id="cwgScrubber">
+                                <div class="cwg-scrubber-fill"  id="cwgFill"></div>
+                                <div class="cwg-scrubber-thumb" id="cwgThumb"></div>
+                            </div>
+                            <div class="cwg-time-row">
+                                <span class="cwg-time-current" id="cwgTimeCurrent">0:00</span>
+                                <span id="cwgTimeDuration">0:00</span>
+                            </div>
+                        </div>
+
+                        <div class="cwg-volume-wrap">
+                            <span class="cwg-vol-icon" id="cwgVolIcon" title="Toggle mute">🔊</span>
+                            <div class="cwg-vol-track" id="cwgVolTrack">
+                                <div class="cwg-vol-fill" id="cwgVolFill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <audio id="cwgAudio" preload="metadata">
+                        <source src="/founder/cwg/files/cwg-lemmy-interview.mp3" type="audio/mpeg">
+                    </audio>
+
+                    <div class="cwg-player-src-note">
+                        🔗 Original CWG field recording · Los Angeles backstage session.
                     </div>
                 </div>
 
                 <!-- Video media triggers -->
                 <h3>Original Video</h3>
                 <p>CWG paired every major feature with original video — interviews, mini-documentaries, and live performance cuts distributed across the site, app, and YouTube.</p>
-                <div class="media-row">
-                    <button class="media-trigger" onclick="openVideoModal('https://www.youtube.com/embed/htTEo5A-GSs', 'Unwritten Law – Mini Documentary', 'Concept, shoot, and distribution across site, app, and YouTube')">
-                        <span class="icon">🎬</span>
-                        <span class="label">
-                            <span class="label-main">Unwritten Law – Mini Documentary</span>
-                            <span class="label-sub">Original CWG video feature</span>
-                        </span>
-                    </button>
-                    <button class="media-trigger" onclick="openVideoModal('https://www.youtube.com/embed/Z6xjYpELYDc', 'Lemmy from Motörhead – Backstage Interview', 'Recorded live at the Key Club, Los Angeles')">
-                        <span class="icon">🤘</span>
-                        <span class="label">
-                            <span class="label-main">Lemmy from Motörhead – Key Club, LA</span>
-                            <span class="label-sub">Backstage interview · original CWG feature</span>
-                        </span>
-                    </button>
+                <div class="cwg-video-grid">
+                    <div class="col-card" style="margin: 0;">
+                        <h4>Unwritten Law — Mini Documentary</h4>
+                        <div class="video-embed" style="margin-top: 10px;">
+                            <iframe src="https://www.youtube.com/embed/htTEo5A-GSs" title="Unwritten Law Mini Documentary" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-card" style="margin: 0;">
+                        <h4>Rob Zombie — Mayhem Festival 2010</h4>
+                        <div class="video-embed" style="margin-top: 10px;">
+                            <iframe src="https://www.youtube.com/embed/Z6xjYpELYDc" title="Lemmy from Motörhead Backstage Interview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-card" style="margin: 0;">
+                        <h4>CWG Feature Interview</h4>
+                        <div class="video-embed" style="margin-top: 10px;">
+                            <iframe src="https://www.youtube.com/embed/8liMAx732fg?start=24" title="CWG Feature Interview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-card" style="margin: 0;">
+                        <h4>CWG Backstage Session</h4>
+                        <div class="video-embed" style="margin-top: 10px;">
+                            <iframe src="https://www.youtube.com/embed/aqiw0hME4Hc?start=339" title="CWG Backstage Session" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -279,63 +337,6 @@
                     <p>One senior writer went on to publish a book about his experience at CWG. Two others later wrote public recommendations calling it <strong>"a musical hot spot online"</strong> and <strong>"an important player in the music industry."</strong> Even inside a scrappy, unfunded project, the culture produced real professional growth.</p>
                 </div>
 
-                <!-- The Lemmy moment -->
-                <h3>The Lemmy Moment</h3>
-                <p>Access was earned, not bought. The most memorable example: getting Lemmy from Motörhead to sit down backstage at the Key Club in Los Angeles and actually talk — not a red carpet thirty-second grab, a real conversation.</p>
-
-                <!-- ── Inline Audio Player ──
-                     To link your file: change the src attribute on the <audio> tag below.
-                     Supports MP3, AAC, OGG. Example:
-                       src="https://jimmarkunas.com/assets/cwg/lemmy-keyclub-2010.mp3"
-                     ── -->
-                <div class="cwg-player" id="cwgPlayer">
-                    <div class="cwg-player-header">
-                        <div class="cwg-player-icon">🎙️</div>
-                        <div class="cwg-player-info">
-                            <div class="cwg-player-title">Lemmy from Motörhead — Backstage Interview</div>
-                            <div class="cwg-player-meta">Key Club, Los Angeles · Recorded 2010 · Original CWG Audio</div>
-                        </div>
-                    </div>
-
-                    <div class="cwg-player-controls">
-                        <!-- Play/Pause -->
-                        <button class="cwg-play-btn" id="cwgPlayBtn" aria-label="Play">
-                            <!-- Play icon -->
-                            <svg id="cwgIconPlay"  viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            <!-- Pause icon (hidden by default) -->
-                            <svg id="cwgIconPause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                        </button>
-
-                        <!-- Progress + time -->
-                        <div class="cwg-progress-wrap">
-                            <div class="cwg-scrubber-track" id="cwgScrubber">
-                                <div class="cwg-scrubber-fill"  id="cwgFill"></div>
-                                <div class="cwg-scrubber-thumb" id="cwgThumb"></div>
-                            </div>
-                            <div class="cwg-time-row">
-                                <span class="cwg-time-current" id="cwgTimeCurrent">0:00</span>
-                                <span id="cwgTimeDuration">0:00</span>
-                            </div>
-                        </div>
-
-                        <!-- Volume -->
-                        <div class="cwg-volume-wrap">
-                            <span class="cwg-vol-icon" id="cwgVolIcon" title="Toggle mute">🔊</span>
-                            <div class="cwg-vol-track" id="cwgVolTrack">
-                                <div class="cwg-vol-fill" id="cwgVolFill"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Hidden native audio element — change src here -->
-                    <audio id="cwgAudio" preload="metadata">
-                        <source src="" type="audio/mpeg">
-                    </audio>
-
-                    <div class="cwg-player-src-note">
-                        🔗 To link your audio file, set <code style="color:var(--accent);">src</code> on the <code style="color:var(--accent);">&lt;audio&gt;</code> element above, or <a href="mailto:jim@jimmarkunas.com">request the full work packet</a>.
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -347,38 +348,59 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Traction & Recognition</h2>
-                <p>For a bootstrapped publication with no marketing budget, CWG reached meaningful scale. Traffic spikes followed big tour coverage and festival season; steady baseline demand came from live photography and early-artist features that ranked organically.</p>
+                <p>CWG reached national scale with zero paid acquisition by combining strong editorial coverage, high-quality live photography, and repeatable distribution across web, app, and video.</p>
 
-                <div class="recognition-card fade-up stagger-1">
-                    <span class="recognition-icon">🏆</span>
-                    <div class="recognition-content">
-                        <h3>Named Top Online Music Publication — Yahoo</h3>
-                        <p>Yahoo recognized CWG as one of the leading online-only music outlets — validation that an internet-native publication with no legacy brand could earn editorial credibility alongside established names.</p>
+                <div class="cwg-traction-kpis fade-up stagger-1">
+                    <div class="cwg-traction-kpi">
+                        <span class="cwg-traction-value">250k+</span>
+                        <span class="cwg-traction-label">Monthly Uniques</span>
+                    </div>
+                    <div class="cwg-traction-kpi">
+                        <span class="cwg-traction-value">10k+</span>
+                        <span class="cwg-traction-label">iOS Downloads</span>
+                    </div>
+                    <div class="cwg-traction-kpi">
+                        <span class="cwg-traction-value">40+</span>
+                        <span class="cwg-traction-label">Contributors</span>
+                    </div>
+                    <div class="cwg-traction-kpi">
+                        <span class="cwg-traction-value">1</span>
+                        <span class="cwg-traction-label">Yahoo Recognition</span>
                     </div>
                 </div>
 
-                <div class="recognition-card fade-up stagger-2">
-                    <span class="recognition-icon">📊</span>
-                    <div class="recognition-content">
-                        <h3>250k Monthly Uniques at Peak</h3>
-                        <p>Built entirely through content, SEO, and social distribution — no paid acquisition, no PR agency. Photos and original interviews from CWG were picked up by fan communities, other blogs, and Wikipedia entries that still reference the coverage today.</p>
-                    </div>
-                </div>
+                <div class="cwg-traction-grid fade-up stagger-2">
+                    <article class="cwg-traction-item">
+                        <div class="cwg-traction-head">
+                            <span class="cwg-traction-icon" aria-hidden="true">✦</span>
+                            <h3>Named Top Online Music Publication</h3>
+                        </div>
+                        <p>Yahoo recognized CWG as a top online music outlet alongside established names.</p>
+                    </article>
 
-                <div class="recognition-card fade-up stagger-3">
-                    <span class="recognition-icon">📱</span>
-                    <div class="recognition-content">
-                        <h3>10k+ iOS Downloads</h3>
-                        <p>A native iOS app before the App Store was saturated — consistent repeat usage during tour and festival seasons proved the audience wanted music coverage on mobile before most outlets believed them.</p>
-                    </div>
-                </div>
+                    <article class="cwg-traction-item">
+                        <div class="cwg-traction-head">
+                            <span class="cwg-traction-icon" aria-hidden="true">↗</span>
+                            <h3>Organic Scale at Peak</h3>
+                        </div>
+                        <p>Traffic scaled to 250k+ monthly uniques through content, SEO, and social only.</p>
+                    </article>
 
-                <div class="recognition-card fade-up">
-                    <span class="recognition-icon">🎸</span>
-                    <div class="recognition-content">
-                        <h3>Label & Publicist Access</h3>
-                        <p>Regular access to arena-level acts and major label artists — earned by being reliable, professional, and respectful of the coverage relationship. Access at this level is relationship-gated; CWG earned it without a masthead, without budget, and without compromise on quality.</p>
-                    </div>
+                    <article class="cwg-traction-item">
+                        <div class="cwg-traction-head">
+                            <span class="cwg-traction-icon" aria-hidden="true">▣</span>
+                            <h3>Early Mobile Validation</h3>
+                        </div>
+                        <p>10k+ iOS installs proved the audience wanted music coverage on mobile early.</p>
+                    </article>
+
+                    <article class="cwg-traction-item">
+                        <div class="cwg-traction-head">
+                            <span class="cwg-traction-icon" aria-hidden="true">♬</span>
+                            <h3>Tier-1 Access Earned</h3>
+                        </div>
+                        <p>Consistent access to major artists and labels through reliability and editorial quality.</p>
+                    </article>
                 </div>
             </div>
         </div>
@@ -460,10 +482,10 @@
                         <p><strong>CWG as a kingmaker:</strong> Many of the staff went on to real careers in music journalism, photography, and media. That was the outcome that mattered most — not the traffic numbers.</p>
                     </div>
 
-                    <div class="hero-cta" style="justify-content: flex-start; margin-top: 32px;">
-                        <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
-                        <a href="https://jimmarkunas.com/work/" class="btn btn-secondary">View All Work</a>
+                    <div class="cwg-legacy-banner-wrap">
+                        <img src="/founder/cwg/images/banner-cwg-thegame.jpg" alt="The Game live photography banner" class="cwg-legacy-banner" loading="lazy">
                     </div>
+
                 </div>
             </div>
         </div>
