@@ -580,6 +580,343 @@ body.page-murad {
     --case-banner-image-mobile: url('/images/banners/logo-murad-mobile.png');
 }
 
+.page-murad .platform-transition-card {
+    background: rgba(68, 122, 203, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 32px 0;
+}
+
+.page-murad .platform-transition-card h4 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.page-murad .platform-shift {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 20px;
+    align-items: center;
+}
+
+.page-murad .platform-state {
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    min-height: 100%;
+}
+
+.page-murad .platform-state.before {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+.page-murad .platform-state.after {
+    background: rgba(68, 122, 203, 0.2);
+    border-color: rgba(68, 122, 203, 0.5);
+}
+
+.page-murad .platform-state .state-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.page-murad .platform-state h5 {
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.page-murad .platform-state ul {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--text-secondary);
+}
+
+.page-murad .platform-state li {
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.45;
+}
+
+.page-murad .platform-arrow {
+    font-size: 40px;
+    color: var(--text-secondary);
+    line-height: 1;
+}
+
+.page-murad .platform-impact {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.page-murad .integration-map-card {
+    background: linear-gradient(145deg, rgba(68, 122, 203, 0.09), rgba(239, 68, 68, 0.07));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 28px 24px;
+    margin: 32px 0;
+}
+
+.page-murad .integration-map-card h3 {
+    text-align: center;
+    margin: 0 0 8px;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.page-murad .integration-map-subhead {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.page-murad .integration-surfaces {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.page-murad .integration-surface {
+    background: rgba(19, 19, 26, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.page-murad .integration-surface.commerce {
+    border-top: 3px solid #60a5fa;
+}
+
+.page-murad .integration-surface.subscription {
+    border-top: 3px solid #f59e0b;
+}
+
+.page-murad .integration-surface.finance {
+    border-top: 3px solid #34d399;
+}
+
+.page-murad .surface-title-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.page-murad .surface-title-row h4 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--text-primary);
+}
+
+.page-murad .surface-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #fecaca;
+    border: 1px solid rgba(239, 68, 68, 0.6);
+    background: rgba(127, 29, 29, 0.3);
+    border-radius: 999px;
+    padding: 3px 7px;
+    white-space: normal;
+    line-height: 1.2;
+}
+
+.page-murad .surface-system {
+    font-size: 14px;
+    color: #bfdbfe;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.page-murad .surface-meta {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--text-secondary);
+}
+
+.page-murad .surface-meta li {
+    font-size: 13px;
+    line-height: 1.45;
+    margin-bottom: 7px;
+}
+
+.page-murad .surface-meta strong {
+    color: var(--text-primary);
+}
+
+.page-murad .integration-flow {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+}
+
+.page-murad .flow-step {
+    border: 1px solid rgba(68, 122, 203, 0.45);
+    background: rgba(68, 122, 203, 0.12);
+    border-radius: 9px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.page-murad .flow-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #dbe9ff;
+    font-weight: 700;
+}
+
+.page-murad .flow-system {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.page-murad .flow-arrow {
+    font-size: 24px;
+    color: var(--text-secondary);
+    line-height: 1;
+}
+
+.page-murad .ownership-image-wrap {
+    margin: 24px 0 32px;
+}
+
+.page-murad .ownership-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.page-murad .subscription-lifecycle-card {
+    margin: 28px 0 8px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(68, 122, 203, 0.07), rgba(15, 23, 42, 0.72));
+    padding: 18px;
+}
+
+.page-murad .lifecycle-head h4 {
+    margin: 0 0 4px;
+    color: var(--text-primary);
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+.page-murad .lifecycle-head p {
+    margin: 0 0 12px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.page-murad .lifecycle-steps {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 8px;
+    align-items: center;
+}
+
+.page-murad .lifecycle-step {
+    border: 1px solid rgba(68, 122, 203, 0.45);
+    border-radius: 10px;
+    background: rgba(68, 122, 203, 0.11);
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: center;
+}
+
+.page-murad .step-name {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: #dbe9ff;
+}
+
+.page-murad .step-event {
+    font-size: 11px;
+    color: var(--text-secondary);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.page-murad .step-arrow {
+    font-size: 22px;
+    color: var(--text-secondary);
+}
+
+.page-murad .lifecycle-rails {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.page-murad .lifecycle-rail {
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    background: rgba(19, 19, 26, 0.82);
+    padding: 10px;
+}
+
+.page-murad .rail-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.page-murad .rail-systems {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.page-murad .lifecycle-kpis {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.page-murad .lifecycle-kpis span {
+    font-size: 12px;
+    color: var(--text-primary);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 999px;
+    padding: 6px 10px;
+    text-align: center;
+}
+
+
 body.page-nyl {
     --case-banner-image-web: url('/images/banners/logo-nyl-web.png');
     --case-banner-image-tablet: url('/images/banners/logo-nyl-tablet.png');
@@ -1543,6 +1880,69 @@ figure.diagram-static .notice-list li {
 /* Global mobile fix for legacy case-study visual timelines
    (inline flex rows with circular milestones). */
 @media (max-width: 960px) {
+    .page-murad .platform-transition-card {
+        padding: 20px 16px;
+    }
+
+    .page-murad .platform-shift {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .page-murad .platform-arrow {
+        display: none;
+    }
+
+    .page-murad .platform-state h5 {
+        font-size: 18px;
+    }
+
+    .page-murad .integration-map-card {
+        padding: 12px 14px 16px;
+    }
+
+    .page-murad .integration-map-card h3 {
+        font-size: 22px;
+    }
+
+    .page-murad .integration-surfaces {
+        grid-template-columns: 1fr;
+    }
+
+    .page-murad .integration-flow {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .page-murad .flow-arrow {
+        display: none;
+    }
+
+    .page-murad .subscription-lifecycle-card {
+        padding: 14px;
+    }
+
+    .page-murad .lifecycle-head h4 {
+        font-size: 18px;
+    }
+
+    .page-murad .lifecycle-steps {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .page-murad .step-arrow {
+        display: none;
+    }
+
+    .page-murad .lifecycle-rails {
+        grid-template-columns: 1fr;
+    }
+
+    .page-murad .lifecycle-kpis {
+        grid-template-columns: 1fr;
+    }
+
     .content-block > div[style*="background: rgba(68, 122, 203, 0.05)"] {
         overflow: hidden;
         padding: 18px 14px !important;
