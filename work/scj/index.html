@@ -22,8 +22,8 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
-                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" style="width:32px;height:32px;object-fit:contain;">
+                <a href="/" class="u-logo-link">
+                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" class="u-logo-img">
                     JIM MARKUNAS
                 </a>
             </div>
@@ -52,7 +52,7 @@
     </div>
 
     <!-- Banner -->
-    <div class="case-banner" style="background-size: cover; background-position: center;">
+    <div class="case-banner">
         <div class="banner-content">
             <span class="banner-badge badge-company">SC JOHNSON / MRS. MEYER'S</span>
             <span class="banner-badge badge-award">15%+ DTC Revenue Uplift</span>
@@ -77,12 +77,12 @@
     <!-- S0: Overview -->
     <section class="case-hero" id="overview">
         <div class="container">
-            <h1 class="fade-up">Mrs. Meyer's <span style="color: var(--accent-blue);">DTC</span> Launch</h1>
+            <h1 class="fade-up">Mrs. Meyer's <span class="u-accent-color">DTC</span> Launch</h1>
             
             <p class="subheadline fade-up stagger-2">Led the solutioning, architecture, and program management to take Mrs. Meyer's from shelf-only to a full DTC engine on BigCommerce—integrating SAP, a third-party WMS, and a modern SaaS stack into SC Johnson's first reusable DTC blueprint.</p>
 
             <!-- Metrics Row ABOVE subheadline -->
-            <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
+            <div class="metrics-row fade-up stagger-1 u-hero-metrics-spacing">
                 <div class="metric-card">
                     <span class="metric-value">15%+</span>
                     <span class="metric-label">DTC Revenue Uplift</span>
@@ -151,11 +151,11 @@
     </section>
 
     <!-- S1: Context -->
-    <section class="case-section" id="context" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="context">
         <div class="container">
             <div class="content-block fade-up">
-                <h2 style="text-align: center;">Context & Stakes</h2>
-                <p style="text-align: center;">Mrs. Meyer's was a cult-favorite brand with zero direct channel. SC Johnson depended entirely on Target, Walmart, and other retailers for both sales and customer insight. There was no owned relationship with end customers, no way to test bundles or subscriptions, and no first-party data to inform marketing or product decisions. Operationally, everything was tuned for pallets, not parcels: SAP and the LiveArea/Merkle WMS were built to ship truckloads to retailers, not thousands of individual consumer orders.</p>
+                <h2 class="u-text-center">Context & Stakes</h2>
+                <p class="u-text-center">Mrs. Meyer's was a cult-favorite brand with zero direct channel. SC Johnson depended entirely on Target, Walmart, and other retailers for both sales and customer insight. There was no owned relationship with end customers, no way to test bundles or subscriptions, and no first-party data to inform marketing or product decisions. Operationally, everything was tuned for pallets, not parcels: SAP and the LiveArea/Merkle WMS were built to ship truckloads to retailers, not thousands of individual consumer orders.</p>
                 
                 <!-- Visual: Revenue mix shift -->
                 <div class="scj-channel-shift">
@@ -179,7 +179,7 @@
                     <p class="scj-shift-note">DTC expanded total revenue instead of cannibalizing retail channels.</p>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+                <div class="u-grid-2-24-mt24">
                     <div class="col-card">
                         <h4>Legacy Constraints</h4>
                         <ul>
@@ -202,13 +202,13 @@
     </section>
 
     <!-- S2: Problem -->
-    <section class="case-section" id="problem" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="problem">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
 
                 <div style="margin: 24px 0 28px;">
-                    <img src="images/banner-mm-02.jpg" alt="SCJ challenge banner" draggable="false" style="display: block; width: 100%; height: auto; border-radius: 12px; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; pointer-events: none;">
+                    <img src="images/banner-mm-02.jpg" alt="SCJ challenge banner" draggable="false" class="u-img-banner-nonselect-rounded">
                 </div>
                 
                 <div class="scj-parcel-map">
@@ -252,9 +252,9 @@
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
-                    <div class="col-card" style="border-left: 4px solid #ef4444;">
-                        <h4 style="color: #ef4444;">Technical Blockers</h4>
+                <div class="u-grid-2-24-mt32">
+                    <div class="col-card u-border-left-red-4">
+                        <h4 class="u-text-red-500">Technical Blockers</h4>
                         <ul>
                             <li>No DTC storefront or consumer checkout</li>
                             <li>SAP not configured for parcel-level orders</li>
@@ -262,8 +262,8 @@
                             <li>No tax, fraud, or consumer payment layer</li>
                         </ul>
                     </div>
-                    <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
-                        <h4 style="color: var(--accent-blue);">Business Blockers</h4>
+                    <div class="col-card u-border-left-accent-4">
+                        <h4 class="u-accent-color">Business Blockers</h4>
                         <ul>
                             <li>Had to prove DTC wouldn't cannibalize retail</li>
                             <li>Multiple agencies + SCJ needed alignment</li>
@@ -273,7 +273,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>Success Criteria:</strong> Launch US & Canada DTC. Deliver 15%+ incremental revenue lift. Prove the stack is reusable for Caldrea and Method without rebuilding from scratch.</p>
                 </div>
             </div>
@@ -281,16 +281,16 @@
     </section>
 
     <!-- S3: Ownership -->
-    <section class="case-section" id="ownership" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="ownership">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
                 
-                <div style="margin: 32px 0;">
-                    <img src="images/banner-mm-04.jpg" alt="SCJ integration banner" draggable="false" style="display: block; width: 100%; height: auto; border-radius: 12px; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; pointer-events: none;">
+                <div class="u-my-32">
+                    <img src="images/banner-mm-04.jpg" alt="SCJ integration banner" draggable="false" class="u-img-banner-nonselect-rounded">
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>Architecture & Integration</h4>
                         <ul>
@@ -311,7 +311,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>Key Decision:</strong> Treat this as a reusable template from day one — not a one-off launch. Every architectural call was filtered through "will this still make sense when we plug in Caldrea and Method?"</p>
                 </div>
             </div>
@@ -319,16 +319,16 @@
     </section>
 
     <!-- S4: Solution -->
-    <section class="case-section" id="solution" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="solution">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
                 
-                <div style="margin: 32px 0;">
+                <div class="u-my-32">
                     <img src="images/bc-open-saas-architecture-example.png" alt="BigCommerce Open SaaS architecture diagram" style="display: block; width: 100%; height: auto; user-select: auto; -webkit-user-select: auto; -webkit-user-drag: auto;">
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>Commerce & Catalog</h4>
                         <ul>
@@ -375,7 +375,7 @@
     </section>
 
     <!-- S5: Delivery -->
-    <section class="case-section" id="delivery" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="delivery">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Delivery Timeline</h2>
@@ -385,28 +385,28 @@
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; position: relative;">
                         <div style="position: absolute; top: 40px; left: 40px; right: 40px; height: 2px; background: var(--border); z-index: 0;"></div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 12px;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; line-height: 1.3;">Jan<br>2019</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Kickoff</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Discovery & scope</div>
+                        <div class="u-timeline-col-stack">
+                            <div class="u-node-blue-80-fs13-lh13">Jan<br>2019</div>
+                            <div class="u-fs13-semibold-primary">Kickoff</div>
+                            <div class="u-fs11-secondary">Discovery & scope</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 12px;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; line-height: 1.3;">Mar<br>2019</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Method Starts</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Parallel workstream begins</div>
+                        <div class="u-timeline-col-stack">
+                            <div class="u-node-blue-80-fs13-lh13">Mar<br>2019</div>
+                            <div class="u-fs13-semibold-primary">Method Starts</div>
+                            <div class="u-fs11-secondary">Parallel workstream begins</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 12px;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; line-height: 1.3;">Jul<br>2019</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Rewind + Launch</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Catalog restored, US goes live</div>
+                        <div class="u-timeline-col-stack">
+                            <div class="u-node-blue-80-fs13-lh13">Jul<br>2019</div>
+                            <div class="u-fs13-semibold-primary">Rewind + Launch</div>
+                            <div class="u-fs11-secondary">Catalog restored, US goes live</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 12px;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #0a0a0f; line-height: 1.3;">Sep<br>2019</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Method Complete</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Parallel track closes</div>
+                        <div class="u-timeline-col-stack">
+                            <div class="u-node-gold-80-fs13-lh13">Sep<br>2019</div>
+                            <div class="u-fs13-semibold-primary">Method Complete</div>
+                            <div class="u-fs11-secondary">Parallel track closes</div>
                         </div>
                     </div>
                 </div>
@@ -434,9 +434,9 @@
     </section>
 
     <!-- S6: Results -->
-    <section class="case-section" id="results" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="results">
         <div class="container">
-            <div style="background: var(--bg-secondary); border: 2px solid var(--accent-blue); border-radius: 12px; padding: 40px;">
+            <div class="u-results-panel-40">
                 <div class="content-block fade-up">
                     <h2>Results</h2>
                 
@@ -459,7 +459,7 @@
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>For Customers</h4>
                         <ul>

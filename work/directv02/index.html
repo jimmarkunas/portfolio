@@ -22,16 +22,16 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
-                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" style="width:32px;height:32px;object-fit:contain;">
+                <a href="/" class="u-logo-link">
+                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" class="u-logo-img">
                     JIM MARKUNAS
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="https://jimmarkunas.com/work/">Work</a></li>
-                <li><a href="https://jimmarkunas.com/services/">Services</a></li>
+                <li><a href="/work/">Work</a></li>
+                <li><a href="/services/">Services</a></li>
                 <li><a href="/cv/">CV</a></li>
-                <li><a href="https://jimmarkunas.com/about/">About</a></li>
+                <li><a href="/about/">About</a></li>
                 <li><a href="/contact/">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -44,15 +44,15 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="https://jimmarkunas.com/work/">Work</a>
-        <a href="https://jimmarkunas.com/services/">Services</a>
+        <a href="/work/">Work</a>
+        <a href="/services/">Services</a>
         <a href="/cv/">CV</a>
-        <a href="https://jimmarkunas.com/about/">About</a>
+        <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
     </div>
 
     <!-- Banner -->
-    <div class="case-banner" style="background-size: cover; background-repeat: no-repeat; background-position: center 58%;">
+    <div class="case-banner">
         <div class="banner-content">
             <span class="banner-badge badge-company">DIRECTV EVERYWHERE · 2012–2013</span>
             <span class="banner-badge badge-award">5M+ Downloads at Launch</span>
@@ -77,11 +77,11 @@
     <!-- S0: Overview -->
     <section class="case-hero" id="overview">
         <div class="container">
-            <h1 class="fade-up">DIRECTV Everywhere: Turning a <span style="color: var(--accent-blue);">Marketing Promise</span> Into a Real Streaming Product</h1>
+            <h1 class="fade-up">DIRECTV Everywhere: Turning a <span class="u-accent-color">Marketing Promise</span> Into a Real Streaming Product</h1>
             
             <p class="subheadline fade-up stagger-2">DIRECTV had already bought national ad spots promising "Everywhere" access — but the actual product was still half-baked. I was brought in as Product Manager to turn that promise into something subscribers could actually use: a true cross-platform streaming experience that worked across web, mobile, and connected devices, built from a partially-assembled stack with a very public deadline.</p>
 
-            <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
+            <div class="metrics-row fade-up stagger-1 u-hero-metrics-spacing">
                 <div class="metric-card">
                     <span class="metric-value">5M+</span>
                     <span class="metric-label">Downloads at Launch</span>
@@ -144,23 +144,23 @@
 
             <div class="hero-cta fade-up stagger-3">
                 <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
-                <a href="https://jimmarkunas.com/cv/" class="btn btn-secondary">Download CV</a>
+                <a href="/cv/" class="btn btn-secondary">Download CV</a>
             </div>
         </div>
     </section>
 
     <!-- S1: Context -->
-    <section class="case-section" id="context" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="context">
         <div class="container">
             <div class="content-block fade-up">
-                <h2 style="text-align: center;">Context & Stakes</h2>
-                <p style="text-align: center;">Before Everywhere, DIRECTV was still fundamentally a set-top-box business. Subscribers could watch on the TV the dish was wired to, maybe dabble with a clunky VOD experience — but there was no sense that your content followed you from screen to screen. Meanwhile, Netflix, HBO GO, and others were training customers to expect exactly that. Marketing had already launched a big national "Watch Anywhere" campaign before the product was ready, putting engineering — and me — in the hot seat.</p>
+                <h2 class="u-text-center">Context & Stakes</h2>
+                <p class="u-text-center">Before Everywhere, DIRECTV was still fundamentally a set-top-box business. Subscribers could watch on the TV the dish was wired to, maybe dabble with a clunky VOD experience — but there was no sense that your content followed you from screen to screen. Meanwhile, Netflix, HBO GO, and others were training customers to expect exactly that. Marketing had already launched a big national "Watch Anywhere" campaign before the product was ready, putting engineering — and me — in the hot seat.</p>
                 <div style="margin: 24px 0 28px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.55); padding: 12px;">
-                    <div style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: rgba(0,0,0,0.18);">
+                    <div class="u-video-wrap-16x9">
                         <iframe
                             src="https://www.youtube.com/embed/rhm-wbznRdo?start=1"
                             title="DIRECTV Everywhere context video"
-                            style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+                            class="u-video-embed-fill"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allowfullscreen>
@@ -174,8 +174,8 @@
                     <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: stretch;">
                         <div class="col-card" style="border-left: 4px solid #ef4444; margin: 0; background: rgba(127,29,29,0.08);">
                             <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #fca5a5; margin-bottom: 10px;">Before</div>
-                            <h4 style="margin-top: 0;">Tethered to the Set-Top Box</h4>
-                            <ul style="margin-bottom: 0;">
+                            <h4 class="u-mt0">Tethered to the Set-Top Box</h4>
+                            <ul class="u-mb0">
                                 <li>Clunky VOD experience and limited portability</li>
                                 <li>No true mobile streaming expectation met</li>
                                 <li>No unified login/entitlement experience</li>
@@ -187,8 +187,8 @@
 
                         <div class="col-card" style="border-left: 4px solid var(--accent-blue); margin: 0; background: rgba(68,122,203,0.08);">
                             <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #93c5fd; margin-bottom: 10px;">After</div>
-                            <h4 style="margin-top: 0;">TV That Follows You</h4>
-                            <ul style="margin-bottom: 0;">
+                            <h4 class="u-mt0">TV That Follows You</h4>
+                            <ul class="u-mb0">
                                 <li>Cross-device streaming across 5 device families</li>
                                 <li>Unified SSO and entitlement-aware access</li>
                                 <li>Live + VOD in one coherent product experience</li>
@@ -198,24 +198,24 @@
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-top: 16px;">
-                        <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 12px; text-align: center;">
-                            <div style="font-size: 22px; font-weight: 700; color: var(--accent-blue);">5M+</div>
-                            <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">Downloads in Year 1</div>
+                        <div class="u-stat-card-center-12">
+                            <div class="u-fs22-bold-accent">5M+</div>
+                            <div class="u-overline-secondary-12">Downloads in Year 1</div>
                         </div>
-                        <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 12px; text-align: center;">
-                            <div style="font-size: 22px; font-weight: 700; color: var(--accent-blue);">5</div>
-                            <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">Device Families Shipped</div>
+                        <div class="u-stat-card-center-12">
+                            <div class="u-fs22-bold-accent">5</div>
+                            <div class="u-overline-secondary-12">Device Families Shipped</div>
                         </div>
-                        <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 12px; text-align: center;">
-                            <div style="font-size: 22px; font-weight: 700; color: var(--accent-blue);">Foundation</div>
-                            <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">For DIRECTV Stream</div>
+                        <div class="u-stat-card-center-12">
+                            <div class="u-fs22-bold-accent">Foundation</div>
+                            <div class="u-overline-secondary-12">For DIRECTV Stream</div>
                         </div>
                     </div>
 
                     <div style="text-align: center; margin-top: 14px; color: var(--text-secondary); font-size: 14px;">DIRECTV's first true cross-platform streaming product — shipped before "streaming wars" was even a headline.</div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+                <div class="u-grid-2-24-mt24">
                     <div class="col-card">
                         <h4>What DIRECTV Needed</h4>
                         <ul>
@@ -238,18 +238,18 @@
     </section>
 
     <!-- S2: Problem -->
-    <section class="case-section" id="problem" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="problem">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
                 
                 <figure>
                     <div style="margin: 0 0 12px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.55); padding: 12px;">
-                        <div style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: rgba(0,0,0,0.18);">
+                        <div class="u-video-wrap-16x9">
                             <iframe
                                 src="https://www.youtube.com/embed/nIKU56RgIZY"
                                 title="DIRECTV Everywhere challenge video"
-                                style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+                                class="u-video-embed-fill"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerpolicy="strict-origin-when-cross-origin"
                                 allowfullscreen>
@@ -264,9 +264,9 @@
                     </ul>
                 </figure>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
-                    <div class="col-card" style="border-left: 4px solid #ef4444;">
-                        <h4 style="color: #ef4444;">Technical Blockers</h4>
+                <div class="u-grid-2-24-mt32">
+                    <div class="col-card u-border-left-red-4">
+                        <h4 class="u-text-red-500">Technical Blockers</h4>
                         <ul>
                             <li>No shared identity or entitlement model across device platforms</li>
                             <li>Linear and VOD catalogs disconnected — no coherent search or discovery</li>
@@ -274,8 +274,8 @@
                             <li>Six device surfaces, zero shared UX patterns — every team reinventing independently</li>
                         </ul>
                     </div>
-                    <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
-                        <h4 style="color: var(--accent-blue);">Organizational Blockers</h4>
+                    <div class="col-card u-border-left-accent-4">
+                        <h4 class="u-accent-color">Organizational Blockers</h4>
                         <ul>
                             <li>30+ teams — programming, devices, marketing, identity, platform engineering — all misaligned</li>
                             <li>Marketing had launched "Watch Anywhere" before engineering had a plan</li>
@@ -285,7 +285,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>The Core Tension:</strong> DIRECTV leadership needed a product that felt simple to subscribers — even though the rights, device rules, and entitlement logic behind it were extraordinarily messy. That gap between "simple for the user" and "complex for everyone building it" was exactly where I sat.</p>
                 </div>
             </div>
@@ -293,7 +293,7 @@
     </section>
 
     <!-- S3: Ownership -->
-    <section class="case-section" id="ownership" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="ownership">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
@@ -308,35 +308,35 @@
                         </div>
 
                         <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px;">
-                            <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 14px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
-                                <div style="font-size: 24px; font-weight: 700; color: var(--accent-blue); line-height: 1;">30+</div>
-                                <div style="margin-top: 6px; font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">Teams Aligned</div>
+                            <div class="u-stat-card-center-14-flex">
+                                <div class="u-fs24-bold-accent-lh1">30+</div>
+                                <div class="u-overline-secondary-11-mt6">Teams Aligned</div>
                             </div>
-                            <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 14px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
-                                <div style="font-size: 24px; font-weight: 700; color: var(--accent-blue); line-height: 1;">6</div>
-                                <div style="margin-top: 6px; font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">Surfaces / Devices</div>
+                            <div class="u-stat-card-center-14-flex">
+                                <div class="u-fs24-bold-accent-lh1">6</div>
+                                <div class="u-overline-secondary-11-mt6">Surfaces / Devices</div>
                             </div>
-                            <div style="background: rgba(7,15,35,0.65); border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; padding: 14px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
-                                <div style="font-size: 24px; font-weight: 700; color: var(--accent-blue); line-height: 1;">12 Mo</div>
-                                <div style="margin-top: 6px; font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">Delivery Window</div>
+                            <div class="u-stat-card-center-14-flex">
+                                <div class="u-fs24-bold-accent-lh1">12 Mo</div>
+                                <div class="u-overline-secondary-11-mt6">Delivery Window</div>
                             </div>
 
                             <div style="grid-column: 1 / -1; background: rgba(7,15,35,0.45); border: 1px solid rgba(68,122,203,0.12); border-radius: 10px; padding: 14px;">
                                 <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;">Platform Coverage</div>
-                                <div style="display:flex; flex-wrap:wrap; gap: 8px;">
-                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">Web</span>
-                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">iOS</span>
-                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">Android</span>
-                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">Roku</span>
-                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">Fire TV</span>
-                                    <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(68,122,203,0.18); background: rgba(68,122,203,0.08); color: var(--text-primary); font-size: 13px;">Apple TV</span>
+                                <div class="u-flex-wrap-gap8">
+                                    <span class="u-pill-blue-13">Web</span>
+                                    <span class="u-pill-blue-13">iOS</span>
+                                    <span class="u-pill-blue-13">Android</span>
+                                    <span class="u-pill-blue-13">Roku</span>
+                                    <span class="u-pill-blue-13">Fire TV</span>
+                                    <span class="u-pill-blue-13">Apple TV</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>Cross-Platform PRDs &amp; UX Parity</h4>
                         <ul>
@@ -375,7 +375,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>"Wow! That was explosive!"</strong> — Shayde Christian, Program Manager, DIRECTV</p>
                 </div>
             </div>
@@ -383,7 +383,7 @@
     </section>
 
     <!-- S4: Solution -->
-    <section class="case-section" id="solution" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="solution">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
@@ -397,49 +397,49 @@
 
                     <div style="display:grid; grid-template-columns: 1.15fr 1.7fr; gap: 14px; align-items: stretch;">
                         <div style="display:grid; grid-template-rows: repeat(3, minmax(0,1fr)); gap: 10px;">
-                            <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.58); padding: 12px;">
-                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px;">Shared Identity</div>
-                                <div style="font-size: 14px; font-weight: 600; color: var(--text-primary);">SSO + Entitlements</div>
-                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Credentials, package access, device limits</div>
+                            <div class="u-card-blue-10-pad12">
+                                <div class="u-overline-secondary-11-mb6">Shared Identity</div>
+                                <div class="u-fs14-primary-semibold">SSO + Entitlements</div>
+                                <div class="u-fs12-secondary-mt4">Credentials, package access, device limits</div>
                             </div>
-                            <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.58); padding: 12px;">
-                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px;">Shared Catalog</div>
-                                <div style="font-size: 14px; font-weight: 600; color: var(--text-primary);">Live + VOD in One Model</div>
-                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Search, browse, and discovery stay coherent</div>
+                            <div class="u-card-blue-10-pad12">
+                                <div class="u-overline-secondary-11-mb6">Shared Catalog</div>
+                                <div class="u-fs14-primary-semibold">Live + VOD in One Model</div>
+                                <div class="u-fs12-secondary-mt4">Search, browse, and discovery stay coherent</div>
                             </div>
-                            <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.58); padding: 12px;">
-                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px;">Shared UX Patterns</div>
-                                <div style="font-size: 14px; font-weight: 600; color: var(--text-primary);">One Product, Not 6 Experiments</div>
-                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Browse, player, and nav parity across surfaces</div>
+                            <div class="u-card-blue-10-pad12">
+                                <div class="u-overline-secondary-11-mb6">Shared UX Patterns</div>
+                                <div class="u-fs14-primary-semibold">One Product, Not 6 Experiments</div>
+                                <div class="u-fs12-secondary-mt4">Browse, player, and nav parity across surfaces</div>
                             </div>
                         </div>
 
                         <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.14); background: rgba(7,15,35,0.44); padding: 14px; display:flex; flex-direction:column; justify-content:space-between;">
                             <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 12px;">
-                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
-                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
-                                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="stroke: #8fb5ff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;">
+                                <div class="u-device-tile">
+                                    <div class="u-icon-holder-22">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" class="u-svg-stroke-blue-18">
                                             <rect x="3" y="4" width="18" height="12" rx="1.8"></rect>
                                             <path d="M8 20h8"></path>
                                             <path d="M10 16l-1 4"></path>
                                             <path d="M14 16l1 4"></path>
                                         </svg>
                                     </div>
-                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">Web</div>
+                                    <div class="u-fs12-primary-mt4">Web</div>
                                 </div>
-                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
-                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
-                                        <svg width="18" height="22" viewBox="0 0 18 24" aria-hidden="true" style="stroke: #8fb5ff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;">
+                                <div class="u-device-tile">
+                                    <div class="u-icon-holder-22">
+                                        <svg width="18" height="22" viewBox="0 0 18 24" aria-hidden="true" class="u-svg-stroke-blue-18">
                                             <rect x="2.5" y="1.5" width="13" height="21" rx="2.8"></rect>
                                             <path d="M7 4h4"></path>
-                                            <circle cx="9" cy="19" r="0.8" style="fill:#8fb5ff; stroke:none;"></circle>
+                                            <circle cx="9" cy="19" r="0.8" class="u-svg-fill-blue-none"></circle>
                                         </svg>
                                     </div>
-                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">iOS</div>
+                                    <div class="u-fs12-primary-mt4">iOS</div>
                                 </div>
-                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
-                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
-                                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="stroke: #8fb5ff; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;">
+                                <div class="u-device-tile">
+                                    <div class="u-icon-holder-22">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" class="u-svg-stroke-blue-16">
                                             <rect x="6" y="8" width="12" height="9" rx="2"></rect>
                                             <path d="M8 8l-1.5-2"></path>
                                             <path d="M16 8l1.5-2"></path>
@@ -447,52 +447,52 @@
                                             <path d="M15 17v3"></path>
                                             <path d="M6 11H4"></path>
                                             <path d="M20 11h-2"></path>
-                                            <circle cx="10" cy="12" r="0.7" style="fill:#8fb5ff; stroke:none;"></circle>
-                                            <circle cx="14" cy="12" r="0.7" style="fill:#8fb5ff; stroke:none;"></circle>
+                                            <circle cx="10" cy="12" r="0.7" class="u-svg-fill-blue-none"></circle>
+                                            <circle cx="14" cy="12" r="0.7" class="u-svg-fill-blue-none"></circle>
                                         </svg>
                                     </div>
-                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">Android</div>
+                                    <div class="u-fs12-primary-mt4">Android</div>
                                 </div>
-                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
-                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
-                                        <svg width="24" height="22" viewBox="0 0 24 24" aria-hidden="true" style="stroke: #8fb5ff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;">
+                                <div class="u-device-tile">
+                                    <div class="u-icon-holder-22">
+                                        <svg width="24" height="22" viewBox="0 0 24 24" aria-hidden="true" class="u-svg-stroke-blue-18">
                                             <rect x="3" y="5" width="18" height="11" rx="2"></rect>
                                             <path d="M10 19h4"></path>
                                             <path d="M8 22h8"></path>
                                         </svg>
                                     </div>
-                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">Roku</div>
+                                    <div class="u-fs12-primary-mt4">Roku</div>
                                 </div>
-                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
-                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
-                                        <svg width="18" height="22" viewBox="0 0 18 24" aria-hidden="true" style="fill: none; stroke: #8fb5ff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;">
+                                <div class="u-device-tile">
+                                    <div class="u-icon-holder-22">
+                                        <svg width="18" height="22" viewBox="0 0 18 24" aria-hidden="true" class="u-svg-stroke-blue-17">
                                             <path d="M9 2c1.7 3-1 4.3 1.8 7.1 1.2 1.2 3 2.7 3 5.4A5.8 5.8 0 0 1 8 20.3a5.8 5.8 0 0 1-3.8-10c.7-.7 1.5-1.5 2-2.7.6-1.5.3-2.5.8-4 .9 1 1.4 1.8 2 3.4Z"></path>
                                         </svg>
                                     </div>
-                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">Fire TV</div>
+                                    <div class="u-fs12-primary-mt4">Fire TV</div>
                                 </div>
-                                <div style="text-align:center; padding:10px 8px; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08);">
-                                    <div style="height: 22px; display:flex; align-items:center; justify-content:center;">
-                                        <svg width="18" height="22" viewBox="0 0 20 24" aria-hidden="true" style="fill: none; stroke: #8fb5ff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;">
+                                <div class="u-device-tile">
+                                    <div class="u-icon-holder-22">
+                                        <svg width="18" height="22" viewBox="0 0 20 24" aria-hidden="true" class="u-svg-stroke-blue-17">
                                             <path d="M12.2 4.2c1-.8 1.7-2 1.6-3.2-1.2.1-2.4.8-3.1 1.7-.7.8-1.2 2-.9 3.1 1.1.1 2.2-.5 2.4-1.6Z"></path>
                                             <path d="M10.1 8.2c1.3 0 2-.7 3.3-.7 1.6 0 2.8.8 3.6 2-.9.5-1.8 1.6-1.8 3.3 0 1.8 1 2.9 1.8 3.4-.4 1.1-.9 2-1.6 2.9-.9 1.1-1.8 2.2-3.2 2.2-1.3 0-1.7-.7-3.2-.7s-2 .7-3.2.7c-1.4 0-2.4-1.1-3.2-2.2-1.7-2.2-3-6.1-1.2-9 .9-1.4 2.4-2.3 4-2.3 1.3 0 2.4.7 3.2.7Z"></path>
                                         </svg>
                                     </div>
-                                    <div style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">Apple TV</div>
+                                    <div class="u-fs12-primary-mt4">Apple TV</div>
                                 </div>
                             </div>
 
                             <div style="border-radius: 10px; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.68); padding: 14px; position: relative;">
                                 <div style="position:absolute; top:-1px; left:12px; right:12px; height:2px; background: linear-gradient(90deg, rgba(68,122,203,0.3), rgba(68,122,203,0.9), rgba(34,211,238,0.35)); border-radius: 999px;"></div>
-                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">Shared Platform Layer</div>
+                                <div class="u-overline-secondary-11-08-mb8">Shared Platform Layer</div>
                                 <div style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">DIRECTV Everywhere Product Model</div>
-                                <div style="display:flex; flex-wrap:wrap; gap: 8px;">
-                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">Auth</span>
-                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">Entitlements</span>
-                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">Catalog</span>
-                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">Search</span>
-                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">Playback</span>
-                                    <span style="padding: 5px 9px; border-radius: 999px; background: rgba(68,122,203,0.12); border: 1px solid rgba(68,122,203,0.18); font-size: 12px; color: var(--text-primary);">DRM</span>
+                                <div class="u-flex-wrap-gap8">
+                                    <span class="u-pill-blue-12">Auth</span>
+                                    <span class="u-pill-blue-12">Entitlements</span>
+                                    <span class="u-pill-blue-12">Catalog</span>
+                                    <span class="u-pill-blue-12">Search</span>
+                                    <span class="u-pill-blue-12">Playback</span>
+                                    <span class="u-pill-blue-12">DRM</span>
                                 </div>
                                 <div style="margin-top: 10px; font-size: 12px; color: var(--text-secondary);">Ship once as a product system; adapt per surface without rebuilding the experience from scratch.</div>
                             </div>
@@ -500,7 +500,7 @@
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>Cross-Platform Apps &amp; UX</h4>
                         <ul>
@@ -525,76 +525,76 @@
                     <div style="background: rgba(68,122,203,0.05); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
                         <div style="display:grid; grid-template-columns: 1.3fr 1fr; gap: 14px; align-items: stretch;">
                             <div style="border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; background: rgba(7,15,35,0.5); padding: 14px;">
-                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">Shared Catalog Model</div>
+                                <div class="u-overline-secondary-11-08-mb8">Shared Catalog Model</div>
                                 <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; align-items:center;">
                                     <div style="grid-column: 1 / -1; display:grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items:center;">
-                                        <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.08); padding: 10px; text-align:center;">
-                                            <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em;">Inputs</div>
+                                        <div class="u-card-blue-8-pad10-center">
+                                            <div class="u-overline-secondary-11-06">Inputs</div>
                                             <div style="font-size: 13px; color: var(--text-primary); margin-top: 4px;">Linear + VOD feeds</div>
                                         </div>
                                         <div style="color: var(--text-secondary); font-size: 18px;">→</div>
                                         <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.18); background: rgba(7,15,35,0.7); padding: 10px; text-align:center;">
-                                            <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em;">Core Layer</div>
+                                            <div class="u-overline-secondary-11-06">Core Layer</div>
                                             <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-top: 4px;">Metadata + Entitlements</div>
                                         </div>
                                     </div>
-                                    <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(7,15,35,0.45); padding: 10px; text-align:center;">
-                                        <div style="font-size: 12px; color: var(--text-primary);">Search</div>
-                                        <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Unified indexing</div>
+                                    <div class="u-card-blue-dark-8-pad10-center">
+                                        <div class="u-fs12-primary">Search</div>
+                                        <div class="u-fs10-secondary-mt3">Unified indexing</div>
                                     </div>
-                                    <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(7,15,35,0.45); padding: 10px; text-align:center;">
-                                        <div style="font-size: 12px; color: var(--text-primary);">Browse</div>
-                                        <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Carousels + rails</div>
+                                    <div class="u-card-blue-dark-8-pad10-center">
+                                        <div class="u-fs12-primary">Browse</div>
+                                        <div class="u-fs10-secondary-mt3">Carousels + rails</div>
                                     </div>
-                                    <div style="border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(7,15,35,0.45); padding: 10px; text-align:center;">
-                                        <div style="font-size: 12px; color: var(--text-primary);">Continue Watching</div>
-                                        <div style="font-size: 10px; color: var(--text-secondary); margin-top: 3px;">Stateful playback</div>
+                                    <div class="u-card-blue-dark-8-pad10-center">
+                                        <div class="u-fs12-primary">Continue Watching</div>
+                                        <div class="u-fs10-secondary-mt3">Stateful playback</div>
                                     </div>
                                     <div style="grid-column: 1 / -1; border-radius: 8px; border: 1px solid rgba(68,122,203,0.14); background: rgba(68,122,203,0.06); padding: 10px;">
                                         <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;">Editorial Logic</div>
                                         <div style="display:flex; flex-wrap:wrap; gap: 6px;">
-                                            <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.6); font-size: 11px; color: var(--text-primary);">Premium you already pay for</span>
-                                            <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.6); font-size: 11px; color: var(--text-primary);">Watch next</span>
-                                            <span style="padding:4px 8px; border-radius:999px; border:1px solid rgba(68,122,203,0.16); background: rgba(7,15,35,0.6); font-size: 11px; color: var(--text-primary);">Collections</span>
+                                            <span class="u-pill-dark-blue-11">Premium you already pay for</span>
+                                            <span class="u-pill-dark-blue-11">Watch next</span>
+                                            <span class="u-pill-dark-blue-11">Collections</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div style="border: 1px solid rgba(68,122,203,0.14); border-radius: 10px; background: rgba(7,15,35,0.5); padding: 14px; display:flex; flex-direction:column;">
-                                <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">Launch Playbook</div>
-                                <div style="display:grid; gap: 8px;">
-                                    <div style="display:grid; grid-template-columns: 20px 1fr; gap: 8px; align-items:start;">
-                                        <div style="width:20px;height:20px;border-radius:50%;background:rgba(68,122,203,0.14);border:1px solid rgba(68,122,203,0.24);display:flex;align-items:center;justify-content:center;color:var(--accent-blue);font-size:11px;">1</div>
+                                <div class="u-overline-secondary-11-08-mb8">Launch Playbook</div>
+                                <div class="u-grid-gap-8">
+                                    <div class="u-grid-20-1-start-gap8">
+                                        <div class="u-step-dot-blue">1</div>
                                         <div>
-                                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Ownership map</div>
-                                            <div style="font-size: 11px; color: var(--text-secondary);">Who owns APIs, UX, device QA, content ops, and cutover decisions</div>
+                                            <div class="u-fs13-semibold-primary">Ownership map</div>
+                                            <div class="u-fs11-secondary">Who owns APIs, UX, device QA, content ops, and cutover decisions</div>
                                         </div>
                                     </div>
-                                    <div style="display:grid; grid-template-columns: 20px 1fr; gap: 8px; align-items:start;">
-                                        <div style="width:20px;height:20px;border-radius:50%;background:rgba(68,122,203,0.14);border:1px solid rgba(68,122,203,0.24);display:flex;align-items:center;justify-content:center;color:var(--accent-blue);font-size:11px;">2</div>
+                                    <div class="u-grid-20-1-start-gap8">
+                                        <div class="u-step-dot-blue">2</div>
                                         <div>
-                                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Definition of ready</div>
-                                            <div style="font-size: 11px; color: var(--text-secondary);">Catalog, auth, rights, and playback checks before launch train moves</div>
+                                            <div class="u-fs13-semibold-primary">Definition of ready</div>
+                                            <div class="u-fs11-secondary">Catalog, auth, rights, and playback checks before launch train moves</div>
                                         </div>
                                     </div>
-                                    <div style="display:grid; grid-template-columns: 20px 1fr; gap: 8px; align-items:start;">
-                                        <div style="width:20px;height:20px;border-radius:50%;background:rgba(68,122,203,0.14);border:1px solid rgba(68,122,203,0.24);display:flex;align-items:center;justify-content:center;color:var(--accent-blue);font-size:11px;">3</div>
+                                    <div class="u-grid-20-1-start-gap8">
+                                        <div class="u-step-dot-blue">3</div>
                                         <div>
-                                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Trade-off protocol</div>
-                                            <div style="font-size: 11px; color: var(--text-secondary);">How to cut scope without breaking the shared product model</div>
+                                            <div class="u-fs13-semibold-primary">Trade-off protocol</div>
+                                            <div class="u-fs11-secondary">How to cut scope without breaking the shared product model</div>
                                         </div>
                                     </div>
-                                    <div style="display:grid; grid-template-columns: 20px 1fr; gap: 8px; align-items:start;">
+                                    <div class="u-grid-20-1-start-gap8">
                                         <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,215,0,0.14);border:1px solid rgba(255,215,0,0.24);display:flex;align-items:center;justify-content:center;color:#ffd700;font-size:11px;">4</div>
                                         <div>
-                                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Cutover plan</div>
-                                            <div style="font-size: 11px; color: var(--text-secondary);">30+ teams operating on the same launch sequence and escalation path</div>
+                                            <div class="u-fs13-semibold-primary">Cutover plan</div>
+                                            <div class="u-fs11-secondary">30+ teams operating on the same launch sequence and escalation path</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(68,122,203,0.12); font-size: 12px; color: var(--text-secondary);">
-                                    <strong style="color: var(--text-primary);">Outcome:</strong> coherent search/discovery + repeatable launch governance that outlived the first release.
+                                    <strong class="u-color-primary">Outcome:</strong> coherent search/discovery + repeatable launch governance that outlived the first release.
                                 </div>
                             </div>
                         </div>
@@ -611,49 +611,49 @@
     </section>
 
     <!-- S5: Delivery -->
-    <section class="case-section" id="delivery" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="delivery">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Delivery Timeline</h2>
                 
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
-                        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--border);"></div>
+                <div class="u-panel-accent-32">
+                    <div class="u-flex-between-center-rel">
+                        <div class="u-abs-midline-border"></div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; text-align: center; padding: 8px;">Onboard</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Jun 2012</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Promise already in market</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80">Onboard</div>
+                            <div class="u-fs13-semibold-primary">Jun 2012</div>
+                            <div class="u-fs11-secondary">Promise already in market</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; text-align: center; padding: 8px;">PRDs + UX</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Product Model</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">6 surfaces · 1 spec</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80">PRDs + UX</div>
+                            <div class="u-fs13-semibold-primary">Product Model</div>
+                            <div class="u-fs11-secondary">6 surfaces · 1 spec</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; text-align: center; padding: 8px;">Identity</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">SSO + Entitle</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Sign once · watch everywhere</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80">Identity</div>
+                            <div class="u-fs13-semibold-primary">SSO + Entitle</div>
+                            <div class="u-fs11-secondary">Sign once · watch everywhere</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; text-align: center; padding: 8px;">Catalog</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Live + VOD</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Unified discovery</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80">Catalog</div>
+                            <div class="u-fs13-semibold-primary">Live + VOD</div>
+                            <div class="u-fs11-secondary">Unified discovery</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #0a0a0f; text-align: center; padding: 8px;">Launch</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">All Platforms</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Press · 5M+ downloads</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-gold-80">Launch</div>
+                            <div class="u-fs13-semibold-primary">All Platforms</div>
+                            <div class="u-fs11-secondary">Press · 5M+ downloads</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #0a0a0f; text-align: center; padding: 8px;">Blueprint</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Jun 2013</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Foundation for DTV Stream</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-gold-80">Blueprint</div>
+                            <div class="u-fs13-semibold-primary">Jun 2013</div>
+                            <div class="u-fs11-secondary">Foundation for DTV Stream</div>
                         </div>
                     </div>
                 </div>
@@ -689,9 +689,9 @@
     </section>
 
     <!-- S6: Results -->
-    <section class="case-section" id="results" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="results">
         <div class="container">
-            <div style="background: var(--bg-secondary); border: 2px solid var(--accent-blue); border-radius: 12px; padding: 40px;">
+            <div class="u-results-panel-40">
                 <div class="content-block fade-up">
                     <h2>Results</h2>
                 
@@ -713,19 +713,19 @@
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch;">
-                    <div class="col-card" style="display: flex; flex-direction: column;">
+                <div class="u-grid-2-24-stretch">
+                    <div class="col-card u-flex-col">
                         <h4>Before DTVE</h4>
-                        <ul style="flex: 1;">
+                        <ul class="u-flex-1">
                             <li>Subscribers tethered to one TV — no true cross-device streaming, just limited VOD on PC</li>
                             <li>"Watch Anywhere" marketing promise out ahead of reality — risking trust and call-center overload</li>
                             <li>Each device team with its own roadmap and UX assumptions — no single cross-platform product view</li>
                             <li>Auth and entitlements opaque — multiple steps, felt bolted-on, dead-ends common</li>
                         </ul>
                     </div>
-                    <div class="col-card" style="display: flex; flex-direction: column;">
+                    <div class="col-card u-flex-col">
                         <h4>After DTVE</h4>
-                        <ul style="flex: 1;">
+                        <ul class="u-flex-1">
                             <li>Single product spanning web and connected devices — millions of downloads in Y1 validating the strategy</li>
                             <li>Unified SSO and entitlement model — clear what you can watch, successful play starts up</li>
                             <li>Cross-device UX parity — UI updates rollout consistently across all platforms</li>
@@ -735,11 +735,11 @@
                 </div>
 
                 <div style="margin: 32px 0 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(68,122,203,0.2); background: rgba(7,15,35,0.55); padding: 12px;">
-                    <div style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: rgba(0,0,0,0.18);">
+                    <div class="u-video-wrap-16x9">
                         <iframe
                             src="https://www.youtube.com/embed/AyIUhugmOSQ"
                             title="DIRECTV Everywhere results video"
-                            style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+                            class="u-video-embed-fill"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allowfullscreen>
@@ -747,7 +747,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>The Real Value:</strong> DIRECTV looked and behaved like a modern streaming company at a time when most pay-TV providers were still treating apps as side projects. The patterns we established — authenticated streaming tied to pay-TV subscriptions, cross-device parity, shared entitlement model — are what everyone else now takes for granted.</p>
                 </div>
                 </div>

@@ -383,8 +383,8 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
-                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" style="width:32px;height:32px;object-fit:contain;">
+                <a href="/" class="u-logo-link">
+                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" class="u-logo-img">
                     JIM MARKUNAS
                 </a>
             </div>
@@ -413,7 +413,7 @@
     </div>
 
     <!-- Banner -->
-    <div class="case-banner" style="background-size: cover; background-position: center;">
+    <div class="case-banner">
         <div class="banner-content">
             <span class="banner-badge badge-company">FREDERICK'S OF HOLLYWOOD · ABG</span>
             <span class="banner-badge badge-award">3x Faster Promo Launches</span>
@@ -438,11 +438,11 @@
     <!-- S0: Overview -->
     <section class="case-hero" id="overview">
         <div class="container">
-            <h1 class="fade-up">Frederick's of Hollywood: Brand Reboot, <span style="color: var(--accent-blue);">Megan Fox</span>, and an Early Enterprise Platform</h1>
+            <h1 class="fade-up">Frederick's of Hollywood: Brand Reboot, <span class="u-accent-color">Megan Fox</span>, and an Early Enterprise Platform</h1>
             
             <p class="subheadline fade-up stagger-2">When ABG bought Frederick's of Hollywood out of bankruptcy, the stores were gone and the tech stack was dated. The comeback would live or die online, with Megan Fox as co-owner driving the PR wave. My job was to get a Shopify Plus flagship live fast enough to ride the moment, stable enough to survive the spotlight, and lean enough for a small team.</p>
 
-            <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
+            <div class="metrics-row fade-up stagger-1 u-hero-metrics-spacing">
                 <div class="metric-card">
                     <span class="metric-value">3x</span>
                     <span class="metric-label">Faster Promo Launches</span>
@@ -505,24 +505,24 @@
 
             <div class="hero-cta fade-up stagger-3">
                 <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
-                <a href="https://jimmarkunas.com/cv/" class="btn btn-secondary">Download CV</a>
+                <a href="/cv/" class="btn btn-secondary">Download CV</a>
             </div>
         </div>
     </section>
 
     <!-- S1: Context -->
-    <section class="case-section" id="context" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="context">
         <div class="container">
             <div class="content-block fade-up">
-                <h2 style="text-align: center;">Context & Stakes</h2>
-                <p style="text-align: center;">ABG bought Frederick's of Hollywood out of bankruptcy with a clear thesis: bring it back as a digital-only brand with a sharper point of view. They brought in Megan Fox as co-owner and ambassador to reintroduce Frederick's to an audience that cared more about Instagram than malls. The problem was the tech stack: heavy, expensive, and built for a catalogue era, not for a social-driven celebrity relaunch with a hard PR deadline.</p>
+                <h2 class="u-text-center">Context & Stakes</h2>
+                <p class="u-text-center">ABG bought Frederick's of Hollywood out of bankruptcy with a clear thesis: bring it back as a digital-only brand with a sharper point of view. They brought in Megan Fox as co-owner and ambassador to reintroduce Frederick's to an audience that cared more about Instagram than malls. The problem was the tech stack: heavy, expensive, and built for a catalogue era, not for a social-driven celebrity relaunch with a hard PR deadline.</p>
 
                 <figure class="lightbox-trigger foh-context-image" data-src="/work/foh/images/banner-foh-07.avif" style="margin-top: 24px; margin-bottom: 24px;">
                     <img src="/work/foh/images/banner-foh-07.avif" alt="Frederick's of Hollywood relaunch campaign visual featuring Megan Fox">
                     <figcaption>Campaign image from Megan Fox re-brand.</figcaption>
                 </figure>
                 
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
+                <div class="u-panel-accent-32">
                     <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Platform: Before vs. After</h4>
                     <div class="foh-platform-shift">
                         <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.45); border-radius: 12px; padding: 24px;">
@@ -530,9 +530,9 @@
                             <div style="font-size: 34px; font-weight: 700; color: #ef4444; line-height: 1.15; margin-bottom: 8px;">Legacy Platform</div>
                             <div style="font-size: 15px; color: var(--text-primary); opacity: 0.9;">Heavy · Expensive · Slow</div>
                             <div style="margin-top: 16px; display: grid; gap: 8px;">
-                                <div style="font-size: 13px; color: var(--text-secondary);">• Large dev team for routine changes</div>
-                                <div style="font-size: 13px; color: var(--text-secondary);">• Long release cycles for campaigns</div>
-                                <div style="font-size: 13px; color: var(--text-secondary);">• High fixed platform overhead</div>
+                                <div class="u-fs13-secondary">• Large dev team for routine changes</div>
+                                <div class="u-fs13-secondary">• Long release cycles for campaigns</div>
+                                <div class="u-fs13-secondary">• High fixed platform overhead</div>
                             </div>
                         </div>
                         <div class="foh-shift-arrow">→</div>
@@ -541,16 +541,16 @@
                             <div style="font-size: 34px; font-weight: 700; color: var(--accent-blue); line-height: 1.15; margin-bottom: 8px;">Shopify Plus</div>
                             <div style="font-size: 15px; color: var(--text-primary); opacity: 0.9;">Campaign-ready · Lean · Fast</div>
                             <div style="margin-top: 16px; display: grid; gap: 8px;">
-                                <div style="font-size: 13px; color: var(--text-secondary);">• Marketing-owned campaign pages</div>
-                                <div style="font-size: 13px; color: var(--text-secondary);">• Faster promo cycles without ticket queues</div>
-                                <div style="font-size: 13px; color: var(--text-secondary);">• Lower TCO, simpler operations</div>
+                                <div class="u-fs13-secondary">• Marketing-owned campaign pages</div>
+                                <div class="u-fs13-secondary">• Faster promo cycles without ticket queues</div>
+                                <div class="u-fs13-secondary">• Lower TCO, simpler operations</div>
                             </div>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">Launched in time for the Megan Fox PR wave with no enterprise bloat</div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+                <div class="u-grid-2-24-mt24">
                     <div class="col-card">
                         <h4>What ABG Needed</h4>
                         <ul>
@@ -573,7 +573,7 @@
     </section>
 
     <!-- S2: Problem -->
-    <section class="case-section" id="problem" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="problem">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
@@ -630,9 +630,9 @@
                     </ul>
                 </figure>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
-                    <div class="col-card" style="border-left: 4px solid #ef4444;">
-                        <h4 style="color: #ef4444;">Platform Blockers</h4>
+                <div class="u-grid-2-24-mt32">
+                    <div class="col-card u-border-left-red-4">
+                        <h4 class="u-text-red-500">Platform Blockers</h4>
                         <ul>
                             <li>Legacy platform required large dev teams for any change</li>
                             <li>Shopify Plus (2016) had a monolithic architecture, less flexible for enterprise</li>
@@ -640,8 +640,8 @@
                             <li>Vendor lock-in risk for a PE portfolio brand</li>
                         </ul>
                     </div>
-                    <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
-                        <h4 style="color: var(--accent-blue);">Business Blockers</h4>
+                    <div class="col-card u-border-left-accent-4">
+                        <h4 class="u-accent-color">Business Blockers</h4>
                         <ul>
                             <li>Hard PR deadline: Megan Fox campaign couldn't wait for a slow migration</li>
                             <li>Marketing needed self-service; couldn't rely on IT for every campaign</li>
@@ -651,7 +651,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>The Core Tension:</strong> Shopify Plus was the right direction: lean, fast, campaign-friendly, but it was young, and this was a very public proof of concept. Getting it wrong would have set back Shopify's enterprise story and Frederick's relaunch simultaneously.</p>
                 </div>
             </div>
@@ -659,7 +659,7 @@
     </section>
 
     <!-- S3: Ownership -->
-    <section class="case-section" id="ownership" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="ownership">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
@@ -697,7 +697,7 @@
                     </div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>Architecture vs. Branding</h4>
                         <ul>
@@ -736,7 +736,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>The Glue:</strong> I was the intersection of ABG, Shopify, creative, and engineering, turning the Megan Fox campaign vision into a launch-ready DTC stack without letting anyone's priorities blow up the timeline.</p>
                 </div>
             </div>
@@ -744,7 +744,7 @@
     </section>
 
     <!-- S4: Solution -->
-    <section class="case-section" id="solution" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="solution">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
@@ -770,7 +770,7 @@
                     </figure>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>Commerce & Content</h4>
                         <ul>
@@ -828,49 +828,49 @@
     </section>
 
     <!-- S5: Delivery -->
-    <section class="case-section" id="delivery" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="delivery">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Delivery Timeline</h2>
                 
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
-                        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--border);"></div>
+                <div class="u-panel-accent-32">
+                    <div class="u-flex-between-center-rel">
+                        <div class="u-abs-midline-border"></div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">ABG</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Acquisition</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">FOH out of bankruptcy</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs13">ABG</div>
+                            <div class="u-fs13-semibold-primary">Acquisition</div>
+                            <div class="u-fs11-secondary">FOH out of bankruptcy</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">Design</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Architecture</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Shopify Plus scoped</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs13">Design</div>
+                            <div class="u-fs13-semibold-primary">Architecture</div>
+                            <div class="u-fs11-secondary">Shopify Plus scoped</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">Build</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Theme + Integrations</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">3PL · OMS · email</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs13">Build</div>
+                            <div class="u-fs13-semibold-primary">Theme + Integrations</div>
+                            <div class="u-fs11-secondary">3PL · OMS · email</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">Stage</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">QA & Stability</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Rollback plans ready</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs13">Stage</div>
+                            <div class="u-fs13-semibold-primary">QA & Stability</div>
+                            <div class="u-fs11-secondary">Rollback plans ready</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #0a0a0f;">Launch</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Megan Fox Wave</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Press hits · site holds</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-gold-80-fs13">Launch</div>
+                            <div class="u-fs13-semibold-primary">Megan Fox Wave</div>
+                            <div class="u-fs11-secondary">Press hits · site holds</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #0a0a0f;">Scale</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">ABG Blueprint</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Portfolio reuse</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-gold-80-fs13">Scale</div>
+                            <div class="u-fs13-semibold-primary">ABG Blueprint</div>
+                            <div class="u-fs11-secondary">Portfolio reuse</div>
                         </div>
                     </div>
                 </div>
@@ -910,9 +910,9 @@
     </section>
 
     <!-- S6: Results -->
-    <section class="case-section" id="results" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="results">
         <div class="container">
-            <div style="background: var(--bg-secondary); border: 2px solid var(--accent-blue); border-radius: 12px; padding: 40px;">
+            <div class="u-results-panel-40">
                 <div class="content-block fade-up">
                     <h2>Results</h2>
                 
@@ -935,18 +935,18 @@
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch;">
-                    <div class="col-card" style="display: flex; flex-direction: column;">
+                    <div class="col-card u-flex-col">
                         <h4>Before Shopify Plus</h4>
-                        <ul style="flex: 1;">
+                        <ul class="u-flex-1">
                             <li>Legacy platform required large dev teams for every change</li>
                             <li>Re-platforming on the old stack meant a long, expensive project</li>
                             <li>Marketing had no agility — campaigns meant ticket queues and release windows</li>
                             <li>Tying a celebrity-driven relaunch to fragile legacy infrastructure felt too risky</li>
                         </ul>
                     </div>
-                    <div class="col-card" style="display: flex; flex-direction: column;">
+                    <div class="col-card u-flex-col">
                         <h4>After the Relaunch</h4>
-                        <ul style="flex: 1;">
+                        <ul class="u-flex-1">
                             <li>FOH launched on a modern cloud stack in time to ride the Megan Fox PR cycle</li>
                             <li>Marketing could spin up campaign pages, adjust assortments, and test offers directly</li>
                             <li>ABG got a leaner cost profile — no giant license, less hosting complexity</li>
@@ -955,7 +955,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 32px;">
+                <div class="callout u-mt-32">
                     <p><strong>The Real Value:</strong> Frederick's got a credible digital reboot on a modern platform. ABG proved it could relaunch heritage brands without dragging them back into heavy, inflexible commerce systems — and had a blueprint to do it again.</p>
                 </div>
                 </div>

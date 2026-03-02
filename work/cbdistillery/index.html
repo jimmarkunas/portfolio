@@ -828,8 +828,8 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
-                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" style="width:32px;height:32px;object-fit:contain;">
+                <a href="/" class="u-logo-link">
+                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" class="u-logo-img">
                     JIM MARKUNAS
                 </a>
             </div>
@@ -858,7 +858,7 @@
     </div>
 
     <!-- Banner -->
-    <div class="case-banner" style="background-size: cover; background-position: center;">
+    <div class="case-banner">
         <div class="banner-content">
             <span class="banner-badge badge-company">CBDISTILLERY</span>
             <span class="banner-badge badge-award">$15M → $40M GMV</span>
@@ -883,11 +883,11 @@
     <!-- S0: Overview -->
     <section class="case-hero" id="overview">
         <div class="container">
-            <h1 class="fade-up">CBDistillery: Banking a <span style="color: var(--accent-blue);">High-Risk Brand</span></h1>
+            <h1 class="fade-up">CBDistillery: Banking a <span class="u-accent-color">High-Risk Brand</span></h1>
             
             <p class="subheadline fade-up stagger-2">Their payment provider dropped them overnight. A $15M CBD brand was suddenly at risk of not being able to process cards at all. I negotiated through 10+ banks and processors, secured Square as their long-term payments spine, and built the BigCommerce + OrderGroove stack that grew GMV to $40M.</p>
 
-            <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
+            <div class="metrics-row fade-up stagger-1 u-hero-metrics-spacing">
                 <div class="metric-card">
                     <span class="metric-value">$15M→$40M</span>
                     <span class="metric-label">GMV Growth</span>
@@ -950,17 +950,17 @@
 
             <div class="hero-cta fade-up stagger-3">
                 <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
-                <a href="https://jimmarkunas.com/cv/" class="btn btn-secondary">Download CV</a>
+                <a href="/cv/" class="btn btn-secondary">Download CV</a>
             </div>
         </div>
     </section>
 
     <!-- S1: Context -->
-    <section class="case-section" id="context" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="context">
         <div class="container">
             <div class="content-block fade-up">
-                <h2 style="text-align: center;">Context & Stakes</h2>
-                <p style="text-align: center;">CBDistillery wasn't coming to BigCommerce for a nicer theme. They were coming because their payments life had blown up. On WooCommerce, they were already straining the limits of a non-enterprise stack. Then their payment provider dropped them. Overnight, a $15M brand was at risk of not being able to process cards at all—and without solving payments first, nothing else mattered.</p>
+                <h2 class="u-text-center">Context & Stakes</h2>
+                <p class="u-text-center">CBDistillery wasn't coming to BigCommerce for a nicer theme. They were coming because their payments life had blown up. On WooCommerce, they were already straining the limits of a non-enterprise stack. Then their payment provider dropped them. Overnight, a $15M brand was at risk of not being able to process cards at all—and without solving payments first, nothing else mattered.</p>
                 
                 <div class="cbd-trajectory">
                     <h4 class="cbd-trajectory-title">Business Trajectory: Crisis to Scale</h4>
@@ -1013,7 +1013,7 @@
                     </div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+                <div class="u-grid-2-24-mt24">
                     <div class="col-card">
                         <h4>The Existential Threat</h4>
                         <ul>
@@ -1036,7 +1036,7 @@
     </section>
 
     <!-- S2: Problem -->
-    <section class="case-section" id="problem" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="problem">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
@@ -1062,9 +1062,9 @@
                     </ul>
                 </figure>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
-                    <div class="col-card" style="border-left: 4px solid #ef4444;">
-                        <h4 style="color: #ef4444;">Payments Blockers</h4>
+                <div class="u-grid-2-24-mt32">
+                    <div class="col-card u-border-left-red-4">
+                        <h4 class="u-text-red-500">Payments Blockers</h4>
                         <ul>
                             <li>Existing processor dropped them — no warning</li>
                             <li>10+ banks and gateways refused their volume</li>
@@ -1072,8 +1072,8 @@
                             <li>Predatory reserves and arbitrary volume caps from the few willing to talk</li>
                         </ul>
                     </div>
-                    <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
-                        <h4 style="color: var(--accent-blue);">Platform Blockers</h4>
+                    <div class="col-card u-border-left-accent-4">
+                        <h4 class="u-accent-color">Platform Blockers</h4>
                         <ul>
                             <li>WooCommerce couldn't scale to enterprise traffic and volume</li>
                             <li>No native Square + BigCommerce tokenized integration existed</li>
@@ -1083,7 +1083,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>The Core Problem:</strong> Without a processor willing to underwrite CBDistillery for the long term, there was no point discussing site design, UX, or campaigns. Payments were the existential problem — and that's where I started.</p>
                 </div>
             </div>
@@ -1091,7 +1091,7 @@
     </section>
 
     <!-- S3: Ownership -->
-    <section class="case-section" id="ownership" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="ownership">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
@@ -1102,7 +1102,7 @@
                     style="width: 100%; height: 300px; object-fit: cover; object-position: center 78%; border-radius: 12px; margin: 32px 0; border: 1px solid var(--border); display: block;"
                 >
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>Fintech Negotiation & Deal Architecture</h4>
                         <ul>
@@ -1141,7 +1141,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p>"Jim, you really went to bat for your client. You made us and them a lot of money in the process, do the same thing for every account, and you'll continue to make more money than Fritz." - <strong>Adrian Sorapuru, Director of Client Partnership Sales, BigCommerce</strong> </p>
                 </div>
             </div>
@@ -1149,7 +1149,7 @@
     </section>
 
     <!-- S4: Solution -->
-    <section class="case-section" id="solution" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="solution">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
@@ -1206,7 +1206,7 @@
                 <figure class="lightbox-trigger cbd-proof-figure" data-src="">
                     <div class="cbd-solution-proof">
                         <div class="cbd-solution-proof-grid">
-                            <div class="col-card" style="margin:0;">
+                            <div class="col-card u-m0">
                                 <h4>Commerce Stack</h4>
                                 <ul>
                                     <li>BigCommerce for catalog, cart, tax, and checkout</li>
@@ -1215,7 +1215,7 @@
                                     <li>WooCommerce fully retired; enterprise-grade traffic handling from day one</li>
                                 </ul>
                             </div>
-                            <div class="col-card" style="margin:0;">
+                            <div class="col-card u-m0">
                                 <h4>Subscriptions & Retention</h4>
                                 <ul>
                                     <li>OrderGroove for recurring billing and subscription management</li>
@@ -1238,7 +1238,7 @@
     </section>
 
     <!-- S5: Delivery -->
-    <section class="case-section" id="delivery" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="delivery">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Delivery Timeline</h2>
@@ -1326,9 +1326,9 @@
     </section>
 
     <!-- S6: Results -->
-    <section class="case-section" id="results" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="results">
         <div class="container">
-            <div style="background: var(--bg-secondary); border: 2px solid var(--accent-blue); border-radius: 12px; padding: 40px;">
+            <div class="u-results-panel-40">
                 <div class="content-block fade-up">
                     <h2>Results</h2>
                 
@@ -1350,19 +1350,19 @@
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch;">
-                    <div class="col-card" style="display: flex; flex-direction: column;">
+                <div class="u-grid-2-24-stretch">
+                    <div class="col-card u-flex-col">
                         <h4>Before Re-Platform</h4>
-                        <ul style="flex: 1;">
+                        <ul class="u-flex-1">
                             <li>Payments fragile — provider could pull the plug anytime (and did)</li>
                             <li>No processor willing to underwrite high-GMV CBD at meaningful volume</li>
                             <li>Subscriptions broken — card vaulting not wired to enterprise standards</li>
                             <li>WooCommerce straining under volume; no path to scale</li>
                         </ul>
                     </div>
-                    <div class="col-card" style="display: flex; flex-direction: column;">
+                    <div class="col-card u-flex-col">
                         <h4>After Re-Platform</h4>
-                        <ul style="flex: 1;">
+                        <ul class="u-flex-1">
                             <li>Long-term payments home with Square — underwritten for volume and risk profile</li>
                             <li>Subscriptions became a core revenue engine with 89% retention</li>
                             <li>GMV climbed from $15M to $40M on the new architecture</li>
@@ -1371,7 +1371,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 32px;">
+                <div class="callout u-mt-32">
                     <p><strong>The Real Story:</strong> This wasn't "we launched a prettier store." It was de-risking the entire business model so growth could actually stick — and leaving BigCommerce with a blueprint for every complex, high-risk merchant that comes after.</p>
                 </div>
                 </div>

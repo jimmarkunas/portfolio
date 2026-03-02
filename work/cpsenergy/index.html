@@ -22,8 +22,8 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
-                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" style="width:32px;height:32px;object-fit:contain;">
+                <a href="/" class="u-logo-link">
+                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" class="u-logo-img">
                     JIM MARKUNAS
                 </a>
             </div>
@@ -52,7 +52,7 @@
     </div>
 
     <!-- Banner -->
-    <div class="case-banner" style="background-size: cover; background-position: center;">
+    <div class="case-banner">
         <div class="banner-content">
             <span class="banner-badge badge-company">CPS Energy</span>
             <span class="banner-badge badge-award">Smart 20 Award Winner</span>
@@ -77,12 +77,12 @@
     <!-- S0: Overview -->
     <section class="case-hero" id="overview">
         <div class="container">
-            <h1 class="fade-up">Smart Streetlights and <span style="color: var(--accent-blue);">Smart City</span> Operations</h1>
+            <h1 class="fade-up">Smart Streetlights and <span class="u-accent-color">Smart City</span> Operations</h1>
             
             <p class="subheadline fade-up stagger-2">From "homes in darkness" TV segments to a Smart 20 award. Built the operations platform and data model that unified CPS Energy, Dalkia, and city systems—turning public complaints into predictable repair service across 135,000+ streetlights.</p>
 
             <!-- Metrics Row ABOVE subheadline -->
-            <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
+            <div class="metrics-row fade-up stagger-1 u-hero-metrics-spacing">
                 <div class="metric-card">
                     <span class="metric-value">73%</span>
                     <span class="metric-label">Fewer Calls</span>
@@ -151,17 +151,17 @@
     </section>
 
     <!-- S1: Context -->
-    <section class="case-section" id="context" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="context">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Opening Report: Homes in Darkness</h2>
                 
                 <!-- YouTube Embed -->
-                <div style="margin: 32px 0;">
-                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: var(--bg-primary); border-radius: 12px; border: 1px solid var(--border);">
+                <div class="u-my-32">
+                    <div class="u-embed-wrap-16x9">
                         <iframe 
                             src="https://www.youtube.com/embed/Ch9cUuG95qI" 
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+                            class="u-embed-fill-tl" 
                             allowfullscreen
                             title="Local News Coverage - Homes in Darkness">
                         </iframe>
@@ -179,7 +179,7 @@
                     <p style="font-size: 14px; color: var(--text-secondary); margin: 0;">— Richard Medina, Chief Energy Delivery Officer at CPS Energy</p>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+                <div class="u-grid-2-24-mt24">
                     <div class="col-card">
                         <h4>Under the Hood</h4>
                         <ul>
@@ -204,7 +204,7 @@
     </section>
 
     <!-- S2: Problem -->
-    <section class="case-section" id="problem" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="problem">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
@@ -277,17 +277,17 @@
                             <h3 style="margin: 0; font-size: clamp(22px, 3vw, 30px); line-height: 1.15;">San Antonio Streetlight Complexity</h3>
                             <p style="margin: 0; color: var(--text-secondary); line-height: 1.6;">A citywide outage problem with fragmented handoffs across residents, support, dispatch, field crews, and reporting systems. The challenge was not a single broken tool, but a broken operating chain.</p>
                             <div style="display: grid; gap: 10px; margin-top: 6px;">
-                                <div style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary);"><span style="width: 8px; height: 8px; border-radius: 999px; background: #447acb; box-shadow: 0 0 0 4px rgba(68,122,203,0.14);"></span>Multiple intake paths and inconsistent resident data</div>
-                                <div style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary);"><span style="width: 8px; height: 8px; border-radius: 999px; background: #22d3ee; box-shadow: 0 0 0 4px rgba(34,211,238,0.12);"></span>Disconnected operational systems and manual handoffs</div>
-                                <div style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary);"><span style="width: 8px; height: 8px; border-radius: 999px; background: #ef4444; box-shadow: 0 0 0 4px rgba(239,68,68,0.10);"></span>Bottlenecks created long repair delays and poor visibility</div>
+                                <div class="u-inline-icon-row"><span style="width: 8px; height: 8px; border-radius: 999px; background: #447acb; box-shadow: 0 0 0 4px rgba(68,122,203,0.14);"></span>Multiple intake paths and inconsistent resident data</div>
+                                <div class="u-inline-icon-row"><span style="width: 8px; height: 8px; border-radius: 999px; background: #22d3ee; box-shadow: 0 0 0 4px rgba(34,211,238,0.12);"></span>Disconnected operational systems and manual handoffs</div>
+                                <div class="u-inline-icon-row"><span style="width: 8px; height: 8px; border-radius: 999px; background: #ef4444; box-shadow: 0 0 0 4px rgba(239,68,68,0.10);"></span>Bottlenecks created long repair delays and poor visibility</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
-                    <div class="col-card" style="border-left: 4px solid #ef4444;">
-                        <h4 style="color: #ef4444;">Systems & Data Blockers</h4>
+                <div class="u-grid-2-24-mt32">
+                    <div class="col-card u-border-left-red-4">
+                        <h4 class="u-text-red-500">Systems & Data Blockers</h4>
                         <ul>
                             <li>No single system of record across CPS, Dalkia, City</li>
                             <li>Residents lacked clear reporting path</li>
@@ -295,8 +295,8 @@
                             <li>No trustworthy metrics for leadership</li>
                         </ul>
                     </div>
-                    <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
-                        <h4 style="color: var(--accent-blue);">Operations Blockers</h4>
+                    <div class="col-card u-border-left-accent-4">
+                        <h4 class="u-accent-color">Operations Blockers</h4>
                         <ul>
                             <li>Field dispatch via email/spreadsheets</li>
                             <li>Manual workflows = 3+ week delays</li>
@@ -306,7 +306,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>Success Criteria:</strong> Single resident flow. Shared CPS/Dalkia view. 1–4 day repair SLA. Metrics for city leadership on safety/carbon/equity.</p>
                 </div>
             </div>
@@ -314,16 +314,16 @@
     </section>
 
     <!-- S3: Ownership -->
-    <section class="case-section" id="ownership" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="ownership">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
                 
-                <div style="margin: 32px 0;">
+                <div class="u-my-32">
                     <img
                         src="/work/cpsenergy/images/CPSE-KSAT-ScreenShot.png"
                         alt="Stakeholder alignment coverage screenshot"
-                        style="display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border);">
+                        class="u-img-fluid-rounded-border">
                 </div>
                 
                 <div class="timeline">
@@ -345,7 +345,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>Key Constraint:</strong> CPS is a municipal utility. Dalkia is an international contractor. The city has its own incentives. I got all three to use one shared platform and agree on the numbers, without a startup's level of control or budget.</p>
                 </div>
             </div>
@@ -353,17 +353,17 @@
     </section>
 
     <!-- S4: Solution -->
-    <section class="case-section" id="solution" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="solution">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Product Vision: Boringly Reliable & Transparently Green Lights</h2>
                 <p>The product vision was to make streetlights feel like a modern utility service instead of a mystery. Residents should have one simple place to report a problem and see that it is being fixed. CPS and Dalkia should share a single operational view that ties outages, work orders, and budget together.</p>
                 
-                <div style="margin: 32px 0;">
+                <div class="u-my-32">
                     <img
                         src="/work/cpsenergy/images/csp-product-01.webp"
                         alt="Unified Operations Platform"
-                        style="display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border);">
+                        class="u-img-fluid-rounded-border">
                 </div>
 
                 <!-- Customer Journey Diagram -->
@@ -397,7 +397,7 @@
                         </div>
                     </div>
                     <div style="max-width: 760px; margin: 24px auto 0;">
-                        <figcaption style="margin-top: 0;">Resident reporting flow: from dark street to fixed light in 4 simple steps</figcaption>
+                        <figcaption class="u-mt0">Resident reporting flow: from dark street to fixed light in 4 simple steps</figcaption>
                         <ul class="notice-list" style="margin-bottom: 0;">
                             <li>Turned confusing multi-system reports into one clear path</li>
                             <li>Guided form captures usable data on first try</li>
@@ -410,43 +410,43 @@
     </section>
 
     <!-- S5: Delivery -->
-    <section class="case-section" id="delivery" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="delivery">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>What We Built</h2>
                 
                 <!-- Visual Timeline -->
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
-                        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--border);"></div>
+                <div class="u-panel-accent-32">
+                    <div class="u-flex-between-center-rel">
+                        <div class="u-abs-midline-border"></div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: white;">Aug</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Discovery</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Requirements</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs16">Aug</div>
+                            <div class="u-fs13-semibold-primary">Discovery</div>
+                            <div class="u-fs11-secondary">Requirements</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: white;">Oct</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Build</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Integrations</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs16">Oct</div>
+                            <div class="u-fs13-semibold-primary">Build</div>
+                            <div class="u-fs11-secondary">Integrations</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: white;">Dec</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Launch</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Go-live</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs16">Dec</div>
+                            <div class="u-fs13-semibold-primary">Launch</div>
+                            <div class="u-fs11-secondary">Go-live</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
+                        <div class="u-timeline-col">
                             <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: #0a0a0f;">Apr</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Award</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Smart 20</div>
+                            <div class="u-fs13-semibold-primary">Award</div>
+                            <div class="u-fs11-secondary">Smart 20</div>
                         </div>
                     </div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
+                <div class="u-grid-2-24-mt32">
                     <div class="col-card">
                         <h4>Resident Tools</h4>
                         <ul>
@@ -467,7 +467,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 32px;">
+                <div class="callout u-mt-32">
                     <p><strong>For residents, the need wasn't "smart cities." It was "my block is dark and nobody fixes it."</strong> The resident-facing part of this program turns that into a simple, trackable flow instead of a guessing game.</p>
                 </div>
             </div>
@@ -475,36 +475,36 @@
     </section>
 
     <!-- S6: Results -->
-    <section class="case-section" id="results" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="results">
         <div class="container">
-            <div style="background: var(--bg-secondary); border: 2px solid var(--accent-blue); border-radius: 12px; padding: 40px;">
+            <div class="u-results-panel-40">
                 <div class="content-block fade-up">
                     <h2>Results</h2>
                 
                 <!-- Visual: Before/After -->
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Repair Window Improvement</h4>
-                    <div style="display: flex; gap: 48px; align-items: flex-end; justify-content: center;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">BEFORE</div>
-                            <div style="width: 240px; height: 180px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                                <div style="font-size: 48px; font-weight: 700; color: white;">3+</div>
-                                <div style="font-size: 16px; color: rgba(255,255,255,0.8);">weeks</div>
+                <div class="u-panel-accent-32">
+                    <h4 class="u-text-center-mb24-primary">Repair Window Improvement</h4>
+                    <div class="u-flex-gap48-end-center">
+                        <div class="u-text-center">
+                            <div class="u-p14-secondary-mb8">BEFORE</div>
+                            <div class="u-kpi-box-red-240x180">
+                                <div class="u-fs48-bold-white">3+</div>
+                                <div class="u-fs16-white80">weeks</div>
                             </div>
                         </div>
-                        <div style="font-size: 40px; color: var(--text-secondary); padding-bottom: 40px;">→</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">AFTER</div>
-                            <div style="width: 240px; height: 120px; background: var(--accent-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px;">
-                                <div style="font-size: 48px; font-weight: 700; color: white; line-height: 1;">1–4</div>
-                                <div style="font-size: 16px; color: rgba(255,255,255,0.8);">days</div>
+                        <div class="u-fs40-secondary-pb40">→</div>
+                        <div class="u-text-center">
+                            <div class="u-p14-secondary-mb8">AFTER</div>
+                            <div class="u-kpi-box-accent-240x120">
+                                <div class="u-fs48-bold-white-lh1">1–4</div>
+                                <div class="u-fs16-white80">days</div>
                             </div>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">Over 80% reduction in repair time</div>
+                    <div class="u-text-center-mt24-secondary-14">Over 80% reduction in repair time</div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>Customer Experience</h4>
                         <ul>
@@ -523,7 +523,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 32px;">
+                <div class="callout u-mt-32">
                     <p><strong>Data-Driven Investment:</strong> City gained hard numbers on safety coverage, energy savings, and emissions reductions to justify further investment in solar LED and smart-city infrastructure.</p>
                 </div>
                 </div>
@@ -540,7 +540,7 @@
                     <iframe
                         src="https://www.youtube.com/embed/GZMHsAIH1Os?si=1rP6qbRpNDqbjd3e"
                         title="YouTube video player"
-                        style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+                        class="u-video-embed-fill"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin"
                         allowfullscreen>
@@ -617,7 +617,7 @@
     <!-- Footer -->
     <footer>
         <div class="container fade-up">
-            <h2>Let's Build Something <span style="color: var(--accent-blue);">Extraordinary</span></h2>
+            <h2>Let's Build Something <span class="u-accent-color">Extraordinary</span></h2>
             <p>Available for product leadership, platform architecture, and transformation program roles. Based in San Antonio, open to remote.</p>
             <div class="footer-cta">
                 <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>

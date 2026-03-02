@@ -229,8 +229,8 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
-                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" style="width:32px;height:32px;object-fit:contain;">
+                <a href="/" class="u-logo-link">
+                    <img src="https://raw.githubusercontent.com/jimmarkunas/portfolio/2722bf9b52e9c947fff242eb252bfe38a2b63cc2/images/logo/ujcg-logo-blue.png" alt="UJCG" class="u-logo-img">
                     JIM MARKUNAS
                 </a>
             </div>
@@ -259,7 +259,7 @@
     </div>
 
     <!-- Banner -->
-    <div class="case-banner" style="background-size: cover; background-position: center;">
+    <div class="case-banner">
         <div class="banner-content">
             <span class="banner-badge badge-company">K2 SPORTS GLOBAL</span>
             <span class="banner-badge badge-award">9 Brands on One Engine</span>
@@ -284,11 +284,11 @@
     <!-- S0: Overview -->
     <section class="case-hero" id="overview">
         <div class="container">
-            <h1 class="fade-up">K2 Sports: One Commerce Engine Behind <span style="color: var(--accent-blue);">9 Global Brands</span></h1>
+            <h1 class="fade-up">K2 Sports: One Commerce Engine Behind <span class="u-accent-color">9 Global Brands</span></h1>
             
             <p class="subheadline fade-up stagger-2">Re-platformed K2 Sports off a sunsetting Demandware stack onto a headless BigCommerce stack: 9 brands, one ERP, one CMS, one reusable blueprint. Now a public BigCommerce case study and the reference design for multi-brand headless commerce.</p>
 
-            <div class="metrics-row fade-up stagger-1" style="margin-top: 32px; margin-bottom: 32px;">
+            <div class="metrics-row fade-up stagger-1 u-hero-metrics-spacing">
                 <div class="metric-card">
                     <span class="metric-value">9 Brands</span>
                     <span class="metric-label">Launched on BC</span>
@@ -351,24 +351,24 @@
 
             <div class="hero-cta fade-up stagger-3">
                 <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
-                <a href="https://jimmarkunas.com/cv/" class="btn btn-secondary">Download CV</a>
+                <a href="/cv/" class="btn btn-secondary">Download CV</a>
             </div>
         </div>
     </section>
 
     <!-- S1: Context -->
-    <section class="case-section" id="context" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="context">
         <div class="container">
             <div class="content-block fade-up">
-                <h2 style="text-align: center;">Context & Stakes</h2>
+                <h2 class="u-text-center">Context & Stakes</h2>
                 <img
                     src="/work/k2/images/banner-k2-02.jpg"
                     alt="K2 architecture context visual"
-                    style="display:block;width:100%;height:auto;border-radius:12px;margin:32px 0;border:1px solid var(--border);"
+                    class="u-img-fluid-rounded-border-my32"
                 >
-                <p style="text-align: center;">K2 Sports ran 9 global brand sites on Demandware; powerful but fragile, and heading for end-of-life. Avante handled ERP, Quivers handled omni-channel inventory and retailer fulfillment. Marketing loved the brand experiences. IT knew the party was over. The stakes were real: winter sports brands don't get do-overs on seasonal traffic, and any wrong move on domains or redirects would torch years of SEO equity.</p>
+                <p class="u-text-center">K2 Sports ran 9 global brand sites on Demandware; powerful but fragile, and heading for end-of-life. Avante handled ERP, Quivers handled omni-channel inventory and retailer fulfillment. Marketing loved the brand experiences. IT knew the party was over. The stakes were real: winter sports brands don't get do-overs on seasonal traffic, and any wrong move on domains or redirects would torch years of SEO equity.</p>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+                <div class="u-grid-2-24-mt24">
                     <div class="col-card">
                         <h4>What Was Breaking</h4>
                         <ul>
@@ -391,7 +391,7 @@
     </section>
 
     <!-- S2: Problem -->
-    <section class="case-section" id="problem" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="problem">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Challenge</h2>
@@ -435,9 +435,9 @@
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
-                    <div class="col-card" style="border-left: 4px solid #ef4444;">
-                        <h4 style="color: #ef4444;">Technical Blockers</h4>
+                <div class="u-grid-2-24-mt32">
+                    <div class="col-card u-border-left-red-4">
+                        <h4 class="u-text-red-500">Technical Blockers</h4>
                         <ul>
                             <li>9 separate integration tangles to Avante + Quivers</li>
                             <li>No native BC/Quivers omni-channel integration</li>
@@ -445,8 +445,8 @@
                             <li>Headless CMS + BC + ERP had never been combined at this scale</li>
                         </ul>
                     </div>
-                    <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
-                        <h4 style="color: var(--accent-blue);">Organizational Blockers</h4>
+                    <div class="col-card u-border-left-accent-4">
+                        <h4 class="u-accent-color">Organizational Blockers</h4>
                         <ul>
                             <li>Marketing wanted brand-distinct experiences, not a generic template</li>
                             <li>Finance wanted clean ERP data without nightly reconciliation heroics</li>
@@ -456,7 +456,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>The Core Tension:</strong> Marketing wanted beautiful, distinct brand sites. Operations wanted one engine. I designed an architecture that gave both sides exactly what they needed without compromise.</p>
                 </div>
             </div>
@@ -464,7 +464,7 @@
     </section>
 
     <!-- S3: Ownership -->
-    <section class="case-section" id="ownership" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="ownership">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
@@ -472,10 +472,10 @@
                 <img
                     src="/work/k2/images/banner-k2-04.jpg"
                     alt="K2 ownership and architecture leadership visual"
-                    style="display:block;width:100%;height:auto;border-radius:12px;margin:32px 0;border:1px solid var(--border);"
+                    class="u-img-fluid-rounded-border-my32"
                 >
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>Architecture & Integration Design</h4>
                         <ul>
@@ -514,7 +514,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 24px;">
+                <div class="callout u-mt-24">
                     <p><strong>My Edge:</strong> I owned the blueprint that made K2's multi-brand, multi-store setup run as a single engine: a pattern BigCommerce has since reused with other multi-brand clients.</p>
                 </div>
             </div>
@@ -522,7 +522,7 @@
     </section>
 
     <!-- S4: Solution -->
-    <section class="case-section" id="solution" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="solution">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
@@ -537,7 +537,7 @@
                     </ul>
                 </figure>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="u-grid-2-24">
                     <div class="col-card">
                         <h4>Commerce & Content Stack</h4>
                         <ul>
@@ -563,49 +563,49 @@
     </section>
 
     <!-- S5: Delivery -->
-    <section class="case-section" id="delivery" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+    <section class="case-section u-section-alt" id="delivery">
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Delivery Timeline</h2>
                 
                 <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
-                        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--border);"></div>
+                    <div class="u-flex-between-center-rel">
+                        <div class="u-abs-midline-border"></div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">Assess</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Discovery</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Stack audit</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs13">Assess</div>
+                            <div class="u-fs13-semibold-primary">Discovery</div>
+                            <div class="u-fs11-secondary">Stack audit</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">Design</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Architecture</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Blueprint spec'd</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs13">Design</div>
+                            <div class="u-fs13-semibold-primary">Architecture</div>
+                            <div class="u-fs11-secondary">Blueprint spec'd</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">Build</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Integration</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Quivers + Avante</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs13">Build</div>
+                            <div class="u-fs13-semibold-primary">Integration</div>
+                            <div class="u-fs11-secondary">Quivers + Avante</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent-blue); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white;">DNS</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Routing & SEO</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Proxy live</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-blue-80-fs13">DNS</div>
+                            <div class="u-fs13-semibold-primary">Routing & SEO</div>
+                            <div class="u-fs11-secondary">Proxy live</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #0a0a0f;">K2</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">First Launch</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">K2 brand live</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-gold-80-fs13">K2</div>
+                            <div class="u-fs13-semibold-primary">First Launch</div>
+                            <div class="u-fs11-secondary">K2 brand live</div>
                         </div>
                         
-                        <div style="z-index: 1; text-align: center; flex: 1;">
-                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFD700; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #0a0a0f;">×9</div>
-                            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">All Brands</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Demandware retired</div>
+                        <div class="u-timeline-col">
+                            <div class="u-node-gold-80-fs13">×9</div>
+                            <div class="u-fs13-semibold-primary">All Brands</div>
+                            <div class="u-fs11-secondary">Demandware retired</div>
                         </div>
                     </div>
                 </div>
@@ -641,9 +641,9 @@
     </section>
 
     <!-- S6: Results -->
-    <section class="case-section" id="results" style="border-top: 1px solid var(--border);">
+    <section class="case-section u-section-divider" id="results">
         <div class="container">
-            <div style="background: var(--bg-secondary); border: 2px solid var(--accent-blue); border-radius: 12px; padding: 40px;">
+            <div class="u-results-panel-40">
                 <div class="content-block fade-up">
                     <h2>Results</h2>
                 
@@ -666,18 +666,18 @@
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch;">
-                    <div class="col-card" style="display: flex; flex-direction: column;">
+                    <div class="col-card u-flex-col">
                         <h4>Before Re-Platform</h4>
-                        <ul style="flex: 1;">
+                        <ul class="u-flex-1">
                             <li>9 separate Demandware integration tangles to ERP and fulfillment</li>
                             <li>Manual reconciliation between storefronts and Avante was routine</li>
                             <li>Domain changes posed real SEO risk during seasonal peak windows</li>
                             <li>No migration blueprint; each brand would have been a separate project</li>
                         </ul>
                     </div>
-                    <div class="col-card" style="display: flex; flex-direction: column;">
+                    <div class="col-card u-flex-col">
                         <h4>After Re-Platform</h4>
-                        <ul style="flex: 1;">
+                        <ul class="u-flex-1">
                             <li>All 9 brands on one headless pattern: BC, CMS, Avante, Quivers</li>
                             <li>Cleaner, predictable data flows significantly reduced manual reconciliation</li>
                             <li>DNS proxy delivered brand-safe URLs while protecting SEO through cutover</li>
@@ -686,7 +686,7 @@
                     </div>
                 </div>
 
-                <div class="callout" style="margin-top: 32px;">
+                <div class="callout u-mt-32">
                     <p><strong>The Downstream Value:</strong> K2 kept selling while Demandware was retired. Now 9 brands run on a single architecture. BC turned it into their public showcase for multi-brand headless commerce, and their sales team still points to it.</p>
                 </div>
                 </div>

@@ -1,0 +1,368 @@
+   ZEVO — TEAL ACCENT THEME + PAGE-SPECIFIC COMPONENTS
+   Accent: #00D9A3 (electric teal/green)
+   Scoped to body.page-zevo — no bleed into other pages
+   ══════════════════════════════════════════════════════════════ */
+
+body.page-zevo {
+    --zevo-logo-green: #5CC93B;
+    --zevo-accent:     var(--zevo-logo-green);
+    --zevo-accent-rgb: 92, 201, 59;
+    --accent:          var(--zevo-logo-green);
+    --accent-blue:     var(--zevo-logo-green);
+    --zevo-accent-dim: rgba(var(--zevo-accent-rgb), 0.12);
+    --zevo-accent-glow: rgba(var(--zevo-accent-rgb), 0.4);
+    --case-banner-image-web: url('/images/banners/banner-zevo-web.jpg');
+    --case-banner-image-tablet: url('/images/banners/banner-zevo-tablet.jpg');
+    --case-banner-image-mobile: url('/images/banners/banner-zevo-mobile.jpg');
+}
+
+/* Background gradient */
+body.page-zevo .bg-gradient {
+    background:
+        radial-gradient(circle at 20% 50%, rgba(var(--zevo-accent-rgb), 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(var(--zevo-accent-rgb), 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(var(--zevo-accent-rgb), 0.06) 0%, transparent 50%);
+}
+
+/* Logo & nav */
+body.page-zevo .logo { color: var(--zevo-logo-green); }
+body.page-zevo .logo a { color: var(--zevo-logo-green); }
+body.page-zevo .logo .logo-mark {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    background-color: #5CC93B;
+    -webkit-mask-image: url('/images/logo/ujcg-logo-blue.png');
+    mask-image: url('/images/logo/ujcg-logo-blue.png');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+body.page-zevo .nav-links a::after { background: var(--zevo-accent); }
+body.page-zevo .mobile-menu a:hover { color: var(--zevo-accent); }
+
+/* Buttons */
+body.page-zevo .btn-primary {
+    background: var(--zevo-accent);
+    box-shadow: 0 0 30px rgba(var(--zevo-accent-rgb), 0.3);
+}
+body.page-zevo .btn-primary:hover { box-shadow: 0 0 40px rgba(var(--zevo-accent-rgb), 0.5); }
+body.page-zevo .btn-secondary:hover { border-color: var(--zevo-accent); background: var(--zevo-accent-dim); }
+
+/* Banner */
+body.page-zevo .case-banner {
+    background-color: #0a1f1c;
+}
+body.page-zevo .case-banner::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+        repeating-linear-gradient(90deg, rgba(var(--zevo-accent-rgb), 0.04) 0px, transparent 1px, transparent 60px),
+        repeating-linear-gradient(0deg,  rgba(var(--zevo-accent-rgb), 0.04) 0px, transparent 1px, transparent 60px);
+}
+body.page-zevo .badge-company { background: rgba(var(--zevo-accent-rgb), 0.15); color: var(--zevo-accent); }
+
+/* Anchor nav */
+body.page-zevo .anchor-nav a:hover,
+body.page-zevo .anchor-nav a.active { color: var(--zevo-accent); }
+
+/* Metrics */
+body.page-zevo .metric-value { color: var(--zevo-accent); }
+
+/* TLDR */
+body.page-zevo .tldr-block { background: transparent; border-color: var(--zevo-accent); }
+body.page-zevo .tldr-item li::before { color: var(--zevo-accent); }
+
+/* Callout */
+body.page-zevo .callout { background: var(--zevo-accent-dim); border-left-color: var(--zevo-accent); }
+
+/* Col-card */
+body.page-zevo .col-card h4 { color: var(--zevo-accent); }
+
+/* Recognition cards */
+body.page-zevo .recognition-card:hover { border-color: var(--zevo-accent); }
+
+/* Gradient text & footer */
+body.page-zevo .gradient-text { color: var(--zevo-accent); }
+body.page-zevo .footer-links a:hover { color: var(--zevo-accent); }
+
+
+/* ── ZEVO-specific components ───────────────────────────────── */
+
+/* Device frame with animated pulse */
+body.page-zevo .device-frame {
+    border: 2px solid rgba(var(--zevo-accent-rgb), 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    background: rgba(var(--zevo-accent-rgb), 0.03);
+    position: relative;
+    overflow: hidden;
+}
+body.page-zevo .device-frame::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(var(--zevo-accent-rgb), 0.08) 0%, transparent 70%);
+    animation: zevo-pulse 8s ease-in-out infinite;
+}
+@keyframes zevo-pulse {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    50%       { transform: translate(20px, -20px) scale(1.1); opacity: 0.8; }
+}
+
+/* Vision grid + cards */
+body.page-zevo .vision-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+    align-items: stretch;
+}
+body.page-zevo .vision-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+    transition: all 0.3s;
+    height: 100%;
+}
+body.page-zevo .vision-grid .vision-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 980px;
+    width: 100%;
+    justify-self: center;
+}
+body.page-zevo .vision-card:hover {
+    border-color: var(--zevo-accent);
+    box-shadow: 0 8px 32px var(--zevo-accent-glow);
+    transform: translateY(-4px);
+}
+body.page-zevo .vision-card-icon {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    background: var(--zevo-accent-dim);
+    border: 1px solid var(--zevo-accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 16px;
+}
+body.page-zevo .vision-card h4 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--zevo-accent); }
+body.page-zevo .vision-card p  { font-size: 15px; color: var(--text-secondary); line-height: 1.7; }
+body.page-zevo .vision-card ul { list-style: none; padding: 0; margin: 12px 0 0; }
+body.page-zevo .vision-card li {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+    padding-left: 20px; position: relative; margin-bottom: 8px;
+}
+body.page-zevo .vision-card li::before { content: '→'; position: absolute; left: 0; color: var(--zevo-accent); }
+
+/* Pitch timeline */
+body.page-zevo .pitch-timeline {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin: 32px auto;
+    max-width: 1120px;
+    align-items: stretch;
+}
+body.page-zevo .pitch-step {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+body.page-zevo .pitch-step::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--zevo-accent) 0%, transparent 100%);
+    border-radius: 12px 12px 0 0;
+}
+body.page-zevo .pitch-step-num {
+    font-size: 32px; font-weight: 900;
+    color: var(--zevo-accent); opacity: 0.3; margin-bottom: 8px;
+}
+body.page-zevo .pitch-step h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+body.page-zevo .pitch-step p  { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+/* Video embed */
+body.page-zevo .zevo-video {
+    position: relative; padding-bottom: 56.25%;
+    height: 0; overflow: hidden;
+    border-radius: 12px; margin: 32px 0;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px rgba(var(--zevo-accent-rgb), 0.15);
+}
+body.page-zevo .zevo-video iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; border: none;
+}
+
+/* Image placeholders */
+body.page-zevo .image-placeholder {
+    width: 100%; border-radius: 12px;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(var(--zevo-accent-rgb), 0.08) 0%, rgba(var(--zevo-accent-rgb), 0.02) 100%);
+    padding: 60px 40px; text-align: center;
+    margin: 32px 0; position: relative; overflow: hidden;
+}
+body.page-zevo .image-placeholder::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(var(--zevo-accent-rgb), 0.03) 20px, rgba(var(--zevo-accent-rgb), 0.03) 40px);
+}
+body.page-zevo .image-placeholder-text {
+    position: relative; z-index: 1;
+    font-size: 18px; font-weight: 600;
+    color: var(--zevo-accent); opacity: 0.6;
+}
+body.page-zevo .image-placeholder-sub {
+    font-size: 13px; color: var(--text-secondary); margin-top: 8px;
+}
+
+/* Founder insight cards */
+body.page-zevo .insight-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--zevo-accent);
+    border-radius: 10px; padding: 28px 32px; margin: 32px 0;
+}
+body.page-zevo .insight-card-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+}
+body.page-zevo .insight-icon { font-size: 28px; }
+body.page-zevo .insight-title { font-size: 19px; font-weight: 700; color: var(--zevo-accent); }
+body.page-zevo .insight-card p  { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+body.page-zevo .insight-card p strong { color: var(--text-primary); }
+
+/* Outcome panel */
+body.page-zevo .outcome-panel {
+    background: linear-gradient(135deg, rgba(var(--zevo-accent-rgb), 0.05) 0%, transparent 100%);
+    border: 2px solid var(--zevo-accent);
+    border-radius: 16px; padding: 40px; margin: 48px 0; position: relative;
+}
+body.page-zevo .outcome-panel::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--zevo-accent) 0%, transparent 100%);
+    border-radius: 16px 16px 0 0;
+}
+
+/* Highlight list */
+body.page-zevo .highlight-list { list-style: none; padding: 0; margin: 24px 0; }
+body.page-zevo .highlight-list li {
+    font-size: 16px; color: var(--text-secondary); line-height: 1.8;
+    padding-left: 32px; position: relative; margin-bottom: 16px;
+}
+body.page-zevo .highlight-list li::before {
+    content: '✦'; position: absolute; left: 0;
+    color: var(--zevo-accent); font-size: 20px;
+}
+
+/* Team structure */
+body.page-zevo .team-structure {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px; margin: 32px 0;
+}
+body.page-zevo .team-structure h4 { font-size: 17px; font-weight: 700; margin-bottom: 12px; color: var(--zevo-accent); }
+body.page-zevo .team-structure p  { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 12px; }
+body.page-zevo .team-structure ul { list-style: none; padding: 0; margin: 0; }
+body.page-zevo .team-structure li {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+    padding-left: 20px; position: relative; margin-bottom: 6px;
+}
+body.page-zevo .team-structure li::before {
+    content: '•'; position: absolute; left: 0;
+    color: var(--zevo-accent); font-weight: 700;
+}
+
+/* Platform architecture banner image */
+body.page-zevo .zevo-arch-banner {
+    width: 100%;
+    height: clamp(220px, 32vw, 420px);
+    display: block;
+    margin: 18px 0 22px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    object-fit: contain;
+    object-position: center;
+    background: rgba(var(--zevo-accent-rgb), 0.03);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+/* Hero metrics containment (ZEVO only) */
+@media (max-width: 1024px) {
+    body.page-zevo .case-hero .metrics-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    body.page-zevo .case-hero .metric-card {
+        min-width: 0;
+        overflow: hidden;
+        padding: 22px 16px;
+    }
+
+    body.page-zevo .case-hero .metric-card .metric-value {
+        font-size: clamp(36px, 9vw, 48px);
+        white-space: nowrap;
+    }
+
+    body.page-zevo .case-hero .metric-card .metric-label {
+        font-size: 14px;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    body.page-zevo .case-hero .metric-card .metric-breakdown {
+        font-size: clamp(14px, 4.1vw, 18px);
+        line-height: 1.35;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        margin-top: 8px;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body.page-zevo .case-hero .metric-card {
+        padding: 18px 14px;
+    }
+
+    body.page-zevo .case-hero .metric-card .metric-value {
+        font-size: clamp(30px, 11vw, 38px);
+        margin-bottom: 6px;
+    }
+
+    body.page-zevo .case-hero .metric-card .metric-label {
+        font-size: 11px;
+        letter-spacing: 0.07em;
+    }
+
+    body.page-zevo .case-hero .metric-card .metric-breakdown {
+        font-size: clamp(12px, 4vw, 15px);
+        line-height: 1.35;
+    }
+
+    body.page-zevo .vision-grid   { grid-template-columns: 1fr; }
+    body.page-zevo .pitch-timeline { grid-template-columns: 1fr; }
+}
+
