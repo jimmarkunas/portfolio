@@ -96,6 +96,7 @@
                 <div class="metric-card">
                     <span class="metric-value">10 Markets</span>
                     <span class="metric-label">7 Languages</span>
+                    <div class="metric-breakdown">Web + app launch footprint</div>
                 </div>
             </div>
 
@@ -156,27 +157,32 @@
                 <h2 style="text-align: center;">Context & Stakes</h2>
                 <p style="text-align: center; max-width: 900px; margin-left: auto; margin-right: auto;">Modere was a global health & beauty brand trying to double past $500M in revenue on top of a brittle, home-grown platform. The company was running a billion-dollar direct sales operation on legacy tech that was expensive to maintain, hard to change, and brittle under scale. Leadership was blunt: they didn't believe they could break the $500M ceiling without a complete rethink.</p>
                 
-                <!-- Visual: Before/After -->
-                <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
-                    <h4 style="text-align: center; margin-bottom: 24px; color: var(--text-primary);">Performance Improvement</h4>
-                    <div style="display: flex; gap: 48px; align-items: flex-end; justify-content: center;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">BEFORE</div>
-                            <div style="width: 240px; height: 240px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                                <div style="font-size: 56px; font-weight: 700; color: white;">Legacy</div>
-                                <div style="font-size: 16px; color: rgba(255,255,255,0.8);">platform</div>
-                            </div>
+                <div class="modere-kpi-shift-card">
+                    <h4>Platform Outcome Shift</h4>
+                    <div class="modere-kpi-shift-grid" role="group" aria-label="Before baseline and after outcomes">
+                        <div class="modere-kpi-state baseline">
+                            <span class="kpi-tag">Baseline</span>
+                            <h5>Legacy Platform Constraints</h5>
+                            <ul>
+                                <li>High maintenance overhead</li>
+                                <li>Slow release velocity</li>
+                                <li>Poor performance under scale</li>
+                            </ul>
                         </div>
-                        <div style="font-size: 40px; color: var(--text-secondary); padding-bottom: 55px;">→</div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">AFTER</div>
-                            <div style="width: 240px; height: 160px; background: var(--accent-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px;">
-                                <div style="font-size: 56px; font-weight: 700; color: white; line-height: 1;">35%</div>
-                                <div style="font-size: 16px; color: rgba(255,255,255,0.8);">faster loads</div>
+                        <div class="modere-kpi-state outcome">
+                            <span class="kpi-tag">Outcomes</span>
+                            <div class="kpi-metrics">
+                                <div class="kpi-metric">
+                                    <strong>43%</strong>
+                                    <span>conversion uplift</span>
+                                </div>
+                                <div class="kpi-metric">
+                                    <strong>35%</strong>
+                                    <span>faster page loads</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 24px; color: var(--text-secondary); font-size: 14px;">43% conversion uplift + 35% performance improvement</div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
@@ -205,53 +211,83 @@
     <section class="case-section" id="problem" style="border-top: 1px solid var(--border);">
         <div class="container">
             <div class="content-block fade-up">
-                <h2>The Challenge</h2>
+                <h2>The Problem I Solved</h2>
+
+                <div style="margin: 24px 0 28px; border-radius: 12px; overflow: hidden;">
+                    <img src="images/banner-dailyroutine.webp" alt="Modere daily routine banner" draggable="false" style="display: block; width: 100%; height: auto; margin-top: -100px; margin-bottom: -100px; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; pointer-events: none;">
+                </div>
                 
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">📊</div>
-                        <div style="font-size: 18px; font-weight: 600;">System Complexity Visualization</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Placeholder for actual diagram</div>
+                <p style="max-width: 980px; margin-left: auto; margin-right: auto; text-align: center;">
+                    Modere's revenue ambitions had outgrown its technology. The company was running a billion-dollar direct sales operation on a
+                    legacy, home-grown platform that was expensive to maintain, hard to change, and brittle under scale. Leadership was clear:
+                    they did not believe they could get past the $500M plateau without a complete rethink of their digital stack.
+                </p>
+
+                <p style="max-width: 980px; margin-left: auto; margin-right: auto; text-align: center;">
+                    Affiliate workflows were equally painful. There was no modern mobile app, no reliable shared-cart motion across channels,
+                    and launching new markets or promotions behaved like custom projects. Central teams were trapped in ticket queues for products,
+                    pricing, promos, and content changes across systems that did not agree on core truths like inventory, eligibility, and pricing.
+                </p>
+
+                <div class="modere-challenge-map-card">
+                    <h3>Where The Legacy Model Broke Down</h3>
+                    <p class="modere-challenge-subhead">Affiliate growth goals were blocked by architecture, operating model, and data fragmentation.</p>
+                    <div class="modere-fragment-grid" role="group" aria-label="Legacy commerce bottlenecks">
+                        <div class="fragment-node">
+                            <h4>Affiliate Experience</h4>
+                            <p class="stack-label">Seller-facing friction</p>
+                            <ul>
+                                <li>No modern mobile-first selling flow</li>
+                                <li>Shared cart and attribution were brittle</li>
+                            </ul>
+                        </div>
+                        <div class="fragment-node">
+                            <h4>Business Operations</h4>
+                            <p class="stack-label">Slow execution path</p>
+                            <ul>
+                                <li>Products/promos depended on engineering</li>
+                                <li>Market launches behaved like one-off builds</li>
+                            </ul>
+                        </div>
+                        <div class="fragment-node">
+                            <h4>Platform/Data Layer</h4>
+                            <p class="stack-label">No shared source of truth</p>
+                            <ul>
+                                <li>Catalog, pricing, rules split across tools</li>
+                                <li>Compliance and reporting were manual-heavy</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="modere-fragment-warning">Brief: build a composable foundation that scales globally without rebuilding every two years.</p>
+                    <div class="modere-impact-chips">
+                        <span>Affiliate-first web + app</span>
+                        <span>One global core, many markets</span>
+                        <span>Composable/replaceable services</span>
+                        <span>SaaS where it counts</span>
                     </div>
                 </div>
 
-                <!-- Functional Diagram -->
-                <figure class="lightbox-trigger" data-src="/assets/directv/DTV_Ecosystem_Functional_Diagram.png">
-                    <img src="/assets/directv/DTV_Ecosystem_Functional_Diagram.png" 
-                         alt="Functional diagram showing disconnected campaign systems across STB, web, and mobile channels with no shared middleware" 
-                         loading="lazy">
-                    <figcaption>12,000+ fragmented sites, zero centralized governance</figcaption>
-                    <ul class="notice-list">
-                        <li>Each site was its own project with local vendors</li>
-                        <li>No single source of truth for brand or compliance</li>
-                        <li>Manual reviews for thousands of pages</li>
-                    </ul>
-                </figure>
-
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;">
                     <div class="col-card" style="border-left: 4px solid #ef4444;">
-                        <h4 style="color: #ef4444;">Technical Blockers</h4>
+                        <h4 style="color: #ef4444;">Affiliate-Side Pain</h4>
                         <ul>
-                            <li>No centralized platform</li>
-                            <li>Fragmented vendor relationships</li>
-                            <li>No role-based access control</li>
-                            <li>No compliance workflow automation</li>
+                            <li>Sign-up, customer management, and sharing relied on workarounds</li>
+                            <li>No cohesive mobile-first toolkit for sellers</li>
+                            <li>Cross-channel cart and offer sharing was unreliable</li>
                         </ul>
                     </div>
                     <div class="col-card" style="border-left: 4px solid var(--accent-blue);">
-                        <h4 style="color: var(--accent-blue);">Operating Model Blockers</h4>
+                        <h4 style="color: var(--accent-blue);">Business-Side Pain</h4>
                         <ul>
-                            <li>6-month site creation cycles</li>
-                            <li>2-week manual compliance reviews</li>
-                            <li>No standardized approval process</li>
-                            <li>Brand inconsistency across regions</li>
+                            <li>New products/promos/content required engineering release cycles</li>
+                            <li>Disconnected systems created pricing/inventory/rules mismatch</li>
+                            <li>Regional growth required repeated custom implementation</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="callout" style="margin-top: 24px;">
-                    <p><strong>Success Criteria:</strong> 6mo → 3wk site launches. 2wk → 3d compliance. 12,000+ sites on one platform.</p>
+                    <p><strong>CTO Feedback:</strong> "Jim is one of the best solutions architects I've worked with. Forward-thinking solutioning."</p>
                 </div>
             </div>
         </div>
@@ -263,38 +299,61 @@
             <div class="content-block fade-up">
                 <h2>What I Owned</h2>
                 
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(68, 122, 203, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">👥</div>
-                        <div style="font-size: 18px; font-weight: 600;">Product Management & Scrum Master</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Placeholder for team structure</div>
+                <div style="margin: 32px 0; border: 1px solid var(--border); border-radius: 16px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.09) 0%, rgba(68, 122, 203, 0.03) 100%); padding: 24px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                        <div style="background: rgba(10, 14, 36, 0.75); border: 1px solid rgba(68, 122, 203, 0.25); border-radius: 12px; padding: 20px;">
+                            <h4 style="margin: 0 0 10px; color: var(--text-primary);">Product Management</h4>
+                            <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary); line-height: 1.7;">
+                                <li>Roadmap</li>
+                                <li>Requirements</li>
+                                <li>Prioritization</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(10, 14, 36, 0.75); border: 1px solid rgba(68, 122, 203, 0.25); border-radius: 12px; padding: 20px;">
+                            <h4 style="margin: 0 0 10px; color: var(--text-primary);">Scrum Leadership</h4>
+                            <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary); line-height: 1.7;">
+                                <li>Ceremonies</li>
+                                <li>Dependency Unblock</li>
+                                <li>Release Cadence</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(10, 14, 36, 0.75); border: 1px solid rgba(68, 122, 203, 0.25); border-radius: 12px; padding: 20px;">
+                            <h4 style="margin: 0 0 10px; color: var(--text-primary);">Cross-Functional Alignment</h4>
+                            <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary); line-height: 1.7;">
+                                <li>Stakeholders</li>
+                                <li>Vendors</li>
+                                <li>Compliance/Engineering Sync</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px; padding: 14px 16px; border-radius: 10px; border: 1px solid rgba(68, 122, 203, 0.35); background: rgba(68, 122, 203, 0.12); color: var(--text-primary); font-weight: 600; text-align: center;">
+                        Outcome: Composable Stack Live Across 10+ Markets · 43% Conversion Uplift · 35% Faster Page Loads
                     </div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                     <div class="col-card">
-                        <h4>Product Discovery & Architecture</h4>
+                        <h4>Architecture & Integration Lead</h4>
                         <ul>
-                            <li>Requirements with NYL digital & compliance teams</li>
-                            <li>Designed multi-tenant architecture layer</li>
-                            <li>Created permission model & compliance workflow</li>
-                            <li>Translated vision into epics and user stories</li>
+                            <li>Defined where PIM, CMS, commerce, promos, and payments lived</li>
+                            <li>Mapped data contracts across products, pricing, subscriptions, and commissions</li>
+                            <li>Kept affiliate, customer, and finance views aligned to one operational truth</li>
+                            <li>Translated business complexity into implementation-ready architecture decisions</li>
                         </ul>
                     </div>
                     <div class="col-card">
-                        <h4>Delivery & Client Management</h4>
+                        <h4>Program Leadership & Vendor Alignment</h4>
                         <ul>
-                            <li>Managed product backlog and sprint planning</li>
-                            <li>Trade-offs between speed, scope, compliance</li>
-                            <li>Led client workshops, demos, steering meetings</li>
-                            <li>Turned one-off build into reusable platform</li>
+                            <li>Guarded composable architecture principles against lift-and-shift shortcuts</li>
+                            <li>Aligned Modere leadership, implementation partners, and platform vendors</li>
+                            <li>Drove trade-off calls across scope, timeline, and MLM-specific requirements</li>
+                            <li>Prevented one-off mobile and regional builds by enforcing shared service use</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="callout" style="margin-top: 24px;">
-                    <p><strong>Key Decision:</strong> F92's engineers owned implementation, but I owned the product logic that made this more than a one-off build. The multi-tenant, multi-brand model that CORE CMS sells today is descended directly from that work.</p>
+                    <p><strong>Key Decision:</strong> I kept BigCommerce intentionally narrow as a headless transaction layer, with Pimcore as product brain and Contentstack as content layer, so Modere could scale and swap services without re-platforming again.</p>
                 </div>
             </div>
         </div>
@@ -305,62 +364,67 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>The Solution</h2>
-                
-                <!-- Placeholder Image -->
-                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(68, 122, 203, 0.15) 0%, rgba(34, 211, 238, 0.1) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 32px 0; border: 1px solid var(--border);">
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🏗️</div>
-                        <div style="font-size: 18px; font-weight: 600;">"Wix for Regulated Enterprises"</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Placeholder for architecture diagram</div>
+
+                <p style="max-width: 980px;">
+                    We built a MACH-style, API-first stack with BigCommerce as the transaction layer, Contentstack for content,
+                    Pimcore as the product brain, a custom promotion engine for MLM-specific commission/eligibility rules, and
+                    payment/payout integrations across Braintree, Klarna, and PayQuicker on Azure + Kubernetes.
+                </p>
+
+                <div style="width: 100%; margin: 28px 0; border: 1px solid var(--border); border-radius: 14px; background: rgba(68, 122, 203, 0.06); padding: 24px;">
+                    <h3 style="margin: 0 0 18px; text-align: center;">Composable Stack Blueprint</h3>
+                    <div class="modere-blueprint-grid">
+                        <div class="col-card modere-blueprint-node" style="margin: 0;">
+                            <h4><span class="modere-blueprint-glyph" aria-hidden="true">◎</span>Commerce Core</h4>
+                            <p>BigCommerce (headless)</p>
+                        </div>
+                        <div class="col-card modere-blueprint-node" style="margin: 0;">
+                            <h4><span class="modere-blueprint-glyph" aria-hidden="true">◈</span>Content Layer</h4>
+                            <p>Contentstack</p>
+                        </div>
+                        <div class="col-card modere-blueprint-node" style="margin: 0;">
+                            <h4><span class="modere-blueprint-glyph" aria-hidden="true">◉</span>Product Brain</h4>
+                            <p>Pimcore PIM</p>
+                        </div>
+                        <div class="col-card modere-blueprint-node" style="margin: 0;">
+                            <h4><span class="modere-blueprint-glyph" aria-hidden="true">◍</span>MLM Logic</h4>
+                            <p>Custom promo + commission engine</p>
+                        </div>
+                        <div class="col-card modere-blueprint-node" style="margin: 0;">
+                            <h4><span class="modere-blueprint-glyph" aria-hidden="true">⬢</span>Infrastructure</h4>
+                            <p>Azure + Kubernetes</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- System Diagram FIRST -->
-                <figure class="lightbox-trigger" data-src="/assets/nyl/NYL_CORE_CMS_Architecture.png">
-                    <img src="/assets/nyl/NYL_CORE_CMS_Architecture.png" 
-                         alt="Multi-tenant CMS architecture showing centralized content library, compliance workflows, and role-based access control" 
-                         loading="lazy">
-                    <figcaption>Multi-tenant platform: centralized governance with local flexibility</figcaption>
-                    <ul class="notice-list">
-                        <li>Global content library eliminates brand drift</li>
-                        <li>Compliance workflow = automated review checkpoints</li>
-                        <li>Role-based access ensures proper separation of duties</li>
-                    </ul>
-                </figure>
+                <div style="margin: 0 0 24px; border-radius: 12px; overflow: hidden;">
+                    <img src="images/banner-affiliatemktg.webp" alt="Modere affiliate marketing banner" draggable="false" style="display: block; width: 100%; height: auto; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; pointer-events: none;">
+                </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                     <div class="col-card">
-                        <h4>Technical Solution</h4>
+                        <h4>Business Capability Delivered</h4>
                         <ul>
-                            <li>Multi-tenant WYSIWYG site builder</li>
-                            <li>Component-based design system</li>
-                            <li>Global content library with versioning</li>
-                            <li>AI-driven lead generation tools</li>
+                            <li>Affiliate and customer flows across web + mobile with shared-cart behavior</li>
+                            <li>Single product/promo core serving 10+ markets and 7 languages</li>
+                            <li>Business-managed content and catalog updates without waiting on engineering</li>
+                            <li>Composable integrations that allow service-level replacement without re-platforming</li>
                         </ul>
                     </div>
                     <div class="col-card">
-                        <h4>Operating Model</h4>
+                        <h4>Implementation Highlights</h4>
                         <ul>
-                            <li>Role-based access (agents, back office, compliance)</li>
-                            <li>Visual status indicators (draft/review/published)</li>
-                            <li>Streamlined approval workflows</li>
-                            <li>Integration with SSO, CRM, analytics, Calendly</li>
+                            <li>Product data, bundles, and regional variations mastered in Pimcore</li>
+                            <li>Content and campaign publishing managed in Contentstack</li>
+                            <li>Promotion engine applied eligibility + payout rules outside core checkout</li>
+                            <li>MobiLoud wrapped web experience into one localized iOS/Android app footprint</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Agent Experience -->
-                <figure class="lightbox-trigger" data-src="/assets/nyl/NYL_Agent_Experience.png" style="margin-top: 48px;">
-                    <img src="/assets/nyl/NYL_Agent_Experience.png" 
-                         alt="Agent experience showing simplified site creation flow with compliance built in" 
-                         loading="lazy">
-                    <figcaption>Agent experience: simple site builder with governance baked in</figcaption>
-                    <ul class="notice-list">
-                        <li>Agents build sites without technical knowledge</li>
-                        <li>All content pre-approved through global library</li>
-                        <li>Automated lead capture and appointment scheduling</li>
-                    </ul>
-                </figure>
+                <div class="callout" style="margin-top: 24px;">
+                    <p><strong>Why it worked:</strong> SaaS handled commodity functions while custom services handled Modere's unique MLM complexity, creating a stack that was both modern and operationally practical.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -370,6 +434,9 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Delivery Timeline</h2>
+                <p style="max-width: 920px;">
+                    2023 to 2024 execution moved from architecture definition to multi-market rollout, with web and mobile shipped from one composable core.
+                </p>
                 
                 <!-- Visual Timeline -->
                 <div style="background: rgba(68, 122, 203, 0.05); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0;">
@@ -410,24 +477,24 @@
                 
                 <div class="timeline">
                     <div class="timeline-item">
-                        <h4>March 2023: Discovery & Kickoff</h4>
-                        <p>Assessed legacy platform, mapped MLM business rules, defined composable architecture strategy and vendor selection.</p>
+                        <h4>March 2023: Program Kickoff</h4>
+                        <p>Established product vision and success criteria: affiliate-first flows, one global core, composable services, and SaaS where it fit.</p>
                     </div>
                     <div class="timeline-item">
-                        <h4>June 2023: Architecture Defined</h4>
-                        <p>Locked in BigCommerce (headless), Pimcore (PIM), Contentstack (CMS), and custom promotion engine. Aligned leadership and vendors around composable vision.</p>
+                        <h4>June 2023: Architecture Decisioning</h4>
+                        <p>Finalized stack boundaries across BigCommerce, Pimcore, Contentstack, promotions, and payments; aligned leaders and partners on API-first contracts.</p>
                     </div>
                     <div class="timeline-item">
-                        <h4>November 2023: Core Platform Build</h4>
-                        <p>Headless commerce, PIM, and CMS integrated. Affiliate flows, shared cart pattern, and payment integrations (Braintree, Klarna, PayQuicker) in place.</p>
+                        <h4>November 2023: Core Build Phase</h4>
+                        <p>Integrated commerce, PIM, and CMS; implemented affiliate-centric flows, shared-cart behavior, and promotion logic for MLM-specific eligibility and payout paths.</p>
                     </div>
                     <div class="timeline-item">
-                        <h4>March 2024: Mobile & Market Integration</h4>
-                        <p>MobiLoud mobile app wrapped and localized for 10 markets and 7 languages. Single composable stack serving web and app.</p>
+                        <h4>March 2024: Mobile + Localization</h4>
+                        <p>Wrapped the shared web experience into one iOS/Android app footprint via MobiLoud, localized across 10 markets and 7 languages.</p>
                     </div>
                     <div class="timeline-item">
-                        <h4>June 2024: Full Stack Launch</h4>
-                        <p>Complete platform live. 43% conversion uplift, 35% faster page loads. Architecture later nominated for 2025 MACH Impact Award.</p>
+                        <h4>June 2024: Full Stack Live</h4>
+                        <p>Launched the composable platform across channels with measured gains: 43% conversion uplift and 35% faster page loads; later recognized by MACH Impact Award nomination.</p>
                     </div>
                 </div>
             </div>
@@ -444,43 +511,45 @@
                 <!-- Metric Tiles -->
                 <div class="metrics-row">
                     <div class="metric-card">
-                        <span class="metric-value">91%</span>
-                        <span class="metric-label">Faster Site Launches</span>
-                        <div class="metric-breakdown">6 months → 3 weeks</div>
+                        <span class="metric-value">43%+</span>
+                        <span class="metric-label">Conversion Uplift</span>
+                        <div class="metric-breakdown">Internal Testing Results</div>
                     </div>
                     <div class="metric-card">
-                        <span class="metric-value">86%</span>
-                        <span class="metric-label">Faster Compliance</span>
-                        <div class="metric-breakdown">2 weeks → 3 days</div>
+                        <span class="metric-value">35%</span>
+                        <span class="metric-label">Faster Page Loads</span>
+                        <div class="metric-breakdown">Performance Improvement</div>
                     </div>
                     <div class="metric-card">
-                        <span class="metric-value">200%</span>
-                        <span class="metric-label">Lead Uplift</span>
-                        <div class="metric-breakdown">For agents on platform</div>
+                        <span class="metric-value">10/7</span>
+                        <span class="metric-label">Markets/Languages</span>
+                        <div class="metric-breakdown">Web + App on One Stack</div>
                     </div>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                     <div class="col-card">
-                        <h4>Speed & Efficiency</h4>
+                        <h4>Old System</h4>
                         <ul>
-                            <li>Site launch: 6mo → 3wks</li>
-                            <li>Compliance: 2wks → 3d</li>
-                            <li>Near-zero non-compliant incidents</li>
+                            <li>Every Product Change Required Engineering, Long Test Cycles, and Risky Releases</li>
+                            <li>No Cohesive Affiliate Toolkit, No Modern Mobile App, and Painful Cart/Offer Sharing</li>
+                            <li>Platform Struggled Beyond $500M, with Performance and Stability Limiting Growth</li>
+                            <li>Data and Rules Were Scattered Across Systems, Hurting Reporting, Compliance, and Forecasting</li>
                         </ul>
                     </div>
                     <div class="col-card">
-                        <h4>Scale & Impact</h4>
+                        <h4>New System</h4>
                         <ul>
-                            <li>12,000+ sites deployed</li>
-                            <li>200% agent lead uplift</li>
-                            <li>Commercialized as F92 product</li>
+                            <li>Internal Tests Showed ~43% Conversion Uplift on the New Flow and Stack</li>
+                            <li>Page Performance Improved by ~35% from Front-End and Cloud Architecture Changes</li>
+                            <li>10+ Markets and 7 Languages Ran from One Composable Web + Mobile Architecture</li>
+                            <li>Business Teams Launched Products/Promotions Faster, and Affiliates Sold with Consistent Tracking</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="callout" style="margin-top: 32px;">
-                    <p><strong>How Measured:</strong> Site launch tracked in project management system. Compliance turnaround tracked through approval workflow. Lead uplift measured via Google Analytics and CRM integration.</p>
+                    <p><strong>Business Value:</strong> Modere gained a modern, flexible commerce engine that matched the scale and complexity of its global sales organization instead of constraining it.</p>
                 </div>
                 </div>
             </div>
@@ -492,36 +561,56 @@
         <div class="container">
             <div class="content-block fade-up">
                 <h2>Press & Recognition</h2>
+
+                <div style="margin-top: 24px; margin-bottom: 24px;">
+                    <img src="images/mach-award.png" alt="MACH Alliance award recognition" style="display: block; width: 100%; height: auto; border-radius: 12px;">
+                </div>
                 
-                <!-- AWS Case Study -->
                 <div class="recognition-card fade-up stagger-1">
-                    <span class="recognition-icon">☁️</span>
+                    <span class="recognition-icon">📄</span>
                     <div class="recognition-content">
-                        <h3>AWS Case Study</h3>
-                        <p>AWS published a 2025 case study on how New York Life "reframes its approach to data and AI," highlighting the unified data foundation that supports better front-end experiences for clients and advisors.</p>
+                        <h3>Guidance Case Study</h3>
+                        <p>Guidance documented Modere's composable commerce transformation and platform modernization approach.</p>
                     </div>
-                    <a href="https://aws.amazon.com" class="btn btn-primary">Read Case Study</a>
+                    <a href="/work/modere/pdf-viewer.html?doc=guidance" class="btn btn-primary">View Case Study</a>
                 </div>
 
-                <!-- Don Vu Quote -->
                 <div class="recognition-card fade-up stagger-2">
-                    <span class="recognition-icon">💬</span>
+                    <span class="recognition-icon">📄</span>
                     <div class="recognition-content">
-                        <h3>CDAO Don Vu on AI Transformation</h3>
-                        <p>"We're really focused on enhancing [our advisors and agents] and trying to make their lives easier by having AI at their side." CORE CMS is one of the tools that turns data and AI investments into tangible agent experiences.</p>
+                        <h3>Hamari Case Study</h3>
+                        <p>Hamari featured Modere's architecture and delivery model for a composable, multi-market commerce engine.</p>
                     </div>
-                    <a href="https://www.youtube.com/watch?v=qpGy9Utd0xc" class="btn btn-primary">Watch Interview</a>
+                    <a href="/work/modere/pdf-viewer.html?doc=hamari" class="btn btn-primary">View Case Study</a>
                 </div>
 
-                <!-- CORE CMS Commercialization -->
                 <div class="recognition-card fade-up stagger-3">
-                    <span class="recognition-icon">🚀</span>
+                    <span class="recognition-icon">📄</span>
                     <div class="recognition-content">
-                        <h3>Commercialized as Fusion92 Product</h3>
-                        <p>The multi-tenant architecture and product logic I designed for NYL became the foundation for Fusion92's CORE CMS product, now marketed to regulated enterprises in insurance, fintech, and banking.</p>
+                        <h3>Pimcore Case Study</h3>
+                        <p>Pimcore case-study coverage highlighted product data architecture and composable integration outcomes.</p>
                     </div>
-                    <a href="https://www.fusion92.com/core-cms" class="btn btn-secondary">View Product Page</a>
+                    <a href="/work/modere/pdf-viewer.html?doc=pimcore" class="btn btn-primary">View Case Study</a>
                 </div>
+
+                <div class="recognition-card fade-up stagger-4">
+                    <span class="recognition-icon">📄</span>
+                    <div class="recognition-content">
+                        <h3>MobiLoud Case Study</h3>
+                        <p>MobiLoud documented the web-and-app unification approach used in the Modere platform rollout.</p>
+                    </div>
+                    <a href="/work/modere/pdf-viewer.html?doc=mobiloud" class="btn btn-primary">View Case Study</a>
+                </div>
+
+                <div class="recognition-card fade-up stagger-5">
+                    <span class="recognition-icon">🏆</span>
+                    <div class="recognition-content">
+                        <h3>MACH Alliance Award Recognition</h3>
+                        <p>Program recognition artifacts for Modere's MACH Impact Award nomination and related outcomes.</p>
+                    </div>
+                    <a href="/work/modere/pdf-viewer.html?doc=mach-award" class="btn btn-primary">View Case Study</a>
+                </div>
+
             </div>
         </div>
     </section>
