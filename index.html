@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jim Markunas - Digital Product & Platform Architect</title>
     <script>document.documentElement.classList.add('js');</script>
-    <link rel="stylesheet" href="style.css?v=20260224-1">
+    <link rel="stylesheet" href="style.css?v=20260302-22">
     <style>
         /* Homepage only: lock What I Do cards to 4/2/1 */
         section.skills-tools#services .skills-grid {
@@ -61,7 +61,7 @@
         }
     </style>
 </head>
-<body>
+<body class="page-home">
     <div class="bg-gradient"></div>
 <header>
     <nav class="container">
@@ -75,7 +75,6 @@
             <li><a href="/work/">Work</a></li>
             <li><a href="/services/">Services</a></li>
             <li><a href="/cv/">CV</a></li>
-            <li><a href="/about/">About</a></li>
             <li><a href="/contact/">Contact</a></li>
         </ul>
         <button class="hamburger" id="hamburger">
@@ -88,21 +87,27 @@
     <a href="/work/">Work</a>
     <a href="/services/">Services</a>
     <a href="/cv/">CV</a>
-    <a href="/about/">About</a>
     <a href="/contact/">Contact</a>
 </div>
 
-<section class="hero">
+<section class="hero hero-home-merged">
     <div class="container">
-        <div class="hero-content">
-            <h1>Building <span class="gradient-text">Digital Platforms</span> That Scale to Millions</h1>
-            <p class="hero-description">20+ years architecting and shipping enterprise platforms—from billion-dollar commerce systems to streaming products used by millions. I turn complex, high-stakes programs into working systems.</p>
-            <div class="hero-cta">
-                <a href="/work/" class="btn btn-secondary">My Portfolio</a>
-                <a href="/cv/" class="btn btn-secondary">My CV</a>
-                <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
+        <div class="hero-content home-hero-panel fade-up">
+            <h1 class="home-hero-title">Building <span class="gradient-text">Digital Platforms</span> That Scale to Millions</h1>
+            <div class="home-hero-inline">
+                <div class="home-hero-image-wrap">
+                    <img src="/images/jim/jimheadshot.jpg" alt="Jim Markunas headshot" class="home-hero-image">
+                </div>
+                <div class="home-hero-main">
+                    <p class="hero-description home-subheadline">20+ years architecting and shipping enterprise platforms—from billion-dollar commerce systems to streaming products used by millions. I turn complex, high-stakes programs into working systems.</p>
+                    <div class="hero-cta">
+                        <a href="/work/" class="btn btn-secondary">My Portfolio</a>
+                        <a href="/cv/" class="btn btn-secondary">My CV</a>
+                        <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
+                    </div>
+                </div>
             </div>
-            <div class="hero-stats">
+            <div class="hero-stats home-hero-stats">
                 <div class="stat">
                     <span class="stat-number">20+</span>
                     <span class="stat-label">Years Experience</span>
@@ -124,59 +129,33 @@
     </div>
 </section>
 
-<section class="recognition" id="recognition" style="padding: 12px 0 24px;">
+<section class="recognition home-trust-slider" id="recognition">
     <div class="container">
-        <div class="recognition-grid">
-            <div class="recognition-item"><a href="/work/bi/"><img src="/images/trust/01 adobe-logo-600.png" alt="Adobe" class="recognition-logo"><div class="recognition-text">Profiled by Adobe<br>Boehringer Ingelheim</div></a></div>
-            <div class="recognition-item"><a href="/work/newyorklife/"><img src="/images/trust/02 aws-logo-600.png" alt="AWS" class="recognition-logo"><div class="recognition-text">AWS Case Study<br>New York Life</div></a></div>
-            <div class="recognition-item"><a href="/work/directv01/"><img src="/images/trust/03 business-insider-logo-600.png" alt="Business Insider" class="recognition-logo"><div class="recognition-text">Profiled by<br>Business Insider</div></a></div>
-            <div class="recognition-item"><a href="/work/directv02/"><img src="/images/trust/04 engadget-logo-600.png" alt="Engadget" class="recognition-logo"><div class="recognition-text">Profiled by<br>Engadget</div></a></div>
-            <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/05 hbr-logo-600.png" alt="Harvard Business Review" class="recognition-logo"><div class="recognition-text">Harvard Business<br>Review Research</div></a></div>
-            <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/07 mit-logo-600.png" alt="MIT" class="recognition-logo"><div class="recognition-text">MIT Research<br>BCG/LEGO</div></a></div>
-            <div class="recognition-item"><a href="/work/modere/"><img src="/images/trust/06 mach-awards-logo-600.png" alt="MACH Awards" class="recognition-logo"><div class="recognition-text">MACH Award<br>Nominee 2025</div></a></div>
-            <div class="recognition-item"><a href="/work/cpsenergy/"><img src="/images/trust/08 smart-20-logo-600.png" alt="Global Smart 20" class="recognition-logo"><div class="recognition-text">Winner, Global<br>Smart 20 Award</div></a></div>
-            <!-- Duplicate for seamless loop -->
-            <div class="recognition-item"><a href="/work/bi/"><img src="/images/trust/01 adobe-logo-600.png" alt="Adobe" class="recognition-logo"><div class="recognition-text">Profiled by Adobe<br>Boehringer Ingelheim</div></a></div>
-            <div class="recognition-item"><a href="/work/newyorklife/"><img src="/images/trust/02 aws-logo-600.png" alt="AWS" class="recognition-logo"><div class="recognition-text">AWS Case Study<br>New York Life</div></a></div>
-            <div class="recognition-item"><a href="/work/directv01/"><img src="/images/trust/03 business-insider-logo-600.png" alt="Business Insider" class="recognition-logo"><div class="recognition-text">Profiled by<br>Business Insider</div></a></div>
-            <div class="recognition-item"><a href="/work/directv02/"><img src="/images/trust/04 engadget-logo-600.png" alt="Engadget" class="recognition-logo"><div class="recognition-text">Profiled by<br>Engadget</div></a></div>
-            <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/05 hbr-logo-600.png" alt="Harvard Business Review" class="recognition-logo"><div class="recognition-text">Harvard Business<br>Review Research</div></a></div>
-            <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/07 mit-logo-600.png" alt="MIT" class="recognition-logo"><div class="recognition-text">MIT Research<br>BCG/LEGO</div></a></div>
-            <div class="recognition-item"><a href="/work/modere/"><img src="/images/trust/06 mach-awards-logo-600.png" alt="MACH Awards" class="recognition-logo"><div class="recognition-text">MACH Award<br>Nominee 2025</div></a></div>
-            <div class="recognition-item"><a href="/work/cpsenergy/"><img src="/images/trust/08 smart-20-logo-600.png" alt="Global Smart 20" class="recognition-logo"><div class="recognition-text">Winner, Global<br>Smart 20 Award</div></a></div>
-        </div>
-    </div>
-</section>
-
-<section class="skills-tools home-competencies" id="services" style="padding: 52px 0;">
-    <div class="container">
-        <div class="section-header fade-up">
-            <a href="/services/" class="u-link-no-underline"><div class="section-tag">What I Do</div></a>
-            <h2 class="section-title">Core Competencies</h2>
-            <p class="section-description">20+ years turning complex digital programs into working systems across product, platform, and program leadership.</p>
-        </div>
-        <div class="skills-grid" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
-            <div class="skill-card fade-up stagger-1">
-                <div class="skill-header"><div class="skill-icon">🎯</div><h3 class="skill-title">Product Management</h3></div>
-                <p class="skill-description">End-to-end product ownership from vision to launch. PRDs, roadmaps, cross-functional leadership, and shipping products that scale to millions of users.</p>
-            </div>
-            <div class="skill-card fade-up stagger-2">
-                <div class="skill-header"><div class="skill-icon">📊</div><h3 class="skill-title">Program Management</h3></div>
-                <p class="skill-description">Large-scale digital transformations across 30+ teams. Risk management, vendor coordination, and keeping high-stakes programs on track under pressure.</p>
-            </div>
-            <div class="skill-card fade-up stagger-3">
-                <div class="skill-header"><div class="skill-icon">🏗️</div><h3 class="skill-title">Solutions Architecture</h3></div>
-                <p class="skill-description">Designing composable, headless, and MACH-certified commerce platforms. API-first architectures that handle $2B+ in GMV and millions of transactions.</p>
-            </div>
-            <div class="skill-card fade-up stagger-6">
-                <div class="skill-header"><div class="skill-icon">🚀</div><h3 class="skill-title">Go-to-Market Strategy</h3></div>
-                <p class="skill-description">Launch strategy, positioning, pricing, and sales enablement. Taking products from 0-to-1 and scaling them to enterprise adoption.</p>
+        <div class="home-trust-frame">
+            <div class="recognition-grid">
+                <div class="recognition-item"><a href="/work/bi/"><img src="/images/trust/01 adobe-logo-600.png" alt="Adobe" class="recognition-logo"><div class="recognition-text">Profiled by Adobe<br>Boehringer Ingelheim</div></a></div>
+                <div class="recognition-item"><a href="/work/newyorklife/"><img src="/images/trust/02 aws-logo-600.png" alt="AWS" class="recognition-logo"><div class="recognition-text">AWS Case Study<br>New York Life</div></a></div>
+                <div class="recognition-item"><a href="/work/directv01/"><img src="/images/trust/03 business-insider-logo-600.png" alt="Business Insider" class="recognition-logo"><div class="recognition-text">Profiled by<br>Business Insider</div></a></div>
+                <div class="recognition-item"><a href="/work/directv02/"><img src="/images/trust/04 engadget-logo-600.png" alt="Engadget" class="recognition-logo"><div class="recognition-text">Profiled by<br>Engadget</div></a></div>
+                <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/05 hbr-logo-600.png" alt="Harvard Business Review" class="recognition-logo"><div class="recognition-text">Harvard Business<br>Review Research</div></a></div>
+                <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/07 mit-logo-600.png" alt="MIT" class="recognition-logo"><div class="recognition-text">MIT Research<br>BCG/LEGO</div></a></div>
+                <div class="recognition-item"><a href="/work/modere/"><img src="/images/trust/06 mach-awards-logo-600.png" alt="MACH Awards" class="recognition-logo"><div class="recognition-text">MACH Award<br>Nominee 2025</div></a></div>
+                <div class="recognition-item"><a href="/work/cpsenergy/"><img src="/images/trust/08 smart-20-logo-600.png" alt="Global Smart 20" class="recognition-logo"><div class="recognition-text">Winner, Global<br>Smart 20 Award</div></a></div>
+                <!-- Duplicate for seamless loop -->
+                <div class="recognition-item"><a href="/work/bi/"><img src="/images/trust/01 adobe-logo-600.png" alt="Adobe" class="recognition-logo"><div class="recognition-text">Profiled by Adobe<br>Boehringer Ingelheim</div></a></div>
+                <div class="recognition-item"><a href="/work/newyorklife/"><img src="/images/trust/02 aws-logo-600.png" alt="AWS" class="recognition-logo"><div class="recognition-text">AWS Case Study<br>New York Life</div></a></div>
+                <div class="recognition-item"><a href="/work/directv01/"><img src="/images/trust/03 business-insider-logo-600.png" alt="Business Insider" class="recognition-logo"><div class="recognition-text">Profiled by<br>Business Insider</div></a></div>
+                <div class="recognition-item"><a href="/work/directv02/"><img src="/images/trust/04 engadget-logo-600.png" alt="Engadget" class="recognition-logo"><div class="recognition-text">Profiled by<br>Engadget</div></a></div>
+                <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/05 hbr-logo-600.png" alt="Harvard Business Review" class="recognition-logo"><div class="recognition-text">Harvard Business<br>Review Research</div></a></div>
+                <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/07 mit-logo-600.png" alt="MIT" class="recognition-logo"><div class="recognition-text">MIT Research<br>BCG/LEGO</div></a></div>
+                <div class="recognition-item"><a href="/work/modere/"><img src="/images/trust/06 mach-awards-logo-600.png" alt="MACH Awards" class="recognition-logo"><div class="recognition-text">MACH Award<br>Nominee 2025</div></a></div>
+                <div class="recognition-item"><a href="/work/cpsenergy/"><img src="/images/trust/08 smart-20-logo-600.png" alt="Global Smart 20" class="recognition-logo"><div class="recognition-text">Winner, Global<br>Smart 20 Award</div></a></div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="work" id="work" style="padding: 44px 0 12px;">
+<section class="work" id="work" style="padding: 22px 0 12px;">
     <div class="container">
         <div class="section-header fade-up">
             <a href="/work/" class="u-link-no-underline"><div class="section-tag">Featured Work</div></a>
@@ -391,56 +370,131 @@
 
 <div class="u-divider-thin-40"></div>
 
-<section class="skills-tools-tools" id="tools" style="padding: 12px 0 20px;">
+<!-- What I Do -->
+<section class="u-core-section-pad-80" id="expertise" style="padding-top: 20px; padding-bottom: 40px;">
     <div class="container">
-        <div class="section-header fade-up">
-            <div class="section-tag">What I Use</div>
-            <h2 class="section-title">Platform & Tools Expertise</h2>
-            <p class="section-description">Deep expertise in modern commerce platforms, cloud infrastructure, and enterprise SaaS ecosystems.</p>
+        <div class="section-header fade-up" style="margin-bottom: 24px;">
+            <div class="section-tag">What I Do</div>
+            <h2 class="section-title" style="margin-bottom: 10px;">Core Expertise <span style="color: var(--accent-blue);">&amp;</span> Capabilities</h2>
+            <p class="section-description">One concise view of how I lead product, platform, and program execution for complex digital systems.</p>
         </div>
-        <div class="tools-grid">
-            <div class="tool-card fade-up stagger-1">
-                <div class="tool-header"><div class="tool-icon">🛒</div><h3 class="tool-title">Commerce Platforms</h3></div>
-                <p class="tool-description">BigCommerce, Shopify Plus, Salesforce Commerce Cloud, Adobe Commerce (Magento), commercetools, Fabric</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 24px;">
+            <div class="fade-up stagger-1 u-card-secondary-20">
+                <div class="u-head-row-gap-12">
+                    <div class="u-fs24" style="color: var(--accent-blue);">▤</div>
+                    <h3 class="u-fs16-bold">Product Management &amp; UX</h3>
+                </div>
+                <ul class="u-list-col-6">
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Product Roadmapping</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Market Analysis</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Go-to-Market Planning</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Competitive Positioning</li>
+                </ul>
             </div>
-            <div class="tool-card fade-up stagger-2">
-                <div class="tool-header"><div class="tool-icon">☁️</div><h3 class="tool-title">Cloud & DevOps</h3></div>
-                <p class="tool-description">AWS, Azure, Google Cloud, Kubernetes, Docker, CI/CD pipelines, Infrastructure as Code</p>
+
+            <div class="fade-up stagger-2 u-card-secondary-20">
+                <div class="u-head-row-gap-12">
+                    <div class="u-fs24" style="color: var(--accent-blue);">≡</div>
+                    <h3 class="u-fs16-bold">Program Management</h3>
+                </div>
+                <ul class="u-list-col-6">
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Portfolio Planning</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Risk Management</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Vendor Coordination</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Executive Status Reporting</li>
+                </ul>
             </div>
-            <div class="tool-card fade-up stagger-3">
-                <div class="tool-header"><div class="tool-icon">🔧</div><h3 class="tool-title">Integration & APIs</h3></div>
-                <p class="tool-description">REST, GraphQL, Webhooks, iPaaS (MuleSoft, Boomi, Workato), Kafka, RabbitMQ, microservices</p>
+
+            <div class="fade-up stagger-3 u-card-secondary-20">
+                <div class="u-head-row-gap-12">
+                    <div class="u-fs24" style="color: var(--accent-blue);">◎</div>
+                    <h3 class="u-fs16-bold">AI &amp; Digital Transformation</h3>
+                </div>
+                <ul class="u-list-col-6">
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>AI-Assisted Workflows</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Process Automation</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Platform Modernization</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Change Leadership</li>
+                </ul>
             </div>
-            <div class="tool-card fade-up stagger-4">
-                <div class="tool-header"><div class="tool-icon">📦</div><h3 class="tool-title">Data & Content</h3></div>
-                <p class="tool-description">Contentful, Contentstack, Sanity, Pimcore, Akeneo, Elastic, Algolia, Segment, Snowflake</p>
+
+            <div class="fade-up stagger-4 u-card-secondary-20">
+                <div class="u-head-row-gap-12">
+                    <div class="u-fs24" style="color: var(--accent-blue);">⌬</div>
+                    <h3 class="u-fs16-bold">Solutions Architecture</h3>
+                </div>
+                <ul class="u-list-col-6">
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Composable Commerce</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>API-First Architecture</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Cloud Infrastructure</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Integration Design</li>
+                </ul>
             </div>
-            <div class="tool-card fade-up stagger-5">
-                <div class="tool-header"><div class="tool-icon">💳</div><h3 class="tool-title">Payments & Fintech</h3></div>
-                <p class="tool-description">Stripe, Square, Braintree, Adyen, PayPal, Klarna, Affirm, fraud prevention, PCI compliance</p>
+
+            <div class="fade-up stagger-5 u-card-secondary-20">
+                <div class="u-head-row-gap-12">
+                    <div class="u-fs24" style="color: var(--accent-blue);">⌖</div>
+                    <h3 class="u-fs16-bold">Sales Engineering</h3>
+                </div>
+                <ul class="u-list-col-6">
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Discovery Workshops</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Solution Framing</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Technical Scoping</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Estimation Support</li>
+                </ul>
             </div>
-            <div class="tool-card fade-up stagger-6">
-                <div class="tool-header"><div class="tool-icon">📊</div><h3 class="tool-title">Analytics & Optimization</h3></div>
-                <p class="tool-description">Google Analytics, Amplitude, Mixpanel, Optimizely, Dynamic Yield, personalization engines</p>
-            </div>
-            <div class="tool-card fade-up stagger-7">
-                <div class="tool-header"><div class="tool-icon">🤖</div><h3 class="tool-title">AI & Automation</h3></div>
-                <p class="tool-description">OpenAI APIs, LLM workflows, prompt orchestration, agent tooling, RAG patterns, support and ops automation</p>
-            </div>
-            <div class="tool-card fade-up stagger-8">
-                <div class="tool-header"><div class="tool-icon">🧭</div><h3 class="tool-title">Product & Delivery</h3></div>
-                <p class="tool-description">Roadmaps, PRDs, backlog management, stakeholder alignment, sprint planning, QA/UAT, release coordination</p>
+
+            <div class="fade-up stagger-6 u-card-secondary-20">
+                <div class="u-head-row-gap-12">
+                    <div class="u-fs24" style="color: var(--accent-blue);">↗</div>
+                    <h3 class="u-fs16-bold">Founder, GTM &amp; Exits</h3>
+                </div>
+                <ul class="u-list-col-6">
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>0-to-1 Product Launch</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Positioning &amp; Messaging</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Investor &amp; Stakeholder Pitches</li>
+                    <li class="u-check-li-16"><span class="u-check-icon-10">→</span>Exit-Ready Operations</li>
+                </ul>
             </div>
         </div>
     </div>
 </section>
 
-<div class="u-divider-thin-40"></div>
+<!-- Professional Journey Timeline -->
+<section class="home-professional-timeline" style="padding: 20px 0; background: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-header fade-up">
+            <div class="section-tag">My Journey</div>
+            <h2 class="section-title">Professional Timeline</h2>
+            <p class="section-description">20+ years architecting digital platforms that scale to millions of users and billions in revenue.</p>
+        </div>
+
+        <div class="timeline fade-up">
+            <div class="timeline-item">
+                <h4><span class="timeline-date">2010 - 2013</span> Digital Pioneer</h4>
+                <p>Founded a digital music magazine, the world's first interactive internet television network, and launched DIRECTV Everywhere.</p>
+            </div>
+            <div class="timeline-item">
+                <h4><span class="timeline-date">2013 - 2017</span> eCommerce Pioneer</h4>
+                <p>Led the bleeding edge of omni-channel eCommerce with American Apparel, LEGO, and the Boston Consulting Group.</p>
+            </div>
+            <div class="timeline-item">
+                <h4><span class="timeline-date">2017 - 2023</span> SaaS eCommerce Pioneer</h4>
+                <p>Led the charge to move the enterprise to cloud eCommerce and led 40+ system integration projects across SaaS, the cloud, ERP's, PIM's, WMS', and other back office ecosystems.</p>
+            </div>
+            <div class="timeline-item">
+                <h4><span class="timeline-date">2024 - 2025</span> Award-Winning PM</h4>
+                <p>Nominated for a MACH Composable award with Modere, and won a Global Smart 20 Award with CPS Energy.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="press" style="padding: 20px 0 20px;">
     <div class="container">
         <div class="section-header fade-up" style="margin-bottom: 22px;">
-            <h2 class="section-title">Press &amp; Awards</h2>
+            <h2 class="section-title">Press <span class="gradient-text">&amp;</span> Awards</h2>
             <p class="section-description">Coverage, case studies, and recognition from the work.</p>
         </div>
         <div class="press-grid">

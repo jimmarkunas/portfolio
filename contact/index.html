@@ -13,7 +13,7 @@
     <meta property="og:url" content="https://jimmarkunas.com/contact">
 
     <!-- Global Stylesheet -->
-    <link rel="stylesheet" href="/style.css?v=20260224-1">
+    <link rel="stylesheet" href="/style.css?v=20260302-16">
 </head>
 <body class="page-contact">
     <div class="bg-gradient"></div>
@@ -30,7 +30,6 @@
                 <li><a href="/work/">Work</a></li>
                 <li><a href="/services/">Services</a></li>
                 <li><a href="/cv/">CV</a></li>
-                <li><a href="/about/">About</a></li>
                 <li><a href="/contact/">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
@@ -41,48 +40,91 @@
         <a href="/work/">Work</a>
         <a href="/services/">Services</a>
         <a href="/cv/">CV</a>
-        <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
     </div>
 
-    <!-- Hero -->
-    <section class="u-core-section-pad-80">
+    <!-- Hero Section with Photo -->
+    <section class="hero u-hero-section-pad-60" style="padding-bottom: 30px;">
         <div class="container">
-            <div class="fade-up" style="max-width:800px;margin:0 auto;text-align:center;">
-                <div class="section-tag">Get In Touch</div>
-                <h1 style="font-size:56px;font-weight:700;line-height:1.1;letter-spacing:-0.03em;margin-bottom:24px;">
-                    Let's Build Something <span class="gradient-text">Extraordinary</span>
-                </h1>
-                <p style="font-size:18px;color:var(--text-secondary);line-height:1.5;max-width:700px;margin:0 auto 40px;">
-                    Available for product leadership, platform architecture, and transformation programs. Based in San Antonio, open to remote opportunities worldwide.
-                </p>
-                <div style="margin-bottom:40px;">
-                    <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary" style="font-size:18px;padding:20px 48px;">Schedule a Call</a>
+            <div class="hero-content about-hero-layout fade-up">
+                <div class="about-hero-image-wrap">
+                    <img src="/images/jim/jimheadshot.jpg" alt="Jim Markunas headshot" class="about-hero-image">
                 </div>
-                <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;">
-                    <a href="mailto:jim@jimmarkunas.com" class="u-contact-link-row" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">
-                        <span class="u-fs20">📧</span> Email Me
-                    </a>
-                    <a href="https://linkedin.com/in/jimmarkunas" target="_blank" rel="noopener noreferrer" class="u-contact-link-row" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">
-                        <span class="u-fs20">💼</span> LinkedIn
-                    </a>
-                    <a href="https://x.com/jimmarkunas" target="_blank" rel="noopener noreferrer" class="u-contact-link-row" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">
-                        <span class="u-fs20">𝕏</span> Twitter
-                    </a>
+                <div class="u-flex-1">
+                    <div class="section-tag about-hero-tag">Contact Me</div>
+                    <h1 class="about-hero-title">Building Digital <span class="gradient-text">Products</span> That Matter</h1>
+                    <p class="hero-description about-hero-description">Two decades of turning impossible into inevitable. From streaming platforms serving millions to billion-dollar commerce systems, I architect the digital experiences that define modern business.</p>
+                    <div class="about-hero-cta">
+                        <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary u-btn-inline-center">Schedule a Call</a>
+                        <a href="/cv/" class="btn btn-secondary u-btn-inline-center">My CV</a>
+                    </div>
                 </div>
-                <p style="font-size:14px;color:var(--text-secondary);margin-top:32px;">Response time: Typically within 24 hours</p>
             </div>
         </div>
     </section>
+    <div class="u-divider-thin-40"></div>
 
-    <!-- Contact Form -->
-    <section style="padding:0 0 80px;">
+    <!-- Contact Form Layout -->
+    <section class="u-core-section-pad-80" style="padding-top: 40px; padding-bottom: 40px;">
         <div class="container">
-            <div style="max-width:680px;margin:0 auto;">
-                <form id="contactForm" class="fade-up" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:20px;padding:48px;position:relative;overflow:hidden;">
+            <div class="contact-split fade-up">
+                <div class="contact-intro">
+                    <h2 class="contact-intro-title">Let's Get <span class="gradient-text">Together</span></h2>
+                    <p class="contact-intro-description">Available for product leadership, platform architecture, and transformation programs. Based in the US, UK, and EU, open to remote opportunities worldwide.</p>
+
+                    <div class="contact-intro-links">
+                        <a href="https://linkedin.com/in/jimmarkunas" target="_blank" rel="noopener noreferrer" class="u-contact-link-row">
+                            <span class="contact-link-icon contact-link-icon-linkedin" aria-hidden="true">in</span>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://x.com/jimmarkunas" target="_blank" rel="noopener noreferrer" class="u-contact-link-row">
+                            <span class="contact-link-icon" aria-hidden="true">𝕏</span>
+                            <span>Twitter</span>
+                        </a>
+                    </div>
+
+                    <p class="contact-intro-response">Typical response time: within 24 hours.</p>
+
+                    <div class="contact-location-divider" aria-hidden="true"></div>
+
+                    <div class="contact-location-grid" aria-label="Regional availability">
+                        <div class="contact-location-item">
+                            <span class="contact-location-glyph" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
+                                    <path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path>
+                                    <circle cx="12" cy="10" r="2.8"></circle>
+                                </svg>
+                            </span>
+                            <span class="contact-location-flag" aria-label="United Kingdom">🇬🇧</span>
+                            <span class="contact-location-label">London, UK</span>
+                        </div>
+                        <div class="contact-location-item">
+                            <span class="contact-location-glyph" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
+                                    <path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path>
+                                    <circle cx="12" cy="10" r="2.8"></circle>
+                                </svg>
+                            </span>
+                            <span class="contact-location-flag" aria-label="United States">🇺🇸</span>
+                            <span class="contact-location-label">United States</span>
+                        </div>
+                        <div class="contact-location-item">
+                            <span class="contact-location-glyph" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
+                                    <path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path>
+                                    <circle cx="12" cy="10" r="2.8"></circle>
+                                </svg>
+                            </span>
+                            <span class="contact-location-flag" aria-label="European Union">🇪🇺</span>
+                            <span class="contact-location-label">Europe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="contactForm" class="contact-form-panel" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:20px;padding:48px;position:relative;overflow:hidden;">
                     <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(68,122,203,0.6),transparent);"></div>
                     <h2 style="font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:-0.02em;">Send a Message</h2>
-                    <p style="font-size:15px;color:var(--text-secondary);margin-bottom:36px;">Prefer async? Fill this out and I'll reply within 24 hours.</p>
+                    <p style="font-size:15px;color:var(--text-secondary);margin-bottom:36px;">Let's talk! Fill this out and I'll reply within 24 hours.</p>
 
                     <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
                         <div class="field-group">
@@ -124,69 +166,12 @@
         </div>
     </section>
 
-    <!-- Trust Scroller -->
-    <section class="recognition">
-        <div class="container">
-            <div class="recognition-grid">
-                <div class="recognition-item"><a href="/work/bi/"><img src="/images/trust/01 adobe-logo-600.png" alt="Adobe" class="recognition-logo"><div class="recognition-text">Profiled by Adobe<br>Boehringer Ingelheim</div></a></div>
-                <div class="recognition-item"><a href="/work/newyorklife/"><img src="/images/trust/02 aws-logo-600.png" alt="AWS" class="recognition-logo"><div class="recognition-text">AWS Case Study<br>New York Life</div></a></div>
-                <div class="recognition-item"><a href="/work/directv01/"><img src="/images/trust/03 business-insider-logo-600.png" alt="Business Insider" class="recognition-logo"><div class="recognition-text">Profiled by<br>Business Insider</div></a></div>
-                <div class="recognition-item"><a href="/work/directv02/"><img src="/images/trust/04 engadget-logo-600.png" alt="Engadget" class="recognition-logo"><div class="recognition-text">Profiled by<br>Engadget</div></a></div>
-                <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/05 hbr-logo-600.png" alt="Harvard Business Review" class="recognition-logo"><div class="recognition-text">Harvard Business<br>Review Research</div></a></div>
-                <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/07 mit-logo-600.png" alt="MIT" class="recognition-logo"><div class="recognition-text">MIT Research<br>BCG/LEGO</div></a></div>
-                <div class="recognition-item"><a href="/work/modere/"><img src="/images/trust/06 mach-awards-logo-600.png" alt="MACH Awards" class="recognition-logo"><div class="recognition-text">MACH Award<br>Nominee 2025</div></a></div>
-                <div class="recognition-item"><a href="/work/cpsenergy/"><img src="/images/trust/08 smart-20-logo-600.png" alt="Global Smart 20" class="recognition-logo"><div class="recognition-text">Winner, Global<br>Smart 20 Award</div></a></div>
-                <div class="recognition-item"><a href="/work/bi/"><img src="/images/trust/01 adobe-logo-600.png" alt="Adobe" class="recognition-logo"><div class="recognition-text">Profiled by Adobe<br>Boehringer Ingelheim</div></a></div>
-                <div class="recognition-item"><a href="/work/newyorklife/"><img src="/images/trust/02 aws-logo-600.png" alt="AWS" class="recognition-logo"><div class="recognition-text">AWS Case Study<br>New York Life</div></a></div>
-                <div class="recognition-item"><a href="/work/directv01/"><img src="/images/trust/03 business-insider-logo-600.png" alt="Business Insider" class="recognition-logo"><div class="recognition-text">Profiled by<br>Business Insider</div></a></div>
-                <div class="recognition-item"><a href="/work/directv02/"><img src="/images/trust/04 engadget-logo-600.png" alt="Engadget" class="recognition-logo"><div class="recognition-text">Profiled by<br>Engadget</div></a></div>
-                <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/05 hbr-logo-600.png" alt="Harvard Business Review" class="recognition-logo"><div class="recognition-text">Harvard Business<br>Review Research</div></a></div>
-                <div class="recognition-item"><a href="/work/lego/"><img src="/images/trust/07 mit-logo-600.png" alt="MIT" class="recognition-logo"><div class="recognition-text">MIT Research<br>BCG/LEGO</div></a></div>
-                <div class="recognition-item"><a href="/work/modere/"><img src="/images/trust/06 mach-awards-logo-600.png" alt="MACH Awards" class="recognition-logo"><div class="recognition-text">MACH Award<br>Nominee 2025</div></a></div>
-                <div class="recognition-item"><a href="/work/cpsenergy/"><img src="/images/trust/08 smart-20-logo-600.png" alt="Global Smart 20" class="recognition-logo"><div class="recognition-text">Winner, Global<br>Smart 20 Award</div></a></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Work With Me -->
-    <section class="u-core-section-pad-80">
-        <div class="container">
-            <div class="section-header fade-up">
-                <div class="section-tag">Why Work Together</div>
-                <h2 class="section-title">What You Get</h2>
-                <p class="section-description">More than consulting—partnership that delivers results.</p>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:48px;max-width:1000px;margin-left:auto;margin-right:auto;">
-                <div class="fade-up stagger-1 u-text-center">
-                    <div class="u-fs48-mb16">⚡</div>
-                    <h3 class="u-h3-20-12">Battle-Tested Experience</h3>
-                    <p class="u-p15-secondary-lh17">20+ years shipping products that scale to millions of users and billions in revenue. I've seen what works—and what doesn't.</p>
-                </div>
-                <div class="fade-up stagger-2 u-text-center">
-                    <div class="u-fs48-mb16">🎯</div>
-                    <h3 class="u-h3-20-12">Hands-On Execution</h3>
-                    <p class="u-p15-secondary-lh17">I don't just advise—I roll up my sleeves and ship. From strategy to code, I'm in the trenches with your team.</p>
-                </div>
-                <div class="fade-up stagger-3 u-text-center">
-                    <div class="u-fs48-mb16">🚀</div>
-                    <h3 class="u-h3-20-12">Results That Matter</h3>
-                    <p class="u-p15-secondary-lh17">I'm measured by outcomes, not hours. Faster time to market, reduced costs, measurable revenue impact.</p>
-                </div>
-                <div class="fade-up stagger-4 u-text-center">
-                    <div class="u-fs48-mb16">🤝</div>
-                    <h3 class="u-h3-20-12">No Bullshit Approach</h3>
-                    <p class="u-p15-secondary-lh17">Straight talk, honest assessments, realistic timelines. I tell you what you need to hear, not what you want to hear.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <div class="u-divider-thin-40"></div>
 
     <footer>
         <div class="container fade-up">
-            <h2>Ready to Start?</h2>
-            <p>Book a call and let's discuss how I can help you build something extraordinary.</p>
+            <h2>Let's Build Something <span class="gradient-text">Extraordinary</span></h2>
+            <p>Available for product leadership, platform architecture, and transformation program roles. Based in San Antonio, open to remote.</p>
             <div class="footer-cta">
                 <a href="https://calendar.app.google/Cc4kuM7cqTyiXQx66" class="btn btn-primary">Schedule a Call</a>
                 <a href="/cv/" class="btn btn-secondary">My CV</a>

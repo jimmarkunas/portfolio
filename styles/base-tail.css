@@ -1303,6 +1303,13 @@ body.page-contact #contactForm {
     margin-bottom: 16px;
 }
 
+.u-brand-glyph {
+    color: var(--accent-blue);
+    font-weight: 600;
+    line-height: 1;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 .u-h3-20-12 {
     font-size: 20px;
     font-weight: 700;

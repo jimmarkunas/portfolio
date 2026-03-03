@@ -11,9 +11,9 @@ body.page-zevo {
     --accent-blue:     var(--zevo-logo-green);
     --zevo-accent-dim: rgba(var(--zevo-accent-rgb), 0.12);
     --zevo-accent-glow: rgba(var(--zevo-accent-rgb), 0.4);
-    --case-banner-image-web: url('/images/banners/banner-zevo-web.jpg');
-    --case-banner-image-tablet: url('/images/banners/banner-zevo-tablet.jpg');
-    --case-banner-image-mobile: url('/images/banners/banner-zevo-mobile.jpg');
+    --case-banner-image-web: url('/images/founderimg/zevo-2000.png');
+    --case-banner-image-tablet: url('/images/founderimg/zevo-2000.png');
+    --case-banner-image-mobile: url('/images/founderimg/zevo-2000.png');
 }
 
 /* Background gradient */
@@ -55,6 +55,9 @@ body.page-zevo .btn-secondary:hover { border-color: var(--zevo-accent); backgrou
 /* Banner */
 body.page-zevo .case-banner {
     background-color: #0a1f1c;
+    background-image: url('/images/founderimg/zevo-2000.png') !important;
+    background-size: cover !important;
+    background-position: center center !important;
 }
 body.page-zevo .case-banner::after {
     content: '';
@@ -64,6 +67,11 @@ body.page-zevo .case-banner::after {
         repeating-linear-gradient(0deg,  rgba(var(--zevo-accent-rgb), 0.04) 0px, transparent 1px, transparent 60px);
 }
 body.page-zevo .badge-company { background: rgba(var(--zevo-accent-rgb), 0.15); color: var(--zevo-accent); }
+
+/* ZEVO banner uses a baked-in logo image (single-layer render). */
+body.page-zevo .case-banner-logo-layer {
+    display: none !important;
+}
 
 /* Anchor nav */
 body.page-zevo .anchor-nav a:hover,
@@ -365,4 +373,3 @@ body.page-zevo .zevo-arch-banner {
     body.page-zevo .vision-grid   { grid-template-columns: 1fr; }
     body.page-zevo .pitch-timeline { grid-template-columns: 1fr; }
 }
-

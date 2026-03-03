@@ -7,9 +7,9 @@
 body.page-cwg {
     --cwg-accent:     #E8622A;
     --cwg-accent-dim: rgba(232, 98, 42, 0.15);
-    --case-banner-image-web: url('/images/banners/logo-cwg-web.png');
-    --case-banner-image-tablet: url('/images/banners/logo-cwg-tablet.png');
-    --case-banner-image-mobile: url('/images/banners/logo-cwg-mobile.png');
+    --case-banner-image-web: url('/images/founderimg/cwg-2000.png');
+    --case-banner-image-tablet: url('/images/founderimg/cwg-2000.png');
+    --case-banner-image-mobile: url('/images/founderimg/cwg-2000.png');
 }
 
 /* Background gradient */
