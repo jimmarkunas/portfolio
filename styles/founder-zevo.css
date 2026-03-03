@@ -11,9 +11,9 @@ body.page-zevo {
     --accent-blue:     var(--zevo-logo-green);
     --zevo-accent-dim: rgba(var(--zevo-accent-rgb), 0.12);
     --zevo-accent-glow: rgba(var(--zevo-accent-rgb), 0.4);
-    --case-banner-image-web: url('/images/founderimg/zevo-2000.png');
-    --case-banner-image-tablet: url('/images/founderimg/zevo-2000.png');
-    --case-banner-image-mobile: url('/images/founderimg/zevo-2000.png');
+    --case-banner-image-web: url('/images/banners/zevo-bg-master.png');
+    --case-banner-image-tablet: url('/images/banners/zevo-bg-master.png');
+    --case-banner-image-mobile: url('/images/banners/zevo-bg-master.png');
 }
 
 /* Background gradient */
@@ -55,22 +55,37 @@ body.page-zevo .btn-secondary:hover { border-color: var(--zevo-accent); backgrou
 /* Banner */
 body.page-zevo .case-banner {
     background-color: #0a1f1c;
-    background-image: url('/images/founderimg/zevo-2000.png') !important;
+    background-image: url('/images/banners/zevo-bg-master.png') !important;
     background-size: cover !important;
     background-position: center center !important;
 }
 body.page-zevo .case-banner::after {
     content: '';
     position: absolute; inset: 0;
+    z-index: 0;
     background:
         repeating-linear-gradient(90deg, rgba(var(--zevo-accent-rgb), 0.04) 0px, transparent 1px, transparent 60px),
         repeating-linear-gradient(0deg,  rgba(var(--zevo-accent-rgb), 0.04) 0px, transparent 1px, transparent 60px);
 }
 body.page-zevo .badge-company { background: rgba(var(--zevo-accent-rgb), 0.15); color: var(--zevo-accent); }
 
-/* ZEVO banner uses a baked-in logo image (single-layer render). */
+/* Keep ZEVO logo overlay visible above the banner background. */
 body.page-zevo .case-banner-logo-layer {
-    display: none !important;
+    display: block !important;
+    z-index: 1;
+    background-image: url('/images/banners/zevo-logo.png') !important;
+    background-repeat: no-repeat;
+    background-position: center 50%;
+    background-size: auto 84%;
+}
+
+body.page-zevo .banner-content {
+    position: absolute;
+    left: 40px;
+    bottom: 20px;
+    display: flex;
+    gap: 12px;
+    z-index: 2;
 }
 
 /* Anchor nav */
@@ -245,7 +260,21 @@ body.page-zevo .insight-card {
 body.page-zevo .insight-card-header {
     display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
 }
-body.page-zevo .insight-icon { font-size: 28px; }
+body.page-zevo .insight-icon {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+body.page-zevo .insight-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+body.page-zevo .insight-icon--bulb { color: var(--zevo-accent); }
+body.page-zevo .insight-icon--target { color: var(--zevo-accent); }
 body.page-zevo .insight-title { font-size: 19px; font-weight: 700; color: var(--zevo-accent); }
 body.page-zevo .insight-card p  { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin: 0; }
 body.page-zevo .insight-card p strong { color: var(--text-primary); }
@@ -351,6 +380,22 @@ body.page-zevo .zevo-arch-banner {
 
 /* Responsive */
 @media (max-width: 768px) {
+    body.page-zevo .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        width: 100%;
+    }
+
+    body.page-zevo .hero-cta .btn {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 1.2;
+        padding: 16px 20px;
+    }
+
     body.page-zevo .case-hero .metric-card {
         padding: 18px 14px;
     }

@@ -76,7 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "page-method": { bg: "/images/banners/method-bg-master.png", logo: "/images/banners/method-logo.png" },
         "page-modere": { bg: "/images/banners/modere-bg-master.png", logo: "/images/banners/modere-logo.png" },
         "page-nyl": { bg: "/images/banners/nyl-bg-master.png", logo: "/images/banners/nyl-logo.png" },
-        "page-scj": { bg: "/images/banners/mm-bg-master.png", logo: "/images/banners/mm-logo.png" }
+        "page-scj": { bg: "/images/banners/mm-bg-master.png", logo: "/images/banners/mm-logo.png" },
+        "page-zevo": { bg: "/images/banners/zevo-bg-master.png", logo: "/images/banners/zevo-logo.png" }
     };
 
     const CARD_LAYER_ASSETS = {
@@ -93,7 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "/work/murad/": { bg: "/images/banners/murad-bg-master.png", logo: "/images/banners/murad-logo.png" },
         "/work/lego/": { bg: "/images/banners/lego-bg-master.png", logo: "/images/banners/lego-logo.png" },
         "/work/aa/": { bg: "/images/banners/aa-bg-master.png", logo: "/images/banners/aa-logo.png" },
-        "/work/directv02/": { bg: "/images/banners/dtv02-bg-master.png", logo: "/images/banners/dtv02-logo.png" }
+        "/work/directv02/": { bg: "/images/banners/dtv02-bg-master.png", logo: "/images/banners/dtv02-logo.png" },
+        "/founder/zevo/": { bg: "/images/banners/zevo-bg-master.png", logo: "/images/banners/zevo-logo.png" }
     };
 
     window.BANNER_LAYOUT_CONFIG = window.BANNER_LAYOUT_CONFIG || {
