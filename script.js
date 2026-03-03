@@ -64,6 +64,38 @@ document.addEventListener('DOMContentLoaded', () => {
         mobile: { x: 50, y: 50, scale: 1.02 }
     };
 
+    const CASE_LAYER_ASSETS = {
+        "page-aa": { bg: "/images/banners/aa-bg-master.png", logo: "/images/banners/aa-logo.png" },
+        "page-bi": { bg: "/images/banners/bi-bg-master.png", logo: "/images/banners/bi-logo.png" },
+        "page-cbd": { bg: "/images/banners/cbdistillery-bg-master.png", logo: "/images/banners/cbdistillery-logo.png" },
+        "page-cpse": { bg: "/images/banners/cps-bg-master.png", logo: "/images/banners/cps-logo.png" },
+        "page-directv01": { bg: "/images/banners/dtv-bg-master.png", logo: "/images/banners/dtv01-logo.png" },
+        "page-directv02": { bg: "/images/banners/dtv02-bg-master.png", logo: "/images/banners/dtv02-logo.png" },
+        "page-foh": { bg: "/images/banners/foh-bg-master.png", logo: "/images/banners/foh-logo.png" },
+        "page-k2": { bg: "/images/banners/k2-bg-master.png", logo: "/images/banners/k2-logo.png" },
+        "page-method": { bg: "/images/banners/method-bg-master.png", logo: "/images/banners/method-logo.png" },
+        "page-modere": { bg: "/images/banners/modere-bg-master.png", logo: "/images/banners/modere-logo.png" },
+        "page-nyl": { bg: "/images/banners/nyl-bg-master.png", logo: "/images/banners/nyl-logo.png" },
+        "page-scj": { bg: "/images/banners/mm-bg-master.png", logo: "/images/banners/mm-logo.png" }
+    };
+
+    const CARD_LAYER_ASSETS = {
+        "/work/directv01/": { bg: "/images/banners/dtv-bg-master.png", logo: "/images/banners/dtv01-logo.png" },
+        "/work/cpsenergy/": { bg: "/images/banners/cps-bg-master.png", logo: "/images/banners/cps-logo.png" },
+        "/work/newyorklife/": { bg: "/images/banners/nyl-bg-master.png", logo: "/images/banners/nyl-logo.png" },
+        "/work/modere/": { bg: "/images/banners/modere-bg-master.png", logo: "/images/banners/modere-logo.png" },
+        "/work/bi/": { bg: "/images/banners/bi-bg-master.png", logo: "/images/banners/bi-logo.png" },
+        "/work/scj/": { bg: "/images/banners/mm-bg-master.png", logo: "/images/banners/mm-logo.png" },
+        "/work/method/": { bg: "/images/banners/method-bg-master.png", logo: "/images/banners/method-logo.png" },
+        "/work/k2/": { bg: "/images/banners/k2-bg-master.png", logo: "/images/banners/k2-logo.png" },
+        "/work/cbdistillery/": { bg: "/images/banners/cbdistillery-bg-master.png", logo: "/images/banners/cbdistillery-logo.png" },
+        "/work/foh/": { bg: "/images/banners/foh-bg-master.png", logo: "/images/banners/foh-logo.png" },
+        "/work/murad/": { bg: "/images/banners/murad-bg-master.png", logo: "/images/banners/murad-logo.png" },
+        "/work/lego/": { bg: "/images/banners/lego-bg-master.png", logo: "/images/banners/lego-logo.png" },
+        "/work/aa/": { bg: "/images/banners/aa-bg-master.png", logo: "/images/banners/aa-logo.png" },
+        "/work/directv02/": { bg: "/images/banners/dtv02-bg-master.png", logo: "/images/banners/dtv02-logo.png" }
+    };
+
     window.BANNER_LAYOUT_CONFIG = window.BANNER_LAYOUT_CONFIG || {
         case: {
             "page-aa": {
@@ -155,11 +187,11 @@ document.addEventListener('DOMContentLoaded', () => {
             "/work/bi/": { desktop: { x: 50, y: 50, scale: 1.04 }, tablet: { x: 50, y: 50, scale: 1.03 }, mobile: { x: 50, y: 50, scale: 1.02 } },
             "/work/scj/": { desktop: { x: 50, y: 50, scale: 1.04 }, tablet: { x: 50, y: 50, scale: 1.03 }, mobile: { x: 50, y: 52, scale: 1.02 } },
             "/work/method/": { desktop: { x: 50, y: 50, scale: 1.04 }, tablet: { x: 50, y: 50, scale: 1.03 }, mobile: { x: 50, y: 52, scale: 1.02 } },
-            "/work/murad/": { desktop: { x: 50, y: 50, scale: 1.04 }, tablet: { x: 50, y: 50, scale: 1.03 }, mobile: { x: 50, y: 52, scale: 1.02 } },
+            "/work/murad/": { desktop: { x: 50, y: 52, scale: 1.04, logoSize: 52 }, tablet: { x: 50, y: 53, scale: 1.03, logoSize: 54 }, mobile: { x: 50, y: 54, scale: 1.02, logoSize: 56 } },
             "/work/k2/": { desktop: { x: 50, y: 50, scale: 1.04 }, tablet: { x: 50, y: 50, scale: 1.03 }, mobile: { x: 50, y: 52, scale: 1.02 } },
             "/work/cbdistillery/": { desktop: { x: 50, y: 50, scale: 1.04 }, tablet: { x: 50, y: 50, scale: 1.03 }, mobile: { x: 50, y: 52, scale: 1.02 } },
             "/work/foh/": { desktop: { x: 50, y: 50, scale: 1.04 }, tablet: { x: 50, y: 50, scale: 1.03 }, mobile: { x: 50, y: 52, scale: 1.02 } },
-            "/work/lego/": { desktop: { x: 50, y: 38, scale: 1.05 }, tablet: { x: 50, y: 42, scale: 1.05 }, mobile: { x: 50, y: 46, scale: 1.03 } },
+            "/work/lego/": { desktop: { x: 50, y: 49, scale: 1.05, logoSize: 50 }, tablet: { x: 50, y: 50, scale: 1.05, logoSize: 52 }, mobile: { x: 50, y: 52, scale: 1.03, logoSize: 54 } },
             "/work/aa/": { desktop: { x: 50, y: 50, scale: 1.04 }, tablet: { x: 50, y: 50, scale: 1.03 }, mobile: { x: 50, y: 52, scale: 1.02 } },
             "/work/directv02/": { desktop: { x: 50, y: 58, scale: 1.04 }, tablet: { x: 50, y: 58, scale: 1.03 }, mobile: { x: 50, y: 60, scale: 1.02 } },
             "/founder/cwg/": { desktop: { x: 50, y: 50, scale: 1.04 }, tablet: { x: 50, y: 52, scale: 1.03 }, mobile: { x: 50, y: 56, scale: 1.02 } },
@@ -208,6 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const banner = document.querySelector('.case-banner');
         if (!banner) return null;
 
+        let logoLayer = banner.querySelector('.case-banner-logo-layer');
+        if (!logoLayer) {
+            logoLayer = document.createElement('div');
+            logoLayer.className = 'case-banner-logo-layer';
+            banner.insertBefore(logoLayer, banner.firstChild);
+        }
+
         const breakpoint = getActiveBannerBreakpoint();
         const pageKey = getBodyPageKey();
         const layoutSet = bannerConfig.case?.[pageKey];
@@ -217,6 +256,21 @@ document.addEventListener('DOMContentLoaded', () => {
         banner.style.setProperty('--banner-y', `${layout.y ?? 50}%`);
         banner.style.setProperty('--banner-scale', String(layout.scale ?? 1));
         banner.style.setProperty('--banner-height', `${layout.height ?? 200}px`);
+
+        const layeredAssets = CASE_LAYER_ASSETS[pageKey];
+        if (layeredAssets?.bg && layeredAssets?.logo) {
+            banner.style.setProperty('--case-banner-image-web', `url('${layeredAssets.bg}')`);
+            banner.style.setProperty('--case-banner-image-tablet', `url('${layeredAssets.bg}')`);
+            banner.style.setProperty('--case-banner-image-mobile', `url('${layeredAssets.bg}')`);
+            banner.style.setProperty('--case-banner-logo-image', `url('${layeredAssets.logo}')`);
+            banner.style.setProperty('--case-banner-logo-x', `${layout.x ?? 50}%`);
+            banner.style.setProperty('--case-banner-logo-y', `${layout.y ?? 50}%`);
+            banner.style.setProperty('--case-banner-logo-size', `${Math.max(56, Math.min(92, (layout.scale ?? 1) * 84))}%`);
+            logoLayer.style.display = 'block';
+        } else {
+            banner.style.removeProperty('--case-banner-logo-image');
+            logoLayer.style.display = 'none';
+        }
 
         banner.dataset.bannerKey = pageKey || 'default-case';
         return { target: 'case', key: pageKey, breakpoint, layout };
@@ -232,18 +286,34 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!key) return;
 
             const img = card.querySelector('.work-preview > img');
-            if (!img) return;
+            const preview = card.querySelector('.work-preview');
+            if (!preview) return;
 
             const layoutSet = bannerConfig.cards?.[key];
             const layout = resolveLayout(layoutSet, breakpoint, DEFAULT_CARD_LAYOUT);
 
-            img.style.setProperty('--card-banner-x', `${layout.x ?? 50}%`);
-            img.style.setProperty('--card-banner-y', `${layout.y ?? 50}%`);
-            img.style.setProperty('--card-banner-scale', String(layout.scale ?? 1.04));
+            const layeredAssets = CARD_LAYER_ASSETS[key];
+            if (layeredAssets?.bg && layeredAssets?.logo) {
+                preview.classList.add('work-preview--layered');
+                preview.style.setProperty('--work-preview-bg-image', `url('${layeredAssets.bg}')`);
+                preview.style.setProperty('--work-preview-logo-image', `url('${layeredAssets.logo}')`);
+                preview.style.setProperty('--work-preview-logo-x', `${layout.x ?? 50}%`);
+                preview.style.setProperty('--work-preview-logo-y', `${layout.y ?? 50}%`);
+                const overlayLogoSize = Math.max(40, Math.min(84, (layout.scale ?? 1.04) * 68));
+                preview.style.setProperty('--work-preview-logo-size', `${overlayLogoSize}%`);
+                if (img) img.style.display = 'none';
+            } else if (img) {
+                preview.classList.remove('work-preview--layered');
+                img.style.display = '';
+                img.style.setProperty('--card-banner-x', `${layout.x ?? 50}%`);
+                img.style.setProperty('--card-banner-y', `${layout.y ?? 50}%`);
+                const adjustedScale = clamp((layout.scale ?? 1.04) - 0.05, 0.93, 1.08);
+                img.style.setProperty('--card-banner-scale', String(adjustedScale));
+            }
 
             card.dataset.bannerKey = key;
-            img.dataset.bannerKey = key;
-            applied.push({ target: 'card', key, breakpoint, layout, card, img });
+            if (img) img.dataset.bannerKey = key;
+            applied.push({ target: 'card', key, breakpoint, layout, card });
         });
 
         return applied;

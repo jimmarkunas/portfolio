@@ -249,6 +249,7 @@ nav {
 .badge-amazon { background: rgba(255, 153, 0, 0.15); border: 1px solid rgba(255, 153, 0, 0.4); color: #FF9900; }
 .badge-adobe { background: rgba(255, 0, 0, 0.12); border: 1px solid rgba(255, 0, 0, 0.35); color: #FF4444; }
 .badge-research { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.4); color: #a78bfa; }
+.badge-founder { background: rgba(0, 231, 107, 0.14); border: 1px solid rgba(0, 231, 107, 0.4); color: #6be08c; }
 .work-badge-press { background: rgba(68, 122, 203, 0.16); border: 1px solid rgba(68, 122, 203, 0.45); color: #7ea9e8; }
 
 .work-card {
@@ -279,6 +280,25 @@ nav {
     position: absolute; inset: 0;
     background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%),
         repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
+}
+
+.work-preview--layered {
+    background-image: var(--work-preview-bg-image);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.work-preview--layered::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: var(--work-preview-logo-image);
+    background-repeat: no-repeat;
+    background-position: var(--work-preview-logo-x, center) var(--work-preview-logo-y, center);
+    background-size: auto var(--work-preview-logo-size, 78%);
 }
 .work-preview-content {
     position: absolute; top: 50%; left: 50%;
@@ -553,6 +573,17 @@ footer p { font-size: 20px; color: var(--text-secondary); margin-bottom: 50px; m
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid var(--border);
+}
+
+.case-banner-logo-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: var(--case-banner-logo-image, none);
+    background-repeat: no-repeat;
+    background-position: var(--case-banner-logo-x, center) var(--case-banner-logo-y, center);
+    background-size: auto var(--case-banner-logo-size, 84%);
 }
 
 @media (max-width: 1024px) {
@@ -2689,6 +2720,11 @@ figure.diagram-static .notice-list li {
 .press-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin: 0; }
 .press-card-arrow { font-size: 18px; color: var(--text-secondary); flex-shrink: 0; transition: color 0.3s, transform 0.3s; }
 .press-card:hover .press-card-arrow { color: var(--accent-blue); transform: translate(2px,-2px); }
+.press-awards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
 /* Home page case study/press modals */
 .press-two-col {
     display: grid;
@@ -2707,6 +2743,9 @@ figure.diagram-static .notice-list li {
     }
 }
 @media (max-width: 768px) {
+    .press-awards-grid {
+        grid-template-columns: 1fr;
+    }
     .press-two-col {
         grid-template-columns: 1fr;
     }
