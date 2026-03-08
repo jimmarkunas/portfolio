@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jim Markunas — Infographic Style Tile</title>
+<style>
+  :root{
+    --bg:#F7F8FC;
+    --canvas:#FFFFFF;
+    --subtle:#EEF2F8;
+    --panel:#FFFFFF;
+    --panel-alt:#F4F6FB;
+    --brand:#447ACB;
+    --brand-hover:#3B6DB6;
+    --teal:#1F9D8B;
+    --teal-soft:#DDF6F1;
+    --amber:#C98A18;
+    --amber-soft:#FFF2D9;
+    --red:#C95B5B;
+    --red-soft:#FCE8E8;
+    --slate:#5D6FA3;
+    --slate-soft:#E8ECF8;
+    --navy:#16233B;
+    --ink:#1F2A44;
+    --steel:#2E3A59;
+    --soft-navy:#243554;
+    --text:#000000;
+    --strong:#111827;
+    --secondary:#4B5563;
+    --muted:#6B7280;
+    --border:#D7DDEA;
+    --border-subtle:#E4E8F1;
+    --shadow:0 16px 40px rgba(26,39,69,.06);
+    --radius:18px;
+    --radius-sm:12px;
+    --radius-pill:14px;
+    --copy:72ch;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height:1.45;
+  }
+  .wrap{max-width:1420px;margin:0 auto;padding:34px 24px 72px;}
+  .hero{
+    background:linear-gradient(180deg, #ffffff 0%, #f6f8fd 100%);
+    border:1px solid var(--border-subtle);
+    border-radius:28px;
+    padding:34px;
+    box-shadow:var(--shadow);
+    display:grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap:26px;
+    align-items:stretch;
+  }
+  .eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:14px}
+  h1,h2,h3,h4,p{margin:0}
+  h1{font-size:48px;line-height:1.04;letter-spacing:-.04em;color:var(--strong);max-width:12ch;margin-bottom:14px}
+  h2{font-size:26px;line-height:1.12;letter-spacing:-.03em;color:var(--strong)}
+  h3{font-size:19px;line-height:1.2;letter-spacing:-.02em;color:var(--strong)}
+  h4{font-size:15px;line-height:1.25;letter-spacing:-.01em;color:var(--strong)}
+  .subhead{font-size:17px;color:var(--secondary);max-width:58ch;margin-bottom:18px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:12px;border:1px solid transparent;font-weight:700;font-size:14px;text-decoration:none;}
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:0 10px 24px rgba(68,122,203,.18)}
+  .btn-secondary{background:#fff;border-color:var(--navy);color:var(--navy)}
+  .microtags{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .tag{padding:7px 10px;border-radius:10px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+  .tag.ops{background:var(--teal-soft);color:#1F6F63}
+  .tag.proof{background:var(--amber-soft);color:#8A5D12}
+  .tag.risk{background:var(--red-soft);color:#8B3E3E}
+  .tag.strategy{background:var(--slate-soft);color:#44537C}
+  .hero-right{display:grid;grid-template-rows:auto 1fr;gap:18px}
+  .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .kpi{background:var(--canvas);border:1px solid var(--border-subtle);border-radius:18px;padding:16px 16px 14px;box-shadow:var(--shadow)}
+  .kpi .label{font-size:12px;color:var(--muted);margin-bottom:10px}
+  .kpi .value{font-size:30px;font-weight:800;line-height:1;letter-spacing:-.04em;color:var(--strong);margin-bottom:8px}
+  .delta{font-size:12px;font-weight:700}
+  .delta.pos{color:var(--teal)}
+  .delta.warn{color:var(--amber)}
+  .proof-panel{background:linear-gradient(135deg, rgba(68,122,203,.08), rgba(93,111,163,.08));border:1px solid var(--border-subtle);border-radius:22px;padding:20px;display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:center}
+  .proof-list{display:grid;gap:12px}
+  .proof-item{background:#fff;border:1px solid var(--border-subtle);border-radius:14px;padding:12px 14px}
+  .proof-item .small{font-size:12px;color:var(--muted);margin-bottom:6px}
+  .proof-item .big{font-size:15px;font-weight:700;color:var(--strong)}
+  .section{margin-top:28px}
+  .section-header{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:16px}
+  .section-header p{font-size:14px;color:var(--secondary);max-width:66ch}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .panel{background:var(--panel);border:1px solid var(--border-subtle);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  .panel.alt{background:var(--panel-alt)}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--secondary);margin:10px 0 0}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:10px;height:10px;border-radius:999px;display:inline-block}
+  .chart-note{font-size:12px;color:var(--muted);margin-top:10px}
+  .snapshot-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 18px;margin-top:18px}
+  .snapshot-item{padding-top:10px;border-top:1px solid var(--border-subtle)}
+  .snapshot-item .k{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px}
+  .snapshot-item .v{font-size:14px;font-weight:700;color:var(--strong)}
+  .beforeafter{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch;margin-top:16px}
+  .state{border:1px solid var(--border-subtle);border-radius:16px;padding:16px;background:#fff}
+  .state.before{background:#FFF7F7;border-color:#F3D8D8}
+  .state.after{background:#F3FAF8;border-color:#D4EFE9}
+  .state-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+  .state.before .state-title{color:var(--red)}
+  .state.after .state-title{color:var(--teal)}
+  .arrow{display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--brand);font-weight:800}
+  ul.clean{margin:0;padding-left:18px;color:var(--secondary)}
+  ul.clean li{margin:8px 0}
+  .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+  .phase{position:relative;background:#fff;border:1px solid var(--border-subtle);border-radius:16px;padding:16px 14px 14px}
+  .phase::before{content:"";position:absolute;top:-1px;left:-1px;right:-1px;height:6px;border-radius:16px 16px 0 0;background:var(--brand)}
+  .phase:nth-child(2)::before{background:var(--slate)}
+  .phase:nth-child(3)::before{background:var(--amber)}
+  .phase:nth-child(4)::before{background:var(--teal)}
+  .phase .step{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .phase .title{font-size:15px;font-weight:800;color:var(--strong);margin-bottom:8px}
+  .phase p{font-size:13px;color:var(--secondary)}
+  .system-map{display:grid;grid-template-columns:1fr 180px 1fr;gap:14px;align-items:center;margin-top:18px}
+  .node-col{display:grid;gap:12px}
+  .node{background:#fff;border:1px solid var(--border-subtle);border-radius:14px;padding:12px 14px;font-size:14px;font-weight:700;color:var(--strong);display:flex;align-items:center;justify-content:space-between}
+  .node small{font-size:11px;color:var(--muted);font-weight:600}
+  .hub{background:linear-gradient(180deg, #fff, #f4f7fd);border:1px solid var(--border);border-radius:18px;padding:18px;text-align:center;box-shadow:var(--shadow)}
+  .hub .title{font-size:14px;font-weight:800;color:var(--strong);margin-bottom:8px}
+  .hub .badge{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(68,122,203,.1);color:var(--brand);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+  .flow{position:relative;height:100%}
+  .flow svg{width:100%;height:100%}
+  .matrix{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}
+  .matrix th,.matrix td{border:1px solid var(--border-subtle);padding:12px;text-align:center}
+  .matrix th{background:var(--panel-alt);color:var(--strong);font-weight:800}
+  .matrix td:first-child,.matrix th:first-child{text-align:left;font-weight:700}
+  .chip{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:8px;font-size:12px;font-weight:800}
+  .r{background:var(--red-soft);color:#8B3E3E}
+  .a{background:var(--amber-soft);color:#8A5D12}
+  .c{background:var(--teal-soft);color:#1F6F63}
+  .i{background:var(--slate-soft);color:#44537C}
+  .risk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  .risk{border-radius:16px;padding:16px;border:1px solid var(--border-subtle);background:#fff}
+  .risk.high{background:#FFF7F7;border-color:#F3D8D8}
+  .risk.med{background:#FFF9EE;border-color:#F5E1B9}
+  .risk.low{background:#F3FAF8;border-color:#D4EFE9}
+  .risk .severity{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+  .risk.high .severity{background:var(--red-soft);color:#8B3E3E}
+  .risk.med .severity{background:var(--amber-soft);color:#8A5D12}
+  .risk.low .severity{background:var(--teal-soft);color:#1F6F63}
+  .risk h4{margin-bottom:8px}
+  .risk p{font-size:13px;color:var(--secondary)}
+  .outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+  .outcome{border:1px solid var(--border-subtle);border-radius:16px;padding:16px;background:#fff}
+  .outcome .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .outcome .metric{font-size:28px;font-weight:800;color:var(--strong);letter-spacing:-.03em;margin-bottom:8px}
+  .outcome p{font-size:13px;color:var(--secondary)}
+  .band{margin-top:30px;background:linear-gradient(135deg, var(--navy), var(--soft-navy));padding:28px 30px;border-radius:26px;color:#fff;display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:center;box-shadow:var(--shadow)}
+  .band .eyebrow{color:#A9C3F1}
+  .band h2,.band h3,.band p{color:#fff}
+  .band p{font-size:15px;opacity:.88;max-width:60ch}
+  .mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .mini-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:14px}
+  .mini-card .big{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}
+  .mini-card .small{font-size:12px;opacity:.84}
+  .glyphs{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+  .glyph{background:#fff;border:1px solid var(--border-subtle);border-radius:16px;padding:14px;display:grid;gap:10px;place-items:center;text-align:center}
+  .glyph .name{font-size:11px;color:var(--secondary);font-weight:700}
+  .icon{width:28px;height:28px;color:var(--brand)}
+  .footer-note{font-size:13px;color:var(--muted);margin-top:16px}
+  .swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .swatch{border-radius:18px;overflow:hidden;border:1px solid var(--border-subtle);background:#fff;box-shadow:var(--shadow)}
+  .swatch-top{height:78px}
+  .swatch-body{padding:12px}
+  .swatch-body .name{font-weight:800;color:var(--strong);font-size:14px}
+  .swatch-body .hex{font-size:12px;color:var(--secondary);margin-top:4px}
+  .chart svg{width:100%;height:190px;display:block}
+  .chart.tall svg{height:240px}
+  .divider{height:1px;background:var(--border-subtle);margin:14px 0 0}
+  @media (max-width: 1100px){
+    .hero,.grid-3,.grid-2,.band{grid-template-columns:1fr}
+    .timeline{grid-template-columns:repeat(2,1fr)}
+    .system-map{grid-template-columns:1fr}
+    .swatches,.glyphs,.mini-grid,.outcomes,.risk-grid{grid-template-columns:repeat(2,1fr)}
+    h1{font-size:40px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Infographic system / visual direction</div>
+      <h1>Proof-first visuals for Jim’s case-study pages.</h1>
+      <p class="subhead">This is not a generic SaaS dashboard. It is a reusable infographic language for platform modernization, commerce delivery, systems integration, vendor recovery, and executive proof storytelling.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#">Primary CTA</a>
+        <a class="btn btn-secondary" href="#">Secondary CTA</a>
+      </div>
+      <div class="microtags">
+        <span class="tag ops">Systems / Ops</span>
+        <span class="tag proof">Proof / Result</span>
+        <span class="tag risk">Risk / Constraint</span>
+        <span class="tag strategy">Product / Strategy</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="label">Budget / scope controlled</div><div class="value">$25M</div><div class="delta pos">Complex multi-vendor program</div></div>
+        <div class="kpi"><div class="label">Time-to-market gain</div><div class="value">30%</div><div class="delta pos">Workflow acceleration</div></div>
+        <div class="kpi"><div class="label">Adoption / operational lift</div><div class="value">25%</div><div class="delta warn">Product + platform outcome</div></div>
+      </div>
+      <div class="proof-panel">
+        <div>
+          <h3 style="margin-bottom:8px">What the visuals need to communicate</h3>
+          <p style="font-size:14px;color:var(--secondary);max-width:38ch">Fast recruiter scanning. Executive-ready proof. Clear role ownership. Architecture clarity. Risk made visible. Delivery sequencing that looks deliberate.</p>
+        </div>
+        <div class="proof-list">
+          <div class="proof-item"><div class="small">Best use of charts</div><div class="big">KPI deltas, timelines, adoption shifts, trend snapshots</div></div>
+          <div class="proof-item"><div class="small">Best use of diagrams</div><div class="big">System maps, process flows, ownership, tradeoffs</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Color system</div>
+        <h2>Updated palette anchored on #447ACB</h2>
+      </div>
+      <p>Use blue for the main story, teal for positive operational movement, amber for proof and notable wins, red for blockers or decline, and slate for neutral strategy/supporting series.</p>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-top" style="background:#447ACB"></div><div class="swatch-body"><div class="name">Brand Blue</div><div class="hex">#447ACB</div></div></div>
+      <div class="swatch"><div class="swatch-top" style="background:#1F9D8B"></div><div class="swatch-body"><div class="name">Teal</div><div class="hex">#1F9D8B</div></div></div>
+      <div class="swatch"><div class="swatch-top" style="background:#C98A18"></div><div class="swatch-body"><div class="name">Amber</div><div class="hex">#C98A18</div></div></div>
+      <div class="swatch"><div class="swatch-top" style="background:#C95B5B"></div><div class="swatch-body"><div class="name">Risk Red</div><div class="hex">#C95B5B</div></div></div>
+      <div class="swatch"><div class="swatch-top" style="background:#5D6FA3"></div><div class="swatch-body"><div class="name">Slate Blue</div><div class="hex">#5D6FA3</div></div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Core infographic modules</div>
+        <h2>Top proof patterns for your case-study pages</h2>
+      </div>
+      <p>These are the standard elements your portfolio needs because your work is complex, cross-functional, integration-heavy, and often judged by risk reduction as much as flashy product visuals.</p>
+    </div>
+    <div class="grid-3">
+      <div class="panel">
+        <div class="eyebrow">1 / KPI delta cards</div>
+        <h3>Fast proof at the top</h3>
+        <div class="kpi-grid" style="grid-template-columns:1fr 1fr; margin-top:16px">
+          <div class="kpi" style="box-shadow:none"><div class="label">Cost reduction</div><div class="value">35%</div><div class="delta pos">Vendor + ops efficiency</div></div>
+          <div class="kpi" style="box-shadow:none"><div class="label">Release cadence</div><div class="value">90d</div><div class="delta warn">Installed operating rhythm</div></div>
+        </div>
+        <p class="chart-note">Use for top-of-page proof, outcomes sections, and recruiter scan moments.</p>
+      </div>
+      <div class="panel alt">
+        <div class="eyebrow">2 / Snapshot panel</div>
+        <h3>Role, stack, scope, scale</h3>
+        <div class="snapshot-list">
+          <div class="snapshot-item"><div class="k">Role</div><div class="v">Senior Product / Delivery Lead</div></div>
+          <div class="snapshot-item"><div class="k">Timeline</div><div class="v">9 months</div></div>
+          <div class="snapshot-item"><div class="k">Stack</div><div class="v">Adobe Commerce + SAP</div></div>
+          <div class="snapshot-item"><div class="k">Scope</div><div class="v">Global commerce + ERP</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="eyebrow">3 / Outcomes grid</div>
+        <h3>Split impact by type</h3>
+        <div class="outcomes">
+          <div class="outcome"><div class="kicker">Business</div><div class="metric">$120M</div><p>Revenue or GMV impact when the source data supports it.</p></div>
+          <div class="outcome"><div class="kicker">Operational</div><div class="metric">65%</div><p>Reduction in manual work, cycle time, or release friction.</p></div>
+          <div class="outcome"><div class="kicker">Technical</div><div class="metric">12</div><p>Integrated systems, workflows hardened, or platform capabilities added.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid-2">
+      <div class="panel">
+        <div class="eyebrow">Transformation proof</div>
+        <h2>Before / after block</h2>
+        <div class="beforeafter">
+          <div class="state before">
+            <div class="state-title">Before</div>
+            <ul class="clean">
+              <li>Fragmented ownership across vendors</li>
+              <li>Manual ERP handoffs and low release confidence</li>
+              <li>High-risk payment and compliance exposure</li>
+            </ul>
+          </div>
+          <div class="arrow">→</div>
+          <div class="state after">
+            <div class="state-title">After</div>
+            <ul class="clean">
+              <li>Defined operating model and system ownership</li>
+              <li>Integrated flows with tighter release governance</li>
+              <li>Platform stability, measurable adoption, cleaner scaling path</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="panel alt">
+        <div class="eyebrow">Delivery sequencing</div>
+        <h2>Phase timeline</h2>
+        <div class="timeline">
+          <div class="phase"><div class="step">Phase 01</div><div class="title">Diagnose</div><p>Find the real blockers, not the visible symptoms.</p></div>
+          <div class="phase"><div class="step">Phase 02</div><div class="title">Design</div><p>Target workflow, architecture, and governance model.</p></div>
+          <div class="phase"><div class="step">Phase 03</div><div class="title">Align</div><p>Vendors, stakeholders, risk owners, and decision paths.</p></div>
+          <div class="phase"><div class="step">Phase 04</div><div class="title">Ship</div><p>Launch, stabilize, harden, and transfer operating rhythm.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid-2">
+      <div class="panel">
+        <div class="eyebrow">Architecture / systems</div>
+        <h2>System map for integration-heavy work</h2>
+        <div class="system-map">
+          <div class="node-col">
+            <div class="node">Adobe Commerce <small>storefront</small></div>
+            <div class="node">PIM / DAM <small>product content</small></div>
+            <div class="node">Payments <small>processor</small></div>
+          </div>
+          <div class="hub">
+            <div class="title">Delivery layer</div>
+            <div class="badge">owned by Jim</div>
+            <p style="font-size:13px;color:var(--secondary);margin-top:10px">Roadmap, dependencies, workflows, release sequencing, vendor alignment.</p>
+          </div>
+          <div class="node-col">
+            <div class="node">SAP / ERP <small>orders + finance</small></div>
+            <div class="node">OMS / WMS <small>inventory + fulfillment</small></div>
+            <div class="node">Analytics / CMS <small>tracking + content</small></div>
+          </div>
+        </div>
+        <p class="chart-note">These diagrams should replace generic decorative illustrations on your site.</p>
+      </div>
+      <div class="panel alt">
+        <div class="eyebrow">Governance / seniority</div>
+        <h2>Stakeholder matrix</h2>
+        <table class="matrix">
+          <thead>
+            <tr><th>Workstream</th><th>Client</th><th>SI / Vendor</th><th>Product</th><th>Jim</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Roadmap / sequencing</td><td><span class="chip i">I</span></td><td><span class="chip c">C</span></td><td><span class="chip c">C</span></td><td><span class="chip r">R</span></td></tr>
+            <tr><td>Requirements / backlog</td><td><span class="chip a">A</span></td><td><span class="chip c">C</span></td><td><span class="chip r">R</span></td><td><span class="chip a">A</span></td></tr>
+            <tr><td>Release / risk governance</td><td><span class="chip c">C</span></td><td><span class="chip c">C</span></td><td><span class="chip i">I</span></td><td><span class="chip r">R</span></td></tr>
+            <tr><td>Executive comms</td><td><span class="chip c">C</span></td><td><span class="chip i">I</span></td><td><span class="chip i">I</span></td><td><span class="chip a">A</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Data visuals</div>
+        <h2>When to use charts on your site</h2>
+      </div>
+      <p>Use charts only when they clarify change, trend, mix, or delivery sequencing. The dashboard references are useful for polish, but your portfolio should favor simple, executive-readable chart types.</p>
+    </div>
+    <div class="grid-3">
+      <div class="panel chart">
+        <h3>Trend line</h3>
+        <svg viewBox="0 0 420 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="420" height="190" rx="16" fill="#fff"/>
+          <path d="M40 160H390" stroke="#E4E8F1"/>
+          <path d="M40 120H390" stroke="#EEF2F8"/>
+          <path d="M40 80H390" stroke="#EEF2F8"/>
+          <path d="M40 40H390" stroke="#EEF2F8"/>
+          <path d="M50 126 C88 110, 106 64, 150 74 S215 120, 252 92 S310 36, 370 54" stroke="#447ACB" stroke-width="4" fill="none"/>
+          <path d="M50 126 C88 110, 106 64, 150 74 S215 120, 252 92 S310 36, 370 54 L370 160 L50 160 Z" fill="rgba(68,122,203,.10)"/>
+          <circle cx="252" cy="92" r="6" fill="#447ACB"/>
+        </svg>
+        <div class="legend"><span><i class="dot" style="background:#447ACB"></i>Primary trend / adoption / throughput</span></div>
+      </div>
+      <div class="panel chart">
+        <h3>Grouped bars</h3>
+        <svg viewBox="0 0 420 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 160H390" stroke="#E4E8F1"/>
+          <rect x="60" y="92" width="18" height="68" rx="9" fill="#B7C4E3"/>
+          <rect x="84" y="64" width="18" height="96" rx="9" fill="#447ACB"/>
+          <rect x="140" y="110" width="18" height="50" rx="9" fill="#B7C4E3"/>
+          <rect x="164" y="72" width="18" height="88" rx="9" fill="#447ACB"/>
+          <rect x="220" y="120" width="18" height="40" rx="9" fill="#B7C4E3"/>
+          <rect x="244" y="54" width="18" height="106" rx="9" fill="#447ACB"/>
+          <rect x="300" y="104" width="18" height="56" rx="9" fill="#B7C4E3"/>
+          <rect x="324" y="78" width="18" height="82" rx="9" fill="#447ACB"/>
+        </svg>
+        <div class="legend"><span><i class="dot" style="background:#447ACB"></i>After</span><span><i class="dot" style="background:#B7C4E3"></i>Before / baseline</span></div>
+      </div>
+      <div class="panel chart">
+        <h3>Stacked outcomes</h3>
+        <svg viewBox="0 0 420 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 160H390" stroke="#E4E8F1"/>
+          <rect x="70" y="116" width="36" height="44" rx="10" fill="#B7C4E3"/>
+          <rect x="70" y="86" width="36" height="30" rx="10" fill="#5D6FA3"/>
+          <rect x="70" y="54" width="36" height="32" rx="10" fill="#447ACB"/>
+          <rect x="158" y="126" width="36" height="34" rx="10" fill="#D5DEEF"/>
+          <rect x="158" y="76" width="36" height="50" rx="10" fill="#1F9D8B"/>
+          <rect x="158" y="32" width="36" height="44" rx="10" fill="#447ACB"/>
+          <rect x="246" y="120" width="36" height="40" rx="10" fill="#D5DEEF"/>
+          <rect x="246" y="86" width="36" height="34" rx="10" fill="#C98A18"/>
+          <rect x="246" y="42" width="36" height="44" rx="10" fill="#447ACB"/>
+          <rect x="334" y="132" width="36" height="28" rx="10" fill="#FCE8E8"/>
+          <rect x="334" y="98" width="36" height="34" rx="10" fill="#C95B5B"/>
+          <rect x="334" y="58" width="36" height="40" rx="10" fill="#447ACB"/>
+        </svg>
+        <div class="legend"><span><i class="dot" style="background:#447ACB"></i>Core impact</span><span><i class="dot" style="background:#1F9D8B"></i>Ops gain</span><span><i class="dot" style="background:#C95B5B"></i>Risk reduction</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid-2">
+      <div class="panel">
+        <div class="eyebrow">Constraint language</div>
+        <h2>Risk / blocker cards</h2>
+        <div class="risk-grid">
+          <div class="risk high"><div class="severity">High</div><h4>Processor instability</h4><p>Payment or banking uncertainty threatening launch viability.</p></div>
+          <div class="risk med"><div class="severity">Medium</div><h4>Vendor dependency</h4><p>Shared milestones across SI, client, and platform providers.</p></div>
+          <div class="risk med"><div class="severity">Medium</div><h4>Compliance friction</h4><p>Regulated review path creating timeline pressure.</p></div>
+          <div class="risk low"><div class="severity">Low</div><h4>Content readiness</h4><p>Operational dependency that can be controlled with cadence.</p></div>
+        </div>
+      </div>
+      <div class="panel alt">
+        <div class="eyebrow">Decision quality</div>
+        <h2>Tradeoff card</h2>
+        <div style="margin-top:16px;border:1px solid var(--border-subtle);border-radius:18px;padding:18px;background:#fff">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:12px">
+            <h3 style="max-width:22ch">Stabilize release scope before expanding personalization</h3>
+            <span class="tag strategy">Executive tradeoff</span>
+          </div>
+          <div class="grid-2" style="gap:12px">
+            <div style="padding:14px;border-radius:14px;background:#F4F6FB"><h4 style="margin-bottom:6px">Why</h4><p style="font-size:13px;color:var(--secondary)">Protected launch confidence and reduced downstream support burden.</p></div>
+            <div style="padding:14px;border-radius:14px;background:#F4F6FB"><h4 style="margin-bottom:6px">Impact</h4><p style="font-size:13px;color:var(--secondary)">Cleaner first release, faster stabilization, better adoption path.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div>
+      <div class="eyebrow">Contrast band example</div>
+      <h2>Use dark bands for proof, outcome, and conversion moments.</h2>
+      <p>Dark bands should be short, high-contrast, and high-signal. They work best for metrics, proof, recruiter shortcuts, and footer CTA moments — not dense reading sections.</p>
+    </div>
+    <div class="mini-grid">
+      <div class="mini-card"><div class="big">3–4</div><div class="small">proof cards max</div></div>
+      <div class="mini-card"><div class="big">1</div><div class="small">primary CTA</div></div>
+      <div class="mini-card"><div class="big">0</div><div class="small">text walls</div></div>
+      <div class="mini-card"><div class="big">100%</div><div class="small">focus on outcomes</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Glyph package</div>
+        <h2>Standard icon categories</h2>
+      </div>
+      <p>Use one icon family across social links, devices, interface actions, callouts, architecture nodes, and case-study proof callouts.</p>
+    </div>
+    <div class="glyphs">
+      <div class="glyph"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M5 3h14v18H5z" stroke="currentColor" stroke-width="2"/><path d="M9 19h6" stroke="currentColor" stroke-width="2"/></svg><div class="name">Device</div></div>
+      <div class="glyph"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H4z" stroke="currentColor" stroke-width="2"/><path d="M8 20h8" stroke="currentColor" stroke-width="2"/></svg><div class="name">Desktop</div></div>
+      <div class="glyph"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="2"/></svg><div class="name">Add</div></div>
+      <div class="glyph"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="2"/><path d="m13 5 7 7-7 7" stroke="currentColor" stroke-width="2"/></svg><div class="name">Arrow</div></div>
+      <div class="glyph"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2"/></svg><div class="name">Menu</div></div>
+      <div class="glyph"><svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg><div class="name">Camera</div></div>
+      <div class="glyph"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M7 10a5 5 0 0 1 10 0c0 4-5 8-5 8s-5-4-5-8Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="1.5" fill="currentColor"/></svg><div class="name">Location</div></div>
+      <div class="glyph"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2"/></svg><div class="name">Callout</div></div>
+    </div>
+    <p class="footer-note">Recommended style: one clean line icon family, 1.75–2px stroke, rounded joins, no mixed icon sets.</p>
+  </section>
+</div>
+</body>
+</html>
