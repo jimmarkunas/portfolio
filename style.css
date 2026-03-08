@@ -1,5 +1,0 @@
-/* Aggregated stylesheet manifest. Keep import order to preserve cascade behavior. */
-@import url('/styles/base-core.css');
-@import url('/styles/founder-cwg.css');
-@import url('/styles/founder-zevo.css');
-@import url('/styles/base-tail.css');
