@@ -244,22 +244,7 @@
     .video-modal-1{position:relative;padding:0}
     .video-modal-1__layout{display:grid;grid-template-columns:1fr minmax(280px,1.02fr);gap:30px;align-items:start}
     .video-modal-1__media{position:relative;display:block;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:1px solid #C7D0DB;background:#111A25}
-    .video-link-card{display:block;text-decoration:none;color:#fff}
-    .video-link-card img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.12) contrast(1.05)}
-    .video-link-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,13,19,.22),rgba(8,13,19,.42))}
-    .video-link-card__play{
-      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-      width:92px;height:64px;border-radius:18px;background:#FF0033;display:grid;place-items:center;
-      box-shadow:0 16px 34px rgba(0,0,0,.32)
-    }
-    .video-link-card__play::before{
-      content:"";margin-left:4px;border-style:solid;border-width:11px 0 11px 18px;border-color:transparent transparent transparent #fff
-    }
-    .video-link-card__label{
-      position:absolute;left:14px;bottom:12px;
-      font-size:12px;font-weight:800;letter-spacing:.02em;color:#fff;
-      background:rgba(15,23,34,.72);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 10px
-    }
+    .video-modal-1__media iframe{display:block;width:100%;height:100%;border:0}
     .video-modal-1__body{display:flex;flex-direction:column;order:1}
     .video-modal-1__media{order:2}
     .video-modal-1__meta{font-size:11px;color:var(--blue);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
@@ -753,11 +738,15 @@
         <article class="challenge-opening">
           <div class="video-modal-1">
             <div class="video-modal-1__layout">
-              <a class="video-modal-1__media video-link-card" href="https://www.youtube.com/watch?v=Ch9cUuG95qI&t=13s" target="_blank" rel="noopener noreferrer" aria-label="Watch opening report on YouTube">
-                <img src="https://img.youtube.com/vi/Ch9cUuG95qI/hqdefault.jpg" alt="Opening report video thumbnail" loading="eager" />
-                <span class="video-link-card__play" aria-hidden="true"></span>
-                <span class="video-link-card__label">Watch on YouTube</span>
-              </a>
+              <div class="video-modal-1__media">
+                <iframe
+                  src="https://www.youtube.com/embed/Ch9cUuG95qI?start=13&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&widget_referrer=http://127.0.0.1:3000"
+                  title="Opening report: Homes in Darkness"
+                  loading="eager"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                  referrerpolicy="origin"
+                  allowfullscreen></iframe>
+              </div>
               <div class="video-modal-1__body">
                 <div class="video-modal-1__meta">KSAT/NBC REPORT · SAN ANTONIO</div>
                 <p class="video-modal-1__lead">Local coverage highlighted the resident-level problem and made service reliability a visible civic issue.</p>
@@ -1169,10 +1158,11 @@
             </div>
             <div class="video-modal-2__media">
               <iframe
-                src="https://www.youtube.com/embed/GZMHsAIH1Os?rel=0&modestbranding=1&playsinline=1"
+                src="https://www.youtube.com/embed/GZMHsAIH1Os?rel=0&modestbranding=1&playsinline=1&enablejsapi=1&widget_referrer=http://127.0.0.1:3000"
                 title="CPS Energy coverage"
                 loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                referrerpolicy="origin"
                 allowfullscreen></iframe>
             </div>
             <p class="video-modal-2__fallback">If video playback is blocked, <a href="https://www.youtube.com/watch?v=GZMHsAIH1Os" target="_blank" rel="noopener noreferrer">watch on YouTube</a>.</p>
