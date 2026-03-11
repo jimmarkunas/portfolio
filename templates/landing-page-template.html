@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{site_title}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap site-header-inner">
+      <a class="brand-link" href="/" aria-label="Jim Markunas home">
+        <img class="brand-logo" src="/images/logo/ujcg-logo-blue.png" alt="UJCG logo" />
+        <span class="brand-name">JIM MARKUNAS</span>
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Toggle navigation">Menu</button>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="/work">Work</a>
+        <a href="/services">Services</a>
+        <a href="/contact">Contact</a>
+        <a class="nav-cta" href="https://calendar.app.google/j7hdCJDSMb4DxPpj8">Book a Call</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">{{hero_eyebrow}}</div>
+        <h1>{{hero_headline}}</h1>
+        <p>{{hero_subhead}}</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="{{hero_primary_cta_url}}">{{hero_primary_cta_label}}</a>
+          <a class="btn btn-outline" href="{{hero_secondary_cta_url}}">{{hero_secondary_cta_label}}</a>
+        </div>
+      </div>
+      <aside class="hero-proof">
+        <div class="hero-proof-grid">
+          <div class="hero-proof-item"><div class="label">CTA</div><div class="value">#447ACB primary</div></div>
+          <div class="hero-proof-item"><div class="label">Typeface</div><div class="value">Inter</div></div>
+          <div class="hero-proof-item"><div class="label">Tone</div><div class="value">Light-first, premium editorial</div></div>
+          <div class="hero-proof-item"><div class="label">Content</div><div class="value">Bullets and proof over filler</div></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>{{case_section_heading}}</h2>
+        <p>{{case_section_subhead}}</p>
+      </div>
+      <div class="case-grid">
+        {{case_cards_html}}
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark-band" id="proof">
+    <div class="wrap">
+      <div class="proof-system">
+        <article class="quote-card">
+          <p class="quote">{{proof_quote}}</p>
+          <p class="source">{{proof_attribution}}</p>
+        </article>
+        {{proof_cards_html}}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>{{faq_heading}}</h2>
+        <p>{{faq_subhead}}</p>
+      </div>
+      <div class="faq-list">
+        {{faq_items_html}}
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark-band">
+    <div class="wrap footer-cta lets-build-footer">
+      <div class="eyebrow">{{footer_eyebrow}}</div>
+      <h2>{{footer_heading}}</h2>
+      <p class="subtle">{{footer_subhead}}</p>
+      <div class="footer-actions">
+        <a class="btn btn-primary" href="{{footer_primary_cta_url}}">{{footer_primary_cta_label}}</a>
+        <a class="btn btn-outline" href="{{footer_secondary_cta_url}}">{{footer_secondary_cta_label}}</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/jimmarkunas">Linkedin</a>
+        <a href="https://github.com/jimmarkunas/">Github</a>
+        <a href="/contact">Email</a>
+        <a href="https://x.com/jimmarkunas">Twitter</a>
+        <a href="https://jimmarkunas.notion.site/Jim-Markunas-Portfolio-2d03c5a05926807393b0f0af6a634226">Notion</a>
+        <a href="/freebies">Freebies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

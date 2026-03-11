@@ -66,9 +66,39 @@ Do not revert to a repetitive six-box grid.
 - white labels / support
 - only use for real metrics
 
-## 11. Footer CTA band
+## 11. Let's Build Footer
 ### Rule
 - full dark band
-- one strong primary CTA
-- one secondary CTA
+- centered headline lockup with optional blue accent word
+- one strong primary CTA and one outline secondary CTA
 - concise, premium close
+
+## 12. Footer
+### Rule
+- required global element on every page
+- centered link row only (no legal/copyright line in this module)
+- links are white and switch to blue on hover
+- uses dark brand gradient background with no top divider
+
+## 13. PDF Viewer
+### Rule
+- default proof-viewer pattern for any case study that includes PDF articles
+- article archive cards in the case page should route to `pdf-viewer.html?doc={key}`
+- viewer page must keep global header + Let's Build Footer + Footer modules
+- include source chips, zoom controls, and "Open PDF in New Tab" fallback
+- preserve light editorial shell with blue CTA hierarchy (no generic dark app shell)
+
+## 14. Video2
+### Rule
+- reusable full-bleed press/coverage module for case-study pages
+- must use native YouTube embed with standard controls (no fake browser chrome/overlays)
+- shell styling must match dark-band/Let's Build treatment (same gradient family + top/bottom borders)
+- inner content stays constrained to standard container width
+- desktop is two-column (copy + media), mobile stacks to one column
+
+## 15. Video3 (Deprecated Alias)
+### Rule
+- alias only; use `Video Modal 1` as the canonical module name
+- canonical behavior: editorial copy left and video proof right
+- must keep native YouTube embed/controls (no third-party overlay chrome)
+- mobile collapses to one column

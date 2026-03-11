@@ -26,13 +26,13 @@ The work centered on solving the existential payments problem first, then buildi
 - **Services:** Solutioning, Sales Engineering
 - **Source page:** https://www.notion.so/2d03c5a059268018a297ca335d7117b6
 
-### Metric cards
+## Numeric Callouts
 
 - $15M → $40M GMV
 - 18%+ subscription growth
 - 89% subscription retention
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 - Very few processors were willing to touch high-volume CBD at the scale CBDistillery needed.
 - The existing WooCommerce setup was already straining under growth and was not the right long-term operating model.
 - Subscriptions and one-time orders needed to work together without breaking accounting, reconciliation, or customer experience.
@@ -43,13 +43,13 @@ I acted as the product and solution lead across payments, platform selection, an
 
 My job was to secure a durable processing path, define the Square + BigCommerce + OrderGroove model, and make sure the resulting stack was stable enough to support growth instead of daily fire drills.
 
-## What I Built
+## What I Built (Architecture / Integration)
 - Prioritized payments architecture before any cosmetic re-platform work.
 - Secured a compliant long-term processor path for a de-banked, high-risk CBD business.
 - Designed a payments-first BigCommerce architecture integrated with OrderGroove so subscriptions and one-time orders ran on the same rails.
 - Reframed the project from 'move off WooCommerce' to 'stabilize the money flow, then scale the business.'
 
-## Delivery
+## Delivery Timeline
 - Re-platformed from WooCommerce to BigCommerce.
 - Integrated the chosen payments path with the commerce stack.
 - Designed the subscription-ready operating model so retention and recurring revenue became a durable growth lever.
@@ -65,6 +65,17 @@ My job was to secure a durable processing path, define the Square + BigCommerce 
 - Named client: CBDistillery
 - Clear metric set captured on the source page
 - Strong fit for the portfolio themes of high-risk payments, fintech-heavy commerce, and operator-grade solutioning
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 This case shows I can solve around real commercial constraints — including payments, banking, and compliance risk — while still building a growth-capable commerce operation.

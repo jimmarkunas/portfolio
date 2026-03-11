@@ -26,13 +26,13 @@ The concept combined live linear programming, on-demand viewing, shopping, and s
 - **Services:** Founder, Product Management
 - **Source page:** https://www.notion.so/2d03c5a0592681179dc9f060dde6749f
 
-### Metric cards
+## Numeric Callouts
 
 - 2010–2011 active
 - 30k+ concept-video views
 - Tier-1 VC interest
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 - The product vision was ahead of mainstream market timing.
 - The team needed to explain a cross-screen, interactive IPTV concept to investors and partners before the space had strong reference points.
 - As a pre-seed startup, traction depended on turning a big product idea into something compelling enough to win meetings and support.
@@ -42,12 +42,12 @@ I was the co-founder, CEO, and head of product, responsible for the end-to-end p
 
 My role included turning the vision into concrete product logic, investor narrative, and a proof-of-concept strong enough to get in the room with top-tier firms and advisors.
 
-## What I Built
+## What I Built (Architecture / Integration)
 - Defined a unified cross-screen TV product that blended live, on-demand, shopping, and social behavior.
 - Created concept and demo materials that communicated the product clearly enough for investor and talent meetings.
 - Framed the product as one network across all screens rather than a collection of device-specific experiences.
 
-## Delivery
+## Delivery Timeline
 - Built the core concept and proof materials used in pitches.
 - Engaged senior advisors from Disney, Yahoo, Warner Bros., and cable sales.
 - Secured meetings with major VCs and entertainment-adjacent partners.
@@ -60,6 +60,17 @@ My role included turning the vision into concrete product logic, investor narrat
 ## Proof
 - Founder story with real investor interest
 - Cross-screen product thinking that predates mainstream OTT behavior
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 Even though ZEVO did not raise, it remains a strong proof point for founder-led product vision, cross-screen thinking, and the ability to explain a future-state product before the market has clear reference points.

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{case_title}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap site-header-inner">
+      <a class="brand-link" href="/" aria-label="Jim Markunas home">
+        <img class="brand-logo" src="/images/logo/ujcg-logo-blue.png" alt="UJCG logo" />
+        <span class="brand-name">JIM MARKUNAS</span>
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Toggle navigation">Menu</button>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="/work">Work</a>
+        <a href="/services">Services</a>
+        <a href="/contact">Contact</a>
+        <a class="nav-cta" href="https://calendar.app.google/j7hdCJDSMb4DxPpj8">Book a Call</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">{{hero_eyebrow}}</div>
+        <h1>{{case_title}}</h1>
+        <p>{{case_subhead}}</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#proof">See key outcomes</a>
+          <a class="btn btn-outline" href="../../index.html#work">View all case studies</a>
+        </div>
+      </div>
+      <aside class="hero-proof">
+        <div class="hero-proof-grid">
+          <div class="hero-proof-item"><div class="label">Client</div><div class="value">{{client}}</div></div>
+          <div class="hero-proof-item"><div class="label">Role</div><div class="value">{{role}}</div></div>
+          <div class="hero-proof-item"><div class="label">Timeline</div><div class="value">{{timeline}}</div></div>
+          <div class="hero-proof-item"><div class="label">Services</div><div class="value">{{services}}</div></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="snapshot">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Snapshot panel</h2>
+        <p>{{snapshot_subhead}}</p>
+      </div>
+      <article class="snapshot">
+        <div class="snapshot-left">
+          <div class="eyebrow">Case framing</div>
+          <h3>{{snapshot_intro}}</h3>
+        </div>
+        <div class="snapshot-main">{{snapshot_rows_html}}</div>
+        <div class="snapshot-right">{{numeric_callouts_html}}</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="before-after">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Before and after</h2>
+        <p>Bullet-led transformation logic only. No dense text blocks.</p>
+      </div>
+      <article class="before-after">
+        <div class="before">
+          <h3>Before</h3>
+          {{before_bullets_html}}
+        </div>
+        <div class="mid-arrow"><span>→</span></div>
+        <div class="after">
+          <h3>After</h3>
+          {{after_bullets_html}}
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="timeline">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Delivery timeline</h2>
+        <p>One bullet per phase in UI to preserve scanability.</p>
+      </div>
+      <article class="timeline-rail">
+        <div class="timeline-rail-list">{{timeline_phases_html}}</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="architecture">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Architecture and integration</h2>
+        <p>Consulting-style lanes with minimal connector noise.</p>
+      </div>
+      <article class="architecture">
+        <div class="arch-lanes">{{architecture_lanes_html}}</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="artifact">
+    <div class="wrap grid-2">
+      <article class="annotated">
+        <div class="annotated-top">Annotated artifact (2 to 4 callouts max)</div>
+        <div class="annotated-body">
+          <div class="annotated-mock">{{artifact_frame_html}}</div>
+          <div class="callout-note a">{{artifact_callout_a}}</div>
+          <div class="callout-note b">{{artifact_callout_b}}</div>
+        </div>
+      </article>
+      <article>
+        <div class="section-head"><h2>Risks and blockers</h2></div>
+        <div class="risk-grid">{{risk_cards_html}}</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section dark-band" id="proof">
+    <div class="wrap">
+      <div class="proof-system">
+        <article class="quote-card">
+          <p class="quote">{{quote_text}}</p>
+          <p class="source">{{quote_source}}</p>
+        </article>
+        {{proof_cards_html}}
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark-band" id="callouts">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Numeric callout strip</h2>
+        <p class="subtle">Blue number, white labels, real metrics only.</p>
+      </div>
+      <div class="numeric-strip">{{dark_callout_strip_html}}</div>
+    </div>
+  </section>
+
+  <!-- Optional module: include for cases with source PDFs -->
+  <section class="section" id="article-archive">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Article archive</h2>
+        <p>Press and public records referenced in this case. Cards should link to `/work/{case-slug}/pdf-viewer.html?doc={key}`.</p>
+      </div>
+      <div class="article-archive-grid">{{article_archive_cards_html}}</div>
+    </div>
+  </section>
+
+  <section class="section dark-band" id="footer-cta">
+    <div class="wrap footer-cta lets-build-footer">
+      <div class="eyebrow">Next step</div>
+      <h2>{{footer_heading}}</h2>
+      <p class="subtle">{{footer_subhead}}</p>
+      <div class="footer-actions">
+        <a class="btn btn-primary" href="../../index.html#work">Explore more case studies</a>
+        <a class="btn btn-outline" href="../../index.html">Back to portfolio home</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/jimmarkunas">Linkedin</a>
+        <a href="https://github.com/jimmarkunas/">Github</a>
+        <a href="/contact">Email</a>
+        <a href="https://x.com/jimmarkunas">Twitter</a>
+        <a href="https://jimmarkunas.notion.site/Jim-Markunas-Portfolio-2d03c5a05926807393b0f0af6a634226">Notion</a>
+        <a href="/freebies">Freebies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

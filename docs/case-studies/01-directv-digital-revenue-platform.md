@@ -26,13 +26,13 @@ The work treated the revenue platform as both a product and an operating model: 
 - **Services:** Product Management, Programme Management
 - **Source page:** https://www.notion.so/2d03c5a0592681aea6d8d7eef6766039
 
-### Metric cards
+## Numeric Callouts
 
 - 60 days faster time-to-value
 - $55M Q4 2025 upsell revenue uplift
 - Omni-channel upsell across STB, mobile, and web
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 - Systems were fragmented and departments were siloed.
 - Campaigns moved slowly, often with six-month delays and inconsistent channel behavior.
 - Premium offers and add-ons existed, but the customer journey lacked coherent ownership across surfaces.
@@ -43,12 +43,12 @@ I operated as both program and product lead for the digital revenue platform.
 
 The key leverage point was establishing end-to-end ownership over the upsell journey so cross-team execution stopped disappearing into the gaps between organizations.
 
-## What I Built
+## What I Built (Architecture / Integration)
 - Reframed the work as a unified revenue product rather than a collection of isolated campaigns.
 - Aligned fragmented teams and systems around one cross-channel upsell operating model.
 - Used middleware and shared delivery logic to make premium offers more consistent and faster to market.
 
-## Delivery
+## Delivery Timeline
 - Built and coordinated the upsell and retention engine across set-top box, mobile, and DTV.com.
 - Improved campaign readiness and reduced the lead time needed for major sports and premium content moments.
 - Made the commercial plumbing invisible to customers while improving revenue execution.
@@ -61,6 +61,17 @@ The key leverage point was establishing end-to-end ownership over the upsell jou
 ## Proof
 - Strong modern product/program case with revenue impact
 - Clear operator narrative: ownership eliminated the 'ghost in the system'
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 This case shows that I can take a fragmented commercial journey, give it real product ownership, and turn revenue operations into a usable platform instead of a chain of disconnected campaigns.

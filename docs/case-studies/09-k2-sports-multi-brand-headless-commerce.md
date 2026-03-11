@@ -27,13 +27,13 @@ The real opportunity was bigger than migration: create one headless, reusable ar
 - **Services:** Solutioning, Architecture, Programme Delivery
 - **Source page:** https://www.notion.so/2d03c5a0592681b4ab72c1fd4ff7a5c0
 
-### Metric cards
+## Numeric Callouts
 
 - 9 brands on one engine
 - 2 core markets (US & CA)
 - 1 unified commerce engine
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 - Demandware was being sunset, forcing a platform decision.
 - The business relied on multiple core systems, including Avante ERP and Quivers for fulfillment and retailer coordination.
 - Any domain or URL mistakes could create SEO damage across a seasonal, search-sensitive portfolio.
@@ -44,13 +44,13 @@ I helped design and lead the headless architecture and the integration model beh
 
 The focus was on making BigCommerce the transaction layer while keeping operational truth in the right systems and preserving differentiated front-end brand experiences.
 
-## What I Built
+## What I Built (Architecture / Integration)
 - Created a reusable headless pattern rather than one custom approach per brand.
 - Used BigCommerce for cart and checkout while keeping ERP and fulfillment ownership in the operational core.
 - Built shared integrations and a centralized API layer to unify multiple stores behind one commerce engine.
 - Protected design flexibility without allowing architecture sprawl.
 
-## Delivery
+## Delivery Timeline
 - Re-platformed nine brand sites.
 - Aligned front-end experience, ERP, fulfillment, and SEO concerns under one architecture.
 - Turned a forced migration into a reusable reference model for multi-brand commerce.
@@ -64,6 +64,17 @@ The focus was on making BigCommerce the transaction layer while keeping operatio
 - Named multi-brand client
 - Clear headless and shared-services architecture story
 - Frequently referenced as a blueprint case in your portfolio ecosystem
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 This case proves I can design for brand variation and enterprise reuse at the same time — balancing headless flexibility with the governance needed for a multi-brand platform.

@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Energy Press Coverage Viewer | CPS Energy Case Study</title>
+    <meta name="description" content="Embedded PDF viewer for CPS Energy press coverage, public agenda materials, and industry mentions referenced in the case study.">
+    <link rel="icon" type="image/png" href="/images/logo/ujcg-logo-blue.png">
+    <link rel="shortcut icon" href="/images/logo/ujcg-logo-blue.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #447ACB;
+            --blue-strong: #3D6EB8;
+            --ink: #000000;
+            --ink-2: #1D2630;
+            --ink-3: #56606E;
+            --page: #F4F6F9;
+            --panel: #FFFFFF;
+            --line: #D3DAE3;
+            --contrast: #2B3A49;
+            --contrast-edge: #1D2E3E;
+            --r-sm: 6px;
+            --r-md: 12px;
+            --r-lg: 16px;
+            --sh-sm: 0 10px 26px rgba(24, 37, 51, .05);
+            --sh-md: 0 20px 46px rgba(24, 37, 51, .09);
+            --max: 1280px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+            background: var(--page);
+            color: var(--ink-2);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .section {
+            padding: 56px 0;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            background: rgba(244, 246, 249, .96);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(10px);
+        }
+
+        .hdr-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 68px;
+            gap: 20px;
+        }
+
+        .brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .5em;
+            text-decoration: none;
+            color: var(--blue);
+            font-size: clamp(13px, 1.8vw, 24px);
+            line-height: 1;
+        }
+
+        .brand-logo {
+            width: 1.4em;
+            height: 1.4em;
+            object-fit: contain;
+            flex: 0 0 auto;
+        }
+
+        .brand-name {
+            font-size: 1em;
+            font-weight: 700;
+            letter-spacing: -.02em;
+            line-height: 1;
+            text-transform: uppercase;
+            color: var(--blue);
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .main-nav .btn-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .main-nav a {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink-3);
+            text-decoration: none;
+            position: relative;
+            transition: color .2s;
+        }
+
+        .main-nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: var(--blue);
+            transition: width .2s;
+        }
+
+        .main-nav a:hover {
+            color: var(--blue);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cv {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            padding: 9px 16px;
+            border-radius: var(--r-sm);
+            background: transparent;
+            color: var(--ink-2) !important;
+            font-size: 13px;
+            font-weight: 800;
+            text-decoration: none !important;
+            border: 1.5px solid var(--line);
+            transition: border-color .2s, color .2s;
+            outline: none;
+        }
+
+        .nav-cv::after {
+            display: none !important;
+        }
+
+        .nav-cv:hover,
+        .nav-cv:focus {
+            border-color: var(--blue);
+            color: var(--ink-2) !important;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .nav-cta {
+            background: var(--blue) !important;
+            color: #fff !important;
+            padding: 10px 16px;
+            border-radius: var(--r-sm);
+            font-weight: 800 !important;
+            font-size: 13px;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--blue-strong) !important;
+        }
+
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            transition: border-color .2s;
+        }
+
+        .nav-toggle:hover,
+        .nav-toggle:focus {
+            border-color: var(--blue);
+            outline: none;
+        }
+
+        .nav-toggle-bars {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .nav-toggle-bars span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--ink-2);
+            border-radius: 2px;
+            transition: transform .2s ease, opacity .2s ease;
+        }
+
+        body.nav-open .nav-toggle-bars span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        body.nav-open .nav-toggle-bars span:nth-child(2) {
+            opacity: 0;
+        }
+
+        body.nav-open .nav-toggle-bars span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .pdf-page {
+            padding: 34px 0 66px;
+            background:
+                radial-gradient(circle at 92% -16%, rgba(68, 122, 203, .14), transparent 36%),
+                radial-gradient(circle at 10% 0, rgba(68, 122, 203, .08), transparent 42%),
+                var(--page);
+        }
+
+        .pdf-shell {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--r-lg);
+            padding: 24px;
+            box-shadow: var(--sh-sm);
+        }
+
+        .pdf-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .pdf-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            color: var(--blue);
+        }
+
+        .pdf-kicker::before {
+            content: "";
+            width: 34px;
+            height: 2px;
+            background: var(--blue);
+            flex: 0 0 auto;
+        }
+
+        .pdf-header h1 {
+            margin: 0;
+            color: var(--ink-2);
+            font-size: clamp(30px, 4vw, 46px);
+            line-height: 1.02;
+            letter-spacing: -.03em;
+        }
+
+        .pdf-header p {
+            margin: 12px 0 0;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--ink-3);
+            max-width: 70ch;
+        }
+
+        .pdf-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 12px 18px;
+            border-radius: var(--r-sm);
+            border: 1px solid transparent;
+            font-size: 13px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all .2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: #fff;
+            box-shadow: 0 0 0 1px rgba(68, 122, 203, .24), 0 0 24px rgba(68, 122, 203, .22);
+        }
+
+        .btn-primary:hover {
+            background: var(--blue);
+            border-color: var(--blue);
+            box-shadow: 0 0 0 1px rgba(68, 122, 203, .48), 0 0 30px rgba(68, 122, 203, .3);
+        }
+
+        .btn-ghost {
+            background: #fff;
+            color: var(--ink-2);
+            border-color: var(--line);
+        }
+
+        .btn-ghost:hover {
+            color: var(--ink-2);
+            border-color: var(--blue);
+            background: rgba(68, 122, 203, .04);
+        }
+
+        .pdf-docs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .pdf-doc {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 7px 11px;
+            border-radius: 999px;
+            border: 1px solid #C8D8EB;
+            background: #EEF4FC;
+            color: #456087;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            transition: border-color .2s ease, color .2s ease, background .2s ease;
+        }
+
+        .pdf-doc:hover {
+            border-color: #AFC5E3;
+            background: #E2ECFA;
+            color: #35557F;
+        }
+
+        .pdf-doc.is-active {
+            border-color: var(--blue);
+            background: rgba(68, 122, 203, .14);
+            color: #1E4271;
+        }
+
+        .pdf-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+            padding: 12px;
+            border-radius: var(--r-md);
+            border: 1px solid #CFE0F2;
+            background: #F4F8FD;
+        }
+
+        .pdf-toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pdf-toolbar button {
+            appearance: none;
+            border: 1px solid #BDD2EA;
+            background: #ECF3FC;
+            color: #2F4A6A;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: border-color .2s ease, background .2s ease;
+        }
+
+        .pdf-toolbar button:hover {
+            background: #E3EEFB;
+            border-color: #9CBBE1;
+        }
+
+        .pdf-toolbar button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        .pdf-status {
+            color: var(--ink-3);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .pdf-canvas-wrap {
+            border-radius: var(--r-md);
+            border: 1px solid #D7E2EF;
+            background: #EEF3F9;
+            padding: 14px;
+            min-height: 320px;
+        }
+
+        .pdf-pages {
+            display: grid;
+            gap: 16px;
+        }
+
+        .pdf-page-canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+        }
+
+        .pdf-page-card {
+            display: grid;
+            gap: 8px;
+            justify-items: center;
+        }
+
+        .pdf-page-label {
+            font-size: 12px;
+            color: #637085;
+        }
+
+        .pdf-loading,
+        .pdf-error {
+            padding: 16px;
+            border-radius: var(--r-md);
+            border: 1px solid #C7D7EA;
+            background: #F7FAFF;
+            color: #435067;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .pdf-error {
+            border-color: rgba(181, 74, 58, .42);
+            color: #7A3026;
+            background: #FBEFED;
+        }
+
+        .pdf-fallback {
+            margin: 14px 0 0;
+            color: var(--ink-3);
+            font-size: 14px;
+        }
+
+        .pdf-fallback a,
+        .pdf-error a {
+            font-weight: 700;
+        }
+
+        .dark-band {
+            background: linear-gradient(100deg, var(--contrast-edge), var(--contrast), var(--contrast-edge));
+            border-top: 1px solid #41566B;
+            border-bottom: 1px solid #41566B;
+            color: #fff;
+        }
+
+        .dark-band h2,
+        .dark-band p {
+            color: #fff;
+        }
+
+        .footer-cta-grid {
+            max-width: 1080px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            margin-top: 26px;
+        }
+
+        .next-step-copy {
+            padding: 8px 0 6px;
+        }
+
+        .next-step-headline {
+            font-size: clamp(44px, 6vw, 86px);
+            line-height: 1.02;
+            font-weight: 900;
+            letter-spacing: -.03em;
+            color: #fff;
+            margin: 0;
+        }
+
+        .next-step-headline .accent {
+            color: var(--blue);
+        }
+
+        .next-step-sub {
+            max-width: 840px;
+            margin: 18px auto 0;
+            font-size: 18px;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, .82);
+        }
+
+        .footer-cta-grid .cta-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .footer-cta-grid .btn {
+            min-height: 56px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, .65);
+        }
+
+        .btn-outline:hover {
+            color: #fff;
+            border-color: var(--blue);
+            background: rgba(68, 122, 203, .05);
+            box-shadow: 0 0 0 1px rgba(68, 122, 203, .42);
+        }
+
+        .site-footer {
+            background: linear-gradient(100deg, var(--contrast-edge), var(--contrast), var(--contrast-edge));
+            padding: 28px 0 34px;
+            color: rgba(255, 255, 255, .58);
+            font-size: 13px;
+        }
+
+        .site-footer .footer-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .site-footer .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 38px;
+            flex-wrap: wrap;
+        }
+
+        .site-footer .footer-links a {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .site-footer .footer-links a:hover {
+            color: var(--blue);
+        }
+
+        @media (max-width: 1060px) {
+            .next-step-sub {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 860px) {
+            .main-nav {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+            }
+
+            body.nav-open .main-nav {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                top: 68px;
+                left: 0;
+                right: 0;
+                background: var(--page);
+                padding: 18px 28px;
+                border-bottom: 1px solid var(--line);
+                z-index: 29;
+                gap: 18px;
+            }
+
+            .pdf-header {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .wrap {
+                padding: 0 18px;
+            }
+
+            .section {
+                padding: 46px 0;
+            }
+
+            .pdf-page {
+                padding: 24px 0 44px;
+            }
+
+            .pdf-shell {
+                padding: 16px;
+                border-radius: 14px;
+            }
+
+            .pdf-toolbar {
+                padding: 10px;
+            }
+
+            .pdf-canvas-wrap {
+                padding: 10px;
+            }
+
+            .pdf-header h1 {
+                font-size: clamp(26px, 9vw, 34px);
+            }
+
+            .pdf-header p {
+                font-size: 15px;
+            }
+
+            .pdf-doc {
+                font-size: 10px;
+                padding: 7px 10px;
+            }
+
+            .next-step-headline {
+                font-size: clamp(34px, 11vw, 54px);
+            }
+
+            .next-step-sub {
+                font-size: 16px;
+                line-height: 1.58;
+            }
+
+            .footer-cta-grid .btn {
+                min-height: 52px;
+                padding: 13px 24px;
+                font-size: 15px;
+            }
+
+            .site-footer .footer-inner {
+                padding: 0 18px;
+            }
+
+            .site-footer .footer-links {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap hdr-inner">
+            <a class="brand-link" href="/" aria-label="Jim Markunas home">
+                <img class="brand-logo" src="/images/logo/ujcg-logo-blue.png" alt="UJCG logo">
+                <span class="brand-name">JIM MARKUNAS</span>
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-controls="site-nav" aria-expanded="false">
+                <span class="nav-toggle-bars" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+            <nav id="site-nav" class="main-nav" aria-label="Primary">
+                <a href="/work">Work</a>
+                <a href="/services">Services</a>
+                <a href="/contact">Contact</a>
+                <div class="btn-group">
+                    <a class="nav-cv" href="/cv">View CV</a>
+                    <a class="nav-cta" href="https://calendar.app.google/LbAzyRmtk5KiiLRE8">Book a Call</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pdf-page">
+        <div class="wrap">
+            <section class="pdf-shell">
+                <div class="pdf-header">
+                    <div>
+                        <div class="pdf-kicker">CPS Energy · Press &amp; Accolades</div>
+                        <h1 id="pdfPageTitle">CPS Energy Press Coverage</h1>
+                        <p id="pdfPageSubtitle">Embedded document proof for the CPS Energy case study.</p>
+                    </div>
+                    <div class="pdf-actions">
+                        <a class="btn btn-ghost" href="/work/cps/#article-archive">Back to Case Study</a>
+                        <a class="btn btn-primary" id="pdfOpenLink" href="#" target="_blank" rel="noopener">Open PDF in New Tab</a>
+                    </div>
+                </div>
+
+                <div class="pdf-docs" id="pdfDocLinks" aria-label="Choose a source document"></div>
+
+                <div class="pdf-toolbar" aria-label="PDF viewer controls">
+                    <div class="pdf-toolbar-group">
+                        <button type="button" id="pdfZoomOut">Zoom Out</button>
+                        <button type="button" id="pdfZoomIn">Zoom In</button>
+                        <button type="button" id="pdfFitWidth">Fit Width</button>
+                        <button type="button" id="pdfRerender">Re-render</button>
+                    </div>
+                    <div class="pdf-status" id="pdfStatus">Loading PDF viewer...</div>
+                </div>
+
+                <div class="pdf-canvas-wrap">
+                    <div class="pdf-loading" id="pdfLoading">Loading article PDF...</div>
+                    <div class="pdf-error" id="pdfError" hidden>
+                        <span id="pdfErrorText">Could not render the PDF in this viewer.</span>
+                        Use <a id="pdfErrorLink" href="#" target="_blank" rel="noopener">Open PDF in New Tab</a>.
+                    </div>
+                    <div class="pdf-pages" id="pdfPages" hidden></div>
+                </div>
+
+                <p class="pdf-fallback">
+                    If the PDF does not render in your browser or VS Code preview, use
+                    <a id="pdfFallbackLink" href="#" target="_blank" rel="noopener">Open PDF in New Tab</a>.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <section class="section dark-band lets-build-footer">
+        <div class="wrap">
+            <div class="footer-cta-grid">
+                <div class="next-step-copy">
+                    <h2 class="next-step-headline">Let's Build Something <span class="accent">Extraordinary</span></h2>
+                    <p class="next-step-sub">Available for eCommerce product leadership, digital platform architecture, and transformation program roles in the US, UK, and EU.</p>
+                    <div class="footer-actions">
+                        <div class="cta-row">
+                            <a class="btn btn-primary" href="https://calendar.app.google/LbAzyRmtk5KiiLRE8">Book a Call</a>
+                            <a class="btn btn-outline" href="/cv">My CV</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="https://linkedin.com/in/jimmarkunas">Linkedin</a>
+                <a href="https://github.com/jimmarkunas/">Github</a>
+                <a href="/contact">Email</a>
+                <a href="https://x.com/jimmarkunas">Twitter</a>
+                <a href="https://jimmarkunas.notion.site/Jim-Markunas-Portfolio-2d03c5a05926807393b0f0af6a634226">Notion</a>
+                <a href="/freebies">Freebies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        (function () {
+            var navToggle = document.querySelector(".nav-toggle");
+            if (navToggle) {
+                navToggle.addEventListener("click", function () {
+                    var isOpen = document.body.classList.toggle("nav-open");
+                    navToggle.setAttribute("aria-expanded", String(isOpen));
+                });
+            }
+
+            var docs = {
+                "digicity": {
+                    label: "DigiCity",
+                    title: "Simply the Best: The SCC Smart20",
+                    subtitle: "Industry smart-city coverage referenced in the CPS Energy case study.",
+                    file: "/work/cps/files/20240220_CPSE_DigiCity.pdf"
+                },
+                "nbc": {
+                    label: "NBC / KSAT",
+                    title: "Homes in darkness: Northeast side residents fight for LED street light restoration",
+                    subtitle: "Local news coverage documenting public streetlight failures and urgency.",
+                    file: "/work/cps/files/20240318_CPSE_NBC.pdf"
+                },
+                "sa-city-council-agenda": {
+                    label: "SA Council",
+                    title: "CPS Energy BoT March 25, 2024 Meeting Agenda v2",
+                    subtitle: "Public agenda materials tied to CPS Energy streetlight/smart-city work.",
+                    file: "/work/cps/files/20240325_CPSE_SACityCouncilAgenda.pdf"
+                },
+                "sa-report": {
+                    label: "SA Report",
+                    title: "San Antonio streetlights go solar as the city seeks to fill safety gaps",
+                    subtitle: "Local reporting on program progress and civic impact.",
+                    file: "/work/cps/files/20240830_CPSE_SAReport.pdf"
+                },
+                "terrago": {
+                    label: "TerraGo",
+                    title: "CPS Energy Streetlight and Smart City Project Wins Smart 20 Award",
+                    subtitle: "Industry/vendor coverage of CPS Energy smart infrastructure operations execution.",
+                    file: "/work/cps/files/20250415_CPSE_TerraGo.pdf"
+                },
+                "msn": {
+                    label: "MSN",
+                    title: "Texas projects dominate Smart 20 Awards at global conference",
+                    subtitle: "Syndicated coverage highlighting recognition and outcomes tied to the CPS Energy program.",
+                    file: "/work/cps/files/20250423_CPSE_MSN.pdf"
+                }
+            };
+
+            var params = new URLSearchParams(window.location.search);
+            var docKey = params.get("doc") || "digicity";
+            if (!Object.prototype.hasOwnProperty.call(docs, docKey)) {
+                docKey = "digicity";
+            }
+            var selected = docs[docKey];
+            var pdfUrl = selected.file;
+
+            var docLinksEl = document.getElementById("pdfDocLinks");
+            var pagesEl = document.getElementById("pdfPages");
+            var loadingEl = document.getElementById("pdfLoading");
+            var errorEl = document.getElementById("pdfError");
+            var errorTextEl = document.getElementById("pdfErrorText");
+            var statusEl = document.getElementById("pdfStatus");
+            var titleEl = document.getElementById("pdfPageTitle");
+            var subtitleEl = document.getElementById("pdfPageSubtitle");
+            var openLinkEl = document.getElementById("pdfOpenLink");
+            var errorLinkEl = document.getElementById("pdfErrorLink");
+            var fallbackLinkEl = document.getElementById("pdfFallbackLink");
+            var zoomInBtn = document.getElementById("pdfZoomIn");
+            var zoomOutBtn = document.getElementById("pdfZoomOut");
+            var fitWidthBtn = document.getElementById("pdfFitWidth");
+            var rerenderBtn = document.getElementById("pdfRerender");
+
+            var docKeys = Object.keys(docs);
+            for (var i = 0; i < docKeys.length; i += 1) {
+                var key = docKeys[i];
+                var link = document.createElement("a");
+                link.className = "pdf-doc" + (key === docKey ? " is-active" : "");
+                link.href = "/work/cps/pdf-viewer.html?doc=" + encodeURIComponent(key);
+                link.textContent = docs[key].label;
+                if (key === docKey) {
+                    link.setAttribute("aria-current", "page");
+                }
+                docLinksEl.appendChild(link);
+            }
+
+            var baseScale = 1;
+            var userZoom = 1;
+            var renderToken = 0;
+            var pdfDoc = null;
+            var lastContainerWidth = 0;
+
+            titleEl.textContent = selected.title;
+            subtitleEl.textContent = selected.subtitle;
+            document.title = selected.title + " | CPS Energy Case Study";
+            openLinkEl.href = pdfUrl;
+            errorLinkEl.href = pdfUrl;
+            fallbackLinkEl.href = pdfUrl;
+
+            function setStatus(text) {
+                statusEl.textContent = text;
+            }
+
+            function showError(message) {
+                if (message) {
+                    errorTextEl.textContent = message;
+                }
+                errorEl.hidden = false;
+                loadingEl.hidden = true;
+                pagesEl.hidden = true;
+                setStatus("PDF viewer unavailable");
+                zoomInBtn.disabled = true;
+                zoomOutBtn.disabled = true;
+                fitWidthBtn.disabled = true;
+                rerenderBtn.disabled = false;
+            }
+
+            function clearPages() {
+                pagesEl.innerHTML = "";
+            }
+
+            function clampZoom(nextZoom) {
+                return Math.min(2.25, Math.max(0.7, nextZoom));
+            }
+
+            async function renderAllPages() {
+                if (!pdfDoc) return;
+
+                var token = ++renderToken;
+                loadingEl.hidden = false;
+                errorEl.hidden = true;
+                pagesEl.hidden = true;
+                clearPages();
+                zoomInBtn.disabled = true;
+                zoomOutBtn.disabled = true;
+                fitWidthBtn.disabled = true;
+                rerenderBtn.disabled = true;
+
+                try {
+                    var firstPage = await pdfDoc.getPage(1);
+                    if (token !== renderToken) return;
+
+                    var unscaled = firstPage.getViewport({ scale: 1 });
+                    var containerWidth = pagesEl.clientWidth || pagesEl.parentElement.clientWidth || 900;
+                    lastContainerWidth = containerWidth;
+                    baseScale = Math.max(0.5, (containerWidth - 24) / unscaled.width);
+                    var finalScale = baseScale * userZoom;
+
+                    setStatus("Rendering " + pdfDoc.numPages + " page" + (pdfDoc.numPages === 1 ? "" : "s") + " at " + Math.round(finalScale * 100) + "%...");
+
+                    for (var pageNumber = 1; pageNumber <= pdfDoc.numPages; pageNumber += 1) {
+                        var page = pageNumber === 1 ? firstPage : await pdfDoc.getPage(pageNumber);
+                        if (token !== renderToken) return;
+
+                        var viewport = page.getViewport({ scale: finalScale });
+                        var canvas = document.createElement("canvas");
+                        canvas.className = "pdf-page-canvas";
+                        canvas.width = Math.floor(viewport.width);
+                        canvas.height = Math.floor(viewport.height);
+
+                        var wrapper = document.createElement("div");
+                        wrapper.className = "pdf-page-card";
+
+                        var label = document.createElement("div");
+                        label.className = "pdf-page-label";
+                        label.textContent = "Page " + pageNumber + " of " + pdfDoc.numPages;
+
+                        wrapper.appendChild(canvas);
+                        wrapper.appendChild(label);
+                        pagesEl.appendChild(wrapper);
+
+                        await page.render({
+                            canvasContext: canvas.getContext("2d", { alpha: false }),
+                            viewport: viewport
+                        }).promise;
+                    }
+
+                    if (token !== renderToken) return;
+
+                    loadingEl.hidden = true;
+                    pagesEl.hidden = false;
+                    setStatus(pdfDoc.numPages + " page" + (pdfDoc.numPages === 1 ? "" : "s") + " rendered · " + Math.round(finalScale * 100) + "%");
+                    zoomInBtn.disabled = false;
+                    zoomOutBtn.disabled = false;
+                    fitWidthBtn.disabled = false;
+                    rerenderBtn.disabled = false;
+                } catch (err) {
+                    console.error(err);
+                    showError("Could not render the PDF in this viewer.");
+                }
+            }
+
+            async function loadPdf() {
+                if (!window.pdfjsLib) {
+                    showError("PDF.js failed to load.");
+                    return;
+                }
+
+                try {
+                    window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+                    setStatus("Loading PDF...");
+                    pdfDoc = await window.pdfjsLib.getDocument(pdfUrl).promise;
+                    zoomInBtn.disabled = false;
+                    zoomOutBtn.disabled = false;
+                    fitWidthBtn.disabled = false;
+                    rerenderBtn.disabled = false;
+                    await renderAllPages();
+                } catch (err) {
+                    console.error(err);
+                    showError("Could not load the PDF.");
+                }
+            }
+
+            zoomInBtn.addEventListener("click", function () {
+                userZoom = clampZoom(userZoom + 0.15);
+                renderAllPages();
+            });
+
+            zoomOutBtn.addEventListener("click", function () {
+                userZoom = clampZoom(userZoom - 0.15);
+                renderAllPages();
+            });
+
+            fitWidthBtn.addEventListener("click", function () {
+                userZoom = 1;
+                renderAllPages();
+            });
+
+            rerenderBtn.addEventListener("click", function () {
+                renderAllPages();
+            });
+
+            var resizeTimer = null;
+            window.addEventListener("resize", function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function () {
+                    var currentWidth = pagesEl.clientWidth || pagesEl.parentElement.clientWidth || 0;
+                    if (!currentWidth || Math.abs(currentWidth - lastContainerWidth) < 40) return;
+                    renderAllPages();
+                }, 180);
+            });
+
+            loadPdf();
+        })();
+    </script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 ---
 title: DIRECTV — TV Everywhere Product Launch
 slug: directv-everywhere-case-study
+source_title: DIRECTV Everywhere Product Launch
+source_url: not-provided-in-source-set
 client: DIRECTV
 role: Product Manager
 timeline: June 2012 – June 2013
@@ -30,6 +32,7 @@ This case matters because it shows product leadership under public pressure, mul
 - **Surfaces:** Web, iOS, Android, and connected TV devices
 - **Mission:** Make DIRECTV content available on demand, on any screen, with a single login
 - **My edge:** I came in with founder experience from an internet-TV startup and used that to push for cross-device UX parity, write the PRDs that aligned 30+ teams, and ship first-of-kind experiences under pressure
+- **Source page:** Not provided in current source set
 
 ## Numeric Callouts
 
@@ -38,7 +41,7 @@ This case matters because it shows product leadership under public pressure, mul
 - **5** device families
 - **30+** teams aligned through PRDs and launch governance
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 
 - Subscribers were still effectively tethered to one TV, even as the market was moving toward device-agnostic streaming.
 - Marketing had already launched a national “Everywhere” campaign before the product was fully ready.
@@ -52,7 +55,7 @@ I helped define the target experience, wrote the PRDs that aligned 30+ teams, an
 
 The leverage point was turning identity, entitlement, content, and UX into one coherent product story that multiple engineering and business teams could actually execute.
 
-## What I Built
+## What I Built (Architecture / Integration)
 
 - Helped shape apps and web experiences for browsing, searching, and streaming live and on-demand content across web, iOS, Android, and connected-TV surfaces.
 - Drove a unified sign-on and entitlement model so “Who is this subscriber?” and “What can they watch?” had one answer across devices.
@@ -60,7 +63,7 @@ The leverage point was turning identity, entitlement, content, and UX into one c
 - Wrote PRDs and release guidance that kept multiple teams aligned around one target experience instead of fragmented device-specific plans.
 - Pushed a practical product judgment: when forced to choose, prioritize content reach and device availability over polishing a “perfect” player UI.
 
-## Delivery
+## Delivery Timeline
 
 ### Phase 01 — Diagnose the real gap
 - Clarify the gap between the marketing promise and the actual product state.
@@ -90,6 +93,17 @@ The leverage point was turning identity, entitlement, content, and UX into one c
 - Referenced externally by major media and technology outlets as an early TV Everywhere milestone.
 - Referenced internally as proof that DIRECTV could compete with streaming-first players.
 - Strong example of product leadership under public pressure and high organizational complexity.
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 

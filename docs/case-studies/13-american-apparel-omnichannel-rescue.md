@@ -26,13 +26,13 @@ The work was not just a re-platform. It was a turnaround program that used Oracl
 - **Services:** Product Management, Programme Management
 - **Source page:** https://www.notion.so/2d03c5a059268047a8a4c653ea498818
 
-### Metric cards
+## Numeric Callouts
 
 - 43%+ digital revenue uplift
 - 14%+ store-sales uplift
 - 65% shrink reduction
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 - Sixteen regional sites had different templates, currencies, and hacks.
 - Inventory accuracy was poor, with manual counts consuming store labor and still producing bad data.
 - Customers could not rely on promises like BOPIS or ship-to-store because digital and physical inventory did not share the same truth.
@@ -43,13 +43,13 @@ Amanda Lopez carried the board-level vision; I served as the technical co-pilot 
 
 I handled product and program work across global IA, PRDs, integration design, launch planning, and the omni-channel logic tying factory, stores, and web together.
 
-## What I Built
+## What I Built (Architecture / Integration)
 - Moved 16 regional sites onto a common Oracle ATG stack.
 - Used RFID and supporting Microsoft/Xterprise tooling to create a more reliable inventory spine across the factory and 260+ stores.
 - Implemented BOPIS, ship-to-store, and profit-smart routing so orders could flow to the best node instead of a single default channel.
 - Built upsell logic around real local inventory rather than generic merchandising assumptions.
 
-## Delivery
+## Delivery Timeline
 - Coordinated global re-platforming plus omni-channel process redesign.
 - Connected digital storefronts, store operations, and physical inventory into one coherent system.
 - Turned a boutique, high-variance operating model into something closer to a modern digital-first retail engine.
@@ -63,6 +63,17 @@ I handled product and program work across global IA, PRDs, integration design, l
 ## Proof
 - Quote from then-CEO Paula Schneider
 - Clear before/after story: disconnected regional sites and manual counts turned into a unified commerce engine
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 This case proves I can use product and program leadership to stabilize a retailer under pressure, connecting inventory, stores, and commerce into one operating model when the business needs results fast.

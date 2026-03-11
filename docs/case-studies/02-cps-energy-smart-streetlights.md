@@ -27,13 +27,13 @@ The goal was to make streetlight repair feel like a modern utility service: one 
 - **Services:** Product Management, Programme Management, Solutioning
 - **Source page:** https://www.notion.so/2d03c5a05926810380bce3c1f5d414bf
 
-### Metric cards
+## Numeric Callouts
 
 - 73% fewer repair calls
 - 3 weeks → 1–4 days repair window
 - 43% fewer truck rolls
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 - No single system of record connected residents, support teams, field operations, and vendor workflows.
 - Crews were being dispatched through spreadsheets, email, and fragmented processes.
 - City leaders needed visibility into safety, equity, and energy outcomes, not just repair tickets.
@@ -44,13 +44,13 @@ I operated across product, program, and stakeholder alignment.
 
 That meant designing the resident and operator experience while also getting utility teams, vendor teams, and municipal stakeholders to work from the same data and workflow model.
 
-## What I Built
+## What I Built (Architecture / Integration)
 - Defined one mobile-friendly resident reporting flow instead of forcing people into phone support and guesswork.
 - Created a shared operational view for CPS and Dalkia so outage, repair, and field data lived in one place.
 - Tied repair metrics to broader service, cost, and sustainability outcomes.
 - Designed the underlying system with future smart-city services in mind rather than treating this as a one-off repair tool.
 
-## Delivery
+## Delivery Timeline
 - Implemented the reporting and operations system for streetlight outages and repair workflows.
 - Brought resident-facing UX and back-office execution into one service loop.
 - Shifted the program from reactive complaints to measurable operational management.
@@ -65,6 +65,17 @@ That meant designing the resident and operator experience while also getting uti
 - News-driven public context plus named executive quote
 - Award recognition (Smart 20)
 - Strong operational metrics tied directly to citizen experience
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 This case proves I can operate at the intersection of product, operations, public trust, and stakeholder complexity — and turn messy civic workflows into measurable service improvements.

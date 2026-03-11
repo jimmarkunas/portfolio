@@ -1,6 +1,8 @@
 ---
 title: Chicks With Guns — Founding and Scaling a Digital-First Music Magazine
 slug: chicks-with-guns-case-study
+source_title: Chicks With Guns Founder Case Study
+source_url: not-provided-in-source-set
 client: Chicks With Guns
 role: Founder / Product Manager
 timeline: 2009 – 2010
@@ -29,6 +31,7 @@ This case matters because it shows founder-level product thinking, editorial sys
 - **Operating model:** All-remote, globally distributed, mostly unpaid / volunteer
 - **Surfaces:** WordPress site, early native iOS app, YouTube / short-form video
 - **Recognition:** Named one of the top online-only music publications by Yahoo; regular artist and label access
+- **Source page:** Not provided in current source set
 
 ## Numeric Callouts
 
@@ -37,7 +40,7 @@ This case matters because it shows founder-level product thinking, editorial sys
 - **43+** distributed contributors across editorial, photography, and engineering
 - **3** core surfaces: web, iOS, video
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 
 - Build a credible digital-native media brand that serious music fans would treat as legitimate while competing against legacy publications with far bigger budgets and infrastructure.
 - Make the product work like a real media system, not just a website: content had to flow across web, iOS, video, and social.
@@ -50,7 +53,7 @@ I was the founder and acting product lead, responsible for the editorial product
 
 The leverage point was treating CWG like a product with multiple surfaces — web, app, video, and distribution — rather than a blog with better branding.
 
-## What I Built
+## What I Built (Architecture / Integration)
 
 - Launched a WordPress-based publication with category structure tuned for bands, tours, festivals, and features.
 - Added an early native iOS app so new stories, galleries, and video could live on readers’ phones, not just the desktop web.
@@ -58,7 +61,7 @@ The leverage point was treating CWG like a product with multiple surfaces — we
 - Recruited and coordinated a distributed contributor network across editorial, photography, and engineering.
 - Treated access, bylines, and portfolio-building work as the incentive model in place of traditional cash compensation.
 
-## Delivery
+## Delivery Timeline
 
 ### Phase 01 — Launch the brand
 - Stand up the initial publication and define the editorial structure.
@@ -88,6 +91,17 @@ The leverage point was treating CWG like a product with multiple surfaces — we
 - Public recognition as a top online-only music publication.
 - Multi-surface execution across web, mobile, and video.
 - Strong example of building something real from nothing under severe resource constraints.
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 

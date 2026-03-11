@@ -27,13 +27,13 @@ The brief was to design a composable, API-first stack that could handle complex 
 - **Services:** Product Management, Programme Management, Solutioning
 - **Source page:** https://www.notion.so/2d03c5a0592681d38c09d9d136eeade6
 
-### Metric cards
+## Numeric Callouts
 
 - 43%+ conversion uplift
 - 35% faster page loads
 - 10 markets / 7 languages
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 - The legacy platform was brittle, expensive, and hard to change at scale.
 - Affiliate-facing workflows such as sign-up, cart sharing, and cross-channel selling were clumsy.
 - Central teams depended too heavily on engineering for products, promos, and content changes.
@@ -44,13 +44,13 @@ I acted as both product and architecture leader, pushing the organization toward
 
 A major part of the work was aligning leadership and multiple vendors around a PIM/CMS-led architecture with a thinner commerce layer.
 
-## What I Built
+## What I Built (Architecture / Integration)
 - Defined a composable stack centered on best-of-breed services rather than a new monolith.
 - Designed for affiliate experience first: web, mobile, shareable carts, and commission-aware workflows.
 - Created one global core across products, promotions, and localized content.
 - Kept services replaceable so the stack could evolve instead of ossify.
 
-## Delivery
+## Delivery Timeline
 - Co-architected the target stack across commerce, content, product information, payments, and app layers.
 - Drove roadmap and vendor alignment so the architecture was not just theoretically correct but actually ship-ready.
 - Helped convert 'we should modernize this' into a concrete platform program.
@@ -65,6 +65,17 @@ A major part of the work was aligning leadership and multiple vendors around a P
 - Award nomination (MACH Impact)
 - Named client and concrete architecture pattern
 - Strong fit with composable-commerce and platform-modernization positioning
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 This case shows I can translate a brittle legacy commerce estate into a composable target architecture and operating model that supports global scale, affiliate complexity, and faster change.

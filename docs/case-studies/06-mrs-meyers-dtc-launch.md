@@ -27,13 +27,13 @@ This case is as much about creating a reusable enterprise DTC pattern as it is a
 - **Services:** Product Management, Solutioning, Programme Delivery
 - **Source page:** https://www.notion.so/2d03c5a059268110be69fabe4e532c0f
 
-### Metric cards
+## Numeric Callouts
 
 - 15%+ DTC revenue uplift
 - 10+ systems unified
 - 2+ follow-on brands enabled
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 - SC Johnson depended on retailers for both revenue and customer insight.
 - There was no owned DTC relationship, no clean way to test bundles or subscriptions, and limited direct customer data.
 - SAP and warehouse operations were built for pallet-scale distribution, not parcel-scale DTC order flows.
@@ -44,13 +44,13 @@ I led solutioning, integration design, and overall program alignment across SCJ,
 
 I acted as the adult in the room across multiple parties while designing the integration layer that made the DTC stack viable.
 
-## What I Built
+## What I Built (Architecture / Integration)
 - Built an end-to-end DTC architecture on BigCommerce for the US and Canada.
 - Integrated BigCommerce with SAP, Salsify, and SCJ's custom LiveArea/Merkle warehouse model.
 - Framed the program as a reusable DTC foundation rather than a one-brand experiment.
 - Designed for future subscription and follow-on brand use from the start.
 
-## Delivery
+## Delivery Timeline
 - Launched the first Mrs. Meyer’s DTC experience on the new stack.
 - Unified more than ten systems into one coherent DTC operating model.
 - Created a template SCJ could use for additional brands.
@@ -64,6 +64,17 @@ I acted as the adult in the room across multiple parties while designing the int
 - Named enterprise client and recognized consumer brand
 - Strong multi-system integration story
 - Clear evidence of reusable platform thinking
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 This case shows I can create a direct-to-consumer engine inside a large enterprise without treating the brand launch like a standalone microsite disconnected from real operations.

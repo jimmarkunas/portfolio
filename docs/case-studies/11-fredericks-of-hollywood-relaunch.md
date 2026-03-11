@@ -26,13 +26,13 @@ The challenge was to relaunch the brand on Shopify Plus, support a major Megan F
 - **Services:** Sales Engineering, Solutioning
 - **Source page:** https://www.notion.so/2d03c5a059268159a4dce0ca6a4eb2db
 
-### Metric cards
+## Numeric Callouts
 
 - 3x faster promo launches
 - 25% lower TCO
 - Enterprise Shopify Plus relaunch
 
-## The Challenge
+## The Challenge (Risks / Blockers)
 - The brand was relaunching after bankruptcy under new ownership.
 - The tech stack was dated, and the business needed a pure-play DTC model.
 - Traffic spikes and campaign timing mattered because the relaunch was tied to a high-visibility celebrity push.
@@ -43,12 +43,12 @@ I served as the enterprise solutions consultant and sales engineer helping ABG e
 
 The value was not just picking Shopify Plus, but designing a realistic architecture that matched ABG's portfolio model and campaign velocity.
 
-## What I Built
+## What I Built (Architecture / Integration)
 - Defined a Shopify Plus architecture sized for relaunch speed, lower operational overhead, and campaign flexibility.
 - Integrated the needed fulfillment and marketing stack while avoiding unnecessary big-iron complexity.
 - Helped translate ABG's portfolio and brand strategy into a pragmatic DTC operating model.
 
-## Delivery
+## Delivery Timeline
 - Supported the legacy-to-Shopify Plus migration path.
 - Prepared the platform to handle a major PR and traffic moment.
 - Enabled faster promotional and merchandising execution.
@@ -61,6 +61,17 @@ The value was not just picking Shopify Plus, but designing a realistic architect
 ## Proof
 - Named portfolio owner and recognizable consumer campaign
 - Clear sales-engineering and platform-selection case
+
+## Module Build Mapping
+- **Hero:** Build from `Overview` + `Snapshot` + `Numeric Callouts`.
+- **Snapshot panel:** Use `Snapshot` with numeric strip from `Numeric Callouts`.
+- **Before / After module:** Derive before-state from `The Challenge (Risks / Blockers)` and after-state from `Outcomes`.
+- **Delivery rail timeline:** Build from `Delivery Timeline` (one bullet per phase in UI).
+- **Architecture / integration module:** Build from `What I Built (Architecture / Integration)`.
+- **Annotated artifact module:** Attach real artifact from source assets during page build.
+- **Risk / blocker cards:** Build from `The Challenge (Risks / Blockers)` bullets.
+- **Proof / quote system:** Build from `Proof` with supporting metrics from `Outcomes` and `Numeric Callouts`.
+- **Footer CTA band:** Apply at page-template layer (not case-specific copy).
 
 ## Why This Still Matters
 This case proves I can use relaunch work to do more than refresh the front end — I can tighten the operating model underneath the brand and improve the customer path at the same time.
