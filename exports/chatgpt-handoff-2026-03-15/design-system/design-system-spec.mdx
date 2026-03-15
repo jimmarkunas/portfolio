@@ -1,0 +1,148 @@
+---
+title: Editorial Operator Design System
+description: Frozen visual rules, tokens, typography, layout, states, and usage rules.
+---
+
+# Editorial Operator
+
+## Frozen decisions
+- Aeonik Trial is the primary typeface.
+- Section headers support two utility label variants: a soft pill header and a plain dot header.
+- Large editorial lockups may use `Lockup Title` when the composition needs a controlled two-line headline.
+- Corners are tight, not bubbly.
+- Cards are quiet, border-led, and low-shadow.
+- Blue is for actions and states; the only structural exception is the small dot header utility marker.
+- Optional gradients are gray-based only.
+
+## Colors
+- Ink: `#222222`
+- Muted: `#7B7B7B`
+- Background: `#FFFFFF`
+- Soft: `#F8F8F8`
+- Subtle: `#F1F1F1`
+- Border: `#E8E8E8`
+- Border strong: `#D8D8D8`
+- Accent: `#447ACB`
+- Accent hover: `#2F5EA4`
+- Inverse: `#111111`
+- Inverse text: `#FFFFFF`
+
+## Typography
+- Approved headline classes: `Display`, `Lockup Title`, `H1`, `H2`, `H3`, `H4`, `H5`, `H6`
+- Approved supporting classes: `Metric`, `Body Large`, `Body`, `Small`, `Eyebrow`, `Utility`
+- Section headers should feel closer to Aeonik regular than bold display weights
+- Section headers should run the full available width instead of being capped to a narrow measure
+- Typeface stack: Aeonik Trial only
+- `Display` is reserved for rare hero-scale statements
+- `Lockup Title` is reserved for editorial two-line lockups that need tighter size and heavier weight than `H2`
+- `Utility` is the shared text class for buttons, links, and field-like controls
+
+### Token snapshot
+- `Display`: `48 / 72 / 96`, `leading-[1.0]`, `tracking-[-0.02em]`, `font-[360]`
+- `Lockup Title`: `30 / 37 / 46`, `leading-[0.96]`, `tracking-[-0.022em]`, `font-[400]`
+- `H1`: `40 / 56 / 72`
+- `H2`: `34 / 44 / 56`
+- `H3`: `28 / 36 / 44`
+- `H4`: `24 / 30 / 36`
+- `H5`: `22 / 28 / 32`
+- `H6`: `18 / 22 / 26`
+- `Metric`: `36 / 44 / 60`
+- `Body Large`: `18 / 19 / 19`
+- `Body`: `16 / 17 / 17`
+- `Small`: `14 / 15 / 15`
+- `Eyebrow`: `11` fixed, uppercase
+- `Utility`: `14 / 15 / 15`
+
+## Iconography
+- Default system icon style is calm outline icons, not decorative icon bursts
+- Default usage size is 20px to 24px in ink or muted
+- Accent blue is reserved for active, selected, or explicitly emphasized icon states
+- The main design-system page keeps a restrained icon specimen only
+- The full rendered icon browser lives at `/design-system/icons`
+- Live rendered glyph families in the full browser: Ionicons, Feather, Heroicons, Tabler, Bootstrap, IcoMoon, Jam, and Flag Icons
+- The icon browser renders one family at a time with paging to keep the page stable and usable
+- Use the broader catalog only when the default system icons do not cover the needed concept
+- Country flags should only appear for locale or geography references, not as generic decoration
+
+## Radius and depth
+- Radius sm: 6px
+- Radius md: 8px
+- Radius lg: 10px
+- Radius xl: 12px
+- Pills: 999px
+- Shadows: use soft and modal shadows sparingly; no heavy drop shadows
+
+## Interaction rules
+Hover states are required for:
+- primary buttons
+- secondary buttons
+- links
+- tabs
+- pagination
+- input focus states must use accent blue
+
+## Navigation rules
+- Top nav is the primary site-level frame: brand at left, the nav cluster pushed to the right, one secondary CTA, and one primary CTA
+- Top nav should be sticky and borderless
+- Top nav brand lockup uses the personal logo plus `Jim Markunas` at top left, and both should scale down on smaller devices
+- Top nav brand lockup should be visually dominant over the nav links and CTAs
+- Desktop shows text links; tablet and mobile collapse those links into a hamburger trigger
+- Top-nav text links are `Work`, `Services`, and `Contact`
+- Top-nav link hover state is accent blue text with an accent blue underline
+- The active top-nav link should stay accent blue with the underline visible
+- Secondary top-nav CTA is `My CV` linking to `/cv`
+- Primary top-nav CTA is `Book a Call` and should link to the live scheduling URL
+- Both CTAs should feel calmer than the brand lockup; use the standard system radius and avoid oversized app-style controls
+- Both top-nav CTA hover states should be explicitly shown on the design-system page
+- Middle nav is for page-level or case-study section switching only, not global site navigation
+- Middle nav uses only a bottom border; remove all other container or link borders
+- Middle-nav links are plain text only, with no outlined tab treatment
+- Middle-nav links are `Overview`, `Challenge`, `Ownership`, `Solution`, and `Impact`
+- Middle-nav links should jump to their corresponding page sections
+- As the user scrolls through sections, the active middle-nav link should highlight in accent blue
+- Footer is the closing surface: it contains the Let&apos;s Build conversion band plus the final navigation/contact block in one component
+
+## Layout rules
+- Desktop: 12-col, 24px gutter, 48px margin
+- Tablet: 8-col, 20px gutter, 32px margin
+- Mobile: 4-col, 16px gutter, 20px margin
+
+## Content modals
+The live design-system page currently recognizes these modal/surface patterns:
+- Product Modal 1
+- Product Modal 2
+- Image Modal 1
+- Content Modal 01
+- Content Modal 02
+- Content Modal 3
+- Press & accolades modal
+- Trust / Social Proof 01
+- Trust / Social Proof 02
+
+## Trust assets
+Manage as four groups:
+1. My name and logo
+2. Press and awards logos
+3. Company logos
+4. Country flags
+
+### Press and awards rule
+- Use the provided source logo images as-is
+- Do not redraw, simplify, recolor, or normalize the artwork
+- Present the images inside consistent system tiles only
+
+### Company logos rule
+- Use the provided source logo images as-is
+- Do not redraw, simplify, recolor, or normalize the artwork
+- Present the images inside consistent system tiles only
+- Center the artwork inside a padded fixed-height tile using contain behavior, not full-bleed scaling
+
+### Country flags rule
+- Use the provided source flag images as-is
+- Do not redraw, simplify, recolor, or normalize the artwork
+- Present the images inside consistent system tiles only
+
+### Personal brand rule
+- The personal logo block should be a horizontal lockup with the logo mark placed to the left of the name
+- Set the name in Aeonik Trial, title case, and quiet
+- Render both the logo mark and the name in ink in the primary specimen
