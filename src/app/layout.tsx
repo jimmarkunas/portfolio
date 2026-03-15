@@ -1,16 +1,20 @@
-import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
-import './globals.css';
+import type { Metadata } from "next"
+
+import "./globals.css"
 
 export const metadata: Metadata = {
-  title: 'Jim Markunas Portfolio',
-  description: 'Portfolio rebuilt on a calm, premium, typography-led system.'
-};
+  title: "Portfolio",
+  description: "Portfolio foundation",
+}
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  );
+  )
 }
