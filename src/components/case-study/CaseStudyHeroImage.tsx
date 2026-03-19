@@ -10,7 +10,7 @@ export function CaseStudyHeroImage({ src, alt }: CaseStudyHeroImageProps) {
         <img
           src={src}
           alt={alt}
-          className="absolute left-1/2 top-0 h-full w-auto max-w-none -translate-x-1/2 grayscale"
+          className="absolute left-1/2 top-0 h-full w-auto max-w-none -translate-x-1/2"
         />
       </div>
     </div>

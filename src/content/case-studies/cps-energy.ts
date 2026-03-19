@@ -17,8 +17,8 @@ export const cpsEnergyCaseStudy = {
       href: "/cv",
     },
     image: {
-      src: "/test/man-placeholder.png",
-      alt: "Portrait placeholder",
+      src: "/cps/hero-cps-01.png",
+      alt: "CPS Energy smart streetlight program",
     },
   },
   atAGlance: {
@@ -46,7 +46,6 @@ export const cpsEnergyCaseStudy = {
     projectOverviewRows: [
       { label: "Client", value: "CPS Energy" },
       { label: "Industry", value: "Public Utilities / Smart City" },
-      { label: "Location", value: "San Antonio, Texas" },
       { label: "Timeline", value: "August 2024 – April 2025" },
     ],
     tools: [
@@ -67,7 +66,7 @@ export const cpsEnergyCaseStudy = {
     eyebrow: "My Role",
     title: "Program & Product Lead",
     copy:
-      "Six systems to integrate. Fifteen people across two organizations that didn't naturally agree. I held the product direction, the program structure, and the accountability that made it all move.",
+      "6 systems to integrate. 15 people across two organizations that didn't naturally agree. I held the product direction, the program structure, and the accountability that made it all move.",
     tags: [
       "Program Leadership",
       "Product Direction",
@@ -75,9 +74,9 @@ export const cpsEnergyCaseStudy = {
       "System Integration",
     ],
     stats: [
-      { value: "15", suffix: "", label: "Team size" },
-      { value: "$2", suffix: "M", label: "Program budget" },
       { value: "6", suffix: "", label: "System integrations" },
+      { value: "$2", suffix: "M", label: "Program budget" },
+      { value: "15", suffix: "", label: "Team size" },
       { value: "8", suffix: " mo", label: "Program timeline" },
     ],
     narrative: {
@@ -106,26 +105,27 @@ export const cpsEnergyCaseStudy = {
         readTime: "Map-based reporting",
         title:
           "Interactive reporting let residents identify the exact streetlight and submit issues digitally, replacing a call-center-heavy intake path",
-        art: "ux",
+        art: "/cps/product-cps-01.png",
       },
       {
         category: "Field Operations",
         readTime: "In-field iPad workflow",
         title:
           "Crews received work orders in real time, updated status from the field, and returned data to central systems, cleaner handoffs, fewer lost orders",
-        art: "olive",
+        art: "/cps/product-cps-02.png",
       },
       {
         category: "Systems Integration",
         readTime: "SAP · Terrago · GIS",
         title:
           "Terrago, SAP, ARM, and GIS connected into a shared operational view, outages, work orders, crews, and citywide inventory in one pipeline",
-        art: "motion",
+        art: "/cps/product-cps-03.png",
       },
     ],
   },
   supplementalNarrative: {
-    title: "In This Project, Ditigal Tech and The Streets Danced Together",
+    title: "In This Project, Ditigal Tech & The Streets Danced Together",
+    image: "/cps/hero-cps-03.png",
     paragraphs: [
       "Yes, the issue started with smart bulbs, but it was really about lack of end-to-end ownership. Residents reported outages and heard nothing back. Crews showed up to jobs with incomplete orders. Operations had no real-time picture of what was happening across 200K streetlights. The work rebuilt those connections so a report from the street or a ping from a smart streetlight could make automation valuable for $1.5 million people.",
     ],
@@ -135,6 +135,7 @@ export const cpsEnergyCaseStudy = {
     ],
     closing:
       "As you'll see in the Press & Accolades section below, this project moved the needle from 'pitchforks & torches' to 'international awards.'",
+    closingImage: "/cps/hero-cps-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -148,6 +149,7 @@ export const cpsEnergyCaseStudy = {
       { value: "1≤4", suffix: "", label: "Day repair window" },
       { value: "200K", suffix: "+", label: "Streetlights in scope" },
     ],
+    statsImage: "/cps/hero-cps-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:

@@ -1,12 +1,13 @@
 import Link from "next/link"
 
 import { BeforeAfterComparison } from "@/components/case-study/BeforeAfterComparison"
+import { BlogCardGrid } from "@/components/case-study/BlogCardGrid"
 import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
 import type { CaseStudyBlogCardArt, CaseStudyData } from "@/components/case-study/types"
 import { Container } from "@/components/Container"
+import { FullWidthImage } from "@/components/FullWidthImage"
 import { EyebrowPill } from "@/components/EyebrowPill"
-import { MobileSolutionCarousel } from "@/components/MobileSolutionCarousel"
 import { PullQuote } from "@/components/PullQuote"
 import { SectionShell } from "@/components/SectionShell"
 import { StatCard } from "@/components/StatCard"
@@ -14,6 +15,10 @@ import { TagPill } from "@/components/TagPill"
 import { Timeline } from "@/components/Timeline"
 
 function renderBlogCardArt(art: CaseStudyBlogCardArt) {
+  if (art.startsWith("/")) {
+    return <img src={art} alt="" className="absolute inset-0 h-full w-full object-cover" />
+  }
+
   if (art === "olive") {
     return (
       <>
@@ -286,8 +291,8 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                           index === 2 ? "lg:col-start-2 lg:row-start-2" : ""
                         } ${index === 3 ? "lg:col-start-3 lg:row-[1/3] lg:place-self-center" : ""}`}
                       >
-                        <div className="flex h-full w-full flex-col items-center justify-center rounded-[10px] bg-white px-6 text-center">
-                          <div className="text-center leading-none text-slate-800">
+                        <div className="flex h-full w-full flex-col items-center justify-center rounded-[10px] bg-[#222222] px-6 text-center">
+                          <div className="text-center leading-none text-white">
                             <span className="font-[var(--font-family-display)] text-[52px] font-medium leading-[56px]">
                               {stat.value}
                             </span>
@@ -297,7 +302,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                               </span>
                             ) : null}
                           </div>
-                          <div className="type-p3 mt-4 max-w-[160px] text-neutral-700">
+                          <div className="type-p3 mt-4 max-w-[160px] text-white/60">
                             {stat.label}
                           </div>
                         </div>
@@ -358,20 +363,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
             </div>
           </div>
 
-          <MobileSolutionCarousel slides={data.solution.cards} />
-
-          <div className="hidden w-full gap-7 md:grid md:grid-cols-3">
-            {data.solution.cards.map((card) => (
-              <article
-                key={`${card.category}-${card.title}`}
-                className="overflow-hidden rounded-[24px] border border-black/8 bg-white shadow-[0_18px_40px_rgba(34,34,34,0.05)]"
-              >
-                <div className="relative aspect-[9/16] overflow-hidden rounded-[24px]">
-                  {renderBlogCardArt(card.art)}
-                </div>
-              </article>
-            ))}
-          </div>
+          <BlogCardGrid cards={data.solution.cards} />
         </div>
       </SectionShell>
 
@@ -379,10 +371,15 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
         <div className="flex w-full flex-col items-start gap-5">
           <h2 className="type-h5 text-[#111111]">{data.supplementalNarrative.title}</h2>
 
-          {data.supplementalNarrative.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="type-p2 text-[#222222]">
-              {paragraph}
-            </p>
+          {data.supplementalNarrative.paragraphs.map((paragraph, i) => (
+            <>
+              <p key={paragraph} className="type-p2 text-[#222222]">
+                {paragraph}
+              </p>
+              {i === 0 && data.supplementalNarrative.image && (
+                <FullWidthImage key="narrative-image" src={data.supplementalNarrative.image} />
+              )}
+            </>
           ))}
 
           {data.supplementalNarrative.highlights ? (
@@ -399,6 +396,10 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
           {data.supplementalNarrative.closing ? (
             <p className="type-p2 text-[#222222]">{data.supplementalNarrative.closing}</p>
           ) : null}
+
+          {data.supplementalNarrative.closingImage && (
+            <FullWidthImage src={data.supplementalNarrative.closingImage} fullWidth={false} />
+          )}
         </div>
       </SectionShell>
 
@@ -462,7 +463,11 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
             ))}
           </div>
 
-          <div className="grid w-full gap-10 pt-5 md:pt-6 lg:grid-cols-4 lg:items-start lg:gap-5 lg:pt-8">
+          {data.impact.statsImage && (
+            <FullWidthImage src={data.impact.statsImage} fullWidth={false} />
+          )}
+
+          <div className="grid w-full gap-10 lg:grid-cols-4 lg:items-start lg:gap-5">
             <div className="flex flex-col items-start gap-4 lg:col-span-2">
               <div className="hidden flex-wrap items-center gap-3 pt-2 lg:flex lg:flex-nowrap">
                 {data.impact.proofPoints.map((item, index) => (
@@ -509,18 +514,13 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
 
       <SectionShell containerClassName="pt-6 pb-16 md:pt-0 md:pb-8 lg:pb-24 lg:pt-12">
         <div className="px-0 pb-6 pt-0 md:pb-8 lg:pb-10">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:items-start lg:gap-6 lg:justify-between">
-            <div className="flex w-full flex-col items-start gap-4 lg:relative lg:col-start-1">
-              <EyebrowPill className="lg:absolute lg:left-0 lg:top-[-44px]" labelClassName="type-p4">
-                {data.delivery.eyebrow}
-              </EyebrowPill>
-              <h2 className="type-h3 max-w-[460px] text-[#222222]">{data.delivery.title}</h2>
-            </div>
-
-            <div className="flex w-full max-w-none flex-col items-start gap-5 pt-2 lg:col-span-3 lg:col-start-1">
-              <h3 className="type-h5 w-full max-w-none text-[#111111]">{data.delivery.introTitle}</h3>
-              <p className="type-p2 w-full max-w-none text-[#222222]">{data.delivery.introCopy}</p>
-            </div>
+          <div className="flex flex-col items-center gap-5 text-center">
+            <EyebrowPill labelClassName="type-p4">
+              {data.delivery.eyebrow}
+            </EyebrowPill>
+            <h2 className="type-h3 text-[#222222]">{data.delivery.title}</h2>
+            <h3 className="type-h5 max-w-[760px] text-[#111111]">{data.delivery.introTitle}</h3>
+            <p className="type-p2 max-w-[760px] text-[#222222]">{data.delivery.introCopy}</p>
           </div>
 
           <div className="mt-6 flex flex-col gap-4 lg:mt-14">

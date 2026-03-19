@@ -49,7 +49,7 @@ export type CaseStudySummaryColumn = {
   points: string[]
 }
 
-export type CaseStudyBlogCardArt = "olive" | "ux" | "motion"
+export type CaseStudyBlogCardArt = "olive" | "ux" | "motion" | (string & {})
 
 export type CaseStudyBlogCard = {
   category: string
@@ -79,9 +79,11 @@ export type CaseStudyMedia =
 
 export type CaseStudyNarrative = {
   title: string
+  image?: string
   paragraphs: string[]
   highlights?: string[]
   closing?: string
+  closingImage?: string
 }
 
 export type CaseStudyData = {
@@ -138,6 +140,7 @@ export type CaseStudyData = {
     intro: string
     proofPoints: string[]
     stats: CaseStudyStat[]
+    statsImage?: string
     beforeAfter: {
       title: string
       summary: string
