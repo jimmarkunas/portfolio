@@ -45,7 +45,7 @@ jobs:
             set ssl:verify-certificate false;
             set ftp:ssl-force true;
             set ftp:passive-mode true;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp.peachpuff-monkey-623316.hostingersite.com;
+            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} 82.25.83.251;
             pwd;
             cls -la;
             cls -la public_html/;
@@ -62,7 +62,7 @@ jobs:
             set ssl:verify-certificate false;
             set ftp:ssl-force true;
             set ftp:passive-mode true;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp.peachpuff-monkey-623316.hostingersite.com;
+            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} 82.25.83.251;
             cd public_html;
             pwd;
             mirror --reverse --delete --verbose ./out/ .;
