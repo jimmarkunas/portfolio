@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+concurrency:
+  group: hostinger-production-deploy
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -34,7 +39,7 @@ jobs:
           lftp -e "
             set ssl:verify-certificate false;
             set ftp:ssl-force true;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} 82.25.83.251;
-            mirror --reverse --delete --verbose ./out/ domains/peachpuff-monkey-623316.hostingersite.com/public_html/;
+            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp.peachpuff-monkey-623316.hostingersite.com;
+            mirror --reverse --delete --verbose ./out/ ./;
             quit
           "
