@@ -50,10 +50,10 @@ export const solsticeOpsCaseStudy = {
       { label: "Location", value: "Austin, USA" },
     ],
     tools: [
-      { label: "Figma", short: "Fg", className: "bg-[#242938] text-white" },
-      { label: "Illustrator", short: "Ai", className: "bg-[#330000] text-[#FF9A00]" },
-      { label: "Photoshop", short: "Ps", className: "bg-[#001E36] text-[#31A8FF]" },
-      { label: "After Effects", short: "Ae", className: "bg-[#00005B] text-[#9999FF]" },
+      { label: "Figma", icon: "/tool-icons/figma.svg" },
+      { label: "Illustrator", icon: "/tool-icons/illustrator.svg" },
+      { label: "Photoshop", icon: "/tool-icons/photoshop.svg" },
+      { label: "After Effects", icon: "/tool-icons/after-effects.svg" },
     ],
     quote: {
       quote:
