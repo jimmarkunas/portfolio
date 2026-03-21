@@ -29,5 +29,6 @@ jobs:
           server: 82.25.83.251
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
           local-dir: ./out/
           server-dir: /public_html/
