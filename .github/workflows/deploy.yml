@@ -11,11 +11,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
       - name: Deploy via SFTP
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzr --delete --exclude='.git*' --exclude='.github'
-          path: ./
+          path: ./out/
           remote_path: /home/u145042057/domains/peachpuff-monkey-623316.hostingersite.com/public_html/
           remote_host: ${{ secrets.FTP_SERVER }}
           remote_user: ${{ secrets.FTP_USERNAME }}
