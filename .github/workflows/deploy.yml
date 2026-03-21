@@ -31,4 +31,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           local-dir: ./out/
-          server-dir: domains/peachpuff-monkey-623316.hostingersite.com/public_html/
+          server-dir: /home/u145042057/domains/peachpuff-monkey-623316.hostingersite.com/public_html/
