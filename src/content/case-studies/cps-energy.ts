@@ -1,7 +1,7 @@
 import type { CaseStudyData } from "@/components/case-study/types"
 
 export const cpsEnergyCaseStudy = {
-  slug: "cps-energy",
+  slug: "cps",
   breadcrumbCurrent: "CPS Energy",
   hero: {
     title: "CPS Energy: Smart Streetlight & Smart City Operations",

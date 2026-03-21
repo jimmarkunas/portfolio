@@ -22,6 +22,7 @@ export type CaseStudyOverviewRow = {
 
 export type CaseStudyExperienceRow = {
   company: string
+  source?: string
   dates: string
   summary: string
   tags: string[]
@@ -117,6 +118,10 @@ export type CaseStudyData = {
       attributionTitle: string
       attributionSubtitle: string
       avatarSrc?: string
+      preQuoteImage?: string
+      preQuoteHeading?: string
+      preQuoteImageCaption?: string
+      preQuoteChart?: "directv-revenue"
     }
   }
   role: {
@@ -132,6 +137,7 @@ export type CaseStudyData = {
     title: string
     copy: string
     cards: CaseStudyBlogCard[]
+    heroImage?: string
   }
   supplementalNarrative: CaseStudyNarrative
   impact: {

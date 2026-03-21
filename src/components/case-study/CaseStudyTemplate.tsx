@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { BeforeAfterComparison } from "@/components/case-study/BeforeAfterComparison"
+import { DirecTVRevenueChart } from "@/components/case-study/DirecTVRevenueChart"
 import { BlogCardGrid } from "@/components/case-study/BlogCardGrid"
 import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
@@ -230,13 +231,16 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                           </div>
                           <div className="flex flex-wrap items-center gap-2.5">
                             {data.problem.tools.map((tool) => (
-                              <img
-                                key={tool.label}
-                                src={tool.icon}
-                                alt={tool.label}
-                                title={tool.label}
-                                className="h-9 w-9 rounded-[10px]"
-                              />
+                              <div key={tool.label} className="group relative">
+                                <img
+                                  src={tool.icon}
+                                  alt={tool.label}
+                                  className="h-[51px] w-[51px] rounded-[10px]"
+                                />
+                                <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#222222] px-2.5 py-1.5 text-xs text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                                  {tool.label}
+                                </div>
+                              </div>
                             ))}
                           </div>
                         </div>
@@ -245,8 +249,26 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                   </div>
                 </div>
 
+                {(data.problem.quote.preQuoteHeading || data.problem.quote.preQuoteImage) && (
+                  <div className="mt-14 lg:mt-16">
+                    {data.problem.quote.preQuoteHeading && (
+                      <h3 className="type-h4 mb-6 pt-5 text-[#222222]">{data.problem.quote.preQuoteHeading}</h3>
+                    )}
+                    {data.problem.quote.preQuoteChart === "directv-revenue" ? (
+                      <DirecTVRevenueChart />
+                    ) : data.problem.quote.preQuoteImage ? (
+                      <>
+                        <img src={data.problem.quote.preQuoteImage} alt="" className="w-full" />
+                        {data.problem.quote.preQuoteImageCaption && (
+                          <p className="mt-2 text-sm text-black/40">{data.problem.quote.preQuoteImageCaption}</p>
+                        )}
+                      </>
+                    ) : null}
+                  </div>
+                )}
+
                 <PullQuote
-                  className="mt-14 lg:mt-16"
+                  className={data.problem.quote.preQuoteImage ? "mt-8" : "mt-14 lg:mt-16"}
                   quote={<>&ldquo;{data.problem.quote.quote}&rdquo;</>}
                   attributionTitle={data.problem.quote.attributionTitle}
                   attributionSubtitle={data.problem.quote.attributionSubtitle}
@@ -317,6 +339,10 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                       {data.role.narrative.title}
                     </h3>
 
+                    {data.role.narrative.image && (
+                      <FullWidthImage src={data.role.narrative.image} fullWidth={false} />
+                    )}
+
                     <div className="flex flex-col gap-5">
                       {data.role.narrative.paragraphs.map((paragraph) => (
                         <p key={paragraph} className="type-p2 text-[#222222]">
@@ -363,7 +389,11 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
             </div>
           </div>
 
-          <BlogCardGrid cards={data.solution.cards} />
+          {data.solution.heroImage ? (
+            <FullWidthImage src={data.solution.heroImage} fullWidth={false} />
+          ) : (
+            <BlogCardGrid cards={data.solution.cards} />
+          )}
         </div>
       </SectionShell>
 
@@ -603,7 +633,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
               {/* Press Video Modal */}
               <div className="border-b border-[#E5E7EB] pb-7">
                 <div className="flex flex-col gap-8">
-                  <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-6 lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:justify-between">
+                  <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-6 lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:justify-between">
                     <div className="md:col-span-2 lg:col-span-1 lg:col-start-1">
                       <CaseStudyMediaFrame
                         media={data.recognition.featured.media}
@@ -614,7 +644,9 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                     <div className="flex w-full max-w-none flex-col gap-8 md:col-start-1 lg:col-start-2 lg:max-w-[320px]">
                       <div>
                         <h3 className="type-h6 text-[#222222]">{data.recognition.featured.company}</h3>
-                        <p className="type-p3 mt-1 text-black/45">{data.recognition.featured.dates}</p>
+                        {data.recognition.featured.dates && (
+                          <p className="type-p3 mt-1 text-black/45">{data.recognition.featured.dates}</p>
+                        )}
                       </div>
                       <p className="type-p3 max-w-none text-black/55 lg:max-w-[320px]">
                         {data.recognition.featured.summary}
@@ -635,12 +667,12 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
               {/* Press Modals */}
               {data.recognition.rows.map((row) => {
                 const slug = row.file ? row.file.split("/").pop()?.replace(/\.[^.]+$/, "") : null
-                const viewerHref = slug ? `/work/cps/press/${slug}` : null
+                const viewerHref = slug ? `/work/${data.slug}/press/${slug}` : null
                 const inner = (
                   <div className="grid w-full gap-x-6 gap-y-2 md:grid-cols-[minmax(0,1fr)_auto] md:items-start lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:items-center lg:justify-between">
                     <div className="w-full">
                       <h3 className="type-h6 text-[#222222]">{row.company}</h3>
-                      <p className="type-p3 mt-1 text-black/45">{row.dates}</p>
+                      <p className="type-p3 mt-1 text-black/45">{row.source ? `${row.source} · ${row.dates}` : row.dates}</p>
                     </div>
 
                     <p className="type-p3 w-full text-black/55 md:col-start-1 lg:col-start-2 lg:max-w-[320px]">

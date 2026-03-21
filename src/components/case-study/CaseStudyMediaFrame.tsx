@@ -29,11 +29,11 @@ export function CaseStudyMediaFrame({
 
   if (media.kind === "image") {
     return (
-      <div className={`${aspectClassName} w-full overflow-hidden ${className}`.trim()}>
+      <div className={`w-full overflow-hidden ${className}`.trim()}>
         <img
           src={media.src}
           alt={media.alt}
-          className={`h-full w-full object-cover ${frameClassName}`.trim()}
+          className={`w-full h-auto block ${frameClassName}`.trim()}
         />
       </div>
     )
