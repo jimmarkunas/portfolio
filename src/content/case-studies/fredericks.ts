@@ -75,9 +75,9 @@ export const fredericksCaseStudy = {
       "Campaign Operations",
     ],
     stats: [
-      { value: "20", suffix: "", label: "team size" },
-      { value: "$3", suffix: "M", label: "program budget" },
       { value: "24", suffix: " mo", label: "program timeline" },
+      { value: "$3", suffix: "M", label: "program budget" },
+      { value: "20", suffix: "", label: "team size" },
       { value: "6", suffix: "", label: "system integrations" },
     ],
     narrative: {

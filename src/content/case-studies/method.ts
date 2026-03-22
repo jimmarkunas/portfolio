@@ -75,9 +75,9 @@ export const methodCaseStudy = {
       "Shared Platform Strategy",
     ],
     stats: [
-      { value: "5", suffix: "", label: "team size" },
-      { value: "$1", suffix: "M", label: "program budget" },
       { value: "10", suffix: "+", label: "system integrations" },
+      { value: "$1", suffix: "M", label: "program budget" },
+      { value: "5", suffix: "", label: "team size" },
       { value: "3", suffix: " mo", label: "program timeline" },
     ],
     narrative: {

@@ -77,9 +77,9 @@ export const boehringeringelheimCaseStudy = {
       "Commerce Strategy",
     ],
     stats: [
-      { value: "10", suffix: "+", label: "team size" },
-      { value: "$30", suffix: "M", label: "program budget" },
       { value: "8", suffix: "", label: "system integrations" },
+      { value: "$30", suffix: "M", label: "program budget" },
+      { value: "10", suffix: "+", label: "team size" },
       { value: "30", suffix: " mo", label: "program timeline" },
     ],
     narrative: {

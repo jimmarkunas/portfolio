@@ -75,9 +75,9 @@ export const cbdistilleryCaseStudy = {
       "Payments Strategy",
     ],
     stats: [
-      { value: "15", suffix: "", label: "team size" },
-      { value: "$3", suffix: "M", label: "program budget" },
       { value: "9", suffix: " mo", label: "program timeline" },
+      { value: "$3", suffix: "M", label: "program budget" },
+      { value: "15", suffix: "", label: "team size" },
       { value: "1", suffix: "", label: "custom BC integration" },
     ],
     narrative: {

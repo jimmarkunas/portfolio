@@ -75,9 +75,9 @@ export const legoCaseStudy = {
       "Requirements Ownership",
     ],
     stats: [
-      { value: "40", suffix: "", label: "team size" },
-      { value: "$16", suffix: "M", label: "program budget" },
       { value: "5", suffix: "", label: "sales channels" },
+      { value: "$16", suffix: "M", label: "program budget" },
+      { value: "40", suffix: "", label: "team size" },
       { value: "6", suffix: "+", label: "country variants" },
     ],
     narrative: {

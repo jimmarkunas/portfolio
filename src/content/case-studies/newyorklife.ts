@@ -76,9 +76,9 @@ export const newYorkLifeCaseStudy = {
       "Enterprise Governance",
     ],
     stats: [
-      { value: "10", suffix: "", label: "team size" },
-      { value: "$10", suffix: "M", label: "program budget" },
       { value: "6", suffix: "", label: "system integrations" },
+      { value: "$10", suffix: "M", label: "program budget" },
+      { value: "10", suffix: "", label: "team size" },
       { value: "9", suffix: " mo", label: "program timeline" },
     ],
     narrative: {

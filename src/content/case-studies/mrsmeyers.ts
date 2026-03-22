@@ -75,9 +75,9 @@ export const mrsmeyersCaseStudy = {
       "System Integration",
     ],
     stats: [
-      { value: "25", suffix: "", label: "team size" },
-      { value: "$3", suffix: "M", label: "program budget" },
       { value: "10", suffix: "+", label: "system integrations" },
+      { value: "$3", suffix: "M", label: "program budget" },
+      { value: "25", suffix: "", label: "team size" },
       { value: "5", suffix: " mo", label: "program timeline" },
     ],
     narrative: {

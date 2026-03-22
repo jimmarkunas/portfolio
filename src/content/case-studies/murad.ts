@@ -75,9 +75,9 @@ export const muradCaseStudy = {
       "Subscription Commerce",
     ],
     stats: [
-      { value: "2", suffix: "", label: "team size" },
-      { value: "$1", suffix: "M", label: "program budget" },
       { value: "11", suffix: "", label: "named integrations" },
+      { value: "$1", suffix: "M", label: "program budget" },
+      { value: "2", suffix: "", label: "team size" },
       { value: "6", suffix: "", label: "markets in scope" },
     ],
     narrative: {

@@ -75,9 +75,9 @@ export const k2CaseStudy = {
       "Integration Strategy",
     ],
     stats: [
-      { value: "4", suffix: "", label: "team size" },
-      { value: "$1.5", suffix: "M", label: "program budget" },
       { value: "9", suffix: "", label: "brand sites" },
+      { value: "$1.5", suffix: "M", label: "program budget" },
+      { value: "4", suffix: "", label: "team size" },
       { value: "1", suffix: "", label: "shared engine" },
     ],
     narrative: {

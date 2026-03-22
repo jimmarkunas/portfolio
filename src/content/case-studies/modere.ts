@@ -76,9 +76,9 @@ export const modereCaseStudy = {
       "Architecture Direction",
     ],
     stats: [
-      { value: "20", suffix: "", label: "team size" },
-      { value: "$6", suffix: "M", label: "program budget" },
       { value: "20", suffix: "+", label: "system integrations" },
+      { value: "$6", suffix: "M", label: "program budget" },
+      { value: "20", suffix: "", label: "team size" },
       { value: "16", suffix: " mo", label: "program timeline" },
     ],
     narrative: {
