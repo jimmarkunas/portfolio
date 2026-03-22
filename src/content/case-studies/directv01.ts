@@ -1,7 +1,7 @@
 import type { CaseStudyData } from "@/components/case-study/types"
 
 export const directv01CaseStudy = {
-  slug: "directv01",
+  slug: "dtv01",
   breadcrumbCurrent: "DIRECTV",
   hero: {
     title: "Turning DIRECTV's Slow Offer Engine to a Revenue Machine",

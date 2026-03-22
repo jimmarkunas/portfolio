@@ -7,7 +7,7 @@ export async function generateStaticParams() {
   for (const [slug, study] of Object.entries(caseStudyRegistry)) {
     for (const row of study.recognition.rows) {
       if (row.file) {
-        const filename = row.file.split("/").pop()!
+        const filename = row.file.split("/").pop()!.replace(/\.[^.]+$/, "")
         params.push({ slug, filename })
       }
     }
