@@ -30,7 +30,9 @@ jobs:
         run: npm run build
 
       - name: Check build output
-        run: ls -la ./out/
+        run: |
+          ls -la ./out/
+          ls -la ./out/_next/static/css/
 
       - name: Install lftp
         run: sudo apt-get install -y lftp
@@ -65,5 +67,8 @@ jobs:
             pwd;
             mirror --reverse --delete --verbose ./out/ ./;
             cls -la;
+            cls -la _next;
+            cls -la _next/static;
+            cls -la _next/static/css;
             quit
           "

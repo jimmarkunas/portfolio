@@ -86,6 +86,8 @@ function renderActionButton(action: CaseStudyData["hero"]["primaryCta"], variant
 }
 
 export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
+  const isFoh = data.slug === "foh"
+
   return (
     <main className="min-h-full overflow-x-hidden bg-[#F3F3F3] text-[#222222]">
       <section className="bg-[#F3F3F3]">
@@ -187,8 +189,14 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                   </svg>
                 </div>
 
-                <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:grid-rows-[auto_auto_auto] lg:items-start lg:gap-x-8 lg:gap-y-5 xl:grid-cols-[minmax(0,573px)_minmax(0,658px)] xl:justify-between xl:gap-x-10">
-                  <div className="flex max-w-none flex-col items-start gap-5 lg:contents">
+                <div className={isFoh
+                  ? "grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:grid-rows-[auto_auto_auto] lg:items-start lg:gap-x-8 lg:gap-y-5 xl:grid-cols-[minmax(0,573px)_minmax(0,658px)] xl:justify-between xl:gap-x-10"
+                  : "grid gap-10 lg:grid-cols-[minmax(0,573px)_minmax(0,658px)] lg:grid-rows-[auto_auto_auto] lg:items-start lg:justify-between lg:gap-x-10 lg:gap-y-5"}
+                >
+                  <div className={isFoh
+                    ? "flex max-w-none flex-col items-start gap-5 lg:contents"
+                    : "flex max-w-none flex-col items-start gap-5 lg:max-w-[573px] lg:contents"}
+                  >
                     <EyebrowPill
                       className="lg:col-start-1 lg:row-start-1 lg:w-fit"
                       labelClassName="type-p2 text-[#222222]"
@@ -196,18 +204,26 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                       {data.problem.eyebrow}
                     </EyebrowPill>
 
-                    <div className="max-w-none lg:col-start-1 lg:row-start-2 xl:max-w-[573px]">
+                    <div className={isFoh
+                      ? "max-w-none lg:col-start-1 lg:row-start-2 xl:max-w-[573px]"
+                      : "max-w-none lg:col-start-1 lg:row-start-2 lg:max-w-[573px]"}
+                    >
                       <h2 className="type-h3 text-[#222222]">{data.problem.title}</h2>
                     </div>
 
                     <CaseStudyMediaFrame
                       media={data.problem.media}
-                      className="rounded-[24px] lg:col-start-1 lg:row-start-3 xl:w-[620px]"
+                      className={isFoh
+                        ? "rounded-[24px] lg:col-start-1 lg:row-start-3 xl:w-[620px]"
+                        : "lg:col-start-1 lg:row-start-3 lg:w-[620px] rounded-[24px]"}
                       frameClassName="px-6 text-center md:px-8 lg:px-10"
                     />
                   </div>
 
-                  <div className="flex w-full max-w-none flex-col gap-8 lg:col-start-2 lg:row-start-3 xl:max-w-[658px] xl:justify-self-end">
+                  <div className={isFoh
+                    ? "flex w-full max-w-none flex-col gap-8 lg:col-start-2 lg:row-start-3 xl:max-w-[658px] xl:justify-self-end"
+                    : "flex w-full max-w-none flex-col gap-8 lg:col-start-2 lg:row-start-3 lg:max-w-[658px] lg:justify-self-end"}
+                  >
                     <p className="type-p3 text-[#222222]">{data.problem.overview}</p>
 
                     <div className="flex flex-col gap-5">
@@ -632,7 +648,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
 
             <div className="flex flex-col">
               {data.recognition.leadImage && (
-                <div className="-mt-9 pb-7 md:-mt-1 lg:-mt-[52px]">
+                <div className={isFoh ? "-mt-9 pb-7 md:-mt-1 lg:-mt-[52px]" : "pb-7"}>
                   <img
                     src={data.recognition.leadImage.src}
                     alt={data.recognition.leadImage.alt}
@@ -644,27 +660,42 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
               {/* Press Video Modal */}
               <div className="border-b border-[#E5E7EB] pb-7">
                 <div className="flex flex-col gap-8">
-                  <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] lg:gap-x-8 lg:gap-y-5 xl:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] xl:justify-between">
-                    <div className="md:col-span-2 lg:row-span-2 lg:col-span-1 lg:col-start-1 xl:row-span-1">
+                  <div className={isFoh
+                    ? "grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] lg:gap-x-8 lg:gap-y-5 xl:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] xl:justify-between"
+                    : "grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-6 lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:justify-between"}
+                  >
+                    <div className={isFoh
+                      ? "md:col-span-2 lg:row-span-2 lg:col-span-1 lg:col-start-1 xl:row-span-1"
+                      : "md:col-span-2 lg:col-span-1 lg:col-start-1"}
+                    >
                       <CaseStudyMediaFrame
                         media={data.recognition.featured.media}
-                        className="rounded-xl xl:w-[530px] xl:max-w-none"
+                        className="xl:w-[530px] xl:max-w-none rounded-xl"
                       />
                     </div>
 
-                    <div className="flex w-full max-w-none flex-col gap-4 md:col-start-1 lg:col-start-2 xl:max-w-[320px]">
+                    <div className={isFoh
+                      ? "flex w-full max-w-none flex-col gap-4 md:col-start-1 lg:col-start-2 xl:max-w-[320px]"
+                      : "flex w-full max-w-none flex-col gap-8 md:col-start-1 lg:col-start-2 lg:max-w-[320px]"}
+                    >
                       <div>
                         <h3 className="type-h6 text-[#222222]">{data.recognition.featured.company}</h3>
                         {data.recognition.featured.dates && (
                           <p className="type-p3 mt-1 text-black/45">{data.recognition.featured.dates}</p>
                         )}
                       </div>
-                      <p className="type-p3 max-w-none text-black/55 xl:max-w-[320px]">
+                      <p className={isFoh
+                        ? "type-p3 max-w-none text-black/55 xl:max-w-[320px]"
+                        : "type-p3 max-w-none text-black/55 lg:max-w-[320px]"}
+                      >
                         {data.recognition.featured.summary}
                       </p>
                     </div>
 
-                    <div className="flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-2 lg:row-start-2 lg:justify-start xl:col-start-3 xl:row-start-1 xl:justify-end xl:flex-nowrap">
+                    <div className={isFoh
+                      ? "flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-2 lg:row-start-2 lg:justify-start xl:col-start-3 xl:row-start-1 xl:justify-end xl:flex-nowrap"
+                      : "flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-3 lg:flex-nowrap"}
+                    >
                       {data.recognition.featured.tags.map((tag) => (
                         <TagPill key={tag} variant="dark">
                           {tag}
