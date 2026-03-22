@@ -658,7 +658,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
               )}
 
               {/* Press Video Modal */}
-              <div className="border-b border-[#E5E7EB] pb-7">
+              {data.recognition.featured && <div className="border-b border-[#E5E7EB] pb-7">
                 <div className="flex flex-col gap-8">
                   <div className={isFoh
                     ? "grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] lg:gap-x-8 lg:gap-y-5 xl:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] xl:justify-between"
@@ -704,7 +704,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>}
 
               {/* Press Modals */}
               {data.recognition.rows.map((row) => {

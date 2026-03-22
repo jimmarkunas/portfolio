@@ -180,7 +180,7 @@ export type CaseStudyData = {
       src: string
       alt: string
     }
-    featured: {
+    featured?: {
       media: CaseStudyMedia
       company: string
       dates: string

@@ -4,9 +4,9 @@ export const cbdistilleryCaseStudy = {
   slug: "cbdistillery",
   breadcrumbCurrent: "CBDistillery",
   hero: {
-    title: "I Turned CBDistillery's Payments Crisis Into a Scalable Revenue Engine",
+    title: "CBDistillery's: From De-Banked to $40m",
     intro:
-      "CBDistillery was not just replatforming, it was at risk of losing the ability to process cards at all. Despite doing millions in revenue, approved payment partners would not touch the business, and without a real banking and subscription solution the company could not scale. I led the fintech and commerce architecture work that secured Square, forced a custom BigCommerce and Order Groove integration, and turned a payments rescue into the engine behind growth from $15M to $40M GMV.",
+      "CBDistillery was at risk of losing the ability to process cards. Despite millions in revenue, BC's payment partners wouldn't touch them, and without a banking solution the company would die instantly. I led negotiations that secured Square, forced a custom BigCommerce, Square & OrderGroove integration, and turned a payments rescue into $40m.",
     primaryCta: {
       label: "Book a Call",
       href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
@@ -17,7 +17,7 @@ export const cbdistilleryCaseStudy = {
       href: "/cv",
     },
     image: {
-      src: "/cbdistillery/hero-cbdistillery-01.png",
+      src: "/cbdistillery/hero-cbd-01.png",
       alt: "CBDistillery fintech and commerce product launch hero image",
     },
   },
@@ -27,23 +27,23 @@ export const cbdistilleryCaseStudy = {
     copy:
       "This was a commerce build, a subscription launch, and a banking rescue all at the same time. I helped CBDistillery get banked, negotiated Square as the long-term processor, and designed a stack where one-time orders, subscriptions, and wholesale could all run on one clean commerce and payments model.",
     stats: [
-      { value: "$15", suffix: "M", label: "GMV at launch" },
-      { value: "$40", suffix: "M", label: "GMV after scale" },
-      { value: "20", suffix: "K+", label: "orders per month" },
-      { value: "89", suffix: "%", label: "retention" },
+      { value: "$15", suffix: "M", label: "GMV at Launch" },
+      { value: "$40", suffix: "M", label: "GMV After Scale" },
+      { value: "20", suffix: "K+", label: "Orders Per Month" },
+      { value: "89", suffix: "%", label: "Retention Uplift" },
     ],
   },
   problem: {
     eyebrow: "Problem Statement",
-    title: "A High-Growth Brand Nobody Would Bank",
+    title: "High-Growth Brand Nobody Would Bank",
     media: {
       kind: "image",
-      src: "/cbdistillery/hero-cbdistillery-02.png",
+      src: "/cbdistillery/modal-cbd-04.png",
       alt: "CBDistillery fintech architecture and payment stack planning materials",
       aspectRatio: "16/9",
     },
     overview:
-      "CBDistillery had real volume, real demand, and a real business, but it was still living in one of the hardest merchant categories to bank. Approved payment partners would not underwrite the account, the company needed to move off WooCommerce, and subscriptions were a critical growth lever that depended on token vaulting and recurring billing actually working. If payments failed, none of the rest of the commerce strategy mattered.",
+      "CBDistillery had real volume, real demand, and a real business, but it was one of the hardest merchant categories to bank. Approved payment partners refused to underwrite the account, CBDistillery needed to move off WooCommerce, and subscriptions were a critical growth lever that depended on token vaulting & recurring billing. If payments failed, none of the rest of the commerce strategy mattered.",
     projectOverviewRows: [
       { label: "Client", value: "CBDistillery" },
       { label: "Industry", value: "CBD • Fintech • Subscription Commerce" },
@@ -53,126 +53,125 @@ export const cbdistilleryCaseStudy = {
       { label: "BigCommerce", icon: "/tool-icons/bc-logo.png" },
       { label: "Square", icon: "/tool-icons/square-logo.png" },
       { label: "Order Groove", icon: "/tool-icons/ordergroove-logo.png" },
-      { label: "WordPress", icon: "/tool-icons/wordpress-logo.png" },
+      { label: "MS Dynamics", icon: "/tool-icons/msdynamics-logo.png" },
     ],
     quote: {
       quote:
-        "Despite their millions of dollars in revenue, none of our approved payment partners would touch them. Jim worked tirelessly to find CBDistillery a payment provider and then to convince the C-levels at BC to support a custom integration on a short timeline.",
+        "Despite their millions of dollars in revenue, none of our approved payment partners would touch them. Jim worked tirelessly to find CBDistillery a payment provider and then convinced the C-levels at BC to support a custom integration with Square on a short timeline.",
       attributionTitle: "Adrian Sorapuru",
       attributionSubtitle: "Director, Strategic Business Development, BigCommerce",
-      avatarSrc: "/cbdistillery/adrian-sorapuru.png",
+      avatarSrc: "/cbdistillery/adrian-sorapuru.jpeg",
     },
   },
   role: {
     eyebrow: "My Role",
     title: "Senior Product Manager & Solutions Architect",
     copy:
-      "I owned the fintech, commerce, and subscription architecture required to get CBDistillery banked and scaling. That meant negotiating the processor relationship, aligning BigCommerce and Order Groove around a custom integration, and designing one stack that could support one-time orders, subscriptions, and wholesale without fragmenting the business.",
+      "I owned the fintech negotiations + the commerce & subscription architecture required to get CBDistillery banked & scaling. That meant negotiating the processor relationship, aligning BigCommerce, Square, and OrderGroove around a custom integration, and designing one stack that could support one-time orders, subscriptions, and wholesale without fragmenting the business.",
     tags: [
-      "Fintech Architecture",
+      "Fintech",
       "Program Leadership",
-      "Subscription Commerce",
-      "Payments Strategy",
+      "Subscriptions",
+      "Solutioning",
     ],
     stats: [
-      { value: "9", suffix: " mo", label: "program timeline" },
-      { value: "$3", suffix: "M", label: "program budget" },
-      { value: "15", suffix: "", label: "team size" },
-      { value: "1", suffix: "", label: "custom BC integration" },
+      { value: "9", suffix: " mo", label: "Program Timeline" },
+      { value: "$3", suffix: "M", label: "Program Budget" },
+      { value: "15", suffix: "", label: "Team Size" },
+      { value: "2", suffix: "", label: "Custom BC Integrations" },
     ],
     narrative: {
-      title: "I Solved the Payments Problem First",
+      title: "I Solved the Payments Problem",
       paragraphs: [
-        "What I saw faster than other people was that this was not mainly a storefront problem. It was a banking and payments problem hiding inside a commerce project. CBDistillery could not grow on hope, and it could not build a durable subscription business without a processor willing to underwrite volume, support token vaulting, and work with both BigCommerce and Order Groove.",
-        "I made three decisions that changed the trajectory. First, I negotiated Square as the long-term payments spine when most partners would not touch the business. Second, I forced the custom BigCommerce, Square, and Order Groove integration that made one-time and recurring billing coexist cleanly. Third, I designed one stack that could support DTC, subscriptions, and wholesale together, which gave the business a real operating model instead of a pile of disconnected revenue streams.",
+        "CBDistillery didn’t need another storefront conversation. It needed a banking partner. I pushed the issue, worked back channels, and called in favors until Square agreed to bank the business, which gave the company a real path to scale subscriptions.",
+        "I changed the trajectory in three places. I got Square in place when most providers wouldn’t touch the business, drove the BigCommerce, Square, and OrderGroove integration that unified one-time and recurring billing, and helped shape one operating model across DTC, subscriptions, and wholesale.",
       ],
       highlights: [
         "Negotiated Square as the long-term payments processor for a high-risk merchant category.",
-        "Forced a custom BigCommerce and Order Groove integration so tokenized recurring billing could actually work.",
-        "Designed one architecture for one-time orders, subscriptions, and wholesale instead of three disconnected systems.",
+        "Forced a custom BigCommerce, OrderGroove, and Square integration so tokenized recurring billing would actually work.",
+        "Designed the architecture for one-time orders, subscriptions, and wholesale.",
       ],
       closing:
-        "This is one of my clearest examples of turning political red tape, payments risk, and platform limitations into a growth engine the business could actually scale on.",
+        "I turned political red tape, payments risk, and platform limitations into a growth engine that scaled to $40m.",
     },
   },
   solution: {
     eyebrow: "Solution",
-    title: "One Payments Spine, One Commerce Stack",
+    title: "Scalable & Revenue-Driving Commerce Stack",
     copy:
-      "I helped build a model where BigCommerce, Square, and Order Groove worked as one commercial system instead of three separate vendors with conflicting assumptions. WordPress handled the front-end brand layer, BigCommerce handled commerce, Square handled the money movement, and Order Groove handled recurring revenue, all on one set of rails.",
+      "Got Square over the line, drove the integration stack, and helped turn three revenue streams into one operating model.",
     cards: [
       {
         category: "Payments Infrastructure",
         readTime: "Square negotiation",
         title:
           "I negotiated and secured Square as the payments spine for a merchant category most partners would not underwrite, which gave CBDistillery a real long-term foundation for scale.",
-        art: "/cbdistillery/product-cbdistillery-01.png",
+        art: "/cbdistillery/modal-cbd-01.png",
       },
       {
         category: "Subscription Engine",
         readTime: "Order Groove integration",
         title:
           "I helped force the custom BigCommerce, Square, and Order Groove integration required to make tokenized recurring billing, subscriptions, and retention programs work cleanly.",
-        art: "/cbdistillery/product-cbdistillery-02.png",
+        art: "/cbdistillery/modal-cbd-02.png",
       },
       {
         category: "Unified Commercial Model",
         readTime: "DTC + wholesale alignment",
         title:
           "I designed one stack that could support one-time consumer purchases, recurring subscriptions, and wholesale activity without splitting the business into separate systems and teams.",
-        art: "/cbdistillery/product-cbdistillery-03.png",
+        art: "/cbdistillery/modal-cbd-03.png",
       },
     ],
   },
   supplementalNarrative: {
-    title: "This Took Negotiation, Not Just Solutioning",
-    image: "/cbdistillery/hero-cbdistillery-03.png",
+    title: "This Took Negotiation + Solutioning",
     paragraphs: [
-      "This case study works because it was not a solo-hero fantasy. Chris Van Dusen drove the brand and marketing engine. Adrian helped reinforce the partnership and commercial path. My role was to be the dogged negotiator and systems architect who could keep pushing through political red tape, line up the right executives, and get a skeptical ecosystem to support a merchant most of them would rather avoid.",
-      "That combination is what made the outcome real. We did not just launch a better store. We built the fintech and commerce rails that let CBDistillery scale subscriptions, improve retention, and grow revenue on a much stronger foundation.",
+      "Chris drove the brand. Adrian helped reinforce the commercial path. I pushed through the politics, lined up the right executives, and got a skeptical ecosystem to support a merchant most providers wanted to avoid.",
+      "We didn’t just launch a better store. We built the fintech and commerce rails that let CBDistillery scale subscriptions, improve retention, and grow on a much stronger foundation.",
     ],
     highlights: [
-      "The hard part was convincing the ecosystem to support the business, not just wiring systems together.",
-      "The launch worked because payments, subscriptions, and commerce were treated as one operating model.",
+      "The hard part was convincing BigCommerce to support the business, not just wiring systems together.",
+      "The launch worked because payments, subscriptions, and commerce were custom-built for the global tenant system.",
     ],
     closing:
-      "The real win was not just getting CBDistillery live, it was getting the company banked, stable, and ready to grow.",
+      "The real win was getting CBDistillery live AND getting them banked, stable, and ready to grow.",
     closingImage: "/cbdistillery/hero-cbdistillery-05.png",
   },
   impact: {
     eyebrow: "Impact",
-    title: "Revenue, Retention, And Subscription Scale",
+    title: "Revenue, Retention & Subscription Scale",
     intro:
-      "Once the payments problem was solved, the business finally had room to grow. The new stack did not just support transactions, it supported recurring revenue, stronger retention, and a much more durable commercial model that could handle real order volume.",
-    proofPoints: ["GMV", "Retention", "Subscriptions"],
+      "Once payments were solved, the business could finally grow. The new stack supported subscriptions, retention, and real order volume.",
+    proofPoints: ["Subscriptions", "Retention", "$40m GMV"],
     stats: [
-      { value: "$15", suffix: "M–$40M", label: "GMV growth" },
-      { value: "18", suffix: "%", label: "new visitors subscribed" },
-      { value: "89", suffix: "%", label: "retention" },
-      { value: "20", suffix: "K+", label: "orders per month" },
+      { value: "$15", suffix: "M–$40M", label: "GMV Growth" },
+      { value: "18", suffix: "%", label: "New Visitors Subscribed" },
+      { value: "89", suffix: "%", label: "Retention" },
+      { value: "20", suffix: "K+", label: "Orders per Month" },
     ],
     statsImage: "/cbdistillery/hero-cbdistillery-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:
-        "CBDistillery moved from payments fragility and platform limitations to a stable commerce and subscription engine that could support serious revenue growth.",
+        "From payments fragility & platform limitations to a stable commerce & subscription engine.",
       columns: [
         {
           label: "Before",
-          title: "Unbanked, Fragile, Constrained",
+          title: "Unbanked + Constrained",
           points: [
-            "Approved payment partners would not underwrite the account despite high revenue volume.",
-            "WooCommerce was creating reliability, security, and maintenance strain.",
-            "Subscriptions could not scale cleanly without the right tokenized payments architecture.",
+            "Approved payment partners wouldn't underwrite.",
+            "WooCommerce wasn't scalable and was development heavy.",
+            "Subscriptions couldn't exist w/o tokenized payments architecture.",
           ],
         },
         {
           label: "After",
-          title: "Banked, Repeatable, Scalable",
+          title: "Scalable",
           points: [
-            "GMV grew from $15M to $40M on a stronger payments and commerce foundation.",
-            "18% of new site visitors subscribed and retention reached 89%.",
-            "The store handled 20K+ orders per month while supporting DTC, wholesale, and recurring revenue together.",
+            "GMV grew to $40M w/ stronger payments & commerce foundation.",
+            "New site visitors subscribed (18%).",
+            "The store handled 20K+ orders per month.",
           ],
         },
       ],
@@ -180,17 +179,17 @@ export const cbdistilleryCaseStudy = {
     journeySteps: [
       {
         step: "1",
-        title: "Get the Merchant Banked",
+        title: "Got Them Banked",
         copy: "I worked the ecosystem until CBDistillery had a real processor willing to support the volume, category risk, and long-term commercial model.",
       },
       {
         step: "2",
-        title: "Force the Right Integration",
-        copy: "I pushed the custom BigCommerce, Square, and Order Groove work that made one-time and recurring billing behave like one coherent customer and revenue system.",
+        title: "Forced the Integration",
+        copy: "I pushed the custom BigCommerce, Square, and OrderGroove work that made one-time and recurring billing behave like one coherent customer & revenue system.",
       },
       {
         step: "3",
-        title: "Scale on Stronger Rails",
+        title: "Scaled on Stronger Rails",
         copy: "Once the fintech and subscription stack held, the business could focus on growth, retention, and volume instead of constantly worrying whether payments would collapse.",
       },
     ],
@@ -200,40 +199,40 @@ export const cbdistilleryCaseStudy = {
     title: "Delivery Phases",
     introTitle: "How I Turned the Payments Crisis Into a Launch",
     introCopy:
-      "This work moved through processor negotiation, architecture design, custom integration planning, subscription alignment, and launch execution. The hard part was not just getting the systems to connect, it was getting the politics, underwriting, and vendor buy-in to line up fast enough that the business could keep moving.",
+      "The program cut across processor negotiation, architecture, integrations, subscription alignment, and launch.",
     phases: [
       {
         phase: "Phase 01",
         title: "Diagnose",
-        copy: "Mapped the real risk across WooCommerce limits, processor refusal, subscription needs, and the business requirement to support both DTC and wholesale.",
+        copy: "Mapped risks: WooCommerce limits, processor refusal, subscription needs.",
         ringClass: "border-[#D39D23]",
         labelClass: "text-[#D39D23]",
       },
       {
         phase: "Phase 02",
         title: "Negotiate",
-        copy: "Worked through 10+ processors, gateways, and banks until Square emerged as the viable long-term payments spine.",
+        copy: "Worked through 10+ processors, gateways, and banks until Square emerged.",
         ringClass: "border-[#5E7FB7]",
         labelClass: "text-[#5E7FB7]",
       },
       {
         phase: "Phase 03",
         title: "Architect",
-        copy: "Defined the BigCommerce, Square, Order Groove, and WordPress stack so one-time orders, subscriptions, and wholesale could operate on one coherent model.",
+        copy: "Negotiated the BigCommerce, Square, OrderGroove stack for subscriptions.",
         ringClass: "border-[#1A9E9A]",
         labelClass: "text-[#1A9E9A]",
       },
       {
         phase: "Phase 04",
         title: "Integrate",
-        copy: "Forced the custom BigCommerce and Order Groove work needed for tokenized recurring billing and durable subscription retention programs.",
+        copy: "Forced custom BC & OrderGroove work needed for recurring billing & subscriptions.",
         ringClass: "border-[#1A9E9A]",
         labelClass: "text-[#1A9E9A]",
       },
       {
         phase: "Phase 05",
         title: "Scale",
-        copy: "Launched a stronger fintech and commerce foundation that let CBDistillery grow GMV, improve retention, and handle high monthly order volume.",
+        copy: "Launched a stronger fintech & commerce foundation that let CBDistillery grow.",
         ringClass: "border-[#3E7BE0]",
         labelClass: "text-[#3E7BE0]",
       },
@@ -243,26 +242,13 @@ export const cbdistilleryCaseStudy = {
     quote: "Jim saved the day with this Square deal. The team is happy.",
     attributionTitle: "Chris Van Dusen",
     attributionSubtitle: "CBDistillery Stakeholder",
-    avatarSrc: "/cbdistillery/chris-van-dusen.png",
+    avatarSrc: "/cbdistillery/chris-vandusen.jpeg",
   },
   recognition: {
     eyebrow: "Recognition",
-    title: "Case Studies & Subscription Proof",
+    title: "Press & Accolades",
     intro:
       "The strongest validation here is that the public case studies documented the exact commercial outcomes the new stack unlocked, from fast subscription growth to stronger retention and high order volume on the new platform.",
-    featured: {
-      media: {
-        kind: "image",
-        src: "/cbdistillery/hero-cbdistillery-06.png",
-        alt: "CBDistillery subscription and commerce case study validation",
-        aspectRatio: "16/9",
-      },
-      company: "How CBDistillery Hit Its Yearly Subscription Revenue Goal in 90 Days",
-      dates: "Case Study",
-      summary:
-        "Order Groove documented CBDistillery's subscription success, including fast revenue ramp, strong new-subscriber conversion, and high retention on the new stack.",
-      tags: ["Case Study", "Subscriptions"],
-    },
     rows: [
       {
         company: "How CBDistillery Hit Its Yearly Subscription Revenue Goal in 90 Days",
@@ -270,7 +256,7 @@ export const cbdistilleryCaseStudy = {
         dates: "Case Study",
         summary:
           "Order Groove highlighted the subscription results, including 18% of new visitors subscribing, 89% retention, and a faster repeat-order cadence.",
-        tags: ["Case Study", "Subscriptions"],
+        tags: ["Case Study", "OrderGroove"],
         file: "/cbdistillery/files/03-og-casestudy.pdf",
       },
       {
@@ -279,7 +265,7 @@ export const cbdistilleryCaseStudy = {
         dates: "Case Study",
         summary:
           "A follow-on Order Groove case study documented continued subscription performance and how the program compounded into a reliable recurring revenue engine for the business.",
-        tags: ["Case Study", "Subscriptions"],
+        tags: ["Case Study", "OrderGroove"],
         file: "/cbdistillery/files/04-og-casestudy.pdf",
       },
       {
@@ -288,7 +274,7 @@ export const cbdistilleryCaseStudy = {
         dates: "Case Study",
         summary:
           "Silk Commerce reinforced the order scale the business could support once the new commerce and payments stack was live, documenting the operational lift from the replatform.",
-        tags: ["Case Study", "Scale"],
+        tags: ["Case Study", "Silk"],
         file: "/cbdistillery/files/02-silk-casestudy.pdf",
       },
       {
@@ -297,7 +283,7 @@ export const cbdistilleryCaseStudy = {
         dates: "Case Study",
         summary:
           "Silk Commerce documented the move from WooCommerce to BigCommerce and the operational benefits of the new platform across DTC and wholesale.",
-        tags: ["Case Study", "BigCommerce"],
+        tags: ["Case Study", "Silk"],
         file: "/cbdistillery/files/01-silk-casestudy.pdf",
       },
     ],
