@@ -75,10 +75,10 @@ export const americanapparelCaseStudy = {
       "Digital Transformation",
     ],
     stats: [
-      { value: "260", suffix: "+", label: "stores" },
-      { value: "$6", suffix: "M", label: "program budget" },
-      { value: "7", suffix: "", label: "team size" },
-      { value: "16", suffix: "", label: "international sites" },
+      { value: "260", suffix: "+", label: "Stores" },
+      { value: "$6", suffix: "M", label: "Program Budget" },
+      { value: "7", suffix: "", label: "Team Size" },
+      { value: "16", suffix: "", label: "International Sites" },
     ],
     narrative: {
       title: "I Turned Inventory Truth Into Commercial Performance",
