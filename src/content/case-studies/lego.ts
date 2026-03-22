@@ -242,62 +242,43 @@ export const legoCaseStudy = {
       "Jim's detail level made it possible to bridge design intent, business requirements, and what engineering actually needed to ship.",
     attributionTitle: "Geneson Rho",
     attributionSubtitle: "BCG Pod Lead",
-    avatarSrc: "/lego/geneson-rho.png",
+    avatarSrc: "/lego/geneson-rho.jpeg",
   },
   recognition: {
     eyebrow: "Recognition",
-    title: "Case Studies, Research, And Public Validation",
+    title: "Press & Accolades",
     intro:
-      "The strongest validation here is that LEGO's digital transformation became a management and research case, and the omni-channel infrastructure work was part of the mechanism that supported later growth through retail channels, e-commerce, and digital platforms.",
+      "LEGO's digital transformation became a management and research case profiled by Harvard Business Review and MIT (among others),and our work was part of the mechanism that supported that growth through retail channels, e-commerce, and digital platforms.",
     featured: {
       media: {
-        kind: "image",
-        src: "/lego/hero-lego-06.png",
-        alt: "MIT and public validation of LEGO's digital transformation",
+        kind: "video",
+        src: "/lego/Knudstrop_Lego_lo.mp4",
         aspectRatio: "16/9",
       },
-      company: "Harvard, MIT, BCG, and The Guardian All Documented This Transformation",
+      company: "BCG Interview With LEGO CEO Jørgen Vig Knudstorp",
       dates: "",
       summary:
         "LEGO's digital transformation became a management case study across multiple institutions and publications, reinforcing that the omni-channel infrastructure work was part of a genuine, documented corporate reinvention.",
-      tags: ["Research", "Press", "Digital Transformation"],
+      tags: ["Interview", "LEGO CEO"],
     },
     rows: [
-      {
-        company: "How Lego Clicked: the Super Brand That Reinvented Itself",
-        source: "The Guardian",
-        dates: "June 4, 2017",
-        summary:
-          "The Guardian framed LEGO as one of the most successful corporate reinventions of its era, reinforcing the broader transformation story that the omni-channel commerce work supported.",
-        tags: ["Press", "Brand Reinvention"],
-        file: "/lego/files/03 The Guardian LEGO Digital.pdf",
-      },
-      {
-        company: "MIS Quarterly Executive",
-        source: "MIS Quarterly Executive",
-        dates: "2016",
-        summary:
-          "MIS Quarterly Executive treated LEGO's transformation as a serious enterprise and digital strategy case, reinforcing the importance of its engagement-platform evolution.",
-        tags: ["Research", "Enterprise Strategy"],
-        file: "/lego/files/04 MIS Quarterly Executive_compressed.pdf",
-      },
-      {
-        company: "Transforming the LEGO Group for the Digital Economy",
-        source: "MIT Sloan CISR",
-        dates: "March 2016",
-        summary:
-          "MIT Sloan CISR documented LEGO's effort to become a digital company and explicitly described the need for a stronger engagement platform, omni-channel access, and faster, more adaptive product delivery.",
-        tags: ["Research", "Digital Transformation"],
-        file: "/lego/files/02 MIT Case Study.pdf",
-      },
-      {
+           {
         company: "BCG Interview With LEGO CEO Jørgen Vig Knudstorp",
         source: "BCG",
         dates: "2016",
         summary:
           "BCG published an interview with LEGO CEO Knudstorp on the digital transformation strategy, including the need to move faster in omni-channel, e-commerce, and cloud-based services.",
-        tags: ["Research", "Strategy"],
-        file: "/lego/files/05 BCG Interview Lego CEO.pdf",
+        tags: ["Interview", "LEGO CEO"],
+        file: "/lego/files/05-BCG-Interview-Lego-CEO.pdf",
+      },
+            {
+        company: "Transforming the LEGO Group for the Digital Economy",
+        source: "MIT Sloan CISR",
+        dates: "March 2016",
+        summary:
+          "MIT Sloan CISR documented LEGO's effort to become a digital company and explicitly described the need for a stronger engagement platform, omni-channel access, and faster, more adaptive product delivery.",
+        tags: ["Case Study", "MIT"],
+        file: "/lego/files/02-MIT-Case-Study.pdf",
       },
       {
         company: "LEGO: An Iconic Brand's Digital Transformation",
@@ -305,8 +286,26 @@ export const legoCaseStudy = {
         dates: "2015",
         summary:
           "Harvard Business Review documented LEGO's broader transformation journey, covering the turnaround strategy, digital evolution, and how the company rebuilt itself into a world-class brand.",
-        tags: ["Research", "Brand Strategy"],
-        file: "/lego/files/01 Harvard Business Review.pdf",
+        tags: ["Case Study", "Harvard"],
+        file: "/lego/files/01-Harvard-Business-Review.pdf",
+      },
+      {
+        company: "How Lego Clicked: the Super Brand That Reinvented Itself",
+        source: "The Guardian",
+        dates: "June 4, 2017",
+        summary:
+          "The Guardian framed LEGO as one of the most successful corporate reinventions of its era, reinforcing the broader transformation story that the omni-channel commerce work supported.",
+        tags: ["Press", "Guardian"],
+        file: "/lego/files/03-The-Guardian-LEGO-Digital.pdf",
+      },
+      {
+        company: "MIS Quarterly Executive",
+        source: "MIS Quarterly Executive",
+        dates: "2016",
+        summary:
+          "MIS Quarterly Executive treated LEGO's transformation as a serious enterprise and digital strategy case, reinforcing the importance of its engagement-platform evolution.",
+        tags: ["Case Study", "MIS"],
+        file: "/lego/files/04-MIS-Quarterly-Executive.pdf",
       },
     ],
   },

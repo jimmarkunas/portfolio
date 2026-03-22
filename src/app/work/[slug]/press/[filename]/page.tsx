@@ -2,13 +2,25 @@ import { notFound } from "next/navigation"
 import { PressViewer } from "@/components/PressViewer"
 import { caseStudyRegistry } from "@/content/case-studies"
 
+const legacyPressFilenameAliases: Record<string, string[]> = {
+  "01-Harvard-Business-Review": ["01 Harvard Business Review"],
+  "02-MIT-Case-Study": ["02 MIT Case Study"],
+  "03-The-Guardian-LEGO-Digital": ["03 The Guardian LEGO Digital"],
+  "04-MIS-Quarterly-Executive": ["04 MIS Quarterly Executive", "04 MIS Quarterly Executive_compressed"],
+  "05-BCG-Interview-Lego-CEO": ["05 BCG Interview Lego CEO"],
+}
+
 export async function generateStaticParams() {
   const params: { slug: string; filename: string }[] = []
   for (const [slug, study] of Object.entries(caseStudyRegistry)) {
     for (const row of study.recognition.rows) {
       if (row.file) {
-        const filename = row.file.split("/").pop()!.replace(/\.[^.]+$/, "")
-        params.push({ slug, filename })
+        const basename = row.file.split("/").pop()!.replace(/\.[^.]+$/, "")
+        const filenames = [basename, ...(legacyPressFilenameAliases[basename] ?? [])]
+
+        for (const filename of filenames) {
+          params.push({ slug, filename: encodeURIComponent(filename) })
+        }
       }
     }
   }

@@ -77,6 +77,11 @@ export type CaseStudyMedia =
       videoId: string
       aspectRatio: "16/9" | "9/16"
     }
+  | {
+      kind: "video"
+      src: string
+      aspectRatio: "16/9" | "9/16"
+    }
 
 export type CaseStudyNarrative = {
   title: string

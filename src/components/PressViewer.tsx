@@ -20,9 +20,21 @@ type PressViewerProps = {
 }
 
 function findArticle(rows: CaseStudyExperienceRow[], filename: string) {
+  const normalize = (value: string) =>
+    decodeURIComponent(value)
+      .replace(/\.[^.]+$/, "")
+      .replace(/_compressed$/i, "")
+      .replace(/[\s_]+/g, "-")
+      .replace(/-+/g, "-")
+      .toLowerCase()
+
+  const decoded = decodeURIComponent(filename)
+  const normalizedFilename = normalize(filename)
   return rows.find((row) => {
     const slug = row.file?.split("/").pop()?.replace(/\.[^.]+$/, "")
-    return slug === filename
+    if (!slug) return false
+
+    return slug === decoded || slug === filename || normalize(slug) === normalizedFilename
   })
 }
 
@@ -74,7 +86,7 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
       const pdfjsLib = (window as any).pdfjsLib
       pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_CDN
 
-      const pdf = await pdfjsLib.getDocument(filePath).promise
+      const pdf = await pdfjsLib.getDocument(encodeURI(filePath)).promise
       if (token !== renderToken.current) return
 
       setPageCount(pdf.numPages)

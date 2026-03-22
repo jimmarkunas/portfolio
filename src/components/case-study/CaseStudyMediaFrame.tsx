@@ -27,6 +27,19 @@ export function CaseStudyMediaFrame({
     )
   }
 
+  if (media.kind === "video") {
+    return (
+      <div className={`${aspectClassName} w-full overflow-hidden ${className}`.trim()}>
+        <video
+          src={media.src}
+          controls
+          playsInline
+          className="h-full w-full object-cover"
+        />
+      </div>
+    )
+  }
+
   if (media.kind === "image") {
     return (
       <div className={`${aspectClassName} w-full overflow-hidden ${className}`.trim()}>
