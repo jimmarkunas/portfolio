@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  trailingSlash: true,
   reactStrictMode: true,
   webpack: (config) => {
     config.resolve.alias.canvas = false
@@ -10,4 +11,3 @@ const nextConfig = {
 }
 
 export default nextConfig
-
