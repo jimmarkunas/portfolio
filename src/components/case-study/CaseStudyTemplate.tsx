@@ -303,11 +303,11 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-5 md:grid-cols-2 md:justify-items-stretch lg:grid-cols-[224px_224px_224px] lg:grid-rows-[208px_208px] lg:justify-end">
+                  <div className="grid grid-cols-2 gap-5 md:grid-cols-2 md:justify-items-stretch lg:grid-cols-[minmax(0,224px)_minmax(0,224px)_minmax(0,224px)] lg:grid-rows-[208px_208px] lg:justify-end">
                     {data.role.stats.map((stat, index) => (
                       <article
                         key={stat.label}
-                        className={`h-[208px] w-full md:max-w-none lg:max-w-[224px] ${
+                        className={`h-[208px] w-full md:max-w-none lg:max-w-none ${
                           index === 0 ? "lg:row-[1/3] lg:place-self-center" : ""
                         } ${index === 1 ? "lg:col-start-2 lg:row-start-1" : ""} ${
                           index === 2 ? "lg:col-start-2 lg:row-start-2" : ""
