@@ -84,8 +84,8 @@ export type CaseStudyMedia =
     }
 
 export type CaseStudyNarrative = {
-  title: string
   image?: string
+  title: string
   paragraphs: string[]
   highlights?: string[]
   closing?: string
@@ -176,6 +176,10 @@ export type CaseStudyData = {
     eyebrow: string
     title: string
     intro: string
+    leadImage?: {
+      src: string
+      alt: string
+    }
     featured: {
       media: CaseStudyMedia
       company: string

@@ -62,16 +62,29 @@ export function BlogCardGrid({ cards }: { cards: CaseStudyBlogCard[] }) {
       </div>
 
       {/* Mobile carousel */}
-      <div className="flex w-full gap-4 overflow-x-auto pb-2 md:hidden">
-        {cards.map((card) => (
-          <div
-            key={`${card.category}-mobile`}
-            className="relative aspect-[9/16] w-[220px] flex-shrink-0 overflow-hidden rounded-[24px] border border-black/8"
-            onClick={() => isImagePath(card.art) ? setLightbox(card.art) : null}
-          >
-            <CardArt art={card.art} />
-          </div>
-        ))}
+      <div className="flex w-full items-start gap-4 overflow-x-auto pb-2 md:hidden">
+        {cards.map((card) => {
+          if (isImagePath(card.art)) {
+            return (
+              <img
+                key={`${card.category}-mobile`}
+                src={card.art}
+                alt=""
+                className="w-[220px] h-auto flex-shrink-0 self-start rounded-[24px] border border-black/8 object-cover"
+                onClick={() => setLightbox(card.art)}
+              />
+            )
+          }
+
+          return (
+            <div
+              key={`${card.category}-mobile`}
+              className="relative aspect-[9/16] w-[220px] flex-shrink-0 overflow-hidden rounded-[24px] border border-black/8"
+            >
+              <CardArt art={card.art} />
+            </div>
+          )
+        })}
       </div>
 
       {/* Lightbox */}
