@@ -8,7 +8,7 @@ export function BeforeAfterComparison({ columns }: BeforeAfterComparisonProps) {
   const [beforeColumn, afterColumn] = columns
 
   return (
-    <div className="mt-2 grid w-full gap-4 p-1 md:grid-cols-[minmax(0,1fr)_56px_minmax(0,1fr)] md:items-start md:gap-0">
+    <div className="mt-2 grid w-full gap-4 p-1 md:grid-cols-[minmax(0,1fr)_56px_minmax(0,1fr)] md:items-stretch md:gap-0">
       <div className="rounded-[10px] bg-white p-6 shadow-[0_10px_30px_rgba(34,34,34,0.04)] md:pr-6 md:pb-6">
         <div className="flex flex-col items-start gap-3">
           <span className="text-[12px] uppercase tracking-[0.18em] text-red-500">

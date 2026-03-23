@@ -3,6 +3,11 @@ import Link from "next/link"
 import { BeforeAfterComparison } from "@/components/case-study/BeforeAfterComparison"
 import { DirecTVRevenueChart } from "@/components/case-study/DirecTVRevenueChart"
 import { BlogCardGrid } from "@/components/case-study/BlogCardGrid"
+import dynamic from "next/dynamic"
+const HeadlessCommerceDiagram = dynamic(
+  () => import("@/app/diagrams/headless_commerce_react"),
+  { ssr: false }
+)
 import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
 import type { CaseStudyBlogCardArt, CaseStudyData } from "@/components/case-study/types"
@@ -405,7 +410,9 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
             </div>
           </div>
 
-          {data.solution.heroImage ? (
+          {data.solution.diagram ? (
+            <HeadlessCommerceDiagram data={data.solution.diagram} />
+          ) : data.solution.heroImage ? (
             <FullWidthImage src={data.solution.heroImage} fullWidth={false} />
           ) : (
             <BlogCardGrid cards={data.solution.cards} />
@@ -419,7 +426,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
 
           {data.supplementalNarrative.paragraphs.map((paragraph, i) => (
             <>
-              <p key={paragraph} className="type-p2 text-[#222222]">
+              <p key={paragraph} className="type-p2 my-0 text-[#222222]">
                 {paragraph}
               </p>
               {i === 0 && data.supplementalNarrative.image && (

@@ -92,6 +92,47 @@ export type CaseStudyNarrative = {
   closingImage?: string
 }
 
+export type DiagramInputNode = {
+  id: string
+  label: string
+  icon: string
+  descriptor: string
+  tier: string
+}
+
+export type DiagramOutputNode = {
+  id: string
+  label: string
+  glyph: string
+  descriptor: string
+  tier?: string
+}
+
+export type DiagramIntegration = {
+  id: string
+  label: string
+  icon: string
+}
+
+export type DiagramPill = {
+  id: string
+  label: string
+}
+
+export type DiagramTooltip = {
+  title: string
+  body: string
+}
+
+export type DiagramData = {
+  inputs: DiagramInputNode[]
+  outputs: DiagramOutputNode[]
+  integrations: DiagramIntegration[]
+  integrationsLabel?: string
+  pills: DiagramPill[]
+  tooltips: Record<string, DiagramTooltip>
+}
+
 export type CaseStudyData = {
   slug: string
   breadcrumbCurrent: string
@@ -143,6 +184,7 @@ export type CaseStudyData = {
     copy: string
     cards: CaseStudyBlogCard[]
     heroImage?: string
+    diagram?: DiagramData
   }
   supplementalNarrative: CaseStudyNarrative
   impact: {
