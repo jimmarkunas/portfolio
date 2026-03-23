@@ -136,7 +136,6 @@ export const cbdistilleryCaseStudy = {
     ],
     closing:
       "The real win was getting CBDistillery live AND getting them banked, stable, and ready to grow.",
-    closingImage: "/cbdistillery/hero-cbdistillery-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -150,7 +149,6 @@ export const cbdistilleryCaseStudy = {
       { value: "89", suffix: "%", label: "Retention" },
       { value: "20", suffix: "K+", label: "Orders per Month" },
     ],
-    statsImage: "/cbdistillery/hero-cbdistillery-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:

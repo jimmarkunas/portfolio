@@ -135,7 +135,6 @@ export const fredericksCaseStudy = {
     ],
     closing:
       "The creative was loud. The architecture was disciplined.",
-    closingImage: "/fredericks/hero-fredericks-05.png",
   },
   impact: {
     eyebrow: "Impact",

@@ -62,7 +62,6 @@ export const boehringeringelheimCaseStudy = {
         "Multi-million dollar accounts were still ordering over the phone; it was a scalability and an operations problem.",
       attributionTitle: "Max Booker",
       attributionSubtitle: "Director, Digital Channel Excellence, Boehringer Ingelheim",
-      avatarSrc: "/boehringer/max-booker.png",
     },
   },
   role: {
@@ -108,27 +107,26 @@ export const boehringeringelheimCaseStudy = {
         readTime: "Reference Storefront",
         title:
           "I defined the global reference build that gave Boehringer one strong commerce baseline instead of a new custom solution for every market.",
-        art: "/boehringer/product-boehringer-01.png",
+        art: "olive",
       },
       {
         category: "ERP Transition",
         readTime: "Oracle-to-SAP Coexistence",
         title:
           "I helped manage the coexistence model so commerce could keep operating while Oracle and SAP logic were being migrated and stabilized.",
-        art: "/boehringer/product-boehringer-02.png",
+        art: "olive",
       },
       {
         category: "Local Execution",
         readTime: "Market Variation Rules",
         title:
           "I set the rules for what could vary by market, including regulation, language, loyalty, checkout, and account logic, so local needs did not destroy the global model.",
-        art: "/boehringer/product-boehringer-03.png",
+        art: "olive",
       },
     ],
   },
   supplementalNarrative: {
     title: "The Hard Part Was Coexistence",
-    image: "/boehringer/hero-boehringer-03.png",
     paragraphs: [
       "Boehringer was not just modernizing a storefront. It was trying to unify five countries, preserve customer continuity, and move the backbone from Oracle to SAP without breaking day-to-day operations. That changes the nature of the work, because every roadmap decision becomes a business continuity decision.",
       "The global reference model mattered because it stopped the program from becoming a collection of country exceptions. Once the core logic was clear, the team could move faster, local teams had a cleaner way to ask for variation, and the business had a platform it could actually expand instead of re-arguing the same architecture every quarter.",
@@ -139,7 +137,6 @@ export const boehringeringelheimCaseStudy = {
     ],
     closing:
       "The platform worked because the governance worked, and the governance worked because someone owned the whole system, not just one market or one vendor stream.",
-    closingImage: "/boehringer/hero-boehringer-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -153,7 +150,6 @@ export const boehringeringelheimCaseStudy = {
       { value: "12", suffix: "%", label: "lower escalations" },
       { value: "3", suffix: "%–30%", label: "U.S. online sales" },
     ],
-    statsImage: "/boehringer/hero-boehringer-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:
@@ -204,26 +200,12 @@ export const boehringeringelheimCaseStudy = {
       "Jim thinks several steps ahead, looks out for the client, and pushes the work to be better without making it heavier.",
     attributionTitle: "Jared Miller",
     attributionSubtitle: "Client Partner, Corra/Publicis Sapient",
-    avatarSrc: "/boehringer/jared-miller.png",
   },
   recognition: {
     eyebrow: "Recognition",
     title: "Press & Accolades",
     intro:
       "The strongest outside proof here is not hype, it is validation from Adobe and Corra that the platform delivered measurable digital growth, global flexibility, and a stronger operating model for animal health commerce.",
-    featured: {
-      media: {
-        kind: "image",
-        src: "/boehringer/hero-boehringer-06.png",
-        alt: "Adobe case study coverage for Boehringer Ingelheim animal health ecommerce",
-        aspectRatio: "16/9",
-      },
-      company: "Adobe and Corra Published Case Studies on This B2B Commerce Transformation",
-      dates: "",
-      summary:
-        "Adobe and Publicis Sapient / Corra each documented the Boehringer Ingelheim build, covering the jump from 3% to 30% U.S. online sales, the global gateway architecture, and the modular services model.",
-      tags: ["Adobe", "Case Study", "B2B"],
-    },
     rows: [
       {
         company: "Building Success With B2B Ecommerce in Animal Health",

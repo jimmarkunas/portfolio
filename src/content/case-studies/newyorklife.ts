@@ -61,7 +61,6 @@ export const newYorkLifeCaseStudy = {
         "What I've consistently observed is this: The greatest challenge isn't technology, it's people and process.",
       attributionTitle: "Don Vu",
       attributionSubtitle: "CDAO, New York Life",
-      avatarSrc: "/newyorklife/don-vu.png",
     },
   },
   role: {
@@ -107,27 +106,26 @@ export const newYorkLifeCaseStudy = {
         readTime: "Template-Driven Builder",
         title:
           "Non-technical teams could create and update pages through a template-driven builder without direct code access, while the underlying system kept the experience controlled and reusable.",
-        art: "/newyorklife/product-nyl-01.png",
+        art: "olive",
       },
       {
         category: "Compliance Workflow Engine",
         readTime: "Review Status Logic",
         title:
           "Built-in status tracking and review gates ensured no page went live without the right checkpoints, replacing manual ambiguity with clear accountability.",
-        art: "/newyorklife/product-nyl-02.png",
+        art: "olive",
       },
       {
         category: "Data and Growth Layer",
         readTime: "Enterprise Integrations",
         title:
           "Integrations like Azure IDP/SSO, Mulesoft, Adobe Experience Manager, Salesforce, Google My Business, and Calendly turned every site into a governed growth asset instead of a disconnected brochure.",
-        art: "/newyorklife/product-nyl-03.png",
+        art: "olive",
       },
     ],
   },
   supplementalNarrative: {
     title: "The Hard Part Was Governance at Scale",
-    image: "/newyorklife/hero-nyl-03.png",
     paragraphs: [
       "The technology mattered, but the real challenge was operational. New York Life needed a platform that mirrored how the business actually worked — back office creation, agent requests, home office review, and centralized publishing — without forcing people into brittle workarounds.",
       "Once those roles, permissions, and workflows were structured correctly, the platform stopped behaving like a pile of pages and started behaving like an enterprise system. Compliance got visibility, agents got speed, and the brand stopped fragmenting at the edges.",
@@ -138,7 +136,6 @@ export const newYorkLifeCaseStudy = {
     ],
     closing:
       "What looked like a CMS on the surface was really a governance product with commercial upside.",
-    closingImage: "/newyorklife/hero-nyl-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -152,7 +149,6 @@ export const newYorkLifeCaseStudy = {
       { value: "~3×", suffix: "", label: "digital revenue growth" },
       { value: "6 mo", suffix: " → 2–4 wk", label: "site launch reduction" },
     ],
-    statsImage: "/newyorklife/hero-nyl-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:
@@ -250,26 +246,12 @@ export const newYorkLifeCaseStudy = {
       "To ensure that we deliver experiences that exceed your expectations, we are constantly evolving and modernizing. We are investing more than $1 billion in service, technology, data and AI, and we are continuously supporting and empowering our agents and advisors to serve your full spectrum of needs.",
     attributionTitle: "Craig DeSanto",
     attributionSubtitle: "Chair, President & CEO, New York Life Insurance Company",
-    avatarSrc: "/newyorklife/craig-desanto.png",
   },
   recognition: {
     eyebrow: "Recognition",
     title: "Press and Strategic Context",
     intro:
       "This project sat inside a larger New York Life modernization push around technology, data, AI, and agent enablement. The strongest external proof is not a trophy, it is the fact that the operating logic behind this platform lines up with how New York Life publicly described its modernization strategy and how Fusion92 later marketed COREcms as an enterprise product.",
-    featured: {
-      media: {
-        kind: "image",
-        src: "/newyorklife/hero-nyl-06.png",
-        alt: "New York Life and AWS modernization article feature",
-        aspectRatio: "16/9",
-      },
-      company: "New York Life and AWS: Building a Modern Foundation for Data and AI",
-      dates: "",
-      summary:
-        "New York Life says AWS featured the company for reimagining its digital foundation with a modern, cloud-first platform that unifies data across the enterprise to deliver faster insights, more seamless experiences, and smarter tools for clients, agents, and advisors.",
-      tags: ["Press", "Modernization"],
-    },
     rows: [
       {
         company: "New York Life and AWS: Building a Modern Foundation for Data and AI",

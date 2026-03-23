@@ -60,7 +60,6 @@ export const muradCaseStudy = {
         "As an account manager, I needed a PM who could save the day. After Murad changed agencies twice, and my PM walked off the job, I personally requested Jim.",
       attributionTitle: "Neely Cox",
       attributionSubtitle: "Enterprise Account Manager, BigCommerce",
-      avatarSrc: "/murad/neely-cox.png",
     },
   },
   role: {
@@ -106,27 +105,26 @@ export const muradCaseStudy = {
         readTime: "OrderGroove + recurring commerce",
         title:
           "I helped define the subscription-first architecture across OrderGroove, BigCommerce, and Murad's business rules, including frequency logic, incentives, customer-service controls, and legacy subscription migration.",
-        art: "/murad/product-murad-01.png",
+        art: "olive",
       },
       {
         category: "Enterprise Backbone",
         readTime: "Oracle-first order model",
         title:
           "I documented and stabilized the order, shipment, payment, and refund logic between BigCommerce and Oracle EBS so the business had a repeatable operating model instead of undocumented tribal knowledge.",
-        art: "/murad/product-murad-02.png",
+        art: "olive",
       },
       {
         category: "Global Commerce Layer",
         readTime: "Multi-market rollout",
         title:
           "I helped shape a shared launch pattern across the US, UK, AU, DE, MX, and MY, while keeping critical integrations aligned across Contentful, Braintree, Kount, Avalara, SendGrid, Retention Science, Yotpo, and Swell.",
-        art: "/murad/product-murad-03.png",
+        art: "olive",
       },
     ],
   },
   supplementalNarrative: {
     title: "The Politics Were the Project",
-    image: "/murad/hero-murad-03.png",
     paragraphs: [
       "The technical work was hard, but the politics were harder. Murad was demanding, highly sensitive to perceived slights from partners, and already on agency number three by the time the launch pressure peaked. Almost every important partner in the stack was either custom, semi-supported, or dependent on BigCommerce stretching beyond the normal playbook. That meant the real job was not only architecture, it was maintaining enough confidence and enough forward motion that the launch date remained believable.",
       "That is why the parking-garage story matters. Three weeks before launch, we found a payment-settlement gap serious enough to derail the program. I literally caught Brent Bellm in the parking garage, explained the risk, asked him to call the CTO, and got the issue elevated fast enough to keep the launch alive. That was not normal project management. That was operator judgment under pressure.",
@@ -137,7 +135,6 @@ export const muradCaseStudy = {
     ],
     closing:
       "Murad is one of my clearest examples of turning technical chaos, client politics, and partner instability into an actual launch.",
-    closingImage: "/murad/hero-murad-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -151,7 +148,6 @@ export const muradCaseStudy = {
       { value: "1", suffix: "", label: "smooth cutover" },
       { value: "0", suffix: "", label: "Magento devs needed" },
     ],
-    statsImage: "/murad/hero-murad-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:
@@ -244,26 +240,12 @@ export const muradCaseStudy = {
       "Thank you so much for the smooth launch. I know it took a lot of preparation by everyone involved. Very much appreciated by the leadership team at Murad.",
     attributionTitle: "Van",
     attributionSubtitle: "Murad Stakeholder",
-    avatarSrc: "/murad/van.png",
   },
   recognition: {
     eyebrow: "Recognition",
     title: "Validation & Follow-On Impact",
     intro:
       "The strongest proof here was not outside press. It was the fact that Murad became a reference-style success internally and the work helped establish me as the person who could handle ugly CPG commerce stacks when the politics and integrations got difficult.",
-    featured: {
-      media: {
-        kind: "image",
-        src: "/murad/hero-murad-06.png",
-        alt: "Murad launch validation and stakeholder appreciation",
-        aspectRatio: "16/9",
-      },
-      company: "Murad Thank You Email",
-      dates: "June 2019",
-      summary:
-        "Murad leadership explicitly thanked the team for the smooth launch and called out how much preparation had gone into getting the cutover right.",
-      tags: ["Recognition", "Stakeholder Validation"],
-    },
     rows: [
       {
         company: "Murad Reference Win",

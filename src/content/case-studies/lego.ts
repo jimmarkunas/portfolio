@@ -135,7 +135,6 @@ export const legoCaseStudy = {
     ],
     closing:
       "The big win wasn't just a cleaner shop; it made the digital transformation show up where customers could actually feel it.",
-    closingImage: "/lego/hero-lego-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -149,7 +148,6 @@ export const legoCaseStudy = {
       { value: "24", suffix: "%", label: "Digital Sales Uplift" },
       { value: "$25", suffix: "", label: "AOV Lift" },
     ],
-    statsImage: "/lego/hero-lego-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:

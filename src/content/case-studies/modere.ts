@@ -53,15 +53,12 @@ export const modereCaseStudy = {
       { label: "BigCommerce", icon: "/tool-icons/bc-logo.png" },
       { label: "Pimcore", icon: "/tool-icons/pimcore-logo.png" },
       { label: "Contentstack", icon: "/tool-icons/contentstack-logo.png" },
-      { label: "Braintree", icon: "/tool-icons/braintree-logo.png" },
-      { label: "Klarna", icon: "/tool-icons/klarna-logo.png" },
       { label: "Azure", icon: "/tool-icons/msazure-logo.png" },
     ],
     quote: {
       quote: "We can't keep scaling this business market by market on custom work; we need a scalable solution.",
       attributionTitle: "Shan Sullivan",
       attributionSubtitle: "SVP, Technology, Modere",
-      avatarSrc: "/modere/shan-sullivan.png",
     },
   },
   role: {
@@ -106,25 +103,24 @@ export const modereCaseStudy = {
         category: "Architecture",
         readTime: "Composable Core",
         title: "I helped move Modere away from a brittle home-grown stack and toward a composable model built around BigCommerce, Pimcore, Contentstack, and a custom promotion engine.",
-        art: "/modere/product-modere-01.png",
+        art: "olive",
       },
       {
         category: "Product Logic",
         readTime: "Pimcore as Brain",
         title: "I treated Pimcore as the product brain so the business could manage product data, pricing, inventory, promotions, and global catalog logic more cleanly across channels and markets.",
-        art: "/modere/product-modere-02.png",
+        art: "olive",
       },
       {
         category: "Mobile & Growth",
         readTime: "Shared Engine",
         title: "I helped make one shared commerce and content engine work across web and mobile, including a wrapper-based app approach that supported 10 markets and 7 languages without rebuilding features natively.",
-        art: "/modere/product-modere-03.png",
+        art: "olive",
       },
     ],
   },
   supplementalNarrative: {
     title: "The Real Win Was Business Independence",
-    image: "/modere/hero-modere-03.png",
     paragraphs: [
       "Before this work, too much of Modere's growth depended on engineers. New promotions, market changes, product updates, and affiliate-facing experiences all carried unnecessary friction because the stack was not built to separate business logic cleanly from presentation and execution.",
       "After the redesign, business teams had a much clearer path to launch and manage products and promotions by working through the right systems instead of opening engineering tickets for everything. That made the platform faster, more scalable, and more commercially useful, which is the whole point of good commerce architecture.",
@@ -135,7 +131,6 @@ export const modereCaseStudy = {
     ],
     closing:
       "This is what good platform work looks like, less friction for the business, less chaos for the teams, and more room for revenue to show up.",
-    closingImage: "/modere/hero-modere-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -149,7 +144,6 @@ export const modereCaseStudy = {
       { value: "35", suffix: "%", label: "faster page loads" },
       { value: "4", suffix: " wk", label: "app launch timeline" },
     ],
-    statsImage: "/modere/hero-modere-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:
@@ -199,25 +193,12 @@ export const modereCaseStudy = {
     quote: "Jim protected the architecture and kept the team from building the wrong thing.",
     attributionTitle: "Chris Beck",
     attributionSubtitle: "CTO, Modere",
-    avatarSrc: "/modere/chris-beck.png",
   },
   recognition: {
     eyebrow: "Recognition",
     title: "Recognition & Validation",
     intro:
       "The strongest proof here is that the architecture did not just look good on a slide. It earned outside validation from platform partners and was strong enough to be recognized in the MACH ecosystem as a serious composable commerce implementation.",
-    featured: {
-      media: {
-        kind: "image",
-        src: "/modere/hero-modere-06.png",
-        alt: "MACH Impact Awards nomination for Modere composable commerce architecture",
-        aspectRatio: "16/9",
-      },
-      company: "MACH Impact Awards",
-      dates: "2025",
-      summary: "Modere's commerce architecture was nominated for a MACH Impact Award, reinforcing that this was not just a migration, it was a serious composable commerce transformation.",
-      tags: ["Award", "Composable Commerce"],
-    },
     rows: [
       {
         company: "MACH Impact Award Nomination for Composable Commerce",

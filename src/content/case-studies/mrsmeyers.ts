@@ -60,7 +60,6 @@ export const mrsmeyersCaseStudy = {
         "This was the first time BC partnered with a globally recognized retail brand to go from zero to one, and Jim was the perfect PM for the job.",
       attributionTitle: "Rachel Gavinski",
       attributionSubtitle: "Key Account Director, BigCommerce",
-      avatarSrc: "/mrsmeyers/rachel-gavinski.png",
     },
   },
   role: {
@@ -106,27 +105,26 @@ export const mrsmeyersCaseStudy = {
         readTime: "Storefront + checkout",
         title:
           "BigCommerce provided the storefront, cart, and checkout layer that let SCJ go from no DTC presence to a real consumer buying experience without building a platform from scratch.",
-        art: "/mrsmeyers/product-mrsmeyers-01.png",
+        art: "olive",
       },
       {
         category: "Enterprise Integration",
         readTime: "Back-office orchestration",
         title:
           "SAP, Salsify, Avalara, payments, fulfillment, and service tools were connected into a launch pattern that could support parcel-style DTC instead of retail-era workflows.",
-        art: "/mrsmeyers/product-mrsmeyers-02.png",
+        art: "olive",
       },
       {
         category: "Scalable Pattern",
         readTime: "Brand repeatability",
         title:
           "The solution was structured so Caldrea and Method could follow the same model, turning one launch into a repeatable SCJ home-care DTC pattern.",
-        art: "/mrsmeyers/product-mrsmeyers-03.png",
+        art: "olive",
       },
     ],
   },
   supplementalNarrative: {
     title: "The Politics Were Real",
-    image: "/mrsmeyers/hero-mrsmeyers-03.png",
     paragraphs: [
       "This project was technically hard, but the political layer mattered just as much. There were moments when internal account management and stakeholder alignment were not where they needed to be, so I did a lot of one-on-one persuasion, damage control, and translation to keep confidence high and prevent small issues from becoming bigger ones.",
       "That is part of why this story matters. It was not just a launch under pressure, it was a launch where the client had to trust that someone was actually steering the ship. Once the system held and the site went live, that trust turned into permission to reuse the pattern across additional home-care brands.",
@@ -137,7 +135,6 @@ export const mrsmeyersCaseStudy = {
     ],
     closing:
       "I was not just moving tickets, I was keeping the room stable long enough for the launch to happen and the business case to prove itself.",
-    closingImage: "/mrsmeyers/hero-mrsmeyers-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -151,7 +148,6 @@ export const mrsmeyersCaseStudy = {
       { value: "2", suffix: "+", label: "follow-on brands" },
       { value: "0", suffix: "–1", label: "DTC channel" },
     ],
-    statsImage: "/mrsmeyers/hero-mrsmeyers-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:
@@ -247,26 +243,12 @@ export const mrsmeyersCaseStudy = {
       "Jim was in the foxhole with us on this one. When things got hard, he stayed calm, stayed close to the client, and helped us get it over the line.",
     attributionTitle: "Jon Michael",
     attributionSubtitle: "Stakeholder, SCJ Program Team",
-    avatarSrc: "/mrsmeyers/jon-michael.png",
   },
   recognition: {
     eyebrow: "Recognition",
     title: "Validation & Expansion",
     intro:
       "The strongest proof here was not outside press, it was what happened next. The launch worked, BigCommerce leadership recognized it internally, and the pattern became the foundation for more SCJ home-care brands to follow.",
-    featured: {
-      media: {
-        kind: "image",
-        src: "/mrsmeyers/hero-mrsmeyers-06.png",
-        alt: "Internal recognition after the Mrs. Meyer's and Caldrea launch",
-        aspectRatio: "16/9",
-      },
-      company: "Launch Announcement: SC Johnson & Son",
-      dates: "June 18, 2020",
-      summary:
-        "BigCommerce CEO Brent Bellm replied to the launch announcement with a simple endorsement, terrific work, Jim and team, then asked to add the account to the company showcase.",
-      tags: ["Recognition", "Executive Validation"],
-    },
     rows: [
       {
         company: "Mrs. Meyer's Clean Day Launch",

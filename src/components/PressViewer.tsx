@@ -96,16 +96,19 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
       const containerWidth = containerRef.current.clientWidth || 800
       const baseScale = (containerWidth - 32) / unscaled.width
       const finalScale = baseScale * zoomLevel
+      const dpr = window.devicePixelRatio || 1
 
       for (let i = 1; i <= pdf.numPages; i++) {
         if (token !== renderToken.current) return
         const page = i === 1 ? firstPage : await pdf.getPage(i)
-        const viewport = page.getViewport({ scale: finalScale })
+        const viewport = page.getViewport({ scale: finalScale * dpr })
 
         const canvas = document.createElement("canvas")
         canvas.width = Math.floor(viewport.width)
         canvas.height = Math.floor(viewport.height)
-        canvas.className = "w-full block"
+        canvas.style.width = `${Math.floor(viewport.width / dpr)}px`
+        canvas.style.height = `${Math.floor(viewport.height / dpr)}px`
+        canvas.className = "block"
 
         const wrapper = document.createElement("div")
         wrapper.className = "flex flex-col items-center gap-2"
@@ -137,7 +140,13 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
       setRenderState("rendered")
       setPageCount(1)
     } else {
-      renderPdf(zoom)
+      const containerWidth = containerRef.current?.clientWidth || 800
+      // On narrow screens, start zoomed to ~560px rendered width so text is readable
+      const startZoom = containerWidth < 560
+        ? Math.round((560 / containerWidth) * 10) / 10
+        : 1
+      setZoom(startZoom)
+      renderPdf(startZoom)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filePath])

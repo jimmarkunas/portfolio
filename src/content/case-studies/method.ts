@@ -53,14 +53,12 @@ export const methodCaseStudy = {
       { label: "BigCommerce", icon: "/tool-icons/bc-logo.png" },
       { label: "SAP", icon: "/tool-icons/sap-logo.png" },
       { label: "Salsify", icon: "/tool-icons/salsify-logo.png" },
-      { label: "Cybersource", icon: "/tool-icons/cybersource-logo.png" },
     ],
     quote: {
       quote:
         "We wanted growth, and we wanted to get into direct-to-consumer as fast as possible.",
       attributionTitle: "Tammy Tran",
       attributionSubtitle: "Director of eCommerce, Method",
-      avatarSrc: "/method/tammy-tran.png",
     },
   },
   role: {
@@ -106,27 +104,26 @@ export const methodCaseStudy = {
         readTime: "Platform reuse",
         title:
           "BigCommerce, SAP, product data, tax, fulfillment, and service tooling stayed on the shared SC Johnson backbone so Method could move fast without rebuilding the stack.",
-        art: "/method/product-method-01.png",
+        art: "olive",
       },
       {
         category: "Brand Experience",
         readTime: "Reusable templates",
         title:
           "I translated Method's design language, storytelling patterns, and page needs into reusable templates that felt brand-specific without creating a custom maintenance nightmare.",
-        art: "/method/product-method-02.png",
+        art: "olive",
       },
       {
         category: "Operational Fit",
         readTime: "End-to-end launch flow",
         title:
           "Cybersource, Avalara or Vertex, Rewind, Klaviyo, Zendesk, and the PFS OMS/WMS layer were organized into a commerce flow that let Method act like a real DTC business from day one.",
-        art: "/method/product-method-03.png",
+        art: "olive",
       },
     ],
   },
   supplementalNarrative: {
     title: "Fast Follow, Not Copy Paste",
-    image: "/method/hero-method-03.png",
     paragraphs: [
       "The temptation on a fast-follow brand launch is to treat it like copy and paste. That is how brands end up feeling generic. What made this work strong was that the shared platform gave us speed, but the experience layer still respected what made Method different, its tone, its design language, and the way the brand needed to show up for customers.",
       "That balance is harder than it looks. Reuse without flattening the brand takes judgment. I had to protect the platform pattern, keep the system fit clean, and still make sure the customer experience did not read like SC Johnson enterprise plumbing with a fresh coat of paint.",
@@ -137,7 +134,6 @@ export const methodCaseStudy = {
     ],
     closing:
       "The real win was not just speed, it was proving that a repeatable architecture could still deliver a brand-right experience.",
-    closingImage: "/method/hero-method-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -151,7 +147,6 @@ export const methodCaseStudy = {
       { value: "1", suffix: "", label: "unified platform" },
       { value: "0", suffix: "–1", label: "DTC channel" },
     ],
-    statsImage: "/method/hero-method-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:
@@ -246,26 +241,12 @@ export const methodCaseStudy = {
     quote: "Jim got it done.",
     attributionTitle: "Tammy Tran",
     attributionSubtitle: "Director of eCommerce, Method",
-    avatarSrc: "/method/tammy-tran-impact.png",
   },
   recognition: {
     eyebrow: "Recognition",
     title: "Platform Reuse In Action",
     intro:
       "The strongest proof here was not outside press, it was platform behavior. Method showed that SC Johnson could move from one successful DTC launch to the next without losing speed, brand integrity, or architectural discipline.",
-    featured: {
-      media: {
-        kind: "image",
-        src: "/method/hero-method-06.png",
-        alt: "Method DTC launch and platform expansion artifacts",
-        aspectRatio: "16/9",
-      },
-      company: "SC Johnson Home-Care Expansion",
-      dates: "2019",
-      summary:
-        "Method became the second major proof point on SC Johnson's shared DTC platform, demonstrating that reusable architecture could still support a distinct brand experience and commercial lift.",
-      tags: ["Expansion", "Platform Reuse"],
-    },
     rows: [
       {
         company: "Method US Launch",

@@ -144,6 +144,7 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
   const [scale, setScale]   = useState(1);
   const [active, setActive] = useState<string | null>(null);
   const [tipPos, setTipPos] = useState({ x: 0, y: 0 });
+  const [tipAnchor, setTipAnchor] = useState<"cursor" | "bottom">("cursor");
 
   // Track rendered SVG width so we can place CSS-pixel icons at exact positions
   useEffect(() => {
@@ -171,6 +172,7 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
     e.stopPropagation();
     if (active === id) { setActive(null); return; }
     const rect = (e.currentTarget as Element).getBoundingClientRect();
+    setTipAnchor("bottom");
     setActive(id);
     setTipPos({ x: rect.left + rect.width / 2, y: rect.bottom });
   }
@@ -179,6 +181,7 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
     e.stopPropagation();
     if (active === id) { setActive(null); return; }
     const rect = (e.currentTarget as Element).getBoundingClientRect();
+    setTipAnchor("cursor");
     setActive(id);
     setTipPos({ x: rect.left + rect.width / 2, y: rect.bottom });
   }
@@ -190,9 +193,8 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
   function touchStart(id: string, e: React.TouchEvent) {
     e.stopPropagation();
     if (active === id) { setActive(null); return; }
-    const rect = (e.currentTarget as Element).getBoundingClientRect();
+    setTipAnchor("bottom");
     setActive(id);
-    setTipPos({ x: rect.left + rect.width / 2, y: rect.bottom });
   }
 
   return (
@@ -200,10 +202,21 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
 
       {/* ── Tooltip ── */}
       {tip && (
-        <div style={{
+        <div style={tipAnchor === "bottom" ? {
           position: "fixed",
-          left: tipPos.x - 120,
-          top:  tipPos.y + 16,
+          left: 8, right: 8, bottom: 16,
+          zIndex: 1000,
+          pointerEvents: "auto",
+          background: C.ink,
+          color: "#fff",
+          borderRadius: 10,
+          padding: "14px 16px",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+          fontFamily: '"Inter Display","Inter",ui-sans-serif,system-ui,sans-serif',
+        } : {
+          position: "fixed",
+          left: `clamp(8px, ${tipPos.x - 120}px, calc(100vw - 248px))`,
+          top: tipPos.y + 16,
           zIndex: 1000,
           width: 240,
           pointerEvents: "auto",

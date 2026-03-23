@@ -136,7 +136,6 @@ export const americanapparelCaseStudy = {
     ],
     closing:
       "The point was never just to modernize the stack. The point was to move revenue, cut shrink, and make a fragile business more coherent fast.",
-    closingImage: "/americanapparel/hero-americanapparel-05.png",
   },
   impact: {
     eyebrow: "Impact",

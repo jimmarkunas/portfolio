@@ -137,7 +137,6 @@ export const directveverywhereCaseStudy = {
     ],
     closing:
       "DIRECTV Everywhere mattered because it proved DTV could behave like a streaming product company, not just advertise like one.",
-    closingImage: "/directveverywhere/hero-directveverywhere-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -151,7 +150,6 @@ export const directveverywhereCaseStudy = {
       { value: "400", suffix: "+", label: "Channels" },
       { value: "$200", suffix: "M", label: "Revenue Uplift" },
     ],
-    statsImage: "/directveverywhere/hero-directveverywhere-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:

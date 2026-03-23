@@ -155,7 +155,6 @@ export const k2CaseStudy = {
     ],
     closing:
       "The win was bigger than a migration. It was turning a forced move into a reusable architecture the business could actually live with.",
-    closingImage: "/k2/hero-k2-05.png",
   },
   impact: {
     eyebrow: "Impact",
@@ -169,7 +168,6 @@ export const k2CaseStudy = {
       { value: "90", suffix: "%", label: "Faster Publishing" },
       { value: "2", suffix: "", label: "Custom BC Integrations" },
     ],
-    statsImage: "/k2/hero-k2-04.png",
     beforeAfter: {
       title: "Before & After",
       summary:

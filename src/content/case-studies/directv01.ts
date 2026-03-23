@@ -131,7 +131,6 @@ export const directv01CaseStudy = {
   },
   supplementalNarrative: {
     title: "Complicated Tech + Complicated Silos",
-    image: "/directv/hero-directv-03.png",
     paragraphs: [
       "The diagrams were complicated, but that was only one challenge: too many teams, too many systems, and no one truly owning the commercial journey end-to-end. Every major sports or premium launch felt like a mini re-platform, which is a terrible way to run a retention business.",
       "Once the platform had an owner, the work stopped feeling like a stack of one-off campaigns and started behaving like a commercial system. Offers became more reusable, decisioning became more coherent, and the business gained a faster way to turn retention pressure into ROI.",
@@ -142,7 +141,6 @@ export const directv01CaseStudy = {
     ],
     closing:
       "This was bigger than campaign delivery, it was revenue surgery inside a legacy business that could not afford more drift, and aligning 65 stakeholders was no easy task.",
-    closingImage: "/directv/hero-directv-05.png",
   },
   impact: {
     eyebrow: "Impact",
