@@ -133,6 +133,12 @@ export type DiagramData = {
   tooltips: Record<string, DiagramTooltip>
 }
 
+export type GlobalLocation = {
+  city: string
+  country: string
+  coordinates: [number, number]
+}
+
 export type CaseStudyData = {
   slug: string
   breadcrumbCurrent: string
@@ -208,13 +214,17 @@ export type CaseStudyData = {
     introCopy: string
     phases: CaseStudyDeliveryPhase[]
   }
+  globalLocations?: {
+    title: string
+    locations: GlobalLocation[]
+  }
   challengeQuote: {
     quote: string
     attributionTitle: string
     attributionSubtitle: string
     avatarSrc?: string
   }
-  recognition: {
+  recognition?: {
     eyebrow: string
     title: string
     intro: string

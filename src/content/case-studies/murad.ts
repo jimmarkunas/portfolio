@@ -4,9 +4,9 @@ export const muradCaseStudy = {
   slug: "murad",
   breadcrumbCurrent: "Murad",
   hero: {
-    title: "I Turned Murad's Chaotic Replatform Into a Live Global DTC Engine",
+    title: "Turning Murad From Chaos to Creation",
     intro:
-      "Murad was trying to move off Magento, reduce cost, stop relying on a large in-house dev team, and launch a subscription-first global DTC model on top of Oracle EBS and a pile of fragile integrations. By the time I was deep in the work, the client had fired two agencies, the politics were ugly, and three weeks before launch we discovered BigCommerce could not settle credit card payments over the API. I held the program together, escalated the blocker to the top, and got the launch over the line with a smooth cutover, six markets live, and zero Magento developers needed afterward.",
+      "Murad was trying to move off Magento, reduce cost, stop relying on a large in-house dev team, and launch a subscription-first global DTC model on top of Oracle EBS and a pile of random enterprise integrations. By the time I was called in, the client fired two agencies, the politics were ugly, and three weeks before launch we discovered BigCommerce couldn't settle credit card payments over the API.",
     primaryCta: {
       label: "Book a Call",
       href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
@@ -54,12 +54,16 @@ export const muradCaseStudy = {
       { label: "Oracle EBS", icon: "/tool-icons/oracle-logo.png" },
       { label: "OrderGroove", icon: "/tool-icons/ordergroove-logo.png" },
       { label: "Contentful", icon: "/tool-icons/contentful-logo.png" },
+      { label: "SendGrid", icon: "/tool-icons/sendgrid-logo.png" },
+      { label: "Avalara", icon: "/tool-icons/avalara-logo.png" },
+      { label: "Yotpo", icon: "/tool-icons/yotpo-logo.png" },
     ],
     quote: {
       quote:
-        "As an account manager, I needed a PM who could save the day. After Murad changed agencies twice, and my PM walked off the job, I personally requested Jim.",
+        "I needed a PM who could save the day. After Murad changed agencies twice, and my PM walked off the job, I personally requested Jim.",
       attributionTitle: "Neely Cox",
       attributionSubtitle: "Enterprise Account Manager, BigCommerce",
+      avatarSrc: "/murad/neely-cox.jpeg",
     },
   },
   role: {
@@ -141,7 +145,7 @@ export const muradCaseStudy = {
     title: "Launch, Stability, Independence",
     intro:
       "The outcome was not just a new site. Murad got a global launch model, a smoother cutover than the circumstances deserved, and a path off Magento that reduced dependence on a large internal dev team. Just as important, the work put me on the map internally as someone who could survive the ugliest CPG stacks and still ship.",
-    proofPoints: ["Scale", "Rescue", "Independence"],
+    proofPoints: ["Rescue", "Independence", "Scale"],
     stats: [
       { value: "6", suffix: "", label: "markets launched" },
       { value: "3", suffix: "", label: "custom BC integrations" },
@@ -151,24 +155,24 @@ export const muradCaseStudy = {
     beforeAfter: {
       title: "Before & After",
       summary:
-        "Murad moved from an expensive, developer-dependent Magento model and chaotic partner environment to a cleaner BigCommerce and Oracle operating model that could support subscriptions and global growth.",
+        "Murad moved from an expensive Magento model to a lighter BigCommerce operating model that could support subscriptions.",
       columns: [
         {
           label: "Before",
-          title: "Expensive, Fragile, Under-Documented",
+          title: "Expensive",
           points: [
-            "Magento required more internal developer support than the business wanted to carry.",
-            "Order, payment, shipment, and refund flows were hard to explain and easy to break.",
-            "The client had already churned through agencies and confidence in the program was shaky.",
+            "Magento required heavy developer support.",
+            "Marketing changes took weeks.",
+            "Murad's confidence in the program was shaky.",
           ],
         },
         {
           label: "After",
-          title: "Live, Clearer, More Repeatable",
+          title: "Custom & Light",
           points: [
-            "Murad launched across six markets on a subscription-first BigCommerce model.",
-            "The cutover went smoothly enough to earn explicit praise from Murad leadership.",
-            "The business had a path forward without needing a permanent Magento-heavy support model.",
+            "Murad launched across 6 markets.",
+            "Launch earned explicit praise from Murad leadership.",
+            "Murad had a clean path forward post Magento.",
           ],
         },
       ],
@@ -238,36 +242,9 @@ export const muradCaseStudy = {
   challengeQuote: {
     quote:
       "Thank you so much for the smooth launch. I know it took a lot of preparation by everyone involved. Very much appreciated by the leadership team at Murad.",
-    attributionTitle: "Van",
-    attributionSubtitle: "Murad Stakeholder",
+    attributionTitle: "Van Vuong",
+    attributionSubtitle: "Chief Digital Officer, Murad",
+    avatarSrc: "/murad/van-vuong.jpeg",
   },
-  recognition: {
-    eyebrow: "Recognition",
-    title: "Validation & Follow-On Impact",
-    intro:
-      "The strongest proof here was not outside press. It was the fact that Murad became a reference-style success internally and the work helped establish me as the person who could handle ugly CPG commerce stacks when the politics and integrations got difficult.",
-    rows: [
-      {
-        company: "Murad Reference Win",
-        dates: "Post-launch",
-        summary:
-          "The project positioned Murad as a reference-style customer and strengthened internal trust that I could handle chaotic enterprise launches.",
-        tags: ["Reference", "Internal Credibility"],
-      },
-      {
-        company: "Subscription Program Live",
-        dates: "2019",
-        summary:
-          "The OrderGroove-powered Auto-Delivery model went live with defined frequency rules, incentives, migration logic, and customer-service controls.",
-        tags: ["Subscriptions", "Launch"],
-      },
-      {
-        company: "Global Expansion Pattern",
-        dates: "2019 and after",
-        summary:
-          "The launch created a reusable BigCommerce and Oracle pattern that supported fast-follow international markets beyond the first US go-live.",
-        tags: ["Scale", "Global Rollout"],
-      },
-    ],
-  },
+
 } satisfies CaseStudyData

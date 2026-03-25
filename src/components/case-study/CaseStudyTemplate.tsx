@@ -8,6 +8,10 @@ const HeadlessCommerceDiagram = dynamic(
   () => import("@/app/diagrams/headless_commerce_react"),
   { ssr: false }
 )
+const GlobalLocationsMap = dynamic(
+  () => import("@/components/case-study/GlobalLocationsMap").then((m) => ({ default: m.GlobalLocationsMap })),
+  { ssr: false }
+)
 import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
 import type { CaseStudyBlogCardArt, CaseStudyData } from "@/components/case-study/types"
@@ -360,6 +364,13 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                       {data.role.narrative.title}
                     </h3>
 
+                    {data.globalLocations && (
+                      <GlobalLocationsMap
+                        title={data.globalLocations.title}
+                        locations={data.globalLocations.locations}
+                      />
+                    )}
+
                     {data.role.narrative.image && (
                       <FullWidthImage src={data.role.narrative.image} fullWidth={false} />
                     )}
@@ -499,6 +510,22 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
             </div>
           </div>
 
+          <div className="hidden w-full items-center justify-center gap-3 lg:flex">
+            {data.impact.proofPoints.map((item, index) => (
+              <div key={`desktop-intro-${item}`} className="flex items-center gap-3">
+                <TagPill variant="dark" className="py-2.5 text-[18px]">
+                  {item}
+                </TagPill>
+                {index < data.impact.proofPoints.length - 1 ? (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M4.5 9H13.5" stroke="#222222" strokeWidth="1.75" strokeLinecap="round" />
+                    <path d="M10.5 5.75L13.75 9L10.5 12.25" stroke="#222222" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                ) : null}
+              </div>
+            ))}
+          </div>
+
           <div className="grid w-full grid-cols-2 gap-5 pt-3 md:pt-4 lg:grid-cols-4 lg:pt-6">
             {data.impact.stats.map((stat) => (
               <StatCard
@@ -522,28 +549,14 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
 
           <div className="grid w-full gap-10 lg:grid-cols-4 lg:items-start lg:gap-5">
             <div className="flex flex-col items-start gap-4 lg:col-span-2">
-              <div className="hidden flex-wrap items-center gap-3 pt-2 lg:flex lg:flex-nowrap">
-                {data.impact.proofPoints.map((item, index) => (
-                  <div key={item} className="flex items-center gap-3">
-                    <TagPill variant="dark" className="py-2.5 text-[18px]">
-                      {item}
-                    </TagPill>
-                    {index < data.impact.proofPoints.length - 1 ? (
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M4.5 9H13.5" stroke="#222222" strokeWidth="1.75" strokeLinecap="round" />
-                        <path d="M10.5 5.75L13.75 9L10.5 12.25" stroke="#222222" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    ) : null}
-                  </div>
-                ))}
+              <div className="flex flex-col gap-5 rounded-2xl border border-[#C8C8C8] p-8">
+                <h2 className="type-h3 max-w-[640px] text-[#222222]">{data.impact.beforeAfter.title}</h2>
+                <p className="type-p3 max-w-[620px] text-[#222222]">{data.impact.beforeAfter.summary}</p>
+                <BeforeAfterComparison columns={data.impact.beforeAfter.columns} />
               </div>
-
-              <h2 className="type-h3 max-w-[640px] pt-4 text-[#222222]">{data.impact.beforeAfter.title}</h2>
-              <p className="type-p3 max-w-[620px] text-[#222222]">{data.impact.beforeAfter.summary}</p>
-              <BeforeAfterComparison columns={data.impact.beforeAfter.columns} />
             </div>
 
-            <div className="flex flex-col lg:col-span-2">
+            <div className="flex flex-col pt-10 lg:col-span-2">
               {data.impact.journeySteps.map((item, index) => (
                 <div key={item.step} className="grid grid-cols-[40px_1fr] gap-x-4 sm:grid-cols-[64px_minmax(0,1fr)] sm:gap-x-10">
                   <div className="flex flex-col items-center">
@@ -603,7 +616,9 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
         </Container>
       </section>
 
-      <section id="recognition" className="relative overflow-hidden bg-white">
+      {!data.recognition && <div className="w-full bg-[#222222]"><div className="mx-auto max-w-[1440px] border-t border-white/10 px-6 md:px-10 lg:px-12" /></div>}
+
+      {data.recognition && <section id="recognition" className="relative overflow-hidden bg-white">
         <div className="pointer-events-none absolute right-[-160px] top-[-20px] h-[420px] w-[420px] rounded-full bg-[#F2CD5C]/10 blur-[125px]" />
         <div className="pointer-events-none absolute left-[-120px] top-[620px] h-[480px] w-[480px] rounded-full bg-[#D8F2D2]/20 blur-[125px]" />
 
@@ -754,7 +769,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
             </div>
           </div>
         </Container>
-      </section>
+      </section>}
     </main>
   )
 }
