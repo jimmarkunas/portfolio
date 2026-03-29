@@ -405,11 +405,6 @@ function DesktopDiagram({ toggle }: { toggle: (key: string) => void }) {
         )}
 
         <div className="relative z-10 flex flex-col items-center gap-5">
-          <motion.div className="flex flex-col items-center gap-4" variants={cardVariants} transition={cardTransition}>
-            <SectionEyebrow>User Experience</SectionEyebrow>
-            <UserExperienceBadge />
-          </motion.div>
-
           <motion.div className="w-full" variants={cardVariants} transition={cardTransition}>
             <StorefrontAndCommerceLayers
               toggle={toggle}
@@ -451,11 +446,6 @@ function MobileDiagram({ toggle }: { toggle: (key: string) => void }) {
       viewport={viewport}
       variants={staggerParent}
     >
-      <motion.div className="flex flex-col items-center gap-3 text-center" variants={cardVariants} transition={cardTransition}>
-        <SectionEyebrow>User Experience</SectionEyebrow>
-        <UserExperienceBadge />
-      </motion.div>
-
       <motion.div variants={cardVariants} transition={cardTransition}>
         <StorefrontAndCommerceLayers
           toggle={toggle}
