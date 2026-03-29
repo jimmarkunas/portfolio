@@ -19,7 +19,8 @@ const BISystemDiagram = dynamic(
 )
 import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
-import type { CaseStudyBlogCardArt, CaseStudyData } from "@/components/case-study/types"
+import { CaseStudyActionButton } from "@/components/case-study/template/CaseStudyActionButton"
+import type { CaseStudyData } from "@/components/case-study/types"
 import { Container } from "@/components/Container"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { EyebrowPill } from "@/components/EyebrowPill"
@@ -28,76 +29,6 @@ import { SectionShell } from "@/components/SectionShell"
 import { StatCard } from "@/components/StatCard"
 import { TagPill } from "@/components/TagPill"
 import { Timeline } from "@/components/Timeline"
-
-function renderBlogCardArt(art: CaseStudyBlogCardArt) {
-  if (art.startsWith("/")) {
-    return <img src={art} alt="" className="absolute inset-0 h-full w-full object-cover" />
-  }
-
-  if (art === "olive") {
-    return (
-      <>
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,#90A07C_0%,#B7C1A5_52%,#D7D3C2_100%)]" />
-        <div className="absolute right-8 top-5 h-52 w-52 rounded-full border border-white/30" />
-        <div className="absolute bottom-0 left-1/2 h-28 w-24 -translate-x-1/2 bg-[#C9D0BF] shadow-[0_-12px_30px_rgba(255,255,255,0.12)_inset]" />
-        <div className="absolute bottom-16 left-1/2 h-28 w-24 -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_35%_35%,#fffef7_0%,#ebe6d6_48%,#d6cfbb_100%)] shadow-[22px_26px_40px_rgba(34,34,34,0.14)]" />
-      </>
-    )
-  }
-
-  if (art === "ux") {
-    return (
-      <>
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,#F31B0F_0%,#EF1C16_44%,#E2D5E4_45%,#D8C7E1_65%,#F7D4CB_100%)]" />
-        <div className="absolute bottom-0 right-0 h-16 w-28 rounded-tl-full bg-[#E2D9EE]" />
-        <div className="absolute bottom-0 left-[46%] h-24 w-24 bg-[linear-gradient(180deg,#C59CEB_0%,#9A6BCF_100%)] shadow-[0_-14px_30px_rgba(255,255,255,0.14)_inset]" />
-        <div className="absolute bottom-20 left-[54%] h-14 w-14 -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_35%_35%,#ffefef_0%,#ff3c2f_35%,#c6100a_100%)] shadow-[18px_22px_34px_rgba(34,34,34,0.18)]" />
-      </>
-    )
-  }
-
-  return (
-    <>
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,#B7DEE7_0%,#B9E0E9_38%,#C5E2DC_60%,#EFE7DA_100%)]" />
-      <div className="absolute bottom-0 left-0 h-32 w-44 rounded-tr-[120px] bg-[#24364D] shadow-[22px_24px_36px_rgba(34,34,34,0.18)]" />
-      <div className="absolute bottom-0 left-[54%] h-32 w-24 -translate-x-1/2 bg-[#A5AB9A] shadow-[0_-12px_26px_rgba(255,255,255,0.12)_inset]" />
-      <div className="absolute left-[64%] top-4 h-16 w-16 -translate-x-1/2 rotate-12 rounded-full bg-[#F1482F] shadow-[18px_20px_34px_rgba(34,34,34,0.22)]" />
-      <div className="absolute left-[55%] top-9 h-16 w-16 -translate-x-1/2 rotate-12 rounded-full bg-[#2F2F2F]" />
-    </>
-  )
-}
-
-function renderActionButton(action: CaseStudyData["hero"]["primaryCta"], variant: "primary" | "secondary") {
-  const className =
-    variant === "primary"
-      ? "inline-flex min-h-[56px] items-center gap-2 rounded-[99px] bg-[#2B2B2B] px-6 pb-3.5 pt-3 text-[20px] leading-8 text-white transition-colors hover:bg-[#447ACB]"
-      : "inline-flex min-h-[56px] items-center rounded-[99px] border border-[#222222]/12 bg-white px-6 pb-3.5 pt-3 text-[20px] leading-8 text-[#222222] transition-colors hover:border-[#447ACB] hover:text-[#447ACB]"
-
-  const content = (
-    <>
-      <span>{action.label}</span>
-      {variant === "primary" ? (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M20 5V15C20 15.552 19.553 16 19 16C18.447 16 18 15.552 18 15V7.41406L6.70707 18.707C6.51207 18.902 6.25604 19 6.00004 19C5.74404 19 5.48801 18.902 5.29301 18.707C4.90201 18.316 4.90201 17.684 5.29301 17.293L16.586 6H9.00004C8.44704 6 8.00004 5.552 8.00004 5C8.00004 4.448 8.44704 4 9.00004 4L19 4C19.13 4 19.2601 4.0269 19.3821 4.0769C19.6271 4.1779 19.8221 4.37292 19.9231 4.61792C19.9741 4.73992 20 4.87 20 5Z" fill="white" />
-        </svg>
-      ) : null}
-    </>
-  )
-
-  if (action.external) {
-    return (
-      <a href={action.href} target="_blank" rel="noreferrer" className={className}>
-        {content}
-      </a>
-    )
-  }
-
-  return (
-    <Link href={action.href} className={className}>
-      {content}
-    </Link>
-  )
-}
 
 export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
   const isFoh = data.slug === "foh"
@@ -149,8 +80,8 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                     </p>
 
                     <div className="mt-8 flex flex-wrap items-center gap-4">
-                      {renderActionButton(data.hero.primaryCta, "primary")}
-                      {renderActionButton(data.hero.secondaryCta, "secondary")}
+                      <CaseStudyActionButton action={data.hero.primaryCta} variant="primary" />
+                      <CaseStudyActionButton action={data.hero.secondaryCta} variant="secondary" />
                     </div>
                   </div>
                 </div>

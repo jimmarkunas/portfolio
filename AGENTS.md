@@ -49,3 +49,8 @@
 - Do not reread unchanged files unless needed for line-accurate patching.
 - Keep status updates short: what changed, what is being checked, and result.
 - After 2 failed attempts on the same issue, stop edits and present a 3-step plan before continuing.
+
+## AI Read Budget Guardrails
+- Treat `.aiignore` as the default exclusion set for search/read operations.
+- Do not read or summarize ignored media/binary assets unless the user explicitly asks.
+- Default log reads to short tails (`tail -n 40`) instead of full-file dumps.

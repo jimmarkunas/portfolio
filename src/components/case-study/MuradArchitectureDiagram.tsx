@@ -1,11 +1,18 @@
 "use client"
 import { useRef, useEffect, useState } from "react"
+import { motion } from "framer-motion"
 import ParticleCanvas from "./ParticleCanvas"
 import Modal from "./Modal"
 import { useModal } from "./useModal"
 import { DIAGRAM_DATA as D } from "./muradDiagramData"
 import DesktopCard from "./DesktopCard"
 import MobileCard from "./MobileCard"
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0 },
+};
+const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
 
 const PATHS = [
   // CMS/Contentful → Adobe (top horizontal via left REST pill)
@@ -113,7 +120,7 @@ export default function MuradArchitectureDiagram() {
   return (
     <>
     {/* ── Desktop ───────────────────────────────────────────────────── */}
-    <div className="hidden w-full md:block">
+    <motion.div className="hidden w-full md:block" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}>
     <div className="relative w-full overflow-hidden" style={{ height: `${825 * scale}px` }}>
       <div style={{
         position: "absolute",
@@ -143,10 +150,11 @@ export default function MuradArchitectureDiagram() {
       >
 <div className="w-[1440px] h-[825px] relative">
   <div className="w-[1440px] h-[825px] left-0 top-0 absolute" style={{ backgroundColor: "#fefefe" }} />
-  <DesktopCard data={D.bcUS} cardKey="bc-us" toggle={toggle} variant="border" iconOverlay style={{left:33,top:240}} />
-  <DesktopCard data={D.bcUK} cardKey="bc-uk" toggle={toggle} variant="border" iconOverlay style={{left:33,top:438}} />
-  <DesktopCard data={D.bcMY} cardKey="bc-my" toggle={toggle} variant="border" iconOverlay style={{left:33,top:635}} />
-  <div data-layer="API" className="Api w-64 h-16 left-[592px] top-[379px] absolute cursor-pointer group" onPointerDown={e => e.stopPropagation()} onClick={e => { e.stopPropagation(); toggle('api-layer') }}>
+  <motion.div className="absolute z-10" style={{left:33,top:240}} variants={cardVariants} transition={cardTransition}><DesktopCard data={D.bcUS} cardKey="bc-us" toggle={toggle} variant="border" iconOverlay style={{}} /></motion.div>
+  <motion.div className="absolute z-10" style={{left:33,top:438}} variants={cardVariants} transition={cardTransition}><DesktopCard data={D.bcUK} cardKey="bc-uk" toggle={toggle} variant="border" iconOverlay style={{}} /></motion.div>
+  <motion.div className="absolute z-10" style={{left:33,top:635}} variants={cardVariants} transition={cardTransition}><DesktopCard data={D.bcMY} cardKey="bc-my" toggle={toggle} variant="border" iconOverlay style={{}} /></motion.div>
+  <motion.div className="absolute z-10" style={{left:592,top:379}} variants={cardVariants} transition={cardTransition}>
+  <div data-layer="API" className="Api w-64 h-16 absolute cursor-pointer group" onPointerDown={e => e.stopPropagation()} onClick={e => { e.stopPropagation(); toggle('api-layer') }}>
     <PulseGlow w={256} h={128} uid="pg-api" style={{ top: -28, left: 0 }} />
     <div data-layer="API Container" className="ApiContainer w-64 h-32 left-0 top-[-28px] absolute bg-[#202124] rounded-[10px] outline outline-1 outline-offset-[-1px] outline-[#202124] group-hover:outline-2 group-hover:outline-blue-500 group-hover:shadow-[0_0_0_2px_rgba(68,122,203,0.15),0_8px_32px_rgba(68,122,203,0.35)] transition-[outline,box-shadow] duration-150" />
     <div data-layer="Modal Title" className="ModalTitle w-64 h-8 left-0 top-[36px] absolute">
@@ -162,10 +170,11 @@ export default function MuradArchitectureDiagram() {
       </div>
     </div>
   </div>
-  <DesktopCard data={D.oracle} cardKey="oracle" toggle={toggle} eyebrowPos="below" style={{left:592,top:635}} />
-  <DesktopCard data={D.sendgrid} cardKey="sendgrid" toggle={toggle} style={{left:1153,top:635}} />
-  <DesktopCard data={D.adobe} cardKey="adobe" toggle={toggle} style={{left:592,top:42}} />
-  <DesktopCard data={D.contentful} cardKey="contentful" toggle={toggle} style={{left:32,top:42}} />
+  </motion.div>
+  <motion.div className="absolute z-10" style={{left:592,top:635}} variants={cardVariants} transition={cardTransition}><DesktopCard data={D.oracle} cardKey="oracle" toggle={toggle} eyebrowPos="below" style={{}} /></motion.div>
+  <motion.div className="absolute z-10" style={{left:1153,top:635}} variants={cardVariants} transition={cardTransition}><DesktopCard data={D.sendgrid} cardKey="sendgrid" toggle={toggle} style={{}} /></motion.div>
+  <motion.div className="absolute z-10" style={{left:592,top:42}} variants={cardVariants} transition={cardTransition}><DesktopCard data={D.adobe} cardKey="adobe" toggle={toggle} style={{}} /></motion.div>
+  <motion.div className="absolute z-10" style={{left:32,top:42}} variants={cardVariants} transition={cardTransition}><DesktopCard data={D.contentful} cardKey="contentful" toggle={toggle} style={{}} /></motion.div>
   <div data-layer="Data Pipeline" className="DataPipeline z-20 w-28 h-8 left-[977px] top-[105px] absolute bg-blue-500 rounded-md">
     <PulseGlow w={112} h={32} uid="pg-rest-r" />
     <div data-layer="REST API" className="RestApi w-28 h-8 left-0 top-0 absolute flex items-center justify-center text-center text-sky-50 text-sm font-normal font-display leading-4">REST API</div>
@@ -244,33 +253,12 @@ export default function MuradArchitectureDiagram() {
 </div>
         <ParticleCanvas paths={PATHS} containerRef={canvasContainerRef} />
       </div>
-      <style jsx>{`
-        [data-layer="Modal Integrations"] [data-svg-wrapper] {
-          cursor: pointer;
-          transition: fill 0.15s ease, stroke 0.15s ease;
-        }
-
-        [data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg path[fill="#212529"],
-        [data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg rect[fill="#212529"],
-        [data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg circle[fill="#212529"],
-        [data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg ellipse[fill="#212529"] {
-          fill: #3b82f6;
-        }
-
-        [data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg path[stroke="#212529"],
-        [data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg rect[stroke="#212529"],
-        [data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg circle[stroke="#212529"],
-        [data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg ellipse[stroke="#212529"] {
-          stroke: #3b82f6;
-        }
-
-      `}</style>
     </div>
     </div>
-    </div>{/* end desktop hidden md:block */}
+    </motion.div>{/* end desktop hidden md:block */}
 
     {/* ── Mobile layout ───────────────────────────────────────────── */}
-    <div className="block md:hidden -mx-6">
+    <motion.div className="block md:hidden -mx-6" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}>
       <div
         className="relative"
         style={{
@@ -324,7 +312,7 @@ export default function MuradArchitectureDiagram() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
 
     <Modal tip={activeKey ? (D.tooltips[activeKey] ?? null) : null} onClose={close} />
     </>

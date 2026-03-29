@@ -24,7 +24,7 @@ export default function BISystemDiagram() {
   return (
     <>
       {/* ── Desktop ── */}
-      <div className="hidden w-full md:block border-2 border-red-500">
+      <div className="hidden w-full md:block">
         <div className="relative w-full overflow-hidden" style={{ height: `${CANVAS_H * scale}px` }}>
           <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "100%", height: "100%", backgroundColor: "#fefefe", backgroundImage: "radial-gradient(circle, #d4d4e4 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
           <div ref={wrapperRef} className="relative w-full overflow-hidden rounded-[10px]" style={{ height: `${CANVAS_H * scale}px` }}>
@@ -171,7 +171,7 @@ export default function BISystemDiagram() {
               </div>
 
               {/* Adobe Commerce Cloud All */}
-              <div className="w-[652px] h-56 left-[502px] top-[593px] absolute rounded-[10px] outline outline-1 outline-offset-[-1px] outline-red-600">
+              <div className="w-[652px] h-56 left-[502px] top-[593px] absolute rounded-[10px]">
                 {/* DevOps */}
                 <div className="w-56 h-48 left-[416px] top-[11px] absolute bg-zinc-100 rounded-[10px]">
                   <div className="w-52 h-10 left-[11px] top-[12px] absolute bg-neutral-800 rounded-[10px] hover:ring-2 hover:ring-white/40 transition-all cursor-default flex items-center justify-center text-white text-base font-medium font-display leading-5">Storage</div>
@@ -296,7 +296,7 @@ export default function BISystemDiagram() {
           </div>
           <div className="flex justify-center"><div className="h-4 w-0.5 bg-zinc-400" /></div>
           <div className="flex gap-2">
-            <div className="flex-1 bg-zinc-100 rounded-[10px] p-2 outline outline-1 outline-red-500">
+            <div className="flex-1 bg-zinc-100 rounded-[10px] p-2">
               <div className="text-xs font-semibold text-zinc-500 mb-1">Adobe Commerce Cloud</div>
               <div className="flex gap-1 flex-wrap">
                 <div className="h-8 px-2 bg-red-600 rounded flex items-center text-white text-xs font-medium">Codebase</div>

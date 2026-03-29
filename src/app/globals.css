@@ -431,3 +431,21 @@ canvas {
 .map-location-popup .leaflet-popup-close-button {
   display: none !important;
 }
+
+/* Murad diagram — connector arrow hover */
+[data-layer="Modal Integrations"] [data-svg-wrapper] {
+  cursor: pointer;
+  transition: fill 0.15s ease, stroke 0.15s ease;
+}
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg path[fill="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg rect[fill="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg circle[fill="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg ellipse[fill="#212529"] {
+  fill: #3b82f6;
+}
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg path[stroke="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg rect[stroke="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg circle[stroke="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg ellipse[stroke="#212529"] {
+  stroke: #3b82f6;
+}

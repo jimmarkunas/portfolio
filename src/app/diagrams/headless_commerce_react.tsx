@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import type { DiagramData } from "@/components/case-study/types";
 import Modal from "@/components/case-study/Modal";
 import { useModal } from "@/components/case-study/useModal";
@@ -148,7 +149,7 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
       <Modal tip={tip} onClose={close} />
 
       {/* ── Mobile layout (hidden md+) ── */}
-      <div className="md:hidden flex flex-col" onClick={close}>
+      <motion.div className="md:hidden flex flex-col" onClick={close} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}>
 
         <div className="flex gap-2">
           {data.inputs.map(node => (
@@ -211,10 +212,10 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
           ))}
         </div>
 
-      </div>
+      </motion.div>
 
       {/* ── Desktop SVG (hidden below md) ── */}
-      <div className="hidden md:block relative">
+      <motion.div className="hidden md:block relative" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}>
       <svg
         viewBox={`0 0 ${VW} ${VH}`}
         width="100%"
@@ -333,7 +334,7 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
         )}
       </div>
 
-      </div>
+      </motion.div>
     </div>
   );
 }

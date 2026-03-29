@@ -1,5 +1,5 @@
 "use client"
-import type { DiagramCard } from "./muradDiagramData"
+import type { DiagramCard } from "./muradDiagramTypes"
 
 interface DesktopCardProps {
   data: DiagramCard

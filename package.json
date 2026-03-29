@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
+    "dev:tail": "bash scripts/dev-tail.sh /tmp/portfolio-dev.log 40",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit"

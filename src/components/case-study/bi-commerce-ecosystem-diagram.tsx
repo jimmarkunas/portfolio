@@ -5,6 +5,28 @@ import { motion } from "framer-motion";
 import Modal from "./Modal";
 import { useModal } from "./useModal";
 import { TOOLTIPS } from "./biCommerceDiagramData";
+import {
+  AEM_BROWSER_PATH,
+  AEM_DATALAKE_PATH,
+  BROWSER_AEM_PATH,
+  CC_DATALAKE_PATH,
+  CC_MULESOFT_PATH,
+  CC_SAP_PATH,
+  CONN_H,
+  CONN_W,
+  DATALAKE_AEM_PATH,
+  DATALAKE_CC_PATH,
+  MOB_DOWN,
+  MOB_UP,
+  MULESOFT_BROWSER_PATH,
+  MULESOFT_CC_PATH,
+  MULESOFT_SAP_PATH,
+  SAP_CC_PATH,
+  SAP_MULESOFT_PATH,
+  TOKENS,
+  VH,
+  VW,
+} from "./bi-commerce-ecosystem.constants";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 28 },
@@ -12,13 +34,6 @@ const cardVariants = {
 };
 
 const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
-
-const VW = 1440;
-const VH = 875;
-
-const TOKENS = {
-  line: "#959595",
-};
 
 type CardFeature = {
   label: string;
@@ -65,13 +80,8 @@ export default function CommerceEcosystemDiagram() {
 
 const mobileCard = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] } },
 };
-
-const CONN_W = 36;
-const CONN_H = 48;
-const MOB_DOWN = [{ x: 12, y: 0 }, { x: 12, y: CONN_H }];
-const MOB_UP   = [{ x: 24, y: CONN_H }, { x: 24, y: 0 }];
 
 function MobileConnector() {
   const ref = useRef<HTMLDivElement>(null);
@@ -147,10 +157,10 @@ function ResponsiveStackLayout({ toggle }: { toggle: (key: string) => void }) {
       <MobileConnector />
 
       <MobileReveal>
-        <div className="relative">
+        <div className="relative group">
           <CommerceCard className="w-full" compact onClick={() => toggle("commerce-cloud")} onGraphqlClick={() => toggle("adobe-graphql")} onPillsClick={() => toggle("commerce-services")} />
-          <svg className="pointer-events-none absolute" width="100%" height="100%" style={{ position: "absolute", top: -8, left: -8, right: -8, bottom: -8 }}>
-            <rect x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="14" fill="none" stroke="#ED2224" strokeWidth="1.5" strokeDasharray="7 5" opacity="0.85">
+          <svg className="pointer-events-none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "visible" }}>
+            <rect x="-6" y="-6" width="calc(100% + 12px)" height="calc(100% + 12px)" rx="16" fill="none" stroke="#ED2224" strokeWidth="1.5" strokeDasharray="7 5" opacity="0.85" className="group-hover:stroke-[#447acb]" style={{ transition: "stroke 300ms" }}>
               <animate attributeName="stroke-dashoffset" from="0" to="-1510" dur="180s" repeatCount="indefinite" />
             </rect>
           </svg>
@@ -190,20 +200,6 @@ function ResponsiveStackLayout({ toggle }: { toggle: (key: string) => void }) {
     </div>
   );
 }
-
-const CC_SAP_PATH = [{ x: 483, y: 710 }, { x: 154, y: 710 }, { x: 154, y: 400 }];
-const SAP_CC_PATH = [{ x: 139, y: 400 }, { x: 139, y: 725 }, { x: 483, y: 725 }];
-const DATALAKE_CC_PATH = [{ x: 1115, y: 715 }, { x: 958, y: 715 }];
-const CC_DATALAKE_PATH = [{ x: 958, y: 730 }, { x: 1115, y: 730 }];
-const BROWSER_AEM_PATH = [{ x: 866, y: 54 }, { x: 1225, y: 54 }, { x: 1225, y: 279 }];
-const AEM_BROWSER_PATH = [{ x: 1240, y: 279 }, { x: 1240, y: 39 }, { x: 866, y: 39 }];
-const CC_MULESOFT_PATH = [{ x: 710, y: 606 }, { x: 710, y: 494 }];
-const MULESOFT_CC_PATH = [{ x: 725, y: 494 }, { x: 725, y: 606 }];
-const AEM_DATALAKE_PATH = [{ x: 1240, y: 506 }, { x: 1240, y: 677 }];
-const DATALAKE_AEM_PATH = [{ x: 1255, y: 677 }, { x: 1255, y: 506 }];
-const SAP_MULESOFT_PATH = [{ x: 319, y: 384 }, { x: 483, y: 384 }];
-const MULESOFT_SAP_PATH = [{ x: 483, y: 399 }, { x: 319, y: 399 }];
-const MULESOFT_BROWSER_PATH = [{ x: 720, y: 279 }, { x: 720, y: 0 }];
 
 function DesktopFixedLayout({ toggle }: { toggle: (key: string) => void }) {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -280,10 +276,10 @@ function DesktopFixedLayout({ toggle }: { toggle: (key: string) => void }) {
       </motion.div>
 
       <motion.div className="absolute left-[483px] top-[606px] z-10" variants={cardVariants} transition={cardTransition}>
-        <div className="relative">
+        <div className="relative group">
           <CommerceCard className="w-[475px]" onClick={() => toggle("commerce-cloud")} onGraphqlClick={() => toggle("adobe-graphql")} onPillsClick={() => toggle("commerce-services")} />
-          <svg className="pointer-events-none absolute" width="100%" height="100%" style={{ position: "absolute", top: -8, left: -8, right: -8, bottom: -8 }}>
-            <rect x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="14" fill="none" stroke="#ED2224" strokeWidth="1.5" strokeDasharray="7 5" opacity="0.85">
+          <svg className="pointer-events-none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "visible" }}>
+            <rect x="-6" y="-6" width="calc(100% + 12px)" height="calc(100% + 12px)" rx="16" fill="none" stroke="#ED2224" strokeWidth="1.5" strokeDasharray="7 5" opacity="0.85" className="group-hover:stroke-[#447acb]" style={{ transition: "stroke 300ms" }}>
               <animate attributeName="stroke-dashoffset" from="0" to="-1510" dur="180s" repeatCount="indefinite" />
             </rect>
           </svg>
