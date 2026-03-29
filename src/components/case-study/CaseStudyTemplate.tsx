@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 import { BeforeAfterComparison } from "@/components/case-study/BeforeAfterComparison"
 import { DirecTVRevenueChart } from "@/components/case-study/DirecTVRevenueChart"
 import { BlogCardGrid } from "@/components/case-study/BlogCardGrid"
@@ -21,9 +19,13 @@ const SCJCommerceArchitecture = dynamic(
   () => import("@/components/case-study/SCJCommerceArchitecture"),
   { ssr: false }
 )
-import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
-import { CaseStudyActionButton } from "@/components/case-study/template/CaseStudyActionButton"
+import { CaseStudyHeroSection } from "@/components/case-study/template/CaseStudyHeroSection"
+import { CaseStudyRecognitionSection } from "@/components/case-study/template/CaseStudyRecognitionSection"
+import {
+  HeroSwooshBackdrop,
+  ProofPointArrowIcon,
+} from "@/components/case-study/template/CaseStudyTemplateIcons"
 import type { CaseStudyData } from "@/components/case-study/types"
 import { Container } from "@/components/Container"
 import { FullWidthImage } from "@/components/FullWidthImage"
@@ -39,63 +41,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
 
   return (
     <main className="min-h-full overflow-x-hidden bg-[#F3F3F3] text-[#222222]">
-      <section className="bg-[#F3F3F3]">
-        <Container>
-          <div className="relative overflow-hidden bg-[#F3F3F3]">
-            <div className="pb-8 pt-6 md:pb-10 md:pt-10 lg:pb-0 lg:pt-[56px]">
-              <div className="flex flex-col gap-4 lg:gap-6">
-                <nav aria-label="Breadcrumb" className="type-p4 text-[#222222]">
-                  <ol className="flex flex-wrap items-center gap-2">
-                    <li>
-                      <Link
-                        className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#222222] text-white transition-colors hover:bg-[#447ACB] hover:text-white"
-                        href="/"
-                        aria-label="Home"
-                      >
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path d="M2.66675 6.73327L8.00008 2.6666L13.3334 6.73327V12.6666C13.3334 13.0202 13.193 13.3594 12.9429 13.6094C12.6928 13.8595 12.3537 13.9999 12.0001 13.9999H4.00008C3.64646 13.9999 3.30732 13.8595 3.05727 13.6094C2.80722 13.3594 2.66675 13.0202 2.66675 12.6666V6.73327Z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                          <path d="M6.00008 13.9999V7.99994H10.0001V13.9999" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </Link>
-                    </li>
-                    <li aria-hidden="true" className="text-[#222222]">
-                      &gt;
-                    </li>
-                    <li>
-                      <Link className="transition-colors hover:text-[#447ACB]" href="/work">
-                        Case Studies
-                      </Link>
-                    </li>
-                    <li aria-hidden="true" className="text-[#222222]">
-                      &gt;
-                    </li>
-                    <li className="text-[#222222]">{data.breadcrumbCurrent}</li>
-                  </ol>
-                </nav>
-
-                <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_724px] lg:items-start lg:gap-12">
-                  <div>
-                    <h1 className="type-h1-case-study -mt-2 text-[#222222]">{data.hero.title}</h1>
-                  </div>
-
-                  <div className="max-w-[724px]">
-                    <p className="type-p2 max-w-[724px] text-black/80 lg:text-[18px] lg:leading-7">
-                      {data.hero.intro}
-                    </p>
-
-                    <div className="mt-8 flex flex-wrap items-center gap-4">
-                      <CaseStudyActionButton action={data.hero.primaryCta} variant="primary" />
-                      <CaseStudyActionButton action={data.hero.secondaryCta} variant="secondary" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <CaseStudyHeroImage src={data.hero.image.src} alt={data.hero.image.alt} />
-          </div>
-        </Container>
-      </section>
+      <CaseStudyHeroSection data={data} />
 
       <section className="border-t border-[#222222]/8 bg-[#F3F3F3]">
         <Container className="py-14 md:py-16 lg:py-20">
@@ -133,9 +79,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
             <div className="relative w-full bg-white md:left-1/2 md:w-screen md:-translate-x-1/2">
               <Container className="relative overflow-visible py-6 md:py-8 lg:min-h-[552px] lg:py-[52px]">
                 <div className="pointer-events-none absolute right-[620px] top-[12px] hidden opacity-50 lg:block">
-                  <svg width="285" height="86" viewBox="0 0 285 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M0 31.8666C0.982931 43.995 8.89015 50.7458 16.9821 56.0192C28.3357 63.2051 40.5816 69.2532 53.0125 73.8242C110.828 93.3802 167.509 88.0339 222.07 61.6625C235.918 54.9084 249.028 46.0603 263.891 37.1836C266.135 53.2226 258.194 68.7256 259.607 85.41C266.223 82.4942 267.67 76.9248 268.994 72.3403C274.351 53.5099 279.492 34.4022 284.142 15.2323C286.297 6.00108 284.051 1.96609 275.189 0.846921C256.758 -1.73088 239.341 1.57154 223.431 10.8163C222.877 11.2465 222.692 12.7236 222.169 14.9083C234.476 24.4655 247.556 9.86151 261.063 15.8189C245.398 35.0981 224.534 45.968 202.931 54.7439C180.283 63.8879 157.173 70.7228 132.771 71.8927C108.862 73.1247 85.8456 69.2176 62.5837 63.2787C39.26 57.8323 18.8604 47.0031 0 31.8666Z" fill="#222222" fillOpacity="0.06" />
-                  </svg>
+                  <HeroSwooshBackdrop />
                 </div>
 
                 <div className={isFoh
@@ -430,10 +374,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                 <div key={`mobile-intro-${item}`} className="flex items-center gap-2">
                   <span className="text-[14px] font-bold text-[#222222]">{item}</span>
                   {index < data.impact.proofPoints.length - 1 ? (
-                    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="shrink-0">
-                      <path d="M4.5 9H13.5" stroke="#222222" strokeWidth="1.75" strokeLinecap="round" />
-                      <path d="M10.5 5.75L13.75 9L10.5 12.25" stroke="#222222" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    <ProofPointArrowIcon size={16} className="shrink-0 text-[#222222]" />
                   ) : null}
                 </div>
               ))}
@@ -446,10 +387,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                     {item}
                   </TagPill>
                   {index < data.impact.proofPoints.length - 1 ? (
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M4.5 9H13.5" stroke="#222222" strokeWidth="1.75" strokeLinecap="round" />
-                      <path d="M10.5 5.75L13.75 9L10.5 12.25" stroke="#222222" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    <ProofPointArrowIcon className="text-[#222222]" />
                   ) : null}
                 </div>
               ))}
@@ -463,10 +401,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                   {item}
                 </TagPill>
                 {index < data.impact.proofPoints.length - 1 ? (
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M4.5 9H13.5" stroke="#222222" strokeWidth="1.75" strokeLinecap="round" />
-                    <path d="M10.5 5.75L13.75 9L10.5 12.25" stroke="#222222" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <ProofPointArrowIcon className="text-[#222222]" />
                 ) : null}
               </div>
             ))}
@@ -562,160 +497,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
         </Container>
       </section>
 
-      {!data.recognition && <div className="w-full bg-[#222222]"><div className="mx-auto max-w-[1440px] border-t border-white/10 px-6 md:px-10 lg:px-12" /></div>}
-
-      {data.recognition && <section id="recognition" className="relative overflow-hidden bg-white">
-        <div className="pointer-events-none absolute right-[-160px] top-[-20px] h-[420px] w-[420px] rounded-full bg-[#F2CD5C]/10 blur-[125px]" />
-        <div className="pointer-events-none absolute left-[-120px] top-[620px] h-[480px] w-[480px] rounded-full bg-[#D8F2D2]/20 blur-[125px]" />
-
-        <Container className="relative z-10 py-20 md:max-w-none md:px-0 md:py-12 lg:max-w-[1440px] lg:px-12 lg:pb-20 lg:pt-28">
-          <div className="flex flex-col gap-16 md:gap-8 lg:gap-20">
-            <div className="grid gap-10 md:gap-5 lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:items-start lg:gap-6 lg:justify-between">
-              <div className="flex flex-col items-start gap-4 lg:relative lg:col-start-1">
-                <EyebrowPill
-                  className="bg-white lg:absolute lg:left-0 lg:top-[-44px]"
-                  labelClassName="type-p2 text-[#222222]"
-                >
-                  {data.recognition.eyebrow}
-                </EyebrowPill>
-                <div className="w-full md:flex md:items-start md:justify-between md:gap-6 lg:block">
-                  <h2 className="type-h3 w-full max-w-none lg:max-w-[396px] text-[#222222]">
-                    {data.recognition.title}
-                  </h2>
-                  <a
-                    href={data.hero.primaryCta.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="type-p4 mt-2 hidden items-center gap-1.5 whitespace-nowrap text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] md:inline-flex lg:hidden"
-                  >
-                    <span>{data.hero.primaryCta.label}</span>
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M0.957229 11.3614L0 10.4042L9.02046 1.375H0.819729V0H11.3614V10.5417H9.9864V2.34094L0.957229 11.3614Z" fill="currentColor" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex w-full max-w-none flex-col items-start gap-6 lg:col-span-2 lg:col-start-2 lg:max-w-[636px]">
-                <p className="type-p3 text-black/65">{data.recognition.intro}</p>
-
-                <a
-                  href={data.hero.primaryCta.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="type-p4 inline-flex items-center gap-1.5 text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] md:hidden lg:inline-flex"
-                >
-                  <span>{data.hero.primaryCta.label}</span>
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M0.957229 11.3614L0 10.4042L9.02046 1.375H0.819729V0H11.3614V10.5417H9.9864V2.34094L0.957229 11.3614Z" fill="currentColor" />
-                  </svg>
-                </a>
-              </div>
-
-            </div>
-
-            <div className="flex flex-col">
-              {data.recognition.leadImage && (
-                <div className={isFoh ? "-mt-9 pb-7 md:-mt-1 lg:-mt-[52px]" : "pb-7"}>
-                  <img
-                    src={data.recognition.leadImage.src}
-                    alt={data.recognition.leadImage.alt}
-                    className="block h-auto w-full"
-                  />
-                </div>
-              )}
-
-              {/* Press Video Modal */}
-              {data.recognition.featured && <div className="border-b border-[#E5E7EB] pb-7">
-                <div className="flex flex-col gap-8">
-                  <div className={isFoh
-                    ? "grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] lg:gap-x-8 lg:gap-y-5 xl:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] xl:justify-between"
-                    : "grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-6 lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:justify-between"}
-                  >
-                    <div className={isFoh
-                      ? "md:col-span-2 lg:row-span-2 lg:col-span-1 lg:col-start-1 xl:row-span-1"
-                      : "md:col-span-2 lg:col-span-1 lg:col-start-1"}
-                    >
-                      <CaseStudyMediaFrame
-                        media={data.recognition.featured.media}
-                        className="xl:w-[530px] xl:max-w-none rounded-xl"
-                      />
-                    </div>
-
-                    <div className={isFoh
-                      ? "flex w-full max-w-none flex-col gap-4 md:col-start-1 lg:col-start-2 xl:max-w-[320px]"
-                      : "flex w-full max-w-none flex-col gap-8 md:col-start-1 lg:col-start-2 lg:max-w-[320px]"}
-                    >
-                      <div>
-                        <h3 className="type-h6 text-[#222222]">{data.recognition.featured.company}</h3>
-                        {data.recognition.featured.dates && (
-                          <p className="type-p3 mt-1 text-black/45">{data.recognition.featured.dates}</p>
-                        )}
-                      </div>
-                      <p className={isFoh
-                        ? "type-p3 max-w-none text-black/55 xl:max-w-[320px]"
-                        : "type-p3 max-w-none text-black/55 lg:max-w-[320px]"}
-                      >
-                        {data.recognition.featured.summary}
-                      </p>
-                    </div>
-
-                    <div className={isFoh
-                      ? "flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-2 lg:row-start-2 lg:justify-start xl:col-start-3 xl:row-start-1 xl:justify-end xl:flex-nowrap"
-                      : "flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-3 lg:flex-nowrap"}
-                    >
-                      {data.recognition.featured.tags.map((tag) => (
-                        <TagPill key={tag} variant="dark">
-                          {tag}
-                        </TagPill>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>}
-
-              {/* Press Modals */}
-              {data.recognition.rows.map((row) => {
-                const slug = row.file ? row.file.split("/").pop()?.replace(/\.[^.]+$/, "") : null
-                const viewerHref = slug ? `/work/${data.slug}/press/${slug}` : null
-                const inner = (
-                  <div className="grid w-full gap-x-6 gap-y-2 md:grid-cols-[minmax(0,1fr)_auto] md:items-start lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:items-center lg:justify-between">
-                    <div className="w-full">
-                      <h3 className="type-h6 text-[#222222]">{row.company}</h3>
-                      <p className="type-p3 mt-1 text-black/45">{row.source ? `${row.source} · ${row.dates}` : row.dates}</p>
-                    </div>
-
-                    <p className="type-p3 w-full text-black/55 md:col-start-1 lg:col-start-2 lg:max-w-[320px]">
-                      {row.summary}
-                    </p>
-
-                    <div className="flex w-full flex-wrap items-center justify-start gap-2 md:col-start-2 md:row-start-1 md:row-end-3 md:w-auto md:self-start md:justify-end lg:row-auto lg:col-start-3 lg:flex-nowrap lg:justify-end">
-                      {row.tags.map((tag) => (
-                        <TagPill key={`${row.company}-${tag}`} variant="dark">
-                          {tag}
-                        </TagPill>
-                      ))}
-                    </div>
-                  </div>
-                )
-                return viewerHref ? (
-                  <Link
-                    key={`${row.company}-${row.summary}`}
-                    href={viewerHref}
-                    className="block w-full cursor-pointer border-b border-[#E5E7EB] py-7 transition-colors duration-150 hover:bg-[#F5F7FA]"
-                  >
-                    {inner}
-                  </Link>
-                ) : (
-                  <div key={`${row.company}-${row.summary}`} className="w-full border-b border-[#E5E7EB] py-7">
-                    {inner}
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </Container>
-      </section>}
+      <CaseStudyRecognitionSection data={data} isFoh={isFoh} />
     </main>
   )
 }

@@ -1,52 +1,13 @@
 import type { CaseStudyData } from "@/components/case-study/types"
-import type { DiagramData } from "@/components/case-study/types"
-
-const k2Diagram: DiagramData = {
-  inputs: [
-    { id: "pwa", label: "PWA Storefront",    icon: "/tool-icons/contentstack-logo.png", descriptor: "Contentstack",  tier: "EXPERIENCE" },
-    { id: "cms", label: "CMS DXP",           icon: "/tool-icons/wordpress-logo.png",    descriptor: "WordPress",     tier: "CONTENT" },
-    { id: "hc",  label: "Headless Commerce", icon: "/tool-icons/bc-logo.png",           descriptor: "BigCommerce",   tier: "COMMERCE" },
-  ],
-  outputs: [
-    { id: "pos", label: "POS",        glyph: "database", descriptor: "In-store",      tier: "OMNI-CHANNEL" },
-    { id: "web", label: "Web App",    glyph: "monitor",  descriptor: "Storefronts",    tier: "OMNI-CHANNEL" },
-    { id: "mob", label: "Mobile App", glyph: "devices",  descriptor: "iOS · Android",  tier: "OMNI-CHANNEL" },
-  ],
-  integrations: [
-    { id: "quivers", label: "Quivers", icon: "/tool-icons/quivers-logo.png" },
-    { id: "epicor",  label: "Avante",  icon: "/tool-icons/epicore-logo.png" },
-    { id: "stripe",  label: "Stripe",  icon: "/tool-icons/stripe-logo.png"  },
-  ],
-  integrationsLabel: "BACK-OFFICE SYSTEMS",
-  pills: [
-    { id: "rest",     label: "REST"     },
-    { id: "graphql",  label: "GraphQL"  },
-    { id: "webhooks", label: "Webhooks" },
-  ],
-  tooltips: {
-    pwa:     { title: "PWA Storefront",    body: "Brand teams controlled each storefront's front-end experience while the commerce engine stayed shared underneath; fast, app-like, and decoupled." },
-    cms:     { title: "CMS DXP",           body: "WordPress powered the front-end brand layer for each of the nine storefronts, and was the integration layer for BC's cart, orders, and checkout." },
-    hc:      { title: "Headless Commerce", body: "BigCommerce served as the shared commerce engine — catalog, cart, and checkout across all 9 brands." },
-    api:     { title: "API Layer",         body: "The central integration hub. REST & GraphQL APIs connected all platforms with clean separation between the commerce engine and front-end surfaces." },
-    quivers: { title: "Quivers",           body: "Unified commerce platform connecting K2 brands, big-box, and specialty retailers. Maintained as the source of truth for omni-channel fulfillment & wholesale data." },
-    epicor:  { title: "Avante / ERP",      body: "ERP managing inventory, financials, and distribution. Kept deliberately outside the commerce layer to avoid turning BigCommerce into a fake ERP." },
-    stripe:  { title: "Stripe",            body: "Payment processing infrastructure handling transactions, fraud prevention, and payout management across all brands and channels." },
-    rest:    { title: "REST",     body: "RESTful endpoints for standard data operations — storefronts, POS, and mobile apps consume product, order, and customer data through this layer." },
-    graphql: { title: "GraphQL",  body: "Flexible query layer letting front-end teams fetch exactly the data they need — powers the complex, cross-brand requirements of the PWA storefronts." },
-    webhooks:{ title: "Webhooks", body: "Event-driven notifications keeping inventory, orders, and customer data in sync across BigCommerce, Quivers, Avante, and the storefronts in real time." },
-    pos:     { title: "POS",        body: "Point-of-sale for in-store transactions. Syncs inventory and order data with the central platform in real time." },
-    web:     { title: "Web App",    body: "Browser-based storefronts. Each of K2's nine brands got a distinct front-end experience consuming the same shared commerce infrastructure." },
-    mob:     { title: "Mobile App", body: "Native and hybrid mobile applications delivering dedicated iOS & Android experiences across the brand portfolio." },
-  },
-}
+import { k2Copy } from "@/content/case-studies/chunks/k2.copy"
+import { k2Diagram } from "@/content/case-studies/chunks/k2.diagram"
 
 export const k2CaseStudy = {
   slug: "k2",
   breadcrumbCurrent: "K2 Sports",
   hero: {
     title: "Headless/Composable Commerce for 9 K2 Brands",
-    intro:
-      "K2 Sports was being forced off a dying Demandware stack, but they still wanted each brand to feel distinct while finance & operations wanted one manageable engine underneath everything. I led the program and solution architecture that turned that mess into a headless multi-brand model, with BigCommerce powering commerce, WordPress and Contentstack powering the front end, and Avante plus Quivers staying the source of truth.",
+    intro: k2Copy.heroIntro,
     primaryCta: {
       label: "Book a Call",
       href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
@@ -64,8 +25,7 @@ export const k2CaseStudy = {
   atAGlance: {
     eyebrow: "At-a-Glance",
     title: "One Engine, Many Brands",
-    copy:
-      "This was a forced replatform, but it became something much more valuable. I turned a brittle migration problem into a reusable headless commerce pattern that let nine K2 brands share one backend engine while still preserving brand-specific front ends, regional logic, and business-user control.",
+    copy: k2Copy.atAGlanceCopy,
     stats: [
       { value: "9", suffix: "", label: "Sites Launched" },
       { value: "75", suffix: "%", label: "Faster Site Creation" },
@@ -82,8 +42,7 @@ export const k2CaseStudy = {
       alt: "K2 Sports headless commerce architecture and scoping artifacts",
       aspectRatio: "16/9",
     },
-    overview:
-      "Demandware was sunsetting, reconciliation across systems was too manual, and nobody had a clean answer for how Quivers, Avante, payments, CMS, SEO, and nine storefronts were supposed to work together in SaaS. Marketing wanted every brand to keep its own look and feel. Finance and operations wanted one reliable engine under everything. The business needed a model that could move at speedboat speed without turning headless commerce into an engineering science project.",
+    overview: k2Copy.problemOverview,
     projectOverviewRows: [
       { label: "Client", value: "K2 Sports" },
       { label: "Industry", value: "Sporting Goods • Multi-Brand Commerce • Headless" },
@@ -106,8 +65,7 @@ export const k2CaseStudy = {
   role: {
     eyebrow: "My Role",
     title: "Program Manager & Solution Architect",
-    copy:
-      "I owned the multi-brand architecture, integration strategy, program execution, and the political work required to get 9 storefronts moving on one clean model. I was the architecture lead, the traffic cop, the SEO & cutover risk manager, and the one person pulling the right people together to make the hard calls.",
+    copy: k2Copy.roleCopy,
     tags: [
       "Headless Commerce",
       "Program Leadership",
@@ -122,45 +80,28 @@ export const k2CaseStudy = {
     ],
     narrative: {
       title: "I Made Headless Commerce Work for Business Users",
-      paragraphs: [
-        "K2 didn’t need another platform swap. It needed a multi-store, multi-brand ecosystem built from scratch that could serve marketing, finance, and operations without forcing BigCommerce to do an ERP’s job.",
-        "I turned 9 stores into one manageable system, pushed our partnership team to approve a custom Quivers and Avante integration with BigCommerce, and solved the DNS and SEO problem so the front end stayed clean without sacrificing search equity.",
-      ],
-      highlights: [
-        "Built the unified API and proxy pattern behind a 9-store, multi-brand headless ecosystem.",
-        "Protected Avante & Quivers as system-of-record layers instead of letting the commerce platform absorb the wrong responsibilities.",
-        "Solved DNS, 301, and SEO continuity so the migration didn't destroy organic traffic or brand coherence.",
-      ],
-      closing:
-        "This is one of my clearest examples of building bleeding-edge architecture while still making it operable for marketing, finance, and operations.",
+      paragraphs: k2Copy.roleNarrative.paragraphs,
+      highlights: k2Copy.roleNarrative.highlights,
+      closing: k2Copy.roleNarrative.closing,
     },
   },
   solution: {
     eyebrow: "Solution",
     title: "Headless, But Actually Operable",
-    copy:
-      "I designed a model where one commerce backend powered multiple brand experiences. BigCommerce ran commerce. WordPress and Contentstack ran the front end. Avante and Quivers stayed the source of truth.",
+    copy: k2Copy.solutionCopy,
     cards: [],
     diagram: k2Diagram,
   },
   supplementalNarrative: {
     title: "This Was a Headless Multi-Store Monolith in Disguise",
-    paragraphs: [
-      "This wasn’t a simple headless commerce build. It was a multi-store system made to feel like one clean brand experience. The challenge was keeping the architecture disciplined enough for finance and operations while still giving each brand room to feel distinct.",
-      "I could see the full picture across APIs, storefronts, source systems, business users, and migration risk, then make the tradeoffs hold. That’s what kept the solution together and made it reusable for other multi-brand clients.",
-    ],
-    highlights: [
-      "The architecture let 9 brands behave like one manageable system without looking like one generic front end.",
-      "The solutioning pattern became a downstream reference for future BigCommerce multi-brand work.",
-    ],
-    closing:
-      "The win was bigger than a migration. It was turning a forced move into a reusable architecture the business could actually live with.",
+    paragraphs: k2Copy.supplementalNarrative.paragraphs,
+    highlights: k2Copy.supplementalNarrative.highlights,
+    closing: k2Copy.supplementalNarrative.closing,
   },
   impact: {
     eyebrow: "Impact",
     title: "Speed, Scale, Lower TCO",
-    intro:
-      "We gave K2 a cleaner operating model, faster storefront creation, faster content velocity, and less dependence on engineering.",
+    intro: k2Copy.impactIntro,
     proofPoints: ["Launch Speed", "Business Control", "Lower TCO"],
     stats: [
       { value: "9", suffix: "", label: "Sites Launched" },
@@ -170,8 +111,7 @@ export const k2CaseStudy = {
     ],
     beforeAfter: {
       title: "Before & After",
-      summary:
-        "K2 moved from a brittle multi-brand migration problem with too much manual reconciliation to a manageable headless commerce model.",
+      summary: k2Copy.impactBeforeAfterSummary,
       columns: [
         {
           label: "Before",
@@ -197,17 +137,17 @@ export const k2CaseStudy = {
       {
         step: "1",
         title: "Designed One Engine",
-        copy: "I built the architecture pattern that let 9 storefronts share one backend commerce model instead of fragmenting into separate implementation projects.",
+        copy: k2Copy.impactJourneyStepCopies[0],
       },
       {
         step: "2",
         title: "Kept the Truth in the Right Place",
-        copy: "I made sure Avante & Quivers remained the source of truth so the business could scale without breaking data discipline or inventing fake system ownership.",
+        copy: k2Copy.impactJourneyStepCopies[1],
       },
       {
         step: "3",
         title: "Made It Work at Speed",
-        copy: "I pulled the right people together to deliver two custom, platform-wide BigCommerce integrations and a headless experience layer that could move fast without collapsing into chaos.",
+        copy: k2Copy.impactJourneyStepCopies[2],
       },
     ],
   },
@@ -215,8 +155,7 @@ export const k2CaseStudy = {
     eyebrow: "Implementation",
     title: "Delivery Phases",
     introTitle: "How I Made the Portfolio Manageable",
-    introCopy:
-      "The program had to move fast across platform scoping, storefront migration, and launch.",
+    introCopy: k2Copy.deliveryIntroCopy,
     phases: [
       {
         phase: "Phase 01",
@@ -256,8 +195,7 @@ export const k2CaseStudy = {
     ],
   },
   challengeQuote: {
-    quote:
-      "What Jim built was bigger than a migration. He created one clean engine behind nine brands, cut the noise between systems, and made the whole portfolio more manageable.",
+    quote: k2Copy.challengeQuote,
     attributionTitle: "Nicole Phillips",
     attributionSubtitle: "Director of eCommerce, K2",
     avatarSrc: "/k2/nicole-phillips.jpeg",
@@ -265,8 +203,7 @@ export const k2CaseStudy = {
   recognition: {
     eyebrow: "Recognition",
     title: "Press & Accolades",
-    intro:
-      "The proof is simple: the pattern held up, BigCommerce reused it, and it kept showing up publicly as a model for multi-brand headless commerce.",
+    intro: k2Copy.recognitionIntro,
     rows: [
       {
         company: "Headless Commerce vs Microservices: Thorough Comparison",
