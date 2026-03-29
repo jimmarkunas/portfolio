@@ -52,7 +52,7 @@ export function BlogCardGrid({ cards }: { cards: CaseStudyBlogCard[] }) {
             className="overflow-hidden rounded-[24px] border border-black/8 bg-white shadow-[0_18px_40px_rgba(34,34,34,0.05)]"
           >
             <div
-              className={`relative overflow-hidden rounded-[24px] ${isImagePath(card.art) ? "cursor-zoom-in" : ""}`}
+              className={`relative aspect-[9/16] overflow-hidden rounded-[24px] ${isImagePath(card.art) ? "cursor-zoom-in" : ""}`}
               onClick={() => isImagePath(card.art) ? setLightbox(card.art) : null}
             >
               <CardArt art={card.art} />

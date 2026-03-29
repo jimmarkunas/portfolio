@@ -13,6 +13,14 @@
 - When touching shared components/design-system code, preserve mobile/tablet/desktop behavior.
 - If 2 attempts on the same issue fail, stop and present a short plan before another edit.
 
+## Git Safety (Hard Rule)
+- Never delete uncommitted changes.
+- Before any destructive git/worktree action, create 3 recovery layers in order:
+  1) `git stash push -u -m "pre-destructive-step-1"`
+  2) `git diff > /tmp/pre-destructive-step-2.patch`
+  3) `git branch backup/pre-destructive-step-3-<timestamp>`
+- If these 3 recovery layers are not created and verified, do not run the destructive action.
+
 ## Case Study Content Rules
 - Source briefs: `docs/case-studies/` (content truth).
 - Runtime files: `src/content/case-studies/` (schema truth).

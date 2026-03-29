@@ -3,13 +3,18 @@ import Link from "next/link"
 import { BeforeAfterComparison } from "@/components/case-study/BeforeAfterComparison"
 import { DirecTVRevenueChart } from "@/components/case-study/DirecTVRevenueChart"
 import { BlogCardGrid } from "@/components/case-study/BlogCardGrid"
+import HeadlessCommerceDiagram from "@/app/diagrams/headless_commerce_react"
 import dynamic from "next/dynamic"
-const HeadlessCommerceDiagram = dynamic(
-  () => import("@/app/diagrams/headless_commerce_react"),
-  { ssr: false }
-)
 const GlobalLocationsMap = dynamic(
   () => import("@/components/case-study/GlobalLocationsMap").then((m) => ({ default: m.GlobalLocationsMap })),
+  { ssr: false }
+)
+const MuradArchitectureDiagram = dynamic(
+  () => import("@/components/case-study/MuradArchitectureDiagram"),
+  { ssr: false }
+)
+const BISystemDiagram = dynamic(
+  () => import("@/components/case-study/bi-commerce-ecosystem-diagram"),
   { ssr: false }
 )
 import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
@@ -408,7 +413,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
         </Container>
       </section>
 
-      <SectionShell surface="white" containerClassName="pb-14 pt-1 md:pb-16 md:pt-1 lg:pb-20 lg:pt-1">
+      <SectionShell surface="white" containerClassName="pb-7 pt-1 md:pb-8 md:pt-1 lg:pb-10 lg:pt-1">
         <div className="flex flex-col items-center gap-8 pt-6 md:pt-8 lg:pt-10">
           <div className="flex flex-col items-center gap-5 text-center">
             <EyebrowPill className="bg-white" labelClassName="type-p2 text-[#222222]">
@@ -423,6 +428,10 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
 
           {data.solution.diagram ? (
             <HeadlessCommerceDiagram data={data.solution.diagram} />
+          ) : data.slug === "murad" ? (
+            <MuradArchitectureDiagram />
+          ) : data.slug === "bi" ? (
+            <BISystemDiagram />
           ) : data.solution.heroImage ? (
             <FullWidthImage src={data.solution.heroImage} fullWidth={false} />
           ) : (

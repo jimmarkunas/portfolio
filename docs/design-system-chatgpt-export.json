@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "name": "Portfolio Design System Export",
+    "format_version": "1.0",
+    "intent": "LLM-friendly summary for ChatGPT and similar assistants"
+  },
+  "stack": {
+    "framework": "Next.js 14",
+    "ui": "React 18 + TypeScript",
+    "styling": "Tailwind CSS + design tokens",
+    "motion": "Framer Motion"
+  },
+  "principles": [
+    "smallest-safe-change",
+    "token-first-styling",
+    "mobile-first-layout",
+    "clear-typography-hierarchy",
+    "purposeful-motion-only"
+  ],
+  "breakpoints": ["md", "lg", "xl"],
+  "design_language": {
+    "surfaces": "rounded cards, soft neutral borders",
+    "controls": "pill chips and compact actions",
+    "signals": "animated particles on connector tracks",
+    "emphasis": "dashed animated perimeter on key commerce card"
+  },
+  "color_intent": {
+    "ink": "near-black content text",
+    "accent_blue": "interactive states and key calls-to-action",
+    "signal_red": "critical connector/emphasis accents",
+    "neutral_gray": "rails, separators, and low-contrast structure"
+  },
+  "typography_intent": {
+    "levels": [
+      "section-title",
+      "card-title",
+      "body-copy",
+      "eyebrow-metadata"
+    ],
+    "goal": "fast visual scanning with stable rhythm"
+  },
+  "motion": {
+    "rules": [
+      "subtle, repeatable loops",
+      "directional flow communication",
+      "no large disruptive transforms in reading zones"
+    ],
+    "examples": [
+      "stroke-dashoffset loop on perimeter border",
+      "particle movement along connector paths"
+    ]
+  },
+  "components": [
+    {
+      "name": "SystemCard",
+      "purpose": "Node card with eyebrow, title, body, and feature row"
+    },
+    {
+      "name": "HeroCard",
+      "purpose": "High-emphasis center card with service pills"
+    },
+    {
+      "name": "CommerceCard",
+      "purpose": "Primary commerce node with animated dashed border envelope"
+    },
+    {
+      "name": "DataLakeCard",
+      "purpose": "Storage/analytics system node and connector targets"
+    },
+    {
+      "name": "BrowserCard",
+      "purpose": "Client delivery node for shopper-facing experiences"
+    }
+  ],
+  "accessibility": {
+    "contrast": "maintain readable contrast across states",
+    "targets": "touch-friendly control sizing",
+    "semantics": "animation never as sole meaning carrier"
+  },
+  "content_rules": {
+    "case_studies_source": "docs/case-studies/",
+    "runtime_source": "src/content/case-studies/",
+    "preserve_metrics_exactly": true,
+    "preserve_first_person_ownership": true
+  }
+}

@@ -8,6 +8,9 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Jim Markunas Portfolio",
   description: "Portfolio rebuild",
+  icons: {
+    icon: "/favicon.svg",
+  },
 }
 
 export default function RootLayout({

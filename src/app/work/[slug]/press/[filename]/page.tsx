@@ -13,7 +13,7 @@ const legacyPressFilenameAliases: Record<string, string[]> = {
 export async function generateStaticParams() {
   const params: { slug: string; filename: string }[] = []
   for (const [slug, study] of Object.entries(caseStudyRegistry)) {
-    for (const row of study.recognition.rows) {
+    for (const row of study.recognition?.rows ?? []) {
       if (row.file) {
         const basename = row.file.split("/").pop()!.replace(/\.[^.]+$/, "")
         const filenames = [basename, ...(legacyPressFilenameAliases[basename] ?? [])]
@@ -35,10 +35,12 @@ export default async function PressViewerPage({
   const { slug } = await params
   const study = caseStudyRegistry[slug]
   if (!study) notFound()
+  const recognitionRows = study.recognition?.rows
+  if (!recognitionRows?.length) notFound()
 
   return (
     <PressViewer
-      rows={study.recognition.rows}
+      rows={recognitionRows}
       backHref={`/work/${slug}#recognition`}
       breadcrumbs={[
         { label: "Work", href: "/work" },
