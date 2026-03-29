@@ -17,6 +17,10 @@ const BISystemDiagram = dynamic(
   () => import("@/components/case-study/bi-commerce-ecosystem-diagram"),
   { ssr: false }
 )
+const SCJCommerceArchitecture = dynamic(
+  () => import("@/components/case-study/SCJCommerceArchitecture"),
+  { ssr: false }
+)
 import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
 import { CaseStudyActionButton } from "@/components/case-study/template/CaseStudyActionButton"
@@ -363,6 +367,8 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
             <MuradArchitectureDiagram />
           ) : data.slug === "bi" ? (
             <BISystemDiagram />
+          ) : data.slug === "mm" ? (
+            <SCJCommerceArchitecture />
           ) : data.solution.heroImage ? (
             <FullWidthImage src={data.solution.heroImage} fullWidth={false} />
           ) : (

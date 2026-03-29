@@ -432,6 +432,16 @@ canvas {
   display: none !important;
 }
 
+/* BI diagram — hero card pulse glow */
+@keyframes bi-pulse-glow {
+  0%, 100% { box-shadow: 0 0 60px 16px rgba(68,122,203,0.45), 0 0 120px 40px rgba(68,122,203,0.20); }
+  50%       { box-shadow: 0 0 100px 30px rgba(68,122,203,0.80), 0 0 180px 70px rgba(68,122,203,0.38); }
+}
+.bi-pulse-glow { border-radius: 10px; }
+@media (min-width: 768px) {
+  .bi-pulse-glow { animation: bi-pulse-glow 6s ease-in-out infinite; }
+}
+
 /* Murad diagram — connector arrow hover */
 [data-layer="Modal Integrations"] [data-svg-wrapper] {
   cursor: pointer;

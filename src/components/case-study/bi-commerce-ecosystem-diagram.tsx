@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Modal from "./Modal";
 import { useModal } from "./useModal";
 import { TOOLTIPS } from "./biCommerceDiagramData";
+import { ProductsIcon, InventoryIcon, DatabaseIcon, ContentIcon, CampaignIcon, LaptopIcon } from "./bi-commerce-icons";
 import {
   AEM_BROWSER_PATH,
   AEM_DATALAKE_PATH,
@@ -27,6 +28,43 @@ import {
   VH,
   VW,
 } from "./bi-commerce-ecosystem.constants";
+
+const SAP_CARD = {
+  eyebrowLabel: "SOURCE OF TRUTH",
+  eyebrowLeft: <SapBadge />,
+  title: "SAP",
+  body: "Owns commercial truth across products, pricing, inventory, and order data.",
+  features: [
+    { label: "Products", icon: <ProductsIcon /> },
+    { label: "Inventory", icon: <InventoryIcon /> },
+    { label: "Orders",   icon: <DatabaseIcon /> },
+  ],
+};
+
+const AEM_CARD = {
+  eyebrowLabel: "CONTENT & ANALYTICS",
+  eyebrowLeft: <AemBadge />,
+  title: "Adobe Experience Manager",
+  body: "Publishes content and experience assets that shape browsing and merchandising.",
+  features: [
+    { label: "Content",   icon: <ContentIcon /> },
+    { label: "Campaigns", icon: <CampaignIcon /> },
+    { label: "Analytics", icon: <DatabaseIcon /> },
+  ],
+};
+
+const MULESOFT_CARD = {
+  eyebrowLabel: "INTEGRATION SPINE",
+  eyebrowLeft: <MulesoftBadge />,
+  title: "Mulesoft API Layer",
+  body: "Publishes content and experience assets that shape browsing and merchandising.",
+};
+
+const MULESOFT_PILLS = [
+  { label: "IDP",       key: "idp"       },
+  { label: "Apps",      key: "apps"      },
+  { label: "API/HOOKS", key: "api-hooks" },
+] as const;
 
 const cardVariants = {
   hidden: { opacity: 0, y: 28 },
@@ -97,6 +135,19 @@ function MobileConnector() {
   );
 }
 
+function MarchingAntsBorder({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative group">
+      {children}
+      <svg className="pointer-events-none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "visible" }}>
+        <rect x="-6" y="-6" width="calc(100% + 12px)" height="calc(100% + 12px)" rx="16" fill="none" stroke="#ED2224" strokeWidth="1.5" strokeDasharray="7 5" opacity="0.85" className="group-hover:stroke-[#447acb]" style={{ transition: "stroke 300ms" }}>
+          <animate attributeName="stroke-dashoffset" from="0" to="-1510" dur="180s" repeatCount="indefinite" />
+        </rect>
+      </svg>
+    </div>
+  );
+}
+
 function MobileReveal({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.div
@@ -115,20 +166,7 @@ function ResponsiveStackLayout({ toggle }: { toggle: (key: string) => void }) {
   return (
     <div className="flex flex-col">
       <MobileReveal>
-        <SystemCard
-          className="w-full"
-          compact
-          eyebrowLabel="SOURCE OF TRUTH"
-          eyebrowLeft={<SapBadge />}
-          title="SAP"
-          body="Owns commercial truth across products, pricing, inventory, and order data."
-          features={[
-            { label: "Products", icon: <ProductsIcon /> },
-            { label: "Inventory", icon: <InventoryIcon /> },
-            { label: "Orders", icon: <DatabaseIcon /> },
-          ]}
-          onClick={() => toggle("sap")}
-        />
+        <SystemCard className="w-full" compact {...SAP_CARD} onClick={() => toggle("sap")} />
       </MobileReveal>
 
       <MobileConnector />
@@ -145,11 +183,8 @@ function ResponsiveStackLayout({ toggle }: { toggle: (key: string) => void }) {
       <MobileReveal>
         <HeroCard
           className="w-full"
-          eyebrowLabel="INTEGRATION SPINE"
-          eyebrowLeft={<MulesoftBadge />}
-          title="Mulesoft API Layer"
-          body="Publishes content and experience assets that shape browsing and merchandising."
-          pills={[{ label: "IDP", onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle("idp"); } }, { label: "Apps", onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle("apps"); } }, { label: "API/HOOKS", onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle("api-hooks"); } }]}
+          {...MULESOFT_CARD}
+          pills={MULESOFT_PILLS.map(p => ({ label: p.label, onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle(p.key); } }))}
           onClick={() => toggle("mulesoft")}
         />
       </MobileReveal>
@@ -157,33 +192,15 @@ function ResponsiveStackLayout({ toggle }: { toggle: (key: string) => void }) {
       <MobileConnector />
 
       <MobileReveal>
-        <div className="relative group">
+        <MarchingAntsBorder>
           <CommerceCard className="w-full" compact onClick={() => toggle("commerce-cloud")} onGraphqlClick={() => toggle("adobe-graphql")} onPillsClick={() => toggle("commerce-services")} />
-          <svg className="pointer-events-none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "visible" }}>
-            <rect x="-6" y="-6" width="calc(100% + 12px)" height="calc(100% + 12px)" rx="16" fill="none" stroke="#ED2224" strokeWidth="1.5" strokeDasharray="7 5" opacity="0.85" className="group-hover:stroke-[#447acb]" style={{ transition: "stroke 300ms" }}>
-              <animate attributeName="stroke-dashoffset" from="0" to="-1510" dur="180s" repeatCount="indefinite" />
-            </rect>
-          </svg>
-        </div>
+        </MarchingAntsBorder>
       </MobileReveal>
 
       <MobileConnector />
 
       <MobileReveal>
-        <SystemCard
-          className="w-full"
-          compact
-          eyebrowLabel="CONTENT & ANALYTICS"
-          eyebrowLeft={<AemBadge />}
-          title="Adobe Experience Manager"
-          body="Publishes content and experience assets that shape browsing and merchandising."
-          features={[
-            { label: "Content", icon: <ContentIcon /> },
-            { label: "Campaigns", icon: <CampaignIcon /> },
-            { label: "Analytics", icon: <DatabaseIcon /> },
-          ]}
-          onClick={() => toggle("aem")}
-        />
+        <SystemCard className="w-full" compact {...AEM_CARD} onClick={() => toggle("aem")} />
       </MobileReveal>
 
       <MobileConnector />
@@ -213,77 +230,49 @@ function DesktopFixedLayout({ toggle }: { toggle: (key: string) => void }) {
       variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}
     >
       <ConnectorLayer />
-      <ParticleCanvas paths={[CC_SAP_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="237,34,36" />
-      <ParticleCanvas paths={[SAP_CC_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="34,34,34" />
-      <ParticleCanvas paths={[DATALAKE_CC_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="34,34,34" />
-      <ParticleCanvas paths={[CC_DATALAKE_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="237,34,36" />
-      <ParticleCanvas paths={[BROWSER_AEM_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="68,122,203" />
-      <ParticleCanvas paths={[AEM_BROWSER_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="68,122,203" />
-      <ParticleCanvas paths={[CC_MULESOFT_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="237,34,36" />
-      <ParticleCanvas paths={[MULESOFT_CC_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="34,34,34" />
-      <ParticleCanvas paths={[AEM_DATALAKE_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="68,122,203" />
-      <ParticleCanvas paths={[DATALAKE_AEM_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="34,34,34" />
-      <ParticleCanvas paths={[SAP_MULESOFT_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="34,34,34" />
-      <ParticleCanvas paths={[MULESOFT_SAP_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="34,34,34" />
-      <ParticleCanvas paths={[MULESOFT_BROWSER_PATH]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color="34,34,34" />
+      {([
+        [CC_SAP_PATH,         "237,34,36" ],
+        [SAP_CC_PATH,         "34,34,34"  ],
+        [DATALAKE_CC_PATH,    "34,34,34"  ],
+        [CC_DATALAKE_PATH,    "237,34,36" ],
+        [BROWSER_AEM_PATH,    "68,122,203"],
+        [AEM_BROWSER_PATH,    "68,122,203"],
+        [CC_MULESOFT_PATH,    "237,34,36" ],
+        [MULESOFT_CC_PATH,    "34,34,34"  ],
+        [AEM_DATALAKE_PATH,   "68,122,203"],
+        [DATALAKE_AEM_PATH,   "34,34,34"  ],
+        [SAP_MULESOFT_PATH,   "34,34,34"  ],
+        [MULESOFT_SAP_PATH,   "34,34,34"  ],
+        [MULESOFT_BROWSER_PATH,"34,34,34" ],
+      ] as const).map(([path, color], i) => (
+        <ParticleCanvas key={i} paths={[path]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color={color} />
+      ))}
 
       <motion.div className="absolute left-[501px] top-[0px] z-10" variants={cardVariants} transition={cardTransition}>
         <BrowserCard className="w-[475px]" onClick={() => toggle("shopper-browser")} onSdkClick={() => toggle("adobe-web-sdk")} />
       </motion.div>
 
       <motion.div className="absolute left-[1px] top-[279px] z-10" variants={cardVariants} transition={cardTransition}>
-        <SystemCard
-          className="w-80"
-          eyebrowLabel="SOURCE OF TRUTH"
-          eyebrowLeft={<SapBadge />}
-          title="SAP"
-          body="Owns commercial truth across products, pricing, inventory, and order data."
-          features={[
-            { label: "Products", icon: <ProductsIcon /> },
-            { label: "Inventory", icon: <InventoryIcon /> },
-            { label: "Orders", icon: <DatabaseIcon /> },
-          ]}
-          onClick={() => toggle("sap")}
-        />
+        <SystemCard className="w-80" {...SAP_CARD} onClick={() => toggle("sap")} />
       </motion.div>
 
       <motion.div className="absolute left-[483px] top-[279px] z-10" variants={cardVariants} transition={cardTransition}>
         <HeroCard
           className="w-[475px]"
-          eyebrowLabel="INTEGRATION SPINE"
-          eyebrowLeft={<MulesoftBadge />}
-          title="Mulesoft API Layer"
-          body="Publishes content and experience assets that shape browsing and merchandising."
-          pills={[{ label: "IDP", onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle("idp"); } }, { label: "Apps", onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle("apps"); } }, { label: "API/HOOKS", onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle("api-hooks"); } }]}
+          {...MULESOFT_CARD}
+          pills={MULESOFT_PILLS.map(p => ({ label: p.label, onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle(p.key); } }))}
           onClick={() => toggle("mulesoft")}
         />
       </motion.div>
 
       <motion.div className="absolute left-[1045px] top-[279px] z-10" variants={cardVariants} transition={cardTransition}>
-        <SystemCard
-          className="w-[390px]"
-          eyebrowLabel="CONTENT & ANALYTICS"
-          eyebrowLeft={<AemBadge />}
-          title="Adobe Experience Manager"
-          body="Publishes content and experience assets that shape browsing and merchandising."
-          features={[
-            { label: "Content", icon: <ContentIcon /> },
-            { label: "Campaigns", icon: <CampaignIcon /> },
-            { label: "Analytics", icon: <DatabaseIcon /> },
-          ]}
-          onClick={() => toggle("aem")}
-        />
+        <SystemCard className="w-[390px]" {...AEM_CARD} onClick={() => toggle("aem")} />
       </motion.div>
 
       <motion.div className="absolute left-[483px] top-[606px] z-10" variants={cardVariants} transition={cardTransition}>
-        <div className="relative group">
+        <MarchingAntsBorder>
           <CommerceCard className="w-[475px]" onClick={() => toggle("commerce-cloud")} onGraphqlClick={() => toggle("adobe-graphql")} onPillsClick={() => toggle("commerce-services")} />
-          <svg className="pointer-events-none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "visible" }}>
-            <rect x="-6" y="-6" width="calc(100% + 12px)" height="calc(100% + 12px)" rx="16" fill="none" stroke="#ED2224" strokeWidth="1.5" strokeDasharray="7 5" opacity="0.85" className="group-hover:stroke-[#447acb]" style={{ transition: "stroke 300ms" }}>
-              <animate attributeName="stroke-dashoffset" from="0" to="-1510" dur="180s" repeatCount="indefinite" />
-            </rect>
-          </svg>
-        </div>
+        </MarchingAntsBorder>
       </motion.div>
 
       <motion.div className="absolute left-[1115px] top-[677px] z-10" variants={cardVariants} transition={cardTransition}>
@@ -500,12 +489,10 @@ function SystemCard({
         <EyebrowRow left={<EyebrowLabel icon={eyebrowLeft} label={eyebrowLabel} />} />
         <Title>{title}</Title>
         {compact ? (
-          <div className="flex flex-row items-center gap-4">
-            <div className="grid grid-cols-3 gap-3 shrink-0">
-              {features.map(f => <DeviceFeature key={f.label} label={f.label} icon={f.icon} />)}
-            </div>
-            <div className="type-p4 text-[#222222]">{body}</div>
-          </div>
+          <CompactCardLayout
+            icons={features.map(f => <DeviceFeature key={f.label} label={f.label} icon={f.icon} />)}
+            body={body}
+          />
         ) : (
           <>
             <Body>{body}</Body>
@@ -532,14 +519,10 @@ function BrowserCard({ className, compact = false, onClick, onSdkClick }: { clas
 
         <Title>Shopper Browser</Title>
 
-        <div className="flex flex-row items-center gap-4">
-          <div className="grid grid-cols-3 gap-3 shrink-0">
-            <DeviceFeature label="Web" />
-            <DeviceFeature label="Tablet" icon={<img src="/tool-icons/svg/icon-tablet.svg" alt="Tablet" className="h-6 w-6" />} />
-            <DeviceFeature label="Mobile" icon={<img src="/tool-icons/svg/icon-mobile.svg" alt="Mobile" className="h-6 w-6" />} />
-          </div>
-          <div className="type-p4 text-[#222222]">Customer FE experience across platforms</div>
-        </div>
+        <CompactCardLayout
+          icons={<><DeviceFeature label="Web" /><DeviceFeature label="Tablet" icon={<img src="/tool-icons/svg/icon-tablet.svg" alt="Tablet" className="h-6 w-6" />} /><DeviceFeature label="Mobile" icon={<img src="/tool-icons/svg/icon-mobile.svg" alt="Mobile" className="h-6 w-6" />} /></>}
+          body="Customer FE experience across platforms"
+        />
       </div>
     </BaseCard>
   );
@@ -554,18 +537,12 @@ function DeviceFeature({ label, icon }: { label: string; icon?: React.ReactNode 
   );
 }
 
-function PulseGlow() {
+function CompactCardLayout({ icons, body }: { icons: React.ReactNode; body: string }) {
   return (
-    <style>{`
-      @keyframes bi-pulse-glow {
-        0%, 100% { box-shadow: 0 0 60px 16px rgba(68,122,203,0.45), 0 0 120px 40px rgba(68,122,203,0.20); }
-        50%       { box-shadow: 0 0 100px 30px rgba(68,122,203,0.80), 0 0 180px 70px rgba(68,122,203,0.38); }
-      }
-      .bi-pulse-glow { border-radius: 10px; }
-      @media (min-width: 768px) {
-        .bi-pulse-glow { animation: bi-pulse-glow 6s ease-in-out infinite; }
-      }
-    `}</style>
+    <div className="flex flex-row items-center gap-4">
+      <div className="grid grid-cols-3 gap-3 shrink-0">{icons}</div>
+      <div className="type-p4 text-[#222222]">{body}</div>
+    </div>
   );
 }
 
@@ -588,7 +565,6 @@ function HeroCard({
 }) {
   return (
     <div className="relative bi-pulse-glow">
-      <PulseGlow />
       <BaseCard className={className} dark onClick={onClick}>
         <div className="flex flex-col gap-4">
           <EyebrowRow left={<EyebrowLabel icon={eyebrowLeft} label={eyebrowLabel} dark />} />
@@ -618,14 +594,10 @@ function CommerceCard({ className, onClick, onGraphqlClick, onPillsClick, compac
         />
         <Title>Adobe Commerce Cloud</Title>
         {compact ? (
-          <div className="flex flex-row items-center gap-4">
-            <div className="grid grid-cols-3 gap-3 shrink-0">
-              <DeviceFeature label="Catalog" icon={<ProductsIcon />} />
-              <DeviceFeature label="Cart" icon={<InventoryIcon />} />
-              <DeviceFeature label="Checkout" icon={<DatabaseIcon />} />
-            </div>
-            <div className="type-p4 text-[#222222]">Publishes content and experience assets that shape browsing and merchandising.</div>
-          </div>
+          <CompactCardLayout
+            icons={<><DeviceFeature label="Catalog" icon={<ProductsIcon />} /><DeviceFeature label="Cart" icon={<InventoryIcon />} /><DeviceFeature label="Checkout" icon={<DatabaseIcon />} /></>}
+            body="Publishes content and experience assets that shape browsing and merchandising."
+          />
         ) : (
           <>
             <Body>Publishes content and experience assets that shape browsing and merchandising.</Body>
@@ -660,66 +632,11 @@ function BlueDot() {
   return <div className="h-3 w-3 rounded-full bg-[#477ACB]" />;
 }
 
-function SapBadge() {
-  return <img src="/tool-icons/svg/sap-logo.svg" alt="SAP" className="h-5 w-5 rounded-[2px]" />;
+function Badge({ src, alt }: { src: string; alt: string }) {
+  return <img src={src} alt={alt} className="h-5 w-5 rounded-[2px]" />;
 }
+function SapBadge()      { return <Badge src="/tool-icons/svg/sap-logo.svg" alt="SAP" />; }
+function MulesoftBadge() { return <Badge src="/tool-icons/svg/mulesoft-logo.svg" alt="Mulesoft" />; }
+function AemBadge()      { return <Badge src="/tool-icons/svg/adobe-experience-manager-logo.svg" alt="Adobe Experience Manager" />; }
+function AdobeBadge()    { return <Badge src="/tool-icons/svg/adobe-logo.svg" alt="Adobe" />; }
 
-function MulesoftBadge() {
-  return <img src="/tool-icons/svg/mulesoft-logo.svg" alt="Mulesoft" className="h-5 w-5 rounded-[2px]" />;
-}
-
-function AemBadge() {
-  return <img src="/tool-icons/svg/adobe-experience-manager-logo.svg" alt="Adobe Experience Manager" className="h-5 w-5 rounded-[2px]" />;
-}
-
-function AdobeBadge() {
-  return <img src="/tool-icons/svg/adobe-logo.svg" alt="Adobe" className="h-5 w-5 rounded-[2px]" />;
-}
-
-function ProductsIcon() {
-  return (
-    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0.993C0.0018 0.7304 0.1069 0.479 0.2925 0.2932C0.4781 0.1074 0.7294 0.0021 0.992 0H19.008C19.556 0 20 0.445 20 0.993V17.007C19.9982 17.2696 19.8931 17.521 19.7075 17.7068C19.5219 17.8926 19.2706 17.9979 19.008 18H0.992C0.7288 17.9997 0.4765 17.895 0.2905 17.7088C0.1045 17.5226 0 17.2702 0 17.007V0.993ZM4 12V14H16V12H4ZM4 4V10H10V4H4ZM12 4V6H16V4H12ZM12 8V10H16V8H12ZM6 6H8V8H6V6Z" fill="#212529"/>
-    </svg>
-  );
-}
-
-function InventoryIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M9 1.507V12.457H19.95C19.449 17.51 15.185 21.457 10 21.457C4.477 21.457 0 16.98 0 11.457C0 6.272 3.947 2.008 9 1.507V1.507ZM11 0C16.553 0.477 20.979 4.904 21.457 10.457H11V0V0Z" fill="#212529"/>
-    </svg>
-  );
-}
-
-function DatabaseIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M5.41667 13.5417C5.41667 13.8808 5.91608 14.4712 7.07417 15.0508C8.5735 15.8004 10.7001 16.25 13 16.25C15.2999 16.25 17.4265 15.8004 18.9258 15.0508C20.0839 14.4712 20.5833 13.8808 20.5833 13.5417V11.1898C18.7958 12.2948 16.0626 13 13 13C9.93742 13 7.20417 12.2937 5.41667 11.1898V13.5417ZM20.5833 16.6064C18.7958 17.7114 16.0626 18.4167 13 18.4167C9.93742 18.4167 7.20417 17.7103 5.41667 16.6064V18.9583C5.41667 19.2974 5.91608 19.8878 7.07417 20.4674C8.5735 21.2171 10.7001 21.6667 13 21.6667C15.2999 21.6667 17.4265 21.2171 18.9258 20.4674C20.0839 19.8878 20.5833 19.2974 20.5833 18.9583V16.6064ZM3.25 18.9583V8.125C3.25 5.43292 7.61583 3.25 13 3.25C18.3842 3.25 22.75 5.43292 22.75 8.125V18.9583C22.75 21.6504 18.3842 23.8333 13 23.8333C7.61583 23.8333 3.25 21.6504 3.25 18.9583ZM13 10.8333C15.2999 10.8333 17.4265 10.3837 18.9258 9.63408C20.0839 9.0545 20.5833 8.46408 20.5833 8.125C20.5833 7.78592 20.0839 7.1955 18.9258 6.61592C17.4265 5.86625 15.2999 5.41667 13 5.41667C10.7001 5.41667 8.5735 5.86625 7.07417 6.61592C5.91608 7.1955 5.41667 7.78592 5.41667 8.125C5.41667 8.46408 5.91608 9.0545 7.07417 9.63408C8.5735 10.3837 10.7001 10.8333 13 10.8333Z" fill="#212529"/>
-    </svg>
-  );
-}
-
-function ContentIcon() {
-  return (
-    <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M7 0V0H19.831C20.475 0 21 0.546 21 1.1904V22.8096C20.9997 23.1254 20.8775 23.4282 20.6603 23.6514C20.443 23.8746 20.1486 24 19.8415 24H1.15853C1.00532 23.9989 0.853819 23.9668 0.712681 23.9055C0.571543 23.8441 0.443531 23.7548 0.335954 23.6426C0.228377 23.5304 0.143341 23.3975 0.0857029 23.2515C0.0280647 23.1055 -0.00104744 22.9492 0.0000287851 22.7916V7.2L7 0ZM3.30169 7.2H7V3.396L3.30169 7.2ZM9.33335 2.4V8.4C9.33335 8.71826 9.21043 9.02349 8.99164 9.24853C8.77285 9.47357 8.4761 9.6 8.16668 9.6H2.33336V21.6H18.6667V2.4H9.33335Z" fill="#212529"/>
-    </svg>
-  );
-}
-
-function CampaignIcon() {
-  return (
-    <svg width="27" height="24" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1.35 0H25.65C26.008 0 26.3514 0.140476 26.6046 0.390524C26.8578 0.640573 27 0.979711 27 1.33333V22.6667C27 23.0203 26.8578 23.3594 26.6046 23.6095C26.3514 23.8595 26.008 24 25.65 24H1.35C0.991958 24 0.64858 23.8595 0.395406 23.6095C0.142232 23.3594 0 23.0203 0 22.6667V1.33333C0 0.979711 0.142232 0.640573 0.395406 0.390524C0.64858 0.140476 0.991958 0 1.35 0V0ZM24.3 5.65067L13.5972 15.1173L2.7 5.62133V21.3333H24.3V5.65067ZM3.38985 2.66667L13.5824 11.5493L23.6277 2.66667H3.38985Z" fill="#212529"/>
-    </svg>
-  );
-}
-
-function LaptopIcon() {
-  return (
-    <svg width="29" height="24" viewBox="0 0 29 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M3.95455 2.66667V17.3333H25.0455V2.66667H3.95455ZM1.31818 1.34267C1.31818 0.601333 1.91795 0 2.62582 0H26.3742C27.0965 0 27.6818 0.598667 27.6818 1.34267V20H1.31818V1.34267ZM0 21.3333H29V24H0V21.3333Z" fill="#222222"/>
-    </svg>
-  );
-}
