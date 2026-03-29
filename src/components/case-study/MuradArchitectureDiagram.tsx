@@ -143,12 +143,12 @@ export default function MuradArchitectureDiagram() {
       >
 <div className="w-[1440px] h-[825px] relative">
   <div className="w-[1440px] h-[825px] left-0 top-0 absolute" style={{ backgroundColor: "#fefefe" }} />
-  <DesktopCard data={D.bcUS} cardKey="bc-us" toggle={toggle} variant="border" style={{left:33,top:240}} />
-  <DesktopCard data={D.bcUK} cardKey="bc-uk" toggle={toggle} variant="border" style={{left:33,top:438}} />
-  <DesktopCard data={D.bcMY} cardKey="bc-my" toggle={toggle} variant="border" style={{left:33,top:635}} />
+  <DesktopCard data={D.bcUS} cardKey="bc-us" toggle={toggle} variant="border" iconOverlay style={{left:33,top:240}} />
+  <DesktopCard data={D.bcUK} cardKey="bc-uk" toggle={toggle} variant="border" iconOverlay style={{left:33,top:438}} />
+  <DesktopCard data={D.bcMY} cardKey="bc-my" toggle={toggle} variant="border" iconOverlay style={{left:33,top:635}} />
   <div data-layer="API" className="Api w-64 h-16 left-[592px] top-[379px] absolute cursor-pointer group" onPointerDown={e => e.stopPropagation()} onClick={e => { e.stopPropagation(); toggle('api-layer') }}>
     <PulseGlow w={256} h={128} uid="pg-api" style={{ top: -28, left: 0 }} />
-    <div data-layer="API Container" className="ApiContainer w-64 h-32 left-0 top-[-28px] absolute bg-neutral-800 rounded-[10px] border border-[#7b7b7b] group-hover:border-blue-500 transition-colors" />
+    <div data-layer="API Container" className="ApiContainer w-64 h-32 left-0 top-[-28px] absolute bg-[#202124] rounded-[10px] outline outline-1 outline-offset-[-1px] outline-[#202124] group-hover:outline-2 group-hover:outline-blue-500 group-hover:shadow-[0_0_0_2px_rgba(68,122,203,0.15),0_8px_32px_rgba(68,122,203,0.35)] transition-[outline,box-shadow] duration-150" />
     <div data-layer="Modal Title" className="ModalTitle w-64 h-8 left-0 top-[36px] absolute">
       <div data-layer="Paragraph" className="Paragraph w-64 h-3.5 left-0 top-[16px] absolute text-center justify-start text-neutral-50 text-sm font-normal font-display leading-4">{D.apiLayer.subtitle}</div>
       <div data-layer="Header" className="Header w-64 h-4 left-0 top-0 absolute text-center justify-start text-white text-base font-semibold font-display leading-4">{D.apiLayer.title}</div>
@@ -264,17 +264,6 @@ export default function MuradArchitectureDiagram() {
           stroke: #3b82f6;
         }
 
-        [data-layer="Modal Integrations"] [data-layer="Avalara Logo"]:hover svg rect,
-        [data-layer="Modal Integrations"] [data-layer="Ordergroove"]:hover svg rect,
-        [data-layer="Modal Integrations"] [data-layer="Paypal Logo"]:hover svg rect {
-          fill: transparent;
-        }
-
-        [data-layer="Modal Integrations"] [data-layer="Avalara Logo"]:hover svg path,
-        [data-layer="Modal Integrations"] [data-layer="Ordergroove"]:hover svg path,
-        [data-layer="Modal Integrations"] [data-layer="Paypal Logo"]:hover svg path {
-          fill: #3b82f6;
-        }
       `}</style>
     </div>
     </div>

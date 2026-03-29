@@ -56,6 +56,8 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
   const [hoveredId, setHoveredId]         = useState<string | null>(null);
   const [hoveredIconId, setHoveredIconId] = useState<string | null>(null);
   const lit = (id: string) => activeKey === id || hoveredId === id || hoveredIconId === id;
+  const pillHovered = hoveredId !== null && data.pills.some(p => p.id === hoveredId);
+  const apiLit = lit("api") || pillHovered || (activeKey !== null && data.pills.some(p => p.id === activeKey));
 
   useEffect(() => {
     const el = containerRef.current;
@@ -123,7 +125,7 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
 
   // Shared HTML icon overlay tile
   function IconTile(node: { id: string; icon: string; label: string },
-                    left: number, top: number) {
+                    left: number, top: number, showHover = false) {
     return (
       <div key={node.id} style={{
         position: "absolute", left, top,
@@ -135,7 +137,7 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
         onPointerLeave={() => setHoveredIconId(null)}
         onClick={(e) => tap(node.id, e)}
       >
-        <DiagramIcon src={node.icon} hovered={hoveredIconId === node.id} size={iconSize} />
+        <DiagramIcon src={node.icon} hovered={showHover && hoveredIconId === node.id} size={iconSize} />
       </div>
     );
   }
@@ -152,8 +154,8 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
           {data.inputs.map(node => (
             <div key={node.id} className="group flex-1 min-w-0 flex flex-col gap-1 rounded-[12px] bg-[#F3F3F3] hover:bg-[#222222] p-3 cursor-pointer transition-colors duration-150"
               onClick={(e) => tap(node.id, e)}>
-              <div className="group/icon w-10 h-10 rounded-[3px] mb-1 hover:bg-[#447ACB] transition-colors duration-150 shrink-0">
-                <img src={node.icon} alt={node.label} className="w-10 h-10 rounded-[3px] group-hover/icon:[filter:brightness(0)_invert(1)] transition-[filter] duration-150" />
+              <div className="w-10 h-10 rounded-[3px] mb-1 shrink-0">
+                <img src={node.icon} alt={node.label} className="w-10 h-10 rounded-[3px]" />
               </div>
               <p className="type-p5 text-[#7B7B7B] group-hover:text-white/60 uppercase tracking-[0.08em] leading-none">{node.tier}</p>
               <p className="type-p4 text-[#222222] group-hover:text-white leading-snug">{node.label}</p>
@@ -170,8 +172,10 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
           </p>
           <div className="flex gap-3">
             {data.integrations.map(intg => (
-              <img key={intg.id} src={intg.icon} alt={intg.label} className="w-10 h-10 rounded-[3px] cursor-pointer"
-                onClick={(e) => tap(intg.id, e)} />
+              <div key={intg.id} className="group/icon w-10 h-10 rounded-[3px] hover:bg-[#447ACB] transition-colors duration-150 cursor-pointer shrink-0"
+                onClick={(e) => tap(intg.id, e)}>
+                <img src={intg.icon} alt={intg.label} className="w-10 h-10 rounded-[3px] group-hover/icon:[filter:brightness(0)_invert(1)] transition-[filter] duration-150" />
+              </div>
             ))}
           </div>
         </div>
@@ -266,7 +270,7 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
 
         {/* Engine circle */}
         <circle cx={ECX} cy={ECY} r={ER}
-          fill={lit("api") ? C.accent : C.ink}
+          fill={apiLit ? C.accent : C.ink}
           stroke="rgba(255,255,255,0.15)" strokeWidth="1"
           style={{ cursor: "pointer", transition: "fill 160ms ease" }}
           onClick={(e) => tap("api", e)}
@@ -323,7 +327,8 @@ export default function DataFlowDiagram({ data }: { data: DiagramData }) {
         {data.integrations.map((intg, j) =>
           IconTile(intg,
             intgXsSvg[j] * scale - iconSize / 2,
-            INTG_Y_SVG * scale - iconSize / 2
+            INTG_Y_SVG * scale - iconSize / 2,
+            true
           )
         )}
       </div>

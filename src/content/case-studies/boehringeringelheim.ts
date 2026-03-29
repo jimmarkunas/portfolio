@@ -17,7 +17,7 @@ export const boehringeringelheimCaseStudy = {
       href: "/cv",
     },
     image: {
-      src: "/boehringer/hero-boehringer-01.png",
+      src: "/bi/hero-bi-01.png",
       alt: "Boehringer Ingelheim global commerce transformation hero image",
     },
   },
@@ -38,7 +38,7 @@ export const boehringeringelheimCaseStudy = {
     title: "Five Markets, One Mess",
     media: {
       kind: "image",
-      src: "/boehringer/hero-boehringer-02.png",
+      src: "/bi/modal-bi-01.png",
       alt: "Boehringer Ingelheim commerce platform visual for global veterinary ordering",
       aspectRatio: "16/9",
     },

@@ -21,6 +21,13 @@ Protect work in progress, avoid destructive edits, and keep visual changes deter
 - Do not refactor during visual tweaks unless explicitly requested.
 - Preserve mobile/tablet/desktop behavior when touching shared components.
 
+## Token + Execution Efficiency
+- Solve one root cause per attempt; no stacked speculative edits.
+- For single-fix requests, limit each attempt to a maximum of 3 files changed.
+- Verify with smallest possible check first, then run broader checks once.
+- If an edit worsens output, revert that edit immediately before trying again.
+- After two failed attempts on the same issue, stop and present a short 3-step plan.
+
 ## Data and Content
 - Keep case study source truth in `docs/case-studies/`.
 - Keep runtime schema truth in `src/content/case-studies/`.
