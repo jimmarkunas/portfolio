@@ -62,7 +62,7 @@ jobs:
       FTP_HOST: 82.25.83.251
       FTP_CONNECT_TIMEOUT_SECONDS: "45"
       FTP_TRANSFER_TIMEOUT_SECONDS: "300"
-      FTP_DEPLOY_ATTEMPTS: "3"
+      FTP_DEPLOY_ATTEMPTS: "2"
     steps:
       - name: Download static artifact
         uses: actions/download-artifact@v4
@@ -97,28 +97,7 @@ jobs:
             target="${FTP_TARGET_DIR}"
           else
             target="./public_html/"
-            if root_listing="$(
-              timeout "${FTP_CONNECT_TIMEOUT_SECONDS}s" lftp -e "
-                set cmd:fail-exit true;
-                set net:timeout 20;
-                set net:max-retries 1;
-                set net:reconnect-interval-base 5;
-                set net:reconnect-interval-max 10;
-                set net:persist-retries 0;
-                set ssl:verify-certificate false;
-                set ftp:ssl-force true;
-                set ftp:passive-mode true;
-                open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
-                cls -1;
-                quit
-              " 2>/dev/null
-            )"; then
-              if ! printf '%s\n' "${root_listing}" | grep -qx "public_html"; then
-                target="./"
-              fi
-            else
-              echo "Warning: Could not inspect FTP root; defaulting to ${target}."
-            fi
+            echo "FTP_TARGET_DIR secret not set; defaulting to ${target}."
           fi
 
           case "${target}" in
@@ -129,27 +108,8 @@ jobs:
           echo "Using deploy target: ${target}"
           echo "target=${target}" >> "${GITHUB_OUTPUT}"
 
-      - name: Inspect remote FTP root
-        continue-on-error: true
-        run: |
-          timeout "${FTP_CONNECT_TIMEOUT_SECONDS}s" lftp -e "
-            set cmd:fail-exit true;
-            set net:timeout 20;
-            set net:max-retries 1;
-            set net:reconnect-interval-base 5;
-            set net:reconnect-interval-max 10;
-            set net:persist-retries 0;
-            set ssl:verify-certificate false;
-            set ftp:ssl-force true;
-            set ftp:passive-mode true;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
-            pwd;
-            cls -la;
-            quit
-          "
-
       - name: Deploy via FTP
-        timeout-minutes: 8
+        timeout-minutes: 12
         run: |
           set -euo pipefail
 
@@ -157,17 +117,17 @@ jobs:
             echo "FTP deploy attempt ${attempt}/${FTP_DEPLOY_ATTEMPTS}"
             if timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp -e "
               set cmd:fail-exit true;
-              set net:timeout 20;
-              set net:max-retries 2;
-              set net:reconnect-interval-base 5;
-              set net:reconnect-interval-max 15;
+              set net:timeout 30;
+              set net:max-retries 8;
+              set net:reconnect-interval-base 3;
+              set net:reconnect-interval-max 10;
               set net:persist-retries 0;
               set ssl:verify-certificate false;
               set ftp:ssl-force true;
               set ftp:passive-mode true;
               open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
               pwd;
-              mirror --reverse --delete --continue --parallel=4 --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
+              mirror --reverse --delete --continue --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
               set cmd:fail-exit false;
               cls -la ${{ steps.deploy_target.outputs.target }};
               cls -la ${{ steps.deploy_target.outputs.target }}deploy-marker.txt;
