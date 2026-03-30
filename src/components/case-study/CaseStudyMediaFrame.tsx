@@ -1,5 +1,5 @@
 import type { CaseStudyMedia } from "@/components/case-study/types"
-import { CaseStudyDeferredVisual } from "@/components/case-study/template/visuals/CaseStudyDeferredVisual"
+import { DeferredMediaReactDiagram } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
 
 type CaseStudyMediaFrameProps = {
   media: CaseStudyMedia
@@ -16,8 +16,7 @@ export function CaseStudyMediaFrame({
     return (
       <div className={`w-full overflow-hidden ${className}`.trim()}>
         {media.component === "bi-data-silos" && (
-          <CaseStudyDeferredVisual
-            visual="media-react-diagram"
+          <DeferredMediaReactDiagram
             component="bi-data-silos"
             eager
             minHeightClassName="min-h-[320px] md:min-h-[360px]"

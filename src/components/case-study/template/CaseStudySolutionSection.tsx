@@ -3,7 +3,7 @@ import type { CaseStudyData } from "@/components/case-study/types"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { SectionShell } from "@/components/SectionShell"
-import { CaseStudyDeferredVisual } from "@/components/case-study/template/visuals/CaseStudyDeferredVisual"
+import { DeferredSolutionDiagramVisual } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
 
 export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
   return (
@@ -21,8 +21,7 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
         </div>
 
         {data.solution.diagram || data.solution.diagramKey ? (
-          <CaseStudyDeferredVisual
-            visual="solution-diagram"
+          <DeferredSolutionDiagramVisual
             diagram={data.solution.diagram}
             diagramKey={data.solution.diagramKey}
             minHeightClassName="min-h-[360px] md:min-h-[420px]"

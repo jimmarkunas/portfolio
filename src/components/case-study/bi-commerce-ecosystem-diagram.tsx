@@ -1,22 +1,27 @@
-"use client";
-import { useRef } from "react";
-import ParticleCanvas from "./ParticleCanvas";
-import { motion } from "framer-motion";
-import { DiagramShell } from "./DiagramShell";
-import { TOOLTIPS } from "./biCommerceDiagramData";
-import { ProductsIcon, InventoryIcon, DatabaseIcon, ContentIcon, CampaignIcon, LaptopIcon } from "./bi-commerce-icons";
-import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
+"use client"
+
+import { motion } from "framer-motion"
+import { useRef, type MouseEvent, type ReactNode, type RefObject } from "react"
+
+import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost"
+import {
+  BI_AEM_SYSTEM_CARD,
+  BI_MULESOFT_HERO_CARD,
+  BI_SAP_SYSTEM_CARD,
+  BlueTag,
+  BrowserCard,
+  CommerceCard,
+  DataLakeCard,
+  HeroCard,
+  MarchingAntsBorder,
+  SystemCard,
+} from "@/components/case-study/diagram-shared/BiDiagramCards"
+import { BiConnectorLayer } from "@/components/case-study/diagram-shared/BiConnectorLayer"
 import {
   BI_DESKTOP_NODE_POSITIONS,
-  BI_AEM_CARD,
   BI_DESKTOP_PARTICLE_PATHS,
-  BI_MULESOFT_CARD,
   BI_MULESOFT_PILLS,
-  BI_SAP_CARD,
-  type BiBadgeKey,
-  type BiFeatureIconKey,
-} from "@/components/case-study/diagram-config/bi-commerce.config";
-import { BiConnectorLayer } from "@/components/case-study/diagram-shared/BiConnectorLayer";
+} from "@/components/case-study/diagram-config/bi-commerce.config"
 import {
   CONN_H,
   CONN_W,
@@ -24,68 +29,224 @@ import {
   MOB_UP,
   VH,
   VW,
-} from "./bi-commerce-ecosystem.constants";
+} from "./bi-commerce-ecosystem.constants"
+import ParticleCanvas from "./ParticleCanvas"
+import { DiagramShell } from "./DiagramShell"
+import { TOOLTIPS } from "./biCommerceDiagramData"
 
 const cardVariants = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0 },
-};
-
-const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
-
-type CardFeature = {
-  label: string;
-  icon: React.ReactNode;
-};
-
-type PillFeature = {
-  label: string;
-  onClick?: (e: React.MouseEvent) => void;
-};
-
-function renderBadge(badge: BiBadgeKey) {
-  if (badge === "sap") return <SapBadge />;
-  if (badge === "aem") return <AemBadge />;
-  return <MulesoftBadge />;
 }
 
-function renderFeatureIcon(icon: BiFeatureIconKey) {
-  if (icon === "products") return <ProductsIcon />;
-  if (icon === "inventory") return <InventoryIcon />;
-  if (icon === "content") return <ContentIcon />;
-  if (icon === "campaign") return <CampaignIcon />;
-  return <DatabaseIcon />;
+const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const
+
+const mobileCard = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
+  },
 }
 
-function toCardFeatures(features: { label: string; icon: BiFeatureIconKey }[]): CardFeature[] {
-  return features.map((feature) => ({
-    label: feature.label,
-    icon: renderFeatureIcon(feature.icon),
-  }));
+function asParticleContainerRef(ref: RefObject<HTMLDivElement>): RefObject<HTMLElement> {
+  return ref as RefObject<HTMLElement>
 }
 
-const SAP_CARD = {
-  eyebrowLabel: BI_SAP_CARD.eyebrowLabel,
-  eyebrowLeft: renderBadge(BI_SAP_CARD.eyebrow),
-  title: BI_SAP_CARD.title,
-  body: BI_SAP_CARD.body,
-  features: toCardFeatures(BI_SAP_CARD.features),
-} as const
+function toMulesoftPills(toggle: (key: string) => void) {
+  return BI_MULESOFT_PILLS.map((pill) => ({
+    label: pill.label,
+    onClick: (event: MouseEvent) => {
+      event.stopPropagation()
+      toggle(pill.key)
+    },
+  }))
+}
 
-const AEM_CARD = {
-  eyebrowLabel: BI_AEM_CARD.eyebrowLabel,
-  eyebrowLeft: renderBadge(BI_AEM_CARD.eyebrow),
-  title: BI_AEM_CARD.title,
-  body: BI_AEM_CARD.body,
-  features: toCardFeatures(BI_AEM_CARD.features),
-} as const
+function MobileConnector({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
+  const ref = useRef<HTMLDivElement>(null)
+  return (
+    <div className="flex justify-center py-[7px]">
+      <div ref={ref} className="relative" style={{ width: CONN_W, height: CONN_H }}>
+        <div className="absolute top-0 bottom-0" style={{ left: 11, width: 1.5, background: "#D9DDE3" }} />
+        <div className="absolute top-0 bottom-0" style={{ left: 23, width: 1.5, background: "#D9DDE3" }} />
+        {shouldReduceMotion ? null : (
+          <>
+            <ParticleCanvas paths={[MOB_DOWN]} containerRef={asParticleContainerRef(ref)} color="237,34,36" />
+            <ParticleCanvas paths={[MOB_UP]} containerRef={asParticleContainerRef(ref)} color="34,34,34" />
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
 
-const MULESOFT_CARD = {
-  eyebrowLabel: BI_MULESOFT_CARD.eyebrowLabel,
-  eyebrowLeft: renderBadge(BI_MULESOFT_CARD.eyebrow),
-  title: BI_MULESOFT_CARD.title,
-  body: BI_MULESOFT_CARD.body,
-} as const
+function MobileReveal({
+  children,
+  className,
+  shouldReduceMotion,
+}: {
+  children: ReactNode
+  className?: string
+  shouldReduceMotion: boolean
+}) {
+  return (
+    <motion.div
+      className={className}
+      variants={mobileCard}
+      initial={shouldReduceMotion ? false : "hidden"}
+      whileInView={shouldReduceMotion ? undefined : "visible"}
+      viewport={{ once: true, margin: "-40px" }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+function ResponsiveStackLayout({
+  toggle,
+  shouldReduceMotion,
+}: {
+  toggle: (key: string) => void
+  shouldReduceMotion: boolean
+}) {
+  const mulesoftPills = toMulesoftPills(toggle)
+
+  return (
+    <div className="flex flex-col">
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
+        <SystemCard className="w-full" compact {...BI_SAP_SYSTEM_CARD} onClick={() => toggle("sap")} />
+      </MobileReveal>
+
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
+
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
+        <div className="flex flex-wrap gap-3 justify-center">
+          <BlueTag label="PAYMENTS" onClick={() => toggle("payments")} />
+          <BlueTag label="TAX" onClick={() => toggle("tax")} />
+        </div>
+      </MobileReveal>
+
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
+
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
+        <HeroCard
+          className="w-full"
+          {...BI_MULESOFT_HERO_CARD}
+          pills={mulesoftPills}
+          onClick={() => toggle("mulesoft")}
+        />
+      </MobileReveal>
+
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
+
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
+        <MarchingAntsBorder shouldReduceMotion={shouldReduceMotion}>
+          <CommerceCard
+            className="w-full"
+            compact
+            onClick={() => toggle("commerce-cloud")}
+            onGraphqlClick={() => toggle("adobe-graphql")}
+            onPillsClick={() => toggle("commerce-services")}
+          />
+        </MarchingAntsBorder>
+      </MobileReveal>
+
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
+
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
+        <SystemCard className="w-full" compact {...BI_AEM_SYSTEM_CARD} onClick={() => toggle("aem")} />
+      </MobileReveal>
+
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
+
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
+        <DataLakeCard className="w-full" onClick={() => toggle("data-lake")} onConnectorClick={() => toggle("aem-connector")} />
+      </MobileReveal>
+
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
+
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
+        <BrowserCard className="w-full" compact onClick={() => toggle("shopper-browser")} onSdkClick={() => toggle("adobe-web-sdk")} />
+      </MobileReveal>
+    </div>
+  )
+}
+
+function DesktopFixedLayout({
+  toggle,
+  shouldReduceMotion,
+}: {
+  toggle: (key: string) => void
+  shouldReduceMotion: boolean
+}) {
+  const canvasContainerRef = useRef<HTMLDivElement>(null)
+  const positions = BI_DESKTOP_NODE_POSITIONS
+  const mulesoftPills = toMulesoftPills(toggle)
+
+  return (
+    <motion.div
+      ref={canvasContainerRef}
+      className="relative h-[875px] w-[1440px] overflow-hidden bg-white"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}
+    >
+      <BiConnectorLayer />
+      {shouldReduceMotion
+        ? null
+        : BI_DESKTOP_PARTICLE_PATHS.map(([path, color], index) => (
+            <ParticleCanvas
+              key={`${path}:${color}:${index}`}
+              paths={[path]}
+              containerRef={asParticleContainerRef(canvasContainerRef)}
+              color={color}
+            />
+          ))}
+
+      <motion.div className="absolute z-10" style={positions.browser} variants={cardVariants} transition={cardTransition}>
+        <BrowserCard className="w-[475px]" onClick={() => toggle("shopper-browser")} onSdkClick={() => toggle("adobe-web-sdk")} />
+      </motion.div>
+
+      <motion.div className="absolute z-10" style={positions.sap} variants={cardVariants} transition={cardTransition}>
+        <SystemCard className="w-80" {...BI_SAP_SYSTEM_CARD} onClick={() => toggle("sap")} />
+      </motion.div>
+
+      <motion.div className="absolute z-10" style={positions.mulesoft} variants={cardVariants} transition={cardTransition}>
+        <HeroCard className="w-[475px]" {...BI_MULESOFT_HERO_CARD} pills={mulesoftPills} onClick={() => toggle("mulesoft")} />
+      </motion.div>
+
+      <motion.div className="absolute z-10" style={positions.aem} variants={cardVariants} transition={cardTransition}>
+        <SystemCard className="w-[390px]" {...BI_AEM_SYSTEM_CARD} onClick={() => toggle("aem")} />
+      </motion.div>
+
+      <motion.div className="absolute z-10" style={positions.commerceCloud} variants={cardVariants} transition={cardTransition}>
+        <MarchingAntsBorder shouldReduceMotion={shouldReduceMotion}>
+          <CommerceCard
+            className="w-[475px]"
+            onClick={() => toggle("commerce-cloud")}
+            onGraphqlClick={() => toggle("adobe-graphql")}
+            onPillsClick={() => toggle("commerce-services")}
+          />
+        </MarchingAntsBorder>
+      </motion.div>
+
+      <motion.div className="absolute z-10" style={positions.dataLake} variants={cardVariants} transition={cardTransition}>
+        <DataLakeCard className="w-80" onClick={() => toggle("data-lake")} onConnectorClick={() => toggle("aem-connector")} />
+      </motion.div>
+
+      <motion.div className="absolute z-10" style={positions.paymentsTag} variants={cardVariants} transition={cardTransition}>
+        <BlueTag label="PAYMENTS" onClick={() => toggle("payments")} />
+      </motion.div>
+
+      <motion.div className="absolute z-10" style={positions.taxTag} variants={cardVariants} transition={cardTransition}>
+        <BlueTag label="TAX" onClick={() => toggle("tax")} />
+      </motion.div>
+    </motion.div>
+  )
+}
 
 export default function CommerceEcosystemDiagram() {
   return (
@@ -115,513 +276,5 @@ export default function CommerceEcosystemDiagram() {
         </>
       )}
     </DiagramRendererHost>
-  );
+  )
 }
-
-const mobileCard = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] } },
-};
-
-function MobileConnector({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-  return (
-    <div className="flex justify-center py-[7px]">
-      <div ref={ref} className="relative" style={{ width: CONN_W, height: CONN_H }}>
-        <div className="absolute top-0 bottom-0" style={{ left: 11, width: 1.5, background: "#D9DDE3" }} />
-        <div className="absolute top-0 bottom-0" style={{ left: 23, width: 1.5, background: "#D9DDE3" }} />
-        {shouldReduceMotion ? null : (
-          <>
-            <ParticleCanvas paths={[MOB_DOWN]} containerRef={ref as React.RefObject<HTMLElement>} color="237,34,36" />
-            <ParticleCanvas paths={[MOB_UP]}   containerRef={ref as React.RefObject<HTMLElement>} color="34,34,34" />
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function MarchingAntsBorder({ children, shouldReduceMotion }: { children: React.ReactNode; shouldReduceMotion: boolean }) {
-  return (
-    <div className="relative group">
-      {children}
-      <svg className="pointer-events-none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "visible" }}>
-        <rect x="-6" y="-6" width="calc(100% + 12px)" height="calc(100% + 12px)" rx="16" fill="none" stroke="#ED2224" strokeWidth="1.5" strokeDasharray="7 5" opacity="0.85" className="group-hover:stroke-[#447acb]" style={{ transition: "stroke 300ms" }}>
-          {shouldReduceMotion ? null : (
-            <animate attributeName="stroke-dashoffset" from="0" to="-1510" dur="180s" repeatCount="indefinite" />
-          )}
-        </rect>
-      </svg>
-    </div>
-  );
-}
-
-function MobileReveal({
-  children,
-  className,
-  shouldReduceMotion,
-}: {
-  children: React.ReactNode
-  className?: string
-  shouldReduceMotion: boolean
-}) {
-  return (
-    <motion.div
-      className={className}
-      variants={mobileCard}
-      initial={shouldReduceMotion ? false : "hidden"}
-      whileInView={shouldReduceMotion ? undefined : "visible"}
-      viewport={{ once: true, margin: "-40px" }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function ResponsiveStackLayout({
-  toggle,
-  shouldReduceMotion,
-}: {
-  toggle: (key: string) => void
-  shouldReduceMotion: boolean
-}) {
-  return (
-    <div className="flex flex-col">
-      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
-        <SystemCard className="w-full" compact {...SAP_CARD} onClick={() => toggle("sap")} />
-      </MobileReveal>
-
-      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
-
-      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
-        <div className="flex flex-wrap gap-3 justify-center">
-          <BlueTag label="PAYMENTS" onClick={() => toggle("payments")} />
-          <BlueTag label="TAX" onClick={() => toggle("tax")} />
-        </div>
-      </MobileReveal>
-
-      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
-
-      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
-        <HeroCard
-          className="w-full"
-          {...MULESOFT_CARD}
-          pills={BI_MULESOFT_PILLS.map(p => ({ label: p.label, onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle(p.key); } }))}
-          onClick={() => toggle("mulesoft")}
-        />
-      </MobileReveal>
-
-      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
-
-      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
-        <MarchingAntsBorder shouldReduceMotion={shouldReduceMotion}>
-          <CommerceCard className="w-full" compact onClick={() => toggle("commerce-cloud")} onGraphqlClick={() => toggle("adobe-graphql")} onPillsClick={() => toggle("commerce-services")} />
-        </MarchingAntsBorder>
-      </MobileReveal>
-
-      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
-
-      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
-        <SystemCard className="w-full" compact {...AEM_CARD} onClick={() => toggle("aem")} />
-      </MobileReveal>
-
-      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
-
-      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
-        <DataLakeCard className="w-full" onClick={() => toggle("data-lake")} onConnectorClick={() => toggle("aem-connector")} />
-      </MobileReveal>
-
-      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
-
-      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
-        <BrowserCard className="w-full" compact onClick={() => toggle("shopper-browser")} onSdkClick={() => toggle("adobe-web-sdk")} />
-      </MobileReveal>
-    </div>
-  );
-}
-
-function DesktopFixedLayout({
-  toggle,
-  shouldReduceMotion,
-}: {
-  toggle: (key: string) => void
-  shouldReduceMotion: boolean
-}) {
-  const canvasContainerRef = useRef<HTMLDivElement>(null);
-  const positions = BI_DESKTOP_NODE_POSITIONS;
-  return (
-    <motion.div
-      ref={canvasContainerRef}
-      className="relative h-[875px] w-[1440px] overflow-hidden bg-white"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}
-    >
-      <BiConnectorLayer />
-      {shouldReduceMotion
-        ? null
-        : BI_DESKTOP_PARTICLE_PATHS.map(([path, color], i) => (
-            <ParticleCanvas key={i} paths={[path]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color={color} />
-          ))}
-
-      <motion.div className="absolute z-10" style={positions.browser} variants={cardVariants} transition={cardTransition}>
-        <BrowserCard className="w-[475px]" onClick={() => toggle("shopper-browser")} onSdkClick={() => toggle("adobe-web-sdk")} />
-      </motion.div>
-
-      <motion.div className="absolute z-10" style={positions.sap} variants={cardVariants} transition={cardTransition}>
-        <SystemCard className="w-80" {...SAP_CARD} onClick={() => toggle("sap")} />
-      </motion.div>
-
-      <motion.div className="absolute z-10" style={positions.mulesoft} variants={cardVariants} transition={cardTransition}>
-        <HeroCard
-          className="w-[475px]"
-          {...MULESOFT_CARD}
-          pills={BI_MULESOFT_PILLS.map(p => ({ label: p.label, onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle(p.key); } }))}
-          onClick={() => toggle("mulesoft")}
-        />
-      </motion.div>
-
-      <motion.div className="absolute z-10" style={positions.aem} variants={cardVariants} transition={cardTransition}>
-        <SystemCard className="w-[390px]" {...AEM_CARD} onClick={() => toggle("aem")} />
-      </motion.div>
-
-      <motion.div className="absolute z-10" style={positions.commerceCloud} variants={cardVariants} transition={cardTransition}>
-        <MarchingAntsBorder shouldReduceMotion={shouldReduceMotion}>
-          <CommerceCard className="w-[475px]" onClick={() => toggle("commerce-cloud")} onGraphqlClick={() => toggle("adobe-graphql")} onPillsClick={() => toggle("commerce-services")} />
-        </MarchingAntsBorder>
-      </motion.div>
-
-      <motion.div className="absolute z-10" style={positions.dataLake} variants={cardVariants} transition={cardTransition}>
-        <DataLakeCard className="w-80" onClick={() => toggle("data-lake")} onConnectorClick={() => toggle("aem-connector")} />
-      </motion.div>
-
-      <motion.div className="absolute z-10" style={positions.paymentsTag} variants={cardVariants} transition={cardTransition}>
-        <BlueTag label="PAYMENTS" onClick={() => toggle("payments")} />
-      </motion.div>
-
-      <motion.div className="absolute z-10" style={positions.taxTag} variants={cardVariants} transition={cardTransition}>
-        <BlueTag label="TAX" onClick={() => toggle("tax")} />
-      </motion.div>
-    </motion.div>
-  );
-}
-
-function BaseCard({
-  children,
-  className,
-  dark = false,
-  onClick,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  dark?: boolean;
-  onClick?: () => void;
-}) {
-  return (
-    <div
-      className={[
-        className ?? "",
-        "rounded-[10px] p-5 md:p-6 outline outline-offset-[-1px] overflow-hidden transition-[outline,box-shadow] duration-150",
-        dark
-          ? [
-              "outline-1 bg-[#202124] outline-[#202124] text-white",
-              onClick ? "cursor-pointer hover:outline-2 hover:outline-blue-500 hover:shadow-[0_0_0_2px_rgba(68,122,203,0.15),0_8px_32px_rgba(68,122,203,0.35)]" : "",
-            ].join(" ")
-          : [
-              "outline-1 bg-white outline-[#D9DDE3] text-[#222222]",
-              onClick ? "cursor-pointer hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]" : "",
-            ].join(" "),
-      ].join(" ")}
-      onClick={onClick}
-    >
-      {children}
-    </div>
-  );
-}
-
-function EyebrowRow({
-  left,
-  right,
-}: {
-  left: React.ReactNode;
-  right?: React.ReactNode;
-}) {
-  return <div className="flex items-center justify-between gap-4">{left}{right}</div>;
-}
-
-function EyebrowLabel({
-  icon,
-  label,
-  dark = false,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  dark?: boolean;
-}) {
-  return (
-    <div className="flex min-w-0 items-center gap-3 overflow-hidden">
-      {icon}
-      <div
-        className={[
-          "type-p5 tracking-[0.06em] uppercase",
-          dark ? "text-white/70" : "text-[#7B7B7B]",
-        ].join(" ")}
-      >
-        {label}
-      </div>
-    </div>
-  );
-}
-
-function Title({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
-  return (
-    <h3 className={["type-h6", dark ? "text-white" : "text-[#222222]"].join(" ")}>
-      {children}
-    </h3>
-  );
-}
-
-function Body({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
-  return (
-    <p className={["type-p4", dark ? "text-white" : "text-[#222222]"].join(" ")}>
-      {children}
-    </p>
-  );
-}
-
-function FeatureRow({ features }: { features: CardFeature[] }) {
-  return (
-    <div className="grid grid-cols-3 gap-3 md:gap-4 self-stretch">
-      {features.map((feature) => (
-        <div key={feature.label} className="flex flex-col items-center justify-center gap-3">
-          {feature.icon}
-          <div className="type-ui-sm text-center text-[#222222]">{feature.label}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function PillRow({ pills, hoverLight = false }: { pills: PillFeature[]; hoverLight?: boolean }) {
-  return (
-    <div className="grid grid-cols-3 gap-3 md:gap-4 self-stretch">
-      {pills.map((pill) => (
-        <BlueTag key={pill.label} label={pill.label} fullWidth hoverLight={hoverLight} onClick={pill.onClick} />
-      ))}
-    </div>
-  );
-}
-
-function BlueTag({ label, fullWidth = false, hoverLight = false, onClick }: { label: string; fullWidth?: boolean; hoverLight?: boolean; onClick?: (e: React.MouseEvent) => void }) {
-  return (
-    <div
-      className={[
-        fullWidth ? "w-full" : "w-28",
-        "h-8 rounded-md bg-[#4A7FDB] outline outline-1 outline-transparent transition-[background-color,outline-color,box-shadow] duration-150 group/tag",
-        onClick
-          ? hoverLight
-            ? "cursor-pointer hover:bg-[#fefefe] hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]"
-            : "cursor-pointer hover:bg-[#222222] hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]"
-          : "",
-      ].join(" ")}
-      onClick={onClick}
-    >
-      <div className={["type-ui-sm flex h-full items-center justify-center px-3 text-center transition-colors duration-150", onClick && hoverLight ? "text-[#F0F7FF] group-hover/tag:text-[#222222]" : "text-[#F0F7FF]"].join(" ")}>
-        {label}
-      </div>
-    </div>
-  );
-}
-
-function TokenPill({ children, onClick }: { children: React.ReactNode; onClick?: (e: React.MouseEvent) => void }) {
-  return (
-    <div
-      className={[
-        "rounded-[999px] bg-[#EEF4FE] px-3 py-1.5 outline outline-1 outline-offset-[-1px] outline-[#E5E7EB] shrink-0 transition-[background-color,color] duration-150",
-        onClick ? "cursor-pointer hover:bg-[#222222] group/pill" : "",
-      ].join(" ")}
-      onClick={onClick}
-    >
-      <div className={["type-ui-sm text-center text-[#477ACB] whitespace-nowrap transition-colors duration-150", onClick ? "group-hover/pill:text-[#fefefe]" : ""].join(" ")}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function SystemCard({
-  className,
-  eyebrowLabel,
-  eyebrowLeft,
-  title,
-  body,
-  features,
-  onClick,
-  compact = false,
-}: {
-  className?: string;
-  eyebrowLabel: string;
-  eyebrowLeft: React.ReactNode;
-  title: string;
-  body: string;
-  features: CardFeature[];
-  onClick?: () => void;
-  compact?: boolean;
-}) {
-  return (
-    <BaseCard className={className} onClick={onClick}>
-      <div className="flex flex-col gap-2">
-        <EyebrowRow left={<EyebrowLabel icon={eyebrowLeft} label={eyebrowLabel} />} />
-        <Title>{title}</Title>
-        {compact ? (
-          <CompactCardLayout
-            icons={features.map(f => <DeviceFeature key={f.label} label={f.label} icon={f.icon} />)}
-            body={body}
-          />
-        ) : (
-          <>
-            <Body>{body}</Body>
-            <FeatureRow features={features} />
-          </>
-        )}
-      </div>
-    </BaseCard>
-  );
-}
-
-function BrowserCard({ className, compact = false, onClick, onSdkClick }: { className?: string; compact?: boolean; onClick?: () => void; onSdkClick?: () => void }) {
-  return (
-    <BaseCard className={className} onClick={onClick}>
-      <div className="flex flex-col gap-2">
-        <EyebrowRow
-          left={<EyebrowLabel icon={<BlueDot />} label="CONTENT & ANALYTICS" />}
-          right={
-            <TokenPill onClick={onSdkClick ? (e) => { e.stopPropagation(); onSdkClick(); } : undefined}>
-              Adobe Web SDK
-            </TokenPill>
-          }
-        />
-
-        <Title>Shopper Browser</Title>
-
-        <CompactCardLayout
-          icons={<><DeviceFeature label="Web" /><DeviceFeature label="Tablet" icon={<img src="/tool-icons/svg/icon-tablet.svg" alt="Tablet" className="h-6 w-6" />} /><DeviceFeature label="Mobile" icon={<img src="/tool-icons/svg/icon-mobile.svg" alt="Mobile" className="h-6 w-6" />} /></>}
-          body="Customer FE experience across platforms"
-        />
-      </div>
-    </BaseCard>
-  );
-}
-
-function DeviceFeature({ label, icon }: { label: string; icon?: React.ReactNode }) {
-  return (
-    <div className="flex flex-col items-center justify-center gap-1.5">
-      {icon ?? <LaptopIcon />}
-      <div className="type-ui-sm text-center text-[#222222]">{label}</div>
-    </div>
-  );
-}
-
-function CompactCardLayout({ icons, body }: { icons: React.ReactNode; body: string }) {
-  return (
-    <div className="flex flex-row items-center gap-4">
-      <div className="grid grid-cols-3 gap-3 shrink-0">{icons}</div>
-      <div className="type-p4 text-[#222222]">{body}</div>
-    </div>
-  );
-}
-
-function HeroCard({
-  className,
-  eyebrowLabel,
-  eyebrowLeft,
-  title,
-  body,
-  pills,
-  onClick,
-}: {
-  className?: string;
-  eyebrowLabel: string;
-  eyebrowLeft: React.ReactNode;
-  title: string;
-  body: string;
-  pills: PillFeature[];
-  onClick?: () => void;
-}) {
-  return (
-    <div className="relative bi-pulse-glow">
-      <BaseCard className={className} dark onClick={onClick}>
-        <div className="flex flex-col gap-4">
-          <EyebrowRow left={<EyebrowLabel icon={eyebrowLeft} label={eyebrowLabel} dark />} />
-          <Title dark>{title}</Title>
-          <Body dark>{body}</Body>
-          <PillRow pills={pills} hoverLight />
-        </div>
-      </BaseCard>
-    </div>
-  );
-}
-
-function CommerceCard({ className, onClick, onGraphqlClick, onPillsClick, compact = false }: { className?: string; onClick?: () => void; onGraphqlClick?: () => void; onPillsClick?: () => void; compact?: boolean }) {
-  const pillHandler = onPillsClick
-    ? (e: React.MouseEvent) => { e.stopPropagation(); onPillsClick(); }
-    : undefined;
-  return (
-    <BaseCard className={className} onClick={onClick}>
-      <div className="flex flex-col gap-2">
-        <EyebrowRow
-          left={<EyebrowLabel icon={<AdobeBadge />} label="COMMERCE LAYER" />}
-          right={
-            <TokenPill onClick={onGraphqlClick ? (e) => { e.stopPropagation(); onGraphqlClick(); } : undefined}>
-              Adobe GraphQL
-            </TokenPill>
-          }
-        />
-        <Title>Adobe Commerce Cloud</Title>
-        {compact ? (
-          <CompactCardLayout
-            icons={<><DeviceFeature label="Catalog" icon={<ProductsIcon />} /><DeviceFeature label="Cart" icon={<InventoryIcon />} /><DeviceFeature label="Checkout" icon={<DatabaseIcon />} /></>}
-            body="Publishes content and experience assets that shape browsing and merchandising."
-          />
-        ) : (
-          <>
-            <Body>Publishes content and experience assets that shape browsing and merchandising.</Body>
-            <PillRow pills={[
-              { label: "CATALOG", onClick: pillHandler },
-              { label: "CART", onClick: pillHandler },
-              { label: "CHECKOUT", onClick: pillHandler },
-            ]} />
-          </>
-        )}
-      </div>
-    </BaseCard>
-  );
-}
-
-function DataLakeCard({ className, onClick, onConnectorClick }: { className?: string; onClick?: () => void; onConnectorClick?: () => void }) {
-  return (
-    <BaseCard className={className} dark onClick={onClick}>
-      <EyebrowRow
-        left={<span className="type-p2 font-medium text-white">Data Lake</span>}
-        right={
-          <TokenPill onClick={onConnectorClick ? (e) => { e.stopPropagation(); onConnectorClick(); } : undefined}>
-            AEM Connector
-          </TokenPill>
-        }
-      />
-    </BaseCard>
-  );
-}
-
-function BlueDot() {
-  return <div className="h-3 w-3 rounded-full bg-[#477ACB]" />;
-}
-
-function Badge({ src, alt }: { src: string; alt: string }) {
-  return <img src={src} alt={alt} className="h-5 w-5 rounded-[2px]" />;
-}
-function SapBadge()      { return <Badge src="/tool-icons/svg/sap-logo.svg" alt="SAP" />; }
-function MulesoftBadge() { return <Badge src="/tool-icons/svg/mulesoft-logo.svg" alt="Mulesoft" />; }
-function AemBadge()      { return <Badge src="/tool-icons/svg/adobe-experience-manager-logo.svg" alt="Adobe Experience Manager" />; }
-function AdobeBadge()    { return <Badge src="/tool-icons/svg/adobe-logo.svg" alt="Adobe" />; }

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { PressViewer } from "@/components/PressViewer"
-import { caseStudyRegistry } from "@/content/case-studies"
+import { loadAllCaseStudies, loadCaseStudyBySlug } from "@/content/case-studies"
 
 const legacyPressFilenameAliases: Record<string, string[]> = {
   "01-Harvard-Business-Review": ["01 Harvard Business Review"],
@@ -12,7 +12,9 @@ const legacyPressFilenameAliases: Record<string, string[]> = {
 
 export async function generateStaticParams() {
   const params: { slug: string; filename: string }[] = []
-  for (const [slug, study] of Object.entries(caseStudyRegistry)) {
+  const studies = await loadAllCaseStudies()
+
+  for (const { slug, study } of studies) {
     for (const row of study.recognition?.rows ?? []) {
       if (row.file) {
         const basename = row.file.split("/").pop()!.replace(/\.[^.]+$/, "")
@@ -33,7 +35,7 @@ export default async function PressViewerPage({
   params: Promise<{ slug: string; filename: string }>
 }) {
   const { slug } = await params
-  const study = caseStudyRegistry[slug]
+  const study = await loadCaseStudyBySlug(slug)
   if (!study) notFound()
   const recognitionRows = study.recognition?.rows
   if (!recognitionRows?.length) notFound()

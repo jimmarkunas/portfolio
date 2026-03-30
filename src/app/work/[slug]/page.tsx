@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 
 import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate"
 import { caseStudySlugs } from "@/content/case-studies/case-study-map"
-import { caseStudyRegistry } from "@/content/case-studies"
+import { loadCaseStudyBySlug } from "@/content/case-studies"
 
 type WorkPageParams = {
   slug: string
@@ -19,7 +19,7 @@ export async function generateMetadata({
   params: Promise<WorkPageParams>
 }): Promise<Metadata> {
   const { slug } = await params
-  const study = caseStudyRegistry[slug]
+  const study = await loadCaseStudyBySlug(slug)
 
   if (!study) {
     return {
@@ -39,7 +39,7 @@ export default async function WorkCaseStudyPage({
   params: Promise<WorkPageParams>
 }) {
   const { slug } = await params
-  const study = caseStudyRegistry[slug]
+  const study = await loadCaseStudyBySlug(slug)
 
   if (!study) {
     notFound()

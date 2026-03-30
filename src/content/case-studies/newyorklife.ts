@@ -259,7 +259,7 @@ export const newYorkLifeCaseStudy = {
         summary:
           "New York Life says AWS featured the company for reimagining its digital foundation with a modern, cloud-first platform that unifies data across the enterprise to deliver faster insights, more seamless experiences, and smarter tools for clients, agents, and advisors.",
         tags: ["Press", "Modernization"],
-        file: "/newyorklife/files/newyorklife.com-New York Life and AWS Building a modern foundation for data and AI.pdf",
+        file: "/newyorklife/files/New-York-Life-AWS-Building-Modern-AI-Data-Foundation.pdf",
       },
       {
         company: "2024 Report to Policy Owners",
@@ -275,7 +275,7 @@ export const newYorkLifeCaseStudy = {
         summary:
           "Fusion92 positions COREcms as an enterprise growth platform built to simplify site creation, centralize content, enforce built-in compliance, support multi-brand and highly regulated industries, and drive lead generation through integrations like Google My Business and Calendly.",
         tags: ["Product", "Platform"],
-        file: "/newyorklife/files/Fusion92 _ Core CMS_compressed.pdf",
+        file: "/newyorklife/files/Fusion92 _Core CMS.pdf",
       },
     ],
   },

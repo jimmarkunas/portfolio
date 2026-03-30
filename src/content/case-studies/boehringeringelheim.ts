@@ -214,7 +214,7 @@ export const boehringeringelheimCaseStudy = {
         dates: "2024",
         summary: "Adobe says Boehringer Ingelheim used Adobe Commerce to create more scalable B2B ecommerce in animal health, with U.S. online sales climbing from 3% to 30% after launch.",
         tags: ["Adobe", "Commerce"],
-        file: "/bi/files/AdobeCaseStudy-BI.pdf",
+        file: "/bi/files/BI-AdobeCaseStudy.pdf",
       },
       {
         company: "Headless B2B Gateways Facilitating Client Engagement Around the World",
@@ -222,7 +222,7 @@ export const boehringeringelheimCaseStudy = {
         dates: "2024",
         summary: "Corra describes how Boehringer Ingelheim built a global reference B2B storefront for regulated veterinary ordering, loyalty, and international expansion with headless architecture and modular services.",
         tags: ["Case Study", "Global"],
-        file: "/bi/files/Publicis Sapient Case Study-BI.pdf",
+        file: "/bi/files/BI-Publicis-Sapient-Case-Study_01.pdf",
       },
       {
         company: "Boehringer Ingelheim Global Reference Gateways",
@@ -230,7 +230,7 @@ export const boehringeringelheimCaseStudy = {
         dates: "2024",
         summary: "Corra details the two global reference gateways for the U.S., France, and the rest of the world, showing how the platform supported regional logic while staying scalable and maintainable.",
         tags: ["Case Study", "B2B"],
-        file: "/bi/files/Publicis-Corra-BoehringerIngelheim02.pdf",
+        file: "/bi/files/BI-Publicis-Sapient-Case-Study_02.pdf",
       },
     ],
   },

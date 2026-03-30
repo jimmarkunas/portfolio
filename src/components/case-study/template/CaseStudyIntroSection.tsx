@@ -6,7 +6,11 @@ import { FullWidthImage } from "@/components/FullWidthImage"
 import { PullQuote } from "@/components/PullQuote"
 import { StatCard } from "@/components/StatCard"
 import { TagPill } from "@/components/TagPill"
-import { CaseStudyDeferredVisual } from "@/components/case-study/template/visuals/CaseStudyDeferredVisual"
+import {
+  DeferredPreQuoteChartVisual,
+  DeferredProblemChartVisual,
+} from "@/components/case-study/template/visuals/deferred/DeferredChartVisual"
+import { DeferredGlobalLocationsVisual } from "@/components/case-study/template/visuals/deferred/DeferredMapVisual"
 
 import { HeroSwooshBackdrop } from "./CaseStudyTemplateIcons"
 
@@ -81,8 +85,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                     <div className={isFoh
                       ? "w-full lg:col-start-1 lg:row-start-3"
                       : "w-full lg:col-start-1 lg:row-start-3"}>
-                      <CaseStudyDeferredVisual
-                        visual="problem-chart"
+                      <DeferredProblemChartVisual
                         chartKey="retail-vs-dtc"
                         brandName={data.problem.chart?.brandName}
                         eager
@@ -156,8 +159,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                     <h3 className="type-h4 mb-6 pt-5 text-[#222222]">{data.problem.quote.preQuoteHeading}</h3>
                   )}
                   {preQuoteChartKey ? (
-                    <CaseStudyDeferredVisual
-                      visual="prequote-chart"
+                    <DeferredPreQuoteChartVisual
                       chartKey={preQuoteChartKey}
                       eager
                       minHeightClassName="min-h-[320px] md:min-h-[380px]"
@@ -247,8 +249,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                   </h3>
 
                   {data.globalLocations && (
-                    <CaseStudyDeferredVisual
-                      visual="global-locations"
+                    <DeferredGlobalLocationsVisual
                       title={data.globalLocations.title}
                       locations={data.globalLocations.locations}
                       minHeightClassName="min-h-[420px]"

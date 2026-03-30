@@ -1,33 +1,41 @@
 import type { CaseStudyData } from "@/components/case-study/types"
-import { cpsEnergyCaseStudy } from "./cps-energy"
-import { directv01CaseStudy } from "./directv01"
-import { newYorkLifeCaseStudy } from "./newyorklife"
-import { modereCaseStudy } from "./modere"
-import { boehringeringelheimCaseStudy } from "./boehringeringelheim"
-import { mrsmeyersCaseStudy } from "./mrsmeyers"
-import { methodCaseStudy } from "./method"
-import { muradCaseStudy } from "./murad"
-import { k2CaseStudy } from "./k2"
-import { cbdistilleryCaseStudy } from "./cbdistillery"
-import { fredericksCaseStudy } from "./fredericks"
-import { legoCaseStudy } from "./lego"
-import { americanapparelCaseStudy } from "./americanapparel"
-import { directveverywhereCaseStudy } from "./directveverywhere"
+import { caseStudySlugs } from "./case-study-map"
+
 export { caseStudyMap, caseStudySlugs } from "./case-study-map"
 
-export const caseStudyRegistry: Record<string, CaseStudyData> = {
-  [cpsEnergyCaseStudy.slug]: cpsEnergyCaseStudy,
-  [directv01CaseStudy.slug]: directv01CaseStudy,
-  [newYorkLifeCaseStudy.slug]: newYorkLifeCaseStudy,
-  [modereCaseStudy.slug]: modereCaseStudy,
-  [boehringeringelheimCaseStudy.slug]: boehringeringelheimCaseStudy,
-  [mrsmeyersCaseStudy.slug]: mrsmeyersCaseStudy,
-  [methodCaseStudy.slug]: methodCaseStudy,
-  [muradCaseStudy.slug]: muradCaseStudy,
-  [k2CaseStudy.slug]: k2CaseStudy,
-  [cbdistilleryCaseStudy.slug]: cbdistilleryCaseStudy,
-  [fredericksCaseStudy.slug]: fredericksCaseStudy,
-  [legoCaseStudy.slug]: legoCaseStudy,
-  [americanapparelCaseStudy.slug]: americanapparelCaseStudy,
-  [directveverywhereCaseStudy.slug]: directveverywhereCaseStudy,
+type CaseStudyLoader = () => Promise<CaseStudyData>
+
+const caseStudyLoaders: Record<string, CaseStudyLoader> = {
+  cps: () => import("./cps-energy").then((module) => module.cpsEnergyCaseStudy),
+  dtv01: () => import("./directv01").then((module) => module.directv01CaseStudy),
+  newyorklife: () => import("./newyorklife").then((module) => module.newYorkLifeCaseStudy),
+  modere: () => import("./modere").then((module) => module.modereCaseStudy),
+  bi: () => import("./boehringeringelheim").then((module) => module.boehringeringelheimCaseStudy),
+  mm: () => import("./mrsmeyers").then((module) => module.mrsmeyersCaseStudy),
+  method: () => import("./method").then((module) => module.methodCaseStudy),
+  murad: () => import("./murad").then((module) => module.muradCaseStudy),
+  k2: () => import("./k2").then((module) => module.k2CaseStudy),
+  cbdistillery: () => import("./cbdistillery").then((module) => module.cbdistilleryCaseStudy),
+  foh: () => import("./fredericks").then((module) => module.fredericksCaseStudy),
+  lego: () => import("./lego").then((module) => module.legoCaseStudy),
+  aa: () => import("./americanapparel").then((module) => module.americanapparelCaseStudy),
+  dtv02: () => import("./directveverywhere").then((module) => module.directveverywhereCaseStudy),
+}
+
+export async function loadCaseStudyBySlug(slug: string): Promise<CaseStudyData | null> {
+  const loader = caseStudyLoaders[slug]
+  return loader ? loader() : null
+}
+
+export async function loadAllCaseStudies(): Promise<Array<{ slug: string; study: CaseStudyData }>> {
+  const studies = await Promise.all(
+    caseStudySlugs.map(async (slug) => {
+      const study = await loadCaseStudyBySlug(slug)
+      return study ? { slug, study } : null
+    })
+  )
+
+  return studies.filter(
+    (entry): entry is { slug: string; study: CaseStudyData } => entry !== null
+  )
 }

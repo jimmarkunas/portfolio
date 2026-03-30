@@ -9,6 +9,8 @@ node_modules/
 
 # Non-production app routes
 src/app/experiments/**
+src/prototypes/**
+public/reference/**
 
 # Non-runtime writing/source briefs
 docs/case-studies/briefs/**
