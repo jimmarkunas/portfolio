@@ -25,7 +25,7 @@ const c = {
 
 const money = (n: number) => `$${Math.round(n / 1_000_000)}M`;
 
-export default function MrsMeyersRetailVsDtcChart() {
+export default function MrsMeyersRetailVsDtcChart({ brandName = "Mrs. Meyers" }: { brandName?: string }) {
   const ref = useRef<SVGSVGElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   const max = Math.max(...data.map((d) => d.value), 1);
@@ -52,7 +52,7 @@ export default function MrsMeyersRetailVsDtcChart() {
 
         <line x1="24" y1="26" x2="24" y2="58" stroke={c.accent} strokeWidth="2" />
         <text x="36" y="38" fill={c.white} fontSize="18" fontWeight="400" fontFamily="Inter Display, Inter, ui-sans-serif, system-ui, sans-serif">
-          Mrs. Meyers retail sales vs DTC
+          {brandName} retail sales vs DTC
         </text>
         <text x="36" y="58" fill={c.white} fontSize="10" fontFamily="Inter Display, Inter, ui-sans-serif, system-ui, sans-serif">
           Illustrative pre-ecommerce snapshot

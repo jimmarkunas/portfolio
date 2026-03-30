@@ -397,7 +397,7 @@ function DesktopDiagram({ toggle }: { toggle: (key: string) => void }) {
   }, [boxes]);
 
   return (
-    <div className="hidden xl:block">
+    <div className="hidden md:block">
       <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={staggerParent}>
       <div ref={wrapperRef} className="relative">
         {particlePaths.length > 0 && (
@@ -408,8 +408,8 @@ function DesktopDiagram({ toggle }: { toggle: (key: string) => void }) {
           <motion.div className="w-full" variants={cardVariants} transition={cardTransition}>
             <StorefrontAndCommerceLayers
               toggle={toggle}
-              topGridClass="grid grid-cols-5 gap-5"
-              commerceGridClass="grid grid-cols-6 gap-5"
+              topGridClass="grid grid-cols-3 gap-3 xl:grid-cols-5 xl:gap-5"
+              commerceGridClass="grid grid-cols-3 gap-3 xl:grid-cols-6 xl:gap-5"
               setNodeRef={setNodeRef}
             />
           </motion.div>
@@ -418,7 +418,7 @@ function DesktopDiagram({ toggle }: { toggle: (key: string) => void }) {
             <div className="absolute inset-x-0 top-6">
               <ApiLayer nodeRef={setNodeRef("api")} onClick={() => toggle("api")} />
             </div>
-            <div className="grid grid-cols-6 gap-5">
+            <div className="grid grid-cols-3 gap-3 xl:grid-cols-6 xl:gap-5">
               {SYSTEM_NODES.map((node) => (
                 <NodeCard
                   key={node.id}
@@ -440,7 +440,7 @@ function DesktopDiagram({ toggle }: { toggle: (key: string) => void }) {
 function MobileDiagram({ toggle }: { toggle: (key: string) => void }) {
   return (
     <motion.div
-      className="space-y-4 xl:hidden"
+      className="space-y-4 md:hidden"
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
@@ -449,8 +449,8 @@ function MobileDiagram({ toggle }: { toggle: (key: string) => void }) {
       <motion.div variants={cardVariants} transition={cardTransition}>
         <StorefrontAndCommerceLayers
           toggle={toggle}
-          topGridClass="grid gap-2.5 sm:grid-cols-2"
-          commerceGridClass="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3"
+          topGridClass="grid grid-cols-2 gap-2.5 sm:grid-cols-2"
+          commerceGridClass="grid grid-cols-2 gap-2.5 sm:grid-cols-2 lg:grid-cols-3"
         />
       </motion.div>
 
@@ -458,7 +458,7 @@ function MobileDiagram({ toggle }: { toggle: (key: string) => void }) {
         <ApiLayer onClick={() => toggle("api")} />
       </motion.div>
 
-      <motion.div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3" variants={cardVariants} transition={cardTransition}>
+      <motion.div className="grid grid-cols-2 gap-2.5 sm:grid-cols-2 lg:grid-cols-3" variants={cardVariants} transition={cardTransition}>
         {SYSTEM_NODES.map((node) => (
           <NodeCard
             key={node.id}

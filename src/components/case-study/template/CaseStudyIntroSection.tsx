@@ -83,11 +83,11 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                     <h2 className="type-h3 text-[#222222]">{data.problem.title}</h2>
                   </div>
 
-                  {data.slug === "mm" ? (
+                  {(data.slug === "mm" || data.slug === "method") ? (
                     <div className={isFoh
                       ? "w-full lg:col-start-1 lg:row-start-3"
                       : "w-full lg:col-start-1 lg:row-start-3"}>
-                      <MrsMeyersRetailVsDtcChart />
+                      <MrsMeyersRetailVsDtcChart brandName={data.slug === "method" ? "Method" : "Mrs. Meyers"} />
                     </div>
                   ) : (
                     <CaseStudyMediaFrame

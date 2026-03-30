@@ -4,9 +4,9 @@ export const methodCaseStudy = {
   slug: "method",
   breadcrumbCurrent: "Method",
   hero: {
-    title: "I Turned Method Into a Brand-True DTC Launch on Shared Rails",
+    title: "Method: Brand-True DTC Launch on Shared Rails",
     intro:
-      "Method had retail recognition, strong design DNA, and a loyal customer base, but no real direct-to-consumer channel the brand actually owned. I led the fast-follow launch on SC Johnson's shared BigCommerce and SAP stack, then made that shared architecture feel unmistakably Method instead of generic enterprise plumbing. The result was 20%+ DTC revenue uplift, three launches, and a reusable commerce pattern the business could scale.",
+      "Method had strong brand equity and a loyal customer base, but no owned DTC channel. I led the fast-follow launch on SC Johnson’s shared BigCommerce and SAP stack, then made the experience feel like Method, not enterprise reuse.",
     primaryCta: {
       label: "Book a Call",
       href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
@@ -25,17 +25,17 @@ export const methodCaseStudy = {
     eyebrow: "At-a-Glance",
     title: "Brand Experience, Shared Engine",
     copy:
-      "This was a true zero-to-one DTC launch for Method, but it was also the second proof point on SC Johnson's emerging home-care commerce stack. I helped take the shared rails built for Mrs. Meyer's, make them feel brand-specific for Method, and prove the business could scale new brands without rebuilding the entire system every time.",
+      "This was Method’s zero-to-one DTC launch and the second real test of SC Johnson’s home-care stack. I turned shared rails into a brand-right Method experience and proved new brands could launch without starting over.",
     stats: [
-      { value: "$20", suffix: "%+", label: "DTC revenue uplift" },
-      { value: "3", suffix: "", label: "launches" },
-      { value: "1", suffix: "", label: "unified platform" },
-      { value: "10", suffix: "+", label: "systems in stack" },
+      { value: "$20", suffix: "%", label: "DTC Revenue Uplift" },
+      { value: "3", suffix: "", label: "Launches (US, CA, Men)" },
+      { value: "1", suffix: "", label: "Unified DTC Platform" },
+      { value: "10", suffix: "+", label: "Systems in Stack" },
     ],
   },
   problem: {
     eyebrow: "Problem Statement",
-    title: "A Cult Brand With No DTC Home",
+    title: "Cult Brand, No DTC",
     media: {
       kind: "image",
       src: "/method/hero-method-02.png",
@@ -43,22 +43,23 @@ export const methodCaseStudy = {
       aspectRatio: "16/9",
     },
     overview:
-      "Method had the brand equity, the design language, and the consumer love, but it still had no true direct-to-consumer channel. SC Johnson wanted growth, wanted DTC fast, and wanted to avoid turning every new brand launch into a custom technology project. The challenge was making shared enterprise rails across commerce, ERP, product data, tax, fulfillment, service, and marketing feel seamless and brand-right for Method, without sacrificing speed or repeatability.",
+      "Method had brand equity, a clear design language, and a loyal customer base, but no true DTC channel. SC Johnson wanted growth fast without turning every brand launch into a custom tech project. The challenge was making shared commerce, ERP, product data, tax, fulfillment, service, and marketing rails feel seamless and unmistakably Method.",
     projectOverviewRows: [
       { label: "Client", value: "SC Johnson • Method" },
       { label: "Industry", value: "CPG • Home Care • eCommerce" },
-      { label: "Timeline", value: "Apr 2019 to Jul 2019" },
+      { label: "Timeline", value: "Apr 2019 - Jul 2019" },
     ],
     tools: [
-      { label: "BigCommerce", icon: "/tool-icons/bc-logo.png" },
-      { label: "SAP", icon: "/tool-icons/sap-logo.png" },
-      { label: "Salsify", icon: "/tool-icons/salsify-logo.png" },
+      { label: "BigCommerce", icon: "/tool-icons/svg/bc-logo-blk.svg" },
+      { label: "SAP", icon: "/tool-icons/svg/sap-logo.svg" },
+      { label: "Salsify", icon: "/tool-icons/svg/salsify-logo.svg" },
     ],
     quote: {
       quote:
-        "We wanted growth, and we wanted to get into direct-to-consumer as fast as possible.",
+        "We wanted to get into direct-to-consumer as fast as possible.",
       attributionTitle: "Tammy Tran",
       attributionSubtitle: "Director of eCommerce, Method",
+      avatarSrc: "/method/tammy-tran.jpeg",
     },
   },
   role: {
@@ -70,7 +71,7 @@ export const methodCaseStudy = {
       "Program Leadership",
       "Enterprise DTC",
       "Solution Architecture",
-      "Shared Platform Strategy",
+      "MACH Composable",
     ],
     stats: [
       { value: "10", suffix: "+", label: "system integrations" },
@@ -81,23 +82,24 @@ export const methodCaseStudy = {
     narrative: {
       title: "I Made Shared Rails Feel Brand-Specific",
       paragraphs: [
-        "Method could not afford a generic store that looked like an afterthought bolted onto enterprise middleware. The brand had strong visual identity, storytelling standards, and customer expectations, which meant the launch had to feel native to Method even though it was running on shared SC Johnson rails. At the same time, the business needed speed. This was a fast-follow launch, not an 18-month greenfield science project.",
-        "I made three decisions that changed the trajectory. First, I treated Method as a shared-rails launch, not a custom build, which protected speed and kept the long-term platform pattern intact. Second, I defined how SAP, Salsify, WMS, tax, payments, service, and marketing tools needed to fit together so the storefront could behave like a real DTC business. Third, I translated Method's design-heavy storytelling needs into reusable templates and page structures, so the experience felt distinctly Method without blowing up the shared architecture.",
+        "Method couldn’t ship a generic store bolted onto enterprise middleware. The launch had to feel native to the brand, even on shared SC Johnson rails, and it had to move fast. This was a fast-follow launch, not a long greenfield build.",
+        "I changed the trajectory in three places: I protected the shared-rails model, locked down how the core systems had to work together, and turned Method’s storytelling needs into reusable templates that felt like the brand without blowing up the architecture.",
       ],
       highlights: [
-        "Protected the shared-platform strategy while still making the launch feel fully brand-specific.",
+        "Protected the shared-platform strategy while still making Method's eCom feel fully brand-specific.",
         "Defined how SAP, Salsify, WMS, tax, payments, service, and marketing tools fit into the Method launch flow.",
         "Turned brand storytelling needs into reusable templates and page types instead of one-off custom pages.",
       ],
       closing:
-        "This is the kind of work I do best, turning shared enterprise systems into something the brand can actually own, and the business can actually scale.",
+        "I turned a shared enterprise system into something Method could own, and that SC Johnson could scale.",
     },
   },
   solution: {
     eyebrow: "Solution",
     title: "One Stack, Distinct Brand Experience",
+    diagramKey: "scj-commerce-architecture" as const,
     copy:
-      "I helped launch Method on the same core SC Johnson commerce foundation used across the home-care portfolio, then shaped the experience so it felt like Method from the first click. The solution was not just technical reuse, it was controlled reuse with enough flexibility for storytelling, merchandising, and customer experience to stay on-brand.",
+      "I helped launch Method on SC Johnson’s shared commerce foundation, then made the experience feel like Method instead of platform reuse.",
     cards: [
       {
         category: "Shared Commerce Core",
@@ -125,39 +127,39 @@ export const methodCaseStudy = {
   supplementalNarrative: {
     title: "Fast Follow, Not Copy Paste",
     paragraphs: [
-      "The temptation on a fast-follow brand launch is to treat it like copy and paste. That is how brands end up feeling generic. What made this work strong was that the shared platform gave us speed, but the experience layer still respected what made Method different, its tone, its design language, and the way the brand needed to show up for customers.",
-      "That balance is harder than it looks. Reuse without flattening the brand takes judgment. I had to protect the platform pattern, keep the system fit clean, and still make sure the customer experience did not read like SC Johnson enterprise plumbing with a fresh coat of paint.",
+      "Fast-follow launches go generic when teams treat them like copy and paste. This one worked because we used shared rails for speed without sanding off what made Method feel like Method.",
+      "That balance was harder than it looked. I had to protect the shared platform, keep the system tight, and stop the experience from reading like enterprise plumbing dressed up as Method.",
     ],
     highlights: [
-      "The launch proved shared rails did not have to mean generic brand experience.",
+      "The launch proved shared rails didn't have to mean generic brand experience.",
       "Method became evidence that SC Johnson could scale more DTC brands without rebuilding the stack every time.",
     ],
     closing:
-      "The real win was not just speed, it was proving that a repeatable architecture could still deliver a brand-right experience.",
+      "The real win wasn't just speed, it was proving out a repeatable architecture while delivering a brand-right experience.",
   },
   impact: {
     eyebrow: "Impact",
     title: "Growth, Speed, Repeatability",
     intro:
-      "Method gave SC Johnson more than another live site. It proved the shared home-care platform could support distinct brands, faster launches, and real commercial performance without going back to custom architecture every time.",
-    proofPoints: ["Revenue", "Repeatability", "Brand Fit"],
+      "Method proved SC Johnson could launch distinct brands faster on a shared platform, without rebuilding the stack each time.",
+    proofPoints: ["Brand Fit", "Revenue", "Repeatability"],
     stats: [
-      { value: "$20", suffix: "%+", label: "DTC revenue uplift" },
-      { value: "3", suffix: "", label: "launches" },
-      { value: "1", suffix: "", label: "unified platform" },
-      { value: "0", suffix: "–1", label: "DTC channel" },
+      { value: "$20", suffix: "%", label: "DTC Revenue Uplift" },
+      { value: "3", suffix: "", label: "Launches (US, CA, Men)" },
+      { value: "1", suffix: "", label: "Unified Platform" },
+      { value: "0-1", suffix: "", label: "DTC Channel" },
     ],
     beforeAfter: {
       title: "Before & After",
       summary:
-        "Method moved from no owned DTC channel to a live commerce business running on a repeatable SC Johnson platform that still felt true to the brand.",
+        "Method moved from no DTC channel to a live commerce business running on a repeatable platform that felt true to the brand.",
       columns: [
         {
           label: "Before",
           title: "Strong Brand, No DTC",
           points: [
             "Method had strong retail recognition, but no true direct-to-consumer channel.",
-            "The business had no owned DTC relationship to learn from or grow.",
+            "The business had no historical data to learn from.",
             "Every new brand launch risked becoming a separate technology project.",
           ],
         },
@@ -167,7 +169,7 @@ export const methodCaseStudy = {
           points: [
             "Method launched as a real DTC business on SC Johnson's shared commerce rails.",
             "The experience felt brand-specific instead of generic platform reuse.",
-            "The launch proved one unified platform could support multiple brands and markets.",
+            "The launch proved one unified platform could support multiple brands & markets.",
           ],
         },
       ],
@@ -198,40 +200,40 @@ export const methodCaseStudy = {
     title: "Delivery Phases",
     introTitle: "How I Got It Live Fast",
     introCopy:
-      "This was a compressed launch with very little room for drift. The work had to move fast, stay coordinated across shared systems, and still preserve the Method brand experience, which meant the program needed tight execution, clear decisions, and no tolerance for architecture creep.",
+      "Compressed launch with no room for drift. The work had to move fast and preserve the Method brand experience.",
     phases: [
       {
         phase: "Phase 01",
         title: "Diagnose",
-        copy: "Mapped what Method needed from a zero-to-one DTC channel, then separated what should stay shared from what needed to feel brand-specific.",
+        copy: "Scoped 0-1 DTC channel, added in brand-specific CMS strategy.",
         ringClass: "border-[#D39D23]",
         labelClass: "text-[#D39D23]",
       },
       {
         phase: "Phase 02",
         title: "Align",
-        copy: "Brought SC Johnson, BigCommerce, LiveArea, and downstream system owners into one execution path with shared expectations around scope and launch timing.",
+        copy: "Brought SCJ, BC, and LiveArea into one execution path.",
         ringClass: "border-[#5E7FB7]",
         labelClass: "text-[#5E7FB7]",
       },
       {
         phase: "Phase 03",
         title: "Design",
-        copy: "Defined how SAP, Salsify, WMS, tax, payments, service, and marketing systems would support the launch while keeping the experience on-brand.",
+        copy: "Defined how SAP, Salsify, WMS, tax, payments, would support the launch.",
         ringClass: "border-[#1A9E9A]",
         labelClass: "text-[#1A9E9A]",
       },
       {
         phase: "Phase 04",
         title: "Build",
-        copy: "Connected the storefront, shared enterprise services, and brand experience layer into one commerce flow that could actually support DTC operations.",
+        copy: "Connected the storefront, shared enterprise services, and brand experience layer.",
         ringClass: "border-[#1A9E9A]",
         labelClass: "text-[#1A9E9A]",
       },
       {
         phase: "Phase 05",
         title: "Launch",
-        copy: "Delivered Method as a live DTC business and proved SC Johnson could extend the same platform pattern across multiple home-care brands.",
+        copy: "Delivered Method as a live DTC business and proved reusable patterns.",
         ringClass: "border-[#3E7BE0]",
         labelClass: "text-[#3E7BE0]",
       },
@@ -241,10 +243,11 @@ export const methodCaseStudy = {
     quote: "Jim got it done.",
     attributionTitle: "Tammy Tran",
     attributionSubtitle: "Director of eCommerce, Method",
+    avatarSrc: "/method/tammy-tran.jpeg",
   },
   recognition: {
     eyebrow: "Recognition",
-    title: "Platform Reuse In Action",
+    title: "Press & Accolades",
     intro:
       "The strongest proof here was not outside press, it was platform behavior. Method showed that SC Johnson could move from one successful DTC launch to the next without losing speed, brand integrity, or architectural discipline.",
     rows: [
