@@ -1,6 +1,7 @@
 "use client"
 
 import type { CaseStudySolutionDiagramKey, DiagramData } from "@/components/case-study/types"
+import ModereSimulation from "@/components/case-study/modere-simulation/ModereSimulation"
 import { DeferredVisualLoader } from "@/components/case-study/template/visuals/deferred/DeferredVisualLoader"
 import type { ComponentType } from "react"
 
@@ -18,6 +19,7 @@ const SOLUTION_DIAGRAM_LOADERS: Record<
   "murad-architecture": () => import("@/components/case-study/MuradArchitectureDiagram"),
   "bi-commerce-ecosystem": () => import("@/components/case-study/bi-commerce-ecosystem-diagram"),
   "scj-commerce-architecture": () => import("@/components/case-study/SCJCommerceArchitecture"),
+  "modere-simulation": () => import("@/components/case-study/modere-simulation/ModereSimulation"),
 }
 
 const HEADLESS_COMMERCE_LOADER = () => import("@/app/diagrams/headless_commerce_react")
@@ -55,6 +57,15 @@ export function DeferredSolutionDiagramVisual({
 
   if (!diagramKey) {
     return null
+  }
+
+  // Render Modere simulation directly in dev so Fast Refresh updates without manual page reloads.
+  if (process.env.NODE_ENV === "development" && diagramKey === "modere-simulation") {
+    return (
+      <div className={className}>
+        <ModereSimulation />
+      </div>
+    )
   }
 
   return (

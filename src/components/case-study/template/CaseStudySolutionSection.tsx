@@ -6,6 +6,8 @@ import { SectionShell } from "@/components/SectionShell"
 import { DeferredSolutionDiagramVisual } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
 
 export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
+  const isModereSimulation = data.solution.diagramKey === "modere-simulation"
+
   return (
     <SectionShell surface="white" containerClassName="pb-7 pt-1 md:pb-8 md:pt-1 lg:pb-10 lg:pt-1">
       <div className="flex flex-col items-center gap-8 pt-6 md:pt-8 lg:pt-10">
@@ -24,7 +26,12 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
           <DeferredSolutionDiagramVisual
             diagram={data.solution.diagram}
             diagramKey={data.solution.diagramKey}
-            minHeightClassName="min-h-[360px] md:min-h-[420px]"
+            className={isModereSimulation ? "mx-auto w-full max-w-[1440px]" : undefined}
+            minHeightClassName={
+              isModereSimulation
+                ? "min-h-[520px] md:min-h-[760px]"
+                : "min-h-[360px] md:min-h-[420px]"
+            }
             loadingLabel="Loading architecture diagram..."
           />
         ) : data.solution.heroImage ? (

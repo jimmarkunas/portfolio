@@ -66,11 +66,18 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
           <div className="flex flex-col">
             {data.recognition.leadImage && (
               <div className={isFoh ? "-mt-9 pb-7 md:-mt-1 lg:-mt-[52px]" : "pb-7"}>
-                <img
-                  src={data.recognition.leadImage.src}
-                  alt={data.recognition.leadImage.alt}
-                  className="block h-auto w-full"
-                />
+                <div className="relative">
+                  <img
+                    src={data.recognition.leadImage.src}
+                    alt={data.recognition.leadImage.alt}
+                    className="block h-auto w-full rounded-sm border border-[#222222]"
+                  />
+                  {data.recognition.leadImage.badge && (
+                    <div className="absolute bottom-4 left-4 max-w-[260px] rounded-lg bg-black/70 px-4 py-3 text-white backdrop-blur-sm">
+                      <p className="type-p4 leading-snug">{data.recognition.leadImage.badge}</p>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 

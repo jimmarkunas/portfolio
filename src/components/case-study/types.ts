@@ -63,6 +63,7 @@ export type CaseStudySolutionDiagramKey =
   | "murad-architecture"
   | "bi-commerce-ecosystem"
   | "scj-commerce-architecture"
+  | "modere-simulation"
 
 export type CaseStudyProblemChart = {
   key: "retail-vs-dtc"
@@ -249,6 +250,7 @@ export type CaseStudyData = {
     leadImage?: {
       src: string
       alt: string
+      badge?: string
     }
     featured?: {
       media: CaseStudyMedia
