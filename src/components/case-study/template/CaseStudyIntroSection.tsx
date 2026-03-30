@@ -1,45 +1,19 @@
-import dynamic from "next/dynamic"
-import type { ComponentType } from "react"
-
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
-import type { CaseStudyData, CaseStudyPreQuoteChartKey } from "@/components/case-study/types"
+import type { CaseStudyData } from "@/components/case-study/types"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { PullQuote } from "@/components/PullQuote"
 import { StatCard } from "@/components/StatCard"
 import { TagPill } from "@/components/TagPill"
+import { CaseStudyDeferredVisual } from "@/components/case-study/template/visuals/CaseStudyDeferredVisual"
 
 import { HeroSwooshBackdrop } from "./CaseStudyTemplateIcons"
 
-const GlobalLocationsMap = dynamic(
-  () => import("@/components/case-study/GlobalLocationsMap").then((m) => ({ default: m.GlobalLocationsMap })),
-  { ssr: false }
-)
-const DirecTVRevenueChart = dynamic(
-  () => import("@/components/case-study/DirecTVRevenueChart").then((m) => ({ default: m.DirecTVRevenueChart })),
-  { ssr: false }
-)
-const BoehringerDataSilosDiagram = dynamic(
-  () => import("@/components/case-study/BoehringerDataSilosDiagram"),
-  { ssr: false }
-)
-const RetailVsDtcChart = dynamic<{ brandName?: string }>(
-  () => import("@/components/case-study/MrsMeyersRetailVsDtcChart"),
-  { ssr: false }
-)
-
-const preQuoteChartRegistry: Record<CaseStudyPreQuoteChartKey, ComponentType> = {
-  "directv-revenue": DirecTVRevenueChart,
-  "bi-data-silos": BoehringerDataSilosDiagram,
-}
-
 export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
   const isFoh = data.slug === "foh"
-  const ProblemChart = data.problem.chart?.key === "retail-vs-dtc" ? RetailVsDtcChart : null
-  const PreQuoteChart = data.problem.quote.preQuoteChart
-    ? preQuoteChartRegistry[data.problem.quote.preQuoteChart]
-    : null
+  const problemChartKey = data.problem.chart?.key
+  const preQuoteChartKey = data.problem.quote.preQuoteChart
 
   return (
     <section className="border-t border-[#222222]/8 bg-[#F3F3F3]">
@@ -103,11 +77,18 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                     <h2 className="type-h3 text-[#222222]">{data.problem.title}</h2>
                   </div>
 
-                  {ProblemChart ? (
+                  {problemChartKey === "retail-vs-dtc" ? (
                     <div className={isFoh
                       ? "w-full lg:col-start-1 lg:row-start-3"
                       : "w-full lg:col-start-1 lg:row-start-3"}>
-                      <ProblemChart brandName={data.problem.chart?.brandName} />
+                      <CaseStudyDeferredVisual
+                        visual="problem-chart"
+                        chartKey="retail-vs-dtc"
+                        brandName={data.problem.chart?.brandName}
+                        eager
+                        minHeightClassName="min-h-[320px] md:min-h-[360px]"
+                        loadingLabel="Loading chart..."
+                      />
                     </div>
                   ) : (
                     <CaseStudyMediaFrame
@@ -174,8 +155,14 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                   {data.problem.quote.preQuoteHeading && (
                     <h3 className="type-h4 mb-6 pt-5 text-[#222222]">{data.problem.quote.preQuoteHeading}</h3>
                   )}
-                  {PreQuoteChart ? (
-                    <PreQuoteChart />
+                  {preQuoteChartKey ? (
+                    <CaseStudyDeferredVisual
+                      visual="prequote-chart"
+                      chartKey={preQuoteChartKey}
+                      eager
+                      minHeightClassName="min-h-[320px] md:min-h-[380px]"
+                      loadingLabel="Loading chart..."
+                    />
                   ) : data.problem.quote.preQuoteImage ? (
                     <>
                       <img src={data.problem.quote.preQuoteImage} alt="" className="w-full" />
@@ -260,9 +247,12 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                   </h3>
 
                   {data.globalLocations && (
-                    <GlobalLocationsMap
+                    <CaseStudyDeferredVisual
+                      visual="global-locations"
                       title={data.globalLocations.title}
                       locations={data.globalLocations.locations}
+                      minHeightClassName="min-h-[420px]"
+                      loadingLabel="Loading global locations..."
                     />
                   )}
 

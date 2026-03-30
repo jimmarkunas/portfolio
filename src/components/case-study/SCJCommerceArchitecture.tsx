@@ -1,17 +1,12 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import type { ReactNode } from "react";
 import {
-  ArrowLeftRight,
-  BarChart3,
   BadgePercent,
   Code2,
   CreditCard,
   Globe,
-  LayoutGrid,
   MessageSquareMore,
   Package,
-  ShoppingBag,
   SlidersHorizontal,
   Sparkles,
   Users,
@@ -21,13 +16,17 @@ import { SCJ_TOOLTIPS } from "./scjDiagramData";
 import ParticleCanvas from "./ParticleCanvas";
 import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
 import {
-  SCJ_BRAND_LOGOS,
   SCJ_COMMERCE_NODES,
   SCJ_SYSTEM_NODES,
-  SCJ_TOP_NODES,
   type MeasuredNodeId,
-  type SystemNodeId,
 } from "@/components/case-study/diagram-config/scj-architecture.config";
+import {
+  ApiLayer,
+  BrandMark,
+  NodeCard,
+  StorefrontAndCommerceLayers,
+  cn,
+} from "@/components/case-study/diagram-shared/SCJDiagramPrimitives";
 
 type Box = { left: number; top: number; width: number; height: number };
 
@@ -42,20 +41,6 @@ const cardVariants = {
 const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
 const staggerParent = { hidden: {}, visible: { transition: { staggerChildren: 0.09 } } };
 const viewport = { once: true, amount: 0.1 } as const;
-
-function cn(...parts: Array<string | false | null | undefined>) {
-  return parts.filter(Boolean).join(" ");
-}
-
-function TextLines({ label }: { label: string }) {
-  return (
-    <>
-      {label.split("\n").map((line) => (
-        <span key={line} className="block">{line}</span>
-      ))}
-    </>
-  );
-}
 
 function useMeasuredNodes(ids: readonly MeasuredNodeId[]) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -104,219 +89,6 @@ function useMeasuredNodes(ids: readonly MeasuredNodeId[]) {
   return { wrapperRef, boxes, setNodeRef };
 }
 
-// ─── Primitives ──────────────────────────────────────────────────────────────
-
-function SectionEyebrow({ children }: { children: ReactNode }) {
-  return (
-    <div className="type-ui-sm text-center text-[#222222]">
-      {children}
-    </div>
-  );
-}
-
-function UserExperienceBadge() {
-  return (
-    <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#447acb] bg-white shadow-[0_1px_2px_rgba(34,34,34,0.04)]">
-      <ShoppingBag className="h-4 w-4 text-[#447acb]" />
-    </div>
-  );
-}
-
-function HeaderIcon({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
-  return (
-    <span className={cn(
-      "inline-flex h-10 w-10 items-center justify-center rounded-full border bg-white",
-      dark ? "border-[#222222] text-[#222222]" : "border-[#d9e6fb] text-[#447acb]"
-    )}>
-      {children}
-    </span>
-  );
-}
-
-function LucideIcon({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(34,34,34,0.08)] bg-[#fefefe] text-[#222222]">
-      {children}
-    </span>
-  );
-}
-
-function BrandIcon({ src, alt }: { src: string; alt: string }) {
-  return (
-    <div className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-[2px]">
-      <img src={src} alt={alt} className="h-full w-full object-contain" />
-    </div>
-  );
-}
-
-function BrandMark({ brand }: { brand: SystemNodeId }) {
-  const src = SCJ_BRAND_LOGOS[brand];
-  if (src) {
-    return (
-      <div className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-[2px]">
-        <img src={src} alt={brand} className="h-full w-full object-contain" />
-      </div>
-    );
-  }
-  return (
-    <span className="inline-flex h-9 w-9 items-center justify-center rounded-[2px] border border-[rgba(34,34,34,0.08)] bg-white text-[#222222]">
-      <BarChart3 className="h-4 w-4" />
-    </span>
-  );
-}
-
-// ─── Shared card ─────────────────────────────────────────────────────────────
-
-const NODE_CARD_BASE =
-  "flex h-32 flex-col items-center justify-center gap-3 rounded-[10px] outline outline-1 outline-offset-[-1px] outline-[#e5e7eb] bg-white px-4 py-3 text-center shadow-[0_1px_2px_rgba(34,34,34,0.02)] transition-[outline,box-shadow] duration-150";
-
-function NodeCard({
-  label,
-  icon,
-  nodeRef,
-  onClick,
-}: {
-  label: string;
-  icon: ReactNode;
-  nodeRef?: (el: HTMLDivElement | null) => void;
-  onClick?: () => void;
-}) {
-  return (
-    <div ref={nodeRef} onClick={onClick} className={cn(NODE_CARD_BASE, onClick && "cursor-pointer hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]")}>
-      {icon}
-      <div className="type-p4 max-w-[150px] text-[#222222]">
-        <TextLines label={label} />
-      </div>
-    </div>
-  );
-}
-
-// ─── Layout components ───────────────────────────────────────────────────────
-
-function CombinedLayersShell({ children }: { children: ReactNode }) {
-  return (
-    <div className="overflow-hidden rounded-[10px] border border-[#7b7b7b] bg-white shadow-[0_1px_2px_rgba(34,34,34,0.02)]">
-      {children}
-    </div>
-  );
-}
-
-function LayerSection({
-  icon,
-  title,
-  subtitle,
-  children,
-  showDivider = true,
-  headerBg = "bg-zinc-100",
-  onHeaderClick,
-}: {
-  icon: ReactNode;
-  title: string;
-  subtitle?: string;
-  children: ReactNode;
-  showDivider?: boolean;
-  headerBg?: string;
-  onHeaderClick?: () => void;
-}) {
-  return (
-    <div className={cn("bg-white", showDivider && "border-b border-[#e5e7eb]")}>
-      <div
-        onClick={onHeaderClick}
-        className={cn(
-          "flex h-24 items-center justify-center gap-3 border-b border-[#e5e7eb] outline outline-1 outline-offset-[-1px] outline-transparent px-5 py-3 text-center",
-          headerBg,
-          onHeaderClick && "cursor-pointer transition-[outline,box-shadow] duration-150 hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]"
-        )}
-      >
-        <HeaderIcon dark>{icon}</HeaderIcon>
-        <div className="flex flex-col items-start gap-1 text-left">
-          <div className="type-h4 text-[#222222]">{title}</div>
-          {subtitle ? <div className="type-p5 text-[#222222]">{subtitle}</div> : null}
-        </div>
-      </div>
-      <div className="p-4">{children}</div>
-    </div>
-  );
-}
-
-function ApiLayer({
-  nodeRef,
-  onClick,
-}: {
-  nodeRef?: (el: HTMLDivElement | null) => void;
-  onClick?: () => void;
-}) {
-  return (
-    <div
-      ref={nodeRef}
-      onClick={onClick}
-      className={cn(
-        "flex h-20 items-center justify-center gap-3 rounded-[10px] outline outline-1 outline-offset-[-1px] outline-[#202124] bg-neutral-800 px-5 py-3 text-white shadow-[0_1px_2px_rgba(34,34,34,0.06)] transition-[outline,box-shadow] duration-150",
-        onClick && "cursor-pointer hover:outline-2 hover:outline-blue-500 hover:shadow-[0_0_0_2px_rgba(68,122,203,0.15),0_8px_32px_rgba(68,122,203,0.35)]"
-      )}
-    >
-      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/90 text-white">
-        <ArrowLeftRight className="h-4 w-4" />
-      </span>
-      <div className="type-h4 text-center">2-Way Rest API Layer</div>
-    </div>
-  );
-}
-
-/** Shared LayerSection tree — used by both desktop and mobile with different grid classes */
-function StorefrontAndCommerceLayers({
-  toggle,
-  topGridClass,
-  commerceGridClass,
-  setNodeRef,
-}: {
-  toggle: (key: string) => void;
-  topGridClass: string;
-  commerceGridClass: string;
-  setNodeRef?: (id: MeasuredNodeId) => (el: HTMLDivElement | null) => void;
-}) {
-  return (
-    <CombinedLayersShell>
-      <LayerSection
-        icon={<LayoutGrid className="h-5 w-5" />}
-        title="Storefront Design"
-        subtitle="Presentation Layer"
-        onHeaderClick={() => toggle("storefront")}
-      >
-        <div className={topGridClass}>
-          {SCJ_TOP_NODES.map((node) => (
-            <NodeCard
-              key={node.id}
-              label={node.label}
-              icon={<BrandIcon src={node.iconSrc} alt={node.iconAlt} />}
-              onClick={() => toggle(node.id)}
-            />
-          ))}
-        </div>
-      </LayerSection>
-
-      <LayerSection
-        icon={<img src="/tool-icons/svg/bc-logo-icon.svg" alt="BigCommerce" className="h-8 w-8" />}
-        title="Commerce System Layer"
-        showDivider={false}
-        headerBg="bg-transparent"
-        onHeaderClick={() => toggle("commerce-layer")}
-      >
-        <div className={commerceGridClass}>
-          {SCJ_COMMERCE_NODES.map((node) => (
-            <NodeCard
-              key={node.id}
-              label={node.label}
-              icon={<BrandIcon src={node.iconSrc} alt={node.iconAlt} />}
-              nodeRef={setNodeRef?.(node.id)}
-              onClick={() => toggle(node.id)}
-            />
-          ))}
-        </div>
-      </LayerSection>
-    </CombinedLayersShell>
-  );
-}
 
 // ─── Connectors ──────────────────────────────────────────────────────────────
 

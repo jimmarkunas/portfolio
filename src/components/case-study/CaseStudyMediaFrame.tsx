@@ -1,5 +1,5 @@
-import BoehringerDataSilosDiagram from "@/components/case-study/BoehringerDataSilosDiagram"
 import type { CaseStudyMedia } from "@/components/case-study/types"
+import { CaseStudyDeferredVisual } from "@/components/case-study/template/visuals/CaseStudyDeferredVisual"
 
 type CaseStudyMediaFrameProps = {
   media: CaseStudyMedia
@@ -15,7 +15,15 @@ export function CaseStudyMediaFrame({
   if (media.kind === "react-diagram") {
     return (
       <div className={`w-full overflow-hidden ${className}`.trim()}>
-        {media.component === "bi-data-silos" && <BoehringerDataSilosDiagram />}
+        {media.component === "bi-data-silos" && (
+          <CaseStudyDeferredVisual
+            visual="media-react-diagram"
+            component="bi-data-silos"
+            eager
+            minHeightClassName="min-h-[320px] md:min-h-[360px]"
+            loadingLabel="Loading diagram..."
+          />
+        )}
       </div>
     )
   }
