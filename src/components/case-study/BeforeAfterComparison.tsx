@@ -9,17 +9,17 @@ export function BeforeAfterComparison({ columns }: BeforeAfterComparisonProps) {
 
   return (
     <div className="mt-2 grid w-full gap-4 p-1 md:grid-cols-[minmax(0,1fr)_56px_minmax(0,1fr)] md:items-stretch md:gap-0">
-      <div className="rounded-[10px] bg-white p-6 shadow-[0_10px_30px_rgba(34,34,34,0.04)] md:pr-6 md:pb-6">
+      <div className="rounded-[10px] bg-[#2E2E2E] p-6 md:pr-6 md:pb-6">
         <div className="flex flex-col items-start gap-3">
-          <span className="text-[12px] uppercase tracking-[0.18em] text-red-500">
+          <span className="text-[12px] uppercase tracking-[0.18em] text-red-400">
             {beforeColumn.label}
           </span>
-          <h3 className="text-[24px] leading-[1.15] tracking-[-0.03em] text-[#222222]">
+          <h3 className="text-[24px] leading-[1.15] tracking-[-0.03em] text-white">
             {beforeColumn.title}
           </h3>
           <ul className="flex flex-col gap-3">
             {beforeColumn.points.map((point) => (
-              <li key={point} className="type-p4 text-[#222222]">
+              <li key={point} className="type-p4 text-white/70">
                 {point}
               </li>
             ))}
@@ -45,17 +45,17 @@ export function BeforeAfterComparison({ columns }: BeforeAfterComparisonProps) {
         </div>
       </div>
 
-      <div className="rounded-[10px] bg-white p-6 shadow-[0_10px_30px_rgba(34,34,34,0.04)] md:pl-6">
+      <div className="rounded-[10px] bg-[#2E2E2E] p-6 md:pl-6">
         <div className="flex flex-col items-start gap-3">
-          <span className="text-[12px] uppercase tracking-[0.18em] text-blue-500">
+          <span className="text-[12px] uppercase tracking-[0.18em] text-blue-400">
             {afterColumn.label}
           </span>
-          <h3 className="text-[24px] leading-[1.15] tracking-[-0.03em] text-[#222222]">
+          <h3 className="text-[24px] leading-[1.15] tracking-[-0.03em] text-white">
             {afterColumn.title}
           </h3>
           <ul className="flex flex-col gap-3">
             {afterColumn.points.map((point) => (
-              <li key={point} className="type-p4 text-[#222222]">
+              <li key={point} className="type-p4 text-white/70">
                 {point}
               </li>
             ))}

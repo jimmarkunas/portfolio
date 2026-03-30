@@ -445,9 +445,9 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
 
           <div className="grid w-full gap-10 lg:grid-cols-4 lg:items-start lg:gap-5">
             <div className="flex flex-col items-start gap-4 lg:col-span-2">
-              <div className="flex flex-col gap-5 rounded-2xl border border-[#C8C8C8] p-8">
-                <h2 className="type-h3 max-w-[640px] text-[#222222]">{data.impact.beforeAfter.title}</h2>
-                <p className="type-p3 max-w-[620px] text-[#222222]">{data.impact.beforeAfter.summary}</p>
+              <div className="flex flex-col gap-5 rounded-2xl border border-[#222222] bg-[#222222] p-8">
+                <h2 className="type-h3 max-w-[640px] text-white">{data.impact.beforeAfter.title}</h2>
+                <p className="type-p3 max-w-[620px] text-white/70">{data.impact.beforeAfter.summary}</p>
                 <BeforeAfterComparison columns={data.impact.beforeAfter.columns} />
               </div>
             </div>
