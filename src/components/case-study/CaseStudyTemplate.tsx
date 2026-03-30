@@ -272,9 +272,9 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
 
                       {data.role.narrative.highlights ? (
                         <div className="flex flex-col gap-5">
-                          {data.role.narrative.highlights.map((item) => (
-                            <div key={item} className="flex items-center gap-3">
-                              <div className="h-[27px] w-px bg-[#0F1112]" />
+                          {data.role.narrative.highlights.map((item, i) => (
+                            <div key={item} className="flex items-start gap-3">
+                              <div className="type-p5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0F1112] text-white">{i + 1}</div>
                               <div className="type-p2 text-[#111111]">{item}</div>
                             </div>
                           ))}
@@ -344,9 +344,9 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
 
           {data.supplementalNarrative.highlights ? (
             <div className="flex flex-col gap-5">
-              {data.supplementalNarrative.highlights.map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <div className="h-[27px] w-px bg-[#0F1112]" />
+              {data.supplementalNarrative.highlights.map((item, i) => (
+                <div key={item} className="flex items-start gap-3">
+                  <div className="type-p5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0F1112] text-white">{i + 1}</div>
                   <div className="type-p2 text-[#111111]">{item}</div>
                 </div>
               ))}
