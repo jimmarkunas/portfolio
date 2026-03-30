@@ -198,7 +198,7 @@ export const mrsmeyersCaseStudy = {
   delivery: {
     eyebrow: "Implementation",
     title: "Delivery Phases",
-    introTitle: "How I Droveh",
+    introTitle: "How I Drove",
     introCopy:
       "This was a compressed launch with real system risk and no room for drift. I moved discovery, design, integration, validation, and vendors toward one date.",
     phases: [
