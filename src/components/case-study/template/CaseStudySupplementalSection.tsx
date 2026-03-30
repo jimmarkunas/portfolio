@@ -20,7 +20,7 @@ export function CaseStudySupplementalSection({ data }: { data: CaseStudyData }) 
         {data.supplementalNarrative.highlights ? (
           <div className="flex flex-col gap-5">
             {data.supplementalNarrative.highlights.map((item, i) => (
-              <div key={item} className="flex items-start gap-3">
+              <div key={`${item}-${i}`} className="flex items-start gap-3">
                 <div className="type-p5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0F1112] text-white">{i + 1}</div>
                 <div className="type-p2 text-[#111111]">{item}</div>
               </div>

@@ -1,13 +1,16 @@
 import dynamic from "next/dynamic"
 import type { ComponentType } from "react"
 
-import HeadlessCommerceDiagram from "@/app/diagrams/headless_commerce_react"
 import { BlogCardGrid } from "@/components/case-study/BlogCardGrid"
-import type { CaseStudyData, CaseStudySolutionDiagramKey } from "@/components/case-study/types"
+import type { CaseStudyData, CaseStudySolutionDiagramKey, DiagramData } from "@/components/case-study/types"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { SectionShell } from "@/components/SectionShell"
 
+const HeadlessCommerceDiagram = dynamic<{ data: DiagramData }>(
+  () => import("@/app/diagrams/headless_commerce_react"),
+  { ssr: false }
+)
 const MuradArchitectureDiagram = dynamic(
   () => import("@/components/case-study/MuradArchitectureDiagram"),
   { ssr: false }

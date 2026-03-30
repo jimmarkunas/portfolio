@@ -42,6 +42,10 @@ export const mrsmeyersCaseStudy = {
       alt: "SC Johnson commerce architecture and launch-planning materials",
       aspectRatio: "16/9",
     },
+    chart: {
+      key: "retail-vs-dtc",
+      brandName: "Mrs. Meyers",
+    },
     overview:
       "SC Johnson wanted to prove DTC could work for Mrs. Meyer’s without blowing up retail. The company had no DTC muscle, no owned customer relationship, and no modern path from storefront to fulfillment. Worse, the systems underneath were built for pallets, retail distribution, and slow enterprise processes, not parcel shipping, tax, payments, subscriptions, customer service, and a consumer-grade storefront.",
     projectOverviewRows: [

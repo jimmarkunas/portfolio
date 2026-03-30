@@ -21,6 +21,7 @@ import Modal from "./Modal";
 import { useModal } from "./useModal";
 import { SCJ_TOOLTIPS } from "./scjDiagramData";
 import ParticleCanvas from "./ParticleCanvas";
+import { useAdaptiveDiagramMotion } from "./useAdaptiveDiagramMotion";
 
 type TopNodeId = "personalization" | "merchandising" | "ugc" | "promotions" | "frontend";
 type CommerceNodeId = "omnichannel" | "subscriptions" | "catalog" | "checkout" | "orders" | "customer";
@@ -366,7 +367,13 @@ function StorefrontAndCommerceLayers({
 
 // ─── Diagrams ─────────────────────────────────────────────────────────────────
 
-function DesktopDiagram({ toggle }: { toggle: (key: string) => void }) {
+function DesktopDiagram({
+  toggle,
+  shouldReduceMotion,
+}: {
+  toggle: (key: string) => void
+  shouldReduceMotion: boolean
+}) {
   const measuredIds = useMemo(
     () => [
       ...COMMERCE_NODES.map((n) => n.id),
@@ -398,9 +405,14 @@ function DesktopDiagram({ toggle }: { toggle: (key: string) => void }) {
 
   return (
     <div className="hidden md:block">
-      <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={staggerParent}>
+      <motion.div
+        initial={shouldReduceMotion ? false : "hidden"}
+        whileInView={shouldReduceMotion ? undefined : "visible"}
+        viewport={viewport}
+        variants={shouldReduceMotion ? undefined : staggerParent}
+      >
       <div ref={wrapperRef} className="relative">
-        {particlePaths.length > 0 && (
+        {!shouldReduceMotion && particlePaths.length > 0 && (
           <ParticleCanvas paths={particlePaths} containerRef={wrapperRef as React.RefObject<HTMLElement>} />
         )}
 
@@ -437,14 +449,20 @@ function DesktopDiagram({ toggle }: { toggle: (key: string) => void }) {
   );
 }
 
-function MobileDiagram({ toggle }: { toggle: (key: string) => void }) {
+function MobileDiagram({
+  toggle,
+  shouldReduceMotion,
+}: {
+  toggle: (key: string) => void
+  shouldReduceMotion: boolean
+}) {
   return (
     <motion.div
       className="space-y-4 md:hidden"
-      initial="hidden"
-      whileInView="visible"
+      initial={shouldReduceMotion ? false : "hidden"}
+      whileInView={shouldReduceMotion ? undefined : "visible"}
       viewport={viewport}
-      variants={staggerParent}
+      variants={shouldReduceMotion ? undefined : staggerParent}
     >
       <motion.div variants={cardVariants} transition={cardTransition}>
         <StorefrontAndCommerceLayers
@@ -476,6 +494,7 @@ function MobileDiagram({ toggle }: { toggle: (key: string) => void }) {
 
 export default function SCJCommerceArchitecture({ className }: ComponentProps) {
   const { activeKey, toggle, close } = useModal();
+  const { shouldReduceMotion } = useAdaptiveDiagramMotion();
   const tip = activeKey ? (SCJ_TOOLTIPS[activeKey] ?? null) : null;
 
   return (
@@ -484,8 +503,8 @@ export default function SCJCommerceArchitecture({ className }: ComponentProps) {
     >
       <Modal tip={tip} onClose={close} />
       <div className="mx-auto max-w-[1440px] px-4 py-4 md:px-6 md:py-6 xl:px-8">
-        <DesktopDiagram toggle={toggle} />
-        <MobileDiagram toggle={toggle} />
+        <DesktopDiagram toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
+        <MobileDiagram toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
       </div>
     </section>
   );

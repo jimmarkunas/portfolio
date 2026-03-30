@@ -1,10 +1,12 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import ParticleCanvas from "./ParticleCanvas";
 import { motion } from "framer-motion";
 import Modal from "./Modal";
 import { useModal } from "./useModal";
+import { DiagramShell } from "./DiagramShell";
 import { TOOLTIPS } from "./biCommerceDiagramData";
+import { useAdaptiveDiagramMotion } from "./useAdaptiveDiagramMotion";
 import { ProductsIcon, InventoryIcon, DatabaseIcon, ContentIcon, CampaignIcon, LaptopIcon } from "./bi-commerce-icons";
 import {
   AEM_BROWSER_PATH,
@@ -84,34 +86,30 @@ type PillFeature = {
 };
 
 export default function CommerceEcosystemDiagram() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
   const { activeKey, toggle, close } = useModal();
+  const { shouldReduceMotion } = useAdaptiveDiagramMotion();
   const tip = activeKey ? (TOOLTIPS[activeKey] ?? null) : null;
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(entries =>
-      setScale(Math.min(1, entries[0].contentRect.width / VW))
-    );
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
   return (
-    <div ref={containerRef} className="rounded-sm bg-white overflow-hidden w-full">
+    <div className="rounded-sm bg-white overflow-hidden w-full">
       <Modal tip={tip} onClose={close} />
 
       <div className="md:hidden p-4">
-        <ResponsiveStackLayout toggle={toggle} />
+        <ResponsiveStackLayout toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
       </div>
 
-      <div className="hidden md:block" style={{ height: VH * scale, position: "relative", overflow: "hidden" }}>
-        <div style={{ transform: `scale(${scale})`, transformOrigin: "top left", position: "absolute", top: 0, left: 0, width: VW, height: VH }}>
-          <DesktopFixedLayout toggle={toggle} />
-        </div>
-      </div>
+      <DiagramShell
+        className="w-full"
+        onPointerDown={close}
+        desktop={{
+          baseWidth: VW,
+          baseHeight: VH,
+          viewportClassName: "hidden md:block",
+          render: ({ shouldReduceMotion: desktopReduceMotion }) => (
+            <DesktopFixedLayout toggle={toggle} shouldReduceMotion={desktopReduceMotion} />
+          ),
+        }}
+      />
     </div>
   );
 }
@@ -121,40 +119,54 @@ const mobileCard = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] } },
 };
 
-function MobileConnector() {
+function MobileConnector({ shouldReduceMotion }: { shouldReduceMotion: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   return (
     <div className="flex justify-center py-[7px]">
       <div ref={ref} className="relative" style={{ width: CONN_W, height: CONN_H }}>
         <div className="absolute top-0 bottom-0" style={{ left: 11, width: 1.5, background: "#D9DDE3" }} />
         <div className="absolute top-0 bottom-0" style={{ left: 23, width: 1.5, background: "#D9DDE3" }} />
-        <ParticleCanvas paths={[MOB_DOWN]} containerRef={ref as React.RefObject<HTMLElement>} color="237,34,36" />
-        <ParticleCanvas paths={[MOB_UP]}   containerRef={ref as React.RefObject<HTMLElement>} color="34,34,34" />
+        {shouldReduceMotion ? null : (
+          <>
+            <ParticleCanvas paths={[MOB_DOWN]} containerRef={ref as React.RefObject<HTMLElement>} color="237,34,36" />
+            <ParticleCanvas paths={[MOB_UP]}   containerRef={ref as React.RefObject<HTMLElement>} color="34,34,34" />
+          </>
+        )}
       </div>
     </div>
   );
 }
 
-function MarchingAntsBorder({ children }: { children: React.ReactNode }) {
+function MarchingAntsBorder({ children, shouldReduceMotion }: { children: React.ReactNode; shouldReduceMotion: boolean }) {
   return (
     <div className="relative group">
       {children}
       <svg className="pointer-events-none" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", overflow: "visible" }}>
         <rect x="-6" y="-6" width="calc(100% + 12px)" height="calc(100% + 12px)" rx="16" fill="none" stroke="#ED2224" strokeWidth="1.5" strokeDasharray="7 5" opacity="0.85" className="group-hover:stroke-[#447acb]" style={{ transition: "stroke 300ms" }}>
-          <animate attributeName="stroke-dashoffset" from="0" to="-1510" dur="180s" repeatCount="indefinite" />
+          {shouldReduceMotion ? null : (
+            <animate attributeName="stroke-dashoffset" from="0" to="-1510" dur="180s" repeatCount="indefinite" />
+          )}
         </rect>
       </svg>
     </div>
   );
 }
 
-function MobileReveal({ children, className }: { children: React.ReactNode; className?: string }) {
+function MobileReveal({
+  children,
+  className,
+  shouldReduceMotion,
+}: {
+  children: React.ReactNode
+  className?: string
+  shouldReduceMotion: boolean
+}) {
   return (
     <motion.div
       className={className}
       variants={mobileCard}
-      initial="hidden"
-      whileInView="visible"
+      initial={shouldReduceMotion ? false : "hidden"}
+      whileInView={shouldReduceMotion ? undefined : "visible"}
       viewport={{ once: true, margin: "-40px" }}
     >
       {children}
@@ -162,25 +174,31 @@ function MobileReveal({ children, className }: { children: React.ReactNode; clas
   );
 }
 
-function ResponsiveStackLayout({ toggle }: { toggle: (key: string) => void }) {
+function ResponsiveStackLayout({
+  toggle,
+  shouldReduceMotion,
+}: {
+  toggle: (key: string) => void
+  shouldReduceMotion: boolean
+}) {
   return (
     <div className="flex flex-col">
-      <MobileReveal>
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
         <SystemCard className="w-full" compact {...SAP_CARD} onClick={() => toggle("sap")} />
       </MobileReveal>
 
-      <MobileConnector />
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
 
-      <MobileReveal>
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
         <div className="flex flex-wrap gap-3 justify-center">
           <BlueTag label="PAYMENTS" onClick={() => toggle("payments")} />
           <BlueTag label="TAX" onClick={() => toggle("tax")} />
         </div>
       </MobileReveal>
 
-      <MobileConnector />
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
 
-      <MobileReveal>
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
         <HeroCard
           className="w-full"
           {...MULESOFT_CARD}
@@ -189,36 +207,42 @@ function ResponsiveStackLayout({ toggle }: { toggle: (key: string) => void }) {
         />
       </MobileReveal>
 
-      <MobileConnector />
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
 
-      <MobileReveal>
-        <MarchingAntsBorder>
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
+        <MarchingAntsBorder shouldReduceMotion={shouldReduceMotion}>
           <CommerceCard className="w-full" compact onClick={() => toggle("commerce-cloud")} onGraphqlClick={() => toggle("adobe-graphql")} onPillsClick={() => toggle("commerce-services")} />
         </MarchingAntsBorder>
       </MobileReveal>
 
-      <MobileConnector />
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
 
-      <MobileReveal>
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
         <SystemCard className="w-full" compact {...AEM_CARD} onClick={() => toggle("aem")} />
       </MobileReveal>
 
-      <MobileConnector />
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
 
-      <MobileReveal>
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
         <DataLakeCard className="w-full" onClick={() => toggle("data-lake")} onConnectorClick={() => toggle("aem-connector")} />
       </MobileReveal>
 
-      <MobileConnector />
+      <MobileConnector shouldReduceMotion={shouldReduceMotion} />
 
-      <MobileReveal>
+      <MobileReveal shouldReduceMotion={shouldReduceMotion}>
         <BrowserCard className="w-full" compact onClick={() => toggle("shopper-browser")} onSdkClick={() => toggle("adobe-web-sdk")} />
       </MobileReveal>
     </div>
   );
 }
 
-function DesktopFixedLayout({ toggle }: { toggle: (key: string) => void }) {
+function DesktopFixedLayout({
+  toggle,
+  shouldReduceMotion,
+}: {
+  toggle: (key: string) => void
+  shouldReduceMotion: boolean
+}) {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   return (
     <motion.div
@@ -230,23 +254,25 @@ function DesktopFixedLayout({ toggle }: { toggle: (key: string) => void }) {
       variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}
     >
       <ConnectorLayer />
-      {([
-        [CC_SAP_PATH,         "237,34,36" ],
-        [SAP_CC_PATH,         "34,34,34"  ],
-        [DATALAKE_CC_PATH,    "34,34,34"  ],
-        [CC_DATALAKE_PATH,    "237,34,36" ],
-        [BROWSER_AEM_PATH,    "68,122,203"],
-        [AEM_BROWSER_PATH,    "68,122,203"],
-        [CC_MULESOFT_PATH,    "237,34,36" ],
-        [MULESOFT_CC_PATH,    "34,34,34"  ],
-        [AEM_DATALAKE_PATH,   "68,122,203"],
-        [DATALAKE_AEM_PATH,   "34,34,34"  ],
-        [SAP_MULESOFT_PATH,   "34,34,34"  ],
-        [MULESOFT_SAP_PATH,   "34,34,34"  ],
-        [MULESOFT_BROWSER_PATH,"34,34,34" ],
-      ] as const).map(([path, color], i) => (
-        <ParticleCanvas key={i} paths={[path]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color={color} />
-      ))}
+      {shouldReduceMotion
+        ? null
+        : ([
+            [CC_SAP_PATH,          "237,34,36"],
+            [SAP_CC_PATH,          "34,34,34"],
+            [DATALAKE_CC_PATH,     "34,34,34"],
+            [CC_DATALAKE_PATH,     "237,34,36"],
+            [BROWSER_AEM_PATH,     "68,122,203"],
+            [AEM_BROWSER_PATH,     "68,122,203"],
+            [CC_MULESOFT_PATH,     "237,34,36"],
+            [MULESOFT_CC_PATH,     "34,34,34"],
+            [AEM_DATALAKE_PATH,    "68,122,203"],
+            [DATALAKE_AEM_PATH,    "34,34,34"],
+            [SAP_MULESOFT_PATH,    "34,34,34"],
+            [MULESOFT_SAP_PATH,    "34,34,34"],
+            [MULESOFT_BROWSER_PATH,"34,34,34"],
+          ] as const).map(([path, color], i) => (
+            <ParticleCanvas key={i} paths={[path]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color={color} />
+          ))}
 
       <motion.div className="absolute left-[501px] top-[0px] z-10" variants={cardVariants} transition={cardTransition}>
         <BrowserCard className="w-[475px]" onClick={() => toggle("shopper-browser")} onSdkClick={() => toggle("adobe-web-sdk")} />
@@ -270,7 +296,7 @@ function DesktopFixedLayout({ toggle }: { toggle: (key: string) => void }) {
       </motion.div>
 
       <motion.div className="absolute left-[483px] top-[606px] z-10" variants={cardVariants} transition={cardTransition}>
-        <MarchingAntsBorder>
+        <MarchingAntsBorder shouldReduceMotion={shouldReduceMotion}>
           <CommerceCard className="w-[475px]" onClick={() => toggle("commerce-cloud")} onGraphqlClick={() => toggle("adobe-graphql")} onPillsClick={() => toggle("commerce-services")} />
         </MarchingAntsBorder>
       </motion.div>
@@ -639,4 +665,3 @@ function SapBadge()      { return <Badge src="/tool-icons/svg/sap-logo.svg" alt=
 function MulesoftBadge() { return <Badge src="/tool-icons/svg/mulesoft-logo.svg" alt="Mulesoft" />; }
 function AemBadge()      { return <Badge src="/tool-icons/svg/adobe-experience-manager-logo.svg" alt="Adobe Experience Manager" />; }
 function AdobeBadge()    { return <Badge src="/tool-icons/svg/adobe-logo.svg" alt="Adobe" />; }
-

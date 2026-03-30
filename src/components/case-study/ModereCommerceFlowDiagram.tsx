@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Modal from "@/components/case-study/Modal";
 import { useModal } from "@/components/case-study/useModal";
 import type { Tip } from "@/components/case-study/useModal";
+import { useAdaptiveDiagramMotion } from "@/components/case-study/useAdaptiveDiagramMotion";
 import {
   Users,
   ShoppingCart,
@@ -188,7 +189,21 @@ function TagChip({ children, dark = false }: { children: React.ReactNode; dark?:
   );
 }
 
-function Rail({ filling, triggerKey }: { filling: boolean; triggerKey: number }) {
+function Rail({
+  filling,
+  triggerKey,
+  shouldReduceMotion,
+}: {
+  filling: boolean
+  triggerKey: number
+  shouldReduceMotion: boolean
+}) {
+  if (shouldReduceMotion) {
+    return (
+      <div className="relative hidden h-px flex-1 self-center xl:block" style={{ background: COLORS.border, zIndex: 0, position: "relative" }} />
+    )
+  }
+
   return (
     <div className="relative hidden h-px flex-1 self-center xl:block" style={{ background: COLORS.border, zIndex: 0, position: "relative" }}>
       <motion.div
@@ -286,6 +301,7 @@ function FlowCard({
   isActive = false,
   compact = false,
   className = "",
+  shouldReduceMotion = false,
 }: {
   step: string;
   title: string;
@@ -295,31 +311,32 @@ function FlowCard({
   isActive?: boolean;
   compact?: boolean;
   className?: string;
+  shouldReduceMotion?: boolean;
 }) {
   return (
     <motion.div
       className={`relative min-w-0 xl:w-[212px] flex flex-col self-stretch z-10 ${className}`}
-      animate={{ y: isActive ? -6 : 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      animate={shouldReduceMotion ? undefined : { y: isActive ? -6 : 0 }}
+      transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
     >
       {emphasized ? (
         <motion.div
           className="pointer-events-none absolute -inset-2 rounded-[20px]"
           style={{ border: `1px dashed ${COLORS.secondary}` }}
-          animate={{ backgroundPositionX: [0, 24] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
+          animate={shouldReduceMotion ? undefined : { backgroundPositionX: [0, 24] }}
+          transition={shouldReduceMotion ? undefined : { duration: 1.8, repeat: Infinity, ease: "linear" }}
         />
       ) : null}
 
       <motion.div
         className="relative flex flex-col h-full rounded-[12px] p-4"
-        animate={{
+        animate={shouldReduceMotion ? undefined : {
           borderColor: isActive ? [COLORS.border, "#477ACB", "#477ACB"] : COLORS.border,
           boxShadow: isActive
             ? "0 20px 50px rgba(71,122,203,0.22), 0 4px 16px rgba(71,122,203,0.14)"
             : "0 10px 30px rgba(15,23,42,0.05)",
         }}
-        transition={{
+        transition={shouldReduceMotion ? undefined : {
           borderColor: isActive
             ? { duration: 0.9, times: [0, 0.12, 1], ease: "easeOut" }
             : { duration: 0.5 },
@@ -335,8 +352,8 @@ function FlowCard({
         <div className="mb-3 flex items-center justify-between gap-3">
           <motion.span
             className="type-p5"
-            animate={{ color: isActive ? COLORS.ink : COLORS.muted }}
-            transition={{ duration: 0.2 }}
+            animate={shouldReduceMotion ? undefined : { color: isActive ? COLORS.ink : COLORS.muted }}
+            transition={shouldReduceMotion ? undefined : { duration: 0.2 }}
           >
             {step}
           </motion.span>
@@ -426,6 +443,7 @@ function renderStepContent(step: FlowStepConfig, onOpen: (key: string) => void, 
 
 export default function ModereCommerceFlowDiagram({ className = "" }: { className?: string }) {
   const { activeKey, open, close } = useModal();
+  const { shouldReduceMotion } = useAdaptiveDiagramMotion();
   const activeTip = activeKey ? TIPS[activeKey] ?? null : null;
 
   const [activeStep, setActiveStep] = useState(0);
@@ -439,6 +457,10 @@ export default function ModereCommerceFlowDiagram({ className = "" }: { classNam
   };
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      return undefined;
+    }
+
     const id = setInterval(() => {
       setActiveStep((step) => {
         const next = (step + 1) % STEP_COUNT;
@@ -447,7 +469,7 @@ export default function ModereCommerceFlowDiagram({ className = "" }: { classNam
       });
     }, 10000);
     return () => clearInterval(id);
-  }, [resetToken]);
+  }, [resetToken, shouldReduceMotion]);
 
   return (
     <div className={`w-full ${className}`} onPointerDown={close}>
@@ -474,17 +496,18 @@ export default function ModereCommerceFlowDiagram({ className = "" }: { classNam
             <motion.div
               className="flex"
               animate={{ x: `${-activeStep * 100}%` }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
+              transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeInOut" }}
             >
               {FLOW_STEPS.map((step) => (
                 <div key={`carousel-${step.step}`} className="w-full shrink-0 px-1">
                   <FlowCard
                     step={step.step}
                     title={step.mobileTitle}
-                    body={step.mobileBody}
-                    emphasized={step.emphasized}
-                    compact
-                  >
+                  body={step.mobileBody}
+                  emphasized={step.emphasized}
+                  compact
+                  shouldReduceMotion={shouldReduceMotion}
+                >
                     {renderStepContent(step, open, `mobile-${step.step}`, true)}
                   </FlowCard>
                 </div>
@@ -549,12 +572,17 @@ export default function ModereCommerceFlowDiagram({ className = "" }: { classNam
                   emphasized={step.emphasized}
                   isActive={activeStep === index}
                   className={step.desktopClassName ?? ""}
+                  shouldReduceMotion={shouldReduceMotion}
                 >
                   {renderStepContent(step, open, `desktop-${step.step}`)}
                 </FlowCard>
 
                 {index < STEP_COUNT - 1 ? (
-                  <Rail filling={activeStep === index + 1} triggerKey={cycle * STEP_COUNT + index + 1} />
+                  <Rail
+                    filling={activeStep === index + 1}
+                    triggerKey={cycle * STEP_COUNT + index + 1}
+                    shouldReduceMotion={shouldReduceMotion}
+                  />
                 ) : null}
               </React.Fragment>
             ))}

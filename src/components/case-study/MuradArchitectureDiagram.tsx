@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import ParticleCanvas from "./ParticleCanvas"
 import Modal from "./Modal"
 import { useModal } from "./useModal"
+import { useAdaptiveDiagramMotion } from "./useAdaptiveDiagramMotion"
 import { DIAGRAM_DATA as D } from "./muradDiagramData"
 import DesktopCard from "./DesktopCard"
 import MobileCard from "./MobileCard"
@@ -44,6 +45,7 @@ function PulseGlow({ w, h, uid = "pg", color = "#447acb", style }: {
   uid?: string
   color?: string
   style?: React.CSSProperties
+  disableAnimation?: boolean
 }) {
   const cx = w / 2
   const cy = h / 2
@@ -106,6 +108,7 @@ export default function MuradArchitectureDiagram() {
   const mobileCanvasRef = useRef<HTMLDivElement>(null)
   const [mobileScale, setMobileScale] = useState(1)
   const { activeKey, toggle, close } = useModal()
+  const { shouldReduceMotion } = useAdaptiveDiagramMotion()
 
   useEffect(() => {
     if (!wrapperRef.current) return
@@ -130,7 +133,13 @@ export default function MuradArchitectureDiagram() {
   return (
     <>
     {/* ── Desktop ───────────────────────────────────────────────────── */}
-    <motion.div className="hidden w-full md:block" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}>
+    <motion.div
+      className="hidden w-full md:block"
+      initial={shouldReduceMotion ? false : "hidden"}
+      whileInView={shouldReduceMotion ? undefined : "visible"}
+      viewport={{ once: true, amount: 0.1 }}
+      variants={shouldReduceMotion ? undefined : { hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}
+    >
     <div className="relative w-full overflow-hidden" style={{ height: `${825 * scale}px` }}>
       <div style={{
         position: "absolute",
@@ -261,15 +270,25 @@ export default function MuradArchitectureDiagram() {
     </div>
   </div>
 </div>
-        <ParticleCanvas paths={PATHS} containerRef={canvasContainerRef} />
-        <ParticleCanvas paths={RED_PATHS} containerRef={canvasContainerRef} color="203,68,68" />
+        {shouldReduceMotion ? null : (
+          <>
+            <ParticleCanvas paths={PATHS} containerRef={canvasContainerRef} />
+            <ParticleCanvas paths={RED_PATHS} containerRef={canvasContainerRef} color="203,68,68" />
+          </>
+        )}
       </div>
     </div>
     </div>
     </motion.div>{/* end desktop hidden md:block */}
 
     {/* ── Mobile layout ───────────────────────────────────────────── */}
-    <motion.div className="block md:hidden -mx-6" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}>
+    <motion.div
+      className="block md:hidden -mx-6"
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={shouldReduceMotion ? undefined : { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
+    >
       <div
         className="relative"
         style={{
@@ -291,8 +310,12 @@ export default function MuradArchitectureDiagram() {
           style={{ width: "calc(100dvw - 20px)", height: `${MOBILE_H * mobileScale}px` }}
         >
           <div ref={mobileCanvasRef} style={{ width: MOBILE_W, height: MOBILE_H, transform: `scale(${mobileScale})`, transformOrigin: "top left", position: "relative", backgroundColor: "#fefefe" }}>
-            <ParticleCanvas paths={MOBILE_PATHS} containerRef={mobileCanvasRef} />
-            <ParticleCanvas paths={MOBILE_RED_PATHS} containerRef={mobileCanvasRef} color="203,68,68" />
+            {shouldReduceMotion ? null : (
+              <>
+                <ParticleCanvas paths={MOBILE_PATHS} containerRef={mobileCanvasRef} />
+                <ParticleCanvas paths={MOBILE_RED_PATHS} containerRef={mobileCanvasRef} color="203,68,68" />
+              </>
+            )}
             {/* ── Oracle ── */}
             <MobileCard data={D.oracle} top={40} cardKey="oracle" toggle={toggle} />
             {/* ── Contentful ── */}

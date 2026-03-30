@@ -42,6 +42,10 @@ export const methodCaseStudy = {
       alt: "Method commerce architecture and launch planning artifacts",
       aspectRatio: "16/9",
     },
+    chart: {
+      key: "retail-vs-dtc",
+      brandName: "Method",
+    },
     overview:
       "Method had brand equity, a clear design language, and a loyal customer base, but no true DTC channel. SC Johnson wanted growth fast without turning every brand launch into a custom tech project. The challenge was making shared commerce, ERP, product data, tax, fulfillment, service, and marketing rails feel seamless and unmistakably Method.",
     projectOverviewRows: [

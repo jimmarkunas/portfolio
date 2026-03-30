@@ -65,6 +65,13 @@ export type CaseStudySolutionDiagramKey =
   | "scj-commerce-architecture"
   | "modere-commerce-flow"
 
+export type CaseStudyProblemChart = {
+  key: "retail-vs-dtc"
+  brandName?: string
+}
+
+export type CaseStudyPreQuoteChartKey = "directv-revenue" | "bi-data-silos"
+
 export type CaseStudyMedia =
   | {
       kind: "image"
@@ -172,6 +179,7 @@ export type CaseStudyData = {
     eyebrow: string
     title: string
     media: CaseStudyMedia
+    chart?: CaseStudyProblemChart
     overview: string
     projectOverviewRows: CaseStudyOverviewRow[]
     tools: CaseStudyTool[]
@@ -183,7 +191,7 @@ export type CaseStudyData = {
       preQuoteImage?: string
       preQuoteHeading?: string
       preQuoteImageCaption?: string
-      preQuoteChart?: "directv-revenue" | "bi-data-silos"
+      preQuoteChart?: CaseStudyPreQuoteChartKey
     }
   }
   role: {

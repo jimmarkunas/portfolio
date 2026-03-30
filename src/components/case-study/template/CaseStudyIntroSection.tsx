@@ -1,10 +1,8 @@
 import dynamic from "next/dynamic"
+import type { ComponentType } from "react"
 
-import { DirecTVRevenueChart } from "@/components/case-study/DirecTVRevenueChart"
-import BoehringerDataSilosDiagram from "@/components/case-study/BoehringerDataSilosDiagram"
-import MrsMeyersRetailVsDtcChart from "@/components/case-study/MrsMeyersRetailVsDtcChart"
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
-import type { CaseStudyData } from "@/components/case-study/types"
+import type { CaseStudyData, CaseStudyPreQuoteChartKey } from "@/components/case-study/types"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
@@ -18,9 +16,30 @@ const GlobalLocationsMap = dynamic(
   () => import("@/components/case-study/GlobalLocationsMap").then((m) => ({ default: m.GlobalLocationsMap })),
   { ssr: false }
 )
+const DirecTVRevenueChart = dynamic(
+  () => import("@/components/case-study/DirecTVRevenueChart").then((m) => ({ default: m.DirecTVRevenueChart })),
+  { ssr: false }
+)
+const BoehringerDataSilosDiagram = dynamic(
+  () => import("@/components/case-study/BoehringerDataSilosDiagram"),
+  { ssr: false }
+)
+const RetailVsDtcChart = dynamic<{ brandName?: string }>(
+  () => import("@/components/case-study/MrsMeyersRetailVsDtcChart"),
+  { ssr: false }
+)
+
+const preQuoteChartRegistry: Record<CaseStudyPreQuoteChartKey, ComponentType> = {
+  "directv-revenue": DirecTVRevenueChart,
+  "bi-data-silos": BoehringerDataSilosDiagram,
+}
 
 export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
   const isFoh = data.slug === "foh"
+  const ProblemChart = data.problem.chart?.key === "retail-vs-dtc" ? RetailVsDtcChart : null
+  const PreQuoteChart = data.problem.quote.preQuoteChart
+    ? preQuoteChartRegistry[data.problem.quote.preQuoteChart]
+    : null
 
   return (
     <section className="border-t border-[#222222]/8 bg-[#F3F3F3]">
@@ -84,11 +103,11 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                     <h2 className="type-h3 text-[#222222]">{data.problem.title}</h2>
                   </div>
 
-                  {(data.slug === "mm" || data.slug === "method") ? (
+                  {ProblemChart ? (
                     <div className={isFoh
                       ? "w-full lg:col-start-1 lg:row-start-3"
                       : "w-full lg:col-start-1 lg:row-start-3"}>
-                      <MrsMeyersRetailVsDtcChart brandName={data.slug === "method" ? "Method" : "Mrs. Meyers"} />
+                      <ProblemChart brandName={data.problem.chart?.brandName} />
                     </div>
                   ) : (
                     <CaseStudyMediaFrame
@@ -155,10 +174,8 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                   {data.problem.quote.preQuoteHeading && (
                     <h3 className="type-h4 mb-6 pt-5 text-[#222222]">{data.problem.quote.preQuoteHeading}</h3>
                   )}
-                  {data.problem.quote.preQuoteChart === "directv-revenue" ? (
-                    <DirecTVRevenueChart />
-                  ) : data.problem.quote.preQuoteChart === "bi-data-silos" ? (
-                    <BoehringerDataSilosDiagram />
+                  {PreQuoteChart ? (
+                    <PreQuoteChart />
                   ) : data.problem.quote.preQuoteImage ? (
                     <>
                       <img src={data.problem.quote.preQuoteImage} alt="" className="w-full" />
@@ -254,8 +271,8 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                   )}
 
                   <div className="flex flex-col gap-5">
-                    {data.role.narrative.paragraphs.map((paragraph) => (
-                      <p key={paragraph} className="type-p2 text-[#222222]">
+                    {data.role.narrative.paragraphs.map((paragraph, paragraphIndex) => (
+                      <p key={`role-paragraph-${paragraphIndex}`} className="type-p2 text-[#222222]">
                         {paragraph}
                       </p>
                     ))}
@@ -263,7 +280,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                     {data.role.narrative.highlights ? (
                       <div className="flex flex-col gap-5">
                         {data.role.narrative.highlights.map((item, i) => (
-                          <div key={item} className="flex items-start gap-3">
+                          <div key={`${item}-${i}`} className="flex items-start gap-3">
                             <div className="type-p5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0F1112] text-white">{i + 1}</div>
                             <div className="type-p2 text-[#111111]">{item}</div>
                           </div>

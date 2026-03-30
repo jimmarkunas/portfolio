@@ -113,8 +113,8 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                       ? "flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-2 lg:row-start-2 lg:justify-start xl:col-start-3 xl:row-start-1 xl:justify-end xl:flex-nowrap"
                       : "flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-3 lg:flex-nowrap"}
                     >
-                      {data.recognition.featured.tags.map((tag) => (
-                        <TagPill key={tag} variant="dark">
+                      {data.recognition.featured.tags.map((tag, tagIndex) => (
+                        <TagPill key={`${tag}-${tagIndex}`} variant="dark">
                           {tag}
                         </TagPill>
                       ))}
@@ -124,9 +124,10 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
               </div>
             )}
 
-            {data.recognition.rows.map((row) => {
+            {data.recognition.rows.map((row, rowIndex) => {
               const slug = row.file ? row.file.split("/").pop()?.replace(/\.[^.]+$/, "") : null
               const viewerHref = slug ? `/work/${data.slug}/press/${slug}` : null
+              const rowKey = row.file ?? row.url ?? `${row.company}-${row.dates}-${rowIndex}`
               const inner = (
                 <div className="grid w-full gap-x-6 gap-y-2 md:grid-cols-[minmax(0,1fr)_auto] md:items-start lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:items-center lg:justify-between">
                   <div className="w-full">
@@ -139,8 +140,8 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                   </p>
 
                   <div className="flex w-full flex-wrap items-center justify-start gap-2 md:col-start-2 md:row-start-1 md:row-end-3 md:w-auto md:self-start md:justify-end lg:row-auto lg:col-start-3 lg:flex-nowrap lg:justify-end">
-                    {row.tags.map((tag) => (
-                      <TagPill key={`${row.company}-${tag}`} variant="dark">
+                    {row.tags.map((tag, tagIndex) => (
+                      <TagPill key={`${row.company}-${tag}-${tagIndex}`} variant="dark">
                         {tag}
                       </TagPill>
                     ))}
@@ -149,14 +150,14 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
               )
               return viewerHref ? (
                 <Link
-                  key={`${row.company}-${row.summary}`}
+                  key={rowKey}
                   href={viewerHref}
                   className="block w-full cursor-pointer border-b border-[#E5E7EB] py-7 transition-colors duration-150 hover:bg-[#F5F7FA]"
                 >
                   {inner}
                 </Link>
               ) : (
-                <div key={`${row.company}-${row.summary}`} className="w-full border-b border-[#E5E7EB] py-7">
+                <div key={rowKey} className="w-full border-b border-[#E5E7EB] py-7">
                   {inner}
                 </div>
               )
