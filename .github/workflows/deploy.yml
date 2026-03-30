@@ -56,11 +56,14 @@ jobs:
           if [ -n "${FTP_TARGET_DIR:-}" ]; then
             target="${FTP_TARGET_DIR}"
           else
-            root_listing="$(
+            # Hostinger commonly serves from public_html. If probing fails, default there
+            # instead of failing pre-deploy.
+            target="./public_html/"
+            if root_listing="$(
               lftp -e "
                 set cmd:fail-exit true;
                 set net:timeout 20;
-                set net:max-retries 1;
+                set net:max-retries 3;
                 set net:reconnect-interval-base 5;
                 set ssl:verify-certificate false;
                 set ftp:ssl-force true;
@@ -68,12 +71,13 @@ jobs:
                 open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
                 cls -1;
                 quit
-              "
-            )"
-
-            target="./"
-            if printf '%s\n' "${root_listing}" | grep -qx "public_html"; then
-              target="./public_html/"
+              " 2>/dev/null
+            )"; then
+              if ! printf '%s\n' "${root_listing}" | grep -qx "public_html"; then
+                target="./"
+              fi
+            else
+              echo "Warning: Could not inspect FTP root; defaulting to ${target}."
             fi
           fi
 
@@ -86,11 +90,12 @@ jobs:
           echo "target=${target}" >> "${GITHUB_OUTPUT}"
 
       - name: Inspect remote FTP root
+        continue-on-error: true
         run: |
           lftp -e "
             set cmd:fail-exit true;
             set net:timeout 20;
-            set net:max-retries 1;
+            set net:max-retries 3;
             set net:reconnect-interval-base 5;
             set ssl:verify-certificate false;
             set ftp:ssl-force true;
@@ -103,22 +108,37 @@ jobs:
 
       - name: Deploy via FTP
         run: |
-          lftp -e "
-            set cmd:fail-exit true;
-            set net:timeout 20;
-            set net:max-retries 1;
-            set net:reconnect-interval-base 5;
-            set ssl:verify-certificate false;
-            set ftp:ssl-force true;
-            set ftp:passive-mode true;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
-            pwd;
-            mirror --reverse --delete --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
-            cls -la;
-            cls -la ${{ steps.deploy_target.outputs.target }};
-            cls -la ${{ steps.deploy_target.outputs.target }}_next;
-            cls -la ${{ steps.deploy_target.outputs.target }}_next/static;
-            cls -la ${{ steps.deploy_target.outputs.target }}_next/static/css;
-            cls -la ${{ steps.deploy_target.outputs.target }}deploy-marker.txt;
-            quit
-          "
+          set -euo pipefail
+
+          for attempt in 1 2 3; do
+            echo "FTP deploy attempt ${attempt}/3"
+            if lftp -e "
+              set cmd:fail-exit true;
+              set net:timeout 20;
+              set net:max-retries 5;
+              set net:reconnect-interval-base 5;
+              set ssl:verify-certificate false;
+              set ftp:ssl-force true;
+              set ftp:passive-mode true;
+              open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
+              pwd;
+              mirror --reverse --delete --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
+              cls -la;
+              cls -la ${{ steps.deploy_target.outputs.target }};
+              cls -la ${{ steps.deploy_target.outputs.target }}_next;
+              cls -la ${{ steps.deploy_target.outputs.target }}_next/static;
+              cls -la ${{ steps.deploy_target.outputs.target }}_next/static/css;
+              cls -la ${{ steps.deploy_target.outputs.target }}deploy-marker.txt;
+              quit
+            "; then
+              echo "FTP deploy succeeded on attempt ${attempt}"
+              break
+            fi
+
+            if [ "${attempt}" -eq 3 ]; then
+              echo "FTP deploy failed after 3 attempts"
+              exit 1
+            fi
+
+            sleep "$((attempt * 15))"
+          done
