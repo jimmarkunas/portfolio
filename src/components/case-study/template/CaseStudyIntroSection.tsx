@@ -85,8 +85,8 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
 
                   {data.slug === "mm" ? (
                     <div className={isFoh
-                      ? "lg:col-start-1 lg:row-start-3 xl:w-[620px]"
-                      : "lg:col-start-1 lg:row-start-3 lg:w-[620px]"}>
+                      ? "w-full lg:col-start-1 lg:row-start-3"
+                      : "w-full lg:col-start-1 lg:row-start-3"}>
                       <MrsMeyersRetailVsDtcChart />
                     </div>
                   ) : (

@@ -1,5 +1,6 @@
 "use client"
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 type Row = { label: string; value: number; dtc?: boolean };
 
@@ -25,6 +26,8 @@ const c = {
 const money = (n: number) => `$${Math.round(n / 1_000_000)}M`;
 
 export default function MrsMeyersRetailVsDtcChart() {
+  const ref = useRef<SVGSVGElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   const max = Math.max(...data.map((d) => d.value), 1);
   const chartX = 145;
   const chartY = 88;
@@ -37,8 +40,9 @@ export default function MrsMeyersRetailVsDtcChart() {
   const noteY = 332;
 
   return (
-    <div className="w-full max-w-[620px]">
+    <div className="w-full">
       <svg
+        ref={ref}
         viewBox="0 0 620 349"
         className="h-auto w-full"
         role="img"
@@ -47,10 +51,10 @@ export default function MrsMeyersRetailVsDtcChart() {
         <rect x="1" y="1" width="618" height="347" rx="22" fill={c.ink} stroke={c.ink} />
 
         <line x1="24" y1="26" x2="24" y2="58" stroke={c.accent} strokeWidth="2" />
-        <text x="36" y="38" fill={c.white} fontSize="18" fontWeight="400" fontFamily="Inter, sans-serif">
+        <text x="36" y="38" fill={c.white} fontSize="18" fontWeight="400" fontFamily="Inter Display, Inter, ui-sans-serif, system-ui, sans-serif">
           Mrs. Meyers retail sales vs DTC
         </text>
-        <text x="36" y="58" fill={c.white} fontSize="10" fontFamily="Inter, sans-serif">
+        <text x="36" y="58" fill={c.white} fontSize="10" fontFamily="Inter Display, Inter, ui-sans-serif, system-ui, sans-serif">
           Illustrative pre-ecommerce snapshot
         </text>
 
@@ -67,7 +71,7 @@ export default function MrsMeyersRetailVsDtcChart() {
 
           return (
             <g key={d.label}>
-              <text x="26" y={y + 17} fill={c.white} fontSize="11" fontFamily="Inter, sans-serif">
+              <text x="26" y={y + 17} fill={c.white} fontSize="11" fontFamily="Inter Display, Inter, ui-sans-serif, system-ui, sans-serif">
                 {d.label}
               </text>
 
@@ -76,7 +80,7 @@ export default function MrsMeyersRetailVsDtcChart() {
               {d.dtc ? (
                 <g>
                   <rect x={pillX} y={y + 4} width={pillW} height="18" rx="9" fill="#3A3A3A" stroke="#555555" />
-                  <text x={pillX + pillW / 2} y={y + 16} textAnchor="middle" fill={c.white} fontSize="9" fontFamily="Inter, sans-serif">
+                  <text x={pillX + pillW / 2} y={y + 16} textAnchor="middle" fill={c.white} fontSize="9" fontFamily="Inter Display, Inter, ui-sans-serif, system-ui, sans-serif">
                     No owned DTC channel
                   </text>
                 </g>
@@ -84,7 +88,7 @@ export default function MrsMeyersRetailVsDtcChart() {
                 <>
                   <motion.rect
                     initial={{ width: 0 }}
-                    animate={{ width: w }}
+                    animate={inView ? { width: w } : { width: 0 }}
                     transition={{ duration: 0.7, delay: i * 0.06, ease: "easeOut" }}
                     x={chartX}
                     y={y}
@@ -92,7 +96,7 @@ export default function MrsMeyersRetailVsDtcChart() {
                     rx="13"
                     fill="#D4D4D4"
                   />
-                  <text x={chartX + w + 8} y={y + 17} fill={c.white} fontSize="10" fontFamily="Inter, sans-serif">
+                  <text x={chartX + w + 8} y={y + 17} fill={c.white} fontSize="10" fontFamily="Inter Display, Inter, ui-sans-serif, system-ui, sans-serif">
                     {money(d.value)}
                   </text>
                 </>
@@ -111,7 +115,7 @@ export default function MrsMeyersRetailVsDtcChart() {
               textAnchor="middle"
               fill="#FFFFFF"
               fontSize="9"
-              fontFamily="Inter, sans-serif"
+              fontFamily="Inter Display, Inter, ui-sans-serif, system-ui, sans-serif"
             >
               {v === 0 ? "0" : money(v)}
             </text>
@@ -120,7 +124,7 @@ export default function MrsMeyersRetailVsDtcChart() {
 
         <line x1="24" y1={dividerY} x2="596" y2={dividerY} stroke="#3A3A3A" />
         <circle cx="30" cy={noteY - 3} r="4" fill={c.accent} />
-        <text x="40" y={noteY} fill="#FFFFFF" fontSize="10" fontFamily="Inter, sans-serif">
+        <text x="40" y={noteY} fill="#FFFFFF" fontSize="10" fontFamily="Inter Display, Inter, ui-sans-serif, system-ui, sans-serif">
           Retail sales were meaningful across major channels, but DTC was at zero.
         </text>
       </svg>
