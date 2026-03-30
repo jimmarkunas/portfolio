@@ -103,6 +103,7 @@ export const muradCaseStudy = {
     title: "A Global Stack Murad Could Actually Run",
     copy:
       "I turned Murad's under-documented, partner-heavy eCommerce program into a workable BigCommerce + Oracle + subscriptions model with global rollout logic.",
+    diagramKey: "murad-architecture",
     cards: [
       {
         category: "Subscription Engine",

@@ -101,6 +101,7 @@ export const boehringeringelheimCaseStudy = {
     title: "One Global Model",
     copy:
       "I helped shape a global commerce architecture that could support heavily regulated B2B ordering, loyalty, localization, and ERP transition inside one operating model. The answer was not to erase local needs, it was to standardize the core, expose the right variation points, and make the platform resilient enough to survive the migration underneath it.",
+    diagramKey: "bi-commerce-ecosystem",
     cards: [
       {
         category: "Global Architecture",

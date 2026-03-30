@@ -100,6 +100,7 @@ export const mrsmeyersCaseStudy = {
     title: "A Reusable DTC Stack",
     copy:
       "Built a reusable launch model connecting storefront, product data, tax, payments, fulfillment, support, and marketing into one workable consumer flow.",
+    diagramKey: "scj-commerce-architecture",
     cards: [
       {
         category: "Commerce Core",

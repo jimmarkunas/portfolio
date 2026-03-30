@@ -17,7 +17,7 @@ Should support:
 Current references:
 - [Container.tsx](/Users/jimmarkunas/Box%20Sync/portfolio/src/components/Container.tsx)
 - [globals.css](/Users/jimmarkunas/Box%20Sync/portfolio/src/app/globals.css)
-- [page.tsx](/Users/jimmarkunas/Box%20Sync/portfolio/src/app/case-study-test/page.tsx)
+- [page.tsx](/Users/jimmarkunas/Box%20Sync/portfolio/src/app/experiments/case-study-test/page.tsx)
 
 ### `EyebrowPill`
 

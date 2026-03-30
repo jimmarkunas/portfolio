@@ -98,6 +98,7 @@ export const modereCaseStudy = {
     title: "One Commerce System, Many Growth Paths",
     copy:
       "I helped shape a composable, API-first commerce platform that could support product complexity, promotions, subscriptions, global markets, and mobile experiences without forcing the business back into custom work every time it wanted to grow. The solution was designed to make commerce more scalable for the business and less painful for affiliates and customers.",
+    diagramKey: "modere-commerce-flow",
     cards: [
       {
         category: "Architecture",

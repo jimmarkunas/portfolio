@@ -59,8 +59,8 @@ export function Timeline({ items, className = "" }: TimelineProps) {
           <div className={`grid gap-8`} style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}>
             {items.map((item) => (
               <article key={item.phase} className="relative flex flex-col items-center text-center">
-                <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-black/8 bg-white">
-                  <div className="h-10 w-10 rounded-full border-[4px] bg-white" style={{ borderColor: extractColor(item.ringClass) }} />
+                <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-black/8 bg-[#222222]">
+                  <div className="h-10 w-10 rounded-full border-[4px] bg-white flex items-center justify-center" style={{ borderColor: extractColor(item.ringClass) }}><div className="h-3 w-3 rounded-full" style={{ backgroundColor: extractColor(item.ringClass) }} /></div>
                 </div>
                 <div className="type-p5 mt-5 uppercase tracking-[0.22em]" style={{ color: extractColor(item.labelClass) }}>
                   {item.phase}
@@ -92,8 +92,8 @@ export function Timeline({ items, className = "" }: TimelineProps) {
                 </div>
               ) : null}
 
-              <div className="absolute left-0 top-5 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-black/8 bg-white shadow-[0_8px_20px_rgba(34,34,34,0.04)]">
-                <div className="h-8 w-8 rounded-full border-[4px] bg-white" style={{ borderColor: extractColor(item.ringClass) }} />
+              <div className="absolute left-0 top-5 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-black/8 bg-[#222222] shadow-[0_8px_20px_rgba(34,34,34,0.04)]">
+                <div className="h-8 w-8 rounded-full border-[4px] bg-white flex items-center justify-center" style={{ borderColor: extractColor(item.ringClass) }}><div className="h-3 w-3 rounded-full" style={{ backgroundColor: extractColor(item.ringClass) }} /></div>
               </div>
 
               <article className="rounded-[20px] border border-black/8 bg-white p-5 shadow-[0_16px_40px_rgba(34,34,34,0.04)]">
@@ -120,8 +120,8 @@ export function Timeline({ items, className = "" }: TimelineProps) {
             >
               {items.map((item) => (
                 <article key={item.phase} className="relative flex flex-col items-center text-center">
-                  <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-black/8 bg-white">
-                    <div className="h-8 w-8 rounded-full border-[4px] bg-white" style={{ borderColor: extractColor(item.ringClass) }} />
+                  <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-black/8 bg-[#222222]">
+                    <div className="h-8 w-8 rounded-full border-[4px] bg-white flex items-center justify-center" style={{ borderColor: extractColor(item.ringClass) }}><div className="h-3 w-3 rounded-full" style={{ backgroundColor: extractColor(item.ringClass) }} /></div>
                   </div>
                   <div className="type-p5 mt-4 uppercase tracking-[0.18em]" style={{ color: extractColor(item.labelClass) }}>
                     {item.phase}
