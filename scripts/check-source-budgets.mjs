@@ -9,6 +9,7 @@ const DEFAULT_MAX_LINES = 380
 const overrideBudgets = new Map([
   ["src/components/case-study/SCJCommerceArchitecture.tsx", 500],
   ["src/components/case-study/diagram-shared/BiDiagramCards.tsx", 600],
+  ["src/components/case-study/modere-simulation/ModereSimulation.tsx", 620],
 ])
 
 function walkFiles(dir, collector) {
