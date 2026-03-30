@@ -4,9 +4,9 @@ export const modereCaseStudy = {
   slug: "modere",
   breadcrumbCurrent: "Modere",
   hero: {
-    title: "I Helped Turn Modere's Stuck Commerce Stack Into a Scalable Growth Engine",
+    title: "Winning Awards & $1B With Modere",
     intro:
-      "Modere wanted to grow from a $500M business into a $1B one, but the company had outgrown its home-grown commerce stack, its launch model, and its tolerance for market-by-market custom work. I helped reimagine the platform around a composable architecture, protected the right product and system decisions under heavy political pressure, and gave the business a faster, cleaner way to scale across web, mobile, markets, and promotions. The result was a stronger commerce foundation that supported real sales growth, better conversion, faster performance, and a path to scale.",
+      "Work Nominated for a MACH Composable Award: Modere wanted to double from $500M GMV to $1B, but the old stack and market-by-market launch model were already breaking under the weight. I helped push the platform toward a composable architecture and protect the system decisions that gave the business a cleaner path to scale.",
     primaryCta: {
       label: "Book a Call",
       href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
@@ -50,10 +50,10 @@ export const modereCaseStudy = {
       { label: "Timeline", value: "Mar 2023 to Jun 2024" },
     ],
     tools: [
-      { label: "BigCommerce", icon: "/tool-icons/bc-logo.png" },
-      { label: "Pimcore", icon: "/tool-icons/pimcore-logo.png" },
-      { label: "Contentstack", icon: "/tool-icons/contentstack-logo.png" },
-      { label: "Azure", icon: "/tool-icons/msazure-logo.png" },
+      { label: "BigCommerce", icon: "/tool-icons/svg/bc-logo-blk.svg" },
+      { label: "Pimcore", icon: "/tool-icons/svg/pimcore-logo.svg" },
+      { label: "Contentstack", icon: "/tool-icons/svg/contentstack-logo.svg" },
+      { label: "Azure", icon: "/tool-icons/svg/azure-logo.svg" },
     ],
     quote: {
       quote: "We can't keep scaling this business market by market on custom work; we need a scalable solution.",

@@ -39,7 +39,7 @@ jobs:
       - name: Check build output
         run: |
           ls -la ./out/
-          ls -la ./out/_next/static/css/
+          find ./out/_next/static -maxdepth 3 -type f | head -n 40
 
       - name: Upload static artifact
         uses: actions/upload-artifact@v4
@@ -59,15 +59,23 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: site-out
-          path: .
+          path: ./out
+          merge-multiple: true
 
       - name: Check downloaded artifact
         run: |
+          if [ ! -d "./out" ]; then
+            echo "Missing ./out after artifact download."
+            find . -maxdepth 3 -type d | sort
+            exit 1
+          fi
           ls -la ./out/
-          ls -la ./out/_next/static/css/
+          find ./out/_next/static -maxdepth 3 -type f | head -n 40
 
       - name: Install lftp
-        run: sudo apt-get install -y lftp
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
 
       - name: Resolve remote deploy directory
         id: deploy_target
@@ -144,6 +152,7 @@ jobs:
               open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
               pwd;
               mirror --reverse --delete --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
+              set cmd:fail-exit false;
               cls -la;
               cls -la ${{ steps.deploy_target.outputs.target }};
               cls -la ${{ steps.deploy_target.outputs.target }}_next;
