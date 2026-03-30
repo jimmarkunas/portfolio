@@ -20,6 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Check deploy workflow guardrails
+        run: bash scripts/check-deploy-workflow.sh
+
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
@@ -57,6 +60,9 @@ jobs:
     timeout-minutes: 20
     env:
       FTP_HOST: 82.25.83.251
+      FTP_CONNECT_TIMEOUT_SECONDS: "45"
+      FTP_TRANSFER_TIMEOUT_SECONDS: "300"
+      FTP_DEPLOY_ATTEMPTS: "3"
     steps:
       - name: Download static artifact
         uses: actions/download-artifact@v4
@@ -92,11 +98,13 @@ jobs:
           else
             target="./public_html/"
             if root_listing="$(
-              lftp -e "
+              timeout "${FTP_CONNECT_TIMEOUT_SECONDS}s" lftp -e "
                 set cmd:fail-exit true;
                 set net:timeout 20;
-                set net:max-retries 3;
+                set net:max-retries 1;
                 set net:reconnect-interval-base 5;
+                set net:reconnect-interval-max 10;
+                set net:persist-retries 0;
                 set ssl:verify-certificate false;
                 set ftp:ssl-force true;
                 set ftp:passive-mode true;
@@ -124,11 +132,13 @@ jobs:
       - name: Inspect remote FTP root
         continue-on-error: true
         run: |
-          lftp -e "
+          timeout "${FTP_CONNECT_TIMEOUT_SECONDS}s" lftp -e "
             set cmd:fail-exit true;
             set net:timeout 20;
-            set net:max-retries 3;
+            set net:max-retries 1;
             set net:reconnect-interval-base 5;
+            set net:reconnect-interval-max 10;
+            set net:persist-retries 0;
             set ssl:verify-certificate false;
             set ftp:ssl-force true;
             set ftp:passive-mode true;
@@ -139,28 +149,27 @@ jobs:
           "
 
       - name: Deploy via FTP
+        timeout-minutes: 8
         run: |
           set -euo pipefail
 
-          for attempt in 1 2 3; do
-            echo "FTP deploy attempt ${attempt}/3"
-            if lftp -e "
+          for attempt in $(seq 1 "${FTP_DEPLOY_ATTEMPTS}"); do
+            echo "FTP deploy attempt ${attempt}/${FTP_DEPLOY_ATTEMPTS}"
+            if timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp -e "
               set cmd:fail-exit true;
               set net:timeout 20;
-              set net:max-retries 5;
+              set net:max-retries 2;
               set net:reconnect-interval-base 5;
+              set net:reconnect-interval-max 15;
+              set net:persist-retries 0;
               set ssl:verify-certificate false;
               set ftp:ssl-force true;
               set ftp:passive-mode true;
               open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
               pwd;
-              mirror --reverse --delete --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
+              mirror --reverse --delete --continue --parallel=4 --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
               set cmd:fail-exit false;
-              cls -la;
               cls -la ${{ steps.deploy_target.outputs.target }};
-              cls -la ${{ steps.deploy_target.outputs.target }}_next;
-              cls -la ${{ steps.deploy_target.outputs.target }}_next/static;
-              cls -la ${{ steps.deploy_target.outputs.target }}_next/static/css;
               cls -la ${{ steps.deploy_target.outputs.target }}deploy-marker.txt;
               quit
             "; then
@@ -168,8 +177,8 @@ jobs:
               break
             fi
 
-            if [ "${attempt}" -eq 3 ]; then
-              echo "FTP deploy failed after 3 attempts"
+            if [ "${attempt}" -eq "${FTP_DEPLOY_ATTEMPTS}" ]; then
+              echo "FTP deploy failed after ${FTP_DEPLOY_ATTEMPTS} attempts"
               exit 1
             fi
 
