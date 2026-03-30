@@ -19,6 +19,10 @@ const SCJCommerceArchitecture = dynamic(
   () => import("@/components/case-study/SCJCommerceArchitecture"),
   { ssr: false }
 )
+const ModereCommerceFlowDiagram = dynamic(
+  () => import("@/components/case-study/ModereCommerceFlowDiagram"),
+  { ssr: false }
+)
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
 import { CaseStudyHeroSection } from "@/components/case-study/template/CaseStudyHeroSection"
 import { CaseStudyRecognitionSection } from "@/components/case-study/template/CaseStudyRecognitionSection"
@@ -313,6 +317,8 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
             <BISystemDiagram />
           ) : data.slug === "mm" ? (
             <SCJCommerceArchitecture />
+          ) : data.slug === "modere" ? (
+            <ModereCommerceFlowDiagram />
           ) : data.solution.heroImage ? (
             <FullWidthImage src={data.solution.heroImage} fullWidth={false} />
           ) : (
