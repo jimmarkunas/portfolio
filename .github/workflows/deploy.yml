@@ -14,6 +14,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      FTP_HOST: 82.25.83.251
     steps:
       - uses: actions/checkout@v5
 
@@ -29,6 +31,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Add deploy marker
+        run: |
+          printf "sha=%s\nutc=%s\nrun=%s\n" \
+            "${GITHUB_SHA}" \
+            "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+            "${GITHUB_RUN_NUMBER}" > ./out/deploy-marker.txt
+
       - name: Check build output
         run: |
           ls -la ./out/
@@ -36,6 +45,40 @@ jobs:
 
       - name: Install lftp
         run: sudo apt-get install -y lftp
+
+      - name: Resolve remote deploy directory
+        id: deploy_target
+        env:
+          FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
+        run: |
+          set -euo pipefail
+
+          if [ -n "${FTP_TARGET_DIR:-}" ]; then
+            target="${FTP_TARGET_DIR}"
+          else
+            root_listing="$(
+              lftp -e "
+                set cmd:fail-exit true;
+                set net:timeout 20;
+                set net:max-retries 1;
+                set net:reconnect-interval-base 5;
+                set ssl:verify-certificate false;
+                set ftp:ssl-force true;
+                set ftp:passive-mode true;
+                open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
+                cls -1;
+                quit
+              "
+            )"
+
+            target="./"
+            if printf '%s\n' "${root_listing}" | grep -qx "public_html"; then
+              target="./public_html/"
+            fi
+          fi
+
+          echo "Using deploy target: ${target}"
+          echo "target=${target}" >> "${GITHUB_OUTPUT}"
 
       - name: Inspect remote FTP root
         run: |
@@ -47,7 +90,7 @@ jobs:
             set ssl:verify-certificate false;
             set ftp:ssl-force true;
             set ftp:passive-mode true;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} 82.25.83.251;
+            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
             pwd;
             cls -la;
             quit
@@ -63,12 +106,13 @@ jobs:
             set ssl:verify-certificate false;
             set ftp:ssl-force true;
             set ftp:passive-mode true;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} 82.25.83.251;
+            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
             pwd;
-            mirror --reverse --delete --verbose ./out/ ./;
+            mirror --reverse --delete --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
             cls -la;
-            cls -la _next;
-            cls -la _next/static;
-            cls -la _next/static/css;
+            cls -la ${{ steps.deploy_target.outputs.target }};
+            cls -la ${{ steps.deploy_target.outputs.target }}_next;
+            cls -la ${{ steps.deploy_target.outputs.target }}_next/static;
+            cls -la ${{ steps.deploy_target.outputs.target }}_next/static/css;
             quit
           "

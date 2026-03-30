@@ -4,9 +4,9 @@ export const mrsmeyersCaseStudy = {
   slug: "mm",
   breadcrumbCurrent: "Mrs. Meyer's",
   hero: {
-    title: "I Helped Launch Mrs. Meyer's First DTC Channel From Scratch",
+    title: "Launching Mrs. Meyer's First DTC Channel From Scratch",
     intro:
-      "SC Johnson had no direct-to-consumer channel for Mrs. Meyer's, which meant no owned customer relationship, no first-party data loop, and no way to prove DTC could add revenue without disrupting retail. I led the program to stand up a modern commerce stack across BigCommerce, SAP, Salsify, tax, payments, fulfillment, and marketing systems, then helped turn that launch into a reusable pattern the business could extend to Caldrea and Method. The result was 15%+ revenue uplift and a new channel SCJ could finally own.",
+      "Mrs. Meyer’s had no DTC channel, which left SC Johnson with no owned customer relationship, no first-party data, and no proof DTC could add revenue without cannibalizing retail.I led the launch across the commerce stack, then helped turn it into a reusable model for Caldrea and Method.",
     primaryCta: {
       label: "Book a Call",
       href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
@@ -17,25 +17,25 @@ export const mrsmeyersCaseStudy = {
       href: "/cv",
     },
     image: {
-      src: "/mrsmeyers/hero-mrsmeyers-01.png",
+      src: "/mm/hero-mm-01.png",
       alt: "Mrs. Meyer's direct-to-consumer commerce launch hero image",
     },
   },
   atAGlance: {
     eyebrow: "At-a-Glance",
-    title: "Zero To One DTC",
+    title: "From Zero - One DTC",
     copy:
-      "This was SC Johnson's first real move into modern home-care DTC for Mrs. Meyer's. I helped design the integration pattern, calm the enterprise politics, and get a fragile mix of retail-era systems to behave like a working direct-to-consumer machine, then set the pattern up so Caldrea and Method could follow.",
+      "This was SC Johnson's first real move into modern home-care DTC for Mrs. Meyer's. I helped design the integration pattern, calm the enterprise politics, and get a fragile mix of retail-era systems to behave like a working direct-to-consumer machine.",
     stats: [
-      { value: "$15", suffix: "%+", label: "revenue uplift" },
-      { value: "10", suffix: "%", label: "brand GMV target" },
-      { value: "2", suffix: "+", label: "follow-on brands" },
-      { value: "10", suffix: "+", label: "systems in stack" },
+      { value: "$15", suffix: "%", label: "Revenue Uplift" },
+      { value: "10", suffix: "%", label: "Brand GMV Target" },
+      { value: "2", suffix: "+", label: "Follow-on Brands" },
+      { value: "10", suffix: "+", label: "Systems in Stack" },
     ],
   },
   problem: {
     eyebrow: "Problem Statement",
-    title: "No DTC, No Safety Net",
+    title: "No Digital Ownership",
     media: {
       kind: "image",
       src: "/mrsmeyers/hero-mrsmeyers-02.png",
@@ -43,30 +43,31 @@ export const mrsmeyersCaseStudy = {
       aspectRatio: "16/9",
     },
     overview:
-      "SC Johnson wanted to prove direct-to-consumer could work for Mrs. Meyer's without creating channel conflict or operational chaos, but the company had no DTC motion, no owned customer relationship, and no modern path from browsing to fulfillment. Underneath that was the real problem, old-money enterprise systems built for pallets, retail distribution, and slow-moving processes suddenly had to support parcel shipping, tax, payments, subscriptions, customer service, and a consumer-grade storefront.",
+      "SC Johnson wanted to prove DTC could work for Mrs. Meyer’s without blowing up retail. The company had no DTC muscle, no owned customer relationship, and no modern path from storefront to fulfillment. Worse, the systems underneath were built for pallets, retail distribution, and slow enterprise processes, not parcel shipping, tax, payments, subscriptions, customer service, and a consumer-grade storefront.",
     projectOverviewRows: [
       { label: "Client", value: "SC Johnson" },
       { label: "Industry", value: "CPG • Home Care • eCommerce" },
-      { label: "Timeline", value: "Feb 2019 to Jul 2019" },
+      { label: "Timeline", value: "Feb 2019 - Jul 2019" },
     ],
     tools: [
-      { label: "BigCommerce", icon: "/tool-icons/bc-logo.png" },
-      { label: "SAP", icon: "/tool-icons/sap-logo.png" },
-      { label: "Salsify", icon: "/tool-icons/salsify-logo.png" },
-      { label: "Avalara", icon: "/tool-icons/avalara-logo.png" },
+      { label: "BigCommerce", icon: "/tool-icons/svg/bc-logo-blk.svg" },
+      { label: "SAP", icon: "/tool-icons/svg/sap-logo.svg" },
+      { label: "Salsify", icon: "/tool-icons/svg/salsify-logo.svg" },
+      { label: "Avalara", icon: "/tool-icons/svg/avalara-logo.svg" },
     ],
     quote: {
       quote:
         "This was the first time BC partnered with a globally recognized retail brand to go from zero to one, and Jim was the perfect PM for the job.",
       attributionTitle: "Rachel Gavinski",
       attributionSubtitle: "Key Account Director, BigCommerce",
+      avatarSrc: "/mm/rachel-gavinski.jpeg",
     },
   },
   role: {
     eyebrow: "My Role",
     title: "Senior Program Manager",
     copy:
-      "I owned the cross-functional machine, architecture conversations, vendor coordination, launch planning, and executive/client communication required to get this live. In practice, the role was part program leadership, part solutioning, and part political cleanup.",
+      "I owned the cross-functional machine, architecture conversations, vendor coordination, launch planning, and executive/client communication required to get this live. My role was part program leadership, part solutioning, and part political cleanup.",
     tags: [
       "Program Leadership",
       "Solution Architecture",
@@ -74,31 +75,31 @@ export const mrsmeyersCaseStudy = {
       "System Integration",
     ],
     stats: [
-      { value: "10", suffix: "+", label: "system integrations" },
-      { value: "$3", suffix: "M", label: "program budget" },
-      { value: "25", suffix: "", label: "team size" },
-      { value: "5", suffix: " mo", label: "program timeline" },
+      { value: "10", suffix: "+", label: "System Integrations" },
+      { value: "$3", suffix: "M", label: "Program Budget" },
+      { value: "25", suffix: "", label: "Team Size" },
+      { value: "5", suffix: " mo", label: "Program Timeline" },
     ],
     narrative: {
       title: "I Made Enterprise Plumbing Behave Like DTC",
       paragraphs: [
-        "The hard part was not making the storefront look good. The hard part was getting SC Johnson's enterprise stack to behave like a direct-to-consumer business for the first time. We had to connect BigCommerce to SAP, product data, tax, payments, fulfillment, customer support, and marketing systems, while keeping the client calm, the agencies aligned, and the launch moving on a compressed timeline.",
-        "I made three decisions that changed the trajectory. First, I helped define the SAP and BigCommerce integration pattern so the business had a clean path from catalog and order capture into back-office operations. Second, I pushed Rewind backups because the risk posture around launch and storefront changes was too casual for a first-time DTC motion. Third, I structured the stack and solution pattern so Mrs. Meyer's was not a dead-end project, it became the base for Caldrea and Method to follow.",
+        "The hard part wasn’t the storefront. It was getting SC Johnson’s enterprise stack to work like a DTC business for the first time. We had to connect BigCommerce to SAP, product data, tax, payments, fulfillment, support, and marketing, while keeping the launch moving on a tight timeline.",
+        "I changed the trajectory in three places. I helped define the SAP and BigCommerce integration pattern, pushed for Rewind backups when the launch risk was too loose, and structured the stack so Mrs. Meyer’s became the model for Caldrea and Method instead of a dead-end build.",
       ],
       highlights: [
-        "Defined the core SAP and BigCommerce integration approach for a first-time enterprise DTC launch.",
+        "Defined the core SAP & BigCommerce integration approach for a first-time enterprise DTC launch.",
         "Pushed backup and recovery safeguards that reduced launch risk and protected the storefront.",
         "Structured the home-care stack to become a reusable pattern for follow-on SCJ brands.",
       ],
       closing:
-        "This was not a normal website launch, it was the moment SC Johnson proved it could open a new revenue channel and make the enterprise systems underneath it hold together.",
+        "This was the moment SC Johnson proved it could open a new revenue channel and make the enterprise systems underneath it hold together.",
     },
   },
   solution: {
     eyebrow: "Solution",
     title: "A Reusable DTC Stack",
     copy:
-      "I helped shape a launch model that connected storefront, product data, tax, payments, fulfillment, support, and marketing into one workable consumer flow. Just as important, the stack was designed to be reusable so SCJ could extend the pattern beyond Mrs. Meyer's instead of funding a brand-new solution every time.",
+      "Built a reusable launch model connecting storefront, product data, tax, payments, fulfillment, support, and marketing into one workable consumer flow.",
     cards: [
       {
         category: "Commerce Core",
@@ -126,49 +127,49 @@ export const mrsmeyersCaseStudy = {
   supplementalNarrative: {
     title: "The Politics Were Real",
     paragraphs: [
-      "This project was technically hard, but the political layer mattered just as much. There were moments when internal account management and stakeholder alignment were not where they needed to be, so I did a lot of one-on-one persuasion, damage control, and translation to keep confidence high and prevent small issues from becoming bigger ones.",
-      "That is part of why this story matters. It was not just a launch under pressure, it was a launch where the client had to trust that someone was actually steering the ship. Once the system held and the site went live, that trust turned into permission to reuse the pattern across additional home-care brands.",
+      "The technical work was hard, but the politics were just as important. When alignment slipped, I handled the one-on-one persuasion and translation needed to keep confidence up and stop small issues from growing.",
+      "This wasn’t just a pressured launch. The client needed to trust that someone was actually steering it. Once the system held, that trust turned into permission to reuse the pattern across other home-care brands.",
     ],
     highlights: [
       "The launch required constant translation across client, agency, platform, and operations teams.",
       "Success built the credibility needed to extend the model beyond one brand.",
     ],
     closing:
-      "I was not just moving tickets, I was keeping the room stable long enough for the launch to happen and the business case to prove itself.",
+      "I wasn't just moving tickets, I was keeping the room stable so the launch could happen and drove a provable business case for a large enterprise.",
   },
   impact: {
     eyebrow: "Impact",
     title: "A New Revenue Channel",
     intro:
-      "The launch mattered because it gave SC Johnson a direct-to-consumer channel it did not have before, then proved the model could drive real revenue and support future launches. This was not a cosmetic eCommerce project, it opened a new commercial lane for the business.",
+      "This launch opened a new DTC revenue lane for SC Johnson and proved the model could scale beyond one brand.",
     proofPoints: ["Revenue", "Repeatability", "System Fit"],
     stats: [
-      { value: "$15", suffix: "%+", label: "revenue uplift" },
-      { value: "10", suffix: "%", label: "brand GMV target" },
-      { value: "2", suffix: "+", label: "follow-on brands" },
-      { value: "0", suffix: "–1", label: "DTC channel" },
+      { value: "$15", suffix: "%", label: "Revenue Uplift" },
+      { value: "10", suffix: "%", label: "Brand GMV Target" },
+      { value: "2", suffix: "+", label: "Follow-on Brands" },
+      { value: "0-1", suffix: "", label: "DTC Channel" },
     ],
     beforeAfter: {
       title: "Before & After",
       summary:
-        "SC Johnson moved from no owned DTC motion for Mrs. Meyer's to a functioning commerce stack that could support direct revenue and future brand launches.",
+        "SC Johnson moved from no owned DTC motion to a functioning ROI machine.",
       columns: [
         {
           label: "Before",
           title: "No DTC Motion",
           points: [
             "No direct-to-consumer storefront for Mrs. Meyer's.",
-            "No owned first-party relationship with shoppers.",
-            "Enterprise systems were not set up for parcel-style consumer commerce.",
+            "No owned 1st-party relationship with shoppers.",
+            "Enterprise systems were not set up for consumer commerce.",
           ],
         },
         {
           label: "After",
-          title: "Live And Repeatable",
+          title: "Live + Repeatable",
           points: [
-            "Mrs. Meyer's launched with a working end-to-end DTC stack.",
-            "The business had a path to 10% of brand GMV through DTC.",
-            "The architecture and delivery model were reused for Caldrea and Method.",
+            "Mrs. Meyer's launched a working end-to-end DTC stack.",
+            "Direct path to 10% of brand GMV through DTC.",
+            "The architecture & delivery model were reused for Caldrea & Method.",
           ],
         },
       ],
@@ -197,42 +198,42 @@ export const mrsmeyersCaseStudy = {
   delivery: {
     eyebrow: "Implementation",
     title: "Delivery Phases",
-    introTitle: "How I Forced It Through",
+    introTitle: "How I Droveh",
     introCopy:
-      "This was a compressed launch with real system risk and very little room for drift. The work had to move from discovery into design, integration, validation, and launch fast, while keeping multiple vendors, enterprise systems, and brand stakeholders moving toward one date.",
+      "This was a compressed launch with real system risk and no room for drift. I moved discovery, design, integration, validation, and vendors toward one date.",
     phases: [
       {
         phase: "Phase 01",
         title: "Diagnose",
-        copy: "Mapped the real gaps across DTC capabilities, enterprise systems, fulfillment, and consumer experience expectations.",
+        copy: "Mapped gaps across DTC capabilities, enterprise systems & fulfillment.",
         ringClass: "border-[#D39D23]",
         labelClass: "text-[#D39D23]",
       },
       {
         phase: "Phase 02",
         title: "Align",
-        copy: "Brought SCJ, BigCommerce, agencies, and downstream system owners into one execution path and one launch target.",
+        copy: "Brought SCJ, BC, agencies, and downstream system owners into one path.",
         ringClass: "border-[#5E7FB7]",
         labelClass: "text-[#5E7FB7]",
       },
       {
         phase: "Phase 03",
         title: "Design",
-        copy: "Defined the integration logic, storefront approach, backup posture, and reusable stack pattern for future home-care brands.",
+        copy: "Defined integration logic, storefront approach, and reusable stack.",
         ringClass: "border-[#1A9E9A]",
         labelClass: "text-[#1A9E9A]",
       },
       {
         phase: "Phase 04",
         title: "Build",
-        copy: "Connected BigCommerce, SAP, Salsify, Avalara, payments, fulfillment, Klaviyo, and analytics into a live commerce workflow.",
+        copy: "Connected BC, SAP, Salsify, Avalara, fulfillment, and Klaviyo.",
         ringClass: "border-[#1A9E9A]",
         labelClass: "text-[#1A9E9A]",
       },
       {
         phase: "Phase 05",
         title: "Launch",
-        copy: "Delivered the first live DTC channel for Mrs. Meyer's, then created the confidence and architecture pattern to extend it to more SCJ brands.",
+        copy: "Delivered first live DTC channel for Mrs. Meyer's, then more SCJ brands.",
         ringClass: "border-[#3E7BE0]",
         labelClass: "text-[#3E7BE0]",
       },
@@ -240,37 +241,20 @@ export const mrsmeyersCaseStudy = {
   },
   challengeQuote: {
     quote:
-      "Jim was in the foxhole with us on this one. When things got hard, he stayed calm, stayed close to the client, and helped us get it over the line.",
+      "Working with Jim was a life-changing experience.",
     attributionTitle: "Jon Michael",
     attributionSubtitle: "Stakeholder, SCJ Program Team",
+    avatarSrc: "/mm/jon-michael.jpeg",
   },
   recognition: {
     eyebrow: "Recognition",
-    title: "Validation & Expansion",
+    title: "Press & Accolades",
+    leadImage: {
+      src: "/mm/kudos-mrsmeyers-01.png",
+      alt: "Mrs. Meyer's DTC launch recognition",
+    },
     intro:
-      "The strongest proof here was not outside press, it was what happened next. The launch worked, BigCommerce leadership recognized it internally, and the pattern became the foundation for more SCJ home-care brands to follow.",
-    rows: [
-      {
-        company: "Mrs. Meyer's Clean Day Launch",
-        dates: "2019",
-        summary:
-          "SC Johnson moved from no DTC motion to a live consumer channel for one of its flagship home-care brands.",
-        tags: ["Launch", "DTC"],
-      },
-      {
-        company: "Caldrea Launch",
-        dates: "2020",
-        summary:
-          "The underlying launch pattern extended into Caldrea, proving the architecture and delivery model were reusable.",
-        tags: ["Expansion", "Reusable Stack"],
-      },
-      {
-        company: "Method Follow-On Path",
-        dates: "Post-launch",
-        summary:
-          "The work created a template SC Johnson could use as it extended the home-care DTC pattern into additional brands like Method.",
-        tags: ["Scale", "Pattern"],
-      },
-    ],
+      "The strongest proof here was: the launch worked, BigCommerce leadership recognized it internally, and the pattern became the foundation for more SCJ home-care brands to follow. Plus Jon Michael is super quotable.",
+    rows: [],
   },
 } satisfies CaseStudyData

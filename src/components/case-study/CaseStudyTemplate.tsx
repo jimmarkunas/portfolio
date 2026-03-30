@@ -1,5 +1,6 @@
 import { BeforeAfterComparison } from "@/components/case-study/BeforeAfterComparison"
 import { DirecTVRevenueChart } from "@/components/case-study/DirecTVRevenueChart"
+import MrsMeyersRetailVsDtcChart from "@/components/case-study/MrsMeyersRetailVsDtcChart"
 import { BlogCardGrid } from "@/components/case-study/BlogCardGrid"
 import HeadlessCommerceDiagram from "@/app/diagrams/headless_commerce_react"
 import dynamic from "next/dynamic"
@@ -108,13 +109,21 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
                       <h2 className="type-h3 text-[#222222]">{data.problem.title}</h2>
                     </div>
 
-                    <CaseStudyMediaFrame
-                      media={data.problem.media}
-                      className={isFoh
-                        ? "rounded-[24px] lg:col-start-1 lg:row-start-3 xl:w-[620px]"
-                        : "lg:col-start-1 lg:row-start-3 lg:w-[620px] rounded-[24px]"}
-                      frameClassName="px-6 text-center md:px-8 lg:px-10"
-                    />
+                    {data.slug === "mm" ? (
+                      <div className={isFoh
+                        ? "lg:col-start-1 lg:row-start-3 xl:w-[620px]"
+                        : "lg:col-start-1 lg:row-start-3 lg:w-[620px]"}>
+                        <MrsMeyersRetailVsDtcChart />
+                      </div>
+                    ) : (
+                      <CaseStudyMediaFrame
+                        media={data.problem.media}
+                        className={isFoh
+                          ? "rounded-[24px] lg:col-start-1 lg:row-start-3 xl:w-[620px]"
+                          : "lg:col-start-1 lg:row-start-3 lg:w-[620px] rounded-[24px]"}
+                        frameClassName="px-6 text-center md:px-8 lg:px-10"
+                      />
+                    )}
                   </div>
 
                   <div className={isFoh
