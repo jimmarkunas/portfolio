@@ -4,9 +4,9 @@ export const muradCaseStudy = {
   slug: "murad",
   breadcrumbCurrent: "Murad",
   hero: {
-    title: "Turning Murad From Chaos to Creation",
+    title: "Murad: From Chaos to Creation",
     intro:
-      "Murad was trying to move off Magento, reduce cost, stop relying on a large in-house dev team, and launch a subscription-first global DTC model on top of Oracle EBS and a pile of random enterprise integrations. By the time I was called in, the client fired two agencies, the politics were ugly, and three weeks before launch we discovered BigCommerce couldn't settle credit card payments over the API.",
+      "Murad needed a cheaper, cleaner path off Magento and a subscription-first global DTC model that could sit on top of Oracle EBS and a messy pile of enterprise integrations. By the time I came in, two agencies were fired, the politics were bad, and three weeks before launch we learned BigCommerce couldn’t settle credit card payments over the API",
     primaryCta: {
       label: "Book a Call",
       href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
@@ -25,17 +25,17 @@ export const muradCaseStudy = {
     eyebrow: "At-a-Glance",
     title: "Subscription-First Under Fire",
     copy:
-      "This was not a clean migration. It was a politically messy, subscription-first global replatform from Magento to BigCommerce, wired into Oracle EBS and a long list of custom partners, under a client that had already churned through agencies and still needed to launch. My job was to make the stack hold, calm the room, and leave behind a model the business could actually run.",
+      "This wasn’t a normal replatform. It was a messy global shift from Magento to BigCommerce, built around subscriptions, tied into Oracle EBS and a long list of custom partners, with a client that had already fired agencies and still needed to hit launch. My job was to keep the stack together, calm the politics, and leave the business with something it could actually operate.",
     stats: [
-      { value: "6", suffix: "", label: "markets in scope" },
-      { value: "11", suffix: "", label: "named integrations" },
-      { value: "2", suffix: "", label: "fired agencies" },
-      { value: "1", suffix: "", label: "subscription model" },
+      { value: "3", suffix: "", label: "Countries in Scopee" },
+      { value: "11", suffix: "", label: "Named Integrations" },
+      { value: "2", suffix: "", label: "Fired Agencies" },
+      { value: "2", suffix: "", label: "Custom Platform Changes" },
     ],
   },
   problem: {
     eyebrow: "Problem Statement",
-    title: "A Replatform Nobody Had Under Control",
+    title: "A Re-Platform Nobody Had Under Control",
     media: {
       kind: "image",
       src: "/murad/hero-murad-02.png",
@@ -43,20 +43,20 @@ export const muradCaseStudy = {
       aspectRatio: "16/9",
     },
     overview:
-      "Murad wanted out of Magento because the platform was expensive and demanded a level of developer support the business did not want to keep paying for. But the replacement was not simple. The new BigCommerce stack had to work with Oracle EBS as the financial source of truth, support subscriptions through OrderGroove, and carry a global rollout across the US, UK, AU, DE, MX, and MY. At the same time, the client had already churned through two agencies, and key order, payment, shipment, and refund flows were still under-documented and easy to break.",
+      "Murad wanted off Magento. For them, the platform was expensive and too dependent on developer support. The problem? The replacement had no room for simplicity. BigCommerce had to sit on top of Oracle EBS, support subscriptions through OrderGroove (an integration that didn't exist), and carry a global rollout across the US, UK, and MY. When I got pulled in, two agencies had already churned, and core order, payment, shipment, and refund flows were nonexistent.",
     projectOverviewRows: [
       { label: "Client", value: "Murad (Unilever) Global DTC" },
       { label: "Industry", value: "Beauty • Skincare • eCommerce" },
-      { label: "Timeline", value: "2019 Launch, With Global Fast-Follows" },
+      { label: "Timeline", value: "2019 Launch + Global Fast-Follows" },
     ],
     tools: [
-      { label: "BigCommerce", icon: "/tool-icons/bc-logo.png" },
-      { label: "Oracle EBS", icon: "/tool-icons/oracle-logo.png" },
-      { label: "OrderGroove", icon: "/tool-icons/ordergroove-logo.png" },
-      { label: "Contentful", icon: "/tool-icons/contentful-logo.png" },
-      { label: "SendGrid", icon: "/tool-icons/sendgrid-logo.png" },
-      { label: "Avalara", icon: "/tool-icons/avalara-logo.png" },
-      { label: "Yotpo", icon: "/tool-icons/yotpo-logo.png" },
+      { label: "BigCommerce", icon: "/tool-icons/svg/bc-logo-blk.svg" },
+      { label: "Oracle EBS", icon: "/tool-icons/svg/oracle-logo.svg" },
+      { label: "OrderGroove", icon: "/tool-icons/svg/ordergroove-logo.svg" },
+      { label: "Contentful", icon: "/tool-icons/svg/contentful-logo.svg" },
+      { label: "SendGrid", icon: "/tool-icons/svg/sendgrid-logo.svg" },
+      { label: "Avalara", icon: "/tool-icons/svg/avalara-logo.svg" },
+      { label: "Yotpo", icon: "/tool-icons/svg/yotpo-logo.svg" },
     ],
     quote: {
       quote:
@@ -78,31 +78,31 @@ export const muradCaseStudy = {
       "Subscription Commerce",
     ],
     stats: [
-      { value: "11", suffix: "", label: "named integrations" },
-      { value: "$1", suffix: "M", label: "program budget" },
-      { value: "2", suffix: "", label: "team size" },
-      { value: "6", suffix: "", label: "markets in scope" },
+      { value: "11", suffix: "", label: "Named Integrations" },
+      { value: "$1", suffix: "M", label: "Program Budget" },
+      { value: "2", suffix: "", label: "Team Size" },
+      { value: "3", suffix: "", label: "Markets in Scope" },
     ],
     narrative: {
       title: "I Turned Chaos Into a Launch",
       paragraphs: [
-        "What I saw faster than other people was simple, BigCommerce was going to have to change to accommodate the client, because the client was not going to change to accommodate the platform. Murad was used to Magento behavior, the business was under-staffed, the agencies were unstable, and the only way this would ship was if someone could document the real order and payment logic, force the right escalations, and keep everyone moving without letting the whole thing dissolve into blame.",
-        "I made three decisions that changed the trajectory. First, I documented the Oracle order, shipment, and refund model so people could stop guessing how the business actually worked. Second, when we discovered three weeks before launch that BigCommerce could not settle credit card payments over the API, I escalated it straight to the top and got the CEO and CTO pulled in, which got the blocker resolved. Third, I shaped the stack as a subscription-first architecture that Murad could reuse across markets instead of as a one-off patch job built only for the US.",
+        "BigCommerce was going to have to bend to the client, because the client wasn’t going to bend to the platform. Murad was used to Magento behavior, the business was under-staffed, the agencies were unstable, and the only way this was going to ship was if Neely & I documented the real order and payment logic, forced the right escalations, and kept the whole thing from collapsing into blame.",
+        "I changed the trajectory in three places. I documented the Oracle order, shipment, and refund model, escalated the BigCommerce payment blocker to the CEO and CTO three weeks before launch, and pushed the stack toward a reusable subscription-first architecture instead of a one-off US patch.",
       ],
       highlights: [
-        "Documented the Oracle order, shipment, and refund logic that the team needed to stop improvising around.",
-        "Escalated the payment-settlement blocker high enough to get platform changes made before launch.",
+        "Documented & solutioned the Oracle order, shipment, and refund logic.",
+        "Escalated the payment-settlement blocker toe the CEO to get platform changes made before launch.",
         "Shaped a subscription-first model across BigCommerce, Oracle EBS, OrderGroove, and the global market rollout.",
       ],
       closing:
-        "This is the kind of work I am unusually good at, holding together chaotic enterprise programs long enough to ship something real, then leaving behind a clearer model than the one I inherited.",
+        "I held together a chaotic enterprise program long enough to ship something real, then left behind a clearer model than the one I inherited.",
     },
   },
   solution: {
     eyebrow: "Solution",
     title: "A Global Stack Murad Could Actually Run",
     copy:
-      "I helped turn Murad's under-documented, partner-heavy eCommerce program into a workable BigCommerce and Oracle model with subscriptions, global rollout logic, and enough self-service capability that the business could stop depending on a permanent bench of Magento developers. The stack was not small, but after the work, it was finally legible.",
+      "I turned Murad's under-documented, partner-heavy eCommerce program into a workable BigCommerce + Oracle + subscriptions model with global rollout logic.",
     cards: [
       {
         category: "Subscription Engine",
@@ -130,12 +130,12 @@ export const muradCaseStudy = {
   supplementalNarrative: {
     title: "The Politics Were the Project",
     paragraphs: [
-      "The technical work was hard, but the politics were harder. Murad was demanding, highly sensitive to perceived slights from partners, and already on agency number three by the time the launch pressure peaked. Almost every important partner in the stack was either custom, semi-supported, or dependent on BigCommerce stretching beyond the normal playbook. That meant the real job was not only architecture, it was maintaining enough confidence and enough forward motion that the launch date remained believable.",
-      "That is why the parking-garage story matters. Three weeks before launch, we found a payment-settlement gap serious enough to derail the program. I literally caught Brent Bellm in the parking garage, explained the risk, asked him to call the CTO, and got the issue elevated fast enough to keep the launch alive. That was not normal project management. That was operator judgment under pressure.",
+      "The stack was hard. The client dynamic was harder. Murad was demanding, highly sensitive with partners, and already on its third agency when launch pressure hit full force. Most of the stack relied on custom partners, thin support, or BigCommerce operating outside the usual playbook. That made the real job bigger than architecture. It was keeping the program moving and the launch date credible.",
+      "Three weeks before launch, we found a payment-settlement gap serious enough to kill the program. I caught Brent Bellm in the parking garage, walked him through the risk, got the CTO pulled in, and forced the escalation fast enough to keep launch alive.",
     ],
     highlights: [
-      "The client had already churned through two agencies before the launch stabilized.",
-      "A platform limitation discovered three weeks before go-live required CEO and CTO escalation.",
+      "The client was like Donald Trump on The Apprentice.",
+      "The BC platform had some ugly enterprise gaps that came to head 3 weeks before launch.",
     ],
     closing:
       "Murad is one of my clearest examples of turning technical chaos, client politics, and partner instability into an actual launch.",
@@ -144,12 +144,12 @@ export const muradCaseStudy = {
     eyebrow: "Impact",
     title: "Launch, Stability, Independence",
     intro:
-      "The outcome was not just a new site. Murad got a global launch model, a smoother cutover than the circumstances deserved, and a path off Magento that reduced dependence on a large internal dev team. Just as important, the work put me on the map internally as someone who could survive the ugliest CPG stacks and still ship.",
-    proofPoints: ["Rescue", "Independence", "Scale"],
+      "Murad got a global launch model, a smooth cutover, and a path off Magento that reduced dependence on a large internal dev team.",
+    proofPoints: ["Rescue", "Scale", "Independence"],
     stats: [
-      { value: "6", suffix: "", label: "markets launched" },
-      { value: "3", suffix: "", label: "custom BC integrations" },
-      { value: "1", suffix: "", label: "smooth cutover" },
+      { value: "3", suffix: "", label: "Markets Launched" },
+      { value: "2", suffix: "", label: "Custom BC Integrations" },
+      { value: "0", suffix: "", label: "Launch Issues" },
       { value: "0", suffix: "", label: "Magento devs needed" },
     ],
     beforeAfter: {
@@ -170,7 +170,7 @@ export const muradCaseStudy = {
           label: "After",
           title: "Custom & Light",
           points: [
-            "Murad launched across 6 markets.",
+            "Murad launched 3 global markets.",
             "Launch earned explicit praise from Murad leadership.",
             "Murad had a clean path forward post Magento.",
           ],
@@ -186,7 +186,7 @@ export const muradCaseStudy = {
       {
         step: "2",
         title: "Escalate the Real Risk",
-        copy: "When the payment-settlement blocker surfaced late, I escalated it high enough and fast enough to prevent a launch failure.",
+        copy: "When the payment-settlement blocker surfaced late, I escalated it high & fast enough to prevent a launch failure.",
       },
       {
         step: "3",
@@ -200,40 +200,40 @@ export const muradCaseStudy = {
     title: "Delivery Phases",
     introTitle: "How I Held It Together",
     introCopy:
-      "This was a politically messy global launch with almost no room for drift. The work moved through architecture clarification, partner realignment, subscription design, platform escalation, and final cutover, all while the client expected BigCommerce to behave like Magento and the agencies kept changing around us.",
+      "This was a messy global launch with no margin for drift. I managed architecture, subscriptions, partner realignment, escalations, and cutover while the client insisted BigCommerce act like Magento.",
     phases: [
       {
         phase: "Phase 01",
         title: "Diagnose",
-        copy: "Mapped the real gaps across Magento replacement, Oracle EBS dependencies, subscription requirements, and cross-market rollout needs.",
+        copy: "Mapped gaps across Magento parity, ERP, subscriptions, and cross-market rollout.",
         ringClass: "border-[#D39D23]",
         labelClass: "text-[#D39D23]",
       },
       {
         phase: "Phase 02",
         title: "Stabilize",
-        copy: "Re-aligned the client and partner ecosystem after agency churn, and rebuilt enough confidence to keep the launch plan alive.",
+        copy: "Re-aligned client & partner ecosystem after agency churn, and rebuilt confidence.",
         ringClass: "border-[#5E7FB7]",
         labelClass: "text-[#5E7FB7]",
       },
       {
         phase: "Phase 03",
         title: "Design",
-        copy: "Defined the subscription-first stack across BigCommerce, Oracle EBS, OrderGroove, Contentful, tax, payments, service, and marketing tools.",
+        copy: "Defined subscription-first stack across BC, Oracle, OrderGroove, and Avalara.",
         ringClass: "border-[#1A9E9A]",
         labelClass: "text-[#1A9E9A]",
       },
       {
         phase: "Phase 04",
         title: "Escalate",
-        copy: "Surfaced the payment-settlement blocker, pulled in executive support, and got the platform issue solved before go-live.",
+        copy: "Surfaced critical payments blocker, pulled in executives, and solved the issue.",
         ringClass: "border-[#1A9E9A]",
         labelClass: "text-[#1A9E9A]",
       },
       {
         phase: "Phase 05",
         title: "Launch",
-        copy: "Delivered a smooth cutover, global market rollout, and a self-service commerce model Murad could operate with far less Magento dependence.",
+        copy: "Delivered a smooth cutover, global market rollout, and a self-service commerce model.",
         ringClass: "border-[#3E7BE0]",
         labelClass: "text-[#3E7BE0]",
       },

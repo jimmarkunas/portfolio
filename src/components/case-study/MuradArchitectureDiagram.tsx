@@ -27,6 +27,11 @@ const PATHS = [
   [{x:353,y:715},{x:426,y:715},{x:426,y:413},{x:592,y:413}],
   // API Layer → Oracle EBS (down)
   [{x:720,y:479},{x:720,y:635}],
+]
+
+// Return rail: Oracle EBS → API Layer (upward, red dots, offset +10px right)
+const RED_PATHS = [
+  [{x:730,y:635},{x:730,y:479}],
   // API Layer → Sendgrid (right then down right spine)
   [{x:848,y:413},{x:1281,y:413},{x:1281,y:635}],
   // Adobe → Sendgrid (top route via right REST pill)
@@ -77,6 +82,11 @@ const MOBILE_H = 1440
 // Order: Oracle → Contentful → API → BC US/UK/MY → Sendgrid → Adobe
 // All paths vertical (constant x per segment)
 // 40px visual gap between every block
+// Mobile return rail: API Layer → Oracle (upward, offset +10px)
+const MOBILE_RED_PATHS = [
+  [{x:160,y:376},{x:160,y:168}],
+]
+
 const MOBILE_PATHS = [
   [{x:150,y:168},{x:150,y:376}],
   [{x:180,y:336},{x:180,y:376}],
@@ -252,6 +262,7 @@ export default function MuradArchitectureDiagram() {
   </div>
 </div>
         <ParticleCanvas paths={PATHS} containerRef={canvasContainerRef} />
+        <ParticleCanvas paths={RED_PATHS} containerRef={canvasContainerRef} color="203,68,68" />
       </div>
     </div>
     </div>
@@ -281,6 +292,7 @@ export default function MuradArchitectureDiagram() {
         >
           <div ref={mobileCanvasRef} style={{ width: MOBILE_W, height: MOBILE_H, transform: `scale(${mobileScale})`, transformOrigin: "top left", position: "relative", backgroundColor: "#fefefe" }}>
             <ParticleCanvas paths={MOBILE_PATHS} containerRef={mobileCanvasRef} />
+            <ParticleCanvas paths={MOBILE_RED_PATHS} containerRef={mobileCanvasRef} color="203,68,68" />
             {/* ── Oracle ── */}
             <MobileCard data={D.oracle} top={40} cardKey="oracle" toggle={toggle} />
             {/* ── Contentful ── */}

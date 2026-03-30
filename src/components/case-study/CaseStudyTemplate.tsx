@@ -365,7 +365,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
 
       <SectionShell containerClassName="py-14 md:py-16 lg:py-20">
         <div className="flex flex-col items-center gap-6">
-          <div className="flex max-w-[577px] flex-col items-center gap-3 text-center">
+          <div className="flex max-w-[800px] flex-col items-center gap-3 text-center">
             <EyebrowPill className="bg-white" labelClassName="type-p2 text-[#222222]">
               {data.impact.eyebrow}
             </EyebrowPill>
@@ -465,7 +465,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
         </div>
       </SectionShell>
 
-      <SectionShell containerClassName="pt-6 pb-16 md:pt-0 md:pb-8 lg:pb-24 lg:pt-12">
+      <SectionShell containerClassName="pt-6 pb-16 md:pt-0 md:pb-8 lg:pb-24 lg:pt-0">
         <div className="px-0 pb-6 pt-0 md:pb-8 lg:pb-10">
           <div className="flex flex-col items-center gap-5 text-center">
             <EyebrowPill labelClassName="type-p4">
