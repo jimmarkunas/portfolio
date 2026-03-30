@@ -1,0 +1,41 @@
+/* BI diagram — hero card pulse glow */
+@keyframes bi-pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 60px 16px rgba(68, 122, 203, 0.45), 0 0 120px 40px rgba(68, 122, 203, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 100px 30px rgba(68, 122, 203, 0.8), 0 0 180px 70px rgba(68, 122, 203, 0.38);
+  }
+}
+
+.bi-pulse-glow {
+  border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .bi-pulse-glow {
+    animation: bi-pulse-glow 6s ease-in-out infinite;
+  }
+}
+
+/* Murad diagram — connector arrow hover */
+[data-layer="Modal Integrations"] [data-svg-wrapper] {
+  cursor: pointer;
+  transition: fill 0.15s ease, stroke 0.15s ease;
+}
+
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg path[fill="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg rect[fill="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg circle[fill="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg ellipse[fill="#212529"] {
+  fill: #3b82f6;
+}
+
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg path[stroke="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg rect[stroke="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg circle[stroke="#212529"],
+[data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg ellipse[stroke="#212529"] {
+  stroke: #3b82f6;
+}

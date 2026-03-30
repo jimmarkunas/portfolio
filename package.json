@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "dev:tail": "bash scripts/dev-tail.sh /tmp/portfolio-dev.log 40",
+    "verify:route": "bash scripts/fast-verify-route.sh",
     "build": "next build",
     "check:bundle-budgets": "node scripts/check-bundle-budgets.mjs",
     "start": "next start",

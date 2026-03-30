@@ -2,42 +2,26 @@
 import { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import ParticleCanvas from "./ParticleCanvas"
-import Modal from "./Modal"
-import { useModal } from "./useModal"
-import { useAdaptiveDiagramMotion } from "./useAdaptiveDiagramMotion"
 import { DIAGRAM_DATA as D } from "./muradDiagramData"
 import DesktopCard from "./DesktopCard"
 import MobileCard from "./MobileCard"
+import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost"
+import {
+  MURAD_DESKTOP_HEIGHT,
+  MURAD_DESKTOP_WIDTH,
+  MURAD_MOBILE_HEIGHT,
+  MURAD_MOBILE_PATHS,
+  MURAD_MOBILE_RED_PATHS,
+  MURAD_MOBILE_WIDTH,
+  MURAD_PATHS,
+  MURAD_RED_PATHS,
+} from "@/components/case-study/diagram-config/murad-architecture.config"
 
 const cardVariants = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0 },
 };
 const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
-
-const PATHS = [
-  // CMS/Contentful → Adobe (top horizontal via left REST pill)
-  [{x:288,y:122},{x:481,y:122},{x:592,y:122}],
-  // Adobe → API Layer (vertical down)
-  [{x:720,y:202},{x:720,y:352}],
-  // BigCommerce US → API Layer
-  [{x:353,y:320},{x:426,y:320},{x:426,y:413},{x:592,y:413}],
-  // BigCommerce UK → API Layer
-  [{x:353,y:518},{x:426,y:518},{x:426,y:413},{x:592,y:413}],
-  // BigCommerce MY → API Layer
-  [{x:353,y:715},{x:426,y:715},{x:426,y:413},{x:592,y:413}],
-  // API Layer → Oracle EBS (down)
-  [{x:720,y:479},{x:720,y:635}],
-]
-
-// Return rail: Oracle EBS → API Layer (upward, red dots, offset +10px right)
-const RED_PATHS = [
-  [{x:730,y:635},{x:730,y:479}],
-  // API Layer → Sendgrid (right then down right spine)
-  [{x:848,y:413},{x:1281,y:413},{x:1281,y:635}],
-  // Adobe → Sendgrid (top route via right REST pill)
-  [{x:848,y:122},{x:1089,y:122},{x:1281,y:122},{x:1281,y:635}],
-]
 
 function PulseGlow({ w, h, uid = "pg", color = "#447acb", style }: {
   w: number
@@ -78,28 +62,6 @@ function PulseGlow({ w, h, uid = "pg", color = "#447acb", style }: {
 }
 
 
-const MOBILE_W = 340
-const MOBILE_H = 1440
-
-// Order: Oracle → Contentful → API → BC US/UK/MY → Sendgrid → Adobe
-// All paths vertical (constant x per segment)
-// 40px visual gap between every block
-// Mobile return rail: API Layer → Oracle (upward, offset +10px)
-const MOBILE_RED_PATHS = [
-  [{x:160,y:376},{x:160,y:168}],
-]
-
-const MOBILE_PATHS = [
-  [{x:150,y:168},{x:150,y:376}],
-  [{x:180,y:336},{x:180,y:376}],
-  [{x:166,y:504},{x:166,y:544}],
-  [{x:180,y:504},{x:180,y:712}],
-  [{x:195,y:504},{x:195,y:880}],
-  [{x:210,y:504},{x:210,y:1048}],
-  [{x:180,y:1176},{x:180,y:1216}],
-  [{x:254,y:336},{x:254,y:1216}],
-]
-
 export default function MuradArchitectureDiagram() {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const canvasContainerRef = useRef<HTMLDivElement>(null)
@@ -107,13 +69,11 @@ export default function MuradArchitectureDiagram() {
   const mobileWrapperRef = useRef<HTMLDivElement>(null)
   const mobileCanvasRef = useRef<HTMLDivElement>(null)
   const [mobileScale, setMobileScale] = useState(1)
-  const { activeKey, toggle, close } = useModal()
-  const { shouldReduceMotion } = useAdaptiveDiagramMotion()
 
   useEffect(() => {
     if (!wrapperRef.current) return
     const el = wrapperRef.current
-    const update = () => setScale(Math.min(1, el.offsetWidth / 1440))
+    const update = () => setScale(Math.min(1, el.offsetWidth / MURAD_DESKTOP_WIDTH))
     update()
     const ro = new ResizeObserver(update)
     ro.observe(el)
@@ -123,7 +83,7 @@ export default function MuradArchitectureDiagram() {
   useEffect(() => {
     if (!mobileWrapperRef.current) return
     const el = mobileWrapperRef.current
-    const update = () => setMobileScale(el.getBoundingClientRect().width / MOBILE_W)
+    const update = () => setMobileScale(el.getBoundingClientRect().width / MURAD_MOBILE_WIDTH)
     update()
     const ro = new ResizeObserver(update)
     ro.observe(el)
@@ -131,7 +91,9 @@ export default function MuradArchitectureDiagram() {
   }, [])
 
   return (
-    <>
+    <DiagramRendererHost tooltips={D.tooltips}>
+      {({ toggle, shouldReduceMotion }) => (
+        <>
     {/* ── Desktop ───────────────────────────────────────────────────── */}
     <motion.div
       className="hidden w-full md:block"
@@ -140,7 +102,7 @@ export default function MuradArchitectureDiagram() {
       viewport={{ once: true, amount: 0.1 }}
       variants={shouldReduceMotion ? undefined : { hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}
     >
-    <div className="relative w-full overflow-hidden" style={{ height: `${825 * scale}px` }}>
+    <div className="relative w-full overflow-hidden" style={{ height: `${MURAD_DESKTOP_HEIGHT * scale}px` }}>
       <div style={{
         position: "absolute",
         top: 0,
@@ -155,13 +117,13 @@ export default function MuradArchitectureDiagram() {
     <div
       ref={wrapperRef}
       className="relative w-full overflow-hidden rounded-[10px]"
-      style={{ height: `${825 * scale}px` }}
+      style={{ height: `${MURAD_DESKTOP_HEIGHT * scale}px` }}
     >
       <div
         ref={canvasContainerRef}
         style={{
-          width: 1440,
-          height: 825,
+          width: MURAD_DESKTOP_WIDTH,
+          height: MURAD_DESKTOP_HEIGHT,
           transform: `scale(${scale})`,
           transformOrigin: "top left",
           position: "relative",
@@ -272,8 +234,8 @@ export default function MuradArchitectureDiagram() {
 </div>
         {shouldReduceMotion ? null : (
           <>
-            <ParticleCanvas paths={PATHS} containerRef={canvasContainerRef} />
-            <ParticleCanvas paths={RED_PATHS} containerRef={canvasContainerRef} color="203,68,68" />
+            <ParticleCanvas paths={MURAD_PATHS} containerRef={canvasContainerRef} />
+            <ParticleCanvas paths={MURAD_RED_PATHS} containerRef={canvasContainerRef} color="203,68,68" />
           </>
         )}
       </div>
@@ -294,7 +256,7 @@ export default function MuradArchitectureDiagram() {
         style={{
           width: "100dvw",
           marginLeft: "calc(50% - 50dvw)",
-          height: `${MOBILE_H * mobileScale}px`,
+          height: `${MURAD_MOBILE_HEIGHT * mobileScale}px`,
         }}
       >
         <div style={{
@@ -307,13 +269,13 @@ export default function MuradArchitectureDiagram() {
         <div
           ref={mobileWrapperRef}
           className="relative mx-auto overflow-hidden"
-          style={{ width: "calc(100dvw - 20px)", height: `${MOBILE_H * mobileScale}px` }}
+          style={{ width: "calc(100dvw - 20px)", height: `${MURAD_MOBILE_HEIGHT * mobileScale}px` }}
         >
-          <div ref={mobileCanvasRef} style={{ width: MOBILE_W, height: MOBILE_H, transform: `scale(${mobileScale})`, transformOrigin: "top left", position: "relative", backgroundColor: "#fefefe" }}>
+          <div ref={mobileCanvasRef} style={{ width: MURAD_MOBILE_WIDTH, height: MURAD_MOBILE_HEIGHT, transform: `scale(${mobileScale})`, transformOrigin: "top left", position: "relative", backgroundColor: "#fefefe" }}>
             {shouldReduceMotion ? null : (
               <>
-                <ParticleCanvas paths={MOBILE_PATHS} containerRef={mobileCanvasRef} />
-                <ParticleCanvas paths={MOBILE_RED_PATHS} containerRef={mobileCanvasRef} color="203,68,68" />
+                <ParticleCanvas paths={MURAD_MOBILE_PATHS} containerRef={mobileCanvasRef} />
+                <ParticleCanvas paths={MURAD_MOBILE_RED_PATHS} containerRef={mobileCanvasRef} color="203,68,68" />
               </>
             )}
             {/* ── Oracle ── */}
@@ -348,8 +310,8 @@ export default function MuradArchitectureDiagram() {
         </div>
       </div>
     </motion.div>
-
-    <Modal tip={activeKey ? (D.tooltips[activeKey] ?? null) : null} onClose={close} />
     </>
+      )}
+    </DiagramRendererHost>
   )
 }

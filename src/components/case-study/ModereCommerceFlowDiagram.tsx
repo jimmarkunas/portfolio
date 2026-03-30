@@ -2,161 +2,19 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Modal from "@/components/case-study/Modal";
-import { useModal } from "@/components/case-study/useModal";
-import type { Tip } from "@/components/case-study/useModal";
+import { ArrowRight } from "lucide-react";
+
+import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
 import { useAdaptiveDiagramMotion } from "@/components/case-study/useAdaptiveDiagramMotion";
 import {
-  Users,
-  ShoppingCart,
-  Smartphone,
-  Share2,
-  Globe,
-  CreditCard,
-  Truck,
-  Search,
-  ShieldCheck,
-  BarChart3,
-  ArrowRight,
-} from "lucide-react";
-
-const COLORS = {
-  ink: "#222222",
-  secondary: "#4B5154",
-  muted: "#7B7B7B",
-  white: "#FFFFFF",
-  softWhite: "#FEFEFE",
-  lightGray: "#F3F3F3",
-  border: "#E5E7EB",
-};
-
-const TIPS: Record<string, Tip> = {
-  affiliates: {
-    label: "Actors",
-    title: "Affiliates",
-    body: "Affiliates were the revenue engine, so signup, commissions, and shared-cart flows had to scale without disruption.",
-  },
-  shoppers: {
-    label: "Actors",
-    title: "Shoppers",
-    body: "Shoppers moved between web, mobile, and affiliate carts, so the experience had to stay consistent across markets and languages.",
-  },
-  contentstack: {
-    label: "Experience Layer",
-    title: "Contentstack",
-    body: "Contentstack handled localized storefront content so teams could ship updates without waiting on engineering.",
-  },
-  bigcommerce: {
-    label: "Commerce Core",
-    title: "BigCommerce",
-    body: "BigCommerce stayed intentionally thin for catalog and checkout, keeping core business logic outside the platform.",
-  },
-  pimcore: {
-    label: "Commerce Core",
-    title: "Pimcore",
-    body: "Pimcore became the product brain for catalog, pricing, and inventory distributed across channels.",
-  },
-  erp: {
-    label: "Enterprise Systems",
-    title: "ERP + Inventory",
-    body: "Infor handled inventory and operations, integrated for cross-market accuracy without tightly coupling the stack.",
-  },
-  touchpoints: {
-    label: "Touchpoints",
-    title: "Web, Mobile & Shared Cart",
-    body: "A shared commerce engine powered web, mobile, and shared-cart touchpoints across markets.",
-  },
-};
-
-type MiniRowIcon = React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
-
-type MiniRowConfig = {
-  label: string;
-  icon?: MiniRowIcon;
-  iconSrc?: string;
-  subdued?: boolean;
-  tipKey?: string;
-};
-
-type FlowStepConfig = {
-  step: string;
-  mobileTitle: string;
-  desktopTitle?: string;
-  mobileBody: string;
-  desktopBody: string;
-  emphasized?: boolean;
-  desktopClassName?: string;
-  rows: MiniRowConfig[];
-  insetModule?: {
-    title: string;
-    rows: MiniRowConfig[];
-  };
-  chips?: string[];
-};
-
-const FLOW_STEPS: FlowStepConfig[] = [
-  {
-    step: "01",
-    mobileTitle: "Actors",
-    mobileBody: "Revenue starts with affiliates and shoppers entering the same system.",
-    desktopBody: "Affiliates and shoppers drive revenue into the same system.",
-    rows: [
-      { icon: Users, label: "Affiliates", tipKey: "affiliates" },
-      { icon: ShoppingCart, label: "Shoppers", subdued: true, tipKey: "shoppers" },
-    ],
-  },
-  {
-    step: "02",
-    mobileTitle: "Touchpoints",
-    mobileBody: "The experience appears across every sales surface, not just one storefront.",
-    desktopBody: "Sales happen across web, mobile, and shared cart flows.",
-    rows: [
-      { icon: Globe, label: "Web Store", tipKey: "touchpoints" },
-      { icon: Smartphone, label: "Mobile App", subdued: true, tipKey: "touchpoints" },
-      { icon: Share2, label: "Shared Cart", tipKey: "touchpoints" },
-    ],
-  },
-  {
-    step: "03",
-    mobileTitle: "Experience Layer",
-    desktopTitle: "Experience",
-    mobileBody: "Content and localization shape the front-end experience before transactions fire.",
-    desktopBody: "Content and localization shape the front-end layer.",
-    rows: [
-      { iconSrc: "/tool-icons/svg/contentstack-logo.svg", label: "Contentstack", tipKey: "contentstack" },
-      { icon: Globe, label: "Localized UX", subdued: true },
-    ],
-  },
-  {
-    step: "04",
-    mobileTitle: "Commerce Core",
-    mobileBody: "Commerce stays intentionally thin so product, promotions, and rules can evolve without another replatform.",
-    desktopBody: "BigCommerce stays thin so the system remains replaceable and scalable.",
-    emphasized: true,
-    desktopClassName: "xl:w-[232px]",
-    rows: [{ iconSrc: "/tool-icons/svg/bc-logo-icon.svg", label: "BigCommerce", tipKey: "bigcommerce" }],
-    insetModule: {
-      title: "Product Truth",
-      rows: [{ iconSrc: "/tool-icons/svg/pimcore-logo.svg", label: "Pimcore", tipKey: "pimcore" }],
-    },
-    chips: ["PIM-led", "API-first"],
-  },
-  {
-    step: "05",
-    mobileTitle: "Enterprise Systems",
-    mobileBody: "Payments, inventory, shipping, analytics, and compliance complete the operating model.",
-    desktopBody: "Operational services complete the model and keep the business running.",
-    rows: [
-      { icon: CreditCard, label: "Payments" },
-      { iconSrc: "/tool-icons/svg/infor-logo.svg", label: "ERP + Inventory", subdued: true, tipKey: "erp" },
-      { icon: Truck, label: "Tax + Shipping" },
-      { icon: Search, label: "Analytics", subdued: true },
-      { icon: ShieldCheck, label: "Compliance" },
-    ],
-  },
-];
-
-const STEP_COUNT = FLOW_STEPS.length;
+  MODERE_COLORS as COLORS,
+  MODERE_FLOW_STEPS as FLOW_STEPS,
+  MODERE_STEP_COUNT as STEP_COUNT,
+  MODERE_TIPS,
+  type FlowStepConfig,
+  type MiniRowConfig,
+  type MiniRowIcon,
+} from "@/components/case-study/diagram-config/modere-flow.config";
 
 function EyebrowPill({ children }: { children: React.ReactNode }) {
   return (
@@ -223,19 +81,6 @@ function Rail({
           <path d="M3 9h12M11 5l4 4-4 4" stroke="#477ACB" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </motion.div>
-    </div>
-  );
-}
-
-function VerticalFlowArrow() {
-  return (
-    <div className="flex justify-center xl:hidden">
-      <div
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full"
-        style={{ background: COLORS.white, border: `1px solid ${COLORS.border}` }}
-      >
-        <ArrowRight className="h-4 w-4 rotate-90" style={{ color: COLORS.ink }} />
-      </div>
     </div>
   );
 }
@@ -442,13 +287,10 @@ function renderStepContent(step: FlowStepConfig, onOpen: (key: string) => void, 
 }
 
 export default function ModereCommerceFlowDiagram({ className = "" }: { className?: string }) {
-  const { activeKey, open, close } = useModal();
-  const { shouldReduceMotion } = useAdaptiveDiagramMotion();
-  const activeTip = activeKey ? TIPS[activeKey] ?? null : null;
-
   const [activeStep, setActiveStep] = useState(0);
   const [cycle, setCycle] = useState(0);
   const [resetToken, setResetToken] = useState(0);
+  const { shouldReduceMotion } = useAdaptiveDiagramMotion();
 
   const navigate = (next: number) => {
     if (next === 0) setCycle(c => c + 1);
@@ -472,123 +314,127 @@ export default function ModereCommerceFlowDiagram({ className = "" }: { classNam
   }, [resetToken, shouldReduceMotion]);
 
   return (
-    <div className={`w-full ${className}`} onPointerDown={close}>
-      <Modal tip={activeTip} onClose={close} />
-      <div
-        className="rounded-[28px] p-5 md:p-6"
-        style={{
-          background: "#FEFEFE",
-        }}
-      >
-        <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
-          <EyebrowPill>Composable Commerce Flow</EyebrowPill>
+    <DiagramRendererHost
+      className={`w-full ${className}`}
+      closeOnPointerDown
+      tooltips={MODERE_TIPS}
+    >
+      {({ open }) => {
+        return (
+          <div
+            className="rounded-[28px] p-5 md:p-6"
+            style={{
+              background: "#FEFEFE",
+            }}
+          >
+            <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
+              <EyebrowPill>Composable Commerce Flow</EyebrowPill>
 
-          <div className="flex flex-wrap gap-2">
-            <TagChip>10+ markets / 7 languages</TagChip>
-            <TagChip>43%+ conversion uplift</TagChip>
-            <TagChip>35% faster page loads</TagChip>
-          </div>
-        </div>
-
-        <div className="xl:hidden">
-          {/* Carousel */}
-          <div className="relative overflow-hidden pt-3 pb-3">
-            <motion.div
-              className="flex"
-              animate={{ x: `${-activeStep * 100}%` }}
-              transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeInOut" }}
-            >
-              {FLOW_STEPS.map((step) => (
-                <div key={`carousel-${step.step}`} className="w-full shrink-0 px-1">
-                  <FlowCard
-                    step={step.step}
-                    title={step.mobileTitle}
-                  body={step.mobileBody}
-                  emphasized={step.emphasized}
-                  compact
-                  shouldReduceMotion={shouldReduceMotion}
-                >
-                    {renderStepContent(step, open, `mobile-${step.step}`, true)}
-                  </FlowCard>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Controls */}
-          <div className="mt-4 flex items-center justify-between px-1">
-            <button
-              type="button"
-              className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full"
-              style={{ background: COLORS.white, border: `1px solid ${COLORS.border}` }}
-              onPointerDown={e => e.stopPropagation()}
-              onClick={e => { e.stopPropagation(); navigate((activeStep - 1 + STEP_COUNT) % STEP_COUNT); }}
-            >
-              <ArrowRight className="h-4 w-4 rotate-180" style={{ color: COLORS.ink }} />
-            </button>
-
-            {/* Dot indicators */}
-            <div className="flex items-center gap-2">
-              {FLOW_STEPS.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onPointerDown={e => e.stopPropagation()}
-                  onClick={e => { e.stopPropagation(); navigate(i); }}
-                  style={{
-                    width: activeStep === i ? 20 : 8,
-                    height: 8,
-                    borderRadius: 999,
-                    background: activeStep === i ? "#477ACB" : COLORS.border,
-                    border: "none",
-                    padding: 0,
-                    cursor: "pointer",
-                    transition: "width 0.3s ease, background 0.3s ease",
-                  }}
-                />
-              ))}
+              <div className="flex flex-wrap gap-2">
+                <TagChip>10+ markets / 7 languages</TagChip>
+                <TagChip>43%+ conversion uplift</TagChip>
+                <TagChip>35% faster page loads</TagChip>
+              </div>
             </div>
 
-            <button
-              type="button"
-              className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full"
-              style={{ background: COLORS.white, border: `1px solid ${COLORS.border}` }}
-              onPointerDown={e => e.stopPropagation()}
-              onClick={e => { e.stopPropagation(); navigate((activeStep + 1) % STEP_COUNT); }}
-            >
-              <ArrowRight className="h-4 w-4" style={{ color: COLORS.ink }} />
-            </button>
-          </div>
-        </div>
-
-        <div className="relative hidden xl:block">
-          <div className="mt-3 flex items-stretch gap-4 overflow-visible" style={{ isolation: "isolate" }}>
-            {FLOW_STEPS.map((step, index) => (
-              <React.Fragment key={`desktop-${step.step}`}>
-                <FlowCard
-                  step={step.step}
-                  title={step.desktopTitle ?? step.mobileTitle}
-                  body={step.desktopBody}
-                  emphasized={step.emphasized}
-                  isActive={activeStep === index}
-                  className={step.desktopClassName ?? ""}
-                  shouldReduceMotion={shouldReduceMotion}
+            <div className="xl:hidden">
+              <div className="relative overflow-hidden pt-3 pb-3">
+                <motion.div
+                  className="flex"
+                  animate={{ x: `${-activeStep * 100}%` }}
+                  transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeInOut" }}
                 >
-                  {renderStepContent(step, open, `desktop-${step.step}`)}
-                </FlowCard>
+                  {FLOW_STEPS.map((step) => (
+                    <div key={`carousel-${step.step}`} className="w-full shrink-0 px-1">
+                      <FlowCard
+                        step={step.step}
+                        title={step.mobileTitle}
+                        body={step.mobileBody}
+                        emphasized={step.emphasized}
+                        compact
+                        shouldReduceMotion={shouldReduceMotion}
+                      >
+                        {renderStepContent(step, open, `mobile-${step.step}`, true)}
+                      </FlowCard>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
 
-                {index < STEP_COUNT - 1 ? (
-                  <Rail
-                    filling={activeStep === index + 1}
-                    triggerKey={cycle * STEP_COUNT + index + 1}
-                    shouldReduceMotion={shouldReduceMotion}
-                  />
-                ) : null}
-              </React.Fragment>
-            ))}
+              <div className="mt-4 flex items-center justify-between px-1">
+                <button
+                  type="button"
+                  className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full"
+                  style={{ background: COLORS.white, border: `1px solid ${COLORS.border}` }}
+                  onPointerDown={e => e.stopPropagation()}
+                  onClick={e => { e.stopPropagation(); navigate((activeStep - 1 + STEP_COUNT) % STEP_COUNT); }}
+                >
+                  <ArrowRight className="h-4 w-4 rotate-180" style={{ color: COLORS.ink }} />
+                </button>
+
+                <div className="flex items-center gap-2">
+                  {FLOW_STEPS.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onPointerDown={e => e.stopPropagation()}
+                      onClick={e => { e.stopPropagation(); navigate(i); }}
+                      style={{
+                        width: activeStep === i ? 20 : 8,
+                        height: 8,
+                        borderRadius: 999,
+                        background: activeStep === i ? "#477ACB" : COLORS.border,
+                        border: "none",
+                        padding: 0,
+                        cursor: "pointer",
+                        transition: "width 0.3s ease, background 0.3s ease",
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full"
+                  style={{ background: COLORS.white, border: `1px solid ${COLORS.border}` }}
+                  onPointerDown={e => e.stopPropagation()}
+                  onClick={e => { e.stopPropagation(); navigate((activeStep + 1) % STEP_COUNT); }}
+                >
+                  <ArrowRight className="h-4 w-4" style={{ color: COLORS.ink }} />
+                </button>
+              </div>
+            </div>
+
+            <div className="relative hidden xl:block">
+              <div className="mt-3 flex items-stretch gap-4 overflow-visible" style={{ isolation: "isolate" }}>
+                {FLOW_STEPS.map((step, index) => (
+                  <React.Fragment key={`desktop-${step.step}`}>
+                    <FlowCard
+                      step={step.step}
+                      title={step.desktopTitle ?? step.mobileTitle}
+                      body={step.desktopBody}
+                      emphasized={step.emphasized}
+                      isActive={activeStep === index}
+                      className={step.desktopClassName ?? ""}
+                      shouldReduceMotion={shouldReduceMotion}
+                    >
+                      {renderStepContent(step, open, `desktop-${step.step}`)}
+                    </FlowCard>
+
+                    {index < STEP_COUNT - 1 ? (
+                      <Rail
+                        filling={activeStep === index + 1}
+                        triggerKey={cycle * STEP_COUNT + index + 1}
+                        shouldReduceMotion={shouldReduceMotion}
+                      />
+                    ) : null}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        );
+      }}
+    </DiagramRendererHost>
   );
 }

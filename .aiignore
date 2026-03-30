@@ -10,6 +10,9 @@ node_modules/
 # Non-production app routes
 src/app/experiments/**
 
+# Non-runtime writing/source briefs
+docs/case-studies/briefs/**
+
 # Heavy media/doc assets not needed for code edits
 public/**/*.pdf
 public/**/*.mp4

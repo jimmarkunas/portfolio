@@ -17,67 +17,22 @@ import {
   Users,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import Modal from "./Modal";
-import { useModal } from "./useModal";
 import { SCJ_TOOLTIPS } from "./scjDiagramData";
 import ParticleCanvas from "./ParticleCanvas";
-import { useAdaptiveDiagramMotion } from "./useAdaptiveDiagramMotion";
-
-type TopNodeId = "personalization" | "merchandising" | "ugc" | "promotions" | "frontend";
-type CommerceNodeId = "omnichannel" | "subscriptions" | "catalog" | "checkout" | "orders" | "customer";
-type SystemNodeId = "erp" | "oms" | "pim" | "esp" | "cms" | "analytics";
-type MeasuredNodeId = CommerceNodeId | SystemNodeId | "api";
-
-type DiagramNode<T extends string> = {
-  id: T;
-  label: string;
-  icon?: ReactNode;
-};
-
-type BrandSystemNode = DiagramNode<SystemNodeId> & {
-  brand: SystemNodeId;
-};
+import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
+import {
+  SCJ_BRAND_LOGOS,
+  SCJ_COMMERCE_NODES,
+  SCJ_SYSTEM_NODES,
+  SCJ_TOP_NODES,
+  type MeasuredNodeId,
+  type SystemNodeId,
+} from "@/components/case-study/diagram-config/scj-architecture.config";
 
 type Box = { left: number; top: number; width: number; height: number };
 
 type ComponentProps = {
   className?: string;
-};
-
-
-const TOP_NODES: DiagramNode<TopNodeId>[] = [
-  { id: "personalization", label: "Personalization",             icon: <BrandIcon src="/tool-icons/svg/icon-user.svg"    alt="Personalization" /> },
-  { id: "merchandising",   label: "Merchandising",               icon: <BrandIcon src="/tool-icons/svg/icon-slider.svg"  alt="Merchandising" /> },
-  { id: "ugc",             label: "User-Generated\nContent",     icon: <BrandIcon src="/tool-icons/svg/icon-ugc.svg"     alt="UGC" /> },
-  { id: "promotions",      label: "Promotions",                  icon: <BrandIcon src="/tool-icons/svg/icon-coupon.svg"  alt="Promotions" /> },
-  { id: "frontend",        label: "Front-end Coding &\nScoping", icon: <BrandIcon src="/tool-icons/svg/icon-code.svg"    alt="Front-end Coding" /> },
-];
-
-const COMMERCE_NODES: DiagramNode<CommerceNodeId>[] = [
-  { id: "omnichannel",   label: "Omni-Channel",               icon: <BrandIcon src="/tool-icons/svg/icon-web.svg"          alt="Omni-Channel" /> },
-  { id: "subscriptions", label: "Subscriptions",              icon: <BrandIcon src="/tool-icons/svg/ordergroove-logo.svg"   alt="Ordergroove" /> },
-  { id: "catalog",       label: "Product Catalog &\nContent", icon: <BrandIcon src="/tool-icons/svg/icon-shipping.svg"      alt="Product Catalog" /> },
-  { id: "checkout",      label: "Cart & Checkout",            icon: <BrandIcon src="/tool-icons/svg/icon-credit-card.svg"   alt="Cart & Checkout" /> },
-  { id: "orders",        label: "Orders",                     icon: <BrandIcon src="/tool-icons/svg/icon-shopping-bag.svg"  alt="Orders" /> },
-  { id: "customer",      label: "Customer Data",              icon: <BrandIcon src="/tool-icons/svg/iscon-user-02.svg"      alt="Customer Data" /> },
-];
-
-const SYSTEM_NODES: BrandSystemNode[] = [
-  { id: "erp",       label: "ERP",       brand: "erp" },
-  { id: "oms",       label: "OMS",       brand: "oms" },
-  { id: "pim",       label: "PIM",       brand: "pim" },
-  { id: "esp",       label: "ESP",       brand: "esp" },
-  { id: "cms",       label: "CMS",       brand: "cms" },
-  { id: "analytics", label: "Analytics", brand: "analytics" },
-];
-
-const BRAND_LOGOS: Record<SystemNodeId, string> = {
-  erp:       "/tool-icons/svg/sap-logo.svg",
-  oms:       "/tool-icons/svg/merkle-logo.svg",
-  pim:       "/tool-icons/svg/salsify-logo.svg",
-  esp:       "/tool-icons/svg/klaviyo-logo.svg",
-  cms:       "/tool-icons/svg/shogun-logo.svg",
-  analytics: "/tool-icons/svg/icon-pie-chart.svg",
 };
 
 const cardVariants = {
@@ -195,7 +150,7 @@ function BrandIcon({ src, alt }: { src: string; alt: string }) {
 }
 
 function BrandMark({ brand }: { brand: SystemNodeId }) {
-  const src = BRAND_LOGOS[brand];
+  const src = SCJ_BRAND_LOGOS[brand];
   if (src) {
     return (
       <div className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-[2px]">
@@ -329,11 +284,11 @@ function StorefrontAndCommerceLayers({
         onHeaderClick={() => toggle("storefront")}
       >
         <div className={topGridClass}>
-          {TOP_NODES.map((node) => (
+          {SCJ_TOP_NODES.map((node) => (
             <NodeCard
               key={node.id}
               label={node.label}
-              icon={node.icon}
+              icon={<BrandIcon src={node.iconSrc} alt={node.iconAlt} />}
               onClick={() => toggle(node.id)}
             />
           ))}
@@ -348,11 +303,11 @@ function StorefrontAndCommerceLayers({
         onHeaderClick={() => toggle("commerce-layer")}
       >
         <div className={commerceGridClass}>
-          {COMMERCE_NODES.map((node) => (
+          {SCJ_COMMERCE_NODES.map((node) => (
             <NodeCard
               key={node.id}
               label={node.label}
-              icon={node.icon}
+              icon={<BrandIcon src={node.iconSrc} alt={node.iconAlt} />}
               nodeRef={setNodeRef?.(node.id)}
               onClick={() => toggle(node.id)}
             />
@@ -376,8 +331,8 @@ function DesktopDiagram({
 }) {
   const measuredIds = useMemo(
     () => [
-      ...COMMERCE_NODES.map((n) => n.id),
-      ...SYSTEM_NODES.map((n) => n.id),
+      ...SCJ_COMMERCE_NODES.map((n) => n.id),
+      ...SCJ_SYSTEM_NODES.map((n) => n.id),
       "api",
     ] as MeasuredNodeId[],
     []
@@ -389,9 +344,9 @@ function DesktopDiagram({
     const api = boxes.api;
     if (!api) return [];
     const paths: { x: number; y: number }[][] = [];
-    COMMERCE_NODES.forEach((node, index) => {
+    SCJ_COMMERCE_NODES.forEach((node, index) => {
       const topBox    = boxes[node.id];
-      const bottomBox = boxes[SYSTEM_NODES[index].id];
+      const bottomBox = boxes[SCJ_SYSTEM_NODES[index].id];
       if (!topBox || !bottomBox) return;
       const topX    = topBox.left    + topBox.width    / 2;
       const topY    = topBox.top     + topBox.height;
@@ -431,7 +386,7 @@ function DesktopDiagram({
               <ApiLayer nodeRef={setNodeRef("api")} onClick={() => toggle("api")} />
             </div>
             <div className="grid grid-cols-3 gap-3 xl:grid-cols-6 xl:gap-5">
-              {SYSTEM_NODES.map((node) => (
+              {SCJ_SYSTEM_NODES.map((node) => (
                 <NodeCard
                   key={node.id}
                   label={node.label}
@@ -477,7 +432,7 @@ function MobileDiagram({
       </motion.div>
 
       <motion.div className="grid grid-cols-2 gap-2.5 sm:grid-cols-2 lg:grid-cols-3" variants={cardVariants} transition={cardTransition}>
-        {SYSTEM_NODES.map((node) => (
+        {SCJ_SYSTEM_NODES.map((node) => (
           <NodeCard
             key={node.id}
             label={node.label}
@@ -493,19 +448,17 @@ function MobileDiagram({
 // ─── Export ───────────────────────────────────────────────────────────────────
 
 export default function SCJCommerceArchitecture({ className }: ComponentProps) {
-  const { activeKey, toggle, close } = useModal();
-  const { shouldReduceMotion } = useAdaptiveDiagramMotion();
-  const tip = activeKey ? (SCJ_TOOLTIPS[activeKey] ?? null) : null;
-
   return (
-    <section
+    <DiagramRendererHost
       className={cn("w-full bg-transparent text-[#222222]", className)}
+      tooltips={SCJ_TOOLTIPS}
     >
-      <Modal tip={tip} onClose={close} />
-      <div className="mx-auto max-w-[1440px] px-4 py-4 md:px-6 md:py-6 xl:px-8">
-        <DesktopDiagram toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
-        <MobileDiagram toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
-      </div>
-    </section>
+      {({ toggle, shouldReduceMotion }) => (
+        <div className="mx-auto max-w-[1440px] px-4 py-4 md:px-6 md:py-6 xl:px-8">
+          <DesktopDiagram toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
+          <MobileDiagram toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
+        </div>
+      )}
+    </DiagramRendererHost>
   );
 }

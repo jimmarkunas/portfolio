@@ -2,71 +2,28 @@
 import { useRef } from "react";
 import ParticleCanvas from "./ParticleCanvas";
 import { motion } from "framer-motion";
-import Modal from "./Modal";
-import { useModal } from "./useModal";
 import { DiagramShell } from "./DiagramShell";
 import { TOOLTIPS } from "./biCommerceDiagramData";
-import { useAdaptiveDiagramMotion } from "./useAdaptiveDiagramMotion";
 import { ProductsIcon, InventoryIcon, DatabaseIcon, ContentIcon, CampaignIcon, LaptopIcon } from "./bi-commerce-icons";
+import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
 import {
-  AEM_BROWSER_PATH,
-  AEM_DATALAKE_PATH,
-  BROWSER_AEM_PATH,
-  CC_DATALAKE_PATH,
-  CC_MULESOFT_PATH,
-  CC_SAP_PATH,
+  BI_AEM_CARD,
+  BI_DESKTOP_PARTICLE_PATHS,
+  BI_MULESOFT_CARD,
+  BI_MULESOFT_PILLS,
+  BI_SAP_CARD,
+  type BiBadgeKey,
+  type BiFeatureIconKey,
+} from "@/components/case-study/diagram-config/bi-commerce.config";
+import {
   CONN_H,
   CONN_W,
-  DATALAKE_AEM_PATH,
-  DATALAKE_CC_PATH,
   MOB_DOWN,
   MOB_UP,
-  MULESOFT_BROWSER_PATH,
-  MULESOFT_CC_PATH,
-  MULESOFT_SAP_PATH,
-  SAP_CC_PATH,
-  SAP_MULESOFT_PATH,
   TOKENS,
   VH,
   VW,
 } from "./bi-commerce-ecosystem.constants";
-
-const SAP_CARD = {
-  eyebrowLabel: "SOURCE OF TRUTH",
-  eyebrowLeft: <SapBadge />,
-  title: "SAP",
-  body: "Owns commercial truth across products, pricing, inventory, and order data.",
-  features: [
-    { label: "Products", icon: <ProductsIcon /> },
-    { label: "Inventory", icon: <InventoryIcon /> },
-    { label: "Orders",   icon: <DatabaseIcon /> },
-  ],
-};
-
-const AEM_CARD = {
-  eyebrowLabel: "CONTENT & ANALYTICS",
-  eyebrowLeft: <AemBadge />,
-  title: "Adobe Experience Manager",
-  body: "Publishes content and experience assets that shape browsing and merchandising.",
-  features: [
-    { label: "Content",   icon: <ContentIcon /> },
-    { label: "Campaigns", icon: <CampaignIcon /> },
-    { label: "Analytics", icon: <DatabaseIcon /> },
-  ],
-};
-
-const MULESOFT_CARD = {
-  eyebrowLabel: "INTEGRATION SPINE",
-  eyebrowLeft: <MulesoftBadge />,
-  title: "Mulesoft API Layer",
-  body: "Publishes content and experience assets that shape browsing and merchandising.",
-};
-
-const MULESOFT_PILLS = [
-  { label: "IDP",       key: "idp"       },
-  { label: "Apps",      key: "apps"      },
-  { label: "API/HOOKS", key: "api-hooks" },
-] as const;
 
 const cardVariants = {
   hidden: { opacity: 0, y: 28 },
@@ -85,32 +42,78 @@ type PillFeature = {
   onClick?: (e: React.MouseEvent) => void;
 };
 
+function renderBadge(badge: BiBadgeKey) {
+  if (badge === "sap") return <SapBadge />;
+  if (badge === "aem") return <AemBadge />;
+  return <MulesoftBadge />;
+}
+
+function renderFeatureIcon(icon: BiFeatureIconKey) {
+  if (icon === "products") return <ProductsIcon />;
+  if (icon === "inventory") return <InventoryIcon />;
+  if (icon === "content") return <ContentIcon />;
+  if (icon === "campaign") return <CampaignIcon />;
+  return <DatabaseIcon />;
+}
+
+function toCardFeatures(features: { label: string; icon: BiFeatureIconKey }[]): CardFeature[] {
+  return features.map((feature) => ({
+    label: feature.label,
+    icon: renderFeatureIcon(feature.icon),
+  }));
+}
+
+const SAP_CARD = {
+  eyebrowLabel: BI_SAP_CARD.eyebrowLabel,
+  eyebrowLeft: renderBadge(BI_SAP_CARD.eyebrow),
+  title: BI_SAP_CARD.title,
+  body: BI_SAP_CARD.body,
+  features: toCardFeatures(BI_SAP_CARD.features),
+} as const
+
+const AEM_CARD = {
+  eyebrowLabel: BI_AEM_CARD.eyebrowLabel,
+  eyebrowLeft: renderBadge(BI_AEM_CARD.eyebrow),
+  title: BI_AEM_CARD.title,
+  body: BI_AEM_CARD.body,
+  features: toCardFeatures(BI_AEM_CARD.features),
+} as const
+
+const MULESOFT_CARD = {
+  eyebrowLabel: BI_MULESOFT_CARD.eyebrowLabel,
+  eyebrowLeft: renderBadge(BI_MULESOFT_CARD.eyebrow),
+  title: BI_MULESOFT_CARD.title,
+  body: BI_MULESOFT_CARD.body,
+} as const
+
 export default function CommerceEcosystemDiagram() {
-  const { activeKey, toggle, close } = useModal();
-  const { shouldReduceMotion } = useAdaptiveDiagramMotion();
-  const tip = activeKey ? (TOOLTIPS[activeKey] ?? null) : null;
-
   return (
-    <div className="rounded-sm bg-white overflow-hidden w-full">
-      <Modal tip={tip} onClose={close} />
+    <DiagramRendererHost
+      className="rounded-sm bg-white overflow-hidden w-full"
+      closeOnPointerDown
+      tooltips={TOOLTIPS}
+    >
+      {({ toggle, close, shouldReduceMotion }) => (
+        <>
+          <div className="md:hidden p-4">
+            <ResponsiveStackLayout toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
+          </div>
 
-      <div className="md:hidden p-4">
-        <ResponsiveStackLayout toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
-      </div>
-
-      <DiagramShell
-        className="w-full"
-        onPointerDown={close}
-        desktop={{
-          baseWidth: VW,
-          baseHeight: VH,
-          viewportClassName: "hidden md:block",
-          render: ({ shouldReduceMotion: desktopReduceMotion }) => (
-            <DesktopFixedLayout toggle={toggle} shouldReduceMotion={desktopReduceMotion} />
-          ),
-        }}
-      />
-    </div>
+          <DiagramShell
+            className="w-full"
+            onPointerDown={close}
+            desktop={{
+              baseWidth: VW,
+              baseHeight: VH,
+              viewportClassName: "hidden md:block",
+              render: ({ shouldReduceMotion: desktopReduceMotion }) => (
+                <DesktopFixedLayout toggle={toggle} shouldReduceMotion={desktopReduceMotion} />
+              ),
+            }}
+          />
+        </>
+      )}
+    </DiagramRendererHost>
   );
 }
 
@@ -202,7 +205,7 @@ function ResponsiveStackLayout({
         <HeroCard
           className="w-full"
           {...MULESOFT_CARD}
-          pills={MULESOFT_PILLS.map(p => ({ label: p.label, onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle(p.key); } }))}
+          pills={BI_MULESOFT_PILLS.map(p => ({ label: p.label, onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle(p.key); } }))}
           onClick={() => toggle("mulesoft")}
         />
       </MobileReveal>
@@ -256,21 +259,7 @@ function DesktopFixedLayout({
       <ConnectorLayer />
       {shouldReduceMotion
         ? null
-        : ([
-            [CC_SAP_PATH,          "237,34,36"],
-            [SAP_CC_PATH,          "34,34,34"],
-            [DATALAKE_CC_PATH,     "34,34,34"],
-            [CC_DATALAKE_PATH,     "237,34,36"],
-            [BROWSER_AEM_PATH,     "68,122,203"],
-            [AEM_BROWSER_PATH,     "68,122,203"],
-            [CC_MULESOFT_PATH,     "237,34,36"],
-            [MULESOFT_CC_PATH,     "34,34,34"],
-            [AEM_DATALAKE_PATH,    "68,122,203"],
-            [DATALAKE_AEM_PATH,    "34,34,34"],
-            [SAP_MULESOFT_PATH,    "34,34,34"],
-            [MULESOFT_SAP_PATH,    "34,34,34"],
-            [MULESOFT_BROWSER_PATH,"34,34,34"],
-          ] as const).map(([path, color], i) => (
+        : BI_DESKTOP_PARTICLE_PATHS.map(([path, color], i) => (
             <ParticleCanvas key={i} paths={[path]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color={color} />
           ))}
 
@@ -286,7 +275,7 @@ function DesktopFixedLayout({
         <HeroCard
           className="w-[475px]"
           {...MULESOFT_CARD}
-          pills={MULESOFT_PILLS.map(p => ({ label: p.label, onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle(p.key); } }))}
+          pills={BI_MULESOFT_PILLS.map(p => ({ label: p.label, onClick: (e: React.MouseEvent) => { e.stopPropagation(); toggle(p.key); } }))}
           onClick={() => toggle("mulesoft")}
         />
       </motion.div>
