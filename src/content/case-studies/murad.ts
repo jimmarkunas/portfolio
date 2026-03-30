@@ -58,7 +58,6 @@ export const muradCaseStudy = {
       { label: "Avalara", icon: "/tool-icons/avalara-logo.png" },
       { label: "Yotpo", icon: "/tool-icons/yotpo-logo.png" },
     ],
-    http://localhost:3000/design-system
     quote: {
       quote:
         "I needed a PM who could save the day. After Murad changed agencies twice, and my PM walked off the job, I personally requested Jim.",

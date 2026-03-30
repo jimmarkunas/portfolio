@@ -49,9 +49,9 @@ export const fredericksCaseStudy = {
       { label: "Timeline", value: "2016 - 2018" },
     ],
     tools: [
-      { label: "Klaviyo", icon: "/tool-icons/klaviyo-logo.png" },
-      { label: "Domo", icon: "/tool-icons/domo-logo.png" },
-      { label: "Shopify Plus", icon: "/tool-icons/shopify-logo.png" },
+      { label: "Klaviyo", icon: "/tool-icons/svg/klaviyo-logo.svg" },
+      { label: "Domo", icon: "/tool-icons/svg/domo-logo.svg" },
+      { label: "Shopify Plus", icon: "/tool-icons/svg/shopify-logo.svg" },
     ],
     quote: {
       quote:
