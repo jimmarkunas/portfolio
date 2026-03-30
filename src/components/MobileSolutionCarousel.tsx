@@ -99,7 +99,7 @@ export function MobileSolutionCarousel({ slides }: MobileSolutionCarouselProps) 
           aria-label="Previous image"
           onClick={() => goTo(activeIndex - 1)}
           disabled={activeIndex === 0}
-          className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/92 text-[#222222] shadow-[0_10px_24px_rgba(34,34,34,0.18)] disabled:opacity-35"
+          className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/92 text-[#222222] shadow-[0_10px_24px_rgba(34,34,34,0.18)] disabled:cursor-default disabled:opacity-35"
         >
           <span className="text-[20px] leading-none">‹</span>
         </button>
@@ -109,7 +109,7 @@ export function MobileSolutionCarousel({ slides }: MobileSolutionCarouselProps) 
           aria-label="Next image"
           onClick={() => goTo(activeIndex + 1)}
           disabled={activeIndex === slides.length - 1}
-          className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/92 text-[#222222] shadow-[0_10px_24px_rgba(34,34,34,0.18)] disabled:opacity-35"
+          className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/92 text-[#222222] shadow-[0_10px_24px_rgba(34,34,34,0.18)] disabled:cursor-default disabled:opacity-35"
         >
           <span className="text-[20px] leading-none">›</span>
         </button>
@@ -122,7 +122,7 @@ export function MobileSolutionCarousel({ slides }: MobileSolutionCarouselProps) 
             type="button"
             aria-label={`Go to image ${index + 1}`}
             onClick={() => goTo(index)}
-            className={`h-2.5 rounded-full transition-all ${
+            className={`h-2.5 cursor-pointer rounded-full transition-all ${
               index === activeIndex ? "w-8 bg-[#222222]" : "w-2.5 bg-[#222222]/20"
             }`}
           />

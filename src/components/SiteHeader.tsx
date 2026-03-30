@@ -23,13 +23,13 @@ export function SiteHeader() {
         <div className="flex items-center justify-between gap-6">
           <Link
             href="/"
-            className="flex items-center justify-start gap-[10px] text-[20px] text-[#222222] md:text-[22px] lg:text-[24px]"
+            className="flex items-center justify-start gap-[10px] text-[20px] text-[#222222] transition-colors duration-150 hover:text-[#447ACB] md:text-[22px] lg:text-[24px]"
             onClick={() => setIsOpen(false)}
           >
             <span className="inline-flex items-baseline leading-none">
-              <FinoxGlyph className="h-[1.7em] w-[1.7em] shrink-0 text-black" />
+              <FinoxGlyph className="h-[1.7em] w-[1.7em] shrink-0 text-current" />
             </span>
-            <span className="text-[1.08em] font-bold leading-none tracking-normal">
+            <span className="font-display text-[1.15em] font-bold leading-none tracking-tight">
               Jim Markunas
             </span>
           </Link>

@@ -80,7 +80,7 @@ export function GlobalLocationsMap({ title, locations }: Props) {
       >
         <button
           onClick={handleReset}
-          className="flex items-center gap-1.5 rounded-lg bg-black/60 px-3 py-1.5 text-[12px] font-medium text-white/80 backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white whitespace-nowrap"
+          className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-black/60 px-3 py-1.5 text-[12px] font-medium text-white/80 backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white whitespace-nowrap"
         >
           <span>←</span> Overview
         </button>
@@ -99,7 +99,7 @@ export function GlobalLocationsMap({ title, locations }: Props) {
             key={label}
             onClick={fn}
             title={t}
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-black/50 text-[15px] text-white/60 backdrop-blur-sm transition-colors hover:bg-black/70 hover:text-white/90"
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-black/50 text-[15px] text-white/60 backdrop-blur-sm transition-colors hover:bg-black/70 hover:text-white/90"
           >
             {label}
           </button>

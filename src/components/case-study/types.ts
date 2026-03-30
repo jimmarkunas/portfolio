@@ -88,6 +88,10 @@ export type CaseStudyMedia =
       src: string
       aspectRatio: "16/9" | "9/16"
     }
+  | {
+      kind: "react-diagram"
+      component: "bi-data-silos"
+    }
 
 export type CaseStudyNarrative = {
   image?: string
@@ -179,7 +183,7 @@ export type CaseStudyData = {
       preQuoteImage?: string
       preQuoteHeading?: string
       preQuoteImageCaption?: string
-      preQuoteChart?: "directv-revenue"
+      preQuoteChart?: "directv-revenue" | "bi-data-silos"
     }
   }
   role: {

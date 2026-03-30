@@ -340,11 +340,11 @@ function BaseCard({
         dark
           ? [
               "outline-1 bg-[#202124] outline-[#202124] text-white",
-              onClick ? "hover:outline-2 hover:outline-blue-500 hover:shadow-[0_0_0_2px_rgba(68,122,203,0.15),0_8px_32px_rgba(68,122,203,0.35)]" : "",
+              onClick ? "cursor-pointer hover:outline-2 hover:outline-blue-500 hover:shadow-[0_0_0_2px_rgba(68,122,203,0.15),0_8px_32px_rgba(68,122,203,0.35)]" : "",
             ].join(" ")
           : [
               "outline-1 bg-white outline-[#D9DDE3] text-[#222222]",
-              onClick ? "hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]" : "",
+              onClick ? "cursor-pointer hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]" : "",
             ].join(" "),
       ].join(" ")}
       onClick={onClick}

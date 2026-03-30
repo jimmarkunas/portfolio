@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic"
 
 import { DirecTVRevenueChart } from "@/components/case-study/DirecTVRevenueChart"
+import BoehringerDataSilosDiagram from "@/components/case-study/BoehringerDataSilosDiagram"
 import MrsMeyersRetailVsDtcChart from "@/components/case-study/MrsMeyersRetailVsDtcChart"
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
 import type { CaseStudyData } from "@/components/case-study/types"
@@ -92,9 +93,13 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                   ) : (
                     <CaseStudyMediaFrame
                       media={data.problem.media}
-                      className={isFoh
-                        ? "rounded-[24px] lg:col-start-1 lg:row-start-3 xl:w-[620px]"
-                        : "lg:col-start-1 lg:row-start-3 lg:w-[620px] rounded-[24px]"}
+                      className={
+                        data.problem.media.kind === "react-diagram"
+                          ? "lg:col-start-1 lg:row-start-3 w-full"
+                          : isFoh
+                            ? "rounded-[24px] lg:col-start-1 lg:row-start-3 xl:w-[620px]"
+                            : "lg:col-start-1 lg:row-start-3 lg:w-[620px] rounded-[24px]"
+                      }
                       frameClassName="px-6 text-center md:px-8 lg:px-10"
                     />
                   )}
@@ -152,6 +157,8 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                   )}
                   {data.problem.quote.preQuoteChart === "directv-revenue" ? (
                     <DirecTVRevenueChart />
+                  ) : data.problem.quote.preQuoteChart === "bi-data-silos" ? (
+                    <BoehringerDataSilosDiagram />
                   ) : data.problem.quote.preQuoteImage ? (
                     <>
                       <img src={data.problem.quote.preQuoteImage} alt="" className="w-full" />

@@ -496,7 +496,7 @@ export default function ModereCommerceFlowDiagram({ className = "" }: { classNam
           <div className="mt-4 flex items-center justify-between px-1">
             <button
               type="button"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full"
+              className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full"
               style={{ background: COLORS.white, border: `1px solid ${COLORS.border}` }}
               onPointerDown={e => e.stopPropagation()}
               onClick={e => { e.stopPropagation(); navigate((activeStep - 1 + STEP_COUNT) % STEP_COUNT); }}
@@ -528,7 +528,7 @@ export default function ModereCommerceFlowDiagram({ className = "" }: { classNam
 
             <button
               type="button"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full"
+              className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full"
               style={{ background: COLORS.white, border: `1px solid ${COLORS.border}` }}
               onPointerDown={e => e.stopPropagation()}
               onClick={e => { e.stopPropagation(); navigate((activeStep + 1) % STEP_COUNT); }}

@@ -1,3 +1,4 @@
+import BoehringerDataSilosDiagram from "@/components/case-study/BoehringerDataSilosDiagram"
 import type { CaseStudyMedia } from "@/components/case-study/types"
 
 type CaseStudyMediaFrameProps = {
@@ -11,6 +12,14 @@ export function CaseStudyMediaFrame({
   className = "",
   frameClassName = "",
 }: CaseStudyMediaFrameProps) {
+  if (media.kind === "react-diagram") {
+    return (
+      <div className={`w-full overflow-hidden ${className}`.trim()}>
+        {media.component === "bi-data-silos" && <BoehringerDataSilosDiagram />}
+      </div>
+    )
+  }
+
   const aspectClassName = media.aspectRatio === "9/16" ? "aspect-[9/16]" : "aspect-video"
 
   if (media.kind === "youtube") {
