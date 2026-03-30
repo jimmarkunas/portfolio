@@ -67,6 +67,36 @@ export const BI_MULESOFT_PILLS = [
   { label: "API/HOOKS", key: "api-hooks" },
 ] as const
 
+export const BI_CONNECTOR_PATHS = [
+  "M 866 39 H 1240",
+  "M 1240 39 V 279",
+  "M 866 54 H 1225",
+  "M 1225 54 V 279",
+  "M 720 0 V 279",
+  "M 710 494 V 606",
+  "M 725 494 V 606",
+  "M 319 384 H 483",
+  "M 319 399 H 483",
+  "M 958 715 H 1115",
+  "M 958 730 H 1115",
+  "M 1240 506 V 677",
+  "M 1255 506 V 677",
+  "M 154 506 V 710",
+  "M 154 710 H 483",
+  "M 139 506 V 725 H 483",
+] as const
+
+export const BI_DESKTOP_NODE_POSITIONS = {
+  browser: { left: 501, top: 0 },
+  sap: { left: 1, top: 279 },
+  mulesoft: { left: 483, top: 279 },
+  aem: { left: 1045, top: 279 },
+  commerceCloud: { left: 483, top: 606 },
+  dataLake: { left: 1115, top: 677 },
+  paymentsTag: { left: 98, top: 591 },
+  taxTag: { left: 98, top: 699 },
+} as const
+
 export const BI_DESKTOP_PARTICLE_PATHS = [
   [CC_SAP_PATH, "237,34,36"],
   [SAP_CC_PATH, "34,34,34"],

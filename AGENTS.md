@@ -28,12 +28,14 @@
 ## Efficiency Guardrails
 - Fix one root cause at a time; avoid speculative stacked changes.
 - For single-bug fixes, touch at most 3 files per attempt unless approved.
-- Run the smallest valid check first (target route/component), then full build once.
+- Default local verification: `npm run verify:route -- /work/<slug>`.
+- Full build is pre-deploy only: `npm run verify:predeploy`.
 - Don’t repeat commands unless code/process state materially changed.
 - Respect `.aiignore` by default; use short log reads (`tail -n 40`).
 
 ## Conventions
 - Prefer design tokens/system styles before ad-hoc values.
 - Keep content in `src/content/`, not inside components.
+- Read `src/content/case-studies/case-study-map.ts` first for slug/file/diagram lookup.
 - Path alias: `@/*` -> `./src/*`; breakpoints: `md`, `lg`, `xl`.
 - Primary CTA copy remains `Book a Call`.

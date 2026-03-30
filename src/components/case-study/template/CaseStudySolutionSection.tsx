@@ -23,16 +23,11 @@ const SCJCommerceArchitecture = dynamic(
   () => import("@/components/case-study/SCJCommerceArchitecture"),
   { ssr: false }
 )
-const ModereCommerceFlowDiagram = dynamic(
-  () => import("@/components/case-study/ModereCommerceFlowDiagram"),
-  { ssr: false }
-)
 
 const solutionDiagramRegistry: Record<CaseStudySolutionDiagramKey, ComponentType> = {
   "murad-architecture": MuradArchitectureDiagram,
   "bi-commerce-ecosystem": BISystemDiagram,
   "scj-commerce-architecture": SCJCommerceArchitecture,
-  "modere-commerce-flow": ModereCommerceFlowDiagram,
 }
 
 export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {

@@ -13,6 +13,7 @@ import { fredericksCaseStudy } from "./fredericks"
 import { legoCaseStudy } from "./lego"
 import { americanapparelCaseStudy } from "./americanapparel"
 import { directveverywhereCaseStudy } from "./directveverywhere"
+export { caseStudyMap, caseStudySlugs } from "./case-study-map"
 
 export const caseStudyRegistry: Record<string, CaseStudyData> = {
   [cpsEnergyCaseStudy.slug]: cpsEnergyCaseStudy,

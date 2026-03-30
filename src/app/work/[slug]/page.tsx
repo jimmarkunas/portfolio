@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate"
+import { caseStudySlugs } from "@/content/case-studies/case-study-map"
 import { caseStudyRegistry } from "@/content/case-studies"
 
 type WorkPageParams = {
@@ -9,7 +10,7 @@ type WorkPageParams = {
 }
 
 export async function generateStaticParams(): Promise<WorkPageParams[]> {
-  return Object.keys(caseStudyRegistry).map((slug) => ({ slug }))
+  return caseStudySlugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({

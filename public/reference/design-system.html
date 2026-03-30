@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Design System Reference</title>
+    <link rel="stylesheet" href="/reference/design-system.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="section">
+        <div class="eyebrow">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          <span>Style Guide Reference</span>
+        </div>
+        <h1>Portfolio Design System</h1>
+        <p>
+          Static visual reference for color, typography, primitives, and breakpoints.
+          This file is intentionally outside Next app routes to reduce route/build noise.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Core Colors</h2>
+        <p>Neutral-first palette with blue reserved for interaction and emphasis.</p>
+        <div class="colors-grid">
+          <article class="swatch">
+            <div class="swatch-color" style="background:#222222;"></div>
+            <div class="swatch-meta"><p class="swatch-name">Ink</p><p class="swatch-value">#222222</p></div>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color" style="background:#4B5154;"></div>
+            <div class="swatch-meta"><p class="swatch-name">Secondary Dark</p><p class="swatch-value">#4B5154</p></div>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color" style="background:#7B7B7B;"></div>
+            <div class="swatch-meta"><p class="swatch-name">Muted</p><p class="swatch-value">#7B7B7B</p></div>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color" style="background:#FFFFFF;"></div>
+            <div class="swatch-meta"><p class="swatch-name">White</p><p class="swatch-value">#FFFFFF</p></div>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color" style="background:#FEFEFE;"></div>
+            <div class="swatch-meta"><p class="swatch-name">Soft White</p><p class="swatch-value">#FEFEFE</p></div>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color" style="background:#F3F3F3;"></div>
+            <div class="swatch-meta"><p class="swatch-name">Light Gray</p><p class="swatch-value">#F3F3F3</p></div>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color" style="background:#447ACB;"></div>
+            <div class="swatch-meta"><p class="swatch-name">Accent</p><p class="swatch-value">#447ACB</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Typography</h2>
+        <p>Representative samples from the current utility type scale.</p>
+        <div class="type-sample">
+          <div class="type-label">type-h1</div>
+          <div class="type-h1">Heading 01</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">type-h3</div>
+          <div class="type-h3">Heading 03</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">type-p2</div>
+          <div class="type-p2">Paragraph two for section intros and support copy.</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">type-p4</div>
+          <div class="type-p4">Paragraph four for navigation and standard UI.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Breakpoints</h2>
+        <p>Active responsive breakpoints used by the site.</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Label</th>
+              <th>Prefix</th>
+              <th>Min Width</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Base</td><td>default</td><td>0px</td><td>Phones and pre-breakpoint layouts.</td></tr>
+            <tr><td>SM</td><td>sm:</td><td>640px</td><td>Larger phones and small tablets.</td></tr>
+            <tr><td>MD</td><td>md:</td><td>768px</td><td>Tablet layout changes.</td></tr>
+            <tr><td>LG</td><td>lg:</td><td>1024px</td><td>Desktop layout changes.</td></tr>
+            <tr><td>XL</td><td>xl:</td><td>1280px</td><td>Large desktop spacing and grids.</td></tr>
+            <tr><td>2XL</td><td>2xl:</td><td>1536px</td><td>Very wide desktop screens.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2>Primitives</h2>
+        <p>Common chips and CTA treatments.</p>
+        <div class="tag-row">
+          <span class="chip">Default Chip</span>
+          <span class="chip dark">Dark Chip</span>
+          <span class="chip">Book a Call</span>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

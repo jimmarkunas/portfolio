@@ -7,6 +7,7 @@ import { TOOLTIPS } from "./biCommerceDiagramData";
 import { ProductsIcon, InventoryIcon, DatabaseIcon, ContentIcon, CampaignIcon, LaptopIcon } from "./bi-commerce-icons";
 import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
 import {
+  BI_DESKTOP_NODE_POSITIONS,
   BI_AEM_CARD,
   BI_DESKTOP_PARTICLE_PATHS,
   BI_MULESOFT_CARD,
@@ -15,12 +16,12 @@ import {
   type BiBadgeKey,
   type BiFeatureIconKey,
 } from "@/components/case-study/diagram-config/bi-commerce.config";
+import { BiConnectorLayer } from "@/components/case-study/diagram-shared/BiConnectorLayer";
 import {
   CONN_H,
   CONN_W,
   MOB_DOWN,
   MOB_UP,
-  TOKENS,
   VH,
   VW,
 } from "./bi-commerce-ecosystem.constants";
@@ -247,6 +248,7 @@ function DesktopFixedLayout({
   shouldReduceMotion: boolean
 }) {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const positions = BI_DESKTOP_NODE_POSITIONS;
   return (
     <motion.div
       ref={canvasContainerRef}
@@ -256,22 +258,22 @@ function DesktopFixedLayout({
       viewport={{ once: true, amount: 0.1 }}
       variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}
     >
-      <ConnectorLayer />
+      <BiConnectorLayer />
       {shouldReduceMotion
         ? null
         : BI_DESKTOP_PARTICLE_PATHS.map(([path, color], i) => (
             <ParticleCanvas key={i} paths={[path]} containerRef={canvasContainerRef as React.RefObject<HTMLElement>} color={color} />
           ))}
 
-      <motion.div className="absolute left-[501px] top-[0px] z-10" variants={cardVariants} transition={cardTransition}>
+      <motion.div className="absolute z-10" style={positions.browser} variants={cardVariants} transition={cardTransition}>
         <BrowserCard className="w-[475px]" onClick={() => toggle("shopper-browser")} onSdkClick={() => toggle("adobe-web-sdk")} />
       </motion.div>
 
-      <motion.div className="absolute left-[1px] top-[279px] z-10" variants={cardVariants} transition={cardTransition}>
+      <motion.div className="absolute z-10" style={positions.sap} variants={cardVariants} transition={cardTransition}>
         <SystemCard className="w-80" {...SAP_CARD} onClick={() => toggle("sap")} />
       </motion.div>
 
-      <motion.div className="absolute left-[483px] top-[279px] z-10" variants={cardVariants} transition={cardTransition}>
+      <motion.div className="absolute z-10" style={positions.mulesoft} variants={cardVariants} transition={cardTransition}>
         <HeroCard
           className="w-[475px]"
           {...MULESOFT_CARD}
@@ -280,59 +282,28 @@ function DesktopFixedLayout({
         />
       </motion.div>
 
-      <motion.div className="absolute left-[1045px] top-[279px] z-10" variants={cardVariants} transition={cardTransition}>
+      <motion.div className="absolute z-10" style={positions.aem} variants={cardVariants} transition={cardTransition}>
         <SystemCard className="w-[390px]" {...AEM_CARD} onClick={() => toggle("aem")} />
       </motion.div>
 
-      <motion.div className="absolute left-[483px] top-[606px] z-10" variants={cardVariants} transition={cardTransition}>
+      <motion.div className="absolute z-10" style={positions.commerceCloud} variants={cardVariants} transition={cardTransition}>
         <MarchingAntsBorder shouldReduceMotion={shouldReduceMotion}>
           <CommerceCard className="w-[475px]" onClick={() => toggle("commerce-cloud")} onGraphqlClick={() => toggle("adobe-graphql")} onPillsClick={() => toggle("commerce-services")} />
         </MarchingAntsBorder>
       </motion.div>
 
-      <motion.div className="absolute left-[1115px] top-[677px] z-10" variants={cardVariants} transition={cardTransition}>
+      <motion.div className="absolute z-10" style={positions.dataLake} variants={cardVariants} transition={cardTransition}>
         <DataLakeCard className="w-80" onClick={() => toggle("data-lake")} onConnectorClick={() => toggle("aem-connector")} />
       </motion.div>
 
-      <motion.div className="absolute left-[98px] top-[591px] z-10" variants={cardVariants} transition={cardTransition}>
+      <motion.div className="absolute z-10" style={positions.paymentsTag} variants={cardVariants} transition={cardTransition}>
         <BlueTag label="PAYMENTS" onClick={() => toggle("payments")} />
       </motion.div>
 
-      <motion.div className="absolute left-[98px] top-[699px] z-10" variants={cardVariants} transition={cardTransition}>
+      <motion.div className="absolute z-10" style={positions.taxTag} variants={cardVariants} transition={cardTransition}>
         <BlueTag label="TAX" onClick={() => toggle("tax")} />
       </motion.div>
     </motion.div>
-  );
-}
-
-function ConnectorLayer() {
-  return (
-    <svg
-      className="absolute inset-0 h-full w-full pointer-events-none"
-      viewBox="0 0 1440 875"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-
-      <path d="M 866 39 H 1240" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 1240 39 V 279" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 866 54 H 1225" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 1225 54 V 279" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 720 0 V 279" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 710 494 V 606" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 725 494 V 606" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 319 384 H 483" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 319 399 H 483" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 958 715 H 1115" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 958 730 H 1115" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 1240 506 V 677" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 1255 506 V 677" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 154 506 V 710" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 154 710 H 483" stroke={TOKENS.line} strokeWidth="2" />
-      <path d="M 139 506 V 725 H 483" stroke={TOKENS.line} strokeWidth="2" />
-
-    </svg>
   );
 }
 
