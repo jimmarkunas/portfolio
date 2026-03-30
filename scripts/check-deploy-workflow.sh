@@ -10,10 +10,19 @@ fi
 
 missing=0
 
+has_line() {
+  local needle="$1"
+  if command -v rg >/dev/null 2>&1; then
+    rg -q --fixed-strings "${needle}" "${workflow}"
+    return
+  fi
+  grep -Fq -- "${needle}" "${workflow}"
+}
+
 require_line() {
   local needle="$1"
   local description="$2"
-  if ! rg -q --fixed-strings "${needle}" "${workflow}"; then
+  if ! has_line "${needle}"; then
     echo "Missing deploy guardrail: ${description}" >&2
     missing=1
   fi
