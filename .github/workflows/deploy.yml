@@ -1,4 +1,4 @@
-name: Deploy to Hostinger
+name: Build and Publish Static Site
 
 on:
   push:
@@ -6,163 +6,64 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
-concurrency:
-  group: hostinger-production-deploy
-  cancel-in-progress: true
+permissions:
+  contents: write
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout source branch
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
-      - name: Check deploy workflow guardrails
-        run: bash scripts/check-deploy-workflow.sh
-
-      - name: Set up Node.js
+      - name: Set up Node
         uses: actions/setup-node@v6
         with:
           node-version: 20
-          cache: "npm"
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Verify pre-deploy build
-        run: npm run verify:predeploy
+      - name: Build static export
+        run: npm run build
 
-      - name: Add deploy marker
+      - name: Verify out folder exists
         run: |
-          printf "sha=%s\nutc=%s\nrun=%s\n" \
-            "${GITHUB_SHA}" \
-            "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
-            "${GITHUB_RUN_NUMBER}" > ./out/deploy-marker.txt
+          test -d out
+          test -f out/index.html
 
-      - name: Check build output
-        run: |
-          ls -la ./out/
-          find ./out/_next/static -maxdepth 3 -type f | head -n 40
-
-      - name: Upload static artifact
-        uses: actions/upload-artifact@v6
-        with:
-          name: site-out
-          path: out
-          if-no-files-found: error
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    env:
-      FTP_HOST: ${{ secrets.FTP_SERVER != '' && secrets.FTP_SERVER || 'ftp.peachpuff-monkey-623316.hostingersite.com' }}
-      FTP_CONNECT_TIMEOUT_SECONDS: "45"
-      FTP_TRANSFER_TIMEOUT_SECONDS: "300"
-      FTP_DEPLOY_ATTEMPTS: "3"
-      FTP_SSL_FORCE: "false"
-    steps:
-      - name: Download static artifact
-        uses: actions/download-artifact@v8
-        with:
-          name: site-out
-          path: ./out
-          merge-multiple: true
-
-      - name: Check downloaded artifact
-        run: |
-          if [ ! -d "./out" ]; then
-            echo "Missing ./out after artifact download."
-            find . -maxdepth 3 -type d | sort
-            exit 1
-          fi
-          ls -la ./out/
-          find ./out/_next/static -maxdepth 3 -type f | head -n 40
-
-      - name: Install lftp
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-
-      - name: Resolve remote deploy directory
-        id: deploy_target
-        env:
-          FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
+      - name: Publish out folder to hostinger-static branch
         run: |
           set -euo pipefail
 
-          if [ -n "${FTP_TARGET_DIR:-}" ]; then
-            target="${FTP_TARGET_DIR}"
-          else
-            target="./public_html/"
-          fi
+          SOURCE_SHA="${GITHUB_SHA}"
+          REPO_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
 
-          case "${target}" in
-            */) ;;
-            *) target="${target}/" ;;
-          esac
+          cd /tmp
+          rm -rf hostinger-static-deploy
+          git clone --branch hostinger-static "$REPO_URL" hostinger-static-deploy
+          cd hostinger-static-deploy
 
-          echo "Using deploy target: ${target}"
-          echo "target=${target}" >> "${GITHUB_OUTPUT}"
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 
-      - name: Deploy via FTP
-        timeout-minutes: 15
-        run: |
-          set -euo pipefail
+          cp -R "${GITHUB_WORKSPACE}/out/." .
 
-          for attempt in $(seq 1 "${FTP_DEPLOY_ATTEMPTS}"); do
-            echo "FTP deploy attempt ${attempt}/${FTP_DEPLOY_ATTEMPTS}"
-            if timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp -e "
-              set cmd:fail-exit true;
-              set net:timeout ${FTP_CONNECT_TIMEOUT_SECONDS};
-              set net:max-retries 2;
-              set net:reconnect-interval-base 5;
-              set ssl:verify-certificate false;
-              set ftp:ssl-force false;
-              set ftp:passive-mode true;
-              open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
-              pwd;
-              mirror --reverse --delete --continue --no-perms ./out/ ${{ steps.deploy_target.outputs.target }};
-              quit
-            "; then
-              echo "FTP deploy succeeded on attempt ${attempt}"
-              break
-            fi
+          printf "source_sha=%s\nbuilt_utc=%s\n" \
+            "$SOURCE_SHA" \
+            "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" > deploy-marker.txt
 
-            if [ "${attempt}" -eq "${FTP_DEPLOY_ATTEMPTS}" ]; then
-              echo "FTP deploy failed after ${FTP_DEPLOY_ATTEMPTS} attempts"
-              exit 1
-            fi
-
-            sleep "$((attempt * 15))"
-          done
-
-      - name: Post-deploy smoke check
-        env:
-          PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
-        run: |
-          set -euo pipefail
-
-          if [ -z "${PRODUCTION_URL:-}" ]; then
-            echo "Skipping smoke check: set PRODUCTION_URL secret to enable checks."
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No deploy changes to publish."
             exit 0
           fi
 
-          base_url="${PRODUCTION_URL%/}"
-          for path in "/" "/work/modere" "/deploy-marker.txt"; do
-            url="${base_url}${path}"
-            status="$(curl -L --max-time 20 --silent --show-error --output /tmp/smoke.txt --write-out "%{http_code}" "${url}" || true)"
-            if ! [[ "${status}" =~ ^[0-9]{3}$ ]]; then
-              echo "Smoke check failed: no HTTP status for ${url}"
-              exit 1
-            fi
-            if [ "${status}" -lt 200 ] || [ "${status}" -ge 400 ]; then
-              echo "Smoke check failed: ${url} returned ${status}"
-              head -n 20 /tmp/smoke.txt || true
-              exit 1
-            fi
-            echo "Smoke check passed: ${url} (${status})"
-          done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Deploy static site from ${SOURCE_SHA}"
+          git push origin hostinger-static
