@@ -253,13 +253,13 @@ export default function NylRbacWorkflow() {
         </motion.div>
 
         <motion.div
-          className="relative hidden flex-col overflow-hidden bg-[color:rgba(243,243,243,0.45)] px-8 pb-12 pt-12 sm:flex"
+          className="relative hidden flex-col overflow-hidden bg-[color:rgba(243,243,243,0.45)] px-8 pb-8 pt-8 md:pb-12 md:pt-12 sm:flex"
           variants={cardVariants}
           initial="hidden"
           animate={animate}
           transition={{ ...cardTransition, delay: 0.3 }}
         >
-          <div className="mb-12 flex items-center gap-3">
+          <div className="mb-8 flex items-center gap-3 md:mb-12">
             <div className="h-6 w-1.5 rounded-full bg-[var(--ink)]" />
             <h3 className="type-p4 font-bold uppercase text-[#222222]">
               System Architecture Flow

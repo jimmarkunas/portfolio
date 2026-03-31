@@ -211,6 +211,7 @@ export type CaseStudyData = {
     heroImage?: string
     diagram?: DiagramData
     diagramKey?: CaseStudySolutionDiagramKey
+    gallery?: string[]
   }
   supplementalNarrative: CaseStudyNarrative
   impact: {

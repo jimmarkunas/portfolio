@@ -4,6 +4,7 @@ import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { SectionShell } from "@/components/SectionShell"
 import { DeferredSolutionDiagramVisual } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
+import { DeferredNylCarousel } from "@/components/case-study/template/visuals/deferred/DeferredNylCarousel"
 
 export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
   const isModereSimulation = data.solution.diagramKey === "modere-simulation"
@@ -26,7 +27,7 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
           <DeferredSolutionDiagramVisual
             diagram={data.solution.diagram}
             diagramKey={data.solution.diagramKey}
-            className={isModereSimulation ? "mx-auto w-full max-w-[1440px]" : undefined}
+            className={isModereSimulation ? "mx-auto w-full max-w-[1440px]" : "w-full"}
             minHeightClassName={
               isModereSimulation
                 ? "min-h-[520px] md:min-h-[760px]"
@@ -38,6 +39,10 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
           <FullWidthImage src={data.solution.heroImage} fullWidth={false} />
         ) : (
           <BlogCardGrid cards={data.solution.cards ?? []} />
+        )}
+
+        {data.solution.gallery && data.solution.gallery.length > 0 && (
+          <DeferredNylCarousel images={data.solution.gallery} />
         )}
       </div>
     </SectionShell>

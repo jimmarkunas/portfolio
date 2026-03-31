@@ -100,6 +100,13 @@ export const newYorkLifeCaseStudy = {
     copy:
       "Multi-tenant CMS that gave agents more speed without losing central control. It baked governance and AI into the product, so sites stayed compliant and drove ROI.",
     diagramKey: "nyl-rbac-workflow",
+    gallery: [
+      "/newyorklife/modal-nyl-01.png",
+      "/newyorklife/modal-nyl-02.png",
+      "/newyorklife/modal-nyl-03.png",
+      "/newyorklife/modal-nyl-04.png",
+      "/newyorklife/modal-nyl-05.png",
+    ],
   },
   supplementalNarrative: {
     title: "Governance at Scale",
