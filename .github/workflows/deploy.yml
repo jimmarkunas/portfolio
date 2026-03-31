@@ -113,9 +113,19 @@ jobs:
         run: |
           set -euo pipefail
 
+          # Find the timestamp of the last deploy marker if it exists
+          DEPLOY_MARKER="./out/deploy-marker.txt"
+          if [ -f "$DEPLOY_MARKER" ]; then
+            DEPLOY_TIME=$(date -r "$DEPLOY_MARKER" +%Y%m%d%H%M.%S)
+            echo "Deploy marker timestamp: $DEPLOY_TIME"
+          else
+            DEPLOY_TIME="197001010000.00"
+            echo "No deploy marker found, deploying all files."
+          fi
+
           for attempt in 1 2 3; do
             echo "FTP deploy attempt ${attempt}/3"
-            if lftp -e "
+            if timeout 300s lftp -e "
               set cmd:fail-exit true;
               set net:timeout 20;
               set net:max-retries 2;
@@ -126,7 +136,7 @@ jobs:
               open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
               pwd;
               ls;
-              mirror --reverse --delete --verbose=1 ./out/ public_html/;
+              mirror --reverse --delete --verbose=1 --only-newer ./out/ public_html/;
               quit
             "; then
               echo "FTP deploy succeeded on attempt ${attempt}"

@@ -33,13 +33,6 @@
 - Don’t repeat commands unless code/process state materially changed.
 - Respect `.aiignore` by default; use short log reads (`tail -n 40`).
 
-## CI/CD Guardrails
-- Do not edit `.github/workflows/deploy.yml` without running `bash scripts/check-deploy-workflow.sh`.
-- Keep deploy artifact paths pinned (`out` upload, `./out` download) and do not change them casually.
-- Keep FTP deploy bounded: explicit timeout wrapper + bounded retries; no unbounded transfer loops.
-- Before pushing workflow/deploy changes, run `npm run verify:predeploy` once.
-- For a deploy failure, capture exact failing step first (`gh run view <run> --job <job> --log`) before patching.
-
 ## Conventions
 - Prefer design tokens/system styles before ad-hoc values.
 - Keep content in `src/content/`, not inside components.
