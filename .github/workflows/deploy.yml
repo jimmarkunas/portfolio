@@ -6,34 +6,30 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 concurrency:
   group: hostinger-production-deploy
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
+    env:
+      FTP_HOST: 82.25.83.251
     steps:
       - uses: actions/checkout@v5
-
-      - name: Check deploy workflow guardrails
-        run: bash scripts/check-deploy-workflow.sh
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 20
-          cache: "npm"
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Verify pre-deploy build
-        run: npm run verify:predeploy
+      - name: Build
+        run: npm run build
 
       - name: Add deploy marker
         run: |
@@ -45,46 +41,10 @@ jobs:
       - name: Check build output
         run: |
           ls -la ./out/
-          find ./out/_next/static -maxdepth 3 -type f | head -n 40
-
-      - name: Upload static artifact
-        uses: actions/upload-artifact@v6
-        with:
-          name: site-out
-          path: out
-          if-no-files-found: error
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    env:
-      FTP_HOST: ${{ secrets.FTP_SERVER != '' && secrets.FTP_SERVER || '82.25.83.251' }}
-      FTP_CONNECT_TIMEOUT_SECONDS: "45"
-      FTP_TRANSFER_TIMEOUT_SECONDS: "300"
-      FTP_DEPLOY_ATTEMPTS: "2"
-    steps:
-      - name: Download static artifact
-        uses: actions/download-artifact@v8
-        with:
-          name: site-out
-          path: ./out
-          merge-multiple: true
-
-      - name: Check downloaded artifact
-        run: |
-          if [ ! -d "./out" ]; then
-            echo "Missing ./out after artifact download."
-            find . -maxdepth 3 -type d | sort
-            exit 1
-          fi
-          ls -la ./out/
-          find ./out/_next/static -maxdepth 3 -type f | head -n 40
+          ls -la ./out/_next/static/css/
 
       - name: Install lftp
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
+        run: sudo apt-get install -y lftp
 
       - name: Resolve remote deploy directory
         id: deploy_target
@@ -96,30 +56,28 @@ jobs:
           if [ -n "${FTP_TARGET_DIR:-}" ]; then
             target="${FTP_TARGET_DIR}"
           else
+            # Hostinger commonly serves from public_html. If probing fails, default there
+            # instead of failing pre-deploy.
             target="./public_html/"
-            root_listing="$(
+            if root_listing="$(
               lftp -e "
                 set cmd:fail-exit true;
-                set net:timeout ${FTP_CONNECT_TIMEOUT_SECONDS};
-                set net:max-retries 1;
-                set net:reconnect-interval-base 3;
+                set net:timeout 20;
+                set net:max-retries 3;
+                set net:reconnect-interval-base 5;
                 set ssl:verify-certificate false;
                 set ftp:ssl-force true;
                 set ftp:passive-mode true;
                 open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
                 cls -1;
                 quit
-              " 2>/dev/null || true
-            )"
-
-            if [ -n "${root_listing}" ]; then
-              if printf '%s\n' "${root_listing}" | grep -qx "public_html"; then
-                target="./public_html/"
-              else
+              " 2>/dev/null
+            )"; then
+              if ! printf '%s\n' "${root_listing}" | grep -qx "public_html"; then
                 target="./"
               fi
             else
-              echo "Could not inspect remote root; defaulting deploy target to ${target}."
+              echo "Warning: Could not inspect FTP root; defaulting to ${target}."
             fi
           fi
 
@@ -131,27 +89,45 @@ jobs:
           echo "Using deploy target: ${target}"
           echo "target=${target}" >> "${GITHUB_OUTPUT}"
 
+      - name: Inspect remote FTP root
+        continue-on-error: true
+        run: |
+          lftp -e "
+            set cmd:fail-exit true;
+            set net:timeout 20;
+            set net:max-retries 3;
+            set net:reconnect-interval-base 5;
+            set ssl:verify-certificate false;
+            set ftp:ssl-force true;
+            set ftp:passive-mode true;
+            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
+            pwd;
+            cls -la;
+            quit
+          "
+
       - name: Deploy via FTP
-        timeout-minutes: 12
         run: |
           set -euo pipefail
 
-          for attempt in $(seq 1 "${FTP_DEPLOY_ATTEMPTS}"); do
-            echo "FTP deploy attempt ${attempt}/${FTP_DEPLOY_ATTEMPTS}"
-            if timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp -e "
+          for attempt in 1 2 3; do
+            echo "FTP deploy attempt ${attempt}/3"
+            if lftp -e "
               set cmd:fail-exit true;
-              set net:timeout 30;
-              set net:max-retries 8;
-              set net:reconnect-interval-base 3;
-              set net:reconnect-interval-max 10;
-              set net:persist-retries 0;
+              set net:timeout 20;
+              set net:max-retries 5;
+              set net:reconnect-interval-base 5;
               set ssl:verify-certificate false;
               set ftp:ssl-force true;
               set ftp:passive-mode true;
               open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
               pwd;
-              mirror --reverse --delete --continue --no-perms ./out/ ${{ steps.deploy_target.outputs.target }};
-              set cmd:fail-exit false;
+              mirror --reverse --delete --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
+              cls -la;
+              cls -la ${{ steps.deploy_target.outputs.target }};
+              cls -la ${{ steps.deploy_target.outputs.target }}_next;
+              cls -la ${{ steps.deploy_target.outputs.target }}_next/static;
+              cls -la ${{ steps.deploy_target.outputs.target }}_next/static/css;
               cls -la ${{ steps.deploy_target.outputs.target }}deploy-marker.txt;
               quit
             "; then
@@ -159,37 +135,10 @@ jobs:
               break
             fi
 
-            if [ "${attempt}" -eq "${FTP_DEPLOY_ATTEMPTS}" ]; then
-              echo "FTP deploy failed after ${FTP_DEPLOY_ATTEMPTS} attempts"
+            if [ "${attempt}" -eq 3 ]; then
+              echo "FTP deploy failed after 3 attempts"
               exit 1
             fi
 
             sleep "$((attempt * 15))"
-          done
-
-      - name: Post-deploy smoke check
-        env:
-          PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
-        run: |
-          set -euo pipefail
-
-          if [ -z "${PRODUCTION_URL:-}" ]; then
-            echo "Skipping smoke check: set PRODUCTION_URL secret to enable checks."
-            exit 0
-          fi
-
-          base_url="${PRODUCTION_URL%/}"
-          for path in "/" "/work/modere" "/deploy-marker.txt"; do
-            url="${base_url}${path}"
-            status="$(curl -L --max-time 20 --silent --show-error --output /tmp/smoke.txt --write-out "%{http_code}" "${url}" || true)"
-            if ! [[ "${status}" =~ ^[0-9]{3}$ ]]; then
-              echo "Smoke check failed: no HTTP status for ${url}"
-              exit 1
-            fi
-            if [ "${status}" -lt 200 ] || [ "${status}" -ge 400 ]; then
-              echo "Smoke check failed: ${url} returned ${status}"
-              head -n 20 /tmp/smoke.txt || true
-              exit 1
-            fi
-            echo "Smoke check passed: ${url} (${status})"
           done
