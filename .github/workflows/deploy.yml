@@ -113,31 +113,28 @@ jobs:
         run: |
           set -euo pipefail
 
-          for attempt in $(seq 1 "${FTP_DEPLOY_ATTEMPTS}"); do
-            echo "FTP deploy attempt ${attempt}/${FTP_DEPLOY_ATTEMPTS}"
-            if timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp -e "
+          for attempt in 1 2 3; do
+            echo "FTP deploy attempt ${attempt}/3"
+            if lftp -e "
               set cmd:fail-exit true;
-              set net:timeout ${FTP_CONNECT_TIMEOUT_SECONDS};
+              set net:timeout 20;
               set net:max-retries 2;
               set net:reconnect-interval-base 5;
-              set net:reconnect-interval-max 15;
-              set net:persist-retries 0;
               set ssl:verify-certificate false;
-              set ftp:ssl-force ${FTP_SSL_FORCE};
+              set ftp:ssl-force false;
               set ftp:passive-mode true;
               open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
               pwd;
-              mirror --reverse --delete --continue --no-perms ./out/ ${{ steps.deploy_target.outputs.target }};
-              set cmd:fail-exit false;
-              cls -la ${{ steps.deploy_target.outputs.target }}deploy-marker.txt;
+              ls;
+              mirror --reverse --delete --verbose=1 ./out/ public_html/;
               quit
             "; then
               echo "FTP deploy succeeded on attempt ${attempt}"
               break
             fi
 
-            if [ "${attempt}" -eq "${FTP_DEPLOY_ATTEMPTS}" ]; then
-              echo "FTP deploy failed after ${FTP_DEPLOY_ATTEMPTS} attempts"
+            if [ "${attempt}" -eq 3 ]; then
+              echo "FTP deploy failed after 3 attempts"
               exit 1
             fi
 
