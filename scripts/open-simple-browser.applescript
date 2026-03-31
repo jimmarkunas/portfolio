@@ -7,7 +7,7 @@ tell application "System Events"
 	delay 0.6
 	key code 36
 	delay 0.6
-	keystroke "http://localhost:3000/design-system"
+	keystroke "http://localhost:3000/"
 	delay 0.3
 	key code 36
 end tell

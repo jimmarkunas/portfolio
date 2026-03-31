@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-workflow=".github/workflows/deploy.yml"
+workflow=".github/workflows/deploy-static.yml"
 
 if [ ! -f "${workflow}" ]; then
   echo "Missing workflow file: ${workflow}" >&2
@@ -13,7 +13,7 @@ missing=0
 has_line() {
   local needle="$1"
   if command -v rg >/dev/null 2>&1; then
-    rg -q --fixed-strings "${needle}" "${workflow}"
+    rg -q --fixed-strings -- "${needle}" "${workflow}"
     return
   fi
   grep -Fq -- "${needle}" "${workflow}"
@@ -28,21 +28,30 @@ require_line() {
   fi
 }
 
-require_line "FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true" "Node 24 JavaScript action runtime pin"
-require_line "uses: actions/upload-artifact@v6" "Node-24-native upload-artifact version pin"
-require_line "uses: actions/download-artifact@v8" "Node-24-native download-artifact version pin"
-require_line "path: ./out" "artifact download path pinned to ./out"
-require_line "merge-multiple: true" "artifact merge mode pinned for out directory layout"
-require_line "if [ ! -d \"./out\" ]; then" "artifact existence check before deploy"
-require_line 'FTP_HOST: ${{ secrets.FTP_SERVER' "FTP host must come from FTP_SERVER secret with fallback"
-require_line "FTP_CONNECT_TIMEOUT_SECONDS:" "FTP connect timeout env guardrail"
-require_line "FTP_TRANSFER_TIMEOUT_SECONDS:" "FTP transfer timeout env guardrail"
-require_line "FTP_DEPLOY_ATTEMPTS:" "FTP retry-attempt env guardrail"
-require_line 'timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp -e' "FTP transfer hard timeout wrapper"
-require_line 'for attempt in $(seq 1 "${FTP_DEPLOY_ATTEMPTS}"); do' "FTP bounded retry loop"
-require_line "mirror --reverse --delete --continue --no-perms ./out/" "mirror deploy command with timestamp-based freshness"
+require_line "branches:" "main branch trigger section present"
+require_line "- main" "deploy trigger pinned to main"
+require_line "workflow_dispatch:" "manual deploy trigger available"
+require_line 'DEPLOY_BRANCH="hostinger-static"' "deploy branch pinned to hostinger-static"
+require_line "test -d out" "out directory existence check"
+require_line "test -f out/index.html" "out/index.html existence check"
+require_line 'cp -R "${GITHUB_WORKSPACE}/out/." "${TMP_DIR}/"' "publish copies only static out output"
 
-if [ "${missing}" -ne 0 ]; then
+forbidden=0
+
+forbidden_line() {
+  local needle="$1"
+  local description="$2"
+  if has_line "${needle}"; then
+    echo "Forbidden deploy content found: ${description}" >&2
+    forbidden=1
+  fi
+}
+
+forbidden_line "FTP_" "FTP environment variables"
+forbidden_line "lftp" "FTP transfer command"
+forbidden_line "mirror --reverse" "FTP mirror command"
+
+if [ "${missing}" -ne 0 ] || [ "${forbidden}" -ne 0 ]; then
   exit 1
 fi
 

@@ -3,7 +3,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-APP_URL="http://localhost:3000/design-system"
+APP_URL="http://localhost:3000/"
 PORT=3000
 
 is_healthy() {

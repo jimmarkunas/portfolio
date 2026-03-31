@@ -41,22 +41,17 @@ jobs:
         run: |
           set -euo pipefail
 
+          DEPLOY_BRANCH="hostinger-static"
           SOURCE_SHA="${GITHUB_SHA}"
           REPO_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          TMP_DIR="$(mktemp -d)"
 
-          cd /tmp
-          rm -rf hostinger-static-deploy
-          git clone --branch hostinger-static "$REPO_URL" hostinger-static-deploy
-          cd hostinger-static-deploy
+          git clone --branch "${DEPLOY_BRANCH}" "${REPO_URL}" "${TMP_DIR}"
 
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          find "${TMP_DIR}" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -R "${GITHUB_WORKSPACE}/out/." "${TMP_DIR}/"
 
-          cp -R "${GITHUB_WORKSPACE}/out/." .
-
-          printf "source_sha=%s\nbuilt_utc=%s\n" \
-            "$SOURCE_SHA" \
-            "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" > deploy-marker.txt
-
+          cd "${TMP_DIR}"
           git add -A
           if git diff --cached --quiet; then
             echo "No deploy changes to publish."
@@ -66,4 +61,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Deploy static site from ${SOURCE_SHA}"
-          git push origin hostinger-static
+          git push origin "${DEPLOY_BRANCH}"
