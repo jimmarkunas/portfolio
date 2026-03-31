@@ -16,6 +16,7 @@ export function DeferredNylCarousel({ images }: Props) {
       componentProps={{ images }}
       minHeightClassName="min-h-[240px] md:min-h-[400px]"
       loadingLabel="Loading gallery..."
+      eager
     />
   )
 }

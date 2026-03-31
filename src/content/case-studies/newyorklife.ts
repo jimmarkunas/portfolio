@@ -17,7 +17,7 @@ export const newYorkLifeCaseStudy = {
       href: "/cv",
     },
     image: {
-      src: "/newyorklife/hero-nyl-01.png",
+      src: "/newyorklife/hero-nyl-02.png",
       alt: "New York Life product platform hero image showing governed agent site experiences",
     },
   },
