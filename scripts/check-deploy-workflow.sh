@@ -34,6 +34,7 @@ require_line "uses: actions/download-artifact@v8" "Node-24-native download-artif
 require_line "path: ./out" "artifact download path pinned to ./out"
 require_line "merge-multiple: true" "artifact merge mode pinned for out directory layout"
 require_line "if [ ! -d \"./out\" ]; then" "artifact existence check before deploy"
+require_line 'FTP_HOST: ${{ secrets.FTP_SERVER' "FTP host must come from FTP_SERVER secret with fallback"
 require_line "FTP_CONNECT_TIMEOUT_SECONDS:" "FTP connect timeout env guardrail"
 require_line "FTP_TRANSFER_TIMEOUT_SECONDS:" "FTP transfer timeout env guardrail"
 require_line "FTP_DEPLOY_ATTEMPTS:" "FTP retry-attempt env guardrail"

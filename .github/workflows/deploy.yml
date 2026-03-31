@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      FTP_HOST: 82.25.83.251
+      FTP_HOST: ${{ secrets.FTP_SERVER != '' && secrets.FTP_SERVER || '82.25.83.251' }}
       FTP_CONNECT_TIMEOUT_SECONDS: "45"
       FTP_TRANSFER_TIMEOUT_SECONDS: "300"
       FTP_DEPLOY_ATTEMPTS: "2"
@@ -95,6 +95,9 @@ jobs:
 
           if [ -n "${FTP_TARGET_DIR:-}" ]; then
             target="${FTP_TARGET_DIR}"
+          elif [[ "${FTP_HOST}" == *.hostingersite.com ]]; then
+            target="./"
+            echo "Hostinger subdomain FTP host detected; defaulting deploy target to ${target}."
           else
             target="./public_html/"
             echo "FTP_TARGET_DIR secret not set; defaulting to ${target}."
