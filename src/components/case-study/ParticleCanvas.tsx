@@ -8,6 +8,8 @@ interface ParticleCanvasProps {
   paths: Path[]
   containerRef: React.RefObject<HTMLElement>
   color?: string // RGB string e.g. "68,122,203"
+  speedMultiplier?: number
+  particlesPerPath?: number
 }
 
 const TRAIL_LENGTH = 8
@@ -37,17 +39,17 @@ function pointOnPath(path: Path, t: number): Point {
   }
 }
 
-function createParticle(pathIndex: number): Particle {
+function createParticle(pathIndex: number, speedMultiplier: number): Particle {
   return {
     pathIndex,
     t: Math.random(),
-    speed: 0.001058 + Math.random() * 0.001587,
+    speed: (0.001058 + Math.random() * 0.001587) * speedMultiplier,
     radius: 2.0 + Math.random() * 1.8,
     trail: [],
   }
 }
 
-export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_COLOR }: ParticleCanvasProps) {
+export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_COLOR, speedMultiplier = 1, particlesPerPath = 3 }: ParticleCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
   const rafRef = useRef<number>(0)
@@ -61,11 +63,9 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
     if (!ctx) return
 
     // 3 particles per path
-    particlesRef.current = paths.flatMap((_, i) => [
-      createParticle(i),
-      createParticle(i),
-      createParticle(i),
-    ])
+    particlesRef.current = paths.flatMap((_, i) =>
+      Array.from({ length: particlesPerPath }, () => createParticle(i, speedMultiplier))
+    )
 
     function resize() {
       if (!canvas || !container) return

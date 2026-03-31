@@ -64,13 +64,14 @@ export type CaseStudySolutionDiagramKey =
   | "bi-commerce-ecosystem"
   | "scj-commerce-architecture"
   | "modere-simulation"
+  | "nyl-rbac-workflow"
 
 export type CaseStudyProblemChart = {
   key: "retail-vs-dtc"
   brandName?: string
 }
 
-export type CaseStudyPreQuoteChartKey = "directv-revenue" | "bi-data-silos"
+export type CaseStudyPreQuoteChartKey = "directv-revenue" | "bi-data-silos" | "nyl-velocity-chart"
 
 export type CaseStudyMedia =
   | {
@@ -97,7 +98,7 @@ export type CaseStudyMedia =
     }
   | {
       kind: "react-diagram"
-      component: "bi-data-silos"
+      component: "bi-data-silos" | "nyl-velocity-chart"
     }
 
 export type CaseStudyNarrative = {
@@ -107,6 +108,7 @@ export type CaseStudyNarrative = {
   highlights?: string[]
   closing?: string
   closingImage?: string
+  gallery?: string[]
 }
 
 export type DiagramInputNode = {
@@ -206,7 +208,7 @@ export type CaseStudyData = {
     eyebrow: string
     title: string
     copy: string
-    cards: CaseStudyBlogCard[]
+    cards?: CaseStudyBlogCard[]
     heroImage?: string
     diagram?: DiagramData
     diagramKey?: CaseStudySolutionDiagramKey

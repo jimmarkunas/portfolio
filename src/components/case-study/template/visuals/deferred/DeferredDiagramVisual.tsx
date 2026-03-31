@@ -20,6 +20,7 @@ const SOLUTION_DIAGRAM_LOADERS: Record<
   "bi-commerce-ecosystem": () => import("@/components/case-study/bi-commerce-ecosystem-diagram"),
   "scj-commerce-architecture": () => import("@/components/case-study/SCJCommerceArchitecture"),
   "modere-simulation": () => import("@/components/case-study/modere-simulation/ModereSimulation"),
+  "nyl-rbac-workflow": () => import("@/components/case-study/NylRbacWorkflow"),
 }
 
 const HEADLESS_COMMERCE_LOADER = () => import("@/app/diagrams/headless_commerce_react")

@@ -4,9 +4,9 @@ export const newYorkLifeCaseStudy = {
   slug: "newyorklife",
   breadcrumbCurrent: "New York Life",
   hero: {
-    title: "I Turned New York Life's Compliance Bottleneck Into a Scalable Product Platform",
+    title: "New York Life's Scalable Product Platform",
     intro:
-      "New York Life needed more than a better CMS. It needed a way to stop legal and brand risk from leaking across thousands of agent sites without slowing the business to a crawl. I helped turn that manual, compliance-heavy mess into a governed multi-tenant platform that cut launch times from months to weeks, shrank review cycles from weeks to days, and drove a ~200% lift in leads and appointments.",
+      "Legal exposure, brand drift, and a brutal review process were dragging across thousands of agent sites. I helped turn that mess into a governed multi-tenant platform that cut launches from months to weeks, reduced review cycles from weeks to days, and drove roughly 200% more leads and appointments.",
     primaryCta: {
       label: "Book a Call",
       href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
@@ -25,110 +25,87 @@ export const newYorkLifeCaseStudy = {
     eyebrow: "At-a-Glance",
     title: "Governance That Performed",
     copy:
-      "I was brought in to help New York Life modernize how thousands of agent sites were launched, governed, and monetized. The result was not just a safer content system, it was a reusable product platform that improved speed, consistency, compliance, and commercial performance at enterprise scale.",
+      "I was brought in to modernize how thousands of New York Life agent sites were launched, governed, and monetized. The result was a reusable product platform that made the business faster, more consistent, more compliant, and easier to scale.",
     stats: [
-      { value: "$10", suffix: "M", label: "program budget" },
-      { value: "12,000", suffix: "+", label: "sites governed" },
-      { value: "200", suffix: "%", label: "lead uplift" },
-      { value: "6 mo", suffix: " → 2–4 wk", label: "site launch reduction" },
+      { value: "$10", suffix: "M", label: "Program Budget" },
+      { value: "12,000", suffix: "+", label: "Sites Governed" },
+      { value: "200", suffix: "%", label: "Lead Uplift" },
+      { value: "6m-2w", suffix: "", label: "Site Launch Reduction" },
     ],
   },
   problem: {
     eyebrow: "Problem Statement",
-    title: "Too Many Sites, Too Much Risk",
+    title: "Too Many Sites, Too Risky",
     media: {
-      kind: "image",
-      src: "/newyorklife/hero-nyl-02.png",
-      alt: "New York Life product launch workflow and governed site ecosystem",
-      aspectRatio: "16/9",
+      kind: "react-diagram",
+      component: "nyl-velocity-chart",
     },
     overview:
       "Before this platform, each agent website behaved like its own project. Local vendors, inconsistent branding, manual compliance checks, and no single source of truth made every update slow, expensive, and risky. New York Life needed a way to support 12,000+ agent sites without letting speed create legal exposure or brand chaos.",
     projectOverviewRows: [
-      { label: "Client", value: "New York Life" },
+      { label: "Client & Agency", value: "New York Life & Fusion92" },
       { label: "Industry", value: "Insurance • Enterprise SaaS • Compliance" },
-      { label: "Timeline", value: "March 2024 to November 2024" },
+      { label: "Timeline", value: "March 2024 - November 2024" },
     ],
     tools: [
-      { label: "Azure IDP/SSO", icon: "/tool-icons/msazure-logo.png" },
-      { label: "Mulesoft", icon: "/tool-icons/mulesoft-logo.png" },
-      { label: "Google My Business", icon: "/tool-icons/google-mb-logo.png" },
-      { label: "Adobe Experience Manager", icon: "/tool-icons/adobexm-logo.png" },
-      { label: "Salesforce", icon: "/tool-icons/salesforce-logo.png" },
+      { label: "Azure IDP/SSO", icon: "/tool-icons/svg/azure-logo.svg" },
+      { label: "Mulesoft", icon: "/tool-icons/svg/mulesoft-logo.svg" },
+      { label: "Google My Business", icon: "/tool-icons/svg/google-my-business-logo.svg" },
+      { label: "Adobe Experience Manager", icon: "/tool-icons/svg/adobe-experience-manager-logo.svg" },
+      { label: "Salesforce", icon: "/tool-icons/svg/salesforce-logo.svg" },
     ],
     quote: {
       quote:
-        "What I've consistently observed is this: The greatest challenge isn't technology, it's people and process.",
+        "Our greatest challenge isn't technology, it's people and process.",
+      avatarSrc: "/newyorklife/don-vu.jpeg",
       attributionTitle: "Don Vu",
       attributionSubtitle: "CDAO, New York Life",
     },
   },
   role: {
     eyebrow: "My Role",
-    title: "Product Manager and Program Manager",
+    title: "Product Manager & Program Manager",
     copy:
-      "I owned the product logic that made this more than a one-off client build. I translated a compliance-heavy enterprise problem into a governed, multi-tenant platform, aligned stakeholders around the right operating model, and helped shape the system that later became Fusion92's COREcms product.",
+      "I owned the product logic that turned this from a one-off build into a governed multi-tenant platform. I translated the compliance problem into a reusable model and helped shape what later became Fusion92’s COREcms product.",
     tags: [
       "Product Strategy",
       "Platform Design",
-      "Compliance Workflow",
+      "High Trust",
       "Enterprise Governance",
     ],
     stats: [
-      { value: "6", suffix: "", label: "system integrations" },
-      { value: "$10", suffix: "M", label: "program budget" },
-      { value: "10", suffix: "", label: "team size" },
-      { value: "9", suffix: " mo", label: "program timeline" },
+      { value: "6", suffix: "", label: "System Integrations" },
+      { value: "$10", suffix: "M", label: "Program Budget" },
+      { value: "10", suffix: "", label: "Team Size" },
+      { value: "9", suffix: " mo", label: "Program Timeline" },
     ],
     narrative: {
-      title: "I Turned a Client Build Into a Platform",
+      title: "Wix For Highly Regulated Enterprises",
       paragraphs: [
-        "When I stepped in, New York Life's content operation was too manual to scale and too risky to trust. Site launches could take up to six months, compliance reviews dragged on for weeks, and every local update created another chance for legal or reputational damage. The business needed to move faster, but nobody was going to accept speed without tighter control.",
-        "I designed the multi-tenant product logic, the permission model, and the workflow structure that made that trade-off possible. I translated the vision into backlog, specs, epics, and stories, led the trade-off conversations across digital and compliance, and made sure the platform worked as both a New York Life solution and a reusable product architecture for future regulated clients.",
+        "New York Life’s content operation was too manual to scale and too risky to trust. Launches took up to six months, compliance reviews dragged on for weeks, and every local update created legal and reputational risk. The business needed speed, but only with tighter control.",
+        "I designed the multi-tenant logic, permissions, and workflow that made speed and control work together. I turned the vision into execution and made sure the platform worked for New York Life and as a reusable model for future regulated clients.",
       ],
       highlights: [
-        "Defined the multi-tenant model that later became COREcms's reusable product foundation.",
+        "Defined the multi-tenant model that later became CORECMS's reusable product foundation.",
         "Built the permission and compliance workflow that matched New York Life's actual operating structure.",
         "Led backlog, workshops, demos, and steering conversations across home office and digital stakeholders.",
       ],
       closing:
-        "This is the kind of work I am best at — turning bureaucracy and risk into a product system that actually performs.",
+        "I turned bureaucracy and risk into a product system that performed.",
     },
   },
   solution: {
     eyebrow: "Solution",
     title: "One Platform, Tight Guardrails",
     copy:
-      "I helped shape a multi-tenant enterprise CMS that let agents move faster while keeping home office control where it belonged. The product combined simple site creation, built-in governance, centralized content systems, and enterprise integrations so every site could look polished, stay compliant, and drive measurable business value.",
-    cards: [
-      {
-        category: "Governed Site Creation",
-        readTime: "Template-Driven Builder",
-        title:
-          "Non-technical teams could create and update pages through a template-driven builder without direct code access, while the underlying system kept the experience controlled and reusable.",
-        art: "olive",
-      },
-      {
-        category: "Compliance Workflow Engine",
-        readTime: "Review Status Logic",
-        title:
-          "Built-in status tracking and review gates ensured no page went live without the right checkpoints, replacing manual ambiguity with clear accountability.",
-        art: "olive",
-      },
-      {
-        category: "Data and Growth Layer",
-        readTime: "Enterprise Integrations",
-        title:
-          "Integrations like Azure IDP/SSO, Mulesoft, Adobe Experience Manager, Salesforce, Google My Business, and Calendly turned every site into a governed growth asset instead of a disconnected brochure.",
-        art: "olive",
-      },
-    ],
+      "Multi-tenant CMS that gave agents more speed without losing central control. It baked governance and AI into the product, so sites stayed compliant and drove ROI.",
+    diagramKey: "nyl-rbac-workflow",
   },
   supplementalNarrative: {
-    title: "The Hard Part Was Governance at Scale",
+    title: "Governance at Scale",
     paragraphs: [
-      "The technology mattered, but the real challenge was operational. New York Life needed a platform that mirrored how the business actually worked — back office creation, agent requests, home office review, and centralized publishing — without forcing people into brittle workarounds.",
-      "Once those roles, permissions, and workflows were structured correctly, the platform stopped behaving like a pile of pages and started behaving like an enterprise system. Compliance got visibility, agents got speed, and the brand stopped fragmenting at the edges.",
+      "The technology mattered, but the real challenge was operational. New York Life needed a platform that matched the way the business actually worked, from agent requests to home office review and centralized publishing, without brittle workarounds.",
+      "Once the roles, permissions, and workflows were locked in, the platform stopped behaving like disconnected pages and started behaving like a real system. Compliance got visibility, agents got speed, and the brand stopped breaking at the edges.",
     ],
     highlights: [
       "Built for 12,000+ governed sites, not a handful of marketing pages.",
@@ -136,41 +113,46 @@ export const newYorkLifeCaseStudy = {
     ],
     closing:
       "What looked like a CMS on the surface was really a governance product with commercial upside.",
+    gallery: [
+      "/newyorklife/modal-nyl-01.png",
+      "/newyorklife/modal-nyl-02.png",
+      "/newyorklife/modal-nyl-03.png",
+      "/newyorklife/modal-nyl-04.png",
+      "/newyorklife/modal-nyl-05.png",
+    ],
   },
   impact: {
     eyebrow: "Impact",
-    title: "Speed, Safety, and Commercial Lift",
+    title: "Speed + Safety + Commercial Lift",
     intro:
-      "This work mattered because it proved that tighter governance did not have to slow the business down. Once the platform had the right product logic underneath it, New York Life could move faster, reduce risk, and drive better lead performance across a massive agent network.",
+      "With the right product logic, New York Life moved faster, reduced risk, and improved lead performance across its agent network.",
     proofPoints: ["Compliance", "Speed", "Commercial Performance"],
     stats: [
-      { value: "200", suffix: "%", label: "lead uplift" },
-      { value: "12,000", suffix: "+", label: "sites governed" },
-      { value: "~3×", suffix: "", label: "digital revenue growth" },
-      { value: "6 mo", suffix: " → 2–4 wk", label: "site launch reduction" },
+      { value: "200", suffix: "%", label: "Lead Uplift" },
+      { value: "12,000", suffix: "+", label: "Sites Launched" },
+      { value: "3×", suffix: "", label: "Digital Revenue Growth" },
+      { value: "6m - 2w", suffix: "", label: "Site Launch Time Reduction" },
     ],
     beforeAfter: {
       title: "Before & After",
       summary:
-        "New York Life moved from fragmented, high-risk, manual site management to a centralized, governed model that improved speed, consistency, risk control, and commercial performance.",
+        "New York Life moved from high-risk, manual site management to a centralized, governed model that improved commercial performance.",
       columns: [
         {
           label: "Before",
-          title: "Manual, Slow, and Exposed",
+          title: "Manual, Slow & Exposed",
           points: [
-            "Site launches could take up to six months.",
-            "Compliance reviews were manual and could take about three weeks.",
-            "No global visibility into what was live across agent sites.",
-            "Brand inconsistency created legal and reputational risk.",
+            "Site launches & compliance reviews took up to 6 months.",
+            "No global visibility into live agent sites.",
+            "Brand inconsistency created legal & reputational risk.",
           ],
         },
         {
           label: "After",
-          title: "Governed, Faster, and Stronger",
+          title: "Governed, Faster & Stronger",
           points: [
-            "New site launches dropped to roughly 2 to 4 weeks.",
-            "Compliance turnaround dropped to 1 to 3 days.",
-            "12,000+ sites could be governed centrally.",
+            "Compliance turnaround dropped to 1-3 days.",
+            "12,000+ sites launched + cebtrally governed.",
             "Lead and appointment activity improved by ~200%.",
           ],
         },
@@ -202,40 +184,40 @@ export const newYorkLifeCaseStudy = {
     title: "Delivery Phases",
     introTitle: "How I Made the Machine Work",
     introCopy:
-      "This project required more than backlog management. I had to balance enterprise bureaucracy, compliance sensitivity, platform design, and commercial upside, while keeping stakeholders aligned around a product they could trust.",
+      "It took more than backlog management: I had to hold together bureaucracy, compliance risk, platform design, and ROI without letting NYL lose trust in the product.",
     phases: [
       {
         phase: "Phase 01",
         title: "Diagnose",
-        copy: "Mapped the legal, brand, and workflow risks hiding inside a fragmented content operation.",
+        copy: "Mapped legal, brand & workflow risks inside a fragmented content operation.",
         ringClass: "border-[#D39D23]",
         labelClass: "text-[#D39D23]",
       },
       {
         phase: "Phase 02",
         title: "Align",
-        copy: "Got home office, digital, and compliance stakeholders moving toward one governed operating model.",
+        copy: "Aligned home office, digital, and compliance stakeholders.",
         ringClass: "border-[#5E7FB7]",
         labelClass: "text-[#5E7FB7]",
       },
       {
         phase: "Phase 03",
         title: "Design",
-        copy: "Defined the multi-tenant platform logic, permission model, and workflow states.",
+        copy: "Defined multi-tenant platform logic, permission model & workflows.",
         ringClass: "border-[#1A9E9A]",
         labelClass: "text-[#1A9E9A]",
       },
       {
         phase: "Phase 04",
         title: "Build",
-        copy: "Connected enterprise systems and translated product decisions into concrete backlog and delivery work.",
+        copy: "Connected enterprise systems & translated product decisions to delivery.",
         ringClass: "border-[#1A9E9A]",
         labelClass: "text-[#1A9E9A]",
       },
       {
         phase: "Phase 05",
         title: "Launch",
-        copy: "Proved the model at scale through faster launches, tighter compliance, and stronger lead performance.",
+        copy: "Proved model at scale through fast launches & stronger lead gen.",
         ringClass: "border-[#3E7BE0]",
         labelClass: "text-[#3E7BE0]",
       },
@@ -243,15 +225,16 @@ export const newYorkLifeCaseStudy = {
   },
   challengeQuote: {
     quote:
-      "To ensure that we deliver experiences that exceed your expectations, we are constantly evolving and modernizing. We are investing more than $1 billion in service, technology, data and AI, and we are continuously supporting and empowering our agents and advisors to serve your full spectrum of needs.",
+      "We're investing $1 billion in service, technology, data and AI, to support & empower our agents and advisors to serve (our customers') full spectrum of needs.",
     attributionTitle: "Craig DeSanto",
     attributionSubtitle: "Chair, President & CEO, New York Life Insurance Company",
+    avatarSrc: "/newyorklife/craig-desanto.png",
   },
   recognition: {
     eyebrow: "Recognition",
-    title: "Press and Strategic Context",
+    title: "Press & Accolades",
     intro:
-      "This project sat inside a larger New York Life modernization push around technology, data, AI, and agent enablement. The strongest external proof is not a trophy, it is the fact that the operating logic behind this platform lines up with how New York Life publicly described its modernization strategy and how Fusion92 later marketed COREcms as an enterprise product.",
+      "This project sat inside a larger New York Life modernization push around technology, data, AI, and agent enablement. The strongest external proof is the operating logic behind this platform lines up with how New York Life publicly described its modernization strategy.",
     rows: [
       {
         company: "New York Life and AWS: Building a Modern Foundation for Data and AI",

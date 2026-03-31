@@ -50,10 +50,10 @@ export const legoCaseStudy = {
       { label: "Timeline", value: "Jun 2015 - Jun 2016" },
     ],
     tools: [
-      { label: "Oracle ATG", icon: "/tool-icons/oracle-logo.png" },
-      { label: "SAP ERP", icon: "/tool-icons/sap-logo.png" },
-      { label: "JIRA", icon: "/tool-icons/jira-logo.png" },
-      { label: "Figma", icon: "/tool-icons/figma.svg" },
+      { label: "Oracle ATG", icon: "/tool-icons/svg/oracle-logo.svg" },
+      { label: "SAP ERP", icon: "/tool-icons/svg/sap-logo.svg" },
+      { label: "JIRA", icon: "/tool-icons/svg/atlassian-logo.svg" },
+      { label: "Figma", icon: "/tool-icons/svg/figma-logo.svg" },
     ],
     quote: {
       quote:

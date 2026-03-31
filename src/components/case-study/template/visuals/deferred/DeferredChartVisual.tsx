@@ -24,6 +24,7 @@ const PREQUOTE_CHART_LOADERS: Record<
       default: module.DirecTVRevenueChart,
     })),
   "bi-data-silos": () => import("@/components/case-study/BoehringerDataSilosDiagram"),
+  "nyl-velocity-chart": () => import("@/components/case-study/NylVelocityChart"),
 }
 
 type DeferredProblemChartVisualProps = SharedVisualProps & {

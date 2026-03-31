@@ -1,5 +1,7 @@
 import { CaseStudyChallengeQuoteSection } from "@/components/case-study/template/CaseStudyChallengeQuoteSection"
 import { CaseStudyDeliverySection } from "@/components/case-study/template/CaseStudyDeliverySection"
+import { DeferredNylRevenueChart } from "@/components/case-study/template/visuals/deferred/DeferredNylRevenueChart"
+import { SectionShell } from "@/components/SectionShell"
 import { CaseStudyHeroSection } from "@/components/case-study/template/CaseStudyHeroSection"
 import { CaseStudyImpactSection } from "@/components/case-study/template/CaseStudyImpactSection"
 import { CaseStudyIntroSection } from "@/components/case-study/template/CaseStudyIntroSection"
@@ -10,6 +12,7 @@ import type { CaseStudyData } from "@/components/case-study/types"
 
 export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
   const isFoh = data.slug === "foh"
+  const isNyl = data.slug === "newyorklife"
 
   return (
     <main className="min-h-full overflow-x-hidden bg-[#F3F3F3] text-[#222222]">
@@ -18,6 +21,11 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
       <CaseStudySolutionSection data={data} />
       <CaseStudySupplementalSection data={data} />
       <CaseStudyImpactSection data={data} />
+      {isNyl && (
+        <SectionShell containerClassName="pt-2 pb-10 md:pt-3 md:pb-12 lg:pt-3 lg:pb-14">
+          <DeferredNylRevenueChart />
+        </SectionShell>
+      )}
       <CaseStudyDeliverySection data={data} />
       <CaseStudyChallengeQuoteSection data={data} />
 

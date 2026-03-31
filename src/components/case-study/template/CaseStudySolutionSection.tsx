@@ -37,7 +37,7 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
         ) : data.solution.heroImage ? (
           <FullWidthImage src={data.solution.heroImage} fullWidth={false} />
         ) : (
-          <BlogCardGrid cards={data.solution.cards} />
+          <BlogCardGrid cards={data.solution.cards ?? []} />
         )}
       </div>
     </SectionShell>

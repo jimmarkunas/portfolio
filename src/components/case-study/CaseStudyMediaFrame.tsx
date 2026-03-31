@@ -1,5 +1,6 @@
 import type { CaseStudyMedia } from "@/components/case-study/types"
 import { DeferredMediaReactDiagram } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
+import { DeferredNylVelocityChart } from "@/components/case-study/template/visuals/deferred/DeferredNylVelocityChart"
 
 type CaseStudyMediaFrameProps = {
   media: CaseStudyMedia
@@ -22,6 +23,9 @@ export function CaseStudyMediaFrame({
             minHeightClassName="min-h-[320px] md:min-h-[360px]"
             loadingLabel="Loading diagram..."
           />
+        )}
+        {media.component === "nyl-velocity-chart" && (
+          <DeferredNylVelocityChart />
         )}
       </div>
     )
