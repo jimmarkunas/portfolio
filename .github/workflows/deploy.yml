@@ -95,12 +95,32 @@ jobs:
 
           if [ -n "${FTP_TARGET_DIR:-}" ]; then
             target="${FTP_TARGET_DIR}"
-          elif [[ "${FTP_HOST}" == *.hostingersite.com ]]; then
-            target="./"
-            echo "Hostinger subdomain FTP host detected; defaulting deploy target to ${target}."
           else
             target="./public_html/"
-            echo "FTP_TARGET_DIR secret not set; defaulting to ${target}."
+            root_listing="$(
+              lftp -e "
+                set cmd:fail-exit true;
+                set net:timeout ${FTP_CONNECT_TIMEOUT_SECONDS};
+                set net:max-retries 1;
+                set net:reconnect-interval-base 3;
+                set ssl:verify-certificate false;
+                set ftp:ssl-force true;
+                set ftp:passive-mode true;
+                open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
+                cls -1;
+                quit
+              " 2>/dev/null || true
+            )"
+
+            if [ -n "${root_listing}" ]; then
+              if printf '%s\n' "${root_listing}" | grep -qx "public_html"; then
+                target="./public_html/"
+              else
+                target="./"
+              fi
+            else
+              echo "Could not inspect remote root; defaulting deploy target to ${target}."
+            fi
           fi
 
           case "${target}" in
