@@ -15,7 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      FTP_HOST: 82.25.83.251
+      FTP_HOST: ftp.peachpuff-monkey-623316.hostingersite.com
+      FTP_TARGET_DIR: public_html/
     steps:
       - uses: actions/checkout@v5
 
@@ -33,7 +34,7 @@ jobs:
 
       - name: Add deploy marker
         run: |
-          printf "sha=%s\nutc=%s\nrun=%s\n" \
+          printf "sha=%s\\nutc=%s\\nrun=%s\\n" \
             "${GITHUB_SHA}" \
             "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
             "${GITHUB_RUN_NUMBER}" > ./out/deploy-marker.txt
@@ -44,67 +45,7 @@ jobs:
           ls -la ./out/_next/static/css/
 
       - name: Install lftp
-        run: sudo apt-get install -y lftp
-
-      - name: Resolve remote deploy directory
-        id: deploy_target
-        env:
-          FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
-        run: |
-          set -euo pipefail
-
-          if [ -n "${FTP_TARGET_DIR:-}" ]; then
-            target="${FTP_TARGET_DIR}"
-          else
-            # Hostinger commonly serves from public_html. If probing fails, default there
-            # instead of failing pre-deploy.
-            target="./public_html/"
-            if root_listing="$(
-              lftp -e "
-                set cmd:fail-exit true;
-                set net:timeout 20;
-                set net:max-retries 3;
-                set net:reconnect-interval-base 5;
-                set ssl:verify-certificate false;
-                set ftp:ssl-force true;
-                set ftp:passive-mode true;
-                open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
-                cls -1;
-                quit
-              " 2>/dev/null
-            )"; then
-              if ! printf '%s\n' "${root_listing}" | grep -qx "public_html"; then
-                target="./"
-              fi
-            else
-              echo "Warning: Could not inspect FTP root; defaulting to ${target}."
-            fi
-          fi
-
-          case "${target}" in
-            */) ;;
-            *) target="${target}/" ;;
-          esac
-
-          echo "Using deploy target: ${target}"
-          echo "target=${target}" >> "${GITHUB_OUTPUT}"
-
-      - name: Inspect remote FTP root
-        continue-on-error: true
-        run: |
-          lftp -e "
-            set cmd:fail-exit true;
-            set net:timeout 20;
-            set net:max-retries 3;
-            set net:reconnect-interval-base 5;
-            set ssl:verify-certificate false;
-            set ftp:ssl-force true;
-            set ftp:passive-mode true;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
-            pwd;
-            cls -la;
-            quit
-          "
+        run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Deploy via FTP
         run: |
@@ -121,14 +62,7 @@ jobs:
               set ftp:ssl-force true;
               set ftp:passive-mode true;
               open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
-              pwd;
-              mirror --reverse --delete --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
-              cls -la;
-              cls -la ${{ steps.deploy_target.outputs.target }};
-              cls -la ${{ steps.deploy_target.outputs.target }}_next;
-              cls -la ${{ steps.deploy_target.outputs.target }}_next/static;
-              cls -la ${{ steps.deploy_target.outputs.target }}_next/static/css;
-              cls -la ${{ steps.deploy_target.outputs.target }}deploy-marker.txt;
+              mirror --reverse --delete --verbose ./out/ ${FTP_TARGET_DIR};
               quit
             "; then
               echo "FTP deploy succeeded on attempt ${attempt}"
