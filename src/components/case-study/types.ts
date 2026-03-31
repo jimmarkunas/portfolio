@@ -108,7 +108,6 @@ export type CaseStudyNarrative = {
   highlights?: string[]
   closing?: string
   closingImage?: string
-  gallery?: string[]
 }
 
 export type DiagramInputNode = {

@@ -113,13 +113,6 @@ export const newYorkLifeCaseStudy = {
     ],
     closing:
       "What looked like a CMS on the surface was really a governance product with commercial upside.",
-    gallery: [
-      "/newyorklife/modal-nyl-01.png",
-      "/newyorklife/modal-nyl-02.png",
-      "/newyorklife/modal-nyl-03.png",
-      "/newyorklife/modal-nyl-04.png",
-      "/newyorklife/modal-nyl-05.png",
-    ],
   },
   impact: {
     eyebrow: "Impact",

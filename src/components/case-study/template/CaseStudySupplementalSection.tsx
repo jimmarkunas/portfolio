@@ -1,8 +1,6 @@
 import type { CaseStudyData } from "@/components/case-study/types"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { SectionShell } from "@/components/SectionShell"
-import { DeferredNylCarousel } from "@/components/case-study/template/visuals/deferred/DeferredNylCarousel"
-
 export function CaseStudySupplementalSection({ data }: { data: CaseStudyData }) {
   return (
     <SectionShell surface="white" containerClassName="pt-0 pb-10 md:pb-12 lg:pb-14">
@@ -35,10 +33,6 @@ export function CaseStudySupplementalSection({ data }: { data: CaseStudyData }) 
 
         {data.supplementalNarrative.closingImage && (
           <FullWidthImage src={data.supplementalNarrative.closingImage} fullWidth={false} />
-        )}
-
-        {data.supplementalNarrative.gallery && data.supplementalNarrative.gallery.length > 0 && (
-          <DeferredNylCarousel images={data.supplementalNarrative.gallery} />
         )}
       </div>
     </SectionShell>
