@@ -39,7 +39,7 @@ require_line "FTP_TRANSFER_TIMEOUT_SECONDS:" "FTP transfer timeout env guardrail
 require_line "FTP_DEPLOY_ATTEMPTS:" "FTP retry-attempt env guardrail"
 require_line 'timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp -e' "FTP transfer hard timeout wrapper"
 require_line 'for attempt in $(seq 1 "${FTP_DEPLOY_ATTEMPTS}"); do' "FTP bounded retry loop"
-require_line "mirror --reverse --delete --continue --ignore-time --no-perms ./out/" "incremental mirror deploy command"
+require_line "mirror --reverse --delete --continue --no-perms ./out/" "mirror deploy command with timestamp-based freshness"
 
 if [ "${missing}" -ne 0 ]; then
   exit 1

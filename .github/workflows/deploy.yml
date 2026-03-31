@@ -127,7 +127,7 @@ jobs:
               set ftp:passive-mode true;
               open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
               pwd;
-              mirror --reverse --delete --continue --ignore-time --no-perms ./out/ ${{ steps.deploy_target.outputs.target }};
+              mirror --reverse --delete --continue --no-perms ./out/ ${{ steps.deploy_target.outputs.target }};
               set cmd:fail-exit false;
               cls -la ${{ steps.deploy_target.outputs.target }}deploy-marker.txt;
               quit
