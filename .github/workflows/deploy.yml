@@ -48,7 +48,7 @@ jobs:
           find ./out/_next/static -maxdepth 3 -type f | head -n 40
 
       - name: Upload static artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: site-out
           path: out
@@ -65,7 +65,7 @@ jobs:
       FTP_DEPLOY_ATTEMPTS: "2"
     steps:
       - name: Download static artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: site-out
           path: ./out
@@ -127,9 +127,8 @@ jobs:
               set ftp:passive-mode true;
               open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${FTP_HOST};
               pwd;
-              mirror --reverse --delete --continue --verbose ./out/ ${{ steps.deploy_target.outputs.target }};
+              mirror --reverse --delete --continue --ignore-time --no-perms ./out/ ${{ steps.deploy_target.outputs.target }};
               set cmd:fail-exit false;
-              cls -la ${{ steps.deploy_target.outputs.target }};
               cls -la ${{ steps.deploy_target.outputs.target }}deploy-marker.txt;
               quit
             "; then

@@ -29,6 +29,8 @@ require_line() {
 }
 
 require_line "FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true" "Node 24 JavaScript action runtime pin"
+require_line "uses: actions/upload-artifact@v6" "Node-24-native upload-artifact version pin"
+require_line "uses: actions/download-artifact@v8" "Node-24-native download-artifact version pin"
 require_line "path: ./out" "artifact download path pinned to ./out"
 require_line "merge-multiple: true" "artifact merge mode pinned for out directory layout"
 require_line "if [ ! -d \"./out\" ]; then" "artifact existence check before deploy"
@@ -37,7 +39,7 @@ require_line "FTP_TRANSFER_TIMEOUT_SECONDS:" "FTP transfer timeout env guardrail
 require_line "FTP_DEPLOY_ATTEMPTS:" "FTP retry-attempt env guardrail"
 require_line 'timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp -e' "FTP transfer hard timeout wrapper"
 require_line 'for attempt in $(seq 1 "${FTP_DEPLOY_ATTEMPTS}"); do' "FTP bounded retry loop"
-require_line "mirror --reverse --delete --continue --verbose ./out/" "incremental mirror deploy command"
+require_line "mirror --reverse --delete --continue --ignore-time --no-perms ./out/" "incremental mirror deploy command"
 
 if [ "${missing}" -ne 0 ]; then
   exit 1
