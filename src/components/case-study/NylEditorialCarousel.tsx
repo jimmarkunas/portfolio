@@ -36,8 +36,6 @@ export default function NylEditorialCarousel({ images }: Props) {
         />
       </AnimatePresence>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/50 pointer-events-none" />
 
       {/* Left sidebar */}
       <div className="absolute left-0 top-0 bottom-0 flex flex-col items-center justify-center w-10 md:w-14 gap-3">
