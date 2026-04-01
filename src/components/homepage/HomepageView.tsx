@@ -36,14 +36,26 @@ export default function Homepage() {
   const [selectedFilter, setSelectedFilter] = useState(insightFilters[0])
   const [selectedSort, setSelectedSort] = useState(insightSortOptions[0])
   const [openMobileSheet, setOpenMobileSheet] = useState<"filter" | "sort" | null>(null)
+  const heroTextLeft = "clamp(98px, 12vw, 177px)"
+  const heroStatPlusLeft = `calc(${heroTextLeft} + 7px)`
+  const heroStatNumberLeft = `calc(${heroTextLeft} + 28px)`
+  const heroStatLabelLeft = `calc(${heroTextLeft} + 26px)`
+  const heroSecondStatPlusLeft = `calc(${heroTextLeft} + 183px)`
+  const heroSecondStatNumberLeft = `calc(${heroTextLeft} + 204px)`
+  const heroSecondStatLabelLeft = `calc(${heroTextLeft} + 204px)`
 
   return (
     <main className="min-h-full bg-[#F3F3F3]">
       <section className="w-full bg-[#F3F3F3]">
         <Container className="bg-[#F3F3F3] px-0 md:px-0 lg:px-0">
-          <div className="bg-[#F3F3F3] px-6 pb-10 pt-8 md:px-10 md:pb-12 md:pt-10 lg:hidden">
+          <div className="bg-[#F3F3F3] px-6 pb-10 pt-8 md:hidden">
             <div className="mx-auto max-w-[440px]">
-              <div className="flex justify-center">
+              <div className="mt-10 text-center md:mt-12">
+                <div className="type-display-hero text-[#222222]">{hero.title}</div>
+                <div className="type-ui-lg mt-4 text-[#222222]">{hero.subtitle}</div>
+              </div>
+
+              <div className="mt-8 flex justify-center">
                 <img
                   src="/jim/hero-jim-01-cutout.png"
                   alt=""
@@ -56,11 +68,6 @@ export default function Homepage() {
                 <div className="type-ui-sm">{hero.role}</div>
                 <div className="h-px w-16 shrink-0 bg-[#222222]" />
                 <div className="type-ui-sm">{hero.year}</div>
-              </div>
-
-              <div className="mt-10 text-center md:mt-12">
-                <div className="type-display-hero text-[#222222]">{hero.title}</div>
-                <div className="type-ui-lg mt-4 text-[#222222]">{hero.subtitle}</div>
               </div>
 
               <div className="mt-8 grid grid-cols-2 gap-6 sm:gap-8">
@@ -82,44 +89,45 @@ export default function Homepage() {
                 </div>
               </div>
 
-              <div className="type-ui-md mt-8 text-center text-[#222222] md:mt-12">
-                {hero.scroll}
-              </div>
             </div>
           </div>
 
-          <div
-            className="relative hidden overflow-hidden bg-[#F3F3F3] lg:block"
-            style={{ height: "938px" }}
-          >
-            <img
-              src="/jim/hero-jim-01-cutout.png"
-              alt=""
-              aria-hidden="true"
-              className="absolute bottom-0 z-0 w-auto max-w-none"
-              style={{ right: "-36px", height: "760px" }}
-            />
+          <div className="relative hidden h-[938px] overflow-hidden bg-[#F3F3F3] md:block">
+            <div className="absolute inset-x-0 top-0 h-full md:h-[calc(100%+80px)] md:-translate-y-20 lg:h-full lg:translate-y-0">
+              <img
+                src="/jim/hero-jim-01-cutout.png"
+                alt=""
+                aria-hidden="true"
+                className="absolute bottom-0 right-[-140px] z-0 h-[760px] w-auto max-w-none md:right-[-300px] lg:right-[-140px] xl:right-[-36px]"
+              />
 
             <div
               className="type-display-hero absolute z-10 text-[#222222]"
-              style={{ left: "177px", top: "367px" }}
+              style={{ left: heroTextLeft, top: "367px" }}
             >
               {hero.title}
             </div>
 
             <div
               className="type-ui-lg absolute z-10 text-[#222222]"
-              style={{ left: "177px", top: "612px" }}
+              style={{ left: heroTextLeft, top: "612px" }}
             >
               {hero.subtitle}
             </div>
 
-            <div
-              className="type-ui-md absolute z-10 text-[#222222]"
-              style={{ left: "177px", top: "860px" }}
-            >
-              {hero.scroll}
-            </div>
+              <div
+                className="type-ui-md absolute bottom-8 z-10 text-[#222222] xl:hidden"
+                style={{ left: heroTextLeft }}
+              >
+                {hero.scroll}
+              </div>
+
+              <div
+                className="type-ui-md absolute z-10 hidden text-[#222222] xl:block"
+                style={{ left: heroTextLeft, top: "860px" }}
+              >
+                {hero.scroll}
+              </div>
 
             <div
               className="absolute z-10"
@@ -175,40 +183,41 @@ export default function Homepage() {
 
             <div
               className="type-stat-plus absolute z-10 text-black"
-              style={{ left: "184px", top: "208px" }}
+              style={{ left: heroStatPlusLeft, top: "208px" }}
             >
               +
             </div>
             <div
               className="type-stat-number absolute z-10 text-[#404040]"
-              style={{ left: "205px", top: "204px" }}
+              style={{ left: heroStatNumberLeft, top: "204px" }}
             >
               {hero.projectCompletedValue}
             </div>
             <div
               className="type-ui-sm absolute z-10 text-[#78716C]"
-              style={{ left: "203px", top: "261px" }}
+              style={{ left: heroStatLabelLeft, top: "261px" }}
             >
               {hero.projectCompletedLabel}
             </div>
 
             <div
               className="type-stat-plus absolute z-10 text-black"
-              style={{ left: "360px", top: "208px" }}
+              style={{ left: heroSecondStatPlusLeft, top: "208px" }}
             >
               +
             </div>
             <div
               className="type-stat-number absolute z-10 text-[#404040]"
-              style={{ left: "381px", top: "204px" }}
+              style={{ left: heroSecondStatNumberLeft, top: "204px" }}
             >
               {hero.startupRaisedValue}
             </div>
-            <div
-              className="type-ui-sm absolute z-10 text-[#78716C]"
-              style={{ left: "381px", top: "261px" }}
-            >
-              {hero.startupRaisedLabel}
+              <div
+                className="type-ui-sm absolute z-10 text-[#78716C]"
+                style={{ left: heroSecondStatLabelLeft, top: "261px" }}
+              >
+                {hero.startupRaisedLabel}
+              </div>
             </div>
           </div>
         </Container>
@@ -217,19 +226,49 @@ export default function Homepage() {
       {/* Trust bar — replace placeholder divs with <img src="/logos/name.svg" alt="Name" className="h-8 w-auto" /> when ready */}
       <section className="w-full bg-[#F3F3F3]">
         <Container className="px-0 md:px-0 lg:px-0">
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-2 md:grid-cols-4">
           {[
-            { src: "/company-logos/svg/disney-logo.svg",           alt: "Disney" },
-            { src: "/company-logos/svg/hbo-logo.svg",              alt: "HBO" },
-            { src: "/company-logos/svg/directv-logo.svg",          alt: "DirecTV" },
-            { src: "/company-logos/svg/shopify-logo.svg",          alt: "Shopify" },
-            { src: "/company-logos/svg/bcg-logo.svg",              alt: "BCG" },
-            { src: "/company-logos/svg/publicis-sapient-logo.svg", alt: "Publicis Sapient" },
-            { src: "/company-logos/svg/bc-logo.svg",               alt: "Boston Consulting" },
-            { src: "/company-logos/svg/aa-logo.svg",               alt: "American Airlines" },
+            {
+              src: "/company-logos/svg/disney-logo.svg",
+              alt: "Disney",
+              scaleClass: "scale-110 md:scale-115 lg:scale-125",
+            },
+            { src: "/company-logos/svg/hbo-logo.svg", alt: "HBO", scaleClass: "scale-100" },
+            { src: "/company-logos/svg/directv-logo.svg", alt: "DirecTV", scaleClass: "scale-100" },
+            {
+              src: "/company-logos/svg/shopify-logo.svg",
+              alt: "Shopify",
+              scaleClass: "scale-110 md:scale-115 lg:scale-125",
+            },
+            {
+              src: "/company-logos/svg/bcg-logo.svg",
+              alt: "BCG",
+              scaleClass: "scale-110 md:scale-115 lg:scale-125",
+            },
+            {
+              src: "/company-logos/svg/publicis-sapient-logo.svg",
+              alt: "Publicis Sapient",
+              scaleClass: "scale-110 md:scale-115 lg:scale-125",
+            },
+            {
+              src: "/company-logos/svg/bc-logo.svg",
+              alt: "Boston Consulting",
+              scaleClass: "scale-110 md:scale-115 lg:scale-125",
+            },
+            {
+              src: "/company-logos/svg/aa-logo.svg",
+              alt: "American Airlines",
+              scaleClass: "scale-110 md:scale-115 lg:scale-125",
+            },
           ].map((logo) => (
-            <div key={logo.alt} className="flex items-center justify-center py-14 px-10">
-              <img src={logo.src} alt={logo.alt} width={160} height={40} />
+            <div key={logo.alt} className="flex items-center justify-center px-4 py-10 md:px-6 md:py-12 lg:px-10 lg:py-14">
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                width={180}
+                height={48}
+                className={`h-auto w-full max-w-[130px] md:max-w-[150px] lg:max-w-[170px] ${logo.scaleClass}`}
+              />
             </div>
           ))}
         </div>
@@ -239,7 +278,7 @@ export default function Homepage() {
       <section className="w-full bg-[#FFFFFF]">
         <Container className="py-14 md:py-16 lg:py-[60px]">
           <div className="flex flex-col items-center gap-12">
-            <div className="flex max-w-[674px] flex-col items-center gap-3">
+            <div className="flex w-full flex-col items-center gap-3">
               <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
                 <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
                 <span className="type-p2 text-[#222222]">{sections.experiencesPill}</span>

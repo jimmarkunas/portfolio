@@ -12,7 +12,7 @@ const fallbackHomepageText = {
   },
   sections: {
     experiencesPill: "Experiences",
-    experiencesTitle: "Why you will work with me",
+    experiencesTitle: "Technical Delivery Leadership",
     experiencesDescription:
       "Every design decision I make is backed by strategy, research, and a commitment to delivering real value. I turn complex challenges into clean, delightful user experiences",
     awardsPill: "Experiences",

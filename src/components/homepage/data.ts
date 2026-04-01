@@ -81,7 +81,7 @@ export const repeatedHighlightProjects = Array.from({ length: 4 }, (_, rowIndex)
   })),
 ).flat()
 
-export const desktopHeroLogoAxisX = 42
+export const desktopHeroLogoAxisX = 18
 export const desktopHeroRailLabelX = 42
 export const desktopHeroRailLineX = desktopHeroRailLabelX + 9
 export const desktopHeroYearLabelX = desktopHeroRailLineX + 9
