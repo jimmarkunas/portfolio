@@ -1,3 +1,5 @@
+import Homepage from "@/components/homepage/HomepageView"
+
 export default function HomePage() {
-  return <main className="min-h-screen bg-white" />
+  return <Homepage />
 }

@@ -19,6 +19,7 @@ import {
   insightSortOptions,
   repeatedHighlightProjects,
 } from "./data"
+import { getHomepageText } from "./homepage"
 import {
   AwardRow,
   ClientCard,
@@ -30,7 +31,8 @@ import {
   SectionPill,
 } from "./ui"
 
-export default function HomepageTestPage() {
+export default function Homepage() {
+  const { hero, sections, stats, testimonial } = getHomepageText()
   const [selectedFilter, setSelectedFilter] = useState(insightFilters[0])
   const [selectedSort, setSelectedSort] = useState(insightSortOptions[0])
   const [openMobileSheet, setOpenMobileSheet] = useState<"filter" | "sort" | null>(null)
@@ -43,7 +45,7 @@ export default function HomepageTestPage() {
             <div className="mx-auto max-w-[440px]">
               <div className="flex justify-center">
                 <img
-                  src="/test/man-placeholder.png"
+                  src="/jim/hero-jim-01-cutout.png"
                   alt=""
                   aria-hidden="true"
                   className="h-auto w-full max-w-[420px]"
@@ -51,64 +53,83 @@ export default function HomepageTestPage() {
               </div>
 
               <div className="mt-6 flex items-center justify-center gap-4 text-[#222222]">
-                <div className="type-ui-sm">Product designer</div>
+                <div className="type-ui-sm">{hero.role}</div>
                 <div className="h-px w-16 shrink-0 bg-[#222222]" />
-                <div className="type-ui-sm">2024</div>
+                <div className="type-ui-sm">{hero.year}</div>
               </div>
 
               <div className="mt-10 text-center md:mt-12">
-                <div className="type-display-hero text-[#222222]">Hello</div>
-                <div className="type-ui-lg mt-4 text-[#222222]">— It’s Finox a design wizerd</div>
+                <div className="type-display-hero text-[#222222]">{hero.title}</div>
+                <div className="type-ui-lg mt-4 text-[#222222]">{hero.subtitle}</div>
               </div>
 
               <div className="mt-8 grid grid-cols-2 gap-6 sm:gap-8">
                 <div>
                   <div className="flex items-start justify-center gap-1 text-[#222222]">
                     <span className="type-stat-plus">+</span>
-                    <span className="type-stat-number text-[#404040]">200</span>
+                    <span className="type-stat-number text-[#404040]">{hero.projectCompletedValue}</span>
                   </div>
                   <div className="type-ui-sm mt-2 text-center text-[#78716C]">
-                    Project completed
+                    {hero.projectCompletedLabel}
                   </div>
                 </div>
                 <div>
                   <div className="flex items-start justify-center gap-1 text-[#222222]">
                     <span className="type-stat-plus">+</span>
-                    <span className="type-stat-number text-[#404040]">50</span>
+                    <span className="type-stat-number text-[#404040]">{hero.startupRaisedValue}</span>
                   </div>
-                  <div className="type-ui-sm mt-2 text-center text-[#78716C]">Startup raised</div>
+                  <div className="type-ui-sm mt-2 text-center text-[#78716C]">{hero.startupRaisedLabel}</div>
                 </div>
               </div>
 
               <div className="type-ui-md mt-8 text-center text-[#222222] md:mt-12">
-                Scroll down ↓
+                {hero.scroll}
               </div>
             </div>
           </div>
 
-          <div className="relative hidden h-[938px] overflow-hidden bg-[#F3F3F3] lg:block">
+          <div
+            className="relative hidden overflow-hidden bg-[#F3F3F3] lg:block"
+            style={{ height: "938px" }}
+          >
             <img
-              src="/test/man-placeholder.png"
+              src="/jim/hero-jim-01-cutout.png"
               alt=""
               aria-hidden="true"
-              className="absolute bottom-0 right-[-36px] z-0 h-[760px] w-auto max-w-none"
+              className="absolute bottom-0 z-0 w-auto max-w-none"
+              style={{ right: "-36px", height: "760px" }}
             />
 
-            <div className="type-display-hero absolute left-[177px] top-[367px] z-10 text-[#222222]">
-              Hello
-            </div>
-
-            <div className="type-ui-lg absolute left-[177px] top-[612px] z-10 text-[#222222]">
-              — It’s Finox a design wizerd
-            </div>
-
-            <div className="type-ui-md absolute left-[177px] top-[860px] z-10 text-[#222222]">
-              Scroll down ↓
+            <div
+              className="type-display-hero absolute z-10 text-[#222222]"
+              style={{ left: "177px", top: "367px" }}
+            >
+              {hero.title}
             </div>
 
             <div
-              className="absolute top-[168px] z-10 h-[701px] w-[120px] -translate-x-1/2"
-              style={{ left: `${desktopHeroLogoAxisX}px` }}
+              className="type-ui-lg absolute z-10 text-[#222222]"
+              style={{ left: "177px", top: "612px" }}
+            >
+              {hero.subtitle}
+            </div>
+
+            <div
+              className="type-ui-md absolute z-10 text-[#222222]"
+              style={{ left: "177px", top: "860px" }}
+            >
+              {hero.scroll}
+            </div>
+
+            <div
+              className="absolute z-10"
+              style={{
+                top: "168px",
+                height: "701px",
+                width: "120px",
+                left: `${desktopHeroLogoAxisX}px`,
+                transform: "translateX(-50%)",
+              }}
             >
               <div className="relative h-full w-full">
                 <div
@@ -122,7 +143,7 @@ export default function HomepageTestPage() {
                     lineHeight: 1,
                   }}
                 >
-                  Product designer
+                  {hero.role}
                 </div>
 
                 <div
@@ -147,31 +168,71 @@ export default function HomepageTestPage() {
                     lineHeight: 1,
                   }}
                 >
-                  2024
+                  {hero.year}
                 </div>
               </div>
             </div>
 
-            <div className="type-stat-plus absolute left-[184px] top-[208px] z-10 text-black">
+            <div
+              className="type-stat-plus absolute z-10 text-black"
+              style={{ left: "184px", top: "208px" }}
+            >
               +
             </div>
-            <div className="type-stat-number absolute left-[205px] top-[204px] z-10 text-[#404040]">
-              200
+            <div
+              className="type-stat-number absolute z-10 text-[#404040]"
+              style={{ left: "205px", top: "204px" }}
+            >
+              {hero.projectCompletedValue}
             </div>
-            <div className="type-ui-sm absolute left-[203px] top-[261px] z-10 text-[#78716C]">
-              Project completed
+            <div
+              className="type-ui-sm absolute z-10 text-[#78716C]"
+              style={{ left: "203px", top: "261px" }}
+            >
+              {hero.projectCompletedLabel}
             </div>
 
-            <div className="type-stat-plus absolute left-[360px] top-[208px] z-10 text-black">
+            <div
+              className="type-stat-plus absolute z-10 text-black"
+              style={{ left: "360px", top: "208px" }}
+            >
               +
             </div>
-            <div className="type-stat-number absolute left-[381px] top-[204px] z-10 text-[#404040]">
-              50
+            <div
+              className="type-stat-number absolute z-10 text-[#404040]"
+              style={{ left: "381px", top: "204px" }}
+            >
+              {hero.startupRaisedValue}
             </div>
-            <div className="type-ui-sm absolute left-[381px] top-[261px] z-10 text-[#78716C]">
-              Startup raised
+            <div
+              className="type-ui-sm absolute z-10 text-[#78716C]"
+              style={{ left: "381px", top: "261px" }}
+            >
+              {hero.startupRaisedLabel}
             </div>
           </div>
+        </Container>
+      </section>
+
+      {/* Trust bar — replace placeholder divs with <img src="/logos/name.svg" alt="Name" className="h-8 w-auto" /> when ready */}
+      <section className="w-full bg-[#F3F3F3]">
+        <Container className="px-0 md:px-0 lg:px-0">
+        <div className="grid grid-cols-4">
+          {[
+            { src: "/company-logos/svg/disney-logo.svg",           alt: "Disney" },
+            { src: "/company-logos/svg/hbo-logo.svg",              alt: "HBO" },
+            { src: "/company-logos/svg/directv-logo.svg",          alt: "DirecTV" },
+            { src: "/company-logos/svg/shopify-logo.svg",          alt: "Shopify" },
+            { src: "/company-logos/svg/bcg-logo.svg",              alt: "BCG" },
+            { src: "/company-logos/svg/publicis-sapient-logo.svg", alt: "Publicis Sapient" },
+            { src: "/company-logos/svg/bc-logo.svg",               alt: "Boston Consulting" },
+            { src: "/company-logos/svg/aa-logo.svg",               alt: "American Airlines" },
+          ].map((logo) => (
+            <div key={logo.alt} className="flex items-center justify-center py-14 px-10">
+              <img src={logo.src} alt={logo.alt} width={160} height={40} />
+            </div>
+          ))}
+        </div>
         </Container>
       </section>
 
@@ -181,17 +242,15 @@ export default function HomepageTestPage() {
             <div className="flex max-w-[674px] flex-col items-center gap-3">
               <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
                 <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                <span className="type-p2 text-[#222222]">Experiences</span>
+                <span className="type-p2 text-[#222222]">{sections.experiencesPill}</span>
               </div>
 
               <div className="flex flex-col items-center gap-2 text-center">
                 <h2 className="type-h3 max-w-[920px] text-[#222222] lg:text-[64px] lg:leading-[1.05] lg:tracking-[-0.04em]">
-                  Why you will work with me
+                  {sections.experiencesTitle}
                 </h2>
                 <p className="type-p3 max-w-[840px] text-[#7B7B7B]">
-                  Every design decision I make is backed by strategy, research, and a commitment
-                  to delivering real value. I turn complex challenges into clean, delightful user
-                  experiences
+                  {sections.experiencesDescription}
                 </p>
               </div>
             </div>
@@ -211,15 +270,12 @@ export default function HomepageTestPage() {
             <div className="flex flex-col items-start gap-3">
               <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
                 <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                <span className="type-p2 text-[#222222]">Experiences</span>
+                <span className="type-p2 text-[#222222]">{sections.awardsPill}</span>
               </div>
 
               <div className="flex flex-col items-start gap-2">
-                <h2 className="type-h3 max-w-[396px] text-[#222222]">My Achievements &amp; Awards</h2>
-                <p className="type-p2 max-w-[482px] text-black/70">
-                  Over the years, my love for creative problem-solving has evolved into a career
-                  dedicated to crafting intuitive and impactful digital experiences.
-                </p>
+                <h2 className="type-h3 max-w-[396px] text-[#222222]">{sections.awardsTitle}</h2>
+                <p className="type-p2 max-w-[482px] text-black/70">{sections.awardsDescription}</p>
               </div>
             </div>
 
@@ -238,11 +294,11 @@ export default function HomepageTestPage() {
             <div className="flex flex-col items-center gap-3">
               <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
                 <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                <span className="type-p2 text-[#222222]">Our Clients</span>
+                <span className="type-p2 text-[#222222]">{sections.clientsPill}</span>
               </div>
 
               <div className="flex flex-col items-center gap-2 text-center">
-                <h2 className="type-h3 max-w-[920px] text-[#222222]">Some of our Best Customers</h2>
+                <h2 className="type-h3 max-w-[920px] text-[#222222]">{sections.clientsTitle}</h2>
               </div>
             </div>
 
@@ -260,23 +316,19 @@ export default function HomepageTestPage() {
           <div className="flex flex-col items-start gap-12">
             <div className="flex w-full flex-col items-start gap-10">
               <div className="flex w-full flex-col items-start gap-5">
-                <SectionPill label="Highlights projects" />
+                <SectionPill label={sections.highlightsPill} />
 
                 <div className="flex w-full flex-col gap-5">
-                  <h2 className="type-h3 text-[#222222]">Case Studies &amp; Project Highlights</h2>
+                  <h2 className="type-h3 text-[#222222]">{sections.highlightsTitle}</h2>
 
                   <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-                    <p className="type-p3 max-w-[962px] text-black/80">
-                      Explore detailed case studies and highlights of recent projects. Learn about
-                      the challenges faced, the design solutions implemented, and the outcomes
-                      achieved.
-                    </p>
+                    <p className="type-p3 max-w-[962px] text-black/80">{sections.highlightsDescription}</p>
 
                     <Link
                       href="/work"
                       className="inline-flex self-start min-h-[56px] items-center gap-2 rounded-[99px] bg-[#2B2B2B] px-6 pb-3.5 pt-3 text-[20px] leading-8 text-white lg:self-auto"
                     >
-                      <span>See More</span>
+                      <span>{sections.highlightsCta}</span>
                       <ArrowUpRightIcon />
                     </Link>
                   </div>
@@ -320,7 +372,7 @@ export default function HomepageTestPage() {
                 </div>
 
                 <div className="hidden items-center gap-5 self-end md:flex lg:self-auto">
-                  <span className="text-[14px] text-black/80">Sort by:</span>
+                  <span className="text-[14px] text-black/80">{sections.sortByLabel}</span>
                   <button
                     type="button"
                     className="inline-flex h-9 items-center gap-1 rounded-full bg-white px-5 py-2.5 text-[14px] text-[#222222]"
@@ -342,7 +394,7 @@ export default function HomepageTestPage() {
 
         <MobileSelectionSheet
           open={openMobileSheet === "filter"}
-          title="Filter projects"
+          title={sections.filterSheetTitle}
           options={insightFilters}
           selected={selectedFilter}
           onClose={() => setOpenMobileSheet(null)}
@@ -351,7 +403,7 @@ export default function HomepageTestPage() {
 
         <MobileSelectionSheet
           open={openMobileSheet === "sort"}
-          title="Sort projects"
+          title={sections.sortSheetTitle}
           options={insightSortOptions}
           selected={selectedSort}
           onClose={() => setOpenMobileSheet(null)}
@@ -363,16 +415,12 @@ export default function HomepageTestPage() {
         <Container className="py-14 md:py-16 lg:py-[72px]">
           <div className="flex flex-col items-start gap-12">
             <div className="flex w-full flex-col items-start gap-5">
-              <SectionPill label="Latest Insights" />
+              <SectionPill label={sections.insightsPill} />
 
               <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                 <div className="flex flex-col items-start gap-3">
-                  <h2 className="type-h3 text-[#222222]">Latest Insights &amp; Trends</h2>
-                  <p className="type-p3 max-w-[962px] text-black/80">
-                    Stay updated with the latest in UI/UX design, product design, and industry
-                    trends. Here, you&apos;ll find in-depth articles, case studies, and expert
-                    opinions that offer valuable insights and inspiration for your next project.
-                  </p>
+                  <h2 className="type-h3 text-[#222222]">{sections.insightsTitle}</h2>
+                  <p className="type-p3 max-w-[962px] text-black/80">{sections.insightsDescription}</p>
                 </div>
 
               </div>
@@ -384,8 +432,8 @@ export default function HomepageTestPage() {
                   <div className="flex flex-col gap-4 md:flex-row md:items-center">
                     <InsightAvatarStack />
                     <div className="flex flex-col">
-                      <div className="type-p2 text-black">75+ Clients</div>
-                      <div className="type-ui-sm text-[#666666]">Around the world Clients</div>
+                      <div className="type-p2 text-black">{stats.clientsCount}</div>
+                      <div className="type-ui-sm text-[#666666]">{stats.clientsSubtext}</div>
                     </div>
                   </div>
                 </article>
@@ -393,9 +441,9 @@ export default function HomepageTestPage() {
                 <article className="relative overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
                   <div className="absolute right-[-24px] top-[-20px] h-28 w-28 rounded-full bg-[#F8F6F2]" />
                   <div className="absolute right-[38px] top-[96px] h-20 w-20 rounded-full bg-[#F8F6F2]" />
-                  <div className="type-h2 relative z-10 text-black">105+</div>
+                  <div className="type-h2 relative z-10 text-black">{stats.completedProjectsValue}</div>
                   <p className="type-p2 relative z-10 mt-16 max-w-[240px] text-[#666666]">
-                    Completed projects for growing brands
+                    {stats.completedProjectsLabel}
                   </p>
                 </article>
               </div>
@@ -407,18 +455,16 @@ export default function HomepageTestPage() {
                 </div>
 
                 <p className="type-p2 mt-6 max-w-[520px] text-[#2B2B2B]">
-                  I like their services and their professionalism and attention to details and
-                  commitment delivering hign - quality results truly exceeded all our team
-                  expectations and meet that on time.
+                  {testimonial.quote}
                 </p>
 
                 <div className="mt-10 flex items-center gap-3">
                   <div className="flex h-14 w-14 items-center justify-center rounded-[10px] bg-[linear-gradient(135deg,#cfcfcf_0%,#f4f4f4_100%)] text-[#222222]">
-                    TA
+                    {testimonial.initials}
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <div className="type-p2 text-[#2B2B2B]">Tawanna Afumba</div>
-                    <div className="type-ui-sm text-[#666666]">intransigent_toejam_15</div>
+                    <div className="type-p2 text-[#2B2B2B]">{testimonial.name}</div>
+                    <div className="type-ui-sm text-[#666666]">{testimonial.handle}</div>
                   </div>
                 </div>
               </article>
@@ -427,19 +473,20 @@ export default function HomepageTestPage() {
                 <article className="relative overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
                   <div className="absolute right-[-28px] top-[-20px] h-28 w-28 rounded-full bg-[#F8F6F2]" />
                   <div className="absolute right-[36px] top-[68px] h-20 w-20 rounded-full bg-[#F8F6F2]" />
-                  <div className="type-h2 relative z-10 text-black">92%</div>
+                  <div className="type-h2 relative z-10 text-black">{stats.retentionRateValue}</div>
                   <p className="type-p2 relative z-10 mt-16 max-w-[240px] text-[#666666]">
-                    Client retention rate over the past 3 years
+                    {stats.retentionRateLabel}
                   </p>
                 </article>
 
                 <article className="rounded-[10px] bg-white px-5 py-4 md:px-6">
                   <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
                     <div className="type-h5 text-black">
-                      4.9<span className="text-[24px] leading-8 text-[#666666]">/5</span>
+                      {stats.ratingValue}
+                      <span className="text-[24px] leading-8 text-[#666666]">{stats.ratingOutOf}</span>
                     </div>
                     <p className="type-ui-sm max-w-[280px] text-black">
-                      We&apos;ve delivered 56+projects that help companies generate real results.
+                      {stats.ratingSummary}
                     </p>
                   </div>
                 </article>
