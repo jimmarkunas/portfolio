@@ -50,9 +50,9 @@ export const americanapparelCaseStudy = {
     ],
     tools: [
       { label: "JIRA", icon: "/tool-icons/jira-logo.png" },
-      { label: "Azure", icon: "/tool-icons/msazure-logo.png" },
+      { label: "Azure", icon: "/tool-icons/svg/azure-logo.svg" },
       { label: "MS Dynamics", icon: "/tool-icons/msdynamics-logo.png" },
-      { label: "Oracle ATG", icon: "/tool-icons/oracle-logo.png" },
+      { label: "Oracle ATG", icon: "/tool-icons/svg/oracle-logo.svg" },
     ],
     quote: {
       quote:

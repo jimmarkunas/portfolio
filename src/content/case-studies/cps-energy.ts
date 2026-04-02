@@ -49,10 +49,10 @@ export const cpsEnergyCaseStudy = {
       { label: "Timeline", value: "August 2024 – April 2025" },
     ],
     tools: [
-      { label: "Figma", icon: "/tool-icons/figma.svg" },
-      { label: "Azure", icon: "/company-logos/icons/azure-logo.png" },
-      { label: "SAP", icon: "/company-logos/icons/sap-logo.png" },
-      { label: "Smartsheet", icon: "/company-logos/icons/smartsheet-logo.png" },
+      { label: "Figma", icon: "/tool-icons/svg/figma-logo.svg" },
+      { label: "Azure", icon: "/tool-icons/svg/azure-logo.svg" },
+      { label: "SAP", icon: "/tool-icons/svg/sap-logo.svg" },
+      { label: "Smartsheet", icon: "/tool-icons/svg/smartsheet-logo.svg" },
     ],
     quote: {
       quote:

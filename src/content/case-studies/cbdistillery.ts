@@ -50,10 +50,10 @@ export const cbdistilleryCaseStudy = {
       { label: "Timeline", value: "2020" },
     ],
     tools: [
-      { label: "BigCommerce", icon: "/tool-icons/bc-logo.png" },
-      { label: "Square", icon: "/tool-icons/square-logo.png" },
-      { label: "Order Groove", icon: "/tool-icons/ordergroove-logo.png" },
-      { label: "MS Dynamics", icon: "/tool-icons/msdynamics-logo.png" },
+      { label: "BigCommerce", icon: "/tool-icons/svg/bc-logo-blk.svg" },
+      { label: "Square", icon: "/tool-icons/svg/square-logo.svg" },
+      { label: "Order Groove", icon: "/tool-icons/svg/ordergroove-logo.svg" },
+      { label: "MS Dynamics", icon: "/tool-icons/svg/msdynamics-logo.svg" },
     ],
     quote: {
       quote:

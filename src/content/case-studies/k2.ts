@@ -49,10 +49,10 @@ export const k2CaseStudy = {
       { label: "Timeline", value: "2020" },
     ],
     tools: [
-      { label: "BigCommerce", icon: "/tool-icons/bc-logo.png" },
-      { label: "Contentstack", icon: "/tool-icons/contentstack-logo.png" },
-      { label: "WordPress", icon: "/tool-icons/wordpress-logo.png" },
-      { label: "Quivers", icon: "/tool-icons/quivers-logo.png" },
+      { label: "BigCommerce", icon: "/tool-icons/svg/bc-logo-blk.svg" },
+      { label: "Contentstack", icon: "/tool-icons/svg/contentstack-logo.svg" },
+      { label: "WordPress", icon: "/tool-icons/svg/wordpress-logo.svg" },
+      { label: "Quivers", icon: "/tool-icons/svg/quivers-logo.svg" },
     ],
     quote: {
       quote:
