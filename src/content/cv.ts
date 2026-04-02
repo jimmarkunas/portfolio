@@ -69,10 +69,11 @@ export const cvContent = {
   awardsSection: {
     title: "My Achievements & Awards",
     description:
-      "Over the years, my love for creative problem-solving has evolved into a career dedicated to crafting intuitive and impactful digital experiences.",
+      "My love of solving complex problems has evolved into a career dedicated to leading impactful digital transformation, platform modernization, and enterprise delivery across business and technology.",
   },
   detailsSection: {
     title: "Resume Details",
+    description: "Additional roles, credentials, and platform/tool fluency across my career.",
     additionalExperienceTitle: "Additional Work Experience",
     credentialsTitle: "Education, Certifications & Tools",
     educationTitle: "Education",

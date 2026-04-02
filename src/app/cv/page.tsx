@@ -190,12 +190,20 @@ export default function CvPage() {
                 {cvContent.awards.map((award) => {
                   const rowBody = (
                     <article className="rounded-[10px] bg-[#F0F0F0] px-6 py-5 md:px-8 md:py-6">
-                      <div className="grid gap-3 md:grid-cols-[110px_minmax(0,1fr)_max-content] md:items-center md:gap-6">
+                      <div className="flex flex-col gap-2 xl:hidden">
                         <div className="type-p2 text-[#404040]">
                           {award.rank} {award.year}
                         </div>
-                        <div className="type-p2 text-[#2A2A2A] md:text-center">{award.title}</div>
-                        <div className="type-p2 text-[#2A2A2A] md:text-right md:whitespace-nowrap">{award.source}</div>
+                        <div className="type-p2 text-[#2A2A2A]">{award.title}</div>
+                        <div className="type-p3 text-[#2A2A2A]">{award.source}</div>
+                      </div>
+
+                      <div className="hidden xl:grid xl:grid-cols-[110px_minmax(0,1fr)_max-content] xl:items-center xl:gap-6">
+                        <div className="type-p2 text-[#404040]">
+                          {award.rank} {award.year}
+                        </div>
+                        <div className="type-p2 text-[#2A2A2A] xl:text-center">{award.title}</div>
+                        <div className="type-p3 text-[#2A2A2A] xl:text-right xl:whitespace-nowrap">{award.source}</div>
                       </div>
                     </article>
                   )
@@ -216,6 +224,7 @@ export default function CvPage() {
             <section className="grid gap-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] lg:gap-12">
               <div className="flex flex-col gap-3">
                 <h2 className="type-h3 text-[#222222]">{cvContent.detailsSection.title}</h2>
+                <p className="type-p2 max-w-[500px] text-[#2D2D2D]">{cvContent.detailsSection.description}</p>
               </div>
 
               <div className="grid gap-4">
