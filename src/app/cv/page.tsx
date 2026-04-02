@@ -4,6 +4,8 @@ import { ArrowUpRight } from "lucide-react"
 
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
+import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
+import { MotionReveal } from "@/components/motion/MotionReveal"
 import { cvContent } from "@/content/cv"
 
 export const metadata: Metadata = {
@@ -22,6 +24,8 @@ function SectionPill({ label, className = "" }: { label: string; className?: str
 function normalizePeriod(period: string) {
   return period.replace("–", "-")
 }
+
+const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
 
 export default function CvPage() {
   const [featuredExperience, ...remainingExperiences] = cvContent.experiences
@@ -46,7 +50,7 @@ export default function CvPage() {
                       key={asset.href}
                       href={asset.href}
                       download={asset.fileName}
-                      className={index === 0 ? "button-primary" : "button-secondary"}
+                      className={`${index === 0 ? "button-primary" : "button-secondary"} ${hoverLiftClass}`}
                     >
                       {asset.label}
                     </a>
@@ -54,25 +58,26 @@ export default function CvPage() {
                 </div>
 
                 <div className="mt-10 grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
-                  {cvContent.impactStats.map((stat) => (
-                    <Link
-                      key={stat.label}
-                      href={stat.href ?? "/work"}
-                      className="flex flex-col items-center justify-center gap-3 rounded-[10px] bg-white px-6 py-6 text-center outline outline-1 outline-black/5 transition-transform duration-200 hover:-translate-y-0.5 md:px-7 md:py-7"
-                    >
-                      <div className="type-stat-number text-[#242840]">
-                        {stat.value}
-                      </div>
-                      <p className="type-p2 text-[#414141]">
-                        {stat.displayLabel ?? stat.label}
-                      </p>
-                    </Link>
+                  {cvContent.impactStats.map((stat, index) => (
+                    <MotionReveal key={stat.label} preset="card" delay={index * 0.04}>
+                      <Link
+                        href={stat.href ?? "/work"}
+                        className={`flex flex-col items-center justify-center gap-3 rounded-[10px] bg-white px-6 py-6 text-center outline outline-1 outline-black/5 ${hoverLiftClass} md:px-7 md:py-7`}
+                      >
+                        <div className="type-stat-number text-[#242840]">
+                          <AnimatedMetricValue value={stat.value} trigger="load" />
+                        </div>
+                        <p className="type-p2 text-[#414141]">
+                          {stat.displayLabel ?? stat.label}
+                        </p>
+                      </Link>
+                    </MotionReveal>
                   ))}
                 </div>
               </section>
 
               <section className="relative pt-0">
-                <article className="relative z-10 rounded-[2px] bg-[#ECECEC] px-5 py-6 md:px-8 md:py-8 lg:px-10 lg:py-10">
+                <MotionReveal preset="section" className="relative z-10 rounded-[2px] bg-[#ECECEC] px-5 py-6 md:px-8 md:py-8 lg:px-10 lg:py-10">
                   <div className="grid gap-8 border-b border-black/10 pb-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,410px)] lg:pb-8">
                     <div className="flex flex-col gap-2">
                       <SectionPill label={cvContent.sectionPills.experience} className="self-start" />
@@ -87,7 +92,7 @@ export default function CvPage() {
                         href={cvContent.cta.primary.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-text-cta type-p3 w-fit"
+                        className={`inline-text-cta type-p3 w-fit ${hoverLiftClass}`}
                       >
                         <span>{cvContent.cta.primary.label}</span>
                         <ArrowUpRight className="h-3.5 w-3.5" />
@@ -171,11 +176,11 @@ export default function CvPage() {
                       </div>
                     </article>
                   ))}
-                </article>
+                </MotionReveal>
               </section>
             </div>
 
-            <section className="grid gap-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] lg:gap-12">
+            <MotionReveal preset="section" className="grid gap-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] lg:gap-12">
               <div className="flex flex-col gap-3">
                 <SectionPill label={cvContent.sectionPills.awards} />
                 <h2 className="type-h3 max-w-[420px] text-[#222222]">
@@ -187,7 +192,7 @@ export default function CvPage() {
               </div>
 
               <div className="flex flex-col gap-4">
-                {cvContent.awards.map((award) => {
+                {cvContent.awards.map((award, index) => {
                   const rowBody = (
                     <article className="rounded-[10px] bg-[#F0F0F0] px-6 py-5 md:px-8 md:py-6">
                       <div className="flex flex-col gap-2 xl:hidden">
@@ -209,72 +214,85 @@ export default function CvPage() {
                   )
 
                   if (!award.href) {
-                    return <div key={`${award.rank}-${award.title}`}>{rowBody}</div>
+                    return (
+                      <MotionReveal key={`${award.rank}-${award.title}`} preset="card" delay={index * 0.04}>
+                        <div>{rowBody}</div>
+                      </MotionReveal>
+                    )
                   }
 
                   return (
-                    <Link key={`${award.rank}-${award.title}`} href={award.href} className="transition-opacity hover:opacity-90">
-                      {rowBody}
-                    </Link>
+                    <MotionReveal key={`${award.rank}-${award.title}`} preset="card" delay={index * 0.04}>
+                      <Link
+                        href={award.href}
+                        className="block transition-[transform,opacity] duration-200 hover:-translate-y-0.5 hover:opacity-90"
+                      >
+                        {rowBody}
+                      </Link>
+                    </MotionReveal>
                   )
                 })}
               </div>
-            </section>
+            </MotionReveal>
 
-            <section className="grid gap-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] lg:gap-12">
+            <MotionReveal preset="section" className="grid gap-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] lg:gap-12">
               <div className="flex flex-col gap-3">
                 <h2 className="type-h3 text-[#222222]">{cvContent.detailsSection.title}</h2>
                 <p className="type-p2 max-w-[500px] text-[#2D2D2D]">{cvContent.detailsSection.description}</p>
               </div>
 
               <div className="grid gap-4">
-                <article className="rounded-[10px] bg-white p-6 outline outline-1 outline-black/5">
-                  <h3 className="type-h5 text-[#2A2A2A]">{cvContent.detailsSection.additionalExperienceTitle}</h3>
-                  <ul className="mt-3 space-y-2">
-                    {cvContent.additionalExperience.map((item) => (
-                      <li key={item} className="type-p3 text-[#5A5A5A]">
-                        • {item}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
+                <MotionReveal preset="card">
+                  <article className="rounded-[10px] bg-white p-6 outline outline-1 outline-black/5">
+                    <h3 className="type-h5 text-[#2A2A2A]">{cvContent.detailsSection.additionalExperienceTitle}</h3>
+                    <ul className="mt-3 space-y-2">
+                      {cvContent.additionalExperience.map((item) => (
+                        <li key={item} className="type-p3 text-[#5A5A5A]">
+                          • {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </MotionReveal>
 
-                <article className="rounded-[10px] bg-white p-6 outline outline-1 outline-black/5">
-                  <h3 className="type-h5 text-[#2A2A2A]">{cvContent.detailsSection.credentialsTitle}</h3>
+                <MotionReveal preset="card" delay={0.05}>
+                  <article className="rounded-[10px] bg-white p-6 outline outline-1 outline-black/5">
+                    <h3 className="type-h5 text-[#2A2A2A]">{cvContent.detailsSection.credentialsTitle}</h3>
 
-                  <div className="mt-3 grid gap-4 md:grid-cols-2">
-                    <div>
-                      <h4 className="type-p2 text-[#2A2A2A]">{cvContent.detailsSection.educationTitle}</h4>
-                      <ul className="mt-2 space-y-1.5">
-                        {cvContent.education.map((item) => (
-                          <li key={item} className="type-p3 text-[#5A5A5A]">
-                            • {item}
-                          </li>
-                        ))}
-                      </ul>
+                    <div className="mt-3 grid gap-4 md:grid-cols-2">
+                      <div>
+                        <h4 className="type-p2 text-[#2A2A2A]">{cvContent.detailsSection.educationTitle}</h4>
+                        <ul className="mt-2 space-y-1.5">
+                          {cvContent.education.map((item) => (
+                            <li key={item} className="type-p3 text-[#5A5A5A]">
+                              • {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <h4 className="type-p2 text-[#2A2A2A]">{cvContent.detailsSection.certificationsTitle}</h4>
+                        <ul className="mt-2 space-y-1.5">
+                          {cvContent.certifications.map((item) => (
+                            <li key={item} className="type-p3 text-[#5A5A5A]">
+                              • {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
 
-                    <div>
-                      <h4 className="type-p2 text-[#2A2A2A]">{cvContent.detailsSection.certificationsTitle}</h4>
-                      <ul className="mt-2 space-y-1.5">
-                        {cvContent.certifications.map((item) => (
-                          <li key={item} className="type-p3 text-[#5A5A5A]">
-                            • {item}
-                          </li>
-                        ))}
-                      </ul>
+                    <div className="mt-4">
+                      <h4 className="type-p2 text-[#2A2A2A]">{cvContent.detailsSection.toolsTitle}</h4>
+                      <p className="type-p3 mt-2 text-[#5A5A5A]">
+                        {cvContent.skills.flatMap((group) => group.items).join(", ")}
+                      </p>
                     </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <h4 className="type-p2 text-[#2A2A2A]">{cvContent.detailsSection.toolsTitle}</h4>
-                    <p className="type-p3 mt-2 text-[#5A5A5A]">
-                      {cvContent.skills.flatMap((group) => group.items).join(", ")}
-                    </p>
-                  </div>
-                </article>
+                  </article>
+                </MotionReveal>
               </div>
-            </section>
+            </MotionReveal>
           </div>
         </Container>
       </section>

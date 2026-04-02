@@ -1,4 +1,6 @@
 import { Container } from "@/components/Container"
+import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
+import { MotionReveal } from "@/components/motion/MotionReveal"
 import {
   desktopHeroLogoAxisX,
   desktopHeroRailLabelX,
@@ -9,6 +11,18 @@ import type { HomepageText } from "@/components/homepage/homepage"
 
 type HomepageHeroSectionProps = {
   hero: HomepageText["hero"]
+}
+
+function MobileHeroStat({ value, label }: { value: string; label: string }) {
+  return (
+    <div>
+      <div className="flex items-start justify-center gap-1 text-[#222222]">
+        <span className="type-stat-plus">+</span>
+        <AnimatedMetricValue value={value} trigger="load" className="type-stat-number text-[#404040]" />
+      </div>
+      <div className="type-ui-sm mt-2 text-center text-[#78716C]">{label}</div>
+    </div>
+  )
 }
 
 export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
@@ -25,19 +39,19 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
       <Container className="bg-[#F3F3F3] px-0 md:px-0 lg:px-0">
         <div className="bg-[#F3F3F3] px-6 pb-10 pt-8 md:hidden">
           <div className="mx-auto max-w-[440px]">
-            <div className="mt-10 text-center md:mt-12">
+            <MotionReveal preset="section" className="mt-10 text-center md:mt-12">
               <div className="type-display-hero text-[#222222]">{hero.title}</div>
               <div className="type-ui-lg mt-4 text-[#222222]">{hero.subtitle}</div>
-            </div>
+            </MotionReveal>
 
-            <div className="mt-8 flex justify-center">
+            <MotionReveal preset="image" delay={0.05} className="mt-8 flex justify-center">
               <img
                 src="/jim/hero-jim-01-cutout.png"
                 alt=""
                 aria-hidden="true"
                 className="h-auto w-full max-w-[420px]"
               />
-            </div>
+            </MotionReveal>
 
             <div className="mt-6 flex items-center justify-center gap-4 text-[#222222]">
               <div className="type-ui-sm">{hero.role}</div>
@@ -45,24 +59,10 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
               <div className="type-ui-sm">{hero.year}</div>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-6 sm:gap-8">
-              <div>
-                <div className="flex items-start justify-center gap-1 text-[#222222]">
-                  <span className="type-stat-plus">+</span>
-                  <span className="type-stat-number text-[#404040]">{hero.projectCompletedValue}</span>
-                </div>
-                <div className="type-ui-sm mt-2 text-center text-[#78716C]">
-                  {hero.projectCompletedLabel}
-                </div>
-              </div>
-              <div>
-                <div className="flex items-start justify-center gap-1 text-[#222222]">
-                  <span className="type-stat-plus">+</span>
-                  <span className="type-stat-number text-[#404040]">{hero.startupRaisedValue}</span>
-                </div>
-                <div className="type-ui-sm mt-2 text-center text-[#78716C]">{hero.startupRaisedLabel}</div>
-              </div>
-            </div>
+            <MotionReveal preset="card" delay={0.1} className="mt-8 grid grid-cols-2 gap-6 sm:gap-8">
+              <MobileHeroStat value={hero.projectCompletedValue} label={hero.projectCompletedLabel} />
+              <MobileHeroStat value={hero.startupRaisedValue} label={hero.startupRaisedLabel} />
+            </MotionReveal>
 
           </div>
         </div>
@@ -166,7 +166,7 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
               className="type-stat-number absolute z-10 text-[#404040]"
               style={{ left: heroStatNumberLeft, top: "204px" }}
             >
-              {hero.projectCompletedValue}
+              <AnimatedMetricValue value={hero.projectCompletedValue} trigger="load" />
             </div>
             <div
               className="type-ui-sm absolute z-10 text-[#78716C]"
@@ -185,7 +185,7 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
               className="type-stat-number absolute z-10 text-[#404040]"
               style={{ left: heroSecondStatNumberLeft, top: "204px" }}
             >
-              {hero.startupRaisedValue}
+              <AnimatedMetricValue value={hero.startupRaisedValue} trigger="load" />
             </div>
             <div
               className="type-ui-sm absolute z-10 text-[#78716C]"
@@ -199,4 +199,3 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
     </section>
   )
 }
-

@@ -6,6 +6,7 @@ import { FullWidthImage } from "@/components/FullWidthImage"
 import { PullQuote } from "@/components/PullQuote"
 import { StatCard } from "@/components/StatCard"
 import { TagPill } from "@/components/TagPill"
+import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
 import {
   DeferredPreQuoteChartVisual,
   DeferredProblemChartVisual,
@@ -42,6 +43,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                   key={`${card.value}-${card.label}`}
                   value={card.value}
                   suffix={card.suffix}
+                  animationTrigger="load"
                   label={card.label}
                   className="min-h-[176px] px-8 py-10"
                   valueClassName="text-center text-slate-800"
@@ -228,7 +230,11 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                       <div className="flex h-full w-full flex-col items-center justify-center rounded-[10px] bg-[#222222] px-6 text-center">
                         <div className="text-center leading-none text-white">
                           <span className="font-[var(--font-family-display)] text-[52px] font-medium leading-[56px]">
-                            {stat.value}
+                            {!stat.suffix || !/[0-9/]/.test(stat.suffix) ? (
+                              <AnimatedMetricValue value={stat.value} />
+                            ) : (
+                              <span>{stat.value}</span>
+                            )}
                           </span>
                           {stat.suffix ? (
                             <span className="font-[var(--font-family-display)] text-[32px] font-semibold leading-8">
