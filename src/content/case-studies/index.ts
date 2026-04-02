@@ -19,6 +19,7 @@ const caseStudyLoaders: Record<string, CaseStudyLoader> = {
   foh: () => import("./fredericks").then((module) => module.fredericksCaseStudy),
   lego: () => import("./lego").then((module) => module.legoCaseStudy),
   aa: () => import("./americanapparel").then((module) => module.americanapparelCaseStudy),
+  zevo: () => import("./zevo").then((module) => module.zevoCaseStudy),
   dtv02: () => import("./directveverywhere").then((module) => module.directveverywhereCaseStudy),
 }
 

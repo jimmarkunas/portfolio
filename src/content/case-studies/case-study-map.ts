@@ -39,6 +39,7 @@ export const caseStudyMap: readonly CaseStudyMapEntry[] = [
   { slug: "foh", route: "/work/foh", contentModule: "@/content/case-studies/fredericks" },
   { slug: "lego", route: "/work/lego", contentModule: "@/content/case-studies/lego" },
   { slug: "aa", route: "/work/aa", contentModule: "@/content/case-studies/americanapparel" },
+  { slug: "zevo", route: "/work/zevo", contentModule: "@/content/case-studies/zevo" },
   { slug: "dtv02", route: "/work/dtv02", contentModule: "@/content/case-studies/directveverywhere" },
 ] as const
 

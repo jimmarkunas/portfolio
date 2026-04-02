@@ -18,6 +18,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
   const isFoh = data.slug === "foh"
   const problemChartKey = data.problem.chart?.key
   const preQuoteChartKey = data.problem.quote.preQuoteChart
+  const hideToolsUsed = data.slug === "zevo" || data.slug === "cwg"
 
   return (
     <section className="border-t border-[#222222]/8 bg-[#F3F3F3]">
@@ -101,7 +102,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                           ? "lg:col-start-1 lg:row-start-3 w-full"
                           : isFoh
                             ? "rounded-[24px] lg:col-start-1 lg:row-start-3 xl:w-[620px]"
-                            : "lg:col-start-1 lg:row-start-3 lg:w-[620px] rounded-[24px]"
+                            : "lg:col-start-1 lg:row-start-3 xl:w-[620px] rounded-[24px]"
                       }
                       frameClassName="px-6 text-center md:px-8 lg:px-10"
                     />
@@ -127,28 +128,30 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                       </div>
                     ))}
 
-                    <div className="flex flex-col gap-5">
-                      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                        <div className="text-[#222222]">
-                          <div className="type-p2 font-[500] md:hidden">Tools Used</div>
-                          <div className="type-p2 hidden md:block">Tools Used</div>
-                        </div>
-                        <div className="flex flex-wrap items-center gap-2.5">
-                          {data.problem.tools.map((tool) => (
-                            <div key={tool.label} className="group relative">
-                              <img
-                                src={tool.icon}
-                                alt={tool.label}
-                                className="h-[51px] w-[51px] rounded-[10px]"
-                              />
-                              <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#222222] px-2.5 py-1.5 text-xs text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                                {tool.label}
+                    {!hideToolsUsed ? (
+                      <div className="flex flex-col gap-5">
+                        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                          <div className="text-[#222222]">
+                            <div className="type-p2 font-[500] md:hidden">Tools Used</div>
+                            <div className="type-p2 hidden md:block">Tools Used</div>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-2.5">
+                            {data.problem.tools.map((tool) => (
+                              <div key={tool.label} className="group relative">
+                                <img
+                                  src={tool.icon}
+                                  alt={tool.label}
+                                  className="h-[51px] w-[51px] rounded-[10px]"
+                                />
+                                <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#222222] px-2.5 py-1.5 text-xs text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                                  {tool.label}
+                                </div>
                               </div>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
