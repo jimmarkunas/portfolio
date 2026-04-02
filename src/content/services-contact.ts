@@ -17,6 +17,12 @@ export type ServiceProjectLogoEntry = {
   size?: "default" | "half"
 }
 
+export type ServiceMapLocationEntry = {
+  city: string
+  country: string
+  coordinates: [number, number] // [longitude, latitude]
+}
+
 export const servicesContactContent = {
   services: {
     eyebrow: "Services",
@@ -123,11 +129,26 @@ export const servicesContactContent = {
       },
     ] satisfies ServiceProjectLogoEntry[],
   },
+  servicesMap: {
+    eyebrow: "Locations",
+    title: "Where I Work",
+    intro:
+      "I support teams across North America, Europe, and Asia through on-site and remote delivery leadership.",
+    mapTitle: "Global Delivery Footprint",
+    locations: [
+      { city: "Austin, TX", country: "United States", coordinates: [-97.7431, 30.2672] },
+      { city: "Los Angeles, CA", country: "United States", coordinates: [-118.2437, 34.0522] },
+      { city: "Chicago, IL", country: "United States", coordinates: [-87.6298, 41.8781] },
+      { city: "London", country: "England, UK", coordinates: [-0.1276, 51.5072] },
+      { city: "Paris", country: "France", coordinates: [2.3522, 48.8566] },
+      { city: "Bangalore", country: "India", coordinates: [77.5946, 12.9716] },
+    ] satisfies ServiceMapLocationEntry[],
+  },
   contact: {
     eyebrow: "Contact",
     title: "Contact Me",
     intro:
-      "Available for product leadership, platform architecture, and transformation programs. Based in the US, UK, and EU — open to remote opportunities worldwide.",
+      "Available for product leadership, platform architecture, and transformation programs. Based in the US, UK, and EU, open to remote opportunities worldwide.",
     email: "jim@jimmarkunas.com",
     linkedinLabel: "linkedin.com/in/jimmarkunas",
     linkedinHref: "https://linkedin.com/in/jimmarkunas",

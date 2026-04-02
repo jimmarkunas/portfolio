@@ -15,6 +15,7 @@ export type GlobalLocation = {
 type Props = {
   title: string
   locations: GlobalLocation[]
+  clusterMarkers?: boolean
 }
 
 const INIT_CENTER: [number, number] = [20, 15]
@@ -56,7 +57,7 @@ function ZoomTracker({ onChange }: { onChange: (z: number) => void }) {
   return null
 }
 
-export function GlobalLocationsMap({ title, locations }: Props) {
+export function GlobalLocationsMap({ title, locations, clusterMarkers = true }: Props) {
   const mapRef = useRef<LeafletMap | null>(null)
   const [currentZoom, setCurrentZoom] = useState(INIT_ZOOM)
   const isDrilledIn = currentZoom > INIT_ZOOM + 0.5
@@ -127,40 +128,71 @@ export function GlobalLocationsMap({ title, locations }: Props) {
           noWrap={true}
         />
 
-        <MarkerClusterGroup
-          iconCreateFunction={makeClusterIcon}
-          showCoverageOnHover={false}
-          spiderfyOnMaxZoom={true}
-          chunkedLoading={true}
-          disableClusteringAtZoom={7}
-        >
-          {locations.map(({ city, country, coordinates: [lng, lat] }) => {
-            const delay = ((Math.abs(lng) + Math.abs(lat)) % 2).toFixed(2)
-            return (
-              <Marker
-                key={`${city}-${country}`}
-                position={[lat, lng]}
-                icon={makeDotIcon(delay)}
-                eventHandlers={{
-                  click: (e) => {
-                    document.querySelectorAll(".map-dot").forEach((el) => el.classList.remove("selected"))
-                    e.target.getElement()?.querySelector(".map-dot")?.classList.add("selected")
-                  },
-                  popupclose: (e) => {
-                    e.target.getElement()?.querySelector(".map-dot")?.classList.remove("selected")
-                  },
-                }}
-              >
-                <Popup className="map-location-popup" offset={[0, -6]}>
-                  <div className="map-popup-inner">
-                    <div className="map-popup-eyebrow">{country}</div>
-                    <div className="map-popup-name">{city}</div>
-                  </div>
-                </Popup>
-              </Marker>
-            )
-          })}
-        </MarkerClusterGroup>
+        {clusterMarkers ? (
+          <MarkerClusterGroup
+            iconCreateFunction={makeClusterIcon}
+            showCoverageOnHover={false}
+            spiderfyOnMaxZoom={true}
+            chunkedLoading={true}
+            disableClusteringAtZoom={7}
+          >
+            {locations.map(({ city, country, coordinates: [lng, lat] }) => {
+              const delay = ((Math.abs(lng) + Math.abs(lat)) % 2).toFixed(2)
+              return (
+                <Marker
+                  key={`${city}-${country}`}
+                  position={[lat, lng]}
+                  icon={makeDotIcon(delay)}
+                  eventHandlers={{
+                    click: (e) => {
+                      document.querySelectorAll(".map-dot").forEach((el) => el.classList.remove("selected"))
+                      e.target.getElement()?.querySelector(".map-dot")?.classList.add("selected")
+                    },
+                    popupclose: (e) => {
+                      e.target.getElement()?.querySelector(".map-dot")?.classList.remove("selected")
+                    },
+                  }}
+                >
+                  <Popup className="map-location-popup" offset={[0, -6]}>
+                    <div className="map-popup-inner">
+                      <div className="map-popup-eyebrow">{country}</div>
+                      <div className="map-popup-name">{city}</div>
+                    </div>
+                  </Popup>
+                </Marker>
+              )
+            })}
+          </MarkerClusterGroup>
+        ) : (
+          <>
+            {locations.map(({ city, country, coordinates: [lng, lat] }) => {
+              const delay = ((Math.abs(lng) + Math.abs(lat)) % 2).toFixed(2)
+              return (
+                <Marker
+                  key={`${city}-${country}`}
+                  position={[lat, lng]}
+                  icon={makeDotIcon(delay)}
+                  eventHandlers={{
+                    click: (e) => {
+                      document.querySelectorAll(".map-dot").forEach((el) => el.classList.remove("selected"))
+                      e.target.getElement()?.querySelector(".map-dot")?.classList.add("selected")
+                    },
+                    popupclose: (e) => {
+                      e.target.getElement()?.querySelector(".map-dot")?.classList.remove("selected")
+                    },
+                  }}
+                >
+                  <Popup className="map-location-popup" offset={[0, -6]}>
+                    <div className="map-popup-inner">
+                      <div className="map-popup-eyebrow">{country}</div>
+                      <div className="map-popup-name">{city}</div>
+                    </div>
+                  </Popup>
+                </Marker>
+              )
+            })}
+          </>
+        )}
       </MapContainer>
     </div>
   )
