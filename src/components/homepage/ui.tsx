@@ -19,14 +19,14 @@ export function ExperienceCard({
 }) {
   return (
     <article
-      className={`rounded-[10px] bg-[#F8F6F2] p-6 md:p-7 ${
+      className={`rounded-[10px] bg-[#F3F3F3] p-6 md:p-7 ${
         wide ? "lg:col-span-1 lg:min-h-[320px]" : "lg:min-h-[320px]"
       }`}
     >
       <div className="text-[#222222]">
         <Icon />
       </div>
-      <div className="mt-24 md:mt-28">
+      <div className="mt-12 md:mt-14">
         <h3 className="type-h5 text-[#222222]">{title}</h3>
         {description ? (
           <p className="type-p3 mt-3 max-w-[320px] text-[#7B7B7B]">{description}</p>

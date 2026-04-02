@@ -42,6 +42,26 @@ export function ShapeFourIcon() {
   )
 }
 
+function ExperienceToolIcon({ src }: { src: string }) {
+  return <img src={src} alt="" aria-hidden="true" width={32} height={32} className="h-8 w-8 object-contain" />
+}
+
+export function GanttIcon() {
+  return <ExperienceToolIcon src="/tool-icons/svg/icon-gantt.svg" />
+}
+
+export function NetworkIcon() {
+  return <ExperienceToolIcon src="/tool-icons/svg/icon-network.svg" />
+}
+
+export function CodeIcon() {
+  return <ExperienceToolIcon src="/tool-icons/svg/icon-code.svg" />
+}
+
+export function StatsIcon() {
+  return <ExperienceToolIcon src="/tool-icons/svg/icon-stats.svg" />
+}
+
 export function ZentroxLogo() {
   return (
     <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
