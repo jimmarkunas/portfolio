@@ -38,6 +38,7 @@ export const caseStudyMap: readonly CaseStudyMapEntry[] = [
   { slug: "cbdistillery", route: "/work/cbdistillery", contentModule: "@/content/case-studies/cbdistillery" },
   { slug: "foh", route: "/work/foh", contentModule: "@/content/case-studies/fredericks" },
   { slug: "lego", route: "/work/lego", contentModule: "@/content/case-studies/lego" },
+  { slug: "cwg", route: "/work/cwg", contentModule: "@/content/case-studies/cwg" },
   { slug: "aa", route: "/work/aa", contentModule: "@/content/case-studies/americanapparel" },
   { slug: "zevo", route: "/work/zevo", contentModule: "@/content/case-studies/zevo" },
   { slug: "dtv02", route: "/work/dtv02", contentModule: "@/content/case-studies/directveverywhere" },

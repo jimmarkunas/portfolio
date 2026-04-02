@@ -18,6 +18,7 @@ const caseStudyLoaders: Record<string, CaseStudyLoader> = {
   cbdistillery: () => import("./cbdistillery").then((module) => module.cbdistilleryCaseStudy),
   foh: () => import("./fredericks").then((module) => module.fredericksCaseStudy),
   lego: () => import("./lego").then((module) => module.legoCaseStudy),
+  cwg: () => import("./cwg").then((module) => module.cwgCaseStudy),
   aa: () => import("./americanapparel").then((module) => module.americanapparelCaseStudy),
   zevo: () => import("./zevo").then((module) => module.zevoCaseStudy),
   dtv02: () => import("./directveverywhere").then((module) => module.directveverywhereCaseStudy),

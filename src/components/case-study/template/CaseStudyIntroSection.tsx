@@ -61,8 +61,8 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
               </div>
 
               <div className={isFoh
-                ? "grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:grid-rows-[auto_auto_auto] lg:items-start lg:gap-x-8 lg:gap-y-5 xl:grid-cols-[minmax(0,573px)_minmax(0,658px)] xl:justify-between xl:gap-x-10"
-                : "grid gap-10 lg:grid-cols-[minmax(0,573px)_minmax(0,658px)] lg:grid-rows-[auto_auto_auto] lg:items-start lg:justify-between lg:gap-x-10 lg:gap-y-5"}
+                ? "grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:grid-rows-[auto_auto_auto] lg:items-start lg:gap-x-8 lg:gap-y-5 2xl:grid-cols-[minmax(0,573px)_minmax(0,658px)] 2xl:justify-between 2xl:gap-x-10"
+                : "grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto_auto] lg:items-start lg:gap-x-10 lg:gap-y-5 2xl:grid-cols-[minmax(0,573px)_minmax(0,658px)] 2xl:justify-between"}
               >
                 <div className={isFoh
                   ? "flex max-w-none flex-col items-start gap-5 lg:contents"
@@ -99,10 +99,10 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                       media={data.problem.media}
                       className={
                         data.problem.media.kind === "react-diagram"
-                          ? "lg:col-start-1 lg:row-start-3 w-full"
+                          ? "min-w-0 lg:col-start-1 lg:row-start-3 w-full"
                           : isFoh
-                            ? "rounded-[24px] lg:col-start-1 lg:row-start-3 xl:w-[620px]"
-                            : "lg:col-start-1 lg:row-start-3 xl:w-[620px] rounded-[24px]"
+                            ? "min-w-0 w-full rounded-[24px] lg:col-start-1 lg:row-start-3 2xl:w-[620px]"
+                            : "min-w-0 w-full rounded-[24px] lg:col-start-1 lg:row-start-3"
                       }
                       frameClassName="px-6 text-center md:px-8 lg:px-10"
                     />
@@ -110,8 +110,8 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                 </div>
 
                 <div className={isFoh
-                  ? "flex w-full max-w-none flex-col gap-8 lg:col-start-2 lg:row-start-3 xl:max-w-[658px] xl:justify-self-end"
-                  : "flex w-full max-w-none flex-col gap-8 lg:col-start-2 lg:row-start-3 lg:max-w-[658px] lg:justify-self-end"}
+                  ? "min-w-0 flex w-full max-w-none flex-col gap-8 lg:col-start-2 lg:row-start-3 xl:max-w-[658px] xl:justify-self-end"
+                  : "min-w-0 flex w-full max-w-none flex-col gap-8 lg:col-start-2 lg:row-start-3 lg:max-w-[658px] lg:justify-self-end"}
                 >
                   <p className="type-p3 text-[#222222]">{data.problem.overview}</p>
 
