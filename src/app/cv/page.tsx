@@ -1,245 +1,201 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowUpRight, Download } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 
 import { Container } from "@/components/Container"
+import { EyebrowPill } from "@/components/EyebrowPill"
 import { cvContent } from "@/content/cv"
 
 export const metadata: Metadata = {
-  title: "CV | Jim Markunas",
-  description: "Jim Markunas resume, experience, and delivery highlights.",
+  title: cvContent.meta.title,
+  description: cvContent.meta.description,
 }
 
-function SectionPill({ label }: { label: string }) {
+function SectionPill({ label, className = "" }: { label: string; className?: string }) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
-      <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-      <span className="type-p2 text-[#222222]">{label}</span>
-    </div>
+    <EyebrowPill className={`self-start bg-white ${className}`.trim()} labelClassName="type-p2 text-[#222222]">
+      {label}
+    </EyebrowPill>
   )
 }
 
+function normalizePeriod(period: string) {
+  return period.replace("–", "-")
+}
+
 export default function CvPage() {
+  const [featuredExperience, ...remainingExperiences] = cvContent.experiences
+
   return (
-    <main className="min-h-full bg-[#F3F3F3]">
+    <main className="min-h-full overflow-x-hidden bg-[#F3F3F3]">
       <section className="w-full bg-[#F3F3F3]">
-        <Container className="pb-14 pt-7 md:pb-16 md:pt-8 lg:pb-[72px] lg:pt-[36px]">
-          <div className="flex flex-col gap-16">
-            <article className="relative overflow-hidden rounded-[20px] bg-white p-6 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)] md:p-8 lg:p-10">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -left-14 top-[46%] h-[380px] w-[380px] rounded-full bg-[#E6EDFF]/70 blur-[96px]"
-              />
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-16 -top-16 h-[420px] w-[420px] rounded-full bg-[#FFF1D8]/80 blur-[120px]"
-              />
+        <Container className="pb-14 pt-8 md:pb-16 md:pt-10 lg:pb-[80px] lg:pt-[42px]">
+          <div className="flex flex-col gap-16 md:gap-20">
+            <div className="flex flex-col gap-8">
+              <section className="flex flex-col items-center">
+                <h1 className="type-h2 mt-4 text-center text-[#232323]">
+                  {cvContent.deliverySection.title}
+                </h1>
+                <p className="type-p2 mt-5 max-w-[920px] text-center text-[#2E2E2E]">
+                  {cvContent.deliverySection.description}
+                </p>
 
-              <div className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(300px,336px)] lg:items-start">
-                <div className="flex flex-col gap-5">
-                  <SectionPill label={cvContent.hero.pill} />
-                  <div className="flex flex-col gap-3">
-                    <h1 className="type-h3 text-[#222222]">{cvContent.hero.name}</h1>
-                    <p className="type-p2 max-w-[760px] text-[#222222]">{cvContent.hero.role}</p>
-                    <p className="type-p3 max-w-[860px] text-[#4B5154]">{cvContent.hero.summary}</p>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px] text-[#4B5154]">
-                    {cvContent.hero.links.map((link) => {
-                      const linkProps = link.external ? { target: "_blank", rel: "noreferrer" } : {}
-                      return (
-                        <a
-                          key={link.label}
-                          href={link.href}
-                          {...linkProps}
-                          className="underline decoration-[#4B5154]/50 underline-offset-4 transition-colors hover:text-[#447ACB]"
-                        >
-                          {link.label}
-                        </a>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                <div className="flex w-full flex-col gap-3">
-                  <div className="type-p4 font-medium text-[#222222]">Download Resume</div>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                   {cvContent.downloads.map((asset, index) => (
                     <a
                       key={asset.href}
                       href={asset.href}
                       download={asset.fileName}
-                      className={
-                        index === 0
-                          ? "inline-flex min-h-[50px] items-center justify-between gap-3 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[16px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB]"
-                          : "inline-flex min-h-[50px] items-center justify-between gap-3 rounded-[50px] border border-[#222222]/20 bg-white px-5 text-[16px] font-medium text-[#222222] transition-colors hover:border-[#447ACB] hover:text-[#447ACB]"
-                      }
+                      className={index === 0 ? "button-primary" : "button-secondary"}
                     >
-                      <span>{asset.label}</span>
-                      <Download className="h-4 w-4" />
+                      {asset.label}
                     </a>
                   ))}
-
-                  <a
-                    href={cvContent.cta.primary.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-1 inline-flex min-h-[50px] items-center justify-between gap-3 rounded-[50px] border border-[#222222]/20 bg-[#F8F8F8] px-5 text-[16px] font-medium text-[#222222] transition-colors hover:border-[#447ACB] hover:text-[#447ACB]"
-                  >
-                    <span>{cvContent.cta.primary.label}</span>
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
                 </div>
-              </div>
 
-              <div className="relative z-10 mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                {cvContent.impactStats.map((stat) => {
-                  const cardBody = (
-                    <>
-                      <div className="type-h5 text-[#222222]">{stat.value}</div>
-                      <p className="type-p4 mt-3 text-[#4B5154]">{stat.label}</p>
-                    </>
-                  )
-
-                  if (stat.href) {
-                    return (
-                      <Link
-                        key={stat.label}
-                        href={stat.href}
-                        className="group rounded-[12px] bg-[#F9FAFB] p-5 outline outline-1 outline-black/5 transition-colors hover:bg-white"
-                      >
-                        {cardBody}
-                        <span className="mt-4 inline-flex items-center gap-1 text-[14px] text-[#447ACB]">
-                          <span>View case study</span>
-                          <ArrowUpRight className="h-3.5 w-3.5" />
-                        </span>
-                      </Link>
-                    )
-                  }
-
-                  return (
-                    <div key={stat.label} className="rounded-[12px] bg-[#F9FAFB] p-5 outline outline-1 outline-black/5">
-                      {cardBody}
-                    </div>
-                  )
-                })}
-              </div>
-            </article>
-
-            <section className="flex flex-col gap-8">
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] lg:items-end">
-                <div className="flex flex-col gap-3">
-                  <SectionPill label="Experience" />
-                  <h2 className="type-h3 max-w-[420px] text-[#222222]">Programs I Have Led</h2>
-                </div>
-                <p className="type-p3 max-w-[840px] text-[#4B5154]">{cvContent.experienceIntro}</p>
-              </div>
-
-              <div className="rounded-[16px] bg-white px-6 py-2 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)] md:px-8">
-                {cvContent.experiences.map((entry) => (
-                  <article key={`${entry.company}-${entry.period}`} className="border-b border-black/10 py-8 last:border-b-0">
-                    <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-                      <div className="max-w-[760px]">
-                        <h3 className="type-h5 text-[#222222]">{entry.company}</h3>
-                        <p className="type-p3 mt-1 text-[#222222]">{entry.role}</p>
-                        <p className="type-p4 mt-1 text-[#6A6A6A]">{entry.period}</p>
+                <div className="mt-10 grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
+                  {cvContent.impactStats.map((stat) => (
+                    <Link
+                      key={stat.label}
+                      href={stat.href ?? "/work"}
+                      className="flex flex-col items-center justify-center gap-3 rounded-[10px] bg-white px-6 py-6 text-center outline outline-1 outline-black/5 transition-transform duration-200 hover:-translate-y-0.5 md:px-7 md:py-7"
+                    >
+                      <div className="type-stat-number text-[#242840]">
+                        {stat.value}
                       </div>
-                      <div className="flex flex-wrap justify-start gap-2 lg:max-w-[420px] lg:justify-end">
-                        {entry.tags.map((tag) => (
+                      <p className="type-p2 text-[#414141]">
+                        {stat.displayLabel ?? stat.label}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              <section className="relative pt-0">
+                <article className="relative z-10 rounded-[2px] bg-[#ECECEC] px-5 py-6 md:px-8 md:py-8 lg:px-10 lg:py-10">
+                  <div className="grid gap-8 border-b border-black/10 pb-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,410px)] lg:pb-8">
+                    <div className="flex flex-col gap-2">
+                      <SectionPill label={cvContent.sectionPills.experience} className="self-start" />
+                      <h2 className="type-h3 max-w-[420px] text-[#2A2A2A]">
+                        {cvContent.experienceSection.title}
+                      </h2>
+                    </div>
+
+                    <div className="flex flex-col gap-3 lg:pt-2">
+                      <p className="type-p3 text-[#555555]">{cvContent.experienceIntro}</p>
+                      <a
+                        href={cvContent.cta.primary.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-text-cta type-p3 w-fit"
+                      >
+                        <span>{cvContent.cta.primary.label}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="border-b border-black/10 py-6">
+                    <div className="grid gap-5 lg:grid-cols-[minmax(0,310px)_minmax(0,1fr)_max-content] lg:items-start lg:gap-6">
+                      <div>
+                        <h3 className="type-p2 text-[#2A2A2A]">{featuredExperience.company}</h3>
+                        <p className="type-p4 mt-1 text-[#666666]">• {normalizePeriod(featuredExperience.period)}</p>
+                      </div>
+
+                      <div className="flex flex-col gap-4">
+                        <p className="type-p3 max-w-[560px] text-[#4B5154]">{featuredExperience.summary}</p>
+                        <ul className="space-y-1.5">
+                          {featuredExperience.highlights.map((highlight) => (
+                            <li key={`${featuredExperience.company}-${highlight}`} className="type-p4 text-[#3F4548]">
+                              • {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                        {featuredExperience.spotlights?.length ? (
+                          <ul className="space-y-1.5">
+                            {featuredExperience.spotlights.map((spotlight) => (
+                              <li
+                                key={`${featuredExperience.company}-${spotlight.client}`}
+                                className="type-p4 text-[#3F4548]"
+                              >
+                                • {spotlight.client}: {spotlight.outcome}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
+
+                      <div className="flex flex-col items-start gap-3 lg:items-end">
+                        <div className="flex flex-wrap gap-2 lg:justify-end">
+                          {featuredExperience.tags.slice(0, 2).map((tag) => (
+                            <span
+                              key={`${featuredExperience.company}-${tag}`}
+                              className="type-ui-sm inline-flex min-h-[28px] items-center rounded-[999px] bg-[#2F2F2F] px-3 text-[#F4F4F4]"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {remainingExperiences.map((entry) => (
+                    <article
+                      key={`${entry.company}-${entry.period}`}
+                      className="grid gap-4 border-b border-black/10 py-5 last:border-b-0 lg:grid-cols-[minmax(0,310px)_minmax(0,1fr)_max-content] lg:items-center lg:gap-6"
+                    >
+                      <div>
+                        <h3 className="type-p2 text-[#2A2A2A]">{entry.company}</h3>
+                        <p className="type-p4 mt-1 text-[#666666]">• {normalizePeriod(entry.period)}</p>
+                      </div>
+                      <div className="max-w-[540px]">
+                        <p className="type-p3 text-[#4B5154]">{entry.summary}</p>
+                        <ul className="mt-2 space-y-1.5">
+                          {entry.highlights.map((highlight) => (
+                            <li key={`${entry.company}-${highlight}`} className="type-p4 text-[#3F4548]">
+                              • {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="flex flex-wrap gap-2 lg:justify-end">
+                        {entry.tags.slice(0, 2).map((tag) => (
                           <span
                             key={`${entry.company}-${tag}`}
-                            className="inline-flex min-h-[34px] items-center rounded-[100px] bg-[#F5F6F8] px-4 text-[14px] text-[#2F3A4B]"
+                            className="type-ui-sm inline-flex min-h-[28px] items-center rounded-[999px] bg-[#DFDFDF] px-3 text-[#555555]"
                           >
                             {tag}
                           </span>
                         ))}
                       </div>
-                    </div>
-
-                    <p className="type-p3 mt-4 max-w-[960px] text-[#4B5154]">{entry.summary}</p>
-
-                    <ul className="mt-4 space-y-2">
-                      {entry.highlights.map((highlight) => (
-                        <li key={highlight} className="type-p4 flex gap-3 text-[#3F4548]">
-                          <span aria-hidden="true" className="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#447ACB]" />
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {entry.spotlights ? (
-                      <div className="mt-6 grid gap-3 md:grid-cols-2">
-                        {entry.spotlights.map((spotlight) => {
-                          const spotlightBody = (
-                            <div className="rounded-[12px] bg-[#F8F8F8] p-4">
-                              <div className="type-p4 font-medium text-[#222222]">{spotlight.client}</div>
-                              <div className="type-p5 mt-1 text-[#5F6368]">{spotlight.focus}</div>
-                              <p className="type-p4 mt-3 text-[#3F4548]">{spotlight.outcome}</p>
-                            </div>
-                          )
-
-                          if (!spotlight.href) {
-                            return <div key={`${entry.company}-${spotlight.client}`}>{spotlightBody}</div>
-                          }
-
-                          return (
-                            <Link key={`${entry.company}-${spotlight.client}`} href={spotlight.href} className="group">
-                              {spotlightBody}
-                            </Link>
-                          )
-                        })}
-                      </div>
-                    ) : null}
-
-                    {entry.relatedWork ? (
-                      <div className="mt-5 flex flex-wrap gap-4">
-                        {entry.relatedWork.map((related) => (
-                          <Link
-                            key={`${entry.company}-${related.label}`}
-                            href={related.href}
-                            className="inline-flex items-center gap-1 text-[15px] text-[#447ACB] underline underline-offset-4 transition-colors hover:text-[#2F5EA4]"
-                          >
-                            <span>{related.label}</span>
-                            <ArrowUpRight className="h-3.5 w-3.5" />
-                          </Link>
-                        ))}
-                      </div>
-                    ) : null}
-                  </article>
-                ))}
-              </div>
-
-              <div className="rounded-[12px] bg-white p-6 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)] md:p-7">
-                <h3 className="type-p2 text-[#222222]">Additional Work Experience</h3>
-                <div className="mt-4 flex flex-col gap-2">
-                  {cvContent.additionalExperience.map((item) => (
-                    <p key={item} className="type-p4 text-[#4B5154]">
-                      {item}
-                    </p>
+                    </article>
                   ))}
-                </div>
-              </div>
-            </section>
+                </article>
+              </section>
+            </div>
 
-            <section className="grid gap-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)]">
+            <section className="grid gap-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] lg:gap-12">
               <div className="flex flex-col gap-3">
-                <SectionPill label="Recognition" />
-                <h2 className="type-h3 max-w-[420px] text-[#222222]">Achievements & Awards</h2>
-                <p className="type-p3 max-w-[460px] text-[#4B5154]">
-                  Recognition tied to measurable program outcomes, from global smart-city modernization to composable commerce execution and enterprise transformation case-study coverage.
+                <SectionPill label={cvContent.sectionPills.awards} />
+                <h2 className="type-h3 max-w-[420px] text-[#222222]">
+                  {cvContent.awardsSection.title}
+                </h2>
+                <p className="type-p2 max-w-[500px] text-[#2D2D2D]">
+                  {cvContent.awardsSection.description}
                 </p>
               </div>
 
               <div className="flex flex-col gap-4">
                 {cvContent.awards.map((award) => {
                   const rowBody = (
-                    <article className="rounded-[10px] bg-white px-6 py-5 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)] md:px-8">
+                    <article className="rounded-[10px] bg-[#F0F0F0] px-6 py-5 md:px-8 md:py-6">
                       <div className="grid gap-3 md:grid-cols-[110px_minmax(0,1fr)_max-content] md:items-center md:gap-6">
-                        <div className="type-p2">
-                          <span className="text-[#666666]">{award.rank}</span>
-                          <span className="text-[#222222]"> {award.year}</span>
+                        <div className="type-p2 text-[#404040]">
+                          {award.rank} {award.year}
                         </div>
-                        <div className="type-p2 text-[#222222] md:text-center">{award.title}</div>
-                        <div className="type-p2 text-[#222222] md:text-right md:whitespace-nowrap">{award.source}</div>
+                        <div className="type-p2 text-[#2A2A2A] md:text-center">{award.title}</div>
+                        <div className="type-p2 text-[#2A2A2A] md:text-right md:whitespace-nowrap">{award.source}</div>
                       </div>
                     </article>
                   )
@@ -249,7 +205,7 @@ export default function CvPage() {
                   }
 
                   return (
-                    <Link key={`${award.rank}-${award.title}`} href={award.href} className="group">
+                    <Link key={`${award.rank}-${award.title}`} href={award.href} className="transition-opacity hover:opacity-90">
                       {rowBody}
                     </Link>
                   )
@@ -257,80 +213,57 @@ export default function CvPage() {
               </div>
             </section>
 
-            <section className="rounded-[20px] bg-white p-6 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)] md:p-8 lg:p-10">
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:gap-10">
-                <div className="flex flex-col gap-3">
-                  <SectionPill label="Capabilities" />
-                  <h2 className="type-h3 text-[#222222]">Tools, Platforms, and Credentials</h2>
-                  <p className="type-p3 text-[#4B5154]">
-                    I combine program leadership with hands-on platform fluency, so business priorities and technical execution stay connected from planning to launch.
-                  </p>
-                </div>
+            <section className="grid gap-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] lg:gap-12">
+              <div className="flex flex-col gap-3">
+                <h2 className="type-h3 text-[#222222]">{cvContent.detailsSection.title}</h2>
+              </div>
 
-                <div className="grid gap-4 md:grid-cols-2">
-                  {cvContent.skills.map((group) => (
-                    <article key={group.title} className="rounded-[12px] bg-[#F8F8F8] p-5">
-                      <h3 className="type-p2 text-[#222222]">{group.title}</h3>
-                      <ul className="mt-3 space-y-2">
-                        {group.items.map((item) => (
-                          <li key={item} className="type-p4 text-[#4B5154]">
-                            {item}
+              <div className="grid gap-4">
+                <article className="rounded-[10px] bg-white p-6 outline outline-1 outline-black/5">
+                  <h3 className="type-h5 text-[#2A2A2A]">{cvContent.detailsSection.additionalExperienceTitle}</h3>
+                  <ul className="mt-3 space-y-2">
+                    {cvContent.additionalExperience.map((item) => (
+                      <li key={item} className="type-p3 text-[#5A5A5A]">
+                        • {item}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+
+                <article className="rounded-[10px] bg-white p-6 outline outline-1 outline-black/5">
+                  <h3 className="type-h5 text-[#2A2A2A]">{cvContent.detailsSection.credentialsTitle}</h3>
+
+                  <div className="mt-3 grid gap-4 md:grid-cols-2">
+                    <div>
+                      <h4 className="type-p2 text-[#2A2A2A]">{cvContent.detailsSection.educationTitle}</h4>
+                      <ul className="mt-2 space-y-1.5">
+                        {cvContent.education.map((item) => (
+                          <li key={item} className="type-p3 text-[#5A5A5A]">
+                            • {item}
                           </li>
                         ))}
                       </ul>
-                    </article>
-                  ))}
+                    </div>
 
-                  <article className="rounded-[12px] bg-[#F8F8F8] p-5">
-                    <h3 className="type-p2 text-[#222222]">Education</h3>
-                    <ul className="mt-3 space-y-2">
-                      {cvContent.education.map((item) => (
-                        <li key={item} className="type-p4 text-[#4B5154]">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
+                    <div>
+                      <h4 className="type-p2 text-[#2A2A2A]">{cvContent.detailsSection.certificationsTitle}</h4>
+                      <ul className="mt-2 space-y-1.5">
+                        {cvContent.certifications.map((item) => (
+                          <li key={item} className="type-p3 text-[#5A5A5A]">
+                            • {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
 
-                  <article className="rounded-[12px] bg-[#F8F8F8] p-5">
-                    <h3 className="type-p2 text-[#222222]">Certifications</h3>
-                    <ul className="mt-3 space-y-2">
-                      {cvContent.certifications.map((item) => (
-                        <li key={item} className="type-p4 text-[#4B5154]">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
-                </div>
-              </div>
-            </section>
-
-            <section className="rounded-[16px] bg-[#222222] p-6 text-white md:p-8">
-              <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                <div className="max-w-[840px]">
-                  <h2 className="type-h4 text-white">{cvContent.cta.heading}</h2>
-                  <p className="type-p3 mt-3 text-white/80">{cvContent.cta.body}</p>
-                </div>
-
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href={cvContent.cta.primary.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-[50px] border border-white bg-white px-5 text-[16px] font-medium text-[#222222] transition-colors hover:border-[#C9DDFF] hover:bg-[#C9DDFF]"
-                  >
-                    <span>{cvContent.cta.primary.label}</span>
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                  <Link
-                    href={cvContent.cta.secondary.href}
-                    className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-[50px] border border-white/60 px-5 text-[16px] font-medium text-white transition-colors hover:border-white hover:bg-white/10"
-                  >
-                    <span>{cvContent.cta.secondary.label}</span>
-                    <ArrowUpRight className="h-4 w-4" />
-                  </Link>
-                </div>
+                  <div className="mt-4">
+                    <h4 className="type-p2 text-[#2A2A2A]">{cvContent.detailsSection.toolsTitle}</h4>
+                    <p className="type-p3 mt-2 text-[#5A5A5A]">
+                      {cvContent.skills.flatMap((group) => group.items).join(", ")}
+                    </p>
+                  </div>
+                </article>
               </div>
             </section>
           </div>
@@ -339,4 +272,3 @@ export default function CvPage() {
     </main>
   )
 }
-

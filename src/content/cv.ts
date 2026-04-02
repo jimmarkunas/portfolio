@@ -13,6 +13,7 @@ export type CvDownloadAsset = {
 export type CvImpactStat = {
   value: string
   label: string
+  displayLabel?: string
   href?: string
 }
 
@@ -48,6 +49,39 @@ export type CvSkillGroup = {
 }
 
 export const cvContent = {
+  meta: {
+    title: "CV | Jim Markunas",
+    description: "Jim Markunas resume, experience, and delivery highlights.",
+  },
+  sectionPills: {
+    delivery: "Result",
+    experience: "Experience",
+    awards: "Achievements",
+  },
+  deliverySection: {
+    title: "My Resume",
+    description:
+      "By aligning business goals, technical constraints, and delivery execution, I help organizations modernize platforms, accelerate time-to-value, and improve results across critical digital channels.",
+  },
+  experienceSection: {
+    title: "Explore My Delivery Journey",
+  },
+  awardsSection: {
+    title: "My Achievements & Awards",
+    description:
+      "Over the years, my love for creative problem-solving has evolved into a career dedicated to crafting intuitive and impactful digital experiences.",
+  },
+  detailsSection: {
+    title: "Resume Details",
+    additionalExperienceTitle: "Additional Work Experience",
+    credentialsTitle: "Education, Certifications & Tools",
+    educationTitle: "Education",
+    certificationsTitle: "Certifications",
+    toolsTitle: "Tools & Platforms",
+  },
+  uiText: {
+    openCaseStudyAriaLabel: "Open case study",
+  },
   hero: {
     pill: "Curriculum Vitae",
     name: "Jim Markunas",
@@ -73,10 +107,28 @@ export const cvContent = {
     },
   ] satisfies CvDownloadAsset[],
   impactStats: [
-    { value: "~$120M", label: "YoY uplift delivered in DIRECTV customer-channel programs", href: "/work/dtv01" },
-    { value: "12k+", label: "New York Life agents enabled through compliant CXM workflows", href: "/work/newyorklife" },
-    { value: "35%", label: "Infrastructure cost reduction on Modere composable modernization", href: "/work/modere" },
-    { value: "Smart 20", label: "Global innovation award for CPS Energy service-channel modernization", href: "/work/cps" },
+    {
+      value: "20+ Years",
+      label: "Leading digital delivery",
+      displayLabel: "Leading digital delivery",
+    },
+    {
+      value: "$1B",
+      label: "Revenue uplift delivered at Modere (up from $500m)",
+      displayLabel: "Revenue uplift delivered at Modere (up from $500m)",
+      href: "/work/modere",
+    },
+    {
+      value: "$120m",
+      label: "YoY Revenue Impact at DIRECTV",
+      displayLabel: "YoY Revenue Impact at DIRECTV",
+      href: "/work/dtv01",
+    },
+    {
+      value: "40k",
+      label: "Hours leading projects",
+      displayLabel: "Hours leading projects",
+    },
   ] satisfies CvImpactStat[],
   experienceIntro:
     "I lead end-to-end delivery across product, engineering, compliance, operations, and executive stakeholders. The work ranges from customer channel modernization to enterprise migration and composable commerce programs.",
@@ -271,4 +323,3 @@ export const cvContent = {
     secondary: { label: "See Case Studies", href: "/work" },
   },
 }
-
