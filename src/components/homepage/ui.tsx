@@ -49,13 +49,13 @@ export function AwardRow({
 }) {
   return (
     <article className="rounded-[10px] bg-white px-6 py-5 md:px-8 md:py-6">
-      <div className="flex flex-col gap-3 md:grid md:grid-cols-[140px_minmax(0,1fr)_170px] md:items-center md:gap-6">
+      <div className="grid gap-3 md:grid-cols-[140px_minmax(0,1fr)_max-content] md:items-center md:gap-6">
         <div className="type-p2">
           <span className="text-[#666666]">{rank}</span>
           <span className="text-[#222222]"> {year}</span>
         </div>
         <div className="type-p2 text-[#222222] md:text-center">{title}</div>
-        <div className="type-p2 text-[#222222] md:text-right">{source}</div>
+        <div className="type-p2 text-[#222222] md:text-right md:whitespace-nowrap">{source}</div>
       </div>
     </article>
   )
@@ -221,22 +221,7 @@ export function HighlightCard({
 export function InsightAvatarStack() {
   return (
     <div className="flex items-center">
-      {["A", "B", "C"].map((label, index) => (
-        <div
-          key={label}
-          className={`-ml-2 flex h-14 w-14 items-center justify-center overflow-hidden rounded-[10px] border border-white text-sm text-[#222222] shadow-[-3px_0px_9px_rgba(0,0,0,0.15)] first:ml-0 ${
-            index === 0
-              ? "bg-[linear-gradient(135deg,#d8d8d8_0%,#f2f2f2_100%)]"
-              : index === 1
-                ? "bg-[linear-gradient(135deg,#e2d8d0_0%,#f7f2ee_100%)]"
-                : "bg-[linear-gradient(135deg,#d1d1d1_0%,#fafafa_100%)]"
-          }`}
-        >
-          {label}
-        </div>
-      ))}
-
-      <div className="-ml-2 flex h-14 w-14 items-center justify-center rounded-[10px] bg-[#2B2B2B] text-[20px] leading-8 text-white shadow-[-3px_0px_9px_rgba(0,0,0,0.15)]">
+      <div className="flex h-14 w-14 items-center justify-center rounded-[10px] bg-[#2B2B2B] text-[20px] leading-8 text-white shadow-[-3px_0px_9px_rgba(0,0,0,0.15)]">
         75+
       </div>
     </div>

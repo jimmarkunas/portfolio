@@ -1,10 +1,12 @@
 "use client"
 
+import type { ReactNode } from "react"
 import Link from "next/link"
 
 import { Container } from "@/components/Container"
 import { PullQuote } from "@/components/PullQuote"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
+import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
 
 import {
   desktopHeroLogoAxisX,
@@ -22,42 +24,101 @@ import {
   SectionPill,
 } from "./ui"
 
-function PortfolioImagePlaceholder({
-  width,
-  height,
-  className = "",
-}: {
-  width: number
-  height: number
-  className?: string
-}) {
-  return (
-    <div
-      className={`relative w-full overflow-hidden rounded-[10px] bg-white ${className}`.trim()}
-      style={{ aspectRatio: `${width} / ${height}` }}
-    >
-      <div className="absolute inset-0 flex items-center justify-center text-center text-[16px] text-[#666666]">
-        {width} x {height}
-      </div>
-    </div>
-  )
+type HomepageInsightCard = {
+  title?: string
+  subtitle?: string
+  value?: string
+  label?: string
+  suffix?: string
+  summary?: string
 }
 
-function PortfolioHoverIcon() {
+type TestimonialItem = {
+  company?: string
+  name: string
+  role: string
+  quote: string
+  avatarSrc?: string
+  badgeSrc?: string
+  badgeImageClassName?: string
+}
+
+type TestimonialCardProps = {
+  testimonial: TestimonialItem
+  tone: "light" | "dark"
+  className?: string
+  topRightBadge?: ReactNode
+}
+
+const recognitionRowClass =
+  "grid gap-6 border-b border-black/10 pb-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:items-start lg:items-center"
+const recognitionSummaryClass =
+  "type-p3 text-[#666666] w-full lg:pl-8"
+const linkedRecognitionRowClass =
+  "transition-colors duration-150 hover:bg-[#F5F7FA]"
+const featuredTagClass =
+  "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#2B2B2B] px-4 text-[16px] leading-6 text-white"
+const defaultTagClass =
+  "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#EFEFEF] px-4 text-[16px] leading-6 text-[#3A3A3A] outline outline-1 outline-black/10"
+
+function TestimonialCard({ testimonial, tone, className = "", topRightBadge }: TestimonialCardProps) {
+  const isDark = tone === "dark"
+
+  const articleClass = isDark
+    ? "relative rounded-[10px] bg-[linear-gradient(180deg,#1F252B_0%,#14191F_100%)] p-6 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
+    : "relative rounded-[10px] bg-[#F9FAFB] p-6 outline outline-1 outline-gray-200"
+
+  const badgeClass = isDark
+    ? "flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-sm text-white"
+    : "flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-sm text-[#2B2B2B]"
+
+  const companyClass = isDark ? "type-p2 opacity-95" : "type-p2 text-[#222222]/80"
+  const quoteTextClass = isDark ? "type-p3 text-white/90" : "type-p3 text-[#2B2B2B]"
+  const quoteGlyphClass = isDark ? "text-[rgba(255,255,255,0.12)]" : "text-[rgba(34,34,34,0.08)]"
+  const nameClass = isDark ? "type-p2 text-white" : "type-p2 text-[#222222]"
+  const roleClass = isDark ? "type-p3 text-white/70" : "type-p3 text-[#5F6368]"
+  const initialBadge = <div className={badgeClass}>{testimonial.name.slice(0, 1)}</div>
+  const companyBadge = testimonial.badgeSrc ? (
+    <div className={`${badgeClass} overflow-hidden`}>
+      <img
+        src={testimonial.badgeSrc}
+        alt={`${testimonial.company ?? testimonial.name} badge`}
+        className={`h-full w-full object-cover ${testimonial.badgeImageClassName ?? ""}`.trim()}
+      />
+    </div>
+  ) : initialBadge
+  const profileAvatar = testimonial.avatarSrc ? (
+    <img src={testimonial.avatarSrc} alt={testimonial.name} className="h-10 w-10 rounded-full object-cover" />
+  ) : initialBadge
+
   return (
-    <span
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
-    >
-      <span className="inline-flex h-20 w-20 items-center justify-center gap-2.5 rounded-[100px] bg-[#447ACB] p-3.5 outline outline-1 outline-offset-[-1px] outline-[#447ACB]/10">
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M29.3402 17.2594L13.5615 33.0381L10.9688 30.4454L26.7475 14.6667H12.8403V11H33.0069V31.1667H29.3402V17.2594Z"
-            fill="#FFE6E6"
-          />
-        </svg>
-      </span>
-    </span>
+    <article className={`${articleClass} ${className}`.trim()}>
+      <div className="absolute right-6 top-6">
+        {topRightBadge ? topRightBadge : companyBadge}
+      </div>
+
+      <div className={companyClass}>{testimonial.company ?? "Client Feedback"}</div>
+
+      <div className="relative mt-6">
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute left-1/2 -top-[0.2em] -translate-x-1/2 font-serif text-[92px] leading-none tracking-[-0.14em] md:text-[108px] ${quoteGlyphClass}`}
+        >
+          &ldquo;
+        </div>
+        <p className={`relative z-10 ${quoteTextClass}`}>{testimonial.quote}</p>
+      </div>
+
+      <div className="mt-6 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          {profileAvatar}
+          <div>
+            <div className={nameClass}>{testimonial.name}</div>
+            <div className={roleClass}>{testimonial.role}</div>
+          </div>
+        </div>
+      </div>
+    </article>
   )
 }
 
@@ -80,12 +141,8 @@ export default function Homepage() {
   const heroSecondStatPlusLeft = `calc(${heroTextLeft} + 183px)`
   const heroSecondStatNumberLeft = `calc(${heroTextLeft} + 204px)`
   const heroSecondStatLabelLeft = `calc(${heroTextLeft} + 204px)`
-  const portfolioHoverCardClass =
-    "group relative block w-full overflow-hidden rounded-[10px] outline outline-1 outline-offset-[-1px] outline-transparent transition-[outline,box-shadow] duration-150 hover:outline-[3px] hover:outline-blue-500 hover:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)] focus-visible:outline-[3px] focus-visible:outline-blue-500 focus-visible:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)]"
-  const portfolioHoverWideCardClass =
-    "group relative block w-full overflow-hidden rounded-xl outline outline-1 outline-offset-[-1px] outline-transparent transition-[outline,box-shadow] duration-150 hover:outline-[3px] hover:outline-blue-500 hover:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)] focus-visible:outline-[3px] focus-visible:outline-blue-500 focus-visible:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)]"
-  const portfolioHoverOverlayClass =
-    "pointer-events-none absolute inset-0 bg-[#222222]/45 opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+  const [statsCard1, statsCard2, statsCard3, statsCard4, statsCard5, statsCard6] =
+    stats.cards as HomepageInsightCard[]
 
   return (
     <main className="min-h-full bg-[#F3F3F3]">
@@ -337,7 +394,7 @@ export default function Homepage() {
               </div>
             </div>
 
-            <div className="grid w-full gap-5 md:grid-cols-2 lg:grid-cols-[396px_repeat(3,minmax(0,1fr))] lg:items-stretch">
+            <div className="grid w-full gap-5 md:grid-cols-2 xl:grid-cols-[396px_repeat(3,minmax(0,1fr))] xl:items-stretch">
               {experienceCards.map((card) => (
                 <ExperienceCard key={card.title} {...card} />
               ))}
@@ -347,7 +404,7 @@ export default function Homepage() {
       </section>
 
       <section className="w-full bg-[#F3F3F3]">
-        <Container className="py-14 md:py-16 lg:py-[72px]">
+        <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
           <div className="flex flex-col gap-20">
             <div className="grid gap-10 lg:grid-cols-[482px_minmax(0,769px)] lg:justify-between lg:gap-12">
               <div className="flex flex-col items-start gap-3">
@@ -369,303 +426,19 @@ export default function Homepage() {
               </div>
             </div>
 
-            <div className="flex w-full flex-col items-center gap-8 md:items-start">
-              <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-6 py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]">
-                <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                <span className="type-p2 text-[#222222]">{sections.portfolio.pill}</span>
-              </div>
-
-              <div className="flex w-full flex-col gap-5">
-                <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                  <h2 className="type-h3 max-w-[702px] text-center text-[#222222] md:text-left">
-                    {sections.portfolio.title}
-                  </h2>
-
-                  <Link
-                    href="/work/"
-                    className="inline-flex self-start min-h-[56px] items-center gap-2 rounded-[99px] bg-[#2B2B2B] px-6 pb-3.5 pt-3 text-[20px] leading-8 text-white lg:self-auto"
-                  >
-                    <span>{sections.highlights.cta}</span>
-                    <ArrowUpRightIcon />
-                  </Link>
-                </div>
-
-                <div className="flex w-full flex-wrap items-center justify-center gap-2 md:justify-start">
-                  {sections.portfolio.categories.map((category, index) => (
-                    <span
-                      key={category}
-                      className={`inline-flex min-h-[44px] items-center justify-center rounded-[99px] px-6 py-2 text-[14px] leading-5 ${
-                        index === 0 ? "bg-[#2B2B2B] text-white" : "bg-[#F8F8F8] text-[#222222]"
-                      }`}
-                    >
-                      {category}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="w-full space-y-4 pt-2">
-                <div className="space-y-4">
-                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                    <Link
-                      href="/work/dtv02/"
-                      className={portfolioHoverCardClass}
-                      style={{ aspectRatio: "433 / 320" }}
-                    >
-                      <img
-                        src="/portfolio-gallery/directv02.svg"
-                        alt="DIRECTV project"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                      <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                    </Link>
-                    <Link
-                      href="/work/cps/"
-                      className={portfolioHoverCardClass}
-                      style={{ aspectRatio: "433 / 320" }}
-                    >
-                      <img
-                        src="/portfolio-gallery/cps.svg"
-                        alt="CPS project"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                      <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                    </Link>
-                    <Link
-                      href="/work/newyorklife/"
-                      className={portfolioHoverCardClass}
-                      style={{ aspectRatio: "433 / 320" }}
-                    >
-                      <img
-                        src="/portfolio-gallery/nyl.svg"
-                        alt="New York Life project"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                      <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                    </Link>
-                  </div>
-
-                  <div className="grid gap-4 xl:grid-cols-3">
-                    <Link
-                      href="/work/modere/"
-                      className={`${portfolioHoverCardClass} xl:col-span-2`}
-                      style={{ aspectRatio: "882 / 658" }}
-                    >
-                      <img
-                        src="/portfolio-gallery/modere.svg"
-                        alt="Modere project"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                      <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                    </Link>
-                    <div className="grid gap-4 md:grid-cols-2 xl:col-span-1 xl:h-full xl:grid-cols-1 xl:grid-rows-2">
-                      <Link
-                        href="/work/bi/"
-                        className={`${portfolioHoverCardClass} xl:h-full`}
-                        style={{ aspectRatio: "433 / 320" }}
-                      >
-                        <img
-                          src="/portfolio-gallery/bi.svg"
-                          alt="BI project"
-                          className="absolute inset-0 h-full w-full object-cover"
-                        />
-                        <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                      </Link>
-                      <Link
-                        href="/work/mm/"
-                        className={`${portfolioHoverCardClass} xl:h-full`}
-                        style={{ aspectRatio: "433 / 320" }}
-                      >
-                        <img
-                          src="/portfolio-gallery/mm.svg"
-                          alt="MM project"
-                          className="absolute inset-0 h-full w-full object-cover"
-                        />
-                        <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                      </Link>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <Link
-                      href="/work/method/"
-                      className={portfolioHoverCardClass}
-                      style={{ aspectRatio: "660 / 381" }}
-                    >
-                      <img
-                        src="/portfolio-gallery/method.svg"
-                        alt="Method project"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                      <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                    </Link>
-                    <Link
-                      href="/work/murad/"
-                      className={portfolioHoverCardClass}
-                      style={{ aspectRatio: "660 / 381" }}
-                    >
-                      <img
-                        src="/portfolio-gallery/murad.svg"
-                        alt="Murad project"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                      <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <Link
-                      href="/work/k2/"
-                      className={portfolioHoverCardClass}
-                      style={{ aspectRatio: "660 / 381" }}
-                    >
-                      <img
-                        src="/portfolio-gallery/k2.svg"
-                        alt="K2 project"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                      <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                    </Link>
-                    <Link
-                      href="/work/cbdistillery/"
-                      className={portfolioHoverCardClass}
-                      style={{ aspectRatio: "660 / 381" }}
-                    >
-                      <img
-                        src="/portfolio-gallery/cbdistillery.svg"
-                        alt="CBDistillery project"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                      <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                    </Link>
-                  </div>
-
-                  <Link
-                    href="/work/foh/"
-                    className={portfolioHoverWideCardClass}
-                    style={{ aspectRatio: "1336 / 582" }}
-                  >
-                    <img
-                      src="/portfolio-gallery/foh.svg"
-                      alt="FOH project"
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                    <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                  </Link>
-
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <Link
-                      href="/work/lego/"
-                      className={portfolioHoverCardClass}
-                      style={{ aspectRatio: "660 / 381" }}
-                    >
-                      <img
-                        src="/portfolio-gallery/lego.svg"
-                        alt="LEGO project"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                      <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                    </Link>
-                    <Link
-                      href="/work/aa/"
-                      className={portfolioHoverCardClass}
-                      style={{ aspectRatio: "660 / 381" }}
-                    >
-                      <img
-                        src="/portfolio-gallery/aa.svg"
-                        alt="American Apparel project"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                      <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                    </Link>
-                  </div>
-
-                  <Link
-                    href="/work/dtv01/"
-                    className={portfolioHoverWideCardClass}
-                    style={{ aspectRatio: "1336 / 582" }}
-                  >
-                    <img
-                      src="/portfolio-gallery/directv01.svg"
-                      alt="DIRECTV project"
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                    <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                      <PortfolioHoverIcon />
-                  </Link>
-                </div>
-
-                <div className="mx-auto flex w-full max-w-[1336px] flex-col items-center gap-10 pt-6 md:pt-10">
-                  <div className="flex w-full max-w-[1200px] flex-col items-center gap-3">
-                    <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
-                      <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                      <span className="type-p2 text-[#222222]">{sections.portfolio.moreProjects.pill}</span>
-                    </div>
-
-                    <h3 className="text-center text-5xl font-normal leading-[56px] text-[#222222]">
-                      {sections.portfolio.moreProjects.title}
-                    </h3>
-                  </div>
-
-                  <div className="grid w-full gap-6 md:grid-cols-2">
-                    {sections.portfolio.moreProjects.cards.map((card, index) => (
-                      <div key={card.title} className="flex flex-col items-start gap-4">
-                        {index === 0 ? (
-                          <Link
-                            href="/work/zevo/"
-                            className={portfolioHoverCardClass}
-                            style={{ aspectRatio: `${card.width} / ${card.height}` }}
-                          >
-                            <img
-                              src="/portfolio-gallery/zevo.svg"
-                              alt="ZEVO project"
-                              className="absolute inset-0 h-full w-full object-cover"
-                            />
-                            <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                            <PortfolioHoverIcon />
-                          </Link>
-                        ) : (
-                          <Link
-                            href="/work/cwg/"
-                            className={portfolioHoverCardClass}
-                            style={{ aspectRatio: `${card.width} / ${card.height}` }}
-                          >
-                            <img
-                              src="/portfolio-gallery/cwg.svg"
-                              alt="CWG project"
-                              className="absolute inset-0 h-full w-full object-cover"
-                            />
-                            <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                            <PortfolioHoverIcon />
-                          </Link>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <PortfolioFounderSections
+              portfolio={sections.portfolio}
+              founder={sections.portfolio.moreProjects}
+              ctaLabel={sections.highlights.cta}
+              ctaHref="/work/"
+              showCta
+            />
           </div>
         </Container>
       </section>
 
       <section className="w-full bg-[#F3F3F3]">
-        <Container className="pb-14 pt-7 md:pb-16 md:pt-8 lg:pb-[72px] lg:pt-[36px]">
+        <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
           <div className="flex flex-col items-start gap-12">
             <div className="flex w-full flex-col items-start gap-5">
               <SectionPill label={sections.insights.pill} />
@@ -679,66 +452,72 @@ export default function Homepage() {
               </div>
             </div>
 
-            <div className="grid w-full gap-5 xl:grid-cols-3">
+            <div className="grid w-full gap-5 md:grid-cols-3">
               <div className="flex h-full flex-col gap-4">
                 <article className="rounded-[10px] bg-white p-[18px]">
                   <div className="flex flex-col gap-4 md:flex-row md:items-center">
                     <InsightAvatarStack />
                     <div className="flex flex-col">
-                      <div className="type-p2 text-black">{stats.clientsCount}</div>
-                      <div className="type-ui-sm text-[#666666]">{stats.clientsSubtext}</div>
+                      <div className="type-p2 text-black">{statsCard1.title ?? ""}</div>
+                      <div className="type-ui-sm text-[#666666]">{statsCard1.subtitle ?? ""}</div>
                     </div>
                   </div>
                 </article>
 
-                <article className="relative flex-1 overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
+                <article className="relative flex flex-1 flex-col overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
                   <div className="absolute right-[-24px] top-[-20px] h-28 w-28 rounded-full bg-[#F8F6F2]" />
                   <div className="absolute right-[38px] top-[96px] h-20 w-20 rounded-full bg-[#F8F6F2]" />
-                  <div className="type-h2 relative z-10 text-black">{stats.completedProjectsValue}</div>
-                  <p className="type-p2 relative z-10 mt-16 max-w-[240px] text-[#666666]">
-                    {stats.completedProjectsLabel}
+                  <div className="type-h2 relative z-10 text-black md:text-[82px] md:leading-[0.95] lg:[font-size:clamp(56px,9vw,var(--font-h2-size))] lg:[line-height:var(--font-h2-line)]">
+                    {statsCard2.value ?? ""}
+                  </div>
+                  <p className="type-p2 relative z-10 mt-10 max-w-[240px] text-[#666666]">
+                    {statsCard2.label ?? ""}
                   </p>
                 </article>
               </div>
 
-              <div className="flex h-full flex-col gap-4 xl:order-3">
+              <div className="flex h-full flex-col gap-4 md:order-3">
                 <article className="rounded-[10px] bg-white p-[18px]">
-                  <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
-                    <div className="type-h5 text-black">{stats.clientsCount}</div>
+                  <div className="flex flex-col items-center justify-center gap-3 text-center md:flex-row md:items-center md:justify-center md:gap-4">
+                    <div className="type-h5 text-black">{statsCard4.title ?? ""}</div>
                     <p className="type-ui-sm max-w-[280px] text-black">
-                      {stats.clientsSubtext}
+                      {statsCard4.subtitle ?? ""}
                     </p>
                   </div>
                 </article>
 
-                <article className="relative flex-1 overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
+                <article className="relative flex flex-1 flex-col overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
                   <div className="absolute right-[-24px] top-[-20px] h-28 w-28 rounded-full bg-[#F8F6F2]" />
                   <div className="absolute right-[38px] top-[96px] h-20 w-20 rounded-full bg-[#F8F6F2]" />
-                  <div className="type-h2 relative z-10 text-black">{stats.completedProjectsValue}</div>
-                  <p className="type-p2 relative z-10 mt-16 max-w-[240px] text-[#666666]">
-                    {stats.completedProjectsLabel}
+                  <div className="type-h2 relative z-10 text-black md:text-[82px] md:leading-[0.95] lg:[font-size:clamp(56px,9vw,var(--font-h2-size))] lg:[line-height:var(--font-h2-line)]">
+                    {statsCard5.value ?? ""}
+                  </div>
+                  <p className="type-p2 relative z-10 mt-10 max-w-[240px] text-[#666666]">
+                    {statsCard5.label ?? ""}
                   </p>
                 </article>
               </div>
 
-              <div className="flex h-full flex-col gap-4 xl:order-2">
-                <article className="relative flex-1 overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
+              <div className="flex h-full flex-col gap-4 md:order-2">
+                <article className="relative flex flex-1 flex-col overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
                   <div className="absolute right-[-28px] top-[-20px] h-28 w-28 rounded-full bg-[#F8F6F2]" />
                   <div className="absolute right-[36px] top-[68px] h-20 w-20 rounded-full bg-[#F8F6F2]" />
-                  <div className="type-h2 relative z-10 text-black">{stats.retentionRateValue}</div>
-                  <p className="type-p2 relative z-10 mt-16 max-w-[240px] text-[#666666]">
-                    {stats.retentionRateLabel}
+                  <div className="type-h2 relative z-10 text-black md:text-[82px] md:leading-[0.95] lg:[font-size:clamp(56px,9vw,var(--font-h2-size))] lg:[line-height:var(--font-h2-line)]">
+                    {statsCard3.value ?? ""}
+                  </div>
+                  <p className="type-p2 relative z-10 mt-10 max-w-[240px] text-[#666666]">
+                    {statsCard3.label ?? ""}
                   </p>
                 </article>
 
                 <article className="rounded-[10px] bg-white px-5 py-4 md:px-6">
                   <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
                     <div className="type-h5 text-black">
-                      {stats.ratingValue}
-                      <span className="text-[24px] leading-8 text-[#666666]">{stats.ratingOutOf}</span>
+                      {statsCard6.value ?? ""}
+                      <span className="text-[24px] leading-8 text-[#666666]">{statsCard6.suffix ?? ""}</span>
                     </div>
                     <p className="type-ui-sm max-w-[280px] text-black">
-                      {stats.ratingSummary}
+                      {statsCard6.summary ?? ""}
                     </p>
                   </div>
                 </article>
@@ -749,7 +528,7 @@ export default function Homepage() {
       </section>
 
       <section className="w-full bg-[#F3F3F3]">
-        <Container className="py-14 md:py-16 lg:py-[72px]">
+        <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
           <div className="flex flex-col items-center gap-12">
             <div className="w-full">
               <div className="mx-auto flex w-full flex-col items-center gap-8">
@@ -760,104 +539,66 @@ export default function Homepage() {
                   <p className="type-p3 max-w-[900px] text-black/70">{sections.testimonials.description}</p>
                 </div>
 
-                <div className="grid w-full gap-5 xl:grid-cols-3">
+                <div className="grid w-full gap-5 md:grid-cols-3">
                   <div className="flex flex-col gap-5">
                     {testimonials[0] ? (
-                      <article className="flex min-h-[410px] flex-1 flex-col justify-between rounded-[10px] bg-[linear-gradient(180deg,#1F252B_0%,#14191F_100%)] p-6 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]">
-                        <div className="type-p2 opacity-95">{testimonials[0].company}</div>
-                        <p className="type-p3 mt-6 max-w-[360px] text-white/90">{testimonials[0].quote}</p>
-                        <div className="mt-8 flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-sm">
-                              {testimonials[0].name.slice(0, 1)}
-                            </div>
-                            <div>
-                              <div className="type-p2 text-white">{testimonials[0].name}</div>
-                              <div className="type-p3 text-white/70">{testimonials[0].role}</div>
-                            </div>
+                      <TestimonialCard
+                        testimonial={testimonials[0]}
+                        tone="dark"
+                        className="flex min-h-[410px] flex-1 flex-col justify-between"
+                        topRightBadge={
+                          <div className="h-10 w-10 overflow-hidden rounded-full bg-white/15">
+                            <img src="/testimonials/tfa-logo.jpg" alt="TFA logo" className="h-full w-full object-cover" />
                           </div>
-                          <div className="flex h-10 w-10 items-center justify-center rounded-[12px] bg-white/10 text-lg text-white/90">×</div>
-                        </div>
-                      </article>
+                        }
+                      />
                     ) : null}
 
                     {testimonials[4] ? (
-                      <article className="rounded-[10px] bg-[#F9FAFB] p-6 outline outline-1 outline-gray-200">
-                        <p className="type-p3 text-[#2B2B2B]">{testimonials[4].quote}</p>
-                        <div className="mt-6 flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-sm text-[#2B2B2B]">
-                              {testimonials[4].name.slice(0, 1)}
-                            </div>
-                            <div>
-                              <div className="type-p2 text-[#222222]">{testimonials[4].name}</div>
-                              <div className="type-p3 text-[#5F6368]">{testimonials[4].role}</div>
-                            </div>
+                      <TestimonialCard
+                        testimonial={testimonials[4]}
+                        tone="light"
+                        topRightBadge={
+                          <div
+                            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-[#2B2B2B]"
+                            aria-hidden="true"
+                          >
+                            <svg
+                              viewBox="0 0 24 24"
+                              className="h-4.5 w-4.5"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.7"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M8 5.2 5 6.4 2.8 10l3.2 2.4L8 10v9.4c2.7.2 5.3.2 8 0V10l2 2.4 3.2-2.4L19 6.4l-3-1.2c-1 1.6-2.5 2.4-4 2.4s-3-.8-4-2.4Z" />
+                            </svg>
                           </div>
-                          <div className="flex h-10 w-10 items-center justify-center rounded-[12px] bg-[#EEF0F3] text-lg text-[#2B2B2B]">×</div>
-                        </div>
-                      </article>
+                        }
+                      />
                     ) : null}
                   </div>
 
                   <div className="flex flex-col gap-5">
                     {[1, 3, 5].map((index) =>
                       testimonials[index] ? (
-                        <article key={testimonials[index].name} className="rounded-[10px] bg-[#F9FAFB] p-6 outline outline-1 outline-gray-200">
-                          <p className="type-p3 text-[#2B2B2B]">{testimonials[index].quote}</p>
-                          <div className="mt-6 flex items-center justify-between gap-4">
-                            <div className="flex items-center gap-3">
-                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-sm text-[#2B2B2B]">
-                                {testimonials[index].name.slice(0, 1)}
-                              </div>
-                              <div>
-                                <div className="type-p2 text-[#222222]">{testimonials[index].name}</div>
-                                <div className="type-p3 text-[#5F6368]">{testimonials[index].role}</div>
-                              </div>
-                            </div>
-                            <div className="flex h-10 w-10 items-center justify-center rounded-[12px] bg-[#EEF0F3] text-lg text-[#2B2B2B]">×</div>
-                          </div>
-                        </article>
+                        <TestimonialCard key={testimonials[index].name} testimonial={testimonials[index]} tone="light" />
                       ) : null,
                     )}
                   </div>
 
                   <div className="flex flex-col gap-5">
                     {testimonials[2] ? (
-                      <article className="rounded-[10px] bg-[#F9FAFB] p-6 outline outline-1 outline-gray-200">
-                        <p className="type-p3 text-[#2B2B2B]">{testimonials[2].quote}</p>
-                        <div className="mt-6 flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-sm text-[#2B2B2B]">
-                              {testimonials[2].name.slice(0, 1)}
-                            </div>
-                            <div>
-                              <div className="type-p2 text-[#222222]">{testimonials[2].name}</div>
-                              <div className="type-p3 text-[#5F6368]">{testimonials[2].role}</div>
-                            </div>
-                          </div>
-                          <div className="flex h-10 w-10 items-center justify-center rounded-[12px] bg-[#EEF0F3] text-lg text-[#2B2B2B]">×</div>
-                        </div>
-                      </article>
+                      <TestimonialCard testimonial={testimonials[2]} tone="light" />
                     ) : null}
 
                     {testimonials[6] ? (
-                      <article className="flex min-h-[410px] flex-1 flex-col justify-between rounded-[10px] bg-[linear-gradient(180deg,#1F252B_0%,#14191F_100%)] p-6 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]">
-                        <div className="type-p2 opacity-95">{testimonials[6].company}</div>
-                        <p className="type-p3 mt-6 max-w-[360px] text-white/90">{testimonials[6].quote}</p>
-                        <div className="mt-8 flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-sm">
-                              {testimonials[6].name.slice(0, 1)}
-                            </div>
-                            <div>
-                              <div className="type-p2 text-white">{testimonials[6].name}</div>
-                              <div className="type-p3 text-white/70">{testimonials[6].role}</div>
-                            </div>
-                          </div>
-                          <div className="flex h-10 w-10 items-center justify-center rounded-[12px] bg-white/10 text-lg text-white/90">×</div>
-                        </div>
-                      </article>
+                      <TestimonialCard
+                        testimonial={testimonials[6]}
+                        tone="dark"
+                        className="flex min-h-[410px] flex-1 flex-col justify-between"
+                      />
                     ) : null}
                   </div>
                 </div>
@@ -875,6 +616,7 @@ export default function Homepage() {
             attributionTitle={testimonial.name}
             attributionSubtitle={testimonial.handle}
             initials={testimonial.initials}
+            avatarSrc={testimonial.avatarSrc}
             glyphClassName="text-[rgba(255,255,255,0.1)]"
             decorativeFrame={
               <>
@@ -891,17 +633,26 @@ export default function Homepage() {
       <section className="w-full bg-[#F3F3F3]">
         <Container className="py-14 md:py-16 lg:py-[72px]">
           <div className="rounded-[10px] bg-white p-6 md:p-10 lg:p-12">
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]">
               <div className="flex flex-col items-start gap-4">
                 <SectionPill label={sections.journey.pill} />
-                <h2 className="type-h3 max-w-[520px] text-[#222222]">{sections.journey.title}</h2>
+                <div className="flex w-full items-start justify-between">
+                  <h2 className="type-h3 max-w-[520px] text-[#222222]">{sections.journey.title}</h2>
+                  <Link
+                    href="https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+                    className="type-p2 hidden items-center gap-2 text-[#222222] underline underline-offset-4 md:inline-flex lg:hidden"
+                  >
+                    <span>{sections.journey.cta}</span>
+                    <ArrowUpRightIcon />
+                  </Link>
+                </div>
               </div>
 
-              <div className="flex flex-col items-start gap-5 lg:max-w-[520px] lg:justify-start lg:justify-self-end">
+              <div className="flex flex-col items-start gap-5 lg:justify-start lg:pl-8">
                 <p className="type-p3 text-black/70">{sections.journey.intro}</p>
                 <Link
                   href="https://calendar.app.google/Cc4kuM7cqTyiXQx66"
-                  className="type-p2 inline-flex items-center gap-2 text-[#222222] underline underline-offset-4"
+                  className="type-p2 inline-flex items-center gap-2 text-[#222222] underline underline-offset-4 md:hidden lg:inline-flex"
                 >
                   <span>{sections.journey.cta}</span>
                   <ArrowUpRightIcon />
@@ -910,12 +661,59 @@ export default function Homepage() {
             </div>
 
             <div className="mt-10 space-y-5">
-              <div className="grid gap-6 border-b border-black/10 pb-6 lg:grid-cols-[1.1fr_0.9fr_auto] lg:items-center">
-                <div>
-                  <h3 className="type-h5 text-[#222222]">{journey.featured.company}</h3>
-                  <p className="type-p3 mt-1 text-[#7B7B7B]">{journey.featured.date}</p>
+              <div className={`${recognitionRowClass} rounded-[10px] p-3 lg:!items-start`}>
+                <div className="hidden w-full p-3 md:order-first md:col-span-2 md:block lg:hidden">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0">
+                      {journey.featured.href ? (
+                        <a
+                          href={journey.featured.href}
+                          target={journey.featured.external ? "_blank" : undefined}
+                          rel={journey.featured.external ? "noopener noreferrer" : undefined}
+                          className="block"
+                        >
+                          <h3 className="type-h5 text-[#222222]">{journey.featured.company}</h3>
+                          <p className="type-p3 mt-1 text-[#7B7B7B]">{journey.featured.date}</p>
+                        </a>
+                      ) : (
+                        <div>
+                          <h3 className="type-h5 text-[#222222]">{journey.featured.company}</h3>
+                          <p className="type-p3 mt-1 text-[#7B7B7B]">{journey.featured.date}</p>
+                        </div>
+                      )}
+                    </div>
 
-                  <div className="mt-5 w-full max-w-[530px] overflow-hidden rounded-[10px] bg-black" style={{ aspectRatio: "530 / 298" }}>
+                    <div className="flex flex-wrap justify-end gap-2">
+                      {journey.featured.tags.map((tag) => (
+                        <span key={`${tag}-tablet-title`} className={featuredTagClass}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="md:col-span-2 lg:col-span-1">
+                  <div className="p-3 md:hidden lg:block">
+                    {journey.featured.href ? (
+                      <a
+                        href={journey.featured.href}
+                        target={journey.featured.external ? "_blank" : undefined}
+                        rel={journey.featured.external ? "noopener noreferrer" : undefined}
+                        className="block"
+                      >
+                        <h3 className="type-h5 text-[#222222]">{journey.featured.company}</h3>
+                        <p className="type-p3 mt-1 text-[#7B7B7B]">{journey.featured.date}</p>
+                      </a>
+                    ) : (
+                      <div>
+                        <h3 className="type-h5 text-[#222222]">{journey.featured.company}</h3>
+                        <p className="type-p3 mt-1 text-[#7B7B7B]">{journey.featured.date}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="w-full max-w-[530px] overflow-hidden rounded-[10px] bg-black md:max-w-none lg:max-w-[530px]" style={{ aspectRatio: "530 / 298" }}>
                     <iframe
                       width="530"
                       height="298"
@@ -928,53 +726,88 @@ export default function Homepage() {
                       className="h-full w-full"
                     />
                   </div>
+
+                  <div className="mt-4 hidden md:block lg:hidden">
+                    {journey.featured.href ? (
+                      <a
+                        href={journey.featured.href}
+                        target={journey.featured.external ? "_blank" : undefined}
+                        rel={journey.featured.external ? "noopener noreferrer" : undefined}
+                        className={recognitionSummaryClass}
+                      >
+                        {journey.featured.summary}
+                      </a>
+                    ) : (
+                      <p className={recognitionSummaryClass}>{journey.featured.summary}</p>
+                    )}
+                  </div>
                 </div>
 
-                <p className="type-p3 text-[#666666] lg:max-w-[320px]">{journey.featured.summary}</p>
-
-                <div className="flex items-center gap-3 lg:flex-col lg:items-end lg:justify-center">
-                  <div className="flex flex-wrap justify-end gap-2">
-                    {journey.featured.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex min-h-[32px] items-center rounded-[999px] bg-[#2B2B2B] px-4 text-[16px] leading-6 text-white"
+                <div className="flex flex-col items-start gap-4 md:col-start-2 md:gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-5">
+                  <div className="md:order-2 md:pt-4 md:hidden lg:order-none lg:pt-0 lg:block">
+                    {journey.featured.href ? (
+                      <a
+                        href={journey.featured.href}
+                        target={journey.featured.external ? "_blank" : undefined}
+                        rel={journey.featured.external ? "noopener noreferrer" : undefined}
+                        className={recognitionSummaryClass}
                       >
+                        {journey.featured.summary}
+                      </a>
+                    ) : (
+                      <p className={recognitionSummaryClass}>{journey.featured.summary}</p>
+                    )}
+                  </div>
+
+                  <div className="flex flex-wrap justify-start gap-2 md:hidden lg:flex lg:flex-nowrap lg:justify-end">
+                    {journey.featured.tags.map((tag) => (
+                      <span key={tag} className={featuredTagClass}>
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <Link
-                    href="/work/"
-                    className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#2B2B2B] text-white"
-                    aria-label="View work"
-                  >
-                    <ArrowUpRightIcon size={28} />
-                  </Link>
                 </div>
               </div>
 
-              {journey.entries.map((entry) => (
-                <div
-                  key={`${entry.company}-${entry.date}`}
-                  className="grid gap-5 border-b border-black/10 pb-6 last:border-b-0 last:pb-0 lg:grid-cols-[1.1fr_0.9fr_auto] lg:items-center"
-                >
-                  <div>
-                    <h3 className="type-h5 text-[#222222]">{entry.company}</h3>
-                    <p className="type-p3 mt-1 text-[#7B7B7B]">{entry.date}</p>
+              {journey.entries.map((entry) => {
+                const rowContent = (
+                  <>
+                    <div>
+                      <h3 className="type-h5 text-[#222222]">{entry.company}</h3>
+                      <p className="type-p3 mt-1 text-[#7B7B7B]">{entry.date}</p>
+                    </div>
+                    <div className="flex flex-col items-start gap-4 md:col-start-2 md:gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-5">
+                      <p className={recognitionSummaryClass}>{entry.summary}</p>
+                      <div className="flex flex-wrap justify-start gap-2 lg:flex-nowrap lg:justify-end">
+                        {entry.tags.map((tag) => (
+                          <span key={tag} className={defaultTagClass}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )
+
+                return entry.href ? (
+                  <a
+                    key={`${entry.company}-${entry.date}`}
+                    href={entry.href}
+                    target={entry.external ? "_blank" : undefined}
+                    rel={entry.external ? "noopener noreferrer" : undefined}
+                    className={`${recognitionRowClass} ${linkedRecognitionRowClass} last:border-b-0 last:pb-0`}
+                  >
+                    {rowContent}
+                  </a>
+                ) : (
+                  <div
+                    key={`${entry.company}-${entry.date}`}
+                    className={`${recognitionRowClass} last:border-b-0 last:pb-0`}
+                  >
+                    {rowContent}
                   </div>
-                  <p className="type-p3 text-[#666666] lg:max-w-[320px]">{entry.summary}</p>
-                  <div className="flex flex-wrap justify-start gap-2 lg:justify-end">
-                    {entry.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex min-h-[32px] items-center rounded-[999px] bg-[#EFEFEF] px-4 text-[16px] leading-6 text-[#3A3A3A] outline outline-1 outline-black/10"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </Container>

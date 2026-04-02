@@ -11,27 +11,6 @@ const fallbackHomepageText = {
     startupRaisedLabel: "Budgets Managed",
   },
   sections: {
-    portfolio: {
-      pill: "Portfolio",
-      title: "Successful Projects I've Led",
-      categories: [
-        "All",
-        "Webflow Development",
-        "SAAS UIUX",
-        "Brand Identity",
-        "E-commerce",
-        "Mobile App",
-        "Others",
-      ],
-      moreProjects: {
-        pill: "Founder",
-        title: "Companies I've Founded",
-        cards: [
-          { title: "Digital Agency Website Design - UI/UX", width: 703, height: 527 },
-          { title: "Brand identity - Branding", width: 703, height: 527 },
-        ],
-      },
-    },
     experiences: {
       pill: "What I Do",
       title: "Technical Delivery Leadership",
@@ -44,54 +23,49 @@ const fallbackHomepageText = {
       description:
         "The work didn’t just launch, it was globally recognized. My work has earned industry awards, and the LEGO digital transformation was later studied at Harvard & MIT as a case study in digital change at scale.",
     },
-    clients: {
-      pill: "Our Clients",
-      title: "Some of our Best Customers",
-    },
-    testimonials: {
-      pill: "Testimonials",
-      title: "What Our Users Say",
-      description:
-        "Trusted by teams who need high-velocity execution, clean delivery, and outcomes that hold up under pressure.",
-    },
-    journey: {
-      pill: "Experiences",
-      title: "Explore My Design Journey",
-      intro:
-        "Over the past 4+ years, I've had the opportunity to work on a wide range of design projects, collaborating with diverse teams and clients to bring creative visions to life.",
-      cta: "Book A Call",
+    portfolio: {
+      pill: "Portfolio",
+      title: "Successful Projects I've Led",
+      categories: [
+        "eCommerce",
+        "Streaming",
+        "Mobile Apps",
+        "SAP",
+        "PIM",
+        "SaaS",
+        "UI/UX",
+      ],
+      moreProjects: {
+        pill: "Founder",
+        title: "Companies I've Founded",
+        cards: [
+          { title: "Digital Agency Website Design - UI/UX", width: 703, height: 527 },
+          { title: "Brand identity - Branding", width: 703, height: 527 },
+        ],
+      },
     },
     highlights: {
-      pill: "Highlights projects",
-      title: "Case Studies & Project Highlights",
-      description:
-        "Explore detailed case studies and highlights of recent projects. Learn about the challenges faced, the design solutions implemented, and the outcomes achieved.",
       cta: "See More",
     },
     insights: {
-      pill: "Latest Insights",
-      title: "Latest Insights & Trends",
+      pill: "Proven Results",
+      title: "My Commercial impact",
       description:
-        "Stay updated with the latest in UI/UX design, product design, and industry trends. Here, you'll find in-depth articles, case studies, and expert opinions that offer valuable insights and inspiration for your next project.",
+        "A snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and transformation programs.",
     },
-  },
-  stats: {
-    clientsCount: "75+ Clients",
-    clientsSubtext: "Around the world Clients",
-    completedProjectsValue: "105+",
-    completedProjectsLabel: "Completed projects for growing brands",
-    retentionRateValue: "92%",
-    retentionRateLabel: "Client retention rate over the past 3 years",
-    ratingValue: "4.9",
-    ratingOutOf: "/5",
-    ratingSummary: "We've delivered 56+projects that help companies generate real results.",
-  },
-  testimonial: {
-    quote:
-      "I like their services and their professionalism and attention to details and commitment delivering hign - quality results truly exceeded all our team expectations and meet that on time.",
-    initials: "TA",
-    name: "Tawanna Afumba",
-    handle: "intransigent_toejam_15",
+    testimonials: {
+      pill: "Testimonials",
+      title: "Trusted by Teams Who Need High-Velocity Execution",
+      description:
+        "",
+    },
+    journey: {
+      pill: "Recognition",
+      title: "Press Coverage",
+      intro:
+        "As a digital commerce thought leader, I’ve been featured by the tech press and on podcasts for my point of view on commerce, platform modernization, and complex delivery. Digital transformation and AI are hot topics, and I'm flattered to be able to help shape the future of eCom. ",
+      cta: "Book A Call",
+    },
   },
   experienceCards: [
     {
@@ -99,9 +73,21 @@ const fallbackHomepageText = {
       description:
         "Lead cross-functional delivery across product, engineering, operations, and executives. Turn business goals into execution.",
     },
-    { title: "Program Delivery", description: "I run complex, multi-workstream programs across teams, vendors, and platforms. Keep execution aligned and risk under control." },
-    { title: "Platform Modernization", description: "Modernize eCommerce & enterprise platforms across discovery, migration, launch, and stabilization." },
-    { title: "Management Consulting", description: "Turn executive priorities, business constraints, and technical complexity into clear scope, solutions, and outcomes." },
+    {
+      title: "Program Delivery",
+      description:
+        "I run complex, multi-workstream programs across teams, vendors, and platforms. Keep execution aligned and risk under control.",
+    },
+    {
+      title: "Platform Modernization",
+      description:
+        "Modernize eCommerce & enterprise platforms across discovery, migration, launch, and stabilization.",
+    },
+    {
+      title: "Management Consulting",
+      description:
+        "Turn executive priorities, business constraints, and technical complexity into clear scope, solutions, and outcomes.",
+    },
   ],
   awards: [
     { rank: "[1]", year: "2025", title: "MACH Composable Award (Nominated)", source: "MACH Alliance" },
@@ -109,104 +95,158 @@ const fallbackHomepageText = {
     { rank: "[3]", year: "2016", title: "Harvard Business Review (Profiled)", source: "Harvard" },
     { rank: "[4]", year: "2016", title: "MIT Sloan Management (Profiled)", source: "MIT" },
   ],
-  clients: [
-    { name: "Zentrox", year: "2023" },
-    { name: "Pixelora", year: "2023" },
-    { name: "Loopinex", year: "2024" },
-    { name: "Vaylo Studio", year: "2024" },
-    { name: "Hexonify", year: "2025" },
-  ],
+  stats: {
+    cards: [
+      {
+        title: "20+ Years",
+        subtitle: "Leading digital delivery",
+      },
+      {
+        value: "$1B",
+        label: "Revenue uplift delivered at Modere (up from $500m)",
+      },
+      {
+        value: "$120m",
+        label: "YoY Revenue Impact at DIRECTV",
+      },
+      {
+        title: "2 Awards",
+        subtitle: "Industry awards for project work",
+      },
+      {
+        value: "40k",
+        label: "Hours leading projects",
+      },
+      {
+        value: "2",
+        suffix: "",
+        summary: "Academic case studies at Harvard and MIT for LEGO",
+      },
+    ],
+  },
   testimonials: [
     {
-      company: "Spectrum",
-      name: "David Kim",
-      role: "CEO At Spectrum",
+      company: "TFA Agency",
+      name: "Jared Miller",
+      role: "CEO/Founder",
+      avatarSrc: "/bi/jared-miller.jpeg",
       quote:
-        "The AI-powered tools in Velora save us countless hours by summarizing tasks and prioritizing what matters most. It's a must-have for any team looking to streamline workflows.",
+        "Jim is one of those rare people who makes hard things feel manageable and big ideas feel executable. He has deep experience across ecommerce and digital platforms, and it shows. He thinks several steps ahead, looks out for the client, and pushes the work to be better.  He elevates teams simply by being in the room. ",
       variant: "dark",
       tall: true,
     },
     {
-      name: "James Parker",
-      role: "Operations Lead",
+      company: "Human, Inc",
+      name: "Matt Jasper",
+      role: "Director, eCommerce",
+      badgeSrc: "/tool-icons/svg/icon-headphones.svg",
+      badgeImageClassName: "scale-[0.72]",
+      avatarSrc: "/testimonials/matt-jasper.jpeg",
       quote:
-        "The collaboration tools in Velora have significantly improved our team's productivity across all projects.",
+        "Jim is the rare combination of strategic thinker, trusted advisor, and proactive problem-solver. He consistently went above and beyond to ensure our success.",
       variant: "light",
     },
     {
-      name: "Liam Scott",
-      role: "Operations Director",
+      company: "Modere",
+      name: "Chris Beck",
+      role: "CTO",
+      badgeSrc: "/modere/modere-logo-circle.svg",
+      avatarSrc: "/modere/chris-back.jpeg",
       quote:
-        "Bulk actions in Velora have simplified task management for our team, boosting overall efficiency.",
+        "Jim protected the architecture and kept the team from building the wrong thing.",
       variant: "light",
     },
     {
-      name: "Maya Patel",
-      role: "Product Designer",
+      company: "Corra Agency",
+      name: "Murali Annavarapu ",
+      role: "Program Manager",
+      badgeSrc: "/testimonials/corra-logo.jpeg",
+      avatarSrc: "/bi/murali-annvarapuru.jpeg",
       quote:
-        "I love how Velora’s AI Summary saves time by giving instant insights from our complex workflows.",
+        "His people management and teamwork skills are truly second to none. Jim leads with empathy, clarity, and accountability.",
       variant: "light",
     },
     {
-      name: "Sarah Turner",
-      role: "Project Manager",
+      company: "American Apparel",
+      name: "Nick Kolev",
+      role: "Director of Engineering",
+      avatarSrc: "/aa/nick-kolev.jpeg",
       quote:
-        "Velora transformed our project management process. Its intuitive features make organizing tasks incredibly easy.",
+        "Jim was a key reason our most challenging projects shipped successfully at American Apparel. He’s a PM who earns trust quickly: prepared, transparent, and dependable.",
       variant: "light",
     },
     {
-      name: "Carlos Rivera",
-      role: "Global Project Manager",
+      company: "BigCommerce",
+      name: "Nekeed Upshaw",
+      role: "Global Product Manager",
+      badgeSrc: "/tool-icons/svg/bc-logo-icon.svg",
+      avatarSrc: "/testimonials/nekeed-upshaw.jpeg",
       quote:
-        "Velora’s 2-way translation has been a game-changer for our global team’s seamless communication.",
+        "Jim operates like a product manager, excels at stakeholder management, effectively prioritizes competing demands, and drives cross-functional alignment.",
       variant: "light",
     },
     {
-      company: "Apex",
-      name: "Sophia Zhang",
-      role: "CEO At Apex",
+      company: "Cloud NC",
+      name: "Adrian Sorapuru",
+      role: "Head of Business Developmentx",
+      badgeSrc: "/testimonials/cloudnc-logo.png",
+      badgeImageClassName: "scale-[1.55]",
+      avatarSrc: "/cbdistillery/adrian-sorapuru.jpeg",
       quote:
-        "Velora has revolutionized how our team manages projects. Its intuitive features and seamless collaboration tools have enhanced our efficiency and ensured we never miss a deadline.",
+        "Jim is an exceptional project manager equipped with technical and sales acumen. He was a leading driver of new business opportunities and drove incremental revenue for the company. Jim understands how to drive key insights that turn pain points into deliverable results. I recommend Jim for any company that needs to deliver results and drive revenue.",
       variant: "dark",
       tall: true,
     },
   ],
+  testimonial: {
+    quote:
+      "I needed a PM who could save the day. After Murad changed agencies twice, and my PM walked off the job, I personally requested Jim.",
+    initials: "TA",
+    name: "Neely Cox",
+    handle: "Enterprise Account Manager, BC",
+    avatarSrc: "/murad/neely-cox.jpeg",
+  },
   journey: {
     featured: {
-      company: "Creative Minds, New York, USA",
-      date: "• February 2022 - Present",
-      summary: "Innovated designs, New York, Senior Product Designer",
-      tags: ["UIUX", "Web Design"],
-      images: [
-        "/portfolio-gallery/method.svg",
-        "/portfolio-gallery/murad.svg",
-        "/portfolio-gallery/cbdistillery.svg",
-      ],
+      company: "Value Squared Podcast",
+      date: "• January 27, 2026",
+      summary: "Value Squared sat down with Jim Markunas, a digital product leader and e-commerce consultant, to break down what’s actually happening in tech, AI, and digital transformation. If you’re a founder, entrepreneur, product manager, or business owner, this episode will challenge how you think about AI, technology, and growth.",
+      tags: ["Podcast", "Value2"],
+      href: "",
+      external: true,
     },
     entries: [
       {
-        company: "Innovative Designs Inc, USA",
-        date: "• January 2020 - February 2022",
-        summary: "Led UX/UI, San Francisco. Crafting tomorrow's experiences",
-        tags: ["Brand Identity", "Branding"],
+        company: "The AI Journal",
+        date: "• February 2026",
+        summary: "Before BOPIS Went Mainstream: Jim Markunas on pioneering one of the world’s first true global omni-channel ecosystems for American Apparel across 16 countries",
+        tags: ["Interview", "AI Journal"],
+        href: "https://aijourn.com/before-bopis-went-mainstream-james-markunas-on-pioneering-one-of-the-worlds-first-true-global-omni-channel-ecosystems-for-american-apparel-across-16-countries/",
+        external: true,
       },
       {
-        company: "Visionary Creations Ltd, UK",
-        date: "• February 2022 - Present",
-        summary: "Principal Designer, Berlin, Crafting tomorrow's experiences",
-        tags: ["UIUX", "Development"],
+        company: "Mind The Product",
+        date: "• April 2026",
+        summary: "Coming Soon",
+        tags: ["Article", "MTP"],
+        href: "",
+        external: true,
       },
       {
-        company: "FutureTech, Berlin, Germany",
-        date: "• February 2022 - Present",
-        summary: "From crafting seamless user experiences to leading",
-        tags: ["Branding", "UI/UX"],
+        company: "The New Stack",
+        date: "• May 2026",
+        summary: "Coming Soon",
+        tags: ["Article", "TNS"],
+        href: "",
+        external: true,
       },
       {
-        company: "Expert Designs Inc, USA",
-        date: "• February 2022 - Present",
-        summary: "Innovated designs, New York, Senior Product Designer",
-        tags: ["UIUX", "Dashboard"],
+        company: "TBD",
+        date: "• May 2026",
+        summary: "Coming Soon",
+        tags: ["Interview", "TBD"],
+        href: "",
+        external: true,
       },
     ],
   },
@@ -217,21 +257,19 @@ export type HomepageText = typeof fallbackHomepageText
 type PartialHomepageText = {
   hero?: Partial<HomepageText["hero"]>
   sections?: {
-    portfolio?: Partial<HomepageText["sections"]["portfolio"]>
     experiences?: Partial<HomepageText["sections"]["experiences"]>
     awards?: Partial<HomepageText["sections"]["awards"]>
-    clients?: Partial<HomepageText["sections"]["clients"]>
-    testimonials?: Partial<HomepageText["sections"]["testimonials"]>
-    journey?: Partial<HomepageText["sections"]["journey"]>
+    portfolio?: Partial<HomepageText["sections"]["portfolio"]>
     highlights?: Partial<HomepageText["sections"]["highlights"]>
     insights?: Partial<HomepageText["sections"]["insights"]>
+    testimonials?: Partial<HomepageText["sections"]["testimonials"]>
+    journey?: Partial<HomepageText["sections"]["journey"]>
   }
-  stats?: Partial<HomepageText["stats"]>
-  testimonial?: Partial<HomepageText["testimonial"]>
   experienceCards?: HomepageText["experienceCards"]
   awards?: HomepageText["awards"]
-  clients?: HomepageText["clients"]
+  stats?: Partial<HomepageText["stats"]>
   testimonials?: HomepageText["testimonials"]
+  testimonial?: Partial<HomepageText["testimonial"]>
   journey?: HomepageText["journey"]
 }
 
@@ -242,10 +280,6 @@ export function getHomepageText(): HomepageText {
   return {
     hero: { ...fallbackHomepageText.hero, ...(homepageText.hero ?? {}) },
     sections: {
-      portfolio: {
-        ...fallbackHomepageText.sections.portfolio,
-        ...(homepageText.sections?.portfolio ?? {}),
-      },
       experiences: {
         ...fallbackHomepageText.sections.experiences,
         ...(homepageText.sections?.experiences ?? {}),
@@ -254,17 +288,9 @@ export function getHomepageText(): HomepageText {
         ...fallbackHomepageText.sections.awards,
         ...(homepageText.sections?.awards ?? {}),
       },
-      clients: {
-        ...fallbackHomepageText.sections.clients,
-        ...(homepageText.sections?.clients ?? {}),
-      },
-      testimonials: {
-        ...fallbackHomepageText.sections.testimonials,
-        ...(homepageText.sections?.testimonials ?? {}),
-      },
-      journey: {
-        ...fallbackHomepageText.sections.journey,
-        ...(homepageText.sections?.journey ?? {}),
+      portfolio: {
+        ...fallbackHomepageText.sections.portfolio,
+        ...(homepageText.sections?.portfolio ?? {}),
       },
       highlights: {
         ...fallbackHomepageText.sections.highlights,
@@ -274,13 +300,20 @@ export function getHomepageText(): HomepageText {
         ...fallbackHomepageText.sections.insights,
         ...(homepageText.sections?.insights ?? {}),
       },
+      testimonials: {
+        ...fallbackHomepageText.sections.testimonials,
+        ...(homepageText.sections?.testimonials ?? {}),
+      },
+      journey: {
+        ...fallbackHomepageText.sections.journey,
+        ...(homepageText.sections?.journey ?? {}),
+      },
     },
-    stats: { ...fallbackHomepageText.stats, ...(homepageText.stats ?? {}) },
-    testimonial: { ...fallbackHomepageText.testimonial, ...(homepageText.testimonial ?? {}) },
     experienceCards: homepageText.experienceCards ?? fallbackHomepageText.experienceCards,
     awards: homepageText.awards ?? fallbackHomepageText.awards,
-    clients: homepageText.clients ?? fallbackHomepageText.clients,
+    stats: { ...fallbackHomepageText.stats, ...(homepageText.stats ?? {}) },
     testimonials: homepageText.testimonials ?? fallbackHomepageText.testimonials,
+    testimonial: { ...fallbackHomepageText.testimonial, ...(homepageText.testimonial ?? {}) },
     journey: homepageText.journey ?? fallbackHomepageText.journey,
   }
 }
