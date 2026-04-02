@@ -5,6 +5,7 @@ import { useState, useRef } from "react"
 const EMAILJS_SERVICE_ID = "service_izfv466"
 const EMAILJS_TEMPLATE_ID = "template_jttfdsq"
 const EMAILJS_PUBLIC_KEY = "qjUSm5iSVeKkQJcYS"
+const CONTACT_RECIPIENT_EMAIL = "jim@greatestpmever.com"
 const SUBMIT_COOLDOWN_MS = 30_000
 const LAST_SUBMIT_KEY = "contact_last_submit_at"
 
@@ -18,7 +19,6 @@ const labelClass = "block text-base text-slate-700 mb-3"
 export function ContactForm() {
   const [state, setState] = useState<State>("idle")
   const [errorMsg, setErrorMsg] = useState("")
-  const [agreed, setAgreed] = useState(false)
   const honeypotRef = useRef<HTMLInputElement>(null)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -37,9 +37,15 @@ export function ContactForm() {
     const form = e.currentTarget
     const fname = (form.elements.namedItem("fname") as HTMLInputElement).value
     const lname = (form.elements.namedItem("lname") as HTMLInputElement).value
-    const femail = (form.elements.namedItem("femail") as HTMLInputElement).value
-    const fphone = (form.elements.namedItem("fphone") as HTMLInputElement).value
-    const fmessage = (form.elements.namedItem("fmessage") as HTMLTextAreaElement).value
+    const femail = (form.elements.namedItem("femail") as HTMLInputElement).value.trim()
+    const fmessage = (form.elements.namedItem("fmessage") as HTMLTextAreaElement).value.trim()
+    const senderName = `${fname} ${lname}`.trim() || "Website Contact"
+
+    if (!femail || !fmessage) {
+      setErrorMsg("Email and message are required.")
+      setState("error")
+      return
+    }
 
     setState("sending")
     setErrorMsg("")
@@ -53,22 +59,32 @@ export function ContactForm() {
           template_id: EMAILJS_TEMPLATE_ID,
           user_id: EMAILJS_PUBLIC_KEY,
           template_params: {
-            from_name: `${fname} ${lname}`.trim(),
+            from_name: senderName,
+            name: senderName,
             from_email: femail,
-            phone: fphone,
+            email: femail,
+            user_email: femail,
+            to_email: CONTACT_RECIPIENT_EMAIL,
+            to: CONTACT_RECIPIENT_EMAIL,
+            recipient: CONTACT_RECIPIENT_EMAIL,
+            send_to: CONTACT_RECIPIENT_EMAIL,
             message: fmessage,
+            subject: `Portfolio contact form submission from ${senderName}`,
             reply_to: femail,
           },
         }),
       })
 
-      if (!res.ok) throw new Error(`Status ${res.status}`)
+      if (!res.ok) {
+        const providerMessage = (await res.text()).trim()
+        throw new Error(`Status ${res.status}${providerMessage ? `: ${providerMessage}` : ""}`)
+      }
 
       localStorage.setItem(LAST_SUBMIT_KEY, String(Date.now()))
       setState("success")
     } catch (err) {
-      console.error("EmailJS error:", err)
-      setErrorMsg("Something went wrong — please email jim@jimmarkunas.com directly.")
+      console.error("Contact form error:", err)
+      setErrorMsg("Submission failed. Please email jim@greatestpmever.com directly.")
       setState("error")
     }
   }
@@ -78,7 +94,7 @@ export function ContactForm() {
       <div className="flex flex-col items-center justify-center rounded-2xl bg-white p-10 py-20 text-center shadow-sm">
         <div className="mb-4 text-5xl">✅</div>
         <p className="mb-2 text-xl font-semibold text-[#111111]">Message sent!</p>
-        <p className="text-base text-[#7B7B7B]">I&apos;ll get back to you within 24 hours.</p>
+        <p className="text-base text-[#7B7B7B]">I'll get back to you within 24 hours.</p>
       </div>
     )
   }
@@ -86,7 +102,6 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      noValidate
       className="w-full rounded-2xl bg-white p-10 flex flex-col gap-8"
     >
       <div className="flex flex-col gap-6">
@@ -94,7 +109,7 @@ export function ContactForm() {
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="fname" className={labelClass}>First name</label>
-            <input id="fname" name="fname" type="text" required placeholder="First name" className={inputClass} />
+            <input id="fname" name="fname" type="text" placeholder="First name" className={inputClass} />
           </div>
           <div>
             <label htmlFor="lname" className={labelClass}>Last name</label>
@@ -108,12 +123,6 @@ export function ContactForm() {
           <input id="femail" name="femail" type="email" required placeholder="you@company.com" className={inputClass} />
         </div>
 
-        {/* Phone */}
-        <div>
-          <label htmlFor="fphone" className={labelClass}>Phone number</label>
-          <input id="fphone" name="fphone" type="tel" placeholder="+1 (555) 000-0000" className={inputClass} />
-        </div>
-
         {/* Message */}
         <div>
           <label htmlFor="fmessage" className={labelClass}>Message</label>
@@ -122,34 +131,12 @@ export function ContactForm() {
             name="fmessage"
             required
             rows={5}
-            placeholder="Leave us a message..."
+            placeholder="Send me a message..."
             className={`${inputClass} resize-y`}
             style={{ minHeight: 120 }}
           />
         </div>
 
-        {/* Privacy checkbox */}
-        <label className="flex cursor-pointer items-start gap-3">
-          <div className="relative mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center">
-            <input
-              type="checkbox"
-              required
-              checked={agreed}
-              onChange={(e) => setAgreed(e.target.checked)}
-              className="peer sr-only"
-            />
-            <div className="h-5 w-5 rounded-[5.5px] border border-[#D0D5DD] bg-white peer-checked:border-[#447ACB] peer-checked:bg-[#447ACB] transition-colors" />
-            {agreed && (
-              <svg className="pointer-events-none absolute inset-0 h-5 w-5 text-white" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path d="M5 10l3.5 3.5L15 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            )}
-          </div>
-          <span className="text-base text-slate-600">
-            You agree to our friendly{" "}
-            <span className="font-medium text-[#111111] underline">privacy policy</span>.
-          </span>
-        </label>
       </div>
 
       {/* Honeypot */}

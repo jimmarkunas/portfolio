@@ -4,21 +4,16 @@ import type { ReactNode } from "react"
 import Link from "next/link"
 
 import { Container } from "@/components/Container"
+import { HomepageHeroSection } from "@/components/homepage/sections/HomepageHeroSection"
+import { PastClientsSection } from "@/components/homepage/sections/PastClientsSection"
+import { HomepageWhatIDoSection } from "@/components/homepage/sections/HomepageWhatIDoSection"
 import { PullQuote } from "@/components/PullQuote"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
 
-import {
-  desktopHeroLogoAxisX,
-  desktopHeroRailLabelX,
-  desktopHeroRailLineX,
-  desktopHeroYearLabelX,
-  getExperienceCards,
-} from "./data"
 import { getHomepageText } from "./homepage"
 import {
   AwardRow,
-  ExperienceCard,
   InsightAvatarStack,
   InsightStars,
   SectionPill,
@@ -133,275 +128,16 @@ export default function Homepage() {
     journey,
     testimonial,
   } = getHomepageText()
-  const experienceCards = getExperienceCards(experienceCardCopy)
-  const heroTextLeft = "clamp(98px, 12vw, 177px)"
-  const heroStatPlusLeft = `calc(${heroTextLeft} + 7px)`
-  const heroStatNumberLeft = `calc(${heroTextLeft} + 28px)`
-  const heroStatLabelLeft = `calc(${heroTextLeft} + 26px)`
-  const heroSecondStatPlusLeft = `calc(${heroTextLeft} + 183px)`
-  const heroSecondStatNumberLeft = `calc(${heroTextLeft} + 204px)`
-  const heroSecondStatLabelLeft = `calc(${heroTextLeft} + 204px)`
   const [statsCard1, statsCard2, statsCard3, statsCard4, statsCard5, statsCard6] =
     stats.cards as HomepageInsightCard[]
 
   return (
     <main className="min-h-full bg-[#F3F3F3]">
-      <section className="w-full bg-[#F3F3F3]">
-        <Container className="bg-[#F3F3F3] px-0 md:px-0 lg:px-0">
-          <div className="bg-[#F3F3F3] px-6 pb-10 pt-8 md:hidden">
-            <div className="mx-auto max-w-[440px]">
-              <div className="mt-10 text-center md:mt-12">
-                <div className="type-display-hero text-[#222222]">{hero.title}</div>
-                <div className="type-ui-lg mt-4 text-[#222222]">{hero.subtitle}</div>
-              </div>
+      <HomepageHeroSection hero={hero} />
 
-              <div className="mt-8 flex justify-center">
-                <img
-                  src="/jim/hero-jim-01-cutout.png"
-                  alt=""
-                  aria-hidden="true"
-                  className="h-auto w-full max-w-[420px]"
-                />
-              </div>
+      <PastClientsSection />
 
-              <div className="mt-6 flex items-center justify-center gap-4 text-[#222222]">
-                <div className="type-ui-sm">{hero.role}</div>
-                <div className="h-px w-16 shrink-0 bg-[#222222]" />
-                <div className="type-ui-sm">{hero.year}</div>
-              </div>
-
-              <div className="mt-8 grid grid-cols-2 gap-6 sm:gap-8">
-                <div>
-                  <div className="flex items-start justify-center gap-1 text-[#222222]">
-                    <span className="type-stat-plus">+</span>
-                    <span className="type-stat-number text-[#404040]">{hero.projectCompletedValue}</span>
-                  </div>
-                  <div className="type-ui-sm mt-2 text-center text-[#78716C]">
-                    {hero.projectCompletedLabel}
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-start justify-center gap-1 text-[#222222]">
-                    <span className="type-stat-plus">+</span>
-                    <span className="type-stat-number text-[#404040]">{hero.startupRaisedValue}</span>
-                  </div>
-                  <div className="type-ui-sm mt-2 text-center text-[#78716C]">{hero.startupRaisedLabel}</div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div className="relative hidden h-[938px] overflow-hidden bg-[#F3F3F3] md:block">
-            <div className="absolute inset-x-0 top-0 h-full md:h-[calc(100%+80px)] md:-translate-y-20 lg:h-full lg:translate-y-0">
-              <img
-                src="/jim/hero-jim-01-cutout.png"
-                alt=""
-                aria-hidden="true"
-                className="absolute bottom-0 right-[-140px] z-0 h-[760px] w-auto max-w-none md:right-[-300px] lg:right-[-140px] xl:right-[-36px]"
-              />
-
-            <div
-              className="type-display-hero absolute z-10 text-[#222222]"
-              style={{ left: heroTextLeft, top: "367px" }}
-            >
-              {hero.title}
-            </div>
-
-            <div
-              className="type-ui-lg absolute z-10 text-[#222222]"
-              style={{ left: heroTextLeft, top: "612px" }}
-            >
-              {hero.subtitle}
-            </div>
-
-              <div
-                className="type-ui-md absolute bottom-8 z-10 text-[#222222] xl:hidden"
-                style={{ left: heroTextLeft }}
-              >
-                {hero.scroll}
-              </div>
-
-              <div
-                className="type-ui-md absolute z-10 hidden text-[#222222] xl:block"
-                style={{ left: heroTextLeft, top: "860px" }}
-              >
-                {hero.scroll}
-              </div>
-
-            <div
-              className="absolute z-10"
-              style={{
-                top: "168px",
-                height: "701px",
-                width: "120px",
-                left: `${desktopHeroLogoAxisX}px`,
-                transform: "translateX(-50%)",
-              }}
-            >
-              <div className="relative h-full w-full">
-                <div
-                  className="absolute left-0 top-0 origin-top-left -rotate-90 whitespace-nowrap text-[#222222]"
-                  style={{
-                    left: `${desktopHeroRailLabelX}px`,
-                    top: "154px",
-                    fontFamily: "var(--font-family-display)",
-                    fontSize: "18px",
-                    fontWeight: 400,
-                    lineHeight: 1,
-                  }}
-                >
-                  {hero.role}
-                </div>
-
-                <div
-                  className="absolute bg-[#222222]"
-                  style={{
-                    left: `${desktopHeroRailLineX}px`,
-                    top: "189px",
-                    width: "1px",
-                    height: "386px",
-                  }}
-                  aria-hidden="true"
-                />
-
-                <div
-                  className="absolute left-0 bottom-0 origin-bottom-left -rotate-90 whitespace-nowrap text-[#222222]"
-                  style={{
-                    left: `${desktopHeroYearLabelX}px`,
-                    bottom: "56px",
-                    fontFamily: "var(--font-family-display)",
-                    fontSize: "18px",
-                    fontWeight: 400,
-                    lineHeight: 1,
-                  }}
-                >
-                  {hero.year}
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="type-stat-plus absolute z-10 text-black"
-              style={{ left: heroStatPlusLeft, top: "208px" }}
-            >
-              +
-            </div>
-            <div
-              className="type-stat-number absolute z-10 text-[#404040]"
-              style={{ left: heroStatNumberLeft, top: "204px" }}
-            >
-              {hero.projectCompletedValue}
-            </div>
-            <div
-              className="type-ui-sm absolute z-10 text-[#78716C]"
-              style={{ left: heroStatLabelLeft, top: "261px" }}
-            >
-              {hero.projectCompletedLabel}
-            </div>
-
-            <div
-              className="type-stat-plus absolute z-10 text-black"
-              style={{ left: heroSecondStatPlusLeft, top: "208px" }}
-            >
-              +
-            </div>
-            <div
-              className="type-stat-number absolute z-10 text-[#404040]"
-              style={{ left: heroSecondStatNumberLeft, top: "204px" }}
-            >
-              {hero.startupRaisedValue}
-            </div>
-            <div
-              className="type-ui-sm absolute z-10 text-[#78716C]"
-              style={{ left: heroSecondStatLabelLeft, top: "261px" }}
-            >
-              {hero.startupRaisedLabel}
-            </div>
-          </div>
-        </div>
-        </Container>
-      </section>
-
-      {/* Trust bar — replace placeholder divs with <img src="/logos/name.svg" alt="Name" className="h-8 w-auto" /> when ready */}
-      <section className="w-full bg-[#F3F3F3]">
-        <Container className="px-0 md:px-0 lg:px-0">
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          {[
-            {
-              src: "/company-logos/svg/disney-logo.svg",
-              alt: "Disney",
-              scaleClass: "scale-110 md:scale-115 lg:scale-125",
-            },
-            { src: "/company-logos/svg/hbo-logo.svg", alt: "HBO", scaleClass: "scale-100" },
-            { src: "/company-logos/svg/directv-logo.svg", alt: "DirecTV", scaleClass: "scale-100" },
-            {
-              src: "/company-logos/svg/shopify-logo.svg",
-              alt: "Shopify",
-              scaleClass: "scale-110 md:scale-115 lg:scale-125",
-            },
-            {
-              src: "/company-logos/svg/bcg-logo.svg",
-              alt: "BCG",
-              scaleClass: "scale-110 md:scale-115 lg:scale-125",
-            },
-            {
-              src: "/company-logos/svg/publicis-sapient-logo.svg",
-              alt: "Publicis Sapient",
-              scaleClass: "scale-110 md:scale-115 lg:scale-125",
-            },
-            {
-              src: "/company-logos/svg/bc-logo.svg",
-              alt: "Boston Consulting",
-              scaleClass: "scale-110 md:scale-115 lg:scale-125",
-            },
-            {
-              src: "/company-logos/svg/aa-logo.svg",
-              alt: "American Airlines",
-              scaleClass: "scale-110 md:scale-115 lg:scale-125",
-            },
-          ].map((logo) => (
-            <div key={logo.alt} className="flex items-center justify-center px-4 py-10 md:px-6 md:py-12 lg:px-10 lg:py-14">
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                width={180}
-                height={48}
-                className={`h-auto w-full max-w-[130px] md:max-w-[150px] lg:max-w-[170px] ${logo.scaleClass}`}
-              />
-            </div>
-          ))}
-        </div>
-        </Container>
-      </section>
-
-      <section className="w-full bg-[#FFFFFF]">
-        <Container className="py-14 md:py-16 lg:py-[60px]">
-          <div className="flex flex-col items-center gap-12">
-            <div className="flex w-full flex-col items-center gap-3">
-              <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
-                <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                <span className="type-p2 text-[#222222]">{sections.experiences.pill}</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-2 text-center">
-                <h2 className="type-h3 max-w-[920px] text-[#222222] lg:text-[64px] lg:leading-[1.05] lg:tracking-[-0.04em]">
-                  {sections.experiences.title}
-                </h2>
-                <p className="type-p3 max-w-[840px] text-[#7B7B7B]">
-                  {sections.experiences.description}
-                </p>
-              </div>
-            </div>
-
-            <div className="grid w-full gap-5 md:grid-cols-2 xl:grid-cols-[396px_repeat(3,minmax(0,1fr))] xl:items-stretch">
-              {experienceCards.map((card) => (
-                <ExperienceCard key={card.title} {...card} />
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
+      <HomepageWhatIDoSection section={sections.experiences} cards={experienceCardCopy} />
 
       <section className="w-full bg-[#F3F3F3]">
         <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">

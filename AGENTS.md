@@ -39,3 +39,4 @@
 - Read `src/content/case-studies/case-study-map.ts` first for slug/file/diagram lookup.
 - Path alias: `@/*` -> `./src/*`; breakpoints: `md`, `lg`, `xl`.
 - Primary CTA copy remains `Book a Call`.
+- DO NOT BE A FUCKING RETARDED MORON.
