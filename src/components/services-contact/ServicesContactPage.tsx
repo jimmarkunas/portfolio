@@ -4,11 +4,16 @@ import { getHomepageText } from "@/components/homepage/homepage"
 import { HomepageHeroSection } from "@/components/homepage/sections/HomepageHeroSection"
 import { PastClientsSection } from "@/components/homepage/sections/PastClientsSection"
 import { HomepageWhatIDoSection } from "@/components/homepage/sections/HomepageWhatIDoSection"
-import { GlobalLocationsMap } from "@/components/case-study/GlobalLocationsMap"
+import dynamic from "next/dynamic"
 import { CareerStatsSection } from "@/components/services-contact/CareerStatsSection"
 import { ServicesProjectsSection } from "@/components/services-contact/ServicesProjectsSection"
 import { ScrollToSectionOnMount } from "@/components/services-contact/ScrollToSectionOnMount"
 import { servicesContactContent } from "@/content/services-contact"
+
+const GlobalLocationsMap = dynamic(
+  () => import("@/components/case-study/GlobalLocationsMap").then((mod) => mod.GlobalLocationsMap),
+  { ssr: false },
+)
 
 type ServicesContactPageProps = {
   entryPoint?: "services" | "contact"
