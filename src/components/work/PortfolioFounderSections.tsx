@@ -132,12 +132,12 @@ export function PortfolioFounderSections({
   const reduceMotionEnabled = Boolean(reduceMotion)
   const [isMobile, setIsMobile] = useState(false)
   const itemY = isMobile ? 8 : 12
-  const [showTitleRow, setShowTitleRow] = useState(false)
-  const [showPillsRow, setShowPillsRow] = useState(false)
-  const [showImageRow1, setShowImageRow1] = useState(false)
-  const [showImageRow2, setShowImageRow2] = useState(false)
-  const [showImageRow3, setShowImageRow3] = useState(false)
-  const [showImageRow4, setShowImageRow4] = useState(false)
+  const [showTitleRow, setShowTitleRow] = useState(true)
+  const [showPillsRow, setShowPillsRow] = useState(true)
+  const [showImageRow1, setShowImageRow1] = useState(true)
+  const [showImageRow2, setShowImageRow2] = useState(true)
+  const [showImageRow3, setShowImageRow3] = useState(true)
+  const [showImageRow4, setShowImageRow4] = useState(true)
   const titleSentinelRef = useRef<HTMLDivElement>(null)
   const row1SentinelRef = useRef<HTMLDivElement>(null)
   const row2SentinelRef = useRef<HTMLDivElement>(null)
@@ -196,7 +196,7 @@ export function PortfolioFounderSections({
 
           <motion.div
             className="flex w-full flex-col items-center gap-8 md:items-start"
-            initial={{ opacity: 0, y: itemY }}
+            initial={false}
             animate={showTitleRow ? { opacity: 1, y: 0 } : { opacity: 0, y: itemY }}
             transition={{ duration: 0.32, ease }}
           >
@@ -224,7 +224,7 @@ export function PortfolioFounderSections({
 
           <motion.div
             className="flex w-full flex-wrap items-center justify-center gap-2 md:justify-start"
-            initial={{ opacity: 0, y: itemY }}
+            initial={false}
             animate={showPillsRow ? { opacity: 1, y: 0 } : { opacity: 0, y: itemY }}
             transition={{ duration: 0.32, ease }}
           >
@@ -246,7 +246,7 @@ export function PortfolioFounderSections({
               {portfolioShowcase.topRow.map((card, index) => (
                 <motion.div
                   key={card.href}
-                  initial={{ opacity: 0, y: itemY }}
+                  initial={false}
                   animate={showImageRow1 ? { opacity: 1, y: 0 } : { opacity: 0, y: itemY }}
                   transition={{ duration: 0.32, ease, delay: index * 0.04 }}
                 >
@@ -269,7 +269,7 @@ export function PortfolioFounderSections({
             <div className="grid w-full gap-4 md:grid-cols-3">
               <motion.div
                 className="md:col-span-2"
-                initial={{ opacity: 0, y: itemY }}
+                initial={false}
                 animate={showImageRow2 ? { opacity: 1, y: 0 } : { opacity: 0, y: itemY }}
                 transition={{ duration: 0.32, ease }}
               >
@@ -288,7 +288,7 @@ export function PortfolioFounderSections({
                   <motion.div
                     key={card.href}
                     className="md:h-full"
-                    initial={{ opacity: 0, y: itemY }}
+                    initial={false}
                     animate={showImageRow2 ? { opacity: 1, y: 0 } : { opacity: 0, y: itemY }}
                     transition={{ duration: 0.32, ease, delay: (index + 1) * 0.04 }}
                   >
@@ -313,7 +313,7 @@ export function PortfolioFounderSections({
               {portfolioShowcase.middleRow.map((card, index) => (
                 <motion.div
                   key={card.href}
-                  initial={{ opacity: 0, y: itemY }}
+                  initial={false}
                   animate={showImageRow3 ? { opacity: 1, y: 0 } : { opacity: 0, y: itemY }}
                   transition={{ duration: 0.32, ease, delay: index * 0.04 }}
                 >
@@ -336,7 +336,7 @@ export function PortfolioFounderSections({
                 {portfolioShowcase.lowerRow.map((card, index) => (
                   <motion.div
                     key={card.href}
-                    initial={{ opacity: 0, y: itemY }}
+                    initial={false}
                     animate={showImageRow4 ? { opacity: 1, y: 0 } : { opacity: 0, y: itemY }}
                     transition={{ duration: 0.32, ease, delay: index * 0.04 }}
                   >
@@ -352,7 +352,7 @@ export function PortfolioFounderSections({
               </div>
 
               <motion.div
-                initial={{ opacity: 0, y: itemY }}
+                initial={false}
                 animate={showImageRow4 ? { opacity: 1, y: 0 } : { opacity: 0, y: itemY }}
                 transition={{ duration: 0.32, ease, delay: 0.04 }}
               >
@@ -369,7 +369,7 @@ export function PortfolioFounderSections({
                 {portfolioShowcase.lowerMiddleRow.map((card, index) => (
                   <motion.div
                     key={card.href}
-                    initial={{ opacity: 0, y: itemY }}
+                    initial={false}
                     animate={showImageRow4 ? { opacity: 1, y: 0 } : { opacity: 0, y: itemY }}
                     transition={{ duration: 0.32, ease, delay: 0.08 + index * 0.04 }}
                   >
@@ -385,7 +385,7 @@ export function PortfolioFounderSections({
               </div>
 
               <motion.div
-                initial={{ opacity: 0, y: itemY }}
+                initial={false}
                 animate={showImageRow4 ? { opacity: 1, y: 0 } : { opacity: 0, y: itemY }}
                 transition={{ duration: 0.32, ease, delay: 0.12 }}
               >
@@ -552,7 +552,7 @@ export function PortfolioFounderSections({
 
         <motion.div
           className="grid w-full gap-6 md:grid-cols-2"
-          initial="hidden"
+          initial={false}
           whileInView="visible"
           viewport={{ once: true, amount: 0.18, margin: "-8% 0px" }}
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09 } } }}
