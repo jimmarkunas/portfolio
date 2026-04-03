@@ -20,7 +20,17 @@ type Props = {
 
 const INIT_CENTER: [number, number] = [20, 15]
 const INIT_ZOOM = 2.75
+const MOBILE_INIT_CENTER: [number, number] = [52.3555, -1.1743]
+const MOBILE_INIT_ZOOM = 4
 const MarkerClusterGroup = dynamic(() => import("react-leaflet-cluster"), { ssr: false })
+
+function getIsMobileViewportMatch() {
+  if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+    return false
+  }
+
+  return window.matchMedia("(max-width: 767px)").matches
+}
 
 function makeDotIcon(delay: string) {
   return L.divIcon({
@@ -62,8 +72,35 @@ function ZoomTracker({ onChange }: { onChange: (z: number) => void }) {
 
 export function GlobalLocationsMapInner({ title, locations, clusterMarkers = true }: Props) {
   const mapRef = useRef<LeafletMap | null>(null)
-  const [currentZoom, setCurrentZoom] = useState(INIT_ZOOM)
-  const isDrilledIn = currentZoom > INIT_ZOOM + 0.5
+  const [isMobileViewport, setIsMobileViewport] = useState(getIsMobileViewportMatch)
+  const [currentZoom, setCurrentZoom] = useState(() => (getIsMobileViewportMatch() ? MOBILE_INIT_ZOOM : INIT_ZOOM))
+  const initialCenter = isMobileViewport ? MOBILE_INIT_CENTER : INIT_CENTER
+  const initialZoom = isMobileViewport ? MOBILE_INIT_ZOOM : INIT_ZOOM
+  const isDrilledIn = currentZoom > initialZoom + 0.5
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return undefined
+
+    const query = window.matchMedia("(max-width: 767px)")
+    const handleChange = (event: MediaQueryListEvent) => setIsMobileViewport(event.matches)
+
+    setIsMobileViewport(query.matches)
+    if (typeof query.addEventListener === "function") {
+      query.addEventListener("change", handleChange)
+      return () => query.removeEventListener("change", handleChange)
+    }
+
+    query.addListener(handleChange)
+    return () => query.removeListener(handleChange)
+  }, [])
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map) return
+
+    map.setView(initialCenter, initialZoom, { animate: false })
+    setCurrentZoom(initialZoom)
+  }, [initialCenter, initialZoom])
 
   const handleZoomChange = useCallback((z: number) => setCurrentZoom(z), [])
   function handleZoomIn() {
@@ -73,7 +110,7 @@ export function GlobalLocationsMapInner({ title, locations, clusterMarkers = tru
     mapRef.current?.zoomOut()
   }
   function handleReset() {
-    mapRef.current?.setView(INIT_CENTER, INIT_ZOOM, { animate: true })
+    mapRef.current?.setView(initialCenter, initialZoom, { animate: true })
   }
 
   return (
@@ -88,6 +125,7 @@ export function GlobalLocationsMapInner({ title, locations, clusterMarkers = tru
       >
         <button
           onClick={handleReset}
+          onPointerDown={(event) => event.stopPropagation()}
           className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-black/60 px-3 py-1.5 text-[12px] font-medium text-white/80 backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white whitespace-nowrap"
         >
           <span>←</span> Overview
@@ -105,8 +143,9 @@ export function GlobalLocationsMapInner({ title, locations, clusterMarkers = tru
           <button
             key={label}
             onClick={fn}
+            onPointerDown={(event) => event.stopPropagation()}
             title={t}
-            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-black/50 text-[15px] text-white/60 backdrop-blur-sm transition-colors hover:bg-black/70 hover:text-white/90"
+            className="flex h-8 w-8 touch-manipulation cursor-pointer items-center justify-center rounded-lg bg-black/50 text-[15px] text-white/60 backdrop-blur-sm transition-colors hover:bg-black/70 hover:text-white/90"
           >
             {label}
           </button>
@@ -114,9 +153,13 @@ export function GlobalLocationsMapInner({ title, locations, clusterMarkers = tru
       </div>
 
       <MapContainer
-        center={INIT_CENTER}
-        zoom={INIT_ZOOM}
+        center={initialCenter}
+        zoom={initialZoom}
         scrollWheelZoom={false}
+        dragging={!isMobileViewport}
+        touchZoom={!isMobileViewport}
+        doubleClickZoom={!isMobileViewport}
+        boxZoom={!isMobileViewport}
         zoomControl={false}
         attributionControl={false}
         zoomSnap={0.25}

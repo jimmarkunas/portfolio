@@ -40,6 +40,8 @@ export function useAdaptiveDiagramMotion() {
   return {
     prefersReducedMotion,
     constrainedViewport,
-    shouldReduceMotion: prefersReducedMotion || constrainedViewport,
+    // Keep full diagram motion on mobile/tablet unless the user explicitly
+    // requests reduced motion at OS/browser level.
+    shouldReduceMotion: prefersReducedMotion,
   }
 }
