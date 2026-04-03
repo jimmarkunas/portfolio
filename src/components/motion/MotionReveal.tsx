@@ -43,9 +43,12 @@ export function MotionReveal({
     const handleMediaQuery = () => setIsMobile(mediaQuery.matches)
 
     handleMediaQuery()
-    mediaQuery.addEventListener("change", handleMediaQuery)
-
-    return () => mediaQuery.removeEventListener("change", handleMediaQuery)
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", handleMediaQuery)
+      return () => mediaQuery.removeEventListener("change", handleMediaQuery)
+    }
+    mediaQuery.addListener(handleMediaQuery)
+    return () => mediaQuery.removeListener(handleMediaQuery)
   }, [])
 
   if (reduceMotion) {

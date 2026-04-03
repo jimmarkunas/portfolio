@@ -153,8 +153,12 @@ export function PortfolioFounderSections({
     const mediaQuery = window.matchMedia("(max-width: 767px)")
     const onChange = () => setIsMobile(mediaQuery.matches)
     onChange()
-    mediaQuery.addEventListener("change", onChange)
-    return () => mediaQuery.removeEventListener("change", onChange)
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", onChange)
+      return () => mediaQuery.removeEventListener("change", onChange)
+    }
+    mediaQuery.addListener(onChange)
+    return () => mediaQuery.removeListener(onChange)
   }, [])
 
   useEffect(() => {

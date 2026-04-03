@@ -22,8 +22,12 @@ function useMediaQuery(query: string) {
     const onChange = (event: MediaQueryListEvent) => setMatches(event.matches)
 
     setMatches(mediaQuery.matches)
-    mediaQuery.addEventListener("change", onChange)
-    return () => mediaQuery.removeEventListener("change", onChange)
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", onChange)
+      return () => mediaQuery.removeEventListener("change", onChange)
+    }
+    mediaQuery.addListener(onChange)
+    return () => mediaQuery.removeListener(onChange)
   }, [query])
 
   return matches
