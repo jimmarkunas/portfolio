@@ -28,6 +28,7 @@ export default function Modal({ tip, onClose }: ModalProps) {
 
   return (
     <div
+      onPointerDown={(event) => event.stopPropagation()}
       onClick={onClose}
       style={{
         position: "fixed",
@@ -43,6 +44,7 @@ export default function Modal({ tip, onClose }: ModalProps) {
     >
       <div
         ref={cardRef}
+        onPointerDown={(event) => event.stopPropagation()}
         onClick={(e) => e.stopPropagation()}
         style={{
           width: "min(560px, calc(100vw - 32px))",
