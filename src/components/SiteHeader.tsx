@@ -19,7 +19,7 @@ export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <header className="w-full bg-[#F3F3F3]">
+    <header className="sticky top-0 z-50 w-full bg-[#F3F3F3]">
       <Container className="py-4 md:py-5">
         <div className="flex items-center justify-between gap-6">
           <Link

@@ -2,7 +2,6 @@ import { Container } from "@/components/Container"
 import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import {
-  desktopHeroLogoAxisX,
   desktopHeroRailLabelX,
   desktopHeroRailLineX,
   desktopHeroYearLabelX,
@@ -68,6 +67,59 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
         </div>
 
         <div className="relative hidden h-[938px] overflow-hidden bg-[#F3F3F3] md:block">
+          <MotionReveal
+            preset="flow"
+            className="absolute z-10"
+            delay={0.18}
+            style={{
+              left: `-${desktopHeroRailLabelX}px`,
+              top: "168px",
+              height: "701px",
+              width: "120px",
+            }}
+          >
+            <div className="relative h-full w-full">
+              <div
+                className="absolute left-0 top-0 origin-top-left -rotate-90 whitespace-nowrap text-[#222222]"
+                style={{
+                  left: `${desktopHeroRailLabelX}px`,
+                  top: "154px",
+                  fontFamily: "var(--font-family-display)",
+                  fontSize: "18px",
+                  fontWeight: 400,
+                  lineHeight: 1,
+                }}
+              >
+                {hero.role}
+              </div>
+
+              <div
+                className="absolute bg-[#222222]"
+                style={{
+                  left: `${desktopHeroRailLineX}px`,
+                  top: "174px",
+                  width: "1px",
+                  height: "386px",
+                }}
+                aria-hidden="true"
+              />
+
+              <div
+                className="absolute left-0 bottom-0 origin-bottom-left -rotate-90 whitespace-nowrap text-[#222222]"
+                style={{
+                  left: `${desktopHeroYearLabelX}px`,
+                  bottom: "56px",
+                  fontFamily: "var(--font-family-display)",
+                  fontSize: "18px",
+                  fontWeight: 400,
+                  lineHeight: 1,
+                }}
+              >
+                {hero.year}
+              </div>
+            </div>
+          </MotionReveal>
+
           <div className="absolute inset-x-0 top-0 h-full md:h-[calc(100%+80px)] md:-translate-y-20 lg:h-full lg:translate-y-0">
             <MotionReveal
               preset="heroMedia"
@@ -116,60 +168,6 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
               style={{ left: heroTextLeft, top: "860px" }}
             >
               {hero.scroll}
-            </MotionReveal>
-
-            <MotionReveal
-              preset="flow"
-              className="absolute z-10"
-              delay={0.18}
-              style={{
-                top: "168px",
-                height: "701px",
-                width: "120px",
-                left: `${desktopHeroLogoAxisX}px`,
-                transform: "translateX(-50%)",
-              }}
-            >
-              <div className="relative h-full w-full">
-                <div
-                  className="absolute left-0 top-0 origin-top-left -rotate-90 whitespace-nowrap text-[#222222]"
-                  style={{
-                    left: `${desktopHeroRailLabelX}px`,
-                    top: "154px",
-                    fontFamily: "var(--font-family-display)",
-                    fontSize: "18px",
-                    fontWeight: 400,
-                    lineHeight: 1,
-                  }}
-                >
-                  {hero.role}
-                </div>
-
-                <div
-                  className="absolute bg-[#222222]"
-                  style={{
-                    left: `${desktopHeroRailLineX}px`,
-                    top: "189px",
-                    width: "1px",
-                    height: "386px",
-                  }}
-                  aria-hidden="true"
-                />
-
-                <div
-                  className="absolute left-0 bottom-0 origin-bottom-left -rotate-90 whitespace-nowrap text-[#222222]"
-                  style={{
-                    left: `${desktopHeroYearLabelX}px`,
-                    bottom: "56px",
-                    fontFamily: "var(--font-family-display)",
-                    fontSize: "18px",
-                    fontWeight: 400,
-                    lineHeight: 1,
-                  }}
-                >
-                  {hero.year}
-                </div>
-              </div>
             </MotionReveal>
 
             <MotionReveal

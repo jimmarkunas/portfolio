@@ -64,14 +64,14 @@ export default function NylEditorialCarousel({ images }: Props) {
         <button
           onClick={prev}
           aria-label="Previous slide"
-          className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/50 text-white hover:bg-white/10 transition-colors"
+          className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/50 bg-[#222222] text-white hover:bg-[#2F2F2F] transition-colors"
         >
           <ChevronLeft size={18} />
         </button>
         <button
           onClick={next}
           aria-label="Next slide"
-          className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/50 text-white hover:bg-white/10 transition-colors"
+          className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/50 bg-[#222222] text-white hover:bg-[#2F2F2F] transition-colors"
         >
           <ChevronRight size={18} />
         </button>

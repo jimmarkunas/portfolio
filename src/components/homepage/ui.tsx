@@ -19,7 +19,7 @@ export function ExperienceCard({
 }) {
   return (
     <article
-      className={`rounded-[10px] bg-[#F3F3F3] p-6 md:p-7 ${
+      className={`h-full rounded-[10px] bg-[#F3F3F3] p-6 md:p-7 ${
         wide ? "lg:col-span-1 lg:min-h-[320px]" : "lg:min-h-[320px]"
       }`}
     >

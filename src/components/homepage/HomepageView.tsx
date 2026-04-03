@@ -159,46 +159,6 @@ export default function Homepage() {
 
       <section className="w-full bg-[#F3F3F3]">
         <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
-          <div className="flex flex-col gap-20">
-            <div className="grid gap-10 lg:grid-cols-[482px_minmax(0,769px)] lg:justify-between lg:gap-12">
-              <MotionReveal preset="hero" className="flex flex-col items-start gap-3" delay={0.02}>
-                <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
-                  <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                  <span className="type-p2 text-[#222222]">{sections.awards.pill}</span>
-                </div>
-
-                <div className="flex flex-col items-start gap-2">
-                  <h2 className="type-h3 max-w-[396px] text-[#222222]">{sections.awards.title}</h2>
-                  <p className="type-p2 max-w-[482px] text-black/70">{sections.awards.description}</p>
-                </div>
-              </MotionReveal>
-
-              <div className="flex flex-col gap-6">
-                {awards.map((item, index) => (
-                  <MotionReveal
-                    key={`${item.rank}-${item.year}-${item.title}`}
-                    preset="cardStrong"
-                    delay={0.08 + index * 0.05}
-                  >
-                    <AwardRow {...item} />
-                  </MotionReveal>
-                ))}
-              </div>
-            </div>
-
-            <PortfolioFounderSections
-              portfolio={sections.portfolio}
-              founder={sections.portfolio.moreProjects}
-              ctaLabel={sections.highlights.cta}
-              ctaHref="/work/"
-              showCta
-            />
-          </div>
-        </Container>
-      </section>
-
-      <section className="w-full bg-[#F3F3F3]">
-        <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
           <div className="flex flex-col items-start gap-12">
             <MotionReveal preset="hero" className="flex w-full flex-col items-start gap-5" delay={0.02}>
               <SectionPill label={sections.insights.pill} />
@@ -293,6 +253,39 @@ export default function Homepage() {
                 </article>
               </MotionReveal>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="w-full bg-[#F3F3F3]">
+        <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
+          <div className="flex flex-col gap-20">
+            <div className="grid gap-10 lg:grid-cols-[482px_minmax(0,769px)] lg:justify-between lg:gap-12">
+              <MotionReveal preset="hero" className="flex flex-col items-start gap-3" delay={0.02}>
+                <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
+                  <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
+                  <span className="type-p2 text-[#222222]">{sections.awards.pill}</span>
+                </div>
+
+                <div className="flex flex-col items-start gap-2">
+                  <h2 className="type-h3 max-w-[396px] text-[#222222]">{sections.awards.title}</h2>
+                  <p className="type-p2 max-w-[482px] text-black/70">{sections.awards.description}</p>
+                </div>
+              </MotionReveal>
+
+              <div className="flex flex-col gap-6">
+                {awards.map((item, index) => (
+                  <MotionReveal
+                    key={`${item.rank}-${item.year}-${item.title}`}
+                    preset="cardStrong"
+                    delay={0.08 + index * 0.05}
+                  >
+                    <AwardRow {...item} />
+                  </MotionReveal>
+                ))}
+              </div>
+            </div>
+
           </div>
         </Container>
       </section>
@@ -409,6 +402,18 @@ export default function Homepage() {
               }
             />
           </MotionReveal>
+        </Container>
+      </section>
+
+      <section className="w-full bg-[#F3F3F3]">
+        <Container className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-0 lg:pt-[72px]">
+          <PortfolioFounderSections
+            portfolio={sections.portfolio}
+            founder={sections.portfolio.moreProjects}
+            ctaLabel={sections.highlights.cta}
+            ctaHref="/work/"
+            showCta
+          />
         </Container>
       </section>
 
