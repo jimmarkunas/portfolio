@@ -130,7 +130,9 @@ function FlowLine() {
   useEffect(() => {
     if (!containerRef.current) return;
     const update = () => {
-      const w = containerRef.current!.offsetWidth;
+      const el = containerRef.current;
+      if (!el) return;
+      const w = el.offsetWidth;
       const pad = 40;
       setPaths([[{ x: pad, y: Y }, { x: w - pad, y: Y }]]);
     };
