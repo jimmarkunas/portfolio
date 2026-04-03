@@ -1,17 +1,20 @@
 import type { CaseStudyData } from "@/components/case-study/types"
 import { FullWidthImage } from "@/components/FullWidthImage"
+import { MotionReveal } from "@/components/motion/MotionReveal"
 import { SectionShell } from "@/components/SectionShell"
 export function CaseStudySupplementalSection({ data }: { data: CaseStudyData }) {
   return (
     <SectionShell surface="white" containerClassName="pt-0 pb-10 md:pb-12 lg:pb-14">
-      <div className="flex w-full flex-col items-start gap-5">
+      <MotionReveal preset="section" className="flex w-full flex-col items-start gap-5">
         <h2 className="type-h5 text-[#111111]">{data.supplementalNarrative.title}</h2>
 
         {data.supplementalNarrative.paragraphs.map((paragraph, index) => (
           <div key={`supplemental-paragraph-${index}`} className="contents">
             <p className="type-p2 my-0 text-[#222222]">{paragraph}</p>
             {index === 0 && data.supplementalNarrative.image && (
-              <FullWidthImage src={data.supplementalNarrative.image} />
+              <MotionReveal preset="image" className="w-full">
+                <FullWidthImage src={data.supplementalNarrative.image} />
+              </MotionReveal>
             )}
           </div>
         ))}
@@ -32,9 +35,11 @@ export function CaseStudySupplementalSection({ data }: { data: CaseStudyData }) 
         ) : null}
 
         {data.supplementalNarrative.closingImage && (
-          <FullWidthImage src={data.supplementalNarrative.closingImage} fullWidth={false} />
+          <MotionReveal preset="image" className="w-full" delay={0.04}>
+            <FullWidthImage src={data.supplementalNarrative.closingImage} fullWidth={false} />
+          </MotionReveal>
         )}
-      </div>
+      </MotionReveal>
     </SectionShell>
   )
 }

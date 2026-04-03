@@ -2,6 +2,7 @@ import { BeforeAfterComparison } from "@/components/case-study/BeforeAfterCompar
 import type { CaseStudyData } from "@/components/case-study/types"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
+import { MotionReveal } from "@/components/motion/MotionReveal"
 import { SectionShell } from "@/components/SectionShell"
 import { StatCard } from "@/components/StatCard"
 import { TagPill } from "@/components/TagPill"
@@ -12,7 +13,7 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyData }) {
   return (
     <SectionShell containerClassName="py-14 md:py-16 lg:py-20">
       <div className="flex flex-col items-center gap-6">
-        <div className="flex max-w-[800px] flex-col items-center gap-3 text-center">
+        <MotionReveal preset="section" className="flex max-w-[800px] flex-col items-center gap-3 text-center">
           <EyebrowPill className="bg-white" labelClassName="type-p2 text-[#222222]">
             {data.impact.eyebrow}
           </EyebrowPill>
@@ -45,9 +46,9 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyData }) {
               </div>
             ))}
           </div>
-        </div>
+        </MotionReveal>
 
-        <div className="hidden w-full items-center justify-center gap-3 lg:flex">
+        <MotionReveal preset="card" className="hidden w-full items-center justify-center gap-3 lg:flex">
           {data.impact.proofPoints.map((item, index) => (
             <div key={`desktop-intro-${item}`} className="flex items-center gap-3">
               <TagPill variant="dark" className="py-2.5 text-[18px]">
@@ -58,39 +59,42 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyData }) {
               ) : null}
             </div>
           ))}
-        </div>
+        </MotionReveal>
 
         <div className="grid w-full grid-cols-2 gap-5 pt-3 md:pt-4 lg:grid-cols-4 lg:pt-6">
-          {data.impact.stats.map((stat) => (
-            <StatCard
-              key={`${stat.value}-${stat.label}`}
-              value={stat.value}
-              suffix={stat.suffix}
-              label={stat.label}
-              className="min-h-[176px] px-8 py-10"
-              valueClassName="text-center text-slate-800"
-              valueTextClassName="text-[56px] font-medium leading-[60px]"
-              suffixClassName="text-[36px] font-semibold leading-9"
-              labelClassName="type-p2 max-w-[220px] text-center font-medium text-neutral-700"
-              contentClassName="gap-3.5"
-            />
+          {data.impact.stats.map((stat, index) => (
+            <MotionReveal key={`${stat.value}-${stat.label}`} preset="card" delay={index * 0.04}>
+              <StatCard
+                value={stat.value}
+                suffix={stat.suffix}
+                label={stat.label}
+                className="min-h-[176px] px-8 py-10"
+                valueClassName="text-center text-slate-800"
+                valueTextClassName="text-[56px] font-medium leading-[60px]"
+                suffixClassName="text-[36px] font-semibold leading-9"
+                labelClassName="type-p2 max-w-[220px] text-center font-medium text-neutral-700"
+                contentClassName="gap-3.5"
+              />
+            </MotionReveal>
           ))}
         </div>
 
         {data.impact.statsImage && (
-          <FullWidthImage src={data.impact.statsImage} fullWidth={false} />
+          <MotionReveal preset="image" className="w-full">
+            <FullWidthImage src={data.impact.statsImage} fullWidth={false} />
+          </MotionReveal>
         )}
 
-        <div className="grid w-full gap-10 lg:grid-cols-4 lg:items-start lg:gap-5">
-          <div className="flex flex-col items-start gap-4 lg:col-span-2">
+        <MotionReveal preset="section" className="grid w-full gap-10 lg:grid-cols-4 lg:items-start lg:gap-5">
+          <MotionReveal preset="card" className="flex flex-col items-start gap-4 lg:col-span-2">
             <div className="flex flex-col gap-5 rounded-2xl border border-[#222222] bg-[#222222] p-8">
               <h2 className="type-h3 max-w-[640px] text-white">{data.impact.beforeAfter.title}</h2>
               <p className="type-p3 max-w-[620px] text-white/70">{data.impact.beforeAfter.summary}</p>
               <BeforeAfterComparison columns={data.impact.beforeAfter.columns} />
             </div>
-          </div>
+          </MotionReveal>
 
-          <div className="flex flex-col pt-10 lg:col-span-2">
+          <MotionReveal preset="card" delay={0.05} className="flex flex-col pt-10 lg:col-span-2">
             {data.impact.journeySteps.map((item, index) => (
               <div key={item.step} className="grid grid-cols-[40px_1fr] gap-x-4 sm:grid-cols-[64px_minmax(0,1fr)] sm:gap-x-10">
                 <div className="flex flex-col items-center">
@@ -107,8 +111,8 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyData }) {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
+          </MotionReveal>
+        </MotionReveal>
       </div>
     </SectionShell>
   )

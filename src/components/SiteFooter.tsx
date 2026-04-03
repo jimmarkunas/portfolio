@@ -22,7 +22,6 @@ const socialLinks = [
     external: true,
   },
 ]
-
 function SocialIcon({
   href,
   label,

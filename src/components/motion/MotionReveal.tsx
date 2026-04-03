@@ -3,7 +3,15 @@
 import { useEffect, useState, type CSSProperties, type ReactNode } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 
-type MotionRevealPreset = "section" | "card" | "image" | "shape"
+type MotionRevealPreset =
+  | "section"
+  | "card"
+  | "image"
+  | "shape"
+  | "hero"
+  | "heroMedia"
+  | "flow"
+  | "cardStrong"
 const revealEase: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
 type MotionRevealProps = {
@@ -82,6 +90,71 @@ export function MotionReveal({
         whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
         viewport={{ once, amount, margin }}
         transition={{ duration: isMobile ? 0.34 : 0.42, delay, ease: revealEase }}
+      >
+        {children}
+      </motion.div>
+    )
+  }
+
+  if (preset === "hero") {
+    const heroY = isMobile ? 14 : 22
+    return (
+      <motion.div
+        className={className}
+        style={style}
+        initial={{ opacity: 0, y: heroY }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once, amount, margin }}
+        transition={{ duration: isMobile ? 0.48 : 0.62, delay, ease: revealEase }}
+      >
+        {children}
+      </motion.div>
+    )
+  }
+
+  if (preset === "heroMedia") {
+    const mediaY = isMobile ? 14 : 20
+    const mediaClip = isMobile ? "inset(0 0 20% 0)" : "inset(0 0 28% 0)"
+    return (
+      <motion.div
+        className={className}
+        style={style}
+        initial={{ opacity: 0, y: mediaY, scale: 0.988, clipPath: mediaClip }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, clipPath: "inset(0 0 0% 0)" }}
+        viewport={{ once, amount, margin }}
+        transition={{ duration: isMobile ? 0.56 : 0.7, delay, ease: revealEase }}
+      >
+        {children}
+      </motion.div>
+    )
+  }
+
+  if (preset === "flow") {
+    const flowX = isMobile ? -10 : -18
+    return (
+      <motion.div
+        className={className}
+        style={style}
+        initial={{ opacity: 0, x: flowX }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once, amount, margin }}
+        transition={{ duration: isMobile ? 0.38 : 0.48, delay, ease: revealEase }}
+      >
+        {children}
+      </motion.div>
+    )
+  }
+
+  if (preset === "cardStrong") {
+    const cardStrongY = isMobile ? 10 : 16
+    return (
+      <motion.div
+        className={className}
+        style={style}
+        initial={{ opacity: 0, y: cardStrongY, scale: 0.988 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once, amount, margin }}
+        transition={{ duration: isMobile ? 0.36 : 0.48, delay, ease: revealEase }}
       >
         {children}
       </motion.div>

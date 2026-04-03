@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/cv", label: "CV" },
   { href: "/contact", label: "Contact" },
 ]
+const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
 
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false)
@@ -23,7 +24,7 @@ export function SiteHeader() {
         <div className="flex items-center justify-between gap-6">
           <Link
             href="/"
-            className="flex items-center justify-start gap-[10px] text-[20px] text-[#222222] transition-colors duration-150 hover:text-[#447ACB] md:text-[22px] lg:text-[24px]"
+            className={`flex items-center justify-start gap-[10px] text-[20px] text-[#222222] transition-colors duration-150 hover:text-[#447ACB] ${hoverLiftClass} md:text-[22px] lg:text-[24px]`}
             onClick={() => setIsOpen(false)}
           >
             <span className="inline-flex items-baseline leading-none">
@@ -39,7 +40,7 @@ export function SiteHeader() {
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  className="text-[16px] font-normal leading-none text-[#222222] transition-colors hover:text-[#447ACB] hover:underline hover:underline-offset-4"
+                  className={`text-[16px] font-normal leading-none text-[#222222] transition-colors hover:text-[#447ACB] hover:underline hover:underline-offset-4 ${hoverLiftClass}`}
                   href={link.href}
                 >
                   {link.label}
@@ -49,7 +50,7 @@ export function SiteHeader() {
 
             <a
               href="https://calendar.app.google/TkZumQx7Bfyou7G26"
-              className="inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB]"
+              className={`inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${hoverLiftClass}`}
               target="_blank"
               rel="noreferrer"
             >
@@ -75,7 +76,7 @@ export function SiteHeader() {
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
             aria-controls="mobile-site-nav"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#222222]/10 bg-[#FEFEFE] text-[#222222] transition-colors hover:border-[#447ACB] hover:text-[#447ACB] lg:hidden"
+            className={`inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#222222]/10 bg-[#FEFEFE] text-[#222222] transition-colors hover:border-[#447ACB] hover:text-[#447ACB] ${hoverLiftClass} lg:hidden`}
             onClick={() => setIsOpen((open) => !open)}
           >
             {isOpen ? <X className="h-5 w-5" strokeWidth={2} /> : <Menu className="h-5 w-5" strokeWidth={2} />}
@@ -91,7 +92,7 @@ export function SiteHeader() {
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  className="text-[18px] font-normal leading-none text-[#222222] transition-colors hover:text-[#447ACB]"
+                  className={`text-[18px] font-normal leading-none text-[#222222] transition-colors hover:text-[#447ACB] ${hoverLiftClass}`}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                 >
@@ -102,7 +103,7 @@ export function SiteHeader() {
 
             <a
               href="https://calendar.app.google/TkZumQx7Bfyou7G26"
-              className="mt-5 inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB]"
+              className={`mt-5 inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${hoverLiftClass}`}
               target="_blank"
               rel="noreferrer"
               onClick={() => setIsOpen(false)}

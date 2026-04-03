@@ -4,9 +4,11 @@ import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame
 import type { CaseStudyData } from "@/components/case-study/types"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
+import { MotionReveal } from "@/components/motion/MotionReveal"
 import { TagPill } from "@/components/TagPill"
 
 import { ExternalLinkMiniIcon } from "./CaseStudyTemplateIcons"
+const hoverLiftClass = "transition-[transform,color] duration-200 hover:-translate-y-0.5"
 
 export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyData; isFoh: boolean }) {
   if (!data.recognition) {
@@ -19,12 +21,12 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
 
   return (
     <section id="recognition" className="relative overflow-hidden bg-white">
-      <div className="pointer-events-none absolute right-[-160px] top-[-20px] h-[420px] w-[420px] rounded-full bg-[#F2CD5C]/10 blur-[125px]" />
-      <div className="pointer-events-none absolute left-[-120px] top-[620px] h-[480px] w-[480px] rounded-full bg-[#D8F2D2]/20 blur-[125px]" />
+      <MotionReveal preset="shape" className="pointer-events-none absolute right-[-160px] top-[-20px] h-[420px] w-[420px] rounded-full bg-[#F2CD5C]/10 blur-[125px]" />
+      <MotionReveal preset="shape" delay={0.08} className="pointer-events-none absolute left-[-120px] top-[620px] h-[480px] w-[480px] rounded-full bg-[#D8F2D2]/20 blur-[125px]" />
 
       <Container className="relative z-10 py-20 md:max-w-none md:px-0 md:py-12 lg:max-w-[1440px] lg:px-12 lg:pb-20 lg:pt-28">
         <div className="flex flex-col gap-16 md:gap-8 lg:gap-20">
-          <div className="grid gap-10 md:gap-5 lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:items-start lg:gap-6 lg:justify-between">
+          <MotionReveal preset="section" className="grid gap-10 md:gap-5 lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:items-start lg:gap-6 lg:justify-between">
             <div className="flex flex-col items-start gap-4 lg:relative lg:col-start-1">
               <EyebrowPill
                 className="bg-white lg:absolute lg:left-0 lg:top-[-44px]"
@@ -40,7 +42,7 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                   href={data.hero.primaryCta.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="type-p4 mt-2 hidden items-center gap-1.5 whitespace-nowrap text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] md:inline-flex lg:hidden"
+                  className={`type-p4 mt-2 hidden items-center gap-1.5 whitespace-nowrap text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] ${hoverLiftClass} md:inline-flex lg:hidden`}
                 >
                   <span>{data.hero.primaryCta.label}</span>
                   <ExternalLinkMiniIcon />
@@ -55,17 +57,17 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                 href={data.hero.primaryCta.href}
                 target="_blank"
                 rel="noreferrer"
-                className="type-p4 inline-flex items-center gap-1.5 text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] md:hidden lg:inline-flex"
+                className={`type-p4 inline-flex items-center gap-1.5 text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] ${hoverLiftClass} md:hidden lg:inline-flex`}
               >
                 <span>{data.hero.primaryCta.label}</span>
                 <ExternalLinkMiniIcon />
               </a>
             </div>
-          </div>
+          </MotionReveal>
 
           <div className="flex flex-col">
             {data.recognition.leadImage && (
-              <div className={isFoh ? "-mt-9 pb-7 md:-mt-1 lg:-mt-[52px]" : "pb-7"}>
+              <MotionReveal preset="image" className={isFoh ? "-mt-9 pb-7 md:-mt-1 lg:-mt-[52px]" : "pb-7"}>
                 <div className="relative">
                   <img
                     src={data.recognition.leadImage.src}
@@ -78,11 +80,11 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                     </div>
                   )}
                 </div>
-              </div>
+              </MotionReveal>
             )}
 
             {data.recognition.featured && (
-              <div className="border-b border-[#E5E7EB] pb-7">
+              <MotionReveal preset="card" className="border-b border-[#E5E7EB] pb-7">
                 <div className="flex flex-col gap-8">
                   <div className={isFoh
                     ? "grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] lg:gap-x-8 lg:gap-y-5 xl:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] xl:justify-between"
@@ -128,7 +130,7 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                     </div>
                   </div>
                 </div>
-              </div>
+              </MotionReveal>
             )}
 
             {data.recognition.rows.map((row, rowIndex) => {
@@ -155,18 +157,21 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                   </div>
                 </div>
               )
-              return viewerHref ? (
-                <Link
-                  key={rowKey}
-                  href={viewerHref}
-                  className="block w-full cursor-pointer border-b border-[#E5E7EB] py-7 transition-colors duration-150 hover:bg-[#F5F7FA]"
-                >
-                  {inner}
-                </Link>
-              ) : (
-                <div key={rowKey} className="w-full border-b border-[#E5E7EB] py-7">
-                  {inner}
-                </div>
+              return (
+                <MotionReveal key={rowKey} preset="card" delay={rowIndex * 0.03}>
+                  {viewerHref ? (
+                    <Link
+                      href={viewerHref}
+                      className="block w-full cursor-pointer border-b border-[#E5E7EB] py-7 transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#F5F7FA]"
+                    >
+                      {inner}
+                    </Link>
+                  ) : (
+                    <div className="w-full border-b border-[#E5E7EB] py-7">
+                      {inner}
+                    </div>
+                  )}
+                </MotionReveal>
               )
             })}
           </div>

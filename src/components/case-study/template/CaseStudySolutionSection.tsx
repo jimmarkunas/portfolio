@@ -2,6 +2,7 @@ import { BlogCardGrid } from "@/components/case-study/BlogCardGrid"
 import type { CaseStudyData } from "@/components/case-study/types"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
+import { MotionReveal } from "@/components/motion/MotionReveal"
 import { SectionShell } from "@/components/SectionShell"
 import { DeferredSolutionDiagramVisual } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
 import { DeferredNylCarousel } from "@/components/case-study/template/visuals/deferred/DeferredNylCarousel"
@@ -12,7 +13,7 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
   return (
     <SectionShell surface="white" containerClassName="pb-7 pt-1 md:pb-8 md:pt-1 lg:pb-10 lg:pt-1">
       <div className="flex flex-col items-center gap-8 pt-6 md:pt-8 lg:pt-10">
-        <div className="flex flex-col items-center gap-5 text-center">
+        <MotionReveal preset="section" className="flex flex-col items-center gap-5 text-center">
           <EyebrowPill className="bg-white" labelClassName="type-p2 text-[#222222]">
             {data.solution.eyebrow}
           </EyebrowPill>
@@ -21,7 +22,7 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
             <h2 className="type-h3 max-w-[1104px] text-[#222222]">{data.solution.title}</h2>
             <p className="type-p3 max-w-[814px] text-black/65">{data.solution.copy}</p>
           </div>
-        </div>
+        </MotionReveal>
 
         {data.solution.diagram || data.solution.diagramKey ? (
           <DeferredSolutionDiagramVisual
@@ -36,13 +37,19 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyData }) {
             loadingLabel="Loading architecture diagram..."
           />
         ) : data.solution.heroImage ? (
-          <FullWidthImage src={data.solution.heroImage} fullWidth={false} />
+          <MotionReveal preset="image">
+            <FullWidthImage src={data.solution.heroImage} fullWidth={false} />
+          </MotionReveal>
         ) : (
-          <BlogCardGrid cards={data.solution.cards ?? []} />
+          <MotionReveal preset="card" className="w-full">
+            <BlogCardGrid cards={data.solution.cards ?? []} />
+          </MotionReveal>
         )}
 
         {data.solution.gallery && data.solution.gallery.length > 0 && (
-          <DeferredNylCarousel images={data.solution.gallery} />
+          <MotionReveal preset="image" className="w-full" delay={0.04}>
+            <DeferredNylCarousel images={data.solution.gallery} />
+          </MotionReveal>
         )}
       </div>
     </SectionShell>

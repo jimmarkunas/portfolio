@@ -39,12 +39,12 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
       <Container className="bg-[#F3F3F3] px-0 md:px-0 lg:px-0">
         <div className="bg-[#F3F3F3] px-6 pb-10 pt-8 md:hidden">
           <div className="mx-auto max-w-[440px]">
-            <MotionReveal preset="section" className="mt-10 text-center md:mt-12">
+            <MotionReveal preset="hero" className="mt-10 text-center md:mt-12" delay={0.02}>
               <div className="type-display-hero text-[#222222]">{hero.title}</div>
               <div className="type-ui-lg mt-4 text-[#222222]">{hero.subtitle}</div>
             </MotionReveal>
 
-            <MotionReveal preset="image" delay={0.05} className="mt-8 flex justify-center">
+            <MotionReveal preset="heroMedia" delay={0.14} className="mt-8 flex justify-center">
               <img
                 src="/jim/hero-jim-01-cutout.png"
                 alt=""
@@ -53,13 +53,13 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
               />
             </MotionReveal>
 
-            <div className="mt-6 flex items-center justify-center gap-4 text-[#222222]">
+            <MotionReveal preset="flow" delay={0.22} className="mt-6 flex items-center justify-center gap-4 text-[#222222]">
               <div className="type-ui-sm">{hero.role}</div>
               <div className="h-px w-16 shrink-0 bg-[#222222]" />
               <div className="type-ui-sm">{hero.year}</div>
-            </div>
+            </MotionReveal>
 
-            <MotionReveal preset="card" delay={0.1} className="mt-8 grid grid-cols-2 gap-6 sm:gap-8">
+            <MotionReveal preset="cardStrong" delay={0.3} className="mt-8 grid grid-cols-2 gap-6 sm:gap-8">
               <MobileHeroStat value={hero.projectCompletedValue} label={hero.projectCompletedLabel} />
               <MobileHeroStat value={hero.startupRaisedValue} label={hero.startupRaisedLabel} />
             </MotionReveal>
@@ -69,43 +69,59 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
 
         <div className="relative hidden h-[938px] overflow-hidden bg-[#F3F3F3] md:block">
           <div className="absolute inset-x-0 top-0 h-full md:h-[calc(100%+80px)] md:-translate-y-20 lg:h-full lg:translate-y-0">
-            <img
-              src="/jim/hero-jim-01-cutout.png"
-              alt=""
-              aria-hidden="true"
+            <MotionReveal
+              preset="heroMedia"
               className="absolute bottom-0 right-[-140px] z-0 h-[760px] w-auto max-w-none md:right-[-300px] lg:right-[-140px] xl:right-[-36px]"
-            />
+              delay={0.16}
+            >
+              <img
+                src="/jim/hero-jim-01-cutout.png"
+                alt=""
+                aria-hidden="true"
+                className="h-full w-auto"
+              />
+            </MotionReveal>
 
-            <div
+            <MotionReveal
+              preset="hero"
               className="type-display-hero absolute z-10 text-[#222222]"
+              delay={0.03}
               style={{ left: heroTextLeft, top: "367px" }}
             >
               {hero.title}
-            </div>
+            </MotionReveal>
 
-            <div
+            <MotionReveal
+              preset="hero"
               className="type-ui-lg absolute z-10 text-[#222222]"
+              delay={0.12}
               style={{ left: heroTextLeft, top: "612px" }}
             >
               {hero.subtitle}
-            </div>
+            </MotionReveal>
 
-            <div
+            <MotionReveal
+              preset="flow"
               className="type-ui-md absolute bottom-8 z-10 text-[#222222] xl:hidden"
+              delay={0.24}
               style={{ left: heroTextLeft }}
             >
               {hero.scroll}
-            </div>
+            </MotionReveal>
 
-            <div
+            <MotionReveal
+              preset="flow"
               className="type-ui-md absolute z-10 hidden text-[#222222] xl:block"
+              delay={0.24}
               style={{ left: heroTextLeft, top: "860px" }}
             >
               {hero.scroll}
-            </div>
+            </MotionReveal>
 
-            <div
+            <MotionReveal
+              preset="flow"
               className="absolute z-10"
+              delay={0.18}
               style={{
                 top: "168px",
                 height: "701px",
@@ -154,45 +170,57 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
                   {hero.year}
                 </div>
               </div>
-            </div>
+            </MotionReveal>
 
-            <div
+            <MotionReveal
+              preset="hero"
               className="type-stat-plus absolute z-10 text-black"
+              delay={0.2}
               style={{ left: heroStatPlusLeft, top: "208px" }}
             >
               +
-            </div>
-            <div
+            </MotionReveal>
+            <MotionReveal
+              preset="hero"
               className="type-stat-number absolute z-10 text-[#404040]"
+              delay={0.23}
               style={{ left: heroStatNumberLeft, top: "204px" }}
             >
               <AnimatedMetricValue value={hero.projectCompletedValue} trigger="load" />
-            </div>
-            <div
+            </MotionReveal>
+            <MotionReveal
+              preset="hero"
               className="type-ui-sm absolute z-10 text-[#78716C]"
+              delay={0.26}
               style={{ left: heroStatLabelLeft, top: "261px" }}
             >
               {hero.projectCompletedLabel}
-            </div>
+            </MotionReveal>
 
-            <div
+            <MotionReveal
+              preset="hero"
               className="type-stat-plus absolute z-10 text-black"
+              delay={0.3}
               style={{ left: heroSecondStatPlusLeft, top: "208px" }}
             >
               +
-            </div>
-            <div
+            </MotionReveal>
+            <MotionReveal
+              preset="hero"
               className="type-stat-number absolute z-10 text-[#404040]"
+              delay={0.33}
               style={{ left: heroSecondStatNumberLeft, top: "204px" }}
             >
               <AnimatedMetricValue value={hero.startupRaisedValue} trigger="load" />
-            </div>
-            <div
+            </MotionReveal>
+            <MotionReveal
+              preset="hero"
               className="type-ui-sm absolute z-10 text-[#78716C]"
+              delay={0.36}
               style={{ left: heroSecondStatLabelLeft, top: "261px" }}
             >
               {hero.startupRaisedLabel}
-            </div>
+            </MotionReveal>
           </div>
         </div>
       </Container>

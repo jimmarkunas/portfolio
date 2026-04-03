@@ -51,12 +51,12 @@ const recognitionRowClass =
 const recognitionSummaryClass =
   "type-p3 text-[#666666] w-full lg:pl-8"
 const linkedRecognitionRowClass =
-  "transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#F5F7FA]"
+  "transition-[transform,background-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:bg-[#F5F7FA] hover:shadow-[0_12px_30px_rgba(34,34,34,0.06)]"
 const featuredTagClass =
   "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#2B2B2B] px-4 text-[16px] leading-6 text-white"
 const defaultTagClass =
   "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#EFEFEF] px-4 text-[16px] leading-6 text-[#3A3A3A] outline outline-1 outline-black/10"
-const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
+const hoverLiftClass = "transition-transform duration-300 hover:-translate-y-0.5"
 const journeyCtaClass = `type-p2 inline-flex items-center gap-2 text-[#222222] underline underline-offset-4 ${hoverLiftClass}`
 
 function InsightShapePair({
@@ -153,15 +153,15 @@ export default function Homepage() {
     <main className="min-h-full bg-[#F3F3F3]">
       <HomepageHeroSection hero={hero} />
 
-      <PastClientsSection />
+      <PastClientsSection motionStyle="homepage" />
 
-      <HomepageWhatIDoSection section={sections.experiences} cards={experienceCardCopy} />
+      <HomepageWhatIDoSection section={sections.experiences} cards={experienceCardCopy} motionStyle="homepage" />
 
       <section className="w-full bg-[#F3F3F3]">
         <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
           <div className="flex flex-col gap-20">
             <div className="grid gap-10 lg:grid-cols-[482px_minmax(0,769px)] lg:justify-between lg:gap-12">
-              <MotionReveal preset="section" className="flex flex-col items-start gap-3">
+              <MotionReveal preset="hero" className="flex flex-col items-start gap-3" delay={0.02}>
                 <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
                   <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
                   <span className="type-p2 text-[#222222]">{sections.awards.pill}</span>
@@ -177,8 +177,8 @@ export default function Homepage() {
                 {awards.map((item, index) => (
                   <MotionReveal
                     key={`${item.rank}-${item.year}-${item.title}`}
-                    preset="card"
-                    delay={index * 0.04}
+                    preset="cardStrong"
+                    delay={0.08 + index * 0.05}
                   >
                     <AwardRow {...item} />
                   </MotionReveal>
@@ -200,7 +200,7 @@ export default function Homepage() {
       <section className="w-full bg-[#F3F3F3]">
         <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
           <div className="flex flex-col items-start gap-12">
-            <div className="flex w-full flex-col items-start gap-5">
+            <MotionReveal preset="hero" className="flex w-full flex-col items-start gap-5" delay={0.02}>
               <SectionPill label={sections.insights.pill} />
 
               <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -210,10 +210,10 @@ export default function Homepage() {
                 </div>
 
               </div>
-            </div>
+            </MotionReveal>
 
-            <MotionReveal preset="section" className="grid w-full gap-5 md:grid-cols-3">
-              <MotionReveal preset="card" className="flex h-full flex-col gap-4">
+            <div className="grid w-full gap-5 md:grid-cols-3">
+              <MotionReveal preset="cardStrong" className="flex h-full flex-col gap-4" delay={0.06}>
                 <article className="rounded-[10px] bg-white p-[18px]">
                   <div className="flex flex-col gap-4 md:flex-row md:items-center">
                     <InsightAvatarStack />
@@ -238,7 +238,7 @@ export default function Homepage() {
                 </article>
               </MotionReveal>
 
-              <MotionReveal preset="card" delay={0.05} className="flex h-full flex-col gap-4 md:order-3">
+              <MotionReveal preset="cardStrong" delay={0.14} className="flex h-full flex-col gap-4 md:order-3">
                 <article className="rounded-[10px] bg-white p-[18px]">
                   <div className="flex flex-col items-center justify-center gap-3 text-center md:flex-row md:items-center md:justify-center md:gap-4">
                     <div className="type-h5 text-black">{statsCard4.title ?? ""}</div>
@@ -262,7 +262,7 @@ export default function Homepage() {
                 </article>
               </MotionReveal>
 
-              <MotionReveal preset="card" delay={0.1} className="flex h-full flex-col gap-4 md:order-2">
+              <MotionReveal preset="cardStrong" delay={0.22} className="flex h-full flex-col gap-4 md:order-2">
                 <article className="relative flex flex-1 flex-col overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
                   <InsightShapePair
                     largeShapeClassName="absolute right-[-28px] top-[-20px] h-28 w-28 rounded-full bg-[#F8F6F2]"
@@ -292,7 +292,7 @@ export default function Homepage() {
                   </div>
                 </article>
               </MotionReveal>
-            </MotionReveal>
+            </div>
           </div>
         </Container>
       </section>
@@ -304,7 +304,7 @@ export default function Homepage() {
               <div className="mx-auto flex w-full flex-col items-center gap-8">
                 <SectionPill label={sections.testimonials.pill} />
 
-                <MotionReveal preset="section" className="flex flex-col items-center gap-3 text-center">
+                <MotionReveal preset="hero" className="flex flex-col items-center gap-3 text-center" delay={0.02}>
                   <h3 className="type-h3 text-[#222222]">{sections.testimonials.title}</h3>
                   <p className="type-p3 max-w-[900px] text-black/70">{sections.testimonials.description}</p>
                 </MotionReveal>
@@ -312,7 +312,7 @@ export default function Homepage() {
                 <div className="grid w-full gap-5 md:grid-cols-3">
                   <div className="flex flex-col gap-5">
                     {testimonials[0] ? (
-                      <MotionReveal preset="card">
+                      <MotionReveal preset="cardStrong" delay={0.06}>
                         <TestimonialCard
                           testimonial={testimonials[0]}
                           tone="dark"
@@ -327,7 +327,7 @@ export default function Homepage() {
                     ) : null}
 
                     {testimonials[4] ? (
-                      <MotionReveal preset="card" delay={0.05}>
+                      <MotionReveal preset="cardStrong" delay={0.18}>
                         <TestimonialCard
                           testimonial={testimonials[4]}
                           tone="light"
@@ -357,7 +357,7 @@ export default function Homepage() {
                   <div className="flex flex-col gap-5">
                     {[1, 3, 5].map((index, itemIndex) =>
                       testimonials[index] ? (
-                        <MotionReveal key={testimonials[index].name} preset="card" delay={itemIndex * 0.05}>
+                        <MotionReveal key={testimonials[index].name} preset="cardStrong" delay={0.12 + itemIndex * 0.08}>
                           <TestimonialCard testimonial={testimonials[index]} tone="light" />
                         </MotionReveal>
                       ) : null,
@@ -366,13 +366,13 @@ export default function Homepage() {
 
                   <div className="flex flex-col gap-5">
                     {testimonials[2] ? (
-                      <MotionReveal preset="card">
+                      <MotionReveal preset="cardStrong" delay={0.1}>
                         <TestimonialCard testimonial={testimonials[2]} tone="light" />
                       </MotionReveal>
                     ) : null}
 
                     {testimonials[6] ? (
-                      <MotionReveal preset="card" delay={0.05}>
+                      <MotionReveal preset="cardStrong" delay={0.24}>
                         <TestimonialCard
                           testimonial={testimonials[6]}
                           tone="dark"
@@ -390,31 +390,33 @@ export default function Homepage() {
 
       <section className="bg-[#222222]">
         <Container className="py-14 md:py-16 lg:py-20">
-          <PullQuote
-            dark
-            quote={<>&ldquo;{testimonial.quote}&rdquo;</>}
-            attributionTitle={testimonial.name}
-            attributionSubtitle={testimonial.handle}
-            initials={testimonial.initials}
-            avatarSrc={testimonial.avatarSrc}
-            glyphClassName="text-[rgba(255,255,255,0.1)]"
-            decorativeFrame={
-              <>
-                <div className="pointer-events-none absolute left-4 top-6 h-16 w-16 rounded-tl-[18px] border-l border-t border-white/10 md:left-8 md:top-8 md:h-20 md:w-20" />
-                <div className="pointer-events-none absolute right-4 top-6 h-16 w-16 rounded-tr-[18px] border-r border-t border-white/10 md:right-8 md:top-8 md:h-20 md:w-20" />
-                <div className="pointer-events-none absolute bottom-6 left-4 h-16 w-16 rounded-bl-[18px] border-b border-l border-white/10 md:bottom-8 md:left-8 md:h-20 md:w-20" />
-                <div className="pointer-events-none absolute bottom-6 right-4 h-16 w-16 rounded-br-[18px] border-b border-r border-white/10 md:bottom-8 md:right-8 md:h-20 md:w-20" />
-              </>
-            }
-          />
+          <MotionReveal preset="section" delay={0.02}>
+            <PullQuote
+              dark
+              quote={<>&ldquo;{testimonial.quote}&rdquo;</>}
+              attributionTitle={testimonial.name}
+              attributionSubtitle={testimonial.handle}
+              initials={testimonial.initials}
+              avatarSrc={testimonial.avatarSrc}
+              glyphClassName="text-[rgba(255,255,255,0.1)]"
+              decorativeFrame={
+                <>
+                  <div className="pointer-events-none absolute left-4 top-6 h-16 w-16 rounded-tl-[18px] border-l border-t border-white/10 md:left-8 md:top-8 md:h-20 md:w-20" />
+                  <div className="pointer-events-none absolute right-4 top-6 h-16 w-16 rounded-tr-[18px] border-r border-t border-white/10 md:right-8 md:top-8 md:h-20 md:w-20" />
+                  <div className="pointer-events-none absolute bottom-6 left-4 h-16 w-16 rounded-bl-[18px] border-b border-l border-white/10 md:bottom-8 md:left-8 md:h-20 md:w-20" />
+                  <div className="pointer-events-none absolute bottom-6 right-4 h-16 w-16 rounded-br-[18px] border-b border-r border-white/10 md:bottom-8 md:right-8 md:h-20 md:w-20" />
+                </>
+              }
+            />
+          </MotionReveal>
         </Container>
       </section>
 
       <section className="w-full bg-[#F3F3F3]">
         <Container className="py-14 md:py-16 lg:py-[72px]">
-          <MotionReveal preset="section" className="rounded-[10px] bg-white p-6 md:p-10 lg:p-12">
+          <MotionReveal preset="section" className="rounded-[10px] bg-white p-6 md:p-10 lg:p-12" delay={0.02}>
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]">
-              <div className="flex flex-col items-start gap-4">
+              <MotionReveal preset="hero" className="flex flex-col items-start gap-4" delay={0.04}>
                 <SectionPill label={sections.journey.pill} />
                 <div className="flex w-full items-start justify-between">
                   <h2 className="type-h3 max-w-[520px] text-[#222222]">{sections.journey.title}</h2>
@@ -426,9 +428,9 @@ export default function Homepage() {
                   <ArrowUpRightIcon />
                   </Link>
                 </div>
-              </div>
+              </MotionReveal>
 
-              <div className="flex flex-col items-start gap-5 lg:justify-start lg:pl-8">
+              <MotionReveal preset="flow" delay={0.1} className="flex flex-col items-start gap-5 lg:justify-start lg:pl-8">
                 <p className="type-p3 text-black/70">{sections.journey.intro}</p>
                 <Link
                   href="https://calendar.app.google/Cc4kuM7cqTyiXQx66"
@@ -437,11 +439,11 @@ export default function Homepage() {
                   <span>{sections.journey.cta}</span>
                   <ArrowUpRightIcon />
                 </Link>
-              </div>
+              </MotionReveal>
             </div>
 
             <div className="mt-10 space-y-5">
-              <div className={`${recognitionRowClass} rounded-[10px] p-3 lg:!items-start`}>
+              <MotionReveal preset="cardStrong" className={`${recognitionRowClass} rounded-[10px] p-3 lg:!items-start`} delay={0.12}>
                 <div className="hidden w-full p-3 md:order-first md:col-span-2 md:block lg:hidden">
                   <div className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
@@ -551,9 +553,10 @@ export default function Homepage() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </MotionReveal>
 
-              {journey.entries.map((entry) => {
+              {journey.entries.map((entry, index) => {
+                const rowDelay = 0.18 + index * 0.06
                 const rowContent = (
                   <>
                     <div>
@@ -574,22 +577,24 @@ export default function Homepage() {
                 )
 
                 return entry.href ? (
-                  <a
-                    key={`${entry.company}-${entry.date}`}
-                    href={entry.href}
-                    target={entry.external ? "_blank" : undefined}
-                    rel={entry.external ? "noopener noreferrer" : undefined}
-                    className={`${recognitionRowClass} ${linkedRecognitionRowClass} last:border-b-0 last:pb-0`}
-                  >
-                    {rowContent}
-                  </a>
+                  <MotionReveal key={`${entry.company}-${entry.date}`} preset="cardStrong" delay={rowDelay}>
+                    <a
+                      href={entry.href}
+                      target={entry.external ? "_blank" : undefined}
+                      rel={entry.external ? "noopener noreferrer" : undefined}
+                      className={`${recognitionRowClass} ${linkedRecognitionRowClass} last:border-b-0 last:pb-0`}
+                    >
+                      {rowContent}
+                    </a>
+                  </MotionReveal>
                 ) : (
-                  <div
-                    key={`${entry.company}-${entry.date}`}
-                    className={`${recognitionRowClass} last:border-b-0 last:pb-0`}
-                  >
-                    {rowContent}
-                  </div>
+                  <MotionReveal key={`${entry.company}-${entry.date}`} preset="cardStrong" delay={rowDelay}>
+                    <div
+                      className={`${recognitionRowClass} last:border-b-0 last:pb-0`}
+                    >
+                      {rowContent}
+                    </div>
+                  </MotionReveal>
                 )
               })}
             </div>
