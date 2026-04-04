@@ -127,7 +127,7 @@ export function SiteFooter() {
               {/* 1. Logo/wordmark — top on mobile, center on desktop */}
               <Link href="/" className="group flex items-center justify-center gap-3 text-[#FEFEFE] transition-colors hover:text-[#447ACB] lg:order-2 lg:justify-self-center">
                 <FinoxGlyph className="h-6 w-6 shrink-0" />
-                <span className="type-footer-brand">Jim Markunas</span>
+                <span className="type-footer-brand">James Markunas</span>
               </Link>
 
               {/* 2. Social icons — middle on mobile, left on desktop */}

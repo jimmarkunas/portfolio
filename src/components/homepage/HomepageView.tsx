@@ -21,6 +21,7 @@ import {
 } from "./ui"
 
 type HomepageInsightCard = {
+  badgeValue?: string
   title?: string
   subtitle?: string
   value?: string
@@ -176,7 +177,7 @@ export default function Homepage() {
               <MotionReveal preset="cardStrong" className="flex h-full flex-col gap-4" delay={0.06}>
                 <article className="rounded-[10px] bg-white p-[18px]">
                   <div className="flex flex-col gap-4 md:flex-row md:items-center">
-                    <InsightAvatarStack />
+                    <InsightAvatarStack value={statsCard1.badgeValue} />
                     <div className="flex flex-col">
                       <div className="type-p2 text-black">{statsCard1.title ?? ""}</div>
                       <div className="type-ui-sm text-[#666666]">{statsCard1.subtitle ?? ""}</div>

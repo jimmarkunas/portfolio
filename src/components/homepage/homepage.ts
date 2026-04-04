@@ -98,6 +98,8 @@ const fallbackHomepageText = {
   stats: {
     cards: [
       {
+        // Edit the small dark badge in the Proven Results lead card.
+        badgeValue: "A+",
         title: "20+ Years",
         subtitle: "Leading digital delivery",
       },

@@ -218,11 +218,11 @@ export function HighlightCard({
   )
 }
 
-export function InsightAvatarStack() {
+export function InsightAvatarStack({ value = "75+" }: { value?: string }) {
   return (
     <div className="flex items-center">
       <div className="flex h-14 w-14 items-center justify-center rounded-[10px] bg-[#2B2B2B] text-[20px] leading-8 text-white shadow-[-3px_0px_9px_rgba(0,0,0,0.15)]">
-        75+
+        {value}
       </div>
     </div>
   )

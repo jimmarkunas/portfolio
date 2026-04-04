@@ -266,6 +266,19 @@ export default function CvPage() {
                   </article>
                 </CvReveal>
 
+                <CvReveal preset="card" delay={0.03}>
+                  <article className="rounded-[10px] bg-white p-6 outline outline-1 outline-black/5">
+                    <h3 className="type-h5 text-[#2A2A2A]">{cvContent.detailsSection.founderExperienceTitle}</h3>
+                    <ul className="mt-3 space-y-3">
+                      {cvContent.founderExperience.map((item) => (
+                        <li key={item.company} className="type-p3 text-[#5A5A5A]">
+                          • <span className="text-[#2A2A2A]">{item.company}:</span> {item.summary}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </CvReveal>
+
                 <CvReveal preset="card" delay={0.05}>
                   <article className="rounded-[10px] bg-white p-6 outline outline-1 outline-black/5">
                     <h3 className="type-h5 text-[#2A2A2A]">{cvContent.detailsSection.credentialsTitle}</h3>

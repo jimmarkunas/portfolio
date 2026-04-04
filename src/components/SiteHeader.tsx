@@ -31,7 +31,7 @@ export function SiteHeader() {
               <FinoxGlyph className="h-[1.7em] w-[1.7em] shrink-0 text-current" />
             </span>
             <span className="font-display text-[1.15em] font-bold leading-none tracking-tight">
-              Jim Markunas
+              James Markunas
             </span>
           </Link>
 

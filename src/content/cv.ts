@@ -48,10 +48,16 @@ export type CvSkillGroup = {
   items: string[]
 }
 
+export type CvFounderExperience = {
+  company: string
+  summary: string
+}
+
 export const cvContent = {
   meta: {
-    title: "CV | Jim Markunas",
-    description: "Jim Markunas resume, experience, and delivery highlights.",
+    title: "CV | James Markunas",
+    description:
+      "Senior Technical Project Manager focused on rescuing complex programs and shipping measurable outcomes.",
   },
   sectionPills: {
     delivery: "Result",
@@ -61,7 +67,7 @@ export const cvContent = {
   deliverySection: {
     title: "My Resume",
     description:
-      "By aligning business goals, technical constraints, and delivery execution, I help organizations modernize platforms, accelerate time-to-value, and improve results across critical digital channels.",
+      "Senior Technical Project Manager who specializes in inheriting broken programs and shipping them across complex, multi-vendor ecommerce and digital transformation programs.",
   },
   experienceSection: {
     title: "Explore My Delivery Journey",
@@ -75,6 +81,7 @@ export const cvContent = {
     title: "Resume Details",
     description: "Additional roles, credentials, and platform/tool fluency across my career.",
     additionalExperienceTitle: "Additional Work Experience",
+    founderExperienceTitle: "Founder Experience",
     credentialsTitle: "Education, Certifications & Tools",
     educationTitle: "Education",
     certificationsTitle: "Certifications",
@@ -85,26 +92,21 @@ export const cvContent = {
   },
   hero: {
     pill: "Curriculum Vitae",
-    name: "Jim Markunas",
-    role: "Channel Product & Program Leader for regulated digital transformation and platform modernization",
+    name: "James Markunas",
+    role: "Senior Technical Project Manager",
     summary:
-      "I bridge IT and business to drive roadmaps, delivery, and measurable outcomes across customer channels, commerce platforms, and Martech/PXM. I specialize in high-stakes programs where delivery complexity, compliance risk, and commercial pressure all hit at once.",
+      "Brought in to rescue distressed engagements at Boehringer Ingelheim, BigCommerce, and Fusion92 after prior PMs failed. 20+ years and 45+ enterprise projects delivering $1.3B+ in verified business impact.",
     links: [
       { label: "jimmarkunas@gmail.com", href: "mailto:jimmarkunas@gmail.com" },
       { label: "linkedin.com/in/jimmarkunas", href: "https://linkedin.com/in/jimmarkunas", external: true },
-      { label: "jimmarkunas.com", href: "https://jimmarkunas.com", external: true },
+      { label: "greatestpmever.com", href: "https://greatestpmever.com", external: true },
     ] satisfies CvLink[],
   },
   downloads: [
     {
-      label: "Download Resume (PDF)",
-      href: "/cv/Jim Markunas Resume_TPM_20260213.pdf",
-      fileName: "Jim Markunas Resume_TPM_20260213.pdf",
-    },
-    {
       label: "Download Resume (DOCX)",
-      href: "/cv/Jim Markunas Resume_TPM_20260213.docx",
-      fileName: "Jim Markunas Resume_TPM_20260213.docx",
+      href: "/cv/Jim_Markunas_Resume_General_TPM_v3.docx",
+      fileName: "Jim_Markunas_Resume_General_TPM_v3.docx",
     },
   ] satisfies CvDownloadAsset[],
   impactStats: [
@@ -114,9 +116,9 @@ export const cvContent = {
       displayLabel: "Leading digital delivery",
     },
     {
-      value: "$1B",
-      label: "Revenue uplift delivered at Modere (up from $500m)",
-      displayLabel: "Revenue uplift delivered at Modere (up from $500m)",
+      value: "$1.3B+",
+      label: "Verified business impact delivered",
+      displayLabel: "Verified business impact delivered",
       href: "/work/modere",
     },
     {
@@ -126,13 +128,13 @@ export const cvContent = {
       href: "/work/dtv01",
     },
     {
-      value: "40k",
-      label: "Hours leading projects",
-      displayLabel: "Hours leading projects",
+      value: "45+",
+      label: "Enterprise projects delivered",
+      displayLabel: "Enterprise projects delivered",
     },
   ] satisfies CvImpactStat[],
   experienceIntro:
-    "I lead end-to-end delivery across product, engineering, compliance, operations, and executive stakeholders. The work ranges from customer channel modernization to enterprise migration and composable commerce programs.",
+    "I bridge business strategy and engineering execution across distressed and high-pressure programs, turning unclear objectives into delivery plans and measurable outcomes.",
   experiences: [
     {
       company: "The Austin Consulting Group",
@@ -248,33 +250,38 @@ export const cvContent = {
     "DIRECTV | Product Manager | 2012 – 2013",
     "Warner Bros. / HBO | Product Manager | 2010 – 2012",
   ],
+  founderExperience: [
+    {
+      company: "Chicks With Guns (CWG)",
+      summary:
+        "Founded and scaled a digital music media brand from zero to national recognition; launched an early native iOS app and built a publishing operation covering major labels and indie artists.",
+    },
+    {
+      company: "ZEVO (IPTV)",
+      summary:
+        "Defined product vision and architecture for an IPTV network; pitched tier-1 Silicon Valley VCs on go-to-market strategy and platform design.",
+    },
+  ] satisfies CvFounderExperience[],
   awards: [
     {
       rank: "[1]",
       year: "2025",
-      title: "Global Smart 20 Award (Won)",
-      source: "Smart Cities Connect",
+      title: "Smart 20 Award",
+      source: "Global smart-grid and sustainability program delivery at CPS Energy",
       href: "/work/cps",
     },
     {
       rank: "[2]",
       year: "2025",
-      title: "MACH Impact Award (Nominated)",
-      source: "MACH Alliance",
+      title: "MACH Impact Award Nomination",
+      source: "Composable commerce platform transformation at Modere",
       href: "/work/modere",
     },
     {
       rank: "[3]",
       year: "2016",
-      title: "Digital Transformation Profile",
-      source: "Harvard Business Review",
-      href: "/work/lego",
-    },
-    {
-      rank: "[4]",
-      year: "2016",
-      title: "Digital Transformation Profile",
-      source: "MIT Sloan CISR",
+      title: "Harvard and MIT Case Studies",
+      source: "BCG/LEGO program work referenced in digital reinvention case studies",
       href: "/work/lego",
     },
   ] satisfies CvAward[],
@@ -282,11 +289,14 @@ export const cvContent = {
     {
       title: "Leadership & Delivery",
       items: [
-        "Program and portfolio management",
-        "Product and channel roadmap leadership",
+        "Technical program management",
+        "Technical project management",
+        "Product ownership",
+        "Backlog management",
+        "Agile / Scrum / SAFe",
         "Cross-functional stakeholder alignment",
         "Risk, dependency, and release management",
-        "Agile/Scrum/SAFe execution",
+        "SOW governance and executive communication",
       ],
     },
     {
@@ -295,17 +305,21 @@ export const cvContent = {
         "Adobe Commerce (Magento)",
         "BigCommerce",
         "Shopify Plus",
+        "Platform migrations",
+        "Multi-vendor delivery",
         "Pimcore (PIM/DAM)",
-        "Salsify (PIM/CXM)",
-        "Salesforce and CXM workflows",
+        "Salsify (PIM/PXM)",
+        "Enterprise ecommerce operations",
       ],
     },
     {
       title: "Enterprise Systems & Tooling",
       items: [
+        "Systems integration (REST APIs, ERP, OMS, FinTech)",
         "SAP and Oracle migration programs",
+        "KPI/OKR definition",
+        "UAT coordination",
         "Azure cloud services",
-        "REST APIs and integration planning",
         "SQL",
         "Jira and Confluence",
         "Figma",
@@ -315,7 +329,11 @@ export const cvContent = {
   education: [
     "B.A., Integrated Marketing Communications — Roosevelt University (Chicago, IL)",
   ],
-  certifications: ["PMP (Project Management Professional)", "CSM (Certified Scrum Master)"],
+  certifications: [
+    "PMP (Project Management Professional)",
+    "CSM (Certified Scrum Master)",
+    "CSPO (Certified Scrum Product Owner)",
+  ],
   cta: {
     heading: "Need someone who can lead complex delivery under pressure?",
     body:

@@ -32,11 +32,13 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
   const heroSecondStatPlusLeft = `calc(${heroTextLeft} + 183px)`
   const heroSecondStatNumberLeft = `calc(${heroTextLeft} + 204px)`
   const heroSecondStatLabelLeft = `calc(${heroTextLeft} + 204px)`
+  const desktopHeaderLeftInset = "max(40px, calc((100vw - 1440px) / 2 + 40px))"
+  const desktopRailLeft = `calc(${desktopHeaderLeftInset} - ${desktopHeroRailLineX}px)`
 
   return (
     <section className="w-full bg-[#F3F3F3]">
-      <Container className="bg-[#F3F3F3] px-0 md:px-0 lg:px-0">
-        <div className="bg-[#F3F3F3] px-6 pb-10 pt-8 md:hidden">
+      <Container className="bg-[#F3F3F3] px-0 md:hidden">
+        <div className="bg-[#F3F3F3] px-6 pb-10 pt-8">
           <div className="mx-auto max-w-[440px]">
             <MotionReveal preset="hero" className="mt-10 text-center md:mt-12" delay={0.02}>
               <div className="type-display-hero text-[#222222]">{hero.title}</div>
@@ -65,65 +67,67 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
 
           </div>
         </div>
+      </Container>
 
-        <div className="relative hidden h-[938px] overflow-hidden bg-[#F3F3F3] md:block">
-          <MotionReveal
-            preset="flow"
-            className="absolute z-10"
-            delay={0.18}
-            style={{
-              left: `-${desktopHeroRailLabelX}px`,
-              top: "168px",
-              height: "701px",
-              width: "120px",
-            }}
-          >
-            <div className="relative h-full w-full">
-              <div
-                className="absolute left-0 top-0 origin-top-left -rotate-90 whitespace-nowrap text-[#222222]"
-                style={{
-                  left: `${desktopHeroRailLabelX}px`,
-                  top: "154px",
-                  fontFamily: "var(--font-family-display)",
-                  fontSize: "18px",
-                  fontWeight: 400,
-                  lineHeight: 1,
-                }}
-              >
-                {hero.role}
-              </div>
-
-              <div
-                className="absolute bg-[#222222]"
-                style={{
-                  left: `${desktopHeroRailLineX}px`,
-                  top: "174px",
-                  width: "1px",
-                  height: "386px",
-                }}
-                aria-hidden="true"
-              />
-
-              <div
-                className="absolute left-0 bottom-0 origin-bottom-left -rotate-90 whitespace-nowrap text-[#222222]"
-                style={{
-                  left: `${desktopHeroYearLabelX}px`,
-                  bottom: "56px",
-                  fontFamily: "var(--font-family-display)",
-                  fontSize: "18px",
-                  fontWeight: 400,
-                  lineHeight: 1,
-                }}
-              >
-                {hero.year}
-              </div>
+      <div className="relative hidden h-[938px] overflow-hidden bg-[#F3F3F3] md:block lg:h-[calc(100vh-88px)] lg:min-h-[938px]">
+        <MotionReveal
+          preset="flow"
+          className="absolute z-10"
+          delay={0.18}
+          style={{
+            left: desktopRailLeft,
+            top: "148px",
+            height: "701px",
+            width: "120px",
+          }}
+        >
+          <div className="relative h-full w-full">
+            <div
+              className="absolute left-0 top-0 origin-top-left -rotate-90 whitespace-nowrap text-[#222222]"
+              style={{
+                left: `${desktopHeroRailLabelX}px`,
+                top: "154px",
+                fontFamily: "var(--font-family-display)",
+                fontSize: "18px",
+                fontWeight: 400,
+                lineHeight: 1,
+              }}
+            >
+              {hero.role}
             </div>
-          </MotionReveal>
 
-          <div className="absolute inset-x-0 top-0 h-full md:h-[calc(100%+80px)] md:-translate-y-20 lg:h-full lg:translate-y-0">
+            <div
+              className="absolute bg-[#222222]"
+              style={{
+                left: `${desktopHeroRailLineX}px`,
+                top: "174px",
+                width: "1px",
+                height: "386px",
+              }}
+              aria-hidden="true"
+            />
+
+            <div
+              className="absolute left-0 bottom-0 origin-bottom-left -rotate-90 whitespace-nowrap text-[#222222]"
+              style={{
+                left: `${desktopHeroYearLabelX}px`,
+                bottom: "56px",
+                fontFamily: "var(--font-family-display)",
+                fontSize: "18px",
+                fontWeight: 400,
+                lineHeight: 1,
+              }}
+            >
+              {hero.year}
+            </div>
+          </div>
+        </MotionReveal>
+
+        <div className="relative mx-auto h-full w-full max-w-[1440px]">
+          <div className="absolute inset-x-0 top-0 h-full md:h-[calc(100%+80px)] md:-translate-y-20 lg:-top-8 lg:h-full lg:translate-y-0">
             <MotionReveal
               preset="heroMedia"
-              className="absolute bottom-0 right-[-140px] z-0 h-[760px] w-auto max-w-none md:right-[-300px] lg:right-[-140px] xl:right-[-36px]"
+              className="absolute bottom-0 right-[-140px] z-0 h-[760px] w-auto max-w-none md:right-[-220px] lg:right-[calc(40px-min(103px,9.5vh))] lg:h-[min(76vh,820px)]"
               delay={0.16}
             >
               <img
@@ -152,23 +156,9 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
               {hero.subtitle}
             </MotionReveal>
 
-            <MotionReveal
-              preset="flow"
-              className="type-ui-md absolute bottom-8 z-10 text-[#222222] xl:hidden"
-              delay={0.24}
-              style={{ left: heroTextLeft }}
-            >
+            <div className="type-ui-md absolute z-10 text-[#222222]" style={{ left: heroTextLeft, bottom: "40px" }}>
               {hero.scroll}
-            </MotionReveal>
-
-            <MotionReveal
-              preset="flow"
-              className="type-ui-md absolute z-10 hidden text-[#222222] xl:block"
-              delay={0.24}
-              style={{ left: heroTextLeft, top: "860px" }}
-            >
-              {hero.scroll}
-            </MotionReveal>
+            </div>
 
             <MotionReveal
               preset="hero"
@@ -221,7 +211,7 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
             </MotionReveal>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   )
 }
