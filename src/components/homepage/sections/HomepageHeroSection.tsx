@@ -26,6 +26,8 @@ function MobileHeroStat({ value, label }: { value: string; label: string }) {
 
 export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
   const heroTextLeft = "clamp(98px, 12vw, 177px)"
+  const heroTextBlockTop = "clamp(312px, 30vw, 367px)"
+  const heroSubtitleGap = "clamp(24px, 3vw, 48px)"
   const heroStatPlusLeft = `calc(${heroTextLeft} + 7px)`
   const heroStatNumberLeft = `calc(${heroTextLeft} + 28px)`
   const heroStatLabelLeft = `calc(${heroTextLeft} + 26px)`
@@ -124,7 +126,7 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
         </MotionReveal>
 
         <div className="relative mx-auto h-full w-full max-w-[1440px]">
-          <div className="absolute inset-x-0 top-0 h-full md:h-[calc(100%+80px)] md:-translate-y-20 lg:-top-8 lg:h-full lg:translate-y-0">
+          <div className="absolute inset-x-0 top-0 h-full md:h-full md:translate-y-0 lg:h-full lg:translate-y-0 xl:-top-8">
             <MotionReveal
               preset="heroMedia"
               className="absolute bottom-0 right-[-140px] z-0 h-[760px] w-auto max-w-none md:right-[-220px] lg:right-[calc(40px-min(103px,9.5vh))] lg:h-[min(76vh,820px)]"
@@ -140,20 +142,14 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
 
             <MotionReveal
               preset="hero"
-              className="type-display-hero absolute z-10 text-[#222222]"
+              className="absolute z-10 text-[#222222]"
               delay={0.03}
-              style={{ left: heroTextLeft, top: "367px" }}
+              style={{ left: heroTextLeft, top: heroTextBlockTop }}
             >
-              {hero.title}
-            </MotionReveal>
-
-            <MotionReveal
-              preset="hero"
-              className="type-ui-lg absolute z-10 text-[#222222]"
-              delay={0.12}
-              style={{ left: heroTextLeft, top: "612px" }}
-            >
-              {hero.subtitle}
+              <div className="type-display-hero">{hero.title}</div>
+              <div className="type-ui-lg" style={{ marginTop: heroSubtitleGap }}>
+                {hero.subtitle}
+              </div>
             </MotionReveal>
 
             <div className="type-ui-md absolute z-10 text-[#222222]" style={{ left: heroTextLeft, bottom: "40px" }}>
