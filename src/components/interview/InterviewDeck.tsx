@@ -32,7 +32,7 @@ const DECK_SLIDES: DeckSlide[] = [
     ],
     metrics: [
       { label: "Years Leading Delivery", value: "20+" },
-      { label: "Programs Delivered", value: "45+" },
+      { label: "Programs Delivered", value: "75+" },
       { label: "Budget Managed", value: "$100M+" },
     ],
     notes: [
@@ -460,4 +460,3 @@ export function InterviewDeck() {
     </div>
   )
 }
-

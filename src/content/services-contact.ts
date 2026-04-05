@@ -59,7 +59,7 @@ export const servicesContactContent = {
         label: "Years leading high-stakes digital delivery programs",
       },
       {
-        value: "45",
+        value: "75",
         suffix: "+",
         label: "Major programs launched across product and platform teams",
       },

@@ -49,7 +49,7 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
 
             <MotionReveal preset="heroMedia" delay={0.14} className="mt-8 flex justify-center">
               <img
-                src="/jim/hero-jim-01-cutout.png"
+                src="/jim/hero-jim-01-cutout-v2.png"
                 alt=""
                 aria-hidden="true"
                 className="h-auto w-full max-w-[420px]"
@@ -133,7 +133,7 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
               delay={0.16}
             >
               <img
-                src="/jim/hero-jim-01-cutout.png"
+                src="/jim/hero-jim-01-cutout-v2.png"
                 alt=""
                 aria-hidden="true"
                 className="h-full w-auto"

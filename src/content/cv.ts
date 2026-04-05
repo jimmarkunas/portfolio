@@ -95,7 +95,7 @@ export const cvContent = {
     name: "James Markunas",
     role: "Senior Technical Project Manager",
     summary:
-      "Brought in to rescue distressed engagements at Boehringer Ingelheim, BigCommerce, and Fusion92 after prior PMs failed. 20+ years and 45+ enterprise projects delivering $1.3B+ in verified business impact.",
+      "Brought in to rescue distressed engagements at Boehringer Ingelheim, BigCommerce, and Fusion92 after prior PMs failed. 20+ years and 75+ enterprise projects delivering $1.3B+ in verified business impact.",
     links: [
       { label: "jimmarkunas@gmail.com", href: "mailto:jimmarkunas@gmail.com" },
       { label: "linkedin.com/in/jimmarkunas", href: "https://linkedin.com/in/jimmarkunas", external: true },
@@ -128,7 +128,7 @@ export const cvContent = {
       href: "/work/dtv01",
     },
     {
-      value: "45+",
+      value: "75+",
       label: "Enterprise projects delivered",
       displayLabel: "Enterprise projects delivered",
     },

@@ -5,7 +5,7 @@ const fallbackHomepageText = {
     title: "Hello",
     subtitle: "— I'm An Award-Winning PM",
     scroll: "Scroll down ↓",
-    projectCompletedValue: "45",
+    projectCompletedValue: "75",
     projectCompletedLabel: "Projects Led",
     startupRaisedValue: "100M",
     startupRaisedLabel: "Budgets Managed",
