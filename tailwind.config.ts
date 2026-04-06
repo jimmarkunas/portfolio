@@ -15,12 +15,21 @@ const config: Config = {
         border: "var(--color-border)",
         accent: "var(--color-accent)",
         "accent-hover": "var(--color-accent-hover)",
+        // Tokens used by the imported interview app
+        "bg-light": "var(--color-bg-light)",
+        "card-light": "var(--color-card-light)",
+        "border-light": "var(--color-border-light)",
+        "text-main": "var(--color-text-main)",
+        "text-muted": "var(--color-text-muted)",
+        white: "var(--color-white)",
       },
       borderRadius: {
         sm: "var(--radius-sm)",
         pill: "var(--radius-pill)",
         chip: "var(--radius-chip)",
         circle: "var(--radius-circle)",
+        finox: "var(--radius-finox)",
+        "finox-lg": "var(--radius-finox-lg)",
       },
       spacing: {
         2: "var(--space-8)",

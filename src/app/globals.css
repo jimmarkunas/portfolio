@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "../styles/tokens.css";
 @import "leaflet/dist/leaflet.css";
 @import "../styles/base.css";
@@ -5,7 +9,3 @@
 @import "../styles/primitives.css";
 @import "../styles/maps.css";
 @import "../styles/diagram-effects.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
