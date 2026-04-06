@@ -1114,60 +1114,6 @@ export default function App() {
               </AnimatePresence>
             </div>
           </div>
-            <div className={cn("absolute bottom-10 left-10 right-10 flex items-center justify-between transition-opacity duration-500 z-40", showControls ? "opacity-100" : "opacity-0 pointer-events-none")}>
-              {/* Left Controls */}
-              <div className="flex items-center gap-4">
-                <button 
-                  onClick={toggleFullscreen}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-white border border-border-light rounded-2xl transition-all shadow-sm font-bold text-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white"
-                >
-                  <Maximize2 className="w-5 h-5" />
-                  Fullscreen
-                </button>
-
-                <button 
-                  onClick={() => setShowNotes(prev => !prev)}
-                  className={cn(
-                    "flex items-center gap-2 px-5 py-2.5 bg-white border border-border-light rounded-2xl text-sm font-bold shadow-sm transition-all text-text-muted hover:bg-accent hover:border-accent hover:text-white",
-                    showNotes ? "bg-accent/5 border-accent/30 text-accent ring-2 ring-accent/10" : ""
-                  )}
-                >
-                  <FileText className="w-5 h-5" />
-                  Notes
-                </button>
-              </div>
-
-              {/* Right Controls */}
-              <div className="flex items-center gap-4">
-                <div className="relative">
-                  <button 
-                    onClick={() => setShowTOC(prev => !prev)}
-                    className={cn(
-                      "flex items-center gap-2 bg-white border border-border-light px-5 py-2.5 rounded-2xl text-sm font-bold shadow-sm transition-all text-text-muted hover:bg-accent hover:border-accent hover:text-white",
-                      showTOC ? "bg-accent/5 border-accent/30 text-accent ring-2 ring-accent/10" : ""
-                    )}
-                  >
-                    {currentSlide + 1} / {slides.length}
-                  </button>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <button 
-                    onClick={prevSlide}
-                    className="w-12 h-12 flex items-center justify-center bg-white border border-border-light rounded-full transition-all shadow-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button 
-                    onClick={nextSlide}
-                    className="w-12 h-12 flex items-center justify-center bg-white border border-border-light rounded-full transition-all shadow-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
             {/* Table of Contents Popup (Anchored to slide container) */}
             <AnimatePresence>
               {showTOC && (
@@ -1262,19 +1208,73 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        {/* Keyboard Hints */}
-        <div className="mt-8 flex justify-center gap-10 text-xs text-text-muted font-bold tracking-widest">
-          <div className="flex items-center gap-3">
-            <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">Space / →</span> Next
+        <div className="mt-8 flex flex-col items-center gap-4">
+          <div className={cn("flex flex-wrap items-center justify-center gap-6 transition-opacity duration-500", showControls ? "opacity-100" : "opacity-0 pointer-events-none")}>
+            {/* Left Controls */}
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={toggleFullscreen}
+                className="flex items-center gap-2 px-5 py-2.5 bg-white border border-border-light rounded-2xl transition-all shadow-sm font-bold text-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white"
+              >
+                <Maximize2 className="w-5 h-5" />
+                Fullscreen
+              </button>
+
+              <button 
+                onClick={() => setShowNotes(prev => !prev)}
+                className={cn(
+                  "flex items-center gap-2 px-5 py-2.5 bg-white border border-border-light rounded-2xl text-sm font-bold shadow-sm transition-all text-text-muted hover:bg-accent hover:border-accent hover:text-white",
+                  showNotes ? "bg-accent/5 border-accent/30 text-accent ring-2 ring-accent/10" : ""
+                )}
+              >
+                <FileText className="w-5 h-5" />
+                Notes
+              </button>
+            </div>
+
+            {/* Right Controls */}
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => setShowTOC(prev => !prev)}
+                className={cn(
+                  "flex items-center gap-2 bg-white border border-border-light px-5 py-2.5 rounded-2xl text-sm font-bold shadow-sm transition-all text-text-muted hover:bg-accent hover:border-accent hover:text-white",
+                  showTOC ? "bg-accent/5 border-accent/30 text-accent ring-2 ring-accent/10" : ""
+                )}
+              >
+                {currentSlide + 1} / {slides.length}
+              </button>
+
+              <div className="flex items-center gap-2">
+                <button 
+                  onClick={prevSlide}
+                  className="w-12 h-12 flex items-center justify-center bg-white border border-border-light rounded-full transition-all shadow-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button 
+                  onClick={nextSlide}
+                  className="w-12 h-12 flex items-center justify-center bg-white border border-border-light rounded-full transition-all shadow-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">←</span> Prev
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">N</span> Notes
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">F</span> Fullscreen
+
+          {/* Keyboard Hints */}
+          <div className="flex flex-wrap justify-center gap-10 text-xs text-text-muted font-bold tracking-widest">
+            <div className="flex items-center gap-3">
+              <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">Space / →</span> Next
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">←</span> Prev
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">N</span> Notes
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">F</span> Fullscreen
+            </div>
           </div>
         </div>
       </div>
