@@ -33,7 +33,10 @@
 }
 
 /* Fullscreen specific styles */
-:fullscreen .presentation-container {
+.presentation-container:fullscreen,
+.presentation-container:-webkit-full-screen,
+:fullscreen .presentation-container,
+:-webkit-full-screen .presentation-container {
   @apply w-screen h-screen max-w-none p-0 rounded-none border-none shadow-none bg-bg-light;
 }
 
