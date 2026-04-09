@@ -102,7 +102,7 @@ const SlideContainer = ({ children, className, title, subhead }: { children: Rea
 const IntroSlide = ({ slideKey = 'slide01' }: { slideKey?: string }) => {
   const data = slideContent[slideKey as keyof typeof slideContent] as any;
   return (
-  <SlideContainer className="bg-gradient-to-br from-white via-bg-light to-accent/5 px-8 md:px-12 !pt-6 pb-12">
+  <SlideContainer className="bg-gradient-to-br from-white via-bg-light to-accent/5 px-12 !pt-6 pb-12">
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ const IntroSlide = ({ slideKey = 'slide01' }: { slideKey?: string }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full mt-auto">
+      <div className="grid grid-cols-4 gap-8 w-full mt-auto">
         {data.stats.map((stat, i) => (
           <div key={i} className="bg-white p-8 rounded-finox border border-border-light card-shadow flex flex-col justify-center items-center text-center aspect-square">
             <div className="text-5xl font-extrabold text-ink mb-2">{stat.value}</div>
@@ -936,11 +936,9 @@ export default function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
   const [showTOC, setShowTOC] = useState(false);
-  const [showControls, setShowControls] = useState(true);
   const [scale, setScale] = useState(1);
   const presentationRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Universal Scaling Logic
   useEffect(() => {
@@ -973,7 +971,7 @@ export default function App() {
 
   // Close TOC when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (tocRef.current && !tocRef.current.contains(event.target as Node)) {
         setShowTOC(false);
       }
@@ -983,29 +981,15 @@ export default function App() {
       // Small delay to prevent the click that opens the TOC from triggering this
       setTimeout(() => {
         window.addEventListener('mousedown', handleClickOutside);
+        window.addEventListener('touchstart', handleClickOutside);
       }, 0);
     }
     
     return () => {
       window.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('touchstart', handleClickOutside);
     };
   }, [showTOC]);
-
-  useEffect(() => {
-    const resetTimer = () => {
-      setShowControls(true);
-      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-      idleTimerRef.current = setTimeout(() => setShowControls(false), 3000);
-    };
-    resetTimer();
-    window.addEventListener('mousemove', resetTimer);
-    window.addEventListener('keydown', resetTimer);
-    return () => {
-      window.removeEventListener('mousemove', resetTimer);
-      window.removeEventListener('keydown', resetTimer);
-      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-    };
-  }, []);
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -1114,55 +1098,6 @@ export default function App() {
               </AnimatePresence>
             </div>
           </div>
-            {/* Table of Contents Popup (Anchored to slide container) */}
-            <AnimatePresence>
-              {showTOC && (
-                <motion.div
-                  ref={tocRef}
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  className="absolute bottom-[85px] right-10 w-[480px] bg-white border border-border-light rounded-2xl shadow-2xl overflow-hidden p-2 flex flex-col max-h-[calc(100%-100px)] z-50 transition-all"
-                >
-                  <div className="px-4 py-2 flex justify-between items-center border-b border-border-light mb-2">
-                    <span className="text-[10px] font-bold text-text-muted tracking-widest">
-                      Table of Contents
-                    </span>
-                    <button 
-                      onClick={() => setShowTOC(false)}
-                      className="p-1 hover:bg-bg-light rounded-lg text-text-muted hover:text-accent transition-colors"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 overflow-y-auto px-1 custom-scrollbar">
-                    {slides.map((slide, index) => (
-                      <button
-                        key={slide.id}
-                        onClick={() => goToSlide(index)}
-                        className={cn(
-                          "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all group",
-                          currentSlide === index 
-                            ? "bg-accent/5 text-accent" 
-                            : "text-text-muted hover:bg-bg-light hover:text-text-main"
-                        )}
-                      >
-                        <span className={cn(
-                          "w-6 h-6 flex items-center justify-center rounded-lg text-[10px] font-bold border shrink-0",
-                          currentSlide === index 
-                            ? "bg-accent text-white border-accent" 
-                            : "bg-bg-light border-border-light group-hover:border-accent/30"
-                        )}>
-                          {index + 1}
-                        </span>
-                        <span className="text-[11px] font-bold truncate leading-tight">{slide.title}</span>
-                      </button>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
           {/* Progress Bar */}
           <div className="absolute bottom-0 left-0 h-2 bg-bg-light w-full z-50">
             <motion.div 
@@ -1182,7 +1117,7 @@ export default function App() {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
-              className="absolute bottom-32 left-10 z-50 w-full max-w-md max-h-[60vh] overflow-y-auto bg-[#0F172A] text-white p-6 rounded-2xl shadow-2xl border border-white/10 custom-scrollbar"
+              className="absolute bottom-24 left-4 right-4 z-50 w-auto max-h-[55vh] overflow-y-auto bg-[#0F172A] text-white p-6 rounded-2xl shadow-2xl border border-white/10 custom-scrollbar md:bottom-32 md:left-10 md:right-auto md:w-full md:max-h-[60vh] md:max-w-md"
             >
               <div className="flex justify-between items-center mb-4">
                 <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] text-accent">
@@ -1191,7 +1126,7 @@ export default function App() {
                 </div>
                 <button 
                   onClick={() => setShowNotes(false)}
-                  className="text-xs text-gray-400 hover:text-white transition-colors font-medium"
+                  className="text-xs text-gray-400 hover:text-white transition-colors font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F172A] rounded-md"
                 >
                   Close
                 </button>
@@ -1208,13 +1143,32 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        <div className="mt-8 flex flex-col items-center gap-4">
-          <div className={cn("flex flex-wrap items-center justify-center gap-6 transition-opacity duration-500", showControls ? "opacity-100" : "opacity-0 pointer-events-none")}>
+        <div className="mt-3 flex flex-col gap-2 px-4 md:mt-4 md:flex-row md:items-center md:justify-between md:px-0" style={{ paddingBottom: "max(env(safe-area-inset-bottom), 0px)" }}>
+          {/* Keyboard Hints */}
+          <div className="order-2 md:order-1 md:hidden text-[11px] font-bold text-text-muted tracking-wide text-center">
+            Tap controls to navigate
+          </div>
+          <div className="hidden md:flex md:flex-1 items-center justify-start gap-6 text-xs text-text-muted font-bold tracking-widest">
+            <div className="flex items-center gap-2.5">
+              <span className="px-3 py-1 bg-white border border-border-light rounded-lg shadow-sm">Space / →</span> Next
+            </div>
+            <div className="flex items-center gap-2.5">
+              <span className="px-3 py-1 bg-white border border-border-light rounded-lg shadow-sm">←</span> Prev
+            </div>
+            <div className="flex items-center gap-2.5">
+              <span className="px-3 py-1 bg-white border border-border-light rounded-lg shadow-sm">N</span> Notes
+            </div>
+            <div className="flex items-center gap-2.5">
+              <span className="px-3 py-1 bg-white border border-border-light rounded-lg shadow-sm">F</span> Fullscreen
+            </div>
+          </div>
+
+          <div className="order-1 md:order-2 w-full flex flex-wrap items-center justify-center gap-3 md:w-auto md:flex-none md:justify-end md:gap-4">
             {/* Left Controls */}
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-3">
               <button 
                 onClick={toggleFullscreen}
-                className="flex items-center gap-2 px-5 py-2.5 bg-white border border-border-light rounded-2xl transition-all shadow-sm font-bold text-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white"
+                className="flex items-center gap-2 px-4 py-3 bg-white border border-border-light rounded-2xl transition-all shadow-sm font-bold text-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white md:px-5 md:py-2"
               >
                 <Maximize2 className="w-5 h-5" />
                 Fullscreen
@@ -1223,7 +1177,7 @@ export default function App() {
               <button 
                 onClick={() => setShowNotes(prev => !prev)}
                 className={cn(
-                  "flex items-center gap-2 px-5 py-2.5 bg-white border border-border-light rounded-2xl text-sm font-bold shadow-sm transition-all text-text-muted hover:bg-accent hover:border-accent hover:text-white",
+                  "flex items-center gap-2 px-4 py-3 bg-white border border-border-light rounded-2xl text-sm font-bold shadow-sm transition-all text-text-muted hover:bg-accent hover:border-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white md:px-5 md:py-2",
                   showNotes ? "bg-accent/5 border-accent/30 text-accent ring-2 ring-accent/10" : ""
                 )}
               >
@@ -1233,47 +1187,82 @@ export default function App() {
             </div>
 
             {/* Right Controls */}
-            <div className="flex items-center gap-4">
-              <button 
-                onClick={() => setShowTOC(prev => !prev)}
-                className={cn(
-                  "flex items-center gap-2 bg-white border border-border-light px-5 py-2.5 rounded-2xl text-sm font-bold shadow-sm transition-all text-text-muted hover:bg-accent hover:border-accent hover:text-white",
-                  showTOC ? "bg-accent/5 border-accent/30 text-accent ring-2 ring-accent/10" : ""
-                )}
-              >
-                {currentSlide + 1} / {slides.length}
-              </button>
+            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-3">
+              <div className="relative">
+                <button 
+                  onClick={() => setShowTOC(prev => !prev)}
+                  className={cn(
+                    "flex items-center gap-2 bg-white border border-border-light px-4 py-3 rounded-2xl text-sm font-bold shadow-sm transition-all text-text-muted hover:bg-accent hover:border-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white md:px-5 md:py-2",
+                    showTOC ? "bg-accent/5 border-accent/30 text-accent ring-2 ring-accent/10" : ""
+                  )}
+                >
+                  {currentSlide + 1} / {slides.length}
+                </button>
+
+                {/* Table of Contents Popup (Anchored to dock TOC trigger) */}
+                <AnimatePresence>
+                  {showTOC && (
+                    <motion.div
+                      ref={tocRef}
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      className="absolute bottom-full left-1/2 mb-3 w-[min(480px,calc(100vw-2rem))] -translate-x-1/2 origin-bottom bg-white border border-border-light rounded-2xl shadow-2xl overflow-hidden p-2 flex flex-col max-h-[55vh] z-50 transition-all md:left-auto md:right-0 md:w-[480px] md:translate-x-0 md:max-h-[60vh] md:origin-bottom-right"
+                    >
+                      <div className="px-4 py-2 flex justify-between items-center border-b border-border-light mb-2">
+                        <span className="text-[10px] font-bold text-text-muted tracking-widest">
+                          Table of Contents
+                        </span>
+                        <button 
+                          onClick={() => setShowTOC(false)}
+                          className="p-1 hover:bg-bg-light rounded-lg text-text-muted hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 overflow-y-auto px-1 custom-scrollbar">
+                        {slides.map((slide, index) => (
+                          <button
+                            key={slide.id}
+                            onClick={() => goToSlide(index)}
+                            className={cn(
+                              "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30",
+                              currentSlide === index 
+                                ? "bg-accent/5 text-accent" 
+                                : "text-text-muted hover:bg-bg-light hover:text-text-main"
+                            )}
+                          >
+                            <span className={cn(
+                              "w-6 h-6 flex items-center justify-center rounded-lg text-[10px] font-bold border shrink-0",
+                              currentSlide === index 
+                                ? "bg-accent text-white border-accent" 
+                                : "bg-bg-light border-border-light group-hover:border-accent/30"
+                            )}>
+                              {index + 1}
+                            </span>
+                            <span className="text-[11px] font-bold truncate leading-tight">{slide.title}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
               <div className="flex items-center gap-2">
                 <button 
                   onClick={prevSlide}
-                  className="w-12 h-12 flex items-center justify-center bg-white border border-border-light rounded-full transition-all shadow-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white"
+                  className="w-12 h-12 md:w-10 md:h-10 flex items-center justify-center bg-white border border-border-light rounded-full transition-all shadow-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button 
                   onClick={nextSlide}
-                  className="w-12 h-12 flex items-center justify-center bg-white border border-border-light rounded-full transition-all shadow-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white"
+                  className="w-12 h-12 md:w-10 md:h-10 flex items-center justify-center bg-white border border-border-light rounded-full transition-all shadow-sm text-text-muted hover:bg-accent hover:border-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
-            </div>
-          </div>
-
-          {/* Keyboard Hints */}
-          <div className="flex flex-wrap justify-center gap-10 text-xs text-text-muted font-bold tracking-widest">
-            <div className="flex items-center gap-3">
-              <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">Space / →</span> Next
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">←</span> Prev
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">N</span> Notes
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="px-3 py-1.5 bg-white border border-border-light rounded-lg shadow-sm">F</span> Fullscreen
             </div>
           </div>
         </div>

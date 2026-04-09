@@ -70,10 +70,10 @@ export default function CvPage() {
 
                 <div className="mt-10 grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
                   {cvContent.impactStats.map((stat, index) => (
-                    <CvReveal key={stat.label} preset="card" delay={index * 0.04}>
+                    <CvReveal key={stat.label} preset="card" delay={index * 0.04} className="h-full">
                       <Link
                         href={stat.href ?? "/work"}
-                        className={`flex flex-col items-center justify-center gap-3 rounded-[10px] bg-white px-6 py-6 text-center outline outline-1 outline-black/5 ${hoverLiftClass} md:px-7 md:py-7`}
+                        className={`flex h-full flex-col items-center justify-center gap-3 rounded-[10px] bg-white px-6 py-6 text-center outline outline-1 outline-black/5 ${hoverLiftClass} md:px-7 md:py-7`}
                       >
                         <div className="type-stat-number text-[#242840]">
                           <AnimatedMetricValue value={stat.value} trigger="load" />
