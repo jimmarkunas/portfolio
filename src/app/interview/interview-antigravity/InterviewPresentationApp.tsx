@@ -700,7 +700,7 @@ const ClosingSlide = () => (
   </SlideContainer>
 );
 
-const slides = [
+export const interviewSlides = [
   { 
     id: '01', 
     title: slideContent.slide01.title,
@@ -929,9 +929,11 @@ const slides = [
   },
 ];
 
+const slides = interviewSlides;
+
 // --- Main App ---
 
-export default function App() {
+export default function InterviewPresentationApp() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showNotes, setShowNotes] = useState(false);

@@ -1,6 +1,6 @@
 "use client"
-import InterviewAntigravityApp from "./interview-antigravity/InterviewAntigravityApp"
+import InterviewAppShell from "./interview-antigravity/InterviewAppShell"
 
 export default function InterviewPage() {
-  return <InterviewAntigravityApp />
+  return <InterviewAppShell />
 }

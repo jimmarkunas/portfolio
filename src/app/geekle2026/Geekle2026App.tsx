@@ -27,7 +27,7 @@ const Slide = ({ children, isActive }: SlideProps) => {
   );
 };
 
-export default function App() {
+export default function Geekle2026App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
