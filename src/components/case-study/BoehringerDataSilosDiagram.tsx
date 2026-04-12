@@ -35,12 +35,10 @@ const tasks = [
 function InputCard({
   icon: Icon,
   title,
-  subtitle,
   className = "",
 }: {
   icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   title: string;
-  subtitle: string;
   className?: string;
 }) {
   return (
@@ -141,7 +139,7 @@ export default function BoehringerDataSilosDiagram() {
         <div className="flex flex-col xl:hidden">
           <div className="grid gap-3">
             {inputs.map((item) => (
-              <InputCard key={item.title} icon={item.icon} title={item.title} subtitle={item.subtitle} />
+              <InputCard key={item.title} icon={item.icon} title={item.title} />
             ))}
           </div>
           <Arrow direction="down" className="py-2" />
@@ -154,7 +152,7 @@ export default function BoehringerDataSilosDiagram() {
         <div className="hidden xl:grid xl:items-center" style={{ gridTemplateColumns: "160px 36px 1fr 36px 110px" }}>
           <div className="flex flex-col gap-4">
             {inputs.map((item) => (
-              <InputCard key={item.title} icon={item.icon} title={item.title} subtitle={item.subtitle} />
+              <InputCard key={item.title} icon={item.icon} title={item.title} />
             ))}
           </div>
           <div className="flex flex-col justify-around self-stretch py-2">

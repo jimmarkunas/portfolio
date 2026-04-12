@@ -1,14 +1,6 @@
 import type {
-  Slide5AnimationTheme,
-  Slide5AnimationThemeOverrides,
-  Slide5AnimationThemePresetMap,
-  Slide5DiagramLabels,
-  Slide5DiagramTooltips,
   Slide5LegendLabelKey,
   Slide5NodeLabelKey,
-  Slide5ThemePreset,
-  Slide5TooltipContent,
-  Slide5TooltipTheme,
   Slide5ZoneLabelKey,
 } from "@/content/interviews";
 

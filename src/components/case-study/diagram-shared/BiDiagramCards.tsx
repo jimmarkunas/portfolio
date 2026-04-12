@@ -350,7 +350,7 @@ export function SystemCard({
 
 export function BrowserCard({
   className,
-  compact = false,
+  compact: _compact = false,
   onClick,
   onSdkClick,
 }: {

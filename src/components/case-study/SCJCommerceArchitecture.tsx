@@ -1,16 +1,5 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  BadgePercent,
-  Code2,
-  CreditCard,
-  Globe,
-  MessageSquareMore,
-  Package,
-  SlidersHorizontal,
-  Sparkles,
-  Users,
-} from "lucide-react";
 import { motion } from "framer-motion";
 import { SCJ_TOOLTIPS } from "./scjDiagramData";
 import ParticleCanvas from "./ParticleCanvas";

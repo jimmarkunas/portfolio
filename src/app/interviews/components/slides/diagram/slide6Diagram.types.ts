@@ -1,5 +1,4 @@
 import type {
-  Slide6DiagramLabels,
   Slide6NodeBodyLabelKey,
   Slide6NodeTypeLabelKey,
 } from "@/content/interviews";

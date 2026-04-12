@@ -8,7 +8,7 @@ interface DiagramLegendProps {
 export default function DiagramLegend({ legend, labels }: DiagramLegendProps) {
   return (
     <div className="relative z-30 inline-flex flex-col" style={{ gap: legend.rowGap }}>
-      {legend.items.map((item, index) => {
+      {legend.items.map((item) => {
         const isWaterfall = item.theme === "waterfall";
 
         return (

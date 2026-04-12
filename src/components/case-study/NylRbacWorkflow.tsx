@@ -116,13 +116,6 @@ function FlowLine() {
   // let the canvas resize handler correct them. Instead, we measure here.
   const Y = 40; // matches top-10 (2.5rem = 40px) center of nodes
 
-  // Build path lazily so ParticleCanvas always gets correct width after resize.
-  const getPath = () => {
-    const w = containerRef.current?.offsetWidth ?? 600;
-    const pad = 40; // left-10 / right-10
-    return [[{ x: pad, y: Y }, { x: w - pad, y: Y }]];
-  };
-
   // We pass a stable ref; ParticleCanvas uses ResizeObserver internally.
   // But paths prop is evaluated once — so we use a state-driven approach.
   const [paths, setPaths] = useState<{ x: number; y: number }[][]>([]);

@@ -3,33 +3,33 @@ import type {
   TitledSection,
 } from "@/content/site/types"
 
-export type CvLink = {
+type CvLink = {
   label: string
   href: string
   external?: boolean
 }
 
-export type CvDownloadAsset = {
+type CvDownloadAsset = {
   label: string
   href: string
   fileName: string
 }
 
-export type CvImpactStat = {
+type CvImpactStat = {
   value: string
   label: string
   displayLabel?: string
   href?: string
 }
 
-export type CvClientSpotlight = {
+type CvClientSpotlight = {
   client: string
   focus: string
   outcome: string
   href?: string
 }
 
-export type CvExperienceEntry = {
+type CvExperienceEntry = {
   company: string
   role: string
   period: string
@@ -40,7 +40,7 @@ export type CvExperienceEntry = {
   relatedWork?: CvLink[]
 }
 
-export type CvAward = {
+type CvAward = {
   rank: string
   year: string
   title: string
@@ -48,28 +48,28 @@ export type CvAward = {
   href?: string
 }
 
-export type CvSkillGroup = {
+type CvSkillGroup = {
   title: string
   items: string[]
 }
 
-export type CvFounderExperience = {
+type CvFounderExperience = {
   company: string
   summary: string
 }
 
-export type CvMeta = {
+type CvMeta = {
   title: string
   description: string
 }
 
-export type CvSectionPills = {
+type CvSectionPills = {
   delivery: string
   experience: string
   awards: string
 }
 
-export type CvDetailsSection = DescribedSection & {
+type CvDetailsSection = DescribedSection & {
   additionalExperienceTitle: string
   founderExperienceTitle: string
   credentialsTitle: string
@@ -78,7 +78,7 @@ export type CvDetailsSection = DescribedSection & {
   toolsTitle: string
 }
 
-export type CvHero = {
+type CvHero = {
   pill: string
   name: string
   role: string
@@ -86,18 +86,18 @@ export type CvHero = {
   links: CvLink[]
 }
 
-export type CvCallToAction = {
+type CvCallToAction = {
   heading: string
   body: string
   primary: CvLink
   secondary: CvLink
 }
 
-export type CvUiText = {
+type CvUiText = {
   openCaseStudyAriaLabel: string
 }
 
-export type CvContent = {
+type CvContent = {
   meta: CvMeta
   sectionPills: CvSectionPills
   deliverySection: DescribedSection

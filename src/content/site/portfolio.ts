@@ -1,11 +1,11 @@
-export type PortfolioShowcaseCard = {
+type PortfolioShowcaseCard = {
   href: string
   src: string
   alt: string
   aspectRatio: string
 }
 
-export type PortfolioShowcase = {
+type PortfolioShowcase = {
   topRow: PortfolioShowcaseCard[]
   feature: PortfolioShowcaseCard
   sideStack: PortfolioShowcaseCard[]
@@ -15,7 +15,7 @@ export type PortfolioShowcase = {
   wideRows: PortfolioShowcaseCard[]
 }
 
-export type PortfolioContent = {
+type PortfolioContent = {
   portfolioShowcase: PortfolioShowcase
   founderShowcase: PortfolioShowcaseCard[]
 }

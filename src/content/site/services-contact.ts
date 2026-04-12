@@ -1,6 +1,6 @@
 import type { EyebrowIntroSection } from "@/content/site/types"
 
-export type ServiceEntry = {
+type ServiceEntry = {
   title: string
   summary: string
 }
@@ -19,39 +19,39 @@ export type ServiceProjectLogoEntry = {
   size?: "default" | "half"
 }
 
-export type ServiceMapLocationEntry = {
+type ServiceMapLocationEntry = {
   city: string
   country: string
   coordinates: [number, number] // [longitude, latitude]
 }
 
-export type ServiceEntriesSection = EyebrowIntroSection & {
+type ServiceEntriesSection = EyebrowIntroSection & {
   entries: ServiceEntry[]
 }
 
-export type CareerStatsSection = EyebrowIntroSection & {
+type CareerStatsSection = EyebrowIntroSection & {
   stats: CareerStatEntry[]
 }
 
-export type ProjectShowcaseSection = {
+type ProjectShowcaseSection = {
   eyebrow: string
   title: string
   logos: ServiceProjectLogoEntry[]
 }
 
-export type ServicesMapSection = EyebrowIntroSection & {
+type ServicesMapSection = EyebrowIntroSection & {
   mapTitle: string
   locations: ServiceMapLocationEntry[]
 }
 
-export type ContactSection = EyebrowIntroSection & {
+type ContactSection = EyebrowIntroSection & {
   email: string
   linkedinLabel: string
   linkedinHref: string
   location: string
 }
 
-export type ServicesContactContent = {
+type ServicesContactContent = {
   services: ServiceEntriesSection
   careerStats: CareerStatsSection
   projectShowcase: ProjectShowcaseSection
