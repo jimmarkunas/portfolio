@@ -1,5 +1,5 @@
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
-import type { CaseStudyData } from "@/content/case-studies/types"
+import type { CaseStudyData } from "@/content/case-studies"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"

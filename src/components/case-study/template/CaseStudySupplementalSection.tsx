@@ -1,4 +1,4 @@
-import type { CaseStudyData } from "@/content/case-studies/types"
+import type { CaseStudyData } from "@/content/case-studies"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { SectionShell } from "@/components/SectionShell"

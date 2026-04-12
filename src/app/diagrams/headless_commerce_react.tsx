@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import type { DiagramData } from "@/components/case-study/types";
+import type { DiagramData } from "@/content/case-studies";
 import Modal from "@/components/case-study/Modal";
 import { useModal } from "@/components/case-study/useModal";
 import { DiagramIcon } from "@/components/case-study/DiagramIcon";

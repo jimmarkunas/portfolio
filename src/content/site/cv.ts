@@ -1,3 +1,8 @@
+import type {
+  DescribedSection,
+  TitledSection,
+} from "@/content/site/types"
+
 export type CvLink = {
   label: string
   href: string
@@ -51,6 +56,67 @@ export type CvSkillGroup = {
 export type CvFounderExperience = {
   company: string
   summary: string
+}
+
+export type CvMeta = {
+  title: string
+  description: string
+}
+
+export type CvSectionPills = {
+  delivery: string
+  experience: string
+  awards: string
+}
+
+export type CvDetailsSection = DescribedSection & {
+  additionalExperienceTitle: string
+  founderExperienceTitle: string
+  credentialsTitle: string
+  educationTitle: string
+  certificationsTitle: string
+  toolsTitle: string
+}
+
+export type CvHero = {
+  pill: string
+  name: string
+  role: string
+  summary: string
+  links: CvLink[]
+}
+
+export type CvCallToAction = {
+  heading: string
+  body: string
+  primary: CvLink
+  secondary: CvLink
+}
+
+export type CvUiText = {
+  openCaseStudyAriaLabel: string
+}
+
+export type CvContent = {
+  meta: CvMeta
+  sectionPills: CvSectionPills
+  deliverySection: DescribedSection
+  experienceSection: TitledSection
+  awardsSection: DescribedSection
+  detailsSection: CvDetailsSection
+  uiText: CvUiText
+  hero: CvHero
+  downloads: CvDownloadAsset[]
+  impactStats: CvImpactStat[]
+  experienceIntro: string
+  experiences: CvExperienceEntry[]
+  additionalExperience: string[]
+  founderExperience: CvFounderExperience[]
+  awards: CvAward[]
+  skills: CvSkillGroup[]
+  education: string[]
+  certifications: string[]
+  cta: CvCallToAction
 }
 
 export const siteContent = {
@@ -341,4 +407,4 @@ export const siteContent = {
     primary: { label: "Book a Call", href: "https://calendar.app.google/TkZumQx7Bfyou7G26", external: true },
     secondary: { label: "See Case Studies", href: "/work" },
   },
-}
+} satisfies CvContent

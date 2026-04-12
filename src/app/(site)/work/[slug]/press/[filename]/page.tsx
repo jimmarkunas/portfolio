@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { PressViewer } from "@/components/PressViewer"
 import { loadAllCaseStudies, loadCaseStudyBySlug } from "@/content/case-studies"
-import type { CaseStudyExperienceRow } from "@/components/case-study/types"
+import type { CaseStudyExperienceRow } from "@/content/case-studies"
 import { buildPageMetadata } from "@/lib/seo"
 
 const legacyPressFilenameAliases: Record<string, string[]> = {

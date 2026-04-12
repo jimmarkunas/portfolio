@@ -1,6 +1,6 @@
 "use client"
 
-import type { GlobalLocation } from "@/content/case-studies/types"
+import type { GlobalLocation } from "@/content/case-studies"
 import { DeferredVisualLoader } from "@/components/case-study/template/visuals/deferred/DeferredVisualLoader"
 
 const GLOBAL_LOCATIONS_LOADER = () =>

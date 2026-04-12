@@ -4,7 +4,7 @@ import { Fragment, useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 import { Container } from "@/components/Container"
-import type { CaseStudyExperienceRow } from "@/content/case-studies/types"
+import type { CaseStudyExperienceRow } from "@/content/case-studies"
 
 const PDFJS_SCRIPT_SRC = "/pdfjs/pdf.min.js"
 const PDFJS_WORKER_SRC = "/pdfjs/pdf.worker.min.js"

@@ -1,5 +1,5 @@
 import { BlogCardGrid } from "@/components/case-study/BlogCardGrid"
-import type { CaseStudyData } from "@/content/case-studies/types"
+import type { CaseStudyData } from "@/content/case-studies"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { MotionReveal } from "@/components/motion/MotionReveal"

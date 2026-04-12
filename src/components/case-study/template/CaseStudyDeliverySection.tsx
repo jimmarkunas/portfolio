@@ -1,4 +1,4 @@
-import type { CaseStudyData } from "@/content/case-studies/types"
+import type { CaseStudyData } from "@/content/case-studies"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { SectionShell } from "@/components/SectionShell"

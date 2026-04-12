@@ -1,4 +1,4 @@
-import type { CaseStudyMedia } from "@/content/case-studies/types"
+import type { CaseStudyMedia } from "@/content/case-studies"
 import { DeferredMediaReactDiagram } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
 import { DeferredNylVelocityChart } from "@/components/case-study/template/visuals/deferred/DeferredNylVelocityChart"
 

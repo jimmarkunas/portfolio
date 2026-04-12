@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import type { CaseStudyData } from "@/content/case-studies/types"
+import type { CaseStudyData } from "@/content/case-studies"
 import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"

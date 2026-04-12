@@ -10,7 +10,7 @@ import type {
   Slide5TooltipContent,
   Slide5TooltipTheme,
   Slide5ZoneLabelKey,
-} from "@/content/interviews/types";
+} from "@/content/interviews";
 
 export type {
   Slide5AnimationTheme,
@@ -24,7 +24,7 @@ export type {
   Slide5TooltipContent,
   Slide5TooltipTheme,
   Slide5ZoneLabelKey,
-} from "@/content/interviews/types";
+} from "@/content/interviews";
 
 export type Slide5ZoneId = "planning" | "execution" | "delivery";
 

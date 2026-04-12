@@ -1,3 +1,5 @@
+import type { EyebrowIntroSection } from "@/content/site/types"
+
 export type ServiceEntry = {
   title: string
   summary: string
@@ -21,6 +23,40 @@ export type ServiceMapLocationEntry = {
   city: string
   country: string
   coordinates: [number, number] // [longitude, latitude]
+}
+
+export type ServiceEntriesSection = EyebrowIntroSection & {
+  entries: ServiceEntry[]
+}
+
+export type CareerStatsSection = EyebrowIntroSection & {
+  stats: CareerStatEntry[]
+}
+
+export type ProjectShowcaseSection = {
+  eyebrow: string
+  title: string
+  logos: ServiceProjectLogoEntry[]
+}
+
+export type ServicesMapSection = EyebrowIntroSection & {
+  mapTitle: string
+  locations: ServiceMapLocationEntry[]
+}
+
+export type ContactSection = EyebrowIntroSection & {
+  email: string
+  linkedinLabel: string
+  linkedinHref: string
+  location: string
+}
+
+export type ServicesContactContent = {
+  services: ServiceEntriesSection
+  careerStats: CareerStatsSection
+  projectShowcase: ProjectShowcaseSection
+  servicesMap: ServicesMapSection
+  contact: ContactSection
 }
 
 export const siteContent = {
@@ -154,4 +190,4 @@ export const siteContent = {
     linkedinHref: "https://linkedin.com/in/jimmarkunas",
     location: "US · UK · EU",
   },
-}
+} satisfies ServicesContactContent

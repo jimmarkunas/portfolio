@@ -2,13 +2,13 @@ import type {
   Slide6DiagramLabels,
   Slide6NodeBodyLabelKey,
   Slide6NodeTypeLabelKey,
-} from "@/content/interviews/types";
+} from "@/content/interviews";
 
 export type {
   Slide6DiagramLabels,
   Slide6NodeBodyLabelKey,
   Slide6NodeTypeLabelKey,
-} from "@/content/interviews/types";
+} from "@/content/interviews";
 
 export type Slide6NodeId =
   | "epic"

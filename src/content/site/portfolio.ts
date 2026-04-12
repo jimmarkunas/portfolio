@@ -5,6 +5,21 @@ export type PortfolioShowcaseCard = {
   aspectRatio: string
 }
 
+export type PortfolioShowcase = {
+  topRow: PortfolioShowcaseCard[]
+  feature: PortfolioShowcaseCard
+  sideStack: PortfolioShowcaseCard[]
+  middleRow: PortfolioShowcaseCard[]
+  lowerRow: PortfolioShowcaseCard[]
+  lowerMiddleRow: PortfolioShowcaseCard[]
+  wideRows: PortfolioShowcaseCard[]
+}
+
+export type PortfolioContent = {
+  portfolioShowcase: PortfolioShowcase
+  founderShowcase: PortfolioShowcaseCard[]
+}
+
 export const siteContent = {
   portfolioShowcase: {
     topRow: [
@@ -38,4 +53,4 @@ export const siteContent = {
     { href: "/work/zevo/", src: "/portfolio-gallery/zevo.svg", alt: "ZEVO project", aspectRatio: "703 / 527" },
     { href: "/work/cwg/", src: "/portfolio-gallery/cwg.svg", alt: "CWG project", aspectRatio: "703 / 527" },
   ] satisfies PortfolioShowcaseCard[],
-}
+} satisfies PortfolioContent
