@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from "react";
+import type { KeyboardEvent, MouseEvent, PointerEvent } from "react";
 
 import type { Slide5NodeLayout } from "./slide5Diagram.types";
 
@@ -27,12 +27,24 @@ export default function DiagramCard({
     }
   };
 
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (!onActivate) return;
+    event.stopPropagation();
+  };
+
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (!onActivate) return;
+    event.stopPropagation();
+    onActivate();
+  };
+
   return (
     <div
       tabIndex={0}
       role={isInteractive ? "button" : undefined}
       aria-pressed={isInteractive ? isActive : undefined}
-      onClick={onActivate}
+      onPointerDown={handlePointerDown}
+      onClick={handleClick}
       onKeyDown={handleKeyDown}
       className={`absolute z-20 inline-flex items-center justify-center overflow-hidden border px-2.5 py-2 text-center text-sm font-medium leading-tight transition-[background-color,color,border-color,box-shadow] duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#F3F3F3] ${
         isInteractive ? "cursor-pointer" : ""

@@ -23,9 +23,31 @@ export default function Slide5TooltipModal({
 }: Slide5TooltipModalProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const [portalHost, setPortalHost] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const syncPortalHost = () => {
+      const fullscreenHost = document.fullscreenElement;
+      const nextHost =
+        fullscreenHost instanceof HTMLElement ? fullscreenHost : document.body;
+
+      setPortalHost((currentHost) =>
+        currentHost === nextHost ? currentHost : nextHost,
+      );
+    };
+
+    syncPortalHost();
+    document.addEventListener("fullscreenchange", syncPortalHost);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", syncPortalHost);
+    };
   }, []);
 
   useEffect(() => {
@@ -62,7 +84,7 @@ export default function Slide5TooltipModal({
     );
   }, [shouldReduceMotion, tip]);
 
-  if (!tip || !isMounted) return null;
+  if (!tip || !isMounted || !portalHost) return null;
 
   const modal = (
     <div
@@ -165,5 +187,5 @@ export default function Slide5TooltipModal({
     </div>
   );
 
-  return createPortal(modal, document.body);
+  return createPortal(modal, portalHost);
 }

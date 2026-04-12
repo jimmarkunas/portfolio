@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, Maximize, Minimize, ArrowRight, Shield, Cpu, Target, Users, Zap, Globe, Mail, Linkedin } from 'lucide-react';
 import { interviewContent } from '@/content/interviewContent';
@@ -50,10 +50,15 @@ const whyJimIconMap = {
   Globe,
 } as const;
 
+const PM_POP_QUIZ_SLIDE_ID = 'slide-pm-pop-quiz';
+const PM_POP_QUIZ_TITLE = 'PM Pop Quiz';
+const PM_POP_QUIZ_SUBTITLE = 'Read the bullet points and guess the role. Click a card to reveal the answer.';
+
 export default function InterviewsApp() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isTocOpen, setIsTocOpen] = useState(false);
+  const [revealedPmPopQuizCategories, setRevealedPmPopQuizCategories] = useState<string[]>([]);
   const [contentBottomInset, setContentBottomInset] = useState(95);
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
@@ -64,27 +69,56 @@ export default function InterviewsApp() {
     slideContent.who.id,
     slideContent.outcomes.id,
     slideContent.services.id,
+    PM_POP_QUIZ_SLIDE_ID,
     slideContent.greatestPm.id,
     slideContent.hybridAgile.id,
     slideContent.jiraTickets.id,
     slideContent.riskLandscape.id,
     slideContent.statusReport.id,
-    slideContent.cover.id,
     slideContent.composableStack.id,
-    slideContent.modere.id,
-    slideContent.engineers.id,
-    slideContent.goal.id,
-    slideContent.tools.id,
-    slideContent.preSetup.id,
-    slideContent.buildPart1.id,
-    slideContent.buildPart2.id,
-    slideContent.finalize.id,
     slideContent.whyJim.id,
     slideContent.rescuePlan.id,
     slideContent.thankYou.id,
   ];
 
-  const slideTitles = content.slideTitles;
+  const hiddenSlideTitles = new Set([
+    slideContent.cover.title,
+    slideContent.modere.title,
+    slideContent.engineers.title,
+    slideContent.goal.title,
+    slideContent.tools.title,
+    slideContent.preSetup.title,
+    `${slideContent.buildPart1.titlePrefix}${slideContent.buildPart1.titleHighlight}`.trim(),
+    `${slideContent.buildPart2.titlePrefix}${slideContent.buildPart2.titleHighlight}`.trim(),
+    slideContent.finalize.title,
+  ]);
+
+  const slideTitles = [
+    ...content.slideTitles.slice(0, 3),
+    PM_POP_QUIZ_TITLE,
+    ...content.slideTitles.slice(3),
+  ].filter((title) => !hiddenSlideTitles.has(title));
+
+  const pmPopQuizCategories = useMemo(() => {
+    const categories = [...slideContent.services.categories];
+
+    for (let i = categories.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [categories[i], categories[j]] = [categories[j], categories[i]];
+    }
+
+    return categories;
+  }, [slideContent.services.categories]);
+
+  const togglePmPopQuizCategoryReveal = useCallback((categoryId: string) => {
+    setRevealedPmPopQuizCategories((prev) => {
+      if (prev.includes(categoryId)) {
+        return prev.filter((id) => id !== categoryId);
+      }
+
+      return [...prev, categoryId];
+    });
+  }, []);
 
   const slides = [
     // Slide 1: Who is Jim Markunas?
@@ -288,6 +322,76 @@ export default function InterviewsApp() {
       </motion.div>
     </div>,
 
+    // Slide 4: PM Pop Quiz
+    <div key={PM_POP_QUIZ_SLIDE_ID} className="h-full flex flex-col">
+      <motion.div
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        className="flex justify-between items-start"
+      >
+        <div className="space-y-2">
+          <h2 className="h2-display">{PM_POP_QUIZ_TITLE}</h2>
+          <p className="text-finox-gray text-xl font-light">
+            {PM_POP_QUIZ_SUBTITLE}
+          </p>
+        </div>
+        <div className="w-[65px] h-[65px] shrink-0" aria-hidden="true" />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
+        className="mt-12 flex-1 flex items-stretch"
+      >
+        <div className="grid grid-cols-2 gap-6 w-full h-full auto-rows-fr">
+          {pmPopQuizCategories.map((category, i) => {
+            const isRevealed = revealedPmPopQuizCategories.includes(category.id);
+
+            return (
+            <motion.button
+              type="button"
+              key={`pm-pop-quiz-${category.id}`}
+              onClick={() => togglePmPopQuizCategoryReveal(category.id)}
+              aria-pressed={isRevealed}
+              aria-label={`${isRevealed ? 'Hide' : 'Reveal'} answer for ${category.title}`}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 + (i * 0.1) }}
+              className="h-full text-left bg-white/5 border border-white/10 p-8 rounded-3xl space-y-6 transition-colors hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#447ACB]/70"
+            >
+              <div className="min-h-[72px]">
+                {isRevealed ? (
+                  <div className="flex items-center gap-4">
+                    {category.percent && (
+                      <div className="bg-finox-slate text-white text-sm font-bold px-3 py-2 rounded">
+                        {category.percent}
+                      </div>
+                    )}
+                    <h3 className="text-4xl font-medium">{category.title}</h3>
+                  </div>
+                ) : (
+                  <div className="flex h-full items-center">
+                    <p className="text-finox-gray text-sm uppercase tracking-[0.18em]">
+                      Guess the job title, then click to reveal
+                    </p>
+                  </div>
+                )}
+              </div>
+              <ul className="space-y-3 list-disc pl-7 marker:text-[#447ACB]">
+                {category.items.map((item) => (
+                  <li key={`pm-pop-quiz-${item.id}`} className="text-finox-gray text-xl font-light leading-tight">
+                    {item.text}
+                  </li>
+                ))}
+              </ul>
+            </motion.button>
+          );})}
+        </div>
+      </motion.div>
+    </div>,
+
     // Slide 4: Am I Really the Greatest PM Ever?
     <div key={slideContent.greatestPm.id} className="h-full flex flex-col">
       <div className="flex justify-between items-start">
@@ -381,174 +485,13 @@ export default function InterviewsApp() {
       slide={slideContent.statusReport}
     />,
 
-    // Slide 9: What We’ll Cover
-    <div key={slideContent.cover.id} className="space-y-12">
-      <h2 className="h2-display">{slideContent.cover.title}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="space-y-6">
-          <p className="p-large text-white">
-            {slideContent.cover.description}
-          </p>
-        </div>
-        <div className="space-y-6 border-l border-finox-slate pl-8">
-          <p className="uppercase text-xs tracking-widest text-finox-gray">{slideContent.cover.reasonLabel}</p>
-          <ul className="space-y-4">
-            {slideContent.cover.reasons.map((item) => (
-              <li key={item.id} className="flex items-start gap-3 text-finox-gray">
-                <ArrowRight className="w-5 h-5 mt-1 flex-shrink-0 text-white" />
-                <span>{item.text}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>,
-
-    // Slide 10: The Composable Stack
+    // Slide 9: The Composable Stack
     <Slide8ComposableStack
       key={slideContent.composableStack.id}
       slide={slideContent.composableStack}
     />,
 
-    // Slide 11: The Modere Game
-    <div key={slideContent.modere.id} className="space-y-12">
-      <div className="flex justify-between items-end">
-        <h2 className="h2-display">{slideContent.modere.title}</h2>
-        <div className="text-finox-gray font-mono text-sm mb-4">{slideContent.modere.caseStudyLabel}</div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="space-y-6">
-          {slideContent.modere.paragraphs.map((paragraph) => (
-            <p key={paragraph.id} className="p-regular">
-              {paragraph.text}
-            </p>
-          ))}
-        </div>
-        <div className="bg-finox-slate/20 p-8 rounded-2xl border border-finox-slate/30">
-          <p className="uppercase text-xs tracking-widest text-finox-gray mb-4">{slideContent.modere.goalLabel}</p>
-          <p className="text-xl leading-relaxed">
-            {slideContent.modere.goalText}
-          </p>
-        </div>
-      </div>
-    </div>,
-
-    // Slide 12: Engineers vs Executives
-    <div key={slideContent.engineers.id} className="space-y-12">
-      <h2 className="h2-display text-center">{slideContent.engineers.titleTop} <br/><span className="text-finox-gray italic">{slideContent.engineers.titleMiddle}</span><br/> {slideContent.engineers.titleBottom}</h2>
-      <div className="flex justify-center gap-8 pt-8">
-        {slideContent.engineers.circles.map((item) => (
-          <div key={item.id} className="flex flex-col items-center p-8 border border-finox-slate rounded-full w-64 h-64 justify-center text-center space-y-2">
-            <span className="uppercase text-[10px] tracking-[0.3em] text-finox-gray">{item.label}</span>
-            <span className="text-xl font-medium">{item.value}</span>
-          </div>
-        ))}
-      </div>
-    </div>,
-
-    // Slide 13: Goal
-    <div key={slideContent.goal.id} className="flex flex-col items-center justify-center text-center space-y-8">
-      <div className="w-24 h-px bg-finox-gray"></div>
-      <h2 className="h1-display">{slideContent.goal.title}</h2>
-      <p className="text-3xl font-light text-finox-gray max-w-2xl">
-        {slideContent.goal.description}
-      </p>
-      <div className="w-24 h-px bg-finox-gray"></div>
-    </div>,
-
-    // Slide 14: Tools Needed
-    <div key={slideContent.tools.id} className="space-y-8">
-      <h2 className="h2-display">{slideContent.tools.title}</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {slideContent.tools.items.map((tool) => (
-          <div key={tool.id} className="p-6 border border-finox-slate/30 rounded-xl hover:border-white transition-colors group">
-            <p className="text-finox-gray text-xs uppercase tracking-widest mb-2 group-hover:text-white transition-colors">{tool.cost}</p>
-            <p className="text-lg font-medium">{tool.name}</p>
-          </div>
-        ))}
-      </div>
-    </div>,
-
-    // Slide 15: Pre-Setup
-    <div key={slideContent.preSetup.id} className="space-y-12">
-      <h2 className="h2-display">{slideContent.preSetup.title}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
-        {slideContent.preSetup.steps.map((step, i) => (
-          <div key={step.id} className="flex items-center gap-6 border-b border-finox-slate/20 pb-4">
-            <span className="text-finox-gray font-mono text-sm">0{i + 1}</span>
-            <span className="text-xl">{step.text}</span>
-          </div>
-        ))}
-      </div>
-    </div>,
-
-    // Slide 16: How to Build Part 1
-    <div key={slideContent.buildPart1.id} className="space-y-12">
-      <h2 className="h2-display">{slideContent.buildPart1.titlePrefix}<span className="text-finox-gray italic">{slideContent.buildPart1.titleHighlight}</span></h2>
-      <div className="space-y-6 max-w-3xl">
-        {slideContent.buildPart1.steps.map((step, i) => (
-          <motion.div 
-            key={step.id}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="flex items-center gap-6 p-6 bg-white/5 rounded-2xl"
-          >
-            <div className="w-10 h-10 rounded-full border border-finox-gray flex items-center justify-center text-sm font-mono">
-              {i + 1}
-            </div>
-            <span className="text-2xl font-light">{step.text}</span>
-          </motion.div>
-        ))}
-      </div>
-    </div>,
-
-    // Slide 17: How to Build Part 2
-    <div key={slideContent.buildPart2.id} className="space-y-12">
-      <h2 className="h2-display">{slideContent.buildPart2.titlePrefix}<span className="text-finox-gray italic">{slideContent.buildPart2.titleHighlight}</span></h2>
-      <div className="space-y-8">
-        <p className="p-large text-white">{slideContent.buildPart2.subtitle}</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {slideContent.buildPart2.steps.map((step, i) => (
-            <div key={step.id} className="p-8 border border-finox-slate rounded-3xl flex flex-col justify-between">
-              <span className="text-finox-gray text-xs uppercase tracking-widest mb-4">{slideContent.buildPart2.stepPrefix} {i + 1}</span>
-              <p className="text-xl leading-relaxed">{step.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>,
-
-    // Slide 18: Finalize the App
-    <div key={slideContent.finalize.id} className="flex flex-col items-center justify-center h-full space-y-16">
-      <h2 className="h2-display">{slideContent.finalize.title}</h2>
-      <div className="flex gap-12">
-        <div className="flex flex-col items-center space-y-4">
-          <div className="w-32 h-32 rounded-full border-2 border-white flex items-center justify-center">
-            <span className="text-3xl font-mono">{slideContent.finalize.firstStepNumber}</span>
-          </div>
-          <p className="text-xl uppercase tracking-widest text-finox-gray">{slideContent.finalize.firstStepLabel}</p>
-        </div>
-        <div className="flex items-center">
-          <div className="w-24 h-px bg-finox-slate"></div>
-        </div>
-        <div className="flex flex-col items-center space-y-4">
-          <div className="w-32 h-32 rounded-full bg-white flex items-center justify-center">
-            <span className="text-3xl font-mono text-finox-dark">{slideContent.finalize.secondStepNumber}</span>
-          </div>
-          <p className="text-xl uppercase tracking-widest text-white">{slideContent.finalize.secondStepLabel}</p>
-        </div>
-      </div>
-      <motion.div 
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ repeat: Infinity, duration: 3 }}
-        className="pt-12 text-finox-gray tracking-[0.5em] uppercase text-xs"
-      >
-        {slideContent.finalize.completionText}
-      </motion.div>
-    </div>,
-
-    // Slide 19: Why Jim Markunas?
+    // Slide 11: Why Jim Markunas?
     <div key={slideContent.whyJim.id} className="flex h-full min-h-0 flex-col gap-8">
       <div className="shrink-0 space-y-2">
         <h2 className="h2-display">{slideContent.whyJim.title}</h2>
@@ -577,7 +520,7 @@ export default function InterviewsApp() {
       </div>
     </div>,
 
-    // Slide 20: The 30-Day Rescue Plan
+    // Slide 12: The 30-Day Rescue Plan
     <div key={slideContent.rescuePlan.id} className="flex h-full min-h-0 flex-col gap-10">
       <div className="shrink-0 space-y-2">
         <h2 className="h2-display">{slideContent.rescuePlan.title}</h2>
@@ -616,7 +559,7 @@ export default function InterviewsApp() {
       </div>
     </div>,
 
-    // Slide 21: Thank You
+    // Slide 13: Thank You
     <div key={slideContent.thankYou.id} className="flex h-full flex-col items-center justify-center text-center space-y-12">
       <div className="space-y-2">
         <h2 className="h2-display">{slideContent.thankYou.title}</h2>
@@ -659,6 +602,11 @@ export default function InterviewsApp() {
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   }, [slides.length]);
+
+  useEffect(() => {
+    if (currentSlide < slides.length) return;
+    setCurrentSlide(Math.max(0, slides.length - 1));
+  }, [currentSlide, slides.length]);
 
   const jumpToSlide = useCallback((slideIndex: number) => {
     setCurrentSlide(slideIndex);

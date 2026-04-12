@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 
-import "./interview-antigravity/index.css"
+import "../interviews/index.css"
 
 export default function InterviewLayout({
   children,
