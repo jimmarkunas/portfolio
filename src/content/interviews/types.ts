@@ -197,6 +197,7 @@ export interface Slide6DiagramLabels {
   nodeTypes: Record<Slide6NodeTypeLabelKey, string>;
   nodes: Record<Slide6NodeBodyLabelKey, string>;
 }
+
 export interface InterviewsContent {
   brandLogo: ImageEntry;
   navigation: {
@@ -400,3 +401,34 @@ export interface InterviewsContent {
     };
   };
 }
+
+export type ProductDeliverySlideKey =
+  | "who"
+  | "outcomes"
+  | "services"
+  | "greatestPm"
+  | "hybridAgile"
+  | "jiraTickets"
+  | "riskLandscape"
+  | "statusReport"
+  | "composableStack";
+
+export type LegacyModernizationSlideKey =
+  | "titleSlide"
+  | "cover"
+  | "boehringer"
+  | "modere"
+  | "engineers"
+  | "goal"
+  | "tools"
+  | "preSetup"
+  | "buildPart1"
+  | "buildPart2"
+  | "finalize";
+
+export type LeadershipCloseSlideKey = "whyJim" | "rescuePlan" | "thankYou";
+
+export type InterviewSlideSubset<K extends keyof InterviewsContent["slides"]> = Pick<
+  InterviewsContent["slides"],
+  K
+>;

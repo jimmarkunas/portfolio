@@ -1,9 +1,9 @@
-import type { InterviewsContent } from "@/content/interviews/types";
-
-const baseSlides = {} as InterviewsContent["slides"];
+import type {
+  InterviewSlideSubset,
+  ProductDeliverySlideKey,
+} from "@/content/interviews/types";
 
 export const slides = {
-  ...baseSlides,
     who: {
       id: "slide-who",
       title: "Who I Am",
@@ -380,4 +380,4 @@ export const slides = {
         },
       ],
     },
-} satisfies InterviewsContent["slides"];
+} satisfies InterviewSlideSubset<ProductDeliverySlideKey>;

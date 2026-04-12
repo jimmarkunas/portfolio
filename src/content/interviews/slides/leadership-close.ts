@@ -1,9 +1,9 @@
-import type { InterviewsContent } from "@/content/interviews/types";
-
-const baseSlides = {} as InterviewsContent["slides"];
+import type {
+  InterviewSlideSubset,
+  LeadershipCloseSlideKey,
+} from "@/content/interviews/types";
 
 export const slides = {
-  ...baseSlides,
     whyJim: {
       id: "slide-why-jim",
       title: "Why Jim Markunas?",
@@ -58,4 +58,4 @@ export const slides = {
       linkedin: "linkedin.com/in/jimmarkunas",
       readyText: "Ready for Questions",
     },
-} satisfies InterviewsContent["slides"];
+} satisfies InterviewSlideSubset<LeadershipCloseSlideKey>;

@@ -1,9 +1,9 @@
-import type { InterviewsContent } from "@/content/interviews/types";
-
-const baseSlides = {} as InterviewsContent["slides"];
+import type {
+  InterviewSlideSubset,
+  LegacyModernizationSlideKey,
+} from "@/content/interviews/types";
 
 export const slides = {
-  ...baseSlides,
     titleSlide: {
       id: "slide-title",
       eyebrow: "Panel Discussion",
@@ -128,4 +128,4 @@ export const slides = {
       secondStepLabel: "Github Commit",
       completionText: "Presentation Complete",
     },
-} satisfies InterviewsContent["slides"];
+} satisfies InterviewSlideSubset<LegacyModernizationSlideKey>;
