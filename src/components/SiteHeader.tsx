@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react"
 
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
+import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 const navLinks = [
   { href: "/work", label: "Portfolio" },
@@ -13,7 +14,17 @@ const navLinks = [
   { href: "/cv", label: "CV" },
   { href: "/contact", label: "Contact" },
 ]
+const BOOK_CALL_HREF = "https://calendar.app.google/TkZumQx7Bfyou7G26"
 const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
+
+function trackHeaderBookCall() {
+  trackEvent("book_call_click", {
+    location: "header",
+    label: "Book a Call",
+    href: BOOK_CALL_HREF,
+    page_path: getCurrentPagePath(),
+  })
+}
 
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false)
@@ -49,10 +60,11 @@ export function SiteHeader() {
             </nav>
 
             <a
-              href="https://calendar.app.google/TkZumQx7Bfyou7G26"
+              href={BOOK_CALL_HREF}
               className={`inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${hoverLiftClass}`}
               target="_blank"
               rel="noreferrer"
+              onClick={trackHeaderBookCall}
             >
               <span>Book a Call</span>
               <svg
@@ -102,11 +114,14 @@ export function SiteHeader() {
             </nav>
 
             <a
-              href="https://calendar.app.google/TkZumQx7Bfyou7G26"
+              href={BOOK_CALL_HREF}
               className={`mt-5 inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${hoverLiftClass}`}
               target="_blank"
               rel="noreferrer"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                trackHeaderBookCall()
+                setIsOpen(false)
+              }}
             >
               <span>Book a Call</span>
               <svg

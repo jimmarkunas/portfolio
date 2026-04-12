@@ -1,9 +1,37 @@
+"use client"
+
 import Link from "next/link"
 
 import type { CaseStudyData } from "@/components/case-study/types"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
+import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 type HeroAction = CaseStudyData["hero"]["primaryCta"]
+const BOOK_CALL_PATTERN = /book\s*a\s*call/i
+
+function trackActionClick(action: HeroAction) {
+  const label = action.label.trim()
+  const pagePath = getCurrentPagePath()
+
+  if (BOOK_CALL_PATTERN.test(label)) {
+    trackEvent("book_call_click", {
+      location: "case_study_cta",
+      label,
+      href: action.href,
+      page_path: pagePath,
+    })
+    return
+  }
+
+  if (action.external) {
+    trackEvent("outbound_link_click", {
+      location: "case_study_cta",
+      label,
+      href: action.href,
+      page_path: pagePath,
+    })
+  }
+}
 
 export function CaseStudyActionButton({
   action,
@@ -28,14 +56,14 @@ export function CaseStudyActionButton({
 
   if (action.external) {
     return (
-      <a href={action.href} target="_blank" rel="noreferrer" className={className}>
+      <a href={action.href} target="_blank" rel="noreferrer" className={className} onClick={() => trackActionClick(action)}>
         {content}
       </a>
     )
   }
 
   return (
-    <Link href={action.href} className={className}>
+    <Link href={action.href} className={className} onClick={() => trackActionClick(action)}>
       {content}
     </Link>
   )

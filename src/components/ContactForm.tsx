@@ -2,6 +2,8 @@
 
 import { useState, useRef } from "react"
 
+import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
+
 const EMAILJS_SERVICE_ID = "service_izfv466"
 const EMAILJS_TEMPLATE_ID = "template_jttfdsq"
 const EMAILJS_PUBLIC_KEY = "qjUSm5iSVeKkQJcYS"
@@ -26,9 +28,21 @@ export function ContactForm() {
 
     if (honeypotRef.current?.value) return
 
+    trackEvent("contact_form_submit", {
+      location: "contact_section",
+      form_name: "contact_form",
+      page_path: getCurrentPagePath(),
+    })
+
     const now = Date.now()
     const last = Number(localStorage.getItem(LAST_SUBMIT_KEY) || 0)
     if (last && now - last < SUBMIT_COOLDOWN_MS) {
+      trackEvent("contact_form_error", {
+        location: "contact_section",
+        form_name: "contact_form",
+        error_type: "cooldown",
+        page_path: getCurrentPagePath(),
+      })
       setErrorMsg("Please wait 30 seconds before sending another message.")
       setState("error")
       return
@@ -42,6 +56,12 @@ export function ContactForm() {
     const senderName = `${fname} ${lname}`.trim() || "Website Contact"
 
     if (!femail || !fmessage) {
+      trackEvent("contact_form_error", {
+        location: "contact_section",
+        form_name: "contact_form",
+        error_type: "validation",
+        page_path: getCurrentPagePath(),
+      })
       setErrorMsg("Email and message are required.")
       setState("error")
       return
@@ -81,9 +101,20 @@ export function ContactForm() {
       }
 
       localStorage.setItem(LAST_SUBMIT_KEY, String(Date.now()))
+      trackEvent("contact_form_success", {
+        location: "contact_section",
+        form_name: "contact_form",
+        page_path: getCurrentPagePath(),
+      })
       setState("success")
     } catch (err) {
       console.error("Contact form error:", err)
+      trackEvent("contact_form_error", {
+        location: "contact_section",
+        form_name: "contact_form",
+        error_type: "request_failed",
+        page_path: getCurrentPagePath(),
+      })
       setErrorMsg("Submission failed. Please email jim@greatestpmever.com directly.")
       setState("error")
     }

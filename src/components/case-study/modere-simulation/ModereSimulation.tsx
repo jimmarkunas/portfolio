@@ -22,6 +22,7 @@ import {
   SIMULATION_STEPS,
   STAGE_HEIGHT_CLASS,
 } from "./modere.data";
+import { getCurrentPagePath, trackEvent } from "@/lib/analytics";
 import type {
   Decision,
   DecisionOption,
@@ -344,6 +345,14 @@ function OutcomeView({
             target="_blank"
             rel="noopener noreferrer"
             className={OUTCOME_PRIMARY_LINK_CLASS}
+            onClick={() => {
+              trackEvent("book_call_click", {
+                location: "case_study_cta",
+                label: "Book a Call",
+                href: ctaHref,
+                page_path: getCurrentPagePath(),
+              });
+            }}
           >
             Book a Call
             <ArrowRight className="h-4 w-4" />

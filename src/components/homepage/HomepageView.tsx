@@ -12,6 +12,7 @@ import { HomepageWhatIDoSection } from "@/components/homepage/sections/HomepageW
 import { PullQuote } from "@/components/PullQuote"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
+import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 import { getHomepageText } from "./homepage"
 import {
@@ -59,6 +60,7 @@ const defaultTagClass =
   "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#EFEFEF] px-4 text-[16px] leading-6 text-[#3A3A3A] outline outline-1 outline-black/10"
 const hoverLiftClass = "transition-transform duration-300 hover:-translate-y-0.5"
 const journeyCtaClass = `type-p2 inline-flex items-center gap-2 text-[#222222] underline underline-offset-4 ${hoverLiftClass}`
+const HOMEPAGE_BOOK_CALL_HREF = "https://calendar.app.google/Cc4kuM7cqTyiXQx66"
 
 function InsightShapePair({
   largeShapeClassName,
@@ -149,6 +151,24 @@ export default function Homepage() {
   } = getHomepageText()
   const [statsCard1, statsCard2, statsCard3, statsCard4, statsCard5, statsCard6] =
     stats.cards as HomepageInsightCard[]
+
+  const trackHomepageBookCall = () => {
+    trackEvent("book_call_click", {
+      location: "homepage_hero",
+      label: "Book a Call",
+      href: HOMEPAGE_BOOK_CALL_HREF,
+      page_path: getCurrentPagePath(),
+    })
+  }
+
+  const trackHomepageOutbound = (label: string, href: string) => {
+    trackEvent("outbound_link_click", {
+      location: "homepage_hero",
+      label,
+      href,
+      page_path: getCurrentPagePath(),
+    })
+  }
 
   return (
     <main className="min-h-full bg-[#F3F3F3]">
@@ -427,8 +447,9 @@ export default function Homepage() {
                 <div className="flex w-full items-start justify-between">
                   <h2 className="type-h3 max-w-[520px] text-[#222222]">{sections.journey.title}</h2>
                 <Link
-                  href="https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+                  href={HOMEPAGE_BOOK_CALL_HREF}
                   className={`${journeyCtaClass} hidden md:inline-flex lg:hidden`}
+                  onClick={trackHomepageBookCall}
                 >
                   <span>{sections.journey.cta}</span>
                   <ArrowUpRightIcon />
@@ -439,8 +460,9 @@ export default function Homepage() {
               <MotionReveal preset="flow" delay={0.1} className="flex flex-col items-start gap-5 lg:justify-start lg:pl-8">
                 <p className="type-p3 text-black/70">{sections.journey.intro}</p>
                 <Link
-                  href="https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+                  href={HOMEPAGE_BOOK_CALL_HREF}
                   className={`${journeyCtaClass} md:hidden lg:inline-flex`}
+                  onClick={trackHomepageBookCall}
                 >
                   <span>{sections.journey.cta}</span>
                   <ArrowUpRightIcon />
@@ -489,6 +511,11 @@ export default function Homepage() {
                         target={journey.featured.external ? "_blank" : undefined}
                         rel={journey.featured.external ? "noopener noreferrer" : undefined}
                         className="block"
+                        onClick={() => {
+                          if (journey.featured.external) {
+                            trackHomepageOutbound(journey.featured.company, journey.featured.href)
+                          }
+                        }}
                       >
                         <h3 className="type-h5 text-[#222222]">{journey.featured.company}</h3>
                         <p className="type-p3 mt-1 text-[#7B7B7B]">{journey.featured.date}</p>
@@ -526,6 +553,11 @@ export default function Homepage() {
                         target={journey.featured.external ? "_blank" : undefined}
                         rel={journey.featured.external ? "noopener noreferrer" : undefined}
                         className={recognitionSummaryClass}
+                        onClick={() => {
+                          if (journey.featured.external) {
+                            trackHomepageOutbound(journey.featured.company, journey.featured.href)
+                          }
+                        }}
                       >
                         {journey.featured.summary}
                       </a>
@@ -543,6 +575,11 @@ export default function Homepage() {
                         target={journey.featured.external ? "_blank" : undefined}
                         rel={journey.featured.external ? "noopener noreferrer" : undefined}
                         className={recognitionSummaryClass}
+                        onClick={() => {
+                          if (journey.featured.external) {
+                            trackHomepageOutbound(journey.featured.company, journey.featured.href)
+                          }
+                        }}
                       >
                         {journey.featured.summary}
                       </a>
@@ -589,6 +626,11 @@ export default function Homepage() {
                       target={entry.external ? "_blank" : undefined}
                       rel={entry.external ? "noopener noreferrer" : undefined}
                       className={`${recognitionRowClass} ${linkedRecognitionRowClass} last:border-b-0 last:pb-0`}
+                      onClick={() => {
+                        if (entry.external) {
+                          trackHomepageOutbound(entry.company, entry.href)
+                        }
+                      }}
                     >
                       {rowContent}
                     </a>

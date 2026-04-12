@@ -7,6 +7,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { founderShowcase, portfolioShowcase } from "@/content/portfolio-showcase"
+import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 type PortfolioSectionCopy = {
   pill: string
@@ -84,7 +85,18 @@ function PortfolioImageCard({
 }: PortfolioImageCardProps) {
   return (
     <div className={wrapperClassName}>
-      <Link href={href} className={className} style={{ aspectRatio }}>
+      <Link
+        href={href}
+        className={className}
+        style={{ aspectRatio }}
+        onClick={() => {
+          trackEvent("case_study_open", {
+            location: "portfolio_grid",
+            label: alt,
+            page_path: getCurrentPagePath(),
+          })
+        }}
+      >
         <img
           src={src}
           alt={alt}
@@ -560,7 +572,18 @@ export function PortfolioFounderSections({
           {founderShowcase.map((card) => (
             <StaggerItem key={card.href} reduceMotion={reduceMotionEnabled} itemY={itemY}>
               <div className="flex flex-col items-start gap-4">
-                <Link href={card.href} className={portfolioHoverCardClass} style={{ aspectRatio: card.aspectRatio }}>
+                <Link
+                  href={card.href}
+                  className={portfolioHoverCardClass}
+                  style={{ aspectRatio: card.aspectRatio }}
+                  onClick={() => {
+                    trackEvent("case_study_open", {
+                      location: "portfolio_grid",
+                      label: card.alt,
+                      page_path: getCurrentPagePath(),
+                    })
+                  }}
+                >
                   <img src={card.src} alt={card.alt} className="absolute inset-0 h-full w-full object-cover" />
                   <span aria-hidden="true" className={portfolioHoverOverlayClass} />
                   <PortfolioHoverIcon />

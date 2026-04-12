@@ -1,7 +1,10 @@
+"use client"
+
 import Link from "next/link"
 
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
+import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 const footerLinks = [
   { href: "/work", label: "Portfolio" },
@@ -22,6 +25,9 @@ const socialLinks = [
     external: true,
   },
 ]
+
+const BOOK_CALL_HREF = "https://calendar.app.google/TkZumQx7Bfyou7G26"
+
 function SocialIcon({
   href,
   label,
@@ -61,6 +67,14 @@ function SocialIcon({
         rel="noreferrer"
         aria-label={label}
         className={className}
+        onClick={() => {
+          trackEvent("outbound_link_click", {
+            location: "footer",
+            label,
+            href,
+            page_path: getCurrentPagePath(),
+          })
+        }}
       >
         {content}
       </a>
@@ -96,10 +110,18 @@ export function SiteFooter() {
                   My CV
                 </Link>
                 <a
-                  href="https://calendar.app.google/TkZumQx7Bfyou7G26"
+                  href={BOOK_CALL_HREF}
                   target="_blank"
                   rel="noreferrer"
                   className="type-ui-md inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#447ACB] bg-[#447ACB] px-5 font-medium text-[#FEFEFE] transition-colors hover:border-[#2F5EA4] hover:bg-[#2F5EA4]"
+                  onClick={() => {
+                    trackEvent("book_call_click", {
+                      location: "footer",
+                      label: "Book a Call",
+                      href: BOOK_CALL_HREF,
+                      page_path: getCurrentPagePath(),
+                    })
+                  }}
                 >
                   <span>Book a Call</span>
                   <svg

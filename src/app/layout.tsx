@@ -1,6 +1,9 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
 
 import "./globals.css"
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics"
+import { PageViewTracker } from "@/components/analytics/PageViewTracker"
 import {
   SEO_DEFAULT_DESCRIPTION,
   SEO_DEFAULT_OG_IMAGE,
@@ -47,6 +50,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#F3F3F3]">
       <body className="bg-[#F3F3F3]">
+        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <PageViewTracker />
+        </Suspense>
         {children}
       </body>
     </html>
