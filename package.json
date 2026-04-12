@@ -13,7 +13,7 @@
     "check:route-boundaries": "bash scripts/check-short.sh route-boundaries node scripts/check-route-boundaries.mjs",
     "check:bundle-budgets": "bash scripts/check-short.sh bundle-budgets node scripts/check-bundle-budgets.mjs",
     "start": "next start",
-    "typecheck": "bash scripts/check-short.sh typecheck tsc --noEmit"
+    "typecheck": "bash scripts/check-short.sh typecheck tsc --noEmit -p tsconfig.typecheck.json"
   },
   "dependencies": {
     "framer-motion": "^12.36.0",
