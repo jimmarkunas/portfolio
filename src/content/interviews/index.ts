@@ -29,6 +29,12 @@ const buildSlideTitles = (slides: InterviewsContent["slides"]): string[] => [
   slides.thankYou.title,
 ];
 
+const slides: InterviewsContent["slides"] = {
+  ...productDeliverySlides,
+  ...legacyModernizationSlides,
+  ...leadershipCloseSlides,
+};
+
 export const interviewContent = {
   brandLogo: {
     id: "ujcg-logo",
@@ -46,12 +52,6 @@ export const interviewContent = {
     tocTitle: "Slide Table of Contents",
     closeButtonLabel: "Close",
   },
-  slideTitles: [] as string[],
-  slides: {
-    ...productDeliverySlides,
-    ...legacyModernizationSlides,
-    ...leadershipCloseSlides,
-  },
+  slideTitles: buildSlideTitles(slides),
+  slides,
 } satisfies InterviewsContent;
-
-interviewContent.slideTitles = buildSlideTitles(interviewContent.slides);
