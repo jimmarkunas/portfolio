@@ -1,4 +1,4 @@
-import type { CaseStudyExperienceRow } from "@/components/case-study/types"
+import type { CaseStudyExperienceRow } from "@/content/case-studies/types"
 
 export const directveverywhereRecognitionRows: CaseStudyExperienceRow[] = [
   {

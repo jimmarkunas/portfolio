@@ -2,7 +2,7 @@
 
 import { CheckCircle2, Clock } from "lucide-react";
 
-import type { InterviewsContent } from "@/content/interviewContent";
+import type { InterviewsContent } from "@/content/interviews";
 
 interface Slide8StatusReportProps {
   slide: InterviewsContent["slides"]["statusReport"];

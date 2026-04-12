@@ -1,4 +1,4 @@
-import type { InterviewsContent } from "@/content/interviewContent";
+import type { InterviewsContent } from "@/content/interviews";
 
 export const PM_POP_QUIZ_SLIDE_ID = "slide-pm-pop-quiz";
 export const PM_POP_QUIZ_TITLE = "PM Pop Quiz";

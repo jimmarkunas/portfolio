@@ -1,5 +1,5 @@
 import { BeforeAfterComparison } from "@/components/case-study/BeforeAfterComparison"
-import type { CaseStudyData } from "@/components/case-study/types"
+import type { CaseStudyData } from "@/content/case-studies/types"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { MotionReveal } from "@/components/motion/MotionReveal"

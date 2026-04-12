@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import type { CaseStudyBlogCard } from "@/components/case-study/types"
+import type { CaseStudyBlogCard } from "@/content/case-studies/types"
 
 function isImagePath(art: string) {
   return art.startsWith("/")

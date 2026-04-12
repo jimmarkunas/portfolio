@@ -1,20 +1,28 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { ChevronLeft, ChevronRight, Maximize, Minimize, ArrowRight, Shield, Cpu, Target, Users, Zap, Globe, Mail, Linkedin } from 'lucide-react';
-import { interviewContent } from '@/content/interviewContent';
-import Slide5HybridDiagram from './components/slides/Slide5HybridDiagram';
-import Slide6JiraDiagram from './components/slides/Slide6JiraDiagram';
-import Slide7RiskLandscape from './components/slides/Slide7RiskLandscape';
-import Slide8StatusReport from './components/slides/Slide8StatusReport';
-import Slide8ComposableStack from './components/slides/Slide8ComposableStack';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
+
+import { interviewContent } from "@/content/interviews";
+
+import Slide5HybridDiagram from "./components/slides/Slide5HybridDiagram";
+import Slide6JiraDiagram from "./components/slides/Slide6JiraDiagram";
+import Slide7RiskLandscape from "./components/slides/Slide7RiskLandscape";
+import Slide8StatusReport from "./components/slides/Slide8StatusReport";
+import Slide8ComposableStack from "./components/slides/Slide8ComposableStack";
+import SlideGreatestPm from "./components/slides/SlideGreatestPm";
+import SlideOutcomes from "./components/slides/SlideOutcomes";
+import SlidePmPopQuiz from "./components/slides/SlidePmPopQuiz";
+import SlideRescuePlan from "./components/slides/SlideRescuePlan";
+import SlideServices from "./components/slides/SlideServices";
+import SlideThankYou from "./components/slides/SlideThankYou";
+import SlideWho from "./components/slides/SlideWho";
+import SlideWhyJim from "./components/slides/SlideWhyJim";
 import {
   buildInterviewSlideRegistry,
   PM_POP_QUIZ_SLIDE_ID,
-  PM_POP_QUIZ_SUBTITLE,
-  PM_POP_QUIZ_TITLE,
-} from './interviewSlideRegistry';
+} from "./interviewSlideRegistry";
 
 interface SlideProps {
   children: React.ReactNode;
@@ -38,7 +46,7 @@ const Slide = ({ children, isActive }: SlideProps) => {
             src={brandLogo.src}
             alt={brandLogo.alt}
             aria-hidden="true"
-              className="pointer-events-none absolute right-16 top-16 h-[65px] w-[65px]"
+            className="pointer-events-none absolute right-16 top-16 h-[65px] w-[65px]"
           />
           {children}
         </motion.div>
@@ -46,15 +54,6 @@ const Slide = ({ children, isActive }: SlideProps) => {
     </AnimatePresence>
   );
 };
-
-const whyJimIconMap = {
-  Shield,
-  Cpu,
-  Target,
-  Users,
-  Zap,
-  Globe,
-} as const;
 
 export default function InterviewsApp() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -92,483 +91,25 @@ export default function InterviewsApp() {
     });
   }, []);
 
-  const pmPopQuizSlide = (
-    <div key={PM_POP_QUIZ_SLIDE_ID} className="h-full flex flex-col">
-      <motion.div
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-        className="flex justify-between items-start"
-      >
-        <div className="space-y-2">
-          <h2 className="h2-display">{PM_POP_QUIZ_TITLE}</h2>
-          <p className="text-finox-gray text-xl font-light">
-            {PM_POP_QUIZ_SUBTITLE}
-          </p>
-        </div>
-        <div className="w-[65px] h-[65px] shrink-0" aria-hidden="true" />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
-        className="mt-12 flex-1 flex items-stretch"
-      >
-        <div className="grid grid-cols-2 gap-6 w-full h-full auto-rows-fr">
-          {pmPopQuizCategories.map((category, i) => {
-            const isRevealed = revealedPmPopQuizCategories.includes(category.id);
-
-            return (
-            <motion.button
-              type="button"
-              key={`pm-pop-quiz-${category.id}`}
-              onClick={() => togglePmPopQuizCategoryReveal(category.id)}
-              aria-pressed={isRevealed}
-              aria-label={`${isRevealed ? 'Hide' : 'Reveal'} answer for ${category.title}`}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 + (i * 0.1) }}
-              className="h-full text-left bg-white/5 border border-white/10 p-8 rounded-3xl space-y-6 transition-colors hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#447ACB]/70"
-            >
-              <div className="min-h-[72px]">
-                {isRevealed ? (
-                  <div className="flex items-center gap-4">
-                    {category.percent && (
-                      <div className="bg-finox-slate text-white text-sm font-bold px-3 py-2 rounded">
-                        {category.percent}
-                      </div>
-                    )}
-                    <h3 className="text-4xl font-medium">{category.title}</h3>
-                  </div>
-                ) : (
-                  <div className="flex h-full items-center">
-                    <p className="text-finox-gray text-sm uppercase tracking-[0.18em]">
-                      Guess the job title, then click to reveal
-                    </p>
-                  </div>
-                )}
-              </div>
-              <ul className="space-y-3 list-disc pl-7 marker:text-[#447ACB]">
-                {category.items.map((item) => (
-                  <li key={`pm-pop-quiz-${item.id}`} className="text-finox-gray text-xl font-light leading-tight">
-                    {item.text}
-                  </li>
-                ))}
-              </ul>
-            </motion.button>
-          );})}
-        </div>
-      </motion.div>
-    </div>
-  );
-
   const slideElements = [
-    // Slide 1: Who is Jim Markunas?
-    <div key={slideContent.who.id} className="h-full flex flex-col">
-      <motion.div
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-        className="flex justify-between items-start"
-      >
-        <div className="space-y-2">
-          <h2 className="h2-display">{slideContent.who.title}</h2>
-          <p className="text-finox-gray text-xl font-light">
-            {slideContent.who.subtitle}
-          </p>
-        </div>
-        <div className="w-[65px] h-[65px] shrink-0" aria-hidden="true" />
-      </motion.div>
-
-      <div className="mt-12 flex-1 flex flex-col">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
-          className="flex-1 flex items-center"
-        >
-          <div className="w-full space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.18 }}
-              className="relative"
-            >
-              <div className="h-px w-full bg-finox-slate/30"></div>
-              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#222222] px-4 text-[10px] uppercase tracking-[0.3em] text-finox-gray">
-                {slideContent.who.companies.label}
-              </span>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.24 }}
-              className="flex h-24 items-center justify-between gap-8 px-4"
-            >
-              {slideContent.who.companies.logos.map((logo, i) => (
-                <motion.img
-                  key={logo.id}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.28, ease: "easeOut", delay: 0.3 + (i * 0.04) }}
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-10 w-auto max-w-[220px] object-contain"
-                />
-              ))}
-            </motion.div>
-          </div>
-        </motion.div>
-
-        <div className="grid grid-cols-4 gap-6 pt-8">
-          {slideContent.who.stats.map((stat, i) => (
-            <motion.div 
-              key={stat.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + (i * 0.1) }}
-              className="bg-white/5 border border-white/10 px-8 py-10 min-h-[220px] rounded-3xl flex flex-col items-center justify-center text-center space-y-2 hover:bg-white/10 transition-colors"
-            >
-              <span className="text-4xl font-bold tracking-tight">{stat.label}</span>
-                <span className="text-finox-gray text-xl uppercase tracking-widest leading-relaxed">{stat.sub}</span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </div>,
-
-    // Slide 2: Enterprise Outcomes
-    <div key={slideContent.outcomes.id} className="h-full flex flex-col">
-      <motion.div
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-        className="flex justify-between items-start"
-      >
-        <div className="space-y-2">
-          <h2 className="h2-display">{slideContent.outcomes.title}</h2>
-          <p className="text-finox-gray text-xl font-light">
-            {slideContent.outcomes.subtitle}
-          </p>
-        </div>
-        <div className="w-[65px] h-[65px] shrink-0" aria-hidden="true" />
-      </motion.div>
-
-      <div className="mt-12 flex-1 flex flex-col">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
-          className="flex-1 flex items-center"
-        >
-          <div className="w-full space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.18 }}
-              className="relative"
-            >
-              <div className="h-px w-full bg-finox-slate/30"></div>
-              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#222222] px-4 text-[10px] uppercase tracking-[0.3em] text-finox-gray">
-                {slideContent.outcomes.projects.label}
-              </span>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.24 }}
-                className="flex h-24 items-center justify-between gap-8 px-4"
-            >
-              {slideContent.outcomes.projects.logos.map((logo, i) => (
-                <motion.img
-                  key={logo.id}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.28, ease: "easeOut", delay: 0.3 + (i * 0.04) }}
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-10 w-auto max-w-[220px] object-contain"
-                />
-              ))}
-            </motion.div>
-          </div>
-        </motion.div>
-
-        <div className="grid grid-cols-4 gap-6 pt-4">
-          {slideContent.outcomes.stats.map((stat, i) => (
-            <motion.div 
-              key={stat.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + (i * 0.1) }}
-              className="bg-white/5 border border-white/10 px-8 py-10 min-h-[220px] rounded-3xl flex flex-col items-center justify-center text-center space-y-2 hover:bg-white/10 transition-colors"
-            >
-              <span className="text-4xl font-bold tracking-tight">{stat.label}</span>
-                <span className="text-finox-gray text-xl uppercase tracking-widest leading-relaxed">{stat.sub}</span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </div>,
-
-    // Slide 3: What Can I Do For You?
-    <div key={slideContent.services.id} className="h-full flex flex-col">
-      <motion.div
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-        className="flex justify-between items-start"
-      >
-        <div className="space-y-2">
-          <h2 className="h2-display">{slideContent.services.title}</h2>
-          <p className="text-finox-gray text-xl font-light">
-            {slideContent.services.subtitle}
-          </p>
-        </div>
-        <div className="w-[65px] h-[65px] shrink-0" aria-hidden="true" />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
-        className="mt-12 flex-1 flex items-stretch"
-      >
-        <div className="grid grid-cols-2 gap-6 w-full h-full auto-rows-fr">
-          {slideContent.services.categories.map((category, i) => (
-            <motion.div 
-              key={category.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 + (i * 0.1) }}
-              className="h-full bg-white/5 border border-white/10 p-8 rounded-3xl space-y-6"
-            >
-              <div className="flex items-center gap-4">
-                {category.percent && (
-                  <div className="bg-finox-slate text-white text-sm font-bold px-3 py-2 rounded">
-                    {category.percent}
-                  </div>
-                )}
-                <h3 className="text-4xl font-medium">{category.title}</h3>
-              </div>
-              <ul className="space-y-3 list-disc pl-7 marker:text-[#447ACB]">
-                {category.items.map((item) => (
-                  <li key={item.id} className="text-finox-gray text-xl font-light leading-tight">
-                    {item.text}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    </div>,
-
-    // Slide 4: Am I Really the Greatest PM Ever?
-    <div key={slideContent.greatestPm.id} className="h-full flex flex-col">
-      <div className="flex justify-between items-start">
-        <div className="space-y-2">
-          <h2 className="h2-display">{slideContent.greatestPm.title}</h2>
-          <p className="text-finox-gray text-xl font-light">
-            {slideContent.greatestPm.subtitle}
-          </p>
-        </div>
-        <div className="w-[65px] h-[65px] shrink-0" aria-hidden="true" />
-      </div>
-
-      <div className="mt-8 grid grid-cols-12 gap-6 flex-1 min-h-0">
-        {/* Left: PMP Score Card */}
-        <div className="col-span-5 h-full min-h-0 bg-white/5 border border-white/10 p-8 rounded-3xl flex flex-col gap-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-finox-slate/20 rounded-lg">
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ repeat: Infinity, duration: 5 }}
-              >
-                <ChevronRight className="w-6 h-6 text-white rotate-[-90deg]" />
-              </motion.div>
-            </div>
-            <h3 className="text-2xl font-medium">{slideContent.greatestPm.pmpScoreCardTitle}</h3>
-          </div>
-          <div className="flex-1 min-h-0 bg-white/10 rounded-2xl overflow-hidden border border-white/5 relative group flex items-start justify-center">
-            <img 
-              src={slideContent.greatestPm.pmpImage.src}
-              alt={slideContent.greatestPm.pmpImage.alt}
-              className="h-full w-auto max-w-full object-contain object-top opacity-80 group-hover:opacity-100 transition-opacity"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-              <span className="text-white text-sm font-mono tracking-widest uppercase">{slideContent.greatestPm.pmpOverlayText}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Right: Metrics & Awards */}
-        <div className="col-span-7 h-full min-h-0 flex flex-col gap-4">
-          <div className="bg-white/5 border border-white/10 p-8 rounded-3xl flex-[0_0_50%] min-h-0 flex flex-col gap-4">
-            <div className="flex justify-between items-center">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-finox-gray">{slideContent.greatestPm.metricsTitle}</span>
-            </div>
-            <div className="flex-1 min-h-0 bg-white/10 rounded-2xl overflow-hidden border border-white/5 flex items-center justify-center">
-              <img 
-                src={slideContent.greatestPm.metricsImage.src}
-                alt={slideContent.greatestPm.metricsImage.alt}
-                className="w-full h-full object-contain object-center opacity-70"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-rows-3 gap-2 flex-1 min-h-0">
-            {slideContent.greatestPm.awards.map((item, i) => (
-              <motion.div 
-                key={item.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 + (i * 0.1) }}
-                className="h-full flex items-center gap-4 p-3 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-colors"
-              >
-                <div className="w-12 h-12 rounded-xl border border-finox-slate/30 flex items-center justify-center text-sm font-mono text-finox-gray">
-                  {item.id}
-                </div>
-                <div className="space-y-1">
-                  <h4 className="font-medium text-lg">{item.title}</h4>
-                  <p className="text-finox-gray text-sm leading-snug">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>,
-
-    // Slide 5: Enterprise Agile: The Hybrid Reality
+    <SlideWho key={slideContent.who.id} slide={slideContent.who} />,
+    <SlideOutcomes key={slideContent.outcomes.id} slide={slideContent.outcomes} />,
+    <SlideServices key={slideContent.services.id} slide={slideContent.services} />,
+    <SlideGreatestPm key={slideContent.greatestPm.id} slide={slideContent.greatestPm} />,
     <Slide5HybridDiagram key={slideContent.hybridAgile.id} slide={slideContent.hybridAgile} />,
-
-    // Slide 6: JIRA Tickets Hierarchy
     <Slide6JiraDiagram key={slideContent.jiraTickets.id} slide={slideContent.jiraTickets} />,
-
-    // Slide 7: Risk Register + Matrix
     <Slide7RiskLandscape key={slideContent.riskLandscape.id} slide={slideContent.riskLandscape} />,
-
-    // Slide 8: The 'Perfect' Status Report
-    <Slide8StatusReport
-      key={slideContent.statusReport.id}
-      slide={slideContent.statusReport}
+    <Slide8StatusReport key={slideContent.statusReport.id} slide={slideContent.statusReport} />,
+    <Slide8ComposableStack key={slideContent.composableStack.id} slide={slideContent.composableStack} />,
+    <SlideWhyJim key={slideContent.whyJim.id} slide={slideContent.whyJim} />,
+    <SlideRescuePlan key={slideContent.rescuePlan.id} slide={slideContent.rescuePlan} />,
+    <SlideThankYou key={slideContent.thankYou.id} slide={slideContent.thankYou} />,
+    <SlidePmPopQuiz
+      key={PM_POP_QUIZ_SLIDE_ID}
+      categories={pmPopQuizCategories}
+      revealedCategoryIds={revealedPmPopQuizCategories}
+      onToggleCategoryReveal={togglePmPopQuizCategoryReveal}
     />,
-
-    // Slide 9: The Composable Stack
-    <Slide8ComposableStack
-      key={slideContent.composableStack.id}
-      slide={slideContent.composableStack}
-    />,
-
-    // Slide 11: Why Jim Markunas?
-    <div key={slideContent.whyJim.id} className="flex h-full min-h-0 flex-col gap-8">
-      <div className="shrink-0 space-y-2">
-        <h2 className="h2-display">{slideContent.whyJim.title}</h2>
-        <p className="text-finox-gray text-xl font-light">{slideContent.whyJim.subtitle}</p>
-      </div>
-
-      <div className="grid min-h-0 flex-1 grid-cols-3 grid-rows-2 gap-6">
-        {slideContent.whyJim.points.map((item, i) => {
-          const Icon = whyJimIconMap[item.icon];
-          return (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.08 * i }}
-              className="flex h-full flex-col rounded-3xl border border-finox-slate/30 bg-white/5 p-8"
-            >
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-[#447ACB]/10">
-                <Icon className="h-7 w-7 text-[#447ACB]" />
-              </div>
-              <h4 className="mb-3 text-2xl font-semibold text-white md:text-3xl">{item.title}</h4>
-              <p className="text-finox-gray text-lg leading-relaxed md:text-xl">{item.desc}</p>
-            </motion.div>
-          );
-        })}
-      </div>
-    </div>,
-
-    // Slide 12: The 30-Day Rescue Plan
-    <div key={slideContent.rescuePlan.id} className="flex h-full min-h-0 flex-col gap-10">
-      <div className="shrink-0 space-y-2">
-        <h2 className="h2-display">{slideContent.rescuePlan.title}</h2>
-        <p className="text-finox-gray text-xl font-light">{slideContent.rescuePlan.subtitle}</p>
-      </div>
-
-      <div className="relative shrink-0 px-2 pt-6">
-        <div className="pointer-events-none absolute left-0 right-0 top-[2.25rem] h-px bg-white/15" />
-        <div className="relative grid grid-cols-4 gap-6">
-          {slideContent.rescuePlan.carouselPhases.map((phase, i) => (
-            <div key={phase.id} className="flex flex-col items-center px-2 text-center">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#447ACB] text-2xl font-semibold text-white shadow-[0_8px_24px_rgba(68,122,203,0.35)]">
-                {i + 1}
-              </div>
-              <h4 className="mb-2 text-4xl font-semibold leading-none text-white">{phase.title}</h4>
-              <p className="max-w-[14rem] text-lg leading-snug text-finox-gray">{phase.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="grid min-h-0 flex-1 grid-cols-2 gap-8">
-        {slideContent.rescuePlan.weeks.map((week) => (
-          <div key={week.id} className="flex h-full flex-col rounded-3xl border border-white/15 bg-white/[0.04] p-8">
-            <h4 className="mb-5 text-5xl font-semibold tracking-tight text-white">{week.title}</h4>
-            <ul className="space-y-4">
-              {week.points.map((point) => (
-                <li key={point} className="flex items-start gap-3 text-finox-gray text-2xl leading-snug">
-                  <span className="mt-3 h-2.5 w-2.5 shrink-0 rounded-full bg-[#447ACB]" />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>,
-
-    // Slide 12: Thank You
-    <div key={slideContent.thankYou.id} className="flex h-full flex-col items-center justify-center text-center space-y-12">
-      <div className="space-y-2">
-        <h2 className="h2-display">{slideContent.thankYou.title}</h2>
-        <p className="text-finox-gray text-xl font-light">{slideContent.thankYou.subtitle}</p>
-      </div>
-
-      <div className="space-y-3">
-        <h3 className="text-5xl font-semibold tracking-tight">{slideContent.thankYou.name}</h3>
-        <p className="text-xl font-semibold text-[#447ACB]">{slideContent.thankYou.role}</p>
-      </div>
-
-      <div className="flex gap-6">
-        <div className="flex items-center gap-3 rounded-full border border-finox-slate/30 bg-white/5 px-6 py-3">
-          <Mail className="h-5 w-5 text-[#447ACB]" />
-          <span className="text-sm font-semibold">{slideContent.thankYou.email}</span>
-        </div>
-        <div className="flex items-center gap-3 rounded-full border border-finox-slate/30 bg-white/5 px-6 py-3">
-          <Linkedin className="h-5 w-5 text-[#447ACB]" />
-          <span className="text-sm font-semibold">{slideContent.thankYou.linkedin}</span>
-        </div>
-      </div>
-
-      <div className="pt-4">
-        <p className="mb-4 text-[11px] uppercase tracking-[0.2em] text-finox-gray">{slideContent.thankYou.readyText}</p>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.6 }}
-          className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/10"
-        >
-          <ArrowRight className="h-6 w-6 rotate-90 text-white" />
-        </motion.div>
-      </div>
-    </div>,
-
-    // Slide 13: PM Pop Quiz
-    pmPopQuizSlide,
   ];
 
   const slideElementsById = slideElements.reduce<Record<string, React.ReactNode>>((acc, slide) => {
@@ -620,20 +161,20 @@ export default function InterviewsApp() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isTocOpen) {
+      if (e.key === "Escape" && isTocOpen) {
         setIsTocOpen(false);
         return;
       }
 
       if (isTocOpen) return;
 
-      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'f') toggleFullscreen();
+      if (e.key === "ArrowRight" || e.key === " ") nextSlide();
+      if (e.key === "ArrowLeft") prevSlide();
+      if (e.key === "f") toggleFullscreen();
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isTocOpen, nextSlide, prevSlide]);
 
   useEffect(() => {
@@ -655,31 +196,30 @@ export default function InterviewsApp() {
 
     updateContentInset();
 
-    if (typeof ResizeObserver === 'undefined') {
-      window.addEventListener('resize', updateContentInset);
-      return () => window.removeEventListener('resize', updateContentInset);
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateContentInset);
+      return () => window.removeEventListener("resize", updateContentInset);
     }
 
     const observer = new ResizeObserver(updateContentInset);
     if (containerRef.current) observer.observe(containerRef.current);
     if (navRef.current) observer.observe(navRef.current);
-    window.addEventListener('resize', updateContentInset);
+    window.addEventListener("resize", updateContentInset);
 
     return () => {
       observer.disconnect();
-      window.removeEventListener('resize', updateContentInset);
+      window.removeEventListener("resize", updateContentInset);
     };
   }, []);
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4 md:p-8">
-      <div 
+      <div
         ref={containerRef}
         className="presentation-container shadow-2xl rounded-lg overflow-hidden border border-finox-slate/20"
       >
-        {/* Progress Bar */}
         <div className="absolute top-0 left-0 w-full h-1 bg-finox-slate/20 z-50">
-          <motion.div 
+          <motion.div
             className="h-full bg-white"
             initial={{ width: 0 }}
             animate={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
@@ -687,24 +227,20 @@ export default function InterviewsApp() {
           />
         </div>
 
-        {/* Slides */}
         <div className="absolute inset-x-0 top-0" style={{ bottom: `${contentBottomInset}px` }}>
-          <Slide isActive={true}>
-            {slides[currentSlide]}
-          </Slide>
+          <Slide isActive={true}>{slides[currentSlide]}</Slide>
         </div>
 
-        {/* Navigation Controls */}
         <div ref={navRef} className="absolute bottom-8 left-0 w-full px-12 flex justify-between items-center z-50">
           <div className="flex gap-4">
-            <button 
+            <button
               onClick={prevSlide}
               className="p-3 rounded-full border border-finox-slate/50 hover:bg-white hover:text-finox-dark transition-all group"
               aria-label={navCopy.previousAriaLabel}
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
-            <button 
+            <button
               onClick={nextSlide}
               className="p-3 rounded-full border border-finox-slate/50 hover:bg-white hover:text-finox-dark transition-all group"
               aria-label={navCopy.nextAriaLabel}
@@ -725,7 +261,7 @@ export default function InterviewsApp() {
             >
               {currentSlide + 1} / {slides.length}
             </button>
-            <button 
+            <button
               onClick={toggleFullscreen}
               className="p-3 rounded-full border border-finox-slate/50 hover:bg-white hover:text-finox-dark transition-all"
               aria-label={navCopy.toggleFullscreenAriaLabel}
@@ -779,8 +315,8 @@ export default function InterviewsApp() {
                             onClick={() => jumpToSlide(index)}
                             className={`flex w-full items-center gap-4 rounded-xl border px-4 py-3 text-left transition-colors ${
                               isActive
-                                ? 'border-white/40 bg-white/10 text-white'
-                                : 'border-finox-slate/30 text-finox-gray hover:border-white/40 hover:bg-white/5 hover:text-white'
+                                ? "border-white/40 bg-white/10 text-white"
+                                : "border-finox-slate/30 text-finox-gray hover:border-white/40 hover:bg-white/5 hover:text-white"
                             }`}
                           >
                             <span className="w-16 shrink-0 font-mono text-xs uppercase tracking-[0.15em]">
@@ -797,7 +333,6 @@ export default function InterviewsApp() {
             </motion.div>
           )}
         </AnimatePresence>
-
       </div>
     </div>
   );

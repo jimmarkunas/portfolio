@@ -1,6 +1,6 @@
 "use client"
 
-import type { CaseStudySolutionDiagramKey, DiagramData } from "@/components/case-study/types"
+import type { CaseStudySolutionDiagramKey, DiagramData } from "@/content/case-studies/types"
 import ModereSimulation from "@/components/case-study/modere-simulation/ModereSimulation"
 import { DeferredVisualLoader } from "@/components/case-study/template/visuals/deferred/DeferredVisualLoader"
 import type { ComponentType } from "react"

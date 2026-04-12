@@ -1,7 +1,7 @@
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { StatCard } from "@/components/StatCard"
-import type { CareerStatEntry } from "@/content/services-contact"
+import type { CareerStatEntry } from "@/content/site/services-contact"
 
 type CareerStatsSectionProps = {
   eyebrow: string

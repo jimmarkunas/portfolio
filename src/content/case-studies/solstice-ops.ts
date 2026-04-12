@@ -1,4 +1,4 @@
-import type { CaseStudyData } from "@/components/case-study/types"
+import type { CaseStudyData } from "@/content/case-studies/types"
 
 export const solsticeOpsCaseStudy = {
   slug: "solstice-ops",

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useAdaptiveDiagramMotion } from "@/components/case-study/useAdaptiveDiagramMotion";
-import type { InterviewsContent } from "@/content/interviewContent";
+import type { InterviewsContent } from "@/content/interviews";
 
 interface Slide7RiskLandscapeProps {
   slide: InterviewsContent["slides"]["riskLandscape"];

@@ -1,0 +1,141 @@
+import type { InterviewsContent } from "@/content/interviews/types";
+
+export const legacyTalkSlides = {
+    titleSlide: {
+      id: "slide-title",
+      eyebrow: "Panel Discussion",
+      titlePrefix: "Talk your client out of a ",
+      titleHighlight: "bad decision",
+      titleSuffix: " with a gamified decision tree",
+      byline: "By: Jim Markunas",
+      sponsor: "Sponsored by: Geekle",
+    },
+    cover: {
+      id: "slide-cover",
+      title: "What We’ll Cover in This Talk",
+      description: "Use free(ish) Tools to make a gamified, interactive app in under 20 minutes to drive executive decision-making.",
+      reasonLabel: "Why the Geekle audience would care:",
+      reasons: [
+        { id: "cover-reason-design", text: "It's design-oriented & uses (mostly) free tools" },
+        { id: "cover-reason-fun", text: "It's fun! It turns hard conversations into a game" },
+        { id: "cover-reason-proof", text: "It's provable - Modere scaled to $1b using this system" },
+      ],
+    },
+    boehringer: {
+      id: "slide-boehringer",
+      title: "Boehringer Ingelheim: Unifying Data",
+      subtitle: "Breaking down silos for a global pharmaceutical leader.",
+      silos: ["Clinical Data", "Marketing Data", "Sales Data", "Supply Chain"],
+      unified: "Unified Data Platform",
+      challenge: {
+        title: "The Challenge",
+        desc: "Data was trapped in legacy silos across different departments, preventing a holistic view of the customer journey and slowing down decision-making.",
+      },
+      result: {
+        title: "The Result",
+        desc: "Implemented a unified data platform that integrated disparate sources, enabling real-time analytics and a 30% increase in operational efficiency.",
+      },
+    },
+    modere: {
+      id: "slide-modere",
+      title: "The Modere Game",
+      caseStudyLabel: "CASE STUDY",
+      paragraphs: [
+        { id: "modere-paragraph-1", text: "Modere was a technologically complex MLM that wanted to scale from $500m GMV to $1B GMV." },
+        { id: "modere-paragraph-2", text: "The C-Suite was frugal, and the ‘old guard’ didn’t want any technological change at all." },
+      ],
+      goalLabel: "The Goal",
+      goalText: "Drive key technology decisions to get them to $1B + illustrate financial consequences of not changing.",
+    },
+    engineers: {
+      id: "slide-engineers",
+      title: "Engineers vs Executives",
+      titleTop: "Engineers, Designers & Artists",
+      titleMiddle: "vs.",
+      titleBottom: "Managers & Executives",
+      circles: [
+        { id: "attention", label: "Attention", value: "Shorter Spans" },
+        { id: "focus", label: "Focus", value: "ROI & Value Prop" },
+        { id: "stance", label: "Stance", value: "Risk-Averse" },
+      ],
+    },
+    goal: {
+      id: "slide-goal",
+      title: "Goal",
+      description: "Drive a key decision using visual gamification of data",
+    },
+    tools: {
+      id: "slide-tools",
+      title: "Tools Needed",
+      items: [
+        { id: "tool-google", name: "Google Account", cost: "Free" },
+        { id: "tool-github", name: "Github", cost: "Free" },
+        { id: "tool-box", name: "Box account", cost: "Free" },
+        { id: "tool-notion", name: "Notion", cost: "Free-ish" },
+        { id: "tool-design-system", name: "Design System", cost: "Free(ish)" },
+        { id: "tool-code-editor", name: "Code Editor (AI)", cost: "Free(ish)" },
+        { id: "tool-design-studio", name: "Google AI Design Studio", cost: "Free" },
+        { id: "tool-chatgpt", name: "ChatGPT", cost: "Free(ish)" },
+        { id: "tool-hosting", name: "Web Hosting", cost: "Not Free" },
+      ],
+    },
+    preSetup: {
+      id: "slide-setup",
+      title: "Pre-Setup",
+      steps: [
+        { id: "pre-setup-hosting", text: "Hostinger (or comparable hosting)" },
+        { id: "pre-setup-github", text: "Github Pages Project & Code Repo" },
+        { id: "pre-setup-vscode", text: "VS Code with CI/CD Pipeline" },
+        { id: "pre-setup-agent", text: "Preferred coding agent (Co-Pilot, Claude Code, etc)" },
+        { id: "pre-setup-chatgpt", text: "Chat GPT Interview" },
+        { id: "pre-setup-notion", text: "Notion - Write a case study" },
+      ],
+    },
+    buildPart1: {
+      id: "slide-build-1",
+      titlePrefix: "How to Build ",
+      titleHighlight: "Part 1",
+      steps: [
+        { id: "build-1-upload-design-system", text: "Upload Design System" },
+        { id: "build-1-upload-case-study", text: "Upload case study" },
+        { id: "build-1-ask-build", text: "Ask for the app build" },
+        { id: "build-1-tweak", text: "Tweak build" },
+        { id: "build-1-download", text: "Download codebase" },
+      ],
+    },
+    buildPart2: {
+      id: "slide-build-2",
+      titlePrefix: "How to Build ",
+      titleHighlight: "Part 2",
+      subtitle: "ChatGPT refinement for streamlined app:",
+      stepPrefix: "Step",
+      steps: [
+        { id: "build-2-streamline", text: "Prompt it to streamline the code for a light weight react/tailwind JSX app" },
+        { id: "build-2-ui-tweaks", text: "Make UI tweaks" },
+        { id: "build-2-export", text: "Export for VS code + Codex Prompt" },
+        { id: "build-2-zip", text: "Make .zip file" },
+      ],
+    },
+    finalize: {
+      id: "slide-finalize",
+      title: "Finalize the App",
+      firstStepNumber: "01",
+      firstStepLabel: "Code or UI tweaks",
+      secondStepNumber: "02",
+      secondStepLabel: "Github Commit",
+      completionText: "Presentation Complete",
+    },
+} satisfies Pick<
+  InterviewsContent["slides"],
+  | "titleSlide"
+  | "cover"
+  | "boehringer"
+  | "modere"
+  | "engineers"
+  | "goal"
+  | "tools"
+  | "preSetup"
+  | "buildPart1"
+  | "buildPart2"
+  | "finalize"
+>;

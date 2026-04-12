@@ -1,4 +1,4 @@
-import type { DiagramData } from "@/components/case-study/types"
+import type { DiagramData } from "@/content/case-studies/types"
 
 export const k2Diagram: DiagramData = {
   inputs: [

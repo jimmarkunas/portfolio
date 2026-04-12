@@ -1,3 +1,31 @@
+import type {
+  Slide5AnimationTheme,
+  Slide5AnimationThemeOverrides,
+  Slide5AnimationThemePresetMap,
+  Slide5DiagramLabels,
+  Slide5DiagramTooltips,
+  Slide5LegendLabelKey,
+  Slide5NodeLabelKey,
+  Slide5ThemePreset,
+  Slide5TooltipContent,
+  Slide5TooltipTheme,
+  Slide5ZoneLabelKey,
+} from "@/content/interviews/types";
+
+export type {
+  Slide5AnimationTheme,
+  Slide5AnimationThemeOverrides,
+  Slide5AnimationThemePresetMap,
+  Slide5DiagramLabels,
+  Slide5DiagramTooltips,
+  Slide5LegendLabelKey,
+  Slide5NodeLabelKey,
+  Slide5ThemePreset,
+  Slide5TooltipContent,
+  Slide5TooltipTheme,
+  Slide5ZoneLabelKey,
+} from "@/content/interviews/types";
+
 export type Slide5ZoneId = "planning" | "execution" | "delivery";
 
 export type Slide5NodeId =
@@ -12,23 +40,6 @@ export type Slide5NodeId =
   | "execution-sprint"
   | "delivery-qa"
   | "delivery-release";
-
-export type Slide5ZoneLabelKey = "planning" | "execution" | "delivery";
-
-export type Slide5NodeLabelKey =
-  | "planningDiscovery"
-  | "planningJira"
-  | "planningSchedule"
-  | "planningReview"
-  | "planningKickoff"
-  | "executionGrooming"
-  | "executionVersioning"
-  | "executionStandups"
-  | "executionSprint"
-  | "deliveryQa"
-  | "deliveryRelease";
-
-export type Slide5LegendLabelKey = "waterfall" | "agile";
 
 export type Slide5CardTheme = "waterfall" | "agile";
 
@@ -121,57 +132,4 @@ export interface Slide5LayoutPreset {
   nodes: Slide5NodeLayout[];
   connectors: Slide5ConnectorLayout[];
   legend: Slide5LegendLayout;
-}
-
-export interface Slide5TooltipContent {
-  label?: string;
-  title: string;
-  body: string;
-}
-
-export type Slide5DiagramTooltips = Record<Slide5NodeId, Slide5TooltipContent>;
-
-export interface Slide5TooltipTheme {
-  overlayColor: string;
-  backgroundColor: string;
-  borderColor: string;
-  shadow: string;
-  labelColor: string;
-  titleColor: string;
-  dividerColor: string;
-  bodyColor: string;
-  closeBorderColor: string;
-  closeColor: string;
-}
-
-export interface Slide5AnimationTheme {
-  particleColor: string;
-  particleSpeedMultiplier: number;
-  particlesPerPath: number;
-  dashedBorderColor: string;
-  dashedBorderWidth: number;
-  dashedBorderDasharray: string;
-  dashedBorderOpacity: number;
-  dashedBorderRadius: number;
-  dashedBorderInset: number;
-  dashedBorderDurationSeconds: number;
-  tooltip: Slide5TooltipTheme;
-}
-
-export interface Slide5AnimationThemeOverrides
-  extends Partial<Omit<Slide5AnimationTheme, "tooltip">> {
-  tooltip?: Partial<Slide5TooltipTheme>;
-}
-
-export type Slide5ThemePreset = "laptop" | "projector";
-
-export type Slide5AnimationThemePresetMap = Record<
-  Slide5ThemePreset,
-  Slide5AnimationThemeOverrides
->;
-
-export interface Slide5DiagramLabels {
-  zones: Record<Slide5ZoneLabelKey, string>;
-  nodes: Record<Slide5NodeLabelKey, string>;
-  legend: Record<Slide5LegendLabelKey, string>;
 }

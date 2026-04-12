@@ -23,16 +23,51 @@ interface Particle {
   trail: Point[]
 }
 
+interface PathMetrics {
+  cumulativeLengths: number[]
+  totalLength: number
+}
+
 function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t
 }
 
-function pointOnPath(path: Path, t: number): Point {
-  if (path.length < 2) return path[0]
-  const segments = path.length - 1
-  const scaled = t * segments
-  const i = Math.min(Math.floor(scaled), segments - 1)
-  const segT = scaled - i
+function distance(a: Point, b: Point) {
+  return Math.hypot(b.x - a.x, b.y - a.y)
+}
+
+function buildPathMetrics(path: Path): PathMetrics {
+  if (path.length < 2) return { cumulativeLengths: [0], totalLength: 0 }
+  const cumulativeLengths = [0]
+  for (let i = 1; i < path.length; i++) {
+    cumulativeLengths[i] = cumulativeLengths[i - 1] + distance(path[i - 1], path[i])
+  }
+  return {
+    cumulativeLengths,
+    totalLength: cumulativeLengths[cumulativeLengths.length - 1] ?? 0,
+  }
+}
+
+function pointOnPath(path: Path, metrics: PathMetrics, t: number): Point {
+  if (path.length < 2) return path[0] ?? { x: 0, y: 0 }
+  if (metrics.totalLength <= 0) return path[0]
+
+  const clampedT = Math.min(1, Math.max(0, t))
+  const targetLength = clampedT * metrics.totalLength
+
+  let i = 0
+  while (
+    i < metrics.cumulativeLengths.length - 1 &&
+    metrics.cumulativeLengths[i + 1] < targetLength
+  ) {
+    i += 1
+  }
+
+  const startLength = metrics.cumulativeLengths[i]
+  const endLength = metrics.cumulativeLengths[i + 1] ?? startLength
+  const segmentLength = endLength - startLength
+  const segT = segmentLength <= 0 ? 0 : (targetLength - startLength) / segmentLength
+
   return {
     x: lerp(path[i].x, path[i + 1].x, segT),
     y: lerp(path[i].y, path[i + 1].y, segT),
@@ -66,6 +101,8 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
     particlesRef.current = paths.flatMap((_, i) =>
       Array.from({ length: particlesPerPath }, () => createParticle(i, speedMultiplier))
     )
+    const pathMetrics = paths.map((path) => buildPathMetrics(path))
+    let lastFrameTime = 0
 
     function resize() {
       if (!canvas || !container) return
@@ -77,8 +114,15 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
     const ro = new ResizeObserver(resize)
     ro.observe(container)
 
-    function draw() {
+    function draw(now: number) {
       if (!ctx || !canvas) return
+
+      const frameDelta = lastFrameTime === 0
+        ? 1000 / 60
+        : Math.min(1000 / 15, now - lastFrameTime)
+      lastFrameTime = now
+      const frameScale = frameDelta / (1000 / 60)
+
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       // Static connector lines
@@ -97,15 +141,16 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
       // Particles
       for (const p of particlesRef.current) {
         const path = paths[p.pathIndex]
-        if (!path || path.length < 2) continue
+        const metrics = pathMetrics[p.pathIndex]
+        if (!path || !metrics || path.length < 2) continue
 
-        p.t += p.speed
+        p.t += p.speed * frameScale
         if (p.t > 1) {
           p.t = 0
           p.trail = []
         }
 
-        const pos = pointOnPath(path, p.t)
+        const pos = pointOnPath(path, metrics, p.t)
         p.trail.push({ ...pos })
         if (p.trail.length > TRAIL_LENGTH) p.trail.shift()
 
@@ -138,7 +183,7 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
       cancelAnimationFrame(rafRef.current)
       ro.disconnect()
     }
-  }, [paths, containerRef])
+  }, [paths, containerRef, color, speedMultiplier, particlesPerPath])
 
   return (
     <canvas

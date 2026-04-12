@@ -1,4 +1,4 @@
-import type { GlobalLocation } from "@/components/case-study/types"
+import type { GlobalLocation } from "@/content/case-studies/types"
 
 export const americanapparelGlobalLocations: GlobalLocation[] = [
   // USA

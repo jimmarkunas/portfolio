@@ -1,6 +1,6 @@
 "use client"
 
-import type { CaseStudyPreQuoteChartKey } from "@/components/case-study/types"
+import type { CaseStudyPreQuoteChartKey } from "@/content/case-studies/types"
 import { DeferredVisualLoader } from "@/components/case-study/template/visuals/deferred/DeferredVisualLoader"
 import type { ComponentType } from "react"
 

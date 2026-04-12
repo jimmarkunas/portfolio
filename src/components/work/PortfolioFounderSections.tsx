@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react"
 
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { founderShowcase, portfolioShowcase } from "@/content/portfolio-showcase"
+import { founderShowcase, portfolioShowcase } from "@/content/site/portfolio-showcase"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 type PortfolioSectionCopy = {

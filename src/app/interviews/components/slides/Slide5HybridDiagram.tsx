@@ -6,7 +6,7 @@ import ParticleCanvas from "@/components/case-study/ParticleCanvas";
 import { useAdaptiveDiagramMotion } from "@/components/case-study/useAdaptiveDiagramMotion";
 import { useModal } from "@/components/case-study/useModal";
 
-import type { InterviewsContent } from "@/content/interviewContent";
+import type { InterviewsContent } from "@/content/interviews";
 
 import DiagramCard from "./diagram/DiagramCard";
 import DiagramConnectorLayer from "./diagram/DiagramConnectorLayer";

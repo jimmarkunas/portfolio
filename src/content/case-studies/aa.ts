@@ -1,4 +1,4 @@
-import type { CaseStudyData } from "@/components/case-study/types"
+import type { CaseStudyData } from "@/content/case-studies/types"
 import { americanapparelCopy } from "@/content/case-studies/chunks/americanapparel.copy"
 import { americanapparelGlobalLocations } from "@/content/case-studies/chunks/americanapparel.locations"
 

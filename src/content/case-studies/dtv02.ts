@@ -1,4 +1,4 @@
-import type { CaseStudyData } from "@/components/case-study/types"
+import type { CaseStudyData } from "@/content/case-studies/types"
 import { directveverywhereCopy } from "@/content/case-studies/chunks/directveverywhere.copy"
 import { directveverywhereRecognitionRows } from "@/content/case-studies/chunks/directveverywhere.recognition"
 

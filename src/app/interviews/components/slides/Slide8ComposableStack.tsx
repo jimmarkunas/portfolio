@@ -7,7 +7,7 @@ import { Cpu, Database, Layers, Server } from "lucide-react";
 
 import ParticleCanvas from "@/components/case-study/ParticleCanvas";
 import { useAdaptiveDiagramMotion } from "@/components/case-study/useAdaptiveDiagramMotion";
-import type { InterviewsContent } from "@/content/interviewContent";
+import type { InterviewsContent } from "@/content/interviews";
 
 interface Slide8ComposableStackProps {
   slide: InterviewsContent["slides"]["composableStack"];

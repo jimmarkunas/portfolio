@@ -6,7 +6,7 @@ import type { ReactNode } from "react"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
-import { cvContent } from "@/content/cv"
+import { cvContent } from "@/content/site/cv"
 import { buildPageMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = buildPageMetadata({

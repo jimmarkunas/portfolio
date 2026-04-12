@@ -8,7 +8,7 @@ import { CaseStudyIntroSection } from "@/components/case-study/template/CaseStud
 import { CaseStudyRecognitionSection } from "@/components/case-study/template/CaseStudyRecognitionSection"
 import { CaseStudySolutionSection } from "@/components/case-study/template/CaseStudySolutionSection"
 import { CaseStudySupplementalSection } from "@/components/case-study/template/CaseStudySupplementalSection"
-import type { CaseStudyData } from "@/components/case-study/types"
+import type { CaseStudyData } from "@/content/case-studies/types"
 
 export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
   const isFoh = data.slug === "foh"

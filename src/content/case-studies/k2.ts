@@ -1,4 +1,4 @@
-import type { CaseStudyData } from "@/components/case-study/types"
+import type { CaseStudyData } from "@/content/case-studies/types"
 import { k2Copy } from "@/content/case-studies/chunks/k2.copy"
 import { k2Diagram } from "@/content/case-studies/chunks/k2.diagram"
 

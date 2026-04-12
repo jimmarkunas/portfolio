@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate"
-import { caseStudySlugs } from "@/content/case-studies/case-study-map"
+import { caseStudySlugs } from "@/content/case-studies"
 import { loadCaseStudyBySlug } from "@/content/case-studies"
 import { buildPageMetadata } from "@/lib/seo"
 

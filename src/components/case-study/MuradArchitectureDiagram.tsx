@@ -23,6 +23,7 @@ const cardVariants = {
   visible: { opacity: 1, y: 0 },
 };
 const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
+const MURAD_PARTICLE_SPEED_MULTIPLIER = 0.82
 
 
 export default function MuradArchitectureDiagram() {
@@ -100,8 +101,17 @@ export default function MuradArchitectureDiagram() {
 />
         {shouldReduceMotion ? null : (
           <>
-            <ParticleCanvas paths={MURAD_PATHS} containerRef={canvasContainerRef} />
-            <ParticleCanvas paths={MURAD_RED_PATHS} containerRef={canvasContainerRef} color="203,68,68" />
+            <ParticleCanvas
+              paths={MURAD_PATHS}
+              containerRef={canvasContainerRef}
+              speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+            />
+            <ParticleCanvas
+              paths={MURAD_RED_PATHS}
+              containerRef={canvasContainerRef}
+              color="203,68,68"
+              speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+            />
           </>
         )}
       </div>
@@ -140,8 +150,17 @@ export default function MuradArchitectureDiagram() {
           <div ref={mobileCanvasRef} style={{ width: MURAD_MOBILE_WIDTH, height: MURAD_MOBILE_HEIGHT, transform: `scale(${mobileScale})`, transformOrigin: "top left", position: "relative", backgroundColor: "#fefefe" }}>
             {shouldReduceMotion ? null : (
               <>
-                <ParticleCanvas paths={MURAD_MOBILE_PATHS} containerRef={mobileCanvasRef} />
-                <ParticleCanvas paths={MURAD_MOBILE_RED_PATHS} containerRef={mobileCanvasRef} color="203,68,68" />
+                  <ParticleCanvas
+                    paths={MURAD_MOBILE_PATHS}
+                    containerRef={mobileCanvasRef}
+                    speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+                  />
+                  <ParticleCanvas
+                    paths={MURAD_MOBILE_RED_PATHS}
+                    containerRef={mobileCanvasRef}
+                    color="203,68,68"
+                    speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+                  />
               </>
             )}
             {/* ── Oracle ── */}

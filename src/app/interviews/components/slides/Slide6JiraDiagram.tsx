@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 
 import ParticleCanvas from "@/components/case-study/ParticleCanvas";
 import { useAdaptiveDiagramMotion } from "@/components/case-study/useAdaptiveDiagramMotion";
-import type { InterviewsContent } from "@/content/interviewContent";
+import type { InterviewsContent } from "@/content/interviews";
 
 import JiraDiagramCard from "./diagram/JiraDiagramCard";
 import JiraDiagramConnectorLayer from "./diagram/JiraDiagramConnectorLayer";

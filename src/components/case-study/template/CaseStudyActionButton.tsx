@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 
-import type { CaseStudyData } from "@/components/case-study/types"
+import type { CaseStudyData } from "@/content/case-studies/types"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 

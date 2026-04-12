@@ -1,3 +1,15 @@
+import type {
+  Slide6DiagramLabels,
+  Slide6NodeBodyLabelKey,
+  Slide6NodeTypeLabelKey,
+} from "@/content/interviews/types";
+
+export type {
+  Slide6DiagramLabels,
+  Slide6NodeBodyLabelKey,
+  Slide6NodeTypeLabelKey,
+} from "@/content/interviews/types";
+
 export type Slide6NodeId =
   | "epic"
   | "story-left"
@@ -9,20 +21,6 @@ export type Slide6NodeId =
   | "bug-middle"
   | "ac-right"
   | "bug-right";
-
-export type Slide6NodeTypeLabelKey = "epic" | "story" | "ac" | "bug";
-
-export type Slide6NodeBodyLabelKey =
-  | "epicBody"
-  | "storyLeftBody"
-  | "storyMiddleBody"
-  | "storyRightBody"
-  | "acLeftBody"
-  | "bugLeftBody"
-  | "acMiddleBody"
-  | "bugMiddleBody"
-  | "acRightBody"
-  | "bugRightBody";
 
 export type Slide6NodeTheme = "dark" | "light";
 
@@ -84,9 +82,4 @@ export interface Slide6LayoutPreset {
   canvas: Slide6CanvasConfig;
   nodes: Slide6NodeLayout[];
   connectors: Slide6ConnectorLayout[];
-}
-
-export interface Slide6DiagramLabels {
-  nodeTypes: Record<Slide6NodeTypeLabelKey, string>;
-  nodes: Record<Slide6NodeBodyLabelKey, string>;
 }

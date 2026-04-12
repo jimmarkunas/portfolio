@@ -1,4 +1,4 @@
-import type { CaseStudySummaryColumn } from "@/components/case-study/types"
+import type { CaseStudySummaryColumn } from "@/content/case-studies/types"
 
 type BeforeAfterComparisonProps = {
   columns: [CaseStudySummaryColumn, CaseStudySummaryColumn] | CaseStudySummaryColumn[]
