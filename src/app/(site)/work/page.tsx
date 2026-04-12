@@ -1,6 +1,16 @@
+import type { Metadata } from "next"
+
 import { Container } from "@/components/Container"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
 import { getHomepageText } from "@/components/homepage/homepage"
+import { buildPageMetadata } from "@/lib/seo"
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Work",
+  description:
+    "Case studies by Jim Markunas across commerce transformation, platform modernization, and enterprise delivery.",
+  canonicalPath: "/work",
+})
 
 export default function WorkPage() {
   const { sections } = getHomepageText()

@@ -1,11 +1,13 @@
 import type { Metadata } from "next"
 import { ServicesContactPage } from "@/components/services-contact/ServicesContactPage"
+import { buildPageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Contact | Jim Markunas",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Contact",
   description:
     "Get in touch with Jim Markunas. Available for product leadership, platform architecture, and transformation programs.",
-}
+  canonicalPath: "/contact",
+})
 
 export default function ContactPage() {
   return <ServicesContactPage entryPoint="contact" />

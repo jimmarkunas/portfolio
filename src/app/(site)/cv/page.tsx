@@ -7,11 +7,13 @@ import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
 import { cvContent } from "@/content/cv"
+import { buildPageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: cvContent.meta.title,
+export const metadata: Metadata = buildPageMetadata({
+  title: "CV",
   description: cvContent.meta.description,
-}
+  canonicalPath: "/cv",
+})
 
 function SectionPill({ label, className = "" }: { label: string; className?: string }) {
   return (

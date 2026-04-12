@@ -1,6 +1,9 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { PressViewer } from "@/components/PressViewer"
 import { loadAllCaseStudies, loadCaseStudyBySlug } from "@/content/case-studies"
+import type { CaseStudyExperienceRow } from "@/components/case-study/types"
+import { buildPageMetadata } from "@/lib/seo"
 
 const legacyPressFilenameAliases: Record<string, string[]> = {
   "01-Harvard-Business-Review": ["01 Harvard Business Review"],
@@ -8,6 +11,27 @@ const legacyPressFilenameAliases: Record<string, string[]> = {
   "03-The-Guardian-LEGO-Digital": ["03 The Guardian LEGO Digital"],
   "04-MIS-Quarterly-Executive": ["04 MIS Quarterly Executive", "04 MIS Quarterly Executive_compressed"],
   "05-BCG-Interview-Lego-CEO": ["05 BCG Interview Lego CEO"],
+}
+
+function normalizePressFilename(value: string): string {
+  return decodeURIComponent(value)
+    .replace(/\.[^.]+$/, "")
+    .replace(/_compressed$/i, "")
+    .replace(/[\s_]+/g, "-")
+    .replace(/-+/g, "-")
+    .toLowerCase()
+}
+
+function findRecognitionArticle(rows: CaseStudyExperienceRow[], filename: string): CaseStudyExperienceRow | undefined {
+  const decoded = decodeURIComponent(filename)
+  const normalizedFilename = normalizePressFilename(filename)
+
+  return rows.find((row) => {
+    const slug = row.file?.split("/").pop()?.replace(/\.[^.]+$/, "")
+    if (!slug) return false
+
+    return slug === decoded || slug === filename || normalizePressFilename(slug) === normalizedFilename
+  })
 }
 
 export async function generateStaticParams() {
@@ -29,16 +53,56 @@ export async function generateStaticParams() {
   return params
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string; filename: string }>
+}): Promise<Metadata> {
+  const { slug, filename } = await params
+  const study = await loadCaseStudyBySlug(slug)
+
+  if (!study) {
+    return buildPageMetadata({
+      title: "Press",
+      description: "Press and recognition coverage for Jim Markunas case studies.",
+      canonicalPath: `/work/${slug}/press/${filename}`,
+      robots: {
+        index: false,
+        follow: false,
+      },
+    })
+  }
+
+  const recognitionRows = study.recognition?.rows ?? []
+  const article = findRecognitionArticle(recognitionRows, filename)
+
+  if (!article) {
+    return buildPageMetadata({
+      title: `${study.breadcrumbCurrent} Press`,
+      description: `Press coverage and recognition for ${study.breadcrumbCurrent} project work led by Jim Markunas.`,
+      canonicalPath: `/work/${slug}/press/${filename}`,
+    })
+  }
+
+  return buildPageMetadata({
+    title: `${article.company} Press`,
+    description: article.summary,
+    canonicalPath: `/work/${slug}/press/${filename}`,
+  })
+}
+
 export default async function PressViewerPage({
   params,
 }: {
   params: Promise<{ slug: string; filename: string }>
 }) {
-  const { slug } = await params
+  const { slug, filename } = await params
   const study = await loadCaseStudyBySlug(slug)
   if (!study) notFound()
   const recognitionRows = study.recognition?.rows
   if (!recognitionRows?.length) notFound()
+  const article = findRecognitionArticle(recognitionRows, filename)
+  if (!article) notFound()
 
   return (
     <PressViewer
