@@ -9,6 +9,12 @@ import Slide6JiraDiagram from './components/slides/Slide6JiraDiagram';
 import Slide7RiskLandscape from './components/slides/Slide7RiskLandscape';
 import Slide8StatusReport from './components/slides/Slide8StatusReport';
 import Slide8ComposableStack from './components/slides/Slide8ComposableStack';
+import {
+  buildInterviewSlideRegistry,
+  PM_POP_QUIZ_SLIDE_ID,
+  PM_POP_QUIZ_SUBTITLE,
+  PM_POP_QUIZ_TITLE,
+} from './interviewSlideRegistry';
 
 interface SlideProps {
   children: React.ReactNode;
@@ -50,10 +56,6 @@ const whyJimIconMap = {
   Globe,
 } as const;
 
-const PM_POP_QUIZ_SLIDE_ID = 'slide-pm-pop-quiz';
-const PM_POP_QUIZ_TITLE = 'PM Pop Quiz';
-const PM_POP_QUIZ_SUBTITLE = 'Read the bullet points and guess the role. Click a card to reveal the answer.';
-
 export default function InterviewsApp() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -65,38 +67,9 @@ export default function InterviewsApp() {
   const content = interviewContent;
   const navCopy = content.navigation;
   const slideContent = content.slides;
-  const slideIdOrder = [
-    slideContent.who.id,
-    slideContent.outcomes.id,
-    slideContent.services.id,
-    slideContent.greatestPm.id,
-    slideContent.hybridAgile.id,
-    slideContent.jiraTickets.id,
-    slideContent.riskLandscape.id,
-    slideContent.statusReport.id,
-    slideContent.composableStack.id,
-    slideContent.whyJim.id,
-    slideContent.rescuePlan.id,
-    slideContent.thankYou.id,
-    PM_POP_QUIZ_SLIDE_ID,
-  ];
-
-  const hiddenSlideTitles = new Set([
-    slideContent.cover.title,
-    slideContent.modere.title,
-    slideContent.engineers.title,
-    slideContent.goal.title,
-    slideContent.tools.title,
-    slideContent.preSetup.title,
-    `${slideContent.buildPart1.titlePrefix}${slideContent.buildPart1.titleHighlight}`.trim(),
-    `${slideContent.buildPart2.titlePrefix}${slideContent.buildPart2.titleHighlight}`.trim(),
-    slideContent.finalize.title,
-  ]);
-
-  const slideTitles = [
-    ...content.slideTitles.filter((title) => !hiddenSlideTitles.has(title)),
-    PM_POP_QUIZ_TITLE,
-  ];
+  const slideRegistry = useMemo(() => buildInterviewSlideRegistry(slideContent), [slideContent]);
+  const slideIdOrder = slideRegistry.map((slide) => slide.id);
+  const slideTitles = slideRegistry.map((slide) => slide.title);
 
   const pmPopQuizCategories = useMemo(() => {
     const categories = [...slideContent.services.categories];
@@ -190,7 +163,7 @@ export default function InterviewsApp() {
     </div>
   );
 
-  const slides = [
+  const slideElements = [
     // Slide 1: Who is Jim Markunas?
     <div key={slideContent.who.id} className="h-full flex flex-col">
       <motion.div
@@ -597,6 +570,25 @@ export default function InterviewsApp() {
     // Slide 13: PM Pop Quiz
     pmPopQuizSlide,
   ];
+
+  const slideElementsById = slideElements.reduce<Record<string, React.ReactNode>>((acc, slide) => {
+    if (!React.isValidElement(slide) || slide.key === null) {
+      return acc;
+    }
+
+    acc[String(slide.key)] = slide;
+    return acc;
+  }, {});
+
+  const slides = slideRegistry.map((slide) => {
+    const element = slideElementsById[slide.id];
+
+    if (!element) {
+      throw new Error(`Missing slide renderer for slide id "${slide.id}"`);
+    }
+
+    return element;
+  });
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
