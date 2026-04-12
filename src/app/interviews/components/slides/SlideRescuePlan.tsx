@@ -1,5 +1,3 @@
-"use client";
-
 import type { InterviewsContent } from "@/content/interviews";
 
 interface SlideRescuePlanProps {

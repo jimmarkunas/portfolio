@@ -1,5 +1,3 @@
-"use client";
-
 import { CheckCircle2, Clock } from "lucide-react";
 
 import type { InterviewsContent } from "@/content/interviews";

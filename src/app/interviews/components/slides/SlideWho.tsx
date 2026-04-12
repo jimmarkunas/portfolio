@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "motion/react";
 
 import type { InterviewsContent } from "@/content/interviews";

@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "motion/react";
 import { Cpu, Globe, Shield, Target, Users, Zap } from "lucide-react";
 

@@ -1,4 +1,4 @@
-@import "../presentation/presentation-foundation.css";
+@import "../../styles/presentation-foundation.css";
 
 .interviews-page .slide-content {
   justify-content: flex-start;

@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "motion/react";
 import { ArrowRight, Linkedin, Mail } from "lucide-react";
 
