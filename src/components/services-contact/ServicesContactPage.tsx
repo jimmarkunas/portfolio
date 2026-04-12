@@ -9,7 +9,7 @@ import { CareerStatsSection } from "@/components/services-contact/CareerStatsSec
 import { ServicesProjectsSection } from "@/components/services-contact/ServicesProjectsSection"
 import { ScrollToSectionOnMount } from "@/components/services-contact/ScrollToSectionOnMount"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { servicesContactContent } from "@/content/site/services-contact"
+import { servicesContactContent } from "@/content/site"
 
 const GlobalLocationsMap = dynamic(
   () => import("@/components/case-study/GlobalLocationsMap").then((mod) => mod.GlobalLocationsMap),

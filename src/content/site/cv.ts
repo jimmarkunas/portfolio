@@ -53,7 +53,7 @@ export type CvFounderExperience = {
   summary: string
 }
 
-export const cvContent = {
+export const siteContent = {
   meta: {
     title: "CV | James Markunas",
     description:

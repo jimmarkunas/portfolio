@@ -1,5 +1,5 @@
 import { Container } from "@/components/Container"
-import type { ServiceProjectLogoEntry } from "@/content/site/services-contact"
+import type { ServiceProjectLogoEntry } from "@/content/site"
 import Link from "next/link"
 
 type ServicesProjectsSectionProps = {

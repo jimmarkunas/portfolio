@@ -23,7 +23,7 @@ export type ServiceMapLocationEntry = {
   coordinates: [number, number] // [longitude, latitude]
 }
 
-export const servicesContactContent = {
+export const siteContent = {
   services: {
     eyebrow: "Services",
     title: "How I Help Teams Ship",
