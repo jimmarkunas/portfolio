@@ -46,7 +46,7 @@ export const interviewContent = {
     tocTitle: "Slide Table of Contents",
     closeButtonLabel: "Close",
   },
-  slideTitles: [],
+  slideTitles: [] as string[],
   slides: {
     ...productDeliverySlides,
     ...legacyModernizationSlides,
