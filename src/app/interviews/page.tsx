@@ -1,30 +1,28 @@
-import { permanentRedirect } from "next/navigation"
+"use client"
 
-type SearchParams = Record<string, string | string[] | undefined>
+import Link from "next/link"
+import { useEffect } from "react"
 
-function buildRedirectQuery(searchParams: SearchParams): string {
-  const query = new URLSearchParams()
+export default function InterviewsPage() {
+  useEffect(() => {
+    const query = window.location.search ?? ""
+    const hash = window.location.hash ?? ""
+    window.location.replace(`/interview${query}${hash}`)
+  }, [])
 
-  Object.entries(searchParams).forEach(([key, value]) => {
-    if (Array.isArray(value)) {
-      value.forEach((item) => query.append(key, item))
-      return
-    }
-
-    if (typeof value === "string") {
-      query.append(key, value)
-    }
-  })
-
-  const queryString = query.toString()
-  return queryString.length > 0 ? `?${queryString}` : ""
-}
-
-export default function InterviewsPage({
-  searchParams,
-}: {
-  searchParams: SearchParams
-}) {
-  const query = buildRedirectQuery(searchParams)
-  permanentRedirect(`/interview${query}`)
+  return (
+    <main className="min-h-screen bg-black text-white grid place-items-center p-6">
+      <div className="text-center space-y-3">
+        <p className="text-sm tracking-[0.08em] uppercase text-white/70">
+          Redirecting to the canonical route
+        </p>
+        <p className="text-xl">
+          Opening <span className="font-semibold">/interview</span>...
+        </p>
+        <Link className="underline text-white/80 hover:text-white" href="/interview">
+          Continue manually
+        </Link>
+      </div>
+    </main>
+  )
 }
