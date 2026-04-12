@@ -12,6 +12,7 @@ import { HomepageWhatIDoSection } from "@/components/homepage/sections/HomepageW
 import { PullQuote } from "@/components/PullQuote"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
+import { siteCta } from "@/content/site"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 import { getHomepageText } from "./homepage"
@@ -60,7 +61,8 @@ const defaultTagClass =
   "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#EFEFEF] px-4 text-[16px] leading-6 text-[#3A3A3A] outline outline-1 outline-black/10"
 const hoverLiftClass = "transition-transform duration-300 hover:-translate-y-0.5"
 const journeyCtaClass = `type-p2 inline-flex items-center gap-2 text-[#222222] underline underline-offset-4 ${hoverLiftClass}`
-const HOMEPAGE_BOOK_CALL_HREF = "https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+const HOMEPAGE_BOOK_CALL_HREF = siteCta.bookingUrls.homepageHero
+const BOOK_CALL_LABEL = siteCta.bookCallLabel
 
 function InsightShapePair({
   largeShapeClassName,
@@ -155,7 +157,7 @@ export default function Homepage() {
   const trackHomepageBookCall = () => {
     trackEvent("book_call_click", {
       location: "homepage_hero",
-      label: "Book a Call",
+      label: BOOK_CALL_LABEL,
       href: HOMEPAGE_BOOK_CALL_HREF,
       page_path: getCurrentPagePath(),
     })

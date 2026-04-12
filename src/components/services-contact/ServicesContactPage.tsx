@@ -9,7 +9,7 @@ import { CareerStatsSection } from "@/components/services-contact/CareerStatsSec
 import { ServicesProjectsSection } from "@/components/services-contact/ServicesProjectsSection"
 import { ScrollToSectionOnMount } from "@/components/services-contact/ScrollToSectionOnMount"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { servicesContactContent } from "@/content/site"
+import { contactSocialLinks, servicesContactContent } from "@/content/site"
 
 const GlobalLocationsMap = dynamic(
   () => import("@/components/case-study/GlobalLocationsMap").then((mod) => mod.GlobalLocationsMap),
@@ -35,10 +35,6 @@ export function ServicesContactPage({ entryPoint = "services" }: ServicesContact
   const { contact, careerStats, projectShowcase, servicesMap } = servicesContactContent
   const { hero, sections, experienceCards } = getHomepageText()
   const scrollToContact = entryPoint === "contact"
-  const socialLinks = [
-    { href: "https://linkedin.com/in/jimmarkunas", label: "LinkedIn", icon: "/sm-icons/linkedin.png" },
-    { href: "https://x.com/jimmarkunas", label: "X", icon: "/sm-icons/twitter.png" },
-  ]
 
   return (
     <main className="min-h-full bg-[#F3F3F3]">
@@ -74,7 +70,7 @@ export function ServicesContactPage({ entryPoint = "services" }: ServicesContact
                   <div className="pt-2">
                     <h3 className="text-2xl leading-8 text-zinc-600">Follow Me</h3>
                     <div className="mt-2 flex items-center gap-1">
-                      {socialLinks.map((link) => (
+                      {contactSocialLinks.map((link) => (
                         <a
                           key={link.label}
                           href={link.href}

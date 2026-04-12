@@ -4,29 +4,11 @@ import Link from "next/link"
 
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
+import { footerNavLinks, footerSocialLinks, siteCta } from "@/content/site"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
-const footerLinks = [
-  { href: "/work", label: "Portfolio" },
-  { href: "/services", label: "Services" },
-  { href: "/cv", label: "CV" },
-  { href: "/contact", label: "Contact" },
-  { href: "/freebies", label: "Freebies" },
-]
-
-const socialLinks = [
-  { href: "/contact", label: "Email", icon: "/sm-icons/email.png" },
-  { href: "https://linkedin.com/in/jimmarkunas", label: "LinkedIn", icon: "/sm-icons/linkedin.png", external: true },
-  { href: "https://x.com/jimmarkunas", label: "X", icon: "/sm-icons/twitter.png", external: true },
-  {
-    href: "https://jimmarkunas.notion.site/Jim-Markunas-Portfolio-2d03c5a05926807393b0f0af6a634226",
-    label: "Notion",
-    icon: "/sm-icons/notion.svg",
-    external: true,
-  },
-]
-
-const BOOK_CALL_HREF = "https://calendar.app.google/TkZumQx7Bfyou7G26"
+const BOOK_CALL_HREF = siteCta.bookingUrls.siteShell
+const BOOK_CALL_LABEL = siteCta.bookCallLabel
 
 function SocialIcon({
   href,
@@ -117,13 +99,13 @@ export function SiteFooter() {
                   onClick={() => {
                     trackEvent("book_call_click", {
                       location: "footer",
-                      label: "Book a Call",
+                      label: BOOK_CALL_LABEL,
                       href: BOOK_CALL_HREF,
                       page_path: getCurrentPagePath(),
                     })
                   }}
                 >
-                  <span>Book a Call</span>
+                  <span>{BOOK_CALL_LABEL}</span>
                   <svg
                     width="12"
                     height="12"
@@ -154,14 +136,14 @@ export function SiteFooter() {
 
               {/* 2. Social icons — middle on mobile, left on desktop */}
               <div className="flex items-center justify-center gap-1 lg:order-1 lg:justify-self-start">
-                {socialLinks.map((link) => (
+                {footerSocialLinks.map((link) => (
                   <SocialIcon key={link.label} {...link} />
                 ))}
               </div>
 
               {/* 3. Nav links — bottom on mobile, right on desktop */}
               <nav className="type-ui-sm flex flex-wrap items-center justify-center gap-x-3 gap-y-2 leading-none text-[#FEFEFE] lg:order-3 lg:justify-self-end">
-                {footerLinks.map((link, index) => (
+                {footerNavLinks.map((link, index) => (
                   <div key={link.href} className="contents">
                     {index > 0 ? <span className="text-white/40">·</span> : null}
                     <Link className="transition-colors hover:text-[#447ACB]" href={link.href}>

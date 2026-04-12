@@ -6,21 +6,17 @@ import { Menu, X } from "lucide-react"
 
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
+import { primaryNavLinks, siteCta } from "@/content/site"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
-const navLinks = [
-  { href: "/work", label: "Portfolio" },
-  { href: "/services", label: "Services" },
-  { href: "/cv", label: "CV" },
-  { href: "/contact", label: "Contact" },
-]
-const BOOK_CALL_HREF = "https://calendar.app.google/TkZumQx7Bfyou7G26"
+const BOOK_CALL_HREF = siteCta.bookingUrls.siteShell
+const BOOK_CALL_LABEL = siteCta.bookCallLabel
 const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
 
 function trackHeaderBookCall() {
   trackEvent("book_call_click", {
     location: "header",
-    label: "Book a Call",
+    label: BOOK_CALL_LABEL,
     href: BOOK_CALL_HREF,
     page_path: getCurrentPagePath(),
   })
@@ -48,7 +44,7 @@ export function SiteHeader() {
 
           <div className="hidden items-center gap-8 lg:flex lg:flex-1 lg:justify-end">
             <nav aria-label="Primary" className="flex items-center gap-x-10">
-              {navLinks.map((link) => (
+              {primaryNavLinks.map((link) => (
                 <Link
                   key={link.href}
                   className={`text-[16px] font-normal leading-none text-[#222222] transition-colors hover:text-[#447ACB] hover:underline hover:underline-offset-4 ${hoverLiftClass}`}
@@ -66,7 +62,7 @@ export function SiteHeader() {
               rel="noreferrer"
               onClick={trackHeaderBookCall}
             >
-              <span>Book a Call</span>
+              <span>{BOOK_CALL_LABEL}</span>
               <svg
                 width="12"
                 height="12"
@@ -101,7 +97,7 @@ export function SiteHeader() {
             className="mt-5 rounded-[16px] border border-black/8 bg-[#FEFEFE] p-5 shadow-[0_8px_24px_rgba(34,34,34,0.06)] lg:hidden"
           >
             <nav aria-label="Mobile primary" className="flex flex-col gap-4">
-              {navLinks.map((link) => (
+              {primaryNavLinks.map((link) => (
                 <Link
                   key={link.href}
                   className={`text-[18px] font-normal leading-none text-[#222222] transition-colors hover:text-[#447ACB] ${hoverLiftClass}`}
@@ -123,7 +119,7 @@ export function SiteHeader() {
                 setIsOpen(false)
               }}
             >
-              <span>Book a Call</span>
+              <span>{BOOK_CALL_LABEL}</span>
               <svg
                 width="12"
                 height="12"
