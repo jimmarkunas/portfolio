@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronLeft, ChevronRight, Maximize, Minimize, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Maximize, Minimize, ArrowRight, Shield, Cpu, Target, Users, Zap, Globe, Mail, Linkedin } from 'lucide-react';
 import { interviewContent } from '@/content/interviewContent';
 import Slide5HybridDiagram from './components/slides/Slide5HybridDiagram';
 import Slide6JiraDiagram from './components/slides/Slide6JiraDiagram';
 import Slide7RiskLandscape from './components/slides/Slide7RiskLandscape';
 import Slide8StatusReport from './components/slides/Slide8StatusReport';
+import Slide8ComposableStack from './components/slides/Slide8ComposableStack';
 
 interface SlideProps {
   children: React.ReactNode;
@@ -40,6 +41,15 @@ const Slide = ({ children, isActive }: SlideProps) => {
   );
 };
 
+const whyJimIconMap = {
+  Shield,
+  Cpu,
+  Target,
+  Users,
+  Zap,
+  Globe,
+} as const;
+
 export default function InterviewsApp() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -60,6 +70,7 @@ export default function InterviewsApp() {
     slideContent.riskLandscape.id,
     slideContent.statusReport.id,
     slideContent.cover.id,
+    slideContent.composableStack.id,
     slideContent.modere.id,
     slideContent.engineers.id,
     slideContent.goal.id,
@@ -68,6 +79,9 @@ export default function InterviewsApp() {
     slideContent.buildPart1.id,
     slideContent.buildPart2.id,
     slideContent.finalize.id,
+    slideContent.whyJim.id,
+    slideContent.rescuePlan.id,
+    slideContent.thankYou.id,
   ];
 
   const slideTitles = content.slideTitles;
@@ -390,7 +404,13 @@ export default function InterviewsApp() {
       </div>
     </div>,
 
-    // Slide 10: The Modere Game
+    // Slide 10: The Composable Stack
+    <Slide8ComposableStack
+      key={slideContent.composableStack.id}
+      slide={slideContent.composableStack}
+    />,
+
+    // Slide 11: The Modere Game
     <div key={slideContent.modere.id} className="space-y-12">
       <div className="flex justify-between items-end">
         <h2 className="h2-display">{slideContent.modere.title}</h2>
@@ -413,7 +433,7 @@ export default function InterviewsApp() {
       </div>
     </div>,
 
-    // Slide 11: Engineers vs Executives
+    // Slide 12: Engineers vs Executives
     <div key={slideContent.engineers.id} className="space-y-12">
       <h2 className="h2-display text-center">{slideContent.engineers.titleTop} <br/><span className="text-finox-gray italic">{slideContent.engineers.titleMiddle}</span><br/> {slideContent.engineers.titleBottom}</h2>
       <div className="flex justify-center gap-8 pt-8">
@@ -426,7 +446,7 @@ export default function InterviewsApp() {
       </div>
     </div>,
 
-    // Slide 12: Goal
+    // Slide 13: Goal
     <div key={slideContent.goal.id} className="flex flex-col items-center justify-center text-center space-y-8">
       <div className="w-24 h-px bg-finox-gray"></div>
       <h2 className="h1-display">{slideContent.goal.title}</h2>
@@ -436,7 +456,7 @@ export default function InterviewsApp() {
       <div className="w-24 h-px bg-finox-gray"></div>
     </div>,
 
-    // Slide 13: Tools Needed
+    // Slide 14: Tools Needed
     <div key={slideContent.tools.id} className="space-y-8">
       <h2 className="h2-display">{slideContent.tools.title}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -449,7 +469,7 @@ export default function InterviewsApp() {
       </div>
     </div>,
 
-    // Slide 14: Pre-Setup
+    // Slide 15: Pre-Setup
     <div key={slideContent.preSetup.id} className="space-y-12">
       <h2 className="h2-display">{slideContent.preSetup.title}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
@@ -462,7 +482,7 @@ export default function InterviewsApp() {
       </div>
     </div>,
 
-    // Slide 15: How to Build Part 1
+    // Slide 16: How to Build Part 1
     <div key={slideContent.buildPart1.id} className="space-y-12">
       <h2 className="h2-display">{slideContent.buildPart1.titlePrefix}<span className="text-finox-gray italic">{slideContent.buildPart1.titleHighlight}</span></h2>
       <div className="space-y-6 max-w-3xl">
@@ -483,7 +503,7 @@ export default function InterviewsApp() {
       </div>
     </div>,
 
-    // Slide 16: How to Build Part 2
+    // Slide 17: How to Build Part 2
     <div key={slideContent.buildPart2.id} className="space-y-12">
       <h2 className="h2-display">{slideContent.buildPart2.titlePrefix}<span className="text-finox-gray italic">{slideContent.buildPart2.titleHighlight}</span></h2>
       <div className="space-y-8">
@@ -499,7 +519,7 @@ export default function InterviewsApp() {
       </div>
     </div>,
 
-    // Slide 17: Finalize the App
+    // Slide 18: Finalize the App
     <div key={slideContent.finalize.id} className="flex flex-col items-center justify-center h-full space-y-16">
       <h2 className="h2-display">{slideContent.finalize.title}</h2>
       <div className="flex gap-12">
@@ -526,6 +546,109 @@ export default function InterviewsApp() {
       >
         {slideContent.finalize.completionText}
       </motion.div>
+    </div>,
+
+    // Slide 19: Why Jim Markunas?
+    <div key={slideContent.whyJim.id} className="flex h-full min-h-0 flex-col gap-8">
+      <div className="shrink-0 space-y-2">
+        <h2 className="h2-display">{slideContent.whyJim.title}</h2>
+        <p className="text-finox-gray text-xl font-light">{slideContent.whyJim.subtitle}</p>
+      </div>
+
+      <div className="grid min-h-0 flex-1 grid-cols-3 grid-rows-2 gap-6">
+        {slideContent.whyJim.points.map((item, i) => {
+          const Icon = whyJimIconMap[item.icon];
+          return (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.08 * i }}
+              className="flex h-full flex-col rounded-3xl border border-finox-slate/30 bg-white/5 p-8"
+            >
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-[#447ACB]/10">
+                <Icon className="h-7 w-7 text-[#447ACB]" />
+              </div>
+              <h4 className="mb-3 text-2xl font-semibold text-white md:text-3xl">{item.title}</h4>
+              <p className="text-finox-gray text-lg leading-relaxed md:text-xl">{item.desc}</p>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>,
+
+    // Slide 20: The 30-Day Rescue Plan
+    <div key={slideContent.rescuePlan.id} className="flex h-full min-h-0 flex-col gap-10">
+      <div className="shrink-0 space-y-2">
+        <h2 className="h2-display">{slideContent.rescuePlan.title}</h2>
+        <p className="text-finox-gray text-xl font-light">{slideContent.rescuePlan.subtitle}</p>
+      </div>
+
+      <div className="relative shrink-0 px-2 pt-6">
+        <div className="pointer-events-none absolute left-0 right-0 top-[2.25rem] h-px bg-white/15" />
+        <div className="relative grid grid-cols-4 gap-6">
+          {slideContent.rescuePlan.carouselPhases.map((phase, i) => (
+            <div key={phase.id} className="flex flex-col items-center px-2 text-center">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#447ACB] text-2xl font-semibold text-white shadow-[0_8px_24px_rgba(68,122,203,0.35)]">
+                {i + 1}
+              </div>
+              <h4 className="mb-2 text-4xl font-semibold leading-none text-white">{phase.title}</h4>
+              <p className="max-w-[14rem] text-lg leading-snug text-finox-gray">{phase.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid min-h-0 flex-1 grid-cols-2 gap-8">
+        {slideContent.rescuePlan.weeks.map((week) => (
+          <div key={week.id} className="flex h-full flex-col rounded-3xl border border-white/15 bg-white/[0.04] p-8">
+            <h4 className="mb-5 text-5xl font-semibold tracking-tight text-white">{week.title}</h4>
+            <ul className="space-y-4">
+              {week.points.map((point) => (
+                <li key={point} className="flex items-start gap-3 text-finox-gray text-2xl leading-snug">
+                  <span className="mt-3 h-2.5 w-2.5 shrink-0 rounded-full bg-[#447ACB]" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>,
+
+    // Slide 21: Thank You
+    <div key={slideContent.thankYou.id} className="flex h-full flex-col items-center justify-center text-center space-y-12">
+      <div className="space-y-2">
+        <h2 className="h2-display">{slideContent.thankYou.title}</h2>
+        <p className="text-finox-gray text-xl font-light">{slideContent.thankYou.subtitle}</p>
+      </div>
+
+      <div className="space-y-3">
+        <h3 className="text-5xl font-semibold tracking-tight">{slideContent.thankYou.name}</h3>
+        <p className="text-xl font-semibold text-[#447ACB]">{slideContent.thankYou.role}</p>
+      </div>
+
+      <div className="flex gap-6">
+        <div className="flex items-center gap-3 rounded-full border border-finox-slate/30 bg-white/5 px-6 py-3">
+          <Mail className="h-5 w-5 text-[#447ACB]" />
+          <span className="text-sm font-semibold">{slideContent.thankYou.email}</span>
+        </div>
+        <div className="flex items-center gap-3 rounded-full border border-finox-slate/30 bg-white/5 px-6 py-3">
+          <Linkedin className="h-5 w-5 text-[#447ACB]" />
+          <span className="text-sm font-semibold">{slideContent.thankYou.linkedin}</span>
+        </div>
+      </div>
+
+      <div className="pt-4">
+        <p className="mb-4 text-[11px] uppercase tracking-[0.2em] text-finox-gray">{slideContent.thankYou.readyText}</p>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.6 }}
+          className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/10"
+        >
+          <ArrowRight className="h-6 w-6 rotate-90 text-white" />
+        </motion.div>
+      </div>
     </div>
   ];
 

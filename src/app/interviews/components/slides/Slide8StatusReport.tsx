@@ -41,6 +41,28 @@ export default function Slide8StatusReport({ slide }: Slide8StatusReportProps) {
             </div>
           </div>
 
+          <div className="px-6 pt-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-4 bg-[#F8FAFD] border border-[#E5E9F0] rounded-xl text-center">
+                <div className="type-h4 font-medium text-[#447ACB] leading-none">
+                  {slide.execView.sla}
+                </div>
+                <div className="type-p5 font-semibold text-finox-gray uppercase tracking-[0.1em]">
+                  SLA Met
+                </div>
+              </div>
+
+              <div className="p-4 bg-[#F8FAFD] border border-[#E5E9F0] rounded-xl text-center">
+                <div className="type-h4 font-medium text-[#447ACB] leading-none">
+                  {slide.execView.blockersCount}
+                </div>
+                <div className="type-p5 font-semibold text-finox-gray uppercase tracking-[0.1em]">
+                  Blockers
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="p-6 grid grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
@@ -99,7 +121,7 @@ export default function Slide8StatusReport({ slide }: Slide8StatusReportProps) {
           </div>
         </div>
 
-        <div className="w-1/3 flex flex-col justify-center gap-6">
+        <div className="w-1/3 flex flex-col justify-center">
           <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
             <h4 className="type-h4 text-white mb-2 font-medium">
               {slide.execView.title}
@@ -107,26 +129,6 @@ export default function Slide8StatusReport({ slide }: Slide8StatusReportProps) {
             <p className="type-p3 text-finox-gray leading-relaxed">
               {slide.execView.desc}
             </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-white border border-[#E5E9F0] rounded-xl text-center">
-              <div className="type-h4 font-medium text-[#447ACB] leading-none">
-                {slide.execView.sla}
-              </div>
-              <div className="type-p5 font-semibold text-finox-gray uppercase tracking-[0.1em]">
-                SLA Met
-              </div>
-            </div>
-
-            <div className="p-4 bg-white border border-[#E5E9F0] rounded-xl text-center">
-              <div className="type-h4 font-medium text-[#447ACB] leading-none">
-                {slide.execView.blockersCount}
-              </div>
-              <div className="type-p5 font-semibold text-finox-gray uppercase tracking-[0.1em]">
-                Blockers
-              </div>
-            </div>
           </div>
         </div>
       </div>
