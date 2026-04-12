@@ -1,8 +1,124 @@
-import type { CaseStudyData } from "@/content/case-studies/types"
-import { americanapparelCopy } from "@/content/case-studies/chunks/americanapparel.copy"
-import { americanapparelGlobalLocations } from "@/content/case-studies/chunks/americanapparel.locations"
+import type { CaseStudyData, GlobalLocation } from "@/content/case-studies/types"
 
-export const americanapparelCaseStudy = {
+export const americanapparelCopy = {
+  heroIntro: `American Apparel was in trouble. The founder was pushed out. The board gave us a blunt mandate: move the numbers fast with digital, or there won't be a company left. I partnered with Amanda Lopez, AA's Director of eCommerce, to drive a global Oracle ATG & RFID-driven commerce engine across 16 regional sites and 260+ stores, while the rest of the business was on fire.`,
+  atAGlanceCopy: `This was not a normal eCommerce re-platform. The company was betting survival on a digital turnaround, and my job was to make the technology real, fast enough to matter. I helped unify 16 international Oracle ATG storefronts, real-time RFID inventory across the entire globe, and omni-channel order routing into one commercial system that retail, factory, and web could finally share.`,
+  problemOverview: `American Apparel didn't need another incremental website upgrade. It needed digital commerce & omni-channel to move revenue quickly enough to stabilize a distressed business. But inventory visibility was broken, stores & web didn't share the same truth, and our global retail footprint was behaving like disconnected local systems. If customers couldn't reliably find size, color, and availability across stores & web, the business would keep bleeding sales and trust.`,
+  roleCopy: `Amanda sold the vision to the board, and I became the technical co-pilot who made it real. I owned the product & program layer that connected global IA, PRDs, integration design, launch plans, and omni-channel logic across stores, factory, and web.`,
+  roleNarrative: {
+    title: `I Turned Inventory Truth to Commercial Performance Across the Globe`,
+    paragraphs: [
+      `The business problem looked like retail, but the real issue was systems truth throughout the world. Stores, factory, and digital weren't operating from one reliable brain, which made global commerce, store fulfillment, and customer promises harder than they should have been. Meanwhile, the company didn't have the luxury of a slow rebuild. The pressure was immediate, and the board wanted results fast.`,
+      `I made three decisions that changed the trajectory. First, I moved 16 international sites onto one Oracle ATG model so markets could share releases, templates, and integrations instead of reinventing the wheel. I made RFID the inventory truth layer for both digital and stores, so product availability stopped living in conflicting realities. Then, I designed the routing logic behind BOPIS and ship-to-store using inventory, distance, shipping cost, and geolocation so every order became both a customer promise and a profit decision.`,
+    ],
+    highlights: [
+      `Moved 16 international sites onto one Oracle ATG commerce model w/ shared integrations and release logic.`,
+      `Made RFID the inventory truth layer across stores, factory, and digital experiences.`,
+      `Designed the order-routing logic behind BOPIS and ship-to-store to balance fulfillment speed, cost, and store traffic.`,
+    ],
+    closing: `Digital commerce wasn't a vanity project for us, it was a survival mechanism for a broken retail business.`,
+  },
+  solutionCopy: `I built a system where stores, factory, and web could finally act like one business. The solution combined a global Oracle ATG stack, real-time RFID inventory visibility, and omni-channel order-routing logic.`,
+  supplementalNarrative: {
+    paragraphs: [
+      `A lot of what retail now treats as normal was still bleeding edge here: real-time inventory visibility, profit-aware order routing, BOPIS, ship-to-store, and unified digital plus store logic were not mature defaults in 2014. We built the playbook while the company was under commercial pressure.`,
+      `Yes, we launched the technology, but we made the business behave like a modern omni-channel retailer before most retailers had the operational muscle or systems clarity to do it well.`,
+    ],
+    highlights: [
+      `The work blended digital commerce, in-store operations, and inventory intelligence into one retail model.`,
+      `American Apparel used omni-channel as a commercial rescue lever before the pattern became standard across retail.`,
+    ],
+    closing: `The point was never just to modernize the stack. The point was to move revenue, cut shrink, and make a fragile business more coherent fast.`,
+  },
+  impactIntro: `We changed the economics of the business, not just the website. Digital revenue grew, store sales moved, omni-channel orders took off from zero, and the inventory system became disciplined.`,
+  impactBeforeAfterSummary: `From fragmented systems to a unified omni-channel engine.`,
+  impactJourneyStepCopies: [
+    `I helped consolidate 16 regional storefronts onto one Oracle ATG model so the business could move globally instead of piecemeal.`,
+    `I pushed RFID and inventory visibility into the core of the customer and fulfillment experience so stores and web stopped disagreeing about what existed.`,
+    `I helped build BOPIS, ship-to-store, and routing logic that made every order a smarter retail decision, not just a checkout event.`,
+  ],
+  deliveryIntroCopy: `This program had to move like a rescue, not a research project. The work progressed while the company was under enormous financial and executive pressure.`,
+}
+
+
+export const americanapparelGlobalLocations: GlobalLocation[] = [
+  // USA
+  { city: "Los Angeles", country: "USA", coordinates: [-118.2437, 34.0522] },
+  { city: "San Francisco", country: "USA", coordinates: [-122.4194, 37.7749] },
+  { city: "San Diego", country: "USA", coordinates: [-117.1611, 32.7157] },
+  { city: "Santa Cruz", country: "USA", coordinates: [-122.0308, 36.9741] },
+  { city: "San Jose", country: "USA", coordinates: [-121.8863, 37.3382] },
+  { city: "Sacramento", country: "USA", coordinates: [-121.4944, 38.5816] },
+  { city: "Austin", country: "USA", coordinates: [-97.7431, 30.2672] },
+  { city: "San Antonio", country: "USA", coordinates: [-98.4936, 29.4241] },
+  { city: "Dallas", country: "USA", coordinates: [-96.7970, 32.7767] },
+  { city: "Houston", country: "USA", coordinates: [-95.3698, 29.7604] },
+  { city: "Portland", country: "USA", coordinates: [-122.6765, 45.5231] },
+  { city: "Seattle", country: "USA", coordinates: [-122.3321, 47.6062] },
+  { city: "New York", country: "USA", coordinates: [-74.006, 40.7128] },
+  { city: "Tempe", country: "USA", coordinates: [-111.94, 33.4255] },
+  { city: "Phoenix", country: "USA", coordinates: [-112.074, 33.4484] },
+  { city: "Scottsdale", country: "USA", coordinates: [-111.9261, 33.4942] },
+  { city: "Tucson", country: "USA", coordinates: [-110.9265, 32.2226] },
+  { city: "Miami", country: "USA", coordinates: [-80.1918, 25.7617] },
+  { city: "Philadelphia", country: "USA", coordinates: [-75.1652, 39.9526] },
+  { city: "Minneapolis", country: "USA", coordinates: [-93.265, 44.9778] },
+  { city: "St. Louis", country: "USA", coordinates: [-90.1994, 38.627] },
+  { city: "Memphis", country: "USA", coordinates: [-90.049, 35.1495] },
+  { city: "New Orleans", country: "USA", coordinates: [-90.0715, 29.9511] },
+  { city: "Chicago", country: "USA", coordinates: [-87.6298, 41.8781] },
+  { city: "Annapolis", country: "USA", coordinates: [-76.4922, 38.9784] },
+  { city: "Washington, DC", country: "USA", coordinates: [-77.0369, 38.9072] },
+  { city: "Providence", country: "USA", coordinates: [-71.4128, 41.824] },
+  { city: "Detroit", country: "USA", coordinates: [-83.0458, 42.3314] },
+  { city: "Secaucus", country: "USA", coordinates: [-74.0565, 40.7895] },
+  { city: "Cincinnati", country: "USA", coordinates: [-84.512, 39.1031] },
+  { city: "Boston", country: "USA", coordinates: [-71.0589, 42.3601] },
+  // Canada
+  { city: "Toronto", country: "Canada", coordinates: [-79.3832, 43.6532] },
+  { city: "Montreal", country: "Canada", coordinates: [-73.5673, 45.5017] },
+  { city: "Vancouver", country: "Canada", coordinates: [-123.1216, 49.2827] },
+  { city: "Edmonton", country: "Canada", coordinates: [-113.4909, 53.5461] },
+  // Latin America
+  { city: "Mexico City", country: "Mexico", coordinates: [-99.1332, 19.4326] },
+  { city: "Monterrey", country: "Mexico", coordinates: [-100.3161, 25.6866] },
+  { city: "São Paulo", country: "Brazil", coordinates: [-46.6333, -23.5505] },
+  // Europe
+  { city: "London", country: "UK", coordinates: [-0.1276, 51.5074] },
+  { city: "Brighton", country: "UK", coordinates: [-0.1313, 50.8225] },
+  { city: "Glasgow", country: "UK", coordinates: [-4.2518, 55.8642] },
+  { city: "Leeds", country: "UK", coordinates: [-1.5491, 53.8008] },
+  { city: "Stockholm", country: "Sweden", coordinates: [18.0686, 59.3293] },
+  { city: "Paris", country: "France", coordinates: [2.3522, 48.8566] },
+  { city: "Brussels", country: "Belgium", coordinates: [4.3517, 50.8503] },
+  { city: "Berlin", country: "Germany", coordinates: [13.405, 52.52] },
+  { city: "Munich", country: "Germany", coordinates: [11.582, 48.1351] },
+  { city: "Rome", country: "Italy", coordinates: [12.4964, 41.9028] },
+  { city: "Florence", country: "Italy", coordinates: [11.2558, 43.7696] },
+  { city: "Amsterdam", country: "Netherlands", coordinates: [4.9041, 52.3676] },
+  { city: "Geneva", country: "Switzerland", coordinates: [6.1432, 46.2044] },
+  { city: "Vienna", country: "Austria", coordinates: [16.3738, 48.2082] },
+  { city: "Barcelona", country: "Spain", coordinates: [2.1734, 41.3851] },
+  { city: "Madrid", country: "Spain", coordinates: [-3.7038, 40.4168] },
+  { city: "Dublin", country: "Ireland", coordinates: [-6.2603, 53.3498] },
+  // Middle East
+  { city: "Tel Aviv", country: "Israel", coordinates: [34.7818, 32.0853] },
+  // Asia
+  { city: "Tokyo", country: "Japan", coordinates: [139.6917, 35.6895] },
+  { city: "Osaka", country: "Japan", coordinates: [135.5022, 34.6937] },
+  { city: "Kyoto", country: "Japan", coordinates: [135.7681, 35.0116] },
+  { city: "Seoul", country: "South Korea", coordinates: [126.978, 37.5665] },
+  { city: "Shanghai", country: "China", coordinates: [121.4737, 31.2304] },
+  { city: "Beijing", country: "China", coordinates: [116.4074, 39.9042] },
+  { city: "Hong Kong", country: "China", coordinates: [114.1694, 22.3193] },
+  // Oceania
+  { city: "Sydney", country: "Australia", coordinates: [151.2093, -33.8688] },
+  { city: "Melbourne", country: "Australia", coordinates: [144.9631, -37.8136] },
+  { city: "Brisbane", country: "Australia", coordinates: [153.0251, -27.4698] },
+  { city: "Auckland", country: "New Zealand", coordinates: [174.7633, -36.8485] },
+]
+
+export const caseStudy = {
   slug: "aa",
   breadcrumbCurrent: "American Apparel",
   hero: {

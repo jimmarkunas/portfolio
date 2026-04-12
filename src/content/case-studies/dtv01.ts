@@ -1,6 +1,6 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
 
-export const directv01CaseStudy = {
+export const caseStudy = {
   slug: "dtv01",
   breadcrumbCurrent: "DIRECTV",
   hero: {

@@ -1,6 +1,9 @@
 import type { InterviewsContent } from "@/content/interviews/types";
 
-export const enterpriseSlides = {
+const baseSlides = {} as InterviewsContent["slides"];
+
+export const slides = {
+  ...baseSlides,
     who: {
       id: "slide-who",
       title: "Who I Am",
@@ -377,15 +380,4 @@ export const enterpriseSlides = {
         },
       ],
     },
-} satisfies Pick<
-  InterviewsContent["slides"],
-  | "who"
-  | "outcomes"
-  | "services"
-  | "greatestPm"
-  | "hybridAgile"
-  | "jiraTickets"
-  | "riskLandscape"
-  | "statusReport"
-  | "composableStack"
->;
+} satisfies InterviewsContent["slides"];

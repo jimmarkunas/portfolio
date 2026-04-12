@@ -1,6 +1,9 @@
 import type { InterviewsContent } from "@/content/interviews/types";
 
-export const leadershipSlides = {
+const baseSlides = {} as InterviewsContent["slides"];
+
+export const slides = {
+  ...baseSlides,
     whyJim: {
       id: "slide-why-jim",
       title: "Why Jim Markunas?",
@@ -55,4 +58,4 @@ export const leadershipSlides = {
       linkedin: "linkedin.com/in/jimmarkunas",
       readyText: "Ready for Questions",
     },
-} satisfies Pick<InterviewsContent["slides"], "whyJim" | "rescuePlan" | "thankYou">;
+} satisfies InterviewsContent["slides"];

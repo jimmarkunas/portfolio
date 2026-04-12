@@ -1,7 +1,7 @@
-import { enterpriseSlides } from "./slides/enterprise";
-import { leadershipSlides } from "./slides/leadership";
-import { legacyTalkSlides } from "./slides/legacy-talk";
-import type { InterviewsContent } from "./types";
+import { slides as leadershipCloseSlides } from "@/content/interviews/slides/leadership-close";
+import { slides as legacyModernizationSlides } from "@/content/interviews/slides/legacy-modernization";
+import { slides as productDeliverySlides } from "@/content/interviews/slides/product-delivery";
+import type { InterviewsContent } from "@/content/interviews/types";
 
 export * from "./types";
 
@@ -29,7 +29,7 @@ const buildSlideTitles = (slides: InterviewsContent["slides"]): string[] => [
   slides.thankYou.title,
 ];
 
-export const interviewContent: InterviewsContent = {
+export const interviewContent = {
   brandLogo: {
     id: "ujcg-logo",
     src: "/panels/01-global/ujcg-logo-f3f3f3-65.svg",
@@ -48,10 +48,10 @@ export const interviewContent: InterviewsContent = {
   },
   slideTitles: [],
   slides: {
-    ...enterpriseSlides,
-    ...legacyTalkSlides,
-    ...leadershipSlides,
+    ...productDeliverySlides,
+    ...legacyModernizationSlides,
+    ...leadershipCloseSlides,
   },
-};
+} satisfies InterviewsContent;
 
 interviewContent.slideTitles = buildSlideTitles(interviewContent.slides);

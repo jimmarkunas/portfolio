@@ -1,6 +1,6 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
 
-export const zevoCaseStudy = {
+export const caseStudy = {
   slug: "zevo",
   breadcrumbCurrent: "ZEVO",
   hero: {

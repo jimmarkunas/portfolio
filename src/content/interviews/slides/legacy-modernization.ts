@@ -1,6 +1,9 @@
 import type { InterviewsContent } from "@/content/interviews/types";
 
-export const legacyTalkSlides = {
+const baseSlides = {} as InterviewsContent["slides"];
+
+export const slides = {
+  ...baseSlides,
     titleSlide: {
       id: "slide-title",
       eyebrow: "Panel Discussion",
@@ -125,17 +128,4 @@ export const legacyTalkSlides = {
       secondStepLabel: "Github Commit",
       completionText: "Presentation Complete",
     },
-} satisfies Pick<
-  InterviewsContent["slides"],
-  | "titleSlide"
-  | "cover"
-  | "boehringer"
-  | "modere"
-  | "engineers"
-  | "goal"
-  | "tools"
-  | "preSetup"
-  | "buildPart1"
-  | "buildPart2"
-  | "finalize"
->;
+} satisfies InterviewsContent["slides"];
