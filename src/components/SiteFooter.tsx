@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
-import { footerNavLinks, footerSocialLinks, siteCta, siteIdentity } from "@/content/site"
+import { footerNavLinks, footerSocialLinks, siteCta, siteIdentity, siteRoutes } from "@/content/site"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 const BOOK_CALL_HREF = siteCta.bookingUrls.siteShell
@@ -86,7 +86,7 @@ export function SiteFooter() {
               </p>
               <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
                 <Link
-                  href="/cv"
+                  href={siteRoutes.cv}
                   className="type-ui-md inline-flex min-h-[48px] items-center rounded-[50px] border border-white/20 px-5 font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:text-[#447ACB]"
                 >
                   My CV

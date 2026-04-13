@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react"
 
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { portfolioContent } from "@/content/site"
+import { portfolioContent, siteRoutes } from "@/content/site"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 type PortfolioSectionCopy = {
@@ -139,7 +139,7 @@ export function PortfolioFounderSections({
   portfolio,
   founder,
   ctaLabel = "See More",
-  ctaHref = "/work/",
+  ctaHref = siteRoutes.work,
   showCta = true,
 }: PortfolioFounderSectionsProps) {
   const reduceMotion = useReducedMotion()

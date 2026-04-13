@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode } from "react"
 import Link from "next/link"
 
 import { ArrowUpRightIcon, StarIcon } from "@/components/icons/ui-icons"
+import { siteRoutes } from "@/content/site"
 
 export type HighlightArtVariant = "featuredTube" | "whiteCubes" | "blueCube" | "oliveSphere" | "redSphere" | "orangeDisk" | "mintColumn"
 
@@ -197,7 +198,7 @@ export function HighlightCard({
 }) {
   return (
     <Link
-      href="/work"
+      href={siteRoutes.work}
       aria-label={`${category}: ${title}. ${readTime}`}
       className="group block"
     >

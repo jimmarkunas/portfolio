@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, Maximize, Minimize, ArrowRight } from 'lucide-react';
+import { presentationSlideMotion } from '@/lib/motion';
 
 interface SlideProps {
   children: React.ReactNode;
@@ -14,10 +15,10 @@ const Slide = ({ children, isActive }: SlideProps) => {
     <AnimatePresence mode="wait">
       {isActive && (
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          initial={presentationSlideMotion.initial}
+          animate={presentationSlideMotion.animate}
+          exit={presentationSlideMotion.exit}
+          transition={presentationSlideMotion.transition}
           className="slide-content h-full w-full"
         >
           {children}

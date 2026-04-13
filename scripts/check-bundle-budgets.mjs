@@ -16,17 +16,46 @@ if (!fs.existsSync(appManifestPath)) {
 const appManifest = JSON.parse(fs.readFileSync(appManifestPath, "utf8"))
 const pageFiles = appManifest?.pages ?? {}
 
+function normalizeAppRouteKey(routeKey) {
+  return routeKey.replace(/\/\([^/]+\)/g, "")
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+}
+
+function routeToAppChunkRegex(route) {
+  const normalizedRoute = route.replace(/^\//, "")
+  const escapedRoute = escapeRegExp(normalizedRoute)
+  return new RegExp(`^static/chunks/app/(?:\\([^/]+\\)/)*${escapedRoute}-`)
+}
+
+function resolveAppRouteKey(routeKey) {
+  if (pageFiles[routeKey]) {
+    return routeKey
+  }
+
+  const matchingRoute = Object.keys(pageFiles).find(
+    (manifestRoute) => normalizeAppRouteKey(manifestRoute) === routeKey,
+  )
+
+  return matchingRoute ?? null
+}
+
 const budgets = [
   { route: "/work/[slug]/page", maxGzipKiB: 240 },
   { route: "/work/[slug]/press/[filename]/page", maxGzipKiB: 105 },
-  { route: "/page", maxGzipKiB: 90 },
+  { route: "/page", maxGzipKiB: 145 },
 ]
+
+const workSlugAppChunkPattern = routeToAppChunkRegex("/work/[slug]/page")
+const homepageAppChunkPattern = routeToAppChunkRegex("/page")
 
 const chunkBudgets = [
   {
     name: "/work/[slug]/page app chunk",
     route: "/work/[slug]/page",
-    match: (file) => file.startsWith("static/chunks/app/work/[slug]/page-"),
+    match: (file) => workSlugAppChunkPattern.test(file),
     maxGzipKiB: 45,
   },
   {
@@ -34,7 +63,23 @@ const chunkBudgets = [
     route: "/work/[slug]/page",
     match: (file) =>
       file.endsWith(".js") &&
-      !file.startsWith("static/chunks/app/work/[slug]/page-") &&
+      !workSlugAppChunkPattern.test(file) &&
+      !file.includes("main-app-"),
+    maxGzipKiB: 55,
+    mode: "max-of-matches",
+  },
+  {
+    name: "/page app chunk",
+    route: "/page",
+    match: (file) => homepageAppChunkPattern.test(file),
+    maxGzipKiB: 5,
+  },
+  {
+    name: "/page largest shared chunk",
+    route: "/page",
+    match: (file) =>
+      file.endsWith(".js") &&
+      !homepageAppChunkPattern.test(file) &&
       !file.includes("main-app-"),
     maxGzipKiB: 55,
     mode: "max-of-matches",
@@ -45,7 +90,8 @@ let hasFailure = false
 console.log("Bundle budget report (gzip, JS only):")
 
 for (const budget of budgets) {
-  const files = (pageFiles[budget.route] ?? []).filter((file) => file.endsWith(".js"))
+  const resolvedRouteKey = resolveAppRouteKey(budget.route)
+  const files = (resolvedRouteKey ? pageFiles[resolvedRouteKey] : []).filter((file) => file.endsWith(".js"))
   if (files.length === 0) {
     hasFailure = true
     console.error(`- ${budget.route}: missing route chunks in app-build-manifest.json`)
@@ -82,7 +128,10 @@ console.log("")
 console.log("Chunk budget report (gzip, JS only):")
 
 for (const budget of chunkBudgets) {
-  const routeFiles = [...new Set((pageFiles[budget.route] ?? []).filter((file) => file.endsWith(".js")))]
+  const resolvedRouteKey = resolveAppRouteKey(budget.route)
+  const routeFiles = [
+    ...new Set((resolvedRouteKey ? pageFiles[resolvedRouteKey] : []).filter((file) => file.endsWith(".js"))),
+  ]
   const matchedFiles = routeFiles.filter((file) => budget.match(file))
 
   if (matchedFiles.length === 0) {

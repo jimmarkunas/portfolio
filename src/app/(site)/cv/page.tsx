@@ -6,13 +6,13 @@ import type { ReactNode } from "react"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
-import { cvContent } from "@/content/site"
+import { cvContent, siteCanonicalPaths, siteRoutes } from "@/content/site"
 import { buildPageMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = buildPageMetadata({
   title: "CV",
   description: cvContent.meta.description,
-  canonicalPath: "/cv",
+  canonicalPath: siteCanonicalPaths.cv,
 })
 
 function SectionPill({ label, className = "" }: { label: string; className?: string }) {
@@ -74,7 +74,7 @@ export default function CvPage() {
                   {cvContent.impactStats.map((stat, index) => (
                     <CvReveal key={stat.label} preset="card" delay={index * 0.04} className="h-full">
                       <Link
-                        href={stat.href ?? "/work"}
+                        href={stat.href ?? siteRoutes.work}
                         className={`flex h-full flex-col items-center justify-center gap-3 rounded-[10px] bg-white px-6 py-6 text-center outline outline-1 outline-black/5 ${hoverLiftClass} md:px-7 md:py-7`}
                       >
                         <div className="type-stat-number text-[#242840]">

@@ -9,7 +9,7 @@ import { HomepageTestimonialsSection } from "@/components/homepage/sections/Home
 import { HomepageJourneySection } from "@/components/homepage/sections/HomepageJourneySection"
 import { PullQuote } from "@/components/PullQuote"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
-import { siteCta } from "@/content/site"
+import { siteCta, siteRoutes } from "@/content/site"
 
 import { getHomepageText } from "./homepage"
 
@@ -72,7 +72,7 @@ export default function Homepage() {
             portfolio={sections.portfolio}
             founder={sections.portfolio.moreProjects}
             ctaLabel={sections.highlights.cta}
-            ctaHref="/work/"
+            ctaHref={siteRoutes.work}
             showCta
           />
         </Container>

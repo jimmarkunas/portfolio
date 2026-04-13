@@ -8,8 +8,10 @@ export {
   footerNavLinks,
   footerSocialLinks,
   primaryNavLinks,
+  siteCanonicalPaths,
   siteCta,
   siteIdentity,
+  siteRoutes,
 } from "./config"
 export type {
   CareerStatEntry,

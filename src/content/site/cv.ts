@@ -2,7 +2,7 @@ import type {
   DescribedSection,
   TitledSection,
 } from "@/content/site/types"
-import { siteCta, siteExternalUrls, siteIdentity } from "./config"
+import { siteCta, siteExternalUrls, siteIdentity, siteRoutes } from "./config"
 
 type CvLink = {
   label: string
@@ -406,6 +406,6 @@ export const siteContent = {
     body:
       "If your roadmap is blocked by cross-team complexity, platform risk, or execution drift, I can help you turn it into a shipped, measurable program.",
     primary: { label: siteCta.bookCallLabel, href: siteCta.bookingUrls.siteShell, external: true },
-    secondary: { label: "See Case Studies", href: "/work" },
+    secondary: { label: "See Case Studies", href: siteRoutes.work },
   },
 } satisfies CvContent

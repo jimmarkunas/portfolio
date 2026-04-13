@@ -3,12 +3,41 @@ export type SiteNavLink = {
   label: string
 }
 
+export type SiteRoute = "/" | `/${string}/`
+
 export type SiteSocialLink = {
   href: string
   label: string
   icon: string
   external?: boolean
 }
+
+function toCanonicalPath(route: SiteRoute): `/${string}` {
+  return route === "/" ? route : (route.slice(0, -1) as `/${string}`)
+}
+
+export const siteRoutes = {
+  home: "/",
+  work: "/work/",
+  services: "/services/",
+  cv: "/cv/",
+  contact: "/contact/",
+  interview: "/interview/",
+  interviews: "/interviews/",
+  geekle2026: "/geekle2026/",
+  previewHomepage: "/preview/homepage/",
+  freebies: "/freebies/",
+} as const satisfies Record<string, SiteRoute>
+
+export const siteCanonicalPaths = {
+  work: toCanonicalPath(siteRoutes.work),
+  services: toCanonicalPath(siteRoutes.services),
+  cv: toCanonicalPath(siteRoutes.cv),
+  contact: toCanonicalPath(siteRoutes.contact),
+  interview: toCanonicalPath(siteRoutes.interview),
+  geekle2026: toCanonicalPath(siteRoutes.geekle2026),
+  previewHomepage: toCanonicalPath(siteRoutes.previewHomepage),
+} as const
 
 export const siteIdentity = {
   displayName: "James Markunas",
@@ -32,19 +61,19 @@ export const siteBookingUrls = {
 } as const
 
 export const primaryNavLinks = [
-  { href: "/work", label: "Portfolio" },
-  { href: "/services", label: "Services" },
-  { href: "/cv", label: "CV" },
-  { href: "/contact", label: "Contact" },
+  { href: siteRoutes.work, label: "Portfolio" },
+  { href: siteRoutes.services, label: "Services" },
+  { href: siteRoutes.cv, label: "CV" },
+  { href: siteRoutes.contact, label: "Contact" },
 ] satisfies SiteNavLink[]
 
 export const footerNavLinks = [
   ...primaryNavLinks,
-  { href: "/freebies", label: "Freebies" },
+  { href: siteRoutes.freebies, label: "Freebies" },
 ] satisfies SiteNavLink[]
 
 export const footerSocialLinks = [
-  { href: "/contact", label: "Email", icon: "/sm-icons/email.png" },
+  { href: siteRoutes.contact, label: "Email", icon: "/sm-icons/email.png" },
   {
     href: siteExternalUrls.linkedin,
     label: "LinkedIn",
