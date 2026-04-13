@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "dtv01",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "Turning DIRECTV's Slow Offer Engine to a Revenue Machine",
     intro:
       "DIRECTV was bleeding subscribers and money, but its upsell engine was trapped inside siloed teams, legacy systems, and a 6-month launch cycle too slow to matter. I came in to give the offer journey an owner, operationalize digital revenue across channels, and turn seasonal chaos into a repeatable commercial machine. I helped drive $55M in Q4 2025 upsell revenue and cut time-to-value by 60 days.",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "murad",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "Murad: From Chaos to Creation",
     intro:
       "Murad needed a cheaper, cleaner path off Magento and a subscription-first global DTC model that could sit on top of Oracle EBS and a messy pile of enterprise integrations. By the time I came in, two agencies were fired, the politics were bad, and three weeks before launch we learned BigCommerce couldn’t settle credit card payments over the API",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

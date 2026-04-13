@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react"
 
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
-import { primaryNavLinks, siteCta } from "@/content/site"
+import { primaryNavLinks, siteCta, siteIdentity } from "@/content/site"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 const BOOK_CALL_HREF = siteCta.bookingUrls.siteShell
@@ -38,7 +38,7 @@ export function SiteHeader() {
               <FinoxGlyph className="h-[1.7em] w-[1.7em] shrink-0 text-current" />
             </span>
             <span className="font-display text-[1.15em] font-bold leading-none tracking-tight">
-              James Markunas
+              {siteIdentity.displayName}
             </span>
           </Link>
 

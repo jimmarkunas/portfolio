@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.typecheck.json",
+  "compilerOptions": {
+    "incremental": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/components/homepage/**/*.ts",
+    "src/components/homepage/**/*.tsx",
+    "src/components/SiteHeader.tsx",
+    "src/components/SiteFooter.tsx",
+    "src/content/site/**/*.ts",
+    "src/app/interviews/**/*.ts",
+    "src/app/interviews/**/*.tsx",
+    "src/app/geekle2026/**/*.ts",
+    "src/app/geekle2026/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    ".next-dev"
+  ]
+}

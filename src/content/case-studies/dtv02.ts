@@ -1,4 +1,5 @@
 import type { CaseStudyData, CaseStudyExperienceRow } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const directveverywhereCopy = {
   heroIntro: `DIRECTV Everywhere was supposed to prove the company could bring premium video beyond the set-top box, but marketing had sold the dream before the product was ready. I stepped in to align 35+ teams around one product truth & turn a public promise into a scalable streaming experience.`,
@@ -144,11 +145,7 @@ export const caseStudy = {
   hero: {
     title: "Leading the Launch of DIRECTV Everywhere",
     intro: directveverywhereCopy.heroIntro,
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

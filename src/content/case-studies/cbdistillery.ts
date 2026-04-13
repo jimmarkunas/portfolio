@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "cbdistillery",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "CBDistillery's: From De-Banked to $40m",
     intro:
       "CBDistillery was at risk of losing the ability to process cards. Despite millions in revenue, BC's payment partners wouldn't touch them, and without a banking solution the company would die instantly. I led negotiations that secured Square, forced a custom BigCommerce, Square & OrderGroove integration, and turned a payments rescue into $40m.",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

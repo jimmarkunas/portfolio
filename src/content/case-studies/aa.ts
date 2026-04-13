@@ -1,4 +1,5 @@
 import type { CaseStudyData, GlobalLocation } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const americanapparelCopy = {
   heroIntro: `American Apparel was in trouble. The founder was pushed out. The board gave us a blunt mandate: move the numbers fast with digital, or there won't be a company left. I partnered with Amanda Lopez, AA's Director of eCommerce, to drive a global Oracle ATG & RFID-driven commerce engine across 16 regional sites and 260+ stores, while the rest of the business was on fire.`,
@@ -124,11 +125,7 @@ export const caseStudy = {
   hero: {
     title: "Saving American Apparel With Digital Commerce",
     intro: americanapparelCopy.heroIntro,
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

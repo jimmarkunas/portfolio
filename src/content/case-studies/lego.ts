@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "lego",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "LEGO's Digital Transformation With BCG",
     intro:
       "LEGO was behind competitors like Target, Disney, and Walmart, and its shop experience wasn’t ready for the next stage of growth. I came in as scrum master and solution architect to turn strategy into shippable product behavior and build the infrastructure linking retail, ecommerce, and digital.",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

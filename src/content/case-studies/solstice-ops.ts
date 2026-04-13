@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "solstice-ops",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "Solstice Ops: Service Visibility for Field Teams",
     intro:
       "I partnered with operations, product, and service leaders to redesign a fragmented field-service experience into a clear system teams could trust. The work focused on clarity, speed, and consistency across every workflow touchpoint.",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

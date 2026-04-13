@@ -4,8 +4,9 @@ import type {
   ResultTab,
   ResultsView,
 } from "./modere.types";
+import { siteCta } from "@/content/site";
 
-export const DEFAULT_CTA_HREF = "https://calendar.app.google/iwn5AUyWqJadMK2t9";
+export const DEFAULT_CTA_HREF = siteCta.bookingUrls.caseStudyDefault;
 export const STAGE_HEIGHT_CLASS = "lg:h-[760px] lg:min-h-[760px]";
 export const CONSOLE_PREFIX = ">";
 

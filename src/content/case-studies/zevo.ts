@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { founderCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "zevo",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "Interactive Internet TV Before it was Mainstream",
     intro:
       "I co-founded ZEVO in 2010 on a bet that internet-native TV would combine live programming, on-demand viewing, and commerce. I led product vision, roadmap, and fundraising through meetings with Oak, Norwest, TCV, and Ashton Kutcher’s team.",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/Cc4kuM7cqTyiXQx66",
-      external: true,
-    },
+    primaryCta: founderCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

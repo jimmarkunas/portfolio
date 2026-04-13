@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "foh",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "Turning Frederick's Into Celebrity-Driven DTC",
     intro:
       "After buying Frederick’s of Hollywood out of bankruptcy, ABG needed a fast digital-first relaunch built around Megan Fox as co-owner, without repeating the cost and weight of a traditional enterprise stack. I helped deliver a Shopify Plus flagship built for traffic, promotions, and a cleaner operating model.",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

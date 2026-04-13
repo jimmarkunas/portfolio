@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { founderCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "cwg",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "Chicks With Guns: Building a Digital Music Magazine",
     intro:
       "In 2009, I founded Chicks With Guns as an online-first music publication built for web, mobile, and video. We grew to 250k+ monthly uniques, launched a native iOS app, built a global staff, and were recognized by Yahoo as a top online music publication.",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/Cc4kuM7cqTyiXQx66",
-      external: true,
-    },
+    primaryCta: founderCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

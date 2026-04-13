@@ -1,3 +1,5 @@
+import { siteCta } from "@/content/site"
+
 const fallbackHomepageText = {
   hero: {
     role: "Program Leader",
@@ -64,7 +66,7 @@ const fallbackHomepageText = {
       title: "Press Coverage",
       intro:
         "As a digital commerce thought leader, I’ve been featured by the tech press and on podcasts for my point of view on commerce, platform modernization, and complex delivery. Digital transformation and AI are hot topics, and I'm flattered to be able to help shape the future of eCom. ",
-      cta: "Book A Call",
+      cta: siteCta.bookCallLabel,
     },
   },
   experienceCards: [

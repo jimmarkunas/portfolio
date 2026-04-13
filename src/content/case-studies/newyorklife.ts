@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "newyorklife",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "New York Life's Scalable Product Platform",
     intro:
       "Legal exposure, brand drift, and a brutal review process were dragging across thousands of agent sites. I helped turn that mess into a governed multi-tenant platform that cut launches from months to weeks, reduced review cycles from weeks to days, and drove roughly 200% more leads and appointments.",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

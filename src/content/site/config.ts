@@ -10,11 +10,25 @@ export type SiteSocialLink = {
   external?: boolean
 }
 
+export const siteIdentity = {
+  displayName: "James Markunas",
+  linkedinLabel: "linkedin.com/in/jimmarkunas",
+} as const
+
 export const siteExternalUrls = {
   linkedin: "https://linkedin.com/in/jimmarkunas",
   x: "https://x.com/jimmarkunas",
   notionPortfolio:
     "https://jimmarkunas.notion.site/Jim-Markunas-Portfolio-2d03c5a05926807393b0f0af6a634226",
+} as const
+
+const HOMEPAGE_HERO_BOOKING_URL = "https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+
+export const siteBookingUrls = {
+  siteShell: "https://calendar.app.google/TkZumQx7Bfyou7G26",
+  homepageHero: HOMEPAGE_HERO_BOOKING_URL,
+  caseStudyDefault: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
+  founderCaseStudy: HOMEPAGE_HERO_BOOKING_URL,
 } as const
 
 export const primaryNavLinks = [
@@ -66,8 +80,5 @@ export const contactSocialLinks = [
 
 export const siteCta = {
   bookCallLabel: "Book a Call",
-  bookingUrls: {
-    siteShell: "https://calendar.app.google/TkZumQx7Bfyou7G26",
-    homepageHero: "https://calendar.app.google/Cc4kuM7cqTyiXQx66",
-  },
+  bookingUrls: siteBookingUrls,
 } as const

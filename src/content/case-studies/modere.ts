@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "modere",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "Winning Awards And Making $1B With Modere",
     intro:
       "Work Nominated for a MACH Composable Award: Modere wanted to double from $500M GMV to $1B, but the old stack and market-by-market launch model were already breaking under the weight. I helped push the platform toward a composable architecture and protect the system decisions that gave the business a cleaner path to scale.",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

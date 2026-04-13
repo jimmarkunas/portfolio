@@ -1,4 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies/types"
+import { defaultCaseStudyPrimaryCta } from "@/content/case-studies/shared"
 
 export const caseStudy = {
   slug: "cps",
@@ -7,11 +8,7 @@ export const caseStudy = {
     title: "CPS Energy: Smart Streetlight & Smart City Operations",
     intro:
       "San Antonio's streets were going dark, residents were losing confidence in a city service nobody could explain, and the repair loop, spanning resident intake, SAP, dispatch, and field crews, had no clear owner. I took accountability for the product, program, and service design that connected all of it, cutting repair calls by 73%, shrinking repair windows from roughly 3 weeks to 1–4 days, and reducing truck rolls by 43%.",
-    primaryCta: {
-      label: "Book a Call",
-      href: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-      external: true,
-    },
+    primaryCta: defaultCaseStudyPrimaryCta,
     secondaryCta: {
       label: "View CV",
       href: "/cv",

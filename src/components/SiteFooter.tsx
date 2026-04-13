@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
-import { footerNavLinks, footerSocialLinks, siteCta } from "@/content/site"
+import { footerNavLinks, footerSocialLinks, siteCta, siteIdentity } from "@/content/site"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 const BOOK_CALL_HREF = siteCta.bookingUrls.siteShell
@@ -131,7 +131,7 @@ export function SiteFooter() {
               {/* 1. Logo/wordmark — top on mobile, center on desktop */}
               <Link href="/" className="group flex items-center justify-center gap-3 text-[#FEFEFE] transition-colors hover:text-[#447ACB] lg:order-2 lg:justify-self-center">
                 <FinoxGlyph className="h-6 w-6 shrink-0" />
-                <span className="type-footer-brand">James Markunas</span>
+                <span className="type-footer-brand">{siteIdentity.displayName}</span>
               </Link>
 
               {/* 2. Social icons — middle on mobile, left on desktop */}

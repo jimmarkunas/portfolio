@@ -9,7 +9,7 @@ export {
   footerSocialLinks,
   primaryNavLinks,
   siteCta,
-  siteExternalUrls,
+  siteIdentity,
 } from "./config"
 export type {
   CareerStatEntry,

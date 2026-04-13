@@ -2,6 +2,7 @@ import type {
   DescribedSection,
   TitledSection,
 } from "@/content/site/types"
+import { siteCta, siteExternalUrls, siteIdentity } from "./config"
 
 type CvLink = {
   label: string
@@ -164,7 +165,7 @@ export const siteContent = {
       "Brought in to rescue distressed engagements at Boehringer Ingelheim, BigCommerce, and Fusion92 after prior PMs failed. 20+ years and 75+ enterprise projects delivering $1.3B+ in verified business impact.",
     links: [
       { label: "jimmarkunas@gmail.com", href: "mailto:jimmarkunas@gmail.com" },
-      { label: "linkedin.com/in/jimmarkunas", href: "https://linkedin.com/in/jimmarkunas", external: true },
+      { label: siteIdentity.linkedinLabel, href: siteExternalUrls.linkedin, external: true },
       { label: "greatestpmever.com", href: "https://greatestpmever.com", external: true },
     ] satisfies CvLink[],
   },
@@ -404,7 +405,7 @@ export const siteContent = {
     heading: "Need someone who can lead complex delivery under pressure?",
     body:
       "If your roadmap is blocked by cross-team complexity, platform risk, or execution drift, I can help you turn it into a shipped, measurable program.",
-    primary: { label: "Book a Call", href: "https://calendar.app.google/TkZumQx7Bfyou7G26", external: true },
+    primary: { label: siteCta.bookCallLabel, href: siteCta.bookingUrls.siteShell, external: true },
     secondary: { label: "See Case Studies", href: "/work" },
   },
 } satisfies CvContent

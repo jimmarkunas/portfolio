@@ -30,6 +30,9 @@ import type {
   ModereSimulationProps,
   ResultsView,
 } from "./modere.types";
+import { siteCta } from "@/content/site";
+
+const BOOK_CALL_LABEL = siteCta.bookCallLabel;
 
 function cn(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ");
@@ -348,13 +351,13 @@ function OutcomeView({
             onClick={() => {
               trackEvent("book_call_click", {
                 location: "case_study_cta",
-                label: "Book a Call",
+                label: BOOK_CALL_LABEL,
                 href: ctaHref,
                 page_path: getCurrentPagePath(),
               });
             }}
           >
-            Book a Call
+            {BOOK_CALL_LABEL}
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>
