@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useParams } from "next/navigation"
 import { Container } from "@/components/Container"
 import type { CaseStudyExperienceRow } from "@/content/case-studies"
+import { findRecognitionArticle } from "@/lib/press"
 
 const PDFJS_SCRIPT_SRC = "/pdfjs/pdf.min.js"
 const PDFJS_WORKER_SRC = "/pdfjs/pdf.worker.min.js"
@@ -17,25 +18,6 @@ type PressViewerProps = {
   rows: CaseStudyExperienceRow[]
   backHref: string
   breadcrumbs: Breadcrumb[]
-}
-
-function findArticle(rows: CaseStudyExperienceRow[], filename: string) {
-  const normalize = (value: string) =>
-    decodeURIComponent(value)
-      .replace(/\.[^.]+$/, "")
-      .replace(/_compressed$/i, "")
-      .replace(/[\s_]+/g, "-")
-      .replace(/-+/g, "-")
-      .toLowerCase()
-
-  const decoded = decodeURIComponent(filename)
-  const normalizedFilename = normalize(filename)
-  return rows.find((row) => {
-    const slug = row.file?.split("/").pop()?.replace(/\.[^.]+$/, "")
-    if (!slug) return false
-
-    return slug === decoded || slug === filename || normalize(slug) === normalizedFilename
-  })
 }
 
 function loadScript(src: string): Promise<void> {
@@ -67,7 +49,7 @@ const PDF_EXTENSIONS = /\.pdf$/i
 export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
   const params = useParams()
   const filename = typeof params.filename === "string" ? params.filename : ""
-  const article = findArticle(rows, filename)
+  const article = findRecognitionArticle(rows, filename)
   const filePath = article?.file ?? null
   const encodedFilePath = filePath ? encodeURI(filePath) : null
   const isImage = filePath ? IMAGE_EXTENSIONS.test(filePath) : false

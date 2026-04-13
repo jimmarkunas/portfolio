@@ -1,0 +1,17 @@
+{
+  "thresholdsKiB": {
+    "routeTotalIncrease": 6,
+    "chunkIncrease": 4
+  },
+  "routeTotalsKiB": {
+    "/work/[slug]/page": 147.5,
+    "/work/[slug]/press/[filename]/page": 95.5,
+    "/page": 140.2
+  },
+  "chunkMetricsKiB": {
+    "/work/[slug]/page app chunk": 11.6,
+    "/work/[slug]/page largest shared chunk": 52.5,
+    "/page app chunk": 0.1,
+    "/page largest shared chunk": 52.5
+  }
+}

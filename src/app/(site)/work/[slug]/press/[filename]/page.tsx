@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { PressViewer } from "@/components/PressViewer"
 import { loadAllCaseStudies, loadCaseStudyBySlug } from "@/content/case-studies"
-import type { CaseStudyExperienceRow } from "@/content/case-studies"
+import { findRecognitionArticle } from "@/lib/press"
 import { buildPageMetadata } from "@/lib/seo"
 
 const legacyPressFilenameAliases: Record<string, string[]> = {
@@ -11,27 +11,6 @@ const legacyPressFilenameAliases: Record<string, string[]> = {
   "03-The-Guardian-LEGO-Digital": ["03 The Guardian LEGO Digital"],
   "04-MIS-Quarterly-Executive": ["04 MIS Quarterly Executive", "04 MIS Quarterly Executive_compressed"],
   "05-BCG-Interview-Lego-CEO": ["05 BCG Interview Lego CEO"],
-}
-
-function normalizePressFilename(value: string): string {
-  return decodeURIComponent(value)
-    .replace(/\.[^.]+$/, "")
-    .replace(/_compressed$/i, "")
-    .replace(/[\s_]+/g, "-")
-    .replace(/-+/g, "-")
-    .toLowerCase()
-}
-
-function findRecognitionArticle(rows: CaseStudyExperienceRow[], filename: string): CaseStudyExperienceRow | undefined {
-  const decoded = decodeURIComponent(filename)
-  const normalizedFilename = normalizePressFilename(filename)
-
-  return rows.find((row) => {
-    const slug = row.file?.split("/").pop()?.replace(/\.[^.]+$/, "")
-    if (!slug) return false
-
-    return slug === decoded || slug === filename || normalizePressFilename(slug) === normalizedFilename
-  })
 }
 
 export async function generateStaticParams() {

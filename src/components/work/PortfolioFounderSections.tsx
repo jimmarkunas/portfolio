@@ -2,138 +2,22 @@
 
 import Link from "next/link"
 import { motion, useInView, useReducedMotion } from "framer-motion"
-import { useEffect, useRef, useState, type ReactNode } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { portfolioContent, siteRoutes } from "@/content/site"
-import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
-
-type PortfolioSectionCopy = {
-  pill: string
-  title: string
-  categories: string[]
-}
-
-type FounderSectionCopy = {
-  pill: string
-  title: string
-}
-
-type PortfolioFounderSectionsProps = {
-  portfolio: PortfolioSectionCopy
-  founder: FounderSectionCopy
-  ctaLabel?: string
-  ctaHref?: string
-  showCta?: boolean
-}
-
-type PortfolioImageCardProps = {
-  href: string
-  src: string
-  alt: string
-  aspectRatio: string
-  className: string
-  wrapperClassName?: string
-  loading?: "eager" | "lazy"
-  fetchPriority?: "high" | "low" | "auto"
-}
-
-type StaggerItemProps = {
-  children: ReactNode
-  className?: string
-  reduceMotion: boolean
-  itemY: number
-}
+import { PortfolioImageCard } from "./portfolio-founder/PortfolioImageCard"
+import { StaggerItem } from "./portfolio-founder/StaggerItem"
+import {
+  portfolioHoverCardClass,
+  portfolioHoverWideCardClass,
+} from "./portfolio-founder/styles"
+import type { PortfolioFounderSectionsProps } from "./portfolio-founder/types"
 
 const ease: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
-function PortfolioHoverIcon() {
-  return (
-    <span
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
-    >
-      <span className="inline-flex h-20 w-20 items-center justify-center gap-2.5 rounded-[100px] bg-[#447ACB] p-3.5 outline outline-1 outline-offset-[-1px] outline-[#447ACB]/10">
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M29.3402 17.2594L13.5615 33.0381L10.9688 30.4454L26.7475 14.6667H12.8403V11H33.0069V31.1667H29.3402V17.2594Z"
-            fill="#FFE6E6"
-          />
-        </svg>
-      </span>
-    </span>
-  )
-}
-
-const portfolioHoverCardClass =
-  "group relative block w-full overflow-hidden rounded-[10px] outline outline-1 outline-offset-[-1px] outline-transparent transition-[transform,outline,box-shadow] duration-150 hover:-translate-y-0.5 hover:outline-[3px] hover:outline-blue-500 hover:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)] focus-visible:outline-[3px] focus-visible:outline-blue-500 focus-visible:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)]"
-const portfolioHoverWideCardClass =
-  "group relative block w-full overflow-hidden rounded-xl outline outline-1 outline-offset-[-1px] outline-transparent transition-[transform,outline,box-shadow] duration-150 hover:-translate-y-0.5 hover:outline-[3px] hover:outline-blue-500 hover:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)] focus-visible:outline-[3px] focus-visible:outline-blue-500 focus-visible:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)]"
-const portfolioHoverOverlayClass =
-  "pointer-events-none absolute inset-0 bg-[#222222]/45 opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
-
 const { founderShowcase, portfolioShowcase } = portfolioContent
-
-function PortfolioImageCard({
-  href,
-  src,
-  alt,
-  aspectRatio,
-  className,
-  wrapperClassName,
-  loading,
-  fetchPriority,
-}: PortfolioImageCardProps) {
-  return (
-    <div className={wrapperClassName}>
-      <Link
-        href={href}
-        className={className}
-        style={{ aspectRatio }}
-        onClick={() => {
-          trackEvent("case_study_open", {
-            location: "portfolio_grid",
-            label: alt,
-            page_path: getCurrentPagePath(),
-          })
-        }}
-      >
-        <img
-          src={src}
-          alt={alt}
-          loading={loading}
-          fetchPriority={fetchPriority}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-        <PortfolioHoverIcon />
-      </Link>
-    </div>
-  )
-}
-
-function StaggerItem({ children, className, reduceMotion, itemY }: StaggerItemProps) {
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>
-  }
-
-  return (
-    <motion.div
-      className={className}
-      variants={{
-        hidden: { opacity: 0, y: itemY },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.32, ease: [0.25, 0.1, 0.25, 1] },
-        },
-      }}
-    >
-      {children}
-    </motion.div>
-  )
-}
 
 export function PortfolioFounderSections({
   portfolio,
@@ -573,24 +457,13 @@ export function PortfolioFounderSections({
         >
           {founderShowcase.map((card) => (
             <StaggerItem key={card.href} reduceMotion={reduceMotionEnabled} itemY={itemY}>
-              <div className="flex flex-col items-start gap-4">
-                <Link
-                  href={card.href}
-                  className={portfolioHoverCardClass}
-                  style={{ aspectRatio: card.aspectRatio }}
-                  onClick={() => {
-                    trackEvent("case_study_open", {
-                      location: "portfolio_grid",
-                      label: card.alt,
-                      page_path: getCurrentPagePath(),
-                    })
-                  }}
-                >
-                  <img src={card.src} alt={card.alt} className="absolute inset-0 h-full w-full object-cover" />
-                  <span aria-hidden="true" className={portfolioHoverOverlayClass} />
-                  <PortfolioHoverIcon />
-                </Link>
-              </div>
+              <PortfolioImageCard
+                href={card.href}
+                src={card.src}
+                alt={card.alt}
+                aspectRatio={card.aspectRatio}
+                className={portfolioHoverCardClass}
+              />
             </StaggerItem>
           ))}
         </motion.div>
