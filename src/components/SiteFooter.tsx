@@ -146,7 +146,7 @@ export function SiteFooter() {
                 {footerNavLinks.map((link, index) => (
                   <div key={link.href} className="contents">
                     {index > 0 ? <span className="text-white/40">·</span> : null}
-                    <Link className="transition-colors hover:text-[#447ACB]" href={link.href}>
+                    <Link className="inline-flex min-h-[44px] items-center md:min-h-0 transition-colors hover:text-[#447ACB]" href={link.href}>
                       {link.label}
                     </Link>
                   </div>

@@ -45,7 +45,7 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                   location="case_study_recognition"
                   target="_blank"
                   rel="noreferrer"
-                  className={`type-p4 mt-2 hidden items-center gap-1.5 whitespace-nowrap text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] ${hoverLiftClass} md:inline-flex lg:hidden`}
+                  className={`type-p4 mt-2 hidden min-h-[44px] items-center gap-1.5 whitespace-nowrap text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] ${hoverLiftClass} md:inline-flex lg:hidden`}
                 >
                   <span>{data.hero.primaryCta.label}</span>
                   <ExternalLinkMiniIcon />
@@ -62,7 +62,7 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                 location="case_study_recognition"
                 target="_blank"
                 rel="noreferrer"
-                className={`type-p4 inline-flex items-center gap-1.5 text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] ${hoverLiftClass} md:hidden lg:inline-flex`}
+                className={`type-p4 inline-flex min-h-[44px] items-center gap-1.5 text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] lg:min-h-0 ${hoverLiftClass} md:hidden lg:inline-flex`}
               >
                 <span>{data.hero.primaryCta.label}</span>
                 <ExternalLinkMiniIcon />

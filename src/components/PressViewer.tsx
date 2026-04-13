@@ -184,7 +184,7 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
             </nav>
             <Link
               href={backHref}
-              className="ml-auto rounded-full bg-[#222222] px-4 py-2 text-[13px] font-medium text-white hover:bg-[#447ACB] transition-colors"
+              className="ml-auto inline-flex min-h-[44px] items-center rounded-full bg-[#222222] px-4 py-2 text-[13px] font-medium text-white transition-colors hover:bg-[#447ACB]"
             >
               ← Back to Case Study
             </Link>
@@ -209,7 +209,7 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
                     href={article.url ?? filePath ?? ""}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#447ACB] underline underline-offset-4 hover:text-[#2d5fa8]"
+                      className="inline-flex min-h-[44px] items-center md:min-h-0 text-[#447ACB] underline underline-offset-4 hover:text-[#2d5fa8]"
                   >
                     View source ↗
                   </a>
@@ -237,19 +237,19 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => handleZoom(-0.15)}
-                className="rounded-lg border border-black/10 px-3 py-1.5 text-[13px] text-[#222222] hover:bg-[#F5F7FA] transition-colors"
+                className="inline-flex min-h-[44px] items-center rounded-lg border border-black/10 px-3 py-1.5 text-[13px] text-[#222222] transition-colors hover:bg-[#F5F7FA]"
               >
                 Zoom Out
               </button>
               <button
                 onClick={() => handleZoom(0.15)}
-                className="rounded-lg border border-black/10 px-3 py-1.5 text-[13px] text-[#222222] hover:bg-[#F5F7FA] transition-colors"
+                className="inline-flex min-h-[44px] items-center rounded-lg border border-black/10 px-3 py-1.5 text-[13px] text-[#222222] transition-colors hover:bg-[#F5F7FA]"
               >
                 Zoom In
               </button>
               <button
                 onClick={handleFitWidth}
-                className="rounded-lg border border-black/10 px-3 py-1.5 text-[13px] text-[#222222] hover:bg-[#F5F7FA] transition-colors"
+                className="inline-flex min-h-[44px] items-center rounded-lg border border-black/10 px-3 py-1.5 text-[13px] text-[#222222] transition-colors hover:bg-[#F5F7FA]"
               >
                 Fit Width
               </button>
@@ -274,7 +274,7 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
                   href={encodedFilePath ?? filePath}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-[#222222] px-4 py-2 text-[13px] font-medium text-white hover:bg-black transition-colors"
+                  className="inline-flex min-h-[44px] items-center rounded-full bg-[#222222] px-4 py-2 text-[13px] font-medium text-white transition-colors hover:bg-black"
                 >
                   Open file directly
                 </a>
@@ -301,11 +301,11 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-          <Link href={backHref} className="text-[14px] text-black/55 hover:text-[#222222]">
+          <Link href={backHref} className="inline-flex min-h-[44px] items-center md:min-h-0 text-[14px] text-black/55 hover:text-[#222222]">
             ← Back to Press &amp; Accolades
           </Link>
           {filePath && (
-            <a href={encodedFilePath ?? filePath} target="_blank" rel="noopener noreferrer" className="text-[14px] text-black/55 hover:text-[#222222]">
+            <a href={encodedFilePath ?? filePath} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center md:min-h-0 text-[14px] text-black/55 hover:text-[#222222]">
               Open in new tab ↗
             </a>
           )}
