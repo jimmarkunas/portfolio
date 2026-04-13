@@ -6,7 +6,7 @@ import { slides as legacyModernizationSlides } from "@/content/interviews/slides
 import { slides as productDeliverySlides } from "@/content/interviews/slides/product-delivery";
 import type { InterviewsContent } from "@/content/interviews/types";
 
-export * from "./types";
+export * from "@/content/interviews/types";
 
 const buildSlideTitles = (slides: InterviewsContent["slides"]): string[] => [
   slides.who.title,
