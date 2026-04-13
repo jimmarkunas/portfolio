@@ -10,23 +10,23 @@ import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
 import { interviewContent } from "@/content/interviews";
 import { presentationSlideMotion } from "@/lib/motion";
 
-import Slide5HybridDiagram from "./components/slides/Slide5HybridDiagram";
-import Slide6JiraDiagram from "./components/slides/Slide6JiraDiagram";
-import Slide7RiskLandscape from "./components/slides/Slide7RiskLandscape";
-import Slide8StatusReport from "./components/slides/Slide8StatusReport";
-import Slide8ComposableStack from "./components/slides/Slide8ComposableStack";
-import SlideGreatestPm from "./components/slides/SlideGreatestPm";
-import SlideOutcomes from "./components/slides/SlideOutcomes";
-import SlidePmPopQuiz from "./components/slides/SlidePmPopQuiz";
-import SlideRescuePlan from "./components/slides/SlideRescuePlan";
-import SlideServices from "./components/slides/SlideServices";
-import SlideThankYou from "./components/slides/SlideThankYou";
-import SlideWho from "./components/slides/SlideWho";
-import SlideWhyJim from "./components/slides/SlideWhyJim";
+import Slide5HybridDiagram from "@/app/interviews/components/slides/Slide5HybridDiagram";
+import Slide6JiraDiagram from "@/app/interviews/components/slides/Slide6JiraDiagram";
+import Slide7RiskLandscape from "@/app/interviews/components/slides/Slide7RiskLandscape";
+import Slide8StatusReport from "@/app/interviews/components/slides/Slide8StatusReport";
+import Slide8ComposableStack from "@/app/interviews/components/slides/Slide8ComposableStack";
+import SlideGreatestPm from "@/app/interviews/components/slides/SlideGreatestPm";
+import SlideOutcomes from "@/app/interviews/components/slides/SlideOutcomes";
+import SlidePmPopQuiz from "@/app/interviews/components/slides/SlidePmPopQuiz";
+import SlideRescuePlan from "@/app/interviews/components/slides/SlideRescuePlan";
+import SlideServices from "@/app/interviews/components/slides/SlideServices";
+import SlideThankYou from "@/app/interviews/components/slides/SlideThankYou";
+import SlideWho from "@/app/interviews/components/slides/SlideWho";
+import SlideWhyJim from "@/app/interviews/components/slides/SlideWhyJim";
 import {
   buildInterviewSlideRegistry,
   PM_POP_QUIZ_SLIDE_ID,
-} from "./interviewSlideRegistry";
+} from "@/app/interviews/interviewSlideRegistry";
 
 interface SlideProps {
   children: React.ReactNode;
