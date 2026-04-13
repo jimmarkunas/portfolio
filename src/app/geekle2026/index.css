@@ -3,3 +3,9 @@
 .geekle2026-page .slide-content {
   justify-content: center;
 }
+
+@media (max-width: 767px) {
+  .geekle2026-page .slide-content {
+    justify-content: flex-start;
+  }
+}

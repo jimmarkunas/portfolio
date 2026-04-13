@@ -107,15 +107,15 @@ export default function Geekle2026App() {
     // Slide 4: Engineers vs Executives
     <div key="slide-4" className="space-y-12">
       <h2 className="h2-display text-center">Engineers, Designers & Artists <br/><span className="text-finox-gray italic">vs.</span><br/> Managers & Executives</h2>
-      <div className="flex justify-center gap-8 pt-8">
+      <div className="flex flex-col items-center gap-6 pt-8 md:flex-row md:justify-center md:gap-8">
         {[
           { label: "Attention", value: "Shorter Spans" },
           { label: "Focus", value: "ROI & Value Prop" },
           { label: "Stance", value: "Risk-Averse" }
         ].map((item, i) => (
-          <div key={i} className="flex flex-col items-center p-8 border border-finox-slate rounded-full w-64 h-64 justify-center text-center space-y-2">
+          <div key={i} className="flex h-52 w-52 flex-col items-center justify-center space-y-2 rounded-full border border-finox-slate p-6 text-center md:h-64 md:w-64 md:p-8">
             <span className="uppercase text-[10px] tracking-[0.3em] text-finox-gray">{item.label}</span>
-            <span className="text-xl font-medium">{item.value}</span>
+            <span className="text-lg font-medium md:text-xl">{item.value}</span>
           </div>
         ))}
       </div>
@@ -225,21 +225,21 @@ export default function Geekle2026App() {
     // Slide 10: Finalize the App
     <div key="slide-10" className="flex flex-col items-center justify-center h-full space-y-16">
       <h2 className="h2-display">Finalize the App</h2>
-      <div className="flex gap-12">
+      <div className="flex flex-col items-center gap-8 md:flex-row md:gap-12">
         <div className="flex flex-col items-center space-y-4">
-          <div className="w-32 h-32 rounded-full border-2 border-white flex items-center justify-center">
+          <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-white md:h-32 md:w-32">
             <span className="text-3xl font-mono">01</span>
           </div>
-          <p className="text-xl uppercase tracking-widest text-finox-gray">Code or UI tweaks</p>
+          <p className="text-center text-base uppercase tracking-widest text-finox-gray md:text-xl">Code or UI tweaks</p>
         </div>
         <div className="flex items-center">
-          <div className="w-24 h-px bg-finox-slate"></div>
+          <div className="h-10 w-px bg-finox-slate md:h-px md:w-24"></div>
         </div>
         <div className="flex flex-col items-center space-y-4">
-          <div className="w-32 h-32 rounded-full bg-white flex items-center justify-center">
+          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white md:h-32 md:w-32">
             <span className="text-3xl font-mono text-finox-dark">02</span>
           </div>
-          <p className="text-xl uppercase tracking-widest text-white">Github Commit</p>
+          <p className="text-center text-base uppercase tracking-widest text-white md:text-xl">Github Commit</p>
         </div>
       </div>
       <motion.div 
@@ -305,7 +305,7 @@ export default function Geekle2026App() {
         </div>
 
         {/* Navigation Controls */}
-        <div className="absolute bottom-8 left-0 w-full px-12 flex justify-between items-center z-50">
+        <div className="absolute bottom-4 left-0 z-50 flex w-full items-center justify-between px-4 sm:px-6 md:bottom-8 md:px-12">
           <div className="flex gap-4">
             <button 
               onClick={prevSlide}

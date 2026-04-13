@@ -232,7 +232,7 @@ export default function InterviewsApp() {
           <Slide isActive={true}>{slides[currentSlide]}</Slide>
         </div>
 
-        <div ref={navRef} className="absolute bottom-8 left-0 w-full px-12 flex justify-between items-center z-50">
+        <div ref={navRef} className="absolute bottom-4 left-0 z-50 flex w-full items-center justify-between px-4 sm:px-6 md:bottom-8 md:px-12">
           <div className="flex gap-4">
             <button
               onClick={prevSlide}

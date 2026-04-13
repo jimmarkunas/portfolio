@@ -9,6 +9,7 @@ import { CareerStatsSection } from "@/components/services-contact/CareerStatsSec
 import { ServicesProjectsSection } from "@/components/services-contact/ServicesProjectsSection"
 import { ScrollToSectionOnMount } from "@/components/services-contact/ScrollToSectionOnMount"
 import { MotionReveal } from "@/components/motion/MotionReveal"
+import { TrackedExternalLink } from "@/components/analytics/TrackedExternalLink"
 import { contactSocialLinks, servicesContactContent } from "@/content/site"
 
 const GlobalLocationsMap = dynamic(
@@ -35,6 +36,7 @@ export function ServicesContactPage({ entryPoint = "services" }: ServicesContact
   const { contact, careerStats, projectShowcase, servicesMap } = servicesContactContent
   const { hero, sections, experienceCards } = getHomepageText()
   const scrollToContact = entryPoint === "contact"
+  const socialLinkLocation = entryPoint === "contact" ? "contact_page" : "services_page"
 
   return (
     <main className="min-h-full bg-[#F3F3F3]">
@@ -71,12 +73,14 @@ export function ServicesContactPage({ entryPoint = "services" }: ServicesContact
                     <h3 className="text-2xl leading-8 text-zinc-600">Follow Me</h3>
                     <div className="mt-2 flex items-center gap-1">
                       {contactSocialLinks.map((link) => (
-                        <a
+                        <TrackedExternalLink
                           key={link.label}
                           href={link.href}
+                          label={link.label}
+                          location={socialLinkLocation}
+                          ariaLabel={link.label}
                           target="_blank"
                           rel="noreferrer"
-                          aria-label={link.label}
                           className="inline-flex h-12 w-12 items-center justify-center text-[#1F1F1F] transition-[transform,color] duration-200 hover:-translate-y-0.5 hover:text-[#447ACB]"
                         >
                           <span
@@ -93,7 +97,7 @@ export function ServicesContactPage({ entryPoint = "services" }: ServicesContact
                               WebkitMaskSize: "contain",
                             }}
                           />
-                        </a>
+                        </TrackedExternalLink>
                       ))}
                     </div>
                   </div>

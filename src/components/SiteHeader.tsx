@@ -100,7 +100,7 @@ export function SiteHeader() {
               {primaryNavLinks.map((link) => (
                 <Link
                   key={link.href}
-                  className={`text-[18px] font-normal leading-none text-[#222222] transition-colors hover:text-[#447ACB] ${hoverLiftClass}`}
+                  className={`inline-flex min-h-[44px] items-center text-[18px] font-normal leading-none text-[#222222] transition-colors hover:text-[#447ACB] ${hoverLiftClass}`}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                 >

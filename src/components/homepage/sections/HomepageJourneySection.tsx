@@ -20,7 +20,7 @@ const featuredTagClass =
 const defaultTagClass =
   "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#EFEFEF] px-4 text-[16px] leading-6 text-[#3A3A3A] outline outline-1 outline-black/10"
 const hoverLiftClass = "transition-transform duration-300 hover:-translate-y-0.5"
-const journeyCtaClass = `type-p2 inline-flex items-center gap-2 text-[#222222] underline underline-offset-4 ${hoverLiftClass}`
+const journeyCtaClass = `type-p2 inline-flex min-h-[44px] items-center gap-2 text-[#222222] underline underline-offset-4 ${hoverLiftClass}`
 
 type HomepageJourneySectionProps = {
   section: HomepageText["sections"]["journey"]

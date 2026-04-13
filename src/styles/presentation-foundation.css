@@ -119,3 +119,34 @@
 :where(.interviews-page, .geekle2026-page) .border-finox-slate\/50 {
   border-color: rgb(75 81 84 / 0.5);
 }
+
+@media (max-width: 767px) {
+  :where(.interviews-page, .geekle2026-page) .presentation-container {
+    aspect-ratio: auto;
+    width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    max-width: 100%;
+  }
+
+  :where(.interviews-page, .geekle2026-page) .slide-content {
+    overflow-y: auto;
+    padding: 1rem 1rem 6.5rem;
+  }
+
+  :where(.interviews-page, .geekle2026-page) .h1-display {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  :where(.interviews-page, .geekle2026-page) .h2-display {
+    font-size: clamp(1.5rem, 7vw, 2.25rem);
+  }
+
+  :where(.interviews-page, .geekle2026-page) .p-large {
+    font-size: 1.125rem;
+  }
+
+  :where(.interviews-page, .geekle2026-page) .p-regular {
+    font-size: 1rem;
+  }
+}

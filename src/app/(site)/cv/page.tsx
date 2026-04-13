@@ -6,6 +6,7 @@ import type { ReactNode } from "react"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
+import { TrackedExternalLink } from "@/components/analytics/TrackedExternalLink"
 import { cvContent, siteCanonicalPaths, siteRoutes } from "@/content/site"
 import { buildPageMetadata } from "@/lib/seo"
 
@@ -59,14 +60,16 @@ export default function CvPage() {
 
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                   {cvContent.downloads.map((asset, index) => (
-                    <a
+                    <TrackedExternalLink
                       key={asset.href}
                       href={asset.href}
+                      label={asset.label}
+                      location="cv_download"
                       download={asset.fileName}
                       className={`${index === 0 ? "button-primary" : "button-secondary"} ${hoverLiftClass}`}
                     >
                       {asset.label}
-                    </a>
+                    </TrackedExternalLink>
                   ))}
                 </div>
 
@@ -101,15 +104,17 @@ export default function CvPage() {
 
                     <div className="flex flex-col gap-3 lg:pt-2">
                       <p className="type-p3 text-[#555555]">{cvContent.experienceIntro}</p>
-                      <a
+                      <TrackedExternalLink
                         href={cvContent.cta.primary.href}
+                        label={cvContent.cta.primary.label}
+                        location="cv_page"
                         target="_blank"
                         rel="noreferrer"
                         className={`inline-text-cta type-p3 w-fit ${hoverLiftClass}`}
                       >
                         <span>{cvContent.cta.primary.label}</span>
                         <ArrowUpRight className="h-3.5 w-3.5" />
-                      </a>
+                      </TrackedExternalLink>
                     </div>
                   </div>
 

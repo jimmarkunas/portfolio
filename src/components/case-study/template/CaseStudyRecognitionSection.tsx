@@ -6,6 +6,7 @@ import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { TagPill } from "@/components/TagPill"
+import { TrackedExternalLink } from "@/components/analytics/TrackedExternalLink"
 
 import { ExternalLinkMiniIcon } from "./CaseStudyTemplateIcons"
 const hoverLiftClass = "transition-[transform,color] duration-200 hover:-translate-y-0.5"
@@ -38,30 +39,34 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                 <h2 className="type-h3 w-full max-w-none lg:max-w-[396px] text-[#222222]">
                   {data.recognition.title}
                 </h2>
-                <a
+                <TrackedExternalLink
                   href={data.hero.primaryCta.href}
+                  label={data.hero.primaryCta.label}
+                  location="case_study_recognition"
                   target="_blank"
                   rel="noreferrer"
                   className={`type-p4 mt-2 hidden items-center gap-1.5 whitespace-nowrap text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] ${hoverLiftClass} md:inline-flex lg:hidden`}
                 >
                   <span>{data.hero.primaryCta.label}</span>
                   <ExternalLinkMiniIcon />
-                </a>
+                </TrackedExternalLink>
               </div>
             </div>
 
             <div className="flex w-full max-w-none flex-col items-start gap-6 lg:col-span-2 lg:col-start-2 lg:max-w-[636px]">
               <p className="type-p3 text-black/65">{data.recognition.intro}</p>
 
-              <a
+              <TrackedExternalLink
                 href={data.hero.primaryCta.href}
+                label={data.hero.primaryCta.label}
+                location="case_study_recognition"
                 target="_blank"
                 rel="noreferrer"
                 className={`type-p4 inline-flex items-center gap-1.5 text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] ${hoverLiftClass} md:hidden lg:inline-flex`}
               >
                 <span>{data.hero.primaryCta.label}</span>
                 <ExternalLinkMiniIcon />
-              </a>
+              </TrackedExternalLink>
             </div>
           </MotionReveal>
 
