@@ -5,8 +5,18 @@ import fs from "node:fs"
 import path from "node:path"
 
 const DEAD_CODE_TSCONFIG = "tsconfig.deadcode.json"
-const SITE_BARREL_PATH = "src/content/site/index.ts"
-const SITE_MODULE_SPECIFIERS = ["@/content/site", "@/content/site/index"]
+const BARREL_CHECKS = [
+  {
+    name: "site",
+    barrelPath: "src/content/site/index.ts",
+    moduleSpecifiers: ["@/content/site", "@/content/site/index"],
+  },
+  {
+    name: "interviews",
+    barrelPath: "src/content/interviews/index.ts",
+    moduleSpecifiers: ["@/content/interviews", "@/content/interviews/index"],
+  },
+]
 
 function walkSourceFiles(dir, collector) {
   const entries = fs.readdirSync(dir, { withFileTypes: true })
@@ -39,6 +49,8 @@ function runDeadCodeTypecheck() {
 
 function extractBarrelNamedExports(sourceText) {
   const exportPattern = /export(?:\s+type)?\s*\{([^}]+)\}\s*from\s*["'][^"']+["']/g
+  const localExportPattern =
+    /^export\s+(?:const|let|var|class|interface|type|(?:async\s+)?function)\s+([A-Za-z_$][\w$]*)/gm
   const names = new Set()
   let match
 
@@ -62,12 +74,19 @@ function extractBarrelNamedExports(sourceText) {
     }
   }
 
+  while ((match = localExportPattern.exec(sourceText)) !== null) {
+    const exportedName = match[1]
+    if (exportedName && exportedName !== "default") {
+      names.add(exportedName)
+    }
+  }
+
   return [...names]
 }
 
-function isExportImported(exportName, sourceText) {
+function isExportImported(exportName, sourceText, moduleSpecifiers) {
   const escapedName = escapeRegExp(exportName)
-  const escapedSpecifiers = SITE_MODULE_SPECIFIERS.map((specifier) => escapeRegExp(specifier)).join("|")
+  const escapedSpecifiers = moduleSpecifiers.map((specifier) => escapeRegExp(specifier)).join("|")
   const importPattern = new RegExp(
     `import\\s+(?:type\\s+)?\\{[\\s\\S]*?\\b${escapedName}\\b[\\s\\S]*?\\}\\s+from\\s+["'](?:${escapedSpecifiers})["']`,
     "m",
@@ -75,24 +94,24 @@ function isExportImported(exportName, sourceText) {
   return importPattern.test(sourceText)
 }
 
-function runSiteBarrelUsageCheck() {
-  if (!fs.existsSync(SITE_BARREL_PATH)) {
-    console.error(`Dead-code check failed: missing barrel file ${SITE_BARREL_PATH}`)
+function runBarrelUsageCheck(check) {
+  if (!fs.existsSync(check.barrelPath)) {
+    console.error(`Dead-code check failed: missing barrel file ${check.barrelPath}`)
     process.exit(1)
   }
 
-  const barrelSource = fs.readFileSync(SITE_BARREL_PATH, "utf8")
+  const barrelSource = fs.readFileSync(check.barrelPath, "utf8")
   const exportedNames = extractBarrelNamedExports(barrelSource)
 
   const sourceFiles = []
   walkSourceFiles("src", sourceFiles)
-  const candidateFiles = sourceFiles.filter((file) => file !== SITE_BARREL_PATH)
+  const candidateFiles = sourceFiles.filter((file) => file !== check.barrelPath)
 
   const unusedExports = []
   for (const exportName of exportedNames) {
     const hasImport = candidateFiles.some((file) => {
       const sourceText = fs.readFileSync(file, "utf8")
-      return isExportImported(exportName, sourceText)
+      return isExportImported(exportName, sourceText, check.moduleSpecifiers)
     })
 
     if (!hasImport) {
@@ -101,15 +120,17 @@ function runSiteBarrelUsageCheck() {
   }
 
   if (unusedExports.length > 0) {
-    console.error("Dead-code check failed: unused site barrel exports detected.")
+    console.error(`Dead-code check failed: unused ${check.name} barrel exports detected.`)
     for (const exportName of unusedExports) {
       console.error(`- ${exportName}`)
     }
     process.exit(1)
   }
 
-  console.log(`Site barrel export check passed (${exportedNames.length} exports scanned).`)
+  console.log(`${check.name} barrel export check passed (${exportedNames.length} exports scanned).`)
 }
 
 runDeadCodeTypecheck()
-runSiteBarrelUsageCheck()
+for (const check of BARREL_CHECKS) {
+  runBarrelUsageCheck(check)
+}

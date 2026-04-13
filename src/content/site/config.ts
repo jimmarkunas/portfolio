@@ -1,3 +1,5 @@
+import bookingPolicy from "./booking-policy.json"
+
 export type SiteNavLink = {
   href: `/${string}`
   label: string
@@ -10,10 +12,6 @@ export type SiteSocialLink = {
   label: string
   icon: string
   external?: boolean
-}
-
-function toCanonicalPath(route: SiteRoute): `/${string}` {
-  return route === "/" ? route : (route.slice(0, -1) as `/${string}`)
 }
 
 export const siteRoutes = {
@@ -29,15 +27,31 @@ export const siteRoutes = {
   freebies: "/freebies/",
 } as const satisfies Record<string, SiteRoute>
 
-export const siteCanonicalPaths = {
-  work: toCanonicalPath(siteRoutes.work),
-  services: toCanonicalPath(siteRoutes.services),
-  cv: toCanonicalPath(siteRoutes.cv),
-  contact: toCanonicalPath(siteRoutes.contact),
-  interview: toCanonicalPath(siteRoutes.interview),
-  geekle2026: toCanonicalPath(siteRoutes.geekle2026),
-  previewHomepage: toCanonicalPath(siteRoutes.previewHomepage),
-} as const
+function toCanonicalPath(route: SiteRoute): `/${string}` {
+  return route === "/" ? route : (route.slice(0, -1) as `/${string}`)
+}
+
+// siteRoutes retain trailing slashes for route constants and smoke checks.
+// Canonical metadata paths intentionally strip trailing slashes.
+const CANONICAL_ROUTE_KEYS = [
+  "work",
+  "services",
+  "cv",
+  "contact",
+  "interview",
+  "geekle2026",
+  "previewHomepage",
+] as const satisfies ReadonlyArray<keyof typeof siteRoutes>
+
+function buildCanonicalPaths<const T extends readonly (keyof typeof siteRoutes)[]>(
+  routes: typeof siteRoutes,
+  keys: T,
+) {
+  const entries = keys.map((key) => [key, toCanonicalPath(routes[key])] as const)
+  return Object.fromEntries(entries) as { [K in T[number]]: `/${string}` }
+}
+
+export const siteCanonicalPaths = buildCanonicalPaths(siteRoutes, CANONICAL_ROUTE_KEYS)
 
 export const siteIdentity = {
   displayName: "James Markunas",
@@ -51,13 +65,13 @@ export const siteExternalUrls = {
     "https://jimmarkunas.notion.site/Jim-Markunas-Portfolio-2d03c5a05926807393b0f0af6a634226",
 } as const
 
-const HOMEPAGE_HERO_BOOKING_URL = "https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+const HOMEPAGE_HERO_BOOKING_URL = bookingPolicy.homepageHero
 
 export const siteBookingUrls = {
-  siteShell: "https://calendar.app.google/TkZumQx7Bfyou7G26",
+  siteShell: bookingPolicy.siteShell,
   homepageHero: HOMEPAGE_HERO_BOOKING_URL,
-  caseStudyDefault: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
-  founderCaseStudy: HOMEPAGE_HERO_BOOKING_URL,
+  caseStudyDefault: bookingPolicy.caseStudyDefault,
+  founderCaseStudy: bookingPolicy.founderCaseStudy,
 } as const
 
 export const primaryNavLinks = [

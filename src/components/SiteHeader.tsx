@@ -4,23 +4,14 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 
+import { TrackedBookCallLink } from "@/components/analytics/TrackedSiteShellLinks"
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
 import { primaryNavLinks, siteCta, siteIdentity } from "@/content/site"
-import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 const BOOK_CALL_HREF = siteCta.bookingUrls.siteShell
 const BOOK_CALL_LABEL = siteCta.bookCallLabel
 const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
-
-function trackHeaderBookCall() {
-  trackEvent("book_call_click", {
-    location: "header",
-    label: BOOK_CALL_LABEL,
-    href: BOOK_CALL_HREF,
-    page_path: getCurrentPagePath(),
-  })
-}
 
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false)
@@ -55,12 +46,11 @@ export function SiteHeader() {
               ))}
             </nav>
 
-            <a
+            <TrackedBookCallLink
               href={BOOK_CALL_HREF}
+              label={BOOK_CALL_LABEL}
+              location="header"
               className={`inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${hoverLiftClass}`}
-              target="_blank"
-              rel="noreferrer"
-              onClick={trackHeaderBookCall}
             >
               <span>{BOOK_CALL_LABEL}</span>
               <svg
@@ -76,7 +66,7 @@ export function SiteHeader() {
                   fill="currentColor"
                 />
               </svg>
-            </a>
+            </TrackedBookCallLink>
           </div>
 
           <button
@@ -109,13 +99,12 @@ export function SiteHeader() {
               ))}
             </nav>
 
-            <a
+            <TrackedBookCallLink
               href={BOOK_CALL_HREF}
+              label={BOOK_CALL_LABEL}
+              location="header"
               className={`mt-5 inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${hoverLiftClass}`}
-              target="_blank"
-              rel="noreferrer"
               onClick={() => {
-                trackHeaderBookCall()
                 setIsOpen(false)
               }}
             >
@@ -133,7 +122,7 @@ export function SiteHeader() {
                   fill="currentColor"
                 />
               </svg>
-            </a>
+            </TrackedBookCallLink>
           </div>
         ) : null}
       </Container>

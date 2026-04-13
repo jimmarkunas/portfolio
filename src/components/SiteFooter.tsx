@@ -2,10 +2,13 @@
 
 import Link from "next/link"
 
+import {
+  TrackedBookCallLink,
+  TrackedOutboundIconLink,
+} from "@/components/analytics/TrackedSiteShellLinks"
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
 import { footerNavLinks, footerSocialLinks, siteCta, siteIdentity, siteRoutes } from "@/content/site"
-import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 const BOOK_CALL_HREF = siteCta.bookingUrls.siteShell
 const BOOK_CALL_LABEL = siteCta.bookCallLabel
@@ -43,23 +46,15 @@ function SocialIcon({
 
   if (external) {
     return (
-      <a
+      <TrackedOutboundIconLink
         href={href}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={label}
+        label={label}
+        location="footer"
         className={className}
-        onClick={() => {
-          trackEvent("outbound_link_click", {
-            location: "footer",
-            label,
-            href,
-            page_path: getCurrentPagePath(),
-          })
-        }}
+        ariaLabel={label}
       >
         {content}
-      </a>
+      </TrackedOutboundIconLink>
     )
   }
 
@@ -91,19 +86,11 @@ export function SiteFooter() {
                 >
                   My CV
                 </Link>
-                <a
+                <TrackedBookCallLink
                   href={BOOK_CALL_HREF}
-                  target="_blank"
-                  rel="noreferrer"
+                  label={BOOK_CALL_LABEL}
+                  location="footer"
                   className="type-ui-md inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#447ACB] bg-[#447ACB] px-5 font-medium text-[#FEFEFE] transition-colors hover:border-[#2F5EA4] hover:bg-[#2F5EA4]"
-                  onClick={() => {
-                    trackEvent("book_call_click", {
-                      location: "footer",
-                      label: BOOK_CALL_LABEL,
-                      href: BOOK_CALL_HREF,
-                      page_path: getCurrentPagePath(),
-                    })
-                  }}
                 >
                   <span>{BOOK_CALL_LABEL}</span>
                   <svg
@@ -119,7 +106,7 @@ export function SiteFooter() {
                       fill="currentColor"
                     />
                   </svg>
-                </a>
+                </TrackedBookCallLink>
               </div>
             </div>
           </div>

@@ -42,10 +42,26 @@ function runNodeScript(scriptPath, cwd) {
 
 function createBookingFixture(baseDir, options = {}) {
   const founderUrl = "https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+
+  writeFile(
+    baseDir,
+    "src/content/site/booking-policy.json",
+    `${JSON.stringify(
+      {
+        siteShell: "https://calendar.app.google/TkZumQx7Bfyou7G26",
+        homepageHero: founderUrl,
+        caseStudyDefault: "https://calendar.app.google/iwn5AUyWqJadMK2t9",
+        founderCaseStudy: founderUrl,
+      },
+      null,
+      2,
+    )}\n`,
+  )
+
   writeFile(
     baseDir,
     "src/content/site/config.ts",
-    `const HOMEPAGE_HERO_BOOKING_URL = "${founderUrl}"\n\nexport const siteBookingUrls = {\n  siteShell: "https://calendar.app.google/TkZumQx7Bfyou7G26",\n  homepageHero: HOMEPAGE_HERO_BOOKING_URL,\n  caseStudyDefault: "https://calendar.app.google/iwn5AUyWqJadMK2t9",\n  founderCaseStudy: HOMEPAGE_HERO_BOOKING_URL,\n} as const\n`,
+    `import bookingPolicy from "./booking-policy.json"\n\nconst HOMEPAGE_HERO_BOOKING_URL = bookingPolicy.homepageHero\n\nexport const siteBookingUrls = {\n  siteShell: bookingPolicy.siteShell,\n  homepageHero: HOMEPAGE_HERO_BOOKING_URL,\n  caseStudyDefault: bookingPolicy.caseStudyDefault,\n  founderCaseStudy: bookingPolicy.founderCaseStudy,\n} as const\n`,
   )
 
   writeFile(baseDir, "src/components/example.tsx", "export const Example = () => null\n")

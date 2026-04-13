@@ -3,15 +3,21 @@
 import fs from "node:fs"
 import path from "node:path"
 
-const SITE_CONFIG_PATH = "src/content/site/config.ts"
+const BOOKING_POLICY_PATH = "src/content/site/booking-policy.json"
 const SOURCE_ROOT = "src"
-const SOURCE_ALLOWLIST = new Set([SITE_CONFIG_PATH])
+const SOURCE_ALLOWLIST = new Set([])
 const PUBLIC_HTML_ROOT = "public"
 const STATIC_FOUNDER_HTML_ALLOWLIST = new Set([
   "public/founder/cwg/index.html",
   "public/founder/zevo/index.html",
 ])
 const BOOKING_URL_PATTERN = /https:\/\/calendar\.app\.google\/[A-Za-z0-9_-]+/g
+const REQUIRED_POLICY_KEYS = [
+  "siteShell",
+  "homepageHero",
+  "caseStudyDefault",
+  "founderCaseStudy",
+]
 
 function walkFiles(dirPath, collector, fileFilter) {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true })
@@ -34,23 +40,26 @@ function walkFiles(dirPath, collector, fileFilter) {
   }
 }
 
-function readFounderBookingUrl() {
-  if (!fs.existsSync(SITE_CONFIG_PATH)) {
-    throw new Error(`Booking URL drift check failed: missing ${SITE_CONFIG_PATH}`)
+function readBookingPolicy() {
+  if (!fs.existsSync(BOOKING_POLICY_PATH)) {
+    throw new Error(`Booking URL drift check failed: missing ${BOOKING_POLICY_PATH}`)
   }
 
-  const sourceText = fs.readFileSync(SITE_CONFIG_PATH, "utf8")
-  const founderBookingUrlMatch = sourceText.match(
-    /const\s+HOMEPAGE_HERO_BOOKING_URL\s*=\s*"(https:\/\/calendar\.app\.google\/[A-Za-z0-9_-]+)"/,
-  )
+  const sourceText = fs.readFileSync(BOOKING_POLICY_PATH, "utf8")
+  const policy = JSON.parse(sourceText)
 
-  if (!founderBookingUrlMatch) {
-    throw new Error(
-      "Booking URL drift check failed: could not determine founder booking URL from src/content/site/config.ts",
-    )
+  for (const key of REQUIRED_POLICY_KEYS) {
+    const value = policy[key]
+    if (typeof value !== "string" || !BOOKING_URL_PATTERN.test(value)) {
+      throw new Error(
+        `Booking URL drift check failed: ${BOOKING_POLICY_PATH} must contain a valid calendar URL for "${key}"`,
+      )
+    }
+
+    BOOKING_URL_PATTERN.lastIndex = 0
   }
 
-  return founderBookingUrlMatch[1]
+  return policy
 }
 
 function getLineNumber(sourceText, index) {
@@ -63,7 +72,8 @@ function getLineNumber(sourceText, index) {
   return line
 }
 
-const founderBookingUrl = readFounderBookingUrl()
+const bookingPolicy = readBookingPolicy()
+const founderBookingUrl = bookingPolicy.homepageHero
 
 const sourceFiles = []
 walkFiles(
@@ -126,7 +136,7 @@ for (const filePath of publicHtmlFiles) {
 }
 
 if (driftFindings.length > 0 || staticFounderFindings.length > 0) {
-  console.error("Booking URL drift check failed: found direct calendar URLs outside src/content/site/config.ts")
+  console.error(`Booking URL drift check failed: found direct calendar URLs outside ${BOOKING_POLICY_PATH}`)
   for (const finding of driftFindings) {
     console.error(`- ${finding.filePath}:${finding.line} -> ${finding.value}`)
   }
