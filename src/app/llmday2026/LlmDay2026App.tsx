@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useRef } from "react";
 import { motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
 
@@ -9,11 +9,11 @@ import { llmDay2026Content } from "@/content/llmday2026";
 import { LlmDay2026SlideFrame } from "./components/LlmDay2026SlideFrame";
 import { LlmDay2026TocDialog } from "./components/LlmDay2026TocDialog";
 import { useLlmDay2026Navigation } from "./hooks/useLlmDay2026Navigation";
+import { useLlmDay2026Fullscreen } from "./hooks/useLlmDay2026Fullscreen";
 import { useLlmDay2026Slides } from "./hooks/useLlmDay2026Slides";
 import { usePresentationInsets } from "./hooks/usePresentationInsets";
 
 export default function LlmDay2026App() {
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
   const content = llmDay2026Content;
@@ -23,15 +23,9 @@ export default function LlmDay2026App() {
     content,
   });
 
-  const toggleFullscreen = useCallback(() => {
-    if (!document.fullscreenElement) {
-      containerRef.current?.requestFullscreen();
-      setIsFullscreen(true);
-    } else {
-      document.exitFullscreen();
-      setIsFullscreen(false);
-    }
-  }, []);
+  const { isFullscreen, toggleFullscreen } = useLlmDay2026Fullscreen({
+    containerRef,
+  });
 
   const {
     currentSlide,

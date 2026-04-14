@@ -300,6 +300,8 @@ export interface LlmDay2026Slides {
   };
 }
 
+export type LlmDay2026SlideKey = keyof LlmDay2026Slides;
+
 export interface LlmDay2026Content {
   brandLogo: ImageEntry;
   navigation: {
@@ -314,9 +316,6 @@ export interface LlmDay2026Content {
   diagrams: {
     legacyRevenueFlow: LegacyFlowDiagramCopy;
   };
-  slideRegistry: {
-    id: string;
-    title: string;
-  }[];
+  slideOrder: LlmDay2026SlideKey[];
   slides: LlmDay2026Slides;
 }

@@ -144,7 +144,7 @@ function ComparisonPanel({
 
 export function SlideFrame({ slide }: { slide: Slides["frame"] }) {
   return (
-    <div className="space-y-12">
+    <div className="flex h-full flex-col">
       <div className="flex justify-between">
         <h2 className="h2-display">{slide.title}</h2>
         <div className="grid grid-cols-3 gap-1 opacity-20">
@@ -154,14 +154,18 @@ export function SlideFrame({ slide }: { slide: Slides["frame"] }) {
         </div>
       </div>
 
-      <div className="grid gap-12 lg:grid-cols-2">
-        <ComparisonPanel title={slide.copilotTitle} items={slide.copilot} />
-        <ComparisonPanel title={slide.agentTitle} items={slide.agent} inverted />
-      </div>
+      <div className="flex flex-1 items-center">
+        <div className="w-full space-y-10">
+          <div className="grid gap-12 lg:grid-cols-2">
+            <ComparisonPanel title={slide.copilotTitle} items={slide.copilot} />
+            <ComparisonPanel title={slide.agentTitle} items={slide.agent} inverted />
+          </div>
 
-      <p className="pt-6 text-center text-2xl font-light italic text-finox-gray">
-        {slide.kickerPrefix} <span className="font-medium not-italic text-white">{slide.kickerHighlight}</span>
-      </p>
+          <p className="text-center text-2xl font-light italic text-finox-gray">
+            {slide.kickerPrefix} <span className="font-medium not-italic text-white">{slide.kickerHighlight}</span>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -172,7 +176,7 @@ export function SlideMagicRequirements({
   slide: Slides["magicRequirements"];
 }) {
   return (
-    <div className="space-y-12">
+    <div className="flex h-full flex-col">
       <div className="flex justify-between">
         <div className="space-y-2">
           <h2 className="h2-display">{slide.title}</h2>
@@ -185,17 +189,19 @@ export function SlideMagicRequirements({
         </div>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        {slide.items.map((item) => (
-          <div
-            key={item.id}
-            className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-8 transition-colors hover:bg-white/10"
-          >
-            <p className="font-mono text-xs uppercase tracking-widest text-finox-gray">{item.label}</p>
-            <h3 className="text-2xl font-medium">{item.title}</h3>
-            <p className="text-sm leading-relaxed text-finox-gray">{item.desc}</p>
-          </div>
-        ))}
+      <div className="flex flex-1 items-center">
+        <div className="grid w-full gap-6 md:grid-cols-3">
+          {slide.items.map((item) => (
+            <div
+              key={item.id}
+              className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-8 transition-colors hover:bg-white/10"
+            >
+              <p className="font-mono text-xs uppercase tracking-widest text-finox-gray">{item.label}</p>
+              <h3 className="text-2xl font-medium">{item.title}</h3>
+              <p className="text-sm leading-relaxed text-finox-gray">{item.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

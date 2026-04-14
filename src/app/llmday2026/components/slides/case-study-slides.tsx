@@ -68,55 +68,59 @@ export function SlideSystemArchitecture({
   slide: Slides["systemArchitecture"];
 }) {
   return (
-    <div className="space-y-12">
+    <div className="flex h-full flex-col">
       <h2 className="h2-display">{slide.title}</h2>
 
-      <div className="grid gap-10 lg:grid-cols-3">
-        {slide.roles.map((role) => {
-          const Icon = ROLE_ICONS[role.id as keyof typeof ROLE_ICONS] ?? FileText;
-          return (
-            <div key={role.id} className="flex flex-col items-center space-y-4 text-center">
-              <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-white">
-                <Icon className="h-6 w-6" />
-              </div>
-              <h3 className="text-2xl font-bold tracking-tight">{role.title}</h3>
-              <div className="rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1 text-[10px] font-bold tracking-widest text-blue-400">
-                {role.tag}
-              </div>
-              <p className="max-w-[260px] text-sm leading-relaxed text-finox-gray">{role.desc}</p>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="space-y-10 rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-12">
-        <div className="flex items-center gap-3">
-          <div className="h-6 w-1 rounded-full bg-white" />
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
-            {slide.flowLabel}
-          </span>
-        </div>
-
-        <div className="relative">
-          <div className="absolute left-0 top-8 z-0 hidden h-px w-full bg-white/10 md:block" />
-          <div className="relative z-10 grid gap-6 md:grid-cols-5">
-            {slide.flowNodes.map((node) => (
-              <div key={node.id} className="flex flex-col items-center">
-                <div
-                  className={`mb-5 flex h-16 w-16 items-center justify-center rounded-2xl text-xl font-bold shadow-xl ${
-                    node.emphasized
-                      ? "bg-white text-finox-dark"
-                      : "border border-white/20 bg-finox-dark text-white"
-                  }`}
-                >
-                  {node.step}
+      <div className="flex flex-1 items-center">
+        <div className="w-full space-y-10">
+          <div className="grid gap-10 lg:grid-cols-3">
+            {slide.roles.map((role) => {
+              const Icon = ROLE_ICONS[role.id as keyof typeof ROLE_ICONS] ?? FileText;
+              return (
+                <div key={role.id} className="flex flex-col items-center space-y-4 text-center">
+                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-white">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-2xl font-bold tracking-tight">{role.title}</h3>
+                  <div className="rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1 text-[10px] font-bold tracking-widest text-blue-400">
+                    {role.tag}
+                  </div>
+                  <p className="max-w-[260px] text-sm leading-relaxed text-finox-gray">{role.desc}</p>
                 </div>
-                <p className="text-sm font-bold">{node.title}</p>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-finox-gray">
-                  {node.sub}
-                </p>
+              );
+            })}
+          </div>
+
+          <div className="space-y-10 rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-12">
+            <div className="flex items-center gap-3">
+              <div className="h-6 w-1 rounded-full bg-white" />
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
+                {slide.flowLabel}
+              </span>
+            </div>
+
+            <div className="relative">
+              <div className="absolute left-0 top-8 z-0 hidden h-px w-full bg-white/10 md:block" />
+              <div className="relative z-10 grid gap-6 md:grid-cols-5">
+                {slide.flowNodes.map((node) => (
+                  <div key={node.id} className="flex flex-col items-center">
+                    <div
+                      className={`mb-5 flex h-16 w-16 items-center justify-center rounded-2xl text-xl font-bold shadow-xl ${
+                        node.emphasized
+                          ? "bg-white text-finox-dark"
+                          : "border border-white/20 bg-finox-dark text-white"
+                      }`}
+                    >
+                      {node.step}
+                    </div>
+                    <p className="text-sm font-bold">{node.title}</p>
+                    <p className="text-[9px] font-bold uppercase tracking-widest text-finox-gray">
+                      {node.sub}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
@@ -275,12 +279,14 @@ export function SlideFlowchart({
   diagramCopy: LlmDay2026Content["diagrams"]["legacyRevenueFlow"];
 }) {
   return (
-    <div className="flex h-full flex-col justify-center space-y-8">
-      <div className="space-y-2 text-center">
+    <div className="flex h-full flex-col">
+      <div className="space-y-2">
         <h2 className="h2-display">{slide.title}</h2>
         <p className="text-xl font-light text-finox-gray">{slide.subtitle}</p>
       </div>
-      <LegacyRevenueFlowDiagram automated={automated} diagram={diagramCopy} />
+      <div className="flex flex-1 items-center justify-center">
+        <LegacyRevenueFlowDiagram automated={automated} diagram={diagramCopy} />
+      </div>
     </div>
   );
 }
@@ -373,36 +379,38 @@ function toneClass(tone: Slides["aiAmplified"]["agents"][number]["tone"]) {
 
 export function SlideAiAmplified({ slide }: { slide: Slides["aiAmplified"] }) {
   return (
-    <div className="space-y-12">
+    <div className="flex h-full flex-col">
       <div className="space-y-2">
         <h2 className="h2-display">{slide.title}</h2>
         <p className="text-xl font-light tracking-wide text-finox-gray">{slide.subtitle}</p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        {slide.agents.map((agent) => (
-          <div
-            key={agent.id}
-            className="space-y-6 rounded-3xl border border-white/10 bg-white/5 p-8 transition-all hover:bg-white/10"
-          >
-            <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 ${toneClass(agent.tone)}`}>
-              {agent.id === "ai-reporting" ? (
-                <BarChart3 className="h-6 w-6" />
-              ) : agent.id === "ai-billing-config" ? (
-                <Cpu className="h-6 w-6" />
-              ) : (
-                <Bot className="h-6 w-6" />
-              )}
+      <div className="flex flex-1 items-center">
+        <div className="grid w-full gap-6 md:grid-cols-3">
+          {slide.agents.map((agent) => (
+            <div
+              key={agent.id}
+              className="space-y-6 rounded-3xl border border-white/10 bg-white/5 p-8 transition-all hover:bg-white/10"
+            >
+              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 ${toneClass(agent.tone)}`}>
+                {agent.id === "ai-reporting" ? (
+                  <BarChart3 className="h-6 w-6" />
+                ) : agent.id === "ai-billing-config" ? (
+                  <Cpu className="h-6 w-6" />
+                ) : (
+                  <Bot className="h-6 w-6" />
+                )}
+              </div>
+              <div className="space-y-3">
+                <h3 className="text-xl font-bold tracking-tight">{agent.title}</h3>
+                <p className="text-sm leading-relaxed text-finox-gray">{agent.desc}</p>
+              </div>
             </div>
-            <div className="space-y-3">
-              <h3 className="text-xl font-bold tracking-tight">{agent.title}</h3>
-              <p className="text-sm leading-relaxed text-finox-gray">{agent.desc}</p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      <div className="border-t border-white/10 pt-8">
+      <div className="mt-auto border-t border-white/10 pt-8">
         <div className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-finox-gray/60">
           <div className="h-px w-12 bg-current" />
           {slide.footer}
