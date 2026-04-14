@@ -15,6 +15,7 @@ const REQUIRED_SITE_ROUTE_KEYS = [
   "interview",
   "interviews",
   "geekle2026",
+  "llmday2026",
   "previewHomepage",
 ]
 

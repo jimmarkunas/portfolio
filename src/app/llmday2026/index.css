@@ -1,0 +1,19 @@
+@import "../../styles/presentation-foundation.css";
+
+.llmday2026-page .slide-content {
+  justify-content: flex-start;
+}
+
+.llmday2026-page .h1-display {
+  letter-spacing: -0.045em;
+}
+
+.llmday2026-page .slide-content .grid.grid-cols-3.gap-1.opacity-20 {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .llmday2026-page .slide-content {
+    justify-content: flex-start;
+  }
+}

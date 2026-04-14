@@ -23,6 +23,7 @@ export const siteRoutes = {
   interview: "/interview/",
   interviews: "/interviews/",
   geekle2026: "/geekle2026/",
+  llmday2026: "/llmday2026/",
   previewHomepage: "/preview/homepage/",
   freebies: "/freebies/",
 } as const satisfies Record<string, SiteRoute>
@@ -40,6 +41,7 @@ const CANONICAL_ROUTE_KEYS = [
   "contact",
   "interview",
   "geekle2026",
+  "llmday2026",
   "previewHomepage",
 ] as const satisfies ReadonlyArray<keyof typeof siteRoutes>
 
