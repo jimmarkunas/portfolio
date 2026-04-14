@@ -62,48 +62,50 @@ export function SlideAgenda({ slide }: { slide: Slides["agenda"] }) {
 
 export function SlideWho({ slide }: { slide: Slides["who"] }) {
   return (
-    <div className="space-y-12">
-      <div className="flex justify-between">
+    <div className="flex h-full flex-col">
+      <div className="flex items-start justify-between">
         <div className="space-y-2">
           <h2 className="h2-display">{slide.title}</h2>
           <p className="text-xl font-light text-finox-gray">{slide.subtitle}</p>
         </div>
-        <div className="grid grid-cols-3 gap-1 opacity-20">
-          {[...Array(9)].map((_, i) => (
-            <div key={i} className="h-1.5 w-1.5 rounded-full bg-white" />
-          ))}
-        </div>
+        <div className="h-[65px] w-[65px] shrink-0" aria-hidden="true" />
       </div>
 
-      <div className="space-y-6">
-        <div className="flex items-center gap-4">
-          <div className="h-px flex-1 bg-finox-slate/30" />
-          <span className="text-[10px] uppercase tracking-[0.3em] text-finox-gray">
-            {slide.companiesLabel}
-          </span>
-          <div className="h-px flex-1 bg-finox-slate/30" />
-        </div>
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 px-2 opacity-70 grayscale">
-          {slide.companies.map((company) => (
-            <span key={company} className="text-sm font-bold tracking-tight">
-              {company}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="grid gap-6 pt-4 sm:grid-cols-2 xl:grid-cols-4">
-        {slide.stats.map((stat) => (
-          <div
-            key={stat.id}
-            className="flex flex-col items-center space-y-2 rounded-3xl border border-white/10 bg-white/5 p-8 text-center"
-          >
-            <span className="text-4xl font-bold tracking-tight">{stat.label}</span>
-            <span className="text-xs uppercase leading-relaxed tracking-widest text-finox-gray">
-              {stat.sub}
-            </span>
+      <div className="mt-12 flex flex-1 flex-col">
+        <div className="flex flex-1 items-center">
+          <div className="w-full space-y-8">
+            <div className="relative">
+              <div className="h-px w-full bg-finox-slate/30" />
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#222222] px-4 text-[10px] uppercase tracking-[0.3em] text-finox-gray">
+                {slide.companies.label}
+              </span>
+            </div>
+            <div className="flex h-24 items-center justify-between gap-8 px-4">
+              {slide.companies.logos.map((logo) => (
+                <img
+                  key={logo.id}
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-10 w-auto max-w-[220px] object-contain"
+                />
+              ))}
+            </div>
           </div>
-        ))}
+        </div>
+
+        <div className="grid grid-cols-4 gap-6 pt-8">
+          {slide.stats.map((stat) => (
+            <div
+              key={stat.id}
+              className="flex min-h-[220px] flex-col items-center justify-center space-y-2 rounded-3xl border border-white/10 bg-white/5 px-8 py-10 text-center transition-colors hover:bg-white/10"
+            >
+              <span className="text-4xl font-bold tracking-tight">{stat.label}</span>
+              <span className="text-xl uppercase leading-relaxed tracking-widest text-finox-gray">
+                {stat.sub}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

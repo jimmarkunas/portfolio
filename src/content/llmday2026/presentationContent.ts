@@ -49,7 +49,7 @@ export const llmDay2026Content = {
   slideRegistry: [
     { id: "slide-main-title", title: "Designing LLM Workflows That Drive Enterprise ROI" },
     { id: "slide-agenda", title: "What We’ll Cover in This Talk" },
-    { id: "slide-who", title: "Who is Jim Markunas?" },
+    { id: "slide-who", title: "Who I Am" },
     { id: "slide-frame", title: "Copilot vs. Agent — One Sentence Each" },
     { id: "slide-magic-requirements", title: "The 3 Magic Requirements" },
     { id: "slide-goal", title: "Goal" },
@@ -108,19 +108,25 @@ export const llmDay2026Content = {
     },
     who: {
       id: "slide-who",
-      title: "Who is Jim Markunas?",
-      subtitle: "I turn enterprise programs into measurable outcomes",
-      companiesLabel: "Companies I’ve Helped",
-      companies: [
-        "American Apparel",
-        "BCG",
-        "Burton",
-        "DIRECTV",
-        "Disney",
-        "HBO",
-        "Publicis Sapient",
-        "Shopify",
-      ],
+      title: "Who I Am",
+      subtitle: "Diagnose like an architect, prioritize like a product owner, and deliver like a PM.",
+      companies: {
+        label: "Companies I've Helped",
+        logos: [
+          { id: "aa", src: "/panels/02-interview/aa-logo-int.svg", alt: "American Apparel" },
+          { id: "bcg", src: "/panels/02-interview/bcg-logo-int.svg", alt: "BCG" },
+          { id: "burton", src: "/panels/02-interview/bc-logo-int.svg", alt: "Burton" },
+          { id: "directv", src: "/panels/02-interview/dtv-logo-int.svg", alt: "DIRECTV" },
+          { id: "disney", src: "/panels/02-interview/disney-logo-int.svg", alt: "Disney" },
+          { id: "hbo", src: "/panels/02-interview/hbo-logo-int.svg", alt: "HBO" },
+          {
+            id: "publicis-sapient",
+            src: "/panels/02-interview/publicis-sapient-logo-int.svg",
+            alt: "Publicis Sapient",
+          },
+          { id: "shopify", src: "/panels/02-interview/shopify-logo-int.svg", alt: "Shopify" },
+        ],
+      },
       stats: [
         { id: "stat-20-years", label: "20+ Years", sub: "Leading Digital Delivery" },
         { id: "stat-75-projects", label: "75+", sub: "Projects Led" },

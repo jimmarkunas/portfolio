@@ -148,8 +148,10 @@ export interface LlmDay2026Slides {
     id: string;
     title: string;
     subtitle: string;
-    companiesLabel: string;
-    companies: string[];
+    companies: {
+      label: string;
+      logos: ImageEntry[];
+    };
     stats: StatEntry[];
   };
   frame: {
