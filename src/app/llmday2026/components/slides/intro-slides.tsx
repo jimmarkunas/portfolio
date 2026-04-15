@@ -194,11 +194,11 @@ export function SlideMagicRequirements({
           {slide.items.map((item) => (
             <div
               key={item.id}
-              className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-8 transition-colors hover:bg-white/10"
+              className="flex min-h-[320px] flex-col space-y-6 rounded-3xl border border-white/10 bg-white/5 p-10 transition-colors hover:bg-white/10"
             >
-              <p className="font-mono text-xs uppercase tracking-widest text-finox-gray">{item.label}</p>
-              <h3 className="text-2xl font-medium">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-finox-gray">{item.desc}</p>
+              <p className="font-mono text-sm uppercase tracking-widest text-finox-gray">{item.label}</p>
+              <h3 className="text-4xl font-medium leading-tight">{item.title}</h3>
+              <p className="text-xl leading-relaxed text-finox-gray">{item.desc}</p>
             </div>
           ))}
         </div>

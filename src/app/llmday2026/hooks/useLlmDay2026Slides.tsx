@@ -10,10 +10,12 @@ import {
   SlideClay,
   SlideComplianceWorkflow,
   SlideDirectvManual,
+  SlideDtvFunctionalDiagram,
   SlideFlowchart,
+  SlideNylPress,
+  SlideNylResults,
   SlideOkGo,
   SlidePlaceholder,
-  SlideRubeGoldberg,
   SlideSystemArchitecture,
 } from "../components/slides/case-study-slides";
 import { SlideClose, SlideDesignPattern } from "../components/slides/closing-slides";
@@ -31,6 +33,7 @@ import {
   SlideExamplesIntro,
   SlideHowToDoThis,
 } from "../components/slides/workflow-slides";
+import InterviewSlideThankYou from "@/app/interviews/components/slides/SlideThankYou";
 import { buildLlmDay2026SlideRegistry } from "../llmday2026SlideRegistry";
 
 type UseLlmDay2026SlidesParams = {
@@ -54,6 +57,8 @@ function renderSlide(
       return <SlideAgenda slide={slideContent.agenda} />;
     case "who":
       return <SlideWho slide={slideContent.who} />;
+    case "class101":
+      return <SlideGoal slide={slideContent.class101} />;
     case "frame":
       return <SlideFrame slide={slideContent.frame} />;
     case "magicRequirements":
@@ -73,19 +78,9 @@ function renderSlide(
     case "systemArchitecture":
       return <SlideSystemArchitecture slide={slideContent.systemArchitecture} />;
     case "placeholderTwo":
-      return (
-        <SlidePlaceholder
-          title={slideContent.placeholderTwo.title}
-          subtitle={slideContent.placeholderTwo.subtitle}
-        />
-      );
+      return <SlideNylResults slide={slideContent.placeholderTwo} />;
     case "placeholderGeneric":
-      return (
-        <SlidePlaceholder
-          title={slideContent.placeholderGeneric.title}
-          subtitle={slideContent.placeholderGeneric.subtitle}
-        />
-      );
+      return <SlideNylPress slide={slideContent.placeholderGeneric} />;
     case "complianceWorkflow":
       return <SlideComplianceWorkflow slide={slideContent.complianceWorkflow} />;
     case "okgo":
@@ -109,7 +104,7 @@ function renderSlide(
     case "directvManual":
       return <SlideDirectvManual slide={slideContent.directvManual} />;
     case "rubeGoldberg":
-      return <SlideRubeGoldberg slide={slideContent.rubeGoldberg} />;
+      return <SlideDtvFunctionalDiagram slide={slideContent.rubeGoldberg} />;
     case "aiAmplified":
       return <SlideAiAmplified slide={slideContent.aiAmplified} />;
     case "placeholderEight":
@@ -123,6 +118,8 @@ function renderSlide(
       return <SlideDesignPattern slide={slideContent.designPattern} />;
     case "close":
       return <SlideClose slide={slideContent.close} />;
+    case "interviewThankYou":
+      return <InterviewSlideThankYou slide={slideContent.interviewThankYou} />;
     default:
       return assertNever(key);
   }

@@ -50,6 +50,7 @@ export const llmDay2026Content = {
     "hero",
     "agenda",
     "who",
+    "class101",
     "frame",
     "magicRequirements",
     "goal",
@@ -63,14 +64,15 @@ export const llmDay2026Content = {
     "placeholderGeneric",
     "complianceWorkflow",
     "okgo",
-    "flowchartManual",
-    "flowchartAutomated",
     "directvManual",
     "rubeGoldberg",
     "aiAmplified",
     "placeholderEight",
+    "flowchartAutomated",
+    "flowchartManual",
     "designPattern",
     "close",
+    "interviewThankYou",
   ],
   slides: {
     hero: {
@@ -98,12 +100,12 @@ export const llmDay2026Content = {
         },
       ],
       whyCare: [
-        { id: "01", label: "Make AI Drive Revenue (the Holy Grail)" },
+        { id: "01", label: "Make AI drive revenue (the Holy Grail)" },
         {
           id: "02",
           label: "Be the best in your industry by leveraging AI tools",
         },
-        { id: "03", label: "Think Differently + Change the Game" },
+        { id: "03", label: "Think differently + Change the game" },
       ],
     },
     who: {
@@ -134,9 +136,14 @@ export const llmDay2026Content = {
         { id: "stat-roi", label: "$1.3B", sub: "ROI Delivered" },
       ],
     },
+    class101: {
+      id: "slide-101-class",
+      title: "The 101 Class",
+      line: "Key concepts for digital transformation",
+    },
     frame: {
       id: "slide-frame",
-      title: "Copilot vs. Agent — One Sentence Each",
+      title: "Copilot vs Agent",
       copilotTitle: "Copilot",
       agentTitle: "Agent",
       copilot: ["Answers your question", "You drive", "One interaction"],
@@ -227,6 +234,12 @@ export const llmDay2026Content = {
       id: "slide-how-to-do-this",
       title: "How to Do This",
       subtitle: "The smart operator builds something like this",
+      explainerTitle: "How This Workflow Operates",
+      explainerPoints: [
+        "Salesforce, Snowflake, and Tableau feed behavior signals into a daily churn monitor so risk is detected before cancellation happens.",
+        "The offer engine selects the best next action for each at-risk account, then the action agent either executes outreach or routes to human escalation.",
+        "Every result writes back to Salesforce, closes the feedback loop, and continuously improves retention targeting over time.",
+      ],
       platformCards: [
         {
           id: "platform-salesforce",
@@ -290,7 +303,7 @@ export const llmDay2026Content = {
     },
     clay: {
       id: "slide-clay",
-      title: "Don’t be Clay",
+      title: "Rule #1: Don’t Be Clay",
       subtitle: "Because Clay’s phone never rings...",
       caption: "Wanna know why his phone never rings?",
       diagram: {
@@ -302,7 +315,8 @@ export const llmDay2026Content = {
     },
     systemArchitecture: {
       id: "slide-architecture",
-      title: "System Architecture Flow",
+      title: "New York Life Compliance-Driven CMS",
+      subtitle: "A project so boring, the client ghosted the agency like a Tinder date..",
       flowLabel: "System Architecture Flow",
       roles: [
         {
@@ -340,17 +354,17 @@ export const llmDay2026Content = {
     },
     placeholderTwo: {
       id: "slide-placeholder-13-mid",
-      title: "Placeholder 02",
-      subtitle: "Content Pending",
+      title: "We Got Decent Results, But...",
+      subtitle: "The client didn't care about our C- product",
     },
     placeholderGeneric: {
       id: "slide-placeholder-new-14",
-      title: "Placeholder",
-      subtitle: "Content Pending",
+      title: "NYL CDO Bragged to the Press",
+      subtitle: "About everyting except our work",
     },
     complianceWorkflow: {
       id: "slide-compliance-workflow",
-      title: "AI-Assisted Compliance Content Workflow",
+      title: "What Would the A+ Look Like?",
       subtitle: "Automated governance with human-in-the-loop selection.",
       steps: [
         {
@@ -392,7 +406,7 @@ export const llmDay2026Content = {
     },
     okgo: {
       id: "slide-okgo",
-      title: "Don’t be OKGo",
+      title: "Rule #2: Don’t Be OKGo",
       subtitle: "The guys who did the treadmill video",
       caption: "They also made a Rube Goldberg Machine video",
       diagram: {
@@ -404,13 +418,20 @@ export const llmDay2026Content = {
     },
     flowchartManual: {
       id: "slide-flowchart",
-      title: "Legacy Process Map (Manual)",
-      subtitle: "People-heavy orchestration across disconnected systems.",
+      title: "Award-Winning Work",
+      subtitle: "That stemmed from a real problem",
+      bullets: [
+        "Turned a negative news story into a public victory",
+        "Won an international award",
+        "Set the standard for greem tech streetlights worldwide",
+      ],
+      imageSrc: "/interviews/llmday/smart-20-logo-600.png",
+      imageAlt: "Smart 20 award logo",
     },
     flowchartAutomated: {
       id: "slide-flowchart-automated",
-      title: "Process Map (Automation-First)",
-      subtitle: "Same engine, but key decision points move to automation.",
+      title: "CPS Energy's Automated Streetlights",
+      subtitle: "Automation that added value & won on the global stage",
     },
     directvManual: {
       id: "slide-directv-manual",
@@ -418,7 +439,7 @@ export const llmDay2026Content = {
       subtitle: "$120M in uplift, every report built by hand.",
       modules: [
         { id: "module-cohorts", label: "Cohorts" },
-        { id: "module-campaign-math", label: "Campaign Math" },
+        { id: "module-campaign-math", label: "Campaigns" },
         { id: "module-stb-push", label: "STB Push" },
         { id: "module-reporting", label: "Reporting" },
       ],
@@ -468,13 +489,13 @@ export const llmDay2026Content = {
     },
     placeholderEight: {
       id: "slide-placeholder-19",
-      title: "Placeholder 08",
-      subtitle: "Content Pending",
+      title: "Rule #3: Be a Meccan",
+      subtitle: "The smallest Texas major hits the global stage",
     },
     designPattern: {
       id: "slide-design-pattern",
-      title: "Every Good Agentic Workflow Has the Same Bones",
-      footer: "The Blueprint for Agentic Success",
+      title: "Build ROI Into Your Workflows",
+      footer: "The Blueprint for AI Success",
       diagram: {
         step01Label: "Step 01",
         step01Title: "TRIGGER",
@@ -517,20 +538,30 @@ export const llmDay2026Content = {
     },
     close: {
       id: "slide-close",
-      title: "The Agent Era Needs Program Managers",
+      title: "The Agent Era Needs Innovators",
       introPrefix: "The copilot era needed",
       introHighlight: "prompt engineers",
       skillsIntro: "The agent era needs people who can:",
       points: [
-        "Define what a bad output looks like",
+        "Define your metric",
         "Build the human override before the automation",
         "Sequence the workflow across systems and teams",
         "Measure whether it’s working",
       ],
       quote:
-        "Agents don’t fail because the model is bad. They fail because nobody designed the workflow.",
+        "Agents don’t fail because the model is bad. They fail because nobody designed the end goal.",
       footerLeft: "Designing LLM Workflows That Drive Enterprise ROI",
-      footerRight: "© 2024 Finox Strategy",
+      footerRight: "",
+    },
+    interviewThankYou: {
+      id: "slide-interview-thank-you",
+      title: "Thank You",
+      subtitle: "Let's build something extraordinary.",
+      name: "Jim Markunas",
+      role: "Greatest PM Ever",
+      email: "jim@greatestpmever.com",
+      linkedin: "linkedin.com/in/jimmarkunas",
+      readyText: "Ready for Questions",
     },
   },
 } satisfies LlmDay2026Content;

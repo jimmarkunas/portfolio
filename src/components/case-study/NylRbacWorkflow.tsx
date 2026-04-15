@@ -29,6 +29,11 @@ type Step = {
   active?: boolean;
 };
 
+type NylRbacWorkflowProps = {
+  variant?: "light" | "dark";
+  className?: string;
+};
+
 const roles: Role[] = [
   {
     title: 'Back Office',
@@ -67,7 +72,7 @@ function RoleCard({ title, subtitle, icon: Icon, pill, tinted = false }: Role) {
     <div
       className={cn(
         'flex h-full w-full flex-col items-center border-b border-[var(--page-bg)] px-8 pb-10 pt-5 text-center last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 md:px-10 md:pb-12 md:pt-6',
-        tinted ? 'bg-[color:rgba(243,243,243,0.55)]' : 'bg-white'
+        tinted ? 'bg-[var(--surface-soft)]' : 'bg-[var(--surface)]'
       )}
     >
       <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-[18px] bg-[var(--page-bg)] text-[var(--ink)] shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
@@ -75,7 +80,7 @@ function RoleCard({ title, subtitle, icon: Icon, pill, tinted = false }: Role) {
       </div>
       <h4 className="type-h6 mb-2 font-bold tracking-tight text-[var(--ink)]">{title}</h4>
       {pill && (
-        <span className="type-p5 mb-3 inline-block rounded-full bg-[#EEF2FA] px-3 py-1 font-bold uppercase tracking-widest text-[#447ACB]">
+        <span className="type-p5 mb-3 inline-block rounded-full bg-[var(--accent-pill-bg)] px-3 py-1 font-bold uppercase tracking-widest text-[var(--accent)]">
           {pill}
         </span>
       )}
@@ -91,8 +96,8 @@ function FlowNode({ id, title, status, active = false }: Step) {
         className={cn(
           'type-p2 flex h-20 w-20 items-center justify-center rounded-[24px] font-bold shadow-[0_10px_30px_rgba(34,34,34,0.08)]',
           active
-            ? 'bg-[var(--ink)] text-white'
-            : 'border-2 border-[var(--page-bg)] bg-white text-[var(--ink)]'
+            ? 'bg-[var(--active-step-bg)] text-[var(--active-step-text)]'
+            : 'border-2 border-[var(--page-bg)] bg-[var(--surface)] text-[var(--ink)]'
         )}
       >
         {id}
@@ -138,7 +143,7 @@ function FlowLine() {
   return (
     <div ref={containerRef} className="absolute inset-0" style={{ pointerEvents: 'none' }}>
       {/* Static line */}
-      <div className="absolute left-10 right-10 bg-[#959595]" style={{ top: Y, height: 1 }} />
+      <div className="absolute left-10 right-10 bg-[var(--line)]" style={{ top: Y, height: 1 }} />
       {/* Particle dots */}
       {paths.length > 0 && (
         <ParticleCanvas
@@ -153,22 +158,33 @@ function FlowLine() {
   );
 }
 
-export default function NylRbacWorkflow() {
+export default function NylRbacWorkflow({
+  variant = "light",
+  className,
+}: NylRbacWorkflowProps) {
   const { shouldReduceMotion } = useAdaptiveDiagramMotion();
   const rootRef = useRef<HTMLDivElement>(null);
   const inView = useInView(rootRef, { once: true, amount: 0.05 });
   const animate = shouldReduceMotion || inView ? 'visible' : 'hidden';
+  const isDark = variant === "dark";
 
   return (
     <div
       ref={rootRef}
-      className="w-full overflow-hidden bg-white font-sans"
+      className={cn("w-full overflow-hidden font-sans", isDark ? "bg-transparent" : "bg-white", className)}
       style={{
-        ['--ink' as string]: '#222222',
-        ['--secondary-dark' as string]: '#4b5154',
-        ['--muted' as string]: '#7b7b7b',
-        ['--white' as string]: '#ffffff',
-        ['--page-bg' as string]: '#f3f3f3',
+        ['--ink' as string]: isDark ? '#F3F3F3' : '#222222',
+        ['--secondary-dark' as string]: isDark ? '#A7AFB8' : '#4b5154',
+        ['--muted' as string]: isDark ? '#A8A8A8' : '#7b7b7b',
+        ['--white' as string]: isDark ? '#fefefe' : '#ffffff',
+        ['--page-bg' as string]: isDark ? '#34373C' : '#f3f3f3',
+        ['--surface' as string]: isDark ? '#232528' : '#ffffff',
+        ['--surface-soft' as string]: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(243,243,243,0.55)',
+        ['--accent' as string]: '#447ACB',
+        ['--accent-pill-bg' as string]: isDark ? 'rgba(68,122,203,0.18)' : '#EEF2FA',
+        ['--active-step-bg' as string]: isDark ? '#447ACB' : '#222222',
+        ['--active-step-text' as string]: '#ffffff',
+        ['--line' as string]: '#959595',
       }}
     >
       <div className="flex flex-col">
@@ -203,7 +219,7 @@ export default function NylRbacWorkflow() {
 
           {/* Right: flow stepper */}
           <motion.div
-            className="flex flex-1 flex-col bg-[color:rgba(243,243,243,0.45)] px-4 py-4"
+            className="flex flex-1 flex-col bg-[var(--surface-soft)] px-4 py-4"
             variants={staggerParent}
             initial="hidden"
             animate={animate}
@@ -219,7 +235,7 @@ export default function NylRbacWorkflow() {
                 >
                   <div className={cn(
                     'type-p5 relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] font-bold shadow-[0_4px_12px_rgba(34,34,34,0.08)]',
-                    step.active ? 'bg-[var(--ink)] text-white' : 'bg-white text-[var(--ink)]'
+                    step.active ? 'bg-[var(--active-step-bg)] text-[var(--active-step-text)]' : 'bg-[var(--surface)] text-[var(--ink)]'
                   )}>
                     {step.id}
                   </div>
@@ -248,7 +264,7 @@ export default function NylRbacWorkflow() {
         </motion.div>
 
         <motion.div
-          className="relative hidden flex-col overflow-hidden bg-[color:rgba(243,243,243,0.45)] px-8 pb-8 pt-8 md:pb-12 md:pt-12 sm:flex"
+          className="relative hidden flex-col overflow-hidden bg-[var(--surface-soft)] px-8 pb-8 pt-8 md:pb-12 md:pt-12 sm:flex"
           variants={cardVariants}
           initial="hidden"
           animate={animate}
@@ -256,7 +272,7 @@ export default function NylRbacWorkflow() {
         >
           <div className="mb-8 flex items-center gap-3 md:mb-12">
             <div className="h-6 w-1.5 rounded-full bg-[var(--ink)]" />
-            <h3 className="type-p4 font-bold uppercase text-[#222222]">
+            <h3 className="type-p4 font-bold uppercase text-[var(--ink)]">
               System Architecture Flow
             </h3>
           </div>
@@ -284,7 +300,7 @@ export default function NylRbacWorkflow() {
             animate={animate}
           >
             {/* Vertical connecting line */}
-            <div className="absolute bottom-6 left-6 top-6 w-px bg-[#959595]" style={{ transform: 'translateX(-0.5px)' }} />
+            <div className="absolute bottom-6 left-6 top-6 w-px bg-[var(--line)]" style={{ transform: 'translateX(-0.5px)' }} />
             {steps.map((step, i) => (
               <motion.div
                 key={step.id}
@@ -294,7 +310,7 @@ export default function NylRbacWorkflow() {
               >
                 <div className={cn(
                   'type-p3 relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] font-bold shadow-[0_4px_16px_rgba(34,34,34,0.08)]',
-                  step.active ? 'bg-[var(--ink)] text-white' : 'border-2 border-[var(--page-bg)] bg-white text-[var(--ink)]'
+                  step.active ? 'bg-[var(--active-step-bg)] text-[var(--active-step-text)]' : 'border-2 border-[var(--page-bg)] bg-[var(--surface)] text-[var(--ink)]'
                 )}>
                   {step.id}
                 </div>

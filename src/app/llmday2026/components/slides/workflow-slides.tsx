@@ -39,17 +39,19 @@ function StrategyGridHeader({
 function StrategyCard({
   text,
   destructive,
+  className,
 }: {
   text: string;
   destructive?: boolean;
+  className?: string;
 }) {
   return (
     <div
-      className={`group flex items-start gap-6 rounded-3xl border p-8 transition-all ${
+      className={`group flex items-center gap-6 rounded-3xl border p-8 transition-all ${
         destructive
           ? "border-white/10 bg-white/5 hover:border-red-500/20 hover:bg-red-500/5"
           : "border-white/10 bg-white/5 hover:border-emerald-500/20 hover:bg-emerald-500/5"
-      }`}
+      } ${className ?? ""}`}
     >
       <div
         className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
@@ -71,15 +73,15 @@ export function SlideDontDoThis({ slide }: { slide: Slides["dontDoThis"] }) {
       <StrategyGridHeader title={slide.title} subtitle={slide.subtitle} destructive />
 
       <div className="flex flex-1 items-center justify-center">
-        <div className="grid w-full max-w-5xl gap-6 md:grid-cols-2">
+        <div className="grid w-full gap-6 md:grid-cols-2">
           {slide.items.map((item) => (
-            <StrategyCard key={item.id} text={item.text} destructive />
+            <StrategyCard key={item.id} text={item.text} destructive className="min-h-[180px] p-10" />
           ))}
         </div>
       </div>
 
       <div className="mt-auto border-t border-white/10 pt-8">
-        <div className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-red-500/40">
+        <div className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.26em] text-red-500/40">
           <div className="h-px w-12 bg-current" />
           {slide.footer}
         </div>
@@ -94,15 +96,15 @@ export function SlideDoThis({ slide }: { slide: Slides["doThis"] }) {
       <StrategyGridHeader title={slide.title} subtitle={slide.subtitle} />
 
       <div className="flex flex-1 items-center justify-center">
-        <div className="grid w-full max-w-5xl gap-6 md:grid-cols-2">
+        <div className="grid w-full gap-6 md:grid-cols-2">
           {slide.items.map((item) => (
-            <StrategyCard key={item.id} text={item.text} />
+            <StrategyCard key={item.id} text={item.text} className="min-h-[180px] p-10" />
           ))}
         </div>
       </div>
 
       <div className="mt-auto border-t border-white/10 pt-8">
-        <div className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-emerald-500/40">
+        <div className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.26em] text-emerald-500/40">
           <div className="h-px w-12 bg-current" />
           {slide.footer}
         </div>
@@ -126,8 +128,27 @@ export function SlideHowToDoThis({ slide }: { slide: Slides["howToDoThis"] }) {
         </div>
       </div>
 
-      <div className="flex flex-1 items-center justify-center">
-        <RoiWorkflowDiagram slide={slide} />
+      <div className="flex flex-1 items-center">
+        <div className="grid w-full items-center gap-8 lg:grid-cols-[1.62fr_0.78fr]">
+          <div className="min-w-0">
+            <RoiWorkflowDiagram />
+          </div>
+          <aside className="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-finox-gray/70">
+              Workflow Brief
+            </p>
+            <h3 className="mt-3 text-2xl font-medium leading-tight text-white">
+              {slide.explainerTitle}
+            </h3>
+            <div className="mt-5 space-y-4">
+              {slide.explainerPoints.map((point, index) => (
+                <p key={`${slide.id}-explain-${index}`} className="text-sm leading-relaxed text-finox-gray">
+                  {point}
+                </p>
+              ))}
+            </div>
+          </aside>
+        </div>
       </div>
 
       <div className="mt-auto border-t border-white/10 pt-8">

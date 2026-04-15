@@ -154,6 +154,11 @@ export interface LlmDay2026Slides {
     };
     stats: StatEntry[];
   };
+  class101: {
+    id: string;
+    title: string;
+    line: string;
+  };
   frame: {
     id: string;
     title: string;
@@ -193,6 +198,8 @@ export interface LlmDay2026Slides {
     id: string;
     title: string;
     subtitle: string;
+    explainerTitle: string;
+    explainerPoints: string[];
     platformCards: WorkflowCardEntry[];
     agentCards: WorkflowCardEntry[];
     outputCards: WorkflowCardEntry[];
@@ -216,6 +223,7 @@ export interface LlmDay2026Slides {
   systemArchitecture: {
     id: string;
     title: string;
+    subtitle: string;
     flowLabel: string;
     roles: RoleEntry[];
     flowNodes: FlowNodeEntry[];
@@ -248,6 +256,9 @@ export interface LlmDay2026Slides {
     id: string;
     title: string;
     subtitle: string;
+    bullets: string[];
+    imageSrc?: string;
+    imageAlt?: string;
   };
   flowchartAutomated: {
     id: string;
@@ -297,6 +308,16 @@ export interface LlmDay2026Slides {
     quote: string;
     footerLeft: string;
     footerRight: string;
+  };
+  interviewThankYou: {
+    id: string;
+    title: string;
+    subtitle: string;
+    name: string;
+    role: string;
+    email: string;
+    linkedin: string;
+    readyText: string;
   };
 }
 

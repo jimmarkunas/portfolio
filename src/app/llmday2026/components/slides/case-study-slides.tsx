@@ -1,5 +1,4 @@
 import {
-  ArrowRightCircle,
   BarChart3,
   Bot,
   Cpu,
@@ -8,11 +7,13 @@ import {
   MousePointerClick,
   ShieldCheck,
   User,
-  UserCheck,
   Zap,
 } from "lucide-react";
 
 import type { LlmDay2026Content } from "@/content/llmday2026";
+
+import NylRbacWorkflow from "@/components/case-study/NylRbacWorkflow";
+import NylRevenueAttributionChart from "@/components/case-study/NylRevenueAttributionChart";
 
 import { LegacyRevenueFlowDiagram } from "./diagrams/LegacyRevenueFlowDiagram";
 
@@ -40,13 +41,11 @@ export function SlideClay({ slide }: { slide: Slides["clay"] }) {
       </div>
 
       <div className="flex flex-1 items-center justify-center">
-        <div className="flex h-64 w-64 flex-col items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 text-center shadow-2xl">
-          <p className="text-xs uppercase tracking-[0.25em] text-finox-gray">{slide.diagram.label}</p>
-          <p className="mt-3 text-4xl font-light text-white/80">{slide.diagram.state}</p>
-          <p className="mt-4 max-w-[180px] text-sm leading-relaxed text-finox-gray">
-            {slide.diagram.description}
-          </p>
-        </div>
+        <img
+          src="/interviews/llmday/clay.png"
+          alt="Clay slide visual"
+          className="h-80 w-80 rounded-3xl border border-white/10 object-cover shadow-2xl"
+        />
       </div>
 
       <div className="pt-4 text-center">
@@ -56,72 +55,21 @@ export function SlideClay({ slide }: { slide: Slides["clay"] }) {
   );
 }
 
-const ROLE_ICONS = {
-  "role-back-office": FileText,
-  "role-field-agents": User,
-  "role-home-office": UserCheck,
-} as const;
-
 export function SlideSystemArchitecture({
   slide,
 }: {
   slide: Slides["systemArchitecture"];
 }) {
   return (
-    <div className="flex h-full flex-col">
-      <h2 className="h2-display">{slide.title}</h2>
+    <div className="flex h-full flex-col space-y-8">
+      <div className="space-y-2">
+        <h2 className="h2-display">{slide.title}</h2>
+        <p className="text-xl font-light text-finox-gray">{slide.subtitle}</p>
+      </div>
 
-      <div className="flex flex-1 items-center">
-        <div className="w-full space-y-10">
-          <div className="grid gap-10 lg:grid-cols-3">
-            {slide.roles.map((role) => {
-              const Icon = ROLE_ICONS[role.id as keyof typeof ROLE_ICONS] ?? FileText;
-              return (
-                <div key={role.id} className="flex flex-col items-center space-y-4 text-center">
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-white">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-2xl font-bold tracking-tight">{role.title}</h3>
-                  <div className="rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1 text-[10px] font-bold tracking-widest text-blue-400">
-                    {role.tag}
-                  </div>
-                  <p className="max-w-[260px] text-sm leading-relaxed text-finox-gray">{role.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="space-y-10 rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-12">
-            <div className="flex items-center gap-3">
-              <div className="h-6 w-1 rounded-full bg-white" />
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
-                {slide.flowLabel}
-              </span>
-            </div>
-
-            <div className="relative">
-              <div className="absolute left-0 top-8 z-0 hidden h-px w-full bg-white/10 md:block" />
-              <div className="relative z-10 grid gap-6 md:grid-cols-5">
-                {slide.flowNodes.map((node) => (
-                  <div key={node.id} className="flex flex-col items-center">
-                    <div
-                      className={`mb-5 flex h-16 w-16 items-center justify-center rounded-2xl text-xl font-bold shadow-xl ${
-                        node.emphasized
-                          ? "bg-white text-finox-dark"
-                          : "border border-white/20 bg-finox-dark text-white"
-                      }`}
-                    >
-                      {node.step}
-                    </div>
-                    <p className="text-sm font-bold">{node.title}</p>
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-finox-gray">
-                      {node.sub}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+      <div className="flex flex-1 items-center justify-center">
+        <div className="w-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+          <NylRbacWorkflow variant="dark" />
         </div>
       </div>
     </div>
@@ -145,6 +93,55 @@ export function SlidePlaceholder({
   );
 }
 
+export function SlideNylResults({ slide }: { slide: Slides["placeholderTwo"] }) {
+  return (
+    <div className="flex h-full flex-col space-y-8">
+      <div className="space-y-2">
+        <h2 className="h2-display">{slide.title}</h2>
+        <p className="text-xl font-light text-finox-gray">{slide.subtitle}</p>
+      </div>
+
+      <div className="flex flex-1 items-center justify-center">
+        <div className="w-full max-w-[1220px] origin-center scale-[0.9] overflow-hidden rounded-2xl border border-white/10 bg-white">
+          <NylRevenueAttributionChart />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function SlideNylPress({ slide }: { slide: Slides["placeholderGeneric"] }) {
+  return (
+    <div className="flex h-full flex-col space-y-8">
+      <div className="space-y-2">
+        <h2 className="h2-display">{slide.title}</h2>
+        <p className="text-xl font-light text-finox-gray">{slide.subtitle}</p>
+      </div>
+
+      <div className="flex flex-1 items-center justify-center">
+        <div className="relative w-full max-w-6xl">
+          <div className="grid items-start gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl">
+              <img
+                src="/interviews/llmday/don-vuo-forbes-01.png"
+                alt="Forbes coverage image 1"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="relative z-20 lg:mt-16 lg:-ml-10 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl">
+              <img
+                src="/interviews/llmday/don-vuo-forbes-02.png"
+                alt="Forbes coverage image 2"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ComplianceStepIcon({ type, index }: { type: "AI AGENT" | "PERSON"; index: number }) {
   if (type === "PERSON") {
     return <MousePointerClick className="h-6 w-6" />;
@@ -161,29 +158,37 @@ export function SlideComplianceWorkflow({
   slide: Slides["complianceWorkflow"];
 }) {
   return (
-    <div className="flex h-full flex-col space-y-12">
+    <div className="flex h-full flex-col space-y-6">
       <div className="flex justify-between">
-        <div className="space-y-2">
+        <div className="space-y-1">
           <h2 className="h2-display">{slide.title}</h2>
-          <p className="text-xl font-light text-finox-gray">{slide.subtitle}</p>
+          <p className="text-lg font-light text-finox-gray">{slide.subtitle}</p>
         </div>
         <DotGrid />
       </div>
 
       <div className="flex flex-1 items-center justify-center">
-        <div className="grid w-full gap-4 lg:grid-cols-5">
+        <div className="grid w-full gap-3 lg:grid-cols-5">
           {slide.steps.map((step, index) => {
             const isPerson = step.type === "PERSON";
             return (
               <div key={step.id} className="relative flex flex-col items-center">
-                {index < slide.steps.length - 1 && (
-                  <div className="absolute -right-6 top-12 z-0 hidden text-white/10 lg:block">
-                    <ArrowRightCircle className="h-8 w-8" />
+                {index >= 0 && (
+                  <div className="absolute -top-5 left-1/2 z-20 hidden -translate-x-1/2 lg:flex">
+                    <span
+                      className="animate-pulse text-base font-semibold leading-none text-white/75 drop-shadow-[0_0_8px_rgba(255,255,255,0.38)]"
+                      style={{
+                        animationDelay: `${index * 180}ms`,
+                        animationDuration: "1.4s",
+                      }}
+                    >
+                      →
+                    </span>
                   </div>
                 )}
 
                 <div
-                  className={`relative z-10 flex h-full w-full flex-col items-center space-y-4 rounded-3xl border p-6 text-center ${
+                  className={`relative z-10 flex h-full min-h-[238px] w-full flex-col items-center space-y-4 rounded-3xl border p-7 text-center ${
                     isPerson
                       ? "border-amber-500/30 bg-amber-500/10"
                       : "border-blue-500/20 bg-blue-500/5"
@@ -218,14 +223,14 @@ export function SlideComplianceWorkflow({
         </div>
       </div>
 
-      <div className="flex justify-center gap-12 border-t border-white/5 pt-8">
+      <div className="flex justify-center gap-10 border-t border-white/10 pt-4">
         {slide.legend.map((entry, index) => {
           const dotClass =
             index === 0
               ? "bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"
               : index === 1
                 ? "bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"
-                : "bg-white/20";
+                : "bg-finox-gray shadow-[0_0_8px_rgba(156,163,175,0.55)]";
 
           return (
             <div key={entry.id} className="flex items-center gap-2">
@@ -253,12 +258,18 @@ export function SlideOkGo({ slide }: { slide: Slides["okgo"] }) {
       </div>
 
       <div className="flex flex-1 items-center justify-center">
-        <div className="flex h-80 w-80 flex-col items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-transparent to-white/5 p-10 text-center shadow-2xl">
-          <p className="text-xs uppercase tracking-[0.25em] text-finox-gray">{slide.diagram.label}</p>
-          <p className="mt-4 text-4xl font-light">{slide.diagram.state}</p>
-          <p className="mt-5 text-sm leading-relaxed text-finox-gray">
-            {slide.diagram.description}
-          </p>
+        <div className="w-full max-w-5xl overflow-hidden rounded-3xl bg-black shadow-2xl">
+          <div className="aspect-video w-full">
+            <iframe
+              className="h-full w-full"
+              src="https://www.youtube.com/embed/qybUFnY7Y8w"
+              title="OK Go treadmill video"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
         </div>
       </div>
 
@@ -278,6 +289,43 @@ export function SlideFlowchart({
   automated: boolean;
   diagramCopy: LlmDay2026Content["diagrams"]["legacyRevenueFlow"];
 }) {
+  if ("bullets" in slide) {
+    return (
+      <div className="flex h-full flex-col">
+        <div className="space-y-2">
+          <h2 className="h2-display">{slide.title}</h2>
+          <p className="text-xl font-light text-finox-gray">{slide.subtitle}</p>
+        </div>
+
+        <div className="mt-8 grid flex-1 items-center gap-10 lg:grid-cols-[1.3fr_0.7fr]">
+          <ul className="w-full space-y-6">
+            {slide.bullets.map((bullet, index) => (
+              <li
+                key={`${slide.id}-bullet-${index}`}
+                className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-5"
+              >
+                <span className="mt-0.5 text-2xl font-medium text-finox-gray">{index + 1}.</span>
+                <span className="text-[2rem] font-light leading-tight text-white/95">{bullet}</span>
+              </li>
+            ))}
+          </ul>
+
+          {slide.imageSrc ? (
+            <div className="flex items-center justify-center lg:justify-end">
+              <div className="w-full max-w-[340px] rounded-3xl border border-white/10 bg-white/[0.02] p-8">
+                <img
+                  src={slide.imageSrc}
+                  alt={slide.imageAlt ?? ""}
+                  className="h-auto w-full object-contain"
+                />
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-full flex-col">
       <div className="space-y-2">
@@ -286,6 +334,30 @@ export function SlideFlowchart({
       </div>
       <div className="flex flex-1 items-center justify-center">
         <LegacyRevenueFlowDiagram automated={automated} diagram={diagramCopy} />
+      </div>
+    </div>
+  );
+}
+
+export function SlideDtvFunctionalDiagram({
+  slide,
+}: {
+  slide: { title: string; subtitle: string };
+}) {
+  return (
+    <div className="flex h-full flex-col">
+      <div className="space-y-2">
+        <h2 className="h2-display">{slide.title}</h2>
+        <p className="text-xl font-light text-finox-gray">{slide.subtitle}</p>
+      </div>
+      <div className="flex flex-1 items-center justify-center">
+        <div className="w-full max-w-6xl overflow-hidden rounded-2xl bg-black/20 pt-[15px]">
+          <img
+            src="/interviews/llmday/dtv-functional-diagram.webp"
+            alt="DIRECTV functional diagram"
+            className="h-auto w-full object-contain"
+          />
+        </div>
       </div>
     </div>
   );
@@ -310,22 +382,22 @@ export function SlideDirectvManual({ slide }: { slide: Slides["directvManual"] }
       </div>
 
       <div className="flex flex-1 items-center justify-center">
-        <div className="grid w-full max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid w-full max-w-6xl gap-7 sm:grid-cols-2 lg:grid-cols-4">
           {slide.modules.map((module) => {
             const Icon = ENGINE_ICONS[module.id as keyof typeof ENGINE_ICONS] ?? FileText;
             return (
               <div
                 key={module.id}
-                className="group flex flex-col items-center space-y-6 rounded-3xl border border-white/10 bg-white/5 p-8 text-center transition-all hover:bg-white/10"
+                className="group flex min-h-[290px] flex-col items-center justify-center space-y-8 rounded-3xl border border-white/10 bg-white/5 p-10 text-center transition-all hover:bg-white/10"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 text-finox-gray transition-colors group-hover:text-white">
-                  <Icon className="h-5 w-5" />
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 text-finox-gray transition-colors group-hover:text-white">
+                  <Icon className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold tracking-tight">{module.label}</h3>
+                  <h3 className="text-[2rem] font-bold tracking-tight leading-tight">{module.label}</h3>
                     <div className="mt-2 flex items-center justify-center gap-2">
-                      <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-amber-500" />
-                      <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-amber-500">
+                      <div className="h-2 w-2 animate-pulse rounded-full bg-amber-500" />
+                      <span className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-amber-500">
                         {slide.moduleStatusLabel}
                       </span>
                     </div>
