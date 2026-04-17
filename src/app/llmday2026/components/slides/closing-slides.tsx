@@ -64,7 +64,7 @@ export function SlideClose({ slide }: { slide: Slides["close"] }) {
           <div className="relative rounded-[40px] bg-white p-12 shadow-2xl">
             <div className="space-y-6">
               <div className="h-1 w-12 bg-finox-dark/20" />
-              <p className="text-4xl font-bold leading-[1.1] tracking-tight text-finox-dark">"{slide.quote}"</p>
+              <p className="whitespace-pre-line text-4xl font-bold leading-[1.1] tracking-tight text-finox-dark">"{slide.quote}"</p>
             </div>
           </div>
         </div>

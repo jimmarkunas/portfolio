@@ -23,8 +23,8 @@ export function buildInterviewSlideRegistry(
     { id: slides.riskLandscape.id, title: slides.riskLandscape.title },
     { id: slides.statusReport.id, title: slides.statusReport.title },
     { id: slides.composableStack.id, title: slides.composableStack.title },
-    { id: slides.whyJim.id, title: slides.whyJim.title },
     { id: slides.rescuePlan.id, title: slides.rescuePlan.title },
+    { id: slides.whyJim.id, title: slides.whyJim.title },
     { id: slides.thankYou.id, title: slides.thankYou.title },
     { id: PM_POP_QUIZ_SLIDE_ID, title: PM_POP_QUIZ_TITLE },
   ];

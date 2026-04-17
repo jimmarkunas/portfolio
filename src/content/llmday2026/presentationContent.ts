@@ -70,7 +70,6 @@ export const llmDay2026Content = {
     "placeholderEight",
     "flowchartAutomated",
     "flowchartManual",
-    "designPattern",
     "close",
     "interviewThankYou",
   ],
@@ -423,7 +422,7 @@ export const llmDay2026Content = {
       bullets: [
         "Turned a negative news story into a public victory",
         "Won an international award",
-        "Set the standard for greem tech streetlights worldwide",
+        "Set the standard for green tech streetlights worldwide",
       ],
       imageSrc: "/interviews/llmday/smart-20-logo-600.png",
       imageAlt: "Smart 20 award logo",
@@ -543,13 +542,13 @@ export const llmDay2026Content = {
       introHighlight: "prompt engineers",
       skillsIntro: "The agent era needs people who can:",
       points: [
-        "Define your metric",
+        "Define metrics",
         "Build the human override before the automation",
-        "Sequence the workflow across systems and teams",
+        "Sequence the workflow across systems & teams",
         "Measure whether it’s working",
       ],
       quote:
-        "Agents don’t fail because the model is bad. They fail because nobody designed the end goal.",
+        "Agents don’t fail because the model is bad.\n\nThey fail because nobody designed the end goal.",
       footerLeft: "Designing LLM Workflows That Drive Enterprise ROI",
       footerRight: "",
     },
