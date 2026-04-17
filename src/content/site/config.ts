@@ -43,6 +43,7 @@ const CANONICAL_ROUTE_KEYS = [
   "geekle2026",
   "llmday2026",
   "previewHomepage",
+  "freebies",
 ] as const satisfies ReadonlyArray<keyof typeof siteRoutes>
 
 function buildCanonicalPaths<const T extends readonly (keyof typeof siteRoutes)[]>(
