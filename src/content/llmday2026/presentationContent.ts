@@ -551,7 +551,8 @@ export const llmDay2026Content = {
         "Agents don’t fail because the model is bad.\n\nThey fail because nobody designed the end goal.",
       footerLeft: "Designing LLM Workflows That Drive Enterprise ROI",
       footerRight: "",
-    },
+    },http://localhost:3000/
+    
     interviewThankYou: {
       id: "slide-interview-thank-you",
       title: "Thank You",

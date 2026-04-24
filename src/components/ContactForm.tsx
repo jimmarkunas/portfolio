@@ -4,10 +4,16 @@ import { useState, useRef } from "react"
 
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
-const EMAILJS_SERVICE_ID = "service_izfv466"
-const EMAILJS_TEMPLATE_ID = "template_jttfdsq"
-const EMAILJS_PUBLIC_KEY = "qjUSm5iSVeKkQJcYS"
-const CONTACT_RECIPIENT_EMAIL = "jim@greatestpmever.com"
+function readConfig(value: string | undefined, fallback: string) {
+  const normalized = value?.trim()
+  return normalized ? normalized : fallback
+}
+
+const HUBSPOT_PORTAL_ID = readConfig(process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID, "245975558")
+const HUBSPOT_FORM_ID = readConfig(
+  process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID,
+  "d2dabfd0-c429-4bf4-9cfc-6a434dfc372f",
+)
 const SUBMIT_COOLDOWN_MS = 30_000
 const LAST_SUBMIT_KEY = "contact_last_submit_at"
 
@@ -17,6 +23,16 @@ const inputClass =
   "w-full rounded-lg border border-gray-300 bg-white px-3.5 py-2.5 text-base text-[#111111] placeholder-[#111111]/70 shadow-[0_1px_2px_rgba(16,24,40,0.05)] outline-none transition-colors focus:border-[#447ACB] focus:ring-1 focus:ring-[#447ACB]"
 
 const labelClass = "block text-base text-slate-700 mb-3"
+
+function getCookie(name: string) {
+  if (typeof document === "undefined") return ""
+  return (
+    document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(`${name}=`))
+      ?.split("=")[1] ?? ""
+  )
+}
 
 export function ContactForm() {
   const [state, setState] = useState<State>("idle")
@@ -53,7 +69,6 @@ export function ContactForm() {
     const lname = (form.elements.namedItem("lname") as HTMLInputElement).value
     const femail = (form.elements.namedItem("femail") as HTMLInputElement).value.trim()
     const fmessage = (form.elements.namedItem("fmessage") as HTMLTextAreaElement).value.trim()
-    const senderName = `${fname} ${lname}`.trim() || "Website Contact"
 
     if (!femail || !fmessage) {
       trackEvent("contact_form_error", {
@@ -71,33 +86,64 @@ export function ContactForm() {
     setErrorMsg("")
 
     try {
-      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      const hutk = getCookie("hubspotutk")
+      const context: { pageUri: string; pageName: string; hutk?: string } = {
+        pageUri: window.location.href,
+        pageName: document.title,
+      }
+      if (hutk) context.hutk = hutk
+
+      const res = await fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`,
+        {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          service_id: EMAILJS_SERVICE_ID,
-          template_id: EMAILJS_TEMPLATE_ID,
-          user_id: EMAILJS_PUBLIC_KEY,
-          template_params: {
-            from_name: senderName,
-            name: senderName,
-            from_email: femail,
-            email: femail,
-            user_email: femail,
-            to_email: CONTACT_RECIPIENT_EMAIL,
-            to: CONTACT_RECIPIENT_EMAIL,
-            recipient: CONTACT_RECIPIENT_EMAIL,
-            send_to: CONTACT_RECIPIENT_EMAIL,
-            message: fmessage,
-            subject: `Portfolio contact form submission from ${senderName}`,
-            reply_to: femail,
-          },
+          fields: [
+            { name: "firstname", value: fname },
+            { name: "lastname", value: lname },
+            { name: "email", value: femail },
+            { name: "message", value: fmessage },
+          ],
+          context,
         }),
-      })
+      },
+      )
 
       if (!res.ok) {
-        const providerMessage = (await res.text()).trim()
-        throw new Error(`Status ${res.status}${providerMessage ? `: ${providerMessage}` : ""}`)
+        const raw = (await res.text()).trim()
+        let userFacingError = ""
+
+        try {
+          const parsed = JSON.parse(raw) as {
+            errors?: Array<{ errorType?: string; message?: string }>
+            message?: string
+            correlationId?: string
+          }
+          const errorType = parsed.errors?.[0]?.errorType
+          if (errorType === "FORM_HAS_RECAPTCHA_ENABLED") {
+            userFacingError =
+              "HubSpot blocked this submit because CAPTCHA is enabled on that form. Disable CAPTCHA for API submissions."
+          } else if (parsed.errors?.length) {
+            userFacingError = parsed.errors
+              .map((entry) => entry.message)
+              .filter(Boolean)
+              .join(" | ")
+          } else if (parsed.message) {
+            userFacingError = parsed.message
+          }
+
+          if (parsed.correlationId) {
+            userFacingError = `${userFacingError} (HubSpot Ref: ${parsed.correlationId})`
+          }
+        } catch {
+          // Keep fallback below when provider response is non-JSON.
+        }
+
+        throw new Error(
+          userFacingError ||
+            `Status ${res.status}${raw ? `: ${raw}` : ""}`,
+        )
       }
 
       localStorage.setItem(LAST_SUBMIT_KEY, String(Date.now()))
@@ -115,7 +161,11 @@ export function ContactForm() {
         error_type: "request_failed",
         page_path: getCurrentPagePath(),
       })
-      setErrorMsg("Submission failed. Please email jim@greatestpmever.com directly.")
+      const detail =
+        err instanceof Error && err.message
+          ? err.message
+          : "Submission failed. Please email jim@greatestpmever.com directly."
+      setErrorMsg(detail)
       setState("error")
     }
   }
