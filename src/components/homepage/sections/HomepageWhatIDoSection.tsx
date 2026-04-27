@@ -1,21 +1,21 @@
 import { Container } from "@/components/Container"
-import { getExperienceCards } from "@/components/homepage/data"
 import type { HomepageText } from "@/components/homepage/homepage"
-import { ExperienceCard } from "@/components/homepage/ui"
 import { MotionReveal } from "@/components/motion/MotionReveal"
+import { siteCta } from "@/content/site"
+import Image from "next/image"
+import Link from "next/link"
 
 type HomepageWhatIDoSectionProps = {
   section: HomepageText["sections"]["experiences"]
-  cards: HomepageText["experienceCards"]
+  engagements: HomepageText["experienceEngagements"]
   motionStyle?: "default" | "homepage"
 }
 
 export function HomepageWhatIDoSection({
   section,
-  cards,
+  engagements,
   motionStyle = "default",
 }: HomepageWhatIDoSectionProps) {
-  const experienceCards = getExperienceCards(cards)
   const useHomepageMotion = motionStyle === "homepage"
 
   return (
@@ -41,10 +41,51 @@ export function HomepageWhatIDoSection({
             </div>
           </MotionReveal>
 
-          <div className="grid w-full gap-5 md:grid-cols-2 xl:grid-cols-[396px_repeat(3,minmax(0,1fr))] xl:items-stretch">
-            {experienceCards.map((card, index) => (
-              <MotionReveal key={card.title} preset={useHomepageMotion ? "cardStrong" : "card"} delay={index * 0.05}>
-                <ExperienceCard {...card} />
+          <MotionReveal preset={useHomepageMotion ? "cardStrong" : "card"} className="w-full">
+            <div className="flex flex-col items-center justify-center gap-3 rounded-[12px] border border-[#E6E6E6] bg-white px-6 py-8 text-center md:flex-row md:gap-2">
+              <p className="type-p2 text-[#222222]">{section.ctaLead} -</p>
+              <Link
+                href={siteCta.bookingUrls.homepageHero}
+                className="type-p2 inline-flex items-center rounded-full bg-[#2B2B2B] px-5 py-2 text-white transition-colors hover:bg-[#1F1F1F]"
+              >
+                {siteCta.bookCallLabel}
+              </Link>
+            </div>
+          </MotionReveal>
+
+          <div className="grid w-full gap-4 md:grid-cols-2">
+            {engagements.map((engagement, index) => (
+              <MotionReveal
+                key={`${engagement.company}-${index}`}
+                preset={useHomepageMotion ? "cardStrong" : "card"}
+                delay={index * 0.04}
+              >
+                <Link href={engagement.href} className="group block h-full">
+                  <article className="h-full rounded-[10px] border border-[#E7E7E7] bg-[#FBFBFB] p-6 transition-all duration-200 group-hover:border-[#4B7FD1] group-hover:shadow-[0_0_0_1px_rgba(75,127,209,0.35),0_0_24px_rgba(75,127,209,0.28)] md:p-7">
+                    <div className="flex items-center">
+                      <Image
+                        src={engagement.logoSrc}
+                        alt={`${engagement.company} logo`}
+                        width={220}
+                        height={36}
+                        className="h-9 w-auto max-w-[220px] object-contain object-left"
+                      />
+                      <span className="sr-only">{engagement.company}</span>
+                    </div>
+
+                    <div className="mt-5 space-y-3 border-l border-[#DFDFDF] pl-4">
+                      <p className="type-p3 text-[#4A4A4A]">
+                        <span className="font-semibold text-[#222222]">Situation:</span> {engagement.situation}
+                      </p>
+                      <p className="type-p3 text-[#4A4A4A]">
+                        <span className="font-semibold text-[#222222]">What I did:</span> {engagement.whatIDid}
+                      </p>
+                      <p className="type-p3 text-[#222222]">
+                        <span className="font-semibold text-[#222222]">Results:</span> {engagement.results}
+                      </p>
+                    </div>
+                  </article>
+                </Link>
               </MotionReveal>
             ))}
           </div>

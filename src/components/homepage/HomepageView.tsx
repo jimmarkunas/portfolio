@@ -21,7 +21,7 @@ export default function Homepage() {
     hero,
     sections,
     stats,
-    experienceCards,
+    experienceEngagements,
     awards,
     testimonials,
     journey,
@@ -34,7 +34,7 @@ export default function Homepage() {
 
       <PastClientsSection motionStyle="homepage" />
 
-      <HomepageWhatIDoSection section={sections.experiences} cards={experienceCards} motionStyle="homepage" />
+      <HomepageWhatIDoSection section={sections.experiences} engagements={experienceEngagements} motionStyle="homepage" />
 
       <HomepageInsightsSection section={sections.insights} statsCards={stats.cards} />
 

@@ -2,22 +2,23 @@ import { siteCta } from "@/content/site"
 
 const fallbackHomepageText = {
   hero: {
-    role: "Program Leader",
+    role: "Program Fixer",
     year: "2008",
     title: "Hello",
-    subtitle: "— I'm An Award-Winning PM",
+    subtitle: "— I Fix Digital Programs Before They Crash",
     scroll: "Scroll down ↓",
     projectCompletedValue: "75",
-    projectCompletedLabel: "Projects Led",
-    startupRaisedValue: "100M",
-    startupRaisedLabel: "Budgets Managed",
+    projectCompletedLabel: "Projects Delivered",
+    startupRaisedValue: "1B+",
+    startupRaisedLabel: "ROI Delivered",
   },
   sections: {
     experiences: {
       pill: "What I Do",
-      title: "Technical Delivery Leadership",
+      title: "Programs I've Rescued",
       description:
-        "I step into high-stakes programs where business goals, technical constraints, vendors, and delivery pressure collide. My job is to turn ambiguity into clarity and keep the work moving without losing speed, quality, or trust.",
+        "Real engagements pulled from the case studies below. Same pattern every time: stabilize the program, align ownership, and convert delivery into measurable business outcomes.",
+      ctaLead: "If your program is in trouble",
     },
     awards: {
       pill: "Recognition",
@@ -69,26 +70,138 @@ const fallbackHomepageText = {
       cta: siteCta.bookCallLabel,
     },
   },
-  experienceCards: [
+  experienceEngagements: [
     {
-      title: "Project Management",
-      description:
-        "Lead cross-functional delivery across product, engineering, operations, and executives. Turn business goals into execution.",
+      company: "DIRECTV",
+      href: "/work/dtv01",
+      logoSrc: "/company-logos/svg/directv-logo.svg",
+      situation:
+        "Upsell campaigns were taking 6 months to launch inside a shrinking subscriber base across 20+ systems.",
+      whatIDid:
+        "Built the operating model, intake/approval flow, and product ownership for the revenue journey.",
+      results:
+        "$55M Q4 upsell revenue and 60-day faster time-to-value.",
     },
     {
-      title: "Program Delivery",
-      description:
-        "I run complex, multi-workstream programs across teams, vendors, and platforms. Keep execution aligned and risk under control.",
+      company: "Modere",
+      href: "/work/modere",
+      logoSrc: "/company-logos/svg/modere-logo.svg",
+      situation:
+        "Growth toward $1B was constrained by a brittle stack, market-by-market custom work, and delivery friction.",
+      whatIDid:
+        "Protected a composable architecture and aligned partners around one scalable system shape.",
+      results:
+        "$1B revenue target reached, 43% conversion uplift, and 35% faster site performance.",
     },
     {
-      title: "Platform Modernization",
-      description:
-        "Modernize eCommerce & enterprise platforms across discovery, migration, launch, and stabilization.",
+      company: "New York Life",
+      href: "/work/newyorklife",
+      logoSrc: "/company-logos/svg/new-york-life-logo.svg",
+      situation:
+        "Agent sites were slow, manual, and compliance-risky, with launches stretching from months to quarters.",
+      whatIDid:
+        "Designed multi-tenant governance workflows and permissions to make speed and control work together.",
+      results:
+        "200% lead uplift, 12,000+ sites governed, and launch times reduced from 6 months to 2 weeks.",
     },
     {
-      title: "Management Consulting",
-      description:
-        "Turn executive priorities, business constraints, and technical complexity into clear scope, solutions, and outcomes.",
+      company: "LEGO",
+      href: "/work/lego",
+      logoSrc: "/company-logos/svg/lego-logo.svg",
+      situation:
+        "The digital engagement layer lagged market expectations with cluttered navigation and inconsistent checkout behavior.",
+      whatIDid:
+        "Turned transformation goals into shippable product requirements across navigation, cart, and checkout.",
+      results:
+        "3x revenue growth, $50M cost savings, 24% digital sales uplift, and $25 AOV lift.",
+    },
+    {
+      company: "Mrs. Meyer's",
+      href: "/work/mm",
+      logoSrc: "/company-logos/svg/mm-logo.svg",
+      situation:
+        "No DTC channel, no owned customer relationship, and enterprise systems not built for consumer commerce.",
+      whatIDid:
+        "Led the first end-to-end DTC stack integration and launch operating model across core systems.",
+      results:
+        "15% revenue uplift, path to 10% brand GMV via DTC, and reuse across follow-on brands.",
+    },
+    {
+      company: "Method",
+      href: "/work/method",
+      logoSrc: "/company-logos/svg/method-logo.svg",
+      situation:
+        "Strong brand equity but no DTC channel, with pressure to launch fast on shared enterprise rails.",
+      whatIDid:
+        "Ran fast-follow launch execution and translated shared platform capabilities into brand-right experience.",
+      results:
+        "20% DTC revenue uplift and 3 launches on one unified platform.",
+    },
+    {
+      company: "Frederick's of Hollywood",
+      href: "/work/foh",
+      logoSrc: "/tool-icons/svg/shopify-logo.svg",
+      situation:
+        "Post-bankruptcy relaunch needed to absorb celebrity traffic and promotions without heavy-stack overhead.",
+      whatIDid:
+        "Led lean Shopify Plus relaunch model and campaign-ready operating workflow.",
+      results:
+        "25% lower TCO and 3x faster promotional launches.",
+    },
+    {
+      company: "CPS Energy",
+      href: "/work/cps",
+      logoSrc: "/tool-icons/svg/cps-energy-logo.svg",
+      situation:
+        "Streetlight repair operations were fragmented across intake, SAP, dispatch, and field crews with unclear ownership.",
+      whatIDid:
+        "Led product and program design to connect resident reporting, field iPad workflows, and system integrations.",
+      results:
+        "73% fewer repair calls, 43% fewer truck rolls, and repair windows cut from ~3 weeks to 1-4 days.",
+    },
+    {
+      company: "Murad",
+      href: "/work/murad",
+      logoSrc: "/company-logos/svg/murad-logo.svg",
+      situation:
+        "Global replatform was unstable after agency churn, with unresolved order, payment, and subscription architecture risks.",
+      whatIDid:
+        "Owned architecture and launch escalation path to stabilize Oracle, BigCommerce, and subscription model execution.",
+      results:
+        "3 markets launched, 0 launch issues, and reduced dependence on Magento-era dev overhead.",
+    },
+    {
+      company: "Boehringer Ingelheim",
+      href: "/work/bi",
+      logoSrc: "/company-logos/svg/bi-logo.svg",
+      situation:
+        "Country-by-country B2B commerce fragmentation and ERP transition risk were slowing digital adoption.",
+      whatIDid:
+        "Defined a global reference model with controlled local variation and managed Oracle-to-SAP coexistence.",
+      results:
+        "10x online sales, 15% higher order throughput, and 12% fewer service escalations.",
+    },
+    {
+      company: "K2 Sports",
+      href: "/work/k2",
+      logoSrc: "/tool-icons/svg/k2-sports-logo.png",
+      situation:
+        "Forced Demandware migration needed to support nine brand experiences without fragmenting operations.",
+      whatIDid:
+        "Designed the headless multi-brand architecture and integration strategy around one shared commerce engine.",
+      results:
+        "9 sites launched, 75% faster site creation, and 90% faster publishing.",
+    },
+    {
+      company: "DIRECTV Everywhere",
+      href: "/work/dtv02",
+      logoSrc: "/company-logos/svg/directv-logo.svg",
+      situation:
+        "A national streaming promise was public before the product was operationally aligned across 35+ teams.",
+      whatIDid:
+        "Defined one product truth across parity, entitlement, and roadmap so execution could converge.",
+      results:
+        "5M+ downloads, 5 device families, and $200M revenue uplift.",
     },
   ],
   awards: [
@@ -269,7 +382,7 @@ type PartialHomepageText = {
     testimonials?: Partial<HomepageText["sections"]["testimonials"]>
     journey?: Partial<HomepageText["sections"]["journey"]>
   }
-  experienceCards?: HomepageText["experienceCards"]
+  experienceEngagements?: HomepageText["experienceEngagements"]
   awards?: HomepageText["awards"]
   stats?: Partial<HomepageText["stats"]>
   testimonials?: HomepageText["testimonials"]
@@ -313,7 +426,7 @@ export function getHomepageText(): HomepageText {
         ...(homepageText.sections?.journey ?? {}),
       },
     },
-    experienceCards: homepageText.experienceCards ?? fallbackHomepageText.experienceCards,
+    experienceEngagements: homepageText.experienceEngagements ?? fallbackHomepageText.experienceEngagements,
     awards: homepageText.awards ?? fallbackHomepageText.awards,
     stats: { ...fallbackHomepageText.stats, ...(homepageText.stats ?? {}) },
     testimonials: homepageText.testimonials ?? fallbackHomepageText.testimonials,
