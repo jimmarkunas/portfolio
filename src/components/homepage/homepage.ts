@@ -80,7 +80,7 @@ const fallbackHomepageText = {
       whatIDid:
         "Built the operating model, intake/approval flow, and product ownership for the revenue journey.",
       results:
-        "$55M Q4 upsell revenue and 60-day faster time-to-value.",
+        "$55M Q4 Upsell Revenue, 60d Faster TTV",
     },
     {
       company: "Modere",
@@ -91,7 +91,7 @@ const fallbackHomepageText = {
       whatIDid:
         "Protected a composable architecture and aligned partners around one scalable system shape.",
       results:
-        "$1B revenue target reached, 43% conversion uplift, and 35% faster site performance.",
+        "$1B Revenue Target Hit, 43% Conversion Uplift, and 35% faster site performance.",
     },
     {
       company: "New York Life",
@@ -102,7 +102,7 @@ const fallbackHomepageText = {
       whatIDid:
         "Designed multi-tenant governance workflows and permissions to make speed and control work together.",
       results:
-        "200% lead uplift, 12,000+ sites governed, and launch times reduced from 6 months to 2 weeks.",
+        "200% Lead Gen Uplift, 12k+ Sites Launched, and launch times reduced from 6 months to 2 weeks.",
     },
     {
       company: "LEGO",
@@ -113,7 +113,7 @@ const fallbackHomepageText = {
       whatIDid:
         "Turned transformation goals into shippable product requirements across navigation, cart, and checkout.",
       results:
-        "3x revenue growth, $50M cost savings, 24% digital sales uplift, and $25 AOV lift.",
+        "3x Revenue Growth, $50M Cost Savings, 24% digital sales uplift, and $25 AOV lift.",
     },
     {
       company: "Mrs. Meyer's",
@@ -124,7 +124,7 @@ const fallbackHomepageText = {
       whatIDid:
         "Led the first end-to-end DTC stack integration and launch operating model across core systems.",
       results:
-        "15% revenue uplift, path to 10% brand GMV via DTC, and reuse across follow-on brands.",
+        "15% Revenue Uplift, 15% Brand GMV Uplift, and reuse across follow-on brands.",
     },
     {
       company: "Method",
@@ -135,18 +135,18 @@ const fallbackHomepageText = {
       whatIDid:
         "Ran fast-follow launch execution and translated shared platform capabilities into brand-right experience.",
       results:
-        "20% DTC revenue uplift and 3 launches on one unified platform.",
+        "20% Revenue Uplift, 3 Issue-Free Launches",
     },
     {
       company: "Frederick's of Hollywood",
       href: "/work/foh",
       logoSrc: "/tool-icons/svg/shopify-logo.svg",
       situation:
-        "Post-bankruptcy relaunch needed to absorb celebrity traffic and promotions without heavy-stack overhead.",
+        "Post-bankruptcy relaunch needed to absorb celebrity traffic & promotions w/o heavy-stack overhead.",
       whatIDid:
         "Led lean Shopify Plus relaunch model and campaign-ready operating workflow.",
       results:
-        "25% lower TCO and 3x faster promotional launches.",
+        "25% Lower TCO, 3x Promo ROI",
     },
     {
       company: "CPS Energy",
@@ -157,7 +157,7 @@ const fallbackHomepageText = {
       whatIDid:
         "Led product and program design to connect resident reporting, field iPad workflows, and system integrations.",
       results:
-        "73% fewer repair calls, 43% fewer truck rolls, and repair windows cut from ~3 weeks to 1-4 days.",
+        "73% Fewer CS Calls, 3w-4d Repair Window Cut",
     },
     {
       company: "Murad",
@@ -168,7 +168,7 @@ const fallbackHomepageText = {
       whatIDid:
         "Owned architecture and launch escalation path to stabilize Oracle, BigCommerce, and subscription model execution.",
       results:
-        "3 markets launched, 0 launch issues, and reduced dependence on Magento-era dev overhead.",
+        "3 International Launchs, 11 Named Integrations",
     },
     {
       company: "Boehringer Ingelheim",
@@ -179,7 +179,7 @@ const fallbackHomepageText = {
       whatIDid:
         "Defined a global reference model with controlled local variation and managed Oracle-to-SAP coexistence.",
       results:
-        "10x online sales, 15% higher order throughput, and 12% fewer service escalations.",
+        "10x Online Sales, 15%+ Order Throughput, and 12% fewer service escalations.",
     },
     {
       company: "K2 Sports",
@@ -190,7 +190,7 @@ const fallbackHomepageText = {
       whatIDid:
         "Designed the headless multi-brand architecture and integration strategy around one shared commerce engine.",
       results:
-        "9 sites launched, 75% faster site creation, and 90% faster publishing.",
+        "9 Sites Launched, 2 Custom Integrations, and 90% faster publishing.",
     },
     {
       company: "DIRECTV Everywhere",
@@ -201,7 +201,7 @@ const fallbackHomepageText = {
       whatIDid:
         "Defined one product truth across parity, entitlement, and roadmap so execution could converge.",
       results:
-        "5M+ downloads, 5 device families, and $200M revenue uplift.",
+        "5M+ Downloads, $200M Revenue Uplift.",
     },
   ],
   awards: [

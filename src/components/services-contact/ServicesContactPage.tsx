@@ -34,7 +34,7 @@ function SectionEyebrow({ label }: { label: string }) {
 
 export function ServicesContactPage({ entryPoint = "services" }: ServicesContactPageProps) {
   const { contact, careerStats, projectShowcase, servicesMap } = servicesContactContent
-  const { hero, sections, experienceCards } = getHomepageText()
+  const { hero, sections, experienceEngagements } = getHomepageText()
   const scrollToContact = entryPoint === "contact"
   const socialLinkLocation = entryPoint === "contact" ? "contact_page" : "services_page"
 
@@ -44,7 +44,7 @@ export function ServicesContactPage({ entryPoint = "services" }: ServicesContact
 
       <section id="services" className="scroll-mt-28">
         <HomepageHeroSection hero={hero} />
-        <HomepageWhatIDoSection section={sections.experiences} cards={experienceCards} />
+        <HomepageWhatIDoSection section={sections.experiences} engagements={experienceEngagements} />
         <PastClientsSection showHeading />
         <CareerStatsSection
           eyebrow={careerStats.eyebrow}

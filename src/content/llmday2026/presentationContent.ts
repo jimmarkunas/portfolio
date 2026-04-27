@@ -552,8 +552,6 @@ export const llmDay2026Content = {
       footerLeft: "Designing LLM Workflows That Drive Enterprise ROI",
       footerRight: "",
     },
-    http://localhost:3000/
-    
     interviewThankYou: {
       id: "slide-interview-thank-you",
       title: "Thank You",

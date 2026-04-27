@@ -11,7 +11,14 @@ const STATIC_FOUNDER_HTML_ALLOWLIST = new Set([
   "public/founder/cwg/index.html",
   "public/founder/zevo/index.html",
 ])
-const BOOKING_URL_PATTERN = /https:\/\/calendar\.app\.google\/[A-Za-z0-9_-]+/g
+const BOOKING_URL_MATCH_PATTERNS = [
+  /https:\/\/calendar\.app\.google\/[A-Za-z0-9_-]+/g,
+  /https:\/\/meetings(?:-[a-z0-9]+)?\.hubspot\.com\/[A-Za-z0-9_-]+(?:\?[A-Za-z0-9=&%._-]+)?/g,
+]
+const BOOKING_URL_VALIDATE_PATTERNS = [
+  /^https:\/\/calendar\.app\.google\/[A-Za-z0-9_-]+$/,
+  /^https:\/\/meetings(?:-[a-z0-9]+)?\.hubspot\.com\/[A-Za-z0-9_-]+(?:\?[A-Za-z0-9=&%._-]+)?$/,
+]
 const REQUIRED_POLICY_KEYS = [
   "siteShell",
   "homepageHero",
@@ -50,13 +57,14 @@ function readBookingPolicy() {
 
   for (const key of REQUIRED_POLICY_KEYS) {
     const value = policy[key]
-    if (typeof value !== "string" || !BOOKING_URL_PATTERN.test(value)) {
+    const hasValidBookingUrl =
+      typeof value === "string" &&
+      BOOKING_URL_VALIDATE_PATTERNS.some((pattern) => pattern.test(value))
+    if (!hasValidBookingUrl) {
       throw new Error(
         `Booking URL drift check failed: ${BOOKING_POLICY_PATH} must contain a valid calendar URL for "${key}"`,
       )
     }
-
-    BOOKING_URL_PATTERN.lastIndex = 0
   }
 
   return policy
@@ -70,6 +78,18 @@ function getLineNumber(sourceText, index) {
     }
   }
   return line
+}
+
+function findBookingUrlMatches(sourceText) {
+  const matches = []
+  for (const pattern of BOOKING_URL_MATCH_PATTERNS) {
+    const regex = new RegExp(pattern.source, "g")
+    for (const match of sourceText.matchAll(regex)) {
+      matches.push(match)
+    }
+  }
+
+  return matches.sort((left, right) => (left.index ?? 0) - (right.index ?? 0))
 }
 
 const bookingPolicy = readBookingPolicy()
@@ -89,7 +109,7 @@ for (const filePath of sourceFiles) {
   }
 
   const sourceText = fs.readFileSync(filePath, "utf8")
-  const matches = sourceText.matchAll(BOOKING_URL_PATTERN)
+  const matches = findBookingUrlMatches(sourceText)
   for (const match of matches) {
     const line = getLineNumber(sourceText, match.index ?? 0)
     driftFindings.push({
@@ -106,7 +126,7 @@ walkFiles(PUBLIC_HTML_ROOT, publicHtmlFiles, (fullPath) => fullPath.endsWith(".h
 const staticFounderFindings = []
 for (const filePath of publicHtmlFiles) {
   const sourceText = fs.readFileSync(filePath, "utf8")
-  const matches = [...sourceText.matchAll(BOOKING_URL_PATTERN)]
+  const matches = findBookingUrlMatches(sourceText)
   if (matches.length === 0) {
     continue
   }
