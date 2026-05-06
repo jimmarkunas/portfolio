@@ -33,7 +33,7 @@ export default function NylVelocityChart({ className }: NylVelocityChartProps) {
         <div>
           <div className="mb-1 flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-white" />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-white/50">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#9CA3AF]">
               Deployment Velocity Report
             </span>
           </div>
@@ -46,7 +46,7 @@ export default function NylVelocityChart({ className }: NylVelocityChartProps) {
       <div className="relative z-10 flex flex-1 flex-col gap-6 md:flex-row md:gap-8">
         <div className="flex flex-row justify-between md:w-1/3 md:flex-col md:justify-between">
           <div>
-            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-white/50">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#9CA3AF]">
               Avg. Launch Time
             </p>
             <div className="flex items-baseline gap-1">
@@ -56,7 +56,7 @@ export default function NylVelocityChart({ className }: NylVelocityChartProps) {
           </div>
 
           <div className="border-l border-white/10 pl-4 md:border-l-0 md:border-t md:pl-0 md:pt-4">
-            <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-white/50">
+            <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#9CA3AF]">
               Total Scale
             </p>
             <div className="flex items-center gap-2">
@@ -67,25 +67,25 @@ export default function NylVelocityChart({ className }: NylVelocityChartProps) {
         </div>
 
         <div className="flex flex-1 flex-col">
-          <div className="relative flex flex-1 flex-col justify-end overflow-hidden rounded-sm bg-white/10 p-4">
+          <div className="relative flex flex-1 flex-col justify-end overflow-hidden rounded-sm bg-[#2A2F36] p-4">
             <div className="flex h-full items-end gap-1">
               {BAR_HEIGHTS.map((height, index) => (
                 <div
                   key={index}
-                  className={cn('flex-1 rounded-t-[1px]', index === 11 ? 'bg-white' : 'bg-white/25')}
+                  className={cn('flex-1 rounded-t-[1px]', index === 11 ? 'bg-[#F3F4F6]' : 'bg-[#6B7280]')}
                   style={{ height: `${height}%` }}
                 />
               ))}
             </div>
 
             <div className="mt-2 flex justify-between">
-              <span className="text-[8px] uppercase tracking-widest text-white/40">Month 01</span>
+              <span className="text-[8px] uppercase tracking-widest text-[#9CA3AF]">Month 01</span>
               <span className="text-[8px] font-bold uppercase tracking-widest text-white">Month 06</span>
             </div>
           </div>
 
           <div className="mt-4">
-            <p className="text-[10px] leading-tight text-white/40">
+            <p className="text-[10px] leading-tight text-[#9CA3AF]">
               Data aggregated across enterprise-level content management systems.
             </p>
           </div>

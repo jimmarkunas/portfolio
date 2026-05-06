@@ -1,4 +1,5 @@
 html {
+  color-scheme: light;
   color: var(--color-ink);
   background: #f3f3f3;
   scroll-behavior: smooth;

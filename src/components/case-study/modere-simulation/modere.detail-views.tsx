@@ -38,7 +38,7 @@ function NodeCard({
         compact ? "min-h-[92px]" : "min-h-[108px]",
       )}
     >
-      <div className="mb-2 text-[10px] uppercase tracking-[0.28em] text-white/40">
+      <div className="mb-2 text-[10px] uppercase tracking-[0.28em] text-[#9CA3AF]">
         {eyebrow}
       </div>
       <div className="text-[16px] tracking-[-0.02em] md:text-[18px]">{label}</div>
@@ -84,17 +84,17 @@ export function ArchitectureView() {
 
             <div className="flex min-h-0 flex-col items-center justify-center gap-4">
               <div className="flex w-full max-w-[300px] min-h-[132px] flex-col justify-center border border-white/10 bg-[#141414] px-6 py-5">
-                <div className="mb-2 text-[10px] uppercase tracking-[0.28em] text-white/40">
+                <div className="mb-2 text-[10px] uppercase tracking-[0.28em] text-[#9CA3AF]">
                   The Nervous System
                 </div>
                 <div className="text-[18px] tracking-[-0.02em] md:text-[22px]">Next.js Engine</div>
               </div>
 
               <div className="flex w-full max-w-[300px] flex-col border border-white/10 bg-black/20 px-5 py-4">
-                <div className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-white/30">
+                <div className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[#9CA3AF]">
                   Console Log
                 </div>
-                <div className="space-y-2 font-mono text-[10px] text-white/60">
+                <div className="space-y-2 font-mono text-[10px] text-[#D1D5DB]">
                   {CONSOLE_LINES.map((line, index) => (
                     <div key={line} className={index === CONSOLE_LINES.length - 1 ? "text-white" : undefined}>
                       {CONSOLE_PREFIX} {line}
@@ -129,25 +129,25 @@ export function AnalysisView({ history }: { history: HistoryItem[] }) {
           >
             <div className="min-h-0">
               <div className="mb-5 flex items-center justify-between">
-                <div className="text-[10px] uppercase tracking-[0.28em] text-white/40">
+                <div className="text-[10px] uppercase tracking-[0.28em] text-[#9CA3AF]">
                   {item.stepTitle}
                 </div>
                 {item.isCorrect ? (
-                  <CheckCircle2 className="h-4 w-4 text-white/40" />
+                  <CheckCircle2 className="h-4 w-4 text-[#9CA3AF]" />
                 ) : (
-                  <ShieldAlert className="h-4 w-4 text-white/40" />
+                  <ShieldAlert className="h-4 w-4 text-[#9CA3AF]" />
                 )}
               </div>
               <div className="mb-3 text-[22px] leading-[1.2] tracking-[-0.02em] md:text-[24px]">
                 &quot;{item.label}&quot;
               </div>
-              <p className="text-[15px] font-normal italic leading-[1.45] tracking-[0] text-white/50 md:text-[16px]">
+              <p className="text-[15px] font-normal italic leading-[1.45] tracking-[0] text-[#D1D5DB] md:text-[16px]">
                 {item.politicsQuote}
               </p>
             </div>
 
             <div className="mt-6 border-t border-white/5 pt-5">
-              <div className="mb-2 text-[10px] uppercase tracking-[0.28em] text-white/40">Outcome</div>
+              <div className="mb-2 text-[10px] uppercase tracking-[0.28em] text-[#9CA3AF]">Outcome</div>
               <div className="text-[16px] font-normal leading-[1.45] tracking-[0] text-white/90 md:text-[17px]">
                 {item.outcome}
               </div>

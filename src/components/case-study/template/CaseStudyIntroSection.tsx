@@ -45,7 +45,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                   suffix={card.suffix}
                   animationTrigger="load"
                   label={card.label}
-                  className="min-h-[176px] px-8 py-10"
+                  className="h-[176px] px-8 py-10"
                   valueClassName="text-center text-slate-800"
                   valueTextClassName="text-[56px] font-medium leading-[60px]"
                   suffixClassName="text-[36px] font-semibold leading-9"
@@ -217,15 +217,15 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-5 md:grid-cols-2 md:justify-items-stretch lg:grid-cols-[minmax(0,224px)_minmax(0,224px)_minmax(0,224px)] lg:grid-rows-[208px_208px] lg:justify-end">
+                <div className="grid grid-cols-2 gap-5 md:grid-cols-2 md:justify-items-stretch lg:justify-items-center xl:grid-cols-[minmax(0,224px)_minmax(0,224px)_minmax(0,224px)] xl:grid-rows-[208px_208px] xl:justify-end">
                   {data.role.stats.map((stat, index) => (
                     <article
                       key={stat.label}
                       className={`h-[208px] w-full md:max-w-none lg:max-w-none ${
-                        index === 0 ? "lg:row-[1/3] lg:place-self-center" : ""
-                      } ${index === 1 ? "lg:col-start-2 lg:row-start-1" : ""} ${
-                        index === 2 ? "lg:col-start-2 lg:row-start-2" : ""
-                      } ${index === 3 ? "lg:col-start-3 lg:row-[1/3] lg:place-self-center" : ""}`}
+                        index === 0 ? "xl:row-[1/3] xl:place-self-center" : ""
+                      } ${index === 1 ? "xl:col-start-2 xl:row-start-1" : ""} ${
+                        index === 2 ? "xl:col-start-2 xl:row-start-2" : ""
+                      } ${index === 3 ? "xl:col-start-3 xl:row-[1/3] xl:place-self-center" : ""}`}
                     >
                       <div className="flex h-full w-full flex-col items-center justify-center rounded-[10px] bg-[#222222] px-6 text-center">
                         <div className="text-center leading-none text-white">
@@ -242,7 +242,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                             </span>
                           ) : null}
                         </div>
-                        <div className="type-p3 mt-4 max-w-[160px] text-white/60">
+                        <div className="type-p3 mt-4 max-w-[160px] text-[#D1D5DB]">
                           {stat.label}
                         </div>
                       </div>

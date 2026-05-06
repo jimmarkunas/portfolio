@@ -38,7 +38,7 @@ export function CareerStatsSection({
                 value={stat.value}
                 suffix={stat.suffix}
                 label={stat.label}
-                className="min-h-[176px] px-8 py-10"
+                className="h-[176px] px-8 py-10"
                 valueClassName="text-center text-slate-800"
                 valueTextClassName="text-[56px] font-medium leading-[60px]"
                 suffixClassName="text-[36px] font-semibold leading-9"

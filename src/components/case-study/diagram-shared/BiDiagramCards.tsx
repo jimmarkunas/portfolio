@@ -179,7 +179,7 @@ function EyebrowLabel({
   return (
     <div className="flex min-w-0 items-center gap-3 overflow-hidden">
       {icon}
-      <div className={["type-p5 tracking-[0.06em] uppercase", dark ? "text-white/70" : "text-[#7B7B7B]"].join(" ")}>
+      <div className={["type-p5 tracking-[0.06em] uppercase", dark ? "text-[#D1D5DB]" : "text-[#7B7B7B]"].join(" ")}>
         {label}
       </div>
     </div>

@@ -86,7 +86,7 @@ export function CaseStudyMediaFrame({
           </div>
           <div>
             <div className="type-p2 text-white">{media.title}</div>
-            <div className="type-p4 mt-1 text-white/65">{media.subtitle}</div>
+            <div className="type-p4 mt-1 text-[#D1D5DB]">{media.subtitle}</div>
           </div>
         </div>
       </div>

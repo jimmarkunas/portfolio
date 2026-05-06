@@ -116,7 +116,7 @@ export function GlobalLocationsMapInner({ title, locations, clusterMarkers = tru
   return (
     <div className="global-locations-map relative overflow-hidden h-[300px] md:h-[420px] lg:h-[500px]">
       <div className="absolute left-4 bottom-4 z-[1000] rounded-lg bg-black/50 px-3 py-1.5 backdrop-blur-sm">
-        <span className="text-[13px] font-medium text-white/80 tracking-wide">{title}</span>
+        <span className="text-[13px] font-medium text-[#E5E7EB] tracking-wide">{title}</span>
       </div>
 
       <div
@@ -126,7 +126,7 @@ export function GlobalLocationsMapInner({ title, locations, clusterMarkers = tru
         <button
           onClick={handleReset}
           onPointerDown={(event) => event.stopPropagation()}
-          className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-black/60 px-3 py-1.5 text-[12px] font-medium text-white/80 backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white whitespace-nowrap"
+          className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-black/60 px-3 py-1.5 text-[12px] font-medium text-[#E5E7EB] backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white whitespace-nowrap"
         >
           <span>←</span> Overview
         </button>
@@ -145,7 +145,7 @@ export function GlobalLocationsMapInner({ title, locations, clusterMarkers = tru
             onClick={fn}
             onPointerDown={(event) => event.stopPropagation()}
             title={t}
-            className="flex h-8 w-8 touch-manipulation cursor-pointer items-center justify-center rounded-lg bg-black/50 text-[15px] text-white/60 backdrop-blur-sm transition-colors hover:bg-black/70 hover:text-white/90"
+            className="flex h-8 w-8 touch-manipulation cursor-pointer items-center justify-center rounded-lg bg-black/50 text-[15px] text-[#D1D5DB] backdrop-blur-sm transition-colors hover:bg-black/70 hover:text-white"
           >
             {label}
           </button>

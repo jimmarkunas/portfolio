@@ -19,7 +19,7 @@ export function BeforeAfterComparison({ columns }: BeforeAfterComparisonProps) {
           </h3>
           <ul className="flex flex-col gap-3">
             {beforeColumn.points.map((point) => (
-              <li key={point} className="type-p4 text-white/70">
+              <li key={point} className="type-p4 text-[#D1D5DB]">
                 {point}
               </li>
             ))}
@@ -55,7 +55,7 @@ export function BeforeAfterComparison({ columns }: BeforeAfterComparisonProps) {
           </h3>
           <ul className="flex flex-col gap-3">
             {afterColumn.points.map((point) => (
-              <li key={point} className="type-p4 text-white/70">
+              <li key={point} className="type-p4 text-[#D1D5DB]">
                 {point}
               </li>
             ))}

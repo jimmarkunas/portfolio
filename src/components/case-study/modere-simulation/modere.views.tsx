@@ -50,7 +50,7 @@ export function TopChrome({ revenue, onReset }: { revenue: number; onReset: () =
           <RefreshCcw className="h-5 w-5" />
         </button>
         <div className="hidden sm:block">
-          <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">
+          <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#9CA3AF]">
             Simulation Active
           </div>
           <div className="text-sm font-medium">Modere $1B Growth Engine</div>
@@ -58,7 +58,7 @@ export function TopChrome({ revenue, onReset }: { revenue: number; onReset: () =
       </div>
 
       <div className="pointer-events-auto flex flex-col items-end border border-white/5 bg-black/40 px-4 py-2 backdrop-blur-sm">
-        <div className="text-[10px] uppercase tracking-[0.2em] text-white/40">Live Revenue</div>
+        <div className="text-[10px] uppercase tracking-[0.2em] text-[#9CA3AF]">Live Revenue</div>
         <motion.div
           key={revenue}
           initial={{ scale: 1.2, color: "#FFFFFF" }}
@@ -81,7 +81,7 @@ export function IntroView({ onStart }: { onStart: () => void }) {
       exit={{ opacity: 0, scale: 1.05 }}
       className="grid h-full content-start px-6 pb-12 pt-[15px] md:px-10 md:pt-[15px] lg:px-16 lg:pb-16 lg:pt-[15px]"
     >
-      <div className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/30">
+      <div className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#9CA3AF]">
         Interactive Executive Simulation
       </div>
       <h1 className="mt-[15px] text-[30px] font-normal leading-[1.3] tracking-[-0.02em] md:text-[36px]">
@@ -90,7 +90,7 @@ export function IntroView({ onStart }: { onStart: () => void }) {
 
       <div className="mt-10 grid items-start gap-12 md:grid-cols-2 lg:gap-24">
         <div className="space-y-6">
-          <p className="text-[18px] font-normal leading-[1.5] tracking-[0] text-white/60">
+          <p className="text-[18px] font-normal leading-[1.5] tracking-[0] text-[#D1D5DB]">
             Modere is stuck at $500M. The technology is a &quot;dumpster fire,&quot; the politics are toxic, and growth has stalled.
           </p>
           <p className="text-[18px] font-normal leading-[1.5] tracking-[0] text-white/90">
@@ -100,7 +100,7 @@ export function IntroView({ onStart }: { onStart: () => void }) {
 
         <div className="relative flex flex-col gap-8 border border-white/10 bg-white/[0.02] p-8 md:p-10">
           <div className="space-y-2">
-            <div className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30">
+            <div className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#9CA3AF]">
               Objective
             </div>
             <div className="text-[30px] font-normal leading-[1.3] tracking-[-0.02em] md:text-[36px]">
@@ -123,7 +123,7 @@ export function IntroView({ onStart }: { onStart: () => void }) {
             </motion.span>
           </button>
 
-          <div className="text-center text-[10px] uppercase tracking-[0.35em] text-white/30">
+          <div className="text-center text-[10px] uppercase tracking-[0.35em] text-[#9CA3AF]">
             Estimated time: 3 Minutes • High Stakes
           </div>
           <PageNumber value="01" />
@@ -155,13 +155,13 @@ export function DecisionView({
           0{stepIndex + 1}
         </div>
         <div className="h-px w-20 bg-white/10 md:w-28" />
-        <div className="text-[10px] uppercase tracking-[0.28em] text-white/40">Decision Point</div>
+        <div className="text-[10px] uppercase tracking-[0.28em] text-[#9CA3AF]">Decision Point</div>
       </div>
 
       <h2 className="mb-8 max-w-4xl text-[30px] font-normal leading-[1.3] tracking-[-0.02em] md:text-[36px]">
         {step.title}
       </h2>
-      <p className="mb-16 max-w-4xl text-[18px] font-normal leading-[1.5] tracking-[0] text-white/60">
+      <p className="mb-16 max-w-4xl text-[18px] font-normal leading-[1.5] tracking-[0] text-[#D1D5DB]">
         {step.scenario}
       </p>
 
@@ -174,13 +174,13 @@ export function DecisionView({
             className="group relative flex min-h-[300px] flex-col justify-between border border-white/10 p-8 text-left transition-all hover:border-white md:p-10"
           >
             <div>
-              <div className="mb-6 text-[11px] font-bold uppercase tracking-[0.28em] text-white/40 transition-opacity group-hover:text-white">
+              <div className="mb-6 text-[11px] font-bold uppercase tracking-[0.28em] text-[#9CA3AF] transition-opacity group-hover:text-white">
                 Option {index + 1}
               </div>
               <div className="mb-4 text-[30px] leading-tight tracking-[-0.03em] md:text-[38px]">
                 {option.label}
               </div>
-              <p className="text-[18px] font-normal leading-[1.5] tracking-[0] text-white/50">
+              <p className="text-[18px] font-normal leading-[1.5] tracking-[0] text-[#D1D5DB]">
                 {option.description}
               </p>
             </div>
@@ -215,7 +215,7 @@ function ResultsTabs({
             "inline-flex min-h-11 items-center border px-4 text-[11px] font-bold uppercase tracking-[0.24em] transition-all",
             value === tab.value
               ? "border-white bg-white text-black"
-              : "border-white/15 text-white/70 hover:border-white/40 hover:text-white",
+              : "border-white/15 text-[#D1D5DB] hover:border-white/40 hover:text-white",
           )}
         >
           {tab.label}
@@ -242,7 +242,7 @@ export function ResultsHeader({
           {content.titleEmphasis ? <span className="italic">{content.titleEmphasis}</span> : null}
           {content.titleSuffix}
         </h2>
-        <p className="text-[18px] font-normal leading-[1.5] tracking-[0] text-white/60">
+        <p className="text-[18px] font-normal leading-[1.5] tracking-[0] text-[#D1D5DB]">
           {content.body}
         </p>
       </div>

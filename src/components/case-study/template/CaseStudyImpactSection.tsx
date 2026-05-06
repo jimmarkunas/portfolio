@@ -68,7 +68,7 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyData }) {
                 value={stat.value}
                 suffix={stat.suffix}
                 label={stat.label}
-                className="min-h-[176px] px-8 py-10"
+                className="h-[176px] px-8 py-10"
                 valueClassName="text-center text-slate-800"
                 valueTextClassName="text-[56px] font-medium leading-[60px]"
                 suffixClassName="text-[36px] font-semibold leading-9"
@@ -89,7 +89,7 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyData }) {
           <MotionReveal preset="card" className="flex flex-col items-start gap-4 lg:col-span-2">
             <div className="flex flex-col gap-5 rounded-2xl border border-[#222222] bg-[#222222] p-8">
               <h2 className="type-h3 max-w-[640px] text-white">{data.impact.beforeAfter.title}</h2>
-              <p className="type-p3 max-w-[620px] text-white/70">{data.impact.beforeAfter.summary}</p>
+              <p className="type-p3 max-w-[620px] text-[#D1D5DB]">{data.impact.beforeAfter.summary}</p>
               <BeforeAfterComparison columns={data.impact.beforeAfter.columns} />
             </div>
           </MotionReveal>
