@@ -342,11 +342,11 @@ const fallbackHomepageText = {
         external: true,
       },
       {
-        company: "Mind The Product",
+        company: "TechGrid",
         date: "• April 2026",
-        summary: "Coming Soon",
-        tags: ["Article", "MTP"],
-        href: "",
+        summary: "Is AI Making Companies Smarter or Just More Efficient at Bad Management?",
+        tags: ["Article", "TechGrid"],
+        href: "https://techgrid.media/interviews/is-ai-making-companies-smarter-or-just-more-efficient-at-bad-management/",
         external: true,
       },
       {
