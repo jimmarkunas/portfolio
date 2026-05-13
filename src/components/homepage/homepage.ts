@@ -7,6 +7,7 @@ const fallbackHomepageText = {
     title: "Hello",
     subtitle: "— I Fix Digital Programs Before They Crash",
     scroll: "Scroll down ↓",
+    
     projectCompletedValue: "75",
     projectCompletedLabel: "Projects Delivered",
     startupRaisedValue: "$1B+",

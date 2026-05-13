@@ -20,6 +20,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
   const problemChartKey = data.problem.chart?.key
   const preQuoteChartKey = data.problem.quote.preQuoteChart
   const hideToolsUsed = data.slug === "zevo" || data.slug === "cwg"
+  const hideProblemQuote = data.slug === "bi"
 
   return (
     <section className="border-t border-[#222222]/8 bg-[#F3F3F3]">
@@ -181,15 +182,17 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                 </div>
               )}
 
-              <PullQuote
-                className={data.problem.quote.preQuoteImage ? "mt-8" : "mt-14 lg:mt-16"}
-                quote={<>&ldquo;{data.problem.quote.quote}&rdquo;</>}
-                attributionTitle={data.problem.quote.attributionTitle}
-                attributionSubtitle={data.problem.quote.attributionSubtitle}
-                avatarSrc={data.problem.quote.avatarSrc}
-                glyphClassName="text-[rgba(34,34,34,0.06)]"
-                attributionClassName="mt-6"
-              />
+              {!hideProblemQuote ? (
+                <PullQuote
+                  className={data.problem.quote.preQuoteImage ? "mt-8" : "mt-14 lg:mt-16"}
+                  quote={<>&ldquo;{data.problem.quote.quote}&rdquo;</>}
+                  attributionTitle={data.problem.quote.attributionTitle}
+                  attributionSubtitle={data.problem.quote.attributionSubtitle}
+                  avatarSrc={data.problem.quote.avatarSrc}
+                  glyphClassName="text-[rgba(34,34,34,0.06)]"
+                  attributionClassName="mt-6"
+                />
+              ) : null}
             </Container>
           </div>
 
