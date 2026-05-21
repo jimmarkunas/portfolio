@@ -192,6 +192,22 @@ export const caseStudy = {
       { phase: "Phase 05", title: "Expand", copy: "Rolled the model into markets with cleaner execution.", ringClass: "border-[#3E7BE0]", labelClass: "text-[#3E7BE0]" },
     ],
   },
+  star: {
+    situation:
+      "Every country ran its own B2B commerce setup. Nothing was shared. A major switch from Oracle to SAP added even more risk to an already fragmented global system.",
+    task: "Build one global model every country follows, while safely managing the Oracle-to-SAP migration running underneath it.",
+    actions: [
+      "Defined a global AEM/AEP reference model all markets use",
+      "Allowed controlled local variation so markets aren't forced into bad fits",
+      "Managed Oracle and SAP running side-by-side without breaking commerce",
+      "Kept a $100M+ program on track across multiple countries",
+    ],
+    results: [
+      { value: "23%+", label: "Conversion uplift", variant: "primary" },
+      { value: "10x", label: "Online sales", variant: "secondary" },
+      { value: "$100M+", label: "Program size", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote:
       "Jim thinks several steps ahead, looks out for the client, and pushes the work to be better without making it heavier.",

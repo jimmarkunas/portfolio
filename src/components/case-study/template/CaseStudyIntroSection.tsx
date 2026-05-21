@@ -14,6 +14,7 @@ import {
 import { DeferredGlobalLocationsVisual } from "@/components/case-study/template/visuals/deferred/DeferredMapVisual"
 
 import { HeroSwooshBackdrop } from "./CaseStudyTemplateIcons"
+import { CaseStudySTARSection } from "./CaseStudySTARSection"
 
 export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
   const isFoh = data.slug === "foh"
@@ -23,9 +24,9 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
   const hideProblemQuote = data.slug === "bi" || data.slug === "dtv01"
 
   return (
+    <>
     <section className="border-t border-[#222222]/8 bg-[#F3F3F3]">
-      <Container className="py-14 md:py-16 lg:py-20">
-        <div className="flex flex-col gap-10 lg:gap-12">
+      <Container className="pt-14 pb-14 md:pt-16 md:pb-16 lg:pt-20 lg:pb-10">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,573px)_minmax(0,658px)] lg:justify-between lg:items-start">
             <div className="flex max-w-[573px] flex-col items-start gap-5">
               <EyebrowPill className="bg-white" labelClassName="type-p2 text-[#222222]">
@@ -42,14 +43,16 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
               {data.atAGlance.stats.map((card) => (
                 <StatCard
                   key={`${card.value}-${card.label}`}
-                  value={card.value}
-                  suffix={card.suffix}
+                  value={`${card.value}${
+                    card.suffix
+                      ? `${card.suffix.length > 1 && card.suffix !== "+" ? " " : ""}${card.suffix}`
+                      : ""
+                  }`}
                   animationTrigger="load"
                   label={card.label}
                   className="h-[176px] px-8 py-10"
                   valueClassName="text-center text-slate-800"
-                  valueTextClassName="text-[56px] font-medium leading-[60px]"
-                  suffixClassName="text-[36px] font-semibold leading-9"
+                  valueTextClassName="type-stat-number font-semibold"
                   labelClassName="type-p2 max-w-[220px] text-neutral-700"
                   contentClassName="gap-4"
                 />
@@ -57,6 +60,16 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
             </div>
           </div>
 
+          {data.star ? (
+            <div className="mt-10 lg:mt-12">
+              <CaseStudySTARSection data={data} />
+            </div>
+          ) : null}
+      </Container>
+    </section>
+    <section className="bg-[#F3F3F3]">
+      <Container className="pt-0 pb-14 md:pt-0 md:pb-16 lg:pt-0 lg:pb-20">
+        <div className="flex flex-col gap-10 lg:gap-12">
           <div className="relative w-full bg-white md:left-1/2 md:w-screen md:-translate-x-1/2">
             <Container className="relative overflow-visible py-6 md:py-8 lg:min-h-[552px] lg:py-[52px]">
               <div className="pointer-events-none absolute right-[620px] top-[12px] hidden opacity-50 lg:block">
@@ -234,7 +247,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
                         <div className="text-center leading-none text-white">
                           <span className="font-[var(--font-family-display)] text-[52px] font-medium leading-[56px]">
                             {!stat.suffix || !/[0-9/]/.test(stat.suffix) ? (
-                              <AnimatedMetricValue value={stat.value} />
+                              <AnimatedMetricValue value={stat.value} numericVariant="proportional" />
                             ) : (
                               <span>{stat.value}</span>
                             )}
@@ -305,5 +318,6 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
         </div>
       </Container>
     </section>
+    </>
   )
 }

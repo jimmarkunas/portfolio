@@ -220,6 +220,22 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "It took months to launch a single agent website. The process was manual, full of compliance risk, and impossible to scale across 12,000+ agents.",
+    task: "Make it fast to launch sites without breaking compliance rules. Speed and control had to work at the same time.",
+    actions: [
+      "Built a multi-tenant system so one platform serves all agents",
+      "Created role-based permissions to keep compliance automatic",
+      "Designed a launch workflow that cut time-to-value by 40%",
+      "Integrated MuleSoft and Azure to connect all the moving parts",
+    ],
+    results: [
+      { value: "200%", label: "Lead gen uplift", variant: "primary" },
+      { value: "12k+", label: "Sites launched", variant: "secondary" },
+      { value: "40%", label: "Faster TTV", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote:
       "We're investing $1 billion in service, technology, data and AI, to support & empower our agents and advisors to serve (our customers') full spectrum of needs.",

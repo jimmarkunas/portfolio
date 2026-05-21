@@ -157,6 +157,19 @@ export type GlobalLocation = {
   coordinates: [number, number]
 }
 
+export type CaseStudySTARResult = {
+  value: string
+  label: string
+  variant: "primary" | "secondary" | "default"
+}
+
+export type CaseStudySTAR = {
+  situation: string
+  task: string
+  actions: string[]
+  results: CaseStudySTARResult[]
+}
+
 export type CaseStudyData = {
   slug: string
   breadcrumbCurrent: string
@@ -245,6 +258,7 @@ export type CaseStudyData = {
     attributionSubtitle: string
     avatarSrc?: string
   }
+  star?: CaseStudySTAR
   recognition?: {
     eyebrow: string
     title: string

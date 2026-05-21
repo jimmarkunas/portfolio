@@ -241,6 +241,22 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "Mrs. Meyer's had no way to sell directly to customers online. All of SC Johnson's systems were built for shipping pallets to stores, not individual orders to people's homes.",
+    task: "Launch the first-ever DTC channel for Mrs. Meyer's and make the enterprise systems underneath it actually work for consumer commerce.",
+    actions: [
+      "Defined how BigCommerce, SAP, tax, payments, and fulfillment had to work together",
+      "Pushed launch safeguards that reduced risk for a first-time DTC channel",
+      "Structured the stack so it could be reused for Caldrea and Method",
+      "Kept the launch moving on a compressed 5-month timeline",
+    ],
+    results: [
+      { value: "15%", label: "Revenue uplift", variant: "primary" },
+      { value: "2+", label: "Follow-on brands", variant: "secondary" },
+      { value: "10+", label: "Systems connected", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote:
       "Working with Jim was a life-changing experience.",

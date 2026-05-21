@@ -188,6 +188,22 @@ export const caseStudy = {
       { phase: "Phase 05", title: "Launch", copy: "Delivered a faster, more scalable commerce system across platforms.", ringClass: "border-[#3E7BE0]", labelClass: "text-[#3E7BE0]" },
     ],
   },
+  star: {
+    situation:
+      "Every country was building its own version of the product. Nothing was shared. The company was trying to hit $1B in revenue but the technology was holding it back.",
+    task: "Stop every team from building their own thing. Get all partners using one shared, scalable system.",
+    actions: [
+      "Defined a single architecture every market had to follow",
+      "Aligned three vendors around one shared delivery plan",
+      "Eliminated one-off custom builds market by market",
+      "Protected the architecture from scope creep and vendor drift",
+    ],
+    results: [
+      { value: "$1B", label: "Revenue target hit", variant: "primary" },
+      { value: "43%", label: "Conversion uplift", variant: "secondary" },
+      { value: "65%+", label: "GTM acceleration", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote: "Jim protected the architecture and kept the team from building the wrong thing.",
     attributionTitle: "Chris Beck",

@@ -233,6 +233,23 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "CBDistillery was at risk of losing card processing because approved partners wouldn't underwrite the account. The company also needed to move off WooCommerce and make subscriptions work through tokenized recurring billing.",
+    task:
+      "Get the business banked and build one commerce-and-payments system that could support one-time orders, subscriptions, and wholesale without fragmentation.",
+    actions: [
+      "Negotiated Square as the long-term processor for a high-risk merchant category",
+      "Drove custom BigCommerce, Square, and OrderGroove integration for recurring billing",
+      "Designed one operating model across DTC, subscriptions, and wholesale",
+      "Led cross-functional delivery so payments stabilization and platform migration landed together",
+    ],
+    results: [
+      { value: "$40M", label: "GMV after scale", variant: "primary" },
+      { value: "20K+", label: "Orders per month", variant: "secondary" },
+      { value: "89%", label: "Retention uplift", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote: "Jim saved the day with this Square deal. The team is happy.",
     attributionTitle: "Chris Van Dusen",

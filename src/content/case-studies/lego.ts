@@ -232,6 +232,22 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "The LEGO website was cluttered, hard to navigate, and checkout worked differently across markets. Revenue was leaking and the digital experience was falling behind competitors.",
+    task: "Take BCG's big strategy and turn it into a real product backlog that engineers could actually build from.",
+    actions: [
+      "Translated BCG's strategy into specific, shippable requirements",
+      "Owned the product backlog for navigation, cart, and checkout",
+      "Defined acceptance criteria that bridged strategy and working code",
+      "Kept delivery moving across a complex multi-agency program",
+    ],
+    results: [
+      { value: "3x", label: "Revenue growth", variant: "primary" },
+      { value: "$50M", label: "Cost savings", variant: "secondary" },
+      { value: "2", label: "Academic case studies", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote:
       "Jim's detail level made it possible to bridge design intent, business requirements, and what engineering actually needed to ship.",

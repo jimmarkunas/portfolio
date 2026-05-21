@@ -334,6 +334,23 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "American Apparel was in financial trouble, and the board needed digital commerce to move revenue fast. Inventory truth was broken across stores, factory, and web, and 16 regional sites were operating like disconnected systems.",
+    task:
+      "Unify global commerce and inventory into one operating model that could stabilize the business and turn omni-channel into a real commercial lever.",
+    actions: [
+      "Moved 16 international storefronts onto one Oracle ATG commerce model",
+      "Made RFID the shared inventory truth layer across stores, factory, and digital",
+      "Designed BOPIS and ship-to-store routing logic using inventory, distance, and shipping cost",
+      "Aligned digital, retail, and operations teams around one launch and fulfillment model",
+    ],
+    results: [
+      { value: "43%", label: "Digital revenue uplift", variant: "primary" },
+      { value: "300%", label: "Omni-channel growth", variant: "secondary" },
+      { value: "65%", label: "Shrink reduction", variant: "default" },
+    ],
+  },
   globalLocations: {
     title: "American Apparel · Global Retail Footprint",
     locations: americanapparelGlobalLocations,

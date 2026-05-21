@@ -233,6 +233,22 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "Frederick's went bankrupt and closed all its stores. The new owner needed to relaunch the brand around Megan Fox as co-owner, fast, without the cost and weight of a traditional enterprise stack.",
+    task: "Build a lean Shopify Plus flagship that could handle celebrity-driven traffic, launch promotions quickly, and not collapse under pressure.",
+    actions: [
+      "Right-sized the architecture to keep costs low and speed high",
+      "Built the promotional workflow so marketing could launch campaigns without engineering",
+      "Worked around Shopify Plus platform gaps that existed at the time",
+      "Turned a brand relaunch into a repeatable DTC operating model",
+    ],
+    results: [
+      { value: "25%", label: "Lower TCO", variant: "primary" },
+      { value: "3x", label: "Faster promo launches", variant: "secondary" },
+      { value: "1", label: "Celebrity-led relaunch", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote:
       "Jim gave us speed & creative problem-solving. He turned a bankrupt brand into a campaign-ready commerce machine without burying us in complexity.",

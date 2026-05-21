@@ -237,6 +237,22 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "A broken streetlight could sit unfixed for 3 weeks. Reports got lost between residents, SAP, dispatch teams, and field crews. No one owned the whole process.",
+    task: "Connect every step of the repair process — from resident report to field fix — so nothing falls through the cracks.",
+    actions: [
+      "Mapped the full repair journey from resident call to streetlight fixed",
+      "Built an intake and dispatch workflow that connected all teams",
+      "Integrated field iPad apps with SAP in real time",
+      "Designed the system that won the Global Smart 20 Award",
+    ],
+    results: [
+      { value: "73%", label: "Fewer CS calls", variant: "primary" },
+      { value: "43%", label: "Truck roll reduction", variant: "secondary" },
+      { value: "3w→4d", label: "Repair window cut", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote:
       "This is the city's first official initiative to widely install solar-powered LED street lights within city limits. Together we are lighting the path to a brighter future!",

@@ -239,6 +239,22 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "Campaign launches took 6 months and 20+ teams weren't talking to each other. The business was losing subscribers and couldn't launch offers fast enough to stop the bleeding.",
+    task: "Give the entire upsell process one owner, one workflow, and one system that could launch offers across all channels.",
+    actions: [
+      "Mapped every team and system involved in a campaign launch",
+      "Built one intake and approval process to replace the chaos",
+      "Took full ownership of the revenue journey from idea to launch",
+      "Kept everything running through the AT&T corporate split",
+    ],
+    results: [
+      { value: "$55M", label: "Q4 upsell revenue", variant: "primary" },
+      { value: "60d", label: "Faster time-to-value", variant: "secondary" },
+      { value: "20+", label: "Systems unified", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote:
       "What a magnificent symphoney Q3 has been! Thanks to the achievements orchestrated by none other than Jim Markunas. Now, we're able to present offers where customers engage most: on-screen!",

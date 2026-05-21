@@ -240,6 +240,22 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "Method had a loyal following and strong brand identity but no way to sell directly to customers. Every new brand launch risked becoming its own separate tech project.",
+    task: "Launch Method on SC Johnson's shared platform fast, without making the store feel like a generic enterprise template.",
+    actions: [
+      "Protected the shared SC Johnson platform so it could serve multiple brands",
+      "Defined how SAP, Salsify, WMS, tax, and payments fit into the Method launch",
+      "Turned brand storytelling needs into reusable templates that fit the architecture",
+      "Proved one platform could support multiple distinct brands without rebuilding",
+    ],
+    results: [
+      { value: "20%", label: "DTC revenue uplift", variant: "primary" },
+      { value: "3", label: "Launches (US, CA, Men)", variant: "secondary" },
+      { value: "1", label: "Unified platform", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote: "Jim got it done.",
     attributionTitle: "Tammy Tran",

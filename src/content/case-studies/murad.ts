@@ -237,6 +237,22 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "Two agencies had already been fired. The previous PM walked off the job. Three weeks before launch, the team discovered BigCommerce couldn't process payments the way the client needed. No one had a plan.",
+    task: "Take over a failing replatform, fix the payment blocker, and get a global skincare brand launched across 3 countries.",
+    actions: [
+      "Documented the Oracle order, shipment, and refund logic that no one had written down",
+      "Escalated the payment-settlement blocker directly to the BigCommerce CEO and CTO",
+      "Built a subscription-first model across BigCommerce, Oracle, and OrderGroove",
+      "Delivered a smooth launch across the US, UK, and Malaysia with zero issues",
+    ],
+    results: [
+      { value: "3", label: "Markets launched", variant: "primary" },
+      { value: "0", label: "Launch issues", variant: "secondary" },
+      { value: "2", label: "Custom BC integrations", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote:
       "Thank you so much for the smooth launch. I know it took a lot of preparation by everyone involved. Very much appreciated by the leadership team at Murad.",

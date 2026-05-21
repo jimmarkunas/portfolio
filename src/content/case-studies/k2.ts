@@ -270,6 +270,22 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "K2's commerce platform was shutting down and the company had 9 brand sites to migrate. Marketing wanted each brand to feel different. Finance wanted one shared system. No one had a plan that satisfied both.",
+    task: "Build one shared commerce engine that could power 9 distinct brand experiences without making everyone rebuild from scratch.",
+    actions: [
+      "Designed the shared API and proxy pattern behind a 9-store headless architecture",
+      "Kept Avante and Quivers as the source of truth so data stayed clean",
+      "Solved DNS and SEO so the migration didn't destroy organic traffic",
+      "Delivered two custom BigCommerce integrations that became a model for future clients",
+    ],
+    results: [
+      { value: "9", label: "Sites launched", variant: "primary" },
+      { value: "75%", label: "Faster site creation", variant: "secondary" },
+      { value: "90%", label: "Faster publishing", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote: k2Copy.challengeQuote,
     attributionTitle: "Nicole Phillips",

@@ -354,6 +354,22 @@ export const caseStudy = {
       },
     ],
   },
+  star: {
+    situation:
+      "Marketing had already promised customers a streaming product on every screen. But inside the company, 35+ teams each had their own version of what the product was. Nothing was aligned.",
+    task: "Get every team working toward one product and make sure what shipped matched what was promised publicly.",
+    actions: [
+      "Wrote product requirements that gave all 35+ teams one shared truth",
+      "Forced cross-device consistency across phones, tablets, web, and TV",
+      "Prioritized authentication and content reach over feature additions",
+      "Kept the launch credible while the campaign was already running publicly",
+    ],
+    results: [
+      { value: "5M+", label: "Downloads", variant: "primary" },
+      { value: "$200M", label: "Revenue uplift", variant: "secondary" },
+      { value: "400+", label: "Channels", variant: "default" },
+    ],
+  },
   challengeQuote: {
     quote:
       "Jim kept the teams aligned when the campaign pressure was public and hard to ignore.",

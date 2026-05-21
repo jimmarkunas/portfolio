@@ -9,6 +9,7 @@ type AnimatedMetricValueProps = {
   value: string
   trigger?: TriggerMode
   className?: string
+  numericVariant?: "tabular" | "proportional"
 }
 
 type ParsedValue = {
@@ -68,6 +69,7 @@ export function AnimatedMetricValue({
   value,
   trigger = "in-view",
   className = "",
+  numericVariant = "tabular",
 }: AnimatedMetricValueProps) {
   const parsed = useMemo(() => parseMetricValue(value), [value])
   const reduceMotion = useReducedMotion()
@@ -115,7 +117,11 @@ export function AnimatedMetricValue({
   }, [parsed, reduceMotion, shouldStart, value])
 
   return (
-    <span ref={rootRef} className={className} style={{ fontVariantNumeric: "tabular-nums" }}>
+    <span
+      ref={rootRef}
+      className={className}
+      style={{ fontVariantNumeric: numericVariant === "tabular" ? "tabular-nums" : "proportional-nums" }}
+    >
       {displayValue}
     </span>
   )
