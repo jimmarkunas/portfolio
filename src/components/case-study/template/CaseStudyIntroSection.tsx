@@ -20,7 +20,7 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
   const problemChartKey = data.problem.chart?.key
   const preQuoteChartKey = data.problem.quote.preQuoteChart
   const hideToolsUsed = data.slug === "zevo" || data.slug === "cwg"
-  const hideProblemQuote = data.slug === "bi"
+  const hideProblemQuote = data.slug === "bi" || data.slug === "dtv01"
 
   return (
     <section className="border-t border-[#222222]/8 bg-[#F3F3F3]">

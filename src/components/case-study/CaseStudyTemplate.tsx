@@ -13,6 +13,7 @@ import type { CaseStudyData } from "@/content/case-studies"
 export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
   const isFoh = data.slug === "foh"
   const isNyl = data.slug === "newyorklife"
+  const hideChallengeQuote = data.slug === "dtv01"
 
   return (
     <main className="min-h-full overflow-x-hidden bg-[#F3F3F3] text-[#222222]">
@@ -27,7 +28,7 @@ export function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
         </SectionShell>
       )}
       <CaseStudyDeliverySection data={data} />
-      <CaseStudyChallengeQuoteSection data={data} />
+      {!hideChallengeQuote ? <CaseStudyChallengeQuoteSection data={data} /> : null}
 
       <CaseStudyRecognitionSection data={data} isFoh={isFoh} />
     </main>
