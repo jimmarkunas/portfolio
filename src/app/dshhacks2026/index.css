@@ -6,6 +6,9 @@
   --dshhacks-support-title-size: clamp(2rem, 2.15vw, 2.5rem);
   --dshhacks-support-body-size: clamp(1.7rem, 1.85vw, 2.1rem);
   --dshhacks-support-label-size: clamp(1.05rem, 1.1vw, 1.25rem);
+  --dshhacks-microcopy-size: clamp(0.95rem, 0.98vw, 1.08rem);
+  --dshhacks-microcopy-line-height: 1.35;
+  --dshhacks-microcopy-tracking: 0.14em;
 }
 
 .dshhacks2026-page .dshhacks-slide-subtitle {
@@ -28,11 +31,22 @@
   line-height: 1.35;
 }
 
+.dshhacks2026-page :is(.text-xs, [class*="text-[10px]"]).font-mono {
+  font-size: var(--dshhacks-microcopy-size);
+  line-height: var(--dshhacks-microcopy-line-height);
+}
+
+.dshhacks2026-page :is(.text-xs, [class*="text-[10px]"]).font-mono:is(.uppercase, [class*="uppercase"]) {
+  letter-spacing: var(--dshhacks-microcopy-tracking);
+}
+
 @media (max-width: 767px) {
   .dshhacks2026-page {
     --dshhacks-slide-subtitle-size: clamp(1.55rem, 6vw, 2rem);
     --dshhacks-support-title-size: clamp(1.45rem, 5.6vw, 1.85rem);
     --dshhacks-support-body-size: clamp(1.2rem, 4.8vw, 1.5rem);
     --dshhacks-support-label-size: clamp(0.95rem, 4vw, 1.1rem);
+    --dshhacks-microcopy-size: clamp(0.88rem, 3.7vw, 1rem);
+    --dshhacks-microcopy-tracking: 0.12em;
   }
 }

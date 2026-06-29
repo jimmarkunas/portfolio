@@ -3,7 +3,12 @@ import { motion } from "motion/react";
 
 import type { DshHacks2026Content } from "@/content/dshhacks2026";
 
-import { DotGrid, InsightBullets, SlideHeader } from "./dshhacks-slide-primitives";
+import {
+  DotGrid,
+  HighlightedTitle,
+  InsightBullets,
+  SlideHeader,
+} from "./dshhacks-slide-primitives";
 
 type Slides = DshHacks2026Content["slides"];
 
@@ -29,25 +34,21 @@ export function SlideWrongThing({ slide }: { slide: Slides["wrongThing"] }) {
   return (
     <div className="flex h-full flex-col justify-between space-y-12">
       <SlideHeader
-        title={
-          <>
-            You&apos;ve Built the Wrong Thing. <span className="text-red-400">{slide.titleHighlight}</span>
-          </>
-        }
+        title={<HighlightedTitle title={slide.title} highlight={slide.titleHighlight} highlightClass="text-red-400" />}
         subtitle={slide.subtitle}
       />
 
-      <div className="grid flex-1 items-center gap-16 lg:grid-cols-12">
+      <div className="grid flex-1 items-start gap-16 lg:grid-cols-12 lg:items-stretch">
         <div className="lg:col-span-6">
           <InsightBullets items={slide.bullets} toneClass="bg-red-400" />
         </div>
 
-        <div className="relative flex h-[400px] flex-col items-center justify-center overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-8 lg:col-span-6">
-          <div className="absolute left-1/2 top-6 -translate-x-1/2 text-center text-[1.35rem] font-mono font-bold uppercase tracking-[0.32em] text-finox-gray">
+        <div className="relative flex min-h-0 self-stretch flex-col items-center justify-between overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-8 pt-20 lg:col-span-6">
+          <div className="absolute inset-x-0 top-7 text-center text-[1.15rem] font-mono font-bold uppercase tracking-[0.28em] text-finox-gray">
             The Broken Loop Visual
           </div>
 
-          <div className="relative z-10 grid w-full max-w-lg grid-cols-4 items-center gap-4">
+          <div className="relative z-10 flex w-full max-w-3xl items-start justify-between gap-6">
             {slide.loopSteps.map((step, index) => {
               const icon =
                 index === 0 ? (
@@ -61,14 +62,14 @@ export function SlideWrongThing({ slide }: { slide: Slides["wrongThing"] }) {
                 );
 
               return (
-                <div key={step.id} className="relative flex flex-col items-center text-center">
+                <div key={step.id} className="relative flex min-w-0 flex-1 flex-col items-center text-center">
                   <div className="mb-3 flex h-20 w-20 flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-2">
                     {icon}
                     <span className="mt-1 text-xs font-bold tracking-wider text-white">{step.label}</span>
                   </div>
-                  <p className="dshhacks-support-label font-medium text-finox-gray">{step.description}</p>
+                  <p className="dshhacks-support-label whitespace-nowrap font-medium text-finox-gray">{step.description}</p>
                   {index < slide.loopSteps.length - 1 ? (
-                    <div className="absolute top-10 -right-4 translate-x-1/2 text-white/20">
+                    <div className="absolute top-10 -right-3 text-white/20">
                       <ArrowRight className="h-4 w-4" />
                     </div>
                   ) : null}
@@ -77,11 +78,14 @@ export function SlideWrongThing({ slide }: { slide: Slides["wrongThing"] }) {
             })}
           </div>
 
-          <div className="relative z-10 mt-8 space-y-2 text-center">
-            <div className="animate-pulse rounded-full border border-red-500/30 bg-red-500/10 px-6 py-2 font-mono text-sm font-bold uppercase tracking-widest text-red-400">
+          <div className="relative z-10 mt-8 w-full rounded-[3rem] border border-red-500/30 bg-[rgba(64,43,43,0.92)] px-10 py-8 text-center shadow-[0_24px_80px_rgba(0,0,0,0.22)]">
+            <div className="font-mono text-[1.15rem] font-bold uppercase tracking-[0.48em] text-red-400">
               {slide.loopOutcome}
             </div>
-            <p className="dshhacks-support-label max-w-xs text-finox-gray">{slide.loopCaption}</p>
+            <div className="mx-auto mt-5 h-px w-56 bg-red-400/40" />
+            <p className="mx-auto mt-6 max-w-4xl text-[2rem] font-light leading-[1.35] text-white">
+              {slide.loopCaption}
+            </p>
           </div>
         </div>
       </div>
@@ -93,17 +97,13 @@ export function SlideIdeaLast({ slide }: { slide: Slides["ideaLast"] }) {
   return (
     <div className="flex h-full flex-col justify-between space-y-12">
       <SlideHeader
-        title={
-          <>
-            The Idea is the <span className="text-blue-400">{slide.titleHighlight}</span>, Not the First
-          </>
-        }
+        title={<HighlightedTitle title={slide.title} highlight={slide.titleHighlight} highlightClass="text-blue-400" />}
         subtitle={slide.subtitle}
       />
 
       <div className="grid flex-1 gap-12 lg:grid-cols-2">
         <div className="relative flex flex-col justify-between overflow-hidden rounded-[32px] border border-red-500/10 bg-white/5 p-10">
-          <div className="absolute right-6 top-4 text-xs font-mono font-bold uppercase tracking-widest text-red-400/60">
+          <div className="absolute left-6 top-4 text-left text-xs font-mono font-bold uppercase tracking-widest text-red-400/60">
             Wrong Sequence
           </div>
           <div className="mb-8 space-y-4">
@@ -132,7 +132,7 @@ export function SlideIdeaLast({ slide }: { slide: Slides["ideaLast"] }) {
         </div>
 
         <div className="relative flex flex-col justify-between overflow-hidden rounded-[32px] border border-emerald-500/20 bg-white/5 p-10">
-          <div className="absolute right-6 top-4 text-xs font-mono font-bold uppercase tracking-widest text-emerald-400/60">
+          <div className="absolute left-6 top-4 text-left text-xs font-mono font-bold uppercase tracking-widest text-emerald-400/60">
             Correct Sequence
           </div>
           <div className="mb-8 space-y-4">
@@ -173,13 +173,6 @@ export function SlideIdeaLast({ slide }: { slide: Slides["ideaLast"] }) {
           </div>
         </div>
       </div>
-
-      <div className="flex items-center justify-center gap-4 border-t border-white/5 py-4 text-center text-sm font-mono uppercase tracking-widest text-finox-gray">
-        <span>{slide.closingPrefix}</span>
-        <span className="rounded border border-red-500/30 bg-red-500/20 px-3 py-1 font-bold text-red-400">
-          {slide.closingBadge}
-        </span>
-      </div>
     </div>
   );
 }
@@ -188,11 +181,7 @@ export function SlideFocusGroup({ slide }: { slide: Slides["focusGroup"] }) {
   return (
     <div className="flex h-full flex-col justify-between space-y-12">
       <SlideHeader
-        title={
-          <>
-            Your Network Is a Focus Group. <span className="text-blue-400">{slide.titleHighlight}</span>
-          </>
-        }
+        title={<HighlightedTitle title={slide.title} highlight={slide.titleHighlight} highlightClass="text-blue-400" />}
         subtitle={slide.subtitle}
       />
 
@@ -201,48 +190,79 @@ export function SlideFocusGroup({ slide }: { slide: Slides["focusGroup"] }) {
           <InsightBullets items={slide.bullets} toneClass="bg-blue-400" />
         </div>
 
-        <div className="flex h-[450px] items-center justify-center p-8 lg:col-span-6">
-          <div className="relative flex h-[380px] w-[380px] items-center justify-center">
-            <div className="absolute inset-0 flex items-center justify-center rounded-full border border-white/10">
-              <span className="absolute top-3 text-[10px] font-mono font-bold uppercase tracking-widest text-finox-gray">
-                {slide.outerRingLabel}
-              </span>
-              <span className="absolute bottom-4 max-w-[140px] text-center text-xs font-medium text-finox-gray/80">
-                {slide.outerRingCaption}
-              </span>
+        <div className="flex h-[450px] items-center justify-center lg:col-span-6">
+          <div className="relative h-full w-full max-w-[520px] scale-[1.16]">
+            <div className="absolute left-1/2 top-[42%] h-[332px] w-[332px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/20" />
+
+            <div className="absolute left-1/2 top-[42%] h-[248px] w-[248px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/25 bg-white/[0.025]" />
+
+            <div className="absolute left-1/2 top-[42%] h-[170px] w-[170px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-blue-400 bg-[radial-gradient(circle,rgba(96,165,250,0.2)_0%,rgba(59,130,246,0.14)_100%)] shadow-[0_0_50px_rgba(59,130,246,0.15)]" />
+
+            <div className="pointer-events-none absolute inset-0">
+              <svg viewBox="0 0 520 450" className="h-full w-full overflow-visible">
+                <path id="dshhacks-focus-outer-arc" d="M 115 189 A 145 145 0 0 1 405 189" fill="none" />
+                <path id="dshhacks-focus-inner-arc" d="M 155 189 A 105 105 0 0 1 365 189" fill="none" />
+                <path id="dshhacks-focus-outer-caption-arc" d="M 405 189 A 145 145 0 0 1 115 189" fill="none" />
+                <path id="dshhacks-focus-inner-caption-arc" d="M 365 189 A 105 105 0 0 1 155 189" fill="none" />
+
+                <text
+                  fill="currentColor"
+                  className="font-mono text-finox-gray"
+                  style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "0.18em" }}
+                >
+                  <textPath href="#dshhacks-focus-outer-arc" startOffset="50%" textAnchor="middle">
+                    {slide.outerRingLabel.toUpperCase()}
+                  </textPath>
+                </text>
+
+                <text
+                  fill="currentColor"
+                  className="font-mono text-white/80"
+                  style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.18em" }}
+                >
+                  <textPath href="#dshhacks-focus-inner-arc" startOffset="50%" textAnchor="middle">
+                    {slide.middleRingLabel.toUpperCase()}
+                  </textPath>
+                </text>
+
+                <text
+                  fill="currentColor"
+                  className="font-mono text-white/80"
+                  style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.18em" }}
+                >
+                  <textPath href="#dshhacks-focus-inner-caption-arc" startOffset="50%" textAnchor="middle">
+                    {slide.middleRingCaption.toUpperCase()}
+                  </textPath>
+                </text>
+
+                <text
+                  fill="currentColor"
+                  className="font-mono text-finox-gray"
+                  style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "0.18em" }}
+                >
+                  <textPath href="#dshhacks-focus-outer-caption-arc" startOffset="50%" textAnchor="middle">
+                    {slide.outerRingCaption.toUpperCase()}
+                  </textPath>
+                </text>
+              </svg>
             </div>
 
-            <div className="absolute inset-12 flex items-center justify-center rounded-full border border-white/20 bg-white/5">
-              <span className="absolute top-3 text-[10px] font-mono font-bold uppercase tracking-widest text-white/55">
-                {slide.middleRingLabel}
-              </span>
-              <span className="absolute bottom-4 max-w-[110px] text-center text-xs font-medium text-white/60">
-                {slide.middleRingCaption}
-              </span>
-            </div>
-
-            <div className="absolute inset-28 z-10 flex flex-col items-center justify-center rounded-full border-2 border-blue-400 bg-blue-500/20 p-4 text-center shadow-[0_0_30px_rgba(59,130,246,0.3)]">
-              <User className="mb-1 h-8 w-8 text-blue-400" />
-              <span className="text-xl font-extrabold tracking-tight text-white">{slide.centerLabel}</span>
-              <span className="mt-1 text-[10px] font-mono font-bold uppercase tracking-wider text-blue-400">
+            <div className="absolute left-1/2 top-[42%] z-10 flex h-[170px] w-[170px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center text-center">
+              <User className="mb-2 h-9 w-9 text-blue-400" />
+              <span className="text-[2.15rem] font-extrabold tracking-tight text-white">{slide.centerLabel}</span>
+              <span className="mt-2 text-[10px] font-mono font-bold uppercase tracking-[0.24em] text-blue-400">
                 {slide.centerCaption}
               </span>
             </div>
 
-            {[
-              "top-12 left-12 -translate-x-1/2 -translate-y-1/2 rotate-[135deg]",
-              "top-12 right-12 translate-x-1/2 -translate-y-1/2 -rotate-[135deg]",
-              "bottom-12 left-12 -translate-x-1/2 translate-y-1/2 rotate-45",
-              "bottom-12 right-12 translate-x-1/2 translate-y-1/2 -rotate-45",
-            ].map((position) => (
-              <div
-                key={position}
-                className={`absolute flex items-center gap-1 text-xs font-mono text-blue-400/80 ${position}`}
-              >
-                <span>{slide.arrowLabel}</span>
-                <ArrowDown className="h-4 w-4 animate-bounce" />
-              </div>
-            ))}
+            <div className="absolute left-1/2 top-[80%] z-10 flex -translate-x-1/2 flex-col items-center">
+              <ArrowDown className="h-4 w-4 rotate-180 text-blue-400/80" />
+              <div className="h-10 w-px bg-gradient-to-b from-blue-400/70 to-blue-400/0" />
+              <span className="mt-2 text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-blue-400/80">
+                {slide.arrowLabel}
+              </span>
+            </div>
+
           </div>
         </div>
       </div>
@@ -252,7 +272,7 @@ export function SlideFocusGroup({ slide }: { slide: Slides["focusGroup"] }) {
 
 function spectrumToneClasses(tone: Slides["painProduct"]["examples"][number]["tone"]) {
   if (tone === "amber") {
-    return "border-amber-500/30 bg-amber-950/20 text-amber-300";
+    return "border-blue-500/30 bg-blue-950/20 text-blue-300";
   }
 
   if (tone === "emerald") {
@@ -266,40 +286,36 @@ export function SlidePainProduct({ slide }: { slide: Slides["painProduct"] }) {
   return (
     <div className="flex h-full flex-col justify-between space-y-12">
       <SlideHeader
-        title={
-          <>
-            Pain Is the Product. <span className="text-amber-400">{slide.titleHighlight}</span>
-          </>
-        }
+        title={<HighlightedTitle title={slide.title} highlight={slide.titleHighlight} highlightClass="text-blue-400" />}
         subtitle={slide.subtitle}
       />
 
-      <div className="grid flex-1 items-center gap-16 lg:grid-cols-12">
+      <div className="grid flex-1 items-start gap-16 lg:grid-cols-12 lg:items-stretch">
         <div className="lg:col-span-5">
-          <InsightBullets items={slide.bullets} toneClass="bg-amber-400" />
+          <InsightBullets items={slide.bullets} toneClass="bg-blue-400" />
         </div>
 
-        <div className="relative flex h-[450px] flex-col justify-center space-y-12 overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-10 lg:col-span-7">
+        <div className="relative flex min-h-0 self-stretch flex-col justify-start space-y-8 overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-8 pt-14 lg:col-span-7">
           <div className="absolute left-6 top-4 text-xs font-mono font-bold uppercase tracking-widest text-finox-gray">
             The Pain Spectrum Bar
           </div>
 
           <div className="relative">
-            <div className="h-4 w-full rounded-full border border-white/10 bg-gradient-to-r from-red-500/20 via-amber-500/30 to-emerald-500/40" />
+            <div className="h-4 w-full rounded-full border border-white/10 bg-gradient-to-r from-red-500/25 via-blue-500/30 to-emerald-500/40" />
             <div className="flex items-center justify-between pt-3 text-xs font-mono uppercase tracking-widest text-finox-gray">
               <span className="font-bold text-red-400">{slide.lowSignalLabel}</span>
               <span className="font-bold text-emerald-400">{slide.highSignalLabel}</span>
             </div>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {slide.examples.map((example, index) => (
               <motion.div
                 key={example.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className={`flex items-center justify-between gap-6 rounded-2xl border p-4 ${spectrumToneClasses(example.tone)}`}
+                className={`flex items-center justify-between gap-6 rounded-2xl border p-5 ${spectrumToneClasses(example.tone)}`}
               >
                 <div className="space-y-1">
                   <span className="text-[10px] font-mono font-extrabold uppercase tracking-widest opacity-70">
@@ -331,9 +347,11 @@ export function SlideDesignBrief({ slide }: { slide: Slides["designBrief"] }) {
     <div className="flex h-full flex-col justify-between space-y-12">
       <SlideHeader
         title={
-          <>
-            From Complaint to <span className="text-emerald-400">{slide.titleHighlight}</span>
-          </>
+          <HighlightedTitle
+            title={slide.title}
+            highlight={slide.titleHighlight}
+            highlightClass="text-emerald-400"
+          />
         }
         subtitle={slide.subtitle}
       />
@@ -367,11 +385,11 @@ export function SlideDesignBrief({ slide }: { slide: Slides["designBrief"] }) {
 
           <div className="relative flex h-[350px] flex-col justify-between overflow-hidden rounded-[24px] border border-emerald-500/20 bg-emerald-500/5 p-8 md:col-span-5">
             <div className="absolute left-6 top-4 text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-400">
-              Structured Brief
+              {slide.briefLabel}
             </div>
             <div className="space-y-3 pt-6">
               <span className="text-sm font-mono font-bold uppercase text-emerald-400">
-                {slide.briefLabel}
+                Structured Brief
               </span>
               <div className="space-y-2 text-lg leading-relaxed text-white">
                 {slide.briefParts.map((part) => (
@@ -387,9 +405,6 @@ export function SlideDesignBrief({ slide }: { slide: Slides["designBrief"] }) {
                   </div>
                 ))}
               </div>
-            </div>
-            <div className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
-              {slide.briefStatus}
             </div>
           </div>
         </div>

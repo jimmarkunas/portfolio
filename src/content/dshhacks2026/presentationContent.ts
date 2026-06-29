@@ -21,13 +21,12 @@ export const dshHacks2026Content = {
     "focusGroup",
     "painProduct",
     "designBrief",
-    "directvCaseStudy",
     "rubeGoldberg",
+    "directvCaseStudy",
     "aiAmplified",
     "cpsCaseStudy",
     "placeholder",
     "ideasPlural",
-    "technologyConstraint",
     "realProductsSequence",
     "homework",
   ],
@@ -79,9 +78,9 @@ export const dshHacks2026Content = {
     },
     ideaLast: {
       id: "slide-3",
-      title: "The Idea is the Last Thing, Not the First",
-      titleHighlight: "Last Thing",
-      subtitle: "Sequence determines outcomes. Real products start with people, not ideas.",
+      title: "The Idea is Last, Not First",
+      titleHighlight: "Last",
+      subtitle: "Real products start with problems, not ideas.",
       wrongSequenceTitle: "Engineer’s Loop",
       wrongSequenceSubtitle:
         "Starting with technology and trying to find a problem that fits it.",
@@ -110,31 +109,25 @@ export const dshHacks2026Content = {
       id: "slide-4",
       title: "Your Network Is a Focus Group. Use It.",
       titleHighlight: "Use It.",
-      subtitle: "You don’t need a massive budget or research panel to do discovery. Start where you are.",
+      subtitle: "You don’t need a massive budget. Start where you are.",
       bullets: [
         {
           id: "focus-group-01",
           title: "Research Subjects Are Everywhere",
           description:
-            "Friends, family, classmates, employers, and professors all represent rich operational domains.",
+            "Friends, family, classmates, employers, and professors: all rich operational domains.",
         },
         {
           id: "focus-group-02",
           title: "Ask the Right Questions",
           description:
-            "Never ask what they think of your idea. Ask what part of their day is hardest and most frustrating.",
+            "Ask what part of their day is hardest and most frustrating.",
         },
         {
           id: "focus-group-03",
-          title: "Find Friction, Don’t Sell",
+          title: "Find Friction",
           description:
-            "Your job is to extract real workflow pain and existing workarounds, not pitch a solution.",
-        },
-        {
-          id: "focus-group-04",
-          title: "The 5-to-500 Rule",
-          description:
-            "Five focused conversations with real people beat 500 hours of coding in isolation every time.",
+            "Your job is to extract real pain points, not pitch a solution.",
         },
       ],
       outerRingLabel: "Professional Contacts",
@@ -149,31 +142,25 @@ export const dshHacks2026Content = {
       id: "slide-5",
       title: "Pain Is the Product. Everything Else Is Features.",
       titleHighlight: "Everything Else Is Features.",
-      subtitle: "If you cannot measure or point to a concrete cost, your product does not exist.",
+      subtitle: "If you can't point to pain, your product doesn't exist.",
       bullets: [
         {
           id: "pain-product-01",
           title: "Quantified Costs",
           description:
-            "Pain must be specific, recurring, and highly costly, expressed in hours, dollars, stress, or missed outcomes.",
+            "Pain must be specific, recurring, and costly (hours, dollars, stress, etc.)",
         },
         {
           id: "pain-product-02",
           title: "The Vague Pain Trap",
           description:
-            "\"Managing schedules is hard\" is a weak signal. It hides the actual workflow friction.",
+            "What happens in vagueness, stays in vagueness.",
         },
         {
           id: "pain-product-03",
           title: "The Sharp Signal",
           description:
             "\"Reconciling spreadsheets takes three hours every Friday\" is strong enough to build around.",
-        },
-        {
-          id: "pain-product-04",
-          title: "Your Ultimate Goal",
-          description:
-            "Make people quantify the exact friction. Force a number onto the discomfort.",
         },
       ],
       lowSignalLabel: "Vague Frustration (Low Signal)",
@@ -209,12 +196,6 @@ export const dshHacks2026Content = {
       titleHighlight: "Design Brief",
       subtitle: "Refining raw frustration into a structured, executable problem statement.",
       bullets: [
-        {
-          id: "design-brief-01",
-          title: "Designed Statements",
-          description:
-            "Pain statements are raw material. Real problem statements are engineered structures.",
-        },
         {
           id: "design-brief-02",
           title: "The Golden Formula",
@@ -266,13 +247,13 @@ export const dshHacks2026Content = {
       id: "slide-7",
       title: "$120M Sitting in a Broken Process",
       titleHighlight: "Broken Process",
-      subtitle: "DIRECTV case study: operational friction is a multi-million dollar revenue leak.",
+      subtitle: "DIRECTV case study: operational friction = million dollar revenue leak.",
       metrics: [
-        { id: "dtv-metric-01", value: "$120M", label: "YoY Revenue Lift", tone: "white" },
-        { id: "dtv-metric-02", value: "180d", label: "Initial Cycle Time", tone: "red" },
+        { id: "dtv-metric-01", value: "$200m", label: "YoY Revenue Lift", tone: "white" },
+        { id: "dtv-metric-02", value: "6 mos", label: "Initial Cycle Time", tone: "red" },
         {
           id: "dtv-metric-03",
-          value: "180 → 120 Days",
+          value: "6 → 4 Months",
           label: "Process Optimization",
           tone: "emerald",
           featured: true,
@@ -283,25 +264,19 @@ export const dshHacks2026Content = {
           id: "dtv-bullet-01",
           title: "The 180-Day Cycle",
           description:
-            "DIRECTV’s campaign operations team originally needed half a year to execute one initiative.",
+            "DIRECTV’s needed half a year to execute one marketing campaign.",
         },
         {
           id: "dtv-bullet-02",
           title: "No Tech Bottleneck",
           description:
-            "The delay was largely non-technical: workflow fragmentation across a dozen siloed stakeholders.",
+            "The delay was workflow fragmentation + lack of automation.",
         },
         {
           id: "dtv-bullet-03",
           title: "The Discovery Process",
           description:
             "Nobody pitched a flashy campaign automation app. We mapped the 180-day problem first.",
-        },
-        {
-          id: "dtv-bullet-04",
-          title: "Outcome-Driven Design",
-          description:
-            "Compressing the cycle to 120 days unlocked $120M in incremental annual revenue.",
         },
       ],
     },
@@ -350,7 +325,7 @@ export const dshHacks2026Content = {
       title: "225,000 Streetlights. 43% Wasted Truck Rolls.",
       titleHighlight: "43% Wasted Truck Rolls.",
       subtitle:
-        "CPS Energy case study: asking the humble workflow question that drives massive labor and environmental efficiency.",
+        "CPS Energy: asking humble questions that drive massive efficiency.",
       metrics: [
         { id: "cps-metric-01", value: "225K", label: "Streetlights Managed", tone: "white" },
         { id: "cps-metric-02", value: "43%", label: "Wasted Truck Rolls", tone: "red" },
@@ -373,19 +348,13 @@ export const dshHacks2026Content = {
           id: "cps-bullet-02",
           title: "The Severe Friction",
           description:
-            "Crews were repeatedly dispatched to lights that were not actually broken, accounting for 43% of truck rolls.",
+            "Crews were repeatedly dispatched to lights that were not actually broken.",
         },
         {
           id: "cps-bullet-03",
           title: "Zero App Hype",
           description:
             "No one suggested a smart-city app. Leadership asked why trucks were being sent to working poles.",
-        },
-        {
-          id: "cps-bullet-04",
-          title: "The Solution & Award",
-          description:
-            "Targeted telemetry filtered false dispatch alerts, reduced support calls, and won the Smart 20 Award.",
         },
       ],
     },
@@ -398,14 +367,8 @@ export const dshHacks2026Content = {
       id: "slide-12",
       title: "Now You Can Have Ideas. Plural.",
       titleHighlight: "Plural.",
-      subtitle: "You only earn the right to brainstorm after you deeply understand the friction.",
+      subtitle: "You earn the right to brainstorm after you deeply understand the friction.",
       bullets: [
-        {
-          id: "ideas-plural-01",
-          title: "Earn Your Brainstorming",
-          description:
-            "Do not fall in love with your first idea. It is statistically likely to be wrong.",
-        },
         {
           id: "ideas-plural-02",
           title: "Hypotheses as Tests",

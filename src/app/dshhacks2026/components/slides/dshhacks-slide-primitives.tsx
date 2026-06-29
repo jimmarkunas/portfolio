@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { Fragment } from "react";
 import type { ReactNode } from "react";
 
 import type {
@@ -33,6 +34,35 @@ export function SlideHeader({ title, subtitle, rightSlot }: SlideHeaderProps) {
       </div>
       {rightSlot ?? <DotGrid />}
     </div>
+  );
+}
+
+type HighlightedTitleProps = {
+  title: string;
+  highlight?: string;
+  highlightClass: string;
+};
+
+export function HighlightedTitle({
+  title,
+  highlight,
+  highlightClass,
+}: HighlightedTitleProps) {
+  if (!highlight || !title.includes(highlight)) {
+    return <>{title}</>;
+  }
+
+  const parts = title.split(highlight);
+
+  return (
+    <>
+      {parts.map((part, index) => (
+        <Fragment key={`${highlight}-${index}`}>
+          {part}
+          {index < parts.length - 1 ? <span className={highlightClass}>{highlight}</span> : null}
+        </Fragment>
+      ))}
+    </>
   );
 }
 

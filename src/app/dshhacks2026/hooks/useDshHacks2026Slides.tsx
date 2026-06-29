@@ -4,10 +4,11 @@ import type {
   DshHacks2026Content,
   DshHacks2026SlideKey,
 } from "@/content/dshhacks2026";
+import { llmDay2026Content } from "@/content/llmday2026";
 import {
   SlideAiAmplified,
-  SlidePlaceholder,
-  SlideRubeGoldberg,
+  SlideDtvFunctionalDiagram,
+  SlideFlowchart,
 } from "@/app/llmday2026/components/slides/case-study-slides";
 
 import {
@@ -57,16 +58,17 @@ function renderSlide(key: DshHacks2026SlideKey, content: DshHacks2026Content): R
     case "directvCaseStudy":
       return <SlideDirectvCaseStudy slide={slideContent.directvCaseStudy} />;
     case "rubeGoldberg":
-      return <SlideRubeGoldberg slide={slideContent.rubeGoldberg} />;
+      return <SlideDtvFunctionalDiagram slide={slideContent.rubeGoldberg} />;
     case "aiAmplified":
       return <SlideAiAmplified slide={slideContent.aiAmplified} />;
     case "cpsCaseStudy":
       return <SlideCpsCaseStudy slide={slideContent.cpsCaseStudy} />;
     case "placeholder":
       return (
-        <SlidePlaceholder
-          title={slideContent.placeholder.title}
-          subtitle={slideContent.placeholder.subtitle}
+        <SlideFlowchart
+          slide={llmDay2026Content.slides.flowchartAutomated}
+          automated
+          diagramCopy={llmDay2026Content.diagrams.legacyRevenueFlow}
         />
       );
     case "ideasPlural":

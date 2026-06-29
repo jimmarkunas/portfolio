@@ -5,6 +5,7 @@ import type { DshHacks2026Content } from "@/content/dshhacks2026";
 
 import {
   DotGrid,
+  HighlightedTitle,
   InsightBullets,
   LegendRow,
   SequenceStages,
@@ -17,91 +18,92 @@ export function SlideIdeasPlural({ slide }: { slide: Slides["ideasPlural"] }) {
   return (
     <div className="flex h-full flex-col justify-between space-y-12">
       <SlideHeader
-        title={
-          <>
-            Now You Can Have Ideas. <span className="text-blue-400">{slide.titleHighlight}</span>
-          </>
-        }
+        title={<HighlightedTitle title={slide.title} highlight={slide.titleHighlight} highlightClass="text-blue-400" />}
         subtitle={slide.subtitle}
       />
 
-      <div className="grid flex-1 items-center gap-16 lg:grid-cols-12">
+      <div className="grid flex-1 items-start gap-16 lg:grid-cols-12 lg:items-stretch">
         <div className="lg:col-span-5">
           <InsightBullets items={slide.bullets} toneClass="bg-blue-400" />
         </div>
 
-        <div className="relative flex h-[450px] flex-col items-center justify-center overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-10 lg:col-span-7">
+        <div className="relative flex min-h-0 self-stretch flex-col overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-6 pt-12 lg:col-span-7">
           <div className="absolute left-6 top-4 text-xs font-mono font-bold uppercase tracking-widest text-finox-gray">
             The Hypothesis Tree Diagram
           </div>
 
-          <div className="relative w-full max-w-xl space-y-8">
-            <div className="flex justify-center">
-              <div className="z-10 w-80 rounded-2xl border-2 border-white bg-white px-8 py-4 text-center shadow-xl">
-                <div className="mb-1 text-[10px] font-mono font-bold uppercase tracking-widest text-finox-slate">
+          <div className="relative flex flex-1 flex-col justify-between">
+            <div className="mx-auto w-full max-w-[360px]">
+              <div className="rounded-[24px] border border-blue-400/25 bg-blue-500/8 px-8 py-4 text-center shadow-[0_18px_40px_rgba(0,0,0,0.2)]">
+                <div className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-blue-400/80">
                   {slide.rootLabel}
                 </div>
-                <div className="text-lg font-extrabold tracking-tight text-finox-dark">
+                <div className="text-[1.7rem] font-extrabold tracking-tight text-white">
                   {slide.rootTitle}
                 </div>
               </div>
             </div>
 
-            <div className="absolute left-[15%] right-[15%] top-[68px] h-[40px] overflow-visible">
-              <svg className="h-full w-full">
-                <path d="M 190 0 C 190 20, 50 20, 50 40" stroke="rgba(255,255,255,0.2)" strokeWidth="2" fill="none" />
-                <path d="M 190 0 L 190 40" stroke="rgba(255,255,255,0.2)" strokeWidth="2" fill="none" />
-                <path d="M 190 0 C 190 20, 330 20, 330 40" stroke="rgba(255,255,255,0.2)" strokeWidth="2" fill="none" />
+            <div className="relative mt-4 flex-1">
+              <svg className="absolute inset-x-0 top-0 h-16 w-full" viewBox="0 0 900 86" preserveAspectRatio="none">
+                <path d="M 450 0 L 450 22" stroke="rgba(255,255,255,0.16)" strokeWidth="2.25" fill="none" />
+                <path d="M 450 22 C 450 42, 160 32, 160 86" stroke="rgba(255,255,255,0.16)" strokeWidth="2.25" fill="none" />
+                <path d="M 450 22 L 450 86" stroke="rgba(255,255,255,0.16)" strokeWidth="2.25" fill="none" />
+                <path d="M 450 22 C 450 42, 740 32, 740 86" stroke="rgba(255,255,255,0.16)" strokeWidth="2.25" fill="none" />
               </svg>
-            </div>
 
-            <div className="relative z-10 grid grid-cols-3 gap-4 pt-4">
-              {slide.hypotheses.map((hypothesis) => {
-                const pass = hypothesis.status === "PASS";
+              <div className="relative z-10 grid h-full grid-cols-3 gap-4 pt-12">
+                {slide.hypotheses.map((hypothesis) => {
+                  const pass = hypothesis.status === "PASS";
+                  const pathLabel = `Path ${hypothesis.id.split("-").pop()?.toUpperCase()}`;
 
-                return (
-                  <div
-                    key={hypothesis.id}
-                    className={`flex h-[180px] flex-col justify-between space-y-3 rounded-2xl border p-4 text-center ${
-                      pass
-                        ? "border-emerald-500/30 bg-emerald-950/20 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.15)]"
-                        : "border-red-500/20 bg-red-950/10 text-red-400"
-                    }`}
-                  >
-                    <div className="space-y-1">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-widest opacity-60">
-                        {hypothesis.id.replace("hypothesis-", "Path 0").toUpperCase()}
-                      </span>
-                      <h4 className="text-sm font-extrabold uppercase tracking-wider text-white">
-                        {hypothesis.name}
-                      </h4>
-                    </div>
-                    <p className="text-xs font-medium leading-relaxed">{hypothesis.description}</p>
-                    <div className="flex flex-col items-center pt-2">
-                      <span className="mb-1 text-[10px] font-mono font-bold uppercase tracking-widest opacity-40">
-                        Filter Gate
-                      </span>
-                      <div
-                        className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-widest ${
-                          pass
-                            ? "border border-emerald-500/30 bg-emerald-500/20 text-emerald-400"
-                            : "border border-red-500/30 bg-red-500/20 text-red-400"
-                        }`}
-                      >
-                        {pass ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
-                        {hypothesis.status}
+                  return (
+                    <div
+                      key={hypothesis.id}
+                      className={`flex h-[174px] flex-col justify-between rounded-[22px] border px-4 py-4 text-center ${
+                        pass
+                          ? "border-emerald-500/35 bg-emerald-950/18 text-emerald-400 shadow-[0_0_28px_rgba(16,185,129,0.14)]"
+                          : "border-red-500/20 bg-red-950/10 text-red-400"
+                      }`}
+                    >
+                      <div className="space-y-2">
+                        <div className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] opacity-65">
+                          {pathLabel}
+                        </div>
+                        <h4 className="text-[0.95rem] font-extrabold uppercase tracking-[0.08em] text-white">
+                          {hypothesis.name}
+                        </h4>
+                        <p className={`text-[0.9rem] font-medium leading-[1.35] ${pass ? "text-emerald-300" : "text-red-300"}`}>
+                          {hypothesis.description}
+                        </p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] opacity-45">
+                          Filter Gate
+                        </div>
+                        <div
+                          className={`mx-auto flex items-center justify-center gap-1 rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] ${
+                            pass
+                              ? "border border-emerald-500/35 bg-emerald-500/18 text-emerald-300"
+                              : "border border-red-500/30 bg-red-500/14 text-red-300"
+                          }`}
+                        >
+                          {pass ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
+                          {hypothesis.status}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-          </div>
 
-          <div className="mt-8 text-center">
-            <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">
-              {slide.footerLabel}
-            </span>
+            <div className="mt-4">
+              <div className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-6 py-3 text-center font-mono text-[0.92rem] font-bold uppercase tracking-[0.18em] text-emerald-400">
+                {slide.footerLabel}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -118,9 +120,11 @@ export function SlideTechnologyConstraint({
     <div className="flex h-full flex-col justify-between space-y-12">
       <SlideHeader
         title={
-          <>
-            Technology Is a <span className="text-emerald-400">{slide.titleHighlight}</span>, Not a Starting Point
-          </>
+          <HighlightedTitle
+            title={slide.title}
+            highlight={slide.titleHighlight}
+            highlightClass="text-emerald-400"
+          />
         }
         subtitle={slide.subtitle}
       />
@@ -202,11 +206,7 @@ export function SlideRealProductsSequence({
   return (
     <div className="flex h-full flex-col justify-between space-y-16">
       <SlideHeader
-        title={
-          <>
-            The Sequence That Produces <span className="text-blue-400">{slide.titleHighlight}</span>
-          </>
-        }
+        title={<HighlightedTitle title={slide.title} highlight={slide.titleHighlight} highlightClass="text-blue-400" />}
         subtitle={slide.subtitle}
       />
 
@@ -225,11 +225,7 @@ export function SlideHomework({ slide }: { slide: Slides["homework"] }) {
   return (
     <div className="flex h-full flex-col justify-between space-y-12">
       <SlideHeader
-        title={
-          <>
-            Run This Conversation <span className="text-amber-400">{slide.titleHighlight}</span> This Week
-          </>
-        }
+        title={<HighlightedTitle title={slide.title} highlight={slide.titleHighlight} highlightClass="text-amber-400" />}
         subtitle={slide.subtitle}
       />
 
@@ -290,11 +286,6 @@ export function SlideHomework({ slide }: { slide: Slides["homework"] }) {
                 </li>
               ))}
             </ol>
-
-            <div className="flex items-center justify-between border-t border-finox-dark/15 pt-4 text-[10px] font-mono font-bold uppercase tracking-widest text-finox-slate">
-              <span>{slide.footerLeft}</span>
-              <span>{slide.footerRight}</span>
-            </div>
           </motion.div>
         </div>
       </div>
