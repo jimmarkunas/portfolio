@@ -126,10 +126,10 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
         </MotionReveal>
 
         <div className="relative mx-auto h-full w-full max-w-[1440px]">
-          <div className="absolute inset-x-0 top-0 h-full md:h-full md:translate-y-0 lg:h-full lg:translate-y-0 xl:-top-8">
+          <div className="absolute inset-x-0 top-0 h-full md:h-full md:translate-y-0 lg:h-full lg:translate-y-0">
             <MotionReveal
               preset="heroMedia"
-              className="absolute bottom-0 right-[-140px] z-0 h-[760px] w-auto max-w-none md:right-[-220px] lg:right-[calc(40px-min(103px,9.5vh))] lg:h-[min(76vh,820px)]"
+              className="absolute bottom-0 right-[-140px] z-0 h-[760px] w-auto max-w-none md:-bottom-10 md:right-[-220px] lg:bottom-0 lg:right-[calc(40px-min(103px,9.5vh)-72px)] lg:h-[min(76vh,820px)]"
               delay={0.16}
             >
               <img

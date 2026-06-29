@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState, type RefObject } from "react";
 
-type UseLlmDay2026FullscreenParams = {
+type UsePresentationFullscreenParams = {
   containerRef: RefObject<HTMLDivElement>;
 };
 
-export function useLlmDay2026Fullscreen({ containerRef }: UseLlmDay2026FullscreenParams) {
+export function usePresentationFullscreen({
+  containerRef,
+}: UsePresentationFullscreenParams) {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const syncFullscreenState = useCallback(() => {

@@ -1,19 +1,21 @@
 import { AnimatePresence, motion } from "motion/react";
 
-import type { LlmDay2026Content } from "@/content/llmday2026";
+import type { PresentationNavigationCopy } from "@/lib/presentation";
 
-type LlmDay2026TocDialogProps = {
+type PresentationTocDialogProps = {
+  dialogId: string;
   isOpen: boolean;
   currentSlide: number;
   slideTitles: string[];
   slideIdOrder: string[];
   totalSlides: number;
-  navCopy: LlmDay2026Content["navigation"];
+  navCopy: PresentationNavigationCopy;
   onClose: () => void;
   onJumpToSlide: (slideIndex: number) => void;
 };
 
-export function LlmDay2026TocDialog({
+export function PresentationTocDialog({
+  dialogId,
   isOpen,
   currentSlide,
   slideTitles,
@@ -22,10 +24,10 @@ export function LlmDay2026TocDialog({
   navCopy,
   onClose,
   onJumpToSlide,
-}: LlmDay2026TocDialogProps) {
+}: PresentationTocDialogProps) {
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isOpen ? (
         <motion.div
           className="absolute inset-0 z-[60] flex items-center justify-center bg-black/75 p-6"
           initial={{ opacity: 0 }}
@@ -34,7 +36,7 @@ export function LlmDay2026TocDialog({
           onClick={onClose}
         >
           <motion.div
-            id="llmday2026-slide-toc"
+            id={dialogId}
             role="dialog"
             aria-modal="true"
             aria-label={navCopy.tocDialogAriaLabel}
@@ -84,7 +86,7 @@ export function LlmDay2026TocDialog({
             </div>
           </motion.div>
         </motion.div>
-      )}
+      ) : null}
     </AnimatePresence>
   );
 }

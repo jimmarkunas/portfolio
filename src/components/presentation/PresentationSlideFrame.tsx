@@ -2,19 +2,19 @@ import { AnimatePresence, motion } from "motion/react";
 
 import { presentationSlideMotion } from "@/lib/motion";
 
-type LlmDay2026SlideFrameProps = {
+type PresentationSlideFrameProps = {
   children: React.ReactNode;
   isActive: boolean;
-  brandLogoSrc: string;
-  brandLogoAlt: string;
+  brandLogoSrc?: string;
+  brandLogoAlt?: string;
 };
 
-export function LlmDay2026SlideFrame({
+export function PresentationSlideFrame({
   children,
   isActive,
   brandLogoSrc,
-  brandLogoAlt,
-}: LlmDay2026SlideFrameProps) {
+  brandLogoAlt = "",
+}: PresentationSlideFrameProps) {
   return (
     <AnimatePresence mode="wait">
       {isActive && (
@@ -25,12 +25,14 @@ export function LlmDay2026SlideFrame({
           transition={presentationSlideMotion.transition}
           className="slide-content relative h-full w-full"
         >
-          <img
-            src={brandLogoSrc}
-            alt={brandLogoAlt}
-            aria-hidden="true"
-            className="pointer-events-none absolute right-16 top-16 h-[65px] w-[65px]"
-          />
+          {brandLogoSrc ? (
+            <img
+              src={brandLogoSrc}
+              alt={brandLogoAlt}
+              aria-hidden="true"
+              className="pointer-events-none absolute right-16 top-16 h-[65px] w-[65px]"
+            />
+          ) : null}
           {children}
         </motion.div>
       )}

@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 
-type UseLlmDay2026NavigationParams = {
+type UsePresentationNavigationParams = {
   slideCount: number;
   onToggleFullscreen: () => void;
 };
 
-export function useLlmDay2026Navigation({
+export function usePresentationNavigation({
   slideCount,
   onToggleFullscreen,
-}: UseLlmDay2026NavigationParams) {
+}: UsePresentationNavigationParams) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTocOpen, setIsTocOpen] = useState(false);
 
