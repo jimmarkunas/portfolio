@@ -1,9 +1,13 @@
 import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
+import { siteCta } from "@/content/site"
+import Link from "next/link"
 
 type PastClientsSectionProps = {
   showHeading?: boolean
   motionStyle?: "default" | "homepage"
+  showRescueCta?: boolean
+  rescueCtaLead?: string
 }
 
 const clientLogos = [
@@ -44,6 +48,8 @@ const clientLogos = [
 export function PastClientsSection({
   showHeading = false,
   motionStyle = "default",
+  showRescueCta = false,
+  rescueCtaLead = "",
 }: PastClientsSectionProps) {
   const useHomepageMotion = motionStyle === "homepage"
 
@@ -88,23 +94,51 @@ export function PastClientsSection({
         </Container>
       ) : (
         <Container className="px-0 md:px-0 lg:px-0">
-          <MotionReveal preset={useHomepageMotion ? "flow" : "section"}>
-            <div className="grid grid-cols-2 md:grid-cols-4">
-              {clientLogos.map((logo, index) => (
-                <MotionReveal key={logo.alt} preset={useHomepageMotion ? "cardStrong" : "card"} delay={index * 0.02}>
-                  <div className="flex items-center justify-center px-4 py-10 md:px-6 md:py-12 lg:px-10 lg:py-14">
-                    <img
-                      src={logo.src}
-                      alt={logo.alt}
-                      width={180}
-                      height={48}
-                      className={`h-auto w-full max-w-[130px] md:max-w-[150px] lg:max-w-[170px] ${logo.scaleClass}`}
-                    />
+          <div className="flex flex-col">
+            {showRescueCta ? (
+              <div className="pb-6 pt-0 md:pb-8 lg:pb-[32px]">
+                <MotionReveal preset={useHomepageMotion ? "cardStrong" : "card"} className="w-full">
+                  <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-[#F3F3F3]">
+                    <div className="mx-auto grid w-full max-w-[1440px] gap-4 px-6 py-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-10 lg:px-10">
+                      <div className="justify-self-start">
+                        <div className="inline-flex items-center gap-2 rounded-[50px] bg-[#F3F3F3] px-3 py-0.5">
+                          <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
+                          <span className="type-p2 text-[#222222]">Companies I&apos;ve helped</span>
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-end justify-end gap-3 text-right md:flex-row md:items-center md:gap-2 md:justify-self-end">
+                        <p className="type-p2 text-[#222222]">{rescueCtaLead} -</p>
+                        <Link
+                          href={siteCta.bookingUrls.homepageHero}
+                          className="type-p2 inline-flex items-center rounded-full bg-[#2B2B2B] px-5 py-2 text-white transition-colors hover:bg-[#1F1F1F]"
+                        >
+                          {siteCta.bookCallLabel}
+                        </Link>
+                      </div>
+                    </div>
                   </div>
                 </MotionReveal>
-              ))}
-            </div>
-          </MotionReveal>
+              </div>
+            ) : null}
+
+            <MotionReveal preset={useHomepageMotion ? "flow" : "section"}>
+              <div className="grid grid-cols-2 md:grid-cols-4">
+                {clientLogos.map((logo, index) => (
+                  <MotionReveal key={logo.alt} preset={useHomepageMotion ? "cardStrong" : "card"} delay={index * 0.02}>
+                    <div className="flex items-center justify-center px-4 py-10 md:px-6 md:py-12 lg:px-10 lg:py-14">
+                      <img
+                        src={logo.src}
+                        alt={logo.alt}
+                        width={180}
+                        height={48}
+                        className={`h-auto w-full max-w-[130px] md:max-w-[150px] lg:max-w-[170px] ${logo.scaleClass}`}
+                      />
+                    </div>
+                  </MotionReveal>
+                ))}
+              </div>
+            </MotionReveal>
+          </div>
         </Container>
       )}
     </section>

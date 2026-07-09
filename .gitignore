@@ -1,10 +1,26 @@
-node_modules
-.next
-.next.bak-*
-.next-dev
-out
-dist
+# dependencies
+/node_modules
+
+# local recovery folders
+/node_modules.stale-*
+
+# next.js outputs
+/.next/
+/.next-dev/
+/.next.bak-*
+/out/
+
+# typescript
+*.tsbuildinfo
+
+# local env files
+.env*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# macOS
 .DS_Store
-*.log
-coverage
-tsconfig.tsbuildinfo

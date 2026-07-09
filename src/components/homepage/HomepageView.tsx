@@ -2,7 +2,6 @@ import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { HomepageHeroSection } from "@/components/homepage/sections/HomepageHeroSection"
 import { PastClientsSection } from "@/components/homepage/sections/PastClientsSection"
-import { HomepageWhatIDoSection } from "@/components/homepage/sections/HomepageWhatIDoSection"
 import { HomepageInsightsSection } from "@/components/homepage/sections/HomepageInsightsSection"
 import { HomepageAwardsSection } from "@/components/homepage/sections/HomepageAwardsSection"
 import { HomepageTestimonialsSection } from "@/components/homepage/sections/HomepageTestimonialsSection"
@@ -21,7 +20,6 @@ export default function Homepage() {
     hero,
     sections,
     stats,
-    experienceEngagements,
     awards,
     testimonials,
     journey,
@@ -32,9 +30,11 @@ export default function Homepage() {
     <main className="min-h-full bg-[#F3F3F3]">
       <HomepageHeroSection hero={hero} />
 
-      <PastClientsSection motionStyle="homepage" />
-
-      <HomepageWhatIDoSection section={sections.experiences} engagements={experienceEngagements} motionStyle="homepage" />
+      <PastClientsSection
+        motionStyle="homepage"
+        showRescueCta
+        rescueCtaLead={sections.experiences.ctaLead}
+      />
 
       <HomepageInsightsSection section={sections.insights} statsCards={stats.cards} />
 
