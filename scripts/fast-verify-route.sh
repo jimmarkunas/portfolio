@@ -18,10 +18,25 @@ fi
 url="${base_url%/}${route}"
 
 echo "Route check: ${url}"
-http_code="$(curl --silent --show-error --max-time 10 --output /dev/null --write-out "%{http_code}" "${url}" || true)"
+curl_result="$(
+  curl \
+    --silent \
+    --show-error \
+    --max-time 10 \
+    --location \
+    --max-redirs 5 \
+    --output /dev/null \
+    --write-out "%{http_code} %{url_effective}" \
+    "${url}" || true
+)"
+http_code="${curl_result%% *}"
+effective_url="${curl_result#* }"
 
 if [[ "$http_code" == "200" ]]; then
   echo "Status: 200 OK"
+  if [[ "$effective_url" != "$url" ]]; then
+    echo "Redirected to: ${effective_url}"
+  fi
 else
   echo "Status: ${http_code} (expected 200)."
   echo "The dev server may be down, still compiling, or the route may be invalid."

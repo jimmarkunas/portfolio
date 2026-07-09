@@ -27,8 +27,8 @@ export function PullQuote({
   dark = false,
   decorativeFrame,
 }: PullQuoteProps) {
-  const quoteTextColor = dark ? "text-[#FEFEFE]" : "text-[#222222]"
-  const subtitleColor = dark ? "text-white/55" : "text-[#222222]/55"
+  const quoteTextColor = dark ? "#FFFFFF" : "#222222"
+  const subtitleColor = dark ? "rgba(255, 255, 255, 0.55)" : "rgba(34, 34, 34, 0.55)"
   const badgeClasses = dark
     ? "bg-[#F3F3F3] text-[#222222]"
     : "bg-[#F3F3F3] text-[#222222]"
@@ -44,7 +44,8 @@ export function PullQuote({
 
       <div className="relative mx-auto flex max-w-[1240px] flex-col items-center">
         <blockquote
-          className={`max-w-[1180px] text-[28px] italic leading-[1.45] tracking-[-0.03em] md:text-[36px] lg:text-[52px] lg:leading-[1.35] ${quoteTextColor} ${quoteClassName}`.trim()}
+          className={`max-w-[1180px] text-[28px] italic leading-[1.45] tracking-[-0.03em] md:text-[36px] lg:text-[52px] lg:leading-[1.35] ${quoteClassName}`.trim()}
+          style={{ color: quoteTextColor }}
         >
           {quote}
         </blockquote>
@@ -64,8 +65,8 @@ export function PullQuote({
             </div>
           )}
           <div className="text-left">
-            <div className={`type-p2 font-medium ${quoteTextColor}`}>{attributionTitle}</div>
-            <div className={`type-p4 ${subtitleColor}`}>{attributionSubtitle}</div>
+            <div className="type-p2 font-medium" style={{ color: quoteTextColor }}>{attributionTitle}</div>
+            <div className="type-p4" style={{ color: subtitleColor }}>{attributionSubtitle}</div>
           </div>
         </div>
       </div>
