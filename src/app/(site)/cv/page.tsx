@@ -14,6 +14,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: "CV",
   description: cvContent.meta.description,
   canonicalPath: siteCanonicalPaths.cv,
+  useDefaultImage: false,
 })
 
 function SectionPill({ label, className = "" }: { label: string; className?: string }) {

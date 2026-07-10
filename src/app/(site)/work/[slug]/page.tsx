@@ -2,9 +2,11 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate"
+import { StructuredData } from "@/components/seo/StructuredData"
 import { caseStudySlugs } from "@/content/case-studies"
 import { loadCaseStudyBySlug } from "@/content/case-studies"
 import { buildPageMetadata } from "@/lib/seo"
+import { createCaseStudyStructuredData } from "@/lib/structured-data"
 
 type WorkPageParams = {
   slug: string
@@ -35,6 +37,10 @@ export async function generateMetadata({
     title: study.breadcrumbCurrent,
     description: study.hero.intro,
     canonicalPath: `/work/${slug}`,
+    image: {
+      url: study.hero.image.src,
+      alt: study.hero.image.alt,
+    },
   })
 }
 
@@ -50,5 +56,10 @@ export default async function WorkCaseStudyPage({
     notFound()
   }
 
-  return <CaseStudyTemplate data={study} />
+  return (
+    <>
+      <StructuredData data={createCaseStudyStructuredData(study)} />
+      <CaseStudyTemplate data={study} />
+    </>
+  )
 }

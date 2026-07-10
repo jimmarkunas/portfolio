@@ -8,6 +8,7 @@ export const metadata: Metadata = buildPageMetadata({
   description:
     "Services by Jim Markunas: product leadership, platform architecture, and transformation programs.",
   canonicalPath: siteCanonicalPaths.services,
+  useDefaultImage: false,
 })
 
 export default function ServicesPage() {

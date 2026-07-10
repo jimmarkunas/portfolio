@@ -4,12 +4,14 @@ import { Suspense } from "react"
 import "./globals.css"
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics"
 import { PageViewTracker } from "@/components/analytics/PageViewTracker"
+import { StructuredData } from "@/components/seo/StructuredData"
 import {
   SEO_DEFAULT_DESCRIPTION,
   SEO_DEFAULT_OG_IMAGE,
   SEO_PERSON_NAME,
   SEO_SITE_URL,
 } from "@/lib/seo"
+import { createSiteStructuredData } from "@/lib/structured-data"
 
 export const metadata: Metadata = {
   metadataBase: new URL(SEO_SITE_URL),
@@ -50,6 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#F3F3F3]">
       <body className="bg-[#F3F3F3]">
+        <StructuredData data={createSiteStructuredData()} />
         <GoogleAnalytics />
         <Suspense fallback={null}>
           <PageViewTracker />

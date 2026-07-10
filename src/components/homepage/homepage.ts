@@ -4,7 +4,7 @@ const fallbackHomepageText = {
   hero: {
     role: "Program Fixer",
     year: "2008",
-    title: "Hello",
+    title: "Fixer",
     subtitle: "— I Fix Digital Programs Before They Crash",
     scroll: "Scroll down ↓",
     projectCompletedValue: "75",

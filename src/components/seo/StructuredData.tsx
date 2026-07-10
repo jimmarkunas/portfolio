@@ -1,0 +1,16 @@
+import type { StructuredDataValue } from "@/lib/structured-data"
+
+type StructuredDataProps = {
+  data: StructuredDataValue | StructuredDataValue[]
+}
+
+export function StructuredData({ data }: StructuredDataProps) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
+    />
+  )
+}

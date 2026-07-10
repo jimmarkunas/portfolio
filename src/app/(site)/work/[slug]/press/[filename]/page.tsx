@@ -60,6 +60,10 @@ export async function generateMetadata({
       title: `${study.breadcrumbCurrent} Press`,
       description: `Press coverage and recognition for ${study.breadcrumbCurrent} project work led by Jim Markunas.`,
       canonicalPath: `/work/${slug}/press/${filename}`,
+      image: {
+        url: study.hero.image.src,
+        alt: study.hero.image.alt,
+      },
     })
   }
 
@@ -67,6 +71,10 @@ export async function generateMetadata({
     title: `${article.company} Press`,
     description: article.summary,
     canonicalPath: `/work/${slug}/press/${filename}`,
+    image: {
+      url: study.hero.image.src,
+      alt: study.hero.image.alt,
+    },
   })
 }
 

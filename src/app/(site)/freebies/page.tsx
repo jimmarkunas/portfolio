@@ -11,6 +11,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: freebiesContent.meta.title,
   description: freebiesContent.meta.description,
   canonicalPath: siteCanonicalPaths.freebies,
+  useDefaultImage: false,
 })
 
 const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"

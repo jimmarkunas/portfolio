@@ -19,6 +19,7 @@ type BuildPageMetadataInput = {
   canonicalPath: string
   socialTitle?: string
   image?: SeoImage
+  useDefaultImage?: boolean
   robots?: Metadata["robots"]
 }
 
@@ -34,14 +35,17 @@ export function buildPageMetadata({
   canonicalPath,
   socialTitle,
   image,
+  useDefaultImage = true,
   robots,
 }: BuildPageMetadataInput): Metadata {
-  const resolvedImage = image ?? {
-    url: SEO_DEFAULT_OG_IMAGE,
-    width: 3779,
-    height: 3024,
-    alt: `${SEO_PERSON_NAME} portfolio preview`,
-  }
+  const resolvedImage = image ?? (useDefaultImage
+    ? {
+        url: SEO_DEFAULT_OG_IMAGE,
+        width: 3779,
+        height: 3024,
+        alt: `${SEO_PERSON_NAME} portfolio preview`,
+      }
+    : null)
 
   const resolvedSocialTitle = withSeoName(socialTitle ?? title)
 
@@ -55,19 +59,24 @@ export function buildPageMetadata({
       title: resolvedSocialTitle,
       description,
       url: canonicalPath,
-      images: [
-        {
-          url: resolvedImage.url,
-          width: resolvedImage.width,
-          height: resolvedImage.height,
-          alt: resolvedImage.alt,
-        },
-      ],
+      ...(resolvedImage
+        ? {
+            images: [
+              {
+                url: resolvedImage.url,
+                width: resolvedImage.width,
+                height: resolvedImage.height,
+                alt: resolvedImage.alt,
+              },
+            ],
+          }
+        : {}),
     },
     twitter: {
+      card: "summary_large_image",
       title: resolvedSocialTitle,
       description,
-      images: [resolvedImage.url],
+      ...(resolvedImage ? { images: [resolvedImage.url] } : {}),
     },
     ...(robots ? { robots } : {}),
   }

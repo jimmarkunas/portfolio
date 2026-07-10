@@ -7,6 +7,7 @@
     "dev:tail": "bash scripts/dev-tail.sh /tmp/portfolio-dev.log 40",
     "verify:route": "bash scripts/check-short.sh verify-route bash scripts/fast-verify-route.sh",
     "verify:route-smoke": "bash scripts/check-short.sh route-smoke bash scripts/check-route-smoke.sh",
+    "check:crawlability": "bash scripts/check-short.sh crawlability node scripts/check-crawlability.mjs",
     "verify:predeploy": "npm run check:deploy-workflow && npm run check:source-budgets && npm run check:dead-code && npm run check:booking-url-drift && npm run check:case-study-registry && npm run check:guard-script-fixtures && npm run check:route-boundaries && npm run build && npm run check:bundle-budget-trends && npm run check:bundle-budgets && npm run typecheck",
     "build": "next build",
     "check:deploy-workflow": "bash scripts/check-short.sh deploy-workflow bash scripts/check-deploy-workflow.sh",
