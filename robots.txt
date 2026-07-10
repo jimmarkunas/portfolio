@@ -1,0 +1,9 @@
+User-Agent: *
+Allow: /
+Disallow: /preview/
+Disallow: /dshhacks2026/
+Disallow: /llmday2026/
+Disallow: /interviews/
+
+Host: https://greatestpmever.com
+Sitemap: https://greatestpmever.com/sitemap.xml
