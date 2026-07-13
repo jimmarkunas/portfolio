@@ -73,7 +73,10 @@ export function SiteFooter() {
           <div className="overflow-hidden bg-transparent">
             <div className="mx-auto flex min-h-[400px] max-w-[840px] flex-col items-center justify-center px-8 py-20 text-center">
               <h2 className="type-h3 text-[#FEFEFE]">
-                Let&apos;s build something <span className="text-[#447ACB]">extraordinary</span>
+                <span className="block">Broken program. Impossible deadline. Skeptical stakeholders.</span>
+                <span className="block">
+                  <span className="text-[#447ACB]">Sounds like a Tuesday.</span> Let&apos;s talk.
+                </span>
               </h2>
               <p className="type-p3 mt-5 max-w-[640px] text-[#F3F3F3]">
                 I&apos;m always excited to collaborate on new and innovative projects. Whether

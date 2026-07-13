@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import type { CSSProperties, ReactNode } from "react"
 
 type PullQuoteProps = {
   quote: ReactNode
@@ -7,11 +7,13 @@ type PullQuoteProps = {
   initials?: string
   avatarSrc?: string
   className?: string
+  contentClassName?: string
   quoteClassName?: string
   attributionClassName?: string
   glyphClassName?: string
   dark?: boolean
   decorativeFrame?: ReactNode
+  hoverBlue?: boolean
 }
 
 export function PullQuote({
@@ -21,17 +23,26 @@ export function PullQuote({
   initials = "CQ",
   avatarSrc,
   className = "",
+  contentClassName = "",
   quoteClassName = "",
   attributionClassName = "",
   glyphClassName = "",
   dark = false,
   decorativeFrame,
+  hoverBlue = false,
 }: PullQuoteProps) {
-  const quoteTextColor = dark ? "#FFFFFF" : "#222222"
-  const subtitleColor = dark ? "rgba(255, 255, 255, 0.55)" : "rgba(34, 34, 34, 0.55)"
+  const quoteTextClass = dark ? "text-white" : "text-[#222222]"
+  const subtitleTextClass = dark ? "text-[rgba(255,255,255,0.55)]" : "text-[rgba(34,34,34,0.55)]"
   const badgeClasses = dark
     ? "bg-[#F3F3F3] text-[#222222]"
     : "bg-[#F3F3F3] text-[#222222]"
+  const quoteClampStyle: CSSProperties = {
+    display: "-webkit-box",
+    WebkitBoxOrient: "vertical",
+    WebkitLineClamp: 3,
+    overflow: "hidden",
+  }
+  const hoverTextClass = hoverBlue ? "transition-colors duration-200 group-hover:text-[#447ACB]" : ""
 
   return (
     <div className={`relative overflow-hidden px-6 py-8 text-center md:px-10 md:py-10 lg:px-12 lg:py-12 ${className}`.trim()}>
@@ -42,10 +53,10 @@ export function PullQuote({
         &ldquo;
       </div>
 
-      <div className="relative mx-auto flex max-w-[1240px] flex-col items-center">
+      <div className={`relative mx-auto flex max-w-[1240px] flex-col items-center ${contentClassName}`.trim()}>
         <blockquote
-          className={`max-w-[1180px] text-[28px] italic leading-[1.45] tracking-[-0.03em] md:text-[36px] lg:text-[52px] lg:leading-[1.35] ${quoteClassName}`.trim()}
-          style={{ color: quoteTextColor }}
+          className={`max-w-[1180px] text-[28px] italic leading-[1.35] tracking-[-0.03em] ${quoteTextClass} md:text-[36px] lg:text-[52px] lg:leading-[1.25] ${hoverTextClass} ${quoteClassName}`.trim()}
+          style={quoteClampStyle}
         >
           {quote}
         </blockquote>
@@ -65,8 +76,12 @@ export function PullQuote({
             </div>
           )}
           <div className="text-left">
-            <div className="type-p2 font-medium" style={{ color: quoteTextColor }}>{attributionTitle}</div>
-            <div className="type-p4" style={{ color: subtitleColor }}>{attributionSubtitle}</div>
+            <div className={`type-p2 font-medium ${quoteTextClass}`.trim()}>
+              {attributionTitle}
+            </div>
+            <div className={`type-p4 ${subtitleTextClass}`.trim()}>
+              {attributionSubtitle}
+            </div>
           </div>
         </div>
       </div>

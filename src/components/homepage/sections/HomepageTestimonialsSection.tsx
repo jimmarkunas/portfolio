@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { Shirt } from "lucide-react"
 
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import type { HomepageText } from "@/components/homepage/homepage"
@@ -23,11 +24,18 @@ type HomepageTestimonialsSectionProps = {
   testimonials: HomepageText["testimonials"]
 }
 
+type TestimonialRenderItem = {
+  testimonial: TestimonialItem
+  delay: number
+  tone: "light" | "dark"
+  topRightBadge?: ReactNode
+}
+
 function TestimonialCard({ testimonial, tone, className = "", topRightBadge }: TestimonialCardProps) {
   const isDark = tone === "dark"
 
   const articleClass = isDark
-    ? "relative rounded-[10px] bg-[linear-gradient(180deg,#1F252B_0%,#14191F_100%)] p-6 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
+    ? "relative rounded-[10px] bg-[#222222] p-6 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
     : "relative rounded-[10px] bg-[#F9FAFB] p-6 outline outline-1 outline-gray-200"
 
   const badgeClass = isDark
@@ -84,7 +92,57 @@ function TestimonialCard({ testimonial, tone, className = "", topRightBadge }: T
   )
 }
 
+function renderTestimonialCard({ testimonial, delay, tone, topRightBadge }: TestimonialRenderItem) {
+  const cardClassName = "md:flex md:h-[320px] md:flex-col md:justify-between md:overflow-hidden"
+
+  return (
+    <MotionReveal key={`${testimonial.company}-${testimonial.name}`} preset="cardStrong" delay={delay}>
+      <TestimonialCard testimonial={testimonial} tone={tone} className={cardClassName} topRightBadge={topRightBadge} />
+    </MotionReveal>
+  )
+}
+
 export function HomepageTestimonialsSection({ section, testimonials }: HomepageTestimonialsSectionProps) {
+  const leftColumnTestimonials = [
+    {
+      testimonial: testimonials[0],
+      delay: 0.06,
+      tone: "dark" as const,
+      topRightBadge: (
+        <div className="h-10 w-10 overflow-hidden rounded-full bg-white/15">
+          <img src="/testimonials/tfa-logo.jpg" alt="TFA logo" className="h-full w-full object-cover" />
+        </div>
+      ),
+    },
+    {
+      testimonial: testimonials[6],
+      delay: 0.18,
+      tone: "dark" as const,
+    },
+  ].filter((item): item is TestimonialRenderItem => Boolean(item.testimonial))
+
+  const middleColumnTestimonials = [
+    { testimonial: testimonials[1], delay: 0.1, tone: "light" as const },
+    {
+      testimonial: testimonials[5],
+      delay: 0.18,
+      tone: "light" as const,
+      topRightBadge: (
+        <div
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-[#2B2B2B]"
+          aria-hidden="true"
+        >
+          <Shirt className="h-5 w-5" strokeWidth={1.8} />
+        </div>
+      ),
+    },
+  ].filter((item): item is TestimonialRenderItem => Boolean(item.testimonial))
+
+  const rightColumnTestimonials = [
+    { testimonial: testimonials[2], delay: 0.12, tone: "light" as const },
+    { testimonial: testimonials[3], delay: 0.2, tone: "light" as const },
+  ].filter((item): item is TestimonialRenderItem => Boolean(item.testimonial))
+
   return (
     <HomepageSectionShell className="bg-[#F3F3F3]">
       <div className="flex flex-col items-center gap-6 md:gap-8">
@@ -103,75 +161,15 @@ export function HomepageTestimonialsSection({ section, testimonials }: HomepageT
 
             <div className="grid w-full gap-5 md:grid-cols-3">
               <div className="flex flex-col gap-5">
-                {testimonials[0] ? (
-                  <MotionReveal preset="cardStrong" delay={0.06}>
-                    <TestimonialCard
-                      testimonial={testimonials[0]}
-                      tone="dark"
-                      className="flex min-h-[410px] flex-1 flex-col justify-between"
-                      topRightBadge={
-                        <div className="h-10 w-10 overflow-hidden rounded-full bg-white/15">
-                          <img src="/testimonials/tfa-logo.jpg" alt="TFA logo" className="h-full w-full object-cover" />
-                        </div>
-                      }
-                    />
-                  </MotionReveal>
-                ) : null}
-
-                {testimonials[4] ? (
-                  <MotionReveal preset="cardStrong" delay={0.18}>
-                    <TestimonialCard
-                      testimonial={testimonials[4]}
-                      tone="light"
-                      topRightBadge={
-                        <div
-                          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-[#2B2B2B]"
-                          aria-hidden="true"
-                        >
-                          <svg
-                            viewBox="0 0 24 24"
-                            className="h-4.5 w-4.5"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.7"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M8 5.2 5 6.4 2.8 10l3.2 2.4L8 10v9.4c2.7.2 5.3.2 8 0V10l2 2.4 3.2-2.4L19 6.4l-3-1.2c-1 1.6-2.5 2.4-4 2.4s-3-.8-4-2.4Z" />
-                          </svg>
-                        </div>
-                      }
-                    />
-                  </MotionReveal>
-                ) : null}
+                {leftColumnTestimonials.map(renderTestimonialCard)}
               </div>
 
               <div className="flex flex-col gap-5">
-                {[1, 3, 5].map((index, itemIndex) =>
-                  testimonials[index] ? (
-                    <MotionReveal key={testimonials[index].name} preset="cardStrong" delay={0.12 + itemIndex * 0.08}>
-                      <TestimonialCard testimonial={testimonials[index]} tone="light" />
-                    </MotionReveal>
-                  ) : null,
-                )}
+                {middleColumnTestimonials.map(renderTestimonialCard)}
               </div>
 
               <div className="flex flex-col gap-5">
-                {testimonials[2] ? (
-                  <MotionReveal preset="cardStrong" delay={0.1}>
-                    <TestimonialCard testimonial={testimonials[2]} tone="light" />
-                  </MotionReveal>
-                ) : null}
-
-                {testimonials[6] ? (
-                  <MotionReveal preset="cardStrong" delay={0.24}>
-                    <TestimonialCard
-                      testimonial={testimonials[6]}
-                      tone="dark"
-                      className="flex min-h-[410px] flex-1 flex-col justify-between"
-                    />
-                  </MotionReveal>
-                ) : null}
+                {rightColumnTestimonials.map(renderTestimonialCard)}
               </div>
             </div>
           </div>

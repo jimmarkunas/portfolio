@@ -7,7 +7,6 @@ import {
   HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
   HomepageSectionHeader,
   HomepageSectionShell,
-  InsightAvatarStack,
 } from "@/components/homepage/ui"
 
 type ServicesItem = HomepageText["services"][number]
@@ -25,10 +24,9 @@ export type HomepageInsightCard = {
 }
 
 type HomepageInsightsSectionProps = {
-  section: HomepageText["sections"]["services"]
+  section: HomepageText["sections"]["provenResults"]
   stats: HomepageText["stats"]
   statsCards: HomepageText["stats"]["cards"]
-  services: HomepageText["services"]
 }
 
 type HomepageInsightTopCardProps = {
@@ -95,115 +93,133 @@ function ServiceCard({ item }: { item: ServicesItem }) {
   )
 }
 
-function CommercialImpactHeaderAndStats({
-  section,
-  stats,
-}: {
-  section: HomepageText["sections"]["services"]
-  stats: HomepageText["stats"]
-}) {
+export function HomepageServicesGrid({ services }: { services: HomepageText["services"] }) {
   return (
-    <>
-      <MotionReveal preset="hero" className="w-full" delay={0.02}>
-        <HomepageSectionHeader label={section.pill}>
-          <div
-            className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} items-start lg:grid lg:grid-cols-[minmax(0,480px)_minmax(0,1fr)] lg:items-start lg:gap-10`}
+    <MotionReveal preset="cardStrong" className="w-full">
+      <div className="grid w-full gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {services.map((item, index) => (
+          <MotionReveal
+            key={`${item.title}-${index}`}
+            preset="cardStrong"
+            className="h-full"
+            delay={0.06 + index * 0.04}
           >
-            <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-[#222222]`}>
-              {section.title}
-            </h2>
-            <p className="type-p3 max-w-[962px] whitespace-pre-line text-black/80">{section.description}</p>
-          </div>
-        </HomepageSectionHeader>
-      </MotionReveal>
-
-      <section className="w-full bg-transparent">
-        <MotionReveal preset="section">
-          <div className="mx-auto w-full max-w-[1440px]">
-            <div className="grid grid-cols-2 gap-x-6 gap-y-10 rounded-[10px] md:grid-cols-4 md:gap-0 md:divide-x md:divide-black/10">
-              {stats.trustStats.map((stat) => (
-                <div
-                  key={stat.title}
-                  className="flex flex-col items-center gap-3 px-1 py-0 text-center lg:px-6"
-                >
-                  <div className="h-[3px] w-7 rounded-full bg-[#447ACB]" />
-                  <div className="type-stat-number text-[#1C1C2E]">
-                    <AnimatedMetricValue value={stat.value} trigger="load" />
-                  </div>
-                  <div className="type-rail-label font-semibold text-[#1C1C2E]">{stat.title}</div>
-                  <div className="type-p5 text-[#6B7280]">{stat.subtitle}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </MotionReveal>
-      </section>
-    </>
+            <ServiceCard item={item} />
+          </MotionReveal>
+        ))}
+      </div>
+    </MotionReveal>
   )
 }
 
-export function HomepageInsightsSection({ section, stats, statsCards, services }: HomepageInsightsSectionProps) {
+function ProvenResultsLeadBlock({
+  section,
+}: {
+  section: HomepageText["sections"]["provenResults"]
+}) {
+  const [introCopy, snapshotCopy] = section.description.split(/\n\s*\n/).map((part) => part.trim())
+
+  return (
+    <MotionReveal preset="hero" className="w-full" delay={0.02}>
+      <HomepageSectionHeader label={section.pill}>
+        <div
+          className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} w-full lg:grid lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:gap-10`}
+        >
+          <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[540px] text-[#222222]`}>
+            {section.title}
+          </h2>
+          <div className="flex flex-col gap-10 pt-1 lg:max-w-[980px]">
+            {introCopy ? <p className="type-p3 text-black/80">{introCopy}</p> : null}
+            {snapshotCopy ? <p className="type-p3 text-black/80">{snapshotCopy}</p> : null}
+          </div>
+        </div>
+      </HomepageSectionHeader>
+    </MotionReveal>
+  )
+}
+
+function TrustStatsRow({ stats }: { stats: HomepageText["stats"] }) {
+  return (
+    <section className="w-full bg-transparent">
+      <MotionReveal preset="section">
+        <div className="mx-auto w-full max-w-[1440px]">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 rounded-[10px] md:grid-cols-4 md:gap-0 md:divide-x md:divide-black/10">
+            {stats.trustStats.map((stat) => (
+              <div
+                key={stat.title}
+                className="flex flex-col items-center gap-3 px-1 py-0 text-center lg:px-6"
+              >
+                <div className="h-[3px] w-7 rounded-full bg-[#447ACB]" />
+                <div className="type-stat-number text-[#1C1C2E]">
+                  <AnimatedMetricValue value={stat.value} trigger="load" />
+                </div>
+                <div className="type-rail-label font-semibold text-[#1C1C2E]">{stat.title}</div>
+                <div className="type-p5 text-[#6B7280]">{stat.subtitle}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </MotionReveal>
+    </section>
+  )
+}
+
+function BlackStatsBand({ statsCards }: { statsCards: HomepageText["stats"]["cards"] }) {
   const [statsCard1, , , statsCard4, , statsCard6] = statsCards as HomepageInsightCard[]
 
+  return (
+    <MotionReveal preset="cardStrong" className="w-full">
+      <div className="relative left-1/2 right-1/2 w-screen -ml-[50vw] -mr-[50vw] bg-[#222222]">
+        <div className="mx-auto w-full max-w-[1440px] px-6 py-8 md:px-10 md:py-10 lg:px-12 lg:py-12">
+          <div className="grid w-full gap-5 md:grid-cols-3">
+            <div className="flex h-full flex-col gap-4">
+              <HomepageInsightTopCard
+                logoSrc={statsCard1.logoSrc}
+                logoAlt={statsCard1.logoAlt}
+                value={statsCard1.badgeValue ?? statsCard1.value ?? statsCard1.title ?? ""}
+                description={statsCard1.subtitle ?? statsCard1.summary ?? ""}
+              />
+            </div>
+
+            <div className="flex h-full flex-col gap-4 md:order-3">
+              <HomepageInsightTopCard
+                logoSrc={statsCard4.logoSrc}
+                logoAlt={statsCard4.logoAlt}
+                value={statsCard4.title ?? statsCard4.value ?? statsCard4.badgeValue ?? ""}
+                description={statsCard4.subtitle ?? statsCard4.summary ?? ""}
+              />
+            </div>
+
+            <div className="flex h-full flex-col gap-4 md:order-2">
+              <HomepageInsightTopCard
+                logoSrc={statsCard6.logoSrc}
+                logoAlt={statsCard6.logoAlt}
+                value={statsCard6.value ?? statsCard6.title ?? statsCard6.badgeValue ?? ""}
+                description={statsCard6.summary ?? statsCard6.subtitle ?? ""}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </MotionReveal>
+  )
+}
+
+export function HomepageInsightsSection({
+  section,
+  stats,
+  statsCards,
+}: HomepageInsightsSectionProps) {
   return (
     <HomepageSectionShell
       className="bg-[#F3F3F3]"
       paddingClassName="pt-10 pb-0 md:pt-12 md:pb-0 lg:pt-14 lg:pb-0"
     >
       <div className="flex flex-col items-start gap-8 md:gap-10">
-        <CommercialImpactHeaderAndStats section={section} stats={stats} />
+        <ProvenResultsLeadBlock section={section} />
+        <TrustStatsRow stats={stats} />
 
-        <div className="flex w-full flex-col gap-8 md:gap-10">
-          <MotionReveal preset="cardStrong" className="w-full">
-            <div className="grid w-full gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {services.map((item, index) => (
-                <MotionReveal
-                  key={`${item.title}-${index}`}
-                  preset="cardStrong"
-                  className="h-full"
-                  delay={0.06 + index * 0.04}
-                >
-                  <ServiceCard item={item} />
-                </MotionReveal>
-              ))}
-            </div>
-          </MotionReveal>
-
-          <MotionReveal preset="cardStrong" className="w-full">
-            <div className="relative left-1/2 right-1/2 w-screen -ml-[50vw] -mr-[50vw] bg-[#222222]">
-              <div className="mx-auto w-full max-w-[1440px] px-6 py-8 md:px-10 md:py-10 lg:px-12 lg:py-12">
-                <div className="grid w-full gap-5 md:grid-cols-3">
-                  <div className="flex h-full flex-col gap-4">
-                    <HomepageInsightTopCard
-                      logoSrc={statsCard1.logoSrc}
-                      logoAlt={statsCard1.logoAlt}
-                      value={statsCard1.badgeValue ?? ""}
-                      description={statsCard1.subtitle ?? ""}
-                    />
-                  </div>
-
-                  <div className="flex h-full flex-col gap-4 md:order-3">
-                    <HomepageInsightTopCard
-                      logoSrc={statsCard4.logoSrc}
-                      logoAlt={statsCard4.logoAlt}
-                      value={statsCard4.title ?? ""}
-                      description={statsCard4.subtitle ?? ""}
-                    />
-                  </div>
-
-                  <div className="flex h-full flex-col gap-4 md:order-2">
-                    <HomepageInsightTopCard
-                      logoSrc={statsCard6.logoSrc}
-                      logoAlt={statsCard6.logoAlt}
-                      value={statsCard6.value ?? ""}
-                      description={statsCard6.summary ?? ""}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </MotionReveal>
-        </div>
+        <BlackStatsBand statsCards={statsCards} />
       </div>
     </HomepageSectionShell>
   )

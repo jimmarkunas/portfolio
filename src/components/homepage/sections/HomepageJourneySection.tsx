@@ -14,17 +14,22 @@ import {
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 const recognitionRowClass =
-  "grid gap-6 border-b border-black/10 pb-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:items-start lg:items-center"
+  "group relative isolate grid gap-5 bg-transparent py-6 md:grid-cols-[minmax(0,320px)_minmax(0,1fr)] md:items-start lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)_auto] lg:gap-8 lg:items-start"
 const recognitionSummaryClass =
-  "type-p3 text-[#666666] w-full lg:pl-8"
+  "type-p3 w-full max-w-[54ch] text-[#5B5B5B] leading-[1.8]"
+const featuredRecognitionRowClass =
+  "grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:items-start lg:grid-cols-[minmax(0,530px)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:items-start lg:gap-x-8 lg:gap-y-3"
+const featuredSummaryClass = "type-p3 w-full max-w-[54ch] text-[#545454] leading-[1.8]"
 const linkedRecognitionRowClass =
-  "transition-[transform,background-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:bg-[#F5F7FA] hover:shadow-[0_12px_30px_rgba(34,34,34,0.06)]"
+  "cursor-pointer focus-visible:outline-[3px] focus-visible:outline-blue-500 focus-visible:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)]"
 const featuredTagClass =
-  "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#2B2B2B] px-4 text-[16px] leading-6 text-white"
+  "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#2B2B2B] px-4 text-[14px] leading-6 tracking-[0.01em] text-white shadow-[0_1px_2px_rgba(34,34,34,0.08)]"
 const defaultTagClass =
-  "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#EFEFEF] px-4 text-[16px] leading-6 text-[#3A3A3A] outline outline-1 outline-black/10"
+  "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#EFEAE2] px-4 text-[14px] leading-6 tracking-[0.01em] text-[#4B4B4B] outline outline-1 outline-black/5 transition-colors duration-200 group-hover:bg-[#222222] group-hover:text-[#F4F1EA] group-hover:outline-[#222222]"
 const hoverLiftClass = "transition-transform duration-300 hover:-translate-y-0.5"
 const journeyCtaClass = `type-p2 inline-flex min-h-[44px] items-center gap-2 text-[#222222] underline underline-offset-4 ${hoverLiftClass}`
+const featuredWidgetClass =
+  "rounded-[24px] border border-black/5 bg-[#FCFBF7] p-5 md:p-7 lg:p-8"
 
 type HomepageJourneySectionProps = {
   section: HomepageText["sections"]["journey"]
@@ -57,8 +62,10 @@ export function HomepageJourneySection({
     })
   }
 
+  const featured = journey.featured
+
   return (
-    <HomepageSectionShell className="bg-[#F3F3F3]">
+    <HomepageSectionShell className="bg-[#F3F0E9]">
       <div className="flex w-full flex-col gap-8 md:gap-10">
         <MotionReveal preset="hero" className="w-full" delay={0.04}>
             <HomepageSectionHeader label={section.pill}>
@@ -79,182 +86,223 @@ export function HomepageJourneySection({
           </HomepageSectionHeader>
         </MotionReveal>
 
-        <MotionReveal preset="section" className="rounded-[10px] bg-white p-6 md:p-10 lg:p-12" delay={0.02}>
-          <div className="space-y-5">
-            <MotionReveal
-              preset="cardStrong"
-              className={`${recognitionRowClass} rounded-[10px] p-3 lg:!items-start`}
-              delay={0.12}
-            >
-              <div className="hidden w-full p-3 md:order-first md:col-span-2 md:block lg:hidden">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="min-w-0">
-                    {journey.featured.href ? (
-                      <a
-                        href={journey.featured.href}
-                        target={journey.featured.external ? "_blank" : undefined}
-                        rel={journey.featured.external ? "noopener noreferrer" : undefined}
-                        className="block"
-                      >
-                        <h3 className="type-h5 text-[#222222]">{journey.featured.company}</h3>
-                        <p className="type-p3 mt-1 text-[#7B7B7B]">{journey.featured.date}</p>
-                      </a>
-                    ) : (
-                      <div>
-                        <h3 className="type-h5 text-[#222222]">{journey.featured.company}</h3>
-                        <p className="type-p3 mt-1 text-[#7B7B7B]">{journey.featured.date}</p>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex flex-wrap justify-end gap-2">
-                    {journey.featured.tags.map((tag) => (
-                      <span key={`${tag}-tablet-title`} className={featuredTagClass}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="md:col-span-2 lg:col-span-1">
-                <div className="p-3 md:hidden lg:block">
-                  {journey.featured.href ? (
-                    <a
-                      href={journey.featured.href}
-                      target={journey.featured.external ? "_blank" : undefined}
-                      rel={journey.featured.external ? "noopener noreferrer" : undefined}
-                      className="block"
-                      onClick={() => {
-                        if (journey.featured.external) {
-                          trackHomepageOutbound(journey.featured.company, journey.featured.href)
-                        }
-                      }}
-                    >
-                      <h3 className="type-h5 text-[#222222]">{journey.featured.company}</h3>
-                      <p className="type-p3 mt-1 text-[#7B7B7B]">{journey.featured.date}</p>
-                    </a>
-                  ) : (
-                    <div>
-                      <h3 className="type-h5 text-[#222222]">{journey.featured.company}</h3>
-                      <p className="type-p3 mt-1 text-[#7B7B7B]">{journey.featured.date}</p>
+        <MotionReveal
+          preset="section"
+          className="w-full"
+          delay={0.02}
+        >
+          <div className="flex w-full flex-col gap-8 md:gap-10">
+            <MotionReveal preset="cardStrong" className={featuredWidgetClass} delay={0.12}>
+              <div
+                className={`${featuredRecognitionRowClass} rounded-[20px] bg-transparent p-0 md:gap-8 lg:gap-x-8 lg:gap-y-3`}
+              >
+                <div className="hidden w-full md:order-first md:col-span-2 md:block lg:hidden">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0">
+                      {featured.href ? (
+                        <a
+                          href={featured.href}
+                          target={featured.external ? "_blank" : undefined}
+                          rel={featured.external ? "noopener noreferrer" : undefined}
+                          className="block"
+                          onClick={() => {
+                            if (featured.external) {
+                              trackHomepageOutbound(featured.company, featured.href)
+                            }
+                          }}
+                        >
+                          <h3 className="type-h6 text-[#222222]">{featured.company}</h3>
+                          <p className="type-p4 mt-1 text-[#767676]">{featured.date}</p>
+                        </a>
+                      ) : (
+                        <div>
+                          <h3 className="type-h6 text-[#222222]">{featured.company}</h3>
+                          <p className="type-p4 mt-1 text-[#767676]">{featured.date}</p>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
 
-                <MotionReveal
-                  preset="image"
-                  className="w-full max-w-[530px] overflow-hidden rounded-[10px] bg-black md:max-w-none lg:max-w-[530px]"
-                  style={{ aspectRatio: "530 / 298" }}
-                >
-                  <iframe
-                    width="530"
-                    height="298"
-                    src="https://www.youtube.com/embed/Am5w8EIKxHM?si=bSia4BHbF5elGAY8"
-                    title="Creative Minds featured video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    loading="lazy"
-                    className="h-full w-full"
-                  />
-                </MotionReveal>
-
-                <div className="mt-4 hidden md:block lg:hidden">
-                  {journey.featured.href ? (
-                    <a
-                      href={journey.featured.href}
-                      target={journey.featured.external ? "_blank" : undefined}
-                      rel={journey.featured.external ? "noopener noreferrer" : undefined}
-                      className={recognitionSummaryClass}
-                      onClick={() => {
-                        if (journey.featured.external) {
-                          trackHomepageOutbound(journey.featured.company, journey.featured.href)
-                        }
-                      }}
-                    >
-                      {journey.featured.summary}
-                    </a>
-                  ) : (
-                    <p className={recognitionSummaryClass}>{journey.featured.summary}</p>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex flex-col items-start gap-4 md:col-start-2 md:gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-5 lg:pt-8">
-                <div className="md:order-2 md:pt-4 md:hidden lg:order-none lg:pt-0 lg:block">
-                  {journey.featured.href ? (
-                    <a
-                      href={journey.featured.href}
-                      target={journey.featured.external ? "_blank" : undefined}
-                      rel={journey.featured.external ? "noopener noreferrer" : undefined}
-                      className={recognitionSummaryClass}
-                      onClick={() => {
-                        if (journey.featured.external) {
-                          trackHomepageOutbound(journey.featured.company, journey.featured.href)
-                        }
-                      }}
-                    >
-                      {journey.featured.summary}
-                    </a>
-                  ) : (
-                    <p className={recognitionSummaryClass}>{journey.featured.summary}</p>
-                  )}
-                </div>
-
-                <div className="flex flex-wrap justify-start gap-2 md:hidden lg:flex lg:flex-nowrap lg:justify-end">
-                  {journey.featured.tags.map((tag) => (
-                    <span key={tag} className={featuredTagClass}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </MotionReveal>
-
-            {journey.entries.map((entry, index) => {
-              const rowDelay = 0.18 + index * 0.06
-              const rowContent = (
-                <>
-                  <div>
-                    <h3 className="type-h5 text-[#222222]">{entry.company}</h3>
-                    <p className="type-p3 mt-1 text-[#7B7B7B]">{entry.date}</p>
-                  </div>
-                  <div className="flex flex-col items-start gap-4 md:col-start-2 md:gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-5">
-                    <p className={recognitionSummaryClass}>{entry.summary}</p>
-                    <div className="flex flex-wrap justify-start gap-2 lg:flex-nowrap lg:justify-end">
-                      {entry.tags.map((tag) => (
-                        <span key={tag} className={defaultTagClass}>
+                    <div className="flex flex-wrap justify-end gap-2">
+                      {featured.tags.map((tag) => (
+                        <span key={`${tag}-tablet-title`} className={featuredTagClass}>
                           {tag}
                         </span>
                       ))}
                     </div>
                   </div>
-                </>
-              )
+                </div>
 
-              return entry.href ? (
-                <MotionReveal key={`${entry.company}-${entry.date}`} preset="cardStrong" delay={rowDelay}>
-                  <a
-                    href={entry.href}
-                    target={entry.external ? "_blank" : undefined}
-                    rel={entry.external ? "noopener noreferrer" : undefined}
-                    className={`${recognitionRowClass} ${linkedRecognitionRowClass} last:border-b-0 last:pb-0`}
-                    onClick={() => {
-                      if (entry.external) {
-                        trackHomepageOutbound(entry.company, entry.href)
-                      }
-                    }}
+                <div className="hidden w-full lg:block lg:col-start-1 lg:row-start-1">
+                  {featured.href ? (
+                    <a
+                      href={featured.href}
+                      target={featured.external ? "_blank" : undefined}
+                      rel={featured.external ? "noopener noreferrer" : undefined}
+                      className="block"
+                      onClick={() => {
+                        if (featured.external) {
+                          trackHomepageOutbound(featured.company, featured.href)
+                        }
+                      }}
+                    >
+                      <h3 className="type-h6 text-[#222222]">{featured.company}</h3>
+                      <p className="type-p4 mt-1 text-[#767676]">{featured.date}</p>
+                    </a>
+                  ) : (
+                    <div>
+                      <h3 className="type-h6 text-[#222222]">{featured.company}</h3>
+                      <p className="type-p4 mt-1 text-[#767676]">{featured.date}</p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="md:col-span-2 lg:col-start-1 lg:row-start-2">
+                  <div className="md:hidden">
+                    {featured.href ? (
+                      <a
+                        href={featured.href}
+                        target={featured.external ? "_blank" : undefined}
+                        rel={featured.external ? "noopener noreferrer" : undefined}
+                        className="block"
+                        onClick={() => {
+                          if (featured.external) {
+                            trackHomepageOutbound(featured.company, featured.href)
+                          }
+                        }}
+                      >
+                        <h3 className="type-h6 text-[#222222]">{featured.company}</h3>
+                        <p className="type-p4 mt-1 text-[#767676]">{featured.date}</p>
+                      </a>
+                    ) : (
+                      <div>
+                        <h3 className="type-h6 text-[#222222]">{featured.company}</h3>
+                        <p className="type-p4 mt-1 text-[#767676]">{featured.date}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  <MotionReveal
+                    preset="image"
+                    className="relative w-full max-w-[530px] overflow-hidden rounded-[14px] bg-black md:max-w-none lg:max-w-[530px]"
+                    style={{ aspectRatio: "530 / 298" }}
                   >
-                    {rowContent}
-                  </a>
-                </MotionReveal>
-              ) : (
-                <MotionReveal key={`${entry.company}-${entry.date}`} preset="cardStrong" delay={rowDelay}>
-                  <div className={`${recognitionRowClass} last:border-b-0 last:pb-0`}>{rowContent}</div>
-                </MotionReveal>
-              )
-            })}
+                    <iframe
+                      width="530"
+                      height="298"
+                      src="https://www.youtube.com/embed/Am5w8EIKxHM?si=bSia4BHbF5elGAY8"
+                      title="Creative Minds featured video"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                      loading="lazy"
+                      className="absolute inset-0 block h-full w-full border-0"
+                    />
+                  </MotionReveal>
+
+                  <div className="mt-4 hidden md:block lg:hidden">
+                    {featured.href ? (
+                      <a
+                        href={featured.href}
+                        target={featured.external ? "_blank" : undefined}
+                        rel={featured.external ? "noopener noreferrer" : undefined}
+                        className={recognitionSummaryClass}
+                        onClick={() => {
+                          if (featured.external) {
+                            trackHomepageOutbound(featured.company, featured.href)
+                          }
+                        }}
+                      >
+                        {featured.summary}
+                      </a>
+                    ) : (
+                      <p className={recognitionSummaryClass}>{featured.summary}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="hidden lg:block lg:col-start-2 lg:row-start-1 lg:pt-1">
+                  <div className="flex flex-wrap justify-start gap-2 lg:flex-nowrap lg:justify-end">
+                    {featured.tags.map((tag) => (
+                      <span key={tag} className={featuredTagClass}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="hidden lg:block lg:col-start-2 lg:row-start-2">
+                  {featured.href ? (
+                    <a
+                      href={featured.href}
+                      target={featured.external ? "_blank" : undefined}
+                      rel={featured.external ? "noopener noreferrer" : undefined}
+                      className={featuredSummaryClass}
+                      onClick={() => {
+                        if (featured.external) {
+                          trackHomepageOutbound(featured.company, featured.href)
+                        }
+                      }}
+                    >
+                      {featured.summary}
+                    </a>
+                  ) : (
+                    <p className={featuredSummaryClass}>{featured.summary}</p>
+                  )}
+                </div>
+              </div>
+            </MotionReveal>
+
+            <div className="flex flex-col divide-y divide-black/10 px-4 md:px-6 lg:px-8">
+              {journey.entries.map((entry, index) => {
+                const rowDelay = 0.18 + index * 0.06
+                const rowContent = (
+                  <>
+                    <div>
+                      <h3 className="type-h6 text-[#222222] transition-colors duration-200 group-hover:text-blue-500">
+                        {entry.company}
+                      </h3>
+                      <p className="type-p4 mt-1 text-[#767676] transition-colors duration-200 group-hover:text-[#222222]">
+                        {entry.date}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-start gap-4 md:col-start-2 md:gap-5 lg:col-start-2 lg:pt-1">
+                      <p className={`${recognitionSummaryClass} transition-colors duration-200 group-hover:text-blue-500`}>
+                        {entry.summary}
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap justify-start gap-2 md:col-start-2 lg:col-start-3 lg:justify-end">
+                      {entry.tags.map((tag) => (
+                        <span key={tag} className={`${defaultTagClass} type-p4`}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                )
+
+                return entry.href ? (
+                  <MotionReveal key={`${entry.company}-${entry.date}`} preset="section" delay={rowDelay}>
+                    <a
+                      href={entry.href}
+                      target={entry.external ? "_blank" : undefined}
+                      rel={entry.external ? "noopener noreferrer" : undefined}
+                      className={`${recognitionRowClass} ${linkedRecognitionRowClass}`}
+                      onClick={() => {
+                        if (entry.external) {
+                          trackHomepageOutbound(entry.company, entry.href)
+                        }
+                      }}
+                    >
+                      {rowContent}
+                    </a>
+                  </MotionReveal>
+                ) : (
+                  <MotionReveal key={`${entry.company}-${entry.date}`} preset="section" delay={rowDelay}>
+                    <div className={recognitionRowClass}>{rowContent}</div>
+                  </MotionReveal>
+                )
+              })}
+            </div>
           </div>
         </MotionReveal>
       </div>

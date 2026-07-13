@@ -1,15 +1,22 @@
-import { Container } from "@/components/Container"
-import { MotionReveal } from "@/components/motion/MotionReveal"
 import { HomepageHeroSection } from "@/components/homepage/sections/HomepageHeroSection"
 import { PastClientsSection } from "@/components/homepage/sections/PastClientsSection"
-import { HomepageInsightsSection } from "@/components/homepage/sections/HomepageInsightsSection"
+import {
+  HomepageInsightsSection,
+  HomepageServicesGrid,
+} from "@/components/homepage/sections/HomepageInsightsSection"
 import { HomepageAwardsSection } from "@/components/homepage/sections/HomepageAwardsSection"
 import { HomepageTestimonialsSection } from "@/components/homepage/sections/HomepageTestimonialsSection"
+import { HomepagePullQuoteSection } from "@/components/homepage/sections/HomepagePullQuoteSection"
 import { HomepageJourneySection } from "@/components/homepage/sections/HomepageJourneySection"
-import { PullQuote } from "@/components/PullQuote"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
 import { siteCta, siteRoutes } from "@/content/site"
-import { HomepageSectionShell } from "@/components/homepage/ui"
+import {
+  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
+  HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
+  HomepageSectionHeader,
+  HomepageSectionShell,
+} from "@/components/homepage/ui"
+import { MotionReveal } from "@/components/motion/MotionReveal"
 
 import { getHomepageText } from "./homepage"
 
@@ -25,7 +32,6 @@ export default function Homepage() {
     awards,
     testimonials,
     journey,
-    testimonial,
   } = getHomepageText()
 
   return (
@@ -35,43 +41,45 @@ export default function Homepage() {
       <PastClientsSection
         motionStyle="homepage"
         showRescueCta
-        rescueCtaLead={sections.experiences.ctaLead}
+        rescueCtaLead={sections.whatIDo.ctaLead}
       />
 
       <HomepageInsightsSection
-        section={sections.services}
-        services={services}
+        section={sections.provenResults}
         stats={stats}
         statsCards={stats.cards}
       />
 
+      <HomepageSectionShell
+        className="bg-[#F3F3F3]"
+        paddingClassName="pt-10 pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14"
+        containerClassName="!px-8 md:!px-12 lg:!px-12"
+      >
+        <div className="flex w-full flex-col gap-8 md:gap-10">
+          <MotionReveal preset="hero" className="w-full" delay={0.02}>
+            <HomepageSectionHeader label={sections.experience.pill}>
+              <div
+                className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} w-full lg:grid lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:gap-12`}
+              >
+                <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[540px] text-[#222222]`}>
+                  {sections.experience.title}
+                </h2>
+                <p className="type-p3 max-w-[980px] text-black/80">
+                  {sections.experience.description}
+                </p>
+              </div>
+            </HomepageSectionHeader>
+          </MotionReveal>
+
+          <HomepageServicesGrid services={services} />
+        </div>
+      </HomepageSectionShell>
+
+      <HomepagePullQuoteSection />
+
       <HomepageAwardsSection section={sections.awards} awards={awards} />
 
       <HomepageTestimonialsSection section={sections.testimonials} testimonials={testimonials} />
-
-      <section className="border border-red-500 bg-[#222222]">
-        <Container className="py-14 md:py-16 lg:py-20">
-          <MotionReveal preset="section" delay={0.02}>
-            <PullQuote
-              dark
-              quote={<>&ldquo;{testimonial.quote}&rdquo;</>}
-              attributionTitle={testimonial.name}
-              attributionSubtitle={testimonial.handle}
-              initials={testimonial.initials}
-              avatarSrc={testimonial.avatarSrc}
-              glyphClassName="text-[rgba(255,255,255,0.1)]"
-              decorativeFrame={
-                <>
-                  <div className="pointer-events-none absolute left-4 top-6 h-16 w-16 rounded-tl-[18px] border-l border-t border-white/10 md:left-8 md:top-8 md:h-20 md:w-20" />
-                  <div className="pointer-events-none absolute right-4 top-6 h-16 w-16 rounded-tr-[18px] border-r border-t border-white/10 md:right-8 md:top-8 md:h-20 md:w-20" />
-                  <div className="pointer-events-none absolute bottom-6 left-4 h-16 w-16 rounded-bl-[18px] border-b border-l border-white/10 md:bottom-8 md:left-8 md:h-20 md:w-20" />
-                  <div className="pointer-events-none absolute bottom-6 right-4 h-16 w-16 rounded-br-[18px] border-b border-r border-white/10 md:bottom-8 md:right-8 md:h-20 md:w-20" />
-                </>
-              }
-            />
-          </MotionReveal>
-        </Container>
-      </section>
 
       <HomepageSectionShell
         className="bg-[#F3F3F3]"
@@ -87,7 +95,7 @@ export default function Homepage() {
       </HomepageSectionShell>
 
       <HomepageJourneySection
-        section={sections.journey}
+        section={sections.recognition}
         journey={journey}
         bookCallHref={HOMEPAGE_BOOK_CALL_HREF}
         bookCallLabel={BOOK_CALL_LABEL}

@@ -44,7 +44,7 @@ export function ServicesContactPage({ entryPoint = "services" }: ServicesContact
 
       <section id="services" className="scroll-mt-28">
         <HomepageHeroSection hero={hero} />
-        <HomepageWhatIDoSection section={sections.experiences} engagements={experienceEngagements} />
+        <HomepageWhatIDoSection section={sections.whatIDo} engagements={experienceEngagements} />
         <PastClientsSection showHeading />
         <CareerStatsSection
           eyebrow={careerStats.eyebrow}

@@ -11,7 +11,7 @@ import { siteCta } from "@/content/site"
 import Link from "next/link"
 
 type HomepageWhatIDoSectionProps = {
-  section: HomepageText["sections"]["experiences"]
+  section: HomepageText["sections"]["whatIDo"]
   engagements: HomepageText["experienceEngagements"]
   motionStyle?: "default" | "homepage"
   showEngagements?: boolean

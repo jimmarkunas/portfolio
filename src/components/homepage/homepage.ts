@@ -13,7 +13,7 @@ const fallbackHomepageText = {
     startupRaisedLabel: "ROI Delivered",
   },
   sections: {
-    experiences: {
+    whatIDo: {
       pill: "What I Do",
       title: "Programs I've Rescued",
       description:
@@ -51,15 +51,15 @@ const fallbackHomepageText = {
     highlights: {
       cta: "See More",
     },
-    services: {
+    provenResults: {
       pill: "Proven Results",
-      title: "My Areas of Expertse & Business Impact",
+      title: "My Business Impact",
       description:
-        "I specialize in turning complex problems into elegant solutions. My approach blends creativity with strategic.\n\nHere's a snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and digital transformation programs.\n",
+        "I specialize in turning complex problems into elegant solutions. My approach blends creativity with strategic.\n\nHere's a snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and digital transformation programs.\n\n",
     },
-    insights: {
-      pill: "Proven Results",
-      title: "Experience & Impact",
+    experience: {
+      pill: "Experience",
+      title: "My Areas of Expertise",
       description:
         "A snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and digital transformation programs.",
     },
@@ -69,7 +69,7 @@ const fallbackHomepageText = {
       description:
         "",
     },
-    journey: {
+    recognition: {
       pill: "Recognition",
       title: "Press Coverage",
       intro:
@@ -319,7 +319,7 @@ const fallbackHomepageText = {
       role: "CEO/Founder",
       avatarSrc: "/bi/jared-miller.jpeg",
       quote:
-        "Jim is one of those rare people who makes hard things feel manageable and big ideas feel executable. He has deep experience across ecommerce and digital platforms, and it shows. He thinks several steps ahead, looks out for the client, and pushes the work to be better.  He elevates teams simply by being in the room. ",
+        "Jim is one of those rare people who makes hard things feel manageable and big ideas feel executable. He has deep experience across ecommerce and digital platforms, and it shows.",
       variant: "dark",
       tall: true,
     },
@@ -347,20 +347,11 @@ const fallbackHomepageText = {
     {
       company: "Corra Agency",
       name: "Murali Annavarapu ",
-      role: "Program Manager",
+      role: "Vice President, Delivery",
       badgeSrc: "/testimonials/corra-logo.jpeg",
       avatarSrc: "/bi/murali-annvarapuru.jpeg",
       quote:
         "His people management and teamwork skills are truly second to none. Jim leads with empathy, clarity, and accountability.",
-      variant: "light",
-    },
-    {
-      company: "American Apparel",
-      name: "Nick Kolev",
-      role: "Director of Engineering",
-      avatarSrc: "/aa/nick-kolev.jpeg",
-      quote:
-        "Jim was a key reason our most challenging projects shipped successfully at American Apparel. He’s a PM who earns trust quickly: prepared, transparent, and dependable.",
       variant: "light",
     },
     {
@@ -374,14 +365,24 @@ const fallbackHomepageText = {
       variant: "light",
     },
     {
+      company: "American Apparel",
+      name: "Nick Kolev",
+      role: "Director, Engineering",
+      badgeSrc: "/company-logos/svg/aa-logo.svg",
+      avatarSrc: "/aa/nick-kolev.jpeg",
+      quote:
+        "Jim was a key reason our most challenging projects shipped successfully at American Apparel. He’s a PM who earns trust quickly: prepared, transparent, and dependable.",
+      variant: "light",
+    },
+    {
       company: "Cloud NC",
       name: "Adrian Sorapuru",
-      role: "Head of Business Developmentx",
+      role: "Head of Business Development",
       badgeSrc: "/testimonials/cloudnc-logo.png",
       badgeImageClassName: "scale-[1.55]",
       avatarSrc: "/cbdistillery/adrian-sorapuru.jpeg",
       quote:
-        "Jim is an exceptional project manager equipped with technical and sales acumen. He was a leading driver of new business opportunities and drove incremental revenue for the company. Jim understands how to drive key insights that turn pain points into deliverable results. I recommend Jim for any company that needs to deliver results and drive revenue.",
+        "Jim is an exceptional project manager equipped with technical and sales acumen. He understands how to drive key insights that turn pain points into deliverable results.",
       variant: "dark",
       tall: true,
     },
@@ -397,7 +398,7 @@ const fallbackHomepageText = {
   journey: {
     featured: {
       company: "Value Squared Podcast",
-      date: "• January 27, 2026",
+      date: "January 27, 2026",
       summary: "Value Squared sat down with Jim Markunas, a digital product leader and e-commerce consultant, to break down what’s actually happening in tech, AI, and digital transformation. If you’re a founder, entrepreneur, product manager, or business owner, this episode will challenge how you think about AI, technology, and growth.",
       tags: ["Podcast", "Value2"],
       href: "",
@@ -406,7 +407,7 @@ const fallbackHomepageText = {
     entries: [
       {
         company: "TechRound",
-        date: "• July 2, 2026",
+        date: "July 2, 2026",
         summary: "Product Market Fit: Early Green Flags And Where To Look",
         tags: ["Article", "TechRound"],
         href: "https://techround.co.uk/guides/product-market-fit-early-green-flags-where-look/",
@@ -414,7 +415,7 @@ const fallbackHomepageText = {
       },
       {
         company: "TechGrid",
-        date: "• May 28, 2026",
+        date: "May 28, 2026",
         summary: "Product Managers: Train Your Robot to Find ROI. Then Sell the Idea to the Execs.",
         tags: ["Article", "TechGrid"],
         href: "https://techgrid.media/articles/product-managers-train-your-robot-to-find-roi-then-sell-the-idea-to-the-execs/",
@@ -422,7 +423,7 @@ const fallbackHomepageText = {
       },
       {
         company: "Dataconomy",
-        date: "• April 3, 2026",
+        date: "April 3, 2026",
         summary: "Your AI program has a data problem, you just don’t know it yet",
         tags: ["Interview", "Dataconomy"],
         href: "https://dataconomy.com/2026/04/03/your-ai-program-has-a-data-problem-you-just-dont-know-it-yet/",
@@ -430,7 +431,7 @@ const fallbackHomepageText = {
       },
       {
         company: "The AI Journal",
-        date: "• March 9, 2026",
+        date: "March 9, 2026",
         summary: "Before BOPIS went mainstream: James Markunas on pioneering one of the world's first true global omni-channel ecosystems for American Apparel across 16 countries",
         tags: ["Interview", "AI Journal"],
         href: "https://aijourn.com/before-bopis-went-mainstream-james-markunas-on-pioneering-one-of-the-worlds-first-true-global-omni-channel-ecosystems-for-american-apparel-across-16-countries/",
@@ -438,7 +439,7 @@ const fallbackHomepageText = {
       },
       {
         company: "TechGrid",
-        date: "• February 25, 2026",
+        date: "February 25, 2026",
         summary: "Is AI making companies smarter or just more efficient at bad management?",
         tags: ["Interview", "TechGrid"],
         href: "https://techgrid.media/interviews/is-ai-making-companies-smarter-or-just-more-efficient-at-bad-management/",
@@ -453,14 +454,14 @@ export type HomepageText = typeof fallbackHomepageText
 type PartialHomepageText = {
   hero?: Partial<HomepageText["hero"]>
   sections?: {
-    experiences?: Partial<HomepageText["sections"]["experiences"]>
+    whatIDo?: Partial<HomepageText["sections"]["whatIDo"]>
     awards?: Partial<HomepageText["sections"]["awards"]>
     portfolio?: Partial<HomepageText["sections"]["portfolio"]>
     highlights?: Partial<HomepageText["sections"]["highlights"]>
-    services?: Partial<HomepageText["sections"]["services"]>
-    insights?: Partial<HomepageText["sections"]["insights"]>
+    provenResults?: Partial<HomepageText["sections"]["provenResults"]>
+    experience?: Partial<HomepageText["sections"]["experience"]>
     testimonials?: Partial<HomepageText["sections"]["testimonials"]>
-    journey?: Partial<HomepageText["sections"]["journey"]>
+    recognition?: Partial<HomepageText["sections"]["recognition"]>
   }
   experienceEngagements?: HomepageText["experienceEngagements"]
   awards?: HomepageText["awards"]
@@ -478,9 +479,9 @@ export function getHomepageText(): HomepageText {
   return {
     hero: { ...fallbackHomepageText.hero, ...(homepageText.hero ?? {}) },
     sections: {
-      experiences: {
-        ...fallbackHomepageText.sections.experiences,
-        ...(homepageText.sections?.experiences ?? {}),
+      whatIDo: {
+        ...fallbackHomepageText.sections.whatIDo,
+        ...(homepageText.sections?.whatIDo ?? {}),
       },
       awards: {
         ...fallbackHomepageText.sections.awards,
@@ -494,21 +495,21 @@ export function getHomepageText(): HomepageText {
         ...fallbackHomepageText.sections.highlights,
         ...(homepageText.sections?.highlights ?? {}),
       },
-      services: {
-        ...fallbackHomepageText.sections.services,
-        ...(homepageText.sections?.services ?? {}),
+      provenResults: {
+        ...fallbackHomepageText.sections.provenResults,
+        ...(homepageText.sections?.provenResults ?? {}),
       },
-      insights: {
-        ...fallbackHomepageText.sections.insights,
-        ...(homepageText.sections?.insights ?? {}),
+      experience: {
+        ...fallbackHomepageText.sections.experience,
+        ...(homepageText.sections?.experience ?? {}),
       },
       testimonials: {
         ...fallbackHomepageText.sections.testimonials,
         ...(homepageText.sections?.testimonials ?? {}),
       },
-      journey: {
-        ...fallbackHomepageText.sections.journey,
-        ...(homepageText.sections?.journey ?? {}),
+      recognition: {
+        ...fallbackHomepageText.sections.recognition,
+        ...(homepageText.sections?.recognition ?? {}),
       },
     },
     experienceEngagements: homepageText.experienceEngagements ?? fallbackHomepageText.experienceEngagements,
