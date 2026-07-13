@@ -9,6 +9,7 @@ export type PortfolioSectionCopy = {
 export type FounderSectionCopy = {
   pill: string
   title: string
+  description?: string
 }
 
 export type PortfolioFounderSectionsProps = {
@@ -26,6 +27,7 @@ export type PortfolioImageCardProps = {
   aspectRatio: string
   className: string
   wrapperClassName?: string
+  fillContainer?: boolean
   loading?: "eager" | "lazy"
   fetchPriority?: "high" | "low" | "auto"
 }

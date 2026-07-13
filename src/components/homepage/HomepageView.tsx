@@ -9,6 +9,7 @@ import { HomepageJourneySection } from "@/components/homepage/sections/HomepageJ
 import { PullQuote } from "@/components/PullQuote"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
 import { siteCta, siteRoutes } from "@/content/site"
+import { HomepageSectionShell } from "@/components/homepage/ui"
 
 import { getHomepageText } from "./homepage"
 
@@ -20,6 +21,7 @@ export default function Homepage() {
     hero,
     sections,
     stats,
+    services,
     awards,
     testimonials,
     journey,
@@ -36,13 +38,18 @@ export default function Homepage() {
         rescueCtaLead={sections.experiences.ctaLead}
       />
 
-      <HomepageInsightsSection section={sections.insights} statsCards={stats.cards} />
+      <HomepageInsightsSection
+        section={sections.services}
+        services={services}
+        stats={stats}
+        statsCards={stats.cards}
+      />
 
       <HomepageAwardsSection section={sections.awards} awards={awards} />
 
       <HomepageTestimonialsSection section={sections.testimonials} testimonials={testimonials} />
 
-      <section className="bg-[#222222]">
+      <section className="border border-red-500 bg-[#222222]">
         <Container className="py-14 md:py-16 lg:py-20">
           <MotionReveal preset="section" delay={0.02}>
             <PullQuote
@@ -66,17 +73,18 @@ export default function Homepage() {
         </Container>
       </section>
 
-      <section className="w-full bg-[#F3F3F3]">
-        <Container className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-0 lg:pt-[72px]">
-          <PortfolioFounderSections
-            portfolio={sections.portfolio}
-            founder={sections.portfolio.moreProjects}
-            ctaLabel={sections.highlights.cta}
-            ctaHref={siteRoutes.work}
-            showCta
-          />
-        </Container>
-      </section>
+      <HomepageSectionShell
+        className="bg-[#F3F3F3]"
+        paddingClassName="pt-10 pb-0 md:pt-12 md:pb-0 lg:pt-14 lg:pb-0"
+      >
+        <PortfolioFounderSections
+          portfolio={sections.portfolio}
+          founder={sections.portfolio.moreProjects}
+          ctaLabel={sections.highlights.cta}
+          ctaHref={siteRoutes.work}
+          showCta
+        />
+      </HomepageSectionShell>
 
       <HomepageJourneySection
         section={sections.journey}

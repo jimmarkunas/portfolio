@@ -1,7 +1,12 @@
-import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import type { HomepageText } from "@/components/homepage/homepage"
-import { AwardRow } from "@/components/homepage/ui"
+import {
+  AwardRow,
+  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
+  HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
+  HomepageSectionHeader,
+  HomepageSectionShell,
+} from "@/components/homepage/ui"
 
 type HomepageAwardsSectionProps = {
   section: HomepageText["sections"]["awards"]
@@ -10,37 +15,33 @@ type HomepageAwardsSectionProps = {
 
 export function HomepageAwardsSection({ section, awards }: HomepageAwardsSectionProps) {
   return (
-    <section className="w-full bg-[#F3F3F3]">
-      <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
-        <div className="flex flex-col gap-20">
-          <div className="grid gap-10 lg:grid-cols-[482px_minmax(0,769px)] lg:justify-between lg:gap-12">
-            <MotionReveal preset="hero" className="flex flex-col items-start gap-3" delay={0.02}>
-              <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
-                <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                <span className="type-p2 text-[#222222]">{section.pill}</span>
-              </div>
-
-              <div className="flex flex-col items-start gap-2">
-                <h2 className="type-h3 max-w-[396px] text-[#222222]">{section.title}</h2>
+    <HomepageSectionShell className="bg-[#F3F3F3]">
+      <div className="flex flex-col gap-12 md:gap-14 lg:gap-16">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,480px)_minmax(0,1fr)] lg:gap-12">
+          <MotionReveal preset="hero" className="w-full" delay={0.02}>
+            <HomepageSectionHeader label={section.pill}>
+              <div className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} items-start`}>
+                <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[396px] text-[#222222]`}>
+                  {section.title}
+                </h2>
                 <p className="type-p2 max-w-[482px] text-black/70">{section.description}</p>
               </div>
-            </MotionReveal>
+            </HomepageSectionHeader>
+          </MotionReveal>
 
-            <div className="flex flex-col gap-6">
-              {awards.map((item, index) => (
-                <MotionReveal
-                  key={`${item.rank}-${item.year}-${item.title}`}
-                  preset="cardStrong"
-                  delay={0.08 + index * 0.05}
-                >
-                  <AwardRow {...item} />
-                </MotionReveal>
-              ))}
-            </div>
+          <div className="flex flex-col gap-6">
+            {awards.map((item, index) => (
+              <MotionReveal
+                key={`${item.rank}-${item.year}-${item.title}`}
+                preset="cardStrong"
+                delay={0.08 + index * 0.05}
+              >
+                <AwardRow {...item} />
+              </MotionReveal>
+            ))}
           </div>
-
         </div>
-      </Container>
-    </section>
+      </div>
+    </HomepageSectionShell>
   )
 }

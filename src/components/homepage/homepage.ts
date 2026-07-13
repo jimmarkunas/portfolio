@@ -21,7 +21,7 @@ const fallbackHomepageText = {
       ctaLead: "If your program is in trouble",
     },
     awards: {
-      pill: "Recognition",
+      pill: "Awards",
       title: "Awards & Academic Case Studies",
       description:
         "The work didn’t just launch, it was globally recognized. My work has earned industry awards, and the LEGO digital transformation was later studied at Harvard & MIT as a case study in digital change at scale.",
@@ -41,6 +41,7 @@ const fallbackHomepageText = {
       moreProjects: {
         pill: "Founder",
         title: "Companies I've Founded",
+        description: "I started my career in tech as an entrepreneur. Here are the brands and products I built from the ground up.",
         cards: [
           { title: "Digital Agency Website Design - UI/UX", width: 703, height: 527 },
           { title: "Brand identity - Branding", width: 703, height: 527 },
@@ -50,11 +51,17 @@ const fallbackHomepageText = {
     highlights: {
       cta: "See More",
     },
+    services: {
+      pill: "Proven Results",
+      title: "My Areas of Expertse & Business Impact",
+      description:
+        "I specialize in turning complex problems into elegant solutions. My approach blends creativity with strategic.\n\nHere's a snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and digital transformation programs.\n",
+    },
     insights: {
       pill: "Proven Results",
-      title: "My Commercial impact",
+      title: "Experience & Impact",
       description:
-        "A snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and transformation programs.",
+        "A snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and digital transformation programs.",
     },
     testimonials: {
       pill: "Testimonials",
@@ -211,36 +218,100 @@ const fallbackHomepageText = {
     { rank: "[4]", year: "2016", title: "MIT Sloan Management (Profiled)", source: "MIT" },
   ],
   stats: {
+    trustStats: [
+      {
+        value: "$1.3B+",
+        title: "Commercial Impact",
+        subtitle: "Delivered across a 20-year career",
+      },
+      {
+        value: "75+",
+        title: "Enterprise Programs",
+        subtitle: "Led end-to-end",
+      },
+      {
+        value: "40k",
+        title: "Hours",
+        subtitle: "Leading complex digital programs",
+      },
+      {
+        value: "5",
+        title: "Program Rescues",
+        subtitle: "Brought in after prior PM or agency failed",
+      },
+    ],
     cards: [
       {
         // Edit the small dark badge in the Proven Results lead card.
-        badgeValue: "A+",
-        title: "20+ Years",
-        subtitle: "Leading digital delivery",
+        logoSrc: "/panels/02-interview/modere-logo-int.svg",
+        logoAlt: "Modere",
+        badgeValue: "$500M → $1B",
+        title: "",
+        subtitle: "Revenue growth enabled at Modere",
       },
       {
-        value: "$1B",
-        label: "Revenue uplift delivered at Modere (up from $500m)",
+        logoSrc: "/company-logos/svg/directv-logo.svg",
+        logoAlt: "DIRECTV",
+        value: "$120M YoY",
+        label: "Revenue uplift at DIRECTV",
       },
       {
-        value: "$120m",
-        label: "YoY Revenue Impact at DIRECTV",
+        logoSrc: "/company-logos/svg/bi-logo.svg",
+        logoAlt: "Boehringer Ingelheim",
+        value: "$340M",
+        label: "Online sales impact at Boehringer Ingelheim",
       },
       {
-        title: "2 Awards",
-        subtitle: "Industry awards for project work",
+        logoSrc: "/company-logos/svg/directv-logo.svg",
+        logoAlt: "DIRECTV",
+        title: "$120M YoY",
+        subtitle: "Revenue uplift at DIRECTV",
       },
       {
         value: "40k",
         label: "Hours leading projects",
       },
       {
-        value: "2",
+        logoSrc: "/company-logos/svg/bi-logo.svg",
+        logoAlt: "Boehringer Ingelheim",
+        value: "$340M",
         suffix: "",
-        summary: "Academic case studies at Harvard and MIT for LEGO",
+        summary: "Online sales impact at Boehringer Ingelheim",
       },
     ],
   },
+  services: [
+    {
+      title: "Technical Program Management",
+      description: "Delivering complex, multi-vendor enterprise digital transformation, re-platforming, and system integrations",
+      icon: "uiux",
+    },
+    {
+      title: "Technical Product Management",
+      description: "Translating business strategy into prioritized backlogs, sprint cadences, and shippable outcomes",
+      icon: "branding",
+    },
+    {
+      title: "Solutioning & Business Analysis",
+      description: "Diagnosing integration complexity across systems (ERP, OMS, PIM, commerce platforms, etc.)",
+      icon: "graphic",
+    },
+    {
+      title: "Digital Transformation",
+      description: "Modernizing legacy platforms and business processes across enterprise systems at global scale",
+      icon: "web",
+    },
+    {
+      title: "Platform & Commerce Delivery",
+      description: "End-to-end launch experience across Adobe Commerce, BigCommerce, Shopify, Oracle, SAP and composable",
+      icon: "marketing",
+    },
+    {
+      title: "Agentic AI & Automation",
+      description: "Building and deploying AI-assisted workflows, compliance agents, and delivery tooling",
+      icon: "motion",
+    },
+  ],
   testimonials: [
     {
       company: "TFA Agency",
@@ -334,35 +405,43 @@ const fallbackHomepageText = {
     },
     entries: [
       {
+        company: "TechRound",
+        date: "• July 2, 2026",
+        summary: "Product Market Fit: Early Green Flags And Where To Look",
+        tags: ["Article", "TechRound"],
+        href: "https://techround.co.uk/guides/product-market-fit-early-green-flags-where-look/",
+        external: true,
+      },
+      {
+        company: "TechGrid",
+        date: "• May 28, 2026",
+        summary: "Product Managers: Train Your Robot to Find ROI. Then Sell the Idea to the Execs.",
+        tags: ["Article", "TechGrid"],
+        href: "https://techgrid.media/articles/product-managers-train-your-robot-to-find-roi-then-sell-the-idea-to-the-execs/",
+        external: true,
+      },
+      {
+        company: "Dataconomy",
+        date: "• April 3, 2026",
+        summary: "Your AI program has a data problem, you just don’t know it yet",
+        tags: ["Interview", "Dataconomy"],
+        href: "https://dataconomy.com/2026/04/03/your-ai-program-has-a-data-problem-you-just-dont-know-it-yet/",
+        external: true,
+      },
+      {
         company: "The AI Journal",
-        date: "• February 2026",
-        summary: "Before BOPIS Went Mainstream: Jim Markunas on pioneering one of the world’s first true global omni-channel ecosystems for American Apparel across 16 countries",
+        date: "• March 9, 2026",
+        summary: "Before BOPIS went mainstream: James Markunas on pioneering one of the world's first true global omni-channel ecosystems for American Apparel across 16 countries",
         tags: ["Interview", "AI Journal"],
         href: "https://aijourn.com/before-bopis-went-mainstream-james-markunas-on-pioneering-one-of-the-worlds-first-true-global-omni-channel-ecosystems-for-american-apparel-across-16-countries/",
         external: true,
       },
       {
         company: "TechGrid",
-        date: "• April 2026",
-        summary: "Is AI Making Companies Smarter or Just More Efficient at Bad Management?",
-        tags: ["Article", "TechGrid"],
+        date: "• February 25, 2026",
+        summary: "Is AI making companies smarter or just more efficient at bad management?",
+        tags: ["Interview", "TechGrid"],
         href: "https://techgrid.media/interviews/is-ai-making-companies-smarter-or-just-more-efficient-at-bad-management/",
-        external: true,
-      },
-      {
-        company: "The New Stack",
-        date: "• May 2026",
-        summary: "Coming Soon",
-        tags: ["Article", "TNS"],
-        href: "",
-        external: true,
-      },
-      {
-        company: "TBD",
-        date: "• May 2026",
-        summary: "Coming Soon",
-        tags: ["Interview", "TBD"],
-        href: "",
         external: true,
       },
     ],
@@ -378,6 +457,7 @@ type PartialHomepageText = {
     awards?: Partial<HomepageText["sections"]["awards"]>
     portfolio?: Partial<HomepageText["sections"]["portfolio"]>
     highlights?: Partial<HomepageText["sections"]["highlights"]>
+    services?: Partial<HomepageText["sections"]["services"]>
     insights?: Partial<HomepageText["sections"]["insights"]>
     testimonials?: Partial<HomepageText["sections"]["testimonials"]>
     journey?: Partial<HomepageText["sections"]["journey"]>
@@ -385,6 +465,7 @@ type PartialHomepageText = {
   experienceEngagements?: HomepageText["experienceEngagements"]
   awards?: HomepageText["awards"]
   stats?: Partial<HomepageText["stats"]>
+  services?: HomepageText["services"]
   testimonials?: HomepageText["testimonials"]
   testimonial?: Partial<HomepageText["testimonial"]>
   journey?: HomepageText["journey"]
@@ -413,6 +494,10 @@ export function getHomepageText(): HomepageText {
         ...fallbackHomepageText.sections.highlights,
         ...(homepageText.sections?.highlights ?? {}),
       },
+      services: {
+        ...fallbackHomepageText.sections.services,
+        ...(homepageText.sections?.services ?? {}),
+      },
       insights: {
         ...fallbackHomepageText.sections.insights,
         ...(homepageText.sections?.insights ?? {}),
@@ -429,6 +514,7 @@ export function getHomepageText(): HomepageText {
     experienceEngagements: homepageText.experienceEngagements ?? fallbackHomepageText.experienceEngagements,
     awards: homepageText.awards ?? fallbackHomepageText.awards,
     stats: { ...fallbackHomepageText.stats, ...(homepageText.stats ?? {}) },
+    services: homepageText.services ?? fallbackHomepageText.services,
     testimonials: homepageText.testimonials ?? fallbackHomepageText.testimonials,
     testimonial: { ...fallbackHomepageText.testimonial, ...(homepageText.testimonial ?? {}) },
     journey: homepageText.journey ?? fallbackHomepageText.journey,

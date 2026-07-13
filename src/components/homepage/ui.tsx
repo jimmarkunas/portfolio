@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from "react"
 
 import Link from "next/link"
 
+import { Container } from "@/components/Container"
 import { ArrowUpRightIcon, StarIcon } from "@/components/icons/ui-icons"
 import { siteRoutes } from "@/content/site"
 
@@ -49,14 +50,14 @@ export function AwardRow({
   source: string
 }) {
   return (
-    <article className="rounded-[10px] bg-white px-6 py-5 md:px-8 md:py-6">
+    <article className="rounded-[10px] bg-[#222222] px-6 py-5 md:px-8 md:py-6">
       <div className="grid gap-3 md:grid-cols-[140px_minmax(0,1fr)_max-content] md:items-center md:gap-6">
         <div className="type-p2">
-          <span className="text-[#666666]">{rank}</span>
-          <span className="text-[#222222]"> {year}</span>
+          <span className="text-white/65">{rank}</span>
+          <span className="text-white"> {year}</span>
         </div>
-        <div className="type-p2 text-[#222222] md:text-center">{title}</div>
-        <div className="type-p2 text-[#222222] md:text-right md:whitespace-nowrap">{source}</div>
+        <div className="type-p2 text-white md:text-center">{title}</div>
+        <div className="type-p2 text-white md:text-right md:whitespace-nowrap">{source}</div>
       </div>
     </article>
   )
@@ -87,6 +88,53 @@ export function SectionPill({ label }: { label: string }) {
     <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
       <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
       <span className="type-p2 text-[#222222]">{label}</span>
+    </div>
+  )
+}
+
+export const HOMEPAGE_SECTION_HEADER_STACK_CLASS = "flex w-full flex-col gap-5"
+export const HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS = "flex flex-col gap-3"
+export const HOMEPAGE_SECTION_HEADER_TITLE_CLASS = "type-h3"
+export const HOMEPAGE_HEADER_SECTION_TOP_INSET_CLASS = "pt-3 md:pt-4 lg:pt-6"
+export const HOMEPAGE_SECTION_SHELL_PADDING_CLASS = "py-10 md:py-12 lg:py-14"
+
+type HomepageSectionShellProps = {
+  className?: string
+  containerClassName?: string
+  paddingClassName?: string
+  children: ReactNode
+}
+
+export function HomepageSectionShell({
+  className = "",
+  containerClassName = "",
+  paddingClassName = HOMEPAGE_SECTION_SHELL_PADDING_CLASS,
+  children,
+}: HomepageSectionShellProps) {
+  return (
+    <section className={`w-full border border-red-500 ${className}`.trim()}>
+      <Container className={`${paddingClassName} ${containerClassName}`.trim()}>{children}</Container>
+    </section>
+  )
+}
+
+export function HomepageSectionHeader({
+  label,
+  align = "left",
+  className = "",
+  children,
+}: {
+  label: string
+  align?: "left" | "center"
+  className?: string
+  children: ReactNode
+}) {
+  const alignmentClass = align === "center" ? "items-center text-center" : "items-start text-left"
+
+  return (
+    <div className={`${HOMEPAGE_SECTION_HEADER_STACK_CLASS} ${alignmentClass} ${className}`.trim()}>
+      <SectionPill label={label} />
+      {children}
     </div>
   )
 }

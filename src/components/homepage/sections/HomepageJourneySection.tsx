@@ -2,11 +2,15 @@
 
 import Link from "next/link"
 
-import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import type { HomepageText } from "@/components/homepage/homepage"
-import { SectionPill } from "@/components/homepage/ui"
+import {
+  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
+  HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
+  HomepageSectionHeader,
+  HomepageSectionShell,
+} from "@/components/homepage/ui"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 const recognitionRowClass =
@@ -54,40 +58,34 @@ export function HomepageJourneySection({
   }
 
   return (
-    <section className="w-full bg-[#F3F3F3]">
-      <Container className="py-14 md:py-16 lg:py-[72px]">
-        <MotionReveal preset="section" className="rounded-[10px] bg-white p-6 md:p-10 lg:p-12" delay={0.02}>
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]">
-            <MotionReveal preset="hero" className="flex flex-col items-start gap-4" delay={0.04}>
-              <SectionPill label={section.pill} />
-              <div className="flex w-full items-start justify-between">
-                <h2 className="type-h3 max-w-[520px] text-[#222222]">{section.title}</h2>
-              <Link
-                href={bookCallHref}
-                className={`${journeyCtaClass} hidden md:inline-flex lg:hidden`}
-                onClick={trackHomepageBookCall}
-              >
-                <span>{section.cta}</span>
-                <ArrowUpRightIcon />
+    <HomepageSectionShell className="bg-[#F3F3F3]">
+      <div className="flex w-full flex-col gap-8 md:gap-10">
+        <MotionReveal preset="hero" className="w-full" delay={0.04}>
+            <HomepageSectionHeader label={section.pill}>
+              <div
+              className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} items-start lg:grid lg:grid-cols-[minmax(0,480px)_minmax(0,1fr)] lg:items-start lg:gap-10`}
+            >
+              <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[520px] text-[#222222]`}>
+                {section.title}
+              </h2>
+              <div className="flex flex-col items-start gap-5 lg:pt-1">
+                <p className="type-p3 text-black/70">{section.intro}</p>
+                <Link href={bookCallHref} className={journeyCtaClass} onClick={trackHomepageBookCall}>
+                  <span>{section.cta}</span>
+                  <ArrowUpRightIcon />
                 </Link>
               </div>
-            </MotionReveal>
+            </div>
+          </HomepageSectionHeader>
+        </MotionReveal>
 
-            <MotionReveal preset="flow" delay={0.1} className="flex flex-col items-start gap-5 lg:justify-start lg:pl-8">
-              <p className="type-p3 text-black/70">{section.intro}</p>
-              <Link
-                href={bookCallHref}
-                className={`${journeyCtaClass} md:hidden lg:inline-flex`}
-                onClick={trackHomepageBookCall}
-              >
-                <span>{section.cta}</span>
-                <ArrowUpRightIcon />
-              </Link>
-            </MotionReveal>
-          </div>
-
-          <div className="mt-10 space-y-5">
-            <MotionReveal preset="cardStrong" className={`${recognitionRowClass} rounded-[10px] p-3 lg:!items-start`} delay={0.12}>
+        <MotionReveal preset="section" className="rounded-[10px] bg-white p-6 md:p-10 lg:p-12" delay={0.02}>
+          <div className="space-y-5">
+            <MotionReveal
+              preset="cardStrong"
+              className={`${recognitionRowClass} rounded-[10px] p-3 lg:!items-start`}
+              delay={0.12}
+            >
               <div className="hidden w-full p-3 md:order-first md:col-span-2 md:block lg:hidden">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
@@ -183,7 +181,7 @@ export function HomepageJourneySection({
                 </div>
               </div>
 
-              <div className="flex flex-col items-start gap-4 md:col-start-2 md:gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-5">
+              <div className="flex flex-col items-start gap-4 md:col-start-2 md:gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-5 lg:pt-8">
                 <div className="md:order-2 md:pt-4 md:hidden lg:order-none lg:pt-0 lg:block">
                   {journey.featured.href ? (
                     <a
@@ -222,7 +220,7 @@ export function HomepageJourneySection({
                     <h3 className="type-h5 text-[#222222]">{entry.company}</h3>
                     <p className="type-p3 mt-1 text-[#7B7B7B]">{entry.date}</p>
                   </div>
-                  <div className="flex flex-col items-start gap-4 md:col-start-2 md:gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-5">
+                  <div className="flex flex-col items-start gap-4 md:col-start-2 md:gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-5">
                     <p className={recognitionSummaryClass}>{entry.summary}</p>
                     <div className="flex flex-wrap justify-start gap-2 lg:flex-nowrap lg:justify-end">
                       {entry.tags.map((tag) => (
@@ -253,17 +251,13 @@ export function HomepageJourneySection({
                 </MotionReveal>
               ) : (
                 <MotionReveal key={`${entry.company}-${entry.date}`} preset="cardStrong" delay={rowDelay}>
-                  <div
-                    className={`${recognitionRowClass} last:border-b-0 last:pb-0`}
-                  >
-                    {rowContent}
-                  </div>
+                  <div className={`${recognitionRowClass} last:border-b-0 last:pb-0`}>{rowContent}</div>
                 </MotionReveal>
               )
             })}
           </div>
         </MotionReveal>
-      </Container>
-    </section>
+      </div>
+    </HomepageSectionShell>
   )
 }

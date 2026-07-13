@@ -1,5 +1,9 @@
-import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
+import {
+  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
+  HomepageSectionHeader,
+  HomepageSectionShell,
+} from "@/components/homepage/ui"
 import { siteCta } from "@/content/site"
 import Link from "next/link"
 
@@ -52,75 +56,80 @@ export function PastClientsSection({
   rescueCtaLead = "",
 }: PastClientsSectionProps) {
   const useHomepageMotion = motionStyle === "homepage"
+  const usePullQuoteStyle = !showHeading && showRescueCta
 
   return (
-    <section className="w-full bg-[#F3F3F3]">
+    <HomepageSectionShell className={usePullQuoteStyle ? "bg-[#222222]" : "bg-[#F3F3F3]"}>
       {showHeading ? (
-        <Container className="py-14 md:py-16 lg:py-[60px]">
-          <div className="flex flex-col items-center gap-10">
-            <MotionReveal
-              preset={useHomepageMotion ? "hero" : "section"}
-              className="flex w-full max-w-[920px] flex-col items-center gap-3 text-center"
-            >
-              <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
-                <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                <span className="type-p2 text-[#222222]">Past Clients</span>
-              </div>
-              <h2 className="type-h3 text-[#222222]">Trusted By Global Teams</h2>
-            </MotionReveal>
+        <div className="flex flex-col items-center gap-10">
+          <MotionReveal preset={useHomepageMotion ? "hero" : "section"} className="w-full max-w-[920px]">
+            <HomepageSectionHeader label="Past Clients" align="center">
+              <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-[#222222]`}>Trusted By Global Teams</h2>
+            </HomepageSectionHeader>
+          </MotionReveal>
 
-            <MotionReveal
-              preset={useHomepageMotion ? "flow" : "section"}
-              className="w-full overflow-hidden rounded-[10px] bg-white"
-              delay={0.08}
-            >
-              <div className="grid grid-cols-2 md:grid-cols-4">
-                {clientLogos.map((logo, index) => (
-                  <MotionReveal key={logo.alt} preset={useHomepageMotion ? "cardStrong" : "card"} delay={index * 0.03}>
-                    <div className="flex items-center justify-center px-4 py-10 md:px-6 md:py-12 lg:px-10 lg:py-14">
-                      <img
-                        src={logo.src}
-                        alt={logo.alt}
-                        width={180}
-                        height={48}
-                        className={`h-auto w-full max-w-[130px] md:max-w-[150px] lg:max-w-[170px] ${logo.scaleClass}`}
-                      />
-                    </div>
-                  </MotionReveal>
-                ))}
-              </div>
-            </MotionReveal>
-          </div>
-        </Container>
+          <MotionReveal
+            preset={useHomepageMotion ? "flow" : "section"}
+            className="w-full overflow-hidden rounded-[10px] bg-white"
+            delay={0.08}
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4">
+              {clientLogos.map((logo, index) => (
+                <MotionReveal key={logo.alt} preset={useHomepageMotion ? "cardStrong" : "card"} delay={index * 0.03}>
+                  <div className="flex items-center justify-center px-4 py-10 md:px-6 md:py-12 lg:px-10 lg:py-14">
+                    <img
+                      src={logo.src}
+                      alt={logo.alt}
+                      width={180}
+                      height={48}
+                      className={`h-auto w-full max-w-[130px] md:max-w-[150px] lg:max-w-[170px] ${logo.scaleClass}`}
+                    />
+                  </div>
+                </MotionReveal>
+              ))}
+            </div>
+          </MotionReveal>
+        </div>
       ) : (
-        <Container className="px-0 md:px-0 lg:px-0">
-          <div className="flex flex-col">
-            {showRescueCta ? (
-              <div className="pb-6 pt-0 md:pb-8 lg:pb-[32px]">
-                <MotionReveal preset={useHomepageMotion ? "cardStrong" : "card"} className="w-full">
-                  <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-[#F3F3F3]">
-                    <div className="mx-auto grid w-full max-w-[1440px] gap-4 px-6 py-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-10 lg:px-10">
-                      <div className="justify-self-start">
-                        <div className="inline-flex items-center gap-2 rounded-[50px] bg-[#F3F3F3] px-3 py-0.5">
-                          <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                          <span className="type-p2 text-[#222222]">Companies I&apos;ve helped</span>
-                        </div>
-                      </div>
-                      <div className="flex flex-col items-end justify-end gap-3 text-right md:flex-row md:items-center md:gap-2 md:justify-self-end">
-                        <p className="type-p2 text-[#222222]">{rescueCtaLead} -</p>
-                        <Link
-                          href={siteCta.bookingUrls.homepageHero}
-                          className="type-p2 inline-flex items-center rounded-full bg-[#2B2B2B] px-5 py-2 text-white transition-colors hover:bg-[#1F1F1F]"
+        <div className="flex flex-col">
+          {usePullQuoteStyle ? (
+            <MotionReveal preset="section" className="w-full">
+              <div className="flex w-full flex-col gap-4 md:gap-6">
+                <HomepageSectionHeader label="Clients">
+                  <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-white`}>Enterprises I&apos;ve Helped</h2>
+                </HomepageSectionHeader>
+
+                <MotionReveal preset={useHomepageMotion ? "flow" : "section"} className="w-full">
+                  <div className="relative mx-auto w-full max-w-[1440px] overflow-hidden px-6 py-6 md:px-10 md:py-8 lg:px-10 lg:py-10">
+                    <div className="pointer-events-none absolute left-2 top-4 h-16 w-16 rounded-tl-[18px] border-l border-t border-white/10 md:left-6 md:top-6 md:h-20 md:w-20" />
+                    <div className="pointer-events-none absolute right-2 top-4 h-16 w-16 rounded-tr-[18px] border-r border-t border-white/10 md:right-6 md:top-6 md:h-20 md:w-20" />
+                    <div className="pointer-events-none absolute bottom-4 left-2 h-16 w-16 rounded-bl-[18px] border-b border-l border-white/10 md:bottom-6 md:left-6 md:h-20 md:w-20" />
+                    <div className="pointer-events-none absolute bottom-4 right-2 h-16 w-16 rounded-br-[18px] border-b border-r border-white/10 md:bottom-6 md:right-6 md:h-20 md:w-20" />
+
+                    <div className="grid grid-cols-2 md:grid-cols-4">
+                      {clientLogos.map((logo, index) => (
+                        <MotionReveal
+                          key={logo.alt}
+                          preset={useHomepageMotion ? "cardStrong" : "card"}
+                          delay={index * 0.02}
                         >
-                          {siteCta.bookCallLabel}
-                        </Link>
-                      </div>
+                          <div className="flex items-center justify-center px-4 py-10 md:px-6 md:py-12 lg:px-10 lg:py-14">
+                            <img
+                              src={logo.src}
+                              alt={logo.alt}
+                              width={180}
+                              height={48}
+                              className={`h-auto w-full max-w-[130px] opacity-90 [filter:brightness(0)_invert(1)] md:max-w-[150px] lg:max-w-[170px] ${logo.scaleClass}`}
+                            />
+                          </div>
+                        </MotionReveal>
+                      ))}
                     </div>
                   </div>
                 </MotionReveal>
               </div>
-            ) : null}
-
+            </MotionReveal>
+          ) : (
             <MotionReveal preset={useHomepageMotion ? "flow" : "section"}>
               <div className="grid grid-cols-2 md:grid-cols-4">
                 {clientLogos.map((logo, index) => (
@@ -131,16 +140,16 @@ export function PastClientsSection({
                         alt={logo.alt}
                         width={180}
                         height={48}
-                        className={`h-auto w-full max-w-[130px] md:max-w-[150px] lg:max-w-[170px] ${logo.scaleClass}`}
+                        className={`h-auto w-full max-w-[130px] opacity-90 [filter:brightness(0)_invert(1)] md:max-w-[150px] lg:max-w-[170px] ${logo.scaleClass}`}
                       />
                     </div>
                   </MotionReveal>
                 ))}
               </div>
             </MotionReveal>
-          </div>
-        </Container>
+          )}
+        </div>
       )}
-    </section>
+    </HomepageSectionShell>
   )
 }

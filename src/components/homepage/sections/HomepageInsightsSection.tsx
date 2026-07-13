@@ -1,13 +1,20 @@
-import { Container } from "@/components/Container"
 import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import type { HomepageText } from "@/components/homepage/homepage"
+import type { ReactNode } from "react"
 import {
+  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
+  HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
+  HomepageSectionHeader,
+  HomepageSectionShell,
   InsightAvatarStack,
-  SectionPill,
 } from "@/components/homepage/ui"
 
+type ServicesItem = HomepageText["services"][number]
+
 export type HomepageInsightCard = {
+  logoSrc?: string
+  logoAlt?: string
   badgeValue?: string
   title?: string
   subtitle?: string
@@ -18,128 +25,186 @@ export type HomepageInsightCard = {
 }
 
 type HomepageInsightsSectionProps = {
-  section: HomepageText["sections"]["insights"]
+  section: HomepageText["sections"]["services"]
+  stats: HomepageText["stats"]
   statsCards: HomepageText["stats"]["cards"]
+  services: HomepageText["services"]
 }
 
-function InsightShapePair({
-  largeShapeClassName,
-  smallShapeClassName,
+type HomepageInsightTopCardProps = {
+  logoSrc?: string
+  logoAlt?: string
+  value: ReactNode
+  description: ReactNode
+}
+
+function HomepageInsightTopCard({ logoSrc, logoAlt, value, description }: HomepageInsightTopCardProps) {
+  return (
+    <article className="flex min-h-[140px] items-center rounded-[10px] bg-[#222222] p-[18px]">
+      <div className="flex w-full flex-col items-center gap-3 text-center">
+        {logoSrc ? (
+          <img
+            src={logoSrc}
+            alt={logoAlt ?? ""}
+            className="h-7 w-auto max-w-[140px] object-contain"
+          />
+        ) : null}
+        <div className="type-h5 shrink-0 text-white">{value}</div>
+        <p className="type-ui-sm max-w-[320px] text-[#F4F4F4]">{description}</p>
+      </div>
+    </article>
+  )
+}
+
+const serviceIconAssets: Record<
+  ServicesItem["icon"],
+  { src: string; scaleClass: string }
+> = {
+  uiux: { src: "/homepage/services/uiux-icon.png", scaleClass: "scale-[2.9]" },
+  branding: { src: "/homepage/services/branding-icon.png", scaleClass: "scale-[1.34]" },
+  graphic: { src: "/homepage/services/graphic-icon.png", scaleClass: "scale-[1.42]" },
+  web: { src: "/homepage/services/web-icon.png", scaleClass: "scale-[1.28]" },
+  marketing: { src: "/homepage/services/marketing-icon.png", scaleClass: "scale-[1.34]" },
+  motion: { src: "/homepage/services/motion-icon.png", scaleClass: "scale-[1.3]" },
+}
+
+function ServicesIcon({ icon }: { icon: ServicesItem["icon"] }) {
+  const asset = serviceIconAssets[icon]
+
+  return (
+    <img
+      src={asset.src}
+      alt=""
+      aria-hidden="true"
+      className={`h-full w-full object-contain ${asset.scaleClass}`}
+    />
+  )
+}
+
+function ServiceCard({ item }: { item: ServicesItem }) {
+  return (
+    <article className="relative flex h-full min-h-[320px] flex-col items-center rounded-[10px] bg-[#F9FAFB] px-6 py-5 outline outline-1 outline-gray-200">
+      <div className="mt-3 flex justify-center text-[#2B2B2B]">
+        <div className="h-[50px] w-[50px]">
+          <ServicesIcon icon={item.icon} />
+        </div>
+      </div>
+      <h3 className="type-h6 mt-8 text-center text-[#222222]">{item.title}</h3>
+      <p className="type-p3 mt-3 max-w-[360px] text-center text-black/80">{item.description}</p>
+    </article>
+  )
+}
+
+function CommercialImpactHeaderAndStats({
+  section,
+  stats,
 }: {
-  largeShapeClassName: string
-  smallShapeClassName: string
+  section: HomepageText["sections"]["services"]
+  stats: HomepageText["stats"]
 }) {
   return (
     <>
-      <MotionReveal preset="shape" className={largeShapeClassName} />
-      <MotionReveal preset="shape" delay={0.08} className={smallShapeClassName} />
+      <MotionReveal preset="hero" className="w-full" delay={0.02}>
+        <HomepageSectionHeader label={section.pill}>
+          <div
+            className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} items-start lg:grid lg:grid-cols-[minmax(0,480px)_minmax(0,1fr)] lg:items-start lg:gap-10`}
+          >
+            <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-[#222222]`}>
+              {section.title}
+            </h2>
+            <p className="type-p3 max-w-[962px] whitespace-pre-line text-black/80">{section.description}</p>
+          </div>
+        </HomepageSectionHeader>
+      </MotionReveal>
+
+      <section className="w-full bg-transparent">
+        <MotionReveal preset="section">
+          <div className="mx-auto w-full max-w-[1440px]">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-10 rounded-[10px] md:grid-cols-4 md:gap-0 md:divide-x md:divide-black/10">
+              {stats.trustStats.map((stat) => (
+                <div
+                  key={stat.title}
+                  className="flex flex-col items-center gap-3 px-1 py-0 text-center lg:px-6"
+                >
+                  <div className="h-[3px] w-7 rounded-full bg-[#447ACB]" />
+                  <div className="type-stat-number text-[#1C1C2E]">
+                    <AnimatedMetricValue value={stat.value} trigger="load" />
+                  </div>
+                  <div className="type-rail-label font-semibold text-[#1C1C2E]">{stat.title}</div>
+                  <div className="type-p5 text-[#6B7280]">{stat.subtitle}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </MotionReveal>
+      </section>
     </>
   )
 }
 
-export function HomepageInsightsSection({ section, statsCards }: HomepageInsightsSectionProps) {
-  const [statsCard1, statsCard2, statsCard3, statsCard4, statsCard5, statsCard6] =
-    statsCards as HomepageInsightCard[]
+export function HomepageInsightsSection({ section, stats, statsCards, services }: HomepageInsightsSectionProps) {
+  const [statsCard1, , , statsCard4, , statsCard6] = statsCards as HomepageInsightCard[]
 
   return (
-    <section className="w-full bg-[#F3F3F3]">
-      <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
-        <div className="flex flex-col items-start gap-12">
-          <MotionReveal preset="hero" className="flex w-full flex-col items-start gap-5" delay={0.02}>
-            <SectionPill label={section.pill} />
+    <HomepageSectionShell
+      className="bg-[#F3F3F3]"
+      paddingClassName="pt-10 pb-0 md:pt-12 md:pb-0 lg:pt-14 lg:pb-0"
+    >
+      <div className="flex flex-col items-start gap-8 md:gap-10">
+        <CommercialImpactHeaderAndStats section={section} stats={stats} />
 
-            <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div className="flex flex-col items-start gap-3">
-                <h2 className="type-h3 text-[#222222]">{section.title}</h2>
-                <p className="type-p3 max-w-[962px] text-black/80">{section.description}</p>
-              </div>
-
+        <div className="flex w-full flex-col gap-8 md:gap-10">
+          <MotionReveal preset="cardStrong" className="w-full">
+            <div className="grid w-full gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {services.map((item, index) => (
+                <MotionReveal
+                  key={`${item.title}-${index}`}
+                  preset="cardStrong"
+                  className="h-full"
+                  delay={0.06 + index * 0.04}
+                >
+                  <ServiceCard item={item} />
+                </MotionReveal>
+              ))}
             </div>
           </MotionReveal>
 
-          <div className="grid w-full gap-5 md:grid-cols-3">
-            <MotionReveal preset="cardStrong" className="flex h-full flex-col gap-4" delay={0.06}>
-              <article className="rounded-[10px] bg-white p-[18px]">
-                <div className="flex flex-col gap-4 md:flex-row md:items-center">
-                  <InsightAvatarStack value={statsCard1.badgeValue} />
-                  <div className="flex flex-col">
-                    <div className="type-p2 text-black">{statsCard1.title ?? ""}</div>
-                    <div className="type-ui-sm text-[#666666]">{statsCard1.subtitle ?? ""}</div>
+          <MotionReveal preset="cardStrong" className="w-full">
+            <div className="relative left-1/2 right-1/2 w-screen -ml-[50vw] -mr-[50vw] bg-[#222222]">
+              <div className="mx-auto w-full max-w-[1440px] px-6 py-8 md:px-10 md:py-10 lg:px-12 lg:py-12">
+                <div className="grid w-full gap-5 md:grid-cols-3">
+                  <div className="flex h-full flex-col gap-4">
+                    <HomepageInsightTopCard
+                      logoSrc={statsCard1.logoSrc}
+                      logoAlt={statsCard1.logoAlt}
+                      value={statsCard1.badgeValue ?? ""}
+                      description={statsCard1.subtitle ?? ""}
+                    />
+                  </div>
+
+                  <div className="flex h-full flex-col gap-4 md:order-3">
+                    <HomepageInsightTopCard
+                      logoSrc={statsCard4.logoSrc}
+                      logoAlt={statsCard4.logoAlt}
+                      value={statsCard4.title ?? ""}
+                      description={statsCard4.subtitle ?? ""}
+                    />
+                  </div>
+
+                  <div className="flex h-full flex-col gap-4 md:order-2">
+                    <HomepageInsightTopCard
+                      logoSrc={statsCard6.logoSrc}
+                      logoAlt={statsCard6.logoAlt}
+                      value={statsCard6.value ?? ""}
+                      description={statsCard6.summary ?? ""}
+                    />
                   </div>
                 </div>
-              </article>
-
-              <article className="relative flex flex-1 flex-col overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
-                <InsightShapePair
-                  largeShapeClassName="absolute right-[-24px] top-[-20px] h-28 w-28 rounded-full bg-[#F8F6F2]"
-                  smallShapeClassName="absolute right-[38px] top-[96px] h-20 w-20 rounded-full bg-[#F8F6F2]"
-                />
-                <div className="type-h2 relative z-10 text-black md:text-[82px] md:leading-[0.95] lg:[font-size:clamp(56px,9vw,var(--font-h2-size))] lg:[line-height:var(--font-h2-line)]">
-                  <AnimatedMetricValue value={statsCard2.value ?? ""} />
-                </div>
-                <p className="type-p2 relative z-10 mt-10 max-w-[240px] text-[#666666]">
-                  {statsCard2.label ?? ""}
-                </p>
-              </article>
-            </MotionReveal>
-
-            <MotionReveal preset="cardStrong" delay={0.14} className="flex h-full flex-col gap-4 md:order-3">
-              <article className="rounded-[10px] bg-white p-[18px]">
-                <div className="flex flex-col items-center justify-center gap-3 text-center md:flex-row md:items-center md:justify-center md:gap-4">
-                  <div className="type-h5 text-black">{statsCard4.title ?? ""}</div>
-                  <p className="type-ui-sm max-w-[280px] text-black">
-                    {statsCard4.subtitle ?? ""}
-                  </p>
-                </div>
-              </article>
-
-              <article className="relative flex flex-1 flex-col overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
-                <InsightShapePair
-                  largeShapeClassName="absolute right-[-24px] top-[-20px] h-28 w-28 rounded-full bg-[#F8F6F2]"
-                  smallShapeClassName="absolute right-[38px] top-[96px] h-20 w-20 rounded-full bg-[#F8F6F2]"
-                />
-                <div className="type-h2 relative z-10 text-black md:text-[82px] md:leading-[0.95] lg:[font-size:clamp(56px,9vw,var(--font-h2-size))] lg:[line-height:var(--font-h2-line)]">
-                  <AnimatedMetricValue value={statsCard5.value ?? ""} />
-                </div>
-                <p className="type-p2 relative z-10 mt-10 max-w-[240px] text-[#666666]">
-                  {statsCard5.label ?? ""}
-                </p>
-              </article>
-            </MotionReveal>
-
-            <MotionReveal preset="cardStrong" delay={0.22} className="flex h-full flex-col gap-4 md:order-2">
-              <article className="relative flex flex-1 flex-col overflow-hidden rounded-[10px] bg-white p-8 md:min-h-[256px]">
-                <InsightShapePair
-                  largeShapeClassName="absolute right-[-28px] top-[-20px] h-28 w-28 rounded-full bg-[#F8F6F2]"
-                  smallShapeClassName="absolute right-[36px] top-[68px] h-20 w-20 rounded-full bg-[#F8F6F2]"
-                />
-                <div className="type-h2 relative z-10 text-black md:text-[82px] md:leading-[0.95] lg:[font-size:clamp(56px,9vw,var(--font-h2-size))] lg:[line-height:var(--font-h2-line)]">
-                  <AnimatedMetricValue value={statsCard3.value ?? ""} />
-                </div>
-                <p className="type-p2 relative z-10 mt-10 max-w-[240px] text-[#666666]">
-                  {statsCard3.label ?? ""}
-                </p>
-              </article>
-
-              <article className="rounded-[10px] bg-white px-5 py-4 md:px-6">
-                <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
-                  <div className="type-h5 text-black">
-                    {!statsCard6.suffix || !/[0-9/]/.test(statsCard6.suffix) ? (
-                      <AnimatedMetricValue value={statsCard6.value ?? ""} />
-                    ) : (
-                      <span>{statsCard6.value ?? ""}</span>
-                    )}
-                    <span className="text-[24px] leading-8 text-[#666666]">{statsCard6.suffix ?? ""}</span>
-                  </div>
-                  <p className="type-ui-sm max-w-[280px] text-black">
-                    {statsCard6.summary ?? ""}
-                  </p>
-                </div>
-              </article>
-            </MotionReveal>
-          </div>
+              </div>
+            </div>
+          </MotionReveal>
         </div>
-      </Container>
-    </section>
+      </div>
+    </HomepageSectionShell>
   )
 }

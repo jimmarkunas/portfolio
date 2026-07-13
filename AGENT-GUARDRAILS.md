@@ -28,6 +28,12 @@ Protect work in progress, avoid destructive edits, and keep visual changes deter
 - If an edit worsens output, revert that edit immediately before trying again.
 - After two failed attempts on the same issue, stop and present a short 3-step plan.
 
+## Repeat-Mistake Lockout
+- Track the current issue as `action + target + intent`.
+- If the same issue fails twice, stop editing that issue entirely.
+- Do not try a third variation until the user gives a new, explicit instruction.
+- Reply with one short sentence naming the failure and one short sentence asking for the exact next change.
+
 ## Data and Content
 - Keep case study source truth in `docs/case-studies/`.
 - Keep runtime schema truth in `src/content/case-studies/`.

@@ -29,6 +29,7 @@ export function PortfolioImageCard({
   aspectRatio,
   className,
   wrapperClassName,
+  fillContainer,
   loading,
   fetchPriority,
 }: PortfolioImageCardProps) {
@@ -37,7 +38,7 @@ export function PortfolioImageCard({
       <Link
         href={href}
         className={className}
-        style={{ aspectRatio }}
+        style={fillContainer ? undefined : { aspectRatio }}
         onClick={() => {
           trackEvent("case_study_open", {
             location: "portfolio_grid",

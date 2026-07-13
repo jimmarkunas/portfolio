@@ -1,9 +1,13 @@
 import type { ReactNode } from "react"
 
-import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import type { HomepageText } from "@/components/homepage/homepage"
-import { SectionPill } from "@/components/homepage/ui"
+import {
+  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
+  HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
+  HomepageSectionHeader,
+  HomepageSectionShell,
+} from "@/components/homepage/ui"
 
 type TestimonialItem = HomepageText["testimonials"][number]
 
@@ -82,95 +86,97 @@ function TestimonialCard({ testimonial, tone, className = "", topRightBadge }: T
 
 export function HomepageTestimonialsSection({ section, testimonials }: HomepageTestimonialsSectionProps) {
   return (
-    <section className="w-full bg-[#F3F3F3]">
-      <Container className="pb-14 pt-0 md:pb-16 md:pt-0 lg:pb-[72px] lg:pt-0">
-        <div className="flex flex-col items-center gap-12">
-          <div className="w-full">
-            <div className="mx-auto flex w-full flex-col items-center gap-8">
-              <SectionPill label={section.pill} />
+    <HomepageSectionShell className="bg-[#F3F3F3]">
+      <div className="flex flex-col items-center gap-6 md:gap-8">
+        <div className="w-full">
+          <div className="mx-auto flex w-full flex-col items-center gap-6 md:gap-8">
+            <MotionReveal preset="hero" className="w-full" delay={0.02}>
+              <HomepageSectionHeader label={section.pill}>
+                <div className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} items-start`}>
+                  <h3 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-[#222222]`}>
+                    {section.title}
+                  </h3>
+                  <p className="type-p3 max-w-[900px] text-black/70">{section.description}</p>
+                </div>
+              </HomepageSectionHeader>
+            </MotionReveal>
 
-              <MotionReveal preset="hero" className="flex flex-col items-center gap-3 text-center" delay={0.02}>
-                <h3 className="type-h3 text-[#222222]">{section.title}</h3>
-                <p className="type-p3 max-w-[900px] text-black/70">{section.description}</p>
-              </MotionReveal>
+            <div className="grid w-full gap-5 md:grid-cols-3">
+              <div className="flex flex-col gap-5">
+                {testimonials[0] ? (
+                  <MotionReveal preset="cardStrong" delay={0.06}>
+                    <TestimonialCard
+                      testimonial={testimonials[0]}
+                      tone="dark"
+                      className="flex min-h-[410px] flex-1 flex-col justify-between"
+                      topRightBadge={
+                        <div className="h-10 w-10 overflow-hidden rounded-full bg-white/15">
+                          <img src="/testimonials/tfa-logo.jpg" alt="TFA logo" className="h-full w-full object-cover" />
+                        </div>
+                      }
+                    />
+                  </MotionReveal>
+                ) : null}
 
-              <div className="grid w-full gap-5 md:grid-cols-3">
-                <div className="flex flex-col gap-5">
-                  {testimonials[0] ? (
-                    <MotionReveal preset="cardStrong" delay={0.06}>
-                      <TestimonialCard
-                        testimonial={testimonials[0]}
-                        tone="dark"
-                        className="flex min-h-[410px] flex-1 flex-col justify-between"
-                        topRightBadge={
-                          <div className="h-10 w-10 overflow-hidden rounded-full bg-white/15">
-                            <img src="/testimonials/tfa-logo.jpg" alt="TFA logo" className="h-full w-full object-cover" />
-                          </div>
-                        }
-                      />
-                    </MotionReveal>
-                  ) : null}
-
-                  {testimonials[4] ? (
-                    <MotionReveal preset="cardStrong" delay={0.18}>
-                      <TestimonialCard
-                        testimonial={testimonials[4]}
-                        tone="light"
-                        topRightBadge={
-                          <div
-                            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-[#2B2B2B]"
-                            aria-hidden="true"
+                {testimonials[4] ? (
+                  <MotionReveal preset="cardStrong" delay={0.18}>
+                    <TestimonialCard
+                      testimonial={testimonials[4]}
+                      tone="light"
+                      topRightBadge={
+                        <div
+                          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-[#2B2B2B]"
+                          aria-hidden="true"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-4.5 w-4.5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.7"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           >
-                            <svg
-                              viewBox="0 0 24 24"
-                              className="h-4.5 w-4.5"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="1.7"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M8 5.2 5 6.4 2.8 10l3.2 2.4L8 10v9.4c2.7.2 5.3.2 8 0V10l2 2.4 3.2-2.4L19 6.4l-3-1.2c-1 1.6-2.5 2.4-4 2.4s-3-.8-4-2.4Z" />
-                            </svg>
-                          </div>
-                        }
-                      />
-                    </MotionReveal>
-                  ) : null}
-                </div>
+                            <path d="M8 5.2 5 6.4 2.8 10l3.2 2.4L8 10v9.4c2.7.2 5.3.2 8 0V10l2 2.4 3.2-2.4L19 6.4l-3-1.2c-1 1.6-2.5 2.4-4 2.4s-3-.8-4-2.4Z" />
+                          </svg>
+                        </div>
+                      }
+                    />
+                  </MotionReveal>
+                ) : null}
+              </div>
 
-                <div className="flex flex-col gap-5">
-                  {[1, 3, 5].map((index, itemIndex) =>
-                    testimonials[index] ? (
-                      <MotionReveal key={testimonials[index].name} preset="cardStrong" delay={0.12 + itemIndex * 0.08}>
-                        <TestimonialCard testimonial={testimonials[index]} tone="light" />
-                      </MotionReveal>
-                    ) : null,
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-5">
-                  {testimonials[2] ? (
-                    <MotionReveal preset="cardStrong" delay={0.1}>
-                      <TestimonialCard testimonial={testimonials[2]} tone="light" />
+              <div className="flex flex-col gap-5">
+                {[1, 3, 5].map((index, itemIndex) =>
+                  testimonials[index] ? (
+                    <MotionReveal key={testimonials[index].name} preset="cardStrong" delay={0.12 + itemIndex * 0.08}>
+                      <TestimonialCard testimonial={testimonials[index]} tone="light" />
                     </MotionReveal>
-                  ) : null}
+                  ) : null,
+                )}
+              </div>
 
-                  {testimonials[6] ? (
-                    <MotionReveal preset="cardStrong" delay={0.24}>
-                      <TestimonialCard
-                        testimonial={testimonials[6]}
-                        tone="dark"
-                        className="flex min-h-[410px] flex-1 flex-col justify-between"
-                      />
-                    </MotionReveal>
-                  ) : null}
-                </div>
+              <div className="flex flex-col gap-5">
+                {testimonials[2] ? (
+                  <MotionReveal preset="cardStrong" delay={0.1}>
+                    <TestimonialCard testimonial={testimonials[2]} tone="light" />
+                  </MotionReveal>
+                ) : null}
+
+                {testimonials[6] ? (
+                  <MotionReveal preset="cardStrong" delay={0.24}>
+                    <TestimonialCard
+                      testimonial={testimonials[6]}
+                      tone="dark"
+                      className="flex min-h-[410px] flex-1 flex-col justify-between"
+                    />
+                  </MotionReveal>
+                ) : null}
               </div>
             </div>
           </div>
         </div>
-      </Container>
-    </section>
+      </div>
+    </HomepageSectionShell>
   )
 }
