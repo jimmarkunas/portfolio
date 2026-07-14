@@ -2,6 +2,7 @@
 
 import { useReducedMotion } from "framer-motion"
 
+import { EyebrowPill } from "@/components/EyebrowPill"
 import { ButtonLink } from "@/components/ButtonLink"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { ExternalLinkMiniIcon } from "@/components/icons/ui-icons"
@@ -93,10 +94,12 @@ export function PortfolioFounderSections({
             </div>
           ) : (
             <>
-              <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-6 py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]">
-                <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                <span className="type-p2 text-[#222222]">{portfolio.pill}</span>
-              </div>
+              <EyebrowPill
+                className="!px-6 !py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]"
+                labelClassName="type-p2 text-[#222222]"
+              >
+                {portfolio.pill}
+              </EyebrowPill>
 
               <div className="flex w-full flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <h2 className="type-h3 max-w-[702px] text-left text-[#222222]">
@@ -157,10 +160,9 @@ export function PortfolioFounderSections({
       >
         <div className="mx-auto flex w-full max-w-[1440px] flex-col items-start gap-10 px-6 py-8 md:px-10 md:py-10 lg:px-10 lg:py-12">
           <div className="flex w-full flex-col items-start gap-3">
-            <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-3 py-0.5">
-              <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-              <span className="type-p2 text-[#222222]">{founder.pill}</span>
-            </div>
+            <EyebrowPill className="!px-3 !py-0.5" labelClassName="type-p2 text-[#222222]">
+              {founder.pill}
+            </EyebrowPill>
 
             <div className="grid w-full gap-3 lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:items-start lg:gap-10">
               <h3 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-white`}>
