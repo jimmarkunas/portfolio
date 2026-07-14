@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import type { ReactNode } from "react"
 
-import { BookCallCta } from "@/components/BookCallCta"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
@@ -103,7 +102,6 @@ export default function CvPage() {
 
                     <div className="flex flex-col gap-3 lg:pt-2">
                       <p className="type-p3 text-[#555555]">{cvContent.experienceIntro}</p>
-                      <BookCallCta location="cv_page" />
                     </div>
                   </div>
 
