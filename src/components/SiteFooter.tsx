@@ -6,6 +6,7 @@ import { TrackedOutboundIconLink } from "@/components/analytics/TrackedSiteShell
 import { BookCallCta } from "@/components/BookCallCta"
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
+import { ButtonLink } from "@/components/ButtonLink"
 import { TextLink } from "@/components/TextLink"
 import { footerNavLinks, footerSocialLinks, siteIdentity, siteRoutes } from "@/content/site"
 
@@ -80,12 +81,13 @@ export function SiteFooter() {
                 you&apos;re starting from scratch or refining an existing idea
               </p>
               <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-                <Link
+                <ButtonLink
                   href={siteRoutes.cv}
-                  className="type-ui-md inline-flex min-h-[48px] items-center rounded-[50px] border border-white/20 px-5 font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:text-[#447ACB]"
+                  variant="secondary"
+                  className="type-ui-md font-medium !border-white/20 !text-[#FEFEFE] hover:!border-[#447ACB] hover:!text-[#447ACB]"
                 >
                   My CV
-                </Link>
+                </ButtonLink>
                 <BookCallCta location="footer" tone="brand" />
               </div>
             </div>

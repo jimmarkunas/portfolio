@@ -1,11 +1,12 @@
 import type { Metadata } from "next"
-import { ArrowUpRight, Download } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 
 import { TrackedExternalLink } from "@/components/analytics/TrackedExternalLink"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { freebiesContent, siteCanonicalPaths } from "@/content/site"
 import { buildPageMetadata } from "@/lib/seo"
+import { FreebiesDownloadButton } from "./FreebiesDownloadButton"
 
 export const metadata: Metadata = buildPageMetadata({
   title: freebiesContent.meta.title,
@@ -51,16 +52,7 @@ export default function FreebiesPage() {
                           </div>
 
                           <div className="flex flex-wrap items-center gap-3">
-                            <TrackedExternalLink
-                              href={asset.href}
-                              label={`Download ${asset.title}`}
-                              location="freebies_download"
-                              download={asset.fileName}
-                              className="button-primary min-h-[44px] px-4 text-[15px]"
-                            >
-                              <Download className="h-4 w-4" aria-hidden="true" />
-                              <span>Download</span>
-                            </TrackedExternalLink>
+                            <FreebiesDownloadButton href={asset.href} title={asset.title} fileName={asset.fileName} />
 
                             <TrackedExternalLink
                               href={asset.href}

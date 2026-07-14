@@ -1,7 +1,6 @@
 "use client"
 
-import Link from "next/link"
-
+import { ButtonLink } from "@/components/ButtonLink"
 import { BookCallCta } from "@/components/BookCallCta"
 import type { CaseStudyData } from "@/content/case-studies"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
@@ -45,10 +44,7 @@ export function CaseStudyActionButton({
     return <BookCallCta location="case_study_hero" />
   }
 
-  const className =
-    variant === "primary"
-      ? "inline-flex min-h-[56px] items-center gap-2 rounded-[99px] bg-[#2B2B2B] px-6 pb-3.5 pt-3 text-[20px] leading-8 text-white transition-colors duration-200 hover:bg-[#447ACB]"
-      : "inline-flex min-h-[56px] items-center rounded-[99px] border border-[#222222]/12 bg-white px-6 pb-3.5 pt-3 text-[20px] leading-8 text-[#222222] transition-colors duration-200 hover:border-[#447ACB] hover:text-[#447ACB]"
+  const className = "min-h-[56px] px-6 py-3.5 text-[20px] leading-8"
 
   const content = (
     <>
@@ -61,15 +57,21 @@ export function CaseStudyActionButton({
 
   if (action.external) {
     return (
-      <a href={action.href} target="_blank" rel="noreferrer" className={className} onClick={() => trackActionClick(action)}>
+      <ButtonLink
+        href={action.href}
+        external
+        variant={variant}
+        className={className}
+        onClick={() => trackActionClick(action)}
+      >
         {content}
-      </a>
+      </ButtonLink>
     )
   }
 
   return (
-    <Link href={action.href} className={className} onClick={() => trackActionClick(action)}>
+    <ButtonLink href={action.href} variant={variant} className={className} onClick={() => trackActionClick(action)}>
       {content}
-    </Link>
+    </ButtonLink>
   )
 }

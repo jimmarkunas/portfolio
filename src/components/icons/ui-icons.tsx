@@ -26,6 +26,22 @@ export function ArrowUpRightIcon({ size = 24, className }: IconProps) {
   )
 }
 
+export function ExternalLinkMiniIcon({ className }: IconProps) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M0.957229 11.3614L0 10.4042L9.02046 1.375H0.819729V0H11.3614V10.5417H9.9864V2.34094L0.957229 11.3614Z" fill="currentColor" />
+    </svg>
+  )
+}
+
 export function ChevronDownIcon({
   size = 24,
   color = "#25314C",

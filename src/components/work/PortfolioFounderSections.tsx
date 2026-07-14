@@ -4,7 +4,8 @@ import { useReducedMotion } from "framer-motion"
 
 import { ButtonLink } from "@/components/ButtonLink"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { HOMEPAGE_SECTION_HEADER_TITLE_CLASS } from "@/components/homepage/ui"
+import { ExternalLinkMiniIcon } from "@/components/icons/ui-icons"
+import { FullSectionHeader, HOMEPAGE_SECTION_HEADER_TITLE_CLASS } from "@/components/homepage/ui"
 import { portfolioContent, siteRoutes } from "@/content/site"
 import {
   PortfolioFeatureRow,
@@ -18,6 +19,23 @@ import type { PortfolioFounderSectionsProps } from "./portfolio-founder/types"
 import { useStagedPortfolioReveal } from "./portfolio-founder/useStagedPortfolioReveal"
 
 const { founderShowcase, portfolioShowcase } = portfolioContent
+
+function PortfolioCategoryControls({ categories }: { categories: string[] }) {
+  return (
+    <div className="hidden w-full flex-wrap items-center justify-center gap-2 md:flex md:justify-start">
+      {categories.map((category) => (
+        <span
+          key={category}
+          className={`inline-flex min-h-[44px] items-center justify-center rounded-[99px] px-6 py-2 text-[14px] leading-5 ${
+            category === "eCommerce" ? "bg-[#2B2B2B] text-white" : "bg-[#F8F8F8] text-[#222222]"
+          }`}
+        >
+          {category}
+        </span>
+      ))}
+    </div>
+  )
+}
 
 export function PortfolioFounderSections({
   intro,
@@ -49,67 +67,41 @@ export function PortfolioFounderSections({
           className="flex w-full flex-col items-start gap-8"
         >
           {intro ? (
-            <div className="max-w-[980px] space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-4 py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]">
+            <FullSectionHeader
+              eyebrow={intro.pill}
+              heading={intro.title}
+              description={intro.description}
+              headingAs="h1"
+              className="w-full"
+              eyebrowClassName="!px-4 !py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]"
+              headingClassName="w-full max-w-none text-4xl font-normal leading-tight text-[#222222] md:text-5xl md:leading-[1.08]"
+              descriptionClassName="w-full max-w-none text-[18px] leading-8 text-[#4B4B4B]"
+              controlsClassName="w-full"
+              controls={<PortfolioCategoryControls categories={portfolio.categories} />}
+            />
+          ) : (
+            <>
+              <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-6 py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]">
                 <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-                <span className="text-[14px] leading-5 text-[#222222]">{intro.pill}</span>
+                <span className="type-p2 text-[#222222]">{portfolio.pill}</span>
               </div>
 
-              <h2 className="max-w-[900px] text-4xl font-normal leading-tight text-[#222222] md:text-5xl md:leading-[1.08]">
-                {intro.title}
-              </h2>
+              <div className="flex w-full flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                <h2 className="type-h3 max-w-[702px] text-left text-[#222222]">
+                  {portfolio.title}
+                </h2>
 
-              <p className="max-w-[860px] text-[18px] leading-8 text-[#4B4B4B]">{intro.description}</p>
-            </div>
-          ) : null}
+                {showCta ? (
+                  <ButtonLink href={ctaHref} variant="bookCall" className="hidden self-start md:inline-flex md:self-auto">
+                    <span>{ctaLabel}</span>
+                    <ExternalLinkMiniIcon />
+                  </ButtonLink>
+                ) : null}
+              </div>
 
-          <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-6 py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]">
-            <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-            <span className="type-p2 text-[#222222]">{portfolio.pill}</span>
-          </div>
-
-          <div className="flex w-full flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <h2 className="type-h3 max-w-[702px] text-left text-[#222222]">
-              {portfolio.title}
-            </h2>
-
-            {showCta ? (
-              <ButtonLink href={ctaHref} variant="bookCall" className="hidden self-start md:inline-flex md:self-auto">
-                <span>{ctaLabel}</span>
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M0.957229 11.3614L0 10.4042L9.02046 1.375H0.819729V0H11.3614V10.5417H9.9864V2.34094L0.957229 11.3614Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </ButtonLink>
-            ) : null}
-          </div>
-        </PortfolioRevealWrap>
-
-        <PortfolioRevealWrap
-          reduceMotionEnabled={reduceMotionEnabled}
-          show={visibility.pills}
-          itemY={itemY}
-          className="hidden w-full flex-wrap items-center justify-center gap-2 md:flex md:justify-start"
-        >
-          {portfolio.categories.map((category) => (
-            <span
-              key={category}
-              className={`inline-flex min-h-[44px] items-center justify-center rounded-[99px] px-6 py-2 text-[14px] leading-5 ${
-                category === "eCommerce" ? "bg-[#2B2B2B] text-white" : "bg-[#F8F8F8] text-[#222222]"
-              }`}
-            >
-              {category}
-            </span>
-          ))}
+              <PortfolioCategoryControls categories={portfolio.categories} />
+            </>
+          )}
         </PortfolioRevealWrap>
       </div>
 
@@ -163,9 +155,9 @@ export function PortfolioFounderSections({
             </div>
 
             <div className="grid w-full gap-3 lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:items-start lg:gap-10">
-            <h3 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-white`}>
-              {founder.title}
-            </h3>
+              <h3 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-white`}>
+                {founder.title}
+              </h3>
               {founder.description ? (
                 <p className="type-p3 max-w-[900px]" style={{ color: "rgba(255,255,255,0.76)" }}>
                   {founder.description}

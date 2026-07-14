@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode } from "react"
 import Link from "next/link"
 
 import { Container } from "@/components/Container"
+import { EyebrowPill } from "@/components/EyebrowPill"
 import { ArrowUpRightIcon, StarIcon } from "@/components/icons/ui-icons"
 import { siteRoutes } from "@/content/site"
 
@@ -137,6 +138,52 @@ export function HomepageSectionHeader({
     <div className={`${HOMEPAGE_SECTION_HEADER_STACK_CLASS} ${alignmentClass} ${className}`.trim()}>
       <SectionPill label={label} />
       {children}
+    </div>
+  )
+}
+
+type FullSectionHeaderProps = {
+  eyebrow: string
+  heading: ReactNode
+  description?: ReactNode
+  controls?: ReactNode
+  align?: "left" | "center"
+  headingAs?: "h1" | "h2" | "h3"
+  className?: string
+  eyebrowClassName?: string
+  headingClassName?: string
+  descriptionClassName?: string
+  controlsClassName?: string
+}
+
+export function FullSectionHeader({
+  eyebrow,
+  heading,
+  description,
+  controls,
+  align = "left",
+  headingAs = "h1",
+  className = "",
+  eyebrowClassName = "",
+  headingClassName = "",
+  descriptionClassName = "",
+  controlsClassName = "",
+}: FullSectionHeaderProps) {
+  const alignmentClass = align === "center" ? "items-center text-center" : "items-start text-left"
+  const HeadingTag = headingAs
+
+  return (
+    <div className={`${HOMEPAGE_SECTION_HEADER_STACK_CLASS} ${alignmentClass} ${className}`.trim()}>
+      <EyebrowPill className={eyebrowClassName} labelClassName="type-p2 text-[#222222]">
+        {eyebrow}
+      </EyebrowPill>
+
+      <div className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} ${alignmentClass}`.trim()}>
+        <HeadingTag className={headingClassName}>{heading}</HeadingTag>
+        {description ? <p className={descriptionClassName}>{description}</p> : null}
+      </div>
+
+      {controls ? <div className={controlsClassName}>{controls}</div> : null}
     </div>
   )
 }

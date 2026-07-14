@@ -24,6 +24,7 @@ type ButtonLinkProps = {
   tone?: ButtonLinkTone
   className?: string
   external?: boolean
+  download?: string
   target?: "_blank" | "_self" | "_parent" | "_top"
   rel?: string
   ariaLabel?: string
@@ -37,6 +38,7 @@ export function ButtonLink({
   tone = "default",
   className = "",
   external = false,
+  download,
   target,
   rel,
   ariaLabel,
@@ -48,7 +50,8 @@ export function ButtonLink({
     return (
       <a
         href={href}
-        target={target ?? "_blank"}
+        download={download}
+        target={download ? target ?? "_self" : target ?? "_blank"}
         rel={rel ?? "noreferrer"}
         className={composedClassName}
         aria-label={ariaLabel}
@@ -60,7 +63,13 @@ export function ButtonLink({
   }
 
   return (
-    <Link href={href} className={composedClassName} aria-label={ariaLabel} onClick={onClick}>
+    <Link
+      href={href}
+      download={download}
+      className={composedClassName}
+      aria-label={ariaLabel}
+      onClick={onClick}
+    >
       {children}
     </Link>
   )

@@ -1,5 +1,6 @@
 import { ContactForm } from "@/components/ContactForm"
 import { Container } from "@/components/Container"
+import { EyebrowPill } from "@/components/EyebrowPill"
 import dynamic from "next/dynamic"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { TrackedExternalLink } from "@/components/analytics/TrackedExternalLink"
@@ -9,17 +10,6 @@ const GlobalLocationsMap = dynamic(
   () => import("@/components/case-study/GlobalLocationsMap").then((mod) => mod.GlobalLocationsMap),
   { ssr: false },
 )
-
-function SectionEyebrow({ label }: { label: string }) {
-  return (
-    <div className="inline-flex items-center gap-2 self-start rounded-full bg-white px-3 py-0.5">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-        <circle cx="6" cy="6" r="6" fill="#2B2B2B" />
-      </svg>
-      <span className="text-xl text-[#1F1F1F]">{label}</span>
-    </div>
-  )
-}
 
 export function ServicesContactPage() {
   const { contact, servicesMap } = servicesContactContent
@@ -32,7 +22,9 @@ export function ServicesContactPage() {
           <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
             <MotionReveal preset="section" className="flex w-full flex-col gap-9 lg:w-[454px] lg:shrink-0">
               <div className="flex flex-col gap-4">
-                <SectionEyebrow label={contact.eyebrow} />
+                <EyebrowPill className="self-start !py-0.5" labelClassName="text-xl text-[#1F1F1F]">
+                  {contact.eyebrow}
+                </EyebrowPill>
 
                 <div className="flex flex-col gap-3">
                   <h2 className="text-5xl leading-[56px] text-[#1F1F1F]">{contact.title}</h2>
@@ -85,7 +77,9 @@ export function ServicesContactPage() {
           <div className="flex flex-col gap-8">
             <MotionReveal preset="section" className="grid gap-6 lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)] lg:items-end">
               <div className="flex flex-col gap-3">
-                <SectionEyebrow label={servicesMap.eyebrow} />
+                <EyebrowPill className="self-start !py-0.5" labelClassName="text-xl text-[#1F1F1F]">
+                  {servicesMap.eyebrow}
+                </EyebrowPill>
                 <h2 className="text-5xl leading-[56px] text-[#1F1F1F]">{servicesMap.title}</h2>
               </div>
 

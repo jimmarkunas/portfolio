@@ -39,7 +39,7 @@ export function TrackedBookCallLink({
       variant="bookCall"
       tone={tone}
       className={className}
-      aria-label={ariaLabel}
+      ariaLabel={ariaLabel}
       onClick={() => {
         trackEvent("book_call_click", {
           location,
