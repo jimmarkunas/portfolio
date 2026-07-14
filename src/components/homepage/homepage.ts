@@ -26,31 +26,6 @@ const fallbackHomepageText = {
       description:
         "The work didn’t just launch, it was globally recognized. My work has earned industry awards, and the LEGO digital transformation was later studied at Harvard & MIT as a case study in digital change at scale.",
     },
-    portfolio: {
-      pill: "Portfolio",
-      title: "Successful Projects I've Led",
-      categories: [
-        "eCommerce",
-        "Streaming",
-        "Mobile Apps",
-        "SAP",
-        "PIM",
-        "SaaS",
-        "UI/UX",
-      ],
-      moreProjects: {
-        pill: "Founder",
-        title: "Companies I've Founded",
-        description: "I started my career in tech as an entrepreneur. Here are the brands and products I built from the ground up.",
-        cards: [
-          { title: "Digital Agency Website Design - UI/UX", width: 703, height: 527 },
-          { title: "Brand identity - Branding", width: 703, height: 527 },
-        ],
-      },
-    },
-    highlights: {
-      cta: "See More",
-    },
     provenResults: {
       pill: "Proven Results",
       title: "My Business Impact",
@@ -454,8 +429,6 @@ type PartialHomepageText = {
   sections?: {
     whatIDo?: Partial<HomepageText["sections"]["whatIDo"]>
     awards?: Partial<HomepageText["sections"]["awards"]>
-    portfolio?: Partial<HomepageText["sections"]["portfolio"]>
-    highlights?: Partial<HomepageText["sections"]["highlights"]>
     provenResults?: Partial<HomepageText["sections"]["provenResults"]>
     experience?: Partial<HomepageText["sections"]["experience"]>
     testimonials?: Partial<HomepageText["sections"]["testimonials"]>
@@ -484,14 +457,6 @@ export function getHomepageText(): HomepageText {
       awards: {
         ...fallbackHomepageText.sections.awards,
         ...(homepageText.sections?.awards ?? {}),
-      },
-      portfolio: {
-        ...fallbackHomepageText.sections.portfolio,
-        ...(homepageText.sections?.portfolio ?? {}),
-      },
-      highlights: {
-        ...fallbackHomepageText.sections.highlights,
-        ...(homepageText.sections?.highlights ?? {}),
       },
       provenResults: {
         ...fallbackHomepageText.sections.provenResults,

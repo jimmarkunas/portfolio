@@ -20,6 +20,24 @@ type PortfolioContent = {
   founderShowcase: PortfolioShowcaseCard[]
 }
 
+type PortfolioSectionCopy = {
+  pill: string
+  title: string
+  categories: string[]
+}
+
+type FounderSectionCopy = {
+  pill: string
+  title: string
+  description: string
+}
+
+type PortfolioSectionContent = {
+  portfolio: PortfolioSectionCopy
+  founder: FounderSectionCopy
+  ctaLabel: string
+}
+
 export const siteContent = {
   portfolioShowcase: {
     topRow: [
@@ -54,3 +72,17 @@ export const siteContent = {
     { href: "/work/cwg/", src: "/portfolio-gallery/cwg.svg", alt: "CWG project", aspectRatio: "703 / 282" },
   ] satisfies PortfolioShowcaseCard[],
 } satisfies PortfolioContent
+
+export const portfolioSectionContent = {
+  portfolio: {
+    pill: "Portfolio",
+    title: "Successful Projects I've Led",
+    categories: ["eCommerce", "Streaming", "Mobile Apps", "SAP", "PIM", "SaaS", "UI/UX"],
+  },
+  founder: {
+    pill: "Founder",
+    title: "Companies I've Founded",
+    description: "I started my career in tech as an entrepreneur. Here are the brands and products I built from the ground up.",
+  },
+  ctaLabel: "See More",
+} satisfies PortfolioSectionContent

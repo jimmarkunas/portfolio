@@ -3,9 +3,9 @@ import type { Metadata } from "next"
 import { Container } from "@/components/Container"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
 import { StructuredData } from "@/components/seo/StructuredData"
-import { getHomepageText } from "@/components/homepage/homepage"
 import { loadAllCaseStudies } from "@/content/case-studies"
 import { siteCanonicalPaths } from "@/content/site"
+import { portfolioSectionContent } from "@/content/site/portfolio"
 import { buildPageMetadata } from "@/lib/seo"
 import { createWorkCollectionStructuredData } from "@/lib/structured-data"
 
@@ -18,7 +18,6 @@ export const metadata: Metadata = buildPageMetadata({
 })
 
 export default async function WorkPage() {
-  const { sections } = getHomepageText()
   const studies = await loadAllCaseStudies()
   const introCopy = {
     pill: "Portfolio",
@@ -33,8 +32,8 @@ export default async function WorkPage() {
         <Container className="pb-14 pt-7 md:pb-16 md:pt-8 lg:pb-[72px] lg:pt-[36px]">
           <PortfolioFounderSections
             intro={introCopy}
-            portfolio={sections.portfolio}
-            founder={sections.portfolio.moreProjects}
+            portfolio={portfolioSectionContent.portfolio}
+            founder={portfolioSectionContent.founder}
             showCta={false}
           />
         </Container>

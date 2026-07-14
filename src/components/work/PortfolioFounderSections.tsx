@@ -48,6 +48,7 @@ export function PortfolioFounderSections({
   const reduceMotion = useReducedMotion()
   const reduceMotionEnabled = Boolean(reduceMotion)
   const { itemY, visibility, sentinelRefs } = useStagedPortfolioReveal()
+  const hasIntro = Boolean(intro)
 
   return (
     <div className="flex w-full flex-col items-start gap-8">
@@ -66,19 +67,31 @@ export function PortfolioFounderSections({
           itemY={itemY}
           className="flex w-full flex-col items-start gap-8"
         >
-          {intro ? (
-            <FullSectionHeader
-              eyebrow={intro.pill}
-              heading={intro.title}
-              description={intro.description}
-              headingAs="h1"
-              className="w-full"
-              eyebrowClassName="!px-4 !py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]"
-              headingClassName="w-full max-w-none text-4xl font-normal leading-tight text-[#222222] md:text-5xl md:leading-[1.08]"
-              descriptionClassName="w-full max-w-none text-[18px] leading-8 text-[#4B4B4B]"
-              controlsClassName="w-full"
-              controls={<PortfolioCategoryControls categories={portfolio.categories} />}
-            />
+          {hasIntro ? (
+            <div className="grid w-full gap-8 lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:gap-10 lg:items-start">
+              <FullSectionHeader
+                eyebrow={intro?.pill ?? portfolio.pill}
+                heading={intro?.title ?? portfolio.title}
+                description={intro?.description}
+                headingAs="h1"
+                className="w-full"
+                eyebrowClassName="!px-4 !py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]"
+                headingClassName="w-full max-w-none text-4xl font-normal leading-tight text-[#222222] md:text-5xl md:leading-[1.08]"
+                descriptionClassName="w-full max-w-none text-[18px] leading-8 text-[#4B4B4B]"
+                controlsClassName="w-full"
+                controls={<PortfolioCategoryControls categories={portfolio.categories} />}
+              />
+
+              <div className="w-full lg:pt-2">
+                <PortfolioTopRow
+                  reduceMotionEnabled={reduceMotionEnabled}
+                  visibility={visibility}
+                  itemY={itemY}
+                  sentinelRefs={sentinelRefs}
+                  cards={portfolioShowcase.topRow}
+                />
+              </div>
+            </div>
           ) : (
             <>
               <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-6 py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]">
@@ -105,14 +118,16 @@ export function PortfolioFounderSections({
         </PortfolioRevealWrap>
       </div>
 
-      <div className="flex w-full flex-col gap-6">
-        <PortfolioTopRow
-          reduceMotionEnabled={reduceMotionEnabled}
-          visibility={visibility}
-          itemY={itemY}
-          sentinelRefs={sentinelRefs}
-          cards={portfolioShowcase.topRow}
-        />
+      <div className={`flex w-full flex-col ${hasIntro ? "gap-6" : "gap-6"}`}>
+        {hasIntro ? null : (
+          <PortfolioTopRow
+            reduceMotionEnabled={reduceMotionEnabled}
+            visibility={visibility}
+            itemY={itemY}
+            sentinelRefs={sentinelRefs}
+            cards={portfolioShowcase.topRow}
+          />
+        )}
 
         <PortfolioFeatureRow
           reduceMotionEnabled={reduceMotionEnabled}

@@ -11,6 +11,7 @@ import { HomepageJourneySection } from "@/components/homepage/sections/HomepageJ
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
 import { ContentFlow } from "@/components/ContentFlow"
 import { siteRoutes } from "@/content/site"
+import { portfolioSectionContent } from "@/content/site/portfolio"
 import {
   HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
   HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
@@ -89,9 +90,9 @@ export default function Homepage() {
         paddingClassName="pt-10 pb-0 md:pt-12 md:pb-0 lg:pt-14 lg:pb-0"
       >
         <PortfolioFounderSections
-          portfolio={sections.portfolio}
-          founder={sections.portfolio.moreProjects}
-          ctaLabel={sections.highlights.cta}
+          portfolio={portfolioSectionContent.portfolio}
+          founder={portfolioSectionContent.founder}
+          ctaLabel={portfolioSectionContent.ctaLabel}
           ctaHref={siteRoutes.work}
           showCta
         />
