@@ -62,6 +62,8 @@ export const siteIdentity = {
   linkedinLabel: "linkedin.com/in/jimmarkunas",
 } as const
 
+export const siteContactEmail = "jim@jimmarkunas.com" as const
+
 export const siteExternalUrls = {
   linkedin: "https://linkedin.com/in/jimmarkunas",
   x: "https://x.com/jimmarkunas",

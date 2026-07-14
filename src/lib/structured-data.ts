@@ -1,6 +1,5 @@
 import type { CaseStudyData } from "@/content/case-studies"
-import { servicesContactContent } from "@/content/site"
-import { siteExternalUrls } from "@/content/site/config"
+import { siteContactEmail, siteExternalUrls } from "@/content/site/config"
 import {
   SEO_DEFAULT_DESCRIPTION,
   SEO_DEFAULT_OG_IMAGE,
@@ -59,7 +58,7 @@ export function createSiteStructuredData(): StructuredDataValue[] {
       alternateName: "James Markunas",
       url: SEO_SITE_URL,
       image: toAbsoluteUrl(SEO_DEFAULT_OG_IMAGE),
-      email: `mailto:${servicesContactContent.contact.email}`,
+      email: `mailto:${siteContactEmail}`,
       jobTitle: "Digital Product & Program Leader",
       description: SEO_DEFAULT_DESCRIPTION,
       sameAs: [siteExternalUrls.linkedin, siteExternalUrls.x, siteExternalUrls.notionPortfolio],

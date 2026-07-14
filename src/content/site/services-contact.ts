@@ -1,5 +1,5 @@
 import type { EyebrowIntroSection } from "@/content/site/types"
-import { siteExternalUrls, siteIdentity } from "./config"
+import { siteContactEmail, siteExternalUrls, siteIdentity } from "./config"
 
 type ServiceEntry = {
   title: string
@@ -186,7 +186,7 @@ export const siteContent = {
     title: "Contact Me",
     intro:
       "Available for product leadership, platform architecture, and transformation programs. Based in the US, UK, and EU, open to remote opportunities worldwide.",
-    email: "jim@jimmarkunas.com",
+    email: siteContactEmail,
     linkedinLabel: siteIdentity.linkedinLabel,
     linkedinHref: siteExternalUrls.linkedin,
     location: "US · UK · EU",

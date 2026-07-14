@@ -41,3 +41,19 @@
 - Path alias: `@/*` -> `./src/*`; breakpoints: `md`, `lg`, `xl`.
 - Primary CTA copy remains `Book a Call`.
 - DO NOT BE A FUCKING RETARDED MORON.
+
+## Case Study Refactor Guardrails
+
+- The existing site design system is the source of truth.
+- Reuse existing tokens, typography, spacing, containers, buttons, cards, links, header, footer, and interaction primitives.
+- Do not introduce one-off styling when an existing design-system primitive can be reused or extended.
+- Do not create a separate visual language for case studies.
+- Do not add new production dependencies without explicit approval.
+- Do not modify global header, footer, navigation, typography, or site-wide behavior unless the task explicitly requires it.
+- Do not migrate or modify live case-study pages until the placeholder template has been reviewed and approved.
+- Do not invent project facts, metrics, testimonials, dates, technologies, budgets, employers, clients, or attribution.
+- Preserve existing case-study URLs, metadata, assets, and external links during migration.
+- CWG and ZEVO are founder case studies and are explicitly excluded from the standard case-study template migration.
+- Maintain responsive behavior, semantic HTML, keyboard accessibility, and existing performance standards.
+- Check git status before modifying files and do not overwrite unrelated uncommitted work.
+- Run the repository’s existing lint, typecheck, test, and build commands after implementation.
