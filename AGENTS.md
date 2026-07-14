@@ -8,6 +8,7 @@
 - Treat user screenshot/wireframe as the visual source of truth.
 - For layout nudges, change one variable at a time.
 - If user asks for one nudge, change only that value.
+- If the user asks to adjust one visible element, do not change shared primitives, tokens, or other instances unless explicitly requested.
 - Do not add scrollbars/scroll-based UI unless explicitly requested.
 - Preserve mobile/tablet/desktop behavior when touching shared UI.
 - After 2 failed attempts on the same issue, stop and present a 3-step plan.

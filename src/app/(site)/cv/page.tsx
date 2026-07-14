@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
 import type { ReactNode } from "react"
 
+import { BookCallCta } from "@/components/BookCallCta"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
@@ -105,17 +105,7 @@ export default function CvPage() {
 
                     <div className="flex flex-col gap-3 lg:pt-2">
                       <p className="type-p3 text-[#555555]">{cvContent.experienceIntro}</p>
-                      <TrackedExternalLink
-                        href={cvContent.cta.primary.href}
-                        label={cvContent.cta.primary.label}
-                        location="cv_page"
-                        target="_blank"
-                        rel="noreferrer"
-                        className={`inline-text-cta type-p3 w-fit ${hoverLiftClass}`}
-                      >
-                        <span>{cvContent.cta.primary.label}</span>
-                        <ArrowUpRight className="h-3.5 w-3.5" />
-                      </TrackedExternalLink>
+                      <BookCallCta location="cv_page" />
                     </div>
                   </div>
 

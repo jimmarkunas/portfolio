@@ -61,7 +61,7 @@ const fallbackHomepageText = {
       pill: "Experience",
       title: "My Areas of Expertise",
       description:
-        "A snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and digital transformation programs.",
+        "I sit at the intersection of three capabilities: program delivery (TPM), product thinking (PO), and platform/integration fluency (Solutions Architecture).\n\nI’m a specialist who sequences: SA fluency to diagnose, PO instincts to prioritize, and TPM rigor to execute. That’s my superpower.",
     },
     testimonials: {
       pill: "Testimonials",
@@ -282,34 +282,28 @@ const fallbackHomepageText = {
   },
   services: [
     {
-      title: "Technical Program Management",
-      description: "Delivering complex, multi-vendor enterprise digital transformation, re-platforming, and system integrations",
-      icon: "uiux",
+      outcome: "Programs that were broken. Now they're not.",
+      category: "Technical Program Management",
     },
     {
-      title: "Technical Product Management",
-      description: "Translating business strategy into prioritized backlogs, sprint cadences, and shippable outcomes",
-      icon: "branding",
+      outcome: "Strategy becomes backlog. Backlog becomes shipped.",
+      category: "Technical Product Management",
     },
     {
-      title: "Solutioning & Business Analysis",
-      description: "Diagnosing integration complexity across systems (ERP, OMS, PIM, commerce platforms, etc.)",
-      icon: "graphic",
+      outcome: "Complex systems, untangled before a line of code is written.",
+      category: "Solutions Architecture",
     },
     {
-      title: "Digital Transformation",
-      description: "Modernizing legacy platforms and business processes across enterprise systems at global scale",
-      icon: "web",
+      outcome: "Legacy platforms modernized. New ones built to last.",
+      category: "Digital Transformation",
     },
     {
-      title: "Platform & Commerce Delivery",
-      description: "End-to-end launch experience across Adobe Commerce, BigCommerce, Shopify, Oracle, SAP and composable",
-      icon: "marketing",
+      outcome: "Commerce platforms launched, migrated, and scaled.",
+      category: "Platform & Commerce Delivery",
     },
     {
-      title: "Agentic AI & Automation",
-      description: "Building and deploying AI-assisted workflows, compliance agents, and delivery tooling",
-      icon: "motion",
+      outcome: "Workflows that run themselves. Agents that don't need babysitting.",
+      category: "Agentic AI & Automation",
     },
   ],
   testimonials: [
@@ -345,7 +339,7 @@ const fallbackHomepageText = {
       variant: "light",
     },
     {
-      company: "Corra Agency",
+      company: "Corra",
       name: "Murali Annavarapu ",
       role: "Vice President, Delivery",
       badgeSrc: "/testimonials/corra-logo.jpeg",

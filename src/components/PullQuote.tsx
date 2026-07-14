@@ -55,7 +55,7 @@ export function PullQuote({
 
       <div className={`relative mx-auto flex max-w-[1240px] flex-col items-center ${contentClassName}`.trim()}>
         <blockquote
-          className={`max-w-[1180px] text-[28px] italic leading-[1.35] tracking-[-0.03em] ${quoteTextClass} md:text-[36px] lg:text-[52px] lg:leading-[1.25] ${hoverTextClass} ${quoteClassName}`.trim()}
+          className={`max-w-[1180px] px-4 text-[clamp(24px,3vw,52px)] italic leading-[1.28] tracking-[-0.03em] sm:px-8 md:px-12 lg:px-16 ${quoteTextClass} ${hoverTextClass} ${quoteClassName}`.trim()}
           style={quoteClampStyle}
         >
           {quote}

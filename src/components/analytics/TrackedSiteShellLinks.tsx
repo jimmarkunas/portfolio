@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react"
 
+import { ButtonLink } from "@/components/ButtonLink"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 type TrackedSiteShellLinkProps = {
@@ -9,6 +10,7 @@ type TrackedSiteShellLinkProps = {
   label: string
   location: string
   className?: string
+  tone?: "default" | "brand"
   children: ReactNode
   target?: "_blank" | "_self" | "_parent" | "_top"
   rel?: string
@@ -21,6 +23,7 @@ export function TrackedBookCallLink({
   label,
   location,
   className,
+  tone = "default",
   children,
   target = "_blank",
   rel = "noreferrer",
@@ -28,10 +31,13 @@ export function TrackedBookCallLink({
   ariaLabel,
 }: TrackedSiteShellLinkProps) {
   return (
-    <a
+    <ButtonLink
       href={href}
+      external
       target={target}
       rel={rel}
+      variant="bookCall"
+      tone={tone}
       className={className}
       aria-label={ariaLabel}
       onClick={() => {
@@ -45,7 +51,7 @@ export function TrackedBookCallLink({
       }}
     >
       {children}
-    </a>
+    </ButtonLink>
   )
 }
 

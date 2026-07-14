@@ -39,3 +39,47 @@
 [data-layer="Modal Integrations"] [data-svg-wrapper]:hover svg ellipse[stroke="#212529"] {
   stroke: #3b82f6;
 }
+
+/* Homepage service cards — ambient pulse */
+@keyframes service-card-ambient-pulse {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.42;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes service-card-accent-pulse {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: scaleX(1.18);
+    opacity: 1;
+  }
+}
+
+.service-card-ambient {
+  transform-origin: top left;
+  animation: service-card-ambient-pulse 8s ease-in-out infinite;
+}
+
+.service-card-accent {
+  transform-origin: left center;
+  animation: service-card-accent-pulse 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card-ambient,
+  .service-card-accent {
+    animation: none;
+  }
+}

@@ -4,13 +4,12 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 
-import { TrackedBookCallLink } from "@/components/analytics/TrackedSiteShellLinks"
+import { BookCallCta } from "@/components/BookCallCta"
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
-import { primaryNavLinks, siteCta, siteIdentity } from "@/content/site"
+import { TextLink } from "@/components/TextLink"
+import { primaryNavLinks, siteIdentity } from "@/content/site"
 
-const BOOK_CALL_HREF = siteCta.bookingUrls.siteShell
-const BOOK_CALL_LABEL = siteCta.bookCallLabel
 const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
 
 export function SiteHeader() {
@@ -36,37 +35,17 @@ export function SiteHeader() {
           <div className="hidden items-center gap-8 lg:flex lg:flex-1 lg:justify-end">
             <nav aria-label="Primary" className="flex items-center gap-x-10">
               {primaryNavLinks.map((link) => (
-                <Link
+                <TextLink
                   key={link.href}
-                  className={`text-[16px] font-normal leading-none text-[#222222] transition-colors hover:text-[#447ACB] hover:underline hover:underline-offset-4 ${hoverLiftClass}`}
                   href={link.href}
+                  className="text-[16px] font-normal leading-none text-[#222222]"
                 >
                   {link.label}
-                </Link>
+                </TextLink>
               ))}
             </nav>
 
-            <TrackedBookCallLink
-              href={BOOK_CALL_HREF}
-              label={BOOK_CALL_LABEL}
-              location="header"
-              className={`inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${hoverLiftClass}`}
-            >
-              <span>{BOOK_CALL_LABEL}</span>
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  d="M0.957229 11.3614L0 10.4042L9.02046 1.375H0.819729V0H11.3614V10.5417H9.9864V2.34094L0.957229 11.3614Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </TrackedBookCallLink>
+            <BookCallCta location="header" />
           </div>
 
           <button
@@ -88,41 +67,18 @@ export function SiteHeader() {
           >
             <nav aria-label="Mobile primary" className="flex flex-col gap-4">
               {primaryNavLinks.map((link) => (
-                <Link
+                <TextLink
                   key={link.href}
-                  className={`inline-flex min-h-[44px] items-center text-[18px] font-normal leading-none text-[#222222] transition-colors hover:text-[#447ACB] ${hoverLiftClass}`}
                   href={link.href}
+                  className="inline-flex min-h-[44px] items-center text-[18px] font-normal leading-none text-[#222222]"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
-                </Link>
+                </TextLink>
               ))}
             </nav>
 
-            <TrackedBookCallLink
-              href={BOOK_CALL_HREF}
-              label={BOOK_CALL_LABEL}
-              location="header"
-              className={`mt-5 inline-flex min-h-[48px] items-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${hoverLiftClass}`}
-              onClick={() => {
-                setIsOpen(false)
-              }}
-            >
-              <span>{BOOK_CALL_LABEL}</span>
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  d="M0.957229 11.3614L0 10.4042L9.02046 1.375H0.819729V0H11.3614V10.5417H9.9864V2.34094L0.957229 11.3614Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </TrackedBookCallLink>
+            <BookCallCta location="header" className="mt-5" onClick={() => setIsOpen(false)} />
           </div>
         ) : null}
       </Container>

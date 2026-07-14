@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 
+import { BookCallCta } from "@/components/BookCallCta"
 import type { CaseStudyData } from "@/content/case-studies"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
@@ -40,6 +41,10 @@ export function CaseStudyActionButton({
   action: HeroAction
   variant: "primary" | "secondary"
 }) {
+  if (BOOK_CALL_PATTERN.test(action.label)) {
+    return <BookCallCta location="case_study_hero" />
+  }
+
   const className =
     variant === "primary"
       ? "inline-flex min-h-[56px] items-center gap-2 rounded-[99px] bg-[#2B2B2B] px-6 pb-3.5 pt-3 text-[20px] leading-8 text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#447ACB]"

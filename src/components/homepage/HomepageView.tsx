@@ -9,7 +9,7 @@ import { HomepageTestimonialsSection } from "@/components/homepage/sections/Home
 import { HomepagePullQuoteSection } from "@/components/homepage/sections/HomepagePullQuoteSection"
 import { HomepageJourneySection } from "@/components/homepage/sections/HomepageJourneySection"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
-import { siteCta, siteRoutes } from "@/content/site"
+import { siteRoutes } from "@/content/site"
 import {
   HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
   HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
@@ -19,9 +19,6 @@ import {
 import { MotionReveal } from "@/components/motion/MotionReveal"
 
 import { getHomepageText } from "./homepage"
-
-const HOMEPAGE_BOOK_CALL_HREF = siteCta.bookingUrls.homepageHero
-const BOOK_CALL_LABEL = siteCta.bookCallLabel
 
 export default function Homepage() {
   const {
@@ -64,7 +61,7 @@ export default function Homepage() {
                 <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[540px] text-[#222222]`}>
                   {sections.experience.title}
                 </h2>
-                <p className="type-p3 max-w-[980px] text-black/80">
+                <p className="type-p3 max-w-[980px] whitespace-pre-line text-black/80">
                   {sections.experience.description}
                 </p>
               </div>
@@ -97,8 +94,6 @@ export default function Homepage() {
       <HomepageJourneySection
         section={sections.recognition}
         journey={journey}
-        bookCallHref={HOMEPAGE_BOOK_CALL_HREF}
-        bookCallLabel={BOOK_CALL_LABEL}
       />
     </main>
   )

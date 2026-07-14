@@ -4,6 +4,7 @@ import { Fragment, useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 import { Container } from "@/components/Container"
+import { TextLink } from "@/components/TextLink"
 import type { CaseStudyExperienceRow } from "@/content/case-studies"
 import { findRecognitionArticle } from "@/lib/press"
 
@@ -166,15 +167,15 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
         <Container className="py-4">
           <div className="flex items-center justify-between">
             <nav className="hidden items-center gap-6 text-[14px] md:flex">
-              <Link href="/" className="text-[#222222] hover:text-black">
+              <TextLink href="/" className="text-[#222222]">
                 Jim Markunas
-              </Link>
+              </TextLink>
               {breadcrumbs.map((crumb) => (
                 <Fragment key={crumb.href}>
                   <span className="text-[#222222]">›</span>
-                  <Link href={crumb.href} className="text-[#222222] hover:text-black">
+                  <TextLink href={crumb.href} className="text-[#222222]">
                     {crumb.label}
-                  </Link>
+                  </TextLink>
                 </Fragment>
               ))}
               <span className="text-[#222222]">›</span>
@@ -205,14 +206,15 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
               {(article.url || filePath) && (
                 <>
                   {" · "}
-                  <a
+                  <TextLink
                     href={article.url ?? filePath ?? ""}
                     target="_blank"
                     rel="noopener noreferrer"
-                      className="inline-flex min-h-[44px] items-center md:min-h-0 text-[#447ACB] underline underline-offset-4 hover:text-[#2d5fa8]"
+                    external
+                    className="inline-flex min-h-[44px] items-center md:min-h-0 underline underline-offset-4"
                   >
                     View source ↗
-                  </a>
+                  </TextLink>
                 </>
               )}
             </p>
@@ -301,13 +303,19 @@ export function PressViewer({ rows, backHref, breadcrumbs }: PressViewerProps) {
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-          <Link href={backHref} className="inline-flex min-h-[44px] items-center md:min-h-0 text-[14px] text-black/55 hover:text-[#222222]">
+          <TextLink href={backHref} className="inline-flex min-h-[44px] items-center md:min-h-0 text-[14px] text-black/55">
             ← Back to Press &amp; Accolades
-          </Link>
+          </TextLink>
           {filePath && (
-            <a href={encodedFilePath ?? filePath} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center md:min-h-0 text-[14px] text-black/55 hover:text-[#222222]">
+            <TextLink
+              href={encodedFilePath ?? filePath}
+              external
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[44px] items-center md:min-h-0 text-[14px] text-black/55"
+            >
               Open in new tab ↗
-            </a>
+            </TextLink>
           )}
         </div>
       </main>

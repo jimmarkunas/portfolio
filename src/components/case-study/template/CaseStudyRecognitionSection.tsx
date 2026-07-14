@@ -1,15 +1,12 @@
 import Link from "next/link"
 
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
+import { BookCallCta } from "@/components/BookCallCta"
 import type { CaseStudyData } from "@/content/case-studies"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { TagPill } from "@/components/TagPill"
-import { TrackedExternalLink } from "@/components/analytics/TrackedExternalLink"
-
-import { ExternalLinkMiniIcon } from "./CaseStudyTemplateIcons"
-const hoverLiftClass = "transition-[transform,color] duration-200 hover:-translate-y-0.5"
 
 export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyData; isFoh: boolean }) {
   if (!data.recognition) {
@@ -39,34 +36,13 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                 <h2 className="type-h3 w-full max-w-none lg:max-w-[396px] text-[#222222]">
                   {data.recognition.title}
                 </h2>
-                <TrackedExternalLink
-                  href={data.hero.primaryCta.href}
-                  label={data.hero.primaryCta.label}
-                  location="case_study_recognition"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`type-p4 mt-2 hidden min-h-[44px] items-center gap-1.5 whitespace-nowrap text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] ${hoverLiftClass} md:inline-flex lg:hidden`}
-                >
-                  <span>{data.hero.primaryCta.label}</span>
-                  <ExternalLinkMiniIcon />
-                </TrackedExternalLink>
+                <BookCallCta location="case_study_recognition" className="mt-2 hidden md:inline-flex lg:hidden" />
               </div>
             </div>
 
             <div className="flex w-full max-w-none flex-col items-start gap-6 lg:col-span-2 lg:col-start-2 lg:max-w-[636px]">
               <p className="type-p3 text-black/65">{data.recognition.intro}</p>
-
-              <TrackedExternalLink
-                href={data.hero.primaryCta.href}
-                label={data.hero.primaryCta.label}
-                location="case_study_recognition"
-                target="_blank"
-                rel="noreferrer"
-                className={`type-p4 inline-flex min-h-[44px] items-center gap-1.5 text-[#222222] underline underline-offset-4 transition-colors hover:text-[#447ACB] lg:min-h-0 ${hoverLiftClass} md:hidden lg:inline-flex`}
-              >
-                <span>{data.hero.primaryCta.label}</span>
-                <ExternalLinkMiniIcon />
-              </TrackedExternalLink>
+              <BookCallCta location="case_study_recognition" className="md:hidden lg:inline-flex" />
             </div>
           </MotionReveal>
 

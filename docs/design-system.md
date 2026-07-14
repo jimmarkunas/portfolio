@@ -128,11 +128,34 @@ CSS variables: `--space-{n}`
 - Min height: 48px, padding: 0 20px
 - Hover: text/border → `--color-accent-hover`, `translateY(-1px)`
 
+**`.button-book-call`**
+- Filled: `--color-ink` background, white text
+- Border: 1px solid `--color-ink`
+- Radius: `--radius-pill`
+- Min height: 48px, padding: 0 20px
+- Text/icon gap: 8px
+- Font: 18px / 500, nowrap
+- Hover: background and border → `--color-accent`, `translateY(-1px)`
+- Used by the semantic `BookCallCta` wrapper and any visual-equivalent booking CTA
+
+**`.button-book-call--brand`**
+- Blue-filled booking tone for dark backgrounds
+- Background and border: `--color-accent`
+- Hover: background and border → `--color-accent-hover`
+- Used via `BookCallCta tone="brand"` when the CTA sits on a dark surface
+
 **`.inline-text-cta`**
 - Inline-flex with icon gap 6px
 - Underline with 4px offset
-- Hover: color → `--color-accent-hover`
+- Hover/focus-visible: color → `--color-accent`
 - Typically paired with `type-p3` and a `<ArrowUpRight>` icon
+
+**`.text-link`**
+- Inline hyperlink primitive for standard text links
+- Color: inherit by default
+- Hover/focus-visible: color → `--color-accent`
+- Outline on focus-visible for keyboard accessibility
+- Used by the shared `TextLink` React primitive
 
 ### Icon button
 

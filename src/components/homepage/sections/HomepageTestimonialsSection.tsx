@@ -42,11 +42,15 @@ function TestimonialCard({ testimonial, tone, className = "", topRightBadge }: T
     ? "flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-sm text-white"
     : "flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-sm text-[#2B2B2B]"
 
-  const companyClass = isDark ? "type-p2 opacity-95" : "type-p2 text-[#222222]/80"
+  const companyClass = isDark ? "type-p3 opacity-95" : "type-p3 text-[#222222]/80"
   const quoteTextClass = isDark ? "type-p3 text-white/90" : "type-p3 text-[#2B2B2B]"
   const quoteGlyphClass = isDark ? "text-[rgba(255,255,255,0.12)]" : "text-[rgba(34,34,34,0.08)]"
-  const nameClass = isDark ? "type-p2 text-white" : "type-p2 text-[#222222]"
-  const roleClass = isDark ? "type-p3 text-white/70" : "type-p3 text-[#5F6368]"
+  const nameClass = isDark
+    ? "text-[clamp(15px,1vw,18px)] font-medium leading-[1.1] tracking-[-0.01em] text-white"
+    : "text-[clamp(15px,1vw,18px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#222222]"
+  const roleClass = isDark
+    ? "text-[clamp(12px,0.85vw,14px)] leading-[1.25] text-white/70"
+    : "text-[clamp(12px,0.85vw,14px)] leading-[1.25] text-[#5F6368]"
   const initialBadge = <div className={badgeClass}>{testimonial.name.slice(0, 1)}</div>
   const companyBadge = testimonial.badgeSrc ? (
     <div className={`${badgeClass} overflow-hidden`}>
@@ -69,7 +73,7 @@ function TestimonialCard({ testimonial, tone, className = "", topRightBadge }: T
 
       <div className={companyClass}>{testimonial.company ?? "Client Feedback"}</div>
 
-      <div className="relative mt-6">
+      <div className="relative mt-6 flex-1">
         <div
           aria-hidden="true"
           className={`pointer-events-none absolute left-1/2 -top-[0.2em] -translate-x-1/2 font-serif text-[92px] leading-none tracking-[-0.14em] md:text-[108px] ${quoteGlyphClass}`}
@@ -79,10 +83,10 @@ function TestimonialCard({ testimonial, tone, className = "", topRightBadge }: T
         <p className={`relative z-10 ${quoteTextClass}`}>{testimonial.quote}</p>
       </div>
 
-      <div className="mt-6 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
+      <div className="mt-6 flex items-center gap-3 md:mt-auto">
+        <div className="flex min-w-0 items-center gap-2.5">
           {profileAvatar}
-          <div>
+          <div className="min-w-0">
             <div className={nameClass}>{testimonial.name}</div>
             <div className={roleClass}>{testimonial.role}</div>
           </div>
@@ -93,7 +97,7 @@ function TestimonialCard({ testimonial, tone, className = "", topRightBadge }: T
 }
 
 function renderTestimonialCard({ testimonial, delay, tone, topRightBadge }: TestimonialRenderItem) {
-  const cardClassName = "md:flex md:h-[320px] md:flex-col md:justify-between md:overflow-hidden"
+  const cardClassName = "md:flex md:h-[320px] md:flex-col md:overflow-hidden"
 
   return (
     <MotionReveal key={`${testimonial.company}-${testimonial.name}`} preset="cardStrong" delay={delay}>

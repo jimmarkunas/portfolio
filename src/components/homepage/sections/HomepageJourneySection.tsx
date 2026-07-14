@@ -1,9 +1,7 @@
 "use client"
 
-import Link from "next/link"
-
+import { BookCallCta } from "@/components/BookCallCta"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import type { HomepageText } from "@/components/homepage/homepage"
 import {
   HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
@@ -14,7 +12,7 @@ import {
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 const recognitionRowClass =
-  "group relative isolate grid gap-5 bg-transparent py-6 md:grid-cols-[minmax(0,320px)_minmax(0,1fr)] md:items-start lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)_auto] lg:gap-8 lg:items-start"
+  "group relative isolate grid gap-5 bg-transparent py-6 md:grid-cols-[minmax(0,300px)_minmax(0,1fr)] md:items-start lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)_auto] lg:gap-8 lg:items-start"
 const recognitionSummaryClass =
   "type-p3 w-full max-w-[54ch] text-[#5B5B5B] leading-[1.8]"
 const featuredRecognitionRowClass =
@@ -26,33 +24,19 @@ const featuredTagClass =
   "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#2B2B2B] px-4 text-[14px] leading-6 tracking-[0.01em] text-white shadow-[0_1px_2px_rgba(34,34,34,0.08)]"
 const defaultTagClass =
   "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#EFEAE2] px-4 text-[14px] leading-6 tracking-[0.01em] text-[#4B4B4B] outline outline-1 outline-black/5 transition-colors duration-200 group-hover:bg-[#222222] group-hover:text-[#F4F1EA] group-hover:outline-[#222222]"
-const hoverLiftClass = "transition-transform duration-300 hover:-translate-y-0.5"
-const journeyCtaClass = `type-p2 inline-flex min-h-[44px] items-center gap-2 text-[#222222] underline underline-offset-4 ${hoverLiftClass}`
+const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
 const featuredWidgetClass =
   "rounded-[24px] border border-black/5 bg-[#FCFBF7] p-5 md:p-7 lg:p-8"
 
 type HomepageJourneySectionProps = {
-  section: HomepageText["sections"]["journey"]
+  section: HomepageText["sections"]["recognition"]
   journey: HomepageText["journey"]
-  bookCallHref: string
-  bookCallLabel: string
 }
 
 export function HomepageJourneySection({
   section,
   journey,
-  bookCallHref,
-  bookCallLabel,
 }: HomepageJourneySectionProps) {
-  const trackHomepageBookCall = () => {
-    trackEvent("book_call_click", {
-      location: "homepage_hero",
-      label: bookCallLabel,
-      href: bookCallHref,
-      page_path: getCurrentPagePath(),
-    })
-  }
-
   const trackHomepageOutbound = (label: string, href: string) => {
     trackEvent("outbound_link_click", {
       location: "homepage_hero",
@@ -65,7 +49,7 @@ export function HomepageJourneySection({
   const featured = journey.featured
 
   return (
-    <HomepageSectionShell className="bg-[#F3F0E9]">
+    <HomepageSectionShell className="bg-[#F3F3F3]">
       <div className="flex w-full flex-col gap-8 md:gap-10">
         <MotionReveal preset="hero" className="w-full" delay={0.04}>
             <HomepageSectionHeader label={section.pill}>
@@ -77,10 +61,7 @@ export function HomepageJourneySection({
               </h2>
               <div className="flex flex-col items-start gap-5 lg:pt-1">
                 <p className="type-p3 text-black/70">{section.intro}</p>
-                <Link href={bookCallHref} className={journeyCtaClass} onClick={trackHomepageBookCall}>
-                  <span>{section.cta}</span>
-                  <ArrowUpRightIcon />
-                </Link>
+                <BookCallCta location="homepage_journey" />
               </div>
             </div>
           </HomepageSectionHeader>

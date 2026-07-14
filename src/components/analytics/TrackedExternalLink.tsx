@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react"
 
+import { TextLink } from "@/components/TextLink"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 type TrackedExternalLinkProps = {
@@ -43,13 +44,14 @@ export function TrackedExternalLink({
   eventName,
 }: TrackedExternalLinkProps) {
   return (
-    <a
+    <TextLink
       href={href}
+      external
       target={target}
       rel={rel}
       download={download}
-      aria-label={ariaLabel}
       className={className}
+      ariaLabel={ariaLabel}
       onClick={() => {
         trackEvent(resolveEventName(label, eventName), {
           location,
@@ -60,6 +62,6 @@ export function TrackedExternalLink({
       }}
     >
       {children}
-    </a>
+    </TextLink>
   )
 }

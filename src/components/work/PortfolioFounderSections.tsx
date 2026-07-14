@@ -1,9 +1,8 @@
 "use client"
 
-import Link from "next/link"
 import { useReducedMotion } from "framer-motion"
 
-import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
+import { ButtonLink } from "@/components/ButtonLink"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { portfolioContent, siteRoutes } from "@/content/site"
 import {
@@ -58,13 +57,22 @@ export function PortfolioFounderSections({
             </h2>
 
             {showCta ? (
-              <Link
-                href={ctaHref}
-                className="hidden self-start min-h-[56px] items-center gap-2 rounded-[99px] bg-[#2B2B2B] px-6 pb-3.5 pt-3 text-[20px] leading-8 text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#447ACB] md:inline-flex md:self-auto"
-              >
+              <ButtonLink href={ctaHref} variant="bookCall" className="hidden self-start md:inline-flex md:self-auto">
                 <span>{ctaLabel}</span>
-                <ArrowUpRightIcon />
-              </Link>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M0.957229 11.3614L0 10.4042L9.02046 1.375H0.819729V0H11.3614V10.5417H9.9864V2.34094L0.957229 11.3614Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </ButtonLink>
             ) : null}
           </div>
         </PortfolioRevealWrap>

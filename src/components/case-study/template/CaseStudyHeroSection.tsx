@@ -4,6 +4,7 @@ import type { CaseStudyData } from "@/content/case-studies"
 import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
+import { TextLink } from "@/components/TextLink"
 
 import { CaseStudyActionButton } from "./CaseStudyActionButton"
 import { BreadcrumbHomeIcon } from "./CaseStudyTemplateIcons"
@@ -17,29 +18,27 @@ export function CaseStudyHeroSection({ data }: { data: CaseStudyData }) {
             <div className="flex flex-col gap-4 lg:gap-6">
               <MotionReveal preset="section">
                 <nav aria-label="Breadcrumb" className="type-p4 text-[#222222]">
-                <ol className="flex flex-wrap items-center gap-2">
-                  <li>
-                    <Link
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#222222] text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#447ACB] hover:text-white"
-                      href="/"
-                      aria-label="Home"
-                    >
-                      <BreadcrumbHomeIcon />
-                    </Link>
-                  </li>
-                  <li aria-hidden="true" className="text-[#222222]">
-                    &gt;
-                  </li>
-                  <li>
-                    <Link className="transition-[transform,color] duration-200 hover:-translate-y-0.5 hover:text-[#447ACB]" href="/work">
-                      Case Studies
-                    </Link>
-                  </li>
-                  <li aria-hidden="true" className="text-[#222222]">
-                    &gt;
-                  </li>
-                  <li className="text-[#222222]">{data.breadcrumbCurrent}</li>
-                </ol>
+                  <ol className="flex flex-wrap items-center gap-2">
+                    <li>
+                      <Link
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#222222] text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#447ACB] hover:text-white"
+                        href="/"
+                        aria-label="Home"
+                      >
+                        <BreadcrumbHomeIcon />
+                      </Link>
+                    </li>
+                    <li aria-hidden="true" className="text-[#222222]">
+                      &gt;
+                    </li>
+                    <li>
+                      <TextLink href="/work">Case Studies</TextLink>
+                    </li>
+                    <li aria-hidden="true" className="text-[#222222]">
+                      &gt;
+                    </li>
+                    <li className="text-[#222222]">{data.breadcrumbCurrent}</li>
+                  </ol>
                 </nav>
               </MotionReveal>
 

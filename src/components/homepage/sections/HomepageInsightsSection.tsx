@@ -54,41 +54,29 @@ function HomepageInsightTopCard({ logoSrc, logoAlt, value, description }: Homepa
   )
 }
 
-const serviceIconAssets: Record<
-  ServicesItem["icon"],
-  { src: string; scaleClass: string }
-> = {
-  uiux: { src: "/homepage/services/uiux-icon.png", scaleClass: "scale-[2.9]" },
-  branding: { src: "/homepage/services/branding-icon.png", scaleClass: "scale-[1.34]" },
-  graphic: { src: "/homepage/services/graphic-icon.png", scaleClass: "scale-[1.42]" },
-  web: { src: "/homepage/services/web-icon.png", scaleClass: "scale-[1.28]" },
-  marketing: { src: "/homepage/services/marketing-icon.png", scaleClass: "scale-[1.34]" },
-  motion: { src: "/homepage/services/motion-icon.png", scaleClass: "scale-[1.3]" },
-}
-
-function ServicesIcon({ icon }: { icon: ServicesItem["icon"] }) {
-  const asset = serviceIconAssets[icon]
-
+function ServiceCard({ item, index }: { item: ServicesItem; index: number }) {
   return (
-    <img
-      src={asset.src}
-      alt=""
-      aria-hidden="true"
-      className={`h-full w-full object-contain ${asset.scaleClass}`}
-    />
-  )
-}
+    <article className="relative flex h-full min-h-[220px] flex-col justify-between overflow-hidden rounded-[14px] bg-[#222222] p-6 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] xl:min-h-[240px]">
+      <div
+        className="service-card-ambient pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(68,122,203,0.2),transparent_44%)]"
+        style={{ animationDelay: `${index * 0.85}s` }}
+      />
 
-function ServiceCard({ item }: { item: ServicesItem }) {
-  return (
-    <article className="relative flex h-full min-h-[320px] flex-col items-center rounded-[10px] bg-[#F9FAFB] px-6 py-5 outline outline-1 outline-gray-200">
-      <div className="mt-3 flex justify-center text-[#2B2B2B]">
-        <div className="h-[50px] w-[50px]">
-          <ServicesIcon icon={item.icon} />
+      <div className="relative flex h-full flex-col justify-between gap-8">
+        <div className="flex w-full flex-col gap-4">
+          <div
+            className="service-card-accent h-[2px] w-6 rounded-full bg-[#447ACB]"
+            style={{ animationDelay: `${index * 0.85 + 0.2}s` }}
+          />
+          <p className="type-h5 w-full max-w-none text-white leading-[1.18]">
+            {item.outcome}
+          </p>
         </div>
+
+        <p className="type-p5 w-full uppercase tracking-[0.16em] text-white/50">
+          {item.category}
+        </p>
       </div>
-      <h3 className="type-h6 mt-8 text-center text-[#222222]">{item.title}</h3>
-      <p className="type-p3 mt-3 max-w-[360px] text-center text-black/80">{item.description}</p>
     </article>
   )
 }
@@ -97,17 +85,17 @@ export function HomepageServicesGrid({ services }: { services: HomepageText["ser
   return (
     <MotionReveal preset="cardStrong" className="w-full">
       <div className="grid w-full gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {services.map((item, index) => (
-          <MotionReveal
-            key={`${item.title}-${index}`}
-            preset="cardStrong"
-            className="h-full"
-            delay={0.06 + index * 0.04}
-          >
-            <ServiceCard item={item} />
-          </MotionReveal>
-        ))}
-      </div>
+          {services.map((item, index) => (
+            <MotionReveal
+              key={`${item.category}-${index}`}
+              preset="cardStrong"
+              className="h-full"
+              delay={0.06 + index * 0.04}
+            >
+              <ServiceCard item={item} index={index} />
+            </MotionReveal>
+          ))}
+        </div>
     </MotionReveal>
   )
 }

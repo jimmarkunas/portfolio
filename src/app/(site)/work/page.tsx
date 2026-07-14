@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 
 import { Container } from "@/components/Container"
+import { TextLink } from "@/components/TextLink"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
 import { StructuredData } from "@/components/seo/StructuredData"
 import { getHomepageText } from "@/components/homepage/homepage"
@@ -108,12 +108,9 @@ export default async function WorkPage() {
                     </p>
 
                     <h2 className="mt-3 text-[28px] leading-tight text-[#222222]">
-                      <Link
-                        href={`/work/${slug}`}
-                        className="transition-colors duration-200 hover:text-[#447ACB]"
-                      >
+                      <TextLink href={`/work/${slug}`}>
                         {study.hero.title}
-                      </Link>
+                      </TextLink>
                     </h2>
 
                     <p className="mt-3 text-[17px] leading-8 text-[#4B4B4B]">
@@ -124,12 +121,12 @@ export default async function WorkPage() {
                       {highlights}
                     </p>
 
-                    <Link
+                    <TextLink
                       href={`/work/${slug}`}
-                      className="mt-5 inline-flex text-[15px] leading-6 text-[#222222] underline decoration-[#222222]/30 underline-offset-4 transition-colors duration-200 hover:text-[#447ACB]"
+                      className="mt-5 inline-flex text-[15px] leading-6 text-[#222222] underline decoration-[#222222]/30 underline-offset-4"
                     >
                       Read the full case study
-                    </Link>
+                    </TextLink>
                   </article>
                 )
               })}

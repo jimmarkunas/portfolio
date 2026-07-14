@@ -51,13 +51,13 @@ export function AwardRow({
 }) {
   return (
     <article className="rounded-[10px] bg-[#222222] px-6 py-5 md:px-8 md:py-6">
-      <div className="grid gap-3 md:grid-cols-[140px_minmax(0,1fr)_max-content] md:items-center md:gap-6">
-        <div className="type-p2">
+      <div className="grid grid-cols-[72px_minmax(0,1fr)_max-content] gap-3 md:grid-cols-[88px_minmax(0,1fr)_max-content] md:gap-6 md:items-center 2xl:grid-cols-[140px_minmax(0,1fr)_max-content] 2xl:gap-6">
+        <div className="type-p2 min-w-0">
           <span className="text-white/65">{rank}</span>
           <span className="text-white"> {year}</span>
         </div>
-        <div className="type-p2 text-white md:text-center">{title}</div>
-        <div className="type-p2 text-white md:text-right md:whitespace-nowrap">{source}</div>
+        <div className="type-p2 min-w-0 text-left text-white">{title}</div>
+        <div className="type-p2 min-w-0 text-left text-white">{source}</div>
       </div>
     </article>
   )
@@ -97,6 +97,8 @@ export const HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS = "flex flex-col gap-3"
 export const HOMEPAGE_SECTION_HEADER_TITLE_CLASS = "type-h3"
 export const HOMEPAGE_HEADER_SECTION_TOP_INSET_CLASS = "pt-3 md:pt-4 lg:pt-6"
 export const HOMEPAGE_SECTION_SHELL_PADDING_CLASS = "py-10 md:py-12 lg:py-14"
+export const HOMEPAGE_PILL_CTA_CLASS =
+  "inline-flex min-h-[48px] min-w-[300px] items-center justify-center gap-2 rounded-[50px] border border-[#222222] bg-[#222222] px-5 text-[18px] font-medium whitespace-nowrap text-[#FEFEFE] transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] hover:text-[#FEFEFE] focus-visible:border-[#447ACB] focus-visible:bg-[#447ACB] focus-visible:text-[#FEFEFE] active:border-[#447ACB] active:bg-[#447ACB] active:text-[#FEFEFE]"
 
 type HomepageSectionShellProps = {
   className?: string

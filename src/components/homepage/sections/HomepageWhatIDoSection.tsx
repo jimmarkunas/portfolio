@@ -1,3 +1,4 @@
+import { BookCallCta } from "@/components/BookCallCta"
 import { Container } from "@/components/Container"
 import type { HomepageText } from "@/components/homepage/homepage"
 import {
@@ -7,7 +8,6 @@ import {
   HomepageSectionShell,
 } from "@/components/homepage/ui"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { siteCta } from "@/content/site"
 import Link from "next/link"
 
 type HomepageWhatIDoSectionProps = {
@@ -61,12 +61,7 @@ export function HomepageWhatIDoSection({
         <MotionReveal preset={useHomepageMotion ? "cardStrong" : "card"} className="w-full">
           <div className="flex flex-col items-center justify-center gap-3 rounded-[12px] border border-[#E6E6E6] bg-white px-6 py-8 text-center md:flex-row md:gap-2">
             <p className="type-p2 text-[#222222]">{section.ctaLead} -</p>
-            <Link
-              href={siteCta.bookingUrls.homepageHero}
-              className="type-p2 inline-flex items-center rounded-full bg-[#2B2B2B] px-5 py-2 text-white transition-colors hover:bg-[#1F1F1F]"
-            >
-              {siteCta.bookCallLabel}
-            </Link>
+            <BookCallCta location="homepage_what_ido" />
           </div>
         </MotionReveal>
 
