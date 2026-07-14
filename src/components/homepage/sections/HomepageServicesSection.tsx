@@ -1,4 +1,5 @@
 import { MotionReveal } from "@/components/motion/MotionReveal"
+import { ContentFlow } from "@/components/ContentFlow"
 import type { HomepageText } from "@/components/homepage/homepage"
 import {
   HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
@@ -16,14 +17,14 @@ type HomepageServicesSectionProps = {
 
 function ServiceCard({ item, index }: { item: ServicesItem; index: number }) {
   return (
-    <article className="relative flex h-full min-h-[220px] flex-col justify-between overflow-hidden rounded-[14px] bg-[#222222] p-6 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] xl:min-h-[240px]">
+    <article className="relative flex h-full min-h-[188px] flex-col justify-between overflow-hidden rounded-[14px] bg-[#222222] p-5 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] md:min-h-[220px] md:p-6 xl:min-h-[240px]">
       <div
         className="service-card-ambient pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(68,122,203,0.2),transparent_44%)]"
         style={{ animationDelay: `${index * 0.85}s` }}
       />
 
-      <div className="relative flex h-full flex-col justify-between gap-8">
-        <div className="flex w-full flex-col gap-4">
+      <div className="relative flex h-full flex-col justify-between gap-6 md:gap-8">
+        <div className="flex w-full flex-col gap-3 md:gap-4">
           <div
             className="service-card-accent h-[2px] w-6 rounded-full bg-[#447ACB]"
             style={{ animationDelay: `${index * 0.85 + 0.2}s` }}
@@ -46,7 +47,7 @@ export function HomepageServicesSection({
   services,
 }: HomepageServicesSectionProps) {
   return (
-    <HomepageSectionShell className="border border-red-500 bg-[#F3F3F3]">
+    <HomepageSectionShell className="bg-[#F3F3F3]">
       <div className="flex flex-col items-start gap-12">
         <MotionReveal preset="hero" className="w-full" delay={0.02}>
           <HomepageSectionHeader label={section.pill}>
@@ -54,7 +55,15 @@ export function HomepageServicesSection({
               className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} items-start lg:grid lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:items-start lg:gap-10`}
             >
               <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-[#222222]`}>{section.title}</h2>
-              <p className="type-p3 max-w-[962px] whitespace-pre-line text-black/80">{section.description}</p>
+              <div className="max-w-[962px]">
+                <ContentFlow spacing="body">
+                  {section.description.map((paragraph) => (
+                    <p key={paragraph} className="type-p3 text-black/80">
+                      {paragraph}
+                    </p>
+                  ))}
+                </ContentFlow>
+              </div>
             </div>
           </HomepageSectionHeader>
         </MotionReveal>

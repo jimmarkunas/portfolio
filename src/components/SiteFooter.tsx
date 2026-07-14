@@ -67,7 +67,7 @@ export function SiteFooter() {
       <div className="w-full bg-[#222222]">
         <Container className="bg-transparent px-0 md:px-0 lg:px-0">
           <div className="overflow-hidden bg-transparent">
-            <div className="mx-auto flex min-h-[400px] max-w-[840px] flex-col items-center justify-center px-8 py-20 text-center">
+            <div className="mx-auto flex min-h-[400px] max-w-[1040px] flex-col items-center justify-center px-8 py-20 text-center">
               <h2 className="type-h3 text-[#FEFEFE]">
                 <span className="block">Broken program. Impossible deadline.</span>
                 <span className="block">Skeptical stakeholders.</span>

@@ -1,7 +1,9 @@
+import type { CSSProperties } from "react"
+
 import Link from "next/link"
 
 import type { PortfolioImageCardProps } from "./types"
-import { portfolioHoverOverlayClass } from "./styles"
+import { portfolioHoverBorderClass, portfolioHoverOverlayClass } from "./styles"
 import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 
 function PortfolioHoverIcon() {
@@ -33,12 +35,16 @@ export function PortfolioImageCard({
   loading,
   fetchPriority,
 }: PortfolioImageCardProps) {
+  const aspectStyle = { "--portfolio-aspect-ratio": aspectRatio } as CSSProperties
+
   return (
     <div className={wrapperClassName}>
       <Link
         href={href}
-        className={className}
-        style={fillContainer ? undefined : { aspectRatio }}
+        className={`${className} aspect-[16/9] ${
+          fillContainer ? "md:h-full md:aspect-auto" : "md:[aspect-ratio:var(--portfolio-aspect-ratio)]"
+        }`}
+        style={aspectStyle}
         onClick={() => {
           trackEvent("case_study_open", {
             location: "portfolio_grid",
@@ -54,6 +60,7 @@ export function PortfolioImageCard({
           fetchPriority={fetchPriority}
           className="absolute inset-0 h-full w-full object-cover"
         />
+        <span aria-hidden="true" className={portfolioHoverBorderClass} />
         <span aria-hidden="true" className={portfolioHoverOverlayClass} />
         <PortfolioHoverIcon />
       </Link>

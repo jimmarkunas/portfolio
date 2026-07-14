@@ -1,5 +1,6 @@
 import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
 import { MotionReveal } from "@/components/motion/MotionReveal"
+import { ContentFlow } from "@/components/ContentFlow"
 import type { HomepageText } from "@/components/homepage/homepage"
 import type { ReactNode } from "react"
 import {
@@ -32,8 +33,41 @@ type HomepageInsightsSectionProps = {
 type HomepageInsightTopCardProps = {
   logoSrc?: string
   logoAlt?: string
-  value: ReactNode
+  value: string
   description: ReactNode
+}
+
+function renderAnimatedMetricText(value: string, trigger: "load" | "in-view") {
+  const metricPattern = /[$€£]?-?\d[\d,]*(?:\.\d+)?[A-Za-z%+]*/g
+  const matches = Array.from(value.matchAll(metricPattern))
+
+  if (matches.length <= 1) {
+    return <AnimatedMetricValue value={value} trigger={trigger} />
+  }
+
+  const pieces: ReactNode[] = []
+  let lastIndex = 0
+
+  matches.forEach((match, index) => {
+    if (match.index == null) {
+      return
+    }
+
+    const rawPrefix = value.slice(lastIndex, match.index)
+    if (rawPrefix) {
+      pieces.push(rawPrefix)
+    }
+
+    pieces.push(<AnimatedMetricValue key={`${match[0]}-${index}`} value={match[0]} trigger={trigger} />)
+    lastIndex = match.index + match[0].length
+  })
+
+  const trailingText = value.slice(lastIndex)
+  if (trailingText) {
+    pieces.push(trailingText)
+  }
+
+  return pieces
 }
 
 function HomepageInsightTopCard({ logoSrc, logoAlt, value, description }: HomepageInsightTopCardProps) {
@@ -47,7 +81,7 @@ function HomepageInsightTopCard({ logoSrc, logoAlt, value, description }: Homepa
             className="h-7 w-auto max-w-[140px] object-contain"
           />
         ) : null}
-        <div className="type-h5 shrink-0 text-white">{value}</div>
+        <div className="type-h5 shrink-0 text-white">{renderAnimatedMetricText(value, "in-view")}</div>
         <p className="type-ui-sm max-w-[320px] text-[#F4F4F4]">{description}</p>
       </div>
     </article>
@@ -56,14 +90,14 @@ function HomepageInsightTopCard({ logoSrc, logoAlt, value, description }: Homepa
 
 function ServiceCard({ item, index }: { item: ServicesItem; index: number }) {
   return (
-    <article className="relative flex h-full min-h-[220px] flex-col justify-between overflow-hidden rounded-[14px] bg-[#222222] p-6 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] xl:min-h-[240px]">
+    <article className="relative flex h-full min-h-[188px] flex-col justify-between overflow-hidden rounded-[14px] bg-[#222222] p-5 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] md:min-h-[220px] md:p-6 xl:min-h-[240px]">
       <div
         className="service-card-ambient pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(68,122,203,0.2),transparent_44%)]"
         style={{ animationDelay: `${index * 0.85}s` }}
       />
 
-      <div className="relative flex h-full flex-col justify-between gap-8">
-        <div className="flex w-full flex-col gap-4">
+      <div className="relative flex h-full flex-col justify-between gap-6 md:gap-8">
+        <div className="flex w-full flex-col gap-3 md:gap-4">
           <div
             className="service-card-accent h-[2px] w-6 rounded-full bg-[#447ACB]"
             style={{ animationDelay: `${index * 0.85 + 0.2}s` }}
@@ -105,8 +139,6 @@ function ProvenResultsLeadBlock({
 }: {
   section: HomepageText["sections"]["provenResults"]
 }) {
-  const [introCopy, snapshotCopy] = section.description.split(/\n\s*\n/).map((part) => part.trim())
-
   return (
     <MotionReveal preset="hero" className="w-full" delay={0.02}>
       <HomepageSectionHeader label={section.pill}>
@@ -116,9 +148,14 @@ function ProvenResultsLeadBlock({
           <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[540px] text-[#222222]`}>
             {section.title}
           </h2>
-          <div className="flex flex-col gap-10 pt-1 lg:max-w-[980px]">
-            {introCopy ? <p className="type-p3 text-black/80">{introCopy}</p> : null}
-            {snapshotCopy ? <p className="type-p3 text-black/80">{snapshotCopy}</p> : null}
+          <div className="pt-1 lg:max-w-[980px]">
+            <ContentFlow spacing="body">
+              {section.description.map((paragraph) => (
+                <p key={paragraph} className="type-p3 text-black/80">
+                  {paragraph}
+                </p>
+              ))}
+            </ContentFlow>
           </div>
         </div>
       </HomepageSectionHeader>
@@ -139,7 +176,7 @@ function TrustStatsRow({ stats }: { stats: HomepageText["stats"] }) {
               >
                 <div className="h-[3px] w-7 rounded-full bg-[#447ACB]" />
                 <div className="type-stat-number text-[#1C1C2E]">
-                  <AnimatedMetricValue value={stat.value} trigger="load" />
+                  <AnimatedMetricValue value={stat.value} trigger="in-view" />
                 </div>
                 <div className="type-rail-label font-semibold text-[#1C1C2E]">{stat.title}</div>
                 <div className="type-p5 text-[#6B7280]">{stat.subtitle}</div>

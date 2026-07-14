@@ -4,6 +4,7 @@ import { useReducedMotion } from "framer-motion"
 
 import { ButtonLink } from "@/components/ButtonLink"
 import { MotionReveal } from "@/components/motion/MotionReveal"
+import { HOMEPAGE_SECTION_HEADER_TITLE_CLASS } from "@/components/homepage/ui"
 import { portfolioContent, siteRoutes } from "@/content/site"
 import {
   PortfolioFeatureRow,
@@ -81,7 +82,7 @@ export function PortfolioFounderSections({
           reduceMotionEnabled={reduceMotionEnabled}
           show={visibility.pills}
           itemY={itemY}
-          className="flex w-full flex-wrap items-center justify-center gap-2 md:justify-start"
+          className="hidden w-full flex-wrap items-center justify-center gap-2 md:flex md:justify-start"
         >
           {portfolio.categories.map((category) => (
             <span
@@ -146,9 +147,9 @@ export function PortfolioFounderSections({
             </div>
 
             <div className="grid w-full gap-3 lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:items-start lg:gap-10">
-              <h3 className="text-left text-5xl font-normal leading-[56px] text-white">
-                {founder.title}
-              </h3>
+            <h3 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-white`}>
+              {founder.title}
+            </h3>
               {founder.description ? (
                 <p className="type-p3 max-w-[900px]" style={{ color: "rgba(255,255,255,0.76)" }}>
                   {founder.description}

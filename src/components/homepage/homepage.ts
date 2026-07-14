@@ -54,14 +54,18 @@ const fallbackHomepageText = {
     provenResults: {
       pill: "Proven Results",
       title: "My Business Impact",
-      description:
-        "I specialize in turning complex problems into elegant solutions. My approach blends creativity with strategic.\n\nHere's a snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and digital transformation programs.\n\n",
+      description: [
+        "I specialize in turning complex problems into elegant solutions. My approach blends creativity with strategic.",
+        "Here's a snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and digital transformation programs.",
+      ],
     },
     experience: {
       pill: "Experience",
       title: "My Areas of Expertise",
-      description:
-        "I sit at the intersection of three capabilities: program delivery (TPM), product thinking (PO), and platform/integration fluency (Solutions Architecture).\n\nI’m a specialist who sequences: SA fluency to diagnose, PO instincts to prioritize, and TPM rigor to execute. That’s my superpower.",
+      description: [
+        "I sit at the intersection of three capabilities: program delivery (TPM), product thinking (PO), and platform/integration fluency (Solutions Architecture).",
+        "I’m a specialist who sequences: SA fluency to diagnose, PO instincts to prioritize, and TPM rigor to execute. That’s my superpower.",
+      ],
     },
     testimonials: {
       pill: "Testimonials",

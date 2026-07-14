@@ -9,6 +9,7 @@ import { HomepageTestimonialsSection } from "@/components/homepage/sections/Home
 import { HomepagePullQuoteSection } from "@/components/homepage/sections/HomepagePullQuoteSection"
 import { HomepageJourneySection } from "@/components/homepage/sections/HomepageJourneySection"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
+import { ContentFlow } from "@/components/ContentFlow"
 import { siteRoutes } from "@/content/site"
 import {
   HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
@@ -53,20 +54,26 @@ export default function Homepage() {
         containerClassName="!px-8 md:!px-12 lg:!px-12"
       >
         <div className="flex w-full flex-col gap-8 md:gap-10">
-          <MotionReveal preset="hero" className="w-full" delay={0.02}>
-            <HomepageSectionHeader label={sections.experience.pill}>
-              <div
-                className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} w-full lg:grid lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:gap-12`}
-              >
-                <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[540px] text-[#222222]`}>
-                  {sections.experience.title}
-                </h2>
-                <p className="type-p3 max-w-[980px] whitespace-pre-line text-black/80">
-                  {sections.experience.description}
-                </p>
-              </div>
-            </HomepageSectionHeader>
-          </MotionReveal>
+            <MotionReveal preset="hero" className="w-full" delay={0.02}>
+              <HomepageSectionHeader label={sections.experience.pill}>
+                <div
+                  className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} w-full lg:grid lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:gap-12`}
+                >
+                  <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[540px] text-[#222222]`}>
+                    {sections.experience.title}
+                  </h2>
+                  <div className="max-w-[980px]">
+                    <ContentFlow spacing="body">
+                      {sections.experience.description.map((paragraph) => (
+                        <p key={paragraph} className="type-p3 text-black/80">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </ContentFlow>
+                  </div>
+                </div>
+              </HomepageSectionHeader>
+            </MotionReveal>
 
           <HomepageServicesGrid services={services} />
         </div>

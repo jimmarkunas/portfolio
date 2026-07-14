@@ -148,7 +148,10 @@ export function HomepageTestimonialsSection({ section, testimonials }: HomepageT
   ].filter((item): item is TestimonialRenderItem => Boolean(item.testimonial))
 
   return (
-    <HomepageSectionShell className="bg-[#F3F3F3]">
+    <HomepageSectionShell
+      className="bg-[#F3F3F3]"
+      paddingClassName="pt-10 pb-0 md:pt-12 md:pb-0 lg:pt-14 lg:pb-0"
+    >
       <div className="flex flex-col items-center gap-6 md:gap-8">
         <div className="w-full">
           <div className="mx-auto flex w-full flex-col items-center gap-6 md:gap-8">

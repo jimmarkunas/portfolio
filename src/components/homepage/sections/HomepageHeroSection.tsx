@@ -38,7 +38,7 @@ export function HomepageHeroSection({ hero }: HomepageHeroSectionProps) {
   const desktopRailLeft = `calc(${desktopHeaderLeftInset} - ${desktopHeroRailLineX}px)`
 
   return (
-    <section className="w-full border border-red-500 bg-[#F3F3F3]">
+    <section className="w-full bg-[#F3F3F3]">
       <Container className="bg-[#F3F3F3] px-0 md:hidden">
         <div className="bg-[#F3F3F3] px-6 pb-10 pt-8">
           <div className="mx-auto max-w-[440px]">

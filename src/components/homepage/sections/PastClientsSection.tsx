@@ -99,7 +99,7 @@ export function PastClientsSection({
                   <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-white`}>Enterprises I&apos;ve Helped</h2>
                 </HomepageSectionHeader>
 
-                <MotionReveal preset={useHomepageMotion ? "flow" : "section"} className="w-full">
+                <MotionReveal preset="section" className="w-full">
                   <div className="relative mx-auto w-full max-w-[1440px] overflow-hidden px-6 py-6 md:px-10 md:py-8 lg:px-10 lg:py-10">
                     <div className="pointer-events-none absolute left-2 top-4 h-16 w-16 rounded-tl-[18px] border-l border-t border-white/10 md:left-6 md:top-6 md:h-20 md:w-20" />
                     <div className="pointer-events-none absolute right-2 top-4 h-16 w-16 rounded-tr-[18px] border-r border-t border-white/10 md:right-6 md:top-6 md:h-20 md:w-20" />

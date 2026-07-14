@@ -3,9 +3,11 @@ import type { Metadata } from "next"
 import { BookCallCta } from "@/components/BookCallCta"
 import { ButtonLink } from "@/components/ButtonLink"
 import { Container } from "@/components/Container"
+import { ContentFlow } from "@/components/ContentFlow"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { ArrowUpRightIcon } from "@/components/icons/ui-icons"
 import { TextLink } from "@/components/TextLink"
+import { siteCta } from "@/content/site"
 import { buildPageMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = buildPageMetadata({
@@ -87,6 +89,55 @@ export default function DesignSystemReferencePage() {
           </div>
         </section>
 
+        <section className="space-y-6 rounded-[20px] border border-black/8 bg-white p-6">
+          <div className="space-y-2">
+            <h2 className="type-h5 text-[#222222]">Content flow</h2>
+            <p className="type-p4 max-w-3xl text-black/55">
+              P1–P5 own typography and line-height. ContentFlow owns spacing between semantic content
+              blocks. Section and grid components own macro-layout spacing. Embedded newline
+              characters do not create paragraph structure.
+            </p>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-3">
+            <article className="rounded-[20px] border border-black/8 bg-[#F8F8F8] p-6">
+              <div className="type-p5 text-black/45">Wrapped paragraph</div>
+              <div className="mt-4 max-w-[28rem]">
+                <p className="type-p3 text-black/70">
+                  This wrapped paragraph proves that line-height still belongs to the canonical
+                  paragraph type scale, not the flow primitive.
+                </p>
+              </div>
+            </article>
+
+            <article className="rounded-[20px] border border-black/8 bg-[#F8F8F8] p-6">
+              <div className="type-p5 text-black/45">Body flow</div>
+              <div className="mt-4 max-w-[28rem]">
+                <ContentFlow spacing="body">
+                  <p className="type-p3 text-black/70">
+                    This is the first paragraph in a real content flow.
+                  </p>
+                  <p className="type-p3 text-black/70">
+                    This is the second paragraph with the shared 20px rhythm between blocks.
+                  </p>
+                </ContentFlow>
+              </div>
+            </article>
+
+            <article className="rounded-[20px] border border-black/8 bg-[#222222] p-6 text-white">
+              <div className="type-p5 text-white/55">Compact flow</div>
+              <div className="mt-4 max-w-[28rem]">
+                <ContentFlow spacing="compact">
+                  <p className="type-p3 text-white/80">
+                    This supporting note stays closely associated with the call to action below.
+                  </p>
+                  <BookCallCta location="design-system-reference-content-flow" tone="brand" />
+                </ContentFlow>
+              </div>
+            </article>
+          </div>
+        </section>
+
         <section className="space-y-6">
           <div className="space-y-2">
             <h2 className="type-h5 text-[#222222]">Buttons</h2>
@@ -120,7 +171,7 @@ export default function DesignSystemReferencePage() {
             <article className="rounded-[20px] border border-black/8 bg-white p-6">
               <div className="type-p5 text-black/45">Book Call</div>
               <div className="mt-4">
-                <ButtonLink href="/contact" variant="bookCall">
+                <ButtonLink href={siteCta.bookingUrls.siteShell} variant="bookCall" external>
                   Book a Call
                   <ArrowUpRightIcon size={12} />
                 </ButtonLink>

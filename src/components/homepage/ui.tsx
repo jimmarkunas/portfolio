@@ -114,7 +114,7 @@ export function HomepageSectionShell({
   children,
 }: HomepageSectionShellProps) {
   return (
-    <section className={`w-full border border-red-500 ${className}`.trim()}>
+    <section className={`w-full ${className}`.trim()}>
       <Container className={`${paddingClassName} ${containerClassName}`.trim()}>{children}</Container>
     </section>
   )

@@ -14,10 +14,10 @@ import { getCurrentPagePath, trackEvent } from "@/lib/analytics"
 const recognitionRowClass =
   "group relative isolate grid gap-5 bg-transparent py-6 md:grid-cols-[minmax(0,300px)_minmax(0,1fr)] md:items-start lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)_auto] lg:gap-8 lg:items-start"
 const recognitionSummaryClass =
-  "type-p3 w-full max-w-[54ch] text-[#5B5B5B] leading-[1.8]"
+  "type-p3 w-full max-w-[54ch] text-[#5B5B5B]"
 const featuredRecognitionRowClass =
   "grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:items-start lg:grid-cols-[minmax(0,530px)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:items-start lg:gap-x-8 lg:gap-y-3"
-const featuredSummaryClass = "type-p3 w-full max-w-[54ch] text-[#545454] leading-[1.8]"
+const featuredSummaryClass = "type-p3 w-full max-w-[54ch] text-[#545454]"
 const linkedRecognitionRowClass =
   "cursor-pointer focus-visible:outline-[3px] focus-visible:outline-[#447ACB] focus-visible:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)]"
 const featuredTagClass =
@@ -185,7 +185,7 @@ export function HomepageJourneySection({
                         href={featured.href}
                         target={featured.external ? "_blank" : undefined}
                         rel={featured.external ? "noopener noreferrer" : undefined}
-                        className={recognitionSummaryClass}
+                        className={`${recognitionSummaryClass} md:max-w-none`}
                         onClick={() => {
                           if (featured.external) {
                             trackHomepageOutbound(featured.company, featured.href)
@@ -195,7 +195,7 @@ export function HomepageJourneySection({
                         {featured.summary}
                       </a>
                     ) : (
-                      <p className={recognitionSummaryClass}>{featured.summary}</p>
+                      <p className={`${recognitionSummaryClass} md:max-w-none`}>{featured.summary}</p>
                     )}
                   </div>
                 </div>
@@ -237,10 +237,19 @@ export function HomepageJourneySection({
                 const rowDelay = 0.18 + index * 0.06
                 const rowContent = (
                   <>
-                    <div>
-                      <h3 className="type-h6 text-[#222222] transition-colors duration-200 group-hover:text-[#447ACB]">
-                        {entry.company}
-                      </h3>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 md:block">
+                        <h3 className="type-h6 text-[#222222] transition-colors duration-200 group-hover:text-[#447ACB]">
+                          {entry.company}
+                        </h3>
+                        <div className="flex flex-wrap gap-2 md:hidden">
+                          {entry.tags.map((tag) => (
+                            <span key={`${entry.company}-${tag}`} className={`${defaultTagClass} type-p4`}>
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                       <p className="type-p4 mt-1 text-[#767676] transition-colors duration-200 group-hover:text-[#222222]">
                         {entry.date}
                       </p>
@@ -250,7 +259,7 @@ export function HomepageJourneySection({
                         {entry.summary}
                       </p>
                     </div>
-                    <div className="flex flex-wrap justify-start gap-2 md:col-start-2 lg:col-start-3 lg:justify-end">
+                    <div className="hidden flex-wrap justify-start gap-2 md:col-start-2 md:flex lg:col-start-3 lg:justify-end">
                       {entry.tags.map((tag) => (
                         <span key={tag} className={`${defaultTagClass} type-p4`}>
                           {tag}

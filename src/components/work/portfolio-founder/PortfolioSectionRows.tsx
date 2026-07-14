@@ -62,7 +62,7 @@ type PortfolioFounderRowProps = {
 }
 
 const ease: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
-const PORTFOLIO_GUTTER_CLASS = "gap-6"
+const PORTFOLIO_GUTTER_CLASS = "gap-4 md:gap-6"
 
 export function RevealWrap({
   reduceMotionEnabled,

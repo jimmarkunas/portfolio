@@ -15,7 +15,10 @@ type HomepageAwardsSectionProps = {
 
 export function HomepageAwardsSection({ section, awards }: HomepageAwardsSectionProps) {
   return (
-    <HomepageSectionShell className="bg-[#F3F3F3]">
+    <HomepageSectionShell
+      className="bg-[#F3F3F3]"
+      paddingClassName="pt-10 pb-0 md:pt-12 md:pb-0 lg:pt-14 lg:pb-0"
+    >
       <div className="flex flex-col gap-12 md:gap-14 lg:gap-16">
         <div className="grid gap-10 2xl:grid-cols-[minmax(0,480px)_minmax(0,1fr)] 2xl:gap-12">
           <MotionReveal preset="hero" className="w-full" delay={0.02}>
