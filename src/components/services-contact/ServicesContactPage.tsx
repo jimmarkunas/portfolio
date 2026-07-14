@@ -73,16 +73,16 @@ export function ServicesContactPage({ entryPoint = "services" }: ServicesContact
                     <h3 className="text-2xl leading-8 text-zinc-600">Follow Me</h3>
                     <div className="mt-2 flex items-center gap-1">
                       {contactSocialLinks.map((link) => (
-                        <TrackedExternalLink
-                          key={link.label}
-                          href={link.href}
-                          label={link.label}
-                          location={socialLinkLocation}
-                          ariaLabel={link.label}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex h-12 w-12 items-center justify-center text-[#1F1F1F] transition-[transform,color] duration-200 hover:-translate-y-0.5 hover:text-[#447ACB]"
-                        >
+                          <TrackedExternalLink
+                            key={link.label}
+                            href={link.href}
+                            label={link.label}
+                            location={socialLinkLocation}
+                            ariaLabel={link.label}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex h-12 w-12 items-center justify-center text-[#1F1F1F] transition-colors duration-200 hover:text-[#447ACB]"
+                          >
                           <span
                             aria-hidden="true"
                             className="block h-5 w-5 bg-current"

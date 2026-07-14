@@ -14,8 +14,6 @@ export const metadata: Metadata = buildPageMetadata({
   useDefaultImage: false,
 })
 
-const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
-
 export default function FreebiesPage() {
   return (
     <main className="min-h-full bg-[#F3F3F3]">
@@ -58,7 +56,7 @@ export default function FreebiesPage() {
                               label={`Download ${asset.title}`}
                               location="freebies_download"
                               download={asset.fileName}
-                              className={`button-primary min-h-[44px] px-4 text-[15px] ${hoverLiftClass}`}
+                              className="button-primary min-h-[44px] px-4 text-[15px]"
                             >
                               <Download className="h-4 w-4" aria-hidden="true" />
                               <span>Download</span>
@@ -70,7 +68,7 @@ export default function FreebiesPage() {
                               location="freebies_open"
                               target="_blank"
                               rel="noreferrer"
-                              className={`inline-text-cta type-p4 ${hoverLiftClass}`}
+                              className="inline-text-cta type-p4"
                             >
                               <span>Open</span>
                               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />

@@ -162,7 +162,7 @@ CSS variables: `--space-{n}`
 **`.icon-circle-button`**
 - 48×48px circle (`--radius-circle`)
 - Background: `--color-ink`, icon: white
-- Hover: background → `--color-accent`, `translateY(-1px)`
+- Hover/focus-visible: background → `--color-accent`
 
 ### Labels & pills
 
@@ -196,4 +196,5 @@ CSS variables: `--space-{n}`
 - Typography leads — let scale and weight do the work before reaching for color or decoration.
 - Surfaces stay quiet — white, light gray (`#F3F3F3`), and border (`#E5E7EB`) are the only surface colors.
 - Blue is an action color — `--color-accent` appears only on interactive states (hover, focus, CTA fills). Never use it decoratively.
-- Transitions are fast and subtle — 160ms ease across color and transform.
+- Transitions are fast and subtle - 160ms ease across color, background, border, outline, shadow, and opacity.
+- Interactive state changes must not alter component geometry. Use color, background, border color, outline, shadow, or opacity for feedback. Translation, scaling, dimensional changes, and typography changes are prohibited unless explicitly documented as an intentional motion variant.

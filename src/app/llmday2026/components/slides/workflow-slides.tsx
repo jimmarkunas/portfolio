@@ -47,7 +47,7 @@ function StrategyCard({
 }) {
   return (
     <div
-      className={`group flex items-center gap-6 rounded-3xl border p-8 transition-all ${
+      className={`group flex items-center gap-6 rounded-3xl border p-8 transition-colors ${
         destructive
           ? "border-white/10 bg-white/5 hover:border-red-500/20 hover:bg-red-500/5"
           : "border-white/10 bg-white/5 hover:border-emerald-500/20 hover:bg-emerald-500/5"

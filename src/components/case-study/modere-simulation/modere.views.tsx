@@ -44,7 +44,7 @@ export function TopChrome({ revenue, onReset }: { revenue: number; onReset: () =
         <button
           type="button"
           onClick={onReset}
-          className="flex h-10 w-10 items-center justify-center border border-white/20 bg-black/40 backdrop-blur-sm transition-all hover:bg-white hover:text-black"
+          className="flex h-10 w-10 items-center justify-center border border-white/20 bg-black/40 backdrop-blur-sm transition-colors hover:bg-white hover:text-black"
           title="Restart Game"
         >
           <RefreshCcw className="h-5 w-5" />
@@ -111,7 +111,7 @@ export function IntroView({ onStart }: { onStart: () => void }) {
           <button
             type="button"
             onClick={onStart}
-            className="group inline-flex min-h-14 w-full items-center justify-center gap-3 border border-white bg-white px-6 text-[18px] font-medium text-black transition-all hover:-translate-y-px"
+            className="group inline-flex min-h-14 w-full items-center justify-center gap-3 border border-white bg-white px-6 text-[18px] font-medium text-black transition-colors hover:border-white/90 hover:bg-[#F8F8F8]"
           >
             Enter Simulation
             <motion.span
@@ -171,10 +171,10 @@ export function DecisionView({
             key={option.label}
             type="button"
             onClick={() => onSelect(option)}
-            className="group relative flex min-h-[300px] flex-col justify-between border border-white/10 p-8 text-left transition-all hover:border-white md:p-10"
+            className="group relative flex min-h-[300px] flex-col justify-between border border-white/10 p-8 text-left transition-colors hover:border-white md:p-10"
           >
             <div>
-              <div className="mb-6 text-[11px] font-bold uppercase tracking-[0.28em] text-[#9CA3AF] transition-opacity group-hover:text-white">
+              <div className="mb-6 text-[11px] font-bold uppercase tracking-[0.28em] text-[#9CA3AF] transition-colors group-hover:text-white">
                 Option {index + 1}
               </div>
               <div className="mb-4 text-[30px] leading-tight tracking-[-0.03em] md:text-[38px]">
@@ -185,7 +185,7 @@ export function DecisionView({
               </p>
             </div>
 
-            <div className="mt-8 flex translate-x-[-10px] items-center gap-2 text-[11px] font-bold uppercase tracking-[0.28em] text-white opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100">
+            <div className="mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.28em] text-white opacity-0 transition-opacity group-hover:opacity-100">
               Select Decision
               <ArrowRight className="h-4 w-4" />
             </div>
@@ -212,7 +212,7 @@ function ResultsTabs({
           type="button"
           onClick={() => onChange(tab.value)}
           className={cn(
-            "inline-flex min-h-11 items-center border px-4 text-[11px] font-bold uppercase tracking-[0.24em] transition-all",
+            "inline-flex min-h-11 items-center border px-4 text-[11px] font-bold uppercase tracking-[0.24em] transition-colors",
             value === tab.value
               ? "border-white bg-white text-black"
               : "border-white/15 text-[#D1D5DB] hover:border-white/40 hover:text-white",

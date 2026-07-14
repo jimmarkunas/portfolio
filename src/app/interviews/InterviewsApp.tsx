@@ -90,14 +90,14 @@ export default function InterviewsApp() {
           <div className="flex gap-4">
             <button
               onClick={prevSlide}
-              className="p-3 rounded-full border border-finox-slate/50 hover:bg-white hover:text-finox-dark transition-all group"
+              className="group rounded-full border border-finox-slate/50 p-3 transition-colors hover:bg-white hover:text-finox-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
               aria-label={navCopy.previousAriaLabel}
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={nextSlide}
-              className="p-3 rounded-full border border-finox-slate/50 hover:bg-white hover:text-finox-dark transition-all group"
+              className="group rounded-full border border-finox-slate/50 p-3 transition-colors hover:bg-white hover:text-finox-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
               aria-label={navCopy.nextAriaLabel}
             >
               <ChevronRight className="w-6 h-6" />
@@ -118,7 +118,7 @@ export default function InterviewsApp() {
             </button>
             <button
               onClick={toggleFullscreen}
-              className="p-3 rounded-full border border-finox-slate/50 hover:bg-white hover:text-finox-dark transition-all"
+              className="rounded-full border border-finox-slate/50 p-3 transition-colors hover:bg-white hover:text-finox-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
               aria-label={navCopy.toggleFullscreenAriaLabel}
             >
               {isFullscreen ? <Minimize className="w-5 h-5" /> : <Maximize className="w-5 h-5" />}

@@ -29,8 +29,6 @@ function normalizePeriod(period: string) {
   return period.replace("–", "-")
 }
 
-const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
-
 type CvRevealProps = {
   children: ReactNode
   className?: string
@@ -67,7 +65,7 @@ export default function CvPage() {
                       label={asset.label}
                       location="cv_download"
                       download={asset.fileName}
-                      className={`${index === 0 ? "button-primary" : "button-secondary"} ${hoverLiftClass}`}
+                      className={index === 0 ? "button-primary" : "button-secondary"}
                     >
                       {asset.label}
                     </TrackedExternalLink>
@@ -79,7 +77,7 @@ export default function CvPage() {
                     <CvReveal key={stat.label} preset="card" delay={index * 0.04} className="h-full">
                       <Link
                         href={stat.href ?? siteRoutes.work}
-                        className={`flex h-full flex-col items-center justify-center gap-3 rounded-[10px] bg-white px-6 py-6 text-center outline outline-1 outline-black/5 ${hoverLiftClass} md:px-7 md:py-7`}
+                        className="flex h-full flex-col items-center justify-center gap-3 rounded-[10px] bg-white px-6 py-6 text-center outline outline-1 outline-black/5 transition-[background-color,box-shadow,outline-color] duration-200 hover:bg-[#FAFAFA] hover:shadow-[0_0_0_1px_rgba(68,122,203,0.18)] md:px-7 md:py-7"
                       >
                         <div className="type-stat-number text-[#242840]">
                           <AnimatedMetricValue value={stat.value} trigger="load" />
@@ -234,7 +232,7 @@ export default function CvPage() {
                     <CvReveal key={`${award.rank}-${award.title}`} preset="card" delay={index * 0.04}>
                       <Link
                         href={award.href}
-                        className="block transition-[transform,opacity] duration-200 hover:-translate-y-0.5 hover:opacity-90"
+                        className="block transition-opacity duration-200 hover:opacity-90"
                       >
                         {rowBody}
                       </Link>

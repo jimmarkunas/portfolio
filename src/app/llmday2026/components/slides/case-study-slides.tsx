@@ -388,7 +388,7 @@ export function SlideDirectvManual({ slide }: { slide: Slides["directvManual"] }
             return (
               <div
                 key={module.id}
-                className="group flex min-h-[290px] flex-col items-center justify-center space-y-8 rounded-3xl border border-white/10 bg-white/5 p-10 text-center transition-all hover:bg-white/10"
+                className="group flex min-h-[290px] flex-col items-center justify-center space-y-8 rounded-3xl border border-white/10 bg-white/5 p-10 text-center transition-colors hover:bg-white/10"
               >
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 text-finox-gray transition-colors group-hover:text-white">
                   <Icon className="h-6 w-6" />
@@ -462,7 +462,7 @@ export function SlideAiAmplified({ slide }: { slide: Slides["aiAmplified"] }) {
           {slide.agents.map((agent) => (
             <div
               key={agent.id}
-              className="space-y-6 rounded-3xl border border-white/10 bg-white/5 p-8 transition-all hover:bg-white/10"
+              className="space-y-6 rounded-3xl border border-white/10 bg-white/5 p-8 transition-colors hover:bg-white/10"
             >
               <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 ${toneClass(agent.tone)}`}>
                 {agent.id === "ai-reporting" ? (

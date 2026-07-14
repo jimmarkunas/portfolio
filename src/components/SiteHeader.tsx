@@ -10,8 +10,6 @@ import { FinoxGlyph } from "@/components/FinoxGlyph"
 import { TextLink } from "@/components/TextLink"
 import { primaryNavLinks, siteIdentity } from "@/content/site"
 
-const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
-
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -21,7 +19,7 @@ export function SiteHeader() {
         <div className="flex items-center justify-between gap-6">
           <Link
             href="/"
-            className={`flex items-center justify-start gap-[10px] text-[20px] text-[#222222] transition-colors duration-150 hover:text-[#447ACB] ${hoverLiftClass} md:text-[22px] lg:text-[24px]`}
+            className="flex items-center justify-start gap-[10px] text-[20px] text-[#222222] transition-colors duration-150 hover:text-[#447ACB] md:text-[22px] lg:text-[24px]"
             onClick={() => setIsOpen(false)}
           >
             <span className="inline-flex items-baseline leading-none">
@@ -53,7 +51,7 @@ export function SiteHeader() {
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
             aria-controls="mobile-site-nav"
-            className={`inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#222222]/10 bg-[#FEFEFE] text-[#222222] transition-colors hover:border-[#447ACB] hover:text-[#447ACB] ${hoverLiftClass} lg:hidden`}
+            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#222222]/10 bg-[#FEFEFE] text-[#222222] transition-colors hover:border-[#447ACB] hover:text-[#447ACB] lg:hidden"
             onClick={() => setIsOpen((open) => !open)}
           >
             {isOpen ? <X className="h-5 w-5" strokeWidth={2} /> : <Menu className="h-5 w-5" strokeWidth={2} />}

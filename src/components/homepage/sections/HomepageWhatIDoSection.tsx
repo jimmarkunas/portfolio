@@ -74,7 +74,7 @@ export function HomepageWhatIDoSection({
                 delay={index * 0.04}
               >
                 <Link href={engagement.href} className="group block h-full">
-                  <article className="h-full rounded-[10px] border border-[#E7E7E7] bg-[#F3F3F3] p-5 transition-all duration-200 group-hover:border-[#4B7FD1] group-hover:shadow-[0_0_0_1px_rgba(75,127,209,0.35),0_0_24px_rgba(75,127,209,0.28)] md:p-6">
+                  <article className="h-full rounded-[10px] border border-[#E7E7E7] bg-[#F3F3F3] p-5 transition-[background-color,border-color,box-shadow] duration-200 group-hover:border-[#447ACB] group-hover:shadow-[0_0_0_1px_rgba(68,122,203,0.35),0_0_24px_rgba(68,122,203,0.28)] md:p-6">
                     <div className="flex flex-col gap-4">
                       <div className="min-w-0">
                         <div className="flex flex-col items-start gap-2">

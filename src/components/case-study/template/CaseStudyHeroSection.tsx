@@ -19,12 +19,12 @@ export function CaseStudyHeroSection({ data }: { data: CaseStudyData }) {
               <MotionReveal preset="section">
                 <nav aria-label="Breadcrumb" className="type-p4 text-[#222222]">
                   <ol className="flex flex-wrap items-center gap-2">
-                    <li>
-                      <Link
-                        className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#222222] text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#447ACB] hover:text-white"
-                        href="/"
-                        aria-label="Home"
-                      >
+                  <li>
+                    <Link
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#222222] text-white transition-colors duration-200 hover:bg-[#447ACB] hover:text-white"
+                      href="/"
+                      aria-label="Home"
+                    >
                         <BreadcrumbHomeIcon />
                       </Link>
                     </li>

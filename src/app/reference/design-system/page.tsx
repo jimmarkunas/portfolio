@@ -30,6 +30,16 @@ export default function DesignSystemReferencePage() {
           </div>
         </section>
 
+        <section className="space-y-3 rounded-[20px] border border-black/8 bg-white p-6">
+          <h2 className="type-h5 text-[#222222]">Interaction rule</h2>
+          <p className="type-p4 max-w-4xl text-black/60">
+            Interactive state changes must not alter component geometry. Use color,
+            background, border color, outline, shadow, or opacity for feedback.
+            Translation, scaling, dimensional changes, and typography changes are
+            prohibited unless explicitly documented as an intentional motion variant.
+          </p>
+        </section>
+
         <section className="space-y-6">
           <div className="space-y-2">
             <h2 className="type-h5 text-[#222222]">Text links</h2>
@@ -81,14 +91,14 @@ export default function DesignSystemReferencePage() {
           <div className="space-y-2">
             <h2 className="type-h5 text-[#222222]">Buttons</h2>
             <p className="type-p4 max-w-3xl text-black/55">
-              `BookCallCta` is the semantic booking wrapper. `See More` should render the same visual
-              primitive directly through `ButtonLink` with `variant="bookCall"`.
+              The shared button primitives also stay stationary on hover, press,
+              and focus-visible. They only change paint properties.
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             <article className="rounded-[20px] border border-black/8 bg-white p-6">
-              <div className="type-p5 text-black/45">Primary button</div>
+              <div className="type-p5 text-black/45">Primary</div>
               <div className="mt-4">
                 <ButtonLink href="/work" variant="primary">
                   See More
@@ -98,24 +108,7 @@ export default function DesignSystemReferencePage() {
             </article>
 
             <article className="rounded-[20px] border border-black/8 bg-white p-6">
-              <div className="type-p5 text-black/45">Book a Call wrapper</div>
-              <div className="mt-4">
-                <BookCallCta location="design-system-reference" />
-              </div>
-            </article>
-
-            <article className="rounded-[20px] border border-black/8 bg-white p-6">
-              <div className="type-p5 text-black/45">Shared booking primitive</div>
-              <div className="mt-4">
-                <ButtonLink href="/work" variant="bookCall">
-                  See More
-                  <ArrowUpRightIcon size={12} />
-                </ButtonLink>
-              </div>
-            </article>
-
-            <article className="rounded-[20px] border border-black/8 bg-white p-6">
-              <div className="type-p5 text-black/45">Secondary button</div>
+              <div className="type-p5 text-black/45">Secondary</div>
               <div className="mt-4">
                 <ButtonLink href="/contact" variant="secondary">
                   See More
@@ -123,6 +116,34 @@ export default function DesignSystemReferencePage() {
                 </ButtonLink>
               </div>
             </article>
+
+            <article className="rounded-[20px] border border-black/8 bg-white p-6">
+              <div className="type-p5 text-black/45">Book Call</div>
+              <div className="mt-4">
+                <ButtonLink href="/contact" variant="bookCall">
+                  Book a Call
+                  <ArrowUpRightIcon size={12} />
+                </ButtonLink>
+              </div>
+            </article>
+
+            <article className="rounded-[20px] border border-black/8 bg-[#222222] p-6">
+              <div className="type-p5 text-white/55">Brand tone</div>
+              <div className="mt-4">
+                <BookCallCta location="design-system-reference" tone="brand" />
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <div className="space-y-2">
+            <h2 className="type-h5 text-[#222222]">Notes</h2>
+            <p className="type-p4 max-w-3xl text-black/55">
+              `BookCallCta` remains the semantic booking wrapper for the live app.
+              The shared primitives above are the canonical interaction surface for
+              standard buttons and links.
+            </p>
           </div>
         </section>
       </Container>

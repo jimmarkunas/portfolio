@@ -47,8 +47,8 @@ export function CaseStudyActionButton({
 
   const className =
     variant === "primary"
-      ? "inline-flex min-h-[56px] items-center gap-2 rounded-[99px] bg-[#2B2B2B] px-6 pb-3.5 pt-3 text-[20px] leading-8 text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#447ACB]"
-      : "inline-flex min-h-[56px] items-center rounded-[99px] border border-[#222222]/12 bg-white px-6 pb-3.5 pt-3 text-[20px] leading-8 text-[#222222] transition-[transform,color,border-color] duration-200 hover:-translate-y-0.5 hover:border-[#447ACB] hover:text-[#447ACB]"
+      ? "inline-flex min-h-[56px] items-center gap-2 rounded-[99px] bg-[#2B2B2B] px-6 pb-3.5 pt-3 text-[20px] leading-8 text-white transition-colors duration-200 hover:bg-[#447ACB]"
+      : "inline-flex min-h-[56px] items-center rounded-[99px] border border-[#222222]/12 bg-white px-6 pb-3.5 pt-3 text-[20px] leading-8 text-[#222222] transition-colors duration-200 hover:border-[#447ACB] hover:text-[#447ACB]"
 
   const content = (
     <>

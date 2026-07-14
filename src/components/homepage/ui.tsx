@@ -260,7 +260,7 @@ export function HighlightCard({
             {category}
           </div>
 
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#222222] shadow-[0_8px_24px_rgba(34,34,34,0.08)] transition-all duration-200 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:bg-[#4B7FD1] group-hover:text-white">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#222222] shadow-[0_8px_24px_rgba(34,34,34,0.08)] transition-colors duration-200 group-hover:bg-[#4B7FD1] group-hover:text-white">
             <ArrowUpRightIcon size={22} />
           </div>
         </div>

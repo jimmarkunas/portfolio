@@ -19,12 +19,11 @@ const featuredRecognitionRowClass =
   "grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:items-start lg:grid-cols-[minmax(0,530px)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:items-start lg:gap-x-8 lg:gap-y-3"
 const featuredSummaryClass = "type-p3 w-full max-w-[54ch] text-[#545454] leading-[1.8]"
 const linkedRecognitionRowClass =
-  "cursor-pointer focus-visible:outline-[3px] focus-visible:outline-blue-500 focus-visible:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)]"
+  "cursor-pointer focus-visible:outline-[3px] focus-visible:outline-[#447ACB] focus-visible:shadow-[0_0_0_3px_rgba(68,122,203,0.22),0_12px_40px_rgba(68,122,203,0.48)]"
 const featuredTagClass =
   "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#2B2B2B] px-4 text-[14px] leading-6 tracking-[0.01em] text-white shadow-[0_1px_2px_rgba(34,34,34,0.08)]"
 const defaultTagClass =
   "inline-flex min-h-[32px] items-center rounded-[999px] bg-[#EFEAE2] px-4 text-[14px] leading-6 tracking-[0.01em] text-[#4B4B4B] outline outline-1 outline-black/5 transition-colors duration-200 group-hover:bg-[#222222] group-hover:text-[#F4F1EA] group-hover:outline-[#222222]"
-const hoverLiftClass = "transition-transform duration-200 hover:-translate-y-0.5"
 const featuredWidgetClass =
   "rounded-[24px] border border-black/5 bg-[#FCFBF7] p-5 md:p-7 lg:p-8"
 
@@ -239,7 +238,7 @@ export function HomepageJourneySection({
                 const rowContent = (
                   <>
                     <div>
-                      <h3 className="type-h6 text-[#222222] transition-colors duration-200 group-hover:text-blue-500">
+                      <h3 className="type-h6 text-[#222222] transition-colors duration-200 group-hover:text-[#447ACB]">
                         {entry.company}
                       </h3>
                       <p className="type-p4 mt-1 text-[#767676] transition-colors duration-200 group-hover:text-[#222222]">
@@ -247,7 +246,7 @@ export function HomepageJourneySection({
                       </p>
                     </div>
                     <div className="flex flex-col items-start gap-4 md:col-start-2 md:gap-5 lg:col-start-2 lg:pt-1">
-                      <p className={`${recognitionSummaryClass} transition-colors duration-200 group-hover:text-blue-500`}>
+                      <p className={`${recognitionSummaryClass} transition-colors duration-200 group-hover:text-[#447ACB]`}>
                         {entry.summary}
                       </p>
                     </div>

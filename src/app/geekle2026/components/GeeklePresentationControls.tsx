@@ -26,14 +26,14 @@ export function GeeklePresentationControls({
       <div className="flex gap-4">
         <button
           onClick={onPrevSlide}
-          className="group rounded-full border border-finox-slate/50 p-3 transition-all hover:bg-white hover:text-finox-dark"
+          className="group rounded-full border border-finox-slate/50 p-3 transition-colors hover:bg-white hover:text-finox-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
           aria-label={navCopy.previousAriaLabel}
         >
           <ChevronLeft className="h-6 w-6" />
         </button>
         <button
           onClick={onNextSlide}
-          className="group rounded-full border border-finox-slate/50 p-3 transition-all hover:bg-white hover:text-finox-dark"
+          className="group rounded-full border border-finox-slate/50 p-3 transition-colors hover:bg-white hover:text-finox-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
           aria-label={navCopy.nextAriaLabel}
         >
           <ChevronRight className="h-6 w-6" />
@@ -46,7 +46,7 @@ export function GeeklePresentationControls({
         </div>
         <button
           onClick={onToggleFullscreen}
-          className="rounded-full border border-finox-slate/50 p-3 transition-all hover:bg-white hover:text-finox-dark"
+          className="rounded-full border border-finox-slate/50 p-3 transition-colors hover:bg-white hover:text-finox-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
           aria-label={navCopy.toggleFullscreenAriaLabel}
         >
           {isFullscreen ? <Minimize className="h-5 w-5" /> : <Maximize className="h-5 w-5" />}

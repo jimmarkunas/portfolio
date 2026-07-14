@@ -81,9 +81,12 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                       />
                     </div>
 
-                    <div className={isFoh
-                      ? "flex w-full max-w-none flex-col gap-4 md:col-start-1 lg:col-start-2 xl:max-w-[320px]"
-                      : "flex w-full max-w-none flex-col gap-8 md:col-start-1 lg:col-start-2 lg:max-w-[320px]"}
+                    <div
+                      className={
+                        isFoh
+                          ? "flex w-full max-w-none flex-col gap-4 md:col-start-1 lg:col-start-2 xl:max-w-[320px]"
+                          : "flex w-full max-w-none flex-col gap-8 md:col-start-1 lg:col-start-2 lg:max-w-[320px]"
+                      }
                     >
                       <div>
                         <h3 className="type-h6 text-[#222222]">{data.recognition.featured.company}</h3>
@@ -99,9 +102,12 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                       </p>
                     </div>
 
-                    <div className={isFoh
-                      ? "flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-2 lg:row-start-2 lg:justify-start xl:col-start-3 xl:row-start-1 xl:justify-end xl:flex-nowrap"
-                      : "flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-3 lg:flex-nowrap"}
+                    <div
+                      className={
+                        isFoh
+                          ? "flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-2 lg:row-start-2 lg:justify-start xl:col-start-3 xl:row-start-1 xl:justify-end xl:flex-nowrap"
+                          : "flex w-full flex-wrap items-center gap-2 md:col-start-2 md:w-auto md:justify-end lg:col-start-3 lg:flex-nowrap"
+                      }
                     >
                       {data.recognition.featured.tags.map((tag, tagIndex) => (
                         <TagPill key={`${tag}-${tagIndex}`} variant="dark">
@@ -143,7 +149,7 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
                   {viewerHref ? (
                     <Link
                       href={viewerHref}
-                      className="block w-full cursor-pointer border-b border-[#E5E7EB] py-7 transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#F5F7FA]"
+                      className="block w-full cursor-pointer border-b border-[#E5E7EB] py-7 transition-colors duration-200 hover:bg-[#F5F7FA]"
                     >
                       {inner}
                     </Link>

@@ -9,7 +9,7 @@ const fallbackHomepageText = {
     scroll: "Scroll down ↓",
     projectCompletedValue: "75",
     projectCompletedLabel: "Projects Delivered",
-    startupRaisedValue: "$1B+",
+    startupRaisedValue: "$1B",
     startupRaisedLabel: "ROI Delivered",
   },
   sections: {

@@ -77,12 +77,11 @@
   border-radius: var(--radius-circle);
   background: var(--color-ink);
   color: var(--color-white);
-  transition: background-color 160ms ease, transform 160ms ease;
+  transition: background-color 160ms ease, color 160ms ease;
 }
 
 .icon-circle-button:hover {
   background: var(--color-accent);
-  transform: translateY(-1px);
 }
 
 .button-primary {
@@ -99,13 +98,21 @@
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
-    transform 160ms ease;
+    color 160ms ease;
 }
 
 .button-primary:hover {
   background: var(--color-accent);
   border-color: var(--color-accent);
-  transform: translateY(-1px);
+}
+
+.button-primary:focus-visible,
+.button-secondary:focus-visible,
+.button-book-call:focus-visible,
+.button-book-call--brand:focus-visible,
+.icon-circle-button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .button-secondary {
@@ -122,13 +129,12 @@
   transition:
     color 160ms ease,
     border-color 160ms ease,
-    transform 160ms ease;
+    background-color 160ms ease;
 }
 
 .button-secondary:hover {
   color: var(--color-accent-hover);
   border-color: var(--color-accent-hover);
-  transform: translateY(-1px);
 }
 
 .button-book-call {
@@ -148,14 +154,12 @@
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
-    color 160ms ease,
-    transform 160ms ease;
+    color 160ms ease;
 }
 
 .button-book-call:hover {
   background: var(--color-accent);
   border-color: var(--color-accent);
-  transform: translateY(-1px);
 }
 
 .button-book-call--brand {

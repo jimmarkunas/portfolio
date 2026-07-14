@@ -122,7 +122,7 @@ export function MobileSolutionCarousel({ slides }: MobileSolutionCarouselProps) 
             type="button"
             aria-label={`Go to image ${index + 1}`}
             onClick={() => goTo(index)}
-            className={`h-2.5 cursor-pointer rounded-full transition-all ${
+            className={`h-2.5 cursor-pointer rounded-full transition-colors ${
               index === activeIndex ? "w-8 bg-[#222222]" : "w-2.5 bg-[#222222]/20"
             }`}
           />
