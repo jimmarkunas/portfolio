@@ -5,8 +5,8 @@ import { motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
 
 import { interviewContent } from "@/content/interviews";
-import { InterviewSlideFrame } from "./components/InterviewSlideFrame";
-import { InterviewTocDialog } from "./components/InterviewTocDialog";
+import { PresentationSlideFrame } from "@/components/presentation/PresentationSlideFrame";
+import { PresentationTocDialog } from "@/components/presentation/PresentationTocDialog";
 import { useInterviewNavigation } from "./hooks/useInterviewNavigation";
 import { useInterviewSlides } from "./hooks/useInterviewSlides";
 import { usePmPopQuizCategories } from "./hooks/usePmPopQuizCategories";
@@ -77,13 +77,9 @@ export default function InterviewsApp() {
         </div>
 
         <div className="absolute inset-x-0 top-0" style={{ bottom: `${contentBottomInset}px` }}>
-          <InterviewSlideFrame
-            isActive={true}
-            brandLogoSrc={content.brandLogo.src}
-            brandLogoAlt={content.brandLogo.alt}
-          >
+          <PresentationSlideFrame isActive brandLogoSrc={content.brandLogo.src} brandLogoAlt={content.brandLogo.alt}>
             {slides[currentSlide]}
-          </InterviewSlideFrame>
+          </PresentationSlideFrame>
         </div>
 
         <div ref={navRef} className="absolute bottom-4 left-0 z-50 flex w-full items-center justify-between px-4 sm:px-6 md:bottom-8 md:px-12">
@@ -126,7 +122,8 @@ export default function InterviewsApp() {
           </div>
         </div>
 
-        <InterviewTocDialog
+        <PresentationTocDialog
+          dialogId="interviews-slide-toc"
           isOpen={isTocOpen}
           currentSlide={currentSlide}
           slideTitles={slideTitles}
