@@ -84,7 +84,7 @@ export function SiteFooter() {
                 <ButtonLink
                   href={siteRoutes.cv}
                   variant="secondary"
-                  className="type-ui-md font-medium !border-white/20 !text-[#FEFEFE] hover:!border-[#447ACB] hover:!text-[#447ACB]"
+                  className="footer-cv-cta type-ui-md font-medium"
                 >
                   My CV
                 </ButtonLink>

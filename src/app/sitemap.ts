@@ -40,19 +40,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  const pressEntries: MetadataRoute.Sitemap = studies.flatMap(({ slug, study }) =>
-    (study.recognition?.rows ?? [])
-      .filter((row) => Boolean(row.file))
-      .map((row) => {
-        const basename = row.file!.split("/").pop()!.replace(/\.[^.]+$/, "")
-        return {
-          url: absoluteUrl(`/work/${slug}/press/${encodeURIComponent(basename)}/`),
-          lastModified: now,
-          changeFrequency: "yearly" as const,
-          priority: 0.5,
-        }
-      })
-  )
-
-  return [...staticEntries, ...caseStudyEntries, ...pressEntries]
+  return [...staticEntries, ...caseStudyEntries]
 }
