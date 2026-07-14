@@ -1,16 +1,7 @@
-import type { Metadata } from "next"
-import { ServicesContactPage } from "@/components/services-contact/ServicesContactPage"
-import { siteCanonicalPaths } from "@/content/site"
-import { buildPageMetadata } from "@/lib/seo"
+import { permanentRedirect } from "next/navigation"
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "Services",
-  description:
-    "Services by Jim Markunas: product leadership, platform architecture, and transformation programs.",
-  canonicalPath: siteCanonicalPaths.services,
-  useDefaultImage: false,
-})
+import { siteRoutes } from "@/content/site"
 
 export default function ServicesPage() {
-  return <ServicesContactPage entryPoint="services" />
+  permanentRedirect(siteRoutes.contact)
 }

@@ -1,13 +1,6 @@
 import { ContactForm } from "@/components/ContactForm"
 import { Container } from "@/components/Container"
-import { getHomepageText } from "@/components/homepage/homepage"
-import { HomepageHeroSection } from "@/components/homepage/sections/HomepageHeroSection"
-import { PastClientsSection } from "@/components/homepage/sections/PastClientsSection"
-import { HomepageWhatIDoSection } from "@/components/homepage/sections/HomepageWhatIDoSection"
 import dynamic from "next/dynamic"
-import { CareerStatsSection } from "@/components/services-contact/CareerStatsSection"
-import { ServicesProjectsSection } from "@/components/services-contact/ServicesProjectsSection"
-import { ScrollToSectionOnMount } from "@/components/services-contact/ScrollToSectionOnMount"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { TrackedExternalLink } from "@/components/analytics/TrackedExternalLink"
 import { contactSocialLinks, servicesContactContent } from "@/content/site"
@@ -16,10 +9,6 @@ const GlobalLocationsMap = dynamic(
   () => import("@/components/case-study/GlobalLocationsMap").then((mod) => mod.GlobalLocationsMap),
   { ssr: false },
 )
-
-type ServicesContactPageProps = {
-  entryPoint?: "services" | "contact"
-}
 
 function SectionEyebrow({ label }: { label: string }) {
   return (
@@ -32,33 +21,12 @@ function SectionEyebrow({ label }: { label: string }) {
   )
 }
 
-export function ServicesContactPage({ entryPoint = "services" }: ServicesContactPageProps) {
-  const { contact, careerStats, projectShowcase, servicesMap } = servicesContactContent
-  const { hero, sections, experienceEngagements } = getHomepageText()
-  const scrollToContact = entryPoint === "contact"
-  const socialLinkLocation = entryPoint === "contact" ? "contact_page" : "services_page"
+export function ServicesContactPage() {
+  const { contact, servicesMap } = servicesContactContent
+  const socialLinkLocation = "contact_page"
 
   return (
     <main className="min-h-full bg-[#F3F3F3]">
-      {scrollToContact ? <ScrollToSectionOnMount targetId="contact" /> : null}
-
-      <section id="services" className="scroll-mt-28">
-        <HomepageHeroSection hero={hero} />
-        <HomepageWhatIDoSection section={sections.whatIDo} engagements={experienceEngagements} />
-        <PastClientsSection showHeading />
-        <CareerStatsSection
-          eyebrow={careerStats.eyebrow}
-          title={careerStats.title}
-          intro={careerStats.intro}
-          stats={careerStats.stats}
-        />
-        <ServicesProjectsSection
-          eyebrow={projectShowcase.eyebrow}
-          title={projectShowcase.title}
-          logos={projectShowcase.logos}
-        />
-      </section>
-
       <section id="contact" className="scroll-mt-28 border-t border-black/10 py-14 md:py-16 lg:py-20">
         <Container>
           <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
@@ -73,16 +41,16 @@ export function ServicesContactPage({ entryPoint = "services" }: ServicesContact
                     <h3 className="text-2xl leading-8 text-zinc-600">Follow Me</h3>
                     <div className="mt-2 flex items-center gap-1">
                       {contactSocialLinks.map((link) => (
-                          <TrackedExternalLink
-                            key={link.label}
-                            href={link.href}
-                            label={link.label}
-                            location={socialLinkLocation}
-                            ariaLabel={link.label}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex h-12 w-12 items-center justify-center text-[#1F1F1F] transition-colors duration-200 hover:text-[#447ACB]"
-                          >
+                        <TrackedExternalLink
+                          key={link.label}
+                          href={link.href}
+                          label={link.label}
+                          location={socialLinkLocation}
+                          ariaLabel={link.label}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex h-12 w-12 items-center justify-center text-[#1F1F1F] transition-colors duration-200 hover:text-[#447ACB]"
+                        >
                           <span
                             aria-hidden="true"
                             className="block h-5 w-5 bg-current"
@@ -96,14 +64,13 @@ export function ServicesContactPage({ entryPoint = "services" }: ServicesContact
                               maskSize: "contain",
                               WebkitMaskSize: "contain",
                             }}
-                          />
+                            />
                         </TrackedExternalLink>
                       ))}
                     </div>
                   </div>
                 </div>
               </div>
-
             </MotionReveal>
 
             <MotionReveal preset="card" delay={0.05} className="w-full lg:max-w-[766px]">

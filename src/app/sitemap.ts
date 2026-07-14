@@ -13,7 +13,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const publicStaticRoutes = [
     siteRoutes.home,
     siteRoutes.work,
-    siteRoutes.services,
     siteRoutes.cv,
     siteRoutes.contact,
     siteRoutes.freebies,
