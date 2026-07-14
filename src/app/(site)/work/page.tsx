@@ -24,36 +24,19 @@ export const metadata: Metadata = buildPageMetadata({
 export default async function WorkPage() {
   const { sections } = getHomepageText()
   const studies = await loadAllCaseStudies()
+  const introCopy = {
+    pill: "Portfolio Index",
+    title: "Case studies in commerce transformation, platform modernization, and delivery rescue",
+    description: `${studies.length} public case studies covering digital commerce, multi-brand architecture, enterprise delivery, and measurable business outcomes across retail, utilities, insurance, streaming, and global platform programs.`,
+  }
 
   return (
     <main className="min-h-full bg-[#F3F3F3]">
       <StructuredData data={createWorkCollectionStructuredData(studies)} />
       <section className="w-full bg-[#F3F3F3]">
-        <Container className="pb-4 pt-8 md:pb-6 md:pt-10 lg:pb-8 lg:pt-12">
-          <div className="max-w-[980px] space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-4 py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]">
-              <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
-              <span className="text-[14px] leading-5 text-[#222222]">Portfolio Index</span>
-            </div>
-
-            <h1 className="max-w-[900px] text-4xl font-normal leading-tight text-[#222222] md:text-5xl md:leading-[1.08]">
-              Case studies in commerce transformation, platform modernization,
-              and delivery rescue
-            </h1>
-
-            <p className="max-w-[860px] text-[18px] leading-8 text-[#4B4B4B]">
-              {studies.length} public case studies covering digital commerce,
-              multi-brand architecture, enterprise delivery, and measurable
-              business outcomes across retail, utilities, insurance, streaming,
-              and global platform programs.
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      <section className="w-full bg-[#F3F3F3]">
         <Container className="pb-14 pt-7 md:pb-16 md:pt-8 lg:pb-[72px] lg:pt-[36px]">
           <PortfolioFounderSections
+            intro={introCopy}
             portfolio={sections.portfolio}
             founder={sections.portfolio.moreProjects}
             ctaLabel={sections.highlights.cta}

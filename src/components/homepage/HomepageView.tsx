@@ -39,7 +39,6 @@ export default function Homepage() {
       <PastClientsSection
         motionStyle="homepage"
         showRescueCta
-        rescueCtaLead={sections.whatIDo.ctaLead}
       />
 
       <HomepageInsightsSection

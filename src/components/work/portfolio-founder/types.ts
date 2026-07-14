@@ -15,6 +15,11 @@ export type FounderSectionCopy = {
 export type PortfolioFounderSectionsProps = {
   portfolio: PortfolioSectionCopy
   founder: FounderSectionCopy
+  intro?: {
+    pill: string
+    title: string
+    description: string
+  }
   ctaLabel?: string
   ctaHref?: string
   showCta?: boolean

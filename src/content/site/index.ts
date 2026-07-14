@@ -15,6 +15,5 @@ export {
   siteRoutes,
 } from "./config"
 export type {
-  CareerStatEntry,
   ServiceProjectLogoEntry,
 } from "./services-contact"

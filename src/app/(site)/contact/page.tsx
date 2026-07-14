@@ -12,5 +12,5 @@ export const metadata: Metadata = buildPageMetadata({
 })
 
 export default function ContactPage() {
-  return <ServicesContactPage entryPoint="contact" />
+  return <ServicesContactPage />
 }

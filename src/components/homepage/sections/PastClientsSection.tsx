@@ -4,14 +4,11 @@ import {
   HomepageSectionHeader,
   HomepageSectionShell,
 } from "@/components/homepage/ui"
-import { siteCta } from "@/content/site"
-import Link from "next/link"
 
 type PastClientsSectionProps = {
   showHeading?: boolean
   motionStyle?: "default" | "homepage"
   showRescueCta?: boolean
-  rescueCtaLead?: string
 }
 
 const clientLogos = [
@@ -53,7 +50,6 @@ export function PastClientsSection({
   showHeading = false,
   motionStyle = "default",
   showRescueCta = false,
-  rescueCtaLead = "",
 }: PastClientsSectionProps) {
   const useHomepageMotion = motionStyle === "homepage"
   const usePullQuoteStyle = !showHeading && showRescueCta

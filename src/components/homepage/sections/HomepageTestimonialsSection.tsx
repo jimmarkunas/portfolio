@@ -108,44 +108,50 @@ function renderTestimonialCard({ testimonial, delay, tone, topRightBadge }: Test
 
 export function HomepageTestimonialsSection({ section, testimonials }: HomepageTestimonialsSectionProps) {
   const leftColumnTestimonials = [
-    {
-      testimonial: testimonials[0],
-      delay: 0.06,
-      tone: "dark" as const,
-      topRightBadge: (
-        <div className="h-10 w-10 overflow-hidden rounded-full bg-white/15">
-          <img src="/testimonials/tfa-logo.jpg" alt="TFA logo" className="h-full w-full object-cover" />
-        </div>
-      ),
-    },
-    {
-      testimonial: testimonials[6],
-      delay: 0.18,
-      tone: "dark" as const,
-    },
-  ].filter((item): item is TestimonialRenderItem => Boolean(item.testimonial))
+    testimonials[0]
+      ? {
+          testimonial: testimonials[0],
+          delay: 0.06,
+          tone: "dark" as const,
+          topRightBadge: (
+            <div className="h-10 w-10 overflow-hidden rounded-full bg-white/15">
+              <img src="/testimonials/tfa-logo.jpg" alt="TFA logo" className="h-full w-full object-cover" />
+            </div>
+          ),
+        }
+      : null,
+    testimonials[6]
+      ? {
+          testimonial: testimonials[6],
+          delay: 0.18,
+          tone: "dark" as const,
+        }
+      : null,
+  ].filter(Boolean) as TestimonialRenderItem[]
 
   const middleColumnTestimonials = [
-    { testimonial: testimonials[1], delay: 0.1, tone: "light" as const },
-    {
-      testimonial: testimonials[5],
-      delay: 0.18,
-      tone: "light" as const,
-      topRightBadge: (
-        <div
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-[#2B2B2B]"
-          aria-hidden="true"
-        >
-          <Shirt className="h-5 w-5" strokeWidth={1.8} />
-        </div>
-      ),
-    },
-  ].filter((item): item is TestimonialRenderItem => Boolean(item.testimonial))
+    testimonials[1] ? { testimonial: testimonials[1], delay: 0.1, tone: "light" as const } : null,
+    testimonials[5]
+      ? {
+          testimonial: testimonials[5],
+          delay: 0.18,
+          tone: "light" as const,
+          topRightBadge: (
+            <div
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E7EB] text-[#2B2B2B]"
+              aria-hidden="true"
+            >
+              <Shirt className="h-5 w-5" strokeWidth={1.8} />
+            </div>
+          ),
+        }
+      : null,
+  ].filter(Boolean) as TestimonialRenderItem[]
 
   const rightColumnTestimonials = [
-    { testimonial: testimonials[2], delay: 0.12, tone: "light" as const },
-    { testimonial: testimonials[3], delay: 0.2, tone: "light" as const },
-  ].filter((item): item is TestimonialRenderItem => Boolean(item.testimonial))
+    testimonials[2] ? { testimonial: testimonials[2], delay: 0.12, tone: "light" as const } : null,
+    testimonials[3] ? { testimonial: testimonials[3], delay: 0.2, tone: "light" as const } : null,
+  ].filter(Boolean) as TestimonialRenderItem[]
 
   return (
     <HomepageSectionShell

@@ -29,7 +29,7 @@ const wipeVariants = {
     clipPath: "inset(0 0 0 0)",
     transition: {
       duration: 0.42,
-      ease: [0.22, 1, 0.36, 1],
+      ease: "easeOut" as const,
     },
   },
   exit: (direction: number) => ({
@@ -38,7 +38,7 @@ const wipeVariants = {
     clipPath: direction > 0 ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)",
     transition: {
       duration: 0.28,
-      ease: [0.22, 1, 0.36, 1],
+      ease: "easeOut" as const,
     },
   }),
 }

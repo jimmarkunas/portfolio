@@ -20,6 +20,7 @@ import { useStagedPortfolioReveal } from "./portfolio-founder/useStagedPortfolio
 const { founderShowcase, portfolioShowcase } = portfolioContent
 
 export function PortfolioFounderSections({
+  intro,
   portfolio,
   founder,
   ctaLabel = "See More",
@@ -47,6 +48,21 @@ export function PortfolioFounderSections({
           itemY={itemY}
           className="flex w-full flex-col items-start gap-8"
         >
+          {intro ? (
+            <div className="max-w-[980px] space-y-4">
+              <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-4 py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]">
+                <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
+                <span className="text-[14px] leading-5 text-[#222222]">{intro.pill}</span>
+              </div>
+
+              <h2 className="max-w-[900px] text-4xl font-normal leading-tight text-[#222222] md:text-5xl md:leading-[1.08]">
+                {intro.title}
+              </h2>
+
+              <p className="max-w-[860px] text-[18px] leading-8 text-[#4B4B4B]">{intro.description}</p>
+            </div>
+          ) : null}
+
           <div className="inline-flex items-center gap-2 rounded-[50px] bg-white px-6 py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]">
             <span className="h-3 w-3 rounded-full bg-[#2B2B2B]" />
             <span className="type-p2 text-[#222222]">{portfolio.pill}</span>
