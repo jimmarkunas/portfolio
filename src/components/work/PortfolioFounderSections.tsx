@@ -95,7 +95,7 @@ export function PortfolioFounderSections({
           ) : (
             <>
               <EyebrowPill
-                className="!px-6 !py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]"
+                className="w-fit self-start !px-6 !py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]"
                 labelClassName="type-p2 text-[#222222]"
               >
                 {portfolio.pill}
