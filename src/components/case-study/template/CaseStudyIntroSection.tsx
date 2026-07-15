@@ -4,7 +4,7 @@ import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { PullQuote } from "@/components/PullQuote"
-import { StatCard } from "@/components/StatCard"
+import { StatText } from "@/components/StatText"
 import { TagPill } from "@/components/TagPill"
 import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
 import {
@@ -41,21 +41,16 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
 
             <div className="grid w-full grid-cols-2 gap-5 md:grid-cols-2">
               {data.atAGlance.stats.map((card) => (
-                <StatCard
-                  key={`${card.value}-${card.label}`}
-                  value={`${card.value}${
-                    card.suffix
-                      ? `${card.suffix.length > 1 && card.suffix !== "+" ? " " : ""}${card.suffix}`
-                      : ""
-                  }`}
-                  animationTrigger="load"
-                  label={card.label}
-                  className="h-[176px] px-8 py-10"
-                  valueClassName="text-center text-slate-800"
-                  valueTextClassName="type-stat-number font-semibold"
-                  labelClassName="type-p2 max-w-[220px] text-neutral-700"
-                  contentClassName="gap-4"
-                />
+                <article key={`${card.value}-${card.label}`} className="relative overflow-hidden rounded-[10px] bg-white h-[176px] px-8 py-10">
+                  <StatText
+                    value={card.value}
+                    suffix={card.suffix}
+                    label={card.label}
+                    className="justify-center"
+                    metricRowClassName="gap-0.5"
+                    labelClassName="type-p2 max-w-[220px] text-center text-neutral-700"
+                  />
+                </article>
               ))}
             </div>
           </div>

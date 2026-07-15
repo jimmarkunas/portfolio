@@ -1,67 +1,82 @@
 "use client"
 
+import Link from "next/link"
+
+import { BreadcrumbHomeIcon } from "@/components/case-study/template/CaseStudyTemplateIcons"
+import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
+import { StatText } from "@/components/StatText"
 import { TextLink } from "@/components/TextLink"
-import { StatCard } from "@/components/StatCard"
 import type { CaseStudyTemplateTestData } from "@/content/case-study-template-test"
-import { CaseStudySectionHeader } from "./CaseStudySectionHeader"
 
 export function CaseStudyOutcomeHeroSection({ data }: { data: CaseStudyTemplateTestData }) {
   return (
     <section className="bg-[#F3F3F3]">
-      <Container className="pb-14 pt-6 md:pb-16 md:pt-8 lg:pb-20 lg:pt-10">
-        <div className="flex flex-col gap-8 lg:gap-10">
+      <Container className="pb-14 pt-8 md:pb-16 md:pt-10 lg:pb-20 lg:pt-12">
+        <div className="flex flex-col gap-6 lg:gap-8">
           <MotionReveal preset="section">
             <nav aria-label="Breadcrumb" className="type-p4 text-[#222222]">
               <ol className="flex flex-wrap items-center gap-2">
                 <li>
-                  <TextLink href="/work/" className="font-medium">
-                    Work
-                  </TextLink>
+                  <Link
+                    className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#222222] text-white transition-colors duration-200 hover:bg-[#447ACB] hover:text-white"
+                    href="/"
+                    aria-label="Home"
+                  >
+                    <BreadcrumbHomeIcon />
+                  </Link>
                 </li>
-                <li aria-hidden="true" className="text-[#222222]/55">
-                  /
+                <li aria-hidden="true" className="text-[#222222]">
+                  &gt;
                 </li>
-                <li>{data.breadcrumbCurrent}</li>
+                <li>
+                  <TextLink href="/work">Case Studies</TextLink>
+                </li>
+                <li aria-hidden="true" className="text-[#222222]">
+                  &gt;
+                </li>
+                <li className="text-[#222222]">{data.breadcrumbCurrent}</li>
               </ol>
             </nav>
           </MotionReveal>
 
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-start lg:gap-12">
-            <MotionReveal preset="section" className="flex max-w-[820px] flex-col items-start gap-6">
-              <CaseStudySectionHeader
-                eyebrow={data.hero.eyebrow}
-                title={data.hero.title}
-                copy={data.hero.intro}
-              />
+            <MotionReveal preset="section" className="flex max-w-[820px] flex-col items-start gap-3">
+              <h1 className="type-h3 md:type-h2 lg:type-h1 xl:type-h1-case-study text-[#222222]">
+                {data.hero.title}
+              </h1>
+              <p className="type-p3 max-w-[760px] text-black/66">{data.hero.intro}</p>
             </MotionReveal>
 
-            <MotionReveal preset="card" delay={0.04} className="grid gap-4 sm:grid-cols-3 lg:pt-2">
+            <MotionReveal preset="card" delay={0.04} className="grid gap-4 xl:grid-cols-3">
               {data.hero.metrics.map((metric) => (
-                <StatCard
+                <article
                   key={`${metric.value}-${metric.label}`}
-                  value={metric.value}
-                  suffix={metric.suffix}
-                  label={<span className="type-p3 text-neutral-700">{metric.label}</span>}
-                  className="min-h-[160px] px-6 py-7"
-                  valueTextClassName="text-[54px] font-medium leading-none"
-                  suffixClassName="text-[30px] font-medium leading-none"
-                  labelClassName="mt-3"
-                />
+                  className="relative overflow-hidden rounded-[10px] bg-white h-[176px] px-8 py-10"
+                >
+                  <StatText
+                    value={metric.value}
+                    suffix={
+                      metric.suffix && /^[a-zA-Z]+$/.test(metric.suffix)
+                        ? metric.suffix.toUpperCase()
+                        : metric.suffix
+                    }
+                    label={metric.label}
+                    className="justify-center"
+                    metricRowClassName="gap-0.5"
+                    labelClassName="type-p3 max-w-[260px] text-center leading-[1.3] text-neutral-700 text-balance"
+                  />
+                </article>
               ))}
             </MotionReveal>
           </div>
 
           <MotionReveal preset="heroMedia" delay={0.08}>
-            <div className="overflow-hidden rounded-[28px] border border-black/8 bg-white shadow-[0_24px_60px_rgba(34,34,34,0.08)]">
-              <CaseStudyMediaFrame media={data.hero.image} className="w-full" />
-            </div>
+            <CaseStudyHeroImage src={data.hero.image.src} alt={data.hero.image.alt} />
           </MotionReveal>
         </div>
       </Container>
     </section>
   )
 }
-
