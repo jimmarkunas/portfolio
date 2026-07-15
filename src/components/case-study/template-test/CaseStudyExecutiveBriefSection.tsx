@@ -56,7 +56,7 @@ export function CaseStudyExecutiveBriefSection({ data }: { data: CaseStudyTempla
           </MotionReveal>
 
           <MotionReveal preset="card" delay={0.04} className="lg:pt-[76px]">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
               {[
                 ["Problem", data.executiveBrief.problem],
                 ["Mandate", data.executiveBrief.mandate],
