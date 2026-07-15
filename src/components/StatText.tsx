@@ -27,17 +27,24 @@ export function StatText({
   const isCompact = size === "compact"
 
   if (!isCompact) {
+    const labelClasses = `type-p3 ${labelClassName}`.trim()
+
     return (
       <div className={`flex h-full flex-col items-center justify-center gap-4 text-center ${className}`.trim()}>
-        <div aria-label={accessibleText} className={`text-center text-slate-800 ${metricRowClassName}`.trim()}>
-          {prefix ? <span className="font-[var(--font-family-display)] type-stat-number font-semibold">{prefix}</span> : null}
+        <div
+          aria-label={accessibleText}
+          className={`inline-flex items-baseline justify-center whitespace-nowrap leading-none text-slate-800 ${metricRowClassName}`.trim()}
+        >
+          {prefix ? <span className="font-[var(--font-family-display)] type-stat-plus font-semibold">{prefix}</span> : null}
           <span className="font-[var(--font-family-display)] type-stat-number font-semibold">{value}</span>
-          {suffix ? <span className="font-[var(--font-family-display)] type-stat-number font-semibold">{suffix}</span> : null}
+          {suffix ? <span className="font-[var(--font-family-display)] type-stat-plus font-semibold">{suffix}</span> : null}
         </div>
-        <div className={labelClassName}>{label}</div>
+        <div className={labelClasses}>{label}</div>
       </div>
     )
   }
+
+  const labelClasses = `type-p4 ${labelClassName}`.trim()
 
   return (
     <div className={`flex h-full flex-col items-center justify-center text-center ${className}`.trim()}>
@@ -46,20 +53,20 @@ export function StatText({
         className={`inline-flex items-baseline justify-center whitespace-nowrap leading-none text-slate-800 ${metricRowClassName}`.trim()}
       >
         {prefix ? (
-          <span className="font-[var(--font-family-display)] text-[28px] font-semibold leading-none text-slate-800">
+          <span className="font-[var(--font-family-display)] type-p1 font-semibold leading-none text-slate-800">
             {prefix}
           </span>
         ) : null}
-        <span className="font-[var(--font-family-display)] text-[56px] font-semibold leading-none tabular-nums text-slate-800">
+        <span className="font-[var(--font-family-display)] type-h4 font-semibold leading-none tabular-nums text-slate-800">
           {value}
         </span>
         {suffix ? (
-          <span className="font-[var(--font-family-display)] text-[28px] font-semibold leading-none text-slate-800">
+          <span className="font-[var(--font-family-display)] type-p1 font-semibold leading-none text-slate-800">
             {suffix}
           </span>
         ) : null}
       </div>
-      <div className={`mt-5 max-w-[210px] text-center text-[21px] font-normal leading-[1.3] text-neutral-700 ${labelClassName}`.trim()}>
+      <div className={`mt-5 max-w-[210px] text-center ${labelClasses} font-normal leading-[1.3] text-neutral-700`.trim()}>
         {label}
       </div>
     </div>

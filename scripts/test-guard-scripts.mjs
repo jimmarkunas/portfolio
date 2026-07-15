@@ -41,7 +41,15 @@ function runNodeScript(scriptPath, cwd) {
 }
 
 function createBookingFixture(baseDir, options = {}) {
-  const founderUrl = "https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+  const provider = options.provider ?? "google"
+  const founderUrl =
+    provider === "cal"
+      ? "https://cal.com/jimmarkunas/meeting?user=jimmarkunas"
+      : "https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+  const alternateFounderUrl =
+    provider === "cal"
+      ? "https://cal.com/jimmarkunas/other-meeting?user=jimmarkunas"
+      : "https://calendar.app.google/WRONGID"
 
   writeFile(
     baseDir,
@@ -74,14 +82,14 @@ function createBookingFixture(baseDir, options = {}) {
   writeFile(
     baseDir,
     "public/founder/zevo/index.html",
-    `<a href=\"${options.wrongFounderUrl ? "https://calendar.app.google/WRONGID" : founderUrl}\">Schedule</a>\n`,
+    `<a href=\"${options.wrongFounderUrl ? alternateFounderUrl : founderUrl}\">Schedule</a>\n`,
   )
 
   if (options.withSourceLeak) {
     writeFile(
       baseDir,
       "src/content/leak.ts",
-      "export const leak = \"https://calendar.app.google/LEAK123\"\n",
+      `export const leak = "${provider === "cal" ? "https://cal.com/jimmarkunas/meeting?user=jimmarkunas" : "https://calendar.app.google/LEAK123"}"\n`,
     )
   }
 
@@ -109,6 +117,20 @@ function createRegistryFixture(baseDir, options = {}) {
       ? "export const notCaseStudy = {}\n"
       : "export const caseStudy = { slug: \"alpha\" }\n",
   )
+
+  writeFile(
+    baseDir,
+    "src/content/case-studies/pull-quotes.ts",
+    `export const pullQuotes = [{ slug: "alpha", quote: "Example quote" }]\n`,
+  )
+
+  if (options.withOrphanModule) {
+    writeFile(
+      baseDir,
+      "src/content/case-studies/orphan.ts",
+      `export const caseStudy = { slug: "orphan" }\n`,
+    )
+  }
 }
 
 function writeChunk(baseDir, relativePath, sizeBytes, random = false) {
@@ -172,16 +194,40 @@ const cases = [
     setup: (baseDir) => createBookingFixture(baseDir),
   },
   {
+    name: "booking-url-drift pass cal.com fixture",
+    script: scriptPaths.booking,
+    expectedPass: true,
+    setup: (baseDir) => createBookingFixture(baseDir, { provider: "cal" }),
+  },
+  {
     name: "booking-url-drift fails on source leak",
     script: scriptPaths.booking,
     expectedPass: false,
     setup: (baseDir) => createBookingFixture(baseDir, { withSourceLeak: true }),
   },
   {
+    name: "booking-url-drift fails on cal.com source leak",
+    script: scriptPaths.booking,
+    expectedPass: false,
+    setup: (baseDir) => createBookingFixture(baseDir, { provider: "cal", withSourceLeak: true }),
+  },
+  {
     name: "booking-url-drift fails on non-founder html booking link",
     script: scriptPaths.booking,
     expectedPass: false,
     setup: (baseDir) => createBookingFixture(baseDir, { withUnexpectedHtmlBooking: true }),
+  },
+  {
+    name: "booking-url-drift fails on unexpected cal.com html booking link",
+    script: scriptPaths.booking,
+    expectedPass: false,
+    setup: (baseDir) => createBookingFixture(baseDir, { provider: "cal", withUnexpectedHtmlBooking: true }),
+  },
+  {
+    name: "booking-url-drift fails when founder static html uses different cal.com url",
+    script: scriptPaths.booking,
+    expectedPass: false,
+    setup: (baseDir) => createBookingFixture(baseDir, { provider: "cal", wrongFounderUrl: true }),
   },
   {
     name: "case-study-registry pass fixture",
@@ -194,6 +240,12 @@ const cases = [
     script: scriptPaths.registry,
     expectedPass: false,
     setup: (baseDir) => createRegistryFixture(baseDir, { missingCaseStudyExport: true }),
+  },
+  {
+    name: "case-study-registry fails on unregistered orphan module",
+    script: scriptPaths.registry,
+    expectedPass: false,
+    setup: (baseDir) => createRegistryFixture(baseDir, { withOrphanModule: true }),
   },
   {
     name: "bundle-budgets pass fixture",

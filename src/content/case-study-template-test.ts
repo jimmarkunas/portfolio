@@ -50,6 +50,8 @@ export type CaseStudyTemplateTestRelatedStudy = {
   }
 }
 
+export type CaseStudyTemplateTestHeroImage = Extract<CaseStudyMedia, { kind: "image" }>
+
 export type CaseStudyTemplateTestData = {
   slug: string
   breadcrumbCurrent: string
@@ -58,7 +60,7 @@ export type CaseStudyTemplateTestData = {
     title: string
     intro: string
     metrics: CaseStudyTemplateTestMetric[]
-    image: CaseStudyMedia
+    image: CaseStudyTemplateTestHeroImage
   }
   executiveBrief: {
     eyebrow: string

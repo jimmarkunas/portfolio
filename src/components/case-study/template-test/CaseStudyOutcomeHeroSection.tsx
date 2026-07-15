@@ -16,7 +16,7 @@ export function CaseStudyOutcomeHeroSection({ data }: { data: CaseStudyTemplateT
       <Container className="pb-14 pt-8 md:pb-16 md:pt-10 lg:pb-20 lg:pt-12">
         <div className="flex flex-col gap-6 lg:gap-8">
           <MotionReveal preset="section">
-            <nav aria-label="Breadcrumb" className="type-p4 text-[#222222]">
+            <nav aria-label="Breadcrumb" className="type-p5 text-[#222222]">
               <ol className="flex flex-wrap items-center gap-2">
                 <li>
                   <Link
@@ -43,10 +43,10 @@ export function CaseStudyOutcomeHeroSection({ data }: { data: CaseStudyTemplateT
 
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-start lg:gap-12">
             <MotionReveal preset="section" className="flex max-w-[820px] flex-col items-start gap-3">
-              <h1 className="type-h3 md:type-h2 lg:type-h1 xl:type-h1-case-study text-[#222222]">
+              <h1 className="type-h1 text-[#222222]">
                 {data.hero.title}
               </h1>
-              <p className="type-p3 max-w-[760px] text-black/66">{data.hero.intro}</p>
+              <p className="type-p2 max-w-[760px] text-black/66">{data.hero.intro}</p>
             </MotionReveal>
 
             <MotionReveal preset="card" delay={0.04} className="grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
@@ -65,7 +65,7 @@ export function CaseStudyOutcomeHeroSection({ data }: { data: CaseStudyTemplateT
                     label={metric.label}
                     className="justify-center"
                     metricRowClassName="gap-0.5"
-                    labelClassName="type-p3 max-w-[260px] text-center leading-[1.3] text-neutral-700 text-balance"
+                    labelClassName="max-w-[260px] text-center leading-[1.3] text-neutral-700 text-balance"
                   />
                 </article>
               ))}

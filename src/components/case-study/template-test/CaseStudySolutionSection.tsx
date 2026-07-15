@@ -29,19 +29,19 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyTemplateTest
                 <div key={lane.title} className="flex flex-col gap-4">
                   <article className="flex h-full flex-col gap-4 rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
                     <div className="flex items-center justify-between gap-4">
-                      <TagPill variant="soft" className="py-1.5 text-[13px] uppercase tracking-[0.12em]">
+                      <TagPill variant="soft" className="py-1.5 type-p5 uppercase tracking-[0.12em]">
                         {lane.eyebrow}
                       </TagPill>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <h3 className="type-h5 text-[#222222]">{lane.title}</h3>
-                      <p className="type-p3 text-black/68">{lane.copy}</p>
+                      <h3 className="type-h4 text-[#222222]">{lane.title}</h3>
+                      <p className="type-p2 text-black/68">{lane.copy}</p>
                     </div>
                     <ul className="mt-auto space-y-2 border-t border-black/8 pt-4">
                       {lane.bullets.map((bullet) => (
                         <li key={bullet} className="flex items-start gap-2 text-[#222222]">
                           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#447ACB]" />
-                          <span className="type-p3">{bullet}</span>
+                          <span className="type-p2">{bullet}</span>
                         </li>
                       ))}
                     </ul>
@@ -63,7 +63,7 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyTemplateTest
 
               <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
                 <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Architecture notes</div>
-                <p className="type-p3 mt-3 text-black/65">
+                <p className="type-p2 mt-3 text-black/65">
                   The point of the section is to pressure-test whether a large system visual reads cleanly without
                   turning into a dashboard.
                 </p>
@@ -73,8 +73,8 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyTemplateTest
 
           <MotionReveal preset="card" delay={0.04} className="rounded-[28px] border border-black/8 bg-white p-6 md:p-8">
             <div className="mb-6 flex flex-col gap-3">
-              <h3 className="type-h5 text-[#222222]">Optional delivery timeline</h3>
-              <p className="type-p3 max-w-[760px] text-black/60">
+              <h3 className="type-h4 text-[#222222]">Optional delivery timeline</h3>
+              <p className="type-p2 max-w-[760px] text-black/60">
                 The timeline is embedded here as an optional block so we can validate section behavior without
                 adding a separate production section yet.
               </p>
@@ -86,4 +86,3 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyTemplateTest
     </section>
   )
 }
-

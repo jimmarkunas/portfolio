@@ -4,7 +4,6 @@ import { BookCallCta } from "@/components/BookCallCta"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import type { HomepageText } from "@/components/homepage/homepage"
 import {
-  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
   HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
   HomepageSectionHeader,
   HomepageSectionShell,
@@ -55,11 +54,11 @@ export function HomepageJourneySection({
               <div
               className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} items-start lg:grid lg:grid-cols-[minmax(0,480px)_minmax(0,1fr)] lg:items-start lg:gap-10`}
             >
-              <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[520px] text-[#222222]`}>
+              <h2 className="type-h2 max-w-[520px] text-[#222222]">
                 {section.title}
               </h2>
               <div className="flex flex-col items-start gap-5 lg:pt-1">
-                <p className="type-p3 text-black/70">{section.intro}</p>
+                <p className="type-p2 text-black/70">{section.intro}</p>
                 <BookCallCta location="homepage_journey" />
               </div>
             </div>

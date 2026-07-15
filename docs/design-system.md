@@ -24,6 +24,12 @@ Design principle: neutral-first. Blue (`--color-accent`) is reserved for interac
 
 ## Typography
 
+The site uses one global `.type-*` typography system across homepage, case studies, CV, services/contact, freebies, founder pages, and future pages.
+HTML heading rank and visual typography role are separate concerns.
+Do not create page-specific typography systems.
+
+Typography is tokenized at six explicit states: Base, SM, MD, LG, XL, and 2XL.
+
 ### Font family
 Both display and body use the same stack:
 ```
@@ -32,50 +38,52 @@ Both display and body use the same stack:
 
 ### Core type scale
 
-All sizes use fluid `clamp()` rules.
+| Class              | Base | SM   | MD   | LG   | XL   | 2XL  | Line | Tracking | Weight |
+|--------------------|------|------|------|------|------|------|------|----------|--------|
+| `.type-h1`         | 32px | 32px | 32px | 41px | 48px | 48px | 1    | -0.06em  | 300    |
+| `.type-h2`         | 32px | 32px | 32px | 41px | 48px | 48px | 1.05 | -0.04em  | 400    |
+| `.type-h3`         | 32px | 32px | 32px | 41px | 48px | 48px | 1.2  | -0.02em  | 400    |
+| `.type-h1-case-study` | 32px | 32px | 32px | 41px | 48px | 48px | 1.2  | -0.02em  | 400    |
+| `.type-h4`         | 28px | 28px | 28px | 32.8px | 36px | 36px | 1.3  | -0.02em  | 400    |
+| `.type-h5`         | 24px | 24px | 24px | 26.6px | 32px | 32px | 1.35 | -0.02em  | 400    |
+| `.type-h6`         | 20px | 20px | 20px | 22.5px | 28px | 28px | 1.4  | -0.02em  | 400    |
+| `.type-p1`         | 20px | 20px | 20px | 20.5px | 24px | 24px | 1.4  | -0.01em  | 400    |
+| `.type-p2`         | 18px | 18px | 18px | 18.4px | 20px | 20px | 1.45 | -0.01em  | 400    |
+| `.type-p3`         | 16px | 16px | 16px | 16px | 18px | 18px | 1.5  | 0        | 400    |
+| `.type-p4`         | 15px | 15px | 15px | 15px | 16px | 16px | 1.5  | 0        | 400    |
+| `.type-p5`         | 13px | 13px | 13px | 13px | 14px | 14px | 1.6  | 0        | 400    |
 
-| Class         | Min   | Fluid  | Max   | Line   | Tracking  | Weight |
-|---------------|-------|--------|-------|--------|-----------|--------|
-| `.type-h1`    | 72px  | 12vw   | 240px | 1      | -0.06em   | 300    |
-| `.type-h2`    | 56px  | 9vw    | 120px | 1.05   | -0.04em   | 400    |
-| `.type-h3`    | 32px  | 4vw    | 48px  | 1.2    | -0.02em   | 400    |
-| `.type-h4`    | 28px  | 3.2vw  | 36px  | 1.3    | -0.02em   | 400    |
-| `.type-h5`    | 24px  | 2.6vw  | 32px  | 1.35   | -0.02em   | 400    |
-| `.type-h6`    | 20px  | 2.2vw  | 28px  | 1.4    | -0.02em   | 400    |
-| `.type-p1`    | 20px  | 2vw    | 24px  | 1.4    | -0.01em   | 400    |
-| `.type-p2`    | 18px  | 1.8vw  | 20px  | 1.45   | -0.01em   | 400    |
-| `.type-p3`    | 16px  | 1.5vw  | 18px  | 1.5    | 0         | 400    |
-| `.type-p4`    | 15px  | 1.3vw  | 16px  | 1.5    | 0         | 400    |
-| `.type-p5`    | 13px  | 1.1vw  | 14px  | 1.6    | 0         | 400    |
+`H1`, `H2`, `H3`, and `H1 case study` share one visual size scale.
 
 ### Utility / homepage type scale
 
-| Class                  | Min   | Fluid  | Max   | Line   | Tracking  | Weight |
-|------------------------|-------|--------|-------|--------|-----------|--------|
-| `.type-display-hero`   | 96px  | 18vw   | 240px | 1.02   | -0.06em   | 300    |
-| `.type-stat-number`    | 32px  | 3.8vw  | 48px  | 1.1    | -0.03em   | 400    |
-| `.type-stat-plus`      | 22px  | 2.4vw  | 30px  | 1      | 0         | 400    |
-| `.type-rail-label`     | 15px  | 1.35vw | 18px  | 1.1    | 0         | 400    |
-| `.type-ui-lg`          | 16px  | 1.45vw | 20px  | 1.45   | 0         | 400    |
-| `.type-ui-md`          | 15px  | 1.2vw  | 18px  | 1.4    | 0         | 400    |
-| `.type-ui-sm`          | 14px  | 1vw    | 16px  | 1.3    | 0         | 400    |
-| `.type-footer-brand`   | 22px  | 2.2vw  | 28px  | 1      | -0.03em   | 400    |
+| Class                | Base | SM    | MD    | LG    | XL    | 2XL  | Line | Tracking | Weight |
+|----------------------|------|-------|-------|-------|-------|------|------|----------|--------|
+| `.type-display-hero` | 96px | 115.2px | 138.2px | 184.3px | 230.4px | 240px | 1.02 | -0.06em  | 300    |
+| `.type-stat-plus`    | 22px | 22px | 22px | 24.6px | 30px | 30px | 1    | 0        | 400    |
+| `.type-stat-number`  | 32px | 32px | 32px | 38.9px | 48px | 48px | 1.1  | -0.03em  | 400    |
+| `.type-rail-label`   | 15px | 15px | 15px | 15px | 17.3px | 18px | 1.1  | 0        | 400    |
+| `.type-ui-lg`        | 16px | 16px | 16px | 16px | 18.6px | 20px | 1.45 | 0        | 400    |
+| `.type-ui-md`        | 15px | 15px | 15px | 15px | 15.4px | 18px | 1.4  | 0        | 400    |
+| `.type-ui-sm`        | 14px | 14px | 14px | 14px | 14px | 15.4px | 1.3  | 0        | 400    |
+| `.type-footer-brand` | 22px | 22px | 22px | 22.5px | 28px | 28px | 1    | -0.03em  | 400    |
 
-### Case study variant
-`.type-h1-case-study` — same spec as `.type-h3` (32px → 4vw → 48px, line 1.2, tracking -0.02em, weight 400).
+`.type-display-hero` is the intentional oversized display exception.
 
 ---
 
 ## Breakpoints
 
-| Label | Prefix   | Min Width |
-|-------|----------|-----------|
-| Base  | (none)   | 0px       |
-| SM    | `sm:`    | 640px     |
-| MD    | `md:`    | 768px     |
-| LG    | `lg:`    | 1024px    |
-| XL    | `xl:`    | 1280px    |
-| 2XL   | `2xl:`   | 1536px    |
+Typography and layout use the same six responsive states.
+
+| Label | Prefix | Min Width | Usage |
+|-------|--------|-----------|-------|
+| Base  | (none) | 0px       | Phones and any size before a breakpoint kicks in. |
+| SM    | `sm:`  | 640px     | Larger phones and small tablets. |
+| MD    | `md:`  | 768px     | Tablet layout changes. |
+| LG    | `lg:`  | 1024px    | Desktop layout changes. |
+| XL    | `xl:`  | 1280px    | Large desktop spacing and grids. |
+| 2XL   | `2xl:` | 1536px    | Very wide desktop screens. |
 
 ---
 

@@ -35,8 +35,8 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyTemplateTestDa
                   </div>
                 }
                 className="min-h-[220px] px-7 py-8"
-                valueTextClassName="text-[52px] font-medium leading-none"
-                suffixClassName="text-[30px] font-medium leading-none"
+                valueTextClassName="type-stat-number font-medium leading-none tabular-nums"
+                suffixClassName="type-stat-plus font-medium leading-none"
                 labelClassName="mt-4"
               />
             ))}
@@ -45,8 +45,8 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyTemplateTestDa
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:items-start">
             <MotionReveal preset="card" className="rounded-[28px] border border-black/8 bg-[#222222] p-6 md:p-8">
               <BeforeAfterComparison columns={data.impact.beforeAfter.columns} />
-              <h3 className="type-h5 mt-6 text-white">{data.impact.beforeAfter.title}</h3>
-              <p className="type-p3 mt-3 max-w-[760px] text-white/72">{data.impact.beforeAfter.summary}</p>
+              <h3 className="type-h4 mt-6 text-white">{data.impact.beforeAfter.title}</h3>
+              <p className="type-p2 mt-3 max-w-[760px] text-white/72">{data.impact.beforeAfter.summary}</p>
             </MotionReveal>
 
             <MotionReveal preset="section" delay={0.04} className="flex flex-col gap-4">
@@ -55,8 +55,8 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyTemplateTestDa
                 <div className="mt-4 flex flex-col gap-4">
                   {data.impact.connections.map((connection) => (
                     <article key={connection.title} className="rounded-[18px] border border-black/8 bg-white p-5">
-                      <h4 className="type-h6 text-[#222222]">{connection.title}</h4>
-                      <p className="type-p3 mt-2 text-black/65">{connection.copy}</p>
+                      <h4 className="type-h5 text-[#222222]">{connection.title}</h4>
+                      <p className="type-p2 mt-2 text-black/65">{connection.copy}</p>
                     </article>
                   ))}
                 </div>
@@ -68,4 +68,3 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyTemplateTestDa
     </section>
   )
 }
-

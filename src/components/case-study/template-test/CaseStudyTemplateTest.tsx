@@ -1,6 +1,7 @@
 import { CaseStudyOutcomeHeroSection } from "./CaseStudyOutcomeHeroSection"
 import { CaseStudyExecutiveBriefSection } from "./CaseStudyExecutiveBriefSection"
 import { CaseStudyChallengeSection } from "./CaseStudyChallengeSection"
+import { CaseStudyProductionQuoteSection } from "./CaseStudyProductionQuoteSection"
 import { CaseStudyOwnershipSection } from "./CaseStudyOwnershipSection"
 import { CaseStudySolutionSection } from "./CaseStudySolutionSection"
 import { CaseStudyImpactSection } from "./CaseStudyImpactSection"
@@ -14,6 +15,7 @@ export function CaseStudyTemplateTest({ data }: { data: CaseStudyTemplateTestDat
     <main className="min-h-full overflow-x-hidden bg-[#F3F3F3] text-[#222222]">
       <CaseStudyOutcomeHeroSection data={data} />
       <CaseStudyExecutiveBriefSection data={data} />
+      <CaseStudyProductionQuoteSection />
       <CaseStudyChallengeSection data={data} />
       <CaseStudyOwnershipSection data={data} />
       <CaseStudySolutionSection data={data} />
@@ -24,4 +26,3 @@ export function CaseStudyTemplateTest({ data }: { data: CaseStudyTemplateTestDat
     </main>
   )
 }
-

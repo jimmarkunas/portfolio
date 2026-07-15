@@ -29,6 +29,15 @@ const typeSamples = [
   { label: "P5", className: "type-p5", sample: "Paragraph five for compact metadata and labels." },
 ]
 
+const breakpointColumns = [
+  { label: "Base", width: 0 },
+  { label: "SM", width: 640 },
+  { label: "MD", width: 768 },
+  { label: "LG", width: 1024 },
+  { label: "XL", width: 1280 },
+  { label: "2XL", width: 1536 },
+]
+
 const breakpoints = [
   { label: "Base", prefix: "default", minWidth: "0px", usage: "Phones and any size before a breakpoint kicks in." },
   { label: "SM", prefix: "sm:", minWidth: "640px", usage: "Larger phones and small tablets." },
@@ -38,45 +47,38 @@ const breakpoints = [
   { label: "2XL", prefix: "2xl:", minWidth: "1536px", usage: "Very wide desktop screens." },
 ]
 
-const breakpointWidths = [
-  { label: "Base", width: 0 },
-  { label: "SM", width: 640 },
-  { label: "MD", width: 768 },
-  { label: "LG", width: 1024 },
-  { label: "XL", width: 1280 },
-  { label: "2XL", width: 1536 },
-]
-
 const coreTypographySpecs = [
-  { label: "H1", className: ".type-h1", min: 72, vw: 12, max: 240, line: "1", track: "-0.06em", weight: "300" },
-  { label: "H2", className: ".type-h2", min: 56, vw: 9, max: 120, line: "1.05", track: "-0.04em", weight: "400" },
-  { label: "H3", className: ".type-h3", min: 32, vw: 4, max: 48, line: "1.2", track: "-0.02em", weight: "400" },
-  { label: "H4", className: ".type-h4", min: 28, vw: 3.2, max: 36, line: "1.3", track: "-0.02em", weight: "400" },
-  { label: "H5", className: ".type-h5", min: 24, vw: 2.6, max: 32, line: "1.35", track: "-0.02em", weight: "400" },
-  { label: "H6", className: ".type-h6", min: 20, vw: 2.2, max: 28, line: "1.4", track: "-0.02em", weight: "400" },
-  { label: "P1", className: ".type-p1", min: 20, vw: 2, max: 24, line: "1.4", track: "-0.01em", weight: "400" },
-  { label: "P2", className: ".type-p2", min: 18, vw: 1.8, max: 20, line: "1.45", track: "-0.01em", weight: "400" },
-  { label: "P3", className: ".type-p3", min: 16, vw: 1.5, max: 18, line: "1.5", track: "0", weight: "400" },
-  { label: "P4", className: ".type-p4", min: 15, vw: 1.3, max: 16, line: "1.5", track: "0", weight: "400" },
-  { label: "P5", className: ".type-p5", min: 13, vw: 1.1, max: 14, line: "1.6", track: "0", weight: "400" },
+  { label: "H1", className: ".type-h1", values: [32, 32, 32, 41, 48, 48], line: "1", track: "-0.06em", weight: "300" },
+  { label: "H2", className: ".type-h2", values: [32, 32, 32, 41, 48, 48], line: "1.05", track: "-0.04em", weight: "400" },
+  { label: "H3", className: ".type-h3", values: [32, 32, 32, 41, 48, 48], line: "1.2", track: "-0.02em", weight: "400" },
+  {
+    label: "H1 case study",
+    className: ".type-h1-case-study",
+    values: [32, 32, 32, 41, 48, 48],
+    line: "1.2",
+    track: "-0.02em",
+    weight: "400",
+  },
+  { label: "H4", className: ".type-h4", values: [28, 28, 28, 32.8, 36, 36], line: "1.3", track: "-0.02em", weight: "400" },
+  { label: "H5", className: ".type-h5", values: [24, 24, 24, 26.6, 32, 32], line: "1.35", track: "-0.02em", weight: "400" },
+  { label: "H6", className: ".type-h6", values: [20, 20, 20, 22.5, 28, 28], line: "1.4", track: "-0.02em", weight: "400" },
+  { label: "P1", className: ".type-p1", values: [20, 20, 20, 20.5, 24, 24], line: "1.4", track: "-0.01em", weight: "400" },
+  { label: "P2", className: ".type-p2", values: [18, 18, 18, 18.4, 20, 20], line: "1.45", track: "-0.01em", weight: "400" },
+  { label: "P3", className: ".type-p3", values: [16, 16, 16, 16, 18, 18], line: "1.5", track: "0", weight: "400" },
+  { label: "P4", className: ".type-p4", values: [15, 15, 15, 15, 16, 16], line: "1.5", track: "0", weight: "400" },
+  { label: "P5", className: ".type-p5", values: [13, 13, 13, 13, 14, 14], line: "1.6", track: "0", weight: "400" },
 ]
 
 const utilityTypographySpecs = [
-  { label: "Hero display", className: ".type-display-hero", min: 96, vw: 18, max: 240, line: "1.02", track: "-0.06em", weight: "300" },
-  { label: "Stat plus", className: ".type-stat-plus", min: 22, vw: 2.4, max: 30, line: "1", track: "0", weight: "400" },
-  { label: "Stat number", className: ".type-stat-number", min: 32, vw: 3.8, max: 48, line: "1.1", track: "-0.03em", weight: "400" },
-  { label: "Rail label", className: ".type-rail-label", min: 15, vw: 1.35, max: 18, line: "1.1", track: "0", weight: "400" },
-  { label: "UI large", className: ".type-ui-lg", min: 16, vw: 1.45, max: 20, line: "1.45", track: "0", weight: "400" },
-  { label: "UI medium", className: ".type-ui-md", min: 15, vw: 1.2, max: 18, line: "1.4", track: "0", weight: "400" },
-  { label: "UI small", className: ".type-ui-sm", min: 14, vw: 1, max: 16, line: "1.3", track: "0", weight: "400" },
-  { label: "Footer brand", className: ".type-footer-brand", min: 22, vw: 2.2, max: 28, line: "1", track: "-0.03em", weight: "400" },
+  { label: "Hero display", className: ".type-display-hero", values: [96, 115.2, 138.2, 184.3, 230.4, 240], line: "1.02", track: "-0.06em", weight: "300" },
+  { label: "Stat plus", className: ".type-stat-plus", values: [22, 22, 22, 24.6, 30, 30], line: "1", track: "0", weight: "400" },
+  { label: "Stat number", className: ".type-stat-number", values: [32, 32, 32, 38.9, 48, 48], line: "1.1", track: "-0.03em", weight: "400" },
+  { label: "Rail label", className: ".type-rail-label", values: [15, 15, 15, 15, 17.3, 18], line: "1.1", track: "0", weight: "400" },
+  { label: "UI large", className: ".type-ui-lg", values: [16, 16, 16, 16, 18.6, 20], line: "1.45", track: "0", weight: "400" },
+  { label: "UI medium", className: ".type-ui-md", values: [15, 15, 15, 15, 15.4, 18], line: "1.4", track: "0", weight: "400" },
+  { label: "UI small", className: ".type-ui-sm", values: [14, 14, 14, 14, 14, 15.4], line: "1.3", track: "0", weight: "400" },
+  { label: "Footer brand", className: ".type-footer-brand", values: [22, 22, 22, 22.5, 28, 28], line: "1", track: "-0.03em", weight: "400" },
 ]
-
-function getFluidSize(width: number, min: number, vw: number, max: number) {
-  if (width === 0) return min
-
-  return Math.min(Math.max((width * vw) / 100, min), max)
-}
 
 function formatPx(value: number) {
   return `${Number(value.toFixed(1)).toString()}px`
@@ -92,9 +94,7 @@ function TypographyBreakdownTable({
   specs: Array<{
     label: string
     className: string
-    min: number
-    vw: number
-    max: number
+    values: number[]
     line: string
     track: string
     weight: string
@@ -112,12 +112,11 @@ function TypographyBreakdownTable({
             <tr className="border-b border-black/8">
               <th className="type-p5 px-5 py-4 text-left text-[#7B7B7B]">Style</th>
               <th className="type-p5 px-5 py-4 text-left text-[#7B7B7B]">Rule</th>
-              {breakpointWidths.map((breakpoint) => (
+              {breakpointColumns.map((breakpoint) => (
                 <th key={breakpoint.label} className="type-p5 px-4 py-4 text-left text-[#7B7B7B]">
                   {breakpoint.label}
                 </th>
               ))}
-              <th className="type-p5 px-4 py-4 text-left text-[#7B7B7B]">Max</th>
               <th className="type-p5 px-4 py-4 text-left text-[#7B7B7B]">Line</th>
               <th className="type-p5 px-4 py-4 text-left text-[#7B7B7B]">Track</th>
               <th className="type-p5 px-4 py-4 text-left text-[#7B7B7B]">Weight</th>
@@ -130,15 +129,12 @@ function TypographyBreakdownTable({
                   <div className="type-p4">{spec.label}</div>
                   <div className="type-p5 mt-1 text-[#7B7B7B]">{spec.className}</div>
                 </td>
-                <td className="type-p5 px-5 py-4 align-top text-[#7B7B7B]">
-                  {`clamp(${spec.min}px, ${spec.vw}vw, ${spec.max}px)`}
-                </td>
-                {breakpointWidths.map((breakpoint) => (
-                  <td key={breakpoint.label} className="type-p4 px-4 py-4 align-top">
-                    {formatPx(getFluidSize(breakpoint.width, spec.min, spec.vw, spec.max))}
+                <td className="type-p5 px-5 py-4 align-top text-[#7B7B7B]">Breakpoint tokens</td>
+                {spec.values.map((value, index) => (
+                  <td key={breakpointColumns[index].label} className="type-p4 px-4 py-4 align-top">
+                    {formatPx(value)}
                   </td>
                 ))}
-                <td className="type-p4 px-4 py-4 align-top">{formatPx(spec.max)}</td>
                 <td className="type-p4 px-4 py-4 align-top">{spec.line}</td>
                 <td className="type-p4 px-4 py-4 align-top">{spec.track}</td>
                 <td className="type-p4 px-4 py-4 align-top">{spec.weight}</td>
@@ -211,8 +207,8 @@ export default function DesignSystemPage() {
             <h2 className="type-h5">Responsive typography breakdown</h2>
             <p className="type-p4 mt-2 max-w-[760px] text-[#7B7B7B]">
               Exact live typography behavior across the active app breakpoints. Sizes below show
-              the computed value at each breakpoint minimum, based on the current fluid `clamp(...)`
-              rules in the codebase.
+              the computed value at each breakpoint using the current breakpoint token values in
+              the codebase.
             </p>
           </div>
           <div className="mt-8 space-y-8">
@@ -223,7 +219,7 @@ export default function DesignSystemPage() {
             />
             <TypographyBreakdownTable
               title="Homepage and UI helpers"
-              note="Fluid utility classes currently used for the homepage hero, stats, rail, CTAs, and footer."
+              note="Breakpoint-token utility classes currently used for the homepage hero, stats, rail, CTAs, and footer."
               specs={utilityTypographySpecs}
             />
           </div>

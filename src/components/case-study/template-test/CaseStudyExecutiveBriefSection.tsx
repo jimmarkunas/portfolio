@@ -20,6 +20,14 @@ const executiveBriefIconMap: Record<CaseStudyTemplateTestFactIcon, LucideIcon> =
   systems: Cpu,
 }
 
+const executiveBriefSystemsIcons = [
+  { label: "BigCommerce", icon: "/tool-icons/svg/bc-logo-blk.svg" },
+  { label: "Shopify Plus", icon: "/tool-icons/svg/shopify-logo.svg" },
+  { label: "Azure", icon: "/tool-icons/svg/azure-logo.svg" },
+  { label: "JIRA", icon: "/tool-icons/jira-logo.png" },
+  { label: "Figma", icon: "/tool-icons/svg/figma-logo.svg" },
+] as const
+
 export function CaseStudyExecutiveBriefSection({ data }: { data: CaseStudyTemplateTestData }) {
   return (
     <section className="bg-white">
@@ -44,11 +52,28 @@ export function CaseStudyExecutiveBriefSection({ data }: { data: CaseStudyTempla
                       return <Icon className="h-[22px] w-[22px] sm:h-6 sm:w-6" strokeWidth={1.75} />
                     })()}
                   </div>
-                  <dt className="type-p4 uppercase tracking-[0.1em] text-[#7B7B7B]">
+                  <dt className="type-p5 uppercase tracking-[0.1em] text-[#7B7B7B]">
                     {fact.label}
                   </dt>
-                  <dd className="type-p2 mt-1 text-[#222222] sm:col-start-3 sm:row-start-1 sm:mt-0">
-                    {fact.value}
+                  <dd className="type-p3 mt-1 text-[#222222] sm:col-start-3 sm:row-start-1 sm:mt-0">
+                    {fact.icon === "systems" ? (
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        {executiveBriefSystemsIcons.map((tool) => (
+                          <div key={tool.label} className="group relative">
+                            <img
+                              src={tool.icon}
+                              alt={tool.label}
+                              className="h-[51px] w-[51px] rounded-[10px]"
+                            />
+                            <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#222222] px-2.5 py-1.5 type-p5 text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                              {tool.label}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      fact.value
+                    )}
                   </dd>
                 </div>
               ))}
@@ -70,7 +95,7 @@ export function CaseStudyExecutiveBriefSection({ data }: { data: CaseStudyTempla
                   <div className="flex flex-col gap-4">
                     <div className="h-[2px] w-6 rounded-full bg-[#447ACB]" />
                     <div className="type-p5 uppercase tracking-[0.16em] text-white/50">{label}</div>
-                    <p className="type-p2 text-white">{copy}</p>
+                    <p className="type-p3 text-white">{copy}</p>
                   </div>
                 </article>
               ))}

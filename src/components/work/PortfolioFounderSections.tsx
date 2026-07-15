@@ -6,7 +6,7 @@ import { EyebrowPill } from "@/components/EyebrowPill"
 import { ButtonLink } from "@/components/ButtonLink"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { ExternalLinkMiniIcon } from "@/components/icons/ui-icons"
-import { FullSectionHeader, HOMEPAGE_SECTION_HEADER_TITLE_CLASS } from "@/components/homepage/ui"
+import { FullSectionHeader } from "@/components/homepage/ui"
 import { portfolioContent, siteRoutes } from "@/content/site"
 import {
   PortfolioFeatureRow,
@@ -83,11 +83,11 @@ export function PortfolioFounderSections({
                 eyebrow={intro?.pill ?? portfolio.pill}
                 heading={intro?.title ?? portfolio.title}
                 description={intro?.description}
-                headingAs="h1"
+                headingAs="h2"
                 className="w-full"
                 eyebrowClassName="!px-4 !py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]"
-                headingClassName="w-full max-w-none text-4xl font-normal leading-tight text-[#222222] md:text-5xl md:leading-[1.08]"
-                descriptionClassName="w-full max-w-none text-[18px] leading-8 text-[#4B4B4B]"
+                headingClassName="w-full max-w-none type-h2 text-[#222222]"
+                descriptionClassName="w-full max-w-none type-p2 text-[#4B4B4B]"
                 controlsClassName="w-full"
                 controls={<PortfolioCategoryControls categories={portfolio.categories} />}
               />
@@ -96,13 +96,13 @@ export function PortfolioFounderSections({
             <>
               <EyebrowPill
                 className="w-fit self-start !px-6 !py-1 shadow-[inset_0_0_0_1px_rgba(34,34,34,0.06)]"
-                labelClassName="type-p2 text-[#222222]"
+                labelClassName="type-p5 text-[#222222]"
               >
                 {portfolio.pill}
               </EyebrowPill>
 
               <div className="flex w-full flex-col gap-6 md:flex-row md:items-end md:justify-between">
-                <h2 className="type-h3 max-w-[702px] text-left text-[#222222]">
+                <h2 className="type-h2 max-w-[702px] text-left text-[#222222]">
                   {portfolio.title}
                 </h2>
 
@@ -160,16 +160,16 @@ export function PortfolioFounderSections({
       >
         <div className="mx-auto flex w-full max-w-[1440px] flex-col items-start gap-10 px-6 py-8 md:px-10 md:py-10 lg:px-10 lg:py-12">
           <div className="flex w-full flex-col items-start gap-3">
-            <EyebrowPill className="!px-3 !py-0.5" labelClassName="type-p2 text-[#222222]">
+            <EyebrowPill className="!px-3 !py-0.5" labelClassName="type-p5 text-[#222222]">
               {founder.pill}
             </EyebrowPill>
 
             <div className="grid w-full gap-3 lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:items-start lg:gap-10">
-              <h3 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-white`}>
+              <h2 className="type-h2 text-white">
                 {founder.title}
-              </h3>
+              </h2>
               {founder.description ? (
-                <p className="type-p3 max-w-[900px]" style={{ color: "rgba(255,255,255,0.76)" }}>
+                <p className="type-p2 max-w-[900px]" style={{ color: "rgba(255,255,255,0.76)" }}>
                   {founder.description}
                 </p>
               ) : null}

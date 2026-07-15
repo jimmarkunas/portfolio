@@ -14,10 +14,12 @@ const STATIC_FOUNDER_HTML_ALLOWLIST = new Set([
 const BOOKING_URL_MATCH_PATTERNS = [
   /https:\/\/calendar\.app\.google\/[A-Za-z0-9_-]+/g,
   /https:\/\/meetings(?:-[a-z0-9]+)?\.hubspot\.com\/[A-Za-z0-9_-]+(?:\?[A-Za-z0-9=&%._-]+)?/g,
+  /https:\/\/cal\.com\/[A-Za-z0-9_-]+(?:\/[A-Za-z0-9_-]+)*(?:\?[A-Za-z0-9=&%._-]+)?/g,
 ]
 const BOOKING_URL_VALIDATE_PATTERNS = [
   /^https:\/\/calendar\.app\.google\/[A-Za-z0-9_-]+$/,
   /^https:\/\/meetings(?:-[a-z0-9]+)?\.hubspot\.com\/[A-Za-z0-9_-]+(?:\?[A-Za-z0-9=&%._-]+)?$/,
+  /^https:\/\/cal\.com\/[A-Za-z0-9_-]+(?:\/[A-Za-z0-9_-]+)*(?:\?[A-Za-z0-9=&%._-]+)?$/,
 ]
 const REQUIRED_POLICY_KEYS = [
   "siteShell",

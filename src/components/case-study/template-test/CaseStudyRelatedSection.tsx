@@ -36,8 +36,8 @@ export function CaseStudyRelatedSection({ data }: { data: CaseStudyTemplateTestD
                   />
                   <div className="flex flex-col gap-3">
                     <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">{study.eyebrow}</div>
-                    <h3 className="type-h5 text-[#222222]">{study.title}</h3>
-                    <p className="type-p3 text-black/65">{study.summary}</p>
+                    <h3 className="type-h4 text-[#222222]">{study.title}</h3>
+                    <p className="type-p2 text-black/65">{study.summary}</p>
                   </div>
                 </article>
               </MotionReveal>
@@ -48,4 +48,3 @@ export function CaseStudyRelatedSection({ data }: { data: CaseStudyTemplateTestD
     </section>
   )
 }
-

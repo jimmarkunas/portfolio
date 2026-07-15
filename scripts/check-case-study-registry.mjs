@@ -138,7 +138,7 @@ function readRegistryEntries() {
 
 function findCaseStudyModuleSlugs() {
   const files = fs.readdirSync(CASE_STUDY_DIR, { withFileTypes: true })
-  const utilityFiles = new Set(["index.ts", "types.ts", "shared.ts", "registry.ts"])
+  const utilityFiles = new Set(["index.ts", "types.ts", "shared.ts", "registry.ts", "pull-quotes.ts"])
 
   return files
     .filter((entry) => entry.isFile() && entry.name.endsWith(".ts") && !utilityFiles.has(entry.name))

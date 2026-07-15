@@ -44,11 +44,11 @@ export function CaseStudyEvidenceSection({ data }: { data: CaseStudyTemplateTest
           <MotionReveal preset="card" className="grid gap-4 md:grid-cols-3">
             {data.evidence.validationItems.map((item) => (
               <article key={item.title} className="rounded-[24px] border border-white/10 bg-white/5 p-6">
-                <TagPill variant="white" className="py-1.5 text-[13px] uppercase tracking-[0.12em]">
+                <TagPill variant="white" className="py-1.5 type-p5 uppercase tracking-[0.12em]">
                   {item.eyebrow}
                 </TagPill>
-                <h3 className="type-h6 mt-4 text-white">{item.title}</h3>
-                <p className="type-p3 mt-3 text-white/68">{item.copy}</p>
+                <h3 className="type-h5 mt-4 text-white">{item.title}</h3>
+                <p className="type-p2 mt-3 text-white/68">{item.copy}</p>
               </article>
             ))}
           </MotionReveal>
@@ -57,4 +57,3 @@ export function CaseStudyEvidenceSection({ data }: { data: CaseStudyTemplateTest
     </section>
   )
 }
-

@@ -1,6 +1,5 @@
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import {
-  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
   HomepageSectionHeader,
   HomepageSectionShell,
 } from "@/components/homepage/ui"
@@ -60,7 +59,7 @@ export function PastClientsSection({
         <div className="flex flex-col items-center gap-10">
           <MotionReveal preset={useHomepageMotion ? "hero" : "section"} className="w-full max-w-[920px]">
             <HomepageSectionHeader label="Past Clients" align="center">
-              <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-[#222222]`}>Trusted By Global Teams</h2>
+              <h2 className="type-h2 text-[#222222]">Trusted By Global Teams</h2>
             </HomepageSectionHeader>
           </MotionReveal>
 
@@ -92,7 +91,7 @@ export function PastClientsSection({
             <MotionReveal preset="section" className="w-full">
               <div className="flex w-full flex-col gap-4 md:gap-6">
                 <HomepageSectionHeader label="Clients">
-                  <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-white`}>Enterprises I&apos;ve Helped</h2>
+                  <h2 className="type-h2 text-white">Enterprises I&apos;ve Helped</h2>
                 </HomepageSectionHeader>
 
                 <MotionReveal preset="section" className="w-full">

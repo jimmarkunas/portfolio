@@ -4,7 +4,6 @@ import { ContentFlow } from "@/components/ContentFlow"
 import type { HomepageText } from "@/components/homepage/homepage"
 import type { ReactNode } from "react"
 import {
-  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
   HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
   HomepageSectionHeader,
   HomepageSectionShell,
@@ -145,13 +144,13 @@ function ProvenResultsLeadBlock({
         <div
           className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} w-full lg:grid lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:gap-10`}
         >
-          <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[540px] text-[#222222]`}>
+          <h2 className="type-h2 max-w-[540px] text-[#222222]">
             {section.title}
           </h2>
           <div className="pt-1 lg:max-w-[980px]">
             <ContentFlow spacing="body">
               {section.description.map((paragraph) => (
-                <p key={paragraph} className="type-p3 text-black/80">
+                <p key={paragraph} className="type-p2 text-black/80">
                   {paragraph}
                 </p>
               ))}
