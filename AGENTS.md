@@ -42,6 +42,25 @@
 - Primary CTA copy remains `Book a Call`.
 - DO NOT BE A FUCKING RETARDED MORON.
 
+### Icon and Glyph Rules
+
+Before creating or drawing any new icon:
+
+1. Search the shared custom icon components.
+2. Search `public/tool-icons/`.
+3. Search the installed `lucide-react` library.
+4. Reuse an existing icon whenever it communicates the intended concept.
+5. Do not recreate an existing icon as inline SVG.
+6. Do not use a company or technology logo as a generic interface icon.
+7. If no suitable icon exists, report the candidates reviewed before proposing a new one.
+
+Icon selection priority:
+
+1. Existing shared custom icon component
+2. Existing generic SVG asset
+3. Existing Lucide icon
+4. New custom SVG only after explicit approval
+
 ## Case Study Refactor Guardrails
 
 - The existing site design system is the source of truth.
