@@ -49,7 +49,7 @@ export function CaseStudyOutcomeHeroSection({ data }: { data: CaseStudyTemplateT
               <p className="type-p3 max-w-[760px] text-black/66">{data.hero.intro}</p>
             </MotionReveal>
 
-            <MotionReveal preset="card" delay={0.04} className="grid gap-4 xl:grid-cols-3">
+            <MotionReveal preset="card" delay={0.04} className="grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
               {data.hero.metrics.map((metric) => (
                 <article
                   key={`${metric.value}-${metric.label}`}

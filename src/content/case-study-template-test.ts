@@ -8,9 +8,18 @@ export type CaseStudyTemplateTestMetric = {
 }
 
 export type CaseStudyTemplateTestFact = {
+  icon: CaseStudyTemplateTestFactIcon
   label: string
   value: string
 }
+
+export type CaseStudyTemplateTestFactIcon =
+  | "role"
+  | "client"
+  | "timeline"
+  | "team"
+  | "budget"
+  | "systems"
 
 export type CaseStudyTemplateTestDecision = {
   title: string
@@ -52,6 +61,9 @@ export type CaseStudyTemplateTestData = {
     image: CaseStudyMedia
   }
   executiveBrief: {
+    eyebrow: string
+    title: string
+    copy: string
     role: string
     client: string
     timeline: string
@@ -146,6 +158,10 @@ export const caseStudyTemplateTest = {
     },
   },
   executiveBrief: {
+    eyebrow: "Executive Brief",
+    title: "Recruiter-readable context in one view",
+    copy:
+      "This section keeps the facts compact and the narrative readable so the page can be scanned quickly without losing the shape of the work.",
     role: "Product and Program Lead",
     client: "Northstar Service Network (fictional)",
     timeline: "April 2025 - September 2025",
@@ -161,12 +177,12 @@ export const caseStudyTemplateTest = {
     outcome:
       "The program became easier to run, easier to explain, and faster to act on because the workflow matched the real business problem.",
     facts: [
-      { label: "Role", value: "Product and Program Lead" },
-      { label: "Client", value: "Northstar Service Network (fictional)" },
-      { label: "Timeline", value: "April 2025 - September 2025" },
-      { label: "Team / stakeholders", value: "12 people across operations, design, engineering, finance, and service leadership" },
-      { label: "Budget / scale", value: "$1.6M program spanning 3 regional teams and 1 national support desk" },
-      { label: "Systems / technology", value: "Figma, React, ServiceNow, SAP, Airtable, and a shared reporting layer" },
+      { icon: "role", label: "Role", value: "Product and Program Lead" },
+      { icon: "client", label: "Client", value: "Northstar Service Network (fictional)" },
+      { icon: "timeline", label: "Timeline", value: "April 2025 - September 2025" },
+      { icon: "team", label: "Team & Stakeholders", value: "12 people across operations, design, engineering, finance, and service leadership" },
+      { icon: "budget", label: "Budget & Scale", value: "$1.6M program spanning 3 regional teams and 1 national support desk" },
+      { icon: "systems", label: "Systems", value: "Figma, React, ServiceNow, SAP, Airtable, and a shared reporting layer" },
     ],
   },
   challenge: {
@@ -401,4 +417,3 @@ export const caseStudyTemplateTest = {
       "Use this test route to confirm the hierarchy, spacing, and responsive behavior before we migrate any real case studies.",
   },
 } satisfies CaseStudyTemplateTestData
-
