@@ -69,6 +69,25 @@ function renderAnimatedMetricText(value: string, trigger: "load" | "in-view") {
   return pieces
 }
 
+function renderHighlightedText(value: string, highlight: string) {
+  const matchIndex = value.indexOf(highlight)
+
+  if (matchIndex < 0) {
+    return value
+  }
+
+  const before = value.slice(0, matchIndex)
+  const after = value.slice(matchIndex + highlight.length)
+
+  return (
+    <>
+      {before}
+      <span className="text-[#447ACB]">{highlight}</span>
+      {after}
+    </>
+  )
+}
+
 function HomepageInsightTopCard({ logoSrc, logoAlt, value, description }: HomepageInsightTopCardProps) {
   return (
     <article className="flex min-h-[140px] items-center rounded-[10px] bg-[#222222] p-[18px]">
@@ -88,6 +107,9 @@ function HomepageInsightTopCard({ logoSrc, logoAlt, value, description }: Homepa
 }
 
 function ServiceCard({ item, index }: { item: ServicesItem; index: number }) {
+  const highlightWords = ["broken", "shipped", "untangled", "modernized", "scaled", "Agents"] as const
+  const highlightWord = highlightWords[index]
+
   return (
     <article className="relative flex h-full min-h-[188px] flex-col justify-between overflow-hidden rounded-[14px] bg-[#222222] p-5 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] md:min-h-[220px] md:p-6 xl:min-h-[240px]">
       <div
@@ -102,7 +124,7 @@ function ServiceCard({ item, index }: { item: ServicesItem; index: number }) {
             style={{ animationDelay: `${index * 0.85 + 0.2}s` }}
           />
           <p className="type-h5 w-full max-w-none text-white leading-[1.18]">
-            {item.outcome}
+            {renderHighlightedText(item.outcome, highlightWord)}
           </p>
         </div>
 

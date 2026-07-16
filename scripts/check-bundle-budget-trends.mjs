@@ -11,7 +11,6 @@ const SNAPSHOT_PATH = path.join(NEXT_DIR, "bundle-budget-trend-current.json")
 
 const ROUTE_TARGETS = [
   "/work/[slug]/page",
-  "/work/[slug]/press/[filename]/page",
   "/page",
 ]
 

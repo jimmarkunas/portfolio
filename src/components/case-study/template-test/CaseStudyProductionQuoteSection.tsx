@@ -11,7 +11,7 @@ export function CaseStudyProductionQuoteSection() {
       <Container className="py-14 md:py-16 lg:py-20">
         <MotionReveal preset="section">
           <PullQuote
-            quote={<>&ldquo;{cpsCaseStudy.problem.quote.quote}&rdquo;</>}
+            quote={cpsCaseStudy.problem.quote.quote}
             attributionTitle={cpsCaseStudy.problem.quote.attributionTitle}
             attributionSubtitle={cpsCaseStudy.problem.quote.attributionSubtitle}
             avatarSrc={cpsCaseStudy.problem.quote.avatarSrc}

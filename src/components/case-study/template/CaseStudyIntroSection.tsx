@@ -191,12 +191,12 @@ export function CaseStudyIntroSection({ data }: { data: CaseStudyData }) {
               )}
 
               {!hideProblemQuote ? (
-                <PullQuote
-                  className={data.problem.quote.preQuoteImage ? "mt-8" : "mt-14 lg:mt-16"}
-                  quote={<>&ldquo;{data.problem.quote.quote}&rdquo;</>}
-                  attributionTitle={data.problem.quote.attributionTitle}
-                  attributionSubtitle={data.problem.quote.attributionSubtitle}
-                  avatarSrc={data.problem.quote.avatarSrc}
+              <PullQuote
+                className={data.problem.quote.preQuoteImage ? "mt-8" : "mt-14 lg:mt-16"}
+                quote={data.problem.quote.quote}
+                attributionTitle={data.problem.quote.attributionTitle}
+                attributionSubtitle={data.problem.quote.attributionSubtitle}
+                avatarSrc={data.problem.quote.avatarSrc}
                   glyphClassName="text-[rgba(34,34,34,0.06)]"
                   attributionClassName="mt-6"
                 />

@@ -24,12 +24,12 @@ export function CaseStudyEvidenceSection({ data }: { data: CaseStudyTemplateTest
           </MotionReveal>
 
           <MotionReveal preset="section">
-            <PullQuote
-              dark
-              quote={<>&ldquo;{data.evidence.testimonial.quote}&rdquo;</>}
-              attributionTitle={data.evidence.testimonial.attributionTitle}
-              attributionSubtitle={data.evidence.testimonial.attributionSubtitle}
-              glyphClassName="text-[rgba(255,255,255,0.1)]"
+          <PullQuote
+            dark
+            quote={data.evidence.testimonial.quote}
+            attributionTitle={data.evidence.testimonial.attributionTitle}
+            attributionSubtitle={data.evidence.testimonial.attributionSubtitle}
+            glyphClassName="text-[rgba(255,255,255,0.1)]"
               decorativeFrame={
                 <>
                   <div className="pointer-events-none absolute left-4 top-6 h-16 w-16 rounded-tl-[18px] border-l border-t border-white/10 md:left-8 md:top-8 md:h-20 md:w-20" />

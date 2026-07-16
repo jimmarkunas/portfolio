@@ -106,7 +106,7 @@ export function RotatingPullQuote({ quotes, className }: RotatingPullQuoteProps)
             <PullQuote
               className="h-full px-3 py-3 md:px-4 md:py-4 lg:px-5 lg:py-5"
               contentClassName="h-full justify-center"
-              quote={<>&ldquo;{quote.quote}&rdquo;</>}
+              quote={quote.quote}
               attributionTitle={quote.attributionTitle}
               attributionSubtitle={quote.attributionSubtitle}
               avatarSrc={quote.avatarSrc}
@@ -142,7 +142,7 @@ export function RotatingPullQuote({ quotes, className }: RotatingPullQuoteProps)
                 <PullQuote
                   className="h-full px-3 py-3 md:px-4 md:py-4 lg:px-5 lg:py-5"
                   contentClassName="h-full justify-center"
-                  quote={<>&ldquo;{quote.quote}&rdquo;</>}
+                  quote={quote.quote}
                   attributionTitle={quote.attributionTitle}
                   attributionSubtitle={quote.attributionSubtitle}
                   avatarSrc={quote.avatarSrc}

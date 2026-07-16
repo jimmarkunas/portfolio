@@ -12,6 +12,7 @@ const scriptPaths = {
   booking: path.join(repoRoot, "scripts/check-booking-url-drift.mjs"),
   registry: path.join(repoRoot, "scripts/check-case-study-registry.mjs"),
   bundles: path.join(repoRoot, "scripts/check-bundle-budgets.mjs"),
+  bundleTrends: path.join(repoRoot, "scripts/check-bundle-budget-trends.mjs"),
 }
 
 const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-guard-fixtures-"))
@@ -22,9 +23,9 @@ function writeFile(baseDir, relativePath, content) {
   fs.writeFileSync(filePath, content)
 }
 
-function runNodeScript(scriptPath, cwd) {
+function runNodeScript(scriptPath, cwd, args = []) {
   try {
-    const stdout = execFileSync(process.execPath, [scriptPath], {
+    const stdout = execFileSync(process.execPath, [scriptPath, ...args], {
       cwd,
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"],
@@ -150,13 +151,6 @@ function createBundleFixture(baseDir, options = {}) {
       "static/chunks/main-app.js",
       "static/chunks/app/(site)/work/[slug]/page-a.js",
     ],
-    "/(site)/work/[slug]/press/[filename]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/shared-a.js",
-      "static/chunks/shared-b.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/work/[slug]/press/[filename]/page-a.js",
-    ],
     "/(site)/page": [
       "static/chunks/webpack.js",
       "static/chunks/shared-a.js",
@@ -176,13 +170,36 @@ function createBundleFixture(baseDir, options = {}) {
   writeChunk(baseDir, ".next/static/chunks/shared-b.js", 3_072)
   writeChunk(baseDir, ".next/static/chunks/main-app.js", 1_024)
   writeChunk(baseDir, ".next/static/chunks/app/(site)/work/[slug]/page-a.js", 4_096)
-  writeChunk(baseDir, ".next/static/chunks/app/(site)/work/[slug]/press/[filename]/page-a.js", 4_096)
   writeChunk(baseDir, ".next/static/chunks/app/(site)/page-a.js", 2_048)
 
   if (options.oversizeSharedChunk) {
     writeChunk(baseDir, ".next/static/chunks/shared-a.js", 260_000, true)
   } else {
     writeChunk(baseDir, ".next/static/chunks/shared-a.js", 8_192)
+  }
+
+  if (options.writeTrendBaseline) {
+    fs.mkdirSync(path.join(baseDir, "scripts"), { recursive: true })
+    const baselineResult = runNodeScript(scriptPaths.bundleTrends, baseDir, ["--write-baseline"])
+    if (!baselineResult.ok) {
+      throw new Error(`Failed to write bundle trend baseline:\n${baselineResult.output}`)
+    }
+  }
+
+  if (options.missingWorkRoute) {
+    writeFile(
+      baseDir,
+      ".next/app-build-manifest.json",
+      `${JSON.stringify(
+        {
+          pages: {
+            "/(site)/page": pages["/(site)/page"],
+          },
+        },
+        null,
+        2,
+      )}\n`,
+    )
   }
 }
 
@@ -248,10 +265,31 @@ const cases = [
     setup: (baseDir) => createRegistryFixture(baseDir, { withOrphanModule: true }),
   },
   {
+    name: "bundle-budget-trends pass fixture",
+    script: scriptPaths.bundleTrends,
+    expectedPass: true,
+    setup: (baseDir) => createBundleFixture(baseDir, { writeTrendBaseline: true }),
+  },
+  {
+    name: "bundle-budget-trends fails when work route is missing",
+    script: scriptPaths.bundleTrends,
+    expectedPass: false,
+    setup: (baseDir) => createBundleFixture(baseDir, {
+      writeTrendBaseline: true,
+      missingWorkRoute: true,
+    }),
+  },
+  {
     name: "bundle-budgets pass fixture",
     script: scriptPaths.bundles,
     expectedPass: true,
     setup: (baseDir) => createBundleFixture(baseDir),
+  },
+  {
+    name: "bundle-budgets fails when work route is missing",
+    script: scriptPaths.bundles,
+    expectedPass: false,
+    setup: (baseDir) => createBundleFixture(baseDir, { missingWorkRoute: true }),
   },
   {
     name: "bundle-budgets fails on oversized shared chunk",
