@@ -68,38 +68,40 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
             </div>
           </MotionReveal>
 
-          <MotionReveal preset="cardStrong" className="bg-white p-6 md:p-8">
-            <div
-              data-placeholder="case-study-solution-diagram"
-              className="flex min-h-[360px] w-full items-center justify-center rounded-[24px] border border-dashed border-black/20 bg-[#F8F8F8] px-6 py-12 text-center md:min-h-[420px] md:px-10"
-            >
-              <div className="flex max-w-[620px] flex-col items-center gap-3">
-                <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Diagram Placeholder</div>
+          {data.slug !== "foh" ? (
+            <MotionReveal preset="cardStrong" className="bg-white p-6 md:p-8">
+              <div
+                data-placeholder="case-study-solution-diagram"
+                className="flex min-h-[360px] w-full items-center justify-center rounded-[24px] border border-dashed border-black/20 bg-[#F8F8F8] px-6 py-12 text-center md:min-h-[420px] md:px-10"
+              >
+                <div className="flex max-w-[620px] flex-col items-center gap-3">
+                  <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Diagram Placeholder</div>
 
-                <h3 className="type-h4 text-[#222222]">Production solution diagram renders here</h3>
+                  <h3 className="type-h4 text-[#222222]">Production solution diagram renders here</h3>
 
-                <p className="type-p2 max-w-[560px] text-black/60">
-                  This test block represents the diagram, architecture visual, workflow, system map, or interactive
-                  solution graphic used by production case studies.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
-                <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Why this shape worked</div>
-                <p className="type-p2 mt-3 text-[#222222]">{data.solution.summary}</p>
+                  <p className="type-p2 max-w-[560px] text-black/60">
+                    This test block represents the diagram, architecture visual, workflow, system map, or interactive
+                    solution graphic used by production case studies.
+                  </p>
+                </div>
               </div>
 
-              <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
-                <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Architecture notes</div>
-                <p className="type-p2 mt-3 text-black/65">
-                  The point of the section is to pressure-test whether a large system visual reads cleanly without
-                  turning into a dashboard.
-                </p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
+                  <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Why this shape worked</div>
+                  <p className="type-p2 mt-3 text-[#222222]">{data.solution.summary}</p>
+                </div>
+
+                <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
+                  <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Architecture notes</div>
+                  <p className="type-p2 mt-3 text-black/65">
+                    The point of the section is to pressure-test whether a large system visual reads cleanly without
+                    turning into a dashboard.
+                  </p>
+                </div>
               </div>
-            </div>
-          </MotionReveal>
+            </MotionReveal>
+          ) : null}
         </div>
       </Container>
     </section>
