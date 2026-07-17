@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { CaseStudyTemplateTest } from "@/components/case-study/template-test/CaseStudyTemplateTest"
+import { CaseStudyRevampTemplate } from "@/components/case-study/revamp/CaseStudyRevampTemplate"
 import { fohRevampCaseStudy } from "@/content/case-studies/revamp/foh"
 import { buildPageMetadata } from "@/lib/seo"
 
@@ -15,5 +15,5 @@ export const metadata: Metadata = buildPageMetadata({
 })
 
 export default function FOHCaseStudyPreviewPage() {
-  return <CaseStudyTemplateTest data={fohRevampCaseStudy} />
+  return <CaseStudyRevampTemplate data={fohRevampCaseStudy} />
 }

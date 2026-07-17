@@ -3,9 +3,9 @@
 import { Container } from "@/components/Container"
 import { PullQuote } from "@/components/PullQuote"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import type { CaseStudyTemplateTestData } from "@/content/case-study-template-test"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 
-export function CaseStudyProductionQuoteSection({ data }: { data: CaseStudyTemplateTestData }) {
+export function CaseStudyRevampProductionQuoteSection({ data }: { data: CaseStudyRevampData }) {
   return (
     <section className="bg-white">
       <Container className="py-14 md:py-16 lg:py-20">

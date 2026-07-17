@@ -8,9 +8,9 @@ import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { StatText } from "@/components/StatText"
 import { TextLink } from "@/components/TextLink"
-import type { CaseStudyTemplateTestData } from "@/content/case-study-template-test"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 
-export function CaseStudyOutcomeHeroSection({ data }: { data: CaseStudyTemplateTestData }) {
+export function CaseStudyRevampHeroSection({ data }: { data: CaseStudyRevampData }) {
   return (
     <section className="bg-[#F3F3F3]">
       <Container className="pb-7 pt-8 md:pb-8 md:pt-10 lg:pb-10 lg:pt-12">

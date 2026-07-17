@@ -6,12 +6,12 @@ import { BadgeDollarSign, Building2, Clock, Cpu, UserCheck, Users } from "lucide
 import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import type {
-  CaseStudyTemplateTestData,
-  CaseStudyTemplateTestFactIcon,
-} from "@/content/case-study-template-test"
-import { CaseStudySectionHeader } from "./CaseStudySectionHeader"
+  CaseStudyRevampData,
+  CaseStudyRevampFactIcon,
+} from "@/content/case-studies/revamp/types"
+import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
 
-const executiveBriefIconMap: Record<CaseStudyTemplateTestFactIcon, LucideIcon> = {
+const executiveBriefIconMap: Record<CaseStudyRevampFactIcon, LucideIcon> = {
   role: UserCheck,
   client: Building2,
   timeline: Clock,
@@ -50,13 +50,13 @@ function renderHighlightedCopy(label: string, copy: string) {
   )
 }
 
-export function CaseStudyExecutiveBriefSection({ data }: { data: CaseStudyTemplateTestData }) {
+export function CaseStudyRevampExecutiveBriefSection({ data }: { data: CaseStudyRevampData }) {
   return (
     <section className="bg-white">
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="grid gap-10 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-12">
           <MotionReveal preset="section" className="flex flex-col gap-8">
-            <CaseStudySectionHeader
+            <CaseStudyRevampSectionHeader
               eyebrow={data.executiveBrief.eyebrow}
               title={data.executiveBrief.title}
               copy={data.executiveBrief.copy}

@@ -1,4 +1,4 @@
-import type { CaseStudyTemplateTestData } from "@/content/case-study-template-test"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 
 export const fohRevampCaseStudy = {
   slug: "foh",
@@ -371,4 +371,4 @@ export const fohRevampCaseStudy = {
     copy:
       "This route is only for review. Once the hierarchy, copy, and media feel right, the live FOH page can be moved onto the new template.",
   },
-} satisfies CaseStudyTemplateTestData
+} satisfies CaseStudyRevampData

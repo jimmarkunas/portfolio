@@ -11,7 +11,7 @@ type CaseStudySectionHeaderProps = {
   className?: string
 }
 
-export function CaseStudySectionHeader({
+export function CaseStudyRevampSectionHeader({
   eyebrow,
   title,
   copy,

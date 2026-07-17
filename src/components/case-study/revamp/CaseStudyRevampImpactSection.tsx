@@ -6,10 +6,10 @@ import { Container } from "@/components/Container"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { StatCard } from "@/components/StatCard"
-import type { CaseStudyTemplateTestData } from "@/content/case-study-template-test"
-import { CaseStudySectionHeader } from "./CaseStudySectionHeader"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
+import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
 
-export function CaseStudyImpactSection({ data }: { data: CaseStudyTemplateTestData }) {
+export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampData }) {
   const timelineRef = useRef<HTMLDivElement | null>(null)
 
   return (
@@ -17,7 +17,7 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyTemplateTestDa
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="flex flex-col gap-10 lg:gap-12">
           <MotionReveal preset="section" className="flex flex-col items-center gap-4 text-center">
-            <CaseStudySectionHeader
+            <CaseStudyRevampSectionHeader
               eyebrow={data.impact.eyebrow}
               title={data.impact.title}
               copy={data.impact.intro}

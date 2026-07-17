@@ -7,10 +7,10 @@ import { FullWidthImage } from "@/components/FullWidthImage"
 import { ExternalLinkMiniIcon } from "@/components/icons/ui-icons"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { TagPill } from "@/components/TagPill"
-import type { CaseStudyTemplateTestData } from "@/content/case-study-template-test"
-import { CaseStudySectionHeader } from "./CaseStudySectionHeader"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
+import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
 
-export function CaseStudyRecognitionSection({ data }: { data: CaseStudyTemplateTestData }) {
+export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRevampData }) {
   const recognition = data.recognition
 
   if (!recognition) {
@@ -29,7 +29,7 @@ export function CaseStudyRecognitionSection({ data }: { data: CaseStudyTemplateT
             preset="section"
             className="grid gap-8 lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)] lg:items-start lg:gap-16"
           >
-            <CaseStudySectionHeader
+            <CaseStudyRevampSectionHeader
               eyebrow={recognition.eyebrow}
               title={recognition.title}
               className="max-w-[460px] lg:pt-0"

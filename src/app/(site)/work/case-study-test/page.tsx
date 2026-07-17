@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { CaseStudyTemplateTest } from "@/components/case-study/template-test/CaseStudyTemplateTest"
-import { caseStudyTemplateTest } from "@/content/case-study-template-test"
+import { CaseStudyRevampTemplate } from "@/components/case-study/revamp/CaseStudyRevampTemplate"
+import { caseStudyRevampFixture } from "@/content/case-studies/revamp/fixture"
 
 export const metadata: Metadata = {
   title: "Case Study Test",
@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 }
 
 export default function CaseStudyTestPage() {
-  return <CaseStudyTemplateTest data={caseStudyTemplateTest} />
+  return <CaseStudyRevampTemplate data={caseStudyRevampFixture} />
 }

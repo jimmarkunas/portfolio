@@ -6,16 +6,16 @@ import { FullWidthImage } from "@/components/FullWidthImage"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { ProofPointArrowIcon } from "@/components/case-study/template/CaseStudyTemplateIcons"
 import { TagPill } from "@/components/TagPill"
-import type { CaseStudyTemplateTestData } from "@/content/case-study-template-test"
-import { CaseStudySectionHeader } from "./CaseStudySectionHeader"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
+import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
 
-export function CaseStudySolutionSection({ data }: { data: CaseStudyTemplateTestData }) {
+export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevampData }) {
   return (
     <section className="bg-[#F3F3F3]">
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="flex flex-col gap-10 lg:gap-12">
           <MotionReveal preset="section" className="flex flex-col items-center gap-4 text-center">
-            <CaseStudySectionHeader
+            <CaseStudyRevampSectionHeader
               eyebrow={data.solution.eyebrow}
               title={data.solution.title}
               copy={data.solution.copy}

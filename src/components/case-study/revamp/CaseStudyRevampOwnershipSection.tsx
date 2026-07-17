@@ -3,10 +3,10 @@
 import { Container } from "@/components/Container"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import type { CaseStudyTemplateTestData } from "@/content/case-study-template-test"
-import { CaseStudySectionHeader } from "./CaseStudySectionHeader"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
+import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
 
-export function CaseStudyOwnershipSection({ data }: { data: CaseStudyTemplateTestData }) {
+export function CaseStudyRevampOwnershipSection({ data }: { data: CaseStudyRevampData }) {
   return (
     <section className="bg-white">
       <Container className="py-14 md:py-16 lg:py-20">
@@ -28,7 +28,7 @@ export function CaseStudyOwnershipSection({ data }: { data: CaseStudyTemplateTes
 
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-start lg:gap-12">
             <MotionReveal preset="section" className="flex flex-col gap-6">
-              <CaseStudySectionHeader eyebrow={data.ownership.eyebrow} title={data.ownership.title} />
+              <CaseStudyRevampSectionHeader eyebrow={data.ownership.eyebrow} title={data.ownership.title} />
               <p className="type-p3 max-w-[620px] text-black/70">{data.ownership.summary}</p>
             </MotionReveal>
 
