@@ -13,13 +13,13 @@ export function FullWidthImage({ src, alt = "", fullWidth = true }: { src: strin
 
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 md:p-8"
           onClick={() => setOpen(false)}
         >
           <img
             src={src}
             alt={alt}
-            className="w-full h-auto block"
+            className="block h-auto w-auto max-h-[calc(100dvh-2rem)] max-w-[calc(100vw-2rem)] object-contain md:max-h-[calc(100dvh-4rem)] md:max-w-[calc(100vw-4rem)]"
             onClick={(e) => e.stopPropagation()}
           />
           <button

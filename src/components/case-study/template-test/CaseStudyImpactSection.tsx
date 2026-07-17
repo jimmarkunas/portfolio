@@ -1,5 +1,7 @@
 "use client"
 
+import { useRef } from "react"
+
 import { Container } from "@/components/Container"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { MotionReveal } from "@/components/motion/MotionReveal"
@@ -8,6 +10,8 @@ import type { CaseStudyTemplateTestData } from "@/content/case-study-template-te
 import { CaseStudySectionHeader } from "./CaseStudySectionHeader"
 
 export function CaseStudyImpactSection({ data }: { data: CaseStudyTemplateTestData }) {
+  const timelineRef = useRef<HTMLDivElement | null>(null)
+
   return (
     <section className="bg-white">
       <Container className="py-14 md:py-16 lg:py-20">
@@ -64,7 +68,7 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyTemplateTestDa
             </div>
 
             <div className="border-t border-black/10 pt-5">
-              <div className="relative">
+              <div ref={timelineRef} className="relative">
                 <div className="absolute bottom-0 left-[calc(34%+36px)] top-0 hidden w-px bg-black/12 lg:block" />
 
                 <div className="divide-y divide-black/8">
@@ -77,12 +81,10 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyTemplateTestDa
                         </div>
 
                         <div className="relative flex justify-center lg:justify-start">
-                          <div className="absolute left-1/2 top-0 z-0 h-full w-px bg-black/12 lg:left-[36px]" />
-                          <div className="relative z-10 flex flex-col items-center gap-2 pt-1 lg:items-start lg:gap-1">
-                            <span className="type-h5 font-light tabular-nums text-black/35">
+                          <div className="relative z-10 flex flex-col items-center pt-1 lg:items-start">
+                            <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#222222] type-p2 font-light tabular-nums text-white">
                               {String(index + 1).padStart(2, "0")}
                             </span>
-                            <span className="h-2.5 w-2.5 rounded-full bg-[#447ACB]" />
                           </div>
                         </div>
 

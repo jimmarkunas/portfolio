@@ -13,7 +13,7 @@ import { CaseStudyRelatedSection } from "./CaseStudyRelatedSection"
 import type { CaseStudyTemplateTestData } from "@/content/case-study-template-test"
 
 function SectionBorder({ children }: { children: ReactNode }) {
-  return <div className="border border-red-500">{children}</div>
+  return <div>{children}</div>
 }
 
 export function CaseStudyTemplateTest({ data }: { data: CaseStudyTemplateTestData }) {
@@ -26,7 +26,7 @@ export function CaseStudyTemplateTest({ data }: { data: CaseStudyTemplateTestDat
         <CaseStudyExecutiveBriefSection data={data} />
       </SectionBorder>
       <SectionBorder>
-        <CaseStudyProductionQuoteSection />
+        <CaseStudyProductionQuoteSection data={data} />
       </SectionBorder>
       <SectionBorder>
         <CaseStudyChallengeSection data={data} />

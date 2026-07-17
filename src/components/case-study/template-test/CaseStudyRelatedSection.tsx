@@ -15,8 +15,8 @@ export function CaseStudyRelatedSection({ data }: { data: CaseStudyTemplateTestD
           <MotionReveal preset="section" className="flex flex-col items-center gap-4 text-center">
             <CaseStudySectionHeader
               eyebrow="Related Case Studies"
-              title="Exactly two cards to test the layout"
-              copy="These are fictional placeholders that use the existing portfolio card language without pulling in live case-study content."
+              title="More Work Worth Comparing"
+              copy="A quick look at two studies with shared themes in scale, operating model, and brand velocity..."
               align="center"
               className="max-w-[900px]"
             />

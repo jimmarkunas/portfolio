@@ -16,6 +16,7 @@ export function CaseStudyEvidenceSection({ data }: { data: CaseStudyTemplateTest
               quote={data.evidence.testimonial.quote}
               attributionTitle={data.evidence.testimonial.attributionTitle}
               attributionSubtitle={data.evidence.testimonial.attributionSubtitle}
+              avatarSrc={data.evidence.testimonial.avatarSrc}
               glyphClassName="text-[rgba(255,255,255,0.1)]"
               decorativeFrame={
                 <>

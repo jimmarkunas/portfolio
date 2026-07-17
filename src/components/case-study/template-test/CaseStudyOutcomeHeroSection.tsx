@@ -13,7 +13,7 @@ import type { CaseStudyTemplateTestData } from "@/content/case-study-template-te
 export function CaseStudyOutcomeHeroSection({ data }: { data: CaseStudyTemplateTestData }) {
   return (
     <section className="bg-[#F3F3F3]">
-      <Container className="pb-14 pt-8 md:pb-16 md:pt-10 lg:pb-20 lg:pt-12">
+      <Container className="pb-7 pt-8 md:pb-8 md:pt-10 lg:pb-10 lg:pt-12">
         <div className="flex flex-col gap-6 lg:gap-8">
           <MotionReveal preset="section">
             <nav aria-label="Breadcrumb" className="type-p5 text-[#222222]">
@@ -41,19 +41,20 @@ export function CaseStudyOutcomeHeroSection({ data }: { data: CaseStudyTemplateT
             </nav>
           </MotionReveal>
 
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-start lg:gap-12">
-            <MotionReveal preset="section" className="flex max-w-[820px] flex-col items-start gap-3">
-              <h1 className="type-h1 text-[#222222]">
-                {data.hero.title}
-              </h1>
-              <p className="type-p2 max-w-[760px] text-black/66">{data.hero.intro}</p>
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-x-12 lg:gap-y-6">
+            <MotionReveal preset="section" className="lg:col-span-2">
+              <h1 className="type-h1-case-study w-full text-[#222222]">{data.hero.title}</h1>
             </MotionReveal>
 
-            <MotionReveal preset="card" delay={0.04} className="grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+            <MotionReveal preset="section" delay={0.05} className="max-w-[760px]">
+              <p className="type-p2 text-black/66">{data.hero.intro}</p>
+            </MotionReveal>
+
+            <MotionReveal preset="card" delay={0.04} className="grid gap-4 md:grid-cols-3 lg:mt-0 lg:items-start xl:grid-cols-3">
               {data.hero.metrics.map((metric) => (
                 <article
                   key={`${metric.value}-${metric.label}`}
-                  className="relative overflow-hidden rounded-[10px] bg-white h-[176px] px-8 py-10"
+                  className="relative h-[176px] overflow-hidden rounded-[10px] bg-white px-8 py-10"
                 >
                   <StatText
                     value={metric.value}
@@ -72,7 +73,7 @@ export function CaseStudyOutcomeHeroSection({ data }: { data: CaseStudyTemplateT
             </MotionReveal>
           </div>
 
-          <MotionReveal preset="heroMedia" delay={0.08}>
+          <MotionReveal preset="image">
             <CaseStudyHeroImage src={data.hero.image.src} alt={data.hero.image.alt} />
           </MotionReveal>
         </div>

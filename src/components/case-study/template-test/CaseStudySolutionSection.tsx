@@ -37,18 +37,18 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyTemplateTest
                       />
                     ) : null}
 
-                    <div className="flex items-center justify-between gap-4">
-                      <TagPill variant="soft" className="py-1.5 type-p5 uppercase tracking-[0.12em]">
+                    <div className="flex items-center justify-center gap-4">
+                      <TagPill variant="soft" className="py-1.5 text-center type-p5 uppercase tracking-[0.12em]">
                         {lane.eyebrow}
                       </TagPill>
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                      <h3 className="type-h4 text-[#222222]">{lane.title}</h3>
+                    <div className="flex h-[8rem] flex-col items-center justify-center gap-2 text-center">
+                      <h3 className="type-h6 text-[#222222]">{lane.title}</h3>
                       <p className="type-p2 text-black/68">{lane.copy}</p>
                     </div>
 
-                    <ul className="mt-auto space-y-2 border-t border-black/8 pt-4">
+                    <ul className="space-y-2 border-t border-black/8 pt-4">
                       {lane.bullets.map((bullet) => (
                         <li key={bullet} className="flex items-start gap-2 text-[#222222]">
                           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#447ACB]" />

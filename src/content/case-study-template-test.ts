@@ -1,4 +1,4 @@
-import type { CaseStudyMedia, CaseStudySummaryColumn } from "@/content/case-studies"
+import type { CaseStudyMedia, CaseStudySummaryColumn, CaseStudyTool } from "@/content/case-studies"
 
 export type CaseStudyTemplateTestImage = {
   src: string
@@ -13,6 +13,13 @@ export type CaseStudyTemplateTestMetric = {
   suffix?: string
   label: string
   detail?: string
+}
+
+export type CaseStudyTemplateTestQuote = {
+  quote: string
+  attributionTitle: string
+  attributionSubtitle: string
+  avatarSrc?: string
 }
 
 export type CaseStudyTemplateTestFact = {
@@ -93,6 +100,7 @@ export type CaseStudyTemplateTestData = {
     metrics: CaseStudyTemplateTestMetric[]
     image: CaseStudyTemplateTestHeroImage
   }
+  productionQuote: CaseStudyTemplateTestQuote
   executiveBrief: {
     eyebrow: string
     title: string
@@ -103,6 +111,7 @@ export type CaseStudyTemplateTestData = {
     teamStakeholders: string
     budgetScale: string
     systemsTechnology: string
+    tools?: CaseStudyTool[]
     problem: string
     mandate: string
     whatIChanged: string
@@ -150,11 +159,7 @@ export type CaseStudyTemplateTestData = {
     eyebrow: string
     title: string
     intro: string
-    testimonial: {
-      quote: string
-      attributionTitle: string
-      attributionSubtitle: string
-    }
+    testimonial: CaseStudyTemplateTestQuote
     validationItems: CaseStudyTemplateTestValidationItem[]
   }
   recognition?: CaseStudyTemplateTestRecognition
@@ -186,6 +191,13 @@ export const caseStudyTemplateTest = {
       aspectRatio: "16/9",
     },
   },
+  productionQuote: {
+    quote:
+      "We needed to completely re-brand Frederick's. We needed to launch fast. I had to have Shopify. Jim & I made magic at American Apparel, I had to have Jim as PM.",
+    attributionTitle: "Amanda Lopez",
+    attributionSubtitle: "Director of eCommerce, Frederick's of Hollywood",
+    avatarSrc: "/foh/amanda-lopez.jpeg",
+  },
   executiveBrief: {
     eyebrow: "Executive Brief",
     title: "Recruiter-readable context in one view",
@@ -197,6 +209,11 @@ export const caseStudyTemplateTest = {
     teamStakeholders: "12 people across operations, design, engineering, finance, and service leadership",
     budgetScale: "$1.6M program spanning 3 regional teams and 1 national support desk",
     systemsTechnology: "Figma, React, ServiceNow, SAP, Airtable, and a shared reporting layer",
+    tools: [
+      { label: "Figma", icon: "/tool-icons/svg/figma-logo.svg" },
+      { label: "React", icon: "/tool-icons/svg/react-logo.svg" },
+      { label: "ServiceNow", icon: "/tool-icons/svg/servicenow-logo.svg" },
+    ],
     problem:
       "The intake, dispatch, and follow-up experience was splitting across too many systems, so teams could not trust the status of urgent work.",
     mandate:
@@ -379,9 +396,10 @@ export const caseStudyTemplateTest = {
       "Validation was part of the template review, so this section keeps the proof visible without turning it into a wall of badges.",
     testimonial: {
       quote:
-        "The strongest change was not the UI. It was that the team could finally describe the service model the same way across operations and leadership.",
-      attributionTitle: "Senior service leader",
-      attributionSubtitle: "Fictional feedback used for template testing",
+        "Jim gave us speed & creative problem-solving. He turned a bankrupt brand into a campaign-ready commerce machine without burying us in complexity.",
+      attributionTitle: "Amanda Lopez",
+      attributionSubtitle: "Director of eCommerce, Frederick's of Hollywood",
+      avatarSrc: "/foh/amanda-lopez.jpeg",
     },
     validationItems: [
       {
@@ -447,24 +465,24 @@ export const caseStudyTemplateTest = {
   relatedStudies: [
     {
       eyebrow: "Related Study 01",
-      title: "Cleaner workflow, quieter operations",
+      title: "Winning Awards And Making $1B With Modere",
       summary:
-        "A fictional companion story that keeps the same operating clarity theme while testing the card layout.",
-      href: "/work/",
+        "Work Nominated for a MACH Composable Award: Modere wanted to double from $500M GMV to $1B, but the old stack and market-by-market launch model were already breaking under the weight. I helped push the platform toward a composable architecture and protect the system decisions that gave the business a cleaner path to scale.",
+      href: "/work/modere",
       image: {
-        src: "/test/man-placeholder.png",
-        alt: "Fictional related study placeholder image 1",
+        src: "/modere/hero-modere-01.png",
+        alt: "Modere composable commerce platform hero image",
       },
     },
     {
       eyebrow: "Related Study 02",
-      title: "Visible ownership across a larger system",
+      title: "Boehringer Ingelheim: 1st B2B Adobe Cloud Commerce",
       summary:
-        "A second fictional card to confirm that two related studies stack cleanly on mobile and read well on desktop.",
-      href: "/work/",
+        "Boehringer Ingelheim had five markets, country-specific business rules, and a commerce model that didn’t scale. I led the product and program work to define one global reference storefront, decide where local variation belonged, and keep commerce stable through the shift from Oracle to SAP.",
+      href: "/work/bi",
       image: {
-        src: "/test/man-placeholder.png",
-        alt: "Fictional related study placeholder image 2",
+        src: "/bi/hero-bi-01.png",
+        alt: "Boehringer Ingelheim global commerce transformation hero image",
       },
     },
   ],
