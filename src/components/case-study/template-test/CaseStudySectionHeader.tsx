@@ -30,7 +30,7 @@ export function CaseStudySectionHeader({
       tone={tone}
       className={`flex flex-col gap-4 ${className}`.trim()}
       eyebrowClassName={isDark ? "!bg-white/10" : ""}
-      eyebrowLabelClassName="type-p5"
+      eyebrowLabelClassName="type-p3"
       titleGroupClassName="flex flex-col gap-3"
       titleClassName="type-h2"
       descriptionClassName="type-p2 max-w-[760px]"

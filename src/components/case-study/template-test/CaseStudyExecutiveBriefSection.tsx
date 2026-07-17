@@ -28,6 +28,36 @@ const executiveBriefSystemsIcons = [
   { label: "Figma", icon: "/tool-icons/svg/figma-logo.svg" },
 ] as const
 
+function renderHighlightedCopy(label: string, copy: string) {
+  const highlightWords: Record<string, string> = {
+    Problem: "systems",
+    Mandate: "ownership",
+    "What I Changed": "simplified",
+    Outcome: "easier",
+  }
+
+  const highlight = highlightWords[label]
+  if (!highlight) {
+    return copy
+  }
+
+  const matchIndex = copy.indexOf(highlight)
+  if (matchIndex < 0) {
+    return copy
+  }
+
+  const before = copy.slice(0, matchIndex)
+  const after = copy.slice(matchIndex + highlight.length)
+
+  return (
+    <>
+      {before}
+      <span className="text-[#447ACB]">{highlight}</span>
+      {after}
+    </>
+  )
+}
+
 export function CaseStudyExecutiveBriefSection({ data }: { data: CaseStudyTemplateTestData }) {
   return (
     <section className="bg-white">
@@ -95,7 +125,7 @@ export function CaseStudyExecutiveBriefSection({ data }: { data: CaseStudyTempla
                   <div className="flex flex-col gap-4">
                     <div className="h-[2px] w-6 rounded-full bg-[#447ACB]" />
                     <div className="type-p5 uppercase tracking-[0.16em] text-white/50">{label}</div>
-                    <p className="type-p3 text-white">{copy}</p>
+                    <p className="type-p3 text-white">{renderHighlightedCopy(label as string, copy as string)}</p>
                   </div>
                 </article>
               ))}

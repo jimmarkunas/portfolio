@@ -1,10 +1,11 @@
 "use client"
 
+import { Fragment } from "react"
 import { Container } from "@/components/Container"
+import { FullWidthImage } from "@/components/FullWidthImage"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { TagPill } from "@/components/TagPill"
-import { Timeline } from "@/components/Timeline"
 import { ProofPointArrowIcon } from "@/components/case-study/template/CaseStudyTemplateIcons"
+import { TagPill } from "@/components/TagPill"
 import type { CaseStudyTemplateTestData } from "@/content/case-study-template-test"
 import { CaseStudySectionHeader } from "./CaseStudySectionHeader"
 
@@ -23,20 +24,30 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyTemplateTest
             />
           </MotionReveal>
 
-          <MotionReveal preset="cardStrong" className="rounded-[28px] border border-black/8 bg-white p-6 md:p-8">
+          <MotionReveal preset="card" className="bg-white p-6 md:p-8">
             <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-stretch">
               {data.solution.architecture.map((lane, index) => (
-                <div key={lane.title} className="flex flex-col gap-4">
-                  <article className="flex h-full flex-col gap-4 rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
+                <Fragment key={lane.title}>
+                  <article className="flex min-w-0 h-full flex-col gap-4 rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
+                    {lane.image ? (
+                      <FullWidthImage
+                        src={lane.image.src}
+                        alt={lane.image.alt}
+                        fullWidth={false}
+                      />
+                    ) : null}
+
                     <div className="flex items-center justify-between gap-4">
                       <TagPill variant="soft" className="py-1.5 type-p5 uppercase tracking-[0.12em]">
                         {lane.eyebrow}
                       </TagPill>
                     </div>
+
                     <div className="flex flex-col gap-2">
                       <h3 className="type-h4 text-[#222222]">{lane.title}</h3>
                       <p className="type-p2 text-black/68">{lane.copy}</p>
                     </div>
+
                     <ul className="mt-auto space-y-2 border-t border-black/8 pt-4">
                       {lane.bullets.map((bullet) => (
                         <li key={bullet} className="flex items-start gap-2 text-[#222222]">
@@ -46,16 +57,35 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyTemplateTest
                       ))}
                     </ul>
                   </article>
+
                   {index < data.solution.architecture.length - 1 ? (
                     <div className="hidden items-center justify-center lg:flex">
-                      <ProofPointArrowIcon className="rotate-0 text-[#447ACB]" />
+                      <ProofPointArrowIcon className="text-[#447ACB]" />
                     </div>
                   ) : null}
-                </div>
+                </Fragment>
               ))}
             </div>
+          </MotionReveal>
 
-            <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-start">
+          <MotionReveal preset="cardStrong" className="bg-white p-6 md:p-8">
+            <div
+              data-placeholder="case-study-solution-diagram"
+              className="flex min-h-[360px] w-full items-center justify-center rounded-[24px] border border-dashed border-black/20 bg-[#F8F8F8] px-6 py-12 text-center md:min-h-[420px] md:px-10"
+            >
+              <div className="flex max-w-[620px] flex-col items-center gap-3">
+                <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Diagram Placeholder</div>
+
+                <h3 className="type-h4 text-[#222222]">Production solution diagram renders here</h3>
+
+                <p className="type-p2 max-w-[560px] text-black/60">
+                  This test block represents the diagram, architecture visual, workflow, system map, or interactive
+                  solution graphic used by production case studies.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
               <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
                 <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Why this shape worked</div>
                 <p className="type-p2 mt-3 text-[#222222]">{data.solution.summary}</p>
@@ -69,17 +99,6 @@ export function CaseStudySolutionSection({ data }: { data: CaseStudyTemplateTest
                 </p>
               </div>
             </div>
-          </MotionReveal>
-
-          <MotionReveal preset="card" delay={0.04} className="rounded-[28px] border border-black/8 bg-white p-6 md:p-8">
-            <div className="mb-6 flex flex-col gap-3">
-              <h3 className="type-h4 text-[#222222]">Optional delivery timeline</h3>
-              <p className="type-p2 max-w-[760px] text-black/60">
-                The timeline is embedded here as an optional block so we can validate section behavior without
-                adding a separate production section yet.
-              </p>
-            </div>
-            <Timeline items={data.solution.timeline} />
           </MotionReveal>
         </div>
       </Container>

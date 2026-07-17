@@ -1,5 +1,13 @@
 import type { CaseStudyMedia, CaseStudySummaryColumn } from "@/content/case-studies"
 
+export type CaseStudyTemplateTestImage = {
+  src: string
+  alt: string
+  width: number
+  height: number
+  caption?: string
+}
+
 export type CaseStudyTemplateTestMetric = {
   value: string
   suffix?: string
@@ -31,6 +39,7 @@ export type CaseStudyTemplateTestArchitectureLane = {
   title: string
   copy: string
   bullets: string[]
+  image?: CaseStudyTemplateTestImage
 }
 
 export type CaseStudyTemplateTestValidationItem = {
@@ -51,6 +60,28 @@ export type CaseStudyTemplateTestRelatedStudy = {
 }
 
 export type CaseStudyTemplateTestHeroImage = Extract<CaseStudyMedia, { kind: "image" }>
+
+export type CaseStudyTemplateTestRecognitionRow = {
+  publisher: string
+  date: string
+  summary: string
+  pdfHref: string
+}
+
+export type CaseStudyTemplateTestRecognition = {
+  eyebrow: string
+  title: string
+  intro: string
+  editorialImage?: CaseStudyTemplateTestImage
+  featured?: {
+    media: CaseStudyMedia
+    title: string
+    date?: string
+    summary: string
+    tags: string[]
+  }
+  rows: CaseStudyTemplateTestRecognitionRow[]
+}
 
 export type CaseStudyTemplateTestData = {
   slug: string
@@ -89,6 +120,7 @@ export type CaseStudyTemplateTestData = {
     eyebrow: string
     title: string
     summary: string
+    editorialImage?: CaseStudyTemplateTestImage
     decisions: CaseStudyTemplateTestDecision[]
   }
   solution: {
@@ -97,28 +129,22 @@ export type CaseStudyTemplateTestData = {
     copy: string
     architecture: CaseStudyTemplateTestArchitectureLane[]
     summary: string
-    timeline: Array<{
-      phase: string
-      title: string
-      copy: string
-      ringClass: string
-      labelClass: string
-    }>
   }
   impact: {
     eyebrow: string
     title: string
     intro: string
+    editorialImage?: CaseStudyTemplateTestImage
     metrics: CaseStudyTemplateTestMetric[]
-    beforeAfter: {
+    transformation: {
+      eyebrow: string
       title: string
-      summary: string
-      columns: CaseStudySummaryColumn[]
+      rows: Array<{
+        problem: string
+        decision: string
+        outcome: string
+      }>
     }
-    connections: Array<{
-      title: string
-      copy: string
-    }>
   }
   evidence: {
     eyebrow: string
@@ -131,6 +157,7 @@ export type CaseStudyTemplateTestData = {
     }
     validationItems: CaseStudyTemplateTestValidationItem[]
   }
+  recognition?: CaseStudyTemplateTestRecognition
   relatedStudies: CaseStudyTemplateTestRelatedStudy[]
   finalCta: {
     eyebrow: string
@@ -149,7 +176,7 @@ export const caseStudyTemplateTest = {
       "This fictional case study exists only to pressure-test the standard template. It gives us a realistic, outcome-led story so we can review hierarchy, spacing, and responsive behavior before any live migration begins.",
     metrics: [
       { value: "32", suffix: "%", label: "Fewer handoff delays" },
-      { value: "4", suffix: "d", label: "Faster status clarity" },
+      { value: "4", suffix: "D", label: "Faster status clarity" },
       { value: "8", suffix: "", label: "Systems rationalized" },
     ],
     image: {
@@ -207,6 +234,13 @@ export const caseStudyTemplateTest = {
     title: "I owned the operating model, not just the screens",
     summary:
       "My job was to make the work legible to the organization, then make the design decisions that kept the model stable once the team started delivering.",
+    editorialImage: {
+      src: "/test/case-study-images/ownership-editorial.png",
+      alt: "Neutral editorial placeholder image for the What I Owned section",
+      width: 2880,
+      height: 1164,
+      caption: "Test placeholder for ownership section editorial imagery.",
+    },
     decisions: [
       {
         title: "Set one intake model",
@@ -241,58 +275,55 @@ export const caseStudyTemplateTest = {
         title: "One intake path",
         copy: "Every request entered through one controlled entry point with a shared status language.",
         bullets: ["Single triage screen", "Shared issue taxonomy", "Clear owner handoff"],
+        image: {
+          src: "/test/case-study-images/solution-card-01.png",
+          alt: "Neutral placeholder image for the first solution card",
+          width: 1792,
+          height: 1856,
+          caption: "Test placeholder for the first solution card image.",
+        },
       },
       {
         eyebrow: "Operating Core",
         title: "One decision model",
         copy: "The middle of the system enforced the logic for priority, routing, and escalation.",
         bullets: ["Rules before routing", "Defined escalation thresholds", "Fewer ambiguous states"],
+        image: {
+          src: "/test/case-study-images/solution-card-02.png",
+          alt: "Neutral placeholder image for the second solution card",
+          width: 1792,
+          height: 1856,
+        },
       },
       {
         eyebrow: "Validation Loop",
         title: "One feedback layer",
         copy: "Leadership and service teams could review the same operating data and trust the result.",
         bullets: ["Shared reporting view", "Actionable audit trail", "Visible service outcomes"],
+        image: {
+          src: "/test/case-study-images/solution-card-03.png",
+          alt: "Neutral placeholder image for the third solution card",
+          width: 1792,
+          height: 1856,
+          caption: "Test placeholder for the third solution card image.",
+        },
       },
     ],
     summary:
       "The architecture is intentionally simple so the page can validate spacing, hierarchy, and legibility without relying on fictional branding.",
-    timeline: [
-      {
-        phase: "Phase 01",
-        title: "Observe",
-        copy: "Map where status was getting lost and why the service model felt inconsistent.",
-        ringClass: "border-[#D39D23]",
-        labelClass: "text-[#D39D23]",
-      },
-      {
-        phase: "Phase 02",
-        title: "Align",
-        copy: "Get operations, product, and engineering to agree on one operating language.",
-        ringClass: "border-[#5E7FB7]",
-        labelClass: "text-[#5E7FB7]",
-      },
-      {
-        phase: "Phase 03",
-        title: "Design",
-        copy: "Turn the agreed model into a cleaner workflow and supporting interface system.",
-        ringClass: "border-[#1A9E9A]",
-        labelClass: "text-[#1A9E9A]",
-      },
-      {
-        phase: "Phase 04",
-        title: "Prove",
-        copy: "Review the new sequence against real service situations and remove ambiguity.",
-        ringClass: "border-[#3E7BE0]",
-        labelClass: "text-[#3E7BE0]",
-      },
-    ],
   },
   impact: {
     eyebrow: "Impact",
     title: "The change was measurable in the work itself",
     intro:
       "The results mattered in three ways: the business had less friction, the operation had clearer ownership, and the project could scale without adding confusion.",
+    editorialImage: {
+      src: "/test/case-study-images/impact-editorial.png",
+      alt: "Neutral editorial placeholder image for the Impact section",
+      width: 2880,
+      height: 1164,
+      caption: "Test placeholder for impact section editorial imagery.",
+    },
     metrics: [
       {
         value: "46",
@@ -308,7 +339,7 @@ export const caseStudyTemplateTest = {
       },
       {
         value: "11",
-        suffix: "d",
+        suffix: "D",
         label: "Down to a 3-day review loop",
         detail: "Process result: the status check became faster and easier to trust.",
       },
@@ -319,45 +350,27 @@ export const caseStudyTemplateTest = {
         detail: "Scale result: the model could hold across multiple teams without drifting.",
       },
     ],
-    beforeAfter: {
-      title: "Before & After",
-      summary:
-        "The program moved from a fragmented service path to one operating model that teams could explain, execute, and review together.",
-      columns: [
+    transformation: {
+      eyebrow: "Transformation",
+      title: "From fragmented service work to one operating spine",
+      rows: [
         {
-          label: "Before",
-          title: "Fragmented service work",
-          points: [
-            "Status was interpreted differently by each team.",
-            "Handoffs required manual follow-up to stay on track.",
-            "Leadership lacked a trusted view of the operating reality.",
-          ],
+          problem: "Status was interpreted differently by each team.",
+          decision: "Create one shared intake and status model.",
+          outcome: "Faster first decisions.",
         },
         {
-          label: "After",
-          title: "A clearer operating spine",
-          points: [
-            "One intake path made triage and ownership visible.",
-            "The decision model reduced ambiguity at every handoff.",
-            "Shared reporting created a more reliable view of progress.",
-          ],
+          problem: "Handoffs required manual follow-up.",
+          decision: "Define explicit ownership and escalation states.",
+          outcome: "Fewer escalations.",
+        },
+        {
+          problem: "Leadership lacked a trusted operating view.",
+          decision: "Establish shared measurement and reporting.",
+          outcome: "Trusted operating data.",
         },
       ],
     },
-    connections: [
-      {
-        title: "Decision 1 -> Outcome",
-        copy: "A single intake path reduced avoidable delay and made the first decision faster.",
-      },
-      {
-        title: "Decision 2 -> Outcome",
-        copy: "Clear ownership states cut down the back-and-forth that used to slow escalations.",
-      },
-      {
-        title: "Decision 5 -> Outcome",
-        copy: "Tracking the right measures early gave the team proof that the model was working.",
-      },
-    ],
   },
   evidence: {
     eyebrow: "Evidence & Validation",
@@ -385,6 +398,49 @@ export const caseStudyTemplateTest = {
         eyebrow: "Outcome",
         title: "Service readability",
         copy: "The final review focused on whether teams could understand status and ownership at a glance.",
+      },
+    ],
+  },
+  recognition: {
+    eyebrow: "Recognition",
+    title: "Press & Accolades",
+    intro:
+      "Fictional placeholder copy explaining that this work received external recognition and press coverage.",
+    editorialImage: {
+      src: "/test/case-study-images/recognition-editorial.png",
+      alt: "Neutral editorial placeholder image for the Press & Accolades section",
+      width: 2880,
+      height: 1164,
+    },
+    featured: {
+      media: {
+        kind: "youtube",
+        videoId: "GZMHsAIH1Os",
+        aspectRatio: "16/9",
+      },
+      title: "A fictional featured press story",
+      date: "June 12, 2026",
+      summary: "Placeholder summary used to test the featured press layout and responsive video embed.",
+      tags: ["Press", "Featured"],
+    },
+    rows: [
+      {
+        publisher: "Northstar Business Review",
+        date: "May 28, 2026",
+        summary: "Placeholder article summary used to validate the standard PDF press-row layout.",
+        pdfHref: "/cps/files/20240220_CPSE_DigiCity.pdf",
+      },
+      {
+        publisher: "Operations Weekly",
+        date: "April 17, 2026",
+        summary: "A second fictional article used to test spacing, hierarchy, and new-tab behavior.",
+        pdfHref: "/bi/files/BI-AdobeCaseStudy.pdf",
+      },
+      {
+        publisher: "Service Design Journal",
+        date: "March 6, 2026",
+        summary: "A third fictional article used to confirm multiple press rows stack correctly.",
+        pdfHref: "/lego/files/01-Harvard-Business-Review.pdf",
       },
     ],
   },
