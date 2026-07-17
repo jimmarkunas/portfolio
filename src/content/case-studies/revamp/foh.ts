@@ -3,6 +3,17 @@ import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 export const fohRevampCaseStudy = {
   slug: "foh",
   breadcrumbCurrent: "Frederick's of Hollywood",
+  metadata: {
+    title: "Frederick's of Hollywood",
+    description:
+      "After buying Frederick's of Hollywood out of bankruptcy, Authentic Brands Group needed a digital-first flagship built around Megan Fox as co-owner - fast, promotional, and lean enough to operate without a traditional enterprise stack. I led delivery of a Shopify Plus relaunch built for celebrity traffic, campaign velocity, and a cleaner operating model. The architecture had to move as fast as the brand story, and it had to keep working after the cameras left.",
+    image: {
+      src: "/foh/hero-foh-01.png",
+      alt: "Frederick's of Hollywood and Megan Fox relaunch campaign imagery",
+      width: 2880,
+      height: 1164,
+    },
+  },
   hero: {
     eyebrow: "Shopify Plus · DTC Relaunch · Fashion",
     title: "Turning Frederick's Into Celebrity-Driven DTC",

@@ -3,6 +3,17 @@ import type { CaseStudyRevampData } from "./types"
 export const caseStudyRevampFixture = {
   slug: "case-study-test",
   breadcrumbCurrent: "Template Test",
+  metadata: {
+    title: "Template Test",
+    description:
+      "This fictional case study exists only to pressure-test the standard template. It gives us a realistic, outcome-led story so we can review hierarchy, spacing, and responsive behavior before any live migration begins.",
+    image: {
+      src: "/test/man-placeholder.png",
+      alt: "Fictional placeholder hero visual for the case study template test",
+      width: 1031,
+      height: 829,
+    },
+  },
   hero: {
     eyebrow: "Fictional placeholder",
     title: "Atlas Ops: A Clearer Operating Model for Service Teams",

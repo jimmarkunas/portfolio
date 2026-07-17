@@ -1,3 +1,5 @@
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
+
 export type CaseStudyAction = {
   label: string
   href: string
@@ -278,3 +280,17 @@ export type CaseStudyData = {
     rows: CaseStudyExperienceRow[]
   }
 }
+
+export type CaseStudyTemplateVersion = "legacy" | "revamp"
+
+export type LoadedLegacyCaseStudy = {
+  templateVersion: "legacy"
+  data: CaseStudyData
+}
+
+export type LoadedRevampCaseStudy = {
+  templateVersion: "revamp"
+  data: CaseStudyRevampData
+}
+
+export type LoadedCaseStudy = LoadedLegacyCaseStudy | LoadedRevampCaseStudy

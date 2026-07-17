@@ -84,9 +84,21 @@ export type CaseStudyRevampRecognition = {
   rows: CaseStudyRevampRecognitionRow[]
 }
 
+export type CaseStudyRevampMetadata = {
+  title: string
+  description: string
+  image: {
+    src: string
+    alt: string
+    width: number
+    height: number
+  }
+}
+
 export type CaseStudyRevampData = {
   slug: string
   breadcrumbCurrent: string
+  metadata?: CaseStudyRevampMetadata
   hero: {
     eyebrow: string
     title: string

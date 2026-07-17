@@ -1,4 +1,8 @@
-import type { CaseStudyData } from "@/content/case-studies"
+import type {
+  CaseStudyData,
+  LoadedCaseStudy,
+  LoadedRevampCaseStudy,
+} from "@/content/case-studies"
 import { siteContactEmail, siteExternalUrls } from "@/content/site/config"
 import {
   SEO_DEFAULT_DESCRIPTION,
@@ -108,28 +112,68 @@ export function createWorkCollectionStructuredData(
   }
 }
 
-export function createCaseStudyStructuredData(study: CaseStudyData): StructuredDataValue {
+function isLoadedCaseStudy(study: CaseStudyData | LoadedCaseStudy): study is LoadedCaseStudy {
+  return "templateVersion" in study
+}
+
+function isRevampLoadedCaseStudy(study: CaseStudyData | LoadedCaseStudy): study is LoadedRevampCaseStudy {
+  return isLoadedCaseStudy(study) && study.templateVersion === "revamp"
+}
+
+export function createCaseStudyStructuredData(study: CaseStudyData): StructuredDataValue
+export function createCaseStudyStructuredData(study: LoadedCaseStudy): StructuredDataValue
+export function createCaseStudyStructuredData(
+  study: CaseStudyData | LoadedCaseStudy
+): StructuredDataValue {
+  if (isRevampLoadedCaseStudy(study)) {
+    const revampStudy = study.data
+    const image = revampStudy.metadata?.image ?? {
+      src: revampStudy.hero.image.src,
+      alt: revampStudy.hero.image.alt,
+    }
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: revampStudy.metadata?.title ?? revampStudy.breadcrumbCurrent,
+      name: revampStudy.breadcrumbCurrent,
+      description: revampStudy.metadata?.description ?? revampStudy.hero.intro,
+      abstract: revampStudy.metadata?.description ?? revampStudy.hero.intro,
+      articleSection: "Case Study",
+      genre: "Case Study",
+      url: toAbsoluteUrl(`/work/${revampStudy.slug}`),
+      mainEntityOfPage: toAbsoluteUrl(`/work/${revampStudy.slug}`),
+      image: [toAbsoluteUrl(image.src)],
+      author: personReference(),
+      creator: personReference(),
+      publisher: personReference(),
+      about: [toThing(revampStudy.hero.title)],
+    }
+  }
+
+  const legacyStudy = isLoadedCaseStudy(study) ? study.data : study
+
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: study.hero.title,
-    name: study.breadcrumbCurrent,
-    description: study.hero.intro,
-    abstract: study.atAGlance.copy,
+    headline: legacyStudy.hero.title,
+    name: legacyStudy.breadcrumbCurrent,
+    description: legacyStudy.hero.intro,
+    abstract: legacyStudy.atAGlance.copy,
     articleSection: "Case Study",
     genre: "Case Study",
-    url: toAbsoluteUrl(`/work/${study.slug}`),
-    mainEntityOfPage: toAbsoluteUrl(`/work/${study.slug}`),
-    image: [toAbsoluteUrl(study.hero.image.src)],
+    url: toAbsoluteUrl(`/work/${legacyStudy.slug}`),
+    mainEntityOfPage: toAbsoluteUrl(`/work/${legacyStudy.slug}`),
+    image: [toAbsoluteUrl(legacyStudy.hero.image.src)],
     author: personReference(),
     creator: personReference(),
     publisher: personReference(),
     about: [
-      toThing(study.problem.title),
-      toThing(study.solution.title),
-      toThing(study.impact.title),
+      toThing(legacyStudy.problem.title),
+      toThing(legacyStudy.solution.title),
+      toThing(legacyStudy.impact.title),
     ],
-    keywords: [...study.role.tags, ...study.impact.proofPoints],
+    keywords: [...legacyStudy.role.tags, ...legacyStudy.impact.proofPoints],
   }
 }
 

@@ -1,4 +1,8 @@
-import type { CaseStudyData } from "@/content/case-studies/types"
+import type {
+  CaseStudyData,
+  LoadedCaseStudy,
+} from "@/content/case-studies/types"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 
 export type CaseStudySlug =
   | "cps"
@@ -18,15 +22,27 @@ export type CaseStudySlug =
   | "zevo"
   | "dtv02"
 
-export type CaseStudyRegistryEntry = {
+type CaseStudyRegistryEntryBase = {
   slug: CaseStudySlug
   route: `/work/${string}`
   contentModule: `@/content/case-studies/${string}`
   diagramModule?: string
+  templateVersion?: "legacy" | "revamp"
+}
+
+type LegacyCaseStudyRegistryEntry = CaseStudyRegistryEntryBase & {
+  templateVersion?: "legacy"
   load: () => Promise<CaseStudyData>
 }
 
-export const caseStudyRegistry = {
+type RevampCaseStudyRegistryEntry = CaseStudyRegistryEntryBase & {
+  templateVersion: "revamp"
+  load: () => Promise<CaseStudyRevampData>
+}
+
+export type CaseStudyRegistryEntry = LegacyCaseStudyRegistryEntry | RevampCaseStudyRegistryEntry
+
+export const caseStudyRegistry: Record<CaseStudySlug, CaseStudyRegistryEntry> = {
   cps: {
     slug: "cps",
     route: "/work/cps",
@@ -127,7 +143,7 @@ export const caseStudyRegistry = {
     contentModule: "@/content/case-studies/dtv02",
     load: () => import("./dtv02").then((module) => module.caseStudy),
   },
-} satisfies Record<CaseStudySlug, CaseStudyRegistryEntry>
+}
 
 export const caseStudySlugs = Object.keys(caseStudyRegistry) as CaseStudySlug[]
 
@@ -136,16 +152,39 @@ export const caseStudyMap = caseStudySlugs.map((slug) => {
   return entry
 })
 
-export async function loadCaseStudyBySlug(slug: string): Promise<CaseStudyData | null> {
-  const entry = caseStudyRegistry[slug as CaseStudySlug]
-  return entry ? entry.load() : null
+function isCaseStudySlug(slug: string): slug is CaseStudySlug {
+  return slug in caseStudyRegistry
+}
+
+export async function loadCaseStudyBySlug(slug: string): Promise<LoadedCaseStudy | null> {
+  if (!isCaseStudySlug(slug)) {
+    return null
+  }
+
+  const entry: CaseStudyRegistryEntry = caseStudyRegistry[slug]
+
+  if (entry.templateVersion === "revamp") {
+    return {
+      templateVersion: "revamp",
+      data: await entry.load(),
+    }
+  }
+
+  return {
+    templateVersion: "legacy",
+    data: await entry.load(),
+  }
 }
 
 export async function loadAllCaseStudies(): Promise<Array<{ slug: CaseStudySlug; study: CaseStudyData }>> {
   const studies = await Promise.all(
     caseStudySlugs.map(async (slug) => {
-      const study = await loadCaseStudyBySlug(slug)
-      return study ? { slug, study } : null
+      const loadedStudy = await loadCaseStudyBySlug(slug)
+      if (!loadedStudy || loadedStudy.templateVersion !== "legacy") {
+        return null
+      }
+
+      return { slug, study: loadedStudy.data }
     })
   )
 
