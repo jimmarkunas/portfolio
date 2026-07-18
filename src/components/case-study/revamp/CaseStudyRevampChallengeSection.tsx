@@ -12,21 +12,15 @@ export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevam
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-12">
           <MotionReveal preset="section" className="flex flex-col gap-6">
-            <CaseStudyRevampSectionHeader
-              eyebrow={data.challenge.eyebrow}
-              title={data.challenge.title}
-              copy={data.challenge.paragraphs[0]}
-            />
+            <CaseStudyRevampSectionHeader eyebrow={data.challenge.eyebrow} title={data.challenge.title} />
 
-            {data.challenge.paragraphs.length > 1 ? (
-              <div className="flex flex-col gap-5">
-                {data.challenge.paragraphs.slice(1).map((paragraph, index) => (
-                  <p key={`${data.challenge.eyebrow}-${index + 1}`} className="type-p3 text-[#222222]">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            ) : null}
+            <div className="flex flex-col gap-5">
+              {data.challenge.paragraphs.map((paragraph, index) => (
+                <p key={`${data.challenge.eyebrow}-${index}`} className="type-p3 text-[#222222]">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </MotionReveal>
 
           <MotionReveal preset="image" delay={0.04}>

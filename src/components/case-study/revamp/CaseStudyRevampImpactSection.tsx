@@ -16,11 +16,13 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
     <section className="bg-white">
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="flex flex-col gap-10 lg:gap-12">
-          <MotionReveal preset="section">
+          <MotionReveal preset="section" className="flex flex-col items-center gap-4 text-center">
             <CaseStudyRevampSectionHeader
               eyebrow={data.impact.eyebrow}
               title={data.impact.title}
               copy={data.impact.intro}
+              align="center"
+              className="max-w-[900px]"
             />
           </MotionReveal>
 
@@ -86,11 +88,11 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
                           </div>
                         </div>
 
-                        <div className="min-w-0 md:order-3 md:w-full">
+                        <div className="min-w-0">
                           <div className="type-p5 uppercase tracking-[0.14em] text-[#447ACB]">Decision</div>
-                          <p className="mt-2 w-full max-w-none type-h5 font-normal text-[#222222]">{row.decision}</p>
+                          <p className="mt-2 max-w-[48rem] type-h5 font-normal text-[#222222]">{row.decision}</p>
 
-                          <div className="mt-5 w-full max-w-none border-l-2 border-l-[#447ACB] pl-6">
+                          <div className="mt-5 max-w-[36rem] border-l-2 border-l-[#447ACB] pl-6">
                             <div className="type-p5 uppercase tracking-[0.14em] text-[#447ACB]">Outcome</div>
                             <p className="mt-2 type-p2 font-medium text-[#447ACB]">{row.outcome}</p>
                           </div>

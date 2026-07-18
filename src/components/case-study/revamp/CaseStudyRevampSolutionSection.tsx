@@ -14,11 +14,13 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
     <section className="bg-[#F3F3F3]">
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="flex flex-col gap-10 lg:gap-12">
-          <MotionReveal preset="section">
+          <MotionReveal preset="section" className="flex flex-col items-center gap-4 text-center">
             <CaseStudyRevampSectionHeader
               eyebrow={data.solution.eyebrow}
               title={data.solution.title}
               copy={data.solution.copy}
+              align="center"
+              className="max-w-[900px]"
             />
           </MotionReveal>
 
