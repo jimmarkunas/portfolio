@@ -46,8 +46,8 @@ export function CaseStudyRevampHeroSection({ data }: { data: CaseStudyRevampData
               <h1 className="type-h1-case-study w-full text-[#222222]">{data.hero.title}</h1>
             </MotionReveal>
 
-            <MotionReveal preset="section" delay={0.05} className="max-w-[760px]">
-              <p className="type-p2 text-black/66">{data.hero.intro}</p>
+            <MotionReveal preset="section" delay={0.05} className="w-full max-w-none">
+              <p className="type-p2 w-full text-black/66">{data.hero.intro}</p>
             </MotionReveal>
 
             <MotionReveal preset="card" delay={0.04} className="grid gap-4 md:grid-cols-3 lg:mt-0 lg:items-start xl:grid-cols-3">
