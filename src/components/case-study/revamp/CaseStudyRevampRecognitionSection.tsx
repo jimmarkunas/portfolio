@@ -24,20 +24,13 @@ export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRev
       className="relative overflow-hidden bg-white"
     >
       <Container className="py-14 md:py-16 lg:py-20">
-        <div className="flex flex-col gap-10 lg:gap-14">
-          <MotionReveal
-            preset="section"
-            className="grid gap-8 lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)] lg:items-start lg:gap-16"
-          >
+        <div className="flex flex-col gap-8 md:gap-5 lg:gap-14">
+          <MotionReveal preset="section">
             <CaseStudyRevampSectionHeader
               eyebrow={recognition.eyebrow}
               title={recognition.title}
-              className="max-w-[460px] lg:pt-0"
+              copy={recognition.intro}
             />
-
-            <div className="flex max-w-[680px] flex-col items-start gap-6 lg:pt-[58px]">
-              <p className="type-p2 text-black/65">{recognition.intro}</p>
-            </div>
           </MotionReveal>
 
           {recognition.editorialImage ? (

@@ -12,13 +12,11 @@ export function CaseStudyRevampRelatedSection({ data }: { data: CaseStudyRevampD
     <section className="bg-[#F3F3F3]">
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="flex flex-col gap-8">
-          <MotionReveal preset="section" className="flex flex-col items-center gap-4 text-center">
+          <MotionReveal preset="section">
             <CaseStudyRevampSectionHeader
               eyebrow="Related Case Studies"
               title="More Work Worth Comparing"
               copy="A quick look at two studies with shared themes in scale, operating model, and brand velocity..."
-              align="center"
-              className="max-w-[900px]"
             />
           </MotionReveal>
 
