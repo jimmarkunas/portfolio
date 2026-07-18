@@ -32,6 +32,7 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
                 key={`${metric.value}-${metric.label}`}
                 value={metric.value}
                 suffix={metric.suffix}
+                decoration={<div className="h-[3px] w-7 rounded-full bg-[#447ACB]" />}
                 label={
                   <div className="flex flex-col gap-2">
                     <span className="type-p2 font-medium text-[#222222]">{metric.label}</span>

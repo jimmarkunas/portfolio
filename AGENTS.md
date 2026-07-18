@@ -76,3 +76,27 @@ Icon selection priority:
 - Maintain responsive behavior, semantic HTML, keyboard accessibility, and existing performance standards.
 - Check git status before modifying files and do not overwrite unrelated uncommitted work.
 - Run the repository’s existing lint, typecheck, test, and build commands after implementation.
+
+## Next.js runtime isolation
+
+Development uses `.next-dev`.
+Production builds use `.next`.
+
+Never change these directories back to one shared output directory.
+
+Do not delete or edit application source when the homepage shell renders but animated content is missing.
+
+Recovery procedure:
+
+1. Stop the exact development-server PID.
+2. Remove `.next-dev`.
+3. Restart `npm run dev`.
+4. Do not restore homepage or case-study source.
+
+Build verification may run while development is active only because the output directories are now isolated.
+
+Approved FOH responsive behavior is locked at tag:
+
+foh-responsive-stasis-2026-07-18
+
+Do not modify that behavior without explicit human approval.

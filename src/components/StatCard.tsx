@@ -77,8 +77,8 @@ export function StatCard({
 
   return (
     <article className={`${cardClasses} ${surfaceClasses} ${className}`.trim()}>
-      {decoration}
       <div className={contentClasses.trim()}>
+        {decoration ? <div className="mb-3 flex justify-center">{decoration}</div> : null}
         <div className={`${valueContainerClasses} ${valueClassName}`.trim()}>
           {shouldAnimateValue ? (
             <AnimatedMetricValue
