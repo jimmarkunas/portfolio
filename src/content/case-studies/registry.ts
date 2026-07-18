@@ -110,8 +110,9 @@ export const caseStudyRegistry: Record<CaseStudySlug, CaseStudyRegistryEntry> = 
   foh: {
     slug: "foh",
     route: "/work/foh",
-    contentModule: "@/content/case-studies/foh",
-    load: () => import("./foh").then((module) => module.caseStudy),
+    contentModule: "@/content/case-studies/revamp/foh",
+    templateVersion: "revamp",
+    load: () => import("./revamp/foh").then((module) => module.fohRevampCaseStudy),
   },
   lego: {
     slug: "lego",
