@@ -45,7 +45,7 @@ export function CaseStudyRevampOwnershipSection({ data }: { data: CaseStudyRevam
                         {index + 1}
                       </div>
                       <div>
-                        <h3 className="type-h4 text-[#222222]">{decision.title}</h3>
+                        <h3 className="type-p1 font-medium text-[#222222]">{decision.title}</h3>
                         <p className="type-p2 mt-2 text-black/65">{decision.copy}</p>
                       </div>
                     </div>
