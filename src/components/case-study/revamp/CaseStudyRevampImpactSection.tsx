@@ -26,7 +26,7 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
             />
           </MotionReveal>
 
-          <MotionReveal preset="card" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <MotionReveal preset="card" className="grid gap-4 sm:grid-cols-2 lg:max-xl:grid-cols-4 xl:grid-cols-4">
             {data.impact.metrics.map((metric) => (
               <StatCard
                 key={`${metric.value}-${metric.label}`}
@@ -75,12 +75,14 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
                   {data.impact.transformation.rows.map((row, index) => (
                     <div key={`${row.problem}-${row.decision}-${row.outcome}`} className="py-10 md:py-12">
                       <div className="grid gap-6 lg:grid-cols-[minmax(0,0.34fr)_72px_minmax(0,1fr)] lg:gap-8 lg:items-start">
-                        <div className="min-w-0">
+                        <div className="order-2 flex min-w-0 flex-col gap-2 lg:order-none">
                           <div className="type-p5 uppercase tracking-[0.14em] text-[#B44A4A]">Problem</div>
-                          <p className="mt-2 max-w-[36ch] type-p2 text-black/55">{row.problem}</p>
+                          <p className="w-full max-w-none type-p3 leading-[1.45] text-black/55 md:max-lg:type-p2 md:max-lg:max-w-[36ch] md:max-lg:leading-[1.45]">
+                            {row.problem}
+                          </p>
                         </div>
 
-                        <div className="relative flex justify-center lg:justify-start">
+                        <div className="relative order-1 flex justify-center lg:order-none lg:justify-start">
                           <div className="relative z-10 flex flex-col items-center pt-1 lg:items-start">
                             <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#222222] type-p2 font-light tabular-nums text-white">
                               {String(index + 1).padStart(2, "0")}
@@ -88,13 +90,19 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
                           </div>
                         </div>
 
-                        <div className="min-w-0">
+                        <div className="order-3 flex min-w-0 flex-col gap-2 lg:order-none">
                           <div className="type-p5 uppercase tracking-[0.14em] text-[#447ACB]">Decision</div>
-                          <p className="mt-2 max-w-[48rem] type-h5 font-normal text-[#222222]">{row.decision}</p>
+                          <p className="w-full max-w-none type-p3 leading-[1.45] font-normal text-[#222222] md:max-lg:type-h5 md:max-lg:leading-[1.35] md:max-lg:max-w-[48rem]">
+                            {row.decision}
+                          </p>
 
-                          <div className="mt-5 max-w-[36rem] border-l-2 border-l-[#447ACB] pl-6">
-                            <div className="type-p5 uppercase tracking-[0.14em] text-[#447ACB]">Outcome</div>
-                            <p className="mt-2 type-p2 font-medium text-[#447ACB]">{row.outcome}</p>
+                          <div className="mt-5 w-full max-w-none border-l-2 border-l-[#447ACB] pl-4 md:max-lg:max-w-none md:max-lg:pl-5 lg:max-w-[36rem] lg:pl-6">
+                            <div className="flex flex-col gap-2">
+                              <div className="type-p5 uppercase tracking-[0.14em] text-[#447ACB]">Outcome</div>
+                              <p className="w-full max-w-none type-p3 leading-[1.45] font-medium text-[#447ACB] md:max-lg:leading-[1.45]">
+                                {row.outcome}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>

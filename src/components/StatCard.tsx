@@ -47,10 +47,14 @@ export function StatCard({
   const surfaceClasses = variant ? "rounded-[10px] bg-white" : surfaceClassName
   const cardClasses = variant ? "relative overflow-hidden" : `relative overflow-hidden ${surfaceClassName}`
   const contentClasses = variant
-    ? `relative flex h-full flex-col items-center text-center ${isIntroVariant ? "gap-4 justify-center" : "gap-3.5 justify-center"}`
+    ? isIntroVariant
+      ? "relative flex h-full flex-col items-center text-center gap-4 justify-center"
+      : "relative flex h-full flex-col items-center text-center gap-3.5 justify-start xl:flex-row xl:items-start xl:justify-between xl:gap-6 xl:text-left"
     : `relative flex h-full flex-col ${alignmentClasses} ${contentClassName}`
   const valueContainerClasses = variant
-    ? `text-center text-slate-800 ${isIntroVariant ? "" : ""}`
+    ? isIntroVariant
+      ? "text-center text-slate-800"
+      : "text-center text-slate-800 xl:text-left"
     : `leading-none text-slate-800 ${align === "center" ? "text-center" : "text-left"} ${valueClassName}`
   const valueTextClasses = variant
     ? isIntroVariant
@@ -65,7 +69,7 @@ export function StatCard({
   const labelClasses = variant
     ? isIntroVariant
       ? `type-p2 max-w-[220px] text-center text-neutral-700 ${labelClassName}`.trim()
-      : `type-p2 max-w-[220px] text-center font-medium text-neutral-700 ${labelClassName}`.trim()
+      : `type-p2 max-w-[220px] text-center font-medium text-neutral-700 xl:max-w-[240px] xl:text-left ${labelClassName}`.trim()
     : labelClassName
   const hasCompositeSuffix = /[0-9/]/.test(suffix)
   const hasCompositeValue = value.includes("/")

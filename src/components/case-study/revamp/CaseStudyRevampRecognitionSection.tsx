@@ -27,15 +27,15 @@ export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRev
         <div className="flex flex-col gap-10 lg:gap-14">
           <MotionReveal
             preset="section"
-            className="grid gap-8 lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)] lg:items-start lg:gap-16"
+            className="grid gap-8 lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)] lg:items-start lg:gap-16 lg:max-xl:w-full lg:max-xl:max-w-none md:max-lg:w-full md:max-lg:max-w-none md:max-lg:[&>div]:w-full md:max-lg:[&>div]:max-w-none md:max-lg:[&>div>p]:max-w-none"
           >
             <CaseStudyRevampSectionHeader
               eyebrow={recognition.eyebrow}
               title={recognition.title}
-              className="max-w-[460px] lg:pt-0"
+              className="max-w-[460px] lg:pt-0 lg:max-xl:w-full lg:max-xl:max-w-none md:max-lg:w-full md:max-lg:max-w-none"
             />
 
-            <div className="flex max-w-[680px] flex-col items-start gap-6 lg:pt-[58px]">
+            <div className="flex max-w-[680px] flex-col items-start gap-6 lg:pt-[58px] lg:max-xl:w-full lg:max-xl:max-w-none md:max-lg:w-full md:max-lg:max-w-none">
               <p className="type-p2 text-black/65">{recognition.intro}</p>
             </div>
           </MotionReveal>
@@ -58,28 +58,33 @@ export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRev
           <div className="flex flex-col gap-8">
             {recognition.featured && (
               <MotionReveal preset="card" className="pb-8">
-                <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-cols-[minmax(0,530px)_minmax(0,1fr)_auto] lg:items-start lg:gap-8">
-                  <div className="md:col-span-2 lg:col-span-1">
+                <div className="grid gap-5 md:max-lg:grid-cols-[minmax(0,1fr)_auto] md:max-lg:gap-x-6 md:max-lg:gap-y-3 lg:grid-cols-[minmax(0,530px)_minmax(0,1fr)_auto] lg:items-start lg:gap-8">
+                  <div className="md:col-span-2 lg:col-span-1 md:max-lg:col-span-2">
                     <CaseStudyMediaFrame
                       media={recognition.featured.media}
                       className="overflow-hidden rounded-[18px]"
                     />
                   </div>
 
-                  <div className="flex flex-col gap-2">
-                    <h3 className="type-h6 text-[#222222]">{recognition.featured.title}</h3>
-                    {recognition.featured.date ? (
-                      <p className="type-p4 text-black/45">{recognition.featured.date}</p>
-                    ) : null}
-                    <p className="type-p3 text-black/60">{recognition.featured.summary}</p>
-                  </div>
+                  <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-2 md:max-lg:gap-x-6 md:max-lg:gap-y-2">
+                    <div className="flex min-w-0 flex-col gap-2">
+                      <h3 className="type-h6 text-[#222222]">{recognition.featured.title}</h3>
+                      {recognition.featured.date ? (
+                        <p className="type-p4 text-black/45">{recognition.featured.date}</p>
+                      ) : null}
+                    </div>
 
-                  <div className="flex flex-wrap items-start gap-2 lg:justify-end">
-                    {recognition.featured.tags.map((tag) => (
-                      <TagPill key={tag} variant="dark" className="py-1.5">
-                        {tag}
-                      </TagPill>
-                    ))}
+                    <div className="flex flex-wrap items-start justify-end gap-2">
+                      {recognition.featured.tags.map((tag) => (
+                        <TagPill key={tag} variant="dark" className="py-1.5">
+                          {tag}
+                        </TagPill>
+                      ))}
+                    </div>
+
+                    <p className="type-p3 col-span-2 w-full max-w-none text-black/60 md:max-lg:col-span-2 md:max-lg:w-full md:max-lg:max-w-none">
+                      {recognition.featured.summary}
+                    </p>
                   </div>
                 </div>
               </MotionReveal>
@@ -97,9 +102,9 @@ export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRev
                       target="_blank"
                       rel="noopener noreferrer"
                       ariaLabel={`Open "${row.publisher}" in a new tab`}
-                      className="group grid w-full gap-5 py-6 text-left transition-colors duration-200 hover:text-[#447ACB] md:grid-cols-[minmax(0,300px)_minmax(0,1fr)] md:items-start lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)_auto] lg:gap-8 !min-h-0 !rounded-none !border-0 !bg-transparent !px-0 !py-6 !text-inherit"
+                      className="group grid w-full gap-3 py-6 text-left transition-colors duration-200 hover:text-[#447ACB] md:grid-cols-[minmax(0,300px)_minmax(0,1fr)] md:items-start md:gap-5 lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)_auto] lg:gap-8 md:max-lg:grid-cols-[minmax(150px,200px)_minmax(0,1fr)_auto] md:max-lg:items-start md:max-lg:gap-x-6 !min-h-0 !rounded-none !border-0 !bg-transparent !px-0 !py-6 !text-inherit"
                     >
-                      <div className="flex flex-col gap-1">
+                      <div className="flex flex-col gap-1 md:max-lg:gap-0.5">
                         <h3 className="type-h6 text-[#222222] transition-colors duration-200 group-hover:text-[#447ACB]">
                           {row.publisher}
                         </h3>
@@ -108,12 +113,12 @@ export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRev
                         </p>
                       </div>
 
-                      <p className="type-p3 w-full max-w-[54ch] text-[#5B5B5B] transition-colors duration-200 group-hover:text-[#447ACB]">
+                      <p className="type-p3 w-full max-w-[54ch] text-[#5B5B5B] transition-colors duration-200 group-hover:text-[#447ACB] md:max-lg:max-w-none">
                         {row.summary}
                       </p>
 
-                      <div className="flex items-start justify-start lg:justify-end">
-                        <span className="button-book-call w-full px-5 text-[15px] transition-colors duration-200 group-hover:bg-[#447ACB] group-hover:border-[#447ACB] md:w-auto">
+                      <div className="flex items-start justify-start md:max-lg:justify-self-end md:max-lg:self-start lg:justify-end">
+                        <span className="button-book-call w-full px-5 text-[15px] transition-colors duration-200 group-hover:bg-[#447ACB] group-hover:border-[#447ACB] md:w-auto md:max-lg:w-auto">
                           <span>Open in new tab</span>
                           <ExternalLinkMiniIcon />
                         </span>

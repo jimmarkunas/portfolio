@@ -60,44 +60,45 @@ export function CaseStudyRevampExecutiveBriefSection({ data }: { data: CaseStudy
               eyebrow={data.executiveBrief.eyebrow}
               title={data.executiveBrief.title}
               copy={data.executiveBrief.copy}
+              className="md:max-lg:w-full md:max-lg:max-w-none md:max-lg:items-start md:max-lg:[&>div]:w-full md:max-lg:[&>div]:max-w-none md:max-lg:[&>div]:gap-3 md:max-lg:[&>div>p]:w-full md:max-lg:[&>div>p]:max-w-none lg:max-xl:w-full lg:max-xl:max-w-none lg:max-xl:items-start lg:max-xl:[&>div]:w-full lg:max-xl:[&>div]:max-w-none lg:max-xl:[&>div]:gap-3 lg:max-xl:[&>div>p]:w-full lg:max-xl:[&>div>p]:max-w-none"
             />
 
             <dl className="divide-y divide-black/10 border-y border-black/10">
               {data.executiveBrief.facts.map((fact) => (
                 <div
                   key={fact.label}
-                  className="grid grid-cols-[44px_minmax(0,1fr)] gap-x-4 py-5 sm:grid-cols-[48px_220px_minmax(0,1fr)] sm:items-center sm:gap-x-6"
+                  className="grid grid-cols-[44px_minmax(0,1fr)] gap-x-4 py-5 sm:grid-cols-[48px_220px_minmax(0,1fr)] sm:items-center sm:gap-x-6 md:max-xl:grid-cols-[48px_220px_minmax(0,1fr)] md:max-xl:items-center md:max-xl:gap-x-6"
                 >
-                  <div className="row-span-2 flex h-11 w-11 items-center justify-center rounded-[10px] text-[#222222] sm:row-span-1 sm:h-12 sm:w-12">
+                  <div className="row-span-2 flex h-11 w-11 items-center justify-center rounded-[10px] text-[#222222] sm:row-span-1 sm:h-12 sm:w-12 md:max-xl:row-span-1 md:max-xl:col-start-1 md:max-xl:row-start-1">
                     {(() => {
                       const Icon = executiveBriefIconMap[fact.icon]
                       return <Icon className="h-[22px] w-[22px] sm:h-6 sm:w-6" strokeWidth={1.75} />
                     })()}
                   </div>
-                    <dt className="type-p5 uppercase tracking-[0.1em] text-[#7B7B7B]">
-                      {fact.label}
-                    </dt>
-                    <dd className="type-p3 mt-1 text-[#222222] sm:col-start-3 sm:row-start-1 sm:mt-0">
-                      {fact.icon === "systems" && data.executiveBrief.tools?.length ? (
-                        <div className="flex flex-wrap items-center gap-2.5">
-                          {data.executiveBrief.tools.map((tool) => (
-                            <div key={tool.label} className="group relative">
-                              <img
-                                src={tool.icon}
-                                alt={tool.label}
-                                className="h-[51px] w-[51px] rounded-[10px]"
-                              />
-                              <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#222222] px-2.5 py-1.5 type-p5 text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                                {tool.label}
-                              </div>
+                  <dt className="type-p5 uppercase tracking-[0.1em] text-[#7B7B7B] md:max-xl:col-start-2 md:max-xl:row-start-1 md:max-xl:mt-0">
+                    {fact.label}
+                  </dt>
+                  <dd className="type-p3 mt-1 text-[#222222] sm:col-start-3 sm:row-start-1 sm:mt-0 md:max-xl:col-start-3 md:max-xl:row-start-1 md:max-xl:mt-0">
+                    {fact.icon === "systems" && data.executiveBrief.tools?.length ? (
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        {data.executiveBrief.tools.map((tool) => (
+                          <div key={tool.label} className="group relative">
+                            <img
+                              src={tool.icon}
+                              alt={tool.label}
+                              className="h-[51px] w-[51px] rounded-[10px]"
+                            />
+                            <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#222222] px-2.5 py-1.5 type-p5 text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                              {tool.label}
                             </div>
-                          ))}
-                        </div>
-                      ) : (
-                        fact.value
-                      )}
-                    </dd>
-                  </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      fact.value
+                    )}
+                  </dd>
+                </div>
                 ))}
             </dl>
           </MotionReveal>

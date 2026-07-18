@@ -50,16 +50,20 @@ export function CaseStudyRevampHeroSection({ data }: { data: CaseStudyRevampData
               <p className="type-p2 w-full text-black/66">{data.hero.intro}</p>
             </MotionReveal>
 
-            <MotionReveal preset="card" delay={0.04} className="grid gap-4 md:grid-cols-3 lg:mt-0 lg:items-start xl:grid-cols-3">
+            <MotionReveal
+              preset="card"
+              delay={0.04}
+              className="grid gap-4 md:grid-cols-3 lg:mt-0 lg:items-start lg:max-xl:gap-5 xl:grid-cols-3"
+            >
               {data.hero.metrics.map((metric) => (
                 <article
                   key={`${metric.value}-${metric.label}`}
-                  className="relative h-[176px] overflow-hidden rounded-[10px] bg-white px-8 py-10"
+                  className="relative h-[176px] overflow-hidden rounded-[10px] bg-white px-8 py-10 md:py-6"
                 >
-                  <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
+                  <div className="flex h-full flex-col items-center justify-center gap-4 text-center md:grid md:grid-rows-[3.5rem_3rem] md:content-center md:justify-items-center md:gap-3">
                     <div
                       aria-label={`${metric.value}${metric.suffix ?? ""} ${metric.label}`.trim()}
-                      className="inline-flex items-baseline justify-center whitespace-nowrap leading-none text-slate-800"
+                      className="inline-flex items-baseline justify-center whitespace-nowrap leading-none text-slate-800 md:flex md:h-14 md:w-full md:justify-center"
                     >
                       <AnimatedMetricValue
                         value={metric.value}
@@ -74,7 +78,7 @@ export function CaseStudyRevampHeroSection({ data }: { data: CaseStudyRevampData
                         </span>
                       ) : null}
                     </div>
-                    <div className="type-p3 max-w-[260px] text-center leading-[1.3] text-neutral-700 text-balance">
+                    <div className="type-p3 max-w-[260px] text-center leading-[1.3] text-neutral-700 text-balance md:flex md:h-12 md:w-full md:items-start md:justify-center md:min-h-0">
                       {metric.label}
                     </div>
                   </div>

@@ -28,8 +28,12 @@ export function CaseStudyRevampOwnershipSection({ data }: { data: CaseStudyRevam
 
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-start lg:gap-12">
             <MotionReveal preset="section" className="flex flex-col gap-6">
-              <CaseStudyRevampSectionHeader eyebrow={data.ownership.eyebrow} title={data.ownership.title} />
-              <p className="type-p3 max-w-[620px] text-black/70">{data.ownership.summary}</p>
+              <CaseStudyRevampSectionHeader
+                eyebrow={data.ownership.eyebrow}
+                title={data.ownership.title}
+                className="md:max-lg:w-full md:max-lg:max-w-none md:max-lg:items-start md:max-lg:[&>div]:w-full md:max-lg:[&>div]:max-w-none md:max-lg:[&>div]:gap-3 md:max-lg:[&>div>p]:max-w-none"
+              />
+              <p className="type-p3 max-w-[620px] text-black/70 md:max-lg:max-w-none">{data.ownership.summary}</p>
             </MotionReveal>
 
             <MotionReveal preset="card" delay={0.04}>

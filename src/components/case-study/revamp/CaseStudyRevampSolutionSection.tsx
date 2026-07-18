@@ -48,14 +48,14 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
                       <p className="type-p2 text-black/68">{lane.copy}</p>
                     </div>
 
-                    <ul className="space-y-2 border-t border-black/8 pt-4">
-                      {lane.bullets.map((bullet) => (
-                        <li key={bullet} className="flex items-start gap-2 text-[#222222]">
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#447ACB]" />
-                          <span className="type-p2">{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <ul className="mx-auto w-max max-w-full space-y-2 border-t border-black/8 pt-4 text-left lg:mx-0 lg:w-auto lg:max-w-none">
+                        {lane.bullets.map((bullet) => (
+                          <li key={bullet} className="flex items-start gap-2 text-[#222222]">
+                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#447ACB]" />
+                            <span className="type-p2">{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
                   </article>
 
                   {index < data.solution.architecture.length - 1 ? (
