@@ -5,8 +5,8 @@ import Link from "next/link"
 import { BreadcrumbHomeIcon } from "@/components/case-study/template/CaseStudyTemplateIcons"
 import { CaseStudyHeroImage } from "@/components/case-study/CaseStudyHeroImage"
 import { Container } from "@/components/Container"
+import { AnimatedMetricValue } from "@/components/metrics/AnimatedMetricValue"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { StatText } from "@/components/StatText"
 import { TextLink } from "@/components/TextLink"
 import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 
@@ -56,18 +56,28 @@ export function CaseStudyRevampHeroSection({ data }: { data: CaseStudyRevampData
                   key={`${metric.value}-${metric.label}`}
                   className="relative h-[176px] overflow-hidden rounded-[10px] bg-white px-8 py-10"
                 >
-                  <StatText
-                    value={metric.value}
-                    suffix={
-                      metric.suffix && /^[a-zA-Z]+$/.test(metric.suffix)
-                        ? metric.suffix.toUpperCase()
-                        : metric.suffix
-                    }
-                    label={metric.label}
-                    className="justify-center"
-                    metricRowClassName="gap-0.5"
-                    labelClassName="max-w-[260px] text-center leading-[1.3] text-neutral-700 text-balance"
-                  />
+                  <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
+                    <div
+                      aria-label={`${metric.value}${metric.suffix ?? ""} ${metric.label}`.trim()}
+                      className="inline-flex items-baseline justify-center whitespace-nowrap leading-none text-slate-800"
+                    >
+                      <AnimatedMetricValue
+                        value={metric.value}
+                        trigger="load"
+                        className="font-[var(--font-family-display)] type-stat-number font-semibold text-[#404040]"
+                      />
+                      {metric.suffix ? (
+                        <span className="font-[var(--font-family-display)] type-stat-plus font-semibold text-[#404040]">
+                          {metric.suffix && /^[a-zA-Z]+$/.test(metric.suffix)
+                            ? metric.suffix.toUpperCase()
+                            : metric.suffix}
+                        </span>
+                      ) : null}
+                    </div>
+                    <div className="type-p3 max-w-[260px] text-center leading-[1.3] text-neutral-700 text-balance">
+                      {metric.label}
+                    </div>
+                  </div>
                 </article>
               ))}
             </MotionReveal>
