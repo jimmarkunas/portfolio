@@ -188,7 +188,7 @@ function DesktopFixedLayout({
   return (
     <motion.div
       ref={canvasContainerRef}
-      className="relative h-[875px] w-[1440px] overflow-hidden bg-white"
+      className="relative h-[875px] w-[1440px] overflow-hidden bg-transparent"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
@@ -251,7 +251,7 @@ function DesktopFixedLayout({
 export default function CommerceEcosystemDiagram() {
   return (
     <DiagramRendererHost
-      className="rounded-sm bg-white overflow-hidden w-full"
+      className="rounded-sm bg-transparent overflow-hidden w-full"
       closeOnPointerDown
       tooltips={TOOLTIPS}
     >
