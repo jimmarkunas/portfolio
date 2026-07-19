@@ -45,14 +45,14 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
 
                     <div className="flex h-[8rem] flex-col items-center justify-center gap-2 text-center">
                       <h3 className="type-h6 text-[#222222]">{lane.title}</h3>
-                      <p className="type-p2 text-black/68">{lane.copy}</p>
+                      <p className="type-p3 text-black/68">{lane.copy}</p>
                     </div>
 
                     <ul className="mx-auto w-max max-w-full space-y-2 border-t border-black/8 pt-4 text-left lg:mx-0 lg:w-auto lg:max-w-none">
                         {lane.bullets.map((bullet) => (
                           <li key={bullet} className="flex items-start gap-2 text-[#222222]">
                             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#447ACB]" />
-                            <span className="type-p2">{bullet}</span>
+                            <span className="type-p3">{bullet}</span>
                           </li>
                         ))}
                       </ul>
@@ -79,7 +79,7 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
 
                   <h3 className="type-h4 text-[#222222]">Production solution diagram renders here</h3>
 
-                  <p className="type-p2 max-w-[560px] text-black/60">
+                  <p className="type-p3 max-w-[560px] text-black/60">
                     This test block represents the diagram, architecture visual, workflow, system map, or interactive
                     solution graphic used by production case studies.
                   </p>
@@ -89,12 +89,12 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
                   <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Why this shape worked</div>
-                  <p className="type-p2 mt-3 text-[#222222]">{data.solution.summary}</p>
+                  <p className="type-p3 mt-3 text-[#222222]">{data.solution.summary}</p>
                 </div>
 
                 <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
                   <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">Architecture notes</div>
-                  <p className="type-p2 mt-3 text-black/65">
+                  <p className="type-p3 mt-3 text-black/65">
                     The point of the section is to pressure-test whether a large system visual reads cleanly without
                     turning into a dashboard.
                   </p>

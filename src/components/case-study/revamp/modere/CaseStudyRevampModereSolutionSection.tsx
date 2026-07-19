@@ -42,7 +42,7 @@ export function CaseStudyRevampModereSolutionSection({
             <div className="grid gap-4 md:grid-cols-2">
               <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
                 <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">WHY THE ARCHITECTURE WORKED</div>
-                <p className="type-p2 mt-3 text-[#222222]">
+                <p className="type-p3 mt-3 text-[#222222]">
                   Commerce, product data, content, and market logic each had a clear home. That separation reduced
                   custom work, protected the platform from vendor drift, and made expansion repeatable instead of
                   rebuilding market by market.
@@ -51,7 +51,7 @@ export function CaseStudyRevampModereSolutionSection({
 
               <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
                 <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">WHAT THE BUSINESS GAINED</div>
-                <p className="type-p2 mt-3 text-black/65">
+                <p className="type-p3 mt-3 text-black/65">
                   Business teams could manage products, pricing, promotions, and market changes without routing
                   routine commercial work through engineering. BigCommerce stayed focused on storefront and
                   transactions while Pimcore became the operational product brain.

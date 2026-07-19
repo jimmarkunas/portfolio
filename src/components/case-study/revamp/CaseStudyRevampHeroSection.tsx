@@ -47,7 +47,7 @@ export function CaseStudyRevampHeroSection({ data }: { data: CaseStudyRevampData
             </MotionReveal>
 
             <MotionReveal preset="section" delay={0.05} className="w-full max-w-none">
-              <p className="type-p2 w-full text-black/66">{data.hero.intro}</p>
+              <p className="type-p3 w-full text-black/66">{data.hero.intro}</p>
             </MotionReveal>
 
             <MotionReveal

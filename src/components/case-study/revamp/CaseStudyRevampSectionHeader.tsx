@@ -33,7 +33,7 @@ export function CaseStudyRevampSectionHeader({
       eyebrowLabelClassName="type-p3"
       titleGroupClassName="flex flex-col gap-3"
       titleClassName="type-h2"
-      descriptionClassName="type-p2 max-w-[760px]"
+      descriptionClassName="type-p3 max-w-[760px]"
     />
   )
 }

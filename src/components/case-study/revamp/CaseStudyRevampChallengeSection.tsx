@@ -16,7 +16,7 @@ export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevam
 
             <div className="flex flex-col gap-5">
               {data.challenge.paragraphs.map((paragraph, index) => (
-                <p key={`${data.challenge.eyebrow}-${index}`} className="type-p3 text-[#222222]">
+                <p key={`${data.challenge.eyebrow}-${index}`} className="type-p4 text-[#222222]">
                   {paragraph}
                 </p>
               ))}

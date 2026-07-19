@@ -36,7 +36,7 @@ export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRev
             />
 
             <div className="flex max-w-[680px] flex-col items-start gap-6 lg:pt-[58px] lg:max-xl:w-full lg:max-xl:max-w-none md:max-lg:w-full md:max-lg:max-w-none">
-              <p className="type-p2 text-black/65">{recognition.intro}</p>
+              <p className="type-p3 text-black/65">{recognition.intro}</p>
             </div>
           </MotionReveal>
 
@@ -82,7 +82,7 @@ export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRev
                       ))}
                     </div>
 
-                    <p className="type-p3 col-span-2 w-full max-w-none text-black/60 md:max-lg:col-span-2 md:max-lg:w-full md:max-lg:max-w-none">
+                    <p className="type-p4 col-span-2 w-full max-w-none text-black/60 md:max-lg:col-span-2 md:max-lg:w-full md:max-lg:max-w-none">
                       {recognition.featured.summary}
                     </p>
                   </div>
@@ -113,7 +113,7 @@ export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRev
                         </p>
                       </div>
 
-                      <p className="type-p3 w-full max-w-[54ch] text-[#5B5B5B] transition-colors duration-200 group-hover:text-[#447ACB] md:max-lg:max-w-none">
+                      <p className="type-p4 w-full max-w-[54ch] text-[#5B5B5B] transition-colors duration-200 group-hover:text-[#447ACB] md:max-lg:max-w-none">
                         {row.summary}
                       </p>
 

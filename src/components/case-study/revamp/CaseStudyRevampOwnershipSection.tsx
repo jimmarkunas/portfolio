@@ -33,7 +33,7 @@ export function CaseStudyRevampOwnershipSection({ data }: { data: CaseStudyRevam
                 title={data.ownership.title}
                 className="md:max-lg:w-full md:max-lg:max-w-none md:max-lg:items-start md:max-lg:[&>div]:w-full md:max-lg:[&>div]:max-w-none md:max-lg:[&>div]:gap-3 md:max-lg:[&>div>p]:max-w-none"
               />
-              <p className="type-p3 max-w-[620px] text-black/70 md:max-lg:max-w-none">{data.ownership.summary}</p>
+              <p className="type-p4 max-w-[620px] text-black/70 md:max-lg:max-w-none">{data.ownership.summary}</p>
             </MotionReveal>
 
             <MotionReveal preset="card" delay={0.04}>
@@ -46,7 +46,7 @@ export function CaseStudyRevampOwnershipSection({ data }: { data: CaseStudyRevam
                       </div>
                       <div>
                         <h3 className="type-p1 font-medium text-[#222222]">{decision.title}</h3>
-                        <p className="type-p2 mt-2 text-black/65">{decision.copy}</p>
+                        <p className="type-p3 mt-2 text-black/65">{decision.copy}</p>
                       </div>
                     </div>
                   </li>
