@@ -142,6 +142,7 @@ export type CaseStudyRevampData = {
     eyebrow: string
     title: string
     copy: string
+    background?: "gray" | "white"
     architecture: CaseStudyRevampArchitectureLane[]
     summary: string
   }
@@ -153,7 +154,7 @@ export type CaseStudyRevampData = {
     metrics: CaseStudyRevampMetric[]
     transformation: {
       eyebrow: string
-      title: string
+      title?: string
       rows: Array<{
         problem: string
         decision: string

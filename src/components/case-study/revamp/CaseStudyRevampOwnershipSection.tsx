@@ -8,7 +8,7 @@ import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
 
 export function CaseStudyRevampOwnershipSection({ data }: { data: CaseStudyRevampData }) {
   return (
-    <section className="bg-white">
+    <section className="bg-[#F3F3F3]">
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="flex flex-col gap-10 lg:gap-12">
           {data.ownership.editorialImage ? (
@@ -39,7 +39,7 @@ export function CaseStudyRevampOwnershipSection({ data }: { data: CaseStudyRevam
             <MotionReveal preset="card" delay={0.04}>
               <ol className="space-y-4">
                 {data.ownership.decisions.map((decision, index) => (
-                  <li key={decision.title} className="rounded-[20px] border border-black/8 bg-[#F8F8F8] p-5 md:p-6">
+                  <li key={decision.title} className="rounded-[20px] border border-black/8 bg-white p-5 md:p-6">
                     <div className="grid gap-4 md:grid-cols-[56px_minmax(0,1fr)] md:items-start md:gap-6">
                       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#222222] type-p5 font-medium text-white">
                         {index + 1}

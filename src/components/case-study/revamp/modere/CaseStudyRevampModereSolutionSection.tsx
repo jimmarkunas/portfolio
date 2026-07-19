@@ -20,8 +20,10 @@ export function CaseStudyRevampModereSolutionSection({
   data: CaseStudyRevampData
   solution: ModereSolutionContent
 }) {
+  const isWhiteBackground = data.solution.background === "white"
+
   return (
-    <section className="bg-[#F3F3F3]">
+    <section className={isWhiteBackground ? "bg-white" : "bg-[#F3F3F3]"}>
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="flex flex-col gap-10 lg:gap-12">
           <MotionReveal preset="section" className="flex flex-col items-center gap-4 text-center">
@@ -38,9 +40,9 @@ export function CaseStudyRevampModereSolutionSection({
             <ModereSimulation className="w-full" />
           </MotionReveal>
 
-          <MotionReveal preset="cardStrong" className="bg-white p-6 md:p-8">
+          <MotionReveal preset="cardStrong" className={`${isWhiteBackground ? "bg-[#F3F3F3]" : "bg-white"} p-6 md:p-8`}>
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
+              <div className={`rounded-[24px] border border-black/8 ${isWhiteBackground ? "bg-white" : "bg-[#F8F8F8]"} p-6`}>
                 <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">WHY THE ARCHITECTURE WORKED</div>
                 <p className="type-p3 mt-3 text-[#222222]">
                   Commerce, product data, content, and market logic each had a clear home. That separation reduced
@@ -49,7 +51,7 @@ export function CaseStudyRevampModereSolutionSection({
                 </p>
               </div>
 
-              <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">
+              <div className={`rounded-[24px] border border-black/8 ${isWhiteBackground ? "bg-white" : "bg-[#F8F8F8]"} p-6`}>
                 <div className="type-p5 uppercase tracking-[0.16em] text-[#7B7B7B]">WHAT THE BUSINESS GAINED</div>
                 <p className="type-p3 mt-3 text-black/65">
                   Business teams could manage products, pricing, promotions, and market changes without routing

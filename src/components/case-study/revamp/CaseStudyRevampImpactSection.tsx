@@ -64,9 +64,6 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
           ) : null}
 
           <MotionReveal preset="section" className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <h3 className="w-full max-w-none type-h4 text-[#222222]">{data.impact.transformation.title}</h3>
-            </div>
 
             <div className="border-t border-black/10 pt-5">
               <div ref={timelineRef} className="relative">
