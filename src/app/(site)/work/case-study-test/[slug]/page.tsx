@@ -1,0 +1,21 @@
+import { notFound } from "next/navigation"
+
+import { CaseStudyRevampTemplate } from "@/components/case-study/revamp/CaseStudyRevampTemplate"
+import { caseStudyPreviewRegistry, getCaseStudyPreview } from "@/content/case-studies/revamp/preview-registry"
+
+type PreviewPageProps = { params: { slug: string } }
+
+export function generateStaticParams() {
+  return caseStudyPreviewRegistry
+    .filter((study) => study.routeKind === "dynamic" && study.loadContent)
+    .map((study) => ({ slug: study.slug }))
+}
+
+export default async function DynamicCaseStudyPreviewPage({ params }: PreviewPageProps) {
+  const study = getCaseStudyPreview(params.slug)
+  if (!study || study.routeKind !== "dynamic" || !study.loadContent) notFound()
+
+  const data = await study.loadContent()
+  return <CaseStudyRevampTemplate data={data} />
+}
+
