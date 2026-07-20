@@ -16,6 +16,9 @@ export default async function DynamicCaseStudyPreviewPage({ params }: PreviewPag
   if (!study || study.routeKind !== "dynamic" || !study.loadContent) notFound()
 
   const data = await study.loadContent()
+  if (study.loadTemplate) {
+    const Template = await study.loadTemplate()
+    return <Template data={data} />
+  }
   return <CaseStudyRevampTemplate data={data} />
 }
-

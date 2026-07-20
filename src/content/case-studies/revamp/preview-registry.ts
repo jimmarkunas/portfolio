@@ -1,3 +1,4 @@
+import type { ComponentType } from "react"
 import type { CaseStudyRevampData } from "./types"
 
 export type CaseStudyMigrationStatus = "approved" | "in-progress" | "not-started" | "blocked"
@@ -18,6 +19,7 @@ export type CaseStudyPreviewRecord = {
   bespokeSolution: boolean
   notes?: string
   loadContent?: () => Promise<CaseStudyRevampData>
+  loadTemplate?: () => Promise<ComponentType<{ data: CaseStudyRevampData }>>
 }
 
 const record = (
@@ -26,7 +28,7 @@ const record = (
   complexity: CaseStudyComplexity,
   sourceReadiness: CaseStudySourceReadiness,
   bespokeSolution: boolean,
-  extras: Partial<Pick<CaseStudyPreviewRecord, "migrationStatus" | "routeKind" | "previewHref" | "approvedTag" | "notes">> = {},
+  extras: Partial<Pick<CaseStudyPreviewRecord, "migrationStatus" | "routeKind" | "previewHref" | "approvedTag" | "notes" | "loadContent" | "loadTemplate">> = {},
 ): CaseStudyPreviewRecord => ({
   slug,
   title,
@@ -40,7 +42,13 @@ const record = (
 })
 
 export const caseStudyPreviewRegistry: CaseStudyPreviewRecord[] = [
-  record("cps", "CPS Energy: Smart Streetlight & Smart City Operations", "B", "partial", false),
+  record("cps", "CPS Energy: Smart Streetlight & Smart City Operations", "C", "complete", true, {
+    migrationStatus: "in-progress",
+    routeKind: "dynamic",
+    previewHref: "/work/case-study-test/cps",
+    loadContent: () => import("./cps").then((module) => module.caseStudy),
+    loadTemplate: () => import("@/components/case-study/revamp/cps/CaseStudyRevampCpsTemplate").then((module) => module.CaseStudyRevampCpsTemplate),
+  }),
   record("dtv01", "Turning DIRECTV's Slow Offer Engine to a Revenue Machine", "B", "legacy-only", false),
   record("newyorklife", "New York Life's Scalable Product Platform", "C", "legacy-only", true),
   record("modere", "Winning Awards And Making $1B With Modere", "C", "complete", true, {
@@ -86,4 +94,3 @@ export const inProgressPreviewCount = caseStudyPreviewRegistry.filter((study) =>
 export const notStartedPreviewCount = caseStudyPreviewRegistry.filter((study) => study.migrationStatus === "not-started").length
 export const blockedPreviewCount = caseStudyPreviewRegistry.filter((study) => study.migrationStatus === "blocked").length
 export const totalPreviewCount = caseStudyPreviewRegistry.length
-
