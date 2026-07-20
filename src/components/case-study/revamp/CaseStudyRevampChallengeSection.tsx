@@ -5,6 +5,7 @@ import { MotionReveal } from "@/components/motion/MotionReveal"
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
 import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
+import { CASE_STUDY_SECTION_INTRO_CLASS } from "./CaseStudySectionIntro"
 
 export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevampData }) {
   return (
@@ -16,7 +17,7 @@ export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevam
 
             <div className="flex flex-col gap-5">
               {data.challenge.paragraphs.map((paragraph, index) => (
-                <p key={`${data.challenge.eyebrow}-${index}`} className="type-p4 text-[#222222]">
+                <p key={`${data.challenge.eyebrow}-${index}`} className={`${CASE_STUDY_SECTION_INTRO_CLASS} text-[#222222]`}>
                   {paragraph}
                 </p>
               ))}
@@ -24,7 +25,7 @@ export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevam
           </MotionReveal>
 
           <MotionReveal preset="image" delay={0.04}>
-            <div className="lg:mt-12 overflow-hidden rounded-[28px] border border-black/8 bg-white shadow-[0_18px_54px_rgba(34,34,34,0.08)]">
+            <div className="overflow-hidden rounded-[28px] border border-black/8 bg-white shadow-[0_18px_54px_rgba(34,34,34,0.08)]">
               <CaseStudyMediaFrame media={data.challenge.visual} className="w-full" />
             </div>
             <p className="type-p5 mt-3 text-black/55">{data.challenge.caption}</p>

@@ -139,6 +139,7 @@ export const modereRevampCaseStudy = {
     ],
   },
   solution: {
+    mode: "diagram",
     background: "gray",
     eyebrow: modereSolutionContent.eyebrow,
     title: modereSolutionContent.title,

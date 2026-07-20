@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 
 import { SectionHeader } from "@/components/SectionHeader"
+import { CASE_STUDY_SECTION_INTRO_CLASS } from "./CaseStudySectionIntro"
 
 type CaseStudySectionHeaderProps = {
   eyebrow: string
@@ -33,7 +34,7 @@ export function CaseStudyRevampSectionHeader({
       eyebrowLabelClassName="type-p3"
       titleGroupClassName="flex flex-col gap-3"
       titleClassName="type-h2"
-      descriptionClassName="type-p3 max-w-[760px]"
+      descriptionClassName={`${CASE_STUDY_SECTION_INTRO_CLASS} max-w-[760px]`}
     />
   )
 }

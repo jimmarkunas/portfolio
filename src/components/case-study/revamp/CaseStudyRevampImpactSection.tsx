@@ -15,7 +15,7 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
   return (
     <section className="bg-white">
       <Container className="py-14 md:py-16 lg:py-20">
-        <div className="flex flex-col gap-10 lg:gap-12">
+        <div className="flex flex-col gap-3 lg:gap-4">
           <MotionReveal preset="section" className="flex flex-col items-center gap-4 text-center">
             <CaseStudyRevampSectionHeader
               eyebrow={data.impact.eyebrow}
@@ -26,7 +26,7 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
             />
           </MotionReveal>
 
-          <MotionReveal preset="card" className="grid gap-4 sm:grid-cols-2 lg:max-xl:grid-cols-4 xl:grid-cols-4">
+          <MotionReveal preset="card" className={`grid gap-4 sm:grid-cols-2 ${data.impact.metrics.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
             {data.impact.metrics.map((metric) => (
               <StatCard
                 key={`${metric.value}-${metric.label}`}

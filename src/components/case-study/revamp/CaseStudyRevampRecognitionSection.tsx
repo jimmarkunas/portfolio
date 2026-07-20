@@ -7,8 +7,8 @@ import { FullWidthImage } from "@/components/FullWidthImage"
 import { ExternalLinkMiniIcon } from "@/components/icons/ui-icons"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { TagPill } from "@/components/TagPill"
+import { SectionPill } from "@/components/homepage/ui"
 import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
-import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
 
 export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRevampData }) {
   const recognition = data.recognition
@@ -25,19 +25,12 @@ export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRev
     >
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="flex flex-col gap-10 lg:gap-14">
-          <MotionReveal
-            preset="section"
-            className="grid gap-8 lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)] lg:items-start lg:gap-16 lg:max-xl:w-full lg:max-xl:max-w-none md:max-lg:w-full md:max-lg:max-w-none md:max-lg:[&>div]:w-full md:max-lg:[&>div]:max-w-none md:max-lg:[&>div>p]:max-w-none"
-          >
-            <CaseStudyRevampSectionHeader
-              eyebrow={recognition.eyebrow}
-              title={recognition.title}
-              className="max-w-[460px] lg:pt-0 lg:max-xl:w-full lg:max-xl:max-w-none md:max-lg:w-full md:max-lg:max-w-none"
-            />
-
-            <div className="flex max-w-[680px] flex-col items-start gap-6 lg:pt-[58px] lg:max-xl:w-full lg:max-xl:max-w-none md:max-lg:w-full md:max-lg:max-w-none">
-              <p className="type-p3 text-black/65">{recognition.intro}</p>
+          <MotionReveal preset="section" className="grid gap-8 lg:grid-cols-[minmax(0,530px)_minmax(0,1fr)] lg:items-start">
+            <div className="flex flex-col items-start gap-6">
+              <SectionPill label={recognition.eyebrow} />
+              <h2 className="type-h2 text-[#222222]">Press & Accolades</h2>
             </div>
+            <p className="type-p3 w-full max-w-none text-black/66 lg:pt-14">{recognition.intro}</p>
           </MotionReveal>
 
           {recognition.editorialImage ? (
@@ -113,7 +106,7 @@ export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRev
                         </p>
                       </div>
 
-                      <p className="type-p4 w-full max-w-[54ch] text-[#5B5B5B] transition-colors duration-200 group-hover:text-[#447ACB] md:max-lg:max-w-none">
+                      <p className="type-p4 w-full max-w-[70ch] text-[#5B5B5B] transition-colors duration-200 group-hover:text-[#447ACB] md:max-lg:max-w-none">
                         {row.summary}
                       </p>
 

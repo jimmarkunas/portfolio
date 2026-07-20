@@ -122,6 +122,7 @@ export const caseStudyRevampFixture = {
     ],
   },
   solution: {
+    mode: "three-column-and-diagram",
     eyebrow: "System / Solution",
     title: "A smaller number of moves created a much clearer system",
     copy:

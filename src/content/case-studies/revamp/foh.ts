@@ -121,6 +121,7 @@ export const fohRevampCaseStudy = {
     ],
   },
   solution: {
+    mode: "three-column",
     eyebrow: "Solution",
     title: "Lean Stack, Loud Re-launch",
     copy:

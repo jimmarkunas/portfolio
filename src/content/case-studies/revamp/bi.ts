@@ -85,6 +85,7 @@ export const biRevampCaseStudy = {
     ],
   },
   solution: {
+    mode: "diagram",
     background: "white",
     eyebrow: "Solution",
     title: "Classic Adobe With a Twist",

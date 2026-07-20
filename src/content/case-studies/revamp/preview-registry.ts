@@ -1,4 +1,6 @@
 import type { CaseStudyRevampData } from "./types"
+import type { ComponentType } from "react"
+import { CaseStudyRevampAaTemplate } from "@/components/case-study/revamp/aa/CaseStudyRevampAaTemplate"
 
 export type CaseStudyMigrationStatus = "approved" | "in-progress" | "not-started" | "blocked"
 export type CaseStudyComplexity = "A" | "B" | "C" | "D" | "E"
@@ -18,6 +20,7 @@ export type CaseStudyPreviewRecord = {
   bespokeSolution: boolean
   notes?: string
   loadContent?: () => Promise<CaseStudyRevampData>
+  loadTemplate?: ComponentType<{ data: CaseStudyRevampData }>
 }
 
 const record = (
@@ -26,7 +29,7 @@ const record = (
   complexity: CaseStudyComplexity,
   sourceReadiness: CaseStudySourceReadiness,
   bespokeSolution: boolean,
-  extras: Partial<Pick<CaseStudyPreviewRecord, "migrationStatus" | "routeKind" | "previewHref" | "approvedTag" | "notes">> = {},
+  extras: Partial<Pick<CaseStudyPreviewRecord, "migrationStatus" | "routeKind" | "previewHref" | "approvedTag" | "notes" | "loadContent" | "loadTemplate">> = {},
 ): CaseStudyPreviewRecord => ({
   slug,
   title,
@@ -70,7 +73,13 @@ export const caseStudyPreviewRegistry: CaseStudyPreviewRecord[] = [
   record("cwg", "Chicks With Guns: Building a Digital Music Magazine", "D", "legacy-only", true, {
     notes: "Founder-specific template required",
   }),
-  record("aa", "Saving American Apparel With Digital Commerce", "B", "legacy-only", false),
+  record("aa", "Saving American Apparel With Digital Commerce", "B", "complete", false, {
+    migrationStatus: "in-progress",
+    routeKind: "dynamic",
+    previewHref: "/work/case-study-test/aa",
+    loadContent: () => import("./aa").then((module) => module.aaRevampCaseStudy),
+    loadTemplate: CaseStudyRevampAaTemplate,
+  }),
   record("zevo", "Interactive Internet TV Before it was Mainstream", "D", "legacy-only", true, {
     notes: "Founder-specific template required",
   }),
@@ -86,4 +95,3 @@ export const inProgressPreviewCount = caseStudyPreviewRegistry.filter((study) =>
 export const notStartedPreviewCount = caseStudyPreviewRegistry.filter((study) => study.migrationStatus === "not-started").length
 export const blockedPreviewCount = caseStudyPreviewRegistry.filter((study) => study.migrationStatus === "blocked").length
 export const totalPreviewCount = caseStudyPreviewRegistry.length
-

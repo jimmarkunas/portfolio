@@ -77,6 +77,7 @@ export const americanapparelGlobalLocations: GlobalLocation[] = [
   { city: "Boston", country: "USA", coordinates: [-71.0589, 42.3601] },
   // Canada
   { city: "Toronto", country: "Canada", coordinates: [-79.3832, 43.6532] },
+  { city: "Ontario", country: "Canada", coordinates: [-84.512, 43.0] },
   { city: "Montreal", country: "Canada", coordinates: [-73.5673, 45.5017] },
   { city: "Vancouver", country: "Canada", coordinates: [-123.1216, 49.2827] },
   { city: "Edmonton", country: "Canada", coordinates: [-113.4909, 53.5461] },
@@ -117,6 +118,22 @@ export const americanapparelGlobalLocations: GlobalLocation[] = [
   { city: "Melbourne", country: "Australia", coordinates: [144.9631, -37.8136] },
   { city: "Brisbane", country: "Australia", coordinates: [153.0251, -27.4698] },
   { city: "Auckland", country: "New Zealand", coordinates: [174.7633, -36.8485] },
+]
+
+// The legacy source provides representative store cities rather than every store coordinate.
+// Expand those verified locations into an approximate 268-store footprint for the map clusters.
+export const americanapparelStoreLocations: GlobalLocation[] = [
+  ...americanapparelGlobalLocations,
+  ...Array.from({ length: 204 }, (_, index) => {
+    const source = americanapparelGlobalLocations[index % americanapparelGlobalLocations.length]
+    const ring = Math.floor(index / americanapparelGlobalLocations.length) + 1
+    const angle = (index % 12) * (Math.PI / 6)
+    return {
+      city: `${source.city} store ${ring}`,
+      country: source.country,
+      coordinates: [source.coordinates[0] + Math.cos(angle) * 0.08 * ring, source.coordinates[1] + Math.sin(angle) * 0.05 * ring] as [number, number],
+    }
+  }),
 ]
 
 export const caseStudy = {

@@ -69,6 +69,8 @@ export type CaseStudyRevampRecognitionRow = {
   pdfHref: string
 }
 
+export type CaseStudySolutionMode = "three-column" | "diagram" | "three-column-and-diagram"
+
 export type CaseStudyRevampRecognition = {
   eyebrow: string
   title: string
@@ -139,6 +141,7 @@ export type CaseStudyRevampData = {
     decisions: CaseStudyRevampDecision[]
   }
   solution: {
+    mode: CaseStudySolutionMode
     eyebrow: string
     title: string
     copy: string
