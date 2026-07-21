@@ -1,4 +1,4 @@
-import type { CaseStudyMedia, CaseStudyTool } from "@/content/case-studies"
+import type { CaseStudyMedia, CaseStudySolutionDiagramKey, CaseStudyTool } from "@/content/case-studies"
 
 export type CaseStudyRevampImage = {
   src: string
@@ -148,7 +148,10 @@ export type CaseStudyRevampData = {
     background?: "gray" | "white"
     architecture: CaseStudyRevampArchitectureLane[]
     featuredMedia?: CaseStudyRevampImage[]
+    carouselImages?: string[]
+    diagramKey?: CaseStudySolutionDiagramKey
     summary: string
+    secondarySummary?: string
   }
   impact: {
     eyebrow: string

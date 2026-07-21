@@ -46,7 +46,7 @@ const record = (
 export const caseStudyPreviewRegistry: CaseStudyPreviewRecord[] = [
   record("cps", "CPS Energy: Smart Streetlight & Smart City Operations", "B", "partial", false),
   record("dtv01", "Turning DIRECTV's Slow Offer Engine to a Revenue Machine", "B", "complete", false, { migrationStatus: "in-progress", routeKind: "dynamic", previewHref: "/work/case-study-test/dtv01", loadContent: () => import("./dtv01").then((module) => module.dtv01RevampCaseStudy), loadTemplate: CaseStudyRevampTemplate }),
-  record("newyorklife", "New York Life's Scalable Product Platform", "C", "legacy-only", true),
+  record("newyorklife", "New York Life's Scalable Product Platform", "C", "complete", true, { migrationStatus: "in-progress", routeKind: "dynamic", previewHref: "/work/case-study-test/newyorklife", loadContent: () => import("./newyorklife").then((module) => module.newyorklifeRevampCaseStudy), loadTemplate: CaseStudyRevampTemplate }),
   record("modere", "Winning Awards And Making $1B With Modere", "C", "complete", true, {
     migrationStatus: "approved",
     routeKind: "explicit",

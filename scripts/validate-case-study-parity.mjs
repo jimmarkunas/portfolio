@@ -13,6 +13,7 @@ if (slugsArg) {
     const modulePath = path.join(root, "src/content/case-studies/revamp", `${slug}.ts`)
     const legacyPath = path.join(root, "src/content/case-studies", `${slug}.ts`)
     const source = fs.existsSync(modulePath) ? fs.readFileSync(modulePath, "utf8") : ""
+    const legacySource = fs.existsSync(legacyPath) ? fs.readFileSync(legacyPath, "utf8") : ""
     if (!fs.existsSync(modulePath)) errors.push(`${slug}: revamp module missing`)
     if (!fs.existsSync(legacyPath)) errors.push(`${slug}: legacy module missing`)
     if (!source.includes("createLegacyParityCaseStudy")) errors.push(`${slug}: direct legacy adapter missing`)
@@ -27,6 +28,18 @@ if (slugsArg) {
       if (!source.includes('ownerApprovedTextReplacements')) errors.push("dtv01: owner-approved revenue correction override missing")
       const legacyDiff = execFileSync("git", ["diff", "--", legacyPath], { encoding: "utf8" })
       if (legacyDiff) errors.push("dtv01: legacy source changed")
+    }
+    if (slug === "newyorklife") {
+      for (const value of ["nyl-velocity-chart", "nyl-rbac-workflow", "newyorklife", "dtv01", "bi"]) {
+        if (!source.includes(value) && !legacySource.includes(value) && !registry.includes(value)) errors.push(`newyorklife: required mapping missing: ${value}`)
+      }
+      if (!source.includes('solutionMode: "diagram"')) errors.push("newyorklife: approved diagram Solution mode missing")
+      if ((source.match(/title:/g) ?? []).length < 5) errors.push("newyorklife: ownership configuration incomplete")
+      if (!legacySource.includes("Program Budget") || !legacySource.includes("Lead Uplift")) errors.push("newyorklife: legacy metrics not represented")
+      if (!legacySource.includes("Our greatest challenge isn't technology, it's people and process.")) errors.push("newyorklife: legacy quote not preserved")
+      for (const value of ["modal-nyl-01.png", "modal-nyl-02.png", "modal-nyl-03.png", "modal-nyl-04.png", "modal-nyl-05.png", "don-vu.jpeg"]) {
+        if (!fs.existsSync(path.join(root, "public", "newyorklife", value))) errors.push(`newyorklife: required asset missing: ${value}`)
+      }
     }
   }
   const protectedFiles = ["src/content/case-studies/revamp/aa.ts", "src/content/case-studies/aa.ts", "src/components/case-study/revamp/types.ts"]

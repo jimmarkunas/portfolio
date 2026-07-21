@@ -1,4 +1,4 @@
-import type { CaseStudyData, CaseStudyMedia } from "@/content/case-studies/types"
+import type { CaseStudyData, CaseStudyMedia, CaseStudySolutionDiagramKey } from "@/content/case-studies/types"
 import type { CaseStudyRevampData, CaseStudyRevampMetric, CaseStudySolutionMode } from "./types"
 
 type OwnershipConfig = { title: string; sourcePath: string }
@@ -17,6 +17,9 @@ export type LegacyParityConfig = {
   removeRecognitionFeatured?: boolean
   featuredSolutionImages?: string[]
   challengeChart?: boolean
+  solutionDiagramKey?: CaseStudySolutionDiagramKey
+  impactEditorialImage?: string
+  solutionSecondarySummary?: string
   ownerApprovedTextReplacements?: Array<[string, string]>
 }
 
@@ -110,8 +113,8 @@ export function createLegacyParityCaseStudy(config: LegacyParityConfig): CaseStu
     },
     challenge: { eyebrow: legacy.problem.eyebrow, title: legacy.problem.title, paragraphs: [legacy.problem.overview], visual: config.challengeChart ? { kind: "react-diagram", component: "directv-revenue" } : media(legacy.problem.media), caption: config.challengeChart ? "" : `${legacy.breadcrumbCurrent} legacy case-study media.` },
     ownership: { eyebrow: "What I Owned", title: legacy.role.narrative.title, summary: legacy.role.copy, decisions: ownership },
-    solution: { mode: config.solutionMode, eyebrow: legacy.solution.eyebrow, title: legacy.solution.title, copy: legacy.solution.copy, architecture: config.featuredSolutionImages ? [] : architecture, featuredMedia: config.featuredSolutionImages?.map((src) => image(src, `${legacy.breadcrumbCurrent} featured solution`)), summary: legacy.supplementalNarrative.paragraphs[0] ?? legacy.solution.copy },
-    impact: { eyebrow: legacy.impact.eyebrow, title: legacy.impact.title, intro: legacy.impact.intro, metrics: config.impactMetricsOverride ?? metricIndexes.map((index) => legacy.impact.stats[index]), transformation: { eyebrow: "Before & After", title: legacy.impact.beforeAfter.title, rows: legacy.impact.beforeAfter.columns.length >= 2 ? legacy.impact.beforeAfter.columns[0].points.map((problem, index) => ({ problem, decision: legacy.impact.journeySteps[index]?.copy ?? legacy.impact.beforeAfter.summary, outcome: legacy.impact.beforeAfter.columns[1].points[index] ?? legacy.impact.beforeAfter.columns[1].points[legacy.impact.beforeAfter.columns[1].points.length - 1] })) : [] } },
+    solution: { mode: config.solutionMode, eyebrow: legacy.solution.eyebrow, title: legacy.solution.title, copy: legacy.solution.copy, architecture: config.featuredSolutionImages || config.solutionDiagramKey ? [] : architecture, featuredMedia: config.featuredSolutionImages?.map((src) => image(src, `${legacy.breadcrumbCurrent} featured solution`)), carouselImages: legacy.solution.gallery, diagramKey: config.solutionDiagramKey, summary: legacy.supplementalNarrative.paragraphs[0] ?? legacy.solution.copy, secondarySummary: config.solutionSecondarySummary },
+    impact: { eyebrow: legacy.impact.eyebrow, title: legacy.impact.title, intro: legacy.impact.intro, editorialImage: config.impactEditorialImage ? image(config.impactEditorialImage, `${legacy.breadcrumbCurrent} impact diagram`) : undefined, metrics: config.impactMetricsOverride ?? metricIndexes.map((index) => legacy.impact.stats[index]), transformation: { eyebrow: "Before & After", title: legacy.impact.beforeAfter.title, rows: legacy.impact.beforeAfter.columns.length >= 2 ? legacy.impact.beforeAfter.columns[0].points.map((problem, index) => ({ problem, decision: legacy.impact.journeySteps[index]?.copy ?? legacy.impact.beforeAfter.summary, outcome: legacy.impact.beforeAfter.columns[1].points[index] ?? legacy.impact.beforeAfter.columns[1].points[legacy.impact.beforeAfter.columns[1].points.length - 1] })) : [] } },
     evidence: { eyebrow: "Delivery Proof", title: legacy.delivery.title, intro: legacy.delivery.introCopy, testimonial: legacy.challengeQuote, validationItems: legacy.delivery.phases.slice(0, 2).map((phase) => ({ eyebrow: phase.phase, title: phase.title, copy: phase.copy })) },
     recognition: legacy.recognition ? { eyebrow: "Recognition", title: "Press & Accolades", intro: legacy.recognition.intro, editorialImage: config.recognitionBannerImage ? image(config.recognitionBannerImage, `${legacy.breadcrumbCurrent} recognition banner`) : undefined, featured: !config.removeRecognitionFeatured && legacy.recognition.featured ? { media: legacy.recognition.featured.media, title: legacy.recognition.featured.company, date: legacy.recognition.featured.dates, summary: legacy.recognition.featured.summary, tags: legacy.recognition.featured.tags } : undefined, rows: legacy.recognition.rows.map((row) => ({ publisher: row.source ?? row.company, date: row.dates, summary: row.summary, pdfHref: row.file ?? row.url ?? "" })) } : undefined,
     relatedStudies: config.relatedSlugs.map((slug) => {

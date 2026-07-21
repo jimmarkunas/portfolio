@@ -8,6 +8,8 @@ import { ProofPointArrowIcon } from "@/components/case-study/template/CaseStudyT
 import { TagPill } from "@/components/TagPill"
 import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
+import { DeferredSolutionDiagramVisual } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
+import { DeferredNylCarousel } from "@/components/case-study/template/visuals/deferred/DeferredNylCarousel"
 
 export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevampData }) {
   const isWhiteBackground = data.solution.background === "white"
@@ -38,7 +40,36 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
             </div>
           ) : null}
 
-          {!data.solution.featuredMedia?.length ? <MotionReveal preset="card" className={`${isWhiteBackground ? "bg-[#F3F3F3]" : "bg-white"} p-6 md:p-8`}>
+          {data.solution.diagramKey ? (
+            <>
+              <MotionReveal preset="image">
+                <div className="overflow-hidden rounded-[28px] bg-white p-4 md:p-6">
+                  <DeferredSolutionDiagramVisual diagramKey={data.solution.diagramKey} eager minHeightClassName="min-h-[420px]" />
+                </div>
+              </MotionReveal>
+              <MotionReveal preset="card">
+                <div className="rounded-[24px] bg-white p-6 md:p-8">
+                  <p className="type-p3 text-black/68">{data.solution.summary}</p>
+                </div>
+              </MotionReveal>
+              {data.solution.carouselImages?.length ? (
+                <MotionReveal preset="image">
+                  <div className="overflow-hidden rounded-[28px] bg-white p-4 md:p-6">
+                    <DeferredNylCarousel images={data.solution.carouselImages} />
+                  </div>
+                </MotionReveal>
+              ) : null}
+              {data.solution.secondarySummary ? (
+                <MotionReveal preset="card">
+                  <div className="rounded-[24px] bg-white p-6 md:p-8">
+                    <p className="type-p3 text-black/68">{data.solution.secondarySummary}</p>
+                  </div>
+                </MotionReveal>
+              ) : null}
+            </>
+          ) : null}
+
+          {!data.solution.featuredMedia?.length && !data.solution.diagramKey ? <MotionReveal preset="card" className={`${isWhiteBackground ? "bg-[#F3F3F3]" : "bg-white"} p-6 md:p-8`}>
             <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-stretch">
               {data.solution.architecture.map((lane, index) => (
                 <Fragment key={lane.title}>
