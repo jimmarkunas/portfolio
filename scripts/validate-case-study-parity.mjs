@@ -41,6 +41,13 @@ if (slugsArg) {
         if (!fs.existsSync(path.join(root, "public", "newyorklife", value))) errors.push(`newyorklife: required asset missing: ${value}`)
       }
     }
+    if (["mm", "method", "murad", "k2"].includes(slug)) {
+      const visual = slug === "mm" || slug === "method" ? "retailChartBrand" : slug === "murad" ? "murad-architecture" : "solutionDiagram"
+      if (!source.includes(visual)) errors.push(`${slug}: bespoke visual mapping missing: ${visual}`)
+      if ((source.match(/title:/g) ?? []).length < 5) errors.push(`${slug}: ownership configuration incomplete`)
+      if (!source.includes("relatedSlugs")) errors.push(`${slug}: related studies missing`)
+      if (!fs.existsSync(path.join(root, "public", slug))) errors.push(`${slug}: asset root missing`)
+    }
   }
   const protectedFiles = ["src/content/case-studies/revamp/aa.ts", "src/content/case-studies/aa.ts", "src/components/case-study/revamp/types.ts"]
   const changedProtected = execFileSync("git", ["diff", "--", ...protectedFiles], { encoding: "utf8" })

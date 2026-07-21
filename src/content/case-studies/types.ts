@@ -100,7 +100,8 @@ export type CaseStudyMedia =
     }
   | {
       kind: "react-diagram"
-      component: "bi-data-silos" | "nyl-velocity-chart" | "directv-revenue"
+      component: "bi-data-silos" | "nyl-velocity-chart" | "directv-revenue" | "retail-vs-dtc"
+      brandName?: string
     }
 
 export type CaseStudyNarrative = {

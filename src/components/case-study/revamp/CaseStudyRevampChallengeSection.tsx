@@ -9,11 +9,12 @@ import { CASE_STUDY_SECTION_INTRO_CLASS } from "./CaseStudySectionIntro"
 
 export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevampData }) {
   const isDirectvRevenueChart = data.challenge.visual.kind === "react-diagram" && data.challenge.visual.component === "directv-revenue"
+  const isRetailChart = data.challenge.visual.kind === "react-diagram" && data.challenge.visual.component === "retail-vs-dtc"
 
   return (
     <section className="bg-[#F3F3F3]">
       <Container className="py-14 md:py-16 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-12 lg:max-xl:grid-cols-1 lg:max-xl:gap-8">
+        <div className={`grid gap-10 ${isRetailChart ? "lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]" : "lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]"} lg:items-start lg:gap-12 lg:max-xl:grid-cols-1 lg:max-xl:gap-8`}>
           <MotionReveal preset="section" className="flex flex-col gap-6">
             <CaseStudyRevampSectionHeader eyebrow={data.challenge.eyebrow} title={data.challenge.title} />
 

@@ -40,11 +40,11 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
             </div>
           ) : null}
 
-          {data.solution.diagramKey ? (
+          {data.solution.diagramKey || data.solution.diagram ? (
             <>
               <MotionReveal preset="image">
                 <div className="overflow-hidden rounded-[28px] bg-white p-4 md:p-6">
-                  <DeferredSolutionDiagramVisual diagramKey={data.solution.diagramKey} eager minHeightClassName="min-h-[420px]" />
+                  <DeferredSolutionDiagramVisual diagram={data.solution.diagram} diagramKey={data.solution.diagramKey} eager minHeightClassName="min-h-[420px]" />
                 </div>
               </MotionReveal>
               <MotionReveal preset="card">
@@ -69,7 +69,7 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
             </>
           ) : null}
 
-          {!data.solution.featuredMedia?.length && !data.solution.diagramKey ? <MotionReveal preset="card" className={`${isWhiteBackground ? "bg-[#F3F3F3]" : "bg-white"} p-6 md:p-8`}>
+          {!data.solution.featuredMedia?.length && !data.solution.diagramKey && !data.solution.diagram ? <MotionReveal preset="card" className={`${isWhiteBackground ? "bg-[#F3F3F3]" : "bg-white"} p-6 md:p-8`}>
             <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-stretch">
               {data.solution.architecture.map((lane, index) => (
                 <Fragment key={lane.title}>

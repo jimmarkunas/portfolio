@@ -1,4 +1,4 @@
-import type { CaseStudyMedia, CaseStudySolutionDiagramKey, CaseStudyTool } from "@/content/case-studies"
+import type { CaseStudyMedia, CaseStudySolutionDiagramKey, CaseStudyTool, DiagramData } from "@/content/case-studies"
 
 export type CaseStudyRevampImage = {
   src: string
@@ -150,6 +150,7 @@ export type CaseStudyRevampData = {
     featuredMedia?: CaseStudyRevampImage[]
     carouselImages?: string[]
     diagramKey?: CaseStudySolutionDiagramKey
+    diagram?: DiagramData
     summary: string
     secondarySummary?: string
   }
