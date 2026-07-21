@@ -1,0 +1,3 @@
+import { caseStudy } from "@/content/case-studies/zevo"
+import { createLegacyParityCaseStudy } from "./createLegacyParityCaseStudy"
+export const zevoRevampCaseStudy = createLegacyParityCaseStudy({ legacy: caseStudy, slug: "zevo", solutionMode: "three-column", relatedSlugs: ["dtv01", "lego"], allowedAssetRoots: ["/zevo/", "/founder/zevo/"], heroMetricsOverride: caseStudy.atAGlance.stats.filter((_, index) => index !== 3), ownership: [{ title: "Thesis", sourcePath: "role.narrative.highlights[0]" }, { title: "Roadmap", sourcePath: "role.narrative.highlights[1]" }, { title: "Validation", sourcePath: "delivery.phases[2].copy" }, { title: "Fundraising", sourcePath: "delivery.phases[3].copy" }, { title: "Go/no-go leadership", sourcePath: "delivery.phases[4].copy" }] })

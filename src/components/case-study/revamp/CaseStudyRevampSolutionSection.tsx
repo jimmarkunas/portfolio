@@ -26,7 +26,19 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
             />
           </MotionReveal>
 
-          <MotionReveal preset="card" className={`${isWhiteBackground ? "bg-[#F3F3F3]" : "bg-white"} p-6 md:p-8`}>
+          {data.solution.featuredMedia?.length ? (
+            <div className="flex flex-col gap-8">
+              {data.solution.featuredMedia.map((featured) => (
+                <MotionReveal key={featured.src} preset="image">
+                  <figure className={`${isWhiteBackground ? "bg-white" : "bg-[#F8F8F8]"} p-4 md:p-6`}>
+                    <FullWidthImage src={featured.src} alt={featured.alt} fullWidth={false} />
+                  </figure>
+                </MotionReveal>
+              ))}
+            </div>
+          ) : null}
+
+          {!data.solution.featuredMedia?.length ? <MotionReveal preset="card" className={`${isWhiteBackground ? "bg-[#F3F3F3]" : "bg-white"} p-6 md:p-8`}>
             <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-stretch">
               {data.solution.architecture.map((lane, index) => (
                 <Fragment key={lane.title}>
@@ -68,7 +80,7 @@ export function CaseStudyRevampSolutionSection({ data }: { data: CaseStudyRevamp
                 </Fragment>
               ))}
             </div>
-          </MotionReveal>
+          </MotionReveal> : null}
 
         </div>
       </Container>

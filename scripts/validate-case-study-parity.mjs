@@ -4,6 +4,40 @@ import path from "node:path"
 import { execFileSync } from "node:child_process"
 
 const root = process.cwd()
+const slugsArg = process.argv[process.argv.indexOf("--slugs") + 1]
+if (slugsArg) {
+  const slugs = slugsArg.split(",")
+  const errors = []
+  const registry = fs.readFileSync(path.join(root, "src/content/case-studies/revamp/preview-registry.ts"), "utf8")
+  for (const slug of slugs) {
+    const modulePath = path.join(root, "src/content/case-studies/revamp", `${slug}.ts`)
+    const legacyPath = path.join(root, "src/content/case-studies", `${slug}.ts`)
+    const source = fs.existsSync(modulePath) ? fs.readFileSync(modulePath, "utf8") : ""
+    if (!fs.existsSync(modulePath)) errors.push(`${slug}: revamp module missing`)
+    if (!fs.existsSync(legacyPath)) errors.push(`${slug}: legacy module missing`)
+    if (!source.includes("createLegacyParityCaseStudy")) errors.push(`${slug}: direct legacy adapter missing`)
+    if (!registry.includes(`record("${slug}"`) || !registry.includes(`previewHref: "/work/case-study-test/${slug}"`)) errors.push(`${slug}: dynamic registry record missing`)
+    if ((source.match(/title:/g) ?? []).length < 5) errors.push(`${slug}: ownership configuration incomplete`)
+    if (slug === "dtv01") {
+      const forbidden = /\$55|55M|Q4 Upsell Revenue|upsell revenue|helped drive \$55M/i
+      const approved = /\$221.*M|value: "\$221"|value: "221"/i.test(source) && /Q4 Digital Retention Revenue|digital retention revenue/i.test(source) && /supported/i.test(source)
+      const sourceWithoutCorrectionMap = source.replace(/ownerApprovedTextReplacements: \[\[.*?\]\], ownership:/, "ownership:")
+      if (forbidden.test(sourceWithoutCorrectionMap)) errors.push("dtv01: forbidden $55M/upsell revenue claim remains in revamp configuration")
+      if (!approved) errors.push("dtv01: approved $221M digital retention revenue supported wording is incomplete")
+      if (!source.includes('ownerApprovedTextReplacements')) errors.push("dtv01: owner-approved revenue correction override missing")
+      const legacyDiff = execFileSync("git", ["diff", "--", legacyPath], { encoding: "utf8" })
+      if (legacyDiff) errors.push("dtv01: legacy source changed")
+    }
+  }
+  const protectedFiles = ["src/content/case-studies/revamp/aa.ts", "src/content/case-studies/aa.ts", "src/components/case-study/revamp/types.ts"]
+  const changedProtected = execFileSync("git", ["diff", "--", ...protectedFiles], { encoding: "utf8" })
+  if (changedProtected) errors.push("protected AA calibration files changed")
+  console.log(`Legacy parity batch (${slugs.length} studies)`)
+  console.log(errors.length ? errors.join("\n") : slugs.map((slug) => `PASS ${slug}: direct legacy adapter, five ownership mappings, dynamic registry`).join("\n"))
+  if (errors.length) process.exit(1)
+  console.log("\nLegacy parity batch: PASS")
+  process.exit(0)
+}
 const slug = process.argv[process.argv.indexOf("--slug") + 1]
 if (slug !== "aa") {
   console.error("Usage: node scripts/validate-case-study-parity.mjs --slug aa")

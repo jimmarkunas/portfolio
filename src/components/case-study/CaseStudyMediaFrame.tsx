@@ -1,6 +1,7 @@
 import type { CaseStudyMedia } from "@/content/case-studies"
 import { DeferredMediaReactDiagram } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
 import { DeferredNylVelocityChart } from "@/components/case-study/template/visuals/deferred/DeferredNylVelocityChart"
+import { DirecTVRevenueChart } from "@/components/case-study/DirecTVRevenueChart"
 
 type CaseStudyMediaFrameProps = {
   media: CaseStudyMedia
@@ -27,6 +28,7 @@ export function CaseStudyMediaFrame({
         {media.component === "nyl-velocity-chart" && (
           <DeferredNylVelocityChart />
         )}
+        {media.component === "directv-revenue" && <DirecTVRevenueChart />}
       </div>
     )
   }

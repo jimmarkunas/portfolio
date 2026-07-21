@@ -37,7 +37,6 @@ export function StatCard({
   animationTrigger = "in-view",
 }: StatCardProps) {
   const isIntroVariant = variant === "intro"
-  const isImpactVariant = variant === "impact"
   const alignmentClasses =
     variant
       ? "items-center text-center justify-center"

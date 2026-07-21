@@ -59,7 +59,7 @@ export function DirecTVRevenueChart() {
   const bw = barW(total)
 
   return (
-    <div className="w-full overflow-hidden rounded-[20px] border border-black/8 shadow-[0_16px_40px_rgba(34,34,34,0.04)] p-6">
+    <div className="w-full overflow-hidden p-6">
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         width="100%"
@@ -191,7 +191,6 @@ export function DirecTVRevenueChart() {
           <span className="text-sm text-[#222222]">Revenue (USD Billions)</span>
         </div>
       </div>
-      <p className="mt-2 pl-[8%] text-sm text-black/40">AT&amp;T chart showing DIRECTV&apos;s revenue from 2012 – 2024</p>
     </div>
   )
 }

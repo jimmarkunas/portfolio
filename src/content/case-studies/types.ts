@@ -100,7 +100,7 @@ export type CaseStudyMedia =
     }
   | {
       kind: "react-diagram"
-      component: "bi-data-silos" | "nyl-velocity-chart"
+      component: "bi-data-silos" | "nyl-velocity-chart" | "directv-revenue"
     }
 
 export type CaseStudyNarrative = {

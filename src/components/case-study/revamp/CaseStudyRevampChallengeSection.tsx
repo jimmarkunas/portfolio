@@ -8,6 +8,8 @@ import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
 import { CASE_STUDY_SECTION_INTRO_CLASS } from "./CaseStudySectionIntro"
 
 export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevampData }) {
+  const isDirectvRevenueChart = data.challenge.visual.kind === "react-diagram" && data.challenge.visual.component === "directv-revenue"
+
   return (
     <section className="bg-[#F3F3F3]">
       <Container className="py-14 md:py-16 lg:py-20">
@@ -25,10 +27,10 @@ export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevam
           </MotionReveal>
 
           <MotionReveal preset="image" delay={0.04}>
-            <div className="overflow-hidden rounded-[28px] border border-black/8 bg-white shadow-[0_18px_54px_rgba(34,34,34,0.08)]">
+            <div className={isDirectvRevenueChart ? "overflow-hidden rounded-[28px] bg-white" : "overflow-hidden rounded-[28px] border border-black/8 bg-white shadow-[0_18px_54px_rgba(34,34,34,0.08)]"}>
               <CaseStudyMediaFrame media={data.challenge.visual} className="w-full" />
             </div>
-            <p className="type-p5 mt-3 text-black/55">{data.challenge.caption}</p>
+            {data.challenge.caption ? <p className="type-p5 mt-3 text-black/55">{data.challenge.caption}</p> : null}
           </MotionReveal>
         </div>
       </Container>
