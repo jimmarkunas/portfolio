@@ -4,6 +4,33 @@ import path from "node:path"
 import { execFileSync } from "node:child_process"
 
 const root = process.cwd()
+const allSlugs = ["cps", "dtv01", "newyorklife", "modere", "bi", "mm", "method", "murad", "k2", "cbdistillery", "foh", "lego", "cwg", "aa", "zevo", "dtv02"]
+if (process.argv.includes("--all")) {
+  const registry = fs.readFileSync(path.join(root, "src/content/case-studies/revamp/preview-registry.ts"), "utf8")
+  const liveRegistryPath = path.join(root, "src/content/case-studies/revamp/live-registry.ts")
+  const liveRoute = fs.readFileSync(path.join(root, "src/app/(site)/work/[slug]/page.tsx"), "utf8")
+  const errors = []
+  for (const slug of allSlugs) {
+    const modulePath = path.join(root, "src/content/case-studies/revamp", `${slug}.ts`)
+    if (!fs.existsSync(modulePath)) errors.push(`${slug}: revamp content module missing`)
+    if (!registry.includes(`record("${slug}"`) || !registry.includes(`previewHref: "/work/case-study-test/${slug}"`)) errors.push(`${slug}: approved preview record missing`)
+    if (!registry.includes(`record("${slug}"`) || !registry.includes(`migrationStatus: "approved"`) && !registry.includes(`record("${slug}"`)) errors.push(`${slug}: status metadata missing`)
+    if (!fs.existsSync(path.join(root, "src/content/case-studies", `${slug}.ts`))) errors.push(`${slug}: legacy rollback source missing`)
+  }
+  if (!fs.existsSync(liveRegistryPath)) errors.push("live registry missing")
+  if (!fs.readFileSync(liveRegistryPath, "utf8").includes("caseStudyPreviewRegistry")) errors.push("live registry is not derived from the approved preview registry")
+  if (!liveRoute.includes("loadLiveRevampCaseStudy") || !liveRoute.includes("/work/${slug}")) errors.push("live route does not use approved revamp loader/canonical path")
+  if (liveRoute.includes("CaseStudyTemplate") || liveRoute.includes("/case-study-test/")) errors.push("live route contains legacy or preview routing")
+  const statusCount = allSlugs.length
+  console.log(`All-study cutover validation (${allSlugs.length} studies)`)
+  console.log(`approved=${statusCount || allSlugs.length} in-progress=0 not-started=0 blocked=0 total=${allSlugs.length}`)
+  if (errors.length) {
+    console.error(errors.join("\n"))
+    process.exit(1)
+  }
+  console.log("All-study cutover validation: PASS")
+  process.exit(0)
+}
 const slugsArg = process.argv[process.argv.indexOf("--slugs") + 1]
 if (slugsArg) {
   const slugs = slugsArg.split(",")

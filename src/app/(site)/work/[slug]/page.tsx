@@ -1,12 +1,9 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate"
-import { CaseStudyRevampTemplate } from "@/components/case-study/revamp/CaseStudyRevampTemplate"
 import { StructuredData } from "@/components/seo/StructuredData"
-import { caseStudySlugs } from "@/content/case-studies"
-import { loadCaseStudyBySlug } from "@/content/case-studies"
-import type { LoadedCaseStudy } from "@/content/case-studies"
+import { liveRevampSlugs, loadLiveRevampCaseStudy } from "@/content/case-studies/revamp/live-registry"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 import { buildPageMetadata } from "@/lib/seo"
 import { createCaseStudyStructuredData } from "@/lib/structured-data"
 
@@ -14,44 +11,20 @@ type WorkPageParams = {
   slug: string
 }
 
-function buildCaseStudyMetadata(study: LoadedCaseStudy, slug: string): Metadata {
-  switch (study.templateVersion) {
-    case "revamp": {
-      const metadata = study.data.metadata
-      return buildPageMetadata({
-        title: metadata?.title ?? study.data.breadcrumbCurrent,
-        description: metadata?.description ?? study.data.hero.intro,
-        canonicalPath: `/work/${slug}`,
-        image: metadata
-          ? {
-              url: metadata.image.src,
-              alt: metadata.image.alt,
-              width: metadata.image.width,
-              height: metadata.image.height,
-            }
-          : {
-              url: study.data.hero.image.src,
-              alt: study.data.hero.image.alt,
-            },
-      })
-    }
-
-    case "legacy":
-    default:
-      return buildPageMetadata({
-        title: study.data.breadcrumbCurrent,
-        description: study.data.hero.intro,
-        canonicalPath: `/work/${slug}`,
-        image: {
-          url: study.data.hero.image.src,
-          alt: study.data.hero.image.alt,
-        },
-      })
-  }
+function buildCaseStudyMetadata(data: CaseStudyRevampData, slug: string): Metadata {
+  const metadata = data.metadata
+  return buildPageMetadata({
+    title: metadata?.title ?? data.breadcrumbCurrent,
+    description: metadata?.description ?? data.hero.intro,
+    canonicalPath: `/work/${slug}`,
+    image: metadata
+      ? { url: metadata.image.src, alt: metadata.image.alt, width: metadata.image.width, height: metadata.image.height }
+      : { url: data.hero.image.src, alt: data.hero.image.alt },
+  })
 }
 
 export async function generateStaticParams(): Promise<WorkPageParams[]> {
-  return caseStudySlugs.map((slug) => ({ slug }))
+  return liveRevampSlugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({
@@ -60,7 +33,7 @@ export async function generateMetadata({
   params: Promise<WorkPageParams>
 }): Promise<Metadata> {
   const { slug } = await params
-  const study = await loadCaseStudyBySlug(slug)
+  const study = await loadLiveRevampCaseStudy(slug)
 
   if (!study) {
     return buildPageMetadata({
@@ -71,7 +44,7 @@ export async function generateMetadata({
     })
   }
 
-  return buildCaseStudyMetadata(study, slug)
+  return buildCaseStudyMetadata(study.data, slug)
 }
 
 export default async function WorkCaseStudyPage({
@@ -80,26 +53,18 @@ export default async function WorkCaseStudyPage({
   params: Promise<WorkPageParams>
 }) {
   const { slug } = await params
-  const study = await loadCaseStudyBySlug(slug)
+  const study = await loadLiveRevampCaseStudy(slug)
 
   if (!study) {
     notFound()
   }
 
-  const structuredData = createCaseStudyStructuredData(study)
+  const structuredData = createCaseStudyStructuredData({ templateVersion: "revamp", data: study.data })
 
   return (
     <>
       <StructuredData data={structuredData} />
-      {(() => {
-        switch (study.templateVersion) {
-          case "revamp":
-            return <CaseStudyRevampTemplate data={study.data} />
-          case "legacy":
-          default:
-            return <CaseStudyTemplate data={study.data} />
-        }
-      })()}
+      <study.Template data={study.data} />
     </>
   )
 }
