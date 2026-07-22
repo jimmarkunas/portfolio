@@ -2,6 +2,7 @@ import type { CaseStudyRevampData } from "./types"
 import type { ComponentType } from "react"
 import { CaseStudyRevampAaTemplate } from "@/components/case-study/revamp/aa/CaseStudyRevampAaTemplate"
 import { CaseStudyRevampTemplate } from "@/components/case-study/revamp/CaseStudyRevampTemplate"
+import { CaseStudyRevampCpsTemplate } from "@/components/case-study/revamp/cps/CaseStudyRevampCpsTemplate"
 
 export type CaseStudyMigrationStatus = "approved" | "in-progress" | "not-started" | "blocked"
 export type CaseStudyComplexity = "A" | "B" | "C" | "D" | "E"
@@ -44,7 +45,7 @@ const record = (
 })
 
 export const caseStudyPreviewRegistry: CaseStudyPreviewRecord[] = [
-  record("cps", "CPS Energy: Smart Streetlight & Smart City Operations", "B", "partial", false),
+  record("cps", "CPS Energy: Smart Streetlight & Smart City Operations", "C", "complete", true, { migrationStatus: "in-progress", routeKind: "dynamic", previewHref: "/work/case-study-test/cps", loadContent: () => import("./cps").then((module) => module.caseStudy), loadTemplate: CaseStudyRevampCpsTemplate }),
   record("dtv01", "Turning DIRECTV's Slow Offer Engine to a Revenue Machine", "B", "complete", false, { migrationStatus: "in-progress", routeKind: "dynamic", previewHref: "/work/case-study-test/dtv01", loadContent: () => import("./dtv01").then((module) => module.dtv01RevampCaseStudy), loadTemplate: CaseStudyRevampTemplate }),
   record("newyorklife", "New York Life's Scalable Product Platform", "C", "complete", true, { migrationStatus: "in-progress", routeKind: "dynamic", previewHref: "/work/case-study-test/newyorklife", loadContent: () => import("./newyorklife").then((module) => module.newyorklifeRevampCaseStudy), loadTemplate: CaseStudyRevampTemplate }),
   record("modere", "Winning Awards And Making $1B With Modere", "C", "complete", true, {

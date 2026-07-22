@@ -16,9 +16,19 @@ if (slugsArg) {
     const legacySource = fs.existsSync(legacyPath) ? fs.readFileSync(legacyPath, "utf8") : ""
     if (!fs.existsSync(modulePath)) errors.push(`${slug}: revamp module missing`)
     if (!fs.existsSync(legacyPath)) errors.push(`${slug}: legacy module missing`)
-    if (!source.includes("createLegacyParityCaseStudy")) errors.push(`${slug}: direct legacy adapter missing`)
+    const bespokeCps = slug === "cps"
+    if (!bespokeCps && !source.includes("createLegacyParityCaseStudy")) errors.push(`${slug}: direct legacy adapter missing`)
     if (!registry.includes(`record("${slug}"`) || !registry.includes(`previewHref: "/work/case-study-test/${slug}"`)) errors.push(`${slug}: dynamic registry record missing`)
     if ((source.match(/title:/g) ?? []).length < 5) errors.push(`${slug}: ownership configuration incomplete`)
+    if (bespokeCps) {
+      for (const value of ["225K", "$2M", "15 people", "6 system integrations", "1.5 million", "August 2024–April 2025", "73", "43", "1–4"]) {
+        if (!source.includes(value)) errors.push(`cps: locked content missing: ${value}`)
+      }
+      for (const value of ["product-cps-01.png", "product-cps-02.png", "product-cps-03.png"]) if (!source.includes(value)) errors.push(`cps: required mapping missing: ${value}`)
+      for (const value of ["CpsOperationsFlowDiagram.tsx", "CaseStudyRevampCpsSolutionSection.tsx", "CaseStudyRevampCpsTemplate.tsx"]) if (!fs.existsSync(path.join(root, "src/components/case-study/revamp/cps", value))) errors.push(`cps: required local component missing: ${value}`)
+      if (!fs.existsSync(path.join(root, "src/components/case-study/revamp/cps/CaseStudyRevampCpsTemplate.tsx"))) errors.push("cps: bespoke template missing")
+      if (!fs.existsSync(path.join(root, "public/cps/product-cps-01.png"))) errors.push("cps: product assets missing")
+    }
     if (slug === "dtv01") {
       const forbidden = /\$55|55M|Q4 Upsell Revenue|upsell revenue|helped drive \$55M/i
       const approved = /\$221.*M|value: "\$221"|value: "221"/i.test(source) && /Q4 Digital Retention Revenue|digital retention revenue/i.test(source) && /supported/i.test(source)
