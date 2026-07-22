@@ -1,8 +1,10 @@
 import type { CaseStudyMedia } from "@/content/case-studies"
 import { DeferredMediaReactDiagram } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
+import {
+  DeferredPreQuoteChartVisual,
+  DeferredProblemChartVisual,
+} from "@/components/case-study/template/visuals/deferred/DeferredChartVisual"
 import { DeferredNylVelocityChart } from "@/components/case-study/template/visuals/deferred/DeferredNylVelocityChart"
-import { DirecTVRevenueChart } from "@/components/case-study/DirecTVRevenueChart"
-import MrsMeyersRetailVsDtcChart from "@/components/case-study/MrsMeyersRetailVsDtcChart"
 
 type CaseStudyMediaFrameProps = {
   media: CaseStudyMedia
@@ -29,8 +31,21 @@ export function CaseStudyMediaFrame({
         {media.component === "nyl-velocity-chart" && (
           <DeferredNylVelocityChart />
         )}
-        {media.component === "directv-revenue" && <DirecTVRevenueChart />}
-        {media.component === "retail-vs-dtc" && <MrsMeyersRetailVsDtcChart brandName={media.brandName} />}
+        {media.component === "directv-revenue" && (
+          <DeferredPreQuoteChartVisual
+            chartKey="directv-revenue"
+            minHeightClassName="min-h-[320px] md:min-h-[360px]"
+            loadingLabel="Loading chart..."
+          />
+        )}
+        {media.component === "retail-vs-dtc" && (
+          <DeferredProblemChartVisual
+            chartKey="retail-vs-dtc"
+            brandName={media.brandName}
+            minHeightClassName="min-h-[320px] md:min-h-[360px]"
+            loadingLabel="Loading chart..."
+          />
+        )}
       </div>
     )
   }
