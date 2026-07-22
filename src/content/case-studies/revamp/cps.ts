@@ -62,3 +62,4 @@ caseStudy.executiveBrief.tools = [
   { label: "SAP", icon: "/tool-icons/svg/sap-logo.svg" },
   { label: "Smartsheet", icon: "/tool-icons/svg/smartsheet-logo.svg" },
 ]
+
