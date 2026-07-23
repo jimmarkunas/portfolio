@@ -113,12 +113,6 @@ export type CaseStudyRevampData = {
     eyebrow: string
     title: string
     copy: string
-    role: string
-    client: string
-    timeline: string
-    teamStakeholders: string
-    budgetScale: string
-    systemsTechnology: string
     tools?: CaseStudyTool[]
     problem: string
     mandate: string

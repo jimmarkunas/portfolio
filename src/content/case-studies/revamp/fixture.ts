@@ -43,12 +43,6 @@ export const caseStudyRevampFixture = {
     title: "Recruiter-readable context in one view",
     copy:
       "This section keeps the facts compact and the narrative readable so the page can be scanned quickly without losing the shape of the work.",
-    role: "Product and Program Lead",
-    client: "Northstar Service Network (fictional)",
-    timeline: "April 2025 - September 2025",
-    teamStakeholders: "12 people across operations, design, engineering, finance, and service leadership",
-    budgetScale: "$1.6M program spanning 3 regional teams and 1 national support desk",
-    systemsTechnology: "Figma, React, ServiceNow, SAP, Airtable, and a shared reporting layer",
     tools: [
       { label: "Figma", icon: "/tool-icons/svg/figma-logo.svg" },
       { label: "React", icon: "/tool-icons/svg/react-logo.svg" },

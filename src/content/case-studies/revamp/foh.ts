@@ -43,12 +43,6 @@ export const fohRevampCaseStudy = {
     title: "Celebrity Traffic, Lean Stack",
     copy:
       "This wasn't a standard eCommerce launch. Frederick's went bankrupt and closed its stores. ABG bought it as an online revival - marketing-led, DTC-only, and lean by necessity. The challenge was building a Shopify Plus flagship that could handle celebrity-driven traffic spikes, support constant campaign launches, and connect the back office without building the kind of enterprise stack the brand couldn't afford or sustain.",
-    role: "Enterprise Program Manager",
-    client: "Frederick's of Hollywood / Authentic Brands Group",
-    timeline: "3-month launch · 2016–2018 engagement",
-    teamStakeholders: "9-person team",
-    budgetScale: "$3M program budget",
-    systemsTechnology: "Shopify Plus, Klaviyo, Domo · 6 system integrations",
     tools: [
       { label: "Klaviyo", icon: "/tool-icons/svg/klaviyo-logo.svg" },
       { label: "Domo", icon: "/tool-icons/svg/domo-logo.svg" },
