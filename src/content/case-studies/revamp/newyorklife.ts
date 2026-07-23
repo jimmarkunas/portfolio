@@ -5,7 +5,7 @@ export const newyorklifeRevampCaseStudy = {
   "breadcrumbCurrent": "New York Life",
   "metadata": {
     "title": "New York Life's Scalable Product Platform",
-    "description": "Legal exposure, brand drift, and a brutal review process were dragging across thousands of agent sites. I helped turn that mess into a governed multi-tenant platform that cut launches from months to weeks, reduced review cycles from weeks to days, and drove roughly 200% more leads and appointments.",
+    "description": "Legal exposure, brand drift, and a brutal review process were dragging across thousands of agent sites. I helped turn that mess into a governed multi-tenant platform that cut launches from months to weeks, reduced review cycles from weeks to days, and drove roughly 200% more leads and appointments by implementing autonomous AI agentic commerce.",
     "image": {
       "src": "/newyorklife/hero-nyl-02.png",
       "alt": "New York Life product platform hero image showing governed agent site experiences",
@@ -16,7 +16,7 @@ export const newyorklifeRevampCaseStudy = {
   "hero": {
     "eyebrow": "At-a-Glance",
     "title": "New York Life's Scalable Product Platform",
-    "intro": "Legal exposure, brand drift, and a brutal review process were dragging across thousands of agent sites. I helped turn that mess into a governed multi-tenant platform that cut launches from months to weeks, reduced review cycles from weeks to days, and drove roughly 200% more leads and appointments.",
+    "intro": "Legal exposure, brand drift, and a brutal review process were dragging across thousands of agent sites. I helped turn that mess into a governed multi-tenant platform that cut launches from months to weeks, reduced review cycles from weeks to days, and drove roughly 200% more leads and appointments by implementing autonomous AI agentic commerce..",
     "metrics": [
       {
         "value": "12K",
@@ -29,7 +29,7 @@ export const newyorklifeRevampCaseStudy = {
         "label": "Lead Uplift"
       },
       {
-        "value": "6m-2w",
+        "value": "6m>2w",
         "suffix": "",
         "label": "Site Launch Reduction"
       }
@@ -252,6 +252,16 @@ export const newyorklifeRevampCaseStudy = {
     "eyebrow": "Recognition",
     "title": "Press & Accolades",
     "intro": "This project sat inside a larger New York Life modernization push around technology, data, AI, and agent enablement. The strongest external proof is the operating logic behind this platform lines up with how New York Life publicly described its modernization strategy.",
+    "featured": {
+      "media": {
+        "kind": "youtube",
+        "videoId": "qpGy9Utd0xc",
+        "aspectRatio": "16/9"
+      },
+      "title": "How AI Transformed New York Life's Customer Service Quality",
+      "tags": ["Video", "Press"],
+      "summary": "Amazon Web Services Fireside chat with Chief Data and Analytics Officer of New York Life on their data and AI journey and how it improved their customer service quality."
+    },
     "rows": [
       {
         "publisher": "New York Life and AWS: Building a Modern Foundation for Data and AI",
