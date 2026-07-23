@@ -15,7 +15,7 @@ function buildCaseStudyMetadata(data: CaseStudyRevampData, slug: string): Metada
   const metadata = data.metadata
   return buildPageMetadata({
     title: metadata?.title ?? data.breadcrumbCurrent,
-    description: metadata?.description ?? data.hero.intro,
+    description: data.hero.intro,
     canonicalPath: `/work/${slug}`,
     image: metadata
       ? { url: metadata.image.src, alt: metadata.image.alt, width: metadata.image.width, height: metadata.image.height }

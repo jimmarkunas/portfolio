@@ -78,7 +78,6 @@ export type CaseStudyRevampRecognition = {
 
 export type CaseStudyRevampMetadata = {
   title: string
-  description: string
   image: {
     src: string
     alt: string
