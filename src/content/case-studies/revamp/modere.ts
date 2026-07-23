@@ -65,12 +65,6 @@ export const modereRevampCaseStudy = {
     title: "Commerce at Scale",
     copy:
       "Modere wasn't short on demand. It was short on scale. Leadership wanted to break past $500M and push toward $1B, but the existing stack was too brittle, too custom, and too dependent on engineers to get there cleanly. Affiliate signup, checkout, promotions, mobile, and market expansion were all dragging, and the politics around the work made it harder.",
-    role: "Senior Product Manager & Program Manager",
-    client: "Modere",
-    timeline: "Mar 2023 - Jun 2024 · 16 months",
-    teamStakeholders: "20-person team",
-    budgetScale: "$6M program budget",
-    systemsTechnology: "BigCommerce, Pimcore, Contentstack, MobiLoud; 20+ system integrations",
     tools: modereExecutiveBriefTools,
     problem:
       "Every market was building its own version of the product. Nothing was shared. The company was trying to hit $1B in revenue but the technology was holding it back - and the original agency wasn't going to deliver the right platform.",
