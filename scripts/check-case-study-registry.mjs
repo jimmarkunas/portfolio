@@ -16,6 +16,21 @@ function getPropertyNameText(nameNode) {
   return null
 }
 
+function unwrapExpression(expression) {
+  let current = expression
+
+  while (
+    ts.isSatisfiesExpression(current) ||
+    ts.isAsExpression(current) ||
+    ts.isTypeAssertionExpression(current) ||
+    ts.isParenthesizedExpression(current)
+  ) {
+    current = current.expression
+  }
+
+  return current
+}
+
 function findPropertyAssignment(objectLiteral, propertyName) {
   for (const property of objectLiteral.properties) {
     if (!ts.isPropertyAssignment(property)) {
@@ -73,7 +88,7 @@ function resolveAliasedModule(specifier) {
 
 function hasCaseStudyExport(modulePath) {
   const sourceText = fs.readFileSync(modulePath, "utf8")
-  return /export\s+const\s+caseStudy\s*=/.test(sourceText)
+  return /export\s+const\s+(?:caseStudy|[A-Za-z_$][\w$]*RevampCaseStudy)\s*=/.test(sourceText)
 }
 
 function readRegistryEntries() {
@@ -95,11 +110,11 @@ function readRegistryEntries() {
         continue
       }
 
-      if (!declaration.initializer || !ts.isSatisfiesExpression(declaration.initializer)) {
+      if (!declaration.initializer) {
         continue
       }
 
-      const expression = declaration.initializer.expression
+      const expression = unwrapExpression(declaration.initializer)
       if (!ts.isObjectLiteralExpression(expression)) {
         continue
       }
@@ -154,7 +169,9 @@ function main() {
 
   for (const entry of entries) {
     const expectedRoute = `/work/${entry.key}`
-    const expectedContentModule = `@/content/case-studies/${entry.key}`
+    const expectedContentModule = entry.contentModule?.startsWith("@/content/case-studies/revamp/")
+      ? entry.contentModule
+      : `@/content/case-studies/${entry.key}`
 
     if (entry.slug !== entry.key) {
       errors.push(`Registry key '${entry.key}' has mismatched slug '${entry.slug ?? "<missing>"}'.`)
