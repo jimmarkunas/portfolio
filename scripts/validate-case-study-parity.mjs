@@ -20,12 +20,13 @@ if (process.argv.includes("--all")) {
     if (!fs.existsSync(path.join(root, "src/content/case-studies", `${slug}.ts`))) errors.push(`${slug}: legacy rollback source missing`)
     if (!catalog.includes(`  ${slug}: {`) || !catalog.includes(`slug: "${slug}"`) || !catalog.includes(`href: "/work/${slug}"`)) errors.push(`${slug}: public related-card catalog entry is incomplete`)
     const source = fs.existsSync(modulePath) ? fs.readFileSync(modulePath, "utf8") : ""
+    if (/createLegacyParityCaseStudy|@\/content\/case-studies\/(?!types(?:["/])|shared(?:["/])|revamp\/)/.test(source)) errors.push(`${slug}: revamp module still depends on legacy content or adapter`)
     if (source.includes("relatedStudies: [")) errors.push(`${slug}: expanded related-card object remains in content module`)
-    if (!source.includes("relatedStudies: { slugs:") && !source.includes("relatedSlugs:")) errors.push(`${slug}: explicit related-study slug configuration missing`)
+    if (!source.includes("relatedStudies: { slugs:") && !source.includes('"relatedStudies": {') && !source.includes("relatedSlugs:")) errors.push(`${slug}: explicit related-study slug configuration missing`)
   }
   if (!fs.existsSync(catalogPath)) errors.push("public related-card catalog missing")
-  const legacyAdapter = fs.readFileSync(path.join(root, "src/content/case-studies/revamp/createLegacyParityCaseStudy.ts"), "utf8")
-  if (legacyAdapter.includes("relatedCopy") || legacyAdapter.includes("relatedImage")) errors.push("legacy adapter still owns expanded related-card content")
+  const legacyAdapterPath = path.join(root, "src/content/case-studies/revamp/createLegacyParityCaseStudy.ts")
+  if (fs.existsSync(legacyAdapterPath)) errors.push("legacy parity adapter still exists")
   if (!fs.existsSync(liveRegistryPath)) errors.push("live registry missing")
   if (!fs.readFileSync(liveRegistryPath, "utf8").includes("caseStudyPreviewRegistry")) errors.push("live registry is not derived from the approved preview registry")
   if (!liveRoute.includes("loadLiveRevampCaseStudy") || !liveRoute.includes("/work/${slug}")) errors.push("live route does not use approved revamp loader/canonical path")

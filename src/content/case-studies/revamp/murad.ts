@@ -1,3 +1,253 @@
-import { caseStudy } from "@/content/case-studies/murad"
-import { createLegacyParityCaseStudy } from "./createLegacyParityCaseStudy"
-export const muradRevampCaseStudy = createLegacyParityCaseStudy({ legacy: caseStudy, slug: "murad", solutionMode: "three-column-and-diagram", solutionDiagramKey: "murad-architecture", heroMetricsOverride: caseStudy.atAGlance.stats.filter((_, index) => index !== 2), relatedSlugs: ["method", "k2"], allowedAssetRoots: ["/murad/"], ownership: [{ title: "Order model", sourcePath: "role.narrative.highlights[0]" }, { title: "Payment escalation", sourcePath: "role.narrative.highlights[1]" }, { title: "Subscription architecture", sourcePath: "role.narrative.highlights[2]" }, { title: "Global rollout", sourcePath: "delivery.phases[4].copy" }, { title: "Client survival", sourcePath: "role.narrative.copy" }] })
+import type { CaseStudyRevampData } from "./types"
+
+export const muradRevampCaseStudy = {
+  "slug": "murad",
+  "breadcrumbCurrent": "Murad",
+  "metadata": {
+    "title": "Murad: From Chaos to Creation",
+    "description": "Murad needed a cheaper, cleaner path off Magento and a subscription-first global DTC model that could sit on top of Oracle EBS and a messy pile of enterprise integrations. By the time I came in, two agencies were fired, the politics were bad, and three weeks before launch we learned BigCommerce couldn’t settle credit card payments over the API",
+    "image": {
+      "src": "/murad/hero-murad-01.png",
+      "alt": "Murad global DTC replatform hero image",
+      "width": 1600,
+      "height": 900
+    }
+  },
+  "hero": {
+    "eyebrow": "At-a-Glance",
+    "title": "Murad: From Chaos to Creation",
+    "intro": "Murad needed a cheaper, cleaner path off Magento and a subscription-first global DTC model that could sit on top of Oracle EBS and a messy pile of enterprise integrations. By the time I came in, two agencies were fired, the politics were bad, and three weeks before launch we learned BigCommerce couldn’t settle credit card payments over the API",
+    "metrics": [
+      {
+        "value": "3",
+        "suffix": "",
+        "label": "Countries in Scopee"
+      },
+      {
+        "value": "11",
+        "suffix": "",
+        "label": "Named Integrations"
+      },
+      {
+        "value": "2",
+        "suffix": "",
+        "label": "Custom Platform Changes"
+      }
+    ],
+    "image": {
+      "kind": "image",
+      "src": "/murad/hero-murad-01.png",
+      "alt": "Murad global DTC replatform hero image",
+      "aspectRatio": "16/9"
+    }
+  },
+  "productionQuote": {
+    "quote": "I needed a PM who could save the day. After Murad changed agencies twice, and my PM walked off the job, I personally requested Jim.",
+    "attributionTitle": "Neely Cox",
+    "attributionSubtitle": "Enterprise Account Manager, BigCommerce",
+    "avatarSrc": "/murad/neely-cox.jpeg"
+  },
+  "executiveBrief": {
+    "eyebrow": "At-a-Glance",
+    "title": "Subscription-First Under Fire",
+    "copy": "This wasn’t a normal replatform. It was a messy global shift from Magento to BigCommerce, built around subscriptions, tied into Oracle EBS and a long list of custom partners, with a client that had already fired agencies and still needed to hit launch. My job was to keep the stack together, calm the politics, and leave the business with something it could actually operate.",
+    "tools": [
+      {
+        "label": "BigCommerce",
+        "icon": "/tool-icons/svg/bc-logo-blk.svg"
+      },
+      {
+        "label": "Oracle EBS",
+        "icon": "/tool-icons/svg/oracle-logo.svg"
+      },
+      {
+        "label": "OrderGroove",
+        "icon": "/tool-icons/svg/ordergroove-logo.svg"
+      },
+      {
+        "label": "Contentful",
+        "icon": "/tool-icons/svg/contentful-logo.svg"
+      },
+      {
+        "label": "SendGrid",
+        "icon": "/tool-icons/svg/sendgrid-logo.svg"
+      },
+      {
+        "label": "Avalara",
+        "icon": "/tool-icons/svg/avalara-logo.svg"
+      },
+      {
+        "label": "Yotpo",
+        "icon": "/tool-icons/svg/yotpo-logo.svg"
+      }
+    ],
+    "problem": "Murad wanted off Magento. For them, the platform was expensive and too dependent on developer support. The problem? The replacement had no room for simplicity. BigCommerce had to sit on top of Oracle EBS, support subscriptions through OrderGroove (an integration that didn't exist), and carry a global rollout across the US, UK, and MY. When I got pulled in, two agencies had already churned, and core order, payment, shipment, and refund flows were nonexistent.",
+    "mandate": "I was the person holding together architecture, launch planning, executive escalation, partner management, and day-to-day client survival. In plain English, I was the program manager, solution engineer, and client therapist at the same time.",
+    "whatIChanged": "BigCommerce was going to have to bend to the client, because the client wasn’t going to bend to the platform. Murad was used to Magento behavior, the business was under-staffed, the agencies were unstable, and the only way this was going to ship was if Neely & I documented the real order and payment logic, forced the right escalations, and kept the whole thing from collapsing into blame.",
+    "outcome": "Murad got a global launch model, a smooth cutover, and a path off Magento that reduced dependence on a large internal dev team.",
+    "facts": [
+      {
+        "icon": "role",
+        "label": "Role",
+        "value": "Program Manager & Solutions Architect"
+      },
+      {
+        "icon": "client",
+        "label": "Client",
+        "value": "Murad (Unilever) Global DTC"
+      },
+      {
+        "icon": "timeline",
+        "label": "Timeline",
+        "value": "2019 Launch + Global Fast-Follows"
+      },
+      {
+        "icon": "team",
+        "label": "Team",
+        "value": "2"
+      },
+      {
+        "icon": "budget",
+        "label": "Budget",
+        "value": "$1"
+      },
+      {
+        "icon": "systems",
+        "label": "Systems",
+        "value": "BigCommerce, Oracle EBS, OrderGroove, Contentful, SendGrid, Avalara, Yotpo"
+      }
+    ]
+  },
+  "challenge": {
+    "eyebrow": "Problem Statement",
+    "title": "A Re-Platform Nobody Had Under Control",
+    "paragraphs": [
+      "Murad wanted off Magento. For them, the platform was expensive and too dependent on developer support. The problem? The replacement had no room for simplicity. BigCommerce had to sit on top of Oracle EBS, support subscriptions through OrderGroove (an integration that didn't exist), and carry a global rollout across the US, UK, and MY. When I got pulled in, two agencies had already churned, and core order, payment, shipment, and refund flows were nonexistent."
+    ],
+    "visual": {
+      "kind": "image",
+      "src": "/murad/hero-murad-02.png",
+      "alt": "Murad project schedule and architecture planning materials",
+      "aspectRatio": "16/9"
+    },
+    "caption": "Murad legacy case-study media."
+  },
+  "ownership": {
+    "eyebrow": "What I Owned",
+    "title": "I Turned Chaos Into a Launch",
+    "summary": "I was the person holding together architecture, launch planning, executive escalation, partner management, and day-to-day client survival. In plain English, I was the program manager, solution engineer, and client therapist at the same time.",
+    "decisions": [
+      {
+        "title": "Order model",
+        "copy": "Documented & solutioned the Oracle order, shipment, and refund logic."
+      },
+      {
+        "title": "Payment escalation",
+        "copy": "Escalated the payment-settlement blocker toe the CEO to get platform changes made before launch."
+      },
+      {
+        "title": "Subscription architecture",
+        "copy": "Shaped a subscription-first model across BigCommerce, Oracle EBS, OrderGroove, and the global market rollout."
+      },
+      {
+        "title": "Global rollout",
+        "copy": "Delivered a smooth cutover, global market rollout, and a self-service commerce model."
+      },
+      {
+        "title": "Client survival",
+        "copy": "Client survival"
+      }
+    ]
+  },
+  "solution": {
+    "mode": "three-column-and-diagram",
+    "eyebrow": "Solution",
+    "title": "A Global Stack Murad Could Actually Run",
+    "copy": "I turned Murad's under-documented, partner-heavy eCommerce program into a workable BigCommerce + Oracle + subscriptions model with global rollout logic.",
+    "architecture": [],
+    "diagramKey": "murad-architecture",
+    "summary": "The stack was hard. The client dynamic was harder. Murad was demanding, highly sensitive with partners, and already on its third agency when launch pressure hit full force. Most of the stack relied on custom partners, thin support, or BigCommerce operating outside the usual playbook. That made the real job bigger than architecture. It was keeping the program moving and the launch date credible."
+  },
+  "impact": {
+    "eyebrow": "Impact",
+    "title": "Launch, Stability, Independence",
+    "intro": "Murad got a global launch model, a smooth cutover, and a path off Magento that reduced dependence on a large internal dev team.",
+    "metrics": [
+      {
+        "value": "3",
+        "suffix": "",
+        "label": "Markets Launched"
+      },
+      {
+        "value": "2",
+        "suffix": "",
+        "label": "Custom BC Integrations"
+      },
+      {
+        "value": "0",
+        "suffix": "",
+        "label": "Launch Issues"
+      },
+      {
+        "value": "0",
+        "suffix": "",
+        "label": "Magento devs needed"
+      }
+    ],
+    "transformation": {
+      "eyebrow": "Before & After",
+      "title": "Before & After",
+      "rows": [
+        {
+          "problem": "Magento required heavy developer support.",
+          "decision": "I translated undocumented Oracle, payment, and subscription logic into something teams could actually work from.",
+          "outcome": "Murad launched 3 global markets."
+        },
+        {
+          "problem": "Marketing changes took weeks.",
+          "decision": "When the payment-settlement blocker surfaced late, I escalated it high & fast enough to prevent a launch failure.",
+          "outcome": "Launch earned explicit praise from Murad leadership."
+        },
+        {
+          "problem": "Murad's confidence in the program was shaky.",
+          "decision": "I held the client, partners, platform, and global rollout together long enough to get the launch done and leave behind a model the business could keep using.",
+          "outcome": "Murad had a clean path forward post Magento."
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "eyebrow": "Delivery Proof",
+    "title": "Delivery Phases",
+    "intro": "This was a messy global launch with no margin for drift. I managed architecture, subscriptions, partner realignment, escalations, and cutover while the client insisted BigCommerce act like Magento.",
+    "testimonial": {
+      "quote": "Thank you so much for the smooth launch. I know it took a lot of preparation by everyone involved. Very much appreciated by the leadership team at Murad.",
+      "attributionTitle": "Van Vuong",
+      "attributionSubtitle": "Chief Digital Officer, Murad",
+      "avatarSrc": "/murad/van-vuong.jpeg"
+    },
+    "validationItems": [
+      {
+        "eyebrow": "Phase 01",
+        "title": "Diagnose",
+        "copy": "Mapped gaps across Magento parity, ERP, subscriptions, and cross-market rollout."
+      },
+      {
+        "eyebrow": "Phase 02",
+        "title": "Stabilize",
+        "copy": "Re-aligned client & partner ecosystem after agency churn, and rebuilt confidence."
+      }
+    ]
+  },
+  "relatedStudies": {
+    "slugs": [
+      "method",
+      "k2"
+    ]
+  },
+  "finalCta": {
+    "eyebrow": "Next step",
+    "title": "Review the Murad case study.",
+    "copy": "A direct legacy-parity preview."
+  }
+} as CaseStudyRevampData
