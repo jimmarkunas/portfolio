@@ -12,7 +12,7 @@ export const modereSolutionContent = {
   eyebrow: "Solution",
   title: "One Commerce System, Many Growth Paths",
   intro:
-    "I shaped a composable, API-first commerce platform designed for scalability and less friction for affiliates and customers. One system. Many markets. Business teams in control of the commercial operations that used to require engineering.",
+    "I shaped a composable, API-first commerce platform designed for scalability & less pain for affiliates & customers. What would YOU do if I weren't around?",
   closingCopy:
     "This is what good platform work looks like - less friction for the business, less chaos for the teams, and more room for revenue growth.",
 } satisfies ModereSolutionContent
@@ -28,8 +28,9 @@ export const modereRevampCaseStudy = {
   slug: "modere",
   breadcrumbCurrent: "Modere",
   metadata: {
-    title: "Modere Preview",
-    description: "Internal preview route for the Modere revamp case study.",
+    title: "Modere Composable Commerce Case Study",
+    description:
+      "How Jim Markunas led Modere's composable commerce transformation across 10 markets, improving conversion, site speed, and commercial scale.",
     image: {
       src: "/modere/hero-modere-01.png",
       alt: "Modere composable commerce platform hero image",
@@ -39,13 +40,13 @@ export const modereRevampCaseStudy = {
   },
   hero: {
     eyebrow: "BigCommerce · Composable Commerce · Health & Beauty · Affiliate Commerce",
-    title: "Winning Awards and Making $1B With Modere",
+    title: "Making $1B & Winning Awards With Modere",
     intro:
-      "Modere wanted to break past $500M in revenue and push toward $1B, but the existing stack was too brittle, too custom, and too dependent on engineers for routine commercial work. I helped push the platform toward a composable architecture and protect the system decisions that gave the business a cleaner path to scale - across 10 markets, 7 languages, and a political environment that was actively working against the right outcome. The result earned a MACH Impact Award nomination.",
+      "Modere's path to $1B wasn't a technology problem. It was a political one. Every market was building its own version of the product, the original agency wasn't going to fix it, and internal pressure was pushing the architecture toward another expensive compromise. I led the platform push toward a composable architecture and protected the system decisions that gave the business a cleaner path to scale across 10 markets, 7 languages, and a political environment actively working against the right outcome. The result: $1B GMV & MACH Impact Award nomination.",
     metrics: [
-      { value: "$1", suffix: "B", label: "Revenue Target Reached" },
+      { value: "$1", suffix: "B", label: "Revenue Target" },
       { value: "43", suffix: "%", label: "Conversion Uplift" },
-      { value: "10", suffix: "", label: "Markets Supported" },
+      { value: "10", suffix: "", label: "Global Markets" },
     ],
     image: {
       kind: "image",
@@ -64,32 +65,31 @@ export const modereRevampCaseStudy = {
     eyebrow: "At-a-Glance",
     title: "Commerce at Scale",
     copy:
-      "Modere wasn't short on demand. It was short on scale. Leadership wanted to break past $500M and push toward $1B, but the existing stack was too brittle, too custom, and too dependent on engineers to get there cleanly. Affiliate signup, checkout, promotions, mobile, and market expansion were all dragging, and the politics around the work made it harder.",
+      "Modere wasn't short on demand. It was short on scale. Leadership wanted to break past $500M and hit $1B, but the existing stack was too brittle, too custom, and too dependent to get there cleanly. Affiliate signup, checkout, promotions, mobile, and market expansion dragged, and the politics around the work made it harder.",
     tools: modereExecutiveBriefTools,
     problem:
-      "Every market was building its own version of the product. Nothing was shared. The company was trying to hit $1B in revenue but the technology was holding it back - and the original agency wasn't going to deliver the right platform.",
-    mandate: "Stop every team from building their own thing. Get all partners using one shared, scalable composable system.",
+      "Every market was building its own custom tech stack. Nothing was shared. Modere was trying to hit $1B in revenue but the technology was holding it back, and the original agency wasn't going to deliver the right platform.",
+    mandate: "Stop every team from building their own thing. Get all partners using one shared, scalable composable system. Enable Modere to double revenue to $1B",
     whatIChanged:
-      "I defined the single architecture every market had to follow, aligned three vendors around one shared delivery plan, eliminated one-off custom builds market by market, and protected the architecture from scope creep and vendor drift.",
+      "I defined the single architecture every market had to follow, aligned 10 vendors around one shared delivery plan, eliminated one-off custom builds market by market, and protected the architecture from scope creep and vendor drift.",
     outcome:
       "$1B revenue target reached. 43% conversion uplift. 35% faster site. 10 markets supported on one composable system. MACH Impact Award nomination.",
     facts: [
-      { icon: "role", label: "Role", value: "Senior Product Manager & Program Manager" },
+      { icon: "role", label: "Role", value: "Senior Product & Program Manager" },
       { icon: "client", label: "Client", value: "Modere" },
       { icon: "client", label: "Industry", value: "Health & Beauty · Affiliate Commerce" },
-      { icon: "timeline", label: "Timeline", value: "Mar 2023 - Jun 2024 · 16 months" },
-      { icon: "team", label: "Team / Stakeholders", value: "20-person team" },
-      { icon: "budget", label: "Budget / Scale", value: "$6M program budget" },
-      { icon: "systems", label: "Systems / Technology", value: "BigCommerce, Pimcore, Contentstack, MobiLoud; 20+ system integrations" },
+      { icon: "timeline", label: "Timeline", value: "Mar 2023 - Jun 2024" },
+      { icon: "team", label: "Team/Stakeholders", value: "40+" },
+      { icon: "budget", label: "Budget", value: "$6M" },
+      { icon: "systems", label: "Key Systems", value: "BigCommerce, Pimcore, Contentstack, MobiLoud; 20+ system integrations" },
     ],
   },
   challenge: {
     eyebrow: "Problem Statement",
     title: "Platform Couldn't Scale",
     paragraphs: [
-      "Modere wasn't short on demand. It was short on scale. Leadership wanted to break past $500M and push toward $1B, but the existing stack was too brittle, too custom, and too dependent on engineers to get there cleanly. Affiliate signup, checkout, promotions, mobile, and market expansion were all dragging, and the politics around the work made it harder.",
-      "Every country was building its own version of the product. Nothing was shared. New markets created more custom work than leverage, and the engineering team had become the bottleneck for too much of the commercial operation - promotions, product updates, market changes, and affiliate experiences all carried friction that didn't need to exist. The business was being constrained by its own infrastructure.",
-      "The original agency wasn't going to deliver the right platform. I saw that early. Helping bring in the right partner and protecting the composable vision through the internal politics that followed was as much the job as the delivery work itself. This wasn't just a technology problem - it was a political transformation that needed stronger architecture, the right partners, and the discipline to avoid bad compromises.",
+      "The business was being constrained by its own infrastructure. Every country built its own bespoke tech stack and homegrown commerce system. New markets created more custom work than leverage, and the engineering team had become the bottleneck for too much of the commercial operation: promotions, product updates, market changes, and affiliate experiences all carried friction that didn't need to exist.",
+      "The original agency wasn't going to deliver the right platform and Modere's CTO knew it. I drove the partner replacement before the build was too far gone to course-correct, then spent the next 16 months protecting the composable architecture from the vendor drift and internal politics that would have turned it into another expensive half-measure.",
     ],
     visual: {
       kind: "image",
@@ -101,34 +101,34 @@ export const modereRevampCaseStudy = {
   },
   ownership: {
     eyebrow: "My Role",
-    title: "Senior Product Manager & Program Manager",
+    title: "The Product & Politics",
     summary:
       "I sat at the center of product, program, and architecture. My job was to hold the composable vision through the politics and stop the platform from collapsing into another expensive half-measure.",
     decisions: [
       {
-        title: "Identified the Wrong Partner Early",
+        title: "Led Vendor Management",
         copy:
-          "The original agency wasn't going to deliver the right platform. I recognized that before the build was far enough along to make changing course catastrophic, helped bring in the right partner, and made the architecture real instead of theoretical.",
+          "The original agency wasn't going to deliver and we didn't have a coherent strategy built around proven technology partners. Before the build was far enough along to make changing course catastrophic, I helped bring in the right partners, and turned theoretical architecture real.",
       },
       {
-        title: "Insisted on Composable Over Another Brittle Rebuild",
+        title: "Insisted on Composable Vs. Brittle Lift-and-Shift",
         copy:
-          "The easier path was another all-in-one platform rebuild. I pushed for composable - a thin commerce layer, Pimcore as the product brain, and clean separation between content, checkout, and business logic. That decision gave Modere a system that could scale to new markets without generating more custom work each time.",
+          "The entrenched politics wanted a monolithic lift and shift. I campaigned for composable: thin commerce layer, Pimcore as the product brain, and clean separation between content, checkout, and business logic. Modere needed a plug-and-play system that could scale to new markets.",
       },
       {
         title: "Positioned Pimcore as the Product Brain",
         copy:
-          "Centralizing product data, pricing, promotions, and inventory logic in Pimcore - rather than baking it into the commerce layer - was the architectural decision that made the platform commercially useful. It gave business teams control over 4,000+ SKUs and 26 global warehouses without engineering tickets for routine updates.",
+          "Centralized product data, pricing, promotions, and inventory logic in Pimcore, rather than baking it into the commerce layer, was the architectural decision that made the platform commercially useful. It gave business teams control over 4,000+ SKUs and 26 global warehouses.",
       },
       {
-        title: "Aligned Three Vendors Around One Delivery Plan",
+        title: "Aligned 10+ Vendors Around One Delivery Plan",
         copy:
-          "BigCommerce, Pimcore, and the delivery agency were operating with misaligned priorities. I structured a shared delivery plan that kept all three moving toward the same architecture and prevented the platform from fragmenting into separate systems with incompatible assumptions.",
+          "BigCommerce, Pimcore, the agency and other tech partners were operating with misaligned priorities. I structured a shared delivery plan that kept everyone moving toward the same architecture and business goals.",
       },
       {
-        title: "Protected the Architecture From Scope Creep and Political Pressure",
+        title: "Killed Scope Creep + Massaged Political Pressure",
         copy:
-          "Internal politics and vendor drift were the two forces most likely to turn the composable vision into another expensive compromise. My job was to hold the line - on architecture decisions, on what went into which system, and on which trade-offs were acceptable. That discipline is why the platform could support 10 markets without collapsing.",
+          "I didn't let internal politics and vendor drift turn the composable vision into another expensive compromise. I held the line and negotiated trade-offs so the platform could support 10 markets without collapsing.",
       },
     ],
   },
@@ -151,7 +151,7 @@ export const modereRevampCaseStudy = {
         value: "$1",
         suffix: "B",
         label: "Revenue Target Reached",
-        detail: "Revenue target reached after the prior platform had constrained scale.",
+        detail: "After the prior platform constrained scale.",
       },
       {
         value: "43",
@@ -169,7 +169,7 @@ export const modereRevampCaseStudy = {
         value: "4",
         suffix: "wk",
         label: "Mobile Launch Timeline",
-        detail: "10 markets and 7 languages launched through MobiLoud in four weeks.",
+        detail: "10 markets and 7 languages launched.",
       },
     ],
     transformation: {
