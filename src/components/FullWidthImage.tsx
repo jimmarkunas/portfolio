@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react"
 import { createPortal } from "react-dom"
+import { useCaseStudyRenderMode } from "@/components/case-study/revamp/CaseStudyRenderMode"
 
 export function FullWidthImage({ src, alt = "", fullWidth = true }: { src: string; alt?: string; fullWidth?: boolean }) {
   const [open, setOpen] = useState(false)
+  const renderMode = useCaseStudyRenderMode()
 
   useEffect(() => {
     if (!open) return
@@ -17,14 +19,15 @@ export function FullWidthImage({ src, alt = "", fullWidth = true }: { src: strin
 
   return (
     <>
-      <button
+      {renderMode === "print" ? <img src={src} alt={alt} className="block h-auto w-full" /> : null}
+      {renderMode === "screen" ? <button
         type="button"
         className={`block cursor-zoom-in text-left ${fullWidth ? "relative left-1/2 w-screen -translate-x-1/2" : "w-full"}`}
         onClick={() => setOpen(true)}
         aria-label={`Expand image${alt ? `: ${alt}` : ""}`}
       >
         <img src={src} alt={alt} className="w-full h-auto block" />
-      </button>
+      </button> : null}
 
       {open && typeof document !== "undefined" ? createPortal(
         <div
