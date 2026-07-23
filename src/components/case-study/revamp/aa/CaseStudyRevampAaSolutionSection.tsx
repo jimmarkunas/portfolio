@@ -3,7 +3,7 @@
 import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { GlobalLocationsMap } from "@/components/case-study/GlobalLocationsMap"
-import { americanapparelStoreLocations } from "@/content/case-studies/aa"
+import { americanapparelStoreLocations } from "@/content/case-studies/revamp/aa-locations"
 
 export function CaseStudyRevampAaMapSection() {
   return (

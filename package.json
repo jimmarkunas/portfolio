@@ -15,6 +15,7 @@
     "check:dead-code": "bash scripts/check-short.sh dead-code node scripts/check-dead-code.mjs",
     "check:booking-url-drift": "bash scripts/check-short.sh booking-url-drift node scripts/check-booking-url-drift.mjs",
     "check:case-study-registry": "bash scripts/check-short.sh case-study-registry node scripts/check-case-study-registry.mjs",
+    "check:no-legacy-case-studies": "node scripts/check-no-legacy-case-studies.mjs",
     "check:guard-script-fixtures": "bash scripts/check-short.sh guard-script-fixtures node scripts/test-guard-scripts.mjs",
     "check:source-budgets": "bash scripts/check-short.sh source-budgets node scripts/check-source-budgets.mjs",
     "check:route-boundaries": "bash scripts/check-short.sh route-boundaries node scripts/check-route-boundaries.mjs",

@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Container } from "@/components/Container"
 import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
 import { StructuredData } from "@/components/seo/StructuredData"
-import { loadAllCaseStudies } from "@/content/case-studies"
+import { liveRevampSlugs, loadLiveRevampCaseStudy } from "@/content/case-studies/revamp/live-registry"
 import { siteCanonicalPaths } from "@/content/site"
 import { portfolioSectionContent } from "@/content/site/portfolio"
 import { buildPageMetadata } from "@/lib/seo"
@@ -18,7 +18,10 @@ export const metadata: Metadata = buildPageMetadata({
 })
 
 export default async function WorkPage() {
-  const studies = await loadAllCaseStudies()
+  const studies = (await Promise.all(liveRevampSlugs.map(async (slug) => {
+    const loaded = await loadLiveRevampCaseStudy(slug)
+    return loaded ? { slug, study: loaded.data } : null
+  }))).filter((study): study is { slug: string; study: NonNullable<Awaited<ReturnType<typeof loadLiveRevampCaseStudy>>>["data"] } => Boolean(study))
   const introCopy = {
     pill: "Portfolio",
     title: "Successful Projects I've Led",

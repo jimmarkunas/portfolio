@@ -1,15 +1,15 @@
-import { caseStudy as aa } from "@/content/case-studies/aa"
-import { caseStudy as bi } from "@/content/case-studies/bi"
-import { caseStudy as cbdistillery } from "@/content/case-studies/cbdistillery"
-import { caseStudy as dtv01 } from "@/content/case-studies/dtv01"
-import { caseStudy as dtv02 } from "@/content/case-studies/dtv02"
-import { caseStudy as foh } from "@/content/case-studies/foh"
-import { caseStudy as k2 } from "@/content/case-studies/k2"
-import { caseStudy as lego } from "@/content/case-studies/lego"
-import { caseStudy as method } from "@/content/case-studies/method"
-import { caseStudy as mm } from "@/content/case-studies/mm"
-import { caseStudy as modere } from "@/content/case-studies/modere"
-import { caseStudy as murad } from "@/content/case-studies/murad"
+import { aaRevampCaseStudy as aa } from "@/content/case-studies/revamp/aa"
+import { biRevampCaseStudy as bi } from "@/content/case-studies/revamp/bi"
+import { cbdistilleryRevampCaseStudy as cbdistillery } from "@/content/case-studies/revamp/cbdistillery"
+import { dtv01RevampCaseStudy as dtv01 } from "@/content/case-studies/revamp/dtv01"
+import { dtv02RevampCaseStudy as dtv02 } from "@/content/case-studies/revamp/dtv02"
+import { fohRevampCaseStudy as foh } from "@/content/case-studies/revamp/foh"
+import { k2RevampCaseStudy as k2 } from "@/content/case-studies/revamp/k2"
+import { legoRevampCaseStudy as lego } from "@/content/case-studies/revamp/lego"
+import { methodRevampCaseStudy as method } from "@/content/case-studies/revamp/method"
+import { mmRevampCaseStudy as mm } from "@/content/case-studies/revamp/mm"
+import { modereRevampCaseStudy as modere } from "@/content/case-studies/revamp/modere"
+import { muradRevampCaseStudy as murad } from "@/content/case-studies/revamp/murad"
 
 export type CaseStudyPullQuote = {
   slug: string
@@ -20,16 +20,16 @@ export type CaseStudyPullQuote = {
 }
 
 export const caseStudyPullQuotes: CaseStudyPullQuote[] = [
-  { slug: dtv01.slug, ...dtv01.challengeQuote },
-  { slug: modere.slug, ...modere.challengeQuote },
-  { slug: bi.slug, ...bi.challengeQuote },
-  { slug: mm.slug, ...mm.challengeQuote },
-  { slug: method.slug, ...method.challengeQuote },
-  { slug: murad.slug, ...murad.challengeQuote },
-  { slug: k2.slug, ...k2.challengeQuote },
-  { slug: cbdistillery.slug, ...cbdistillery.challengeQuote },
-  { slug: foh.slug, ...foh.challengeQuote },
-  { slug: lego.slug, ...lego.challengeQuote },
-  { slug: aa.slug, ...aa.challengeQuote },
-  { slug: dtv02.slug, ...dtv02.challengeQuote },
+  { slug: dtv01.slug, ...dtv01.productionQuote },
+  { slug: modere.slug, ...modere.productionQuote },
+  { slug: bi.slug, ...bi.productionQuote },
+  { slug: mm.slug, ...mm.productionQuote },
+  { slug: method.slug, ...method.productionQuote },
+  { slug: murad.slug, ...murad.productionQuote },
+  { slug: k2.slug, ...k2.productionQuote },
+  { slug: cbdistillery.slug, ...cbdistillery.productionQuote },
+  { slug: foh.slug, ...foh.productionQuote },
+  { slug: lego.slug, ...lego.productionQuote },
+  { slug: aa.slug, ...aa.productionQuote },
+  { slug: dtv02.slug, ...dtv02.productionQuote },
 ]

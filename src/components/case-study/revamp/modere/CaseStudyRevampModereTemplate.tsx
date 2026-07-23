@@ -25,7 +25,7 @@ export function CaseStudyRevampModereTemplate({
   solution: ModereSolutionContent
 }) {
   return (
-    <main className="min-h-full overflow-x-hidden bg-[#F3F3F3] text-[#222222]">
+    <main data-case-study-renderer="revamp" className="min-h-full overflow-x-hidden bg-[#F3F3F3] text-[#222222]">
       <SectionBorder>
         <CaseStudyRevampHeroSection data={data} />
       </SectionBorder>

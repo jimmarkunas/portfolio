@@ -3,6 +3,7 @@ import type {
   LoadedCaseStudy,
   LoadedRevampCaseStudy,
 } from "@/content/case-studies"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 import { siteContactEmail, siteExternalUrls } from "@/content/site/config"
 import {
   SEO_DEFAULT_DESCRIPTION,
@@ -78,7 +79,7 @@ export function createSiteStructuredData(): StructuredDataValue[] {
 }
 
 export function createWorkCollectionStructuredData(
-  studies: Array<{ slug: string; study: CaseStudyData }>
+  studies: Array<{ slug: string; study: CaseStudyData | CaseStudyRevampData }>
 ): StructuredDataValue {
   return {
     "@context": "https://schema.org",
@@ -103,7 +104,7 @@ export function createWorkCollectionStructuredData(
           "@type": "Article",
           headline: study.hero.title,
           name: study.breadcrumbCurrent,
-          description: study.role.copy,
+        description: "role" in study ? study.role.copy : study.hero.intro,
           image: toAbsoluteUrl(study.hero.image.src),
           author: personReference(),
         },

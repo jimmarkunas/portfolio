@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-import { loadAllCaseStudies } from "@/content/case-studies"
+import { liveRevampSlugs } from "@/content/case-studies/revamp/live-registry"
 import { siteRoutes } from "@/content/site"
 import { SEO_SITE_URL } from "@/lib/seo"
 
@@ -31,9 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       0.7,
   }))
 
-  const studies = await loadAllCaseStudies()
-
-  const caseStudyEntries: MetadataRoute.Sitemap = studies.map(({ slug }) => ({
+  const caseStudyEntries: MetadataRoute.Sitemap = liveRevampSlugs.map((slug) => ({
     url: absoluteUrl(`/work/${slug}/`),
     lastModified: now,
     changeFrequency: "monthly",

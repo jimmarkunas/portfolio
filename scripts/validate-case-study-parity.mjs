@@ -17,7 +17,6 @@ if (process.argv.includes("--all")) {
     if (!fs.existsSync(modulePath)) errors.push(`${slug}: revamp content module missing`)
     if (!registry.includes(`record("${slug}"`) || !registry.includes(`previewHref: "/work/case-study-test/${slug}"`)) errors.push(`${slug}: approved preview record missing`)
     if (!registry.includes(`record("${slug}"`) || !registry.includes(`migrationStatus: "approved"`) && !registry.includes(`record("${slug}"`)) errors.push(`${slug}: status metadata missing`)
-    if (!fs.existsSync(path.join(root, "src/content/case-studies", `${slug}.ts`))) errors.push(`${slug}: legacy rollback source missing`)
     if (!catalog.includes(`  ${slug}: {`) || !catalog.includes(`slug: "${slug}"`) || !catalog.includes(`href: "/work/${slug}"`)) errors.push(`${slug}: public related-card catalog entry is incomplete`)
     const source = fs.existsSync(modulePath) ? fs.readFileSync(modulePath, "utf8") : ""
     if (/createLegacyParityCaseStudy|@\/content\/case-studies\/(?!types(?:["/])|shared(?:["/])|revamp\/)/.test(source)) errors.push(`${slug}: revamp module still depends on legacy content or adapter`)
