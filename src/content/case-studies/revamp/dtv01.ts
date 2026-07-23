@@ -187,7 +187,7 @@ export const dtv01RevampCaseStudy = {
       {
         "value": "$221",
         "suffix": "M",
-        "label": "Q4 Digital Retention Revenue"
+        "label": "Q4 Revenue Uplift"
       },
       {
         "value": "60",
