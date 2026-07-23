@@ -131,9 +131,6 @@ export const biRevampCaseStudy = {
       { publisher: "Corra", date: "2024", summary: "Corra details the two global reference gateways for the U.S., France, and the rest of the world, showing how regional logic stayed scalable and maintainable.", pdfHref: "/bi/files/BI-Publicis-Sapient-Case-Study_02.pdf" },
     ],
   },
-  relatedStudies: [
-    { eyebrow: "Related Case Study", title: "Winning Awards and Making $1B With Modere", summary: "A composable commerce platform built to scale markets, content, and mobile without rebuilding the stack each time.", href: "/work/modere", image: { src: "/modere/hero-modere-01.png", alt: "Modere composable commerce platform" } },
-    { eyebrow: "Related Case Study", title: "Turning Frederick's Into Celebrity-Driven DTC", summary: "A lean Shopify Plus relaunch built for celebrity traffic, campaign velocity, and a cleaner operating model.", href: "/work/foh", image: { src: "/foh/hero-foh-01.png", alt: "Frederick's of Hollywood and Megan Fox relaunch" } },
-  ],
+  relatedStudies: { slugs: ["modere", "foh"] },
   finalCta: { eyebrow: "Next step", title: "If this preview looks right, we can wire it into the live case study next.", copy: "Use this preview route to confirm the hierarchy, spacing, and interactive diagram before any live BI migration." },
 } satisfies CaseStudyRevampData

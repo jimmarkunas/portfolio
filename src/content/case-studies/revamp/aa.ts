@@ -124,9 +124,6 @@ export const aaRevampCaseStudy = {
       { publisher: "Motorola", date: "2012", summary: "American Apparel Deploys Motorola RFID Across Its Supply Chain for Product Visibility — Motorola documented the RFID rollout and showed how item-level inventory visibility dramatically improved stock accuracy, cycle counts, and store operations.", pdfHref: "/aa/files/02-motorola-casestudy.pdf" },
     ],
   },
-  relatedStudies: [
-    { eyebrow: "Related Case Study", title: "Turning Frederick's Into Celebrity-Driven DTC", summary: "A lean Shopify Plus relaunch built for celebrity traffic, campaign velocity, and a cleaner operating model.", href: "/work/foh", image: { src: "/foh/hero-foh-01.png", alt: "Frederick's of Hollywood and Megan Fox relaunch" } },
-    { eyebrow: "Related Case Study", title: "Winning Awards and Making $1B With Modere", summary: "A composable commerce platform built to scale markets, content, and mobile without rebuilding the stack each time.", href: "/work/modere", image: { src: "/modere/hero-modere-01.png", alt: "Modere composable commerce platform" } },
-  ],
+  relatedStudies: { slugs: ["foh", "modere"] },
   finalCta: { eyebrow: "Next step", title: "Review the American Apparel parity preview.", copy: "This preview preserves the legacy content represented by the shared revamp schema." },
 } satisfies CaseStudyRevampData

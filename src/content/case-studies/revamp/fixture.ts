@@ -297,30 +297,7 @@ export const caseStudyRevampFixture = {
       },
     ],
   },
-  relatedStudies: [
-    {
-      eyebrow: "Related Study 01",
-      title: "Winning Awards And Making $1B With Modere",
-      summary:
-        "Work Nominated for a MACH Composable Award: Modere wanted to double from $500M GMV to $1B, but the old stack and market-by-market launch model were already breaking under the weight. I helped push the platform toward a composable architecture and protect the system decisions that gave the business a cleaner path to scale.",
-      href: "/work/modere",
-      image: {
-        src: "/modere/hero-modere-01.png",
-        alt: "Modere composable commerce platform hero image",
-      },
-    },
-    {
-      eyebrow: "Related Study 02",
-      title: "Boehringer Ingelheim: 1st B2B Adobe Cloud Commerce",
-      summary:
-        "Boehringer Ingelheim had five markets, country-specific business rules, and a commerce model that didn’t scale. I led the product and program work to define one global reference storefront, decide where local variation belonged, and keep commerce stable through the shift from Oracle to SAP.",
-      href: "/work/bi",
-      image: {
-        src: "/bi/hero-bi-01.png",
-        alt: "Boehringer Ingelheim global commerce transformation hero image",
-      },
-    },
-  ],
+  relatedStudies: { slugs: ["modere", "bi"] },
   finalCta: {
     eyebrow: "Next step",
     title: "If this structure feels right, we can turn it into the live template next.",

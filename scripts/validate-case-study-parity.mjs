@@ -7,6 +7,8 @@ const root = process.cwd()
 const allSlugs = ["cps", "dtv01", "newyorklife", "modere", "bi", "mm", "method", "murad", "k2", "cbdistillery", "foh", "lego", "cwg", "aa", "zevo", "dtv02"]
 if (process.argv.includes("--all")) {
   const registry = fs.readFileSync(path.join(root, "src/content/case-studies/revamp/preview-registry.ts"), "utf8")
+  const catalogPath = path.join(root, "src/content/case-studies/revamp/case-study-card-catalog.ts")
+  const catalog = fs.existsSync(catalogPath) ? fs.readFileSync(catalogPath, "utf8") : ""
   const liveRegistryPath = path.join(root, "src/content/case-studies/revamp/live-registry.ts")
   const liveRoute = fs.readFileSync(path.join(root, "src/app/(site)/work/[slug]/page.tsx"), "utf8")
   const errors = []
@@ -16,7 +18,14 @@ if (process.argv.includes("--all")) {
     if (!registry.includes(`record("${slug}"`) || !registry.includes(`previewHref: "/work/case-study-test/${slug}"`)) errors.push(`${slug}: approved preview record missing`)
     if (!registry.includes(`record("${slug}"`) || !registry.includes(`migrationStatus: "approved"`) && !registry.includes(`record("${slug}"`)) errors.push(`${slug}: status metadata missing`)
     if (!fs.existsSync(path.join(root, "src/content/case-studies", `${slug}.ts`))) errors.push(`${slug}: legacy rollback source missing`)
+    if (!catalog.includes(`  ${slug}: {`) || !catalog.includes(`slug: "${slug}"`) || !catalog.includes(`href: "/work/${slug}"`)) errors.push(`${slug}: public related-card catalog entry is incomplete`)
+    const source = fs.existsSync(modulePath) ? fs.readFileSync(modulePath, "utf8") : ""
+    if (source.includes("relatedStudies: [")) errors.push(`${slug}: expanded related-card object remains in content module`)
+    if (!source.includes("relatedStudies: { slugs:") && !source.includes("relatedSlugs:")) errors.push(`${slug}: explicit related-study slug configuration missing`)
   }
+  if (!fs.existsSync(catalogPath)) errors.push("public related-card catalog missing")
+  const legacyAdapter = fs.readFileSync(path.join(root, "src/content/case-studies/revamp/createLegacyParityCaseStudy.ts"), "utf8")
+  if (legacyAdapter.includes("relatedCopy") || legacyAdapter.includes("relatedImage")) errors.push("legacy adapter still owns expanded related-card content")
   if (!fs.existsSync(liveRegistryPath)) errors.push("live registry missing")
   if (!fs.readFileSync(liveRegistryPath, "utf8").includes("caseStudyPreviewRegistry")) errors.push("live registry is not derived from the approved preview registry")
   if (!liveRoute.includes("loadLiveRevampCaseStudy") || !liveRoute.includes("/work/${slug}")) errors.push("live route does not use approved revamp loader/canonical path")

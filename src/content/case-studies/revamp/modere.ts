@@ -284,30 +284,7 @@ export const modereRevampCaseStudy = {
       },
     ],
   },
-  relatedStudies: [
-    {
-      eyebrow: "Related Case Study",
-      title: "Turning Frederick's Into Celebrity-Driven DTC",
-      summary:
-        "After buying Frederick's of Hollywood out of bankruptcy, Authentic Brands Group needed a digital-first flagship built around Megan Fox as co-owner - fast, promotional, and lean enough to operate without a traditional enterprise stack.",
-      href: "/work/foh",
-      image: {
-        src: "/foh/hero-foh-01.png",
-        alt: "Frederick's of Hollywood and Megan Fox relaunch campaign imagery",
-      },
-    },
-    {
-      eyebrow: "Related Case Study",
-      title: "Boehringer Ingelheim: 1st B2B Adobe Cloud Commerce",
-      summary:
-        "Boehringer Ingelheim had five markets, country-specific business rules, and a commerce model that didn't scale. I led the product and program work to define one global reference storefront, decide where local variation belonged, and keep commerce stable through the shift from Oracle to SAP.",
-      href: "/work/bi",
-      image: {
-        src: "/bi/hero-bi-01.png",
-        alt: "Boehringer Ingelheim global commerce transformation hero image",
-      },
-    },
-  ],
+  relatedStudies: { slugs: ["foh", "bi"] },
   finalCta: {
     eyebrow: "Next step",
     title: "If this preview looks right, we can wire it into the live case study next.",

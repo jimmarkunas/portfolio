@@ -1,4 +1,5 @@
 import type { CaseStudyMedia, CaseStudySolutionDiagramKey, CaseStudyTool, DiagramData } from "@/content/case-studies"
+import type { CaseStudyRevampRelatedStudies } from "./related-studies"
 
 export type CaseStudyRevampImage = {
   src: string
@@ -47,17 +48,6 @@ export type CaseStudyRevampValidationItem = {
   eyebrow: string
   title: string
   copy: string
-}
-
-export type CaseStudyRevampRelatedStudy = {
-  eyebrow: string
-  title: string
-  summary: string
-  href: string
-  image: {
-    src: string
-    alt: string
-  }
 }
 
 export type CaseStudyRevampHeroImage = Extract<CaseStudyMedia, { kind: "image" }>
@@ -172,7 +162,7 @@ export type CaseStudyRevampData = {
     validationItems: CaseStudyRevampValidationItem[]
   }
   recognition?: CaseStudyRevampRecognition
-  relatedStudies: CaseStudyRevampRelatedStudy[]
+  relatedStudies: CaseStudyRevampRelatedStudies
   finalCta: {
     eyebrow: string
     title: string

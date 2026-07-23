@@ -5,26 +5,29 @@ import { MotionReveal } from "@/components/motion/MotionReveal"
 import { PortfolioImageCard } from "@/components/work/portfolio-founder/PortfolioImageCard"
 import { portfolioHoverWideCardClass } from "@/components/work/portfolio-founder/styles"
 import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
+import { resolveRelatedStudies } from "@/content/case-studies/revamp/related-studies"
 import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
 
 export function CaseStudyRevampRelatedSection({ data }: { data: CaseStudyRevampData }) {
+  const relatedStudies = resolveRelatedStudies({ currentSlug: data.slug, config: data.relatedStudies })
+  const { eyebrow = "Related Case Studies", title = "More Work Worth Comparing", intro = "A quick look at two studies with shared themes in scale, operating model, and brand velocity..." } = data.relatedStudies
   return (
     <section className="bg-[#F3F3F3]">
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="flex flex-col gap-8">
           <MotionReveal preset="section" className="flex flex-col items-center gap-4 text-center">
             <CaseStudyRevampSectionHeader
-              eyebrow="Related Case Studies"
-              title="More Work Worth Comparing"
-              copy="A quick look at two studies with shared themes in scale, operating model, and brand velocity..."
+              eyebrow={eyebrow}
+              title={title}
+              copy={intro}
               align="center"
               className="max-w-[900px]"
             />
           </MotionReveal>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {data.relatedStudies.map((study, index) => (
-              <MotionReveal key={study.title} preset="card" delay={index * 0.04}>
+            {relatedStudies.map((study, index) => (
+              <MotionReveal key={study.slug} preset="card" delay={index * 0.04}>
                 <article className="flex h-full flex-col gap-4">
                   <PortfolioImageCard
                     href={study.href}
