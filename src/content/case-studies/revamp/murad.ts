@@ -97,23 +97,28 @@ export const muradRevampCaseStudy = {
         "value": "Murad (Unilever) Global DTC"
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "Beauty • Skincare • eCommerce"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "2019 Launch + Global Fast-Follows"
       },
       {
         "icon": "team",
-        "label": "Team",
+        "label": "Team / Stakeholders",
         "value": "2"
       },
       {
         "icon": "budget",
-        "label": "Budget",
+        "label": "Budget / Scale",
         "value": "$1"
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "BigCommerce, Oracle EBS, OrderGroove, Contentful, SendGrid, Avalara, Yotpo"
       }
     ]

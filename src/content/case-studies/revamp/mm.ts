@@ -85,23 +85,28 @@ export const mmRevampCaseStudy = {
         "value": "SC Johnson"
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "CPG • Home Care • eCommerce"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "Feb 2019 - Jul 2019"
       },
       {
         "icon": "team",
-        "label": "Team",
+        "label": "Team / Stakeholders",
         "value": "25"
       },
       {
         "icon": "budget",
-        "label": "Budget",
+        "label": "Budget / Scale",
         "value": "$3"
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "BigCommerce, SAP, Salsify, Avalara"
       }
     ]

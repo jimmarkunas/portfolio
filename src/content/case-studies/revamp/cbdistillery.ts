@@ -85,23 +85,28 @@ export const cbdistilleryRevampCaseStudy = {
         "value": "CBDistillery"
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "CBD • Fintech • Subscription Commerce"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "2020"
       },
       {
         "icon": "team",
-        "label": "Team",
+        "label": "Team / Stakeholders",
         "value": "15"
       },
       {
         "icon": "budget",
-        "label": "Budget",
+        "label": "Budget / Scale",
         "value": "$3"
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "BigCommerce, Square, Order Groove, MS Dynamics"
       }
     ]

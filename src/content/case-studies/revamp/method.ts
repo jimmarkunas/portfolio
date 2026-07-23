@@ -81,23 +81,28 @@ export const methodRevampCaseStudy = {
         "value": "SC Johnson • Method"
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "CPG • Home Care • eCommerce"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "Apr 2019 - Jul 2019"
       },
       {
         "icon": "team",
-        "label": "Team",
+        "label": "Team / Stakeholders",
         "value": "5"
       },
       {
         "icon": "budget",
-        "label": "Budget",
+        "label": "Budget / Scale",
         "value": "$1"
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "BigCommerce, SAP, Salsify"
       }
     ]

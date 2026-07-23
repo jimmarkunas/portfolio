@@ -85,23 +85,28 @@ export const cwgRevampCaseStudy = {
         "value": ""
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "Digital Media • Music Publishing • Mobile Content"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "2009-2010"
       },
       {
         "icon": "team",
-        "label": "Team",
+        "label": "Team / Stakeholders",
         "value": "40"
       },
       {
         "icon": "budget",
-        "label": "Budget",
+        "label": "Budget / Scale",
         "value": "$0"
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "WordPress, iOS App, Video, Web Publishing"
       }
     ]

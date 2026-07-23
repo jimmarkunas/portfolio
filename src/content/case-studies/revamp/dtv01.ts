@@ -16,12 +16,12 @@ export const dtv01RevampCaseStudy = {
   "hero": {
     "eyebrow": "At-a-glance",
     "title": "Turning DIRECTV's Offer Engine to a Revenue Machine",
-    "intro": "DIRECTV was bleeding subscribers and money, but its upsell engine was trapped inside siloed teams, legacy systems, and a 6-month launch cycle too slow to matter. I came in to give the offer journey an owner, operationalize digital revenue across channels, and turn seasonal chaos into a repeatable commercial machine. The platform directly supported $221M in digital retention revenue in Q4 2025 and cut time-to-value by 60 days.",
+    "intro": "DIRECTV was bleeding subscribers and the upsell engine was too slow to matter. Campaigns took 6 months to launch, 13 teams had no shared operating model, and the stack was split across 20+ legacy systems. I came in to give the offer journey an owner, build the machine from scratch, and turn seasonal chaos into repeatable commercial revenue. The platform directly supported $221M in Q4 digital retention revenue and cut time-to-value by 60 days.",
     "metrics": [
       {
         "value": "$221",
         "suffix": "M",
-        "label": "Q4 Digital Retention Revenue"
+        "label": "Q4 Revenue Uplift"
       },
       {
         "value": "60",
@@ -52,7 +52,7 @@ export const dtv01RevampCaseStudy = {
   "executiveBrief": {
     "eyebrow": "At-a-Glance",
     "title": "Revenue Under Pressure",
-    "copy": "I was brought in during a messy period to turn fragmented sports and premium campaigns into a repeatable upsell and retention engine. The work spanned all of omni-channel: set-top box, DIRECTV.com, mobile, and the operating model underneath all of it. DTV needed offers to launch faster and make real money.",
+    "copy": "13 siloed organizations, a 6-month campaign launch cycle, and a revenue platform nobody owned. I was brought in to fix all of it; building the operating model, intake mechanics, and product framing that turned a fragmented offer operation into something that could actually ship and make money across set-top box, web, and mobile.",
     "tools": [
       {
         "label": "DIRECTV Systems",
@@ -75,10 +75,10 @@ export const dtv01RevampCaseStudy = {
         "icon": "/tool-icons/snowflake-logo.png"
       }
     ],
-    "problem": "DIRECTV needed someone to fix a brittle revenue system inside a shrinking legacy business. Campaigns took 6 months to launch, teams didn't share a unified operating model, and the stack was split across 20+ legacy systems. On top of all that, DTV's corporate breakup with AT&T added even more duplication, pressure and political heat.",
-    "mandate": "I owned the messy middle: operating model, launch mechanics, and enough of the product layer to make the whole machine work. I wasn't there to babysit delivery, I was there to stop the bleed and give our revenue platform lasting ownership.",
-    "whatIChanged": "DIRECTV had the raw ingredients for upsell, but no real machine. Seasonal launches dragged on for 6 months, teams worked in silos, legacy systems fought each other, and the business was trying to protect revenue inside a shrinking subscriber base. Then the AT&T divorce happened: the process had to be duplicated and re-architected under even more pressure.",
-    "outcome": "Once the revenue model had an owner and the launch mechanics were rebuilt, the platform moved faster, launched more coherently, and turned retention pressure into measurable revenue.",
+    "problem": "DIRECTV was losing subscribers and the upsell engine couldn't keep up. Campaigns took 6 months to launch, 13 teams operated without a shared model, and the stack was split across 20+ legacy systems. The AT&T divorce made it worse: duplicated processes, fractured ownership, and a revenue platform nobody was accountable for.",
+    "mandate": "Give the offer journey an owner. I wasn't brought in to manage tickets, I was brought in to define the revenue platform as a product, build the operating model, and make the whole machine work under pressure.",
+    "whatIChanged": "I stood up the intake, grooming, and approval model that replaced ad hoc launch chaos. Defined the offer schema so every team was working from the same source of truth. Handled the AT&T separation without letting it stall execution. Turned a fragmented operation into something that could ship on time & make money.",
+    "outcome": "$221M in Q4 digital retention revenue. Campaign cycles cut by 60 days. Offers launching consistently across set-top box, web, and mobile, and for the first time, the platform had an owner.",
     "facts": [
       {
         "icon": "role",
@@ -91,23 +91,28 @@ export const dtv01RevampCaseStudy = {
         "value": "DIRECTV"
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "Satellite TV • Streaming • Telecommunications"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "Apr 2025 - Nov 2025"
       },
       {
         "icon": "team",
-        "label": "Team",
-        "value": "65"
+        "label": "Team / Stakeholders",
+        "value": "65+"
       },
       {
         "icon": "budget",
-        "label": "Budget",
-        "value": "$10"
+        "label": "Budget / Scale",
+        "value": "$10M"
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "DIRECTV Systems, JIRA, Mulesoft, Smartsheet, Snowflake"
       }
     ]
@@ -116,7 +121,8 @@ export const dtv01RevampCaseStudy = {
     "eyebrow": "Problem Statement",
     "title": "A Shrinking, Siloed Machine",
     "paragraphs": [
-      "DIRECTV needed someone to fix a brittle revenue system inside a shrinking legacy business. Campaigns took 6 months to launch, teams didn't share a unified operating model, and the stack was split across 20+ legacy systems. On top of all that, DTV's corporate breakup with AT&T added even more duplication, pressure and political heat."
+      "DIRECTV needed someone to fix a brittle revenue system inside a shrinking legacy business. Campaigns took too long to launch, 13 teams operated without a shared model, and the stack was fragmented across 20+ legacy systems with no single owner accountable for the offer journey end-to-end.",
+      "Then the AT&T divorce happened. Processes that were already broken had to be duplicated and re-architected under even more organizational pressure, with decisioning, billing, and execution all at risk of stalling. The business needed the revenue platform to work, and it needed it to work faster than the org chart made possible.",
     ],
     "visual": {
       "kind": "react-diagram",
@@ -127,7 +133,7 @@ export const dtv01RevampCaseStudy = {
   "ownership": {
     "eyebrow": "What I Owned",
     "title": "I Gave the Revenue Journey an Owner",
-    "summary": "I owned the messy middle: operating model, launch mechanics, and enough of the product layer to make the whole machine work. I wasn't there to babysit delivery, I was there to stop the bleed and give our revenue platform lasting ownership.",
+    "summary": "I owned the messy middle: operating model, launch mechanics, and enough of the product layer to make the whole machine work. I didn't babysit delivery, I stopped the bleed and gave the revenue platform lasting ownership.",
     "decisions": [
       {
         "title": "Product ownership",

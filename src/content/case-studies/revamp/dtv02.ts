@@ -93,23 +93,28 @@ export const dtv02RevampCaseStudy = {
         "value": "DIRECTV"
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "Streaming • Media • Consumer Video"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "Jun 2012 - Jun 2013"
       },
       {
         "icon": "team",
-        "label": "Team",
+        "label": "Team / Stakeholders",
         "value": "75+"
       },
       {
         "icon": "budget",
-        "label": "Budget",
+        "label": "Budget / Scale",
         "value": "$6"
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "DIRECTV, Amazon Fire TV, Apple iOS App Store, Apple TV, Google Play, JIRA"
       }
     ]

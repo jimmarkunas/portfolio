@@ -89,23 +89,28 @@ export const newyorklifeRevampCaseStudy = {
         "value": ""
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "Insurance • Enterprise SaaS • Compliance"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "March 2024 - November 2024"
       },
       {
         "icon": "team",
-        "label": "Team",
+        "label": "Team / Stakeholders",
         "value": "10"
       },
       {
         "icon": "budget",
-        "label": "Budget",
+        "label": "Budget / Scale",
         "value": "$10"
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "Azure IDP/SSO, Mulesoft, Google My Business, Adobe Experience Manager, Salesforce"
       }
     ]

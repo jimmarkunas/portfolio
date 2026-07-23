@@ -85,23 +85,28 @@ export const legoRevampCaseStudy = {
         "value": "BCG • LEGO"
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "Retail • Toys • Omni-Channel eCommerce"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "Jun 2015 - Jun 2016"
       },
       {
         "icon": "team",
-        "label": "Team",
+        "label": "Team / Stakeholders",
         "value": "40"
       },
       {
         "icon": "budget",
-        "label": "Budget",
+        "label": "Budget / Scale",
         "value": "$16"
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "Oracle ATG, SAP ERP, JIRA, Figma"
       }
     ]

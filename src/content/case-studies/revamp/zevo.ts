@@ -85,23 +85,28 @@ export const zevoRevampCaseStudy = {
         "value": ""
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "Media • Streaming • Interactive Commerce"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "2010"
       },
       {
         "icon": "team",
-        "label": "Team",
+        "label": "Team / Stakeholders",
         "value": ""
       },
       {
         "icon": "budget",
-        "label": "Budget",
+        "label": "Budget / Scale",
         "value": ""
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "Web Platform, API Services, Mobile Sync, Commerce Layer"
       }
     ]

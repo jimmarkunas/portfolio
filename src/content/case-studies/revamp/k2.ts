@@ -85,23 +85,28 @@ export const k2RevampCaseStudy = {
         "value": "K2 Sports"
       },
       {
+        "icon": "client",
+        "label": "Industry",
+        "value": "Sporting Goods • Multi-Brand Commerce • Headless"
+      },
+      {
         "icon": "timeline",
         "label": "Timeline",
         "value": "2020"
       },
       {
         "icon": "team",
-        "label": "Team",
+        "label": "Team / Stakeholders",
         "value": "4"
       },
       {
         "icon": "budget",
-        "label": "Budget",
+        "label": "Budget / Scale",
         "value": "$1.5"
       },
       {
         "icon": "systems",
-        "label": "Systems",
+        "label": "Systems / Technology",
         "value": "BigCommerce, Contentstack, WordPress, Quivers"
       }
     ]
