@@ -37,7 +37,7 @@ export const caseStudy = {
   "hero": {
     "eyebrow": "SAP · Field Operations · Service Design · Systems Integration · Smart City · Public Utilities",
     "title": "CPS Energy: Smart Streetlight & Smart City Operations",
-    "intro": "San Antonio’s streetlight repair process was failing in public. Residents reported the same outages repeatedly, work orders were lost between CPS Energy, Dalkia, SAP, dispatch, and field crews, and a repair could take roughly three weeks. I led the product and program work that connected the resident experience, operational systems, and field workflow into one accountable service loop—cutting repair calls by 73%, truck rolls by 43%, and repair windows to 1–4 days across 225K+ streetlights.",
+    "intro": "San Antonio’s streetlight repair process was failing in public. Residents called to report the same outages repeatedly, work orders were lost between CPS Energy, SAP, and Dalkia field crews, and a repair could take three weeks or more. I led the product and program work that connected the resident experience, operational systems, and field workflow into one accountable service loop—cutting repair calls by 73%, truck rolls by 43%, and repair windows to 1–4 days across 225K+ streetlights.",
     "metrics": [
       {
         "value": "43",
@@ -49,8 +49,8 @@ export const caseStudy = {
         "label": "Day Repair Window"
       },
       {
-        "value": "225K",
-        "suffix": "+",
+        "value": "225",
+        "suffix": "K",
         "label": "Streetlights"
       }
     ],
@@ -96,9 +96,9 @@ export const caseStudy = {
       }
     ],
     "problem": "A broken streetlight could remain unresolved for roughly three weeks. Resident reports, SAP work orders, dispatch decisions, field activity, follow-up orders, and closure updates were fragmented across organizations and systems.",
-    "mandate": "Create one end-to-end service loop—from the first report or streetlight alert through dispatch, repair, closure, and follow-up—so work no longer disappeared between handoffs.",
-    "whatIChanged": "I mapped the complete resident-to-repair journey, defined the resident reporting experience, aligned CPS Energy and Dalkia around one operating model, prioritized SAP and field-workflow integration, and used a proof of concept to move the organization from debate into deployment.",
-    "outcome": "The solution was successfully launched and deployed. Repair calls fell 73%, truck rolls fell 43%, repair windows dropped from approximately three weeks to 1–4 days, and the service directly supported 1.5 million San Antonio residents.",
+    "mandate": "Create one end-to-end service loop, from the 1st report or streetlight alert through dispatch, repair, closure, and follow-up, so work no longer disappeared between handoffs.",
+    "whatIChanged": "I mapped the complete resident report-to-repair journey, defined the corporate reporting experience, aligned CPS Energy and Dalkia around one operating model, prioritized SAP and field-workflow integration, and moved the organization from debate to deployment.",
+    "outcome": "The solution was successfully deployed. Repair calls fell 73%, truck rolls fell 43%, repair windows dropped from three weeks to 1–4 days, and the service directly supported 1.5 million San Antonio residents. We won a 2025 Global Smart 20 Award for the work.",
     "facts": [
       {
         "icon": "role",
@@ -118,7 +118,7 @@ export const caseStudy = {
       {
         "icon": "timeline",
         "label": "Timeline",
-        "value": "Aug 2024–Apr 2025 · 8 months"
+        "value": "Aug 2024–Apr 2025"
       },
       {
         "icon": "team",
@@ -141,9 +141,9 @@ export const caseStudy = {
     "eyebrow": "Problem Statement",
     "title": "Homes in Darkness",
     "paragraphs": [
-      "San Antonio residents were dealing with dark streets, slow repair timelines, and a support experience that gave them no confidence an outage would be resolved. The problem was bigger than maintenance. The service loop was fragmented across resident intake, 311 and call-center channels, IVR, SAP, dispatch, field crews, follow-up orders, and closure.",
+      "San Antonio residents were dealing with dark streets, slow repair timelines, and a support experience that gave them no confidence an outage would be resolved. The problem was bigger than maintenance. The service loop was fragmented across resident intake, 311 and call-center channels, IVR, SAP, dispatch, field crews, follow-up orders, and closure with no single thread connecting any of it.",
       "Ownership was divided across CPS Energy and Dalkia, but nobody owned the complete journey. Residents reported the same outage repeatedly because they could not see status. Field crews could arrive without current work-order information. Follow-up work could disappear between teams. Operations lacked one reliable view of the repair lifecycle across more than 225,000 streetlights.",
-      "Dark streets and delayed repairs became local-news material. The program therefore had to solve the operational problem and restore public confidence: one intake path, one accountable workflow, and one closed loop from report to repair."
+      "Dark streets and delayed repairs became local-news material. That meant the program had to fix the service and restore public confidence at the same time: one intake path, one accountable workflow, and one closed loop from report to repair."
     ],
     "visual": {
       "kind": "youtube",
@@ -166,7 +166,7 @@ export const caseStudy = {
         "copy": "I led the product and UX direction for a resident-facing reporting experience that let people identify the affected streetlight and submit the issue digitally."
       },
       {
-        "title": "Aligned CPS Energy and Dalkia Around One Service Model",
+        "title": "Aligned Stakeholders Around One Service Model",
         "copy": "I established shared ownership, clarified handoffs, and kept the work organized around one resident-to-repair outcome."
       },
       {
@@ -307,7 +307,7 @@ export const caseStudy = {
   "recognition": {
     "eyebrow": "Recognition",
     "title": "From Public Failure to Smart-City Recognition",
-    "intro": "The evidence spans the full program arc: public reporting of the streetlight problem, official records and project coverage, and recognition of the deployed operating model through the 2025 Smart 20 Award.",
+    "intro": "The program went from local-news failure to a 2025 Smart 20 Award. The press coverage, board records, and project documentation below trace the full arc.",
     "featured": {
       "media": {
         "kind": "youtube",

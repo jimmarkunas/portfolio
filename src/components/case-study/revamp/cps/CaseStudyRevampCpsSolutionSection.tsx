@@ -67,8 +67,8 @@ export function CaseStudyRevampCpsSolutionSection({ data }: { data: CaseStudyRev
             </div>
           </MotionReveal>
 
-          <MotionReveal preset="cardStrong" className="overflow-hidden rounded-[24px] bg-white">
-            <div className="p-6 md:p-8">
+          <MotionReveal preset="section">
+            <div>
               <CaseStudyRevampSectionHeader
                 eyebrow={cpsSolutionContent.flow.eyebrow}
                 title={cpsSolutionContent.flow.title}
