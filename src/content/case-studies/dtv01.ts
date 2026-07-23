@@ -40,7 +40,9 @@ export const caseStudy = {
       aspectRatio: "16/9",
     },
     overview:
-      "DIRECTV needed someone to fix a brittle revenue system inside a shrinking legacy business. Campaigns took 6 months to launch, teams didn't share a unified operating model, and the stack was split across 20+ legacy systems. On top of all that, DTV's corporate breakup with AT&T added even more duplication, pressure and political heat.",
+      "DIRECTV needed someone to fix a brittle revenue system inside a shrinking legacy business. Campaigns took 6 months to launch, teams didn't share a unified operating model, and the stack was split across 20+ legacy systems.",
+    overviewParagraph:
+      "Then the AT&T divorce happened. DTV's corporate breakup added even more duplication, pressure, and political heat to an already fragile commercial system.",
     projectOverviewRows: [
       { label: "Client", value: "DIRECTV" },
       { label: "Industry", value: "Satellite TV • Streaming • Telecommunications" },
