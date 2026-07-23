@@ -117,7 +117,7 @@ export function CaseStudyRevampExecutiveBriefSection({ data }: { data: CaseStudy
                 >
                   <div className="flex flex-col gap-4">
                     <div className="h-[2px] w-6 rounded-full bg-[#447ACB]" />
-                    <div className="type-p5 uppercase tracking-[0.16em] text-white/50">{label}</div>
+                    <div className="type-p5 uppercase tracking-[0.16em] text-[#447ACB]">{label}</div>
                     <p className="type-p4 text-white">{renderHighlightedCopy(label as string, copy as string)}</p>
                   </div>
                 </article>
