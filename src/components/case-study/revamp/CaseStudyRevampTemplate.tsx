@@ -26,10 +26,10 @@ export function CaseStudyRevampTemplate({ data }: { data: CaseStudyRevampData })
         <CaseStudyRevampExecutiveBriefSection data={data} />
       </SectionBorder>
       <SectionBorder>
-        <CaseStudyRevampProductionQuoteSection data={data} />
+        <CaseStudyRevampChallengeSection data={data} />
       </SectionBorder>
       <SectionBorder>
-        <CaseStudyRevampChallengeSection data={data} />
+        <CaseStudyRevampProductionQuoteSection data={data} />
       </SectionBorder>
       <SectionBorder>
         <CaseStudyRevampOwnershipSection data={data} />
