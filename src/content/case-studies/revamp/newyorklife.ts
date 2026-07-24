@@ -118,7 +118,8 @@ export const newyorklifeRevampCaseStudy = {
     "eyebrow": "Problem Statement",
     "title": "Too Many Sites, Too Risky",
     "paragraphs": [
-      "Before this platform, each agent website behaved like its own project. Local vendors, inconsistent branding, manual compliance checks, and no single source of truth made every update slow, expensive, and risky. New York Life needed a way to support 12,000+ agent sites without letting speed create legal exposure or brand chaos."
+      "Before this platform, each agent website behaved like its own project. Local vendors, inconsistent branding, manual compliance checks, and no single source of truth made every update slow, expensive, and risky. New York Life needed a way to support 12,000+ agent sites without letting speed create legal exposure or brand chaos.",
+      "New York Life was also fighting an agent retention problem. Without a compliant, high-performing digital presence, agents had every incentive to go independent — taking their books of business with them. A platform that was slow to launch, hard to update, and legally exposed didn't just create operational risk. It made the company easier to leave.",
     ],
     "visual": {
       "kind": "react-diagram",
@@ -187,7 +188,7 @@ export const newyorklifeRevampCaseStudy = {
         "label": "Lead Uplift"
       },
       {
-        "value": "12,000",
+        "value": "12K",
         "suffix": "+",
         "label": "Sites Launched"
       },
@@ -197,7 +198,7 @@ export const newyorklifeRevampCaseStudy = {
         "label": "Digital Revenue Growth"
       },
       {
-        "value": "6m - 2w",
+        "value": "6m>2w",
         "suffix": "",
         "label": "Site Launch Time Reduction"
       }
