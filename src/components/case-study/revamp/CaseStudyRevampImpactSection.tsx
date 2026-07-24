@@ -66,7 +66,7 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
             ))}
           </MotionReveal>
 
-          {data.slug === "cwg" ? editorialImage : null}
+          {data.slug === "cwg" || data.slug === "zevo" ? editorialImage : null}
 
           <MotionReveal preset="section" className="flex flex-col gap-4">
 
@@ -116,7 +116,7 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
             </div>
           </MotionReveal>
 
-          {data.slug !== "cwg" ? editorialImage : null}
+          {data.slug !== "cwg" && data.slug !== "zevo" ? editorialImage : null}
         </div>
       </Container>
     </section>

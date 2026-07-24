@@ -13,7 +13,7 @@ import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 export function CaseStudyRevampRecognitionSection({ data }: { data: CaseStudyRevampData }) {
   const recognition = data.recognition
 
-  if (!recognition) {
+  if (!recognition || data.slug === "zevo") {
     return null
   }
 

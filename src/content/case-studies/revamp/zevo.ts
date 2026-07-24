@@ -96,7 +96,7 @@ export const zevoRevampCaseStudy = {
       {
         "icon": "team",
         "label": "Team / Stakeholders",
-        "value": ""
+        "value": "10"
       },
       {
         "icon": "budget",
@@ -114,14 +114,15 @@ export const zevoRevampCaseStudy = {
     "eyebrow": "Problem Statement",
     "title": "Big Product Thesis, Too Early for Capital",
     "paragraphs": [
-      "The challenge was not imagination, it was de-risking. ZEVO asked investors to underwrite both platform and content complexity before there was mainstream proof that the market would adopt this model at scale. We had a coherent vision and early engagement, but no simple traction shortcut to close institutional capital."
+      "The challenge was not imagination, it was de-risking. ZEVO asked investors to underwrite both platform and content complexity before there was mainstream proof that the market would adopt this model at scale. We had a coherent vision and early engagement, but no simple traction shortcut to close institutional capital.",
+      "The raise didn't close. While we were in market, Netflix, Hulu, and the major networks moved aggressively into streaming and eliminated the white space we were pitching into. Then Ashton Kutcher pulled out, and the institutional case collapsed with it. ZEVO didn't fail because the thesis was wrong. It failed because the market caught up before the capital did. That experience is what led directly to HBO and DIRECTV, where I got to work on the streaming infrastructure from the inside.",
     ],
     "visual": {
       "kind": "youtube",
       "videoId": "9lLgHIxA4as",
       "aspectRatio": "16/9"
     },
-    "caption": "ZEVO legacy case-study media."
+    "caption": "ZEVO Product video"
   },
   "ownership": {
     "eyebrow": "What I Owned",
@@ -155,6 +156,14 @@ export const zevoRevampCaseStudy = {
     "eyebrow": "Solution",
     "title": "What We Built to Validate the Thesis",
     "copy": "The immediate goal was not feature sprawl. It was proving a coherent internet TV model: shared identity, synchronized multi-device behavior, and commerce-ready interaction primitives.",
+    "featuredMedia": [
+      {
+        "src": "/founder/zevo/banner-zevo-07.jpg",
+        "alt": "ZEVO interactive commerce experience shown on a mobile device",
+        "width": 3000,
+        "height": 1688
+      }
+    ],
     "architecture": [],
     "summary": "ZEVO assumed consumer behavior would move toward always-on streaming, cross-device continuity, and interactive participation. Those assumptions proved directionally right over time, but in 2010 they were still expensive to finance without hard market proof."
   },
@@ -184,6 +193,12 @@ export const zevoRevampCaseStudy = {
         "label": "Raise Target"
       }
     ],
+    "editorialImage": {
+      "src": "/founder/zevo/banner-zevo-06.png",
+      "alt": "ZEVO interactive commerce experience shown on a mobile device",
+      "width": 3000,
+      "height": 1567
+    },
     "transformation": {
       "eyebrow": "Before & After",
       "title": "Before & After",
