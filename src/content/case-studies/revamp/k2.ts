@@ -15,7 +15,7 @@ export const k2RevampCaseStudy = {
   "hero": {
     "eyebrow": "At-a-Glance",
     "title": "Headless/Composable Commerce for 9 K2 Brands",
-    "intro": "K2 Sports was being forced off a dying Demandware stack, but they still wanted each brand to feel distinct while finance & operations wanted one manageable engine underneath everything. I led the program and solution architecture that turned that mess into a headless multi-brand model, with BigCommerce powering commerce, WordPress and Contentstack powering the front end, and Avante plus Quivers staying the source of truth.",
+    "intro": "K2 Sports needed to escape a failing Demandware stack without losing what made each brand distinct. Marketing wanted nine storefronts with their own identity. Finance and operations wanted one engine underneath all of them. I led the program and solution architecture that resolved both: a headless multi-brand model with BigCommerce handling commerce, WordPress and Contentstack owning the front end, and Avante plus Quivers as the source of truth for inventory and fulfillment.",
     "metrics": [
       {
         "value": "9",
@@ -68,7 +68,7 @@ export const k2RevampCaseStudy = {
         "icon": "/tool-icons/svg/quivers-logo.svg"
       }
     ],
-    "problem": "Demandware was sunsetting, reconciliation across systems was too manual, and nobody had a clean answer for how Quivers, Avante, payments, CMS, SEO, and nine storefronts were supposed to work together in SaaS. Marketing wanted every brand to keep its own look and feel. Finance and operations wanted one reliable engine under everything. The business needed a model that could move at speedboat speed without turning headless commerce into an engineering science project.",
+    "problem": "Demandware was sunsetting, reconciliation across systems was too manual, and nobody had a clean answer for how Quivers, Avante, payments, CMS, SEO, and nine storefronts were supposed to work together in SaaS. The business needed a model that could move at speedboat speed without turning headless commerce into an engineering science project.",
     "mandate": "I owned the multi-brand architecture, integration strategy, program execution, and the political work required to get 9 storefronts moving on one clean model. I was the architecture lead, the traffic cop, the SEO & cutover risk manager, and the one person pulling the right people together to make the hard calls.",
     "whatIChanged": "K2 didn’t need another platform swap. It needed a multi-store, multi-brand ecosystem built from scratch that could serve marketing, finance, and operations without forcing BigCommerce to do an ERP’s job.",
     "outcome": "We gave K2 a cleaner operating model, faster storefront creation, faster content velocity, and less dependence on engineering.",
@@ -101,7 +101,7 @@ export const k2RevampCaseStudy = {
       {
         "icon": "budget",
         "label": "Budget / Scale",
-        "value": "$1.5"
+        "value": "$1.5M"
       },
       {
         "icon": "systems",
@@ -114,7 +114,8 @@ export const k2RevampCaseStudy = {
     "eyebrow": "Problem Statement",
     "title": "Forced Migration, No Plan",
     "paragraphs": [
-      "Demandware was sunsetting, reconciliation across systems was too manual, and nobody had a clean answer for how Quivers, Avante, payments, CMS, SEO, and nine storefronts were supposed to work together in SaaS. Marketing wanted every brand to keep its own look and feel. Finance and operations wanted one reliable engine under everything. The business needed a model that could move at speedboat speed without turning headless commerce into an engineering science project."
+      "Demandware was sunsetting and K2 Sports had nine storefronts, no migration plan, and a stack where Quivers, Avante, payments, CMS, and SEO had never cleanly worked together. Marketing wanted every brand to keep its own identity. Finance and operations wanted one reliable engine underneath all of them. Those two requirements had never coexisted on the old platform, and nobody had a clear answer for how to make them coexist on the new one.",
+      "The headless path was the right call, but headless done wrong just trades one maintenance problem for another. The architecture had to be opinionated enough to give operations one engine to manage, and flexible enough to let nine brands look and behave like nine different companies. That balance doesn't happen by accident.",
     ],
     "visual": {
       "kind": "image",
@@ -122,32 +123,32 @@ export const k2RevampCaseStudy = {
       "alt": "K2 Sports headless commerce architecture and scoping artifacts",
       "aspectRatio": "16/9"
     },
-    "caption": "K2 Sports legacy case-study media."
+    "caption": "K2 Sports is a visual-first brand."
   },
   "ownership": {
     "eyebrow": "What I Owned",
     "title": "I Made Headless Commerce Work for Business Users",
-    "summary": "I owned the multi-brand architecture, integration strategy, program execution, and the political work required to get 9 storefronts moving on one clean model. I was the architecture lead, the traffic cop, the SEO & cutover risk manager, and the one person pulling the right people together to make the hard calls.",
+    "summary": "I owned the multi-brand architecture, integration strategy, and program execution across nine storefronts and a four-person team. That meant making the hard calls on what went where, keeping the vendors aligned on a shared model, and managing the SEO and cutover risks that could have handed the business a traffic crater on launch day.",
     "decisions": [
       {
         "title": "Multi-brand architecture",
-        "copy": "Multi-brand architecture"
+        "copy": "Designed one shared BigCommerce engine that let nine storefronts operate independently on the front end without creating nine separate maintenance problems on the back end."
       },
       {
         "title": "Source-of-truth boundaries",
-        "copy": "Source-of-truth boundaries"
+        "copy": "Defined what lived in Avante, what lived in Quivers, and what lived in BigCommerce so every system knew its job and data didn't contradict itself across storefronts."
       },
       {
         "title": "SEO continuity",
-        "copy": "SEO continuity"
+        "copy": "Mapped redirect strategy, URL structure, and DNS routing across nine domains so the migration off Demandware didn't hand a traffic loss to the business on launch day."
       },
       {
         "title": "Integration strategy",
-        "copy": "Solved the DNS, SEO, and routing risks so the migration wouldn't destroy traffic."
+        "copy": "Resolved how Quivers, Avante, payments, and CMS connected to the commerce layer without creating the same reconciliation mess K2 was trying to escape."
       },
       {
         "title": "Migration leadership",
-        "copy": "I owned the multi-brand architecture, integration strategy, program execution, and the political work required to get 9 storefronts moving on one clean model. I was the architecture lead, the traffic cop, the SEO & cutover risk manager, and the one person pulling the right people together to make the hard calls."
+        "copy": "Owned cutover sequencing across nine storefronts, coordinated the right stakeholders at the right decision points, and kept the program moving without letting brand politics or vendor disagreements stall the timeline."
       }
     ]
   },
