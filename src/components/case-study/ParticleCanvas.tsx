@@ -12,6 +12,7 @@ interface ParticleCanvasProps {
   particlesPerPath?: number
   glow?: boolean
   radius?: number
+  drawStaticPaths?: boolean
 }
 
 const TRAIL_LENGTH = 8
@@ -86,7 +87,7 @@ function createParticle(pathIndex: number, speedMultiplier: number, radius?: num
   }
 }
 
-export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_COLOR, speedMultiplier = 1, particlesPerPath = 3, glow = true, radius }: ParticleCanvasProps) {
+export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_COLOR, speedMultiplier = 1, particlesPerPath = 3, glow = true, radius, drawStaticPaths = true }: ParticleCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
   const rafRef = useRef<number>(0)
@@ -127,18 +128,19 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Static connector lines
-      ctx.save()
-      ctx.strokeStyle = `rgba(34,34,34,0.07)`
-      ctx.lineWidth = 1
-      for (const path of paths) {
-        if (path.length < 2) continue
-        ctx.beginPath()
-        ctx.moveTo(path[0].x, path[0].y)
-        for (let i = 1; i < path.length; i++) ctx.lineTo(path[i].x, path[i].y)
-        ctx.stroke()
+      if (drawStaticPaths) {
+        ctx.save()
+        ctx.strokeStyle = `rgba(34,34,34,0.07)`
+        ctx.lineWidth = 1
+        for (const path of paths) {
+          if (path.length < 2) continue
+          ctx.beginPath()
+          ctx.moveTo(path[0].x, path[0].y)
+          for (let i = 1; i < path.length; i++) ctx.lineTo(path[i].x, path[i].y)
+          ctx.stroke()
+        }
+        ctx.restore()
       }
-      ctx.restore()
 
       // Particles
       for (const p of particlesRef.current) {
@@ -191,7 +193,7 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
       cancelAnimationFrame(rafRef.current)
       ro.disconnect()
     }
-  }, [paths, containerRef, color, speedMultiplier, particlesPerPath, glow, radius])
+  }, [paths, containerRef, color, speedMultiplier, particlesPerPath, glow, radius, drawStaticPaths])
 
   return (
     <canvas

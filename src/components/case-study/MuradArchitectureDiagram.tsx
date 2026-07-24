@@ -105,12 +105,14 @@ export default function MuradArchitectureDiagram() {
               paths={MURAD_PATHS}
               containerRef={canvasContainerRef}
               speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+              drawStaticPaths={false}
             />
             <ParticleCanvas
               paths={MURAD_RED_PATHS}
               containerRef={canvasContainerRef}
               color="203,68,68"
               speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+              drawStaticPaths={false}
             />
           </>
         )}
