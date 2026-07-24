@@ -11,6 +11,24 @@ import { CaseStudyRevampSectionHeader } from "./CaseStudyRevampSectionHeader"
 
 export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampData }) {
   const timelineRef = useRef<HTMLDivElement | null>(null)
+  const editorialImage = data.impact.editorialImage ? (
+    <MotionReveal preset="image">
+      <div className={`flex w-full flex-col gap-4 ${data.slug === "newyorklife" ? "items-center text-center" : ""}`}>
+        {data.slug === "newyorklife" ? <h3 className="type-h5 text-[#222222]">CORECMS launch: digital lead attribution increased</h3> : null}
+        {data.slug === "newyorklife" ? <p className="type-p3 w-full text-black/62">After the CORECMS launch, digitally attributed lead generation rose well above the 2023 baseline, reaching nearly $100M by November.</p> : null}
+        <figure className={`flex w-full flex-col gap-3 ${data.slug === "newyorklife" ? "rounded-[24px] bg-white p-4 md:p-6 [&_img]:brightness-[1.05]" : ""}`}>
+          <FullWidthImage
+            src={data.impact.editorialImage.src}
+            alt={data.impact.editorialImage.alt}
+            fullWidth={false}
+          />
+          {data.impact.editorialImage.caption ? (
+            <figcaption className="type-p5 text-black/55">{data.impact.editorialImage.caption}</figcaption>
+          ) : null}
+        </figure>
+      </div>
+    </MotionReveal>
+  ) : null
 
   return (
     <section className="bg-white">
@@ -47,6 +65,8 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
               />
             ))}
           </MotionReveal>
+
+          {data.slug === "cwg" ? editorialImage : null}
 
           <MotionReveal preset="section" className="flex flex-col gap-4">
 
@@ -96,24 +116,7 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
             </div>
           </MotionReveal>
 
-          {data.impact.editorialImage ? (
-            <MotionReveal preset="image">
-              <div className={`flex w-full flex-col gap-4 ${data.slug === "newyorklife" ? "items-center text-center" : ""}`}>
-                {data.slug === "newyorklife" ? <h3 className="type-h5 text-[#222222]">CORECMS launch: digital lead attribution increased</h3> : null}
-                {data.slug === "newyorklife" ? <p className="type-p3 w-full text-black/62">After the CORECMS launch, digitally attributed lead generation rose well above the 2023 baseline, reaching nearly $100M by November.</p> : null}
-                <figure className={`flex w-full flex-col gap-3 ${data.slug === "newyorklife" ? "rounded-[24px] bg-white p-4 md:p-6 [&_img]:brightness-[1.05]" : ""}`}>
-                  <FullWidthImage
-                    src={data.impact.editorialImage.src}
-                    alt={data.impact.editorialImage.alt}
-                    fullWidth={false}
-                  />
-                  {data.impact.editorialImage.caption ? (
-                    <figcaption className="type-p5 text-black/55">{data.impact.editorialImage.caption}</figcaption>
-                  ) : null}
-                </figure>
-              </div>
-            </MotionReveal>
-          ) : null}
+          {data.slug !== "cwg" ? editorialImage : null}
         </div>
       </Container>
     </section>

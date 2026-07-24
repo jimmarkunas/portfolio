@@ -114,7 +114,8 @@ export const cwgRevampCaseStudy = {
     "eyebrow": "Problem Statement",
     "title": "Building Credibility at Scale Without Capital",
     "paragraphs": [
-      "The challenge was proving a digital-native publication could compete with legacy music outlets on quality and access while operating with no budget. We needed high editorial standards, dependable artist relationships, and repeatable distribution across multiple channels without paid acquisition."
+      "The challenge was proving a digital-native publication could compete with legacy music outlets on quality and access while operating with no budget. We needed high editorial standards, dependable artist relationships, and repeatable distribution across multiple channels without paid acquisition.",
+      "The stakes were simple: if the editorial quality slipped or the distribution dried up, the audience would leave and not come back. A digital publication with no budget and no institutional backing has no second chance. Credibility is the only asset, and it either compounds or it disappears.",
     ],
     "visual": {
       "kind": "image",
@@ -122,7 +123,7 @@ export const cwgRevampCaseStudy = {
       "alt": "Chicks With Guns live photography coverage",
       "aspectRatio": "16/9"
     },
-    "caption": "Chicks With Guns legacy case-study media."
+    "caption": "Linkin Park Live 2010 (Credit: Chicks With Guns Magazine)."
   },
   "ownership": {
     "eyebrow": "What I Owned",
@@ -156,6 +157,14 @@ export const cwgRevampCaseStudy = {
     "eyebrow": "Solution",
     "title": "A Multi-Surface Editorial Engine",
     "copy": "We designed CWG as one coordinated media system. Editorial, photography, and video were planned once and distributed across every surface with consistent quality and velocity.",
+    "featuredMedia": [
+      {
+        "src": "/founder/cwg/images/banner-cwg-slash.jpg",
+        "alt": "Slash performing for Chicks With Guns",
+        "width": 3000,
+        "height": 1740
+      }
+    ],
     "architecture": [],
     "summary": "CWG ran on a distributed contributor model with clear assignment ownership and production standards. The operating principle was simple: quality first, consistency always."
   },
@@ -185,6 +194,12 @@ export const cwgRevampCaseStudy = {
         "label": "Yahoo recognition"
       }
     ],
+    "editorialImage": {
+      "src": "/founder/cwg/images/banner-cwg-thegame.jpg",
+      "alt": "The Game performing for Chicks With Guns",
+      "width": 3000,
+      "height": 1685
+    },
     "transformation": {
       "eyebrow": "Before & After",
       "title": "Before & After",
@@ -248,32 +263,7 @@ export const cwgRevampCaseStudy = {
         "Editorial"
       ]
     },
-    "rows": [
-      {
-        "publisher": "Yahoo",
-        "date": "2010",
-        "summary": "CWG was named a top online music publication, validating credibility in a category dominated by legacy media brands.",
-        "pdfHref": ""
-      },
-      {
-        "publisher": "CWG Analytics",
-        "date": "2009-2010",
-        "summary": "Reached 250k+ monthly uniques through editorial quality, SEO, and social distribution without paid acquisition.",
-        "pdfHref": ""
-      },
-      {
-        "publisher": "App Analytics",
-        "date": "2009-2010",
-        "summary": "Exceeded 10k iOS downloads, confirming demand for mobile-native music coverage during early app ecosystem growth.",
-        "pdfHref": ""
-      },
-      {
-        "publisher": "Team Outcomes",
-        "date": "2009-2010",
-        "summary": "Built and managed 40+ contributors globally, with multiple team members later advancing into media, music, and photography careers.",
-        "pdfHref": ""
-      }
-    ]
+    "rows": []
   },
   "relatedStudies": {
     "slugs": [
