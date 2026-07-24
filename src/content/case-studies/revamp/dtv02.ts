@@ -76,9 +76,9 @@ export const dtv02RevampCaseStudy = {
         "icon": "/tool-icons/jira-logo.png"
       }
     ],
-    "problem": "Before DIRECTV Everywhere, DIRECTV was still a broadcast TV business trying to answer a market that was rapidly shifting to streaming on every screen. Netflix, HBOGo, and the broader app economy were already teaching customers to expect on-demand, authenticated viewing anywhere. DTV's marketing had already promised the experience publicly, while product, content, device, security, and operations teams were still fighting over what the product actually was.",
-    "mandate": "I owned the product definition layer that kept a very public streaming launch from disintegrating into cross-functional chaos. I wrote the PRDs, kept 35+ teams aligned, forced decisions around parity and entitlement, and made sure the product that shipped matched one coherent truth instead of 7 competing narratives.",
-    "whatIChanged": "DIRECTV Everywhere was not dying because streaming technology was impossible. It was dying because too many teams were in-fighting over competing roadmpas, while a national campaign was selling subscriberships for a product that didn't exist. Public promises on one side, organizational confusion on the other, it was killing the product.",
+    "problem": "DIRECTV was still a broadcast TV business trying to answer a market that was rapidly shifting to streaming on every screen. Netflix and HBOGo were already teaching customers to expect on-demand, authenticated viewing anywhere. DTV's marketing promised the experience publicly, but didn't have a product.",
+    "mandate": "I owned the product definition layer that kept a very public streaming launch from disintegrating into cross-functional chaos. I wrote the PRDs, kept 35+ teams aligned, forced decisions around parity and entitlement, and made sure the product shipped.",
+    "whatIChanged": "DIRECTV Everywhere wasn't dying because streaming technology was impossible. It was because too many teams were in-fighting over competing roadmpas, while a national campaign was selling subscriberships for a product that didn't exist.",
     "outcome": "DIRECTV Everywhere became more than just a slick marketing campaign. It turned into a real product that customers downloaded, used across devices, and expanded into it's own standalone product still sold today.",
     "facts": [
       {
@@ -109,7 +109,7 @@ export const dtv02RevampCaseStudy = {
       {
         "icon": "budget",
         "label": "Budget / Scale",
-        "value": "$6"
+        "value": "$6M"
       },
       {
         "icon": "systems",
@@ -122,14 +122,15 @@ export const dtv02RevampCaseStudy = {
     "eyebrow": "Problem Statement",
     "title": "Product Served Before Ready",
     "paragraphs": [
-      "Before DIRECTV Everywhere, DIRECTV was still a broadcast TV business trying to answer a market that was rapidly shifting to streaming on every screen. Netflix, HBOGo, and the broader app economy were already teaching customers to expect on-demand, authenticated viewing anywhere. DTV's marketing had already promised the experience publicly, while product, content, device, security, and operations teams were still fighting over what the product actually was."
+      "DIRECTV had already promised customers they could watch anything, anywhere, on any screen. The problem was the product didn't exist yet. Netflix and HBOGo were training subscribers to expect on-demand authenticated viewing as a baseline, and DIRECTV's answer was a marketing campaign with nothing behind it.",
+      "The internal reality made it worse. Product, content, device, security, and operations teams were all fighting over what the product actually was while customers were already being promised it in national TV spots. There was no shared definition, no owner, and no clear path to shipping something that worked across 400+ channels, 5 device families, and 20 million subscribers.",
     ],
     "visual": {
       "kind": "youtube",
       "videoId": "A_snqcURb_E",
       "aspectRatio": "16/9"
     },
-    "caption": "DIRECTV Everywhere legacy case-study media."
+    "caption": "DIRECTV Everywhere national commercial."
   },
   "ownership": {
     "eyebrow": "What I Owned",
