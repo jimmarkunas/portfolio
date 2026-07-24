@@ -24,6 +24,7 @@ const cardVariants = {
 };
 const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
 const MURAD_PARTICLE_SPEED_MULTIPLIER = 0.82
+const MURAD_ADOBE_SENDGRID_SPEED_MULTIPLIER = 0.55
 
 
 export default function MuradArchitectureDiagram() {
@@ -105,13 +106,15 @@ export default function MuradArchitectureDiagram() {
               paths={MURAD_PATHS}
               containerRef={canvasContainerRef}
               speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+              radiusMultiplier={1.5}
               drawStaticPaths={false}
             />
             <ParticleCanvas
               paths={MURAD_RED_PATHS}
               containerRef={canvasContainerRef}
               color="203,68,68"
-              speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+              speedMultiplier={MURAD_ADOBE_SENDGRID_SPEED_MULTIPLIER}
+              radiusMultiplier={1.5}
               drawStaticPaths={false}
             />
           </>
@@ -156,12 +159,14 @@ export default function MuradArchitectureDiagram() {
                     paths={MURAD_MOBILE_PATHS}
                     containerRef={mobileCanvasRef}
                     speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+                    radiusMultiplier={1.5}
                   />
                   <ParticleCanvas
                     paths={MURAD_MOBILE_RED_PATHS}
                     containerRef={mobileCanvasRef}
                     color="203,68,68"
                     speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+                    radiusMultiplier={1.5}
                   />
               </>
             )}

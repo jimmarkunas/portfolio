@@ -2,7 +2,15 @@
 import { useRef, useEffect } from "react"
 
 type Point = { x: number; y: number }
-type Path = Point[]
+
+export type ParticlePathStyle = {
+  radius?: number
+  radiusVariance?: number
+  opacity?: number
+  glow?: boolean
+}
+
+type Path = Point[] & { particleStyle?: ParticlePathStyle }
 
 interface ParticleCanvasProps {
   paths: Path[]
@@ -12,6 +20,7 @@ interface ParticleCanvasProps {
   particlesPerPath?: number
   glow?: boolean
   radius?: number
+  radiusMultiplier?: number
   drawStaticPaths?: boolean
 }
 
@@ -23,6 +32,8 @@ interface Particle {
   t: number
   speed: number
   radius: number
+  opacity: number
+  glow: boolean
   trail: Point[]
 }
 
@@ -77,17 +88,22 @@ function pointOnPath(path: Path, metrics: PathMetrics, t: number): Point {
   }
 }
 
-function createParticle(pathIndex: number, speedMultiplier: number, radius?: number): Particle {
+function createParticle(pathIndex: number, speedMultiplier: number, radius: number | undefined, defaultGlow: boolean, radiusMultiplier: number, particleStyle?: ParticlePathStyle): Particle {
+  const baseRadius = particleStyle?.radius ?? radius
+  const radiusVariance = particleStyle?.radiusVariance ?? (baseRadius === undefined ? 1.8 : 0)
+
   return {
     pathIndex,
     t: Math.random(),
     speed: (0.001058 + Math.random() * 0.001587) * speedMultiplier,
-    radius: radius ?? 2.0 + Math.random() * 1.8,
+    radius: ((baseRadius ?? 2.0) + Math.random() * radiusVariance) * radiusMultiplier,
+    opacity: particleStyle?.opacity ?? 1,
+    glow: particleStyle?.glow ?? defaultGlow,
     trail: [],
   }
 }
 
-export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_COLOR, speedMultiplier = 1, particlesPerPath = 3, glow = true, radius, drawStaticPaths = true }: ParticleCanvasProps) {
+export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_COLOR, speedMultiplier = 1, particlesPerPath = 3, glow = true, radius, radiusMultiplier = 1, drawStaticPaths = true }: ParticleCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
   const rafRef = useRef<number>(0)
@@ -102,7 +118,7 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
 
     // 3 particles per path
     particlesRef.current = paths.flatMap((_, i) =>
-      Array.from({ length: particlesPerPath }, () => createParticle(i, speedMultiplier, radius))
+      Array.from({ length: particlesPerPath }, () => createParticle(i, speedMultiplier, radius, glow, radiusMultiplier, paths[i].particleStyle))
     )
     const pathMetrics = paths.map((path) => buildPathMetrics(path))
     let lastFrameTime = 0
@@ -158,7 +174,9 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
         p.trail.push({ ...pos })
         if (p.trail.length > TRAIL_LENGTH) p.trail.shift()
 
-        if (glow) {
+        ctx.globalAlpha = p.opacity
+
+        if (p.glow) {
           // Draw trail
           for (let i = 0; i < p.trail.length; i++) {
             const alpha = ((i + 1) / p.trail.length) * 0.35
@@ -172,8 +190,8 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
 
         // Draw either a solid head or the existing radial glow.
         ctx.beginPath()
-        ctx.arc(pos.x, pos.y, glow ? p.radius * 2 : p.radius, 0, Math.PI * 2)
-        if (glow) {
+        ctx.arc(pos.x, pos.y, p.glow ? p.radius * 2 : p.radius, 0, Math.PI * 2)
+        if (p.glow) {
           const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, p.radius * 2)
           grad.addColorStop(0, `rgba(${color},0.85)`)
           grad.addColorStop(1, `rgba(${color},0)`)
@@ -182,6 +200,7 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
           ctx.fillStyle = `rgb(${color})`
         }
         ctx.fill()
+        ctx.globalAlpha = 1
       }
 
       rafRef.current = requestAnimationFrame(draw)
@@ -193,7 +212,7 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
       cancelAnimationFrame(rafRef.current)
       ro.disconnect()
     }
-  }, [paths, containerRef, color, speedMultiplier, particlesPerPath, glow, radius, drawStaticPaths])
+  }, [paths, containerRef, color, speedMultiplier, particlesPerPath, glow, radius, radiusMultiplier, drawStaticPaths])
 
   return (
     <canvas
