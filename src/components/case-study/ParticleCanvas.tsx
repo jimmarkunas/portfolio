@@ -10,6 +10,8 @@ interface ParticleCanvasProps {
   color?: string // RGB string e.g. "68,122,203"
   speedMultiplier?: number
   particlesPerPath?: number
+  glow?: boolean
+  radius?: number
 }
 
 const TRAIL_LENGTH = 8
@@ -74,17 +76,17 @@ function pointOnPath(path: Path, metrics: PathMetrics, t: number): Point {
   }
 }
 
-function createParticle(pathIndex: number, speedMultiplier: number): Particle {
+function createParticle(pathIndex: number, speedMultiplier: number, radius?: number): Particle {
   return {
     pathIndex,
     t: Math.random(),
     speed: (0.001058 + Math.random() * 0.001587) * speedMultiplier,
-    radius: 2.0 + Math.random() * 1.8,
+    radius: radius ?? 2.0 + Math.random() * 1.8,
     trail: [],
   }
 }
 
-export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_COLOR, speedMultiplier = 1, particlesPerPath = 3 }: ParticleCanvasProps) {
+export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_COLOR, speedMultiplier = 1, particlesPerPath = 3, glow = true, radius }: ParticleCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
   const rafRef = useRef<number>(0)
@@ -99,7 +101,7 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
 
     // 3 particles per path
     particlesRef.current = paths.flatMap((_, i) =>
-      Array.from({ length: particlesPerPath }, () => createParticle(i, speedMultiplier))
+      Array.from({ length: particlesPerPath }, () => createParticle(i, speedMultiplier, radius))
     )
     const pathMetrics = paths.map((path) => buildPathMetrics(path))
     let lastFrameTime = 0
@@ -154,23 +156,29 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
         p.trail.push({ ...pos })
         if (p.trail.length > TRAIL_LENGTH) p.trail.shift()
 
-        // Draw trail
-        for (let i = 0; i < p.trail.length; i++) {
-          const alpha = ((i + 1) / p.trail.length) * 0.35
-          const r = p.radius * ((i + 1) / p.trail.length)
-          ctx.beginPath()
-          ctx.arc(p.trail[i].x, p.trail[i].y, r, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(${color},${alpha})`
-          ctx.fill()
+        if (glow) {
+          // Draw trail
+          for (let i = 0; i < p.trail.length; i++) {
+            const alpha = ((i + 1) / p.trail.length) * 0.35
+            const r = p.radius * ((i + 1) / p.trail.length)
+            ctx.beginPath()
+            ctx.arc(p.trail[i].x, p.trail[i].y, r, 0, Math.PI * 2)
+            ctx.fillStyle = `rgba(${color},${alpha})`
+            ctx.fill()
+          }
         }
 
-        // Draw head with radial gradient
-        const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, p.radius * 2)
-        grad.addColorStop(0, `rgba(${color},0.85)`)
-        grad.addColorStop(1, `rgba(${color},0)`)
+        // Draw either a solid head or the existing radial glow.
         ctx.beginPath()
-        ctx.arc(pos.x, pos.y, p.radius * 2, 0, Math.PI * 2)
-        ctx.fillStyle = grad
+        ctx.arc(pos.x, pos.y, glow ? p.radius * 2 : p.radius, 0, Math.PI * 2)
+        if (glow) {
+          const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, p.radius * 2)
+          grad.addColorStop(0, `rgba(${color},0.85)`)
+          grad.addColorStop(1, `rgba(${color},0)`)
+          ctx.fillStyle = grad
+        } else {
+          ctx.fillStyle = `rgb(${color})`
+        }
         ctx.fill()
       }
 
@@ -183,7 +191,7 @@ export default function ParticleCanvas({ paths, containerRef, color = DEFAULT_CO
       cancelAnimationFrame(rafRef.current)
       ro.disconnect()
     }
-  }, [paths, containerRef, color, speedMultiplier, particlesPerPath])
+  }, [paths, containerRef, color, speedMultiplier, particlesPerPath, glow, radius])
 
   return (
     <canvas

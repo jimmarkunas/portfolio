@@ -152,6 +152,8 @@ function FlowLine() {
           color="68,122,203"
           speedMultiplier={0.3125}
           particlesPerPath={6}
+          glow={false}
+          radius={4}
         />
       )}
     </div>
