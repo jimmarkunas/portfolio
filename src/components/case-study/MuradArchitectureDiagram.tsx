@@ -7,6 +7,7 @@ import MobileCard from "./MobileCard"
 import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost"
 import { MuradApiLayerCard } from "@/components/case-study/diagram-shared/MuradApiLayerCard"
 import { MuradDesktopLayer } from "@/components/case-study/diagram-shared/MuradDesktopLayer"
+import { MURAD_API_ORACLE_POINTS } from "@/components/case-study/diagram-shared/MuradArrowsLayer"
 import {
   MURAD_DESKTOP_HEIGHT,
   MURAD_DESKTOP_WIDTH,
@@ -24,6 +25,12 @@ const cardVariants = {
 };
 const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
 const MURAD_PARTICLE_SPEED_MULTIPLIER = 0.82
+const MURAD_ALIGNED_BLUE_PATHS = MURAD_PATHS.map((path, index) =>
+  index === 5 ? [...MURAD_API_ORACLE_POINTS] : path,
+)
+const MURAD_ALIGNED_RED_PATHS = MURAD_RED_PATHS.map((path, index) =>
+  index === 0 ? [...MURAD_API_ORACLE_POINTS].reverse() : path,
+)
 
 
 export default function MuradArchitectureDiagram() {
@@ -102,15 +109,17 @@ export default function MuradArchitectureDiagram() {
         {shouldReduceMotion ? null : (
           <>
             <ParticleCanvas
-              paths={MURAD_PATHS}
+              paths={MURAD_ALIGNED_BLUE_PATHS}
               containerRef={canvasContainerRef}
               speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+              drawStaticPaths={false}
             />
             <ParticleCanvas
-              paths={MURAD_RED_PATHS}
+              paths={MURAD_ALIGNED_RED_PATHS}
               containerRef={canvasContainerRef}
               color="203,68,68"
               speedMultiplier={MURAD_PARTICLE_SPEED_MULTIPLIER}
+              drawStaticPaths={false}
             />
           </>
         )}
