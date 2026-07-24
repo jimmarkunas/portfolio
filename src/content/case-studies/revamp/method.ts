@@ -4,7 +4,7 @@ export const methodRevampCaseStudy = {
   "slug": "method",
   "breadcrumbCurrent": "Method",
   "metadata": {
-    "title": "Method: Brand-True DTC Launch on Shared Rails",
+    "title": "Method: Protecting Retail While Building DTC",
     "image": {
       "src": "/method/hero-method-01.png",
       "alt": "Method direct-to-consumer launch hero image",
@@ -14,11 +14,11 @@ export const methodRevampCaseStudy = {
   },
   "hero": {
     "eyebrow": "At-a-Glance",
-    "title": "Method: Brand-True DTC Launch on Shared Rails",
-    "intro": "Method had strong brand equity and a loyal customer base, but no owned DTC channel. I led the fast-follow launch on SC Johnson’s shared BigCommerce and SAP stack, then made the experience feel like Method, not enterprise reuse.",
+    "title": "Method: Protecting Retail While Building DTC",
+    "intro": "Method had a homegrown commerce system that wasn't converting and a retail presence at Target and Walmart it couldn't afford to damage. I led the migration to SC Johnson's shared BigCommerce stack, brought in the right SEO expertise to protect organic traffic through the replatform, and structured the launch so DTC revenue grew without cannibalizing the retail relationships that made the brand.",
     "metrics": [
       {
-        "value": "$20",
+        "value": "20",
         "suffix": "%",
         "label": "DTC Revenue Uplift"
       },
@@ -41,15 +41,15 @@ export const methodRevampCaseStudy = {
     }
   },
   "productionQuote": {
-    "quote": "We wanted to get into direct-to-consumer as fast as possible.",
+    "quote": "We had some DTC, but needed to scale as fast as possible without losing traffic and SEO.",
     "attributionTitle": "Tammy Tran",
     "attributionSubtitle": "Director of eCommerce, Method",
     "avatarSrc": "/method/tammy-tran.jpeg"
   },
   "executiveBrief": {
     "eyebrow": "At-a-Glance",
-    "title": "Brand Experience, Shared Engine",
-    "copy": "This was Method’s zero-to-one DTC launch and the second real test of SC Johnson’s home-care stack. I turned shared rails into a brand-right Method experience and proved new brands could launch without starting over.",
+    "title": "Replatform Without Losing What Already Worked",
+    "copy": "Method's homegrown system wasn't converting, but the brand had real organic traffic and a retail presence that DTC couldn't be allowed to undercut. I led the migration to SC Johnson's shared BigCommerce stack, protected SEO through the transition, and launched a DTC channel that grew revenue without touching the retail relationships that built the brand.",
     "tools": [
       {
         "label": "BigCommerce",
@@ -62,12 +62,16 @@ export const methodRevampCaseStudy = {
       {
         "label": "Salsify",
         "icon": "/tool-icons/svg/salsify-logo.svg"
+      },
+      {
+        "label": "Adobe Experience Manager",
+        "icon": "/tool-icons/svg/adobe-experience-manager-logo.svg"
       }
     ],
-    "problem": "Method had brand equity, a clear design language, and a loyal customer base, but no true DTC channel. SC Johnson wanted growth fast without turning every brand launch into a custom tech project. The challenge was making shared commerce, ERP, product data, tax, fulfillment, service, and marketing rails feel seamless and unmistakably Method.",
-    "mandate": "I led the cross-functional launch across architecture, integration planning, execution, and stakeholder coordination. My job was to take shared enterprise rails, make them feel Method-specific, and get a zero-to-one DTC business live fast without compromising the long-term platform strategy.",
-    "whatIChanged": "Method couldn’t ship a generic store bolted onto enterprise middleware. The launch had to feel native to the brand, even on shared SC Johnson rails, and it had to move fast. This was a fast-follow launch, not a long greenfield build.",
-    "outcome": "Method proved SC Johnson could launch distinct brands faster on a shared platform, without rebuilding the stack each time.",
+        "problem": "Method had strong retail distribution and brand recognition but a homegrown commerce system that wasn't scaling or converting. A replatform risked two things: losing organic search traffic built over years, and signaling to retail partners like Target and Walmart that DTC was coming for their shelf space.",
+    "mandate": "Migrate Method to SC Johnson's shared BigCommerce stack, protect organic traffic through the transition, and structure the DTC launch so it grew revenue without creating channel conflict with existing retail partners.",
+    "whatIChanged": "Brought in outside SEO expertise to map redirect strategy and protect traffic before a single URL changed. Architected the launch model to position DTC as additive to retail, not competitive with it. Used Adobe Experience Cloud to drive the sales uplift plan and connect the launch strategy to measurable DTC growth. Kept Method on the shared SC Johnson platform so SC Johnson could replicate the model across future brands without rebuilding the stack.",
+    "outcome": "20% DTC revenue uplift across three launches. Organic traffic protected through the replatform. Retail relationships intact. SC Johnson had a proven model for future brand DTC entries.",
     "facts": [
       {
         "icon": "role",
@@ -82,7 +86,7 @@ export const methodRevampCaseStudy = {
       {
         "icon": "client",
         "label": "Industry",
-        "value": "CPG • Home Care • eCommerce"
+        "value": "CPG / Home Care / eCommerce"
       },
       {
         "icon": "timeline",
@@ -97,20 +101,21 @@ export const methodRevampCaseStudy = {
       {
         "icon": "budget",
         "label": "Budget / Scale",
-        "value": "$1"
+        "value": "$1M"
       },
       {
         "icon": "systems",
         "label": "Systems / Technology",
-        "value": "BigCommerce, SAP, Salsify"
+        "value": "BigCommerce, SAP, Salsify, AEM"
       }
     ]
   },
   "challenge": {
     "eyebrow": "Problem Statement",
-    "title": "Cult Brand, No DTC",
+    "title": "A Replatform With Two Ways to Lose",
     "paragraphs": [
-      "Method had brand equity, a clear design language, and a loyal customer base, but no true DTC channel. SC Johnson wanted growth fast without turning every brand launch into a custom tech project. The challenge was making shared commerce, ERP, product data, tax, fulfillment, service, and marketing rails feel seamless and unmistakably Method."
+      "Method had built real brand equity and a loyal customer base through retail, but the homegrown commerce system they were running on wasn't converting and wasn't going to scale. A replatform was the right call. The problem was that a badly executed replatform had two ways to damage the business: tank the organic search traffic they had spent years building, or signal to Target and Walmart that Method was going direct and coming for their customers.",
+      "Both failure conditions were real. Retailers watch DTC launches closely. A brand that looks like it is prioritizing direct over wholesale creates friction with its distribution partners at exactly the moment it needs them most. And an SEO crater during a platform migration can take 12 to 18 months to recover from, wiping out the conversion gains the new platform was supposed to deliver. The replatform had to work without triggering either outcome."
     ],
     "visual": {
       "kind": "react-diagram",
@@ -121,47 +126,46 @@ export const methodRevampCaseStudy = {
   },
   "ownership": {
     "eyebrow": "What I Owned",
-    "title": "I Made Shared Rails Feel Brand-Specific",
-    "summary": "I led the cross-functional launch across architecture, integration planning, execution, and stakeholder coordination. My job was to take shared enterprise rails, make them feel Method-specific, and get a zero-to-one DTC business live fast without compromising the long-term platform strategy.",
+    "title": "SEO, Channel Strategy, and a Clean Migration",
+    "summary": "I owned the migration strategy, the SEO protection plan, the retail channel architecture, and the cross-functional execution across SC Johnson, BigCommerce, and the agency team. The work required both technical judgment and commercial awareness: getting the platform right mattered less if the launch created channel conflict or a traffic loss that ate the gains.",
     "decisions": [
       {
-        "title": "Shared platform strategy",
-        "copy": "Protected the shared-platform strategy while still making Method's eCom feel fully brand-specific."
+        "title": "SEO protection strategy",
+        "copy": "Brought in a specialist SEO consultant to audit the existing traffic, map the redirect architecture, and validate URL structure before migration began. Organic traffic was treated as an asset to be preserved, not a risk to be managed after the fact."
+      },
+      {
+        "title": "Retail channel architecture",
+        "copy": "Structured the DTC launch positioning and product assortment to be additive to retail rather than competitive with it, giving Method a direct channel without creating friction with Target and Walmart."
+      },
+      {
+        "title": "Shared platform governance",
+        "copy": "Kept Method on SC Johnson's shared BigCommerce and SAP rails rather than building a custom stack, protecting the investment SC Johnson had already made and giving future brands a proven model to follow."
       },
       {
         "title": "System integration",
-        "copy": "Defined how SAP, Salsify, WMS, tax, payments, service, and marketing tools fit into the Method launch flow."
-      },
-      {
-        "title": "Brand templates",
-        "copy": "Turned brand storytelling needs into reusable templates and page types instead of one-off custom pages."
+        "copy": "Defined how SAP, Salsify, WMS, tax, payments, fulfillment, and marketing tools connected to the Method launch, with AEM handling content management across the brand experience."
       },
       {
         "title": "Launch execution",
-        "copy": "Connected the storefront, shared enterprise services, and brand experience layer."
-      },
-      {
-        "title": "Stakeholder coordination",
-        "copy": "I changed the trajectory in three places: I protected the shared-rails model, locked down how the core systems had to work together, and turned Method’s storytelling needs into reusable templates that felt like the brand without blowing up the architecture."
+        "copy": "Coordinated SC Johnson, BigCommerce, and the agency team across three launches (US, CA, Men's line) on a compressed timeline with a five-person team and no room for a prolonged cutover."
       }
     ]
   },
   "solution": {
     "mode": "three-column-and-diagram",
     "eyebrow": "Solution",
-    "title": "One Stack, Distinct Brand Experience",
-    "copy": "I helped launch Method on SC Johnson’s shared commerce foundation, then made the experience feel like Method instead of platform reuse.",
+    "title": "Migration Built Around What Could Not Break",
+    "copy": "The migration plan was sequenced around the two constraints that could not move: organic traffic and retail relationships. SEO work started before platform work. Channel positioning was defined before product assortment was finalized. Everything else — integration sequencing, template architecture, launch phasing — was organized around those two fixed points.",
     "architecture": [],
-    "diagramKey": "scj-commerce-architecture",
-    "summary": "Fast-follow launches go generic when teams treat them like copy and paste. This one worked because we used shared rails for speed without sanding off what made Method feel like Method."
+    "summary": "Replatforms fail when teams treat SEO and channel strategy as post-launch problems. Both had to be solved before the first URL changed and before the first DTC order was placed."
   },
   "impact": {
     "eyebrow": "Impact",
-    "title": "Growth, Speed, Repeatability",
-    "intro": "Method proved SC Johnson could launch distinct brands faster on a shared platform, without rebuilding the stack each time.",
+    "title": "Revenue Up, Traffic Protected, Retail Intact",
+    "intro": "Three launches. 20% DTC revenue uplift. Organic traffic protected through the migration. Retail partnerships undamaged. SC Johnson had a reusable model for the next brand.",
     "metrics": [
       {
-        "value": "$20",
+        "value": "20",
         "suffix": "%",
         "label": "DTC Revenue Uplift"
       },
@@ -176,9 +180,9 @@ export const methodRevampCaseStudy = {
         "label": "Unified Platform"
       },
       {
-        "value": "0-1",
+        "value": "0",
         "suffix": "",
-        "label": "DTC Channel"
+        "label": "SEO Traffic Loss"
       }
     ],
     "transformation": {
@@ -186,19 +190,19 @@ export const methodRevampCaseStudy = {
       "title": "Before & After",
       "rows": [
         {
-          "problem": "Method had strong retail recognition, but no true direct-to-consumer channel.",
-          "decision": "I kept Method on the shared SC Johnson architecture so the business could move fast and keep building a repeatable platform instead of funding a custom one-off.",
-          "outcome": "Method launched as a real DTC business on SC Johnson's shared commerce rails."
+          "problem": "Method's homegrown commerce system wasn't converting and couldn't scale to support the growth the brand was ready for.",
+          "decision": "I led the migration to SC Johnson's shared BigCommerce platform, brought in an outside SEO specialist before a single URL changed, and used Google Feed mapping and 301 redirects to protect every page of organic traffic through the cutover.",
+          "outcome": "Method achieved a 20% DTC revenue uplift across three launches with no measurable loss of organic traffic."
         },
         {
-          "problem": "The business had no historical data to learn from.",
-          "decision": "I turned Method's visual and storytelling requirements into reusable templates and page structures that fit the stack without flattening the brand.",
-          "outcome": "The experience felt brand-specific instead of generic platform reuse."
+          "problem": "Launching DTC risked signaling to Target and Walmart that Method was going direct and competing for their customers.",
+          "decision": "I structured the DTC assortment and channel positioning before launch so DTC was additive to the retail business, not a threat to it. The two channels were designed to coexist from day one.",
+          "outcome": "Method launched a full DTC operation without creating friction with its existing retail distribution partners."
         },
         {
-          "problem": "Every new brand launch risked becoming a separate technology project.",
-          "decision": "Once Method went live, SC Johnson had stronger evidence that shared enterprise rails could support distinct brands, real revenue, and repeatable expansion.",
-          "outcome": "The launch proved one unified platform could support multiple brands & markets."
+          "problem": "AEM and AEP were not part of the Mrs. Meyer's build. Method needed real-time personalization and behavioral analytics that the shared platform hadn't delivered before.",
+          "decision": "I implemented AEM for content management and AEP for real-time CDP and analytics, then wired both into the storefront through front-end hooks that gave the business live behavioral data from launch day.",
+          "outcome": "Method had a conversion and personalization layer that Mrs. Meyer's didn't, and SC Johnson had a more capable platform model to carry forward."
         }
       ]
     }
@@ -206,7 +210,7 @@ export const methodRevampCaseStudy = {
   "evidence": {
     "eyebrow": "Delivery Proof",
     "title": "Delivery Phases",
-    "intro": "Compressed launch with no room for drift. The work had to move fast and preserve the Method brand experience.",
+    "intro": "Three-month timeline. Three launches. SEO audit and redirect mapping completed before platform migration began. Retail channel positioning locked before product assortment was finalized.",
     "testimonial": {
       "quote": "Jim got it done.",
       "attributionTitle": "Tammy Tran",
@@ -216,13 +220,18 @@ export const methodRevampCaseStudy = {
     "validationItems": [
       {
         "eyebrow": "Phase 01",
-        "title": "Diagnose",
-        "copy": "Scoped 0-1 DTC channel, added in brand-specific CMS strategy."
+        "title": "Protect",
+        "copy": "SEO audit, redirect architecture, and retail channel positioning completed before platform migration touched a single URL."
       },
       {
         "eyebrow": "Phase 02",
         "title": "Align",
-        "copy": "Brought SCJ, BC, and LiveArea into one execution path."
+        "copy": "SC Johnson, BigCommerce, and LiveArea aligned on one execution path across integration sequencing, brand templates, and launch phasing."
+      },
+      {
+        "eyebrow": "Phase 03",
+        "title": "Launch",
+        "copy": "Three launches executed across US, Canada, and Men's line on a compressed timeline with a five-person team."
       }
     ]
   },
@@ -233,8 +242,8 @@ export const methodRevampCaseStudy = {
     ]
   },
   "finalCta": {
-    "eyebrow": "Next step",
-    "title": "Review the Method case study.",
-    "copy": "A direct legacy-parity preview."
+    "eyebrow": "Next",
+    "title": "See how the model started with Mrs. Meyer's.",
+    "copy": "Method was the follow-on. Mrs. Meyer's was SC Johnson's first DTC bet and the engagement that proved the shared platform could work."
   }
 } as CaseStudyRevampData
