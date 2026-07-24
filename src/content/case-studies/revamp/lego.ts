@@ -41,7 +41,7 @@ export const legoRevampCaseStudy = {
     }
   },
   "productionQuote": {
-    "quote": "We're not savvy enough where software development is going now, smaller applications, disruptive business models, omni-channel landscapes, e-commerce, web-based services, and so on. We're not nimble enough there. And we could risk ending up with a legacy platform instead of an advantage platform.",
+    "quote": "We're not savvy enough with omni-channel e-commerce. We risk ending up with a legacy platform instead of an advantage platform.",
     "attributionTitle": "Jørgen Vig Knudstorp",
     "attributionSubtitle": "Chief Executive Officer, LEGO",
     "avatarSrc": "/lego/jørgen-vig-knudstorp.jpg"
@@ -49,7 +49,7 @@ export const legoRevampCaseStudy = {
   "executiveBrief": {
     "eyebrow": "At-a-Glance",
     "title": "Omni-Channel, Finally",
-    "copy": "This was the engagement-layer work that helped LEGO stop behaving like a brand with a half-baked shop bolted onto a strong enterprise platform. I helped translate the digital transformation into customer-facing product requirements across navigation, cart, checkout, promotions, and cross-platform commerce behavior, so LEGO could grow through retail channels + e-commerce with a stronger omni-channel foundation.",
+    "copy": "This was the engagement-layer work that transformed LEGO from a dying brand back to a future-proof global enterprise. I helped translate the digital transformation into customer-facing product requirements across ditial and retail commerce channels, so LEGO could grow retail + e-commerce with a stronger omni-channel foundation.",
     "tools": [
       {
         "label": "Oracle ATG",
@@ -68,10 +68,10 @@ export const legoRevampCaseStudy = {
         "icon": "/tool-icons/svg/figma-logo.svg"
       }
     ],
-    "problem": "LEGO had already built a serious enterprise platform, but the customer-facing engagement layer was still lagging the market. The shop felt cluttered, navigation had grown messy, cart & checkout behavior varied too much across flows and regions, and the experience was not operating like a modern omni-channel storefront across retail and digital. The company needed a stronger digital product layer.",
+    "problem": "LEGO built a serious enterprise platform, but the customer-facing engagement layer was lagging behind the market. The omni-channel customer experience wasn't operating like a modern omni-channel storefront across retail and digital. The company needed a stronger digital product layer that seemlessly integrated with worldwide retail.",
     "mandate": "I was the commerce systems expert responsible for solutioning + UI/UX product management across the hardest parts of the LEGO shop transformation. My job was to take broad, generalized transformation goals and turn them into shippable product requirements that designers, business leaders, and engineers could all execute against.",
-    "whatIChanged": "The hard part here wasn't making prettier screens, it was translating a very broad digital transformation into concrete product behavior that could survive design politics, enterprise constraints, and real commerce complexity. LEGO needed the shop to stop feeling like an afterthought and start behaving like an omni-channel engagement layer of a world-class retail and digital brand.",
-    "outcome": "We made the shop easier to navigate, easier to optimize, and easier to scale globally",
+    "whatIChanged": "I translated very broad digital transformation into concrete product behavior across digital and retail channels. LEGO needed the shop to stop feeling like an afterthought and start behaving like an omni-channel engagement layer of a world-class retail and digital brand.",
+    "outcome": "We made the shop easier to navigate, easier to optimize, and easier to scale globally, while marrying the physical retail store experience.",
     "facts": [
       {
         "icon": "role",
@@ -112,9 +112,10 @@ export const legoRevampCaseStudy = {
   },
   "challenge": {
     "eyebrow": "Problem Statement",
-    "title": "A Great Brand Behind on Omni-Channel",
+    "title": "A Great Retail Brand Behind on Omni-Channel",
     "paragraphs": [
-      "LEGO had already built a serious enterprise platform, but the customer-facing engagement layer was still lagging the market. The shop felt cluttered, navigation had grown messy, cart & checkout behavior varied too much across flows and regions, and the experience was not operating like a modern omni-channel storefront across retail and digital. The company needed a stronger digital product layer."
+      "LEGO had the brand, the global retail footprint, and the enterprise infrastructure. What it didn't have was a digital commerce experience that matched any of it. The shop felt cluttered, cart and checkout behavior varied too much across regions and flows, and the experience wasn't holding up against competitors who had made digital their primary channel.",
+      "The stakes were real. BCG had been brought in to drive a global digital transformation, and the commerce platform was the centerpiece. A brand with LEGO's reach and margin profile couldn't afford to leave digital revenue on the table while the omni-channel gap between its stores and its website kept widening across 6 country variants.",
     ],
     "visual": {
       "kind": "image",
@@ -122,7 +123,7 @@ export const legoRevampCaseStudy = {
       "alt": "LEGO navigation, checkout, and omni-channel design authority materials",
       "aspectRatio": "16/9"
     },
-    "caption": "BCG • LEGO legacy case-study media."
+    "caption": "BCG • LEGO married the big box retail experience with digital."
   },
   "ownership": {
     "eyebrow": "What I Owned",
@@ -131,23 +132,23 @@ export const legoRevampCaseStudy = {
     "decisions": [
       {
         "title": "Experience structure",
-        "copy": "Cleaned up navigation and fixed the taxonomy around Sets, Bricks, Accessories, and Explore."
+        "copy": "Restructured the navigation taxonomy around Sets, Bricks, Accessories, and Explore to unify the browse experience across the website and retail store floors."
       },
       {
         "title": "Hard flows",
-        "copy": "Owned cart & checkout requirements across devices and markets."
+        "copy": "Defined cart and checkout requirements across devices, markets, and country variants, connecting the digital purchase flow to LEGO's physical retail inventory and fulfillment model."
       },
       {
         "title": "Strategy to product",
-        "copy": "Used Design Authority to force decisions and keep delivery moving."
+        "copy": "Translated BCG's omni-channel transformation strategy into shippable product requirements, turning consulting deliverables into stories engineering could build against."
       },
       {
         "title": "Design Authority",
-        "copy": "Used Design Authority materials to keep the product moving and drive development."
+        "copy": "Established a Design Authority process to force cross-team decisions and keep delivery moving across a 40-person program without losing the retail-digital integration thread."
       },
       {
         "title": "Device states",
-        "copy": "Owned detailed requirements for device-specific states across multiple country variants."
+        "copy": "Owned device-specific state requirements across 6 country variants, covering the edge cases that break the omni-channel experience when a customer moves between a store visit and an online purchase."
       }
     ]
   },
