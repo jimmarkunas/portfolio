@@ -15,7 +15,7 @@ export const cbdistilleryRevampCaseStudy = {
   "hero": {
     "eyebrow": "At-a-Glance",
     "title": "CBDistillery's: From De-Banked to $40m",
-    "intro": "CBDistillery was at risk of losing the ability to process cards. Despite millions in revenue, BC's payment partners wouldn't touch them, and without a banking solution the company would die instantly. I led negotiations that secured Square, forced a custom BigCommerce, Square & OrderGroove integration, and turned a payments rescue into $40m.",
+    "intro": "CBDistillery was at risk of losing the ability to process credit cards and digital payments. Despite millions in revenue, BC's payment partners wouldn't touch them, and without a banking solution the company would die instantly. I led negotiations that secured Square, forced a custom BigCommerce, Square & OrderGroove integration, and turned a payments rescue into $40m.",
     "metrics": [
       {
         "value": "$15",
@@ -41,7 +41,7 @@ export const cbdistilleryRevampCaseStudy = {
     }
   },
   "productionQuote": {
-    "quote": "Despite their millions of dollars in revenue, none of our approved payment partners would touch them. Jim worked tirelessly to find CBDistillery a payment provider and then convinced the C-levels at BC to support a custom integration with Square on a short timeline.",
+    "quote": "Despite millions of dollars in revenue, none of our payment partners would touch them. Jim worked tirelessly to find CBDistillery a payment provider and then convinced the C-levels at BC to support a custom integration with Square on a short timeline.",
     "attributionTitle": "Adrian Sorapuru",
     "attributionSubtitle": "Director, Strategic Business Development, BigCommerce",
     "avatarSrc": "/cbdistillery/adrian-sorapuru.jpeg"
@@ -69,8 +69,8 @@ export const cbdistilleryRevampCaseStudy = {
       }
     ],
     "problem": "CBDistillery had real volume, real demand, and a real business, but it was one of the hardest merchant categories to bank. Approved payment partners refused to underwrite the account, CBDistillery needed to move off WooCommerce, and subscriptions were a critical growth lever that depended on token vaulting & recurring billing. If payments failed, none of the rest of the commerce strategy mattered.",
-    "mandate": "I owned the fintech negotiations + the commerce & subscription architecture required to get CBDistillery banked & scaling. That meant negotiating the processor relationship, aligning BigCommerce, Square, and OrderGroove around a custom integration, and designing one stack that could support one-time orders, subscriptions, and wholesale without fragmenting the business.",
-    "whatIChanged": "CBDistillery didn’t need another storefront conversation. It needed a banking partner. I pushed the issue, worked back channels, and called in favors until Square agreed to bank the business, which gave the company a real path to scale subscriptions.",
+    "mandate": "I owned the fintech negotiations + the commerce & subscription architecture required to get CBDistillery banked & scaling. That meant negotiating the processor relationship, aligning BigCommerce, Square, and OrderGroove around a custom integration, and designing one unified commerce engine.",
+    "whatIChanged": "CBDistillery didn’t need a pretty storefront, it needed a banking partner. I pushed the issue, worked back channels, and called in favors until Square agreed to bank the business, which gave the company a real path to scale their entire enterprise.",
     "outcome": "Once payments were solved, the business could finally grow. The new stack supported subscriptions, retention, and real order volume.",
     "facts": [
       {
@@ -114,7 +114,8 @@ export const cbdistilleryRevampCaseStudy = {
     "eyebrow": "Problem Statement",
     "title": "High-Growth Brand Nobody Would Bank",
     "paragraphs": [
-      "CBDistillery had real volume, real demand, and a real business, but it was one of the hardest merchant categories to bank. Approved payment partners refused to underwrite the account, CBDistillery needed to move off WooCommerce, and subscriptions were a critical growth lever that depended on token vaulting & recurring billing. If payments failed, none of the rest of the commerce strategy mattered."
+      "CBDistillery had real volume, real demand, and a real business. It also sold CBD, which made it one of the hardest merchant categories to bank. Every major payment partner refused to underwrite the account, the existing WooCommerce stack couldn't support the subscription model they needed to grow, and without token vaulting and recurring billing, the entire commerce strategy stalled before it started.",
+      "The replatform to BigCommerce was the forcing function. But a new platform without a payment processor is just an expensive website. Solving the processor problem wasn't a side quest; it was the condition everything else depended on. I negotiated Square as the processor, which unlocked the subscription infrastructure and gave CBDistillery a path from $15M to $40M in GMV.",
     ],
     "visual": {
       "kind": "image",
@@ -127,7 +128,7 @@ export const cbdistilleryRevampCaseStudy = {
   "ownership": {
     "eyebrow": "What I Owned",
     "title": "I Solved the Payments Problem",
-    "summary": "I owned the fintech negotiations + the commerce & subscription architecture required to get CBDistillery banked & scaling. That meant negotiating the processor relationship, aligning BigCommerce, Square, and OrderGroove around a custom integration, and designing one stack that could support one-time orders, subscriptions, and wholesale without fragmenting the business.",
+    "summary": "I owned the fintech negotiations + the commerce & subscription architecture required to get CBDistillery banked & scaling. I aligned BigCommerce, Square, and OrderGroove around a custom integration, and designing one stack that could support one-time orders, subscriptions, and wholesale.",
     "decisions": [
       {
         "title": "Payments processor",
@@ -202,8 +203,8 @@ export const cbdistilleryRevampCaseStudy = {
     "intro": "Once payments were solved, the business could finally grow. The new stack supported subscriptions, retention, and real order volume.",
     "metrics": [
       {
-        "value": "$15",
-        "suffix": "M–$40M",
+        "value": "$25",
+        "suffix": "M",
         "label": "GMV Growth"
       },
       {
