@@ -5,7 +5,6 @@ export const dtv02RevampCaseStudy = {
   "breadcrumbCurrent": "DIRECTV Everywhere",
   "metadata": {
     "title": "Leading the Launch of DIRECTV Everywhere",
-    "description": "DIRECTV Everywhere was supposed to prove the company could bring premium video beyond the set-top box, but marketing had sold the dream before the product was ready. I stepped in to align 35+ teams around one product truth & turn a public promise into a scalable streaming experience.",
     "image": {
       "src": "/dtv02/hero-dtv02-01.png",
       "alt": "DIRECTV Everywhere cross-platform streaming launch hero image",

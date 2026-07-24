@@ -5,7 +5,6 @@ export const cwgRevampCaseStudy = {
   "breadcrumbCurrent": "Chicks With Guns",
   "metadata": {
     "title": "Chicks With Guns: Building a Digital Music Magazine",
-    "description": "In 2009, I founded Chicks With Guns as an online-first music publication built for web, mobile, and video. We grew to 250k+ monthly uniques, launched a native iOS app, built a global staff, and were recognized by Yahoo as a top online music publication.",
     "image": {
       "src": "/founder/cwg/hero-cwg-01.png",
       "alt": "Chicks With Guns founder case study hero image",

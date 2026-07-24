@@ -5,7 +5,6 @@ export const newyorklifeRevampCaseStudy = {
   "breadcrumbCurrent": "New York Life",
   "metadata": {
     "title": "New York Life's Scalable Product Platform",
-    "description": "Legal exposure, brand drift, and a brutal review process were dragging across thousands of agent sites. I helped turn that mess into a governed multi-tenant platform that cut launches from months to weeks, reduced review cycles from weeks to days, and drove roughly 200% more leads and appointments by implementing autonomous AI agentic commerce.",
     "image": {
       "src": "/newyorklife/hero-nyl-02.png",
       "alt": "New York Life product platform hero image showing governed agent site experiences",

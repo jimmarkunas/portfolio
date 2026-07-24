@@ -5,7 +5,6 @@ export const legoRevampCaseStudy = {
   "breadcrumbCurrent": "BCG • LEGO",
   "metadata": {
     "title": "LEGO's Digital Transformation With BCG",
-    "description": "LEGO was behind competitors like Target, Disney, and Walmart, and its shop experience wasn’t ready for the next stage of growth. I came in as scrum master and solution architect to turn strategy into shippable product behavior and build the infrastructure linking retail, ecommerce, and digital.",
     "image": {
       "src": "/lego/hero-lego-01.png",
       "alt": "LEGO omni-channel storefront and enterprise transformation hero image",

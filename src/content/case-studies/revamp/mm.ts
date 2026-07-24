@@ -5,7 +5,6 @@ export const mmRevampCaseStudy = {
   "breadcrumbCurrent": "Mrs. Meyer's",
   "metadata": {
     "title": "Launching Mrs. Meyer's First DTC Channel From Scratch",
-    "description": "Mrs. Meyer’s had no DTC channel, which left SC Johnson with no owned customer relationship, no first-party data, and no proof DTC could add revenue without cannibalizing retail.I led the launch across the commerce stack, then helped turn it into a reusable model for Caldrea and Method.",
     "image": {
       "src": "/mm/hero-mm-01.png",
       "alt": "Mrs. Meyer's direct-to-consumer commerce launch hero image",

@@ -5,7 +5,6 @@ export const dtv01RevampCaseStudy = {
   "breadcrumbCurrent": "DIRECTV",
   "metadata": {
     "title": "Turning DIRECTV's Offer Engine to a Revenue Machine",
-    "description": "DIRECTV was bleeding subscribers and money, but its upsell engine was trapped inside siloed teams, legacy systems, and a 6-month launch cycle too slow to matter. I came in to give the offer journey an owner, operationalize digital revenue across channels, and turn seasonal chaos into a repeatable commercial machine. The platform directly supported $221M in digital retention revenue in Q4 2025 and cut time-to-value by 60 days.",
     "image": {
       "src": "/dtv01/hero-dtv-01.png",
       "alt": "DIRECTV revenue platform hero image showing brand campaign artwork",

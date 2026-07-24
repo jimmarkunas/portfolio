@@ -13,7 +13,6 @@ export const modereRevampCaseStudy = {
   "breadcrumbCurrent": "Modere",
   "metadata": {
     "title": "Modere Preview",
-    "description": "Internal preview route for the Modere revamp case study.",
     "image": {
       "src": "/modere/hero-modere-01.png",
       "alt": "Modere composable commerce platform hero image",

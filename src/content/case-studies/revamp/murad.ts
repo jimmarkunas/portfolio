@@ -5,7 +5,6 @@ export const muradRevampCaseStudy = {
   "breadcrumbCurrent": "Murad",
   "metadata": {
     "title": "Murad: From Chaos to Creation",
-    "description": "Murad needed a cheaper, cleaner path off Magento and a subscription-first global DTC model that could sit on top of Oracle EBS and a messy pile of enterprise integrations. By the time I came in, two agencies were fired, the politics were bad, and three weeks before launch we learned BigCommerce couldn’t settle credit card payments over the API",
     "image": {
       "src": "/murad/hero-murad-01.png",
       "alt": "Murad global DTC replatform hero image",

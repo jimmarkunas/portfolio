@@ -5,7 +5,6 @@ export const cbdistilleryRevampCaseStudy = {
   "breadcrumbCurrent": "CBDistillery",
   "metadata": {
     "title": "CBDistillery's: From De-Banked to $40m",
-    "description": "CBDistillery was at risk of losing the ability to process cards. Despite millions in revenue, BC's payment partners wouldn't touch them, and without a banking solution the company would die instantly. I led negotiations that secured Square, forced a custom BigCommerce, Square & OrderGroove integration, and turned a payments rescue into $40m.",
     "image": {
       "src": "/cbdistillery/hero-cbd-01.png",
       "alt": "CBDistillery fintech and commerce product launch hero image",

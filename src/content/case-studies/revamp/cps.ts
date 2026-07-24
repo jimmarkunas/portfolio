@@ -26,7 +26,6 @@ export const caseStudy = {
   "breadcrumbCurrent": "CPS Energy",
   "metadata": {
     "title": "CPS Energy: Smart Streetlight & Smart City Operations",
-    "description": "I led the product and program work that connected resident reporting, operational systems, and field workflow into one accountable CPS Energy service loop.",
     "image": {
       "src": "/cps/hero-cps-01.png",
       "alt": "CPS Energy streetlight operations in San Antonio across a network of more than 225,000 streetlights",

@@ -5,7 +5,6 @@ export const biRevampCaseStudy = {
   "breadcrumbCurrent": "Boehringer Ingelheim",
   "metadata": {
     "title": "Boehringer Ingelheim: 1st B2B Adobe Cloud Commerce",
-    "description": "A global B2B commerce transformation across five markets, with one reference storefront and a controlled Oracle-to-SAP transition.",
     "image": {
       "src": "/bi/hero-bi-01.png",
       "alt": "Boehringer Ingelheim global B2B commerce program",

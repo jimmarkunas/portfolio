@@ -5,7 +5,6 @@ export const k2RevampCaseStudy = {
   "breadcrumbCurrent": "K2 Sports",
   "metadata": {
     "title": "Headless/Composable Commerce for 9 K2 Brands",
-    "description": "K2 Sports was being forced off a dying Demandware stack, but they still wanted each brand to feel distinct while finance & operations wanted one manageable engine underneath everything. I led the program and solution architecture that turned that mess into a headless multi-brand model, with BigCommerce powering commerce, WordPress and Contentstack powering the front end, and Avante plus Quivers staying the source of truth.",
     "image": {
       "src": "/k2/hero-k2-01.png",
       "alt": "K2 Sports headless multi-brand commerce transformation hero image",

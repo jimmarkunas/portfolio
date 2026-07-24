@@ -5,7 +5,6 @@ export const zevoRevampCaseStudy = {
   "breadcrumbCurrent": "ZEVO",
   "metadata": {
     "title": "Interactive Internet TV Before it was Mainstream",
-    "description": "I co-founded ZEVO in 2010 on a bet that internet-native TV would combine live programming, on-demand viewing, and commerce. I led product vision, roadmap, and fundraising through meetings with Oak, Norwest, TCV, and Ashton Kutcher’s team.",
     "image": {
       "src": "/founder/zevo/hero-zevo-01.png",
       "alt": "ZEVO internet TV concept hero artwork",

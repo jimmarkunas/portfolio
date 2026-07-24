@@ -5,7 +5,6 @@ export const methodRevampCaseStudy = {
   "breadcrumbCurrent": "Method",
   "metadata": {
     "title": "Method: Brand-True DTC Launch on Shared Rails",
-    "description": "Method had strong brand equity and a loyal customer base, but no owned DTC channel. I led the fast-follow launch on SC Johnson’s shared BigCommerce and SAP stack, then made the experience feel like Method, not enterprise reuse.",
     "image": {
       "src": "/method/hero-method-01.png",
       "alt": "Method direct-to-consumer launch hero image",

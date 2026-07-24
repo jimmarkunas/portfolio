@@ -5,7 +5,6 @@ export const aaRevampCaseStudy = {
   "breadcrumbCurrent": "American Apparel",
   "metadata": {
     "title": "Saving American Apparel With Digital Commerce",
-    "description": "American Apparel's global Oracle ATG, RFID, and omni-channel commerce transformation.",
     "image": {
       "src": "/aa/hero-aa-01.png",
       "alt": "American Apparel omni-channel commerce transformation hero image",
