@@ -89,7 +89,11 @@ export function NodeCard({
 }
 
 function CombinedLayersShell({ children }: { children: ReactNode }) {
-  return <>{children}</>
+  return (
+    <div className="overflow-hidden rounded-[10px] border border-[#7b7b7b] bg-white">
+      {children}
+    </div>
+  )
 }
 
 function LayerSection({
@@ -114,12 +118,13 @@ function LayerSection({
       <div
         onClick={onHeaderClick}
         className={cn(
-          "flex h-16 items-center justify-start gap-2 border-b border-[var(--color-border)] bg-white px-0 py-3 text-left",
+          "flex h-16 items-center justify-center gap-2 border-b border-[var(--color-border)] px-0 py-3 text-center",
+          headerBg,
           onHeaderClick && "cursor-pointer transition-[outline,box-shadow] duration-150 hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]"
         )}
       >
         <HeaderIcon dark>{icon}</HeaderIcon>
-        <div className="flex flex-col items-start gap-0.5 text-left">
+        <div className="flex flex-col items-center gap-0.5 text-center">
           <div className="type-h6 text-[var(--color-ink)]">{title}</div>
         </div>
       </div>
@@ -187,6 +192,7 @@ export function StorefrontAndCommerceLayers({
         icon={<img src="/tool-icons/svg/bc-logo-icon.svg" alt="BigCommerce" className="h-8 w-8" />}
         title="Commerce System Layer"
         showDivider={false}
+        headerBg="bg-white"
         subtitle="Commerce Platform"
         onHeaderClick={() => toggle("commerce-layer")}
       >
