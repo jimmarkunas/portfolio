@@ -65,6 +65,7 @@ export type CaseStudySolutionDiagramKey =
   | "murad-architecture"
   | "bi-commerce-ecosystem"
   | "scj-commerce-architecture"
+  | "method-seo-cro-flow"
   | "modere-simulation"
   | "nyl-rbac-workflow"
 
