@@ -86,7 +86,7 @@ export const methodRevampCaseStudy = {
       {
         "icon": "client",
         "label": "Industry",
-        "value": "CPG / Home Care / eCommerce"
+        "value": "CPG • Home Care • eCommerce"
       },
       {
         "icon": "timeline",

@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SCJ_TOOLTIPS } from "./scjDiagramData";
-import ParticleCanvas from "./ParticleCanvas";
 import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
 import {
   SCJ_COMMERCE_NODES,
@@ -22,6 +21,39 @@ type Box = { left: number; top: number; width: number; height: number };
 type ComponentProps = {
   className?: string;
 };
+
+function pointOnPath(path: { x: number; y: number }[], progress: number) {
+  const lengths = path.slice(1).map((point, index) => Math.hypot(point.x - path[index].x, point.y - path[index].y));
+  const total = lengths.reduce((sum, length) => sum + length, 0);
+  let distance = progress * total;
+  for (let index = 0; index < lengths.length; index += 1) {
+    if (distance <= lengths[index]) {
+      const start = path[index];
+      const end = path[index + 1];
+      const ratio = lengths[index] === 0 ? 0 : distance / lengths[index];
+      return { x: start.x + (end.x - start.x) * ratio, y: start.y + (end.y - start.y) * ratio };
+    }
+    distance -= lengths[index];
+  }
+  return path[path.length - 1] ?? { x: 0, y: 0 };
+}
+
+function DeterministicDots({ paths, reducedMotion }: { paths: { x: number; y: number }[][]; reducedMotion: boolean }) {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    if (reducedMotion) return;
+    let frame = 0;
+    const startedAt = performance.now();
+    const tick = (now: number) => {
+      setProgress(((now - startedAt) % 4800) / 4800);
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [reducedMotion]);
+  if (reducedMotion) return null;
+  return <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">{paths.map((path, index) => { const point = pointOnPath(path, progress); return <span key={index} className="absolute h-[9px] w-[9px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#447ACB]" style={{ left: point.x, top: point.y }} />; })}</div>;
+}
 
 const cardVariants = {
   hidden:  { opacity: 0, y: 28 },
@@ -128,9 +160,7 @@ function DesktopDiagram({
         variants={shouldReduceMotion ? undefined : staggerParent}
       >
       <div ref={wrapperRef} className="relative">
-        {!shouldReduceMotion && particlePaths.length > 0 && (
-          <ParticleCanvas paths={particlePaths} containerRef={wrapperRef as React.RefObject<HTMLElement>} />
-        )}
+        {!shouldReduceMotion && particlePaths.length > 0 && <DeterministicDots paths={particlePaths} reducedMotion={shouldReduceMotion} />}
 
         <div className="relative z-10 flex flex-col items-center gap-5">
           <motion.div className="w-full" variants={cardVariants} transition={cardTransition}>

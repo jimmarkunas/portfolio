@@ -112,7 +112,7 @@ export const caseStudy = {
       {
         "icon": "client",
         "label": "Industry",
-        "value": "Public Utilities / Smart City"
+        "value": "Public Utilities • Smart City"
       },
       {
         "icon": "timeline",
