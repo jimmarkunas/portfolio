@@ -59,7 +59,7 @@ export function MuradArrowsLayer() {
             direction="forward"
             speed={14.2}
             radius={4.5}
-            color="rgb(68,122,203)"
+            color="#447ACB"
             spacingMode="uniform"
           />
         </svg>
@@ -105,7 +105,7 @@ export function MuradArrowsLayer() {
             direction="forward"
             speed={14.2}
             radius={4.5}
-            color="rgb(68,122,203)"
+            color="#447ACB"
             spacingMode="uniform"
           />
         </svg>
