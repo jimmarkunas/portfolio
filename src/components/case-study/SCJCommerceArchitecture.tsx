@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SCJ_TOOLTIPS } from "./scjDiagramData";
 import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
@@ -16,44 +16,11 @@ import {
   cn,
 } from "@/components/case-study/diagram-shared/SCJDiagramPrimitives";
 
-type Box = { left: number; top: number; width: number; height: number };
-
 type ComponentProps = {
   className?: string;
 };
 
-function pointOnPath(path: { x: number; y: number }[], progress: number) {
-  const lengths = path.slice(1).map((point, index) => Math.hypot(point.x - path[index].x, point.y - path[index].y));
-  const total = lengths.reduce((sum, length) => sum + length, 0);
-  let distance = progress * total;
-  for (let index = 0; index < lengths.length; index += 1) {
-    if (distance <= lengths[index]) {
-      const start = path[index];
-      const end = path[index + 1];
-      const ratio = lengths[index] === 0 ? 0 : distance / lengths[index];
-      return { x: start.x + (end.x - start.x) * ratio, y: start.y + (end.y - start.y) * ratio };
-    }
-    distance -= lengths[index];
-  }
-  return path[path.length - 1] ?? { x: 0, y: 0 };
-}
-
-function DeterministicDots({ paths, reducedMotion }: { paths: { x: number; y: number }[][]; reducedMotion: boolean }) {
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    if (reducedMotion) return;
-    let frame = 0;
-    const startedAt = performance.now();
-    const tick = (now: number) => {
-      setProgress(((now - startedAt) % 4800) / 4800);
-      frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [reducedMotion]);
-  if (reducedMotion) return null;
-  return <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">{paths.map((path, index) => { const point = pointOnPath(path, progress); return <span key={index} className="absolute h-[9px] w-[9px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#447ACB]" style={{ left: point.x, top: point.y }} />; })}</div>;
-}
+type Box = { left: number; top: number; width: number; height: number };
 
 const cardVariants = {
   hidden:  { opacity: 0, y: 28 },
@@ -81,8 +48,8 @@ function useMeasuredNodes(ids: readonly MeasuredNodeId[]) {
         const rect = node.getBoundingClientRect();
         next[id] = {
           left: rect.left - wrapperRect.left,
-          top:  rect.top  - wrapperRect.top,
-          width:  rect.width,
+          top: rect.top - wrapperRect.top,
+          width: rect.width,
           height: rect.height,
         };
       });
@@ -110,9 +77,6 @@ function useMeasuredNodes(ids: readonly MeasuredNodeId[]) {
   return { wrapperRef, boxes, setNodeRef };
 }
 
-
-// ─── Connectors ──────────────────────────────────────────────────────────────
-
 // ─── Diagrams ─────────────────────────────────────────────────────────────────
 
 function DesktopDiagram({
@@ -133,22 +97,22 @@ function DesktopDiagram({
 
   const { wrapperRef, boxes, setNodeRef } = useMeasuredNodes(measuredIds);
 
-  const particlePaths = useMemo(() => {
+  const enterpriseRails = useMemo(() => {
     const api = boxes.api;
     if (!api) return [];
-    const paths: { x: number; y: number }[][] = [];
-    SCJ_COMMERCE_NODES.forEach((node, index) => {
-      const topBox    = boxes[node.id];
-      const bottomBox = boxes[SCJ_SYSTEM_NODES[index].id];
-      if (!topBox || !bottomBox) return;
-      const topX    = topBox.left    + topBox.width    / 2;
-      const topY    = topBox.top     + topBox.height;
-      const bottomX = bottomBox.left + bottomBox.width / 2;
-      const bottomY = bottomBox.top;
-      paths.push([{ x: topX, y: topY },               { x: topX,    y: api.top            }]);
-      paths.push([{ x: bottomX, y: api.top + api.height }, { x: bottomX, y: bottomY }]);
+    const apiBottom = api.top + api.height;
+    const systemRails = SCJ_SYSTEM_NODES.flatMap((node) => {
+      const systemBox = boxes[node.id];
+      if (!systemBox) return [];
+      const systemTop = systemBox.top;
+      const centerX = systemBox.left + systemBox.width / 2;
+      const xs = node.id === "erp" || node.id === "oms" || node.id === "esp" ? [
+        { id: `${node.id}-left`, x: centerX - 15 },
+        { id: `${node.id}-right`, x: centerX + 15 },
+      ] : [{ id: node.id, x: centerX }];
+      return xs.map((rail) => ({ id: rail.id, x: rail.x, top: apiBottom - 1, bottom: systemTop + 1 }));
     });
-    return paths;
+    return systemRails;
   }, [boxes]);
 
   return (
@@ -160,7 +124,21 @@ function DesktopDiagram({
         variants={shouldReduceMotion ? undefined : staggerParent}
       >
       <div ref={wrapperRef} className="relative">
-        {!shouldReduceMotion && particlePaths.length > 0 && <DeterministicDots paths={particlePaths} reducedMotion={shouldReduceMotion} />}
+        <svg className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-visible" aria-hidden="true">
+          {enterpriseRails.map((rail) => (
+            <line
+              key={rail.id}
+              x1={Math.round(rail.x) + 0.5}
+              y1={Math.round(rail.top)}
+              x2={Math.round(rail.x) + 0.5}
+              y2={Math.round(rail.bottom)}
+              stroke="#959595"
+              strokeWidth={1}
+              vectorEffect="non-scaling-stroke"
+              shapeRendering="crispEdges"
+            />
+          ))}
+        </svg>
 
         <div className="relative z-10 flex flex-col items-center gap-5">
           <motion.div className="w-full" variants={cardVariants} transition={cardTransition}>
