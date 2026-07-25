@@ -21,6 +21,7 @@ type ComponentProps = {
 };
 
 type Box = { left: number; top: number; width: number; height: number };
+type LocalMeasuredNodeId = MeasuredNodeId | "combined";
 const SCJ_DESKTOP_CANVAS_WIDTH = 1440;
 
 const cardVariants = {
@@ -31,10 +32,10 @@ const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
 const staggerParent = { hidden: {}, visible: { transition: { staggerChildren: 0.09 } } };
 const viewport = { once: true, amount: 0.1 } as const;
 
-function useMeasuredNodes(ids: readonly MeasuredNodeId[], diagramScale: number) {
+function useMeasuredNodes(ids: readonly LocalMeasuredNodeId[], diagramScale: number) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const nodeRefs = useRef<Partial<Record<MeasuredNodeId, HTMLDivElement | null>>>({});
-  const [boxes, setBoxes] = useState<Partial<Record<MeasuredNodeId, Box>>>({});
+  const nodeRefs = useRef<Partial<Record<LocalMeasuredNodeId, HTMLDivElement | null>>>({});
+  const [boxes, setBoxes] = useState<Partial<Record<LocalMeasuredNodeId, Box>>>({});
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -43,7 +44,7 @@ function useMeasuredNodes(ids: readonly MeasuredNodeId[], diagramScale: number) 
     const update = () => {
       const wrapperRect = wrapper.getBoundingClientRect();
       const safeScale = diagramScale > 0 ? diagramScale : 1;
-      const next: Partial<Record<MeasuredNodeId, Box>> = {};
+      const next: Partial<Record<LocalMeasuredNodeId, Box>> = {};
       ids.forEach((id) => {
         const node = nodeRefs.current[id];
         if (!node) return;
@@ -72,7 +73,7 @@ function useMeasuredNodes(ids: readonly MeasuredNodeId[], diagramScale: number) 
     };
   }, [ids, diagramScale]);
 
-  const setNodeRef = (id: MeasuredNodeId) => (element: HTMLDivElement | null) => {
+  const setNodeRef = (id: LocalMeasuredNodeId) => (element: HTMLDivElement | null) => {
     nodeRefs.current[id] = element;
   };
 
@@ -95,11 +96,37 @@ function DesktopDiagram({
       ...SCJ_COMMERCE_NODES.map((n) => n.id),
       ...SCJ_SYSTEM_NODES.map((n) => n.id),
       "api",
-    ] as MeasuredNodeId[],
+      "combined",
+    ] as LocalMeasuredNodeId[],
     []
   );
 
   const { wrapperRef, boxes, setNodeRef } = useMeasuredNodes(measuredIds, diagramScale);
+
+  const upperRails = useMemo(() => {
+    const combinedBox = boxes.combined;
+    const api = boxes.api;
+    if (!combinedBox || !api) return [];
+
+    const combinedBottom = combinedBox.top + combinedBox.height;
+    const apiTop = api.top;
+    const combinedCenterX = combinedBox.left + combinedBox.width / 2;
+
+    return [
+      {
+        id: "combined-api-left",
+        x: combinedCenterX - 15,
+        top: combinedBottom - 1,
+        bottom: apiTop + 1,
+      },
+      {
+        id: "combined-api-right",
+        x: combinedCenterX + 15,
+        top: combinedBottom - 1,
+        bottom: apiTop + 1,
+      },
+    ];
+  }, [boxes]);
 
   const enterpriseRails = useMemo(() => {
     const api = boxes.api;
@@ -129,6 +156,19 @@ function DesktopDiagram({
       >
       <div ref={wrapperRef} className="relative">
         <svg className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-visible" aria-hidden="true">
+          {upperRails.map((rail) => (
+            <line
+              key={rail.id}
+              x1={Math.round(rail.x) + 0.5}
+              y1={Math.round(rail.top)}
+              x2={Math.round(rail.x) + 0.5}
+              y2={Math.round(rail.bottom)}
+              stroke="#959595"
+              strokeWidth={1}
+              vectorEffect="non-scaling-stroke"
+              shapeRendering="crispEdges"
+            />
+          ))}
           {enterpriseRails.map((rail) => (
             <line
               key={rail.id}
@@ -145,7 +185,7 @@ function DesktopDiagram({
         </svg>
 
         <div className="relative z-10 flex flex-col items-center gap-5">
-          <motion.div className="w-full" variants={cardVariants} transition={cardTransition}>
+          <motion.div ref={setNodeRef("combined")} className="w-full" variants={cardVariants} transition={cardTransition}>
             <StorefrontAndCommerceLayers
               toggle={toggle}
               topGridClass="grid grid-cols-5 gap-5"
