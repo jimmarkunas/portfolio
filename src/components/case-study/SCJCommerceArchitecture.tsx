@@ -165,6 +165,7 @@ function DesktopDiagram({
                   label={node.label}
                   icon={<BrandMark brand={node.brand} />}
                   nodeRef={setNodeRef(node.id)}
+                  centerLabel
                   onClick={() => toggle(node.id)}
                 />
               ))}

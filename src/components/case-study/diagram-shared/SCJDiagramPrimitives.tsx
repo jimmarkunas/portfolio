@@ -19,13 +19,7 @@ export function cn(...parts: Array<string | false | null | undefined>) {
 }
 
 function TextLines({ label }: { label: string }) {
-  return (
-    <>
-      {label.split("\n").map((line) => (
-        <span key={line} className="block">{line}</span>
-      ))}
-    </>
-  )
+  return <span>{label.replace(/\n/g, " ")}</span>
 }
 
 function UserExperienceBadge() {
@@ -72,16 +66,21 @@ export function NodeCard({
   icon,
   nodeRef,
   onClick,
+  centerLabel = false,
 }: {
   label: string
   icon: ReactNode
   nodeRef?: (el: HTMLDivElement | null) => void
   onClick?: () => void
+  centerLabel?: boolean
 }) {
   return (
     <div ref={nodeRef} onClick={onClick} className={cn(NODE_CARD_BASE, onClick && "cursor-pointer hover:border-[var(--color-accent)] hover:shadow-[0_0_0_2px_rgba(68,122,203,0.18),0_8px_24px_rgba(68,122,203,0.22)]")}>
       {icon}
-      <div className="type-p4 max-w-[150px] text-[var(--color-ink)]">
+      <div className={cn(
+        "type-p4 flex max-w-[150px] justify-center text-center text-[var(--color-ink)]",
+        centerLabel ? "items-start" : "h-12 items-start"
+      )}>
         <TextLines label={label} />
       </div>
     </div>
