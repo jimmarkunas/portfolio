@@ -21,6 +21,7 @@ type ComponentProps = {
 };
 
 type Box = { left: number; top: number; width: number; height: number };
+const SCJ_DESKTOP_CANVAS_WIDTH = 1440;
 
 const cardVariants = {
   hidden:  { opacity: 0, y: 28 },
@@ -30,7 +31,7 @@ const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
 const staggerParent = { hidden: {}, visible: { transition: { staggerChildren: 0.09 } } };
 const viewport = { once: true, amount: 0.1 } as const;
 
-function useMeasuredNodes(ids: readonly MeasuredNodeId[]) {
+function useMeasuredNodes(ids: readonly MeasuredNodeId[], diagramScale: number) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const nodeRefs = useRef<Partial<Record<MeasuredNodeId, HTMLDivElement | null>>>({});
   const [boxes, setBoxes] = useState<Partial<Record<MeasuredNodeId, Box>>>({});
@@ -41,16 +42,17 @@ function useMeasuredNodes(ids: readonly MeasuredNodeId[]) {
 
     const update = () => {
       const wrapperRect = wrapper.getBoundingClientRect();
+      const safeScale = diagramScale > 0 ? diagramScale : 1;
       const next: Partial<Record<MeasuredNodeId, Box>> = {};
       ids.forEach((id) => {
         const node = nodeRefs.current[id];
         if (!node) return;
         const rect = node.getBoundingClientRect();
         next[id] = {
-          left: rect.left - wrapperRect.left,
-          top: rect.top - wrapperRect.top,
-          width: rect.width,
-          height: rect.height,
+          left: (rect.left - wrapperRect.left) / safeScale,
+          top: (rect.top - wrapperRect.top) / safeScale,
+          width: rect.width / safeScale,
+          height: rect.height / safeScale,
         };
       });
       setBoxes(next);
@@ -68,7 +70,7 @@ function useMeasuredNodes(ids: readonly MeasuredNodeId[]) {
       observer.disconnect();
       window.removeEventListener("resize", update);
     };
-  }, [ids]);
+  }, [ids, diagramScale]);
 
   const setNodeRef = (id: MeasuredNodeId) => (element: HTMLDivElement | null) => {
     nodeRefs.current[id] = element;
@@ -82,9 +84,11 @@ function useMeasuredNodes(ids: readonly MeasuredNodeId[]) {
 function DesktopDiagram({
   toggle,
   shouldReduceMotion,
+  diagramScale,
 }: {
   toggle: (key: string) => void
   shouldReduceMotion: boolean
+  diagramScale: number
 }) {
   const measuredIds = useMemo(
     () => [
@@ -95,7 +99,7 @@ function DesktopDiagram({
     []
   );
 
-  const { wrapperRef, boxes, setNodeRef } = useMeasuredNodes(measuredIds);
+  const { wrapperRef, boxes, setNodeRef } = useMeasuredNodes(measuredIds, diagramScale);
 
   const enterpriseRails = useMemo(() => {
     const api = boxes.api;
@@ -116,7 +120,7 @@ function DesktopDiagram({
   }, [boxes]);
 
   return (
-    <div className="hidden md:block">
+    <div>
       <motion.div
         initial={shouldReduceMotion ? false : "hidden"}
         whileInView={shouldReduceMotion ? undefined : "visible"}
@@ -144,8 +148,8 @@ function DesktopDiagram({
           <motion.div className="w-full" variants={cardVariants} transition={cardTransition}>
             <StorefrontAndCommerceLayers
               toggle={toggle}
-              topGridClass="grid grid-cols-3 gap-3 xl:grid-cols-5 xl:gap-5"
-              commerceGridClass="grid grid-cols-3 gap-3 xl:grid-cols-6 xl:gap-5"
+              topGridClass="grid grid-cols-5 gap-5"
+              commerceGridClass="grid grid-cols-6 gap-5"
               setNodeRef={setNodeRef}
             />
           </motion.div>
@@ -154,7 +158,7 @@ function DesktopDiagram({
             <div className="absolute inset-x-0 top-6">
               <ApiLayer nodeRef={setNodeRef("api")} onClick={() => toggle("api")} />
             </div>
-            <div className="grid grid-cols-3 gap-3 xl:grid-cols-6 xl:gap-5">
+            <div className="grid grid-cols-6 gap-5">
               {SCJ_SYSTEM_NODES.map((node) => (
                 <NodeCard
                   key={node.id}
@@ -173,44 +177,58 @@ function DesktopDiagram({
   );
 }
 
-function MobileDiagram({
+function ScaledDesktopDiagram({
   toggle,
   shouldReduceMotion,
 }: {
   toggle: (key: string) => void
   shouldReduceMotion: boolean
 }) {
+  const frameRef = useRef<HTMLDivElement | null>(null);
+  const canvasRef = useRef<HTMLDivElement | null>(null);
+  const [availableWidth, setAvailableWidth] = useState(SCJ_DESKTOP_CANVAS_WIDTH);
+  const [naturalHeight, setNaturalHeight] = useState(0);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    const canvas = canvasRef.current;
+    if (!frame || !canvas) return;
+
+    const update = () => {
+      setAvailableWidth(frame.clientWidth);
+      setNaturalHeight(canvas.scrollHeight);
+    };
+
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(frame);
+    observer.observe(canvas);
+    window.addEventListener("resize", update);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  const scale = Math.min(1, availableWidth / SCJ_DESKTOP_CANVAS_WIDTH);
+  const scaledWidth = SCJ_DESKTOP_CANVAS_WIDTH * scale;
+  const canvasLeft = Math.max(0, (availableWidth - scaledWidth) / 2);
+  const scaledHeight = naturalHeight * scale;
+
   return (
-    <motion.div
-      className="space-y-4 md:hidden"
-      initial={shouldReduceMotion ? false : "hidden"}
-      whileInView={shouldReduceMotion ? undefined : "visible"}
-      viewport={viewport}
-      variants={shouldReduceMotion ? undefined : staggerParent}
-    >
-      <motion.div variants={cardVariants} transition={cardTransition}>
-        <StorefrontAndCommerceLayers
+    <div ref={frameRef} className="relative w-full overflow-hidden" style={{ height: scaledHeight || undefined }}>
+      <div
+        ref={canvasRef}
+        className="absolute left-0 top-0 w-[1440px] origin-top-left px-8 py-6"
+        style={{ transform: `scale(${scale})`, left: canvasLeft }}
+      >
+        <DesktopDiagram
           toggle={toggle}
-          topGridClass="grid grid-cols-2 gap-2.5 sm:grid-cols-2"
-          commerceGridClass="grid grid-cols-2 gap-2.5 sm:grid-cols-2 lg:grid-cols-3"
+          shouldReduceMotion={shouldReduceMotion}
+          diagramScale={scale}
         />
-      </motion.div>
-
-      <motion.div variants={cardVariants} transition={cardTransition}>
-        <ApiLayer onClick={() => toggle("api")} />
-      </motion.div>
-
-      <motion.div className="grid grid-cols-2 gap-2.5 sm:grid-cols-2 lg:grid-cols-3" variants={cardVariants} transition={cardTransition}>
-        {SCJ_SYSTEM_NODES.map((node) => (
-          <NodeCard
-            key={node.id}
-            label={node.label}
-            icon={<BrandMark brand={node.brand} />}
-            onClick={() => toggle(node.id)}
-          />
-        ))}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 
@@ -223,9 +241,8 @@ export default function SCJCommerceArchitecture({ className }: ComponentProps) {
       tooltips={SCJ_TOOLTIPS}
     >
       {({ toggle, shouldReduceMotion }) => (
-        <div className="mx-auto max-w-[1440px] px-4 py-4 md:px-6 md:py-6 xl:px-8">
-          <DesktopDiagram toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
-          <MobileDiagram toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
+        <div className="mx-auto w-full max-w-[1440px]">
+          <ScaledDesktopDiagram toggle={toggle} shouldReduceMotion={shouldReduceMotion} />
         </div>
       )}
     </DiagramRendererHost>

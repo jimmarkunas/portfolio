@@ -90,7 +90,7 @@ export function NodeCard({
 
 function CombinedLayersShell({ children }: { children: ReactNode }) {
   return (
-    <div className="overflow-hidden rounded-[10px] border border-[#7b7b7b] bg-white">
+    <div className="overflow-hidden rounded-[10px] border border-[#222222] bg-white">
       {children}
     </div>
   )
