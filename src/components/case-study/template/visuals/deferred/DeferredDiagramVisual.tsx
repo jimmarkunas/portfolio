@@ -20,7 +20,6 @@ const SOLUTION_DIAGRAM_LOADERS: Record<
   "murad-architecture": () => import("@/components/case-study/MuradArchitectureDiagram"),
   "bi-commerce-ecosystem": () => import("@/components/case-study/bi-commerce-ecosystem-diagram"),
   "scj-commerce-architecture": () => import("@/components/case-study/SCJCommerceArchitecture"),
-  "method-seo-cro-flow": () => import("@/components/case-study/method-seo-cro-flow/MethodSeoCroFlow").then((module) => ({ default: module.MethodSeoCroFlow })),
   "modere-simulation": () => import("@/components/case-study/modere-simulation/ModereSimulation"),
   "nyl-rbac-workflow": () => import("@/components/case-study/NylRbacWorkflow"),
 }

@@ -155,7 +155,6 @@ export const methodRevampCaseStudy = {
     "mode": "three-column-and-diagram",
     "eyebrow": "Solution",
     "title": "Migration Built Around What Could Not Break",
-    "diagramKey": "method-seo-cro-flow",
     "copy": "The migration plan was sequenced around the two constraints that could not move: organic traffic and retail relationships. SEO work started before platform work. Channel positioning was defined before product assortment was finalized. Everything else — integration sequencing, template architecture, launch phasing — was organized around those two fixed points.",
     "architecture": [],
     "summary": "Replatforms fail when teams treat SEO and channel strategy as post-launch problems. Both had to be solved before the first URL changed and before the first DTC order was placed."
