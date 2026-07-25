@@ -64,7 +64,12 @@ export const caseStudyPreviewRegistry: CaseStudyPreviewRecord[] = [
     approvedTag: "bi-revamp-approved-2026-07-19",
   }),
   record("mm", "Launching Mrs. Meyer's First DTC Channel From Scratch", "C", "partial", true),
-  record("method", "Method: Brand-True DTC Launch on Shared Rails", "C", "legacy-only", true),
+  record("method", "Method: Brand-True DTC Launch on Shared Rails", "C", "legacy-only", true, {
+    migrationStatus: "in-progress",
+    routeKind: "explicit",
+    previewHref: "/work/case-study-test/method",
+    notes: "Diagram-only preview; live Method and shared Mrs. Meyer's routes remain unchanged.",
+  }),
   record("murad", "Murad: From Chaos to Creation", "C", "legacy-only", true),
   record("k2", "Headless/Composable Commerce for 9 K2 Brands", "C", "legacy-only", true),
   record("cbdistillery", "CBDistillery's: From De-Banked to $40m", "B", "legacy-only", false),
