@@ -30,8 +30,8 @@ function UserExperienceBadge() {
   )
 }
 
-function HeaderIcon({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
-  return <span className="inline-flex h-6 w-6 items-center justify-center text-[var(--color-ink)]">{children}</span>
+function HeaderIcon({ children, dark = false, className }: { children: ReactNode; dark?: boolean; className?: string }) {
+  return <span className={cn("inline-flex h-6 w-6 items-center justify-center text-[var(--color-ink)]", className)}>{children}</span>
 }
 
 function BrandIcon({ src, alt }: { src: string; alt: string }) {
@@ -102,6 +102,7 @@ function LayerSection({
   children,
   showDivider = true,
   headerBg = "bg-zinc-100",
+  headerText = "text-[var(--color-ink)]",
   onHeaderClick,
 }: {
   icon: ReactNode
@@ -110,21 +111,22 @@ function LayerSection({
   children: ReactNode
   showDivider?: boolean
   headerBg?: string
+  headerText?: string
   onHeaderClick?: () => void
 }) {
   return (
-    <div className={cn("bg-white", showDivider && "border-b border-[var(--color-border)]")}>
+    <div className={cn("bg-white", showDivider && "border-b border-[#222222]")}>
       <div
         onClick={onHeaderClick}
         className={cn(
-          "flex h-16 items-center justify-center gap-2 border-b border-[var(--color-border)] px-0 py-3 text-center",
+          "flex h-16 items-center justify-center gap-2 border-b border-[#222222] px-0 py-3 text-center",
           headerBg,
           onHeaderClick && "cursor-pointer transition-[outline,box-shadow] duration-150 hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]"
         )}
       >
-        <HeaderIcon dark>{icon}</HeaderIcon>
+        <HeaderIcon dark className={headerText}>{icon}</HeaderIcon>
         <div className="flex flex-col items-center gap-0.5 text-center">
-          <div className="type-h6 text-[var(--color-ink)]">{title}</div>
+          <div className={cn("type-h6", headerText)}>{title}</div>
         </div>
       </div>
       <div className="p-4">{children}</div>
@@ -172,6 +174,8 @@ export function StorefrontAndCommerceLayers({
       <LayerSection
         icon={<LayoutGrid className="h-5 w-5" />}
         title="Storefront Design"
+        headerBg="bg-[#222222]"
+        headerText="text-[#f1f1f1]"
         subtitle="Presentation Layer"
         onHeaderClick={() => toggle("storefront")}
       >
@@ -188,10 +192,11 @@ export function StorefrontAndCommerceLayers({
       </LayerSection>
 
       <LayerSection
-        icon={<img src="/tool-icons/svg/bc-logo-icon.svg" alt="BigCommerce" className="h-8 w-8" />}
+        icon={<img src="/tool-icons/svg/bc-logo-icon.svg" alt="BigCommerce" className="h-8 w-8 invert" />}
         title="Commerce System Layer"
         showDivider={false}
-        headerBg="bg-white"
+        headerBg="bg-[#222222]"
+        headerText="text-[#f1f1f1]"
         subtitle="Commerce Platform"
         onHeaderClick={() => toggle("commerce-layer")}
       >
