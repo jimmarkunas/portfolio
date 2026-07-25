@@ -9,7 +9,7 @@ import { CASE_STUDY_SECTION_INTRO_CLASS } from "./CaseStudySectionIntro"
 
 export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevampData }) {
   const isDirectvRevenueChart = data.challenge.visual.kind === "react-diagram" && data.challenge.visual.component === "directv-revenue"
-  const isRetailChart = data.challenge.visual.kind === "react-diagram" && data.challenge.visual.component === "retail-vs-dtc"
+  const isRetailChart = data.challenge.visual.kind === "react-diagram" && ["retail-vs-dtc", "method-traffic-continuity"].includes(data.challenge.visual.component)
 
   return (
     <section className="bg-[#F3F3F3]">

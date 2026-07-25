@@ -65,6 +65,7 @@ export type CaseStudySolutionDiagramKey =
   | "murad-architecture"
   | "bi-commerce-ecosystem"
   | "scj-commerce-architecture"
+  | "method-seo-cro-flow"
   | "modere-simulation"
   | "nyl-rbac-workflow"
 
@@ -100,7 +101,7 @@ export type CaseStudyMedia =
     }
   | {
       kind: "react-diagram"
-      component: "bi-data-silos" | "nyl-velocity-chart" | "directv-revenue" | "retail-vs-dtc"
+      component: "bi-data-silos" | "nyl-velocity-chart" | "directv-revenue" | "retail-vs-dtc" | "method-traffic-continuity"
       brandName?: string
     }
 

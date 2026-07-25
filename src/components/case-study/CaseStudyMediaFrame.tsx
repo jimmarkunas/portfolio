@@ -51,6 +51,14 @@ export function CaseStudyMediaFrame({
             loadingLabel="Loading chart..."
           />
         )}
+        {media.component === "method-traffic-continuity" && (
+          <DeferredProblemChartVisual
+            chartKey="method-traffic-continuity"
+            eager={eager}
+            minHeightClassName="min-h-[320px] md:min-h-[360px]"
+            loadingLabel="Loading chart..."
+          />
+        )}
       </div>
     )
   }
