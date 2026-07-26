@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SCJ_TOOLTIPS } from "./scjDiagramData";
 import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
@@ -37,47 +37,50 @@ function useMeasuredNodes(ids: readonly LocalMeasuredNodeId[], diagramScale: num
   const nodeRefs = useRef<Partial<Record<LocalMeasuredNodeId, HTMLDivElement | null>>>({});
   const [boxes, setBoxes] = useState<Partial<Record<LocalMeasuredNodeId, Box>>>({});
 
+  const remeasure = useCallback(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const safeScale = diagramScale > 0 ? diagramScale : 1;
+    const next: Partial<Record<LocalMeasuredNodeId, Box>> = {};
+    ids.forEach((id) => {
+      const node = nodeRefs.current[id];
+      if (!node) return;
+      const rect = node.getBoundingClientRect();
+      next[id] = {
+        left: (rect.left - wrapperRect.left) / safeScale,
+        top: (rect.top - wrapperRect.top) / safeScale,
+        width: rect.width / safeScale,
+        height: rect.height / safeScale,
+      };
+    });
+    setBoxes(next);
+  }, [ids, diagramScale]);
+
   useEffect(() => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
 
-    const update = () => {
-      const wrapperRect = wrapper.getBoundingClientRect();
-      const safeScale = diagramScale > 0 ? diagramScale : 1;
-      const next: Partial<Record<LocalMeasuredNodeId, Box>> = {};
-      ids.forEach((id) => {
-        const node = nodeRefs.current[id];
-        if (!node) return;
-        const rect = node.getBoundingClientRect();
-        next[id] = {
-          left: (rect.left - wrapperRect.left) / safeScale,
-          top: (rect.top - wrapperRect.top) / safeScale,
-          width: rect.width / safeScale,
-          height: rect.height / safeScale,
-        };
-      });
-      setBoxes(next);
-    };
-
-    update();
-    const observer = new ResizeObserver(update);
+    remeasure();
+    const observer = new ResizeObserver(remeasure);
     observer.observe(wrapper);
     ids.forEach((id) => {
       const node = nodeRefs.current[id];
       if (node) observer.observe(node);
     });
-    window.addEventListener("resize", update);
+    window.addEventListener("resize", remeasure);
     return () => {
       observer.disconnect();
-      window.removeEventListener("resize", update);
+      window.removeEventListener("resize", remeasure);
     };
-  }, [ids, diagramScale]);
+  }, [ids, remeasure]);
 
   const setNodeRef = (id: LocalMeasuredNodeId) => (element: HTMLDivElement | null) => {
     nodeRefs.current[id] = element;
   };
 
-  return { wrapperRef, boxes, setNodeRef };
+  return { wrapperRef, boxes, setNodeRef, remeasure };
 }
 
 // ─── Diagrams ─────────────────────────────────────────────────────────────────
@@ -101,7 +104,7 @@ function DesktopDiagram({
     []
   );
 
-  const { wrapperRef, boxes, setNodeRef } = useMeasuredNodes(measuredIds, diagramScale);
+  const { wrapperRef, boxes, setNodeRef, remeasure } = useMeasuredNodes(measuredIds, diagramScale);
 
   const upperRails = useMemo(() => {
     const combinedBox = boxes.combined;
@@ -194,7 +197,7 @@ function DesktopDiagram({
             />
           </motion.div>
 
-          <motion.div className="relative w-full px-5 pt-36" variants={cardVariants} transition={cardTransition}>
+          <motion.div className="relative w-full px-5 pt-36" variants={cardVariants} transition={cardTransition} onAnimationComplete={remeasure}>
             <div className="absolute inset-x-0 top-6">
               <ApiLayer nodeRef={setNodeRef("api")} onClick={() => toggle("api")} />
             </div>
