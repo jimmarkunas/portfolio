@@ -34,10 +34,17 @@ function HeaderIcon({ children, dark = false, className }: { children: ReactNode
   return <span className={cn("inline-flex h-6 w-6 items-center justify-center text-[var(--color-ink)]", className)}>{children}</span>
 }
 
-function BrandIcon({ src, alt }: { src: string; alt: string }) {
+const SCJ_THIN_GLYPH_FILTER_ID = "scj-thin-glyph"
+
+function BrandIcon({ src, alt, thin = false }: { src: string; alt: string; thin?: boolean }) {
   return (
     <div className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-[2px]">
-      <img src={src} alt={alt} className="h-full w-full object-contain" />
+      <img
+        src={src}
+        alt={alt}
+        className="h-full w-full object-contain"
+        style={thin ? { filter: `url(#${SCJ_THIN_GLYPH_FILTER_ID})` } : undefined}
+      />
     </div>
   )
 }
@@ -92,6 +99,18 @@ function CombinedLayersShell({ children }: { children: ReactNode }) {
     <div className="overflow-hidden rounded-[10px] border border-[#222222] bg-white">
       {children}
     </div>
+  )
+}
+
+function ThinGlyphFilter() {
+  return (
+    <svg aria-hidden="true" className="pointer-events-none absolute h-0 w-0">
+      <defs>
+        <filter id={SCJ_THIN_GLYPH_FILTER_ID} x="-10%" y="-10%" width="120%" height="120%">
+          <feMorphology in="SourceGraphic" operator="erode" radius="0.45" />
+        </filter>
+      </defs>
+    </svg>
   )
 }
 
@@ -170,49 +189,52 @@ export function StorefrontAndCommerceLayers({
   setNodeRef?: (id: MeasuredNodeId) => (el: HTMLDivElement | null) => void
 }) {
   return (
-    <CombinedLayersShell>
-      <LayerSection
-        icon={<LayoutGrid className="h-5 w-5" />}
-        title="Storefront Design"
-        headerBg="bg-[#222222]"
-        headerText="text-[#f1f1f1]"
-        subtitle="Presentation Layer"
-        onHeaderClick={() => toggle("storefront")}
-      >
-        <div className={topGridClass}>
-          {SCJ_TOP_NODES.map((node) => (
-            <NodeCard
-              key={node.id}
-              label={node.label}
-              icon={<BrandIcon src={node.iconSrc} alt={node.iconAlt} />}
-              onClick={() => toggle(node.id)}
-            />
-          ))}
-        </div>
-      </LayerSection>
+    <>
+      <ThinGlyphFilter />
+      <CombinedLayersShell>
+        <LayerSection
+          icon={<LayoutGrid className="h-5 w-5" />}
+          title="Storefront Design"
+          headerBg="bg-[#222222]"
+          headerText="text-[#f1f1f1]"
+          subtitle="Presentation Layer"
+          onHeaderClick={() => toggle("storefront")}
+        >
+          <div className={topGridClass}>
+            {SCJ_TOP_NODES.map((node) => (
+              <NodeCard
+                key={node.id}
+                label={node.label}
+                icon={<BrandIcon src={node.iconSrc} alt={node.iconAlt} thin />}
+                onClick={() => toggle(node.id)}
+              />
+            ))}
+          </div>
+        </LayerSection>
 
-      <LayerSection
-        icon={<img src="/tool-icons/svg/bc-logo-icon.svg" alt="BigCommerce" className="h-8 w-8 invert" />}
-        title="Commerce System Layer"
-        showDivider={false}
-        headerBg="bg-[#222222]"
-        headerText="text-[#f1f1f1]"
-        subtitle="Commerce Platform"
-        onHeaderClick={() => toggle("commerce-layer")}
-      >
-        <div className={commerceGridClass}>
-          {SCJ_COMMERCE_NODES.map((node) => (
-            <NodeCard
-              key={node.id}
-              label={node.label}
-              icon={<BrandIcon src={node.iconSrc} alt={node.iconAlt} />}
-              nodeRef={setNodeRef?.(node.id)}
-              onClick={() => toggle(node.id)}
-            />
-          ))}
-        </div>
-      </LayerSection>
-    </CombinedLayersShell>
+        <LayerSection
+          icon={<img src="/tool-icons/svg/bc-logo-icon.svg" alt="BigCommerce" className="h-8 w-8 invert" />}
+          title="Commerce System Layer"
+          showDivider={false}
+          headerBg="bg-[#222222]"
+          headerText="text-[#f1f1f1]"
+          subtitle="Commerce Platform"
+          onHeaderClick={() => toggle("commerce-layer")}
+        >
+          <div className={commerceGridClass}>
+            {SCJ_COMMERCE_NODES.map((node) => (
+              <NodeCard
+                key={node.id}
+                label={node.label}
+                icon={<BrandIcon src={node.iconSrc} alt={node.iconAlt} thin />}
+                nodeRef={setNodeRef?.(node.id)}
+                onClick={() => toggle(node.id)}
+              />
+            ))}
+          </div>
+        </LayerSection>
+      </CombinedLayersShell>
+    </>
   )
 }
 
