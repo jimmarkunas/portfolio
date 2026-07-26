@@ -14,12 +14,12 @@ export const biRevampCaseStudy = {
   },
   "hero": {
     "eyebrow": "Adobe Experience Cloud · B2B Commerce · Animal Health · Pharmaceuticals",
-    "title": "Boehringer Ingelheim: 1st B2B Adobe Cloud Commerce",
-    "intro": "Boehringer Ingelheim had five markets, country-specific business rules, and a commerce model that didn't scale. I led the product and program work to define one global reference storefront, decide where local variation belonged, and keep commerce stable through the shift from Oracle to SAP. Five countries. One global model. Three years. No country was allowed to break the program, and none did.",
+    "title": "Boehringer Ingelheim: B2B Adobe Cloud Commerce",
+    "intro": "I was brought in by Publicis Sapient to replace a PM who had burned the timeline, lost stakeholder trust, and left the scope in pieces. I stabilized the program in 21 days. Then, mid-program, an Oracle-to-SAP migration landed on top of the live commerce build, adding ERP continuity risk to an already distressed engagement. Five countries. Three years. One global model. The program held.",
     "metrics": [
       {
         "value": "10",
-        "suffix": "×",
+        "suffix": "x",
         "label": "Online Sales Uplift"
       },
       {
@@ -47,8 +47,8 @@ export const biRevampCaseStudy = {
   },
   "executiveBrief": {
     "eyebrow": "At-a-Glance",
-    "title": "Global Cloud Commerce",
-    "copy": "I led product and program delivery for a high-risk global commerce transformation across 5 countries, anchored in the U.S. and France. The work had to align storefront logic, ERP migration, and multi-vendor delivery without letting local complexity or cutover risk derail it.",
+    "title": "Global Cloud Commerce: Rescued & Delivered",
+    "copy": "Publicis Sapient brought me in to replace a failing PM on one of the most complex B2B commerce programs they had, 5 countries, a distressed client relationship, and an Oracle-to-SAP migration that arrived mid-program. I rebuilt the delivery structure, restored stakeholder trust, and got the program across the line across every country it touched.",
     "tools": [
       {
         "label": "Adobe Commerce Cloud",
@@ -75,10 +75,10 @@ export const biRevampCaseStudy = {
         "icon": "/tool-icons/svg/mulesoft-logo.svg"
       }
     ],
-    "problem": "Every country ran its own B2B commerce setup, with no shared global model, while the Oracle-to-SAP migration increased delivery and continuity risk.",
-    "mandate": "Build one global model that countries could follow while safely managing the ERP transition underneath it.",
-    "whatIChanged": "I defined the global reference storefront, set boundaries for local variation, managed Oracle and SAP in parallel, and protected the roadmap from country-specific exceptions.",
-    "outcome": "10× online sales uplift. 15%+ order throughput improvement. 12% fewer service escalations. U.S. online sales grew from 3% to 30% of total animal health revenue.",
+    "problem": "The prior PM had burned the timeline, fractured stakeholder trust, and left the scope uncontrolled. Boehringer had 5 markets running independent commerce models with no shared global infrastructure, and a surprise Oracle-to-SAP migration was about to add live ERP continuity risk to an already failing engagement.",
+    "mandate": "Replace the prior PM, stabilize the engagement, define a global reference storefront across 5 countries, and manage the Oracle-to-SAP migration in parallel without letting it stall or break the commerce program.",
+    "whatIChanged": "Rebuilt delivery structure and stakeholder trust within 21 days. Defined the global reference storefront that gave all 5 countries one model to follow. Set clear boundaries for local variation so market exceptions couldn't fragment the platform. Managed Oracle and SAP running in parallel, sequencing cutovers country by country without breaking commerce continuity.",
+    "outcome": "10x online sales uplift. 15%+ order throughput improvement. 12% fewer service escalations. U.S. online sales grew from 3% to 30% of total animal health revenue. Five countries delivered. Program held through a mid-build ERP migration.",
     "facts": [
       {
         "icon": "role",
@@ -103,58 +103,58 @@ export const biRevampCaseStudy = {
       {
         "icon": "team",
         "label": "Team / Stakeholders",
-        "value": "10+ person team"
+        "value": "10 + scalable offshore across US and EU"
       },
       {
         "icon": "budget",
         "label": "Budget / Scale",
-        "value": "$30M program budget"
+        "value": "$30M"
       },
       {
         "icon": "systems",
         "label": "Systems / Technology",
-        "value": "Adobe Commerce Cloud, AEM, AEP, SAP, Oracle, MuleSoft; 8 integrations"
+        "value": "Adobe Commerce Cloud, AEM, AEP, SAP, Oracle, MuleSoft"
       }
     ]
   },
   "challenge": {
     "eyebrow": "Problem Statement",
-    "title": "Five Markets, 7 Messes",
+    "title": "Distressed Program + Live ERP Migration",
     "paragraphs": [
-      "The core problem was simple: every market had its own commerce model, and none of it scaled. Multi-million-dollar accounts were still ordering by phone, customers were dealing with awkward eligibility rules and fragmented support, and the business was trying to modernize commerce while moving from Oracle to SAP. Boehringer didn't need another country patch. It needed one global model that could flex locally without losing control.",
-      "The scale and regulatory complexity made it harder. Boehringer supports customers with products for many animal species, taking into account different regulations for pets and livestock across countries. B2B customers needed the right catalog, pricing, and ordering flow without a support call to sort out the rest. Every market had its own version of that problem, and no shared infrastructure existed to solve it.",
-      "The Oracle-to-SAP migration added a live continuity risk to the delivery environment. Every roadmap decision carried business continuity stakes. The work required managing two ERP systems in parallel while the commerce platform was being built on top of both — without letting the migration stall or fragment the commerce program."
+      "The program was  on fire when I arrived; the prior PM  burned the timeline, broke stakeholder trust on both sides of the Atlantic, and left scope uncontrolled across 5 markets. Multi-million-dollar accounts were still ordering by phone, and the client had lost confidence in the delivery team.",
+      "I stabilized everything in 21 days: rebuilt the delivery structure, restored trust with US and EU stakeholders, and got the program back on a trackable roadmap. Then, the Oracle-to-SAP migration landed mid-build, on top of a live commerce program across five countries with active cutover sequencing already in motion.",
+      "The scale and regulatory complexity made it worse. Five markets, multiple animal species, different regulations for pets and livestock in every country. Every market needed its own catalog, pricing, and ordering flow. No country was allowed to break the program. ",
     ],
     "visual": {
       "kind": "react-diagram",
       "component": "bi-data-silos"
     },
-    "caption": "Five markets. Five versions of commerce truth. None of them scalable."
+    "caption": "Five markets. A distressed program. A live ERP migration mid-build. One global model that had to hold through all of it."
   },
   "ownership": {
-    "eyebrow": "My Role",
-    "title": "Senior Product & Program Manager",
-    "summary": "I ran the product and program spine of the transformation. I defined the global storefront, set the rules for local variation, managed Oracle-to-SAP coexistence, and kept backlog, vendors, and cutover from drifting while the business kept running.",
+    "eyebrow": "What I Owned",
+    "title": "I Rescued the Program and Delivered Anyway",
+    "summary": "I ran the product and program spine of the transformation, from initial stabilization through global delivery. That meant rebuilding stakeholder trust, defining the global storefront, setting the rules for local variation, managing Oracle and SAP in parallel, and protecting the roadmap from both country pressure and ERP disruption.",
     "decisions": [
       {
-        "title": "Replaced the Prior PM and Stabilized the Engagement",
-        "copy": "I was brought in by Publicis to save the project and replace the current PM. I rebuilt the delivery structure, re-established stakeholder trust across U.S. and EU teams, and put the program back on a trackable roadmap."
+        "title": "Stabilized a Distressed Engagement in 21 Days",
+        "copy": "Burned timeline, fractured client relationships, and uncontrolled scope across US and EU. I rebuilt the delivery structure, re-established stakeholder trust on both sides, and put the program back on a trackable roadmap within three weeks of arriving."
       },
       {
         "title": "Defined the Global Reference Storefront",
-        "copy": "I defined the global reference model that anchored the U.S. and France, giving the program one backbone instead of five competing patterns."
+        "copy": "I defined the global reference model anchored in the US and France that gave all 5 countries one backbone to follow. That made the program scalable and stopped local market exceptions from fragmenting the platform."
+      },
+      {
+        "title": "Managed the Oracle-to-SAP Migration Mid-Program",
+        "copy": "When the ERP migration landed mid-build, I owned the coexistence strategy, managing Oracle and SAP running in parallel, sequencing country-by-country cutovers, and protecting business continuity without stalling the commerce program."
       },
       {
         "title": "Set the Rules for Local Variation",
-        "copy": "I set the boundaries for what markets could localize — catalog eligibility, pricing rules, and language — while keeping variation from breaking the global model."
+        "copy": "I defined what markets could localize: catalog eligibility, pricing rules, language, and what had to stay global. Every market got what it needed without breaking the global model."
       },
       {
-        "title": "Managed Oracle-to-SAP Coexistence",
-        "copy": "I managed both systems running side-by-side, protected cutover sequencing, and made sure business continuity was not sacrificed for technical convenience."
-      },
-      {
-        "title": "Locked Down Scope Against Country Pressure",
-        "copy": "I locked down scope and managed the backlog against the global model, stopping country pressure from turning one platform into a patchwork."
+        "title": "Protected Scope Against Three Years of Country Pressure",
+        "copy": "Across 3 years and 5 countries, I locked down scope against the global model, managed the backlog through parallel tracks, and kept the program from drifting."
       }
     ]
   },
@@ -162,8 +162,8 @@ export const biRevampCaseStudy = {
     "mode": "diagram",
     "background": "white",
     "eyebrow": "Solution",
-    "title": "Classic Adobe With a Twist",
-    "copy": "Rebuilt a global commerce model that could handle regulated B2B ordering, localization, and ERP transition without breaking.",
+    "title": "One Global Model, Controlled Local Variation, Parallel ERP",
+    "copy": "The solution required three things to work simultaneously: a global commerce model that 5 countries could follow, a local variation framework that gave markets flexibility, and an Oracle/SAP ERP coexistence strategy.",
     "architecture": [
       {
         "eyebrow": "Commerce Architecture",
@@ -200,16 +200,16 @@ export const biRevampCaseStudy = {
         ]
       }
     ],
-    "summary": ""
+    "summary": "Most programs fail when complexity compounds. This one held because every decision, storefront architecture, local variation boundaries, ERP cutover sequencing, was made against one governing model instead of negotiated market by market."
   },
   "impact": {
     "eyebrow": "Impact",
-    "title": "Scale, Throughput, Stability",
-    "intro": "Fragmented B2B commerce became a scalable global system with more digital volume, fewer service escalations, and a platform that could absorb country complexity.",
+    "title": "Delivered Across Five Countries Through a Live ERP Migration",
+    "intro": "A formerly distressed program delivered 10x online sales uplift, 15%+ order throughput improvement, and grew US online sales from 3% to 30% of total animal health revenue.",
     "metrics": [
       {
         "value": "10",
-        "suffix": "×",
+        "suffix": "x",
         "label": "Online Sales",
         "detail": "Online sales uplift since Adobe Commerce launch"
       },
@@ -228,7 +228,7 @@ export const biRevampCaseStudy = {
       {
         "value": "30",
         "suffix": "%",
-        "label": "U.S. Online Sales",
+        "label": "US Online Sales",
         "detail": "Up from 3% of total animal health revenue"
       }
     ],
@@ -236,19 +236,19 @@ export const biRevampCaseStudy = {
       "eyebrow": "Before & After",
       "rows": [
         {
-          "problem": "Every market had its own way of doing commerce. Nothing was shared, and country exceptions kept multiplying.",
-          "decision": "I defined the global reference storefront that anchored 5 countries and locked scope against fragmentation.",
-          "outcome": "One global reference storefront supported 5 countries and online sales scaled 10×."
+          "problem": "Dead on arrival: the program burned its timeline, lost stakeholder trust, and left scope uncontrolled across 5 markets.",
+          "decision": "I rebuilt the delivery structure and re-established stakeholder trust across US and EU teams within 21 days, then put the program back on a trackable roadmap.",
+          "outcome": "The program moved from distressed to on-track and stayed there through three years, 5 countries, and a mid-build ERP migration."
         },
         {
-          "problem": "Large B2B accounts were still ordering by phone, with fragmented eligibility handling and service escalations.",
-          "decision": "I drove a B2B self-service model with country-specific catalog eligibility and regulated ordering flows.",
-          "outcome": "Service escalations fell 12% and customers got cleaner ordering and eligibility handling."
+          "problem": "Multi-million dollar B2B accounts were still ordering by phone, with fragmented catalog eligibility and no self-service ordering path.",
+          "decision": "I delivered a global B2B self-service model with country-specific catalog eligibility and regulated ordering flows, built on Adobe Commerce Cloud with SAP as the commercial source of truth.",
+          "outcome": "Service escalations fell 12%, order throughput improved 15%+, and US online sales grew from 3% to 30% of total animal health revenue."
         },
         {
-          "problem": "Country customizations and ERP change created constant cutover risk while Oracle and SAP ran in parallel.",
-          "decision": "I managed coexistence country by country, protecting business continuity while the technical backbone changed.",
-          "outcome": "Throughput improved 15%+ and the platform stayed stable through the ERP transition."
+          "problem": "The Oracle-to-SAP migration arrived mid-program, adding live ERP continuity risk to an already complex five-country commerce build.",
+          "decision": "I managed Oracle and SAP running in parallel, sequenced country-by-country cutovers, and protected business continuity without stalling the commerce program.",
+          "outcome": "The platform stayed stable through the full ERP transition. Online sales scaled 10x. No country broke the program."
         }
       ]
     }
@@ -256,7 +256,7 @@ export const biRevampCaseStudy = {
   "evidence": {
     "eyebrow": "Delivery Proof",
     "title": "What the Work Actually Produced",
-    "intro": "The strongest outside proof here is not hype — it is validation from Adobe and Corra that the platform delivered measurable digital growth, global flexibility, and a stronger operating model for animal health commerce.",
+    "intro": "Three external sources independently documented the platform outcomes. The strongest proof is not what the delivery team claimed — it is what Adobe, Publicis Sapient, and Corra each published independently about what the platform delivered.",
     "testimonial": {
       "quote": "Multi-million dollar accounts were still ordering over the phone; it was a scalability and an operations problem.",
       "attributionTitle": "Max Booker",
@@ -265,43 +265,43 @@ export const biRevampCaseStudy = {
     },
     "validationItems": [
       {
+        "eyebrow": "Stabilization",
+        "title": "Program Rescued in 21 Days",
+        "copy": "A distressed engagement with burned timeline, broken stakeholder trust, and uncontrolled scope was rebuilt into a trackable program within three weeks of arrival."
+      },
+      {
         "eyebrow": "Architecture",
         "title": "One Global Model That Held Across Five Countries",
-        "copy": "The reference model stopped the platform from being buried under country exceptions."
+        "copy": "The reference model stopped the platform from being buried under country exceptions and gave Boehringer a scalable foundation for international B2B commerce."
       },
       {
         "eyebrow": "ERP Migration",
         "title": "Commerce Survived the Migration",
-        "copy": "The governance model kept both systems operational in parallel and sequenced cutovers without breaking commerce."
-      },
-      {
-        "eyebrow": "B2B Operations",
-        "title": "Self-Service Replaced Phone-Based Procurement",
-        "copy": "Multi-million-dollar B2B accounts moved into self-service ordering with country-specific eligibility."
+        "copy": "Oracle and SAP ran in parallel for the duration of the ERP transition. Country-by-country cutover sequencing protected business continuity without stalling the commerce program."
       }
     ]
   },
   "recognition": {
     "eyebrow": "Recognition",
     "title": "Press & Accolades",
-    "intro": "Three external sources independently documented the platform outcomes — Adobe on the commerce results, Publicis Sapient/Corra on the global architecture, and Corra again on the reference gateway model.",
+    "intro": "Thanks to my work, Adobe uses BI as a case study and Publicis Sapient/Corra own the gold standard on B2B Adobe Experience Cloud implementations.",
     "rows": [
       {
         "publisher": "Adobe",
         "date": "2024",
-        "summary": "Adobe says Boehringer Ingelheim used Adobe Commerce to create more scalable B2B ecommerce in animal health, with U.S. online sales climbing from 3% to 30% after launch.",
+        "summary": "Adobe documented how Boehringer Ingelheim used Adobe Commerce to build scalable B2B ecommerce in animal health, with US online sales climbing from 3% to 30% of total revenue after launch.",
         "pdfHref": "/bi/files/BI-AdobeCaseStudy.pdf"
       },
       {
         "publisher": "Publicis Sapient / Corra",
         "date": "2024",
-        "summary": "Corra describes how Boehringer Ingelheim built a global reference B2B storefront for regulated veterinary ordering and international expansion with headless architecture and modular services.",
+        "summary": "Corra documented how Boehringer Ingelheim built a global reference B2B storefront for regulated veterinary ordering and international expansion using headless architecture and modular services.",
         "pdfHref": "/bi/files/BI-Publicis-Sapient-Case-Study_01.pdf"
       },
       {
         "publisher": "Corra",
         "date": "2024",
-        "summary": "Corra details the two global reference gateways for the U.S., France, and the rest of the world, showing how regional logic stayed scalable and maintainable.",
+        "summary": "Corra detailed the two global reference gateways built for the US, France, and the rest of the world, showing how regional logic stayed scalable and maintainable across five markets.",
         "pdfHref": "/bi/files/BI-Publicis-Sapient-Case-Study_02.pdf"
       }
     ]
@@ -313,8 +313,8 @@ export const biRevampCaseStudy = {
     ]
   },
   "finalCta": {
-    "eyebrow": "Next step",
-    "title": "If this preview looks right, we can wire it into the live case study next.",
-    "copy": "Use this preview route to confirm the hierarchy, spacing, and interactive diagram before any live BI migration."
+    "eyebrow": "Next",
+    "title": "See the composable commerce program that followed.",
+    "copy": "Boehringer was a stabilization and global delivery story. Modere was the composable architecture story — a different kind of complexity, a different kind of rescue."
   }
 } as CaseStudyRevampData
