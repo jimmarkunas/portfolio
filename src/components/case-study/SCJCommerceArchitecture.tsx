@@ -1,12 +1,11 @@
 "use client";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SCJ_TOOLTIPS } from "./scjDiagramData";
 import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
 import {
   SCJ_COMMERCE_NODES,
   SCJ_SYSTEM_NODES,
-  type MeasuredNodeId,
 } from "@/components/case-study/diagram-config/scj-architecture.config";
 import {
   ApiLayer,
@@ -20,9 +19,141 @@ type ComponentProps = {
   className?: string;
 };
 
-type Box = { left: number; top: number; width: number; height: number };
-type LocalMeasuredNodeId = MeasuredNodeId | "combined";
 const SCJ_DESKTOP_CANVAS_WIDTH = 1440;
+type ScjRoute = {
+  id: string
+  points: readonly { x: number; y: number }[]
+  direction: "up" | "down"
+}
+
+const SCJ_CANVAS_HEIGHT = 743
+const SCJ_DOT_DURATION = 2666.625
+const SCJ_DOT_RADIUS = 4.5
+const SCJ_DOT_COLOR = "#447ACB"
+const SCJ_DOT_PHASES = [0] as const
+const SCJ_DOT_FADE_WINDOW = 0.08
+
+const SCJ_ROUTES: readonly ScjRoute[] = [
+  {
+    id: "combined-api-left",
+    direction: "down",
+    points: [
+      { x: 705.5, y: 442 },
+      { x: 705.5, y: 488 },
+    ],
+  },
+  {
+    id: "combined-api-right",
+    direction: "up",
+    points: [
+      { x: 735.5, y: 442 },
+      { x: 735.5, y: 488 },
+    ],
+  },
+  {
+    id: "erp-left",
+    direction: "down",
+    points: [
+      { x: 140.5, y: 550 },
+      { x: 140.5, y: 608 },
+    ],
+  },
+  {
+    id: "erp-right",
+    direction: "up",
+    points: [
+      { x: 170.5, y: 550 },
+      { x: 170.5, y: 608 },
+    ],
+  },
+  {
+    id: "oms-left",
+    direction: "down",
+    points: [
+      { x: 366.5, y: 550 },
+      { x: 366.5, y: 608 },
+    ],
+  },
+  {
+    id: "oms-right",
+    direction: "up",
+    points: [
+      { x: 396.5, y: 550 },
+      { x: 396.5, y: 608 },
+    ],
+  },
+  {
+    id: "pim",
+    direction: "up",
+    points: [
+      { x: 607.5, y: 550 },
+      { x: 607.5, y: 608 },
+    ],
+  },
+  {
+    id: "esp-left",
+    direction: "down",
+    points: [
+      { x: 818.5, y: 550 },
+      { x: 818.5, y: 608 },
+    ],
+  },
+  {
+    id: "esp-right",
+    direction: "up",
+    points: [
+      { x: 848.5, y: 550 },
+      { x: 848.5, y: 608 },
+    ],
+  },
+  {
+    id: "cms",
+    direction: "up",
+    points: [
+      { x: 1059.5, y: 550 },
+      { x: 1059.5, y: 608 },
+    ],
+  },
+  {
+    id: "analytics",
+    direction: "down",
+    points: [
+      { x: 1285.5, y: 550 },
+      { x: 1285.5, y: 608 },
+    ],
+  },
+] as const
+
+function pointAlongRoute(
+  route: readonly { x: number; y: number }[],
+  progress: number,
+) {
+  const lengths = route.slice(1).map((point, index) =>
+    Math.hypot(point.x - route[index].x, point.y - route[index].y),
+  )
+
+  const total = lengths.reduce((sum, length) => sum + length, 0)
+  let distance = progress * total
+
+  for (let index = 0; index < lengths.length; index += 1) {
+    const segmentLength = lengths[index]
+
+    if (distance <= segmentLength) {
+      const start = route[index]
+      const end = route[index + 1]
+      const ratio = segmentLength === 0 ? 0 : distance / segmentLength
+
+      return {
+        x: start.x + (end.x - start.x) * ratio,
+        y: start.y + (end.y - start.y) * ratio,
+      }
+    }
+
+    distance -= segmentLength
+  }
+
+  return route[route.length - 1]
+}
 
 const cardVariants = {
   hidden:  { opacity: 0, y: 28 },
@@ -32,123 +163,15 @@ const cardTransition = { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } as const;
 const staggerParent = { hidden: {}, visible: { transition: { staggerChildren: 0.09 } } };
 const viewport = { once: true, amount: 0.1 } as const;
 
-function useMeasuredNodes(ids: readonly LocalMeasuredNodeId[], diagramScale: number) {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const nodeRefs = useRef<Partial<Record<LocalMeasuredNodeId, HTMLDivElement | null>>>({});
-  const [boxes, setBoxes] = useState<Partial<Record<LocalMeasuredNodeId, Box>>>({});
-
-  const remeasure = useCallback(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-
-    const wrapperRect = wrapper.getBoundingClientRect();
-    const safeScale = diagramScale > 0 ? diagramScale : 1;
-    const next: Partial<Record<LocalMeasuredNodeId, Box>> = {};
-    ids.forEach((id) => {
-      const node = nodeRefs.current[id];
-      if (!node) return;
-      const rect = node.getBoundingClientRect();
-      next[id] = {
-        left: (rect.left - wrapperRect.left) / safeScale,
-        top: (rect.top - wrapperRect.top) / safeScale,
-        width: rect.width / safeScale,
-        height: rect.height / safeScale,
-      };
-    });
-    setBoxes(next);
-  }, [ids, diagramScale]);
-
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-
-    remeasure();
-    const observer = new ResizeObserver(remeasure);
-    observer.observe(wrapper);
-    ids.forEach((id) => {
-      const node = nodeRefs.current[id];
-      if (node) observer.observe(node);
-    });
-    window.addEventListener("resize", remeasure);
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", remeasure);
-    };
-  }, [ids, remeasure]);
-
-  const setNodeRef = (id: LocalMeasuredNodeId) => (element: HTMLDivElement | null) => {
-    nodeRefs.current[id] = element;
-  };
-
-  return { wrapperRef, boxes, setNodeRef, remeasure };
-}
-
 // ─── Diagrams ─────────────────────────────────────────────────────────────────
 
 function DesktopDiagram({
   toggle,
   shouldReduceMotion,
-  diagramScale,
 }: {
   toggle: (key: string) => void
   shouldReduceMotion: boolean
-  diagramScale: number
 }) {
-  const measuredIds = useMemo(
-    () => [
-      ...SCJ_COMMERCE_NODES.map((n) => n.id),
-      ...SCJ_SYSTEM_NODES.map((n) => n.id),
-      "api",
-      "combined",
-    ] as LocalMeasuredNodeId[],
-    []
-  );
-
-  const { wrapperRef, boxes, setNodeRef, remeasure } = useMeasuredNodes(measuredIds, diagramScale);
-
-  const upperRails = useMemo(() => {
-    const combinedBox = boxes.combined;
-    const api = boxes.api;
-    if (!combinedBox || !api) return [];
-
-    const combinedBottom = combinedBox.top + combinedBox.height;
-    const apiTop = api.top;
-    const combinedCenterX = combinedBox.left + combinedBox.width / 2;
-
-    return [
-      {
-        id: "combined-api-left",
-        x: combinedCenterX - 15,
-        top: combinedBottom - 1,
-        bottom: apiTop + 1,
-      },
-      {
-        id: "combined-api-right",
-        x: combinedCenterX + 15,
-        top: combinedBottom - 1,
-        bottom: apiTop + 1,
-      },
-    ];
-  }, [boxes]);
-
-  const enterpriseRails = useMemo(() => {
-    const api = boxes.api;
-    if (!api) return [];
-    const apiBottom = api.top + api.height;
-    const systemRails = SCJ_SYSTEM_NODES.flatMap((node) => {
-      const systemBox = boxes[node.id];
-      if (!systemBox) return [];
-      const systemTop = systemBox.top;
-      const centerX = systemBox.left + systemBox.width / 2;
-      const xs = node.id === "erp" || node.id === "oms" || node.id === "esp" ? [
-        { id: `${node.id}-left`, x: centerX - 15 },
-        { id: `${node.id}-right`, x: centerX + 15 },
-      ] : [{ id: node.id, x: centerX }];
-      return xs.map((rail) => ({ id: rail.id, x: rail.x, top: apiBottom - 1, bottom: systemTop + 1 }));
-    });
-    return systemRails;
-  }, [boxes]);
-
   return (
     <div>
       <motion.div
@@ -157,49 +180,19 @@ function DesktopDiagram({
         viewport={viewport}
         variants={shouldReduceMotion ? undefined : staggerParent}
       >
-      <div ref={wrapperRef} className="relative">
-        <svg className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-visible" aria-hidden="true">
-          {upperRails.map((rail) => (
-            <line
-              key={rail.id}
-              x1={Math.round(rail.x) + 0.5}
-              y1={Math.round(rail.top)}
-              x2={Math.round(rail.x) + 0.5}
-              y2={Math.round(rail.bottom)}
-              stroke="#959595"
-              strokeWidth={1}
-              vectorEffect="non-scaling-stroke"
-              shapeRendering="crispEdges"
-            />
-          ))}
-          {enterpriseRails.map((rail) => (
-            <line
-              key={rail.id}
-              x1={Math.round(rail.x) + 0.5}
-              y1={Math.round(rail.top)}
-              x2={Math.round(rail.x) + 0.5}
-              y2={Math.round(rail.bottom)}
-              stroke="#959595"
-              strokeWidth={1}
-              vectorEffect="non-scaling-stroke"
-              shapeRendering="crispEdges"
-            />
-          ))}
-        </svg>
-
+      <div className="relative">
         <div className="relative z-10 flex flex-col items-center gap-5">
-          <motion.div ref={setNodeRef("combined")} className="w-full" variants={cardVariants} transition={cardTransition}>
+          <motion.div className="w-full" variants={cardVariants} transition={cardTransition}>
             <StorefrontAndCommerceLayers
               toggle={toggle}
               topGridClass="grid grid-cols-5 gap-5"
               commerceGridClass="grid grid-cols-6 gap-5"
-              setNodeRef={setNodeRef}
             />
           </motion.div>
 
-          <motion.div className="relative w-full px-5 pt-36" variants={cardVariants} transition={cardTransition} onAnimationComplete={remeasure}>
+          <motion.div className="relative w-full px-5 pt-36" variants={cardVariants} transition={cardTransition}>
             <div className="absolute inset-x-0 top-6">
-              <ApiLayer nodeRef={setNodeRef("api")} onClick={() => toggle("api")} />
+              <ApiLayer onClick={() => toggle("api")} />
             </div>
             <div className="grid grid-cols-6 gap-5">
               {SCJ_SYSTEM_NODES.map((node) => (
@@ -207,7 +200,6 @@ function DesktopDiagram({
                   key={node.id}
                   label={node.label}
                   icon={<BrandMark brand={node.brand} />}
-                  nodeRef={setNodeRef(node.id)}
                   centerLabel
                   onClick={() => toggle(node.id)}
                 />
@@ -232,6 +224,26 @@ function ScaledDesktopDiagram({
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const [availableWidth, setAvailableWidth] = useState(SCJ_DESKTOP_CANVAS_WIDTH);
   const [naturalHeight, setNaturalHeight] = useState(0);
+  const [connectorProgress, setConnectorProgress] = useState(0);
+
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+
+    let frame = 0;
+    const startedAt = performance.now();
+
+    const tick = (now: number) => {
+      setConnectorProgress(
+        ((now - startedAt) % SCJ_DOT_DURATION) / SCJ_DOT_DURATION,
+      );
+
+      frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(frame);
+  }, [shouldReduceMotion]);
 
   useEffect(() => {
     const frame = frameRef.current;
@@ -258,6 +270,27 @@ function ScaledDesktopDiagram({
   const scaledWidth = SCJ_DESKTOP_CANVAS_WIDTH * scale;
   const canvasLeft = Math.max(0, (availableWidth - scaledWidth) / 2);
   const scaledHeight = naturalHeight * scale;
+  const connectorDots = shouldReduceMotion
+    ? []
+    : SCJ_ROUTES.flatMap((route) =>
+        SCJ_DOT_PHASES.map((phase, index) => {
+          const phasedProgress = (connectorProgress + phase) % 1
+          const routeProgress = route.direction === "up"
+            ? 1 - phasedProgress
+            : phasedProgress
+          const opacity = routeProgress < SCJ_DOT_FADE_WINDOW
+            ? routeProgress / SCJ_DOT_FADE_WINDOW
+            : routeProgress > 1 - SCJ_DOT_FADE_WINDOW
+              ? (1 - routeProgress) / SCJ_DOT_FADE_WINDOW
+              : 1
+
+          return {
+            key: `${route.id}-dot-${index}`,
+            opacity,
+            ...pointAlongRoute(route.points, routeProgress),
+          }
+        }),
+      );
 
   return (
     <div ref={frameRef} className="relative w-full overflow-hidden" style={{ height: scaledHeight || undefined }}>
@@ -266,10 +299,40 @@ function ScaledDesktopDiagram({
         className="absolute left-0 top-0 w-[1440px] origin-top-left px-8 py-6"
         style={{ transform: `scale(${scale})`, left: canvasLeft }}
       >
+        <svg
+          className="pointer-events-none absolute inset-0 z-0"
+          width={SCJ_DESKTOP_CANVAS_WIDTH}
+          height={SCJ_CANVAS_HEIGHT}
+          viewBox={`0 0 ${SCJ_DESKTOP_CANVAS_WIDTH} ${SCJ_CANVAS_HEIGHT}`}
+          aria-hidden="true"
+          fill="none"
+        >
+          {SCJ_ROUTES.map((route) => (
+            <path
+              key={route.id}
+              d={`M ${route.points.map((point) => `${point.x} ${point.y}`).join(" L ")}`}
+              stroke="#959595"
+              strokeWidth={1}
+              vectorEffect="non-scaling-stroke"
+              shapeRendering="crispEdges"
+            />
+          ))}
+
+          {connectorDots.map((dot) => (
+            <circle
+              key={dot.key}
+              cx={dot.x}
+              cy={dot.y}
+              r={SCJ_DOT_RADIUS}
+              fill={SCJ_DOT_COLOR}
+              opacity={dot.opacity}
+            />
+          ))}
+        </svg>
+
         <DesktopDiagram
           toggle={toggle}
           shouldReduceMotion={shouldReduceMotion}
-          diagramScale={scale}
         />
       </div>
     </div>
