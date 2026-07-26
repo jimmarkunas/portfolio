@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useRef, type MouseEvent, type ReactNode, type RefObject } from "react"
+import { useEffect, useRef, type MouseEvent, type ReactNode, type RefObject } from "react"
 
 import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost"
 import {
@@ -30,9 +30,179 @@ import {
   VH,
   VW,
 } from "./bi-commerce-ecosystem.constants"
-import ParticleCanvas from "./ParticleCanvas"
 import { DiagramShell } from "./DiagramShell"
 import { TOOLTIPS } from "./biCommerceDiagramData"
+
+type SharpParticlePoint = { x: number; y: number }
+type SharpParticlePath = SharpParticlePoint[]
+
+interface SharpParticleCanvasProps {
+  paths: SharpParticlePath[]
+  containerRef: React.RefObject<HTMLElement>
+  color?: string
+  speedMultiplier?: number
+  particlesPerPath?: number
+}
+
+interface SharpParticle {
+  pathIndex: number
+  t: number
+  speed: number
+  radius: number
+}
+
+interface SharpPathMetrics {
+  cumulativeLengths: number[]
+  totalLength: number
+}
+
+function sharpLerp(a: number, b: number, t: number) {
+  return a + (b - a) * t
+}
+
+function sharpDistance(a: SharpParticlePoint, b: SharpParticlePoint) {
+  return Math.hypot(b.x - a.x, b.y - a.y)
+}
+
+function buildSharpPathMetrics(path: SharpParticlePath): SharpPathMetrics {
+  if (path.length < 2) return { cumulativeLengths: [0], totalLength: 0 }
+  const cumulativeLengths = [0]
+  for (let i = 1; i < path.length; i++) {
+    cumulativeLengths[i] = cumulativeLengths[i - 1] + sharpDistance(path[i - 1], path[i])
+  }
+  return {
+    cumulativeLengths,
+    totalLength: cumulativeLengths[cumulativeLengths.length - 1] ?? 0,
+  }
+}
+
+function pointOnSharpPath(path: SharpParticlePath, metrics: SharpPathMetrics, t: number): SharpParticlePoint {
+  if (path.length < 2) return path[0] ?? { x: 0, y: 0 }
+  if (metrics.totalLength <= 0) return path[0]
+
+  const clampedT = Math.min(1, Math.max(0, t))
+  const targetLength = clampedT * metrics.totalLength
+
+  let i = 0
+  while (
+    i < metrics.cumulativeLengths.length - 1 &&
+    metrics.cumulativeLengths[i + 1] < targetLength
+  ) {
+    i += 1
+  }
+
+  const startLength = metrics.cumulativeLengths[i]
+  const endLength = metrics.cumulativeLengths[i + 1] ?? startLength
+  const segmentLength = endLength - startLength
+  const segT = segmentLength <= 0 ? 0 : (targetLength - startLength) / segmentLength
+
+  return {
+    x: sharpLerp(path[i].x, path[i + 1].x, segT),
+    y: sharpLerp(path[i].y, path[i + 1].y, segT),
+  }
+}
+
+function createSharpParticle(pathIndex: number, speedMultiplier: number): SharpParticle {
+  return {
+    pathIndex,
+    t: Math.random(),
+    speed: (0.001058 + Math.random() * 0.001587) * speedMultiplier,
+    radius: 2.0 + Math.random() * 1.8,
+  }
+}
+
+function SharpParticleCanvas({
+  paths,
+  containerRef,
+  color = "68,122,203",
+  speedMultiplier = 1,
+  particlesPerPath = 3,
+}: SharpParticleCanvasProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const particlesRef = useRef<SharpParticle[]>([])
+  const rafRef = useRef<number>(0)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const container = containerRef.current
+    if (!canvas || !container) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    particlesRef.current = paths.flatMap((_, i) =>
+      Array.from({ length: particlesPerPath }, () => createSharpParticle(i, speedMultiplier))
+    )
+    const pathMetrics = paths.map((path) => buildSharpPathMetrics(path))
+    let lastFrameTime = 0
+
+    function resize() {
+      if (!canvas || !container) return
+      canvas.width = container.offsetWidth
+      canvas.height = container.offsetHeight
+    }
+
+    resize()
+    const ro = new ResizeObserver(resize)
+    ro.observe(container)
+
+    function draw(now: number) {
+      if (!ctx || !canvas) return
+
+      const frameDelta = lastFrameTime === 0
+        ? 1000 / 60
+        : Math.min(1000 / 15, now - lastFrameTime)
+      lastFrameTime = now
+      const frameScale = frameDelta / (1000 / 60)
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      // Static connector lines
+      ctx.save()
+      ctx.strokeStyle = `rgba(34,34,34,0.07)`
+      ctx.lineWidth = 1
+      for (const path of paths) {
+        if (path.length < 2) continue
+        ctx.beginPath()
+        ctx.moveTo(path[0].x, path[0].y)
+        for (let i = 1; i < path.length; i++) ctx.lineTo(path[i].x, path[i].y)
+        ctx.stroke()
+      }
+      ctx.restore()
+
+      for (const p of particlesRef.current) {
+        const path = paths[p.pathIndex]
+        const metrics = pathMetrics[p.pathIndex]
+        if (!path || !metrics || path.length < 2) continue
+
+        p.t += p.speed * frameScale
+        if (p.t > 1) p.t = 0
+
+        const pos = pointOnSharpPath(path, metrics, p.t)
+        ctx.beginPath()
+        ctx.arc(pos.x, pos.y, p.radius, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(${color},1)`
+        ctx.fill()
+      }
+
+      rafRef.current = requestAnimationFrame(draw)
+    }
+
+    rafRef.current = requestAnimationFrame(draw)
+
+    return () => {
+      cancelAnimationFrame(rafRef.current)
+      ro.disconnect()
+    }
+  }, [paths, containerRef, color, speedMultiplier, particlesPerPath])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0 }}
+    />
+  )
+}
 
 const cardVariants = {
   hidden: { opacity: 0, y: 28 },
@@ -73,8 +243,8 @@ function MobileConnector({ shouldReduceMotion }: { shouldReduceMotion: boolean }
         <div className="absolute top-0 bottom-0" style={{ left: 23, width: 1.5, background: "#D9DDE3" }} />
         {shouldReduceMotion ? null : (
           <>
-            <ParticleCanvas paths={[MOB_DOWN]} containerRef={asParticleContainerRef(ref)} color="237,34,36" />
-            <ParticleCanvas paths={[MOB_UP]} containerRef={asParticleContainerRef(ref)} color="34,34,34" />
+            <SharpParticleCanvas paths={[MOB_DOWN]} containerRef={asParticleContainerRef(ref)} color="237,34,36" />
+            <SharpParticleCanvas paths={[MOB_UP]} containerRef={asParticleContainerRef(ref)} color="34,34,34" />
           </>
         )}
       </div>
@@ -198,7 +368,7 @@ function DesktopFixedLayout({
       {shouldReduceMotion
         ? null
         : BI_DESKTOP_PARTICLE_PATHS.map(([path, color], index) => (
-            <ParticleCanvas
+            <SharpParticleCanvas
               key={`${path}:${color}:${index}`}
               paths={[path]}
               containerRef={asParticleContainerRef(canvasContainerRef)}

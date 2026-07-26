@@ -55,12 +55,8 @@ export const biRevampCaseStudy = {
         "icon": "/tool-icons/svg/adobe-logo.svg"
       },
       {
-        "label": "Adobe Experience Manager",
+        "label": "Adobe Experience Manager + Adobe Experience Platform",
         "icon": "/tool-icons/svg/adobe-experience-manager-logo.svg"
-      },
-      {
-        "label": "Adobe Experience Platform",
-        "icon": "/tool-icons/adobexm-logo.png"
       },
       {
         "label": "SAP",
