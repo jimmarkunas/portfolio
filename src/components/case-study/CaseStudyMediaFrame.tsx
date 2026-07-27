@@ -1,6 +1,11 @@
 import type { CaseStudyMedia } from "@/content/case-studies"
 import { DeferredMediaReactDiagram } from "@/components/case-study/template/visuals/deferred/DeferredDiagramVisual"
+import {
+  DeferredPreQuoteChartVisual,
+  DeferredProblemChartVisual,
+} from "@/components/case-study/template/visuals/deferred/DeferredChartVisual"
 import { DeferredNylVelocityChart } from "@/components/case-study/template/visuals/deferred/DeferredNylVelocityChart"
+import { useCaseStudyRenderMode } from "@/components/case-study/revamp/CaseStudyRenderMode"
 
 type CaseStudyMediaFrameProps = {
   media: CaseStudyMedia
@@ -13,6 +18,8 @@ export function CaseStudyMediaFrame({
   className = "",
   frameClassName = "",
 }: CaseStudyMediaFrameProps) {
+  const renderMode = useCaseStudyRenderMode()
+  const eager = renderMode === "print"
   if (media.kind === "react-diagram") {
     return (
       <div className={`w-full overflow-hidden ${className}`.trim()}>
@@ -27,6 +34,31 @@ export function CaseStudyMediaFrame({
         {media.component === "nyl-velocity-chart" && (
           <DeferredNylVelocityChart />
         )}
+        {media.component === "directv-revenue" && (
+          <DeferredPreQuoteChartVisual
+            chartKey="directv-revenue"
+            eager={eager}
+            minHeightClassName="min-h-[320px] md:min-h-[360px]"
+            loadingLabel="Loading chart..."
+          />
+        )}
+        {media.component === "retail-vs-dtc" && (
+          <DeferredProblemChartVisual
+            chartKey="retail-vs-dtc"
+            eager={eager}
+            brandName={media.brandName}
+            minHeightClassName="min-h-[320px] md:min-h-[360px]"
+            loadingLabel="Loading chart..."
+          />
+        )}
+        {media.component === "method-traffic-continuity" && (
+          <DeferredProblemChartVisual
+            chartKey="method-traffic-continuity"
+            eager={eager}
+            minHeightClassName="min-h-[320px] md:min-h-[360px]"
+            loadingLabel="Loading chart..."
+          />
+        )}
       </div>
     )
   }
@@ -34,6 +66,9 @@ export function CaseStudyMediaFrame({
   const aspectClassName = media.aspectRatio === "9/16" ? "aspect-[9/16]" : "aspect-video"
 
   if (media.kind === "youtube") {
+    if (renderMode === "print") {
+      return <div className={`${aspectClassName} flex w-full flex-col items-center justify-center gap-2 bg-white p-6 text-center`.trim()}><p className="type-p3">Video: {media.videoId}</p><a href={`https://www.youtube.com/watch?v=${media.videoId}`}>Open video online</a></div>
+    }
     return (
       <div className={`${aspectClassName} w-full overflow-hidden ${className}`.trim()}>
         <iframe

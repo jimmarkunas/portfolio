@@ -4,7 +4,6 @@ import { Shirt } from "lucide-react"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import type { HomepageText } from "@/components/homepage/homepage"
 import {
-  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
   HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
   HomepageSectionHeader,
   HomepageSectionShell,
@@ -164,10 +163,10 @@ export function HomepageTestimonialsSection({ section, testimonials }: HomepageT
             <MotionReveal preset="hero" className="w-full" delay={0.02}>
               <HomepageSectionHeader label={section.pill}>
                 <div className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} items-start`}>
-                  <h3 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} text-[#222222]`}>
+                  <h2 className="type-h2 text-[#222222]">
                     {section.title}
-                  </h3>
-                  <p className="type-p3 max-w-[900px] text-black/70">{section.description}</p>
+                  </h2>
+                  <p className="type-p2 max-w-[900px] text-black/70">{section.description}</p>
                 </div>
               </HomepageSectionHeader>
             </MotionReveal>

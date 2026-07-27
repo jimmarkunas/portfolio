@@ -16,14 +16,6 @@ export const metadata: Metadata = buildPageMetadata({
   useDefaultImage: false,
 })
 
-function SectionPill({ label, className = "" }: { label: string; className?: string }) {
-  return (
-    <EyebrowPill className={`self-start bg-white ${className}`.trim()} labelClassName="type-p2 text-[#222222]">
-      {label}
-    </EyebrowPill>
-  )
-}
-
 function normalizePeriod(period: string) {
   return period.replace("–", "-")
 }
@@ -94,7 +86,9 @@ export default function CvPage() {
                 <CvReveal preset="section" className="relative z-10 rounded-[2px] bg-[#ECECEC] px-5 py-6 md:px-8 md:py-8 lg:px-10 lg:py-10">
                   <div className="grid gap-8 border-b border-black/10 pb-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,410px)] lg:pb-8">
                     <div className="flex flex-col gap-2">
-                      <SectionPill label={cvContent.sectionPills.experience} className="self-start" />
+                      <EyebrowPill className="self-start bg-white" labelClassName="type-p2 text-[#222222]">
+                        {cvContent.sectionPills.experience}
+                      </EyebrowPill>
                       <h2 className="type-h3 max-w-[420px] text-[#2A2A2A]">
                         {cvContent.experienceSection.title}
                       </h2>
@@ -187,7 +181,9 @@ export default function CvPage() {
 
             <CvReveal preset="section" className="grid gap-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] lg:gap-12">
               <div className="flex flex-col gap-3">
-                <SectionPill label={cvContent.sectionPills.awards} />
+                <EyebrowPill className="self-start bg-white" labelClassName="type-p2 text-[#222222]">
+                  {cvContent.sectionPills.awards}
+                </EyebrowPill>
                 <h2 className="type-h3 max-w-[420px] text-[#222222]">
                   {cvContent.awardsSection.title}
                 </h2>
@@ -208,12 +204,12 @@ export default function CvPage() {
                         <div className="type-p3 text-[#2A2A2A]">{award.source}</div>
                       </div>
 
-                      <div className="hidden xl:grid xl:grid-cols-[110px_minmax(0,1fr)_max-content] xl:items-center xl:gap-6">
+                      <div className="hidden xl:grid xl:grid-cols-[110px_minmax(220px,0.8fr)_minmax(0,1.2fr)] xl:items-center xl:gap-6">
                         <div className="type-p2 text-[#404040]">
                           {award.rank} {award.year}
                         </div>
                         <div className="type-p2 text-[#2A2A2A] xl:text-center">{award.title}</div>
-                        <div className="type-p3 text-[#2A2A2A] xl:text-right xl:whitespace-nowrap">{award.source}</div>
+                        <div className="type-p3 text-[#2A2A2A] xl:text-right">{award.source}</div>
                       </div>
                     </article>
                   )

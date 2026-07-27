@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from "react"
 
 type PullQuoteProps = {
-  quote: ReactNode
+  quote: string
   attributionTitle: string
   attributionSubtitle: string
   initials?: string
@@ -14,6 +14,50 @@ type PullQuoteProps = {
   dark?: boolean
   decorativeFrame?: ReactNode
   hoverBlue?: boolean
+}
+
+function hashString(value: string) {
+  let hash = 5381
+
+  for (let index = 0; index < value.length; index += 1) {
+    hash = (hash * 33) ^ value.charCodeAt(index)
+  }
+
+  return hash >>> 0
+}
+
+function renderHighlightedQuoteText(quote: string, attributionTitle: string) {
+  const tokens = quote.match(/\S+|\s+/g) ?? [quote]
+  const candidateIndices = tokens
+    .map((token, index) => {
+      const cleaned = token.replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, "")
+      if (!cleaned || cleaned.length <= 4) {
+        return null
+      }
+
+      return index
+    })
+    .filter((index): index is number => index != null)
+
+  const fallbackIndices = tokens
+    .map((token, index) => (/^\s+$/.test(token) ? null : index))
+    .filter((index): index is number => index != null)
+
+  const highlightIndices = candidateIndices.length > 0 ? candidateIndices : fallbackIndices
+  const selectedIndex =
+    highlightIndices.length > 0
+      ? highlightIndices[hashString(`${quote}-${attributionTitle}`) % highlightIndices.length]
+      : null
+
+  return tokens.map((token, index) =>
+    index === selectedIndex ? (
+      <span key={`${token}-${index}`} className="text-[#447ACB]">
+        {token}
+      </span>
+    ) : (
+      <span key={`${token}-${index}`}>{token}</span>
+    ),
+  )
 }
 
 export function PullQuote({
@@ -43,6 +87,10 @@ export function PullQuote({
     overflow: "hidden",
   }
   const hoverTextClass = hoverBlue ? "transition-colors duration-200 group-hover:text-[#447ACB]" : ""
+  const attributionTitleClass = dark
+    ? "type-p2 font-medium text-[#447ACB]"
+    : `type-p2 font-medium ${quoteTextClass}`
+  const renderedQuote = dark ? renderHighlightedQuoteText(quote, attributionTitle) : quote
 
   return (
     <div className={`relative overflow-hidden px-6 py-8 text-center md:px-10 md:py-10 lg:px-12 lg:py-12 ${className}`.trim()}>
@@ -58,7 +106,7 @@ export function PullQuote({
           className={`max-w-[1180px] px-4 text-[clamp(24px,3vw,52px)] italic leading-[1.28] tracking-[-0.03em] sm:px-8 md:px-12 lg:px-16 ${quoteTextClass} ${hoverTextClass} ${quoteClassName}`.trim()}
           style={quoteClampStyle}
         >
-          {quote}
+          <>&ldquo;{dark ? renderedQuote : quote}&rdquo;</>
         </blockquote>
 
         <div className={`mt-4 flex items-center gap-4 ${attributionClassName}`.trim()}>
@@ -76,7 +124,7 @@ export function PullQuote({
             </div>
           )}
           <div className="text-left">
-            <div className={`type-p2 font-medium ${quoteTextClass}`.trim()}>
+            <div className={attributionTitleClass}>
               {attributionTitle}
             </div>
             <div className={`type-p4 ${subtitleTextClass}`.trim()}>

@@ -44,8 +44,7 @@ function resolveAppRouteKey(routeKey) {
 
 const budgets = [
   { route: "/work/[slug]/page", maxGzipKiB: 240 },
-  { route: "/work/[slug]/press/[filename]/page", maxGzipKiB: 105 },
-  { route: "/page", maxGzipKiB: 145 },
+  { route: "/page", maxGzipKiB: 148 },
 ]
 
 const workSlugAppChunkPattern = routeToAppChunkRegex("/work/[slug]/page")

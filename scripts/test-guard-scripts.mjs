@@ -12,6 +12,7 @@ const scriptPaths = {
   booking: path.join(repoRoot, "scripts/check-booking-url-drift.mjs"),
   registry: path.join(repoRoot, "scripts/check-case-study-registry.mjs"),
   bundles: path.join(repoRoot, "scripts/check-bundle-budgets.mjs"),
+  bundleTrends: path.join(repoRoot, "scripts/check-bundle-budget-trends.mjs"),
 }
 
 const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-guard-fixtures-"))
@@ -22,9 +23,9 @@ function writeFile(baseDir, relativePath, content) {
   fs.writeFileSync(filePath, content)
 }
 
-function runNodeScript(scriptPath, cwd) {
+function runNodeScript(scriptPath, cwd, args = []) {
   try {
-    const stdout = execFileSync(process.execPath, [scriptPath], {
+    const stdout = execFileSync(process.execPath, [scriptPath, ...args], {
       cwd,
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"],
@@ -41,7 +42,15 @@ function runNodeScript(scriptPath, cwd) {
 }
 
 function createBookingFixture(baseDir, options = {}) {
-  const founderUrl = "https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+  const provider = options.provider ?? "google"
+  const founderUrl =
+    provider === "cal"
+      ? "https://cal.com/jimmarkunas/meeting?user=jimmarkunas"
+      : "https://calendar.app.google/Cc4kuM7cqTyiXQx66"
+  const alternateFounderUrl =
+    provider === "cal"
+      ? "https://cal.com/jimmarkunas/other-meeting?user=jimmarkunas"
+      : "https://calendar.app.google/WRONGID"
 
   writeFile(
     baseDir,
@@ -74,14 +83,14 @@ function createBookingFixture(baseDir, options = {}) {
   writeFile(
     baseDir,
     "public/founder/zevo/index.html",
-    `<a href=\"${options.wrongFounderUrl ? "https://calendar.app.google/WRONGID" : founderUrl}\">Schedule</a>\n`,
+    `<a href=\"${options.wrongFounderUrl ? alternateFounderUrl : founderUrl}\">Schedule</a>\n`,
   )
 
   if (options.withSourceLeak) {
     writeFile(
       baseDir,
       "src/content/leak.ts",
-      "export const leak = \"https://calendar.app.google/LEAK123\"\n",
+      `export const leak = "${provider === "cal" ? "https://cal.com/jimmarkunas/meeting?user=jimmarkunas" : "https://calendar.app.google/LEAK123"}"\n`,
     )
   }
 
@@ -95,20 +104,44 @@ function createBookingFixture(baseDir, options = {}) {
 }
 
 function createRegistryFixture(baseDir, options = {}) {
-  const route = options.badRoute ? "/work/not-alpha" : "/work/alpha"
-  writeFile(
-    baseDir,
-    "src/content/case-studies/registry.ts",
-    `export type CaseStudySlug = "alpha"\n\nexport type CaseStudyRegistryEntry = {\n  slug: CaseStudySlug\n  route: \`/work/\${string}\`\n  contentModule: \`@/content/case-studies/\${string}\`\n  load: () => Promise<unknown>\n}\n\nexport const caseStudyRegistry = {\n  alpha: {\n    slug: "alpha",\n    route: "${route}",\n    contentModule: "@/content/case-studies/alpha",\n    load: () => import("./alpha").then((module) => module.caseStudy),\n  },\n} satisfies Record<CaseStudySlug, CaseStudyRegistryEntry>\n`,
+  const legacyGuardSource = fs.readFileSync(
+    path.join(repoRoot, "scripts/check-no-legacy-case-studies.mjs"),
+    "utf8",
   )
+  writeFile(baseDir, "scripts/check-no-legacy-case-studies.mjs", legacyGuardSource)
 
+  const liveSlugs = [
+    "cps", "dtv01", "newyorklife", "modere", "bi", "mm", "method", "murad",
+    "k2", "cbdistillery", "foh", "lego", "cwg", "aa", "zevo", "dtv02",
+  ]
   writeFile(
     baseDir,
-    "src/content/case-studies/alpha.ts",
-    options.missingCaseStudyExport
-      ? "export const notCaseStudy = {}\n"
-      : "export const caseStudy = { slug: \"alpha\" }\n",
+    "src/content/case-studies/revamp/preview-registry.ts",
+    `${liveSlugs.map((slug) => `record("${slug}", {})`).join("\n")}\n`,
   )
+  writeFile(
+    baseDir,
+    "src/content/case-studies/revamp/live-registry.ts",
+    "export const caseStudyPreviewRegistry = {}\n",
+  )
+  writeFile(
+    baseDir,
+    "src/app/(site)/work/[slug]/page.tsx",
+    "export default function WorkPage() { return null }\n",
+  )
+  writeFile(
+    baseDir,
+    "src/app/(site)/work/[slug]/print/page.tsx",
+    "export default function PrintPage() { return null }\n",
+  )
+  for (const [index, slug] of liveSlugs.entries()) {
+    if (options.missingRevampModule && index === 0) continue
+    writeFile(baseDir, `src/content/case-studies/revamp/${slug}.ts`, `export const ${slug} = {}\n`)
+  }
+
+  if (options.withLegacyRegistry) {
+    writeFile(baseDir, "src/content/case-studies/registry.ts", "export const legacyRegistry = {}\n")
+  }
 }
 
 function writeChunk(baseDir, relativePath, sizeBytes, random = false) {
@@ -127,13 +160,6 @@ function createBundleFixture(baseDir, options = {}) {
       "static/chunks/shared-b.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(site)/work/[slug]/page-a.js",
-    ],
-    "/(site)/work/[slug]/press/[filename]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/shared-a.js",
-      "static/chunks/shared-b.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/work/[slug]/press/[filename]/page-a.js",
     ],
     "/(site)/page": [
       "static/chunks/webpack.js",
@@ -154,13 +180,36 @@ function createBundleFixture(baseDir, options = {}) {
   writeChunk(baseDir, ".next/static/chunks/shared-b.js", 3_072)
   writeChunk(baseDir, ".next/static/chunks/main-app.js", 1_024)
   writeChunk(baseDir, ".next/static/chunks/app/(site)/work/[slug]/page-a.js", 4_096)
-  writeChunk(baseDir, ".next/static/chunks/app/(site)/work/[slug]/press/[filename]/page-a.js", 4_096)
   writeChunk(baseDir, ".next/static/chunks/app/(site)/page-a.js", 2_048)
 
   if (options.oversizeSharedChunk) {
     writeChunk(baseDir, ".next/static/chunks/shared-a.js", 260_000, true)
   } else {
     writeChunk(baseDir, ".next/static/chunks/shared-a.js", 8_192)
+  }
+
+  if (options.writeTrendBaseline) {
+    fs.mkdirSync(path.join(baseDir, "scripts"), { recursive: true })
+    const baselineResult = runNodeScript(scriptPaths.bundleTrends, baseDir, ["--write-baseline"])
+    if (!baselineResult.ok) {
+      throw new Error(`Failed to write bundle trend baseline:\n${baselineResult.output}`)
+    }
+  }
+
+  if (options.missingWorkRoute) {
+    writeFile(
+      baseDir,
+      ".next/app-build-manifest.json",
+      `${JSON.stringify(
+        {
+          pages: {
+            "/(site)/page": pages["/(site)/page"],
+          },
+        },
+        null,
+        2,
+      )}\n`,
+    )
   }
 }
 
@@ -172,10 +221,22 @@ const cases = [
     setup: (baseDir) => createBookingFixture(baseDir),
   },
   {
+    name: "booking-url-drift pass cal.com fixture",
+    script: scriptPaths.booking,
+    expectedPass: true,
+    setup: (baseDir) => createBookingFixture(baseDir, { provider: "cal" }),
+  },
+  {
     name: "booking-url-drift fails on source leak",
     script: scriptPaths.booking,
     expectedPass: false,
     setup: (baseDir) => createBookingFixture(baseDir, { withSourceLeak: true }),
+  },
+  {
+    name: "booking-url-drift fails on cal.com source leak",
+    script: scriptPaths.booking,
+    expectedPass: false,
+    setup: (baseDir) => createBookingFixture(baseDir, { provider: "cal", withSourceLeak: true }),
   },
   {
     name: "booking-url-drift fails on non-founder html booking link",
@@ -184,22 +245,61 @@ const cases = [
     setup: (baseDir) => createBookingFixture(baseDir, { withUnexpectedHtmlBooking: true }),
   },
   {
+    name: "booking-url-drift fails on unexpected cal.com html booking link",
+    script: scriptPaths.booking,
+    expectedPass: false,
+    setup: (baseDir) => createBookingFixture(baseDir, { provider: "cal", withUnexpectedHtmlBooking: true }),
+  },
+  {
+    name: "booking-url-drift fails when founder static html uses different cal.com url",
+    script: scriptPaths.booking,
+    expectedPass: false,
+    setup: (baseDir) => createBookingFixture(baseDir, { provider: "cal", wrongFounderUrl: true }),
+  },
+  {
     name: "case-study-registry pass fixture",
     script: scriptPaths.registry,
     expectedPass: true,
     setup: (baseDir) => createRegistryFixture(baseDir),
   },
   {
-    name: "case-study-registry fails when caseStudy export is missing",
+    name: "case-study-registry fails when a required revamp module is missing",
     script: scriptPaths.registry,
     expectedPass: false,
-    setup: (baseDir) => createRegistryFixture(baseDir, { missingCaseStudyExport: true }),
+    setup: (baseDir) => createRegistryFixture(baseDir, { missingRevampModule: true }),
+  },
+  {
+    name: "case-study-registry fails when legacy registry remains active",
+    script: scriptPaths.registry,
+    expectedPass: false,
+    setup: (baseDir) => createRegistryFixture(baseDir, { withLegacyRegistry: true }),
+  },
+  {
+    name: "bundle-budget-trends pass fixture",
+    script: scriptPaths.bundleTrends,
+    expectedPass: true,
+    setup: (baseDir) => createBundleFixture(baseDir, { writeTrendBaseline: true }),
+  },
+  {
+    name: "bundle-budget-trends fails when work route is missing",
+    script: scriptPaths.bundleTrends,
+    expectedPass: false,
+    setup: (baseDir) => createBundleFixture(baseDir, {
+      writeTrendBaseline: true,
+      missingWorkRoute: true,
+    }),
   },
   {
     name: "bundle-budgets pass fixture",
     script: scriptPaths.bundles,
     expectedPass: true,
     setup: (baseDir) => createBundleFixture(baseDir),
+  },
+  {
+    name: "bundle-budgets fails when work route is missing",
+    script: scriptPaths.bundles,
+    expectedPass: false,
+    setup: (baseDir) => createBundleFixture(baseDir, { missingWorkRoute: true }),
   },
   {
     name: "bundle-budgets fails on oversized shared chunk",

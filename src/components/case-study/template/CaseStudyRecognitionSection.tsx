@@ -1,7 +1,6 @@
-import Link from "next/link"
-
 import { CaseStudyMediaFrame } from "@/components/case-study/CaseStudyMediaFrame"
 import { BookCallCta } from "@/components/BookCallCta"
+import { CaseStudyPressCta } from "@/components/case-study/template/CaseStudyPressCta"
 import type { CaseStudyData } from "@/content/case-studies"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
@@ -121,43 +120,36 @@ export function CaseStudyRecognitionSection({ data, isFoh }: { data: CaseStudyDa
             )}
 
             {data.recognition.rows.map((row, rowIndex) => {
-              const slug = row.file ? row.file.split("/").pop()?.replace(/\.[^.]+$/, "") : null
-              const viewerHref = slug ? `/work/${data.slug}/press/${slug}` : null
+              const documentHref = row.url ?? (row.file ? encodeURI(row.file) : null)
               const rowKey = row.file ?? row.url ?? `${row.company}-${row.dates}-${rowIndex}`
-              const inner = (
-                <div className="grid w-full gap-x-6 gap-y-2 md:grid-cols-[minmax(0,1fr)_auto] md:items-start lg:grid-cols-[minmax(0,460px)_320px_minmax(0,300px)] lg:items-center lg:justify-between">
-                  <div className="w-full">
-                    <h3 className="type-h6 text-[#222222]">{row.company}</h3>
-                    <p className="type-p3 mt-1 text-black/45">{row.source ? `${row.source} · ${row.dates}` : row.dates}</p>
+              const rowContent = (
+                <>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="type-h6 text-[#222222] transition-colors duration-200 group-hover:text-[#447ACB]">
+                      {row.company}
+                    </h3>
+                    <p className="type-p4 mt-1 text-[#767676] transition-colors duration-200 group-hover:text-[#222222]">
+                      {row.source ? `${row.source} · ${row.dates}` : row.dates}
+                    </p>
                   </div>
 
-                  <p className="type-p3 w-full text-black/55 md:col-start-1 lg:col-start-2 lg:max-w-[320px]">
+                  <p className="type-p3 w-full max-w-[54ch] text-[#5B5B5B] transition-colors duration-200 group-hover:text-[#447ACB]">
                     {row.summary}
                   </p>
 
-                  <div className="flex w-full flex-wrap items-center justify-start gap-2 md:col-start-2 md:row-start-1 md:row-end-3 md:w-auto md:self-start md:justify-end lg:row-auto lg:col-start-3 lg:flex-nowrap lg:justify-end">
-                    {row.tags.map((tag, tagIndex) => (
-                      <TagPill key={`${row.company}-${tag}-${tagIndex}`} variant="dark">
-                        {tag}
-                      </TagPill>
-                    ))}
-                  </div>
-                </div>
+                  {documentHref ? (
+                    <div className="flex items-start justify-start lg:col-start-3 lg:justify-end">
+                      <CaseStudyPressCta href={documentHref} title={row.company} location="case_study_recognition" />
+                    </div>
+                  ) : null}
+                </>
               )
+
               return (
                 <MotionReveal key={rowKey} preset="card" delay={rowIndex * 0.03}>
-                  {viewerHref ? (
-                    <Link
-                      href={viewerHref}
-                      className="block w-full cursor-pointer border-b border-[#E5E7EB] py-7 transition-colors duration-200 hover:bg-[#F5F7FA]"
-                    >
-                      {inner}
-                    </Link>
-                  ) : (
-                    <div className="w-full border-b border-[#E5E7EB] py-7">
-                      {inner}
-                    </div>
-                  )}
+                  <div className="group relative isolate grid gap-5 bg-transparent py-6 md:grid-cols-[minmax(0,300px)_minmax(0,1fr)] md:items-start lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)_auto] lg:gap-8 lg:items-start">
+                    {rowContent}
+                  </div>
                 </MotionReveal>
               )
             })}

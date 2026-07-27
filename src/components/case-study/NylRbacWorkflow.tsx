@@ -3,9 +3,96 @@
 import { useRef, useState, useEffect } from 'react';
 import { Building2, Users, UserCheck } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
-import ParticleCanvas from '@/components/case-study/ParticleCanvas';
 import { useAdaptiveDiagramMotion } from '@/components/case-study/useAdaptiveDiagramMotion';
 import type { LucideIcon } from 'lucide-react';
+
+type NylPoint = { x: number; y: number };
+type NylPath = NylPoint[];
+
+type NylSharpParticleCanvasProps = {
+  path: NylPath;
+  containerRef: React.RefObject<HTMLElement>;
+};
+
+type NylParticle = {
+  t: number;
+  speed: number;
+};
+
+const NYL_DOT_COUNT = 6;
+const NYL_DOT_SPEED = 0.3125;
+const NYL_DOT_RADIUS = 4;
+const NYL_DOT_COLOR = 'rgba(68,122,203,1)';
+
+function NylSharpParticleCanvas({
+  path,
+  containerRef,
+}: NylSharpParticleCanvasProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const particlesRef = useRef<NylParticle[]>([]);
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const drawingCanvas: HTMLCanvasElement = canvas;
+    const drawingContext: CanvasRenderingContext2D = ctx;
+
+    particlesRef.current = Array.from({ length: NYL_DOT_COUNT }, () => ({
+        t: Math.random(),
+        speed: (0.001058 + Math.random() * 0.001587) * NYL_DOT_SPEED,
+      }));
+    let lastFrameTime = 0;
+
+    canvas.width = container.offsetWidth;
+    canvas.height = container.offsetHeight;
+
+    function draw(now: number) {
+      const frameDelta = lastFrameTime === 0 ? 1000 / 60 : Math.min(1000 / 15, now - lastFrameTime);
+      lastFrameTime = now;
+      const frameScale = frameDelta / (1000 / 60);
+
+      drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+
+      drawingContext.save();
+      drawingContext.strokeStyle = 'rgba(34,34,34,0.07)';
+      drawingContext.lineWidth = 1;
+      drawingContext.beginPath();
+      drawingContext.moveTo(path[0].x, path[0].y);
+      drawingContext.lineTo(path[1].x, path[1].y);
+      drawingContext.stroke();
+      drawingContext.restore();
+
+      for (const particle of particlesRef.current) {
+        particle.t += particle.speed * frameScale;
+        if (particle.t > 1) particle.t = 0;
+
+        const position = {
+          x: path[0].x + (path[1].x - path[0].x) * particle.t,
+          y: path[0].y + (path[1].y - path[0].y) * particle.t,
+        };
+        drawingContext.beginPath();
+        drawingContext.arc(position.x, position.y, NYL_DOT_RADIUS, 0, Math.PI * 2);
+        drawingContext.fillStyle = NYL_DOT_COLOR;
+        drawingContext.fill();
+      }
+
+      rafRef.current = requestAnimationFrame(draw);
+    }
+
+    rafRef.current = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [path, containerRef]);
+
+  return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }} />;
+}
 
 const cardVariants = {
   hidden:  { opacity: 0, y: 24 },
@@ -146,12 +233,9 @@ function FlowLine() {
       <div className="absolute left-10 right-10 bg-[var(--line)]" style={{ top: Y, height: 1 }} />
       {/* Particle dots */}
       {paths.length > 0 && (
-        <ParticleCanvas
-          paths={paths}
+        <NylSharpParticleCanvas
+          path={paths[0]}
           containerRef={containerRef as React.RefObject<HTMLElement>}
-          color="68,122,203"
-          speedMultiplier={0.3125}
-          particlesPerPath={6}
         />
       )}
     </div>

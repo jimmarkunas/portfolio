@@ -1,26 +1,47 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
+import { useCaseStudyRenderMode } from "@/components/case-study/revamp/CaseStudyRenderMode"
 
 export function FullWidthImage({ src, alt = "", fullWidth = true }: { src: string; alt?: string; fullWidth?: boolean }) {
   const [open, setOpen] = useState(false)
+  const renderMode = useCaseStudyRenderMode()
+
+  useEffect(() => {
+    if (!open) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false)
+    }
+    document.addEventListener("keydown", onKeyDown)
+    return () => document.removeEventListener("keydown", onKeyDown)
+  }, [open])
 
   return (
     <>
-      <div className={`cursor-zoom-in ${fullWidth ? "relative left-1/2 w-screen -translate-x-1/2" : "w-full"}`} onClick={() => setOpen(true)}>
+      {renderMode === "print" ? <img src={src} alt={alt} className="block h-auto w-full" /> : null}
+      {renderMode === "screen" ? <button
+        type="button"
+        className={`block cursor-zoom-in text-left ${fullWidth ? "relative left-1/2 w-screen -translate-x-1/2" : "w-full"}`}
+        onClick={() => setOpen(true)}
+        aria-label={`Expand image${alt ? `: ${alt}` : ""}`}
+      >
         <img src={src} alt={alt} className="w-full h-auto block" />
-      </div>
+      </button> : null}
 
-      {open && (
+      {open && typeof document !== "undefined" ? createPortal(
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 md:p-8"
           onClick={() => setOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Expanded image${alt ? `: ${alt}` : ""}`}
         >
           <img
             src={src}
             alt={alt}
-            className="w-full h-auto block"
-            onClick={(e) => e.stopPropagation()}
+            className="block h-auto w-auto max-h-[calc(100dvh-2rem)] max-w-[calc(100vw-2rem)] object-contain md:max-h-[calc(100dvh-4rem)] md:max-w-[calc(100vw-4rem)]"
+            onClick={() => setOpen(false)}
           />
           <button
             onClick={() => setOpen(false)}
@@ -30,7 +51,7 @@ export function FullWidthImage({ src, alt = "", fullWidth = true }: { src: strin
             ✕
           </button>
         </div>
-      )}
+      , document.body) : null}
     </>
   )
 }

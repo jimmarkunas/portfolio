@@ -124,7 +124,7 @@ export const siteContent = {
   meta: {
     title: "CV | James Markunas",
     description:
-      "Senior Technical Project Manager focused on rescuing complex programs and shipping measurable outcomes.",
+      "Senior Technical Project Manager specializing in rescuing distressed programs and delivering measurable outcomes across enterprise eCommerce, digital transformation, and systems integration.",
   },
   sectionPills: {
     delivery: "Result",
@@ -134,7 +134,7 @@ export const siteContent = {
   deliverySection: {
     title: "My Resume",
     description:
-      "Senior Technical Project Manager who specializes in inheriting broken programs and shipping them across complex, multi-vendor ecommerce and digital transformation programs.",
+      "Senior technical program and product manager with 20+ years rescuing distressed programs and shipping them. $1.3B+ in verified business impact across Adobe Commerce, BigCommerce, Shopify Plus, SAP, Oracle, and composable commerce. Trusted to deliver when the stakes are real.",
   },
   experienceSection: {
     title: "Explore My Delivery Journey",
@@ -142,7 +142,7 @@ export const siteContent = {
   awardsSection: {
     title: "My Achievements & Awards",
     description:
-      "My love of solving complex problems has evolved into a career dedicated to leading impactful digital transformation, platform modernization, and enterprise delivery across business and technology.",
+      "Three programs recognized externally across global smart-city innovation, composable commerce architecture, and academic case study inclusion. Each one reflects a specific delivery decision, not just a project outcome.",
   },
   detailsSection: {
     title: "Resume Details",
@@ -162,20 +162,14 @@ export const siteContent = {
     name: "James Markunas",
     role: "Senior Technical Project Manager",
     summary:
-      "Brought in to rescue distressed engagements at Boehringer Ingelheim, BigCommerce, and Fusion92 after prior PMs failed. 20+ years and 75+ enterprise projects delivering $1.3B+ in verified business impact.",
+      "Brought in after prior PMs failed at Boehringer Ingelheim, BigCommerce, and Fusion92. Rebuilt stakeholder trust and delivered measurable outcomes every time. 20+ years and 75+ enterprise programs delivering $1.3B+ in verified business impact across Adobe Commerce, BigCommerce, Shopify Plus, SAP, Oracle, and composable commerce.",
     links: [
       { label: "jimmarkunas@gmail.com", href: "mailto:jimmarkunas@gmail.com" },
       { label: siteIdentity.linkedinLabel, href: siteExternalUrls.linkedin, external: true },
       { label: "greatestpmever.com", href: "https://greatestpmever.com", external: true },
     ] satisfies CvLink[],
   },
-  downloads: [
-    {
-      label: "Download Resume (DOCX)",
-      href: "/cv/Jim_Markunas_Resume_General_TPM_v3.docx",
-      fileName: "Jim_Markunas_Resume_General_TPM_v3.docx",
-    },
-  ] satisfies CvDownloadAsset[],
+  downloads: [] as CvDownloadAsset[],
   impactStats: [
     {
       value: "20+ Years",
@@ -189,9 +183,9 @@ export const siteContent = {
       href: "/work/modere",
     },
     {
-      value: "$120m",
-      label: "YoY Revenue Impact at DIRECTV",
-      displayLabel: "YoY Revenue Impact at DIRECTV",
+      value: "$221M",
+      label: "Q4 Digital Retention Revenue at DIRECTV",
+      displayLabel: "Q4 Digital Retention Revenue at DIRECTV",
       href: "/work/dtv01",
     },
     {
@@ -201,7 +195,7 @@ export const siteContent = {
     },
   ] satisfies CvImpactStat[],
   experienceIntro:
-    "I bridge business strategy and engineering execution across distressed and high-pressure programs, turning unclear objectives into delivery plans and measurable outcomes.",
+    "I bridge business strategy and engineering execution across complex, multi-vendor programs. The consistent pattern across 20+ years: brought in when delivery is broken, trusted to fix it, and held accountable for the outcome.",
   experiences: [
     {
       company: "The Austin Consulting Group",
@@ -220,21 +214,21 @@ export const siteContent = {
           client: "DIRECTV",
           focus: "Customer Channels / Martech",
           outcome:
-            "Drove end-to-end delivery of a cross-functional product and engineering program that supported roughly $120M YoY uplift.",
+            "Drove end-to-end delivery of a cross-functional product and engineering program across 13 siloed organizations, cutting campaign cycle from 180 to 120 days and supporting $221M in Q4 digital retention revenue.",
           href: "/work/dtv01",
         },
         {
           client: "CPS Energy",
-          focus: "Service Channels / Smart Grid",
+          focus: "SAP Integration / Field Operations",
           outcome:
-            "Owned prioritized backlog, releases, and KPI/OKR reporting to drive +18% engagement and -12% support calls; program recognized with the global Smart 20 Award.",
+            "Owned end-to-end delivery of SAP work order management and crew dispatch integration across CPS Energy and Dalkia, cutting repair calls 73%, truck rolls 43%, and repair windows from three weeks to 1-4 days. Program won the 2025 Global Smart 20 Award.",
           href: "/work/cps",
         },
         {
           client: "New York Life",
           focus: "CXM / Content Operations",
           outcome:
-            "Led delivery of a compliance-driven CMS and site builder for 12k+ agents; achieved around 40% faster time-to-value and 30% fewer defects.",
+            "Led delivery of a compliance-driven multi-tenant CMS for 12,000+ insurance agent sites, cutting site launch time from 6 months to 2 weeks, reducing compliance review cycles 40% via AI automation, and driving 200% lead uplift across the agent network.",
           href: "/work/newyorklife",
         },
         {
@@ -334,7 +328,7 @@ export const siteContent = {
       rank: "[1]",
       year: "2025",
       title: "Smart 20 Award",
-      source: "Global smart-grid and sustainability program delivery at CPS Energy",
+      source: "Global innovation award for SAP field operations and systems integration program delivery at CPS Energy",
       href: "/work/cps",
     },
     {
@@ -399,12 +393,11 @@ export const siteContent = {
   certifications: [
     "PMP (Project Management Professional)",
     "CSM (Certified Scrum Master)",
-    "CSPO (Certified Scrum Product Owner)",
   ],
   cta: {
-    heading: "Need someone who can lead complex delivery under pressure?",
+    heading: "Need someone who can rescue a complex program and ship it?",
     body:
-      "If your roadmap is blocked by cross-team complexity, platform risk, or execution drift, I can help you turn it into a shipped, measurable program.",
+      "If your roadmap is blocked by cross-team complexity, platform risk, or execution failure, I have done this before, at scale, under pressure, with measurable outcomes every time.",
     primary: { label: siteCta.bookCallLabel, href: siteCta.bookingUrls.siteShell, external: true },
     secondary: { label: "See Case Studies", href: siteRoutes.work },
   },

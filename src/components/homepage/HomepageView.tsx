@@ -13,7 +13,6 @@ import { ContentFlow } from "@/components/ContentFlow"
 import { siteRoutes } from "@/content/site"
 import { portfolioSectionContent } from "@/content/site/portfolio"
 import {
-  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
   HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
   HomepageSectionHeader,
   HomepageSectionShell,
@@ -59,13 +58,13 @@ export default function Homepage() {
                 <div
                   className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} w-full lg:grid lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:gap-12`}
                 >
-                  <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-[540px] text-[#222222]`}>
+                  <h2 className="type-h2 max-w-[540px] text-[#222222]">
                     {sections.experience.title}
                   </h2>
                   <div className="max-w-[980px]">
                     <ContentFlow spacing="body">
                       {sections.experience.description.map((paragraph) => (
-                        <p key={paragraph} className="type-p3 text-black/80">
+                        <p key={paragraph} className="type-p2 text-black/80">
                           {paragraph}
                         </p>
                       ))}

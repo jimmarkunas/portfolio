@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-import { loadAllCaseStudies } from "@/content/case-studies"
+import { liveRevampSlugs } from "@/content/case-studies/revamp/live-registry"
 import { siteRoutes } from "@/content/site"
 import { SEO_SITE_URL } from "@/lib/seo"
 
@@ -31,28 +31,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       0.7,
   }))
 
-  const studies = await loadAllCaseStudies()
-
-  const caseStudyEntries: MetadataRoute.Sitemap = studies.map(({ slug }) => ({
+  const caseStudyEntries: MetadataRoute.Sitemap = liveRevampSlugs.map((slug) => ({
     url: absoluteUrl(`/work/${slug}/`),
     lastModified: now,
     changeFrequency: "monthly",
     priority: 0.8,
   }))
 
-  const pressEntries: MetadataRoute.Sitemap = studies.flatMap(({ slug, study }) =>
-    (study.recognition?.rows ?? [])
-      .filter((row) => Boolean(row.file))
-      .map((row) => {
-        const basename = row.file!.split("/").pop()!.replace(/\.[^.]+$/, "")
-        return {
-          url: absoluteUrl(`/work/${slug}/press/${encodeURIComponent(basename)}/`),
-          lastModified: now,
-          changeFrequency: "yearly" as const,
-          priority: 0.5,
-        }
-      })
-  )
-
-  return [...staticEntries, ...caseStudyEntries, ...pressEntries]
+  return [...staticEntries, ...caseStudyEntries]
 }

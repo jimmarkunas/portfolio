@@ -146,7 +146,7 @@ function BaseCard({
                 : "",
             ].join(" ")
           : [
-              "outline-1 bg-white outline-[#D9DDE3] text-[#222222]",
+              "outline-1 bg-white outline-[#7B7B7B] text-[#222222]",
               onClick ? "cursor-pointer hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]" : "",
             ].join(" "),
       ].join(" ")}

@@ -1,0 +1,250 @@
+import type { CaseStudyRevampData } from "./types"
+
+export const methodRevampCaseStudy = {
+  "slug": "method",
+  "breadcrumbCurrent": "Method",
+  "metadata": {
+    "title": "Method: Protecting Retail While Building DTC",
+    "image": {
+      "src": "/method/hero-method-01.png",
+      "alt": "Method direct-to-consumer launch hero image",
+      "width": 1600,
+      "height": 900
+    }
+  },
+  "hero": {
+    "eyebrow": "At-a-Glance",
+    "title": "Method: Protecting Retail While Building DTC",
+    "intro": "Method had a homegrown commerce system that wasn't converting and a retail presence at Target and Walmart it couldn't afford to damage. I led the migration to SC Johnson's shared BigCommerce stack, brought in the right SEO expertise to protect organic traffic through the replatform, and structured the launch so DTC revenue grew without cannibalizing the retail relationships that made the brand.",
+    "metrics": [
+      {
+        "value": "20",
+        "suffix": "%",
+        "label": "DTC Revenue Uplift"
+      },
+      {
+        "value": "3",
+        "suffix": "",
+        "label": "Launches (US, CA, Men)"
+      },
+      {
+        "value": "10",
+        "suffix": "+",
+        "label": "Systems in Stack"
+      }
+    ],
+    "image": {
+      "kind": "image",
+      "src": "/method/hero-method-01.png",
+      "alt": "Method direct-to-consumer launch hero image",
+      "aspectRatio": "16/9"
+    }
+  },
+  "productionQuote": {
+    "quote": "We had some DTC, but needed to scale as fast as possible without losing traffic and SEO.",
+    "attributionTitle": "Tammy Tran",
+    "attributionSubtitle": "Director of eCommerce, Method",
+    "avatarSrc": "/method/tammy-tran.jpeg"
+  },
+  "executiveBrief": {
+    "eyebrow": "At-a-Glance",
+    "title": "Replatform Without Losing What Already Worked",
+    "copy": "Method's homegrown system wasn't converting, but the brand had real organic traffic and a retail presence that DTC couldn't be allowed to undercut. I led the migration to SC Johnson's shared BigCommerce stack, protected SEO through the transition, and launched a DTC channel that grew revenue without touching the retail relationships that built the brand.",
+    "tools": [
+      {
+        "label": "BigCommerce",
+        "icon": "/tool-icons/svg/bc-logo-blk.svg"
+      },
+      {
+        "label": "SAP",
+        "icon": "/tool-icons/svg/sap-logo.svg"
+      },
+      {
+        "label": "Salsify",
+        "icon": "/tool-icons/svg/salsify-logo.svg"
+      },
+      {
+        "label": "Adobe Experience Manager",
+        "icon": "/tool-icons/svg/adobe-experience-manager-logo.svg"
+      }
+    ],
+        "problem": "Method had strong retail distribution and brand recognition but a homegrown commerce system that wasn't scaling or converting. A replatform risked two things: losing organic search traffic built over years, and signaling to retail partners like Target and Walmart that DTC was coming for their shelf space.",
+    "mandate": "Migrate Method to SC Johnson's shared BigCommerce stack, protect organic traffic through the transition, and structure the DTC launch so it grew revenue without creating channel conflict with existing retail partners.",
+    "whatIChanged": "Brought in outside SEO expertise to map redirect strategy and protect traffic before a single URL changed. Architected the launch model to position DTC as additive to retail, not competitive with it. Used Adobe Experience Cloud to drive the sales uplift plan and connect the launch strategy to measurable DTC growth. Kept Method on the shared SC Johnson platform so SC Johnson could replicate the model across future brands without rebuilding the stack.",
+    "outcome": "20% DTC revenue uplift across three launches. Organic traffic protected through the replatform. Retail relationships intact. SC Johnson had a proven model for future brand DTC entries.",
+    "facts": [
+      {
+        "icon": "role",
+        "label": "Role",
+        "value": "Senior Program Manager"
+      },
+      {
+        "icon": "client",
+        "label": "Client",
+        "value": "SC Johnson • Method"
+      },
+      {
+        "icon": "client",
+        "label": "Industry",
+        "value": "CPG • Home Care • eCommerce"
+      },
+      {
+        "icon": "timeline",
+        "label": "Timeline",
+        "value": "Apr 2019 - Jul 2019"
+      },
+      {
+        "icon": "team",
+        "label": "Team / Stakeholders",
+        "value": "5"
+      },
+      {
+        "icon": "budget",
+        "label": "Budget / Scale",
+        "value": "$1M"
+      },
+      {
+        "icon": "systems",
+        "label": "Systems / Technology",
+        "value": "BigCommerce, SAP, Salsify, AEM"
+      }
+    ]
+  },
+  "challenge": {
+    "eyebrow": "Problem Statement",
+    "title": "A Replatform With Two Ways to Lose",
+    "paragraphs": [
+      "Method had built real brand equity and a loyal customer base through retail, but the homegrown commerce system they were running on wasn't converting and wasn't going to scale. A replatform was the right call. The problem was that a badly executed replatform had two ways to damage the business: tank the organic search traffic they had spent years building, or signal to Target and Walmart that Method was going direct and coming for their customers.",
+      "Both failure conditions were real. Retailers watch DTC launches closely. A brand that looks like it is prioritizing direct over wholesale creates friction with its distribution partners at exactly the moment it needs them most. And an SEO crater during a platform migration can take 12 to 18 months to recover from, wiping out the conversion gains the new platform was supposed to deliver. The replatform had to work without triggering either outcome."
+    ],
+    "visual": {
+      "kind": "react-diagram",
+      "component": "method-traffic-continuity",
+      "brandName": "Method"
+    },
+    "caption": ""
+  },
+  "ownership": {
+    "eyebrow": "What I Owned",
+    "title": "SEO, Channel Strategy, and a Clean Migration",
+    "summary": "I owned the migration strategy, the SEO protection plan, the retail channel architecture, and the cross-functional execution across SC Johnson, BigCommerce, and the agency team. The work required both technical judgment and commercial awareness: getting the platform right mattered less if the launch created channel conflict or a traffic loss that ate the gains.",
+    "decisions": [
+      {
+        "title": "SEO protection strategy",
+        "copy": "Brought in a specialist SEO consultant to audit the existing traffic, map the redirect architecture, and validate URL structure before migration began. Organic traffic was treated as an asset to be preserved, not a risk to be managed after the fact."
+      },
+      {
+        "title": "Retail channel architecture",
+        "copy": "Structured the DTC launch positioning and product assortment to be additive to retail rather than competitive with it, giving Method a direct channel without creating friction with Target and Walmart."
+      },
+      {
+        "title": "Shared platform governance",
+        "copy": "Kept Method on SC Johnson's shared BigCommerce and SAP rails rather than building a custom stack, protecting the investment SC Johnson had already made and giving future brands a proven model to follow."
+      },
+      {
+        "title": "System integration",
+        "copy": "Defined how SAP, Salsify, WMS, tax, payments, fulfillment, and marketing tools connected to the Method launch, with AEM handling content management across the brand experience."
+      },
+      {
+        "title": "Launch execution",
+        "copy": "Coordinated SC Johnson, BigCommerce, and the agency team across three launches (US, CA, Men's line) on a compressed timeline with a five-person team and no room for a prolonged cutover."
+      }
+    ]
+  },
+  "solution": {
+    "mode": "three-column-and-diagram",
+    "eyebrow": "Solution",
+    "title": "Migration Built Around What Could Not Break",
+    "diagramKey": "method-seo-cro-flow",
+    "copy": "The migration plan was sequenced around the two constraints that could not move: organic traffic and retail relationships. SEO work started before platform work. Channel positioning was defined before product assortment was finalized. Everything else — integration sequencing, template architecture, launch phasing — was organized around those two fixed points.",
+    "architecture": [],
+    "summary": "Replatforms fail when teams treat SEO and channel strategy as post-launch problems. Both had to be solved before the first URL changed and before the first DTC order was placed."
+  },
+  "impact": {
+    "eyebrow": "Impact",
+    "title": "Revenue Up, Traffic Protected, Retail Intact",
+    "intro": "Three launches. 20% DTC revenue uplift. Organic traffic protected through the migration. Retail partnerships undamaged. SC Johnson had a reusable model for the next brand.",
+    "metrics": [
+      {
+        "value": "20",
+        "suffix": "%",
+        "label": "DTC Revenue Uplift"
+      },
+      {
+        "value": "3",
+        "suffix": "",
+        "label": "Launches (US, CA, Men)"
+      },
+      {
+        "value": "1",
+        "suffix": "",
+        "label": "Unified Platform"
+      },
+      {
+        "value": "0",
+        "suffix": "",
+        "label": "SEO Traffic Loss"
+      }
+    ],
+    "transformation": {
+      "eyebrow": "Before & After",
+      "title": "Before & After",
+      "rows": [
+        {
+          "problem": "Method's homegrown commerce system wasn't converting and couldn't scale to support the growth the brand was ready for.",
+          "decision": "I led the migration to SC Johnson's shared BigCommerce platform, brought in an outside SEO specialist before a single URL changed, and used Google Feed mapping and 301 redirects to protect every page of organic traffic through the cutover.",
+          "outcome": "Method achieved a 20% DTC revenue uplift across three launches with no measurable loss of organic traffic."
+        },
+        {
+          "problem": "Launching DTC risked signaling to Target and Walmart that Method was going direct and competing for their customers.",
+          "decision": "I structured the DTC assortment and channel positioning before launch so DTC was additive to the retail business, not a threat to it. The two channels were designed to coexist from day one.",
+          "outcome": "Method launched a full DTC operation without creating friction with its existing retail distribution partners."
+        },
+        {
+          "problem": "AEM and AEP were not part of the Mrs. Meyer's build. Method needed real-time personalization and behavioral analytics that the shared platform hadn't delivered before.",
+          "decision": "I implemented AEM for content management and AEP for real-time CDP and analytics, then wired both into the storefront through front-end hooks that gave the business live behavioral data from launch day.",
+          "outcome": "Method had a conversion and personalization layer that Mrs. Meyer's didn't, and SC Johnson had a more capable platform model to carry forward."
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "eyebrow": "Delivery Proof",
+    "title": "Delivery Phases",
+    "intro": "Three-month timeline. Three launches. SEO audit and redirect mapping completed before platform migration began. Retail channel positioning locked before product assortment was finalized.",
+    "testimonial": {
+      "quote": "Jim got it done.",
+      "attributionTitle": "Tammy Tran",
+      "attributionSubtitle": "Director of eCommerce, Method",
+      "avatarSrc": "/method/tammy-tran.jpeg"
+    },
+    "validationItems": [
+      {
+        "eyebrow": "Phase 01",
+        "title": "Protect",
+        "copy": "SEO audit, redirect architecture, and retail channel positioning completed before platform migration touched a single URL."
+      },
+      {
+        "eyebrow": "Phase 02",
+        "title": "Align",
+        "copy": "SC Johnson, BigCommerce, and LiveArea aligned on one execution path across integration sequencing, brand templates, and launch phasing."
+      },
+      {
+        "eyebrow": "Phase 03",
+        "title": "Launch",
+        "copy": "Three launches executed across US, Canada, and Men's line on a compressed timeline with a five-person team."
+      }
+    ]
+  },
+  "relatedStudies": {
+    "slugs": [
+      "mm",
+      "murad"
+    ]
+  },
+  "finalCta": {
+    "eyebrow": "Next",
+    "title": "See how the model started with Mrs. Meyer's.",
+    "copy": "Method was the follow-on. Mrs. Meyer's was SC Johnson's first DTC bet and the engagement that proved the shared platform could work."
+  }
+} as CaseStudyRevampData

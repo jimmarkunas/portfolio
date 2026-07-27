@@ -1,0 +1,38 @@
+{
+  "slugs": [
+    "cps",
+    "dtv01",
+    "newyorklife",
+    "modere",
+    "bi",
+    "mm",
+    "method",
+    "murad",
+    "k2",
+    "cbdistillery",
+    "foh",
+    "lego",
+    "cwg",
+    "aa",
+    "zevo",
+    "dtv02"
+  ],
+  "counts": {
+    "cps": 160,
+    "dtv01": 132,
+    "newyorklife": 124,
+    "modere": 138,
+    "bi": 152,
+    "mm": 114,
+    "method": 109,
+    "murad": 113,
+    "k2": 182,
+    "cbdistillery": 137,
+    "foh": 173,
+    "lego": 145,
+    "cwg": 130,
+    "aa": 144,
+    "zevo": 129,
+    "dtv02": 161
+  }
+}

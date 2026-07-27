@@ -9,3 +9,89 @@
 @import "../styles/primitives.css";
 @import "../styles/maps.css";
 @import "../styles/diagram-effects.css";
+
+@media print {
+  @page {
+    size: Letter;
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #222 !important;
+  }
+
+  header,
+  footer,
+  nav,
+  button,
+  [role="dialog"] {
+    display: none !important;
+  }
+
+  main {
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .sticky,
+  [class*="fixed"],
+  [class*="-translate-x-1/2"] {
+    position: static !important;
+    transform: none !important;
+  }
+
+  [class*="overflow-hidden"] {
+    overflow: visible !important;
+  }
+
+  section,
+  figure,
+  blockquote,
+  article,
+  dl {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  img,
+  svg,
+  video,
+  iframe {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  main > div {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  img,
+  svg,
+  video,
+  iframe {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+}

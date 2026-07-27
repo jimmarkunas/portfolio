@@ -1,4 +1,28 @@
 export type DiagramPath = { x: number; y: number }[]
+type ParticlePathStyle = {
+  radius: number
+  radiusVariance: number
+  opacity: number
+  glow: boolean
+}
+
+const MURAD_CRISP_RED_PARTICLE_STYLE: ParticlePathStyle = {
+  radius: 3,
+  radiusVariance: 0,
+  opacity: 0.85,
+  glow: false,
+}
+
+const MURAD_CRISP_BLUE_PARTICLE_STYLE: ParticlePathStyle = {
+  radius: 3,
+  radiusVariance: 0,
+  opacity: 0.85,
+  glow: false,
+}
+
+function withParticleStyle(path: DiagramPath, particleStyle: ParticlePathStyle): DiagramPath {
+  return Object.assign(path, { particleStyle })
+}
 
 export const MURAD_DESKTOP_WIDTH = 1440
 export const MURAD_DESKTOP_HEIGHT = 825
@@ -6,23 +30,36 @@ export const MURAD_DESKTOP_HEIGHT = 825
 export const MURAD_MOBILE_WIDTH = 340
 export const MURAD_MOBILE_HEIGHT = 1440
 
+const BIGCOMMERCE_TRUNK_X = 427
+
 export const MURAD_PATHS: DiagramPath[] = [
-  [{ x: 288, y: 122 }, { x: 481, y: 122 }, { x: 592, y: 122 }],
-  [{ x: 720, y: 202 }, { x: 720, y: 352 }],
-  [{ x: 353, y: 320 }, { x: 426, y: 320 }, { x: 426, y: 413 }, { x: 592, y: 413 }],
-  [{ x: 353, y: 518 }, { x: 426, y: 518 }, { x: 426, y: 413 }, { x: 592, y: 413 }],
-  [{ x: 353, y: 715 }, { x: 426, y: 715 }, { x: 426, y: 413 }, { x: 592, y: 413 }],
-  [{ x: 720, y: 479 }, { x: 720, y: 635 }],
+  withParticleStyle(
+    [{ x: 288, y: 122 }, { x: 481, y: 122 }, { x: 592, y: 122 }],
+    MURAD_CRISP_BLUE_PARTICLE_STYLE,
+  ),
+  withParticleStyle(
+    [{ x: 289, y: 321 }, { x: BIGCOMMERCE_TRUNK_X, y: 321 }, { x: BIGCOMMERCE_TRUNK_X, y: 413 }, { x: 592, y: 413 }],
+    MURAD_CRISP_BLUE_PARTICLE_STYLE,
+  ),
+  withParticleStyle(
+    [{ x: 353, y: 518 }, { x: BIGCOMMERCE_TRUNK_X, y: 518 }, { x: BIGCOMMERCE_TRUNK_X, y: 413 }, { x: 592, y: 413 }],
+    MURAD_CRISP_BLUE_PARTICLE_STYLE,
+  ),
+  withParticleStyle(
+    [{ x: 289, y: 715 }, { x: BIGCOMMERCE_TRUNK_X, y: 715 }, { x: BIGCOMMERCE_TRUNK_X, y: 413 }, { x: 592, y: 413 }],
+    MURAD_CRISP_BLUE_PARTICLE_STYLE,
+  ),
 ]
 
 export const MURAD_RED_PATHS: DiagramPath[] = [
-  [{ x: 730, y: 635 }, { x: 730, y: 479 }],
-  [{ x: 848, y: 413 }, { x: 1281, y: 413 }, { x: 1281, y: 635 }],
-  [{ x: 848, y: 122 }, { x: 1089, y: 122 }, { x: 1281, y: 122 }, { x: 1281, y: 635 }],
+  withParticleStyle(
+    [{ x: 848, y: 122 }, { x: 1089, y: 122 }, { x: 1281, y: 122 }, { x: 1281, y: 635 }],
+    MURAD_CRISP_RED_PARTICLE_STYLE,
+  ),
 ]
 
 export const MURAD_MOBILE_RED_PATHS: DiagramPath[] = [
-  [{ x: 160, y: 376 }, { x: 160, y: 168 }],
+  [{ x: 165, y: 376 }, { x: 165, y: 168 }],
 ]
 
 export const MURAD_MOBILE_PATHS: DiagramPath[] = [

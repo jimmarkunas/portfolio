@@ -1,10 +1,9 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate"
 import { StructuredData } from "@/components/seo/StructuredData"
-import { caseStudySlugs } from "@/content/case-studies"
-import { loadCaseStudyBySlug } from "@/content/case-studies"
+import { liveRevampSlugs, loadLiveRevampCaseStudy } from "@/content/case-studies/revamp/live-registry"
+import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 import { buildPageMetadata } from "@/lib/seo"
 import { createCaseStudyStructuredData } from "@/lib/structured-data"
 
@@ -12,8 +11,20 @@ type WorkPageParams = {
   slug: string
 }
 
+function buildCaseStudyMetadata(data: CaseStudyRevampData, slug: string): Metadata {
+  const metadata = data.metadata
+  return buildPageMetadata({
+    title: metadata?.title ?? data.breadcrumbCurrent,
+    description: data.hero.intro,
+    canonicalPath: `/work/${slug}`,
+    image: metadata
+      ? { url: metadata.image.src, alt: metadata.image.alt, width: metadata.image.width, height: metadata.image.height }
+      : { url: data.hero.image.src, alt: data.hero.image.alt },
+  })
+}
+
 export async function generateStaticParams(): Promise<WorkPageParams[]> {
-  return caseStudySlugs.map((slug) => ({ slug }))
+  return liveRevampSlugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({
@@ -22,7 +33,7 @@ export async function generateMetadata({
   params: Promise<WorkPageParams>
 }): Promise<Metadata> {
   const { slug } = await params
-  const study = await loadCaseStudyBySlug(slug)
+  const study = await loadLiveRevampCaseStudy(slug)
 
   if (!study) {
     return buildPageMetadata({
@@ -33,15 +44,7 @@ export async function generateMetadata({
     })
   }
 
-  return buildPageMetadata({
-    title: study.breadcrumbCurrent,
-    description: study.hero.intro,
-    canonicalPath: `/work/${slug}`,
-    image: {
-      url: study.hero.image.src,
-      alt: study.hero.image.alt,
-    },
-  })
+  return buildCaseStudyMetadata(study.data, slug)
 }
 
 export default async function WorkCaseStudyPage({
@@ -50,16 +53,18 @@ export default async function WorkCaseStudyPage({
   params: Promise<WorkPageParams>
 }) {
   const { slug } = await params
-  const study = await loadCaseStudyBySlug(slug)
+  const study = await loadLiveRevampCaseStudy(slug)
 
   if (!study) {
     notFound()
   }
 
+  const structuredData = createCaseStudyStructuredData({ templateVersion: "revamp", data: study.data })
+
   return (
     <>
-      <StructuredData data={createCaseStudyStructuredData(study)} />
-      <CaseStudyTemplate data={study} />
+      <StructuredData data={structuredData} />
+      <study.Template data={study.data} />
     </>
   )
 }

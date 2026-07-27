@@ -1,0 +1,8 @@
+"use client"
+import { normalizeFlowSpec } from "./flow-animation"
+import type { FlowAnimationSpec } from "./flow-types"
+
+export function AnimatedSvgFlowDots({ specs, reducedMotion = false }: { specs: FlowAnimationSpec[]; reducedMotion?: boolean }) {
+  return <>{specs.flatMap((rawSpec) => { const spec = normalizeFlowSpec(rawSpec); const path = toPath(spec.path); return Array.from({ length: spec.count }, (_, index) => { const begin = (spec.delay ?? 0) + (spec.spacing ?? 0) * index + (spec.phase ?? 0); const reverse = spec.direction === "path-reverse"; const pingPong = spec.loopMode === "ping-pong"; const keyPoints = pingPong ? (reverse ? "1;0;1" : "0;1;0") : reverse ? "1;0" : "0;1"; const keyTimes = pingPong ? "0;0.5;1" : "0;1"; const hidden = reducedMotion && spec.reducedMotionBehavior === "hidden"; return <g key={`${spec.id}-${index}`} data-animated-flow-dot={!hidden} data-flow-path-id={spec.id} data-flow-direction={spec.direction} data-flow-loop-mode={spec.loopMode}>{!hidden ? <circle r={spec.style.size / 2} fill={spec.style.color} opacity={spec.style.opacity ?? 1} style={{ filter: spec.style.shadow }}><animateMotion path={path} dur={`${spec.duration}s`} begin={`${begin}s`} repeatCount={spec.loopMode === "once" ? "1" : "indefinite"} keyPoints={keyPoints} keyTimes={keyTimes} calcMode="linear" /><animate attributeName="opacity" values={`0;${spec.style.opacity ?? 1};${spec.style.opacity ?? 1};0`} keyTimes="0;0.08;0.92;1" dur={`${spec.duration}s`} begin={`${begin}s`} repeatCount={spec.loopMode === "once" ? "1" : "indefinite"} /></circle> : null}</g> }) })}</>
+}
+function toPath(path: FlowAnimationSpec["path"]) { return path.kind === "svg" ? path.d : path.points.map((point, index) => `${index ? "L" : "M"}${point.x} ${point.y}`).join(" ") }

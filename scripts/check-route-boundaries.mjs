@@ -5,11 +5,17 @@ import path from "node:path"
 
 const APP_ROOT = "src/app"
 const ROUTE_FILE_PATTERN = /(page|layout|loading|error|route|template)\.(t|j)sx?$/
+const APPROVED_CASE_STUDY_MODULES = new Set([
+  "@/content/case-studies/case-study-map",
+  "@/content/case-studies/revamp/live-registry",
+  "@/content/case-studies/revamp/preview-registry",
+  "@/content/case-studies/revamp/types",
+])
 
 const boundaryRules = [
   {
     message: "Route files must not import case-study content modules directly. Use loadCaseStudyBySlug/loadAllCaseStudies.",
-    test: (source) => /^@\/content\/case-studies\/(?!case-study-map$).+/.test(source),
+    test: (source) => /^@\/content\/case-studies\/.+/.test(source) && !APPROVED_CASE_STUDY_MODULES.has(source),
   },
   {
     message: "Route files must not import heavy case-study diagram components directly. Load through section-level deferred components.",

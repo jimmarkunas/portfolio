@@ -40,11 +40,11 @@ export function CaseStudyActionButton({
   action: HeroAction
   variant: "primary" | "secondary"
 }) {
-  if (BOOK_CALL_PATTERN.test(action.label)) {
-    return <BookCallCta location="case_study_hero" />
-  }
+  const className = "case-study-hero-cta"
 
-  const className = "min-h-[56px] px-6 py-3.5 text-[20px] leading-8"
+  if (BOOK_CALL_PATTERN.test(action.label)) {
+    return <BookCallCta location="case_study_hero" className={className} />
+  }
 
   const content = (
     <>

@@ -4,7 +4,7 @@ import { EyebrowPill } from "@/components/EyebrowPill"
 import { FullWidthImage } from "@/components/FullWidthImage"
 import { MotionReveal } from "@/components/motion/MotionReveal"
 import { SectionShell } from "@/components/SectionShell"
-import { StatCard } from "@/components/StatCard"
+import { StatText } from "@/components/StatText"
 import { TagPill } from "@/components/TagPill"
 
 import { ProofPointArrowIcon } from "./CaseStudyTemplateIcons"
@@ -64,17 +64,16 @@ export function CaseStudyImpactSection({ data }: { data: CaseStudyData }) {
         <div className="grid w-full grid-cols-2 gap-5 pt-3 md:pt-4 lg:grid-cols-4 lg:pt-6">
           {data.impact.stats.map((stat, index) => (
             <MotionReveal key={`${stat.value}-${stat.label}`} preset="card" delay={index * 0.04}>
-              <StatCard
-                value={stat.value}
-                suffix={stat.suffix}
-                label={stat.label}
-                className="h-[176px] px-8 py-10"
-                valueClassName="text-center text-slate-800"
-                valueTextClassName="text-[56px] font-medium leading-[60px]"
-                suffixClassName="text-[36px] font-semibold leading-9"
-                labelClassName="type-p2 max-w-[220px] text-center font-medium text-neutral-700"
-                contentClassName="gap-3.5"
-              />
+              <article className="relative overflow-hidden rounded-[10px] bg-white h-[176px] px-8 py-10">
+                <StatText
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  label={stat.label}
+                  className="justify-center"
+                  metricRowClassName="gap-1"
+                  labelClassName="type-p2 max-w-[220px] text-center font-medium text-neutral-700"
+                />
+              </article>
             </MotionReveal>
           ))}
         </div>

@@ -10,7 +10,7 @@ export function CaseStudyChallengeQuoteSection({ data }: { data: CaseStudyData }
         <MotionReveal preset="section">
           <PullQuote
             dark
-            quote={<>&ldquo;{data.challengeQuote.quote}&rdquo;</>}
+            quote={data.challengeQuote.quote}
             attributionTitle={data.challengeQuote.attributionTitle}
             attributionSubtitle={data.challengeQuote.attributionSubtitle}
             avatarSrc={data.challengeQuote.avatarSrc}

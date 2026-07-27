@@ -172,3 +172,20 @@
   background: var(--color-accent-hover);
   border-color: var(--color-accent-hover);
 }
+
+.case-study-hero-cta {
+  min-height: 56px;
+  padding: 0 24px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.footer-cv-cta {
+  border: 1px solid rgba(254, 254, 254, 0.72);
+  color: #fefefe;
+}
+
+.footer-cv-cta:hover {
+  border-color: #447acb;
+  color: #447acb;
+}

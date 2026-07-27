@@ -13,6 +13,7 @@ type SharedVisualProps = {
 
 const PROBLEM_CHART_LOADERS = {
   "retail-vs-dtc": () => import("@/components/case-study/MrsMeyersRetailVsDtcChart"),
+  "method-traffic-continuity": () => import("@/components/case-study/MethodTrafficContinuityChart"),
 } as const
 
 const PREQUOTE_CHART_LOADERS: Record<

@@ -2,7 +2,6 @@ import { MotionReveal } from "@/components/motion/MotionReveal"
 import type { HomepageText } from "@/components/homepage/homepage"
 import {
   AwardRow,
-  HOMEPAGE_SECTION_HEADER_TITLE_CLASS,
   HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
   HomepageSectionHeader,
   HomepageSectionShell,
@@ -24,7 +23,7 @@ export function HomepageAwardsSection({ section, awards }: HomepageAwardsSection
           <MotionReveal preset="hero" className="w-full" delay={0.02}>
             <HomepageSectionHeader label={section.pill}>
               <div className={`${HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS} items-start`}>
-                <h2 className={`${HOMEPAGE_SECTION_HEADER_TITLE_CLASS} max-w-none lg:max-w-[396px] text-[#222222]`}>
+                <h2 className="type-h2 max-w-none lg:max-w-[396px] text-[#222222]">
                   {section.title}
                 </h2>
                 <p className="type-p2 max-w-none lg:max-w-[482px] text-black/70">{section.description}</p>

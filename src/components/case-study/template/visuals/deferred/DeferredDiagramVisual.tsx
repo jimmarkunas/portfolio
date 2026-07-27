@@ -3,6 +3,7 @@
 import type { CaseStudySolutionDiagramKey, DiagramData } from "@/content/case-studies"
 import ModereSimulation from "@/components/case-study/modere-simulation/ModereSimulation"
 import { DeferredVisualLoader } from "@/components/case-study/template/visuals/deferred/DeferredVisualLoader"
+import { useCaseStudyRenderMode } from "@/components/case-study/revamp/CaseStudyRenderMode"
 import type { ComponentType } from "react"
 
 type SharedVisualProps = {
@@ -19,6 +20,7 @@ const SOLUTION_DIAGRAM_LOADERS: Record<
   "murad-architecture": () => import("@/components/case-study/MuradArchitectureDiagram"),
   "bi-commerce-ecosystem": () => import("@/components/case-study/bi-commerce-ecosystem-diagram"),
   "scj-commerce-architecture": () => import("@/components/case-study/SCJCommerceArchitecture"),
+  "method-seo-cro-flow": () => import("@/components/case-study/method-seo-cro-flow/MethodSeoCroFlow"),
   "modere-simulation": () => import("@/components/case-study/modere-simulation/ModereSimulation"),
   "nyl-rbac-workflow": () => import("@/components/case-study/NylRbacWorkflow"),
 }
@@ -42,6 +44,8 @@ export function DeferredSolutionDiagramVisual({
   loadingLabel = "Loading architecture diagram...",
   eager,
 }: DeferredSolutionDiagramVisualProps) {
+  const renderMode = useCaseStudyRenderMode()
+  const shouldLoadEagerly = eager || renderMode === "print"
   if (diagram) {
     return (
       <DeferredVisualLoader
@@ -51,7 +55,7 @@ export function DeferredSolutionDiagramVisual({
         className={className}
         minHeightClassName={minHeightClassName}
         loadingLabel={loadingLabel}
-        eager={eager}
+        eager={shouldLoadEagerly}
       />
     )
   }
@@ -76,7 +80,7 @@ export function DeferredSolutionDiagramVisual({
       className={className}
       minHeightClassName={minHeightClassName}
       loadingLabel={loadingLabel}
-      eager={eager}
+      eager={shouldLoadEagerly}
     />
   )
 }

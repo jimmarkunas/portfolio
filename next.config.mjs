@@ -4,8 +4,7 @@ import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js"
 const nextConfig = (phase) => ({
   // Keep static export for non-dev builds, but avoid dev asset routing bugs.
   ...(phase === PHASE_DEVELOPMENT_SERVER ? {} : { output: "export" }),
-  // Keep dev and build artifacts separate so stale manifests/chunks cannot collide.
-  distDir: phase === PHASE_DEVELOPMENT_SERVER ? ".next-dev" : ".next",
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   trailingSlash: true,
   reactStrictMode: true,
   webpack: (config) => {
