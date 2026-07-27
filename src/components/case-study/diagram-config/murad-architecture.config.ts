@@ -1,6 +1,10 @@
-import type { ParticlePathStyle } from "@/components/case-study/ParticleCanvas"
-
 export type DiagramPath = { x: number; y: number }[]
+type ParticlePathStyle = {
+  radius: number
+  radiusVariance: number
+  opacity: number
+  glow: boolean
+}
 
 const MURAD_CRISP_RED_PARTICLE_STYLE: ParticlePathStyle = {
   radius: 3,
