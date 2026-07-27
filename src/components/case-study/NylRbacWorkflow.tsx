@@ -39,6 +39,8 @@ function NylSharpParticleCanvas({
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+    const drawingCanvas: HTMLCanvasElement = canvas;
+    const drawingContext: CanvasRenderingContext2D = ctx;
 
     particlesRef.current = Array.from({ length: NYL_DOT_COUNT }, () => ({
         t: Math.random(),
@@ -54,16 +56,16 @@ function NylSharpParticleCanvas({
       lastFrameTime = now;
       const frameScale = frameDelta / (1000 / 60);
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
-      ctx.save();
-      ctx.strokeStyle = 'rgba(34,34,34,0.07)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(path[0].x, path[0].y);
-      ctx.lineTo(path[1].x, path[1].y);
-      ctx.stroke();
-      ctx.restore();
+      drawingContext.save();
+      drawingContext.strokeStyle = 'rgba(34,34,34,0.07)';
+      drawingContext.lineWidth = 1;
+      drawingContext.beginPath();
+      drawingContext.moveTo(path[0].x, path[0].y);
+      drawingContext.lineTo(path[1].x, path[1].y);
+      drawingContext.stroke();
+      drawingContext.restore();
 
       for (const particle of particlesRef.current) {
         particle.t += particle.speed * frameScale;
@@ -73,10 +75,10 @@ function NylSharpParticleCanvas({
           x: path[0].x + (path[1].x - path[0].x) * particle.t,
           y: path[0].y + (path[1].y - path[0].y) * particle.t,
         };
-        ctx.beginPath();
-        ctx.arc(position.x, position.y, NYL_DOT_RADIUS, 0, Math.PI * 2);
-        ctx.fillStyle = NYL_DOT_COLOR;
-        ctx.fill();
+        drawingContext.beginPath();
+        drawingContext.arc(position.x, position.y, NYL_DOT_RADIUS, 0, Math.PI * 2);
+        drawingContext.fillStyle = NYL_DOT_COLOR;
+        drawingContext.fill();
       }
 
       rafRef.current = requestAnimationFrame(draw);
