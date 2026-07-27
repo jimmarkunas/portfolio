@@ -10,7 +10,6 @@ import { CaseStudyRevampEvidenceSection } from "../CaseStudyRevampEvidenceSectio
 import { CaseStudyRevampRecognitionSection } from "../CaseStudyRevampRecognitionSection"
 import { CaseStudyRevampRelatedSection } from "../CaseStudyRevampRelatedSection"
 import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
-import type { ModereSolutionContent } from "@/content/case-studies/revamp/modere"
 import { CaseStudyRevampModereSolutionSection } from "./CaseStudyRevampModereSolutionSection"
 
 function SectionBorder({ children }: { children: ReactNode }) {
@@ -19,10 +18,8 @@ function SectionBorder({ children }: { children: ReactNode }) {
 
 export function CaseStudyRevampModereTemplate({
   data,
-  solution,
 }: {
   data: CaseStudyRevampData
-  solution: ModereSolutionContent
 }) {
   return (
     <main data-case-study-renderer="revamp" className="min-h-full overflow-x-hidden bg-[#F3F3F3] text-[#222222]">
@@ -42,7 +39,7 @@ export function CaseStudyRevampModereTemplate({
         <CaseStudyRevampOwnershipSection data={data} />
       </SectionBorder>
       <SectionBorder>
-        <CaseStudyRevampModereSolutionSection data={data} solution={solution} />
+        <CaseStudyRevampModereSolutionSection data={data} />
       </SectionBorder>
       <SectionBorder>
         <CaseStudyRevampImpactSection data={data} />

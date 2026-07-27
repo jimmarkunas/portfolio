@@ -1,10 +1,7 @@
 import type { Metadata } from "next"
 
 import { CaseStudyRevampModereTemplate } from "@/components/case-study/revamp/modere/CaseStudyRevampModereTemplate"
-import {
-  modereRevampCaseStudy,
-  modereSolutionContent,
-} from "@/content/case-studies/revamp/modere"
+import { modereRevampCaseStudy } from "@/content/case-studies/revamp/modere"
 import { buildPageMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = buildPageMetadata({
@@ -18,5 +15,5 @@ export const metadata: Metadata = buildPageMetadata({
 })
 
 export default function ModereCaseStudyPreviewPage() {
-  return <CaseStudyRevampModereTemplate data={modereRevampCaseStudy} solution={modereSolutionContent} />
+  return <CaseStudyRevampModereTemplate data={modereRevampCaseStudy} />
 }
