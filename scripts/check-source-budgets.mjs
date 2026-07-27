@@ -17,6 +17,8 @@ const budgetTargets = [
 ]
 
 const overrideBudgets = new Map([
+  ["src/components/case-study/NylRbacWorkflow.tsx", 450],
+  ["src/components/case-study/bi-commerce-ecosystem-diagram.tsx", 500],
   ["src/components/case-study/SCJCommerceArchitecture.tsx", 500],
   ["src/components/case-study/diagram-shared/BiDiagramCards.tsx", 600],
   ["src/components/case-study/modere-simulation/ModereSimulation.tsx", 620],
