@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
-import { CaseStudyRevampBiTemplate } from "@/components/case-study/revamp/bi/CaseStudyRevampBiTemplate"
-import { biRevampCaseStudy } from "@/content/case-studies/revamp/bi"
+import { notFound } from "next/navigation"
+
+import { getCaseStudyPreview } from "@/content/case-studies/revamp/preview-registry"
 import { buildPageMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = buildPageMetadata({
@@ -10,6 +11,15 @@ export const metadata: Metadata = buildPageMetadata({
   robots: { index: false, follow: false },
 })
 
-export default function BICaseStudyPreviewPage() {
-  return <CaseStudyRevampBiTemplate data={biRevampCaseStudy} />
+export default async function BICaseStudyPreviewPage() {
+  const study = getCaseStudyPreview("bi")
+
+  if (!study || !study.loadContent || !study.loadTemplate) {
+    notFound()
+  }
+
+  const data = await study.loadContent()
+  const Template = study.loadTemplate
+
+  return <Template data={data} />
 }
