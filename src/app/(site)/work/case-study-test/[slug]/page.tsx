@@ -15,13 +15,13 @@ export const metadata: Metadata = {
 
 export function generateStaticParams() {
   return caseStudyPreviewRegistry
-    .filter((study) => study.routeKind === "dynamic" && study.loadContent)
+    .filter((study) => study.loadContent)
     .map((study) => ({ slug: study.slug }))
 }
 
 export default async function DynamicCaseStudyPreviewPage({ params }: PreviewPageProps) {
   const study = getCaseStudyPreview(params.slug)
-  if (!study || study.routeKind !== "dynamic" || !study.loadContent) notFound()
+  if (!study || !study.loadContent) notFound()
 
   const data = await study.loadContent()
   const Template = study.loadTemplate ?? CaseStudyRevampTemplate

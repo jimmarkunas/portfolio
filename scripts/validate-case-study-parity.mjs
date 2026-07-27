@@ -168,7 +168,7 @@ check("AA private assets stay in public/aa", aaPaths.filter((value) => value.sta
 check("Challenge and Impact media are unique", !has(revamp, 'challenge.visual') || !/challenge[\s\S]*?\/aa\/hero-aa-02\.png[\s\S]*?impact/.test(revamp))
 for (const value of ["/aa/hero-aa-01.png", "/aa/modal-aa-01.png", "/aa/modal-aa-02.png", "/aa/modal-aa-03.png", "/aa/modal-aa-04.png", "/aa/hero-aa-02.png", "/aa/banner-aa-010.jpg", "/aa/amanda-lopez.jpeg", "/aa/paula-schneider.jpeg", "/aa/files/01-objectedge-casestudy.pdf", "/aa/files/03-microsoft-casestudy.pdf", "/aa/files/02-motorola-casestudy.pdf"]) check(`asset exists ${value}`, asset(value))
 check("video/embed preserved", has(revamp, 'videoId: "IdChd8u4VLg"'))
-check("registry AA-only record", has(fs.readFileSync(registryPath, "utf8"), 'record("aa"') && has(fs.readFileSync(registryPath, "utf8"), 'routeKind: "dynamic"') && has(fs.readFileSync(registryPath, 'utf8'), 'import("./aa")'))
+check("registry AA-only record", has(fs.readFileSync(registryPath, "utf8"), 'record("aa"') && has(fs.readFileSync(registryPath, 'utf8'), 'import("./aa")'))
 const aaLocalSource = fs.readdirSync(path.join(root, "src/components/case-study/revamp/aa")).map((file) => fs.readFileSync(path.join(root, "src/components/case-study/revamp/aa", file), "utf8")).join("\n")
 check("no placeholder language", !/lorem ipsum|placeholder|tbd|coming soon|todo|DIAGRAM PLACEHOLDER|Production solution diagram renders here|This test block represents|Why this shape worked|Architecture notes/i.test(revamp + aaLocalSource))
 const protectedFiles = ["src/content/case-studies/registry.ts", "src/components/case-study/revamp/CaseStudyRevampTemplate.tsx", "src/app/(site)/work/[slug]/page.tsx"]
