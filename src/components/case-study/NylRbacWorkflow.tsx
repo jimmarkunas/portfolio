@@ -10,70 +10,23 @@ type NylPoint = { x: number; y: number };
 type NylPath = NylPoint[];
 
 type NylSharpParticleCanvasProps = {
-  paths: NylPath[];
+  path: NylPath;
   containerRef: React.RefObject<HTMLElement>;
-  color: string;
-  speedMultiplier: number;
-  particlesPerPath: number;
-  radius: number;
 };
 
 type NylParticle = {
-  pathIndex: number;
   t: number;
   speed: number;
 };
 
-type NylPathMetrics = {
-  cumulativeLengths: number[];
-  totalLength: number;
-};
-
-function nylDistance(a: NylPoint, b: NylPoint) {
-  return Math.hypot(b.x - a.x, b.y - a.y);
-}
-
-function buildNylPathMetrics(path: NylPath): NylPathMetrics {
-  if (path.length < 2) return { cumulativeLengths: [0], totalLength: 0 };
-  const cumulativeLengths = [0];
-  for (let i = 1; i < path.length; i++) {
-    cumulativeLengths[i] = cumulativeLengths[i - 1] + nylDistance(path[i - 1], path[i]);
-  }
-  return {
-    cumulativeLengths,
-    totalLength: cumulativeLengths[cumulativeLengths.length - 1] ?? 0,
-  };
-}
-
-function pointOnNylPath(path: NylPath, metrics: NylPathMetrics, t: number): NylPoint {
-  if (path.length < 2) return path[0] ?? { x: 0, y: 0 };
-  if (metrics.totalLength <= 0) return path[0];
-
-  const clampedT = Math.min(1, Math.max(0, t));
-  const targetLength = clampedT * metrics.totalLength;
-  let i = 0;
-  while (i < metrics.cumulativeLengths.length - 1 && metrics.cumulativeLengths[i + 1] < targetLength) {
-    i += 1;
-  }
-
-  const startLength = metrics.cumulativeLengths[i];
-  const endLength = metrics.cumulativeLengths[i + 1] ?? startLength;
-  const segmentLength = endLength - startLength;
-  const segmentT = segmentLength <= 0 ? 0 : (targetLength - startLength) / segmentLength;
-
-  return {
-    x: path[i].x + (path[i + 1].x - path[i].x) * segmentT,
-    y: path[i].y + (path[i + 1].y - path[i].y) * segmentT,
-  };
-}
+const NYL_DOT_COUNT = 6;
+const NYL_DOT_SPEED = 0.3125;
+const NYL_DOT_RADIUS = 4;
+const NYL_DOT_COLOR = 'rgba(68,122,203,1)';
 
 function NylSharpParticleCanvas({
-  paths,
+  path,
   containerRef,
-  color,
-  speedMultiplier,
-  particlesPerPath,
-  radius,
 }: NylSharpParticleCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<NylParticle[]>([]);
@@ -87,25 +40,14 @@ function NylSharpParticleCanvas({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    particlesRef.current = paths.flatMap((_, pathIndex) =>
-      Array.from({ length: particlesPerPath }, () => ({
-        pathIndex,
+    particlesRef.current = Array.from({ length: NYL_DOT_COUNT }, () => ({
         t: Math.random(),
-        speed: (0.001058 + Math.random() * 0.001587) * speedMultiplier,
-      }))
-    );
-    const pathMetrics = paths.map((path) => buildNylPathMetrics(path));
+        speed: (0.001058 + Math.random() * 0.001587) * NYL_DOT_SPEED,
+      }));
     let lastFrameTime = 0;
 
-    function resize() {
-      if (!canvas || !container) return;
-      canvas.width = container.offsetWidth;
-      canvas.height = container.offsetHeight;
-    }
-
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(container);
+    canvas.width = container.offsetWidth;
+    canvas.height = container.offsetHeight;
 
     function draw(now: number) {
       const frameDelta = lastFrameTime === 0 ? 1000 / 60 : Math.min(1000 / 15, now - lastFrameTime);
@@ -117,27 +59,23 @@ function NylSharpParticleCanvas({
       ctx.save();
       ctx.strokeStyle = 'rgba(34,34,34,0.07)';
       ctx.lineWidth = 1;
-      for (const path of paths) {
-        if (path.length < 2) continue;
-        ctx.beginPath();
-        ctx.moveTo(path[0].x, path[0].y);
-        for (let i = 1; i < path.length; i++) ctx.lineTo(path[i].x, path[i].y);
-        ctx.stroke();
-      }
+      ctx.beginPath();
+      ctx.moveTo(path[0].x, path[0].y);
+      ctx.lineTo(path[1].x, path[1].y);
+      ctx.stroke();
       ctx.restore();
 
       for (const particle of particlesRef.current) {
-        const path = paths[particle.pathIndex];
-        const metrics = pathMetrics[particle.pathIndex];
-        if (!path || !metrics || path.length < 2) continue;
-
         particle.t += particle.speed * frameScale;
         if (particle.t > 1) particle.t = 0;
 
-        const position = pointOnNylPath(path, metrics, particle.t);
+        const position = {
+          x: path[0].x + (path[1].x - path[0].x) * particle.t,
+          y: path[0].y + (path[1].y - path[0].y) * particle.t,
+        };
         ctx.beginPath();
-        ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${color},1)`;
+        ctx.arc(position.x, position.y, NYL_DOT_RADIUS, 0, Math.PI * 2);
+        ctx.fillStyle = NYL_DOT_COLOR;
         ctx.fill();
       }
 
@@ -148,9 +86,8 @@ function NylSharpParticleCanvas({
 
     return () => {
       cancelAnimationFrame(rafRef.current);
-      ro.disconnect();
     };
-  }, [paths, containerRef, color, speedMultiplier, particlesPerPath, radius]);
+  }, [path, containerRef]);
 
   return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }} />;
 }
@@ -295,12 +232,8 @@ function FlowLine() {
       {/* Particle dots */}
       {paths.length > 0 && (
         <NylSharpParticleCanvas
-          paths={paths}
+          path={paths[0]}
           containerRef={containerRef as React.RefObject<HTMLElement>}
-          color="68,122,203"
-          speedMultiplier={0.3125}
-          particlesPerPath={6}
-          radius={4}
         />
       )}
     </div>
