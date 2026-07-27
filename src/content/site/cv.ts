@@ -169,7 +169,7 @@ export const siteContent = {
       { label: "greatestpmever.com", href: "https://greatestpmever.com", external: true },
     ] satisfies CvLink[],
   },
-  downloads: [] satisfies CvDownloadAsset[],
+  downloads: [] as CvDownloadAsset[],
   impactStats: [
     {
       value: "20+ Years",
