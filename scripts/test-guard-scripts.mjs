@@ -104,33 +104,43 @@ function createBookingFixture(baseDir, options = {}) {
 }
 
 function createRegistryFixture(baseDir, options = {}) {
-  const route = options.badRoute ? "/work/not-alpha" : "/work/alpha"
+  const legacyGuardSource = fs.readFileSync(
+    path.join(repoRoot, "scripts/check-no-legacy-case-studies.mjs"),
+    "utf8",
+  )
+  writeFile(baseDir, "scripts/check-no-legacy-case-studies.mjs", legacyGuardSource)
+
+  const liveSlugs = [
+    "cps", "dtv01", "newyorklife", "modere", "bi", "mm", "method", "murad",
+    "k2", "cbdistillery", "foh", "lego", "cwg", "aa", "zevo", "dtv02",
+  ]
   writeFile(
     baseDir,
-    "src/content/case-studies/registry.ts",
-    `export type CaseStudySlug = "alpha"\n\nexport type CaseStudyRegistryEntry = {\n  slug: CaseStudySlug\n  route: \`/work/\${string}\`\n  contentModule: \`@/content/case-studies/\${string}\`\n  load: () => Promise<unknown>\n}\n\nexport const caseStudyRegistry = {\n  alpha: {\n    slug: "alpha",\n    route: "${route}",\n    contentModule: "@/content/case-studies/alpha",\n    load: () => import("./alpha").then((module) => module.caseStudy),\n  },\n} satisfies Record<CaseStudySlug, CaseStudyRegistryEntry>\n`,
+    "src/content/case-studies/revamp/preview-registry.ts",
+    `${liveSlugs.map((slug) => `record("${slug}", {})`).join("\n")}\n`,
   )
-
   writeFile(
     baseDir,
-    "src/content/case-studies/alpha.ts",
-    options.missingCaseStudyExport
-      ? "export const notCaseStudy = {}\n"
-      : "export const caseStudy = { slug: \"alpha\" }\n",
+    "src/content/case-studies/revamp/live-registry.ts",
+    "export const caseStudyPreviewRegistry = {}\n",
   )
-
   writeFile(
     baseDir,
-    "src/content/case-studies/pull-quotes.ts",
-    `export const pullQuotes = [{ slug: "alpha", quote: "Example quote" }]\n`,
+    "src/app/(site)/work/[slug]/page.tsx",
+    "export default function WorkPage() { return null }\n",
   )
+  writeFile(
+    baseDir,
+    "src/app/(site)/work/[slug]/print/page.tsx",
+    "export default function PrintPage() { return null }\n",
+  )
+  for (const [index, slug] of liveSlugs.entries()) {
+    if (options.missingRevampModule && index === 0) continue
+    writeFile(baseDir, `src/content/case-studies/revamp/${slug}.ts`, `export const ${slug} = {}\n`)
+  }
 
-  if (options.withOrphanModule) {
-    writeFile(
-      baseDir,
-      "src/content/case-studies/orphan.ts",
-      `export const caseStudy = { slug: "orphan" }\n`,
-    )
+  if (options.withLegacyRegistry) {
+    writeFile(baseDir, "src/content/case-studies/registry.ts", "export const legacyRegistry = {}\n")
   }
 }
 
@@ -253,16 +263,16 @@ const cases = [
     setup: (baseDir) => createRegistryFixture(baseDir),
   },
   {
-    name: "case-study-registry fails when caseStudy export is missing",
+    name: "case-study-registry fails when a required revamp module is missing",
     script: scriptPaths.registry,
     expectedPass: false,
-    setup: (baseDir) => createRegistryFixture(baseDir, { missingCaseStudyExport: true }),
+    setup: (baseDir) => createRegistryFixture(baseDir, { missingRevampModule: true }),
   },
   {
-    name: "case-study-registry fails on unregistered orphan module",
+    name: "case-study-registry fails when legacy registry remains active",
     script: scriptPaths.registry,
     expectedPass: false,
-    setup: (baseDir) => createRegistryFixture(baseDir, { withOrphanModule: true }),
+    setup: (baseDir) => createRegistryFixture(baseDir, { withLegacyRegistry: true }),
   },
   {
     name: "bundle-budget-trends pass fixture",
