@@ -2,13 +2,13 @@
 
 import { useRef } from "react";
 
+import { usePresentationFullscreen } from "@/hooks/usePresentationFullscreen";
+import { usePresentationNavigation } from "@/hooks/usePresentationNavigation";
 import { geekle2026Content } from "@/content/presentations/geekle2026";
 
 import { GeeklePresentationControls } from "./components/GeeklePresentationControls";
 import { GeekleProgressBar } from "./components/GeekleProgressBar";
 import { GeekleSlideFrame } from "./components/GeekleSlideFrame";
-import { useGeekleFullscreen } from "./hooks/useGeekleFullscreen";
-import { useGeekleNavigation } from "./hooks/useGeekleNavigation";
 import { useGeekleSlides } from "./hooks/useGeekleSlides";
 
 export default function Geekle2026App() {
@@ -16,8 +16,8 @@ export default function Geekle2026App() {
   const content = geekle2026Content;
 
   const { slides } = useGeekleSlides({ content });
-  const { isFullscreen, toggleFullscreen } = useGeekleFullscreen({ containerRef });
-  const { currentSlide, nextSlide, prevSlide } = useGeekleNavigation({
+  const { isFullscreen, toggleFullscreen } = usePresentationFullscreen({ containerRef });
+  const { currentSlide, nextSlide, prevSlide } = usePresentationNavigation({
     slideCount: slides.length,
     onToggleFullscreen: toggleFullscreen,
   });
