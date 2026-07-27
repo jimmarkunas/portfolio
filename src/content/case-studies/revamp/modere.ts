@@ -3,7 +3,7 @@ import type { CaseStudyRevampData } from "./types"
 export const modereSolutionDetails = {
   architectureWorked: {
     eyebrow: "MORE THAN A GANTT CHART",
-    copy: "Any PM can make a PRD or a Gantt chart; I align teams around soultions and drive ROI for enterprises.",
+    copy: "Any PM can make a PRD or a Gantt chart; I align teams around solutions and drive ROI for enterprises.",
   },
   businessGained: {
     eyebrow: "SELL WITHOUT SELLING",
@@ -160,7 +160,7 @@ export const modereRevampCaseStudy = {
       },
       {
         "title": "Protected the Architecture From Political Pressure",
-        "copy": "Internal politics could have turned the $1B vision into dust. My job was to hold the line. I did, and that's why the platform could scale collapsing."
+        "copy": "Internal politics could have turned the $1B vision into dust. My job was to hold the line. I did, and that's why the platform could scale without collapsing."
       }
     ]
   },
