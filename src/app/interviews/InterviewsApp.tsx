@@ -1,21 +1,24 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useRef } from "react";
 import { motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
 
 import { interviewContent } from "@/content/interviews";
 import { PresentationSlideFrame } from "@/components/presentation/PresentationSlideFrame";
 import { PresentationTocDialog } from "@/components/presentation/PresentationTocDialog";
-import { useInterviewNavigation } from "./hooks/useInterviewNavigation";
+import { usePresentationFullscreen } from "@/hooks/usePresentationFullscreen";
+import { usePresentationNavigation } from "@/hooks/usePresentationNavigation";
 import { useInterviewSlides } from "./hooks/useInterviewSlides";
 import { usePmPopQuizCategories } from "./hooks/usePmPopQuizCategories";
 import { usePresentationInsets } from "./hooks/usePresentationInsets";
 
 export default function InterviewsApp() {
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
+  const { isFullscreen, toggleFullscreen } = usePresentationFullscreen({
+    containerRef,
+  });
   const content = interviewContent;
   const navCopy = content.navigation;
   const slideContent = content.slides;
@@ -33,16 +36,6 @@ export default function InterviewsApp() {
     onTogglePmPopQuizCategoryReveal: togglePmPopQuizCategoryReveal,
   });
 
-  const toggleFullscreen = useCallback(() => {
-    if (!document.fullscreenElement) {
-      containerRef.current?.requestFullscreen();
-      setIsFullscreen(true);
-    } else {
-      document.exitFullscreen();
-      setIsFullscreen(false);
-    }
-  }, []);
-
   const {
     currentSlide,
     isTocOpen,
@@ -50,7 +43,7 @@ export default function InterviewsApp() {
     nextSlide,
     prevSlide,
     jumpToSlide,
-  } = useInterviewNavigation({
+  } = usePresentationNavigation({
     slideCount: slides.length,
     onToggleFullscreen: toggleFullscreen,
   });
