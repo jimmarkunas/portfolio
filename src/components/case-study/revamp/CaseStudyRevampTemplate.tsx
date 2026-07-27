@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import type { ComponentType, ReactNode } from "react"
 
 import { CaseStudyRevampHeroSection } from "./CaseStudyRevampHeroSection"
 import { CaseStudyRevampExecutiveBriefSection } from "./CaseStudyRevampExecutiveBriefSection"
@@ -12,11 +12,19 @@ import { CaseStudyRevampRecognitionSection } from "./CaseStudyRevampRecognitionS
 import { CaseStudyRevampRelatedSection } from "./CaseStudyRevampRelatedSection"
 import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 
+type CaseStudyRevampTemplateProps = {
+  data: CaseStudyRevampData
+  SolutionSection?: ComponentType<{ data: CaseStudyRevampData }>
+}
+
 function SectionBorder({ children }: { children: ReactNode }) {
   return <div>{children}</div>
 }
 
-export function CaseStudyRevampTemplate({ data }: { data: CaseStudyRevampData }) {
+export function CaseStudyRevampTemplate({
+  data,
+  SolutionSection = CaseStudyRevampSolutionSection,
+}: CaseStudyRevampTemplateProps) {
   return (
     <main data-case-study-renderer="revamp" className="min-h-full overflow-x-hidden bg-[#F3F3F3] text-[#222222]">
       <SectionBorder>
@@ -35,7 +43,7 @@ export function CaseStudyRevampTemplate({ data }: { data: CaseStudyRevampData })
         <CaseStudyRevampOwnershipSection data={data} />
       </SectionBorder>
       <SectionBorder>
-        <CaseStudyRevampSolutionSection data={data} />
+        <SolutionSection data={data} />
       </SectionBorder>
       <SectionBorder>
         <CaseStudyRevampImpactSection data={data} />
