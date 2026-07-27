@@ -204,12 +204,12 @@ export default function CvPage() {
                         <div className="type-p3 text-[#2A2A2A]">{award.source}</div>
                       </div>
 
-                      <div className="hidden xl:grid xl:grid-cols-[110px_minmax(0,1fr)_max-content] xl:items-center xl:gap-6">
+                      <div className="hidden xl:grid xl:grid-cols-[110px_minmax(220px,0.8fr)_minmax(0,1.2fr)] xl:items-center xl:gap-6">
                         <div className="type-p2 text-[#404040]">
                           {award.rank} {award.year}
                         </div>
                         <div className="type-p2 text-[#2A2A2A] xl:text-center">{award.title}</div>
-                        <div className="type-p3 text-[#2A2A2A] xl:text-right xl:whitespace-nowrap">{award.source}</div>
+                        <div className="type-p3 text-[#2A2A2A] xl:text-right">{award.source}</div>
                       </div>
                     </article>
                   )
