@@ -231,7 +231,7 @@ export const dtv01RevampCaseStudy = {
     "title": "Delivery Phases",
     "intro": "I came in midstream to a job that was part rescue, part rebuild, part political cleanup. The work had to move fast enough for seasonal deadlines, while also absorbing the duplication and extra complexity created by the AT&T divorce.",
     "testimonial": {
-      "quote": "What a magnificent symphoney Q3 has been! Thanks to the achievements orchestrated by none other than Jim Markunas. Now, we're able to present offers where customers engage most: on-screen!",
+      "quote": "What a magnificent symphoney Q3 has been! Thanks to the achievements orchestrated by none other than Jim Markunas!",
       "attributionTitle": "Katherine Huynh",
       "attributionSubtitle": "Sr. Director of Product Marketing, DIRECTV",
       "avatarSrc": "/dtv01/katherine-huynh.jpeg"
