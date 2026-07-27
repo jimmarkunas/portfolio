@@ -47,7 +47,7 @@ const record = (
 })
 
 export const caseStudyPreviewRegistry: CaseStudyPreviewRecord[] = [
-  record("cps", "CPS Energy: Smart Streetlight & Smart City Operations", "C", "complete", true, { routeKind: "dynamic", previewHref: "/work/case-study-test/cps", loadContent: () => import("./cps").then((module) => module.caseStudy), loadTemplate: CaseStudyRevampCpsTemplate }),
+  record("cps", "CPS Energy: Smart Streetlight & Smart City Operations", "C", "complete", true, { routeKind: "dynamic", previewHref: "/work/case-study-test/cps", loadContent: () => import("./cps").then((module) => module.cpsRevampCaseStudy), loadTemplate: CaseStudyRevampCpsTemplate }),
   record("dtv01", "Turning DIRECTV's Slow Offer Engine to a Revenue Machine", "B", "complete", false, { routeKind: "dynamic", previewHref: "/work/case-study-test/dtv01", loadContent: () => import("./dtv01").then((module) => module.dtv01RevampCaseStudy), loadTemplate: CaseStudyRevampTemplate }),
   record("newyorklife", "New York Life's Scalable Product Platform", "C", "complete", true, { routeKind: "dynamic", previewHref: "/work/case-study-test/newyorklife", loadContent: () => import("./newyorklife").then((module) => module.newyorklifeRevampCaseStudy), loadTemplate: CaseStudyRevampTemplate }),
   record("modere", "Winning Awards And Making $1B With Modere", "C", "complete", true, {

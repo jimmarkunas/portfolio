@@ -8,12 +8,12 @@ import { MotionReveal } from "@/components/motion/MotionReveal"
 import { ProofPointArrowIcon } from "@/components/case-study/template/CaseStudyTemplateIcons"
 import { TagPill } from "@/components/TagPill"
 import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
-import { cpsSolutionContent } from "@/content/case-studies/revamp/cps"
 import { CaseStudyRevampSectionHeader } from "../CaseStudyRevampSectionHeader"
 import { CpsOperationsFlowDiagram } from "./CpsOperationsFlowDiagram"
 
 export function CaseStudyRevampCpsSolutionSection({ data }: { data: CaseStudyRevampData }) {
   const isWhiteBackground = data.solution.background === "white"
+  const operatingModel = data.solution.operatingModel
 
   return (
     <section className={isWhiteBackground ? "bg-white" : "bg-[#F3F3F3]"}>
@@ -70,9 +70,9 @@ export function CaseStudyRevampCpsSolutionSection({ data }: { data: CaseStudyRev
           <MotionReveal preset="section">
             <div>
               <CaseStudyRevampSectionHeader
-                eyebrow={cpsSolutionContent.flow.eyebrow}
-                title={cpsSolutionContent.flow.title}
-                copy={cpsSolutionContent.flow.copy}
+                eyebrow={operatingModel?.eyebrow ?? ""}
+                title={operatingModel?.title ?? ""}
+                copy={operatingModel?.copy ?? ""}
               />
               <div className="mt-6">
                 <CpsOperationsFlowDiagram />
@@ -81,7 +81,7 @@ export function CaseStudyRevampCpsSolutionSection({ data }: { data: CaseStudyRev
           </MotionReveal>
 
           <MotionReveal preset="cardStrong" className={`${isWhiteBackground ? "bg-[#F3F3F3]" : "bg-white"} p-6 md:p-8`}>
-            <p className="type-p3 text-[#222222]">{cpsSolutionContent.closing}</p>
+            <p className="type-p3 text-[#222222]">{data.solution.summary}</p>
           </MotionReveal>
         </div>
       </Container>

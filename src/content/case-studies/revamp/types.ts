@@ -130,6 +130,11 @@ export type CaseStudyRevampData = {
     copy: string
     background?: "gray" | "white"
     architecture: CaseStudyRevampArchitectureLane[]
+    operatingModel?: {
+      eyebrow: string
+      title: string
+      copy: string
+    }
     featuredMedia?: CaseStudyRevampImage[]
     carouselImages?: string[]
     diagramKey?: CaseStudySolutionDiagramKey
