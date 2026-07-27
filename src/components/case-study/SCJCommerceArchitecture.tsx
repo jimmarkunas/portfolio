@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { SCJ_TOOLTIPS } from "./scjDiagramData";
 import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost";
 import {
-  SCJ_COMMERCE_NODES,
   SCJ_SYSTEM_NODES,
 } from "@/components/case-study/diagram-config/scj-architecture.config";
 import {
