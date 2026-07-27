@@ -30,7 +30,7 @@ function UserExperienceBadge() {
   )
 }
 
-function HeaderIcon({ children, dark = false, className }: { children: ReactNode; dark?: boolean; className?: string }) {
+function HeaderIcon({ children, className }: { children: ReactNode; className?: string }) {
   return <span className={cn("inline-flex h-6 w-6 items-center justify-center text-[var(--color-ink)]", className)}>{children}</span>
 }
 
@@ -117,7 +117,6 @@ function ThinGlyphFilter() {
 function LayerSection({
   icon,
   title,
-  subtitle,
   children,
   showDivider = true,
   headerBg = "bg-zinc-100",
@@ -126,7 +125,6 @@ function LayerSection({
 }: {
   icon: ReactNode
   title: string
-  subtitle?: string
   children: ReactNode
   showDivider?: boolean
   headerBg?: string
@@ -143,7 +141,7 @@ function LayerSection({
           onHeaderClick && "cursor-pointer transition-[outline,box-shadow] duration-150 hover:outline-blue-500 hover:shadow-[0_6px_24px_rgba(0,0,0,0.10)]"
         )}
       >
-        <HeaderIcon dark className={headerText}>{icon}</HeaderIcon>
+        <HeaderIcon className={headerText}>{icon}</HeaderIcon>
         <div className="flex flex-col items-center gap-0.5 text-center">
           <div className={cn("type-h6", headerText)}>{title}</div>
         </div>
@@ -197,7 +195,6 @@ export function StorefrontAndCommerceLayers({
           title="Storefront Design"
           headerBg="bg-[#222222]"
           headerText="text-[#f1f1f1]"
-          subtitle="Presentation Layer"
           onHeaderClick={() => toggle("storefront")}
         >
           <div className={topGridClass}>
@@ -218,7 +215,6 @@ export function StorefrontAndCommerceLayers({
           showDivider={false}
           headerBg="bg-[#222222]"
           headerText="text-[#f1f1f1]"
-          subtitle="Commerce Platform"
           onHeaderClick={() => toggle("commerce-layer")}
         >
           <div className={commerceGridClass}>
