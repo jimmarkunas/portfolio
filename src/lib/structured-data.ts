@@ -1,6 +1,4 @@
 import type {
-  CaseStudyData,
-  LoadedCaseStudy,
   LoadedRevampCaseStudy,
 } from "@/content/case-studies"
 import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
@@ -79,7 +77,7 @@ export function createSiteStructuredData(): StructuredDataValue[] {
 }
 
 export function createWorkCollectionStructuredData(
-  studies: Array<{ slug: string; study: CaseStudyData | CaseStudyRevampData }>
+  studies: Array<{ slug: string; study: CaseStudyRevampData }>
 ): StructuredDataValue {
   return {
     "@context": "https://schema.org",
@@ -104,7 +102,7 @@ export function createWorkCollectionStructuredData(
           "@type": "Article",
           headline: study.hero.title,
           name: study.breadcrumbCurrent,
-        description: "role" in study ? study.role.copy : study.hero.intro,
+          description: study.hero.intro,
           image: toAbsoluteUrl(study.hero.image.src),
           author: personReference(),
         },
@@ -113,68 +111,31 @@ export function createWorkCollectionStructuredData(
   }
 }
 
-function isLoadedCaseStudy(study: CaseStudyData | LoadedCaseStudy): study is LoadedCaseStudy {
-  return "templateVersion" in study
-}
-
-function isRevampLoadedCaseStudy(study: CaseStudyData | LoadedCaseStudy): study is LoadedRevampCaseStudy {
-  return isLoadedCaseStudy(study) && study.templateVersion === "revamp"
-}
-
-export function createCaseStudyStructuredData(study: CaseStudyData): StructuredDataValue
-export function createCaseStudyStructuredData(study: LoadedCaseStudy): StructuredDataValue
 export function createCaseStudyStructuredData(
-  study: CaseStudyData | LoadedCaseStudy
+  study: LoadedRevampCaseStudy
 ): StructuredDataValue {
-  if (isRevampLoadedCaseStudy(study)) {
-    const revampStudy = study.data
-    const image = revampStudy.metadata?.image ?? {
-      src: revampStudy.hero.image.src,
-      alt: revampStudy.hero.image.alt,
-    }
-
-    return {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: revampStudy.metadata?.title ?? revampStudy.breadcrumbCurrent,
-      name: revampStudy.breadcrumbCurrent,
-      description: revampStudy.hero.intro,
-      abstract: revampStudy.hero.intro,
-      articleSection: "Case Study",
-      genre: "Case Study",
-      url: toAbsoluteUrl(`/work/${revampStudy.slug}`),
-      mainEntityOfPage: toAbsoluteUrl(`/work/${revampStudy.slug}`),
-      image: [toAbsoluteUrl(image.src)],
-      author: personReference(),
-      creator: personReference(),
-      publisher: personReference(),
-      about: [toThing(revampStudy.hero.title)],
-    }
+  const revampStudy = study.data
+  const image = revampStudy.metadata?.image ?? {
+    src: revampStudy.hero.image.src,
+    alt: revampStudy.hero.image.alt,
   }
-
-  const legacyStudy = isLoadedCaseStudy(study) ? study.data : study
 
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: legacyStudy.hero.title,
-    name: legacyStudy.breadcrumbCurrent,
-    description: legacyStudy.hero.intro,
-    abstract: legacyStudy.atAGlance.copy,
+    headline: revampStudy.metadata?.title ?? revampStudy.breadcrumbCurrent,
+    name: revampStudy.breadcrumbCurrent,
+    description: revampStudy.hero.intro,
+    abstract: revampStudy.hero.intro,
     articleSection: "Case Study",
     genre: "Case Study",
-    url: toAbsoluteUrl(`/work/${legacyStudy.slug}`),
-    mainEntityOfPage: toAbsoluteUrl(`/work/${legacyStudy.slug}`),
-    image: [toAbsoluteUrl(legacyStudy.hero.image.src)],
+    url: toAbsoluteUrl(`/work/${revampStudy.slug}`),
+    mainEntityOfPage: toAbsoluteUrl(`/work/${revampStudy.slug}`),
+    image: [toAbsoluteUrl(image.src)],
     author: personReference(),
     creator: personReference(),
     publisher: personReference(),
-    about: [
-      toThing(legacyStudy.problem.title),
-      toThing(legacyStudy.solution.title),
-      toThing(legacyStudy.impact.title),
-    ],
-    keywords: [...legacyStudy.role.tags, ...legacyStudy.impact.proofPoints],
+    about: [toThing(revampStudy.hero.title)],
   }
 }
 

@@ -283,16 +283,7 @@ export type CaseStudyData = {
   }
 }
 
-export type CaseStudyTemplateVersion = "legacy" | "revamp"
-
-export type LoadedLegacyCaseStudy = {
-  templateVersion: "legacy"
-  data: CaseStudyData
-}
-
 export type LoadedRevampCaseStudy = {
   templateVersion: "revamp"
   data: CaseStudyRevampData
 }
-
-export type LoadedCaseStudy = LoadedLegacyCaseStudy | LoadedRevampCaseStudy
