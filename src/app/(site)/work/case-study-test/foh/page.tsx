@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
+import { notFound } from "next/navigation"
 
-import { CaseStudyRevampTemplate } from "@/components/case-study/revamp/CaseStudyRevampTemplate"
-import { fohRevampCaseStudy } from "@/content/case-studies/revamp/foh"
+import { getCaseStudyPreview } from "@/content/case-studies/revamp/preview-registry"
 import { buildPageMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = buildPageMetadata({
@@ -14,6 +14,15 @@ export const metadata: Metadata = buildPageMetadata({
   },
 })
 
-export default function FOHCaseStudyPreviewPage() {
-  return <CaseStudyRevampTemplate data={fohRevampCaseStudy} />
+export default async function FOHCaseStudyPreviewPage() {
+  const study = getCaseStudyPreview("foh")
+
+  if (!study || !study.loadContent || !study.loadTemplate) {
+    notFound()
+  }
+
+  const data = await study.loadContent()
+  const Template = study.loadTemplate
+
+  return <Template data={data} />
 }
