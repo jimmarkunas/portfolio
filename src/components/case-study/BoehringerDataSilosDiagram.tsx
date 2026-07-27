@@ -136,7 +136,7 @@ export default function BoehringerDataSilosDiagram() {
         }}
       >
         {/* Mobile + tablet — vertical stack */}
-        <div className="flex flex-col xl:hidden">
+        <div className="flex flex-col md:hidden">
           <div className="grid gap-3">
             {inputs.map((item) => (
               <InputCard key={item.title} icon={item.icon} title={item.title} />
@@ -149,7 +149,7 @@ export default function BoehringerDataSilosDiagram() {
         </div>
 
         {/* Desktop — full horizontal */}
-        <div className="hidden xl:grid xl:items-center" style={{ gridTemplateColumns: "160px 36px 1fr 36px 110px" }}>
+        <div className="hidden md:grid md:items-center" style={{ gridTemplateColumns: "160px 36px 1fr 36px 110px" }}>
           <div className="flex flex-col gap-4">
             {inputs.map((item) => (
               <InputCard key={item.title} icon={item.icon} title={item.title} />

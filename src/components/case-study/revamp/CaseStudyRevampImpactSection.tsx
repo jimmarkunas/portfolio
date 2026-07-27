@@ -44,7 +44,7 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
             />
           </MotionReveal>
 
-          <MotionReveal preset="card" className={`grid gap-4 sm:grid-cols-2 ${data.impact.metrics.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
+          <MotionReveal preset="card" className={`grid items-stretch gap-4 sm:grid-cols-2 ${data.impact.metrics.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
             {data.impact.metrics.map((metric) => (
               <StatCard
                 key={`${metric.value}-${metric.label}`}
@@ -52,16 +52,17 @@ export function CaseStudyRevampImpactSection({ data }: { data: CaseStudyRevampDa
                 suffix={metric.suffix}
                 decoration={<div className="h-[3px] w-7 rounded-full bg-[#447ACB]" />}
                 label={
-                  <div className="flex flex-col gap-2">
-                    <span className="type-p2 font-medium text-[#222222]">{metric.label}</span>
-                    {metric.detail ? <span className="type-p3 text-black/62">{metric.detail}</span> : null}
+                  <div className="type-p2 grid w-full grid-rows-[2.9em_auto] gap-2">
+                    <span className="self-end font-medium text-[#222222]">{metric.label}</span>
+                    <span className="type-p3 min-h-[4.5em] text-black/62">{metric.detail ?? "\u00A0"}</span>
                   </div>
                 }
-                className="min-h-[220px] px-7 py-8"
+                className="h-full min-h-[220px] px-7 py-8"
+                contentClassName="!justify-start"
                 valueClassName="inline-flex items-baseline justify-center whitespace-nowrap gap-0.5"
                 valueTextClassName="type-stat-number font-semibold leading-none tabular-nums"
                 suffixClassName="type-stat-plus font-semibold leading-none uppercase"
-                labelClassName="mt-4"
+                labelClassName="mt-4 w-full"
               />
             ))}
           </MotionReveal>

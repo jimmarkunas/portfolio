@@ -14,14 +14,14 @@ export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevam
   return (
     <section className="bg-[#F3F3F3]">
       <Container className="py-14 md:py-16 lg:py-20">
-        <div className={`grid gap-10 ${isRetailChart ? "lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]" : "lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]"} lg:grid-rows-[auto_auto] lg:items-start lg:gap-x-12 lg:gap-y-4 lg:max-xl:grid-cols-1 lg:max-xl:gap-x-8 lg:max-xl:gap-y-4`}>
-          <MotionReveal preset="section" className="flex flex-col items-start gap-4 lg:col-start-1 lg:row-start-1">
+        <div className={`grid gap-10 ${isRetailChart ? "xl:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]" : "xl:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]"} xl:grid-rows-[auto_auto] xl:items-start xl:gap-x-12 xl:gap-y-4`}>
+          <MotionReveal preset="section" className="flex flex-col items-start gap-4 xl:col-start-1 xl:row-start-1">
             <EyebrowPill data-case-study-challenge-eyebrow className="w-fit" labelClassName="type-p3 text-[#222222]">
               {data.challenge.eyebrow}
             </EyebrowPill>
           </MotionReveal>
 
-          <MotionReveal preset="section" className="flex flex-col gap-6 lg:col-start-1 lg:row-start-2">
+          <MotionReveal preset="section" className="flex flex-col gap-6 xl:col-start-1 xl:row-start-2">
             <h2 data-case-study-challenge-title className="type-h2 text-[#222222]">{data.challenge.title}</h2>
             <div data-case-study-challenge-copy className="flex flex-col gap-5">
               {data.challenge.paragraphs.map((paragraph, index) => (
@@ -32,7 +32,7 @@ export function CaseStudyRevampChallengeSection({ data }: { data: CaseStudyRevam
             </div>
           </MotionReveal>
 
-          <MotionReveal preset="image" delay={0.04} className="lg:col-start-2 lg:row-start-2">
+          <MotionReveal preset="image" delay={0.04} className="xl:col-start-2 xl:row-start-2">
             <div data-case-study-challenge-media className={isDirectvRevenueChart ? "overflow-hidden rounded-[28px] bg-white" : "overflow-hidden rounded-[28px] border border-black/8 bg-white shadow-[0_18px_54px_rgba(34,34,34,0.08)]"}>
               <CaseStudyMediaFrame media={data.challenge.visual} className="w-full" />
             </div>

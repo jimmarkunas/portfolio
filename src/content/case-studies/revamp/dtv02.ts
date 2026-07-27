@@ -15,17 +15,19 @@ export const dtv02RevampCaseStudy = {
   "hero": {
     "eyebrow": "At-a-Glance",
     "title": "Leading the Launch of DIRECTV Everywhere",
-    "intro": "DIRECTV Everywhere was supposed to prove the company could bring premium video beyond the set-top box, but marketing had sold the dream before the product was ready. I stepped in to align 35+ teams around one product truth & turn a public promise into a scalable streaming experience.",
+    "intro": "DIRECTV Everywhere was supposed to prove the company could bring premium video beyond the set-top box, but marketing had sold the dream before the product was ready. I stepped in to align 35+ teams around one product truth and turn a public promise into a scalable streaming experience across 5 device families and 20M+ subscribers.",
     "metrics": [
       {
         "value": "5",
         "suffix": "M+",
-        "label": "Downloads"
+        "label": "Downloads",
+        "detail": "Across all device families at launch"
       },
       {
         "value": "5",
         "suffix": "",
-        "label": "Device Families"
+        "label": "Device Families",
+        "detail": "Web, iOS, Android, Roku, Apple TV"
       },
       {
         "value": "20",
@@ -76,10 +78,10 @@ export const dtv02RevampCaseStudy = {
         "icon": "/tool-icons/jira-logo.png"
       }
     ],
-    "problem": "DIRECTV was still a broadcast TV business trying to answer a market that was rapidly shifting to streaming on every screen. Netflix and HBOGo were already teaching customers to expect on-demand, authenticated viewing anywhere. DTV's marketing promised the experience publicly, but didn't have a product.",
+    "problem": "DIRECTV had already promised customers they could watch anything, anywhere, on any screen. The problem was the product didn't exist yet. Netflix and HBOGo were training subscribers to expect on-demand authenticated viewing as a baseline, and DIRECTV's answer was a marketing campaign with nothing behind it.",
     "mandate": "I owned the product definition layer that kept a very public streaming launch from disintegrating into cross-functional chaos. I wrote the PRDs, kept 35+ teams aligned, forced decisions around parity and entitlement, and made sure the product shipped.",
-    "whatIChanged": "DIRECTV Everywhere wasn't dying because streaming technology was impossible. It was because too many teams were in-fighting over competing roadmpas, while a national campaign was selling subscriberships for a product that didn't exist.",
-    "outcome": "DIRECTV Everywhere became more than just a slick marketing campaign. It turned into a real product that customers downloaded, used across devices, and expanded into it's own standalone product still sold today.",
+    "whatIChanged": "DIRECTV Everywhere wasn't failing because streaming technology was impossible. It was failing because too many teams were fighting over competing roadmaps while a national campaign was selling subscriptions for a product that didn't exist. I wrote the PRDs that forced one shared product truth, locked entitlement and authentication logic, and drove cross-device parity across web, iOS, Android, and connected TV.",
+    "outcome": "DIRECTV Everywhere shipped as a real product across 5 device families, reached 5M+ downloads, and gave 20M+ subscribers authenticated streaming access across 400+ channels. It evolved into a standalone product still sold today.",
     "facts": [
       {
         "icon": "role",
@@ -150,8 +152,8 @@ export const dtv02RevampCaseStudy = {
         "copy": "Prioritized authentication, entitlement, and content reach over feature sprawl and product drift."
       },
       {
-        "title": "PRDs",
-        "copy": "PRDs"
+        "title": "PRD ownership",
+        "copy": "Wrote and owned the product requirements documents that kept 35+ teams working from one shared product truth instead of seven competing interpretations of what DIRECTV Everywhere was supposed to be."
       },
       {
         "title": "Launch protection",
@@ -207,7 +209,7 @@ export const dtv02RevampCaseStudy = {
   "impact": {
     "eyebrow": "Impact",
     "title": "Scale, Reach & Credibility",
-    "intro": "DIRECTV Everywhere became more than just a slick marketing campaign. It turned into a real product that customers downloaded, used across devices, and expanded into it's own standalone product still sold today.",
+    "intro": "DIRECTV Everywhere shipped as a real product across 5 device families, reached 5M+ downloads, and gave 20M+ subscribers authenticated streaming access across 400+ channels. It evolved into a standalone streaming product still sold today.",
     "metrics": [
       {
         "value": "5",
@@ -222,12 +224,14 @@ export const dtv02RevampCaseStudy = {
       {
         "value": "400",
         "suffix": "+",
-        "label": "Channels"
+        "label": "Channels",
+        "detail": "Live and on-demand at launch"
       },
       {
         "value": "$200",
         "suffix": "M",
-        "label": "Revenue Uplift"
+        "label": "Revenue Uplift",
+        "detail": "Platform subscriber revenue impact"
       }
     ],
     "transformation": {
@@ -363,8 +367,8 @@ export const dtv02RevampCaseStudy = {
     ]
   },
   "finalCta": {
-    "eyebrow": "Next step",
-    "title": "Review the DIRECTV Everywhere case study.",
-    "copy": "A direct legacy-parity preview."
+    "eyebrow": "Next",
+    "title": "See the revenue platform program that came after it.",
+    "copy": "DIRECTV Everywhere was the streaming infrastructure story. The DIRECTV Revenue Platform was what came next: 13 siloed organizations, a 6-month campaign cycle, and $221M in Q4 digital retention revenue on the line."
   }
 } as CaseStudyRevampData

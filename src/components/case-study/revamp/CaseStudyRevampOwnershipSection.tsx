@@ -34,7 +34,7 @@ export function CaseStudyRevampOwnershipSection({ data }: { data: CaseStudyRevam
               <CaseStudyRevampSectionHeader
                 eyebrow="What I Owned"
                 title={data.ownership.title}
-                className="md:max-lg:w-full md:max-lg:max-w-none md:max-lg:items-start md:max-lg:[&>div]:w-full md:max-lg:[&>div]:max-w-none md:max-lg:[&>div]:gap-3 md:max-lg:[&>div>p]:max-w-none"
+                className="md:max-lg:w-full md:max-lg:max-w-none md:max-lg:items-start md:max-lg:[&>div:not(.eyebrow-pill)]:w-full md:max-lg:[&>div:not(.eyebrow-pill)]:max-w-none md:max-lg:[&>div:not(.eyebrow-pill)]:gap-3 md:max-lg:[&>div:not(.eyebrow-pill)>p]:max-w-none"
               />
               <p className={`${CASE_STUDY_SECTION_INTRO_CLASS} max-w-[620px] md:max-lg:max-w-none`}>{data.ownership.summary}</p>
             </MotionReveal>
@@ -43,7 +43,7 @@ export function CaseStudyRevampOwnershipSection({ data }: { data: CaseStudyRevam
               <ol className="space-y-4">
                 {data.ownership.decisions.map((decision, index) => (
                   <li key={decision.title} className="rounded-[20px] border border-black/8 bg-white p-5 md:p-6">
-                    <div className="grid gap-4 md:grid-cols-[56px_minmax(0,1fr)] md:items-start md:gap-6">
+                    <div className="grid justify-items-center gap-4 text-center md:grid-cols-[56px_minmax(0,1fr)] md:items-start md:justify-items-stretch md:text-left md:gap-6">
                       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#222222] type-p5 font-medium text-white">
                         {index + 1}
                       </div>
