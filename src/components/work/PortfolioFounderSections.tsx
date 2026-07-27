@@ -1,6 +1,6 @@
 "use client"
 
-import { useReducedMotion } from "framer-motion"
+import { useReducedMotion } from "motion/react"
 
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { ButtonLink } from "@/components/ButtonLink"

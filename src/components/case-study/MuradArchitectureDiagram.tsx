@@ -1,6 +1,6 @@
 "use client"
 import { useRef, useEffect, useState } from "react"
-import { motion, useReducedMotion } from "framer-motion"
+import { motion, useReducedMotion } from "motion/react"
 import { DIAGRAM_DATA as D } from "./muradDiagramData"
 import MobileCard from "./MobileCard"
 import { DiagramRendererHost } from "@/components/case-study/diagram-shared/DiagramRendererHost"

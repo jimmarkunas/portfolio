@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import type { DiagramData } from "@/content/case-studies";
 import Modal from "@/components/case-study/Modal";
 import { useModal } from "@/components/case-study/useModal";

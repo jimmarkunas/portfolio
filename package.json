@@ -25,7 +25,6 @@
     "typecheck": "bash scripts/check-short.sh typecheck tsc --noEmit -p tsconfig.typecheck.json"
   },
   "dependencies": {
-    "framer-motion": "^12.36.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.469.0",
     "motion": "^12.36.0",

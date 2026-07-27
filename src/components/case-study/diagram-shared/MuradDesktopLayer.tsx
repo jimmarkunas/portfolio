@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 
 import DesktopCard from "@/components/case-study/DesktopCard"
 import { MuradApiLayerCard } from "@/components/case-study/diagram-shared/MuradApiLayerCard"

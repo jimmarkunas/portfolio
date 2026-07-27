@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { useInView, useReducedMotion } from "framer-motion"
+import { useInView, useReducedMotion } from "motion/react"
 
 type TriggerMode = "load" | "in-view"
 

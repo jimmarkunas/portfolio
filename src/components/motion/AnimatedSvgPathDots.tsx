@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useId, useMemo, useState } from "react"
-import { useReducedMotion } from "framer-motion"
+import { useReducedMotion } from "motion/react"
 
 export type ParticleSpacingMode = "uniform" | "random"
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useReducedMotion } from "framer-motion"
+import { useReducedMotion } from "motion/react"
 
 const METHOD_DOT_DURATION = 21333
 const METHOD_DOT_RADIUS = 4.5

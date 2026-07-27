@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { useInView } from "framer-motion"
+import { useInView } from "motion/react"
 
 type StageKey = "title" | "pills" | "row1" | "row2" | "row3" | "row4"
 

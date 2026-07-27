@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { Building2, Users, UserCheck } from 'lucide-react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView } from 'motion/react';
 import { useAdaptiveDiagramMotion } from '@/components/case-study/useAdaptiveDiagramMotion';
 import type { LucideIcon } from 'lucide-react';
 

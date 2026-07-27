@@ -1,6 +1,6 @@
 "use client"
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 
 type Row = { label: string; value: number; dtc?: boolean };
 
