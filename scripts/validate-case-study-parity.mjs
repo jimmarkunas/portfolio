@@ -9,7 +9,6 @@ if (process.argv.includes("--all")) {
   const registry = fs.readFileSync(path.join(root, "src/content/case-studies/revamp/case-study-registry.ts"), "utf8")
   const catalogPath = path.join(root, "src/content/case-studies/revamp/case-study-card-catalog.ts")
   const catalog = fs.existsSync(catalogPath) ? fs.readFileSync(catalogPath, "utf8") : ""
-  const liveRegistryPath = path.join(root, "src/content/case-studies/revamp/live-registry.ts")
   const liveRoute = fs.readFileSync(path.join(root, "src/app/(site)/work/[slug]/page.tsx"), "utf8")
   const errors = []
   for (const slug of allSlugs) {
@@ -25,9 +24,7 @@ if (process.argv.includes("--all")) {
   if (!fs.existsSync(catalogPath)) errors.push("public related-card catalog missing")
   const legacyAdapterPath = path.join(root, "src/content/case-studies/revamp/createLegacyParityCaseStudy.ts")
   if (fs.existsSync(legacyAdapterPath)) errors.push("legacy parity adapter still exists")
-  if (!fs.existsSync(liveRegistryPath)) errors.push("live registry missing")
-  if (!fs.readFileSync(liveRegistryPath, "utf8").includes("caseStudyPreviewRegistry")) errors.push("live registry is not derived from the case-study registry")
-  if (!liveRoute.includes("loadLiveRevampCaseStudy") || !liveRoute.includes("/work/${slug}")) errors.push("live route does not use approved revamp loader/canonical path")
+  if (!liveRoute.includes("loadLiveRevampCaseStudy") || !liveRoute.includes("/work/${slug}") || !liveRoute.includes("content/case-studies/revamp/case-study-registry")) errors.push("live route does not use case-study registry loader/canonical path")
   if (liveRoute.includes("CaseStudyTemplate") || liveRoute.includes("/case-study-test/")) errors.push("live route contains legacy or preview routing")
   const statusCount = allSlugs.length
   console.log(`All-study cutover validation (${allSlugs.length} studies)`)

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-import { liveRevampSlugs } from "@/content/case-studies/revamp/live-registry"
+import { liveRevampSlugs } from "@/content/case-studies/revamp/case-study-registry"
 import { siteRoutes } from "@/content/site"
 import { SEO_SITE_URL } from "@/lib/seo"
 

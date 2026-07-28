@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { StructuredData } from "@/components/seo/StructuredData"
-import { liveRevampSlugs, loadLiveRevampCaseStudy } from "@/content/case-studies/revamp/live-registry"
+import { liveRevampSlugs, loadLiveRevampCaseStudy } from "@/content/case-studies/revamp/case-study-registry"
 import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
 import { buildPageMetadata } from "@/lib/seo"
 import { createCaseStudyStructuredData } from "@/lib/structured-data"

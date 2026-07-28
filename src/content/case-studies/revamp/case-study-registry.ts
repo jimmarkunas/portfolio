@@ -42,3 +42,17 @@ export const caseStudyPreviewRegistry: CaseStudyPreviewRecord[] = [
 export function getCaseStudyPreview(slug: string) {
   return caseStudyPreviewRegistry.find((study) => study.slug === slug)
 }
+
+export const liveRevampSlugs = caseStudyPreviewRegistry.map(
+  (study) => study.slug,
+)
+
+export async function loadLiveRevampCaseStudy(slug: string) {
+  const entry = getCaseStudyPreview(slug)
+  if (!entry) return null
+
+  return {
+    data: await entry.loadContent(),
+    Template: entry.loadTemplate,
+  }
+}

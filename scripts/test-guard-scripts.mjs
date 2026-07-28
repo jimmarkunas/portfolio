@@ -121,18 +121,13 @@ function createRegistryFixture(baseDir, options = {}) {
   )
   writeFile(
     baseDir,
-    "src/content/case-studies/revamp/live-registry.ts",
-    "export const caseStudyPreviewRegistry = {}\n",
-  )
-  writeFile(
-    baseDir,
     "src/app/(site)/work/[slug]/page.tsx",
-    "export default function WorkPage() { return null }\n",
+    "import { liveRevampSlugs, loadLiveRevampCaseStudy } from \"@/content/case-studies/revamp/case-study-registry\"\nexport default function WorkPage() { return null }\n",
   )
   writeFile(
     baseDir,
     "src/app/(site)/work/[slug]/print/page.tsx",
-    "export default function PrintPage() { return null }\n",
+    "import { liveRevampSlugs, loadLiveRevampCaseStudy } from \"@/content/case-studies/revamp/case-study-registry\"\nexport default function PrintPage() { return null }\n",
   )
   for (const [index, slug] of liveSlugs.entries()) {
     if (options.missingRevampModule && index === 0) continue

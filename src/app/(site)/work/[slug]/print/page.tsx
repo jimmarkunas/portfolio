@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { CaseStudyRenderModeProvider } from "@/components/case-study/revamp/CaseStudyRenderMode"
-import { liveRevampSlugs, loadLiveRevampCaseStudy } from "@/content/case-studies/revamp/live-registry"
+import { liveRevampSlugs, loadLiveRevampCaseStudy } from "@/content/case-studies/revamp/case-study-registry"
 import { buildPageMetadata } from "@/lib/seo"
 
 type PrintPageParams = { slug: string }
