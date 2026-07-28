@@ -15,8 +15,7 @@ if (process.argv.includes("--all")) {
   for (const slug of allSlugs) {
     const modulePath = path.join(root, "src/content/case-studies/revamp", `${slug}.ts`)
     if (!fs.existsSync(modulePath)) errors.push(`${slug}: revamp content module missing`)
-    if (!registry.includes(`record("${slug}"`) || !registry.includes(`previewHref: "/work/case-study-test/${slug}"`)) errors.push(`${slug}: approved preview record missing`)
-    if (!registry.includes(`record("${slug}"`) || !registry.includes(`migrationStatus: "approved"`) && !registry.includes(`record("${slug}"`)) errors.push(`${slug}: status metadata missing`)
+    if (!registry.includes(`record("${slug}"`)) errors.push(`${slug}: case-study registry record missing`)
     if (!catalog.includes(`  ${slug}: {`) || !catalog.includes(`slug: "${slug}"`) || !catalog.includes(`href: "/work/${slug}"`)) errors.push(`${slug}: public related-card catalog entry is incomplete`)
     const source = fs.existsSync(modulePath) ? fs.readFileSync(modulePath, "utf8") : ""
     if (/createLegacyParityCaseStudy|@\/content\/case-studies\/(?!types(?:["/])|shared(?:["/])|revamp\/)/.test(source)) errors.push(`${slug}: revamp module still depends on legacy content or adapter`)
@@ -27,7 +26,7 @@ if (process.argv.includes("--all")) {
   const legacyAdapterPath = path.join(root, "src/content/case-studies/revamp/createLegacyParityCaseStudy.ts")
   if (fs.existsSync(legacyAdapterPath)) errors.push("legacy parity adapter still exists")
   if (!fs.existsSync(liveRegistryPath)) errors.push("live registry missing")
-  if (!fs.readFileSync(liveRegistryPath, "utf8").includes("caseStudyPreviewRegistry")) errors.push("live registry is not derived from the approved preview registry")
+  if (!fs.readFileSync(liveRegistryPath, "utf8").includes("caseStudyPreviewRegistry")) errors.push("live registry is not derived from the case-study registry")
   if (!liveRoute.includes("loadLiveRevampCaseStudy") || !liveRoute.includes("/work/${slug}")) errors.push("live route does not use approved revamp loader/canonical path")
   if (liveRoute.includes("CaseStudyTemplate") || liveRoute.includes("/case-study-test/")) errors.push("live route contains legacy or preview routing")
   const statusCount = allSlugs.length
@@ -54,7 +53,7 @@ if (slugsArg) {
     if (!fs.existsSync(legacyPath)) errors.push(`${slug}: legacy module missing`)
     const bespokeCps = slug === "cps"
     if (!bespokeCps && !source.includes("createLegacyParityCaseStudy")) errors.push(`${slug}: direct legacy adapter missing`)
-    if (!registry.includes(`record("${slug}"`) || !registry.includes(`previewHref: "/work/case-study-test/${slug}"`)) errors.push(`${slug}: dynamic registry record missing`)
+    if (!registry.includes(`record("${slug}"`)) errors.push(`${slug}: case-study registry record missing`)
     if ((source.match(/title:/g) ?? []).length < 5) errors.push(`${slug}: ownership configuration incomplete`)
     if (bespokeCps) {
       for (const value of ["225K", "$2M", "15 people", "6 system integrations", "1.5 million", "August 2024–April 2025", "73", "43", "1–4"]) {
