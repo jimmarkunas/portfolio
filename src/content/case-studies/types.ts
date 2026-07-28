@@ -39,6 +39,12 @@ export type CaseStudyMedia =
       aspectRatio: "16/9" | "9/16"
     }
   | {
+      kind: "cloudinary-video"
+      cloudName: string
+      publicId: string
+      aspectRatio: "16/9" | "9/16"
+    }
+  | {
       kind: "react-diagram"
       component: "bi-data-silos" | "nyl-velocity-chart" | "directv-revenue" | "retail-vs-dtc" | "method-traffic-continuity"
       brandName?: string

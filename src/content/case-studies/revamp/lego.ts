@@ -274,8 +274,9 @@ export const legoRevampCaseStudy = {
     "intro": "LEGO's digital transformation became a management and research case profiled by Harvard Business Review and MIT (among others),and our work was part of the mechanism that supported that growth through retail channels, e-commerce, and digital platforms.",
     "featured": {
       "media": {
-        "kind": "video",
-        "src": "/lego/Knudstrop_Lego_lo.mp4",
+        "kind": "cloudinary-video",
+        "cloudName": "abj6dhip",
+        "publicId": "Knudstrop_Lego_lo_j7rldn",
         "aspectRatio": "16/9"
       },
       "title": "BCG Interview With LEGO CEO Jørgen Vig Knudstorp",

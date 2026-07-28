@@ -88,8 +88,26 @@ export function CaseStudyMediaFrame({
         <video
           src={media.src}
           controls
+          preload="metadata"
           playsInline
           className="h-full w-full object-cover"
+        />
+      </div>
+    )
+  }
+
+  if (media.kind === "cloudinary-video") {
+    if (renderMode === "print") {
+      return <div className={`${aspectClassName} flex items-center justify-center bg-white p-6 text-center`.trim()}><a className="type-p3 underline" href={`https://player.cloudinary.com/embed/?cloud_name=${media.cloudName}&public_id=${media.publicId}`}>Open video online</a></div>
+    }
+    return (
+      <div className={`${aspectClassName} w-full overflow-hidden ${className}`.trim()}>
+        <iframe
+          src={`https://player.cloudinary.com/embed/?cloud_name=${media.cloudName}&public_id=${media.publicId}`}
+          title="LEGO video"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+          allowFullScreen
+          className="h-full w-full"
         />
       </div>
     )
