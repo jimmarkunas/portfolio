@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 import fs from "node:fs"
-import path from "node:path"
 import * as ts from "typescript"
 
 const SITE_CONFIG_PATH = "src/content/site/config.ts"
-const REGISTRY_PATH = "src/content/case-studies/registry.ts"
+const CASE_STUDY_REGISTRY_PATH =
+  "src/content/case-studies/revamp/preview-registry.ts"
 const REQUIRED_SITE_ROUTE_KEYS = [
   "home",
   "work",
@@ -85,6 +85,53 @@ function findVariableObjectLiteral(sourceFile, variableName) {
   return objectLiteral
 }
 
+function unwrapArrayLiteral(initializer) {
+  let current = initializer
+
+  while (
+    ts.isAsExpression(current) ||
+    ts.isSatisfiesExpression(current) ||
+    ts.isParenthesizedExpression(current) ||
+    ts.isTypeAssertionExpression(current) ||
+    ts.isNonNullExpression(current)
+  ) {
+    current = current.expression
+  }
+
+  return ts.isArrayLiteralExpression(current) ? current : null
+}
+
+function findVariableArrayLiteral(sourceFile, variableName) {
+  let arrayLiteral = null
+
+  sourceFile.forEachChild((node) => {
+    if (!ts.isVariableStatement(node)) {
+      return
+    }
+
+    for (const declaration of node.declarationList.declarations) {
+      if (!ts.isIdentifier(declaration.name) || declaration.name.text !== variableName) {
+        continue
+      }
+
+      if (!declaration.initializer) {
+        continue
+      }
+
+      const initializer = unwrapArrayLiteral(declaration.initializer)
+      if (initializer) {
+        arrayLiteral = initializer
+      }
+    }
+  })
+
+  if (!arrayLiteral) {
+    throw new Error(`Unable to find array literal for variable '${variableName}'.`)
+  }
+
+  return arrayLiteral
+}
+
 function readSiteRoutes() {
   const sourceFile = readSourceFile(SITE_CONFIG_PATH)
   const siteRoutesObject = findVariableObjectLiteral(sourceFile, "siteRoutes")
@@ -110,49 +157,6 @@ function readSiteRoutes() {
   return routes
 }
 
-function readCaseStudyRegistryEntries() {
-  const sourceFile = readSourceFile(REGISTRY_PATH)
-  const registryObject = findVariableObjectLiteral(sourceFile, "caseStudyRegistry")
-  const entries = []
-
-  for (const property of registryObject.properties) {
-    if (!ts.isPropertyAssignment(property) || !ts.isObjectLiteralExpression(property.initializer)) {
-      continue
-    }
-
-    const key = getPropertyNameText(property.name)
-    if (!key) {
-      continue
-    }
-
-    let route = null
-    let contentModule = null
-
-    for (const nestedProperty of property.initializer.properties) {
-      if (!ts.isPropertyAssignment(nestedProperty)) {
-        continue
-      }
-
-      const nestedKey = getPropertyNameText(nestedProperty.name)
-      if (!nestedKey || !ts.isStringLiteralLike(nestedProperty.initializer)) {
-        continue
-      }
-
-      if (nestedKey === "route") {
-        route = nestedProperty.initializer.text
-      }
-
-      if (nestedKey === "contentModule") {
-        contentModule = nestedProperty.initializer.text
-      }
-    }
-
-    entries.push({ key, route, contentModule })
-  }
-
-  return entries
-}
-
 function ensureTrailingSlash(route) {
   if (route === "/") {
     return route
@@ -161,73 +165,34 @@ function ensureTrailingSlash(route) {
   return route.endsWith("/") ? route : `${route}/`
 }
 
-function resolveAliasedModule(specifier) {
-  if (!specifier || !specifier.startsWith("@/")) {
-    return null
-  }
+function readCaseStudySlugs() {
+  const sourceFile = readSourceFile(CASE_STUDY_REGISTRY_PATH)
+  const registryArray = findVariableArrayLiteral(sourceFile, "caseStudyPreviewRegistry")
+  const slugs = []
 
-  const withoutAlias = specifier.slice(2)
-  const basePath = path.join("src", withoutAlias)
-  const candidates = [
-    `${basePath}.ts`,
-    `${basePath}.tsx`,
-    path.join(basePath, "index.ts"),
-    path.join(basePath, "index.tsx"),
-  ]
-
-  for (const candidate of candidates) {
-    if (fs.existsSync(candidate)) {
-      return candidate
-    }
-  }
-
-  return null
-}
-
-function findFirstPressBasename(contentModulePath) {
-  const sourceText = fs.readFileSync(contentModulePath, "utf8")
-  const match = sourceText.match(/file:\s*"([^"]+)"/)
-  if (!match) {
-    return null
-  }
-
-  const fullPath = match[1]
-  const fileName = fullPath.split("/").pop()
-  if (!fileName) {
-    return null
-  }
-
-  return fileName.replace(/\.[^.]+$/, "")
-}
-
-function findPressSmokeRoute(entries) {
-  const preferredOrder = ["lego", "cps", "murad"]
-  const entryScore = (entry) => {
-    const index = preferredOrder.indexOf(entry.key)
-    return index === -1 ? preferredOrder.length + 1 : index
-  }
-
-  const orderedEntries = [...entries].sort((a, b) => entryScore(a) - entryScore(b))
-
-  for (const entry of orderedEntries) {
-    if (!entry.contentModule || !entry.route) {
-      continue
+  for (const [index, element] of registryArray.elements.entries()) {
+    if (!ts.isCallExpression(element) || !ts.isIdentifier(element.expression) || element.expression.text !== "record") {
+      throw new Error(`Invalid case-study registry entry at index ${index}: expected record(...) call.`)
     }
 
-    const modulePath = resolveAliasedModule(entry.contentModule)
-    if (!modulePath) {
-      continue
+    const firstArgument = element.arguments[0]
+    if (!firstArgument || !ts.isStringLiteral(firstArgument)) {
+      throw new Error(`Invalid case-study registry entry at index ${index}: record(...) requires a string slug.`)
     }
 
-    const basename = findFirstPressBasename(modulePath)
-    if (!basename) {
-      continue
-    }
-
-    return ensureTrailingSlash(`${entry.route}/press/${encodeURIComponent(basename)}`)
+    slugs.push(firstArgument.text)
   }
 
-  return null
+  if (slugs.length === 0) {
+    throw new Error(`No case-study slugs found in ${CASE_STUDY_REGISTRY_PATH}.`)
+  }
+
+  const duplicateSlugs = slugs.filter((slug, index) => slugs.indexOf(slug) !== index)
+  if (duplicateSlugs.length > 0) {
+    throw new Error(`Duplicate case-study slugs found: ${[...new Set(duplicateSlugs)].join(", ")}`)
+  }
+
+  return slugs
 }
 
 function uniqueRoutes(routes) {
@@ -255,18 +220,9 @@ function main() {
     routes.push(ensureTrailingSlash(route))
   }
 
-  const registryEntries = readCaseStudyRegistryEntries()
-  const muradEntry = registryEntries.find((entry) => entry.key === "murad")
-  const sampleCaseStudyEntry = muradEntry ?? registryEntries[0]
-
-  if (sampleCaseStudyEntry?.route) {
-    routes.push(ensureTrailingSlash(sampleCaseStudyEntry.route))
-  }
-
-  const pressRoute = findPressSmokeRoute(registryEntries)
-  if (pressRoute) {
-    routes.push(pressRoute)
-  }
+  const caseStudySlugs = readCaseStudySlugs()
+  const representativeSlug = caseStudySlugs.includes("murad") ? "murad" : caseStudySlugs[0]
+  routes.push(ensureTrailingSlash(`/work/${representativeSlug}`))
 
   const finalRoutes = uniqueRoutes(routes)
   for (const route of finalRoutes) {
