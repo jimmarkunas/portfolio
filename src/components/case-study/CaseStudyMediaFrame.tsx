@@ -103,7 +103,7 @@ export function CaseStudyMediaFrame({
     return (
       <div className={`${aspectClassName} w-full overflow-hidden ${className}`.trim()}>
         <iframe
-          src={`https://player.cloudinary.com/embed/?cloud_name=${media.cloudName}&public_id=${media.publicId}`}
+          src={`https://player.cloudinary.com/embed/?cloud_name=${media.cloudName}&public_id=${media.publicId}&source%5Bsource_types%5D%5B0%5D=mp4&player%5Bmuted%5D=false`}
           title="LEGO video"
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
           allowFullScreen
