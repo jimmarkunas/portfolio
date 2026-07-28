@@ -1,7 +1,4 @@
-import type {
-  LoadedRevampCaseStudy,
-} from "@/content/case-studies"
-import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
+import type { CaseStudyRevampData, LoadedRevampCaseStudy } from "@/content/case-studies/revamp/types"
 import { siteContactEmail, siteExternalUrls } from "@/content/site/config"
 import {
   SEO_DEFAULT_DESCRIPTION,

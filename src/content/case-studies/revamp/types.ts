@@ -173,3 +173,8 @@ export type CaseStudyRevampData = {
     copy: string
   }
 }
+
+export type LoadedRevampCaseStudy = {
+  templateVersion: "revamp"
+  data: CaseStudyRevampData
+}

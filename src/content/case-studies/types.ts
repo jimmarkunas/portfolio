@@ -1,5 +1,3 @@
-import type { CaseStudyRevampData } from "@/content/case-studies/revamp/types"
-
 export type CaseStudyTool = {
   label: string
   icon: string
@@ -95,9 +93,4 @@ export type GlobalLocation = {
   city: string
   country: string
   coordinates: [number, number]
-}
-
-export type LoadedRevampCaseStudy = {
-  templateVersion: "revamp"
-  data: CaseStudyRevampData
 }
