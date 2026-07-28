@@ -1,8 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { CaseStudyRevampTemplate } from "@/components/case-study/revamp/CaseStudyRevampTemplate"
-import { caseStudyPreviewRegistry, getCaseStudyPreview } from "@/content/case-studies/revamp/case-study-registry"
+import { liveRevampSlugs, loadLiveRevampCaseStudy } from "@/content/case-studies/revamp/case-study-registry"
 
 type PreviewPageProps = { params: { slug: string } }
 
@@ -14,16 +13,12 @@ export const metadata: Metadata = {
 }
 
 export function generateStaticParams() {
-  return caseStudyPreviewRegistry
-    .filter((study) => study.loadContent)
-    .map((study) => ({ slug: study.slug }))
+  return liveRevampSlugs.map((slug) => ({ slug }))
 }
 
 export default async function DynamicCaseStudyPreviewPage({ params }: PreviewPageProps) {
-  const study = getCaseStudyPreview(params.slug)
-  if (!study || !study.loadContent) notFound()
+  const study = await loadLiveRevampCaseStudy(params.slug)
+  if (!study) notFound()
 
-  const data = await study.loadContent()
-  const Template = study.loadTemplate ?? CaseStudyRevampTemplate
-  return <Template data={data} />
+  return <study.Template data={study.data} />
 }
