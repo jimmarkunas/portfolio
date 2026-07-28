@@ -1,7 +1,7 @@
 import type { ComponentType } from "react"
 
 import type { CaseStudyRevampData } from "./types"
-import { caseStudyPreviewRegistry } from "./preview-registry"
+import { caseStudyPreviewRegistry } from "./case-study-registry"
 
 export type LiveRevampRegistryEntry = {
   slug: string

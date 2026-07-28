@@ -8,7 +8,7 @@ const ROUTE_FILE_PATTERN = /(page|layout|loading|error|route|template)\.(t|j)sx?
 const APPROVED_CASE_STUDY_MODULES = new Set([
   "@/content/case-studies/case-study-map",
   "@/content/case-studies/revamp/live-registry",
-  "@/content/case-studies/revamp/preview-registry",
+  "@/content/case-studies/revamp/case-study-registry",
   "@/content/case-studies/revamp/types",
 ])
 

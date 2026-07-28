@@ -5,7 +5,7 @@ import * as ts from "typescript"
 
 const SITE_CONFIG_PATH = "src/content/site/config.ts"
 const CASE_STUDY_REGISTRY_PATH =
-  "src/content/case-studies/revamp/preview-registry.ts"
+  "src/content/case-studies/revamp/case-study-registry.ts"
 const REQUIRED_SITE_ROUTE_KEYS = [
   "home",
   "work",

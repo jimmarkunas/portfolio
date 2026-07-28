@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   },
 }
 
-import { caseStudyPreviewRegistry } from "@/content/case-studies/revamp/preview-registry"
+import { caseStudyPreviewRegistry } from "@/content/case-studies/revamp/case-study-registry"
 
 export default function CaseStudyRevampPreviewDashboard() {
   return (

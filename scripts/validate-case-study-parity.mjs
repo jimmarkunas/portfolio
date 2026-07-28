@@ -6,7 +6,7 @@ import { execFileSync } from "node:child_process"
 const root = process.cwd()
 const allSlugs = ["cps", "dtv01", "newyorklife", "modere", "bi", "mm", "method", "murad", "k2", "cbdistillery", "foh", "lego", "cwg", "aa", "zevo", "dtv02"]
 if (process.argv.includes("--all")) {
-  const registry = fs.readFileSync(path.join(root, "src/content/case-studies/revamp/preview-registry.ts"), "utf8")
+  const registry = fs.readFileSync(path.join(root, "src/content/case-studies/revamp/case-study-registry.ts"), "utf8")
   const catalogPath = path.join(root, "src/content/case-studies/revamp/case-study-card-catalog.ts")
   const catalog = fs.existsSync(catalogPath) ? fs.readFileSync(catalogPath, "utf8") : ""
   const liveRegistryPath = path.join(root, "src/content/case-studies/revamp/live-registry.ts")
@@ -43,7 +43,7 @@ const slugsArg = process.argv[process.argv.indexOf("--slugs") + 1]
 if (slugsArg) {
   const slugs = slugsArg.split(",")
   const errors = []
-  const registry = fs.readFileSync(path.join(root, "src/content/case-studies/revamp/preview-registry.ts"), "utf8")
+  const registry = fs.readFileSync(path.join(root, "src/content/case-studies/revamp/case-study-registry.ts"), "utf8")
   for (const slug of slugs) {
     const modulePath = path.join(root, "src/content/case-studies/revamp", `${slug}.ts`)
     const legacyPath = path.join(root, "src/content/case-studies", `${slug}.ts`)
@@ -111,7 +111,7 @@ if (slug !== "aa") {
 
 const legacyPath = path.join(root, "src/content/case-studies/aa.ts")
 const revampPath = path.join(root, "src/content/case-studies/revamp/aa.ts")
-const registryPath = path.join(root, "src/content/case-studies/revamp/preview-registry.ts")
+const registryPath = path.join(root, "src/content/case-studies/revamp/case-study-registry.ts")
 const legacy = fs.readFileSync(legacyPath, "utf8")
 const revamp = fs.existsSync(revampPath) ? fs.readFileSync(revampPath, "utf8") : ""
 const errors = []

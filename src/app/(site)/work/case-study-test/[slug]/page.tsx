@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { CaseStudyRevampTemplate } from "@/components/case-study/revamp/CaseStudyRevampTemplate"
-import { caseStudyPreviewRegistry, getCaseStudyPreview } from "@/content/case-studies/revamp/preview-registry"
+import { caseStudyPreviewRegistry, getCaseStudyPreview } from "@/content/case-studies/revamp/case-study-registry"
 
 type PreviewPageProps = { params: { slug: string } }
 

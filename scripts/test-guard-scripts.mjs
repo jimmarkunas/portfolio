@@ -116,7 +116,7 @@ function createRegistryFixture(baseDir, options = {}) {
   ]
   writeFile(
     baseDir,
-    "src/content/case-studies/revamp/preview-registry.ts",
+    "src/content/case-studies/revamp/case-study-registry.ts",
     `${liveSlugs.map((slug) => `record("${slug}", {})`).join("\n")}\n`,
   )
   writeFile(
