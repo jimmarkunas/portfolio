@@ -16,6 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     siteRoutes.cv,
     siteRoutes.contact,
     siteRoutes.freebies,
+    siteRoutes.agents,
     siteRoutes.interview,
     siteRoutes.geekle2026,
   ]

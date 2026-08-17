@@ -27,6 +27,7 @@ export const siteRoutes = {
   llmday2026: "/llmday2026/",
   previewHomepage: "/preview/homepage/",
   freebies: "/freebies/",
+  agents: "/agents/",
 } as const satisfies Record<string, SiteRoute>
 
 function toCanonicalPath(route: SiteRoute): `/${string}` {
@@ -45,6 +46,7 @@ const CANONICAL_ROUTE_KEYS = [
   "llmday2026",
   "previewHomepage",
   "freebies",
+  "agents",
 ] as const satisfies ReadonlyArray<keyof typeof siteRoutes>
 
 function buildCanonicalPaths<const T extends readonly (keyof typeof siteRoutes)[]>(
@@ -83,6 +85,7 @@ export const siteBookingUrls = {
 export const primaryNavLinks = [
   { href: siteRoutes.work, label: "Portfolio" },
   { href: siteRoutes.cv, label: "CV" },
+  { href: siteRoutes.agents, label: "A.G.E.N.T.S." },
   { href: siteRoutes.contact, label: "Contact" },
 ] satisfies SiteNavLink[]
 
