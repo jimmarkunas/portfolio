@@ -19,6 +19,7 @@ type PresentationDeckProps = {
   slideIdOrder: string[];
   navigation: PresentationNavigationCopy;
   brandLogo?: PresentationBrandLogo;
+  reserveNavigationInset?: boolean;
 };
 
 export function PresentationDeck({
@@ -28,6 +29,7 @@ export function PresentationDeck({
   slideIdOrder,
   navigation,
   brandLogo,
+  reserveNavigationInset = true,
 }: PresentationDeckProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
@@ -51,7 +53,7 @@ export function PresentationDeck({
   const contentBottomInset = usePresentationInsets({
     containerRef,
     navRef,
-    initialInset: 95,
+    initialInset: reserveNavigationInset ? 95 : 0,
   });
 
   return (
