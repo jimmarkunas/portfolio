@@ -1,13 +1,15 @@
 type FinoxGlyphProps = {
   className?: string
+  dotSpacing?: number
 }
 
-export function FinoxGlyph({ className }: FinoxGlyphProps) {
-  const dots = Array.from({ length: 6 }, (_, row) =>
-    Array.from({ length: 6 }, (_, column) => ({
+export function FinoxGlyph({ className, dotSpacing = 6 }: FinoxGlyphProps) {
+  const dotOffset = (40 - dotSpacing * 4) / 2
+  const dots = Array.from({ length: 5 }, (_, row) =>
+    Array.from({ length: 5 }, (_, column) => ({
       key: `${row}-${column}`,
-      cx: 5 + column * 6,
-      cy: 5 + row * 6,
+      cx: dotOffset + column * dotSpacing,
+      cy: dotOffset + row * dotSpacing,
     })),
   ).flat()
 

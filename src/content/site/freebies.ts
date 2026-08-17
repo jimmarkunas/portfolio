@@ -1,4 +1,4 @@
-type FreebieAssetKind = "PDF" | "DOCX"
+type FreebieAssetKind = "PDF" | "DOCX" | "ZIP"
 
 type FreebieAsset = {
   title: string
@@ -38,7 +38,7 @@ export const siteContent = {
     eyebrow: "Freebies",
     title: "Downloadable Assets",
     intro:
-      "A growing library of practical resources. Starting with one PDF checklist you can download right now.",
+      "A growing library of practical resources you can download right now.",
   },
   collections: [
     {
@@ -52,6 +52,34 @@ export const siteContent = {
           href: "/freebies/PMF_Checklist_MindTheProduct.pdf",
           fileName: "PMF_Checklist_MindTheProduct.pdf",
           kind: "PDF",
+        },
+      ],
+    },
+    {
+      id: "usaii-agents",
+      title: "USAII + Jim Markunas — A.G.E.N.T.S.",
+      description: "The A.G.E.N.T.S. methodology and supporting typography files.",
+      assets: [
+        {
+          title: "A.G.E.N.T.S. Methodology",
+          description: "The USAII + Jim Markunas A.G.E.N.T.S. methodology guide.",
+          href: "/freebies/USAII_AGENTS_by_Jim_Markunas_20260817.pdf",
+          fileName: "USAII_AGENTS_by_Jim_Markunas_20260817.pdf",
+          kind: "PDF",
+        },
+        {
+          title: "A.G.E.N.T.S. Methodology (Editable)",
+          description: "An editable DOCX version of the methodology guide.",
+          href: "/freebies/USAII_AGENTS_by_Jim_Markunas_20260817.docx",
+          fileName: "USAII_AGENTS_by_Jim_Markunas_20260817.docx",
+          kind: "DOCX",
+        },
+        {
+          title: "Typography Pack",
+          description: "Inter, Montserrat, and Red Hat Display font files.",
+          href: "/freebies/Inter,Montserrat,Red_Hat_Display.zip",
+          fileName: "Inter,Montserrat,Red_Hat_Display.zip",
+          kind: "ZIP",
         },
       ],
     },

@@ -98,9 +98,9 @@ export function SiteFooter() {
           <div className="px-4 py-4 md:px-10">
             <div className="flex flex-col items-center gap-6 2xl:grid 2xl:min-h-[48px] 2xl:grid-cols-[1fr_auto_1fr] 2xl:items-center">
               {/* 1. Logo/wordmark — top on mobile, center on desktop */}
-              <Link href="/" className="group flex items-center justify-center gap-3 text-[#FEFEFE] transition-colors hover:text-[#447ACB] 2xl:order-2 2xl:justify-self-center">
-                <FinoxGlyph className="h-6 w-6 shrink-0" />
-                <span className="type-footer-brand">{siteIdentity.displayName}</span>
+              <Link href="/" className="group flex items-center justify-center gap-[10px] text-[20px] text-[#FEFEFE] transition-colors hover:text-[#447ACB] md:text-[22px] lg:text-[24px] 2xl:order-2 2xl:justify-self-center">
+                <FinoxGlyph className="h-[1.4em] w-[1.4em] shrink-0" dotSpacing={8} />
+                <span className="font-display text-[1.15em] font-bold leading-none tracking-tight">{siteIdentity.displayName}</span>
               </Link>
 
               {/* 2. Social icons — middle on mobile, left on desktop */}
