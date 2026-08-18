@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react"
 import { TrackedExternalLink } from "@/components/analytics/TrackedExternalLink"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
+import { MotionReveal } from "@/components/motion/MotionReveal"
 import { agentsContent, freebiesContent, siteCanonicalPaths } from "@/content/site"
 import { buildPageMetadata } from "@/lib/seo"
 import { FreebiesDownloadButton } from "../freebies/FreebiesDownloadButton"
@@ -45,21 +46,25 @@ export default function AgentsPage() {
     <main className="min-h-full overflow-x-hidden bg-[#F3F3F3]">
       <Container className="pb-16 pt-8 md:pb-20 md:pt-10 lg:pb-[100px] lg:pt-[42px]">
         <div className="flex flex-col gap-14 md:gap-20">
-          <section className="max-w-[980px]">
-            <EyebrowPill className="w-fit bg-white" labelClassName="type-p2 text-[#222222]">{agentsContent.hero.eyebrow}</EyebrowPill>
-            <h1 className="type-display-hero mt-5 text-[#232323]">{agentsContent.hero.title}</h1>
-            <p className="type-h5 mt-4 max-w-[820px] text-[#2E2E2E]">{agentsContent.hero.subhead}</p>
-            <p className="type-p3 mt-4 text-[#555555]">{agentsContent.hero.attribution}</p>
-            <div className="mt-8 max-w-[850px] space-y-4">
-              {agentsContent.hero.paragraphs.map((paragraph) => <p key={paragraph} className="type-p2 text-[#3F4548]">{paragraph}</p>)}
-            </div>
-            <blockquote className="mt-8 border-l-2 border-[#447ACB] pl-5 type-h5 text-[#2A2A2A]">“{agentsContent.hero.quote}”</blockquote>
-          </section>
+          <MotionReveal preset="hero" className="w-full" delay={0.02}>
+            <section className="max-w-[980px]">
+              <EyebrowPill className="w-fit bg-white" labelClassName="type-p2 text-[#222222]">{agentsContent.hero.eyebrow}</EyebrowPill>
+              <h1 className="type-display-hero mt-5 text-[#232323]">{agentsContent.hero.title}</h1>
+              <p className="type-h5 mt-4 max-w-[820px] text-[#2E2E2E]">{agentsContent.hero.subhead}</p>
+              <p className="type-p3 mt-4 text-[#555555]">{agentsContent.hero.attribution}</p>
+              <div className="mt-8 max-w-[850px] space-y-4">
+                {agentsContent.hero.paragraphs.map((paragraph) => <p key={paragraph} className="type-p2 text-[#3F4548]">{paragraph}</p>)}
+              </div>
+              <blockquote className="mt-8 border-l-2 border-[#447ACB] pl-5 type-h5 text-[#2A2A2A]">“{agentsContent.hero.quote}”</blockquote>
+            </section>
+          </MotionReveal>
 
-          <ProductionReadinessCheck />
+          <MotionReveal preset="cardStrong" className="w-full" delay={0.08}>
+            <ProductionReadinessCheck />
+          </MotionReveal>
 
           <Section title="The A.G.E.N.T.S. Operating Model">
-            <div className="mt-7 divide-y divide-black/10 border-y border-black/10">
+            <div className="mt-7 divide-y divide-black/10 border-b border-black/10">
               {agentsContent.questions.map(([letter, name, question, description]) => (
                 <article key={letter} className="grid gap-3 py-5 md:grid-cols-[64px_220px_minmax(0,1fr)] md:items-start md:gap-6">
                   <span className="type-h4 text-[#447ACB]">{letter}</span>
