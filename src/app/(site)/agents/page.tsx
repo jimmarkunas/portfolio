@@ -7,6 +7,7 @@ import { EyebrowPill } from "@/components/EyebrowPill"
 import { agentsContent, freebiesContent, siteCanonicalPaths } from "@/content/site"
 import { buildPageMetadata } from "@/lib/seo"
 import { FreebiesDownloadButton } from "../freebies/FreebiesDownloadButton"
+import { ProductionReadinessCheck } from "./ProductionReadinessCheck"
 
 export const metadata: Metadata = buildPageMetadata({
   title: agentsContent.meta.title,
@@ -54,6 +55,8 @@ export default function AgentsPage() {
             </div>
             <blockquote className="mt-8 border-l-2 border-[#447ACB] pl-5 type-h5 text-[#2A2A2A]">“{agentsContent.hero.quote}”</blockquote>
           </section>
+
+          <ProductionReadinessCheck />
 
           <Section title="The A.G.E.N.T.S. Operating Model">
             <div className="mt-7 divide-y divide-black/10 border-y border-black/10">
