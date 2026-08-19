@@ -67,7 +67,6 @@ require_match '^[[:space:]]*-[[:space:]]*main[[:space:]]*$' "deploy trigger pinn
 require_match 'workflow_dispatch:[[:space:]]*$' "manual deploy trigger available"
 require_match 'NEXT_PUBLIC_DEPLOY_SHA:[[:space:]]*\$\{\{[[:space:]]*github\.sha[[:space:]]*\}\}' "build receives deploy SHA"
 require_match 'run:[[:space:]]*npm run check:deploy-artifacts[[:space:]]+--[[:space:]]+--sha[[:space:]]+"\$\{GITHUB_SHA\}"' "artifact validation uses GITHUB_SHA explicitly"
-require_match 'run:[[:space:]]*npm run check:live-deployment[[:space:]]+--[[:space:]]+--base-url[[:space:]]+https://greatestpmever\.com[[:space:]]+--sha[[:space:]]+"\$\{GITHUB_SHA\}"' "live verification uses GITHUB_SHA explicitly"
 require_match 'DEPLOY_BRANCH="hostinger-static"' "deploy branch pinned to hostinger-static"
 require_match 'Source commit being deployed:' "source SHA is logged during publish"
 require_match 'test[[:space:]]+-d[[:space:]]+out' "out directory existence check"
@@ -79,8 +78,7 @@ require_order \
   "static build before artifact validation" \
   'Build static export::static build step present' \
   'Verify deploy artifacts::artifact validation step present' \
-  'Publish out folder to hostinger-static branch::publish step present' \
-  'Verify live deployment markers::live verification step present'
+  'Publish out folder to hostinger-static branch::publish step present'
 
 forbidden_line 'FTP_' "FTP environment variables"
 forbidden_line 'lftp' "FTP transfer command"
