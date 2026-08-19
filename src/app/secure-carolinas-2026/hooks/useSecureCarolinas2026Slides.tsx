@@ -11,15 +11,13 @@ import {
   Slide03Agents,
   Slide04AttackSurface,
 } from "../components/slides/Act1Slides";
-import {
-  Slide05Question,
-  Slide06Authority,
-  Slide07Guardrails,
-  Slide08Evidence,
-  Slide09Network,
-  Slide10Transfer,
-  Slide11Success,
-} from "../components/slides/Act2Slides";
+import { Slide05Question } from "../components/slides/act2/Slide05Question";
+import { Slide06Authority } from "../components/slides/act2/Slide06Authority";
+import { Slide07Guardrails } from "../components/slides/act2/Slide07Guardrails";
+import { Slide08Evidence } from "../components/slides/act2/Slide08Evidence";
+import { Slide09Network } from "../components/slides/act2/Slide09Network";
+import { Slide10Transfer } from "../components/slides/act2/Slide10Transfer";
+import { Slide11Success } from "../components/slides/act2/Slide11Success";
 import {
   Slide12MeetAgent,
   Slide13DecisionBoard,
