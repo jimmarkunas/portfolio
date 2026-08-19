@@ -14,6 +14,7 @@ export const metadata: Metadata = buildPageMetadata({
   description:
     "16 public case studies across commerce transformation, platform modernization, enterprise delivery, and delivery rescue.",
   canonicalPath: siteCanonicalPaths.work,
+  routeMarker: "work",
   useDefaultImage: false,
 })
 
@@ -29,7 +30,7 @@ export default async function WorkPage() {
   }
 
   return (
-    <main className="min-h-full bg-[#F3F3F3]">
+    <main id="work-page" data-gpme-route="work" data-gpme-deploy-sha={process.env.NEXT_PUBLIC_DEPLOY_SHA} className="min-h-full bg-[#F3F3F3]">
       <StructuredData data={createWorkCollectionStructuredData(studies)} />
       <section className="w-full bg-[#F3F3F3]">
         <Container className="pb-14 pt-7 md:pb-16 md:pt-8 lg:pb-[72px] lg:pt-[36px]">

@@ -33,7 +33,7 @@ export default function Homepage() {
   } = getHomepageText()
 
   return (
-    <main className="min-h-full bg-[#F3F3F3]">
+    <main id="home-page" data-gpme-route="home" data-gpme-deploy-sha={process.env.NEXT_PUBLIC_DEPLOY_SHA} className="min-h-full bg-[#F3F3F3]">
       <HomepageHeroSection hero={hero} />
 
       <PastClientsSection

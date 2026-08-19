@@ -17,6 +17,7 @@ type BuildPageMetadataInput = {
   title: string
   description: string
   canonicalPath: string
+  routeMarker?: string
   socialTitle?: string
   image?: SeoImage
   useDefaultImage?: boolean
@@ -33,11 +34,13 @@ export function buildPageMetadata({
   title,
   description,
   canonicalPath,
+  routeMarker,
   socialTitle,
   image,
   useDefaultImage = true,
   robots,
 }: BuildPageMetadataInput): Metadata {
+  const deploySha = process.env.NEXT_PUBLIC_DEPLOY_SHA?.trim() || null
   const resolvedImage = image ?? (useDefaultImage
     ? {
         url: SEO_DEFAULT_OG_IMAGE,
@@ -52,6 +55,10 @@ export function buildPageMetadata({
   return {
     title,
     description,
+    other: {
+      ...(routeMarker ? { "gpme-route": routeMarker } : {}),
+      ...(deploySha ? { "gpme-deploy-sha": deploySha } : {}),
+    },
     alternates: {
       canonical: canonicalPath,
     },

@@ -14,6 +14,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: agentsContent.meta.title,
   description: agentsContent.meta.description,
   canonicalPath: siteCanonicalPaths.agents,
+  routeMarker: "agents",
   useDefaultImage: false,
 })
 
@@ -21,7 +22,7 @@ const agentResources = freebiesContent.collections.find((collection) => collecti
 
 export default function AgentsPage() {
   return (
-    <main className="min-h-full overflow-x-hidden bg-[#F3F3F3]">
+    <main data-gpme-route="agents" data-gpme-deploy-sha={process.env.NEXT_PUBLIC_DEPLOY_SHA} className="min-h-full overflow-x-hidden bg-[#F3F3F3]">
       <Container className="pb-16 pt-8 md:pb-20 md:pt-10 lg:pb-[100px] lg:pt-[42px]">
         <div className="flex flex-col gap-14 md:gap-16 lg:gap-20">
           <div className="flex flex-col gap-10 md:gap-12 lg:gap-[52px]">

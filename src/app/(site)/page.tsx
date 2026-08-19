@@ -12,6 +12,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: HOMEPAGE_TITLE,
   description: HOMEPAGE_DESCRIPTION,
   canonicalPath: "/",
+  routeMarker: "home",
   image: {
     url: HOMEPAGE_OG_IMAGE,
     width: 3779,

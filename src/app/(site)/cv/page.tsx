@@ -13,6 +13,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: "CV",
   description: cvContent.meta.description,
   canonicalPath: siteCanonicalPaths.cv,
+  routeMarker: "cv",
   useDefaultImage: false,
 })
 
@@ -35,7 +36,7 @@ export default function CvPage() {
   const [featuredExperience, ...remainingExperiences] = cvContent.experiences
 
   return (
-    <main className="min-h-full overflow-x-hidden bg-[#F3F3F3]">
+    <main id="cv-page" data-gpme-route="cv" data-gpme-deploy-sha={process.env.NEXT_PUBLIC_DEPLOY_SHA} className="min-h-full overflow-x-hidden bg-[#F3F3F3]">
       <section className="w-full bg-[#F3F3F3]">
         <Container className="pb-14 pt-8 md:pb-16 md:pt-10 lg:pb-[80px] lg:pt-[42px]">
           <div className="flex flex-col gap-16 md:gap-20">
