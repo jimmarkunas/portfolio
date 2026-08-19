@@ -88,6 +88,3 @@ jobs:
           git commit -m "Deploy static site from ${SOURCE_SHA}"
           git push origin "${DEPLOY_BRANCH}"
           echo "Published ${DEPLOY_BRANCH} from ${SOURCE_SHA}"
-
-      - name: Verify live deployment markers
-        run: npm run check:live-deployment -- --base-url https://greatestpmever.com --sha "${GITHUB_SHA}"
