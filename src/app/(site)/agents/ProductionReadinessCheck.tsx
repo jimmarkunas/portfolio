@@ -13,6 +13,7 @@ const statuses: readonly Status[] = ["DEFINED", "PARTIAL", "UNCLEAR"]
 const businessValues: readonly BusinessValue[] = ["Increase ROI", "Decrease Cost", "Increase Operational Efficiency"]
 const totalSteps = 9
 const focusClass = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8EB4F0]"
+const selectedOptionClass = "border-[#8EB4F0] bg-[#447ACB]/20 text-white shadow-[inset_0_0_0_1px_rgba(142,180,240,0.15)]"
 
 function getResult(
   systemsInventory: FoundationAnswer,
@@ -84,9 +85,9 @@ export function ProductionReadinessCheck() {
   }
 
   return (
-    <section aria-labelledby="production-readiness-check" className="border-t border-black/10 pt-8 md:pt-10">
-      <div className="w-full border border-[#2F3540] bg-[#111318] p-3 text-white shadow-2xl md:p-5 lg:p-6">
-        <div className="flex min-h-[620px] flex-col rounded-[22px] border border-white/10 bg-[#171A20] md:min-h-[640px] lg:min-h-[700px]">
+    <section aria-labelledby="production-readiness-check">
+      <div className="w-full border border-white/10 bg-[#222222] p-3 text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] md:p-5 lg:p-6">
+        <div className="flex min-h-[620px] flex-col rounded-[20px] border border-white/10 bg-[#222222] md:min-h-[640px] lg:min-h-[700px]">
           <header className="flex min-h-[112px] flex-col justify-center gap-4 border-b border-white/10 px-5 py-5 sm:flex-row sm:items-center sm:justify-between md:px-7">
             <div>
               <div className="type-p5 font-bold uppercase tracking-[0.3em] text-[#9CA3AF]">
@@ -145,8 +146,8 @@ export function ProductionReadinessCheck() {
                       {(["YES", "NO"] as const).map((answer) => {
                         const selected = (stepIndex === 0 ? systemsInventory : ownershipDefined) === answer
                         return (
-                          <button key={answer} type="button" aria-pressed={selected} className={`flex min-h-[140px] flex-col justify-between border p-5 text-left transition-colors ${focusClass} ${selected ? "border-white bg-white text-black" : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`} onClick={() => selectFoundationAnswer(answer)}>
-                            <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-black/55" : "text-[#9CA3AF]"}`}>Foundation answer</span>
+                          <button key={answer} type="button" aria-pressed={selected} className={`flex min-h-[140px] flex-col justify-between border p-5 text-left transition-colors ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`} onClick={() => selectFoundationAnswer(answer)}>
+                            <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#8EB4F0]" : "text-[#9CA3AF]"}`}>Foundation answer</span>
                             <span className="type-h5">{answer}</span>
                           </button>
                         )
@@ -161,8 +162,8 @@ export function ProductionReadinessCheck() {
                       {businessValues.map((value) => {
                         const selected = selectedValues.includes(value)
                         return (
-                          <button key={value} type="button" aria-pressed={selected} className={`flex min-h-[140px] flex-col justify-between border p-5 text-left transition-colors ${focusClass} ${selected ? "border-white bg-white text-black" : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`} onClick={() => setSelectedValues((current) => selected ? current.filter((item) => item !== value) : [...current, value])}>
-                            <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-black/55" : "text-[#9CA3AF]"}`}>Value target</span>
+                          <button key={value} type="button" aria-pressed={selected} className={`flex min-h-[140px] flex-col justify-between border p-5 text-left transition-colors ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`} onClick={() => setSelectedValues((current) => selected ? current.filter((item) => item !== value) : [...current, value])}>
+                            <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#8EB4F0]" : "text-[#9CA3AF]"}`}>Value target</span>
                             <span className="type-h5">{value}</span>
                           </button>
                         )
@@ -177,10 +178,10 @@ export function ProductionReadinessCheck() {
                       {statuses.map((status) => {
                         const selected = selectedStatuses[currentQuestion[0]] === status
                         return (
-                          <button key={status} type="button" aria-pressed={selected} className={`group relative flex min-h-[120px] flex-col justify-between border p-5 text-left transition-colors ${focusClass} ${selected ? "border-white bg-white text-black" : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`} onClick={() => setSelectedStatuses((current) => ({ ...current, [currentQuestion[0]]: status }))}>
-                            <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-black/55" : "text-[#9CA3AF]"}`}>Status option</span>
+                          <button key={status} type="button" aria-pressed={selected} className={`group relative flex min-h-[120px] flex-col justify-between border p-5 text-left transition-colors ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`} onClick={() => setSelectedStatuses((current) => ({ ...current, [currentQuestion[0]]: status }))}>
+                            <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#8EB4F0]" : "text-[#9CA3AF]"}`}>Status option</span>
                             <span className="type-h5">{status}</span>
-                            <span className={`type-p4 ${selected ? "text-black/65" : "text-[#AEB5C0]"}`}>{status === "DEFINED" ? "The control is explicit and ready to operate." : status === "PARTIAL" ? "The control exists but needs completion." : "The control or its owner is not clear."}</span>
+                            <span className={`type-p4 ${selected ? "text-[#D1D5DB]" : "text-[#AEB5C0]"}`}>{status === "DEFINED" ? "The control is explicit and ready to operate." : status === "PARTIAL" ? "The control exists but needs completion." : "The control or its owner is not clear."}</span>
                           </button>
                         )
                       })}
@@ -198,14 +199,14 @@ export function ProductionReadinessCheck() {
             ) : (
               <section className="flex flex-1 flex-col">
                 <div className="mb-8 flex items-center gap-4"><div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 font-mono text-sm">R</div><div className="h-px w-12 bg-white/10" /><div className="type-p5 uppercase tracking-[0.28em] text-[#9CA3AF]">Results</div></div>
-                <div className="border border-[#447ACB]/60 bg-[#1D293D] px-5 py-6 md:px-7 md:py-7" role="status" aria-live="polite"><div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">Readiness result</div><p className="type-h2 mt-2 text-white">{result.title}</p><p className="type-p3 mt-3 max-w-[760px] text-[#D1D5DB]">{result.description}</p></div>
+                <div className="border border-[#447ACB]/60 bg-[#447ACB]/15 px-5 py-6 md:px-7 md:py-7" role="status" aria-live="polite"><div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">Readiness result</div><p className="type-h2 mt-2 text-white">{result.title}</p><p className="type-p3 mt-3 max-w-[760px] text-[#D1D5DB]">{result.description}</p></div>
                 <div className="mt-6 grid gap-3 md:grid-cols-2">
                   <div className="border border-white/10 bg-white/[0.03] px-4 py-4"><div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Foundation inventory</div><div className="type-p4 mt-1 text-white">{systemsInventory}</div></div>
                   <div className="border border-white/10 bg-white/[0.03] px-4 py-4"><div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Defined ownership</div><div className="type-p4 mt-1 text-white">{ownershipDefined}</div></div>
                 </div>
                 <div className="mt-3 border border-white/10 bg-white/[0.03] px-4 py-4"><div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Business value</div><div className="type-p4 mt-1 text-white">{selectedValues.join(" · ")}</div></div>
                 <div className="mt-3 grid gap-3 md:grid-cols-2">
-                  {agentsContent.questions.map(([letter, name, question]) => <div key={letter} className="flex items-center justify-between gap-4 border border-white/10 bg-white/[0.03] px-4 py-4"><div className="min-w-0"><div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{letter} · {name}</div><div className="type-p4 mt-1 truncate text-white">{question}</div></div><div className="shrink-0 type-p5 font-bold uppercase tracking-[0.12em] text-[#8EB4F0]">{selectedStatuses[letter]}</div></div>)}
+                  {agentsContent.questions.map(([letter, name, question]) => <div key={letter} className="flex items-center justify-between gap-4 border border-white/10 bg-white/[0.03] px-4 py-4"><div className="min-w-0"><div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{letter} · {name}</div><div className="type-p4 mt-1 text-white">{question}</div></div><div className="shrink-0 type-p5 font-bold uppercase tracking-[0.12em] text-[#8EB4F0]">{selectedStatuses[letter]}</div></div>)}
                 </div>
                 <button type="button" className={`mt-8 min-h-[44px] self-start border border-white/25 px-5 type-p5 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-black ${focusClass}`} onClick={reset}>Reassess</button>
               </section>
