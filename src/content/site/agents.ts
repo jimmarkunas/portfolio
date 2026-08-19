@@ -5,17 +5,42 @@ export const agentsContent = {
       "A.G.E.N.T.S. is Jim Markunas’ enterprise AI agent operating model for defining authority, guardrails, evidence, integrations, escalation, business value, and accountability.",
   },
   hero: {
-    eyebrow: "ENTERPRISE AI AGENT OPERATING MODEL",
-    title: "A.G.E.N.T.S.",
-    subhead:
-      "A practical operating model for moving enterprise AI agents from experimentation into governed production.",
-    attribution: "Created by Jim Markunas",
-    paragraphs: [
-      "Enterprise agents create a different product problem from chatbots and conventional automation.",
-      "Once software can evaluate changing conditions, choose among permitted actions, interact with business systems, and create real-world consequences, model capability is only part of the design problem.",
-      "A.G.E.N.T.S. provides six operating questions for defining that responsibility before an agent is trusted with real work.",
+    title: "Want to ACTUALLY Get ROI Out of Agentic AI?",
+    badge: "FREE AI Readiness Check + Toolkit Download",
+    subhead: "Here’s how, in one complete enterprise system.",
+    body: "A.G.E.N.T.S. gives your enterprise a practical system for turning agentic AI from scattered experiments into measurable business capability. Run the readiness check, find the gaps, then download the full system to apply it across teams, tools, workflows, and production decisions.",
+    primaryCta: "Run the readiness check",
+    secondaryCta: "Download the free system",
+  },
+  readiness: {
+    heading: "Is your enterprise ready to put AI into production?",
+    steps: ["Answer 9 questions", "Find the gaps", "Get a production decision", "Put AI into production"],
+  },
+  framework: {
+    label: "What is A.G.E.N.T.S.?",
+    heading: "A complete operating model for enterprise AI.",
+    body: "A.G.E.N.T.S. is the system for turning enterprise AI from experimentation into measurable business capability. It gives your organization a practical way to define what AI may do, what must constrain it, what evidence it leaves, what systems it may touch, when people take over, and how the enterprise proves value.",
+    controls: [
+      ["A", "Authority", "What may AI do?", "Grant authority action by action."],
+      ["G", "Guardrails", "What must constrain it?", "Set limits, approvals, prohibited actions, and hard stops."],
+      ["E", "Evidence", "How will we know what it did?", "Preserve enough evidence to reconstruct every consequential action."],
+      ["N", "Network and Integrations", "What systems may AI touch?", "Scope its systems, identities, data, and permissions."],
+      ["T", "Transfer and Escalation", "When does a person take over?", "Define the handoff, transferred context, and resume conditions."],
+      ["S", "Success and Accountability", "Did it create value, and who owns the result?", "Measure the result. Name the human accountable for it."],
     ],
-    quote: "A chatbot can give you an answer. An agent can create a consequence.",
+  },
+  productionGate: {
+    label: "Production Gate",
+    heading: "Before enterprise AI goes live, four things must be clear.",
+    rows: [["01", "Value", "What business result should improve?"], ["02", "Authority", "What is AI allowed to do?"], ["03", "Evidence", "Can the enterprise reconstruct what happened?"], ["04", "Ownership", "Who owns the outcome?"]],
+  },
+  resources: {
+    label: "Free System",
+    heading: "Download the complete A.G.E.N.T.S. enterprise toolkit.",
+    body: "Use the free toolkit to move from AI ambition to enterprise production readiness. Define the business case, map authority and access, set guardrails, document evidence, plan escalation, assign ownership, and run the gate before production.",
+    items: ["Define the enterprise business case.", "Map authority, access, and system boundaries.", "Set guardrails and evidence requirements.", "Plan escalation and accountable ownership.", "Run the production readiness gate.", "Scale the model across the enterprise."],
+    downloadCta: "Download the free system",
+    openCta: "Open resource",
   },
   questions: [
     ["A", "Authority", "What may the agent do?", "Define its authority action by action: observe, recommend, prepare, decide, and execute."],
