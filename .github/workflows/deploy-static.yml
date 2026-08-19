@@ -1,4 +1,4 @@
-name: Build and Deploy Static Site
+name: Build and Publish Static Site
 
 on:
   push:
@@ -6,21 +6,19 @@ on:
       - main
   workflow_dispatch:
 
-concurrency:
-  group: hostinger-production
-  cancel-in-progress: true
-
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  build-and-deploy:
+  build-and-publish:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
-      - name: Checkout main
+      - name: Checkout source branch
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up Node
         uses: actions/setup-node@v6
@@ -39,7 +37,7 @@ jobs:
 
           if [[ -z "${GA_ID}" ]]; then
             echo "NEXT_PUBLIC_GA_MEASUREMENT_ID is not configured for deploy-static workflow." >&2
-            echo "Set GitHub Repository Variable NEXT_PUBLIC_GA_MEASUREMENT_ID to your GA4 ID, for example G-XXXXXXX." >&2
+            echo "Set GitHub Repository Variable NEXT_PUBLIC_GA_MEASUREMENT_ID to your GA4 ID (for example: G-XXXXXXX)." >&2
             exit 1
           fi
 
@@ -48,59 +46,33 @@ jobs:
       - name: Build static export
         run: npm run build
 
-      - name: Verify static export
+      - name: Verify out folder exists
         run: |
           test -d out
           test -f out/index.html
-          test -f out/agents/index.html
 
-      - name: Validate Hostinger deploy secrets
-        env:
-          HOSTINGER_HOST: ${{ secrets.HOSTINGER_HOST }}
-          HOSTINGER_PORT: ${{ secrets.HOSTINGER_PORT }}
-          HOSTINGER_USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
-          HOSTINGER_PASSWORD: ${{ secrets.HOSTINGER_PASSWORD }}
-          HOSTINGER_TARGET_DIR: ${{ secrets.HOSTINGER_TARGET_DIR }}
+      - name: Publish out folder to hostinger-static branch
         run: |
           set -euo pipefail
 
-          missing=0
-          for name in HOSTINGER_HOST HOSTINGER_USERNAME HOSTINGER_PASSWORD HOSTINGER_TARGET_DIR; do
-            if [[ -z "${!name:-}" ]]; then
-              echo "Missing required GitHub secret: ${name}" >&2
-              missing=1
-            fi
-          done
+          DEPLOY_BRANCH="hostinger-static"
+          SOURCE_SHA="${GITHUB_SHA}"
+          REPO_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          TMP_DIR="$(mktemp -d)"
 
-          if [[ -z "${HOSTINGER_PORT:-}" ]]; then
-            echo "HOSTINGER_PORT not set. Defaulting to 65002."
-            echo "HOSTINGER_PORT=65002" >> "$GITHUB_ENV"
-          else
-            echo "HOSTINGER_PORT=${HOSTINGER_PORT}" >> "$GITHUB_ENV"
+          git clone --branch "${DEPLOY_BRANCH}" "${REPO_URL}" "${TMP_DIR}"
+
+          find "${TMP_DIR}" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -R "${GITHUB_WORKSPACE}/out/." "${TMP_DIR}/"
+
+          cd "${TMP_DIR}"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No deploy changes to publish."
+            exit 0
           fi
 
-          if [[ "${missing}" -ne 0 ]]; then
-            exit 1
-          fi
-
-      - name: Install deploy client
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-
-      - name: Deploy out folder to Hostinger
-        env:
-          HOSTINGER_HOST: ${{ secrets.HOSTINGER_HOST }}
-          HOSTINGER_USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
-          HOSTINGER_PASSWORD: ${{ secrets.HOSTINGER_PASSWORD }}
-          HOSTINGER_TARGET_DIR: ${{ secrets.HOSTINGER_TARGET_DIR }}
-        run: |
-          set -euo pipefail
-
-          lftp -u "${HOSTINGER_USERNAME}","${HOSTINGER_PASSWORD}" -p "${HOSTINGER_PORT}" "sftp://${HOSTINGER_HOST}" <<EOF
-          set sftp:auto-confirm yes
-          set net:max-retries 2
-          set net:timeout 30
-          mirror --reverse --delete --verbose --parallel=4 out/ "${HOSTINGER_TARGET_DIR}"
-          bye
-          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Deploy static site from ${SOURCE_SHA}"
+          git push origin "${DEPLOY_BRANCH}"
