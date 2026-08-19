@@ -60,7 +60,7 @@ function buildCanonicalPaths<const T extends readonly (keyof typeof siteRoutes)[
 export const siteCanonicalPaths = buildCanonicalPaths(siteRoutes, CANONICAL_ROUTE_KEYS)
 
 export const siteIdentity = {
-  displayName: "James Markunas",
+  displayName: "Jim Markunas",
   linkedinLabel: "linkedin.com/in/jimmarkunas",
 } as const
 
@@ -100,6 +100,12 @@ export const footerSocialLinks = [
     href: siteExternalUrls.linkedin,
     label: "LinkedIn",
     icon: "/sm-icons/linkedin.png",
+    external: true,
+  },
+  {
+    href: "https://github.com/jimmarkunas",
+    label: "GitHub",
+    icon: "/sm-icons/github.svg",
     external: true,
   },
   {

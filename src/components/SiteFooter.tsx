@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { Github, Linkedin, Mail, Twitter } from "lucide-react"
 
 import { TrackedOutboundIconLink } from "@/components/analytics/TrackedSiteShellLinks"
 import { BookCallCta } from "@/components/BookCallCta"
@@ -21,22 +22,36 @@ function SocialIcon({
   icon: string
   external?: boolean
 }) {
-  const content = (
-    <span
-      aria-hidden="true"
-      className="block h-5 w-5 bg-current"
-      style={{
-        maskImage: `url('${icon}')`,
-        WebkitMaskImage: `url('${icon}')`,
-        maskRepeat: "no-repeat",
-        WebkitMaskRepeat: "no-repeat",
-        maskPosition: "center",
-        WebkitMaskPosition: "center",
-        maskSize: "contain",
-        WebkitMaskSize: "contain",
-      }}
-    />
-  )
+  const lucideClassName = "h-5 w-5"
+  const content = (() => {
+    switch (label) {
+      case "Email":
+        return <Mail aria-hidden="true" className={lucideClassName} strokeWidth={2} />
+      case "LinkedIn":
+        return <Linkedin aria-hidden="true" className={lucideClassName} strokeWidth={2} />
+      case "GitHub":
+        return <Github aria-hidden="true" className={lucideClassName} strokeWidth={2} />
+      case "X":
+        return <Twitter aria-hidden="true" className={lucideClassName} strokeWidth={2} />
+      default:
+        return (
+          <span
+            aria-hidden="true"
+            className="block h-5 w-5 bg-current"
+            style={{
+              maskImage: `url('${icon}')`,
+              WebkitMaskImage: `url('${icon}')`,
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+            }}
+          />
+        )
+    }
+  })()
 
   const className =
     "inline-flex h-12 w-12 items-center justify-center text-[#FEFEFE] transition-colors hover:text-[#447ACB]"
