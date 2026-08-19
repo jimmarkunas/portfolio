@@ -1,0 +1,4 @@
+Force Hostinger redeploy
+Timestamp: 2026-08-19T02:26:00-05:00
+Source: ca433f28
+Reason: production /agents cache refresh
