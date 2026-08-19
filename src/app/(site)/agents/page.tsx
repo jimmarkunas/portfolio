@@ -12,7 +12,7 @@ import { ProductionReadinessCheck } from "./ProductionReadinessCheck"
 const agentsRepoUrl = "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model"
 const agentsAdoptionUrl =
   "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model/issues/new?template=adoption-report.yml&title=I%20used%20Jim%27s%20A.G.E.N.T.S.%20Toolkit%20to%20build..."
-const agentsPdfUrl =
+const agentsToolkitUrl =
   "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model/raw/main/Free%20Toolkit%20Download/AGENTS-Enterprise-Model-Template-Kit.zip"
 
 export const metadata: Metadata = buildPageMetadata({
@@ -37,12 +37,12 @@ export default function AgentsPage() {
                   <h1 className="type-h2 text-[#232323]">{agentsContent.hero.title}</h1>
                   <div className="mt-7 flex flex-wrap gap-3">
                     <TrackedExternalLink
-                      href={agentsPdfUrl}
-                      label="Download the free system"
+                      href={agentsToolkitUrl}
+                      label="Download the free toolkit"
                       location="agents_hero"
-                      download="agents-enterprise-ai-implementation-package.pdf"
+                      download="AGENTS-Enterprise-Model-Template-Kit.zip"
                       className="button-primary"
-                      ariaLabel="Download the free system"
+                      ariaLabel="Download the free toolkit"
                     >
                       {agentsContent.hero.primaryCta}
                     </TrackedExternalLink>
@@ -111,12 +111,12 @@ export default function AgentsPage() {
               <p className="type-p3 mt-3 text-[#3F4548]">{agentsContent.resources.githubBody}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <TrackedExternalLink
-                  href={agentsPdfUrl}
-                  label="Download the package"
+                  href={agentsToolkitUrl}
+                  label="Download the free toolkit"
                   location="agents_github_block"
-                  download="agents-enterprise-ai-implementation-package.pdf"
+                  download="AGENTS-Enterprise-Model-Template-Kit.zip"
                   className="button-primary"
-                  ariaLabel="Download the package"
+                  ariaLabel="Download the free toolkit"
                 >
                   {agentsContent.resources.githubDownloadCta}
                 </TrackedExternalLink>
