@@ -6,11 +6,12 @@ export const agentsContent = {
   },
   hero: {
     title: "Want to ACTUALLY Get ROI Out of Agentic AI?",
-    badge: "FREE AI Readiness Check + Toolkit Download",
+    badge: "FREE system download + readiness preview",
     subhead: "Here’s how, in one complete enterprise system.",
-    body: "A.G.E.N.T.S. gives your enterprise a practical system for turning agentic AI from scattered experiments into measurable business capability. Run the readiness check, find the gaps, then download the full system to apply it across teams, tools, workflows, and production decisions.",
-    primaryCta: "Run the readiness check",
-    secondaryCta: "Download the free system",
+    body: "A.G.E.N.T.S. is a complete enterprise AI operating model you can download, apply, star, fork, and report adoption against. The readiness check is a preview. The implementation package is the system.",
+    primaryCta: "Download the free toolkit",
+    secondaryCta: "Star on GitHub",
+    tertiaryCta: "Report adoption",
   },
   readiness: {
     heading: "Is your enterprise ready to put AI into production?",
@@ -39,8 +40,14 @@ export const agentsContent = {
     heading: "Download the complete A.G.E.N.T.S. enterprise toolkit.",
     body: "Use the free toolkit to move from AI ambition to enterprise production readiness. Define the business case, map authority and access, set guardrails, document evidence, plan escalation, assign ownership, and run the gate before production.",
     items: ["Define the enterprise business case.", "Map authority, access, and system boundaries.", "Set guardrails and evidence requirements.", "Plan escalation and accountable ownership.", "Run the production readiness gate.", "Scale the model across the enterprise."],
-    downloadCta: "Download the free system",
+    downloadCta: "Download the free toolkit",
     openCta: "Open resource",
+    githubHeading: "Use it, star it, report adoption.",
+    githubBody:
+      "The public GitHub repo is the home for the A.G.E.N.T.S. system. Star it if it is useful, fork it if you adapt it, and open an adoption report if your team uses it in a workshop, governance review, product planning session, or production readiness process. The free toolkit includes the PDF, editable DOCX, and Inter font package.",
+    githubDownloadCta: "Download the free toolkit",
+    githubStarCta: "Star on GitHub",
+    githubAdoptionCta: "Report adoption",
   },
   questions: [
     ["A", "Authority", "What may the agent do?", "Define its authority action by action: observe, recommend, prepare, decide, and execute."],
