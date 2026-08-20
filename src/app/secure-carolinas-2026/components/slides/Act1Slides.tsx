@@ -200,10 +200,10 @@ export const Slide03Agents: React.FC = () => {
                     step.highlight
                       ? 'border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
                       : 'border-[#E4E4E7] bg-[#F8F8F9]'
-                  }`}
+                  } ${step.label === 'SYSTEM' ? 'pr-6 lg:pr-8' : ''}`}
                 >
                   <span
-                    className={`max-w-full break-words text-[1.55rem] font-semibold tracking-[0.03em] leading-none lg:text-[2.45rem] ${
+                    className={`max-w-full whitespace-nowrap text-[1.95rem] font-semibold tracking-[0.01em] leading-none lg:text-[3rem] ${
                       step.highlight ? 'text-[#3B71CA]' : 'text-[#18181B]'
                     }`}
                   >
@@ -218,18 +218,8 @@ export const Slide03Agents: React.FC = () => {
           </div>
         </div>
 
-        <div className="sc26-surface-card p-6 lg:p-8">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] font-mono font-bold tracking-[0.22em] text-[#18181B] lg:text-sm">
-            {secureCarolinas2026Copy.slides.agents.capabilities.map((item) => (
-              <span key={item} className="rounded-full border border-[#E4E4E7] bg-white px-4 py-2">
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-
         <div className="sc26-surface-card-accent p-4 lg:p-5 flex items-center justify-center">
-          <p className="flex items-center gap-3 text-sm font-semibold leading-tight text-[#18181B] lg:text-base">
+          <p className="flex items-center gap-4 text-xl font-semibold leading-tight text-[#18181B] lg:text-[2.15rem]">
             <span className="w-2.5 h-2.5 rounded-full bg-[#3B71CA] shrink-0 animate-ping" />
             <span>
               {secureCarolinas2026Copy.slides.agents.callout}{' '}
