@@ -87,6 +87,7 @@ export const secureCarolinas2026Copy = {
         { label: "AGENT", highlight: true },
         { label: "TOOL", highlight: false },
         { label: "SYSTEM", highlight: false },
+        { label: "Agent", highlight: false },
         { label: "ACTION", highlight: false },
       ],
       capabilitiesLabel: "READ · WRITE · SEND · SPEND",
