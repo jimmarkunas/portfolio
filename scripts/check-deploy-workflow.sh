@@ -41,6 +41,11 @@ require_line "test -f out/agents/index.html" "agents artifact existence check"
 require_line "Verify deploy artifacts" "deploy artifact validation step present"
 require_line 'run: npm run check:deploy-artifacts -- --sha "${GITHUB_SHA}"' "artifact validation uses GITHUB_SHA"
 require_line 'cp -R "${GITHUB_WORKSPACE}/out/." "${TMP_DIR}/"' "publish copies only static out output"
+require_line "Deploy out folder to Hostinger over SSH" "direct Hostinger SSH deploy step present"
+require_line "SSH_PRIVATE_KEY:" "SSH private key secret is referenced"
+require_line "SSH_PORT: \"65002\"" "Hostinger SSH port is configured"
+require_line "rsync -az --delete" "SSH deploy uses rsync"
+require_line "public_html/" "SSH deploy targets public_html"
 require_line "Verify live deployment" "live deployment verification step present"
 require_line 'run: npm run check:live-deployment -- --base-url https://greatestpmever.com --sha "${GITHUB_SHA}"' "live verification uses GITHUB_SHA"
 
@@ -55,8 +60,9 @@ forbidden_line() {
   fi
 }
 
-forbidden_line "FTP_" "FTP environment variables"
 forbidden_line "lftp" "FTP transfer command"
+forbidden_line "ftp://" "FTP transport URL"
+forbidden_line "sftp://" "SFTP transport URL"
 forbidden_line "mirror --reverse" "FTP mirror command"
 
 if [ "${missing}" -ne 0 ] || [ "${forbidden}" -ne 0 ]; then
