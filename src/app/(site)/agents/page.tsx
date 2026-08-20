@@ -5,7 +5,7 @@ import { TrackedExternalLink } from "@/components/analytics/TrackedExternalLink"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { agentsContent, freebiesContent, siteCanonicalPaths } from "@/content/site"
+import { agentsContent, siteCanonicalPaths } from "@/content/site"
 import { buildPageMetadata } from "@/lib/seo"
 import { ProductionReadinessCheck } from "./ProductionReadinessCheck"
 
@@ -22,8 +22,6 @@ export const metadata: Metadata = buildPageMetadata({
   routeMarker: "agents",
   useDefaultImage: false,
 })
-
-const agentResources = freebiesContent.collections.find((collection) => collection.id === "usaii-agents")
 
 export default function AgentsPage() {
   return (
@@ -151,14 +149,6 @@ export default function AgentsPage() {
             </h3>
             <div className="mt-7 grid gap-7 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-10">
               <ul className="space-y-3">{agentsContent.resources.items.map((item) => <li key={item} className="type-p3 text-[#2A2A2A]">• {item}</li>)}</ul>
-              <div className="space-y-3">
-                {agentResources?.assets.map((asset) => (
-                  <li key={asset.href} className="list-none rounded-[10px] bg-white px-4 py-4 outline outline-1 outline-black/5">
-                    <h3 className="type-p2 text-[#2A2A2A]">{asset.title}</h3>
-                    <p className="type-p4 mt-1 text-[#4B5154]">{asset.kind}</p>
-                  </li>
-                ))}
-              </div>
             </div>
           </section>
 
