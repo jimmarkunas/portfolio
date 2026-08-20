@@ -44,6 +44,8 @@ jobs:
           echo "NEXT_PUBLIC_GA_MEASUREMENT_ID=${GA_ID}" >> "$GITHUB_ENV"
 
       - name: Build static export
+        env:
+          NEXT_PUBLIC_DEPLOY_SHA: ${{ github.sha }}
         run: npm run build
 
       - name: Verify out folder exists
