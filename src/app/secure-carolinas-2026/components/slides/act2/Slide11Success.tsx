@@ -17,45 +17,36 @@ import {
   Sparkles
 } from 'lucide-react';
 import { SlideHeader } from '../../SlideHeader';
+import { secureCarolinas2026Copy } from '@/content/secure-carolinas-2026/presentationContent';
 
 // ==========================================
 export const Slide11Success: React.FC = () => {
-  const metrics = [
-    { name: 'Business Outcome', desc: 'Dispute resolution time & satisfaction' },
-    { name: 'Accuracy', desc: 'Correct rule application vs ground truth' },
-    { name: 'Error Rate', desc: 'Failed API calls, erroneous state changes' },
-    { name: 'Unnecessary Actions', desc: 'Superfluous tool calls and lookups' },
-    { name: 'Escalation Rate', desc: 'Percentage of cases routed to humans' },
-    { name: 'Customer Impact', desc: 'CSAT, repeat contacts, dispute scores' },
-    { name: 'Operational Cost', desc: 'Token usage, API charges, triage labor' },
-    { name: 'Operational Risk', desc: 'Policy near-misses and anomaly metrics' },
-  ];
+  const metrics = secureCarolinas2026Copy.slides.success.metrics;
 
   return (
     <div className="sc26-slide-wrapper">
       <SlideHeader
-        actLabel="ACT II — A.G.E.N.T.S. Framework"
-        title="S — Success & Accountability"
-        subtitle="How do we know this agent should continue operating — and who owns the result?"
-        extraBadge="Pillar 6 of 6"
+        actLabel={secureCarolinas2026Copy.acts.act2}
+        title={secureCarolinas2026Copy.slides.success.title}
+        subtitle={secureCarolinas2026Copy.slides.success.subtitle}
+        extraBadge={secureCarolinas2026Copy.slides.success.headerBadge}
       />
 
       <div className="space-y-5 my-auto">
         {/* Core Premise */}
         <div className="sc26-surface-card p-4 flex items-center justify-between">
           <div className="text-xs lg:text-sm text-[#52525B]">
-            <strong className="text-[#18181B]">Core Principle:</strong> Success cannot simply mean:{' '}
-            <span className="italic">“The agent completed the task.”</span>
+            <strong className="text-[#18181B]">{secureCarolinas2026Copy.slides.success.coreLabel}</strong> {secureCarolinas2026Copy.slides.success.coreText}{' '}
           </div>
           <span className="text-[10px] font-mono text-[#B91C1C] px-2.5 py-0.5 bg-[#B91C1C]/10 rounded-full font-bold">
-            Task Completion ≠ Success
+            {secureCarolinas2026Copy.slides.success.taskBadge}
           </span>
         </div>
 
         {/* 8 Dimensions Grid */}
         <div className="sc26-surface-card p-5 space-y-3">
           <span className="sc26-type-mono-tag text-[#71717A] font-semibold">
-            8 Dimensions of Agentic Operational Health
+            {secureCarolinas2026Copy.slides.success.metricsLabel}
           </span>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             {metrics.map((m, idx) => (
@@ -70,18 +61,13 @@ export const Slide11Success: React.FC = () => {
         {/* Single Owner & Anchor Line */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5">
           <div className="md:col-span-5 p-4 sc26-surface-card flex items-center gap-3">
-            <span className="sc26-type-mono-tag text-[#71717A] font-bold">OWNERSHIP</span>
-            <span className="text-xs font-medium text-[#18181B]">
-              One person or function must ultimately own the agent.
-            </span>
+            <span className="sc26-type-mono-tag text-[#71717A] font-bold">{secureCarolinas2026Copy.slides.success.ownershipLabel}</span>
+            <span className="text-xs font-medium text-[#18181B]">{secureCarolinas2026Copy.slides.success.ownershipText}</span>
           </div>
 
           <div className="md:col-span-7 p-4 sc26-surface-card-accent flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-[#3B71CA] shrink-0" />
-            <p className="text-xs lg:text-sm font-semibold text-[#18181B]">
-              Execution can be delegated.{' '}
-              <span className="text-[#3B71CA]">Accountability cannot.</span>
-            </p>
+            <p className="text-xs lg:text-sm font-semibold text-[#18181B]">{secureCarolinas2026Copy.slides.success.anchor}</p>
           </div>
         </div>
       </div>

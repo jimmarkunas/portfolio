@@ -12,6 +12,7 @@ import {
   Zap
 } from 'lucide-react';
 import { SlideHeader } from '../SlideHeader';
+import { secureCarolinas2026Copy } from '@/content/secure-carolinas-2026/presentationContent';
 
 // ==========================================
 // Slide 14 — Defined. Partial. Unclear.
@@ -54,8 +55,8 @@ export const Slide14DefinedPartialUnclear: React.FC = () => {
     <div className="sc26-slide-wrapper">
       <SlideHeader
         actLabel="ACT IV — The Production Readiness Gate"
-        title="Defined. Partial. Unclear."
-        subtitle="Every single A.G.E.N.T.S. domain receives an unambiguous readiness status."
+        title={secureCarolinas2026Copy.slides.readinessStatus.title}
+        subtitle={secureCarolinas2026Copy.slides.readinessStatus.subtitle}
         extraBadge="Readiness Taxonomy"
       />
 
@@ -146,8 +147,8 @@ export const Slide15ProductionDecision: React.FC = () => {
     <div className="sc26-slide-wrapper">
       <SlideHeader
         actLabel="ACT IV — The Production Readiness Gate"
-        title="The Production Decision"
-        subtitle="If any A.G.E.N.T.S. control is unclear, the agent is not ready."
+        title={secureCarolinas2026Copy.slides.productionDecision.title}
+        subtitle={secureCarolinas2026Copy.slides.productionDecision.subtitle}
         extraBadge="Executive Decision"
       />
 
@@ -177,17 +178,15 @@ export const Slide15ProductionDecision: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="sc26-surface-card p-5 space-y-1.5">
-            <span className="sc26-type-mono-tag text-[#71717A] font-semibold">The Purpose of Governance</span>
+            <span className="sc26-type-mono-tag text-[#71717A] font-semibold">{secureCarolinas2026Copy.slides.productionDecision.purposeLabel}</span>
             <p className="text-sm lg:text-base font-semibold text-[#18181B] leading-snug">
-              “The goal isn't to stop autonomous AI.{' '}
-              <span className="text-[#3B71CA]">The goal is to know exactly where autonomy ends.</span>”
+              {secureCarolinas2026Copy.slides.productionDecision.purposeQuote}
             </p>
           </div>
           <div className="sc26-surface-card-accent p-5 space-y-1.5">
-            <span className="sc26-type-mono-tag text-[#3B71CA] font-bold">Final Spoken Takeaway</span>
+            <span className="sc26-type-mono-tag text-[#3B71CA] font-bold">{secureCarolinas2026Copy.slides.productionDecision.finalLabel}</span>
             <p className="text-sm lg:text-base font-semibold text-[#18181B] leading-snug">
-              “Execution can be delegated.{' '}
-              <span className="text-[#3B71CA]">Accountability cannot.</span>”
+              {secureCarolinas2026Copy.slides.productionDecision.finalQuote}
             </p>
           </div>
         </div>
@@ -219,14 +218,14 @@ export const Slide16ClosingCta: React.FC = () => {
               </span>
               <div className="h-px w-20 bg-[#E4E4E7]" aria-hidden="true" />
             </div>
-          </div>
+            </div>
 
           <div className="space-y-4">
             <h1 className="sc26-type-hero max-w-4xl text-[#18181B]">
-              Put A.G.E.N.T.S. to Work.
+              {secureCarolinas2026Copy.slides.closingCta.title}
             </h1>
             <p className="sc26-type-h2 max-w-3xl text-[#52525B]">
-              Free enterprise AI operating model + production readiness check.
+              {secureCarolinas2026Copy.slides.closingCta.subtitle}
             </p>
           </div>
 

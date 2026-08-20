@@ -21,6 +21,7 @@ import {
   Fingerprint
 } from 'lucide-react';
 import { SlideHeader } from '../SlideHeader';
+import { secureCarolinas2026Copy } from '@/content/secure-carolinas-2026/presentationContent';
 
 // ==========================================
 // Slide 1 — Title
@@ -42,15 +43,15 @@ export const Slide01Title: React.FC = () => {
               aria-hidden="true"
               className="h-16 w-16 shrink-0"
             />
-            <div className="space-y-1.5 pt-0.5">
-              <div className="type-p5 tracking-[0.22em] uppercase text-[#71717A]">
-                Secure Carolinas 2026 // Keynote
-              </div>
-              <div className="h-px w-20 bg-[#E4E4E7]" aria-hidden="true" />
+          <div className="space-y-1.5 pt-0.5">
+            <div className="type-p5 tracking-[0.22em] uppercase text-[#71717A]">
+              Secure Carolinas 2026 // Keynote
+            </div>
+            <div className="h-px w-20 bg-[#E4E4E7]" aria-hidden="true" />
             </div>
           </div>
           <span className="type-p5 text-[#71717A] tracking-[0.2em] uppercase hidden sm:inline">
-            A.G.E.N.T.S. OPERATING MODEL
+            {secureCarolinas2026Copy.acts.act2}
           </span>
         </motion.div>
 
@@ -62,10 +63,10 @@ export const Slide01Title: React.FC = () => {
           className="space-y-3"
         >
           <h1 className="sc26-type-hero max-w-4xl text-[#18181B]">
-            Is Your Enterprise Ready to Put AI Into Production?
+            {secureCarolinas2026Copy.slides.title.title}
           </h1>
           <p className="sc26-type-h2 text-[#52525B] font-light max-w-3xl">
-            When Agentic AI Becomes an Attack Surface
+            {secureCarolinas2026Copy.slides.title.subtitle}
           </p>
         </motion.div>
 
@@ -112,7 +113,7 @@ export const Slide01Title: React.FC = () => {
         </motion.div>
 
         <div className="flex items-center gap-3 pt-2 text-[11px] uppercase tracking-[0.24em] text-[#71717A]">
-          <span>ACT I</span>
+          <span>{secureCarolinas2026Copy.slides.title.actLabel}</span>
           <span aria-hidden="true">•</span>
           <span>SHIFT IN ATTACK SURFACE</span>
         </div>
@@ -125,6 +126,11 @@ export const Slide01Title: React.FC = () => {
 // Slide 2 — Copilots Were Mostly an Information Problem
 // ==========================================
 export const Slide02Copilots: React.FC = () => {
+  const copilotSteps: readonly {
+    label: string;
+    sub: string;
+    highlight: boolean;
+  }[] = secureCarolinas2026Copy.slides.copilots.steps;
   const steps = [
     { label: 'User', sub: 'Initiates Prompt', icon: <User className="w-4 h-4 text-[#3F3F46]" /> },
     { label: 'AI Model', sub: 'Generates Draft', icon: <Bot className="w-4 h-4 text-[#3B71CA]" /> },
@@ -133,39 +139,31 @@ export const Slide02Copilots: React.FC = () => {
     { label: 'Action', sub: 'Manual Change', icon: <CheckCircle2 className="w-4 h-4 text-[#15803D]" /> },
   ];
 
-  const examples = [
-    { num: '01', title: 'Summarize a document', tag: 'Synthesizing internal reports and briefs' },
-    { num: '02', title: 'Draft an email', tag: 'Drafting correspondence for user approval' },
-    { num: '03', title: 'Answer a question', tag: 'Searching company documentation' },
-    { num: '04', title: 'Generate code', tag: 'Assisting engineers in IDE autocompletion' },
-    { num: '05', title: 'Recommend next steps', tag: 'Presenting support options to human agents' },
-  ];
-
   return (
     <div className="sc26-slide-wrapper">
       <SlideHeader
-        actLabel="ACT I — Shift in Attack Surface"
-        title="Copilots Were Mostly an Information Problem"
-        subtitle="Traditional generative AI mostly produced outputs for humans to evaluate."
-        extraBadge="Paradigm 01"
+        actLabel={secureCarolinas2026Copy.acts.act1}
+        title={secureCarolinas2026Copy.slides.copilots.title}
+        subtitle={secureCarolinas2026Copy.slides.copilots.subtitle}
+        extraBadge={secureCarolinas2026Copy.slides.copilots.headerBadge}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
         {/* Left Column: Visual Progression Flow */}
         <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
           <div className="sc26-surface-card p-6 space-y-5">
-            <div className="flex items-center justify-between pb-2 border-b border-[#F0F0F2]">
-              <span className="sc26-type-mono-tag text-[#71717A] font-semibold">
-                Traditional Copilot Pipeline
-              </span>
+          <div className="flex items-center justify-between pb-2 border-b border-[#F0F0F2]">
+            <span className="sc26-type-mono-tag text-[#71717A] font-semibold">
+              {secureCarolinas2026Copy.slides.copilots.pipelineLabel}
+            </span>
               <span className="text-[11px] font-mono text-[#15803D] bg-[#15803D]/10 px-2 py-0.5 rounded">
-                Gated Execution
+                {secureCarolinas2026Copy.slides.copilots.pipelineStatus}
               </span>
             </div>
 
             {/* Stepped Node Graph */}
             <div className="grid grid-cols-5 gap-2 items-center">
-              {steps.map((s, i) => (
+              {copilotSteps.map((s, i) => (
                 <div
                   key={i}
                   className={`p-3 rounded-xl border flex flex-col items-center text-center space-y-1.5 transition-all ${
@@ -175,7 +173,7 @@ export const Slide02Copilots: React.FC = () => {
                   }`}
                 >
                   <div className="p-1.5 bg-white rounded-lg border border-[#E4E4E7] shadow-sm">
-                    {s.icon}
+                    {steps[i].icon}
                   </div>
                   <div className="text-[11px] font-bold text-[#18181B] truncate w-full">
                     {s.label}
@@ -188,7 +186,7 @@ export const Slide02Copilots: React.FC = () => {
             </div>
 
             <div className="p-3.5 sc26-surface-panel text-xs text-[#52525B] leading-relaxed">
-              In the copilot era, models acted purely as advisors. The output risk was naturally bounded because a human employee reviewed, verified, and committed every enterprise action.
+              {secureCarolinas2026Copy.slides.copilots.panelText}
             </div>
           </div>
 
@@ -196,7 +194,7 @@ export const Slide02Copilots: React.FC = () => {
           <div className="sc26-surface-card-accent p-4 lg:p-5 flex items-center gap-3.5">
             <div className="w-2.5 h-2.5 rounded-full bg-[#3B71CA] shrink-0 animate-ping" />
             <p className="text-sm lg:text-base font-semibold text-[#18181B]">
-              <span className="text-[#3B71CA]">The human</span> remained the execution boundary.
+              <span className="text-[#3B71CA]">{secureCarolinas2026Copy.slides.copilots.calloutLead}</span> remained the execution boundary.
             </p>
           </div>
         </div>
@@ -204,9 +202,9 @@ export const Slide02Copilots: React.FC = () => {
         {/* Right Column: Workload Examples */}
         <div className="lg:col-span-6 space-y-2.5">
           <div className="sc26-type-mono-tag text-[#71717A] font-semibold mb-1">
-            Common Copilot Workloads
+            {secureCarolinas2026Copy.slides.copilots.examplesLabel}
           </div>
-          {examples.map((item, index) => (
+          {secureCarolinas2026Copy.slides.copilots.examples.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: 10 }}
@@ -224,7 +222,7 @@ export const Slide02Copilots: React.FC = () => {
                 </div>
               </div>
               <span className="text-[10px] font-mono font-medium text-[#71717A] px-2 py-0.5 bg-[#F4F4F5] border border-[#E4E4E7] rounded">
-                Human Evaluated
+                {secureCarolinas2026Copy.slides.copilots.exampleBadge}
               </span>
             </motion.div>
           ))}
@@ -257,14 +255,15 @@ export const Slide03Agents: React.FC = () => {
     { label: 'Spend Money', icon: <CreditCard className="w-4 h-4 text-[#3B71CA]" />, cat: 'Financial' },
     { label: 'Continue Unprompted', icon: <CheckCircle2 className="w-4 h-4 text-[#3B71CA]" />, cat: 'Autonomy' },
   ];
+  const capIcons = capabilities.map((cap) => cap.icon);
 
   return (
     <div className="sc26-slide-wrapper">
       <SlideHeader
-        actLabel="ACT I — Shift in Attack Surface"
-        title="Agents Move the Execution Boundary"
-        subtitle="Autonomous execution shifts the model from a passive advisor to an active operator."
-        extraBadge="Paradigm 02"
+        actLabel={secureCarolinas2026Copy.acts.act1}
+        title={secureCarolinas2026Copy.slides.agents.title}
+        subtitle={secureCarolinas2026Copy.slides.agents.subtitle}
+        extraBadge={secureCarolinas2026Copy.slides.agents.headerBadge}
       />
 
       <div className="space-y-5 my-auto">
@@ -272,15 +271,15 @@ export const Slide03Agents: React.FC = () => {
         <div className="sc26-surface-card p-6 space-y-4">
           <div className="flex items-center justify-between pb-2 border-b border-[#F0F0F2]">
             <span className="sc26-type-mono-tag text-[#71717A] font-semibold">
-              The Autonomous Execution Pipeline
+              {secureCarolinas2026Copy.slides.agents.pipelineLabel}
             </span>
             <span className="text-[11px] font-mono font-medium text-[#B91C1C] px-2.5 py-0.5 bg-[#B91C1C]/10 border border-[#B91C1C]/20 rounded-full">
-              ● Human Boundary Removed
+              {secureCarolinas2026Copy.slides.agents.pipelineStatus}
             </span>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-6 gap-2.5 items-center">
-            {pipeline.map((step, idx) => (
+            {secureCarolinas2026Copy.slides.agents.pipeline.map((step, idx) => (
               <div
                 key={idx}
                 className="p-3 bg-[#F8F8F9] border border-[#E4E4E7] rounded-xl flex flex-col justify-center text-center relative hover:border-[#3B71CA]/40 transition-colors"
@@ -296,16 +295,18 @@ export const Slide03Agents: React.FC = () => {
         {/* 8 Autonomous Capabilities */}
         <div className="space-y-2.5">
           <div className="sc26-type-mono-tag text-[#71717A] font-semibold">
-            Delegated Autonomous Capabilities
+            {secureCarolinas2026Copy.slides.agents.capabilitiesLabel}
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-            {capabilities.map((cap, i) => (
+            {secureCarolinas2026Copy.slides.agents.capabilities.map((cap, i) => (
               <div
                 key={i}
                 className="sc26-surface-card p-3 flex items-center justify-between hover:border-[#3B71CA]/40 transition-colors"
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2 bg-[#F4F4F5] rounded-lg border border-[#E4E4E7]">{cap.icon}</div>
+                  <div className="p-2 bg-[#F4F4F5] rounded-lg border border-[#E4E4E7]">
+                    {capIcons[i]}
+                  </div>
                   <div>
                     <div className="text-xs font-bold text-[#18181B]">{cap.label}</div>
                     <div className="text-[10px] font-mono text-[#71717A]">{cap.cat}</div>
@@ -326,7 +327,7 @@ export const Slide03Agents: React.FC = () => {
             </p>
           </div>
           <span className="hidden md:inline-block text-[11px] font-mono text-[#71717A] px-3 py-1 bg-white border border-[#E4E4E7] rounded-full">
-            Autonomous Authority
+            {secureCarolinas2026Copy.slides.agents.calloutBadge}
           </span>
         </div>
       </div>
@@ -359,10 +360,10 @@ export const Slide04AttackSurface: React.FC = () => {
   return (
     <div className="sc26-slide-wrapper">
       <SlideHeader
-        actLabel="ACT I — Shift in Attack Surface"
-        title="Your Attack Surface Is Now a Business Process"
-        subtitle="Security must evolve from perimeter infrastructure defense to governed autonomous execution logic."
-        extraBadge="Enterprise Risk"
+        actLabel={secureCarolinas2026Copy.acts.act1}
+        title={secureCarolinas2026Copy.slides.attackSurface.title}
+        subtitle={secureCarolinas2026Copy.slides.attackSurface.subtitle}
+        extraBadge={secureCarolinas2026Copy.slides.attackSurface.headerBadge}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
@@ -370,14 +371,14 @@ export const Slide04AttackSurface: React.FC = () => {
         <div className="lg:col-span-5 sc26-surface-card p-6 space-y-4">
           <div className="flex items-center justify-between pb-2 border-b border-[#F0F0F2]">
             <div>
-              <span className="sc26-type-mono-tag text-[#71717A] font-semibold block">Scope 01</span>
-              <h3 className="text-base font-bold text-[#18181B]">Traditional Attack Surface</h3>
+              <span className="sc26-type-mono-tag text-[#71717A] font-semibold block">{secureCarolinas2026Copy.slides.attackSurface.traditionalLabel}</span>
+              <h3 className="text-base font-bold text-[#18181B]">{secureCarolinas2026Copy.slides.attackSurface.traditionalHeading}</h3>
             </div>
             <Lock className="w-4 h-4 text-[#71717A]" />
           </div>
 
           <div className="space-y-2">
-            {traditional.map((item, idx) => (
+            {secureCarolinas2026Copy.slides.attackSurface.traditional.map((item, idx) => (
               <div key={idx} className="p-2.5 bg-[#F8F8F9] rounded-xl border border-[#EDEDF0] flex items-center justify-between">
                 <span className="text-xs font-semibold text-[#18181B]">{item.name}</span>
                 <span className="text-[10px] text-[#71717A]">{item.desc}</span>
@@ -390,14 +391,14 @@ export const Slide04AttackSurface: React.FC = () => {
         <div className="lg:col-span-7 sc26-surface-card-accent p-6 space-y-4">
           <div className="flex items-center justify-between pb-2 border-b border-[#3B71CA]/15">
             <div>
-              <span className="sc26-type-mono-tag text-[#3B71CA] font-semibold block">Scope 02 (Expanded)</span>
-              <h3 className="text-base font-bold text-[#18181B]">Agentic Attack Surface Adds</h3>
+              <span className="sc26-type-mono-tag text-[#3B71CA] font-semibold block">{secureCarolinas2026Copy.slides.attackSurface.agenticLabel}</span>
+              <h3 className="text-base font-bold text-[#18181B]">{secureCarolinas2026Copy.slides.attackSurface.agenticHeading}</h3>
             </div>
             <ShieldAlert className="w-5 h-5 text-[#3B71CA]" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {agentic.map((item, idx) => (
+            {secureCarolinas2026Copy.slides.attackSurface.agentic.map((item, idx) => (
               <div key={idx} className="p-2.5 bg-white border border-[#E4E4E7] rounded-xl space-y-0.5 shadow-sm">
                 <div className="text-xs font-bold text-[#18181B]">{item.name}</div>
                 <div className="text-[10px] text-[#52525B] leading-tight">{item.desc}</div>
@@ -413,11 +414,7 @@ export const Slide04AttackSurface: React.FC = () => {
           <AlertTriangle className="w-4 h-4 text-[#B45309]" />
         </div>
         <p className="text-xs lg:text-sm text-[#18181B] font-normal leading-relaxed">
-          <strong className="font-semibold text-[#18181B]">Core Takeaway:</strong> An agent can operate{' '}
-          <span className="underline decoration-[#3B71CA] decoration-2 underline-offset-2 font-medium">
-            exactly as designed
-          </span>{' '}
-          and still create a serious enterprise incident if the operating model is wrong.
+          <strong className="font-semibold text-[#18181B]">{secureCarolinas2026Copy.slides.attackSurface.coreTakeawayLabel}</strong> {secureCarolinas2026Copy.slides.attackSurface.coreTakeaway}
         </p>
       </div>
     </div>
