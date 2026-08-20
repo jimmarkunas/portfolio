@@ -44,8 +44,6 @@ jobs:
           echo "NEXT_PUBLIC_GA_MEASUREMENT_ID=${GA_ID}" >> "$GITHUB_ENV"
 
       - name: Build static export
-        env:
-          NEXT_PUBLIC_DEPLOY_SHA: ${{ github.sha }}
         run: npm run build
 
       - name: Verify out folder exists
@@ -84,36 +82,3 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Deploy static site from ${SOURCE_SHA}"
           git push origin "${DEPLOY_BRANCH}"
-
-      - name: Deploy out folder to Hostinger over SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ secrets.FTP_SERVER }}
-          SSH_USERNAME: ${{ secrets.FTP_USERNAME }}
-          SSH_PORT: "65002"
-        run: |
-          set -euo pipefail
-
-          if [[ -z "${SSH_PRIVATE_KEY}" || -z "${SSH_HOST}" || -z "${SSH_USERNAME}" ]]; then
-            echo "Missing SSH deployment secret configuration." >&2
-            exit 1
-          fi
-
-          key_file="$(mktemp)"
-          trap 'rm -f "${key_file}"' EXIT
-          chmod 600 "${key_file}"
-          printf '%s\n' "${SSH_PRIVATE_KEY}" > "${key_file}"
-
-          mkdir -p "${HOME}/.ssh"
-          chmod 700 "${HOME}/.ssh"
-          ssh-keyscan -p "${SSH_PORT}" -T 15 "${SSH_HOST}" >> "${HOME}/.ssh/known_hosts"
-
-          target="/home/${SSH_USERNAME}/domains/greatestpmever.com/public_html/"
-          echo "Deploying static files to ${SSH_USERNAME}@${SSH_HOST}:${target}"
-
-          timeout 300s rsync -az --delete --info=progress2 \
-            -e "ssh -p ${SSH_PORT} -i ${key_file} -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=15" \
-            ./out/ "${SSH_USERNAME}@${SSH_HOST}:${target}"
-
-      - name: Verify live deployment
-        run: npm run check:live-deployment -- --base-url https://greatestpmever.com --sha "${GITHUB_SHA}"

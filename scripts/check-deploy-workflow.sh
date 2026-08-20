@@ -28,26 +28,22 @@ require_line() {
   fi
 }
 
-require_line "branches:" "main branch trigger section present"
-require_line "- main" "deploy trigger pinned to main"
+require_line "name: Build and Publish Static Site" "publish workflow name is present"
 require_line "workflow_dispatch:" "manual deploy trigger available"
-require_line 'NEXT_PUBLIC_DEPLOY_SHA: ${{ github.sha }}' "build receives deploy SHA"
+require_line 'permissions:' "workflow permissions block present"
+require_line 'contents: write' "workflow can write the hostinger-static branch"
+require_line 'Build static export' "static build step present"
+require_line 'Verify out folder exists' "static output verification present"
+require_line 'test -f out/cv/index.html' "cv output verification present"
+require_line 'test -f out/work/index.html' "work output verification present"
+require_line 'test -f out/agents/index.html' "agents output verification present"
+require_line 'Verify deploy artifacts' "deploy artifact verification present"
+require_line 'npm run check:deploy-artifacts -- --sha "${GITHUB_SHA}"' "deploy artifact checker is called"
+require_line 'Publish out folder to hostinger-static branch' "hostinger-static publish step present"
 require_line 'DEPLOY_BRANCH="hostinger-static"' "deploy branch pinned to hostinger-static"
-require_line "test -d out" "out directory existence check"
-require_line "test -f out/index.html" "out/index.html existence check"
-require_line "test -f out/cv/index.html" "CV artifact existence check"
-require_line "test -f out/work/index.html" "work artifact existence check"
-require_line "test -f out/agents/index.html" "agents artifact existence check"
-require_line "Verify deploy artifacts" "deploy artifact validation step present"
-require_line 'run: npm run check:deploy-artifacts -- --sha "${GITHUB_SHA}"' "artifact validation uses GITHUB_SHA"
-require_line 'cp -R "${GITHUB_WORKSPACE}/out/." "${TMP_DIR}/"' "publish copies only static out output"
-require_line "Deploy out folder to Hostinger over SSH" "direct Hostinger SSH deploy step present"
-require_line "SSH_PRIVATE_KEY:" "SSH private key secret is referenced"
-require_line "SSH_PORT: \"65002\"" "Hostinger SSH port is configured"
-require_line "rsync -az --delete" "SSH deploy uses rsync"
-require_line "public_html/" "SSH deploy targets public_html"
-require_line "Verify live deployment" "live deployment verification step present"
-require_line 'run: npm run check:live-deployment -- --base-url https://greatestpmever.com --sha "${GITHUB_SHA}"' "live verification uses GITHUB_SHA"
+require_line 'git clone --branch "${DEPLOY_BRANCH}"' "hostinger-static branch clone present"
+require_line 'git commit -m "Deploy static site from ${SOURCE_SHA}"' "deploy commit message includes source sha"
+require_line 'git push origin "${DEPLOY_BRANCH}"' "hostinger-static branch push present"
 
 forbidden=0
 
@@ -60,9 +56,11 @@ forbidden_line() {
   fi
 }
 
+forbidden_line "Deploy out folder to Hostinger over SSH" "SSH deploy step"
+forbidden_line "rsync -az --delete" "SSH rsync deploy command"
+forbidden_line "check:live-deployment" "live verification step"
+forbidden_line "FTP_" "FTP deploy variables"
 forbidden_line "lftp" "FTP transfer command"
-forbidden_line "ftp://" "FTP transport URL"
-forbidden_line "sftp://" "SFTP transport URL"
 forbidden_line "mirror --reverse" "FTP mirror command"
 
 if [ "${missing}" -ne 0 ] || [ "${forbidden}" -ne 0 ]; then
