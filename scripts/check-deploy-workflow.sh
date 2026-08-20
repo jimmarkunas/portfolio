@@ -31,10 +31,18 @@ require_line() {
 require_line "branches:" "main branch trigger section present"
 require_line "- main" "deploy trigger pinned to main"
 require_line "workflow_dispatch:" "manual deploy trigger available"
+require_line 'NEXT_PUBLIC_DEPLOY_SHA: ${{ github.sha }}' "build receives deploy SHA"
 require_line 'DEPLOY_BRANCH="hostinger-static"' "deploy branch pinned to hostinger-static"
 require_line "test -d out" "out directory existence check"
 require_line "test -f out/index.html" "out/index.html existence check"
+require_line "test -f out/cv/index.html" "CV artifact existence check"
+require_line "test -f out/work/index.html" "work artifact existence check"
+require_line "test -f out/agents/index.html" "agents artifact existence check"
+require_line "Verify deploy artifacts" "deploy artifact validation step present"
+require_line 'run: npm run check:deploy-artifacts -- --sha "${GITHUB_SHA}"' "artifact validation uses GITHUB_SHA"
 require_line 'cp -R "${GITHUB_WORKSPACE}/out/." "${TMP_DIR}/"' "publish copies only static out output"
+require_line "Verify live deployment" "live deployment verification step present"
+require_line 'run: npm run check:live-deployment -- --base-url https://greatestpmever.com --sha "${GITHUB_SHA}"' "live verification uses GITHUB_SHA"
 
 forbidden=0
 

@@ -44,12 +44,20 @@ jobs:
           echo "NEXT_PUBLIC_GA_MEASUREMENT_ID=${GA_ID}" >> "$GITHUB_ENV"
 
       - name: Build static export
+        env:
+          NEXT_PUBLIC_DEPLOY_SHA: ${{ github.sha }}
         run: npm run build
 
       - name: Verify out folder exists
         run: |
           test -d out
           test -f out/index.html
+          test -f out/cv/index.html
+          test -f out/work/index.html
+          test -f out/agents/index.html
+
+      - name: Verify deploy artifacts
+        run: npm run check:deploy-artifacts -- --sha "${GITHUB_SHA}"
 
       - name: Publish out folder to hostinger-static branch
         run: |
@@ -76,3 +84,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Deploy static site from ${SOURCE_SHA}"
           git push origin "${DEPLOY_BRANCH}"
+
+      - name: Verify live deployment
+        run: npm run check:live-deployment -- --base-url https://greatestpmever.com --sha "${GITHUB_SHA}"
