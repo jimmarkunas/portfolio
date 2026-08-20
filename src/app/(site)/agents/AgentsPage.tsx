@@ -8,6 +8,8 @@ import { agentsContent } from "@/content/site/agents"
 import { ProductionReadinessCheck } from "./ProductionReadinessCheck"
 
 const agentsRepoUrl = "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model"
+const agentsDiscussionsUrl =
+  "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model/discussions"
 const agentsAdoptionUrl =
   "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model/issues/new?template=adoption-report.yml&title=I%20used%20Jim%27s%20A.G.E.N.T.S.%20Toolkit%20to%20build..."
 
@@ -41,12 +43,12 @@ export function AgentsPage() {
                   <div className="mt-7 flex flex-wrap gap-3">
                     <TrackedExternalLink
                       href={agentsRepoUrl}
-                      label="Download the free toolkit"
+                      label="Get the free toolkit on GitHub"
                       location="agents_hero"
                       target="_blank"
                       rel="noreferrer"
                       className="button-primary !text-white hover:!text-white"
-                      ariaLabel="Download the free toolkit"
+                      ariaLabel="Get the free toolkit on GitHub"
                     >
                       {agentsContent.hero.primaryCta}
                     </TrackedExternalLink>
@@ -67,7 +69,7 @@ export function AgentsPage() {
                       location="agents_hero"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-text-cta type-p4 lg:ml-3 lg:whitespace-nowrap"
+                      className="hidden lg:inline-flex inline-text-cta type-p4 lg:ml-3 lg:whitespace-nowrap"
                       ariaLabel="Report adoption"
                     >
                       {agentsContent.hero.tertiaryCta}
@@ -88,7 +90,7 @@ export function AgentsPage() {
               </section>
             </MotionReveal>
 
-            <section id="readiness-check" className="scroll-mt-24">
+            <section className="scroll-mt-24">
               <div>
                 <h2 className="type-h4 text-center text-[#2A2A2A]">{agentsContent.readiness.heading}</h2>
                 <div className="mt-6 grid gap-3 rounded-[10px] bg-white px-5 py-5 sm:grid-cols-2 lg:grid-cols-4 md:px-7">
@@ -116,12 +118,12 @@ export function AgentsPage() {
               <div className="mt-5 flex flex-wrap gap-3">
                 <TrackedExternalLink
                   href={agentsRepoUrl}
-                  label="Download the free toolkit"
+                  label="Get the free toolkit on GitHub"
                   location="agents_github_block"
                   target="_blank"
                   rel="noreferrer"
                   className="button-primary !text-white hover:!text-white"
-                  ariaLabel="Download the free toolkit"
+                  ariaLabel="Get the free toolkit on GitHub"
                 >
                   {agentsContent.resources.githubDownloadCta}
                 </TrackedExternalLink>
@@ -146,6 +148,17 @@ export function AgentsPage() {
                   ariaLabel="Report adoption"
                 >
                   {agentsContent.resources.githubAdoptionCta}
+                </TrackedExternalLink>
+                <TrackedExternalLink
+                  href={agentsDiscussionsUrl}
+                  label="Join the discussion"
+                  location="agents_github_block"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-text-cta type-p4"
+                  ariaLabel="Join the discussion"
+                >
+                  {agentsContent.resources.githubDiscussionCta}
                 </TrackedExternalLink>
               </div>
             </div>

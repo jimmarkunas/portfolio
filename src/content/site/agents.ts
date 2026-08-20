@@ -1,6 +1,6 @@
 export const agentsContent = {
   meta: {
-    title: "A.G.E.N.T.S. Enterprise Agent Operating Model | Jim Markunas",
+    title: "A.G.E.N.T.S. Enterprise AI Operating Model | Jim Markunas",
     description:
       "A.G.E.N.T.S. is Jim Markunas’ enterprise AI agent operating model for defining authority, guardrails, evidence, integrations, escalation, business value, and accountability.",
   },
@@ -9,7 +9,7 @@ export const agentsContent = {
     badge: "FREE system download + readiness preview",
     subhead: "Here’s how, in one complete enterprise system.",
     body: "A.G.E.N.T.S. is a complete enterprise AI operating model you can download, apply, star, fork, and report adoption against. The readiness check is a preview. The implementation package is the system.",
-    primaryCta: "Download the free toolkit",
+    primaryCta: "Get the free toolkit on GitHub",
     secondaryCta: "Star on GitHub",
     tertiaryCta: "Report adoption",
   },
@@ -40,14 +40,15 @@ export const agentsContent = {
     heading: "Download the complete A.G.E.N.T.S. enterprise toolkit.",
     body: "Use the free toolkit to move from AI ambition to enterprise production readiness. Define the business case, map authority and access, set guardrails, document evidence, plan escalation, assign ownership, and run the gate before production.",
     items: ["Define the enterprise business case.", "Map authority, access, and system boundaries.", "Set guardrails and evidence requirements.", "Plan escalation and accountable ownership.", "Run the production readiness gate.", "Scale the model across the enterprise."],
-    downloadCta: "Download the free toolkit",
+    downloadCta: "Get the free toolkit on GitHub",
     openCta: "Open resource",
     githubHeading: "Use it, star it, report adoption.",
     githubBody:
       "The public GitHub repo is the home for the A.G.E.N.T.S. system. Star it if it is useful, fork it if you adapt it, and open an adoption report if your team uses it in a workshop, governance review, product planning session, or production readiness process. The free toolkit includes the PDF, editable DOCX, and Inter font package.",
-    githubDownloadCta: "Download the free toolkit",
+    githubDownloadCta: "Get the free toolkit on GitHub",
     githubStarCta: "Star on GitHub",
     githubAdoptionCta: "Report adoption",
+    githubDiscussionCta: "Join the discussion",
   },
   questions: [
     ["A", "Authority", "What may the agent do?", "Define its authority action by action: observe, recommend, prepare, decide, and execute."],
