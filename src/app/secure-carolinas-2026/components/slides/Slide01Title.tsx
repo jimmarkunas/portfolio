@@ -9,25 +9,14 @@ export const Slide01Title: React.FC = () => {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className="flex items-start justify-between gap-6"
+          className="flex justify-center"
         >
-          <div className="flex items-start gap-4">
-            <img
-              src="/images/logo/ujcg-logo-blue.png"
-              alt="Jim Markunas logo"
-              aria-hidden="true"
-              className="h-16 w-16 shrink-0"
-            />
-            <div className="space-y-1.5 pt-0.5">
-              <div className="type-p5 tracking-[0.22em] uppercase text-[#71717A]">
-                Secure Carolinas 2026 // Keynote
-              </div>
-              <div className="h-px w-20 bg-[#E4E4E7]" aria-hidden="true" />
-            </div>
-          </div>
-          <span className="type-p5 text-[#71717A] tracking-[0.2em] uppercase hidden sm:inline">
-            A.G.E.N.T.S. OPERATING MODEL
-          </span>
+          <img
+            src="/images/logo/ujcg-logo-blue.png"
+            alt="Jim Markunas logo"
+            aria-hidden="true"
+            className="h-32 w-32 shrink-0"
+          />
         </motion.div>
 
         <motion.div
