@@ -19,6 +19,8 @@ type PresentationDeckProps = {
   slideIdOrder: string[];
   navigation: PresentationNavigationCopy;
   brandLogo?: PresentationBrandLogo;
+  brandLogoPosition?: "left" | "right";
+  footerCenterContent?: ReactNode | ((currentSlide: number, totalSlides: number) => ReactNode);
   reserveNavigationInset?: boolean;
 };
 
@@ -29,6 +31,8 @@ export function PresentationDeck({
   slideIdOrder,
   navigation,
   brandLogo,
+  brandLogoPosition = "right",
+  footerCenterContent,
   reserveNavigationInset = true,
 }: PresentationDeckProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -76,6 +80,7 @@ export function PresentationDeck({
             isActive
             brandLogoSrc={brandLogo?.src}
             brandLogoAlt={brandLogo?.alt}
+            brandLogoPosition={brandLogoPosition}
           >
             {slides[currentSlide]}
           </PresentationSlideFrame>
@@ -85,21 +90,31 @@ export function PresentationDeck({
           ref={navRef}
           className="absolute bottom-4 left-0 z-50 flex w-full items-center justify-between px-4 sm:px-6 md:bottom-8 md:px-12"
         >
-          <div className="flex gap-4">
-            <button
-              onClick={prevSlide}
-              className="group rounded-full border border-finox-slate/50 p-3 transition-colors hover:bg-white hover:text-finox-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-              aria-label={navigation.previousAriaLabel}
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="group rounded-full border border-finox-slate/50 p-3 transition-colors hover:bg-white hover:text-finox-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-              aria-label={navigation.nextAriaLabel}
-            >
-              <ChevronRight className="h-6 w-6" />
-            </button>
+          <div className="flex items-center gap-4 min-w-0">
+            <div className="flex gap-4">
+              <button
+                onClick={prevSlide}
+                className="group rounded-full border border-finox-slate/50 p-3 transition-colors hover:bg-white hover:text-finox-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                aria-label={navigation.previousAriaLabel}
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="group rounded-full border border-finox-slate/50 p-3 transition-colors hover:bg-white hover:text-finox-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                aria-label={navigation.nextAriaLabel}
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            </div>
+
+            {footerCenterContent ? (
+              <div className="flex min-w-0 items-center justify-start text-left">
+                {typeof footerCenterContent === "function"
+                  ? footerCenterContent(currentSlide, slides.length)
+                  : footerCenterContent}
+              </div>
+            ) : null}
           </div>
 
           <div className="flex items-center gap-8">

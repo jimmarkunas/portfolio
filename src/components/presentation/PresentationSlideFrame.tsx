@@ -7,6 +7,7 @@ type PresentationSlideFrameProps = {
   isActive: boolean;
   brandLogoSrc?: string;
   brandLogoAlt?: string;
+  brandLogoPosition?: "left" | "right";
 };
 
 export function PresentationSlideFrame({
@@ -14,6 +15,7 @@ export function PresentationSlideFrame({
   isActive,
   brandLogoSrc,
   brandLogoAlt = "",
+  brandLogoPosition = "right",
 }: PresentationSlideFrameProps) {
   return (
     <AnimatePresence mode="wait">
@@ -30,7 +32,9 @@ export function PresentationSlideFrame({
               src={brandLogoSrc}
               alt={brandLogoAlt}
               aria-hidden="true"
-              className="pointer-events-none absolute right-16 top-16 h-[65px] w-[65px]"
+              className={`pointer-events-none absolute top-16 h-[65px] w-[65px] ${
+                brandLogoPosition === "left" ? "left-16" : "right-16"
+              }`}
             />
           ) : null}
           {children}

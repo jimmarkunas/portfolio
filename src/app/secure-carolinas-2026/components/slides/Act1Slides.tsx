@@ -29,20 +29,27 @@ export const Slide01Title: React.FC = () => {
   return (
     <div className="sc26-slide-wrapper justify-center py-4">
       <div className="max-w-5xl mx-auto w-full flex flex-col justify-center space-y-6 lg:space-y-8 my-auto">
-        {/* Top Eyebrow Tag */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className="flex items-center gap-3"
+          className="flex items-start justify-between gap-6"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-white border border-[#E4E4E7] rounded-full text-xs font-medium text-[#3F3F46] tracking-wider uppercase shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-[#3B71CA]" />
-            <span className="font-mono text-[11px] font-semibold text-[#18181B]">
-              SECURE CAROLINAS 2026 // KEYNOTE
-            </span>
+          <div className="flex items-start gap-4">
+            <img
+              src="/images/logo/ujcg-logo-blue.png"
+              alt="Jim Markunas logo"
+              aria-hidden="true"
+              className="h-16 w-16 shrink-0"
+            />
+            <div className="space-y-1.5 pt-0.5">
+              <div className="type-p5 tracking-[0.22em] uppercase text-[#71717A]">
+                Secure Carolinas 2026 // Keynote
+              </div>
+              <div className="h-px w-20 bg-[#E4E4E7]" aria-hidden="true" />
+            </div>
           </div>
-          <span className="text-xs font-mono text-[#71717A] tracking-wider uppercase hidden sm:inline">
+          <span className="type-p5 text-[#71717A] tracking-[0.2em] uppercase hidden sm:inline">
             A.G.E.N.T.S. OPERATING MODEL
           </span>
         </motion.div>
@@ -85,7 +92,7 @@ export const Slide01Title: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.45, delay: 0.22 }}
-          className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-[#F0F0F2] text-xs font-mono text-[#71717A]"
+          className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-[#F0F0F2] text-xs text-[#71717A]"
         >
           <div className="flex items-center gap-3">
             <span className="font-semibold text-[#18181B] text-sm">Jim Markunas</span>
@@ -103,6 +110,12 @@ export const Slide01Title: React.FC = () => {
             <ArrowUpRight className="w-3 h-3" />
           </a>
         </motion.div>
+
+        <div className="flex items-center gap-3 pt-2 text-[11px] uppercase tracking-[0.24em] text-[#71717A]">
+          <span>ACT I</span>
+          <span aria-hidden="true">•</span>
+          <span>SHIFT IN ATTACK SURFACE</span>
+        </div>
       </div>
     </div>
   );

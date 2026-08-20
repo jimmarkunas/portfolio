@@ -73,5 +73,6 @@ export function useSecureCarolinas2026Slides({
     slides,
     slideTitles: registry.map((item) => item.title),
     slideIdOrder: registry.map((item) => item.id),
+    slideKeys: registry.map((item) => item.key),
   };
 }

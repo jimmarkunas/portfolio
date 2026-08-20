@@ -206,10 +206,19 @@ export const Slide16ClosingCta: React.FC = () => {
     <div className="sc26-slide-wrapper justify-center">
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1.55fr)_minmax(340px,0.95fr)] lg:gap-12">
         <div className="space-y-6">
-          <div className="flex items-center gap-3">
-            <span className="sc26-type-mono-tag text-[#71717A] font-semibold">
-              SECURE CAROLINAS 2026 · A.G.E.N.T.S. CLOSING CTA
-            </span>
+          <div className="flex items-start gap-4">
+            <img
+              src="/images/logo/ujcg-logo-blue.png"
+              alt="Jim Markunas logo"
+              aria-hidden="true"
+              className="h-16 w-16 shrink-0"
+            />
+            <div className="space-y-1.5 pt-0.5">
+              <span className="type-p5 tracking-[0.22em] uppercase text-[#71717A]">
+                Secure Carolinas 2026 · A.G.E.N.T.S. Closing CTA
+              </span>
+              <div className="h-px w-20 bg-[#E4E4E7]" aria-hidden="true" />
+            </div>
           </div>
 
           <div className="space-y-4">
@@ -249,10 +258,10 @@ export const Slide16ClosingCta: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex justify-center lg:justify-end">
-          <div className="w-full max-w-[420px] rounded-[24px] border border-[#E4E4E7] bg-white p-5 shadow-[0_16px_40px_rgba(0,0,0,0.08)] lg:p-6">
-            <div className="mb-4 text-center text-[11px] font-mono font-bold tracking-[0.18em] text-[#3B71CA]">
-              SCAN FOR THE FREE SYSTEM
+          <div className="flex justify-center lg:justify-end">
+            <div className="w-full max-w-[420px] rounded-[24px] border border-[#E4E4E7] bg-white p-5 shadow-[0_16px_40px_rgba(0,0,0,0.08)] lg:p-6">
+              <div className="mb-4 text-center text-[11px] font-mono font-bold tracking-[0.18em] text-[#3B71CA]">
+                SCAN FOR THE FREE SYSTEM
             </div>
             <div className="rounded-[20px] border border-[#F0F0F2] bg-white p-4">
               <img
@@ -265,6 +274,12 @@ export const Slide16ClosingCta: React.FC = () => {
               greatestpmever.com/agents
             </p>
           </div>
+        </div>
+
+        <div className="flex items-center gap-3 pt-2 text-[11px] uppercase tracking-[0.24em] text-[#71717A]">
+          <span>ACT IV</span>
+          <span aria-hidden="true">•</span>
+          <span>THE PRODUCTION READINESS GATE</span>
         </div>
       </div>
     </div>

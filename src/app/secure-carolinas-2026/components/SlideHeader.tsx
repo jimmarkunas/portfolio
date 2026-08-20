@@ -1,10 +1,13 @@
 import React from 'react';
+import { EyebrowPill } from '@/components/EyebrowPill';
 
 interface SlideHeaderProps {
   actLabel: string;
   title: string;
   subtitle?: string;
   extraBadge?: string;
+  logoSrc?: string;
+  logoAlt?: string;
 }
 
 export const SlideHeader: React.FC<SlideHeaderProps> = ({
@@ -12,24 +15,33 @@ export const SlideHeader: React.FC<SlideHeaderProps> = ({
   title,
   subtitle,
   extraBadge,
+  logoSrc = '/images/logo/ujcg-logo-blue.png',
+  logoAlt = 'Jim Markunas logo',
 }) => {
   return (
-    <header className="mb-4 lg:mb-6 space-y-2 select-none">
-      <div className="flex items-center justify-between">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#E4E4E7] rounded-full text-xs font-medium text-[#3F3F46] tracking-wider uppercase shadow-sm">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#3B71CA] animate-pulse" />
-          <span className="font-mono text-[11px] font-semibold text-[#18181B]">{actLabel}</span>
+    <header className="mb-6 lg:mb-8 select-none">
+      <div className="flex items-start justify-between gap-6">
+        <div className="min-w-0 flex-1">
+          <div className="flex min-w-0 items-center gap-4">
+            <img
+              src={logoSrc}
+              alt={logoAlt}
+              aria-hidden="true"
+              className="h-16 w-16 shrink-0"
+            />
+            <h2 className="min-w-0 sc26-type-h1">{title}</h2>
+          </div>
+          {subtitle && <p className="mt-2 w-full max-w-none pl-20 sc26-type-p1 text-[#52525B]">{subtitle}</p>}
         </div>
         {extraBadge && (
-          <span className="text-[11px] font-mono font-medium text-[#71717A] tracking-wider uppercase px-2.5 py-0.5 bg-[#F4F4F5] border border-[#E4E4E7] rounded-md">
+          <EyebrowPill
+            className="shrink-0"
+            labelClassName="leading-none"
+            labelStyle={{ fontSize: "18px", letterSpacing: "0.18em" }}
+          >
             {extraBadge}
-          </span>
+          </EyebrowPill>
         )}
-      </div>
-
-      <div className="space-y-1">
-        <h2 className="sc26-type-h1">{title}</h2>
-        {subtitle && <p className="sc26-type-p1 max-w-4xl text-[#52525B]">{subtitle}</p>}
       </div>
     </header>
   );

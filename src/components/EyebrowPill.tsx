@@ -5,6 +5,7 @@ type EyebrowPillProps = {
   className?: string
   dotClassName?: string
   labelClassName?: string
+  labelStyle?: React.CSSProperties
   showDot?: boolean
 }
 
@@ -13,12 +14,13 @@ export function EyebrowPill({
   className = "",
   dotClassName = "",
   labelClassName = "",
+  labelStyle,
   showDot = true,
 }: EyebrowPillProps) {
   return (
     <div className={`eyebrow-pill ${className}`.trim()}>
       {showDot ? <span className={`eyebrow-pill__dot ${dotClassName}`.trim()} /> : null}
-      <span className={labelClassName}>{children}</span>
+      <span className={labelClassName} style={labelStyle}>{children}</span>
     </div>
   )
 }

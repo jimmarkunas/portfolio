@@ -17,6 +17,15 @@
   font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
+.secure-carolinas-2026-page .font-mono {
+  font-family: var(--font-family-display);
+}
+
+.secure-carolinas-2026-page .sc26-type-mono-tag,
+.secure-carolinas-2026-page .type-footer-brand {
+  font-family: var(--font-family-display);
+}
+
 .secure-carolinas-2026-page .presentation-container {
   aspect-ratio: 16 / 9;
   width: 100%;
@@ -68,24 +77,24 @@
 }
 
 .secure-carolinas-2026-page .sc26-type-h1 {
-  font-size: clamp(2rem, 3.4vw, 3.25rem);
+  font-size: clamp(2.75rem, 4.3vw, 4.5rem);
   font-weight: 300;
-  line-height: 1.08;
-  letter-spacing: -0.045em;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
   color: var(--sc26-ink);
 }
 
 .secure-carolinas-2026-page .sc26-type-h2 {
-  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+  font-size: clamp(2rem, 2.8vw, 3rem);
   font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
   color: var(--sc26-ink);
 }
 
 .secure-carolinas-2026-page .sc26-type-p1 {
-  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
-  line-height: 1.45;
+  font-size: clamp(1.25rem, 1.65vw, 1.55rem);
+  line-height: 1.35;
   letter-spacing: -0.01em;
   color: #52525b;
   font-weight: 400;
