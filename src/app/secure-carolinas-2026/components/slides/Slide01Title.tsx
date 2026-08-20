@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 export const Slide01Title: React.FC = () => {
   return (
     <div className="sc26-slide-wrapper justify-center py-4">
-      <div className="max-w-5xl mx-auto w-full flex flex-col justify-center space-y-6 lg:space-y-8 my-auto">
+      <div className="w-full max-w-none flex flex-col justify-center space-y-6 lg:space-y-8 my-auto">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -23,12 +23,12 @@ export const Slide01Title: React.FC = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.08 }}
-          className="space-y-3"
+          className="w-full space-y-3"
         >
-          <h1 className="sc26-type-hero max-w-4xl text-[#18181B]">
+          <h1 className="sc26-type-hero w-full max-w-none text-[#18181B]">
             Is Your Enterprise Ready to Put AI Into Production?
           </h1>
-          <p className="sc26-type-h2 text-[#52525B] font-light max-w-3xl">
+          <p className="sc26-type-h2 w-full max-w-none text-[#52525B] font-light">
             When Agentic AI Becomes an Attack Surface
           </p>
         </motion.div>
