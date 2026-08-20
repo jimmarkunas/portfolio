@@ -14,7 +14,7 @@ export const Slide01Title: React.FC = () => {
           src="/images/logo/ujcg-logo-blue.png"
           alt="Jim Markunas logo"
           aria-hidden="true"
-          className="h-32 w-32 shrink-0"
+          className="h-16 w-16 shrink-0"
         />
       </motion.div>
 
