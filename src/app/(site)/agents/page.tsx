@@ -5,7 +5,7 @@ import { TrackedExternalLink } from "@/components/analytics/TrackedExternalLink"
 import { Container } from "@/components/Container"
 import { EyebrowPill } from "@/components/EyebrowPill"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { agentsContent, freebiesContent, siteCanonicalPaths } from "@/content/site"
+import { agentsContent, siteCanonicalPaths } from "@/content/site"
 import { buildPageMetadata } from "@/lib/seo"
 import { ProductionReadinessCheck } from "./ProductionReadinessCheck"
 
@@ -14,6 +14,12 @@ const agentsAdoptionUrl =
   "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model/issues/new?template=adoption-report.yml&title=I%20used%20Jim%27s%20A.G.E.N.T.S.%20Toolkit%20to%20build..."
 const agentsToolkitUrl =
   "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model/raw/main/Free%20Toolkit%20Download/AGENTS-Enterprise-Model-Template-Kit.zip"
+
+const agentResources = [
+  { fileName: "AGENTS-Enterprise-Model.pdf", title: "A.G.E.N.T.S. Methodology", kind: "PDF" },
+  { fileName: "AGENTS-Enterprise-Model.docx", title: "A.G.E.N.T.S. Methodology (Editable)", kind: "DOCX" },
+  { fileName: "Inter-Font.zip", title: "Typography Pack", kind: "ZIP" },
+] as const
 
 export const metadata: Metadata = buildPageMetadata({
   title: agentsContent.meta.title,
@@ -24,8 +30,6 @@ export const metadata: Metadata = buildPageMetadata({
 })
 
 export default function AgentsPage() {
-  const agentResources = freebiesContent.collections.find((collection) => collection.id === "usaii-agents")
-
   return (
     <main data-gpme-route="agents" data-gpme-deploy-sha={process.env.NEXT_PUBLIC_DEPLOY_SHA} className="min-h-full overflow-x-hidden bg-[#F3F3F3]">
       <Container className="pb-16 pt-8 md:pb-20 md:pt-10 lg:pb-[100px] lg:pt-[42px]">
@@ -152,7 +156,7 @@ export default function AgentsPage() {
             <div className="mt-7 grid gap-7 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-10">
               <ul className="space-y-3">{agentsContent.resources.items.map((item) => <li key={item} className="type-p3 text-[#2A2A2A]">• {item}</li>)}</ul>
               <div className="grid gap-3">
-                {agentResources?.assets.map((asset) => (
+                {agentResources.map((asset) => (
                   <article
                     key={asset.fileName}
                     className="rounded-[10px] bg-white px-4 py-4 outline outline-1 outline-black/5"
