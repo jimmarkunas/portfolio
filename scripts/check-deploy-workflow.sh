@@ -28,37 +28,13 @@ require_line() {
   fi
 }
 
-require_line "concurrency:" "deploy concurrency block present"
-require_line "group: hostinger-production" "deploy concurrency pinned to hostinger-production"
-require_line "cancel-in-progress: true" "deploy concurrency cancels in-progress runs"
+require_line "branches:" "main branch trigger section present"
+require_line "- main" "deploy trigger pinned to main"
 require_line "workflow_dispatch:" "manual deploy trigger available"
-require_line "Validate Hostinger deploy secrets" "hostinger secret validation step present"
-require_line "Install deploy client" "deploy client installation step present"
-require_line "Test Hostinger FTP connection" "FTP connection test step present"
-require_line "Deploy out folder to Hostinger" "hostinger deploy step present"
-require_line "FTP_SERVER:" "FTP server secret is referenced"
-require_line "FTP_PORT:" "FTP port is referenced"
-require_line "FTP_USERNAME:" "FTP username secret is referenced"
-require_line "FTP_PASSWORD:" "FTP password secret is referenced"
-require_line "FTP_TARGET_DIR:" "FTP target dir secret is referenced"
-require_line "FTP_CONNECT_TIMEOUT_SECONDS: \"10\"" "FTP connect timeout is configured"
-require_line "FTP_TRANSFER_TIMEOUT_SECONDS: \"120\"" "FTP transfer timeout is configured"
-require_line "FTP_DEPLOY_ATTEMPTS: \"2\"" "FTP deploy retry count is configured"
-require_line "timeout 60s lftp" "FTP connection test timeout is configured"
-require_line "set net:timeout 10" "FTP connection test timeout is short"
-require_line "set net:max-retries 1" "FTP connection test retry count is minimal"
-require_line "pwd" "FTP connection test performs pwd"
-require_line "ls" "FTP connection test lists the directory"
-require_line "Using deploy target:" "FTP deploy target resolution is present"
-require_line "FTP deploy attempt" "FTP deploy retry loop is present"
-require_line 'timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp \' "FTP transfer timeout wrapper is present"
-require_line "set net:max-retries 2" "FTP retry count is present"
-require_line "set net:reconnect-interval-base 3" "FTP reconnect backoff is present"
-require_line "set net:reconnect-interval-max 10" "FTP reconnect ceiling is present"
-require_line "mirror --reverse --delete --continue --verbose --no-perms ./out/" "FTP mirror verbose output is enabled"
-require_line '"ftp://${FTP_HOST}"' "FTP endpoint is used"
-require_line "set ftp:passive-mode true" "FTP passive mode is configured"
-require_line "FTP_TARGET_DIR secret is required and must point to the Hostinger public_html path." "FTP target dir is required"
+require_line 'DEPLOY_BRANCH="hostinger-static"' "deploy branch pinned to hostinger-static"
+require_line "test -d out" "out directory existence check"
+require_line "test -f out/index.html" "out/index.html existence check"
+require_line 'cp -R "${GITHUB_WORKSPACE}/out/." "${TMP_DIR}/"' "publish copies only static out output"
 
 forbidden=0
 
@@ -71,11 +47,9 @@ forbidden_line() {
   fi
 }
 
-forbidden_line "hostinger-static" "static publish branch flow"
-forbidden_line "check:live-deployment" "live verification step"
-forbidden_line "DEPLOY_BRANCH=" "branch publish deploy variables"
-forbidden_line "sftp://" "SFTP endpoint is disabled"
-forbidden_line "82.25.83.251" "hardcoded fallback FTP server removed"
+forbidden_line "FTP_" "FTP environment variables"
+forbidden_line "lftp" "FTP transfer command"
+forbidden_line "mirror --reverse" "FTP mirror command"
 
 if [ "${missing}" -ne 0 ] || [ "${forbidden}" -ne 0 ]; then
   exit 1
