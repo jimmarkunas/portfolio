@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { agentsContent } from "@/content/site"
+import { agentsContent } from "@/content/site/agents"
 
 type Status = "DEFINED" | "PARTIAL" | "UNCLEAR"
 type View = "intro" | "assessment" | "result"
