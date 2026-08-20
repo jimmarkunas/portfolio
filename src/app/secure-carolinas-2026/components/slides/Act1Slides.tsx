@@ -144,11 +144,15 @@ export const Slide02Copilots: React.FC = () => {
                 <div
                   className={`flex min-h-[150px] min-w-0 flex-1 items-center justify-center rounded-2xl border px-4 text-center transition-all lg:min-h-[180px] lg:px-6 ${
                     step.highlight
-                      ? 'border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
+                      ? 'min-h-[200px] lg:min-h-[260px] border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
                       : 'border-[#E4E4E7] bg-[#F8F8F9]'
                   }`}
                 >
-                  <span className={`text-xl font-semibold leading-tight lg:text-3xl ${step.highlight ? 'text-[#3B71CA]' : 'text-[#18181B]'}`}>
+                  <span
+                    className={`max-w-full break-words text-xl font-semibold leading-tight lg:text-3xl ${
+                      step.highlight ? 'text-[#3B71CA]' : 'text-[#18181B]'
+                    }`}
+                  >
                     {step.label}
                   </span>
                 </div>
@@ -161,8 +165,12 @@ export const Slide02Copilots: React.FC = () => {
         </div>
 
         <div className="sc26-surface-card-accent flex items-center justify-center px-8 py-7 text-center lg:py-8">
-          <p className="text-2xl font-semibold leading-tight text-[#18181B] lg:text-3xl">
-            {secureCarolinas2026Copy.slides.copilots.callout}
+          <p className="flex items-center gap-3 text-2xl font-semibold leading-tight text-[#18181B] lg:text-3xl">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#3B71CA] shrink-0 animate-ping" />
+            <span>
+              <span className="text-[#3B71CA]">{secureCarolinas2026Copy.slides.copilots.calloutLead}</span>{' '}
+              remained the execution boundary.
+            </span>
           </p>
         </div>
       </div>
@@ -174,99 +182,60 @@ export const Slide02Copilots: React.FC = () => {
 // Slide 3 — Agents Move the Execution Boundary
 // ==========================================
 export const Slide03Agents: React.FC = () => {
-  const pipeline = [
-    { name: 'Objective', desc: 'Goal assigned' },
-    { name: 'Agent', desc: 'Autonomous Planner' },
-    { name: 'Decision', desc: 'Strategy chosen' },
-    { name: 'Tools', desc: 'Function Calling' },
-    { name: 'Enterprise Systems', desc: 'DB, ERP, APIs' },
-    { name: 'Direct Action', desc: 'Real-world impact' },
-  ];
-
-  const capabilities = [
-    { label: 'Retrieve Data', icon: <Database className="w-4 h-4 text-[#3B71CA]" />, cat: 'Telemetry' },
-    { label: 'Decide Strategy', icon: <Bot className="w-4 h-4 text-[#3B71CA]" />, cat: 'Planning' },
-    { label: 'Call Tool APIs', icon: <Workflow className="w-4 h-4 text-[#3B71CA]" />, cat: 'Integration' },
-    { label: 'Modify DB Records', icon: <Layers className="w-4 h-4 text-[#3B71CA]" />, cat: 'Persistence' },
-    { label: 'Contact Customers', icon: <Mail className="w-4 h-4 text-[#3B71CA]" />, cat: 'External' },
-    { label: 'Trigger Workflows', icon: <Zap className="w-4 h-4 text-[#3B71CA]" />, cat: 'Automation' },
-    { label: 'Spend Money', icon: <CreditCard className="w-4 h-4 text-[#3B71CA]" />, cat: 'Financial' },
-    { label: 'Continue Unprompted', icon: <CheckCircle2 className="w-4 h-4 text-[#3B71CA]" />, cat: 'Autonomy' },
-  ];
-  const capIcons = capabilities.map((cap) => cap.icon);
-
   return (
     <div className="sc26-slide-wrapper">
       <SlideHeader
         actLabel={secureCarolinas2026Copy.acts.act1}
         title={secureCarolinas2026Copy.slides.agents.title}
         subtitle={secureCarolinas2026Copy.slides.agents.subtitle}
-        extraBadge={secureCarolinas2026Copy.slides.agents.headerBadge}
       />
 
-      <div className="space-y-5 my-auto">
-        {/* Agentic Execution Architecture */}
-        <div className="sc26-surface-card p-6 space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-[#F0F0F2]">
-            <span className="sc26-type-mono-tag text-[#71717A] font-semibold">
-              {secureCarolinas2026Copy.slides.agents.pipelineLabel}
-            </span>
-            <span className="text-[11px] font-mono font-medium text-[#B91C1C] px-2.5 py-0.5 bg-[#B91C1C]/10 border border-[#B91C1C]/20 rounded-full">
-              {secureCarolinas2026Copy.slides.agents.pipelineStatus}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-2.5 items-center">
-            {secureCarolinas2026Copy.slides.agents.pipeline.map((step, idx) => (
-              <div
-                key={idx}
-                className="p-3 bg-[#F8F8F9] border border-[#E4E4E7] rounded-xl flex flex-col justify-center text-center relative hover:border-[#3B71CA]/40 transition-colors"
-              >
-                <span className="text-[10px] font-mono font-bold text-[#3B71CA]">0{idx + 1}</span>
-                <span className="text-xs font-bold text-[#18181B] mt-0.5">{step.name}</span>
-                <span className="text-[10px] text-[#71717A] mt-0.5">{step.desc}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* 8 Autonomous Capabilities */}
-        <div className="space-y-2.5">
-          <div className="sc26-type-mono-tag text-[#71717A] font-semibold">
-            {secureCarolinas2026Copy.slides.agents.capabilitiesLabel}
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-            {secureCarolinas2026Copy.slides.agents.capabilities.map((cap, i) => (
-              <div
-                key={i}
-                className="sc26-surface-card p-3 flex items-center justify-between hover:border-[#3B71CA]/40 transition-colors"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 bg-[#F4F4F5] rounded-lg border border-[#E4E4E7]">
-                    {capIcons[i]}
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-[#18181B]">{cap.label}</div>
-                    <div className="text-[10px] font-mono text-[#71717A]">{cap.cat}</div>
-                  </div>
+      <div className="space-y-8 my-auto">
+        <div className="sc26-surface-card p-8 lg:p-10">
+          <div className="flex items-center justify-between gap-3">
+            {secureCarolinas2026Copy.slides.agents.flow.map((step, index) => (
+              <React.Fragment key={step.label}>
+                <div
+                  className={`flex min-h-[180px] min-w-0 flex-1 items-center justify-center rounded-2xl border px-4 text-center lg:min-h-[220px] lg:px-6 ${
+                    step.highlight
+                      ? 'border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
+                      : 'border-[#E4E4E7] bg-[#F8F8F9]'
+                  }`}
+                >
+                  <span
+                    className={`text-2xl font-semibold tracking-[0.08em] lg:text-4xl ${
+                      step.highlight ? 'text-[#3B71CA]' : 'text-[#18181B]'
+                    }`}
+                  >
+                    {step.label}
+                  </span>
                 </div>
-              </div>
+                {index < secureCarolinas2026Copy.slides.agents.flow.length - 1 && (
+                  <ArrowRight className="h-8 w-8 shrink-0 text-[#A1A1AA] lg:h-10 lg:w-10" aria-hidden="true" />
+                )}
+              </React.Fragment>
             ))}
           </div>
         </div>
 
-        {/* Key Anchor Callout */}
-        <div className="sc26-surface-card-accent p-4 lg:p-5 flex items-center justify-between">
-          <div className="flex items-center gap-3.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#3B71CA] shrink-0" />
-            <p className="text-sm lg:text-base font-semibold text-[#18181B]">
-              The model didn't just become another user.{' '}
-              <span className="text-[#3B71CA]">It became an operator.</span>
-            </p>
+        <div className="sc26-surface-card p-6 lg:p-8">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] font-mono font-bold tracking-[0.22em] text-[#18181B] lg:text-sm">
+            {secureCarolinas2026Copy.slides.agents.capabilities.map((item) => (
+              <span key={item} className="rounded-full border border-[#E4E4E7] bg-white px-4 py-2">
+                {item}
+              </span>
+            ))}
           </div>
-          <span className="hidden md:inline-block text-[11px] font-mono text-[#71717A] px-3 py-1 bg-white border border-[#E4E4E7] rounded-full">
-            {secureCarolinas2026Copy.slides.agents.calloutBadge}
-          </span>
+        </div>
+
+        <div className="sc26-surface-card-accent p-4 lg:p-5 flex items-center justify-center">
+          <p className="flex items-center gap-3 text-sm font-semibold leading-tight text-[#18181B] lg:text-base">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#3B71CA] shrink-0 animate-ping" />
+            <span>
+              {secureCarolinas2026Copy.slides.agents.callout}{' '}
+              <span className="text-[#3B71CA]">It became an operator.</span>
+            </span>
+          </p>
         </div>
       </div>
     </div>
