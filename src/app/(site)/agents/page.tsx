@@ -37,7 +37,7 @@ export default function AgentsPage() {
         <div className="flex flex-col gap-14 md:gap-16 lg:gap-20">
           <div className="flex flex-col gap-10 md:gap-12 lg:gap-[52px]">
             <MotionReveal preset="hero" className="w-full" delay={0.02}>
-              <section className="grid gap-5 border border-green-500 p-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-x-12 xl:gap-x-16">
+              <section className="grid gap-5 p-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-x-12 xl:gap-x-16">
                 <div className="lg:col-start-1 lg:row-start-1">
                   <h1 className="type-h2 text-[#232323]">{agentsContent.hero.title}</h1>
                   <div className="mt-7 flex flex-wrap gap-3">
