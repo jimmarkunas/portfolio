@@ -35,7 +35,8 @@ require_line "workflow_dispatch:" "manual deploy trigger available"
 require_line "Validate Hostinger deploy secrets" "hostinger secret validation step present"
 require_line "Install deploy client" "deploy client installation step present"
 require_line "Deploy out folder to Hostinger" "hostinger deploy step present"
-require_line "FTP_HOST:" "FTP host secret is referenced"
+require_line "FTP_SERVER:" "FTP server secret is referenced"
+require_line "FTP_PORT:" "FTP port is referenced"
 require_line "FTP_USERNAME:" "FTP username secret is referenced"
 require_line "FTP_PASSWORD:" "FTP password secret is referenced"
 require_line "FTP_TARGET_DIR:" "FTP target dir secret is referenced"
@@ -44,12 +45,14 @@ require_line "FTP_TRANSFER_TIMEOUT_SECONDS: \"300\"" "FTP transfer timeout is co
 require_line "FTP_DEPLOY_ATTEMPTS: \"3\"" "FTP deploy retry count is configured"
 require_line "Using deploy target:" "FTP deploy target resolution is present"
 require_line "FTP deploy attempt" "FTP deploy retry loop is present"
-require_line 'timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp -e "' "FTP transfer timeout wrapper is present"
-require_line "set net:max-retries 8;" "FTP retry count is present"
-require_line "set net:reconnect-interval-base 3;" "FTP reconnect backoff is present"
-require_line "set net:reconnect-interval-max 10;" "FTP reconnect ceiling is present"
+require_line 'timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp \' "FTP transfer timeout wrapper is present"
+require_line "set net:max-retries 8" "FTP retry count is present"
+require_line "set net:reconnect-interval-base 3" "FTP reconnect backoff is present"
+require_line "set net:reconnect-interval-max 10" "FTP reconnect ceiling is present"
 require_line "mirror --reverse --delete --continue --no-perms ./out/" "FTP mirror deploy command present"
-require_line 'cls -la ${target}deploy-marker.txt;' "FTP post-deploy marker inspection is present"
+require_line "set sftp:auto-confirm yes" "SFTP host key confirmation is configured"
+require_line '"sftp://${FTP_HOST}"' "SFTP endpoint is used"
+require_line "FTP_TARGET_DIR secret is required and must point to the Hostinger public_html path." "FTP target dir is required"
 
 forbidden=0
 
@@ -65,6 +68,8 @@ forbidden_line() {
 forbidden_line "hostinger-static" "static publish branch flow"
 forbidden_line "check:live-deployment" "live verification step"
 forbidden_line "DEPLOY_BRANCH=" "branch publish deploy variables"
+forbidden_line "set ftp:ssl-force true;" "forced FTPS is disabled"
+forbidden_line "82.25.83.251" "hardcoded fallback FTP server removed"
 
 if [ "${missing}" -ne 0 ] || [ "${forbidden}" -ne 0 ]; then
   exit 1
