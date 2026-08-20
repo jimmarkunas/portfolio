@@ -39,7 +39,7 @@ export default function AgentsPage() {
                       label="Download the free toolkit"
                       location="agents_hero"
                       download="AGENTS-Enterprise-Model-Template-Kit.zip"
-                      className="button-primary"
+                      className="button-primary !text-white hover:!text-white"
                       ariaLabel="Download the free toolkit"
                     >
                       {agentsContent.hero.primaryCta}
@@ -113,7 +113,7 @@ export default function AgentsPage() {
                   label="Download the free toolkit"
                   location="agents_github_block"
                   download="AGENTS-Enterprise-Model-Template-Kit.zip"
-                  className="button-primary"
+                  className="button-primary !text-white hover:!text-white"
                   ariaLabel="Download the free toolkit"
                 >
                   {agentsContent.resources.githubDownloadCta}
