@@ -125,7 +125,7 @@ jobs:
               set net:persist-retries 0
               mirror --reverse --delete --continue --no-perms ./out/ "${target}"
               bye
-            EOF
+          EOF
             then
               echo "FTP deploy succeeded on attempt ${attempt}"
               break
