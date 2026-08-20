@@ -56,27 +56,27 @@ jobs:
 
       - name: Validate Hostinger deploy secrets
         env:
-          HOSTINGER_HOST: ${{ secrets.HOSTINGER_HOST }}
-          HOSTINGER_PORT: ${{ secrets.HOSTINGER_PORT }}
-          HOSTINGER_USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
-          HOSTINGER_PASSWORD: ${{ secrets.HOSTINGER_PASSWORD }}
-          HOSTINGER_TARGET_DIR: ${{ secrets.HOSTINGER_TARGET_DIR }}
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
         run: |
           set -euo pipefail
 
           missing=0
-          for name in HOSTINGER_HOST HOSTINGER_USERNAME HOSTINGER_PASSWORD HOSTINGER_TARGET_DIR; do
+          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_TARGET_DIR; do
             if [[ -z "${!name:-}" ]]; then
               echo "Missing required GitHub secret: ${name}" >&2
               missing=1
             fi
           done
 
-          if [[ -z "${HOSTINGER_PORT:-}" ]]; then
-            echo "HOSTINGER_PORT not set. Defaulting to 65002."
-            echo "HOSTINGER_PORT=65002" >> "$GITHUB_ENV"
+          if [[ -z "${FTP_PORT:-}" ]]; then
+            echo "FTP_PORT not set. Defaulting to 65002."
+            echo "FTP_PORT=65002" >> "$GITHUB_ENV"
           else
-            echo "HOSTINGER_PORT=${HOSTINGER_PORT}" >> "$GITHUB_ENV"
+            echo "FTP_PORT=${FTP_PORT}" >> "$GITHUB_ENV"
           fi
 
           if [[ "${missing}" -ne 0 ]]; then
@@ -90,17 +90,17 @@ jobs:
 
       - name: Deploy out folder to Hostinger
         env:
-          HOSTINGER_HOST: ${{ secrets.HOSTINGER_HOST }}
-          HOSTINGER_USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
-          HOSTINGER_PASSWORD: ${{ secrets.HOSTINGER_PASSWORD }}
-          HOSTINGER_TARGET_DIR: ${{ secrets.HOSTINGER_TARGET_DIR }}
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
         run: |
           set -euo pipefail
 
-          lftp -u "${HOSTINGER_USERNAME}","${HOSTINGER_PASSWORD}" -p "${HOSTINGER_PORT}" "sftp://${HOSTINGER_HOST}" <<EOF
+          lftp -u "${FTP_USERNAME}","${FTP_PASSWORD}" -p "${FTP_PORT}" "sftp://${FTP_SERVER}" <<EOF
           set sftp:auto-confirm yes
           set net:max-retries 2
           set net:timeout 30
-          mirror --reverse --delete --verbose --parallel=4 out/ "${HOSTINGER_TARGET_DIR}"
+          mirror --reverse --delete --verbose --parallel=4 out/ "${FTP_TARGET_DIR}"
           bye
           EOF
