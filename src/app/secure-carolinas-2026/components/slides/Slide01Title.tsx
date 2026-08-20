@@ -8,7 +8,7 @@ export const Slide01Title: React.FC = () => {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35 }}
-        className="absolute left-14 top-8"
+        className="absolute left-5 top-5"
       >
         <img
           src="/images/logo/ujcg-logo-blue.png"
