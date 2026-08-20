@@ -195,3 +195,78 @@ export const Slide15ProductionDecision: React.FC = () => {
     </div>
   );
 };
+
+// ==========================================
+// Slide 16 — Closing CTA
+// ==========================================
+export const Slide16ClosingCta: React.FC = () => {
+  const actions = ["USE IT", "FORK IT", "CHALLENGE IT", "REPORT ADOPTION"];
+
+  return (
+    <div className="sc26-slide-wrapper justify-center">
+      <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1.55fr)_minmax(340px,0.95fr)] lg:gap-12">
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <span className="sc26-type-mono-tag text-[#71717A] font-semibold">
+              SECURE CAROLINAS 2026 · A.G.E.N.T.S. CLOSING CTA
+            </span>
+          </div>
+
+          <div className="space-y-4">
+            <h1 className="sc26-type-hero max-w-4xl text-[#18181B]">
+              Put A.G.E.N.T.S. to Work.
+            </h1>
+            <p className="sc26-type-h2 max-w-3xl text-[#52525B]">
+              Free enterprise AI operating model + production readiness check.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2.5">
+            {actions.map((action) => (
+              <span
+                key={action}
+                className="rounded-full border border-[#3B71CA]/20 bg-[#EFF6FF] px-3.5 py-1.5 text-[11px] font-mono font-bold tracking-[0.16em] text-[#3B71CA]"
+              >
+                {action}
+              </span>
+            ))}
+          </div>
+
+          <div className="space-y-2 pt-2">
+            <p className="sc26-type-p1 text-[#52525B]">
+              Scan to use it, fork it, challenge it, or report adoption.
+            </p>
+            <a
+              href="https://greatestpmever.com/agents"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-[#E4E4E7] bg-white px-4 py-2 text-sm font-medium text-[#18181B] shadow-sm"
+            >
+              <span className="sc26-type-mono-tag font-semibold tracking-[0.12em] text-[#71717A] normal-case">
+                greatestpmever.com/agents
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div className="flex justify-center lg:justify-end">
+          <div className="w-full max-w-[420px] rounded-[24px] border border-[#E4E4E7] bg-white p-5 shadow-[0_16px_40px_rgba(0,0,0,0.08)] lg:p-6">
+            <div className="mb-4 text-center text-[11px] font-mono font-bold tracking-[0.18em] text-[#3B71CA]">
+              SCAN FOR THE FREE SYSTEM
+            </div>
+            <div className="rounded-[20px] border border-[#F0F0F2] bg-white p-4">
+              <img
+                src="/qr-codes/secure-carolinas-2026-agents.png"
+                alt="QR code linking to the A.G.E.N.T.S. toolkit"
+                className="aspect-square w-full select-none object-contain"
+              />
+            </div>
+            <p className="mt-4 text-center text-[11px] font-mono font-semibold tracking-[0.14em] text-[#71717A]">
+              greatestpmever.com/agents
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

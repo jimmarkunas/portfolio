@@ -27,6 +27,7 @@ import {
 import {
   Slide14DefinedPartialUnclear,
   Slide15ProductionDecision,
+  Slide16ClosingCta,
 } from "../components/slides/Act4Slides";
 import { buildSecureCarolinas2026SlideRegistry } from "../secureCarolinas2026SlideRegistry";
 
@@ -51,6 +52,7 @@ function renderSlide(key: SecureCarolinas2026SlideKey): ReactNode {
     case "decisionBoard": return <Slide13DecisionBoard />;
     case "readinessStatus": return <Slide14DefinedPartialUnclear />;
     case "productionDecision": return <Slide15ProductionDecision />;
+    case "closingCta": return <Slide16ClosingCta />;
     default: return assertNever(key);
   }
 }

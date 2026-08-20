@@ -16,6 +16,7 @@ export const secureCarolinas2026SlideOrder = [
   "decisionBoard",
   "readinessStatus",
   "productionDecision",
+  "closingCta",
 ] as const;
 
 export type SecureCarolinas2026SlideKey = (typeof secureCarolinas2026SlideOrder)[number];

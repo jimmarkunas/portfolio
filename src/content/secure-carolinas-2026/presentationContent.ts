@@ -41,5 +41,12 @@ export const secureCarolinas2026Content: SecureCarolinas2026Content = {
     decisionBoard: slide("decision-board", "Live Decision Board: Customer Order Exception Agent", "Applying the 6 pillars transforms ambiguous autonomy into bounded operations.", "ACT_III", ACT_III),
     readinessStatus: slide("readiness-status", "Defined. Partial. Unclear.", "Every A.G.E.N.T.S. domain receives an unambiguous readiness status.", "ACT_IV", ACT_IV),
     productionDecision: slide("production-decision", "The Production Decision", "If any A.G.E.N.T.S. control is unclear, the agent is not ready.", "ACT_IV", ACT_IV),
+    closingCta: slide(
+      "closing-cta",
+      "Put A.G.E.N.T.S. to Work.",
+      "Free enterprise AI operating model + production readiness check.",
+      "ACT_IV",
+      ACT_IV,
+    ),
   },
 };
