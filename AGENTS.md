@@ -19,12 +19,13 @@
 - Preserve metrics and first-person ownership language.
 - Avoid resume-style rewrites.
 
-## Git Safety
-- Never delete uncommitted changes.
-- Before destructive git/worktree actions, create all 3 recovery layers:
-  1) `git stash push -u -m "pre-destructive-step-1"`
-  2) `git diff > /tmp/pre-destructive-step-2.patch`
-  3) `git branch backup/pre-destructive-step-3-<timestamp>`
+## Git Safety — MAIN ONLY
+- Work only on `main`. Never create, switch to, commit on, or push a feature/backup/recovery branch.
+- Never run `git switch -c`, `git checkout -b`, `git branch <name>`, `gh pr create`, or any equivalent branch-creation workflow.
+- Never force-push or rewrite `main`.
+- Restore points are annotated Git tags created automatically after every commit. Do not use backup branches.
+- Never delete uncommitted changes. If the working tree is not clean, stop and report it.
+- Before any destructive Git action, STOP. Destructive Git actions are not authorized for Codex in this repository.
 
 ## Efficiency Guardrails
 - Fix one root cause at a time; avoid speculative stacked changes.
@@ -100,3 +101,35 @@ Approved FOH responsive behavior is locked at tag:
 foh-responsive-stasis-2026-07-18
 
 Do not modify that behavior without explicit human approval.
+
+## CI/CD ABSOLUTE LOCK — HUMAN-ONLY
+
+**Mandatory first read before any Git, deployment, build-pipeline, or Hostinger work:** `docs/DEPLOYMENT_INCIDENT_2026-08-20.md`.
+
+Codex and every other AI coding agent are permanently forbidden from modifying the production deployment architecture. This prohibition applies even if an AI believes a pipeline change would fix an incident.
+
+AI agents MAY:
+- edit normal application/content files requested by the user;
+- run read-only Git/CI diagnostics;
+- create normal commits on `main`;
+- push `main`;
+- read GitHub Actions logs.
+
+AI agents MUST NEVER:
+- edit, replace, delete, rename, regenerate, or bypass `.github/workflows/**`;
+- edit `next.config.mjs`;
+- edit `scripts/prepush.sh`, `scripts/check-deploy-workflow.sh`, `scripts/check-deploy-artifacts.mjs`, or `scripts/check-live-deployment.mjs`;
+- change the deployment-related scripts in `package.json`;
+- directly push to `hostinger-static`;
+- use FTP, FTPS, SFTP, rsync, `lftp`, `mirror --delete`, or any direct file transport to Hostinger/public_html;
+- change Hostinger Git repository, branch, install path, Auto Deployment, or deployment settings;
+- delete or rewrite `public_html`;
+- create or push new Git branches;
+- force-push, reset, rebase, or rewrite `main`;
+- use `--no-verify` to bypass Git hooks.
+
+The production contract is fixed:
+
+`main -> GitHub Actions -> static out/ -> hostinger-static -> human clicks Hostinger Deploy -> human clears cache`
+
+If deployment fails, preserve this architecture and diagnose the failing layer. Do not "fix" deployment by redesigning the pipeline.

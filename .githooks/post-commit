@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+branch="$(git symbolic-ref --quiet --short HEAD || true)"
+[[ "$branch" == "main" ]] || exit 0
+sha="$(git rev-parse --short=8 HEAD)"
+stamp="$(date +%Y%m%d-%H%M%S)"
+tag="restore/${stamp}-${sha}"
+if ! git show-ref --tags --verify --quiet "refs/tags/$tag"; then
+  git tag -a "$tag" -m "Automatic restore point for ${sha}"
+  echo "Created restore point: $tag"
+fi

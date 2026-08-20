@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ZERO="0000000000000000000000000000000000000000"
+
+is_protected() {
+  case "$1" in
+    .github/workflows/*|next.config.mjs|scripts/prepush.sh|scripts/check-deploy-workflow.sh|scripts/check-deploy-artifacts.mjs|scripts/check-live-deployment.mjs|AGENTS.md|docs/DEPLOYMENT_INCIDENT_2026-08-20.md|.githooks/*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [[ "$remote_ref" == refs/heads/* ]]; then
+    if [[ "$remote_ref" != "refs/heads/main" ]]; then
+      echo "BLOCKED: pushing branches other than main is prohibited: $remote_ref" >&2
+      exit 1
+    fi
+    if [[ "$local_sha" == "$ZERO" ]]; then
+      echo "BLOCKED: deleting main is prohibited." >&2
+      exit 1
+    fi
+    if [[ "$remote_sha" != "$ZERO" ]] && ! git merge-base --is-ancestor "$remote_sha" "$local_sha"; then
+      echo "BLOCKED: non-fast-forward/force push to main is prohibited." >&2
+      exit 1
+    fi
+
+    bootstrap=0
+    if [[ "$remote_sha" == "$ZERO" ]] || ! git cat-file -e "${remote_sha}:docs/DEPLOYMENT_INCIDENT_2026-08-20.md" 2>/dev/null; then
+      bootstrap=1
+    fi
+
+    if [[ "$remote_sha" != "$ZERO" && "$bootstrap" -eq 0 ]]; then
+      changed="$(git diff --name-only "$remote_sha" "$local_sha")"
+      while IFS= read -r file; do
+        [[ -z "$file" ]] && continue
+        if is_protected "$file"; then
+          echo "BLOCKED: push changes protected deployment/guardrail file: $file" >&2
+          exit 1
+        fi
+      done <<< "$changed"
+
+      if grep -qx 'package.json' <<< "$changed"; then
+        old="$(mktemp)"; new="$(mktemp)"
+        trap 'rm -f "$old" "$new"' EXIT
+        git show "${remote_sha}:package.json" > "$old"
+        git show "${local_sha}:package.json" > "$new"
+        node - "$old" "$new" <<'NODE'
+const fs = require('fs');
+const [oldPath, newPath] = process.argv.slice(2);
+const a = JSON.parse(fs.readFileSync(oldPath, 'utf8'));
+const b = JSON.parse(fs.readFileSync(newPath, 'utf8'));
+const keys = ['build','verify:predeploy','check:deploy-workflow','check:deploy-artifacts','check:live-deployment','prepush'];
+for (const k of keys) {
+  if ((a.scripts?.[k] ?? null) !== (b.scripts?.[k] ?? null)) {
+    console.error(`BLOCKED: push changes package.json deployment script: ${k}`);
+    process.exit(1);
+  }
+}
+NODE
+      fi
+    fi
+  fi
+done

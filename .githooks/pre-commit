@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+branch="$(git symbolic-ref --quiet --short HEAD || true)"
+if [[ "$branch" != "main" ]]; then
+  echo "BLOCKED: commits are allowed only on main. Current branch: ${branch:-DETACHED}" >&2
+  exit 1
+fi
+
+bootstrap=0
+if ! git cat-file -e HEAD:docs/DEPLOYMENT_INCIDENT_2026-08-20.md 2>/dev/null; then
+  bootstrap=1
+fi
+
+staged="$(git diff --cached --name-only --diff-filter=ACMR)"
+
+is_protected() {
+  case "$1" in
+    .github/workflows/*|next.config.mjs|scripts/prepush.sh|scripts/check-deploy-workflow.sh|scripts/check-deploy-artifacts.mjs|scripts/check-live-deployment.mjs|AGENTS.md|docs/DEPLOYMENT_INCIDENT_2026-08-20.md|.githooks/*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+if [[ "$bootstrap" -eq 0 ]]; then
+  while IFS= read -r file; do
+    [[ -z "$file" ]] && continue
+    if is_protected "$file"; then
+      echo "BLOCKED: protected deployment/guardrail file is staged: $file" >&2
+      exit 1
+    fi
+  done <<< "$staged"
+fi
+
+if grep -qx 'package.json' <<< "$staged" && git cat-file -e HEAD:package.json 2>/dev/null; then
+  old="$(mktemp)"; new="$(mktemp)"
+  trap 'rm -f "$old" "$new"' EXIT
+  git show HEAD:package.json > "$old"
+  git show :package.json > "$new"
+  node - "$old" "$new" <<'NODE'
+const fs = require('fs');
+const [oldPath, newPath] = process.argv.slice(2);
+const a = JSON.parse(fs.readFileSync(oldPath, 'utf8'));
+const b = JSON.parse(fs.readFileSync(newPath, 'utf8'));
+const keys = ['build','verify:predeploy','check:deploy-workflow','check:deploy-artifacts','check:live-deployment','prepush'];
+for (const k of keys) {
+  const av = a.scripts?.[k] ?? null;
+  const bv = b.scripts?.[k] ?? null;
+  if (av !== bv) {
+    console.error(`BLOCKED: package.json deployment script changed: ${k}`);
+    process.exit(1);
+  }
+}
+NODE
+fi
