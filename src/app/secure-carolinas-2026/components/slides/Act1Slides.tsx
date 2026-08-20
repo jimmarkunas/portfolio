@@ -126,18 +126,7 @@ export const Slide01Title: React.FC = () => {
 // Slide 2 — Copilots Were Mostly an Information Problem
 // ==========================================
 export const Slide02Copilots: React.FC = () => {
-  const copilotSteps: readonly {
-    label: string;
-    sub: string;
-    highlight: boolean;
-  }[] = secureCarolinas2026Copy.slides.copilots.steps;
-  const steps = [
-    { label: 'User', sub: 'Initiates Prompt', icon: <User className="w-4 h-4 text-[#3F3F46]" /> },
-    { label: 'AI Model', sub: 'Generates Draft', icon: <Bot className="w-4 h-4 text-[#3B71CA]" /> },
-    { label: 'Recommendation', sub: 'Information Output', icon: <FileText className="w-4 h-4 text-[#71717A]" /> },
-    { label: 'Human', sub: 'Execution Boundary', icon: <User className="w-4 h-4 text-[#18181B]" />, highlight: true },
-    { label: 'Action', sub: 'Manual Change', icon: <CheckCircle2 className="w-4 h-4 text-[#15803D]" /> },
-  ];
+  const copilotSteps = secureCarolinas2026Copy.slides.copilots.steps;
 
   return (
     <div className="sc26-slide-wrapper">
@@ -145,87 +134,36 @@ export const Slide02Copilots: React.FC = () => {
         actLabel={secureCarolinas2026Copy.acts.act1}
         title={secureCarolinas2026Copy.slides.copilots.title}
         subtitle={secureCarolinas2026Copy.slides.copilots.subtitle}
-        extraBadge={secureCarolinas2026Copy.slides.copilots.headerBadge}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
-        {/* Left Column: Visual Progression Flow */}
-        <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
-          <div className="sc26-surface-card p-6 space-y-5">
-          <div className="flex items-center justify-between pb-2 border-b border-[#F0F0F2]">
-            <span className="sc26-type-mono-tag text-[#71717A] font-semibold">
-              {secureCarolinas2026Copy.slides.copilots.pipelineLabel}
-            </span>
-              <span className="text-[11px] font-mono text-[#15803D] bg-[#15803D]/10 px-2 py-0.5 rounded">
-                {secureCarolinas2026Copy.slides.copilots.pipelineStatus}
-              </span>
-            </div>
-
-            {/* Stepped Node Graph */}
-            <div className="grid grid-cols-5 gap-2 items-center">
-              {copilotSteps.map((s, i) => (
+      <div className="my-auto flex flex-col gap-8">
+        <div className="sc26-surface-card px-8 py-10 lg:px-10 lg:py-12">
+          <div className="flex items-center justify-between gap-3 lg:gap-5">
+            {copilotSteps.map((step, index) => (
+              <React.Fragment key={step.label}>
                 <div
-                  key={i}
-                  className={`p-3 rounded-xl border flex flex-col items-center text-center space-y-1.5 transition-all ${
-                    s.highlight
-                      ? 'bg-[#EFF6FF] border-[#3B71CA] shadow-sm ring-2 ring-[#3B71CA]/20'
-                      : 'bg-[#F8F8F9] border-[#E4E4E7]'
+                  className={`flex min-h-[150px] min-w-0 flex-1 items-center justify-center rounded-2xl border px-4 text-center transition-all lg:min-h-[180px] lg:px-6 ${
+                    step.highlight
+                      ? 'border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
+                      : 'border-[#E4E4E7] bg-[#F8F8F9]'
                   }`}
                 >
-                  <div className="p-1.5 bg-white rounded-lg border border-[#E4E4E7] shadow-sm">
-                    {steps[i].icon}
-                  </div>
-                  <div className="text-[11px] font-bold text-[#18181B] truncate w-full">
-                    {s.label}
-                  </div>
-                  <div className="text-[9px] font-mono text-[#71717A] truncate w-full">
-                    {s.sub}
-                  </div>
+                  <span className={`text-xl font-semibold leading-tight lg:text-3xl ${step.highlight ? 'text-[#3B71CA]' : 'text-[#18181B]'}`}>
+                    {step.label}
+                  </span>
                 </div>
-              ))}
-            </div>
-
-            <div className="p-3.5 sc26-surface-panel text-xs text-[#52525B] leading-relaxed">
-              {secureCarolinas2026Copy.slides.copilots.panelText}
-            </div>
-          </div>
-
-          {/* Anchor Callout */}
-          <div className="sc26-surface-card-accent p-4 lg:p-5 flex items-center gap-3.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#3B71CA] shrink-0 animate-ping" />
-            <p className="text-sm lg:text-base font-semibold text-[#18181B]">
-              <span className="text-[#3B71CA]">{secureCarolinas2026Copy.slides.copilots.calloutLead}</span> remained the execution boundary.
-            </p>
+                {index < copilotSteps.length - 1 && (
+                  <ArrowRight className="h-7 w-7 shrink-0 text-[#A1A1AA] lg:h-9 lg:w-9" aria-hidden="true" />
+                )}
+              </React.Fragment>
+            ))}
           </div>
         </div>
 
-        {/* Right Column: Workload Examples */}
-        <div className="lg:col-span-6 space-y-2.5">
-          <div className="sc26-type-mono-tag text-[#71717A] font-semibold mb-1">
-            {secureCarolinas2026Copy.slides.copilots.examplesLabel}
-          </div>
-          {secureCarolinas2026Copy.slides.copilots.examples.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.05 * index }}
-              className="sc26-surface-card p-3.5 flex items-center justify-between"
-            >
-              <div className="flex items-center gap-3">
-                <span className="w-6 h-6 rounded-md bg-[#F4F4F5] border border-[#E4E4E7] text-[11px] font-mono text-[#3F3F46] flex items-center justify-center font-bold">
-                  {item.num}
-                </span>
-                <div>
-                  <div className="text-xs lg:text-sm font-semibold text-[#18181B]">{item.title}</div>
-                  <div className="text-[11px] text-[#71717A]">{item.tag}</div>
-                </div>
-              </div>
-              <span className="text-[10px] font-mono font-medium text-[#71717A] px-2 py-0.5 bg-[#F4F4F5] border border-[#E4E4E7] rounded">
-                {secureCarolinas2026Copy.slides.copilots.exampleBadge}
-              </span>
-            </motion.div>
-          ))}
+        <div className="sc26-surface-card-accent flex items-center justify-center px-8 py-7 text-center lg:py-8">
+          <p className="text-2xl font-semibold leading-tight text-[#18181B] lg:text-3xl">
+            {secureCarolinas2026Copy.slides.copilots.callout}
+          </p>
         </div>
       </div>
     </div>
