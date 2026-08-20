@@ -22,14 +22,16 @@ export const Slide01Title: React.FC = () => {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.08 }}
-        className="flex h-full w-full flex-col justify-center space-y-3 text-center"
+        className="absolute inset-0 flex items-center justify-center text-center"
       >
-        <h1 className="sc26-type-hero w-full max-w-none text-center text-[#18181B]">
-          Is Your Enterprise Ready to Put AI Into Production?
-        </h1>
-        <p className="sc26-type-h2 w-full max-w-none text-center font-light text-[#52525B]">
-          When Agentic AI Becomes an Attack Surface
-        </p>
+        <div className="w-full space-y-3">
+          <h1 className="sc26-type-hero w-full max-w-none text-center text-[#18181B]">
+            Is Your Enterprise Ready to Put AI Into Production?
+          </h1>
+          <p className="sc26-type-h2 w-full max-w-none text-center font-light text-[#52525B]">
+            When Agentic AI Becomes an Attack Surface
+          </p>
+        </div>
       </motion.div>
     </div>
   );
