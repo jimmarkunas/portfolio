@@ -8,13 +8,13 @@ export const Slide01Title: React.FC = () => {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35 }}
-        className="absolute left-5 top-5"
+        className="absolute left-5 top-5 h-[6.667rem] w-[6.667rem] overflow-hidden"
       >
         <img
           src="/images/logo/ujcg-logo-blue.png"
           alt="Jim Markunas logo"
           aria-hidden="true"
-          className="h-32 w-32 shrink-0"
+          className="h-32 w-32 max-w-none shrink-0"
         />
       </motion.div>
 
