@@ -5,8 +5,8 @@ import type {
   SecureCarolinas2026SlideKey,
 } from "@/content/secure-carolinas-2026";
 
+import { Slide01Title } from "../components/slides/Slide01Title";
 import {
-  Slide01Title,
   Slide02Copilots,
   Slide03Agents,
   Slide04AttackSurface,
