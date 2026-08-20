@@ -23,9 +23,9 @@ export const metadata: Metadata = buildPageMetadata({
   useDefaultImage: false,
 })
 
-const agentResources = freebiesContent.collections.find((collection) => collection.id === "usaii-agents")
-
 export default function AgentsPage() {
+  const agentResources = freebiesContent.collections.find((collection) => collection.id === "usaii-agents")
+
   return (
     <main data-gpme-route="agents" data-gpme-deploy-sha={process.env.NEXT_PUBLIC_DEPLOY_SHA} className="min-h-full overflow-x-hidden bg-[#F3F3F3]">
       <Container className="pb-16 pt-8 md:pb-20 md:pt-10 lg:pb-[100px] lg:pt-[42px]">
@@ -151,12 +151,15 @@ export default function AgentsPage() {
             </h3>
             <div className="mt-7 grid gap-7 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-10">
               <ul className="space-y-3">{agentsContent.resources.items.map((item) => <li key={item} className="type-p3 text-[#2A2A2A]">• {item}</li>)}</ul>
-              <div className="space-y-3">
+              <div className="grid gap-3">
                 {agentResources?.assets.map((asset) => (
-                  <li key={asset.href} className="list-none rounded-[10px] bg-white px-4 py-4 outline outline-1 outline-black/5">
+                  <article
+                    key={asset.fileName}
+                    className="rounded-[10px] bg-white px-4 py-4 outline outline-1 outline-black/5"
+                  >
                     <h3 className="type-p2 text-[#2A2A2A]">{asset.title}</h3>
                     <p className="type-p4 mt-1 text-[#4B5154]">{asset.kind}</p>
-                  </li>
+                  </article>
                 ))}
               </div>
             </div>
