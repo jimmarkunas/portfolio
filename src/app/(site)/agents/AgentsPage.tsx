@@ -10,8 +10,6 @@ import { ProductionReadinessCheck } from "./ProductionReadinessCheck"
 const agentsRepoUrl = "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model"
 const agentsAdoptionUrl =
   "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model/issues/new?template=adoption-report.yml&title=I%20used%20Jim%27s%20A.G.E.N.T.S.%20Toolkit%20to%20build..."
-const agentsToolkitUrl =
-  "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model/raw/main/Free%20Toolkit%20Download/AGENTS-Enterprise-Model-Template-Kit.zip"
 
 const agentResources = [
   { fileName: "AGENTS-Enterprise-Model.pdf", title: "A.G.E.N.T.S. Methodology", kind: "PDF" },
@@ -42,10 +40,11 @@ export function AgentsPage() {
                 <div className="order-2">
                   <div className="mt-7 flex flex-wrap gap-3">
                     <TrackedExternalLink
-                      href={agentsToolkitUrl}
+                      href={agentsRepoUrl}
                       label="Download the free toolkit"
                       location="agents_hero"
-                      download="AGENTS-Enterprise-Model-Template-Kit.zip"
+                      target="_blank"
+                      rel="noreferrer"
                       className="button-primary !text-white hover:!text-white"
                       ariaLabel="Download the free toolkit"
                     >
@@ -116,10 +115,11 @@ export function AgentsPage() {
               <p className="type-p3 mt-3 text-[#3F4548]">{agentsContent.resources.githubBody}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <TrackedExternalLink
-                  href={agentsToolkitUrl}
+                  href={agentsRepoUrl}
                   label="Download the free toolkit"
                   location="agents_github_block"
-                  download="AGENTS-Enterprise-Model-Template-Kit.zip"
+                  target="_blank"
+                  rel="noreferrer"
                   className="button-primary !text-white hover:!text-white"
                   ariaLabel="Download the free toolkit"
                 >
