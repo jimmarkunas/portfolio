@@ -50,8 +50,8 @@ require_line "set net:max-retries 8" "FTP retry count is present"
 require_line "set net:reconnect-interval-base 3" "FTP reconnect backoff is present"
 require_line "set net:reconnect-interval-max 10" "FTP reconnect ceiling is present"
 require_line "mirror --reverse --delete --continue --no-perms ./out/" "FTP mirror deploy command present"
-require_line "set sftp:auto-confirm yes" "SFTP host key confirmation is configured"
-require_line '"sftp://${FTP_HOST}"' "SFTP endpoint is used"
+require_line '"ftp://${FTP_HOST}"' "FTP endpoint is used"
+require_line "set ftp:passive-mode true" "FTP passive mode is configured"
 require_line "FTP_TARGET_DIR secret is required and must point to the Hostinger public_html path." "FTP target dir is required"
 
 forbidden=0
@@ -68,7 +68,7 @@ forbidden_line() {
 forbidden_line "hostinger-static" "static publish branch flow"
 forbidden_line "check:live-deployment" "live verification step"
 forbidden_line "DEPLOY_BRANCH=" "branch publish deploy variables"
-forbidden_line "set ftp:ssl-force true;" "forced FTPS is disabled"
+forbidden_line "sftp://" "SFTP endpoint is disabled"
 forbidden_line "82.25.83.251" "hardcoded fallback FTP server removed"
 
 if [ "${missing}" -ne 0 ] || [ "${forbidden}" -ne 0 ]; then

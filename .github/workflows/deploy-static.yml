@@ -57,7 +57,7 @@ jobs:
       - name: Validate Hostinger deploy secrets
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_PORT: ${{ secrets.FTP_PORT != '' && secrets.FTP_PORT || '65002' }}
+          FTP_PORT: ${{ secrets.FTP_PORT != '' && secrets.FTP_PORT || '21' }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
@@ -84,7 +84,7 @@ jobs:
       - name: Deploy out folder to Hostinger
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_PORT: ${{ secrets.FTP_PORT != '' && secrets.FTP_PORT || '65002' }}
+          FTP_PORT: ${{ secrets.FTP_PORT != '' && secrets.FTP_PORT || '21' }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
@@ -115,14 +115,14 @@ jobs:
             if timeout "${FTP_TRANSFER_TIMEOUT_SECONDS}s" lftp \
               -u "${FTP_USERNAME},${FTP_PASSWORD}" \
               -p "${FTP_PORT}" \
-              "sftp://${FTP_HOST}" <<EOF
+              "ftp://${FTP_HOST}" <<EOF
               set cmd:fail-exit true
-              set sftp:auto-confirm yes
-              set net:timeout 30
+              set net:timeout ${FTP_CONNECT_TIMEOUT_SECONDS}
               set net:max-retries 8
               set net:reconnect-interval-base 3
               set net:reconnect-interval-max 10
               set net:persist-retries 0
+              set ftp:passive-mode true
               mirror --reverse --delete --continue --no-perms ./out/ "${target}"
               bye
           EOF
