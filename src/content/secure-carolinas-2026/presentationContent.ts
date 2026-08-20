@@ -84,10 +84,9 @@ export const secureCarolinas2026Copy = {
       subtitle: "Autonomous execution shifts the model from advisor to operator.",
       flow: [
         { label: "GOAL", highlight: false },
-        { label: "AGENT", highlight: true },
         { label: "TOOL", highlight: false },
         { label: "SYSTEM", highlight: false },
-        { label: "Agent", highlight: false },
+        { label: "AGENT", highlight: true },
         { label: "ACTION", highlight: false },
       ],
       capabilitiesLabel: "READ · WRITE · SEND · SPEND",

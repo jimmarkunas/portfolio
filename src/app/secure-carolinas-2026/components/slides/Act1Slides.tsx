@@ -192,18 +192,18 @@ export const Slide03Agents: React.FC = () => {
 
       <div className="space-y-8 my-auto">
         <div className="sc26-surface-card p-8 lg:p-10">
-          <div className="flex items-center justify-between gap-3">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3 lg:gap-4">
             {secureCarolinas2026Copy.slides.agents.flow.map((step, index) => (
               <React.Fragment key={step.label}>
                 <div
-                  className={`flex min-h-[180px] min-w-0 flex-1 items-center justify-center rounded-2xl border px-4 text-center lg:min-h-[220px] lg:px-6 ${
+                  className={`flex min-h-[180px] min-w-0 items-center justify-center rounded-2xl border px-3 text-center lg:min-h-[220px] lg:px-5 ${
                     step.highlight
                       ? 'border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
                       : 'border-[#E4E4E7] bg-[#F8F8F9]'
                   }`}
                 >
                   <span
-                    className={`text-2xl font-semibold tracking-[0.08em] lg:text-4xl ${
+                    className={`max-w-full break-words text-[1.9rem] font-semibold tracking-[0.05em] leading-none lg:text-[3.1rem] ${
                       step.highlight ? 'text-[#3B71CA]' : 'text-[#18181B]'
                     }`}
                   >
@@ -211,7 +211,7 @@ export const Slide03Agents: React.FC = () => {
                   </span>
                 </div>
                 {index < secureCarolinas2026Copy.slides.agents.flow.length - 1 && (
-                  <ArrowRight className="h-8 w-8 shrink-0 text-[#A1A1AA] lg:h-10 lg:w-10" aria-hidden="true" />
+                  <ArrowRight className="h-7 w-7 shrink-0 text-[#A1A1AA] lg:h-9 lg:w-9" aria-hidden="true" />
                 )}
               </React.Fragment>
             ))}
