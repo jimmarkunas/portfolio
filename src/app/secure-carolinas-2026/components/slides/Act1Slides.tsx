@@ -236,83 +236,60 @@ export const Slide03Agents: React.FC = () => {
 // Slide 4 — Your Attack Surface Is Now a Business Process
 // ==========================================
 export const Slide04AttackSurface: React.FC = () => {
-  const traditional = [
-    { name: 'Endpoints', desc: 'Laptops, mobile devices, hardware assets' },
-    { name: 'Networks', desc: 'VPCs, firewalls, routing topologies' },
-    { name: 'Applications', desc: 'Monoliths, microservices, frontends' },
-    { name: 'Identities', desc: 'SSO, IAM roles, MFA credentials' },
-    { name: 'APIs', desc: 'REST, GraphQL, microservice contracts' },
-  ];
-
-  const agentic = [
-    { name: 'Delegated Authority', desc: 'Autonomous execution without manual sign-off' },
-    { name: 'Business Rules', desc: 'Interpreted logic, edge conditions, policies' },
-    { name: 'Tool Permissions', desc: 'Database writes, financial transfers, messaging' },
-    { name: 'Workflow State', desc: 'Long-running multi-step memory & context' },
-    { name: 'External Data', desc: 'Indirect prompt injection & untrusted payloads' },
-    { name: 'Escalation Paths', desc: 'Failure handling and human handover points' },
-    { name: 'Autonomous Decisions', desc: 'Reasoning loops acting on enterprise state' },
-  ];
-
   return (
     <div className="sc26-slide-wrapper">
       <SlideHeader
         actLabel={secureCarolinas2026Copy.acts.act1}
         title={secureCarolinas2026Copy.slides.attackSurface.title}
         subtitle={secureCarolinas2026Copy.slides.attackSurface.subtitle}
-        extraBadge={secureCarolinas2026Copy.slides.attackSurface.headerBadge}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
-        {/* Traditional Column */}
-        <div className="lg:col-span-5 sc26-surface-card p-6 space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-[#F0F0F2]">
-            <div>
-              <span className="sc26-type-mono-tag text-[#71717A] font-semibold block">{secureCarolinas2026Copy.slides.attackSurface.traditionalLabel}</span>
-              <h3 className="text-base font-bold text-[#18181B]">{secureCarolinas2026Copy.slides.attackSurface.traditionalHeading}</h3>
+      <div className="my-auto space-y-2.5 lg:space-y-3">
+        <div className="sc26-surface-card p-3 lg:p-4">
+          <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="rounded-2xl border border-[#BFD3FF] bg-[#EFF6FF] px-4 py-3.5 text-center lg:px-5 lg:py-4">
+              <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#3B71CA] lg:text-[1.85rem]">
+                {secureCarolinas2026Copy.slides.attackSurface.traditionalLabel}
+              </div>
             </div>
-            <Lock className="w-4 h-4 text-[#71717A]" />
-          </div>
-
-          <div className="space-y-2">
-            {secureCarolinas2026Copy.slides.attackSurface.traditional.map((item, idx) => (
-              <div key={idx} className="p-2.5 bg-[#F8F8F9] rounded-xl border border-[#EDEDF0] flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#18181B]">{item.name}</span>
-                <span className="text-[10px] text-[#71717A]">{item.desc}</span>
+            {secureCarolinas2026Copy.slides.attackSurface.traditional.map((item) => (
+              <div
+                key={item.name}
+                className="rounded-2xl border border-[#E4E4E7] bg-[#F8F8F9] px-4 py-3.5 text-center lg:px-5 lg:py-4"
+              >
+                <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#18181B] lg:text-[1.85rem]">
+                  {item.name}
+                </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Agentic Column */}
-        <div className="lg:col-span-7 sc26-surface-card-accent p-6 space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-[#3B71CA]/15">
-            <div>
-              <span className="sc26-type-mono-tag text-[#3B71CA] font-semibold block">{secureCarolinas2026Copy.slides.attackSurface.agenticLabel}</span>
-              <h3 className="text-base font-bold text-[#18181B]">{secureCarolinas2026Copy.slides.attackSurface.agenticHeading}</h3>
-            </div>
-            <ShieldAlert className="w-5 h-5 text-[#3B71CA]" />
+        <div className="flex items-center justify-center py-0.5">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E4E4E7] bg-white text-xl font-semibold text-[#3B71CA] lg:h-12 lg:w-12 lg:text-3xl">
+            {secureCarolinas2026Copy.slides.attackSurface.plusLabel}
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {secureCarolinas2026Copy.slides.attackSurface.agentic.map((item, idx) => (
-              <div key={idx} className="p-2.5 bg-white border border-[#E4E4E7] rounded-xl space-y-0.5 shadow-sm">
-                <div className="text-xs font-bold text-[#18181B]">{item.name}</div>
-                <div className="text-[10px] text-[#52525B] leading-tight">{item.desc}</div>
+        <div className="sc26-surface-card-accent p-3 lg:p-4">
+          <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="rounded-2xl border border-[#BFD3FF] bg-[#EFF6FF] px-4 py-3.5 text-center lg:px-5 lg:py-4">
+              <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#3B71CA] lg:text-[1.85rem]">
+                {secureCarolinas2026Copy.slides.attackSurface.agenticLabel}
+              </div>
+            </div>
+            {secureCarolinas2026Copy.slides.attackSurface.agentic.map((item) => (
+              <div
+                key={item.name}
+                className="rounded-2xl border border-[#BFD3FF] bg-white px-4 py-3.5 text-center lg:px-5 lg:py-4"
+              >
+                <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#18181B] lg:text-[1.85rem]">
+                  {item.name}
+                </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Core Point Banner */}
-      <div className="sc26-surface-card p-[18px] flex items-center gap-3.5">
-        <div className="p-2 bg-[#F4F4F5] rounded-xl border border-[#E4E4E7]">
-          <AlertTriangle className="w-4 h-4 text-[#B45309]" />
-        </div>
-        <p className="text-xs lg:text-sm text-[#18181B] font-normal leading-relaxed">
-          <strong className="font-semibold text-[#18181B]">{secureCarolinas2026Copy.slides.attackSurface.coreTakeawayLabel}</strong> {secureCarolinas2026Copy.slides.attackSurface.coreTakeaway}
-        </p>
       </div>
     </div>
   );
