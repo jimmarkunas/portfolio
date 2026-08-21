@@ -151,7 +151,7 @@ export const Slide16ClosingCta: React.FC = () => {
               <div className="rounded-[24px] border border-[#F0F0F2] bg-white p-5">
                 <img
                   src="/qr-codes/secure-carolinas-2026-agents.png"
-                  alt="QR code linking to the A.G.E.N.T.S. readiness check"
+                  alt="QR code linking to the A.G.E.N.T.S. framework and production readiness kit"
                   className="aspect-square w-full select-none object-contain"
                 />
               </div>
