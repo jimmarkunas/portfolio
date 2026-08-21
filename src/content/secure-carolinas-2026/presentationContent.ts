@@ -80,7 +80,7 @@ export const secureCarolinas2026Copy = {
       searchLabel: "Act 1, attack surface, enterprise AI entrypoint",
       act: "ACT_I",
       actLabel: ACT_I,
-      title: "Agents Now Execute",
+      title: "Now, Agents Execute",
       subtitle: "Autonomous execution shifts the model from advisor to operator.",
       flow: [
         { label: "GOAL", highlight: false },
@@ -128,7 +128,7 @@ export const secureCarolinas2026Copy = {
       searchLabel: "Act 2, A.G.E.N.T.S. controls, readiness requirements",
       act: "ACT_II",
       actLabel: ACT_II,
-      title: "Before Production, Answer Six Questions",
+      title: "Before Production, Answer 6 Questions",
       subtitle: "What must be true before an AI agent can act on behalf of the enterprise?",
       pillars: [
         { letter: "A", name: "Authority", desc: "What can it do?" },
@@ -138,7 +138,7 @@ export const secureCarolinas2026Copy = {
         { letter: "T", name: "Transfer & Escalation", desc: "When must it stop?" },
         { letter: "S", name: "Success & Accountability", desc: "Who owns the outcome?" },
       ],
-      anchor: "Six questions. One production decision.",
+      anchor: "6 questions | 1 production decision",
     },
     authority: {
       id: "authority",
@@ -202,7 +202,7 @@ export const secureCarolinas2026Copy = {
         { step: "Outcome", desc: "" },
       ],
       questions: [],
-      anchor: "We need an auditable operational record — not hidden model reasoning.",
+      anchor: "We need an auditable operational record, not hidden model reasoning.",
     },
     network: {
       id: "network-integrations",

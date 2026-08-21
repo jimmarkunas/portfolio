@@ -23,7 +23,7 @@ export const Slide12MeetAgent: React.FC = () => {
 
       <div className="my-auto space-y-8">
         <div className="sc26-surface-card p-7 lg:p-9">
-          <div className="mb-5 sc26-type-mono-tag font-semibold text-[#71717A]">{copy.capabilitiesLabel}</div>
+          <div className="mb-8 font-mono text-2xl font-semibold tracking-[0.06em] text-[#3B71CA] lg:text-3xl">{copy.capabilitiesLabel}</div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {copy.capabilities.map((capability, index) => (
               <motion.div

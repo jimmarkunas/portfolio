@@ -15,7 +15,7 @@ export const Slide11Success: React.FC = () => {
 
       <div className="my-auto space-y-7">
         <div className="sc26-surface-card p-7 lg:p-8">
-          <div className="mb-5 sc26-type-mono-tag font-semibold text-[#71717A]">{copy.metricsLabel}</div>
+          <div className="mb-8 font-mono text-2xl font-semibold tracking-[0.06em] text-[#3B71CA] lg:text-3xl">{copy.metricsLabel}</div>
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             {copy.metrics.map((metric) => (
               <div
