@@ -44,16 +44,18 @@ export const Slide05Question: React.FC = () => {
             >
               <div>
                 <div className="mb-3 flex items-center justify-between border-b border-[#F0F0F2] pb-2">
-                  <span className="font-mono text-3xl font-bold text-[#18181B] transition-colors group-hover:text-[#3B71CA] lg:text-[3.25rem]">
+                  <span className="font-mono text-3xl font-bold text-[#3B71CA] transition-colors group-hover:text-[#3B71CA] lg:text-[3.25rem]">
                     {p.letter}
                   </span>
                   <div className="p-1 bg-[#F4F4F5] rounded-md border border-[#E4E4E7]">
                     {p.icon}
                   </div>
                 </div>
-                <div className="text-sm font-bold text-[#18181B] lg:text-[1.25rem]">{p.name}</div>
+                <div className="min-h-[3.5rem] text-sm font-bold leading-tight text-[#18181B] lg:min-h-[4.75rem] lg:text-[1.25rem]">
+                  {p.name}
+                </div>
               </div>
-              <div className="border-t border-[#F8F8F9] pt-2 text-sm leading-tight text-[#71717A] lg:text-[1.1rem]">
+              <div className="min-h-[3.25rem] border-t border-[#F8F8F9] pt-2 text-sm leading-tight text-[#71717A] lg:min-h-[4rem] lg:text-[1.1rem]">
                 {p.desc}
               </div>
             </motion.div>
