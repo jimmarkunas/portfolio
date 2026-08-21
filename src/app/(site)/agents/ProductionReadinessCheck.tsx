@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 
+import { secureCarolinas2026Copy } from "@/content/secure-carolinas-2026"
 import { agentsContent } from "@/content/site/agents"
 
 type ProductionReadinessCheckVariant = "default" | "presentation" | "scenario"
@@ -19,6 +20,8 @@ type Decision = {
   title: "GO" | "GO WITH CONDITIONS" | "NO GO" | "INCOMPLETE"
   description: string
 }
+
+type ScenarioConfig = typeof secureCarolinas2026Copy.scenarios.customerOrderException
 
 const statuses: readonly Status[] = ["DEFINED", "PARTIAL", "UNCLEAR"]
 const businessValues: readonly BusinessValue[] = ["Increase ROI", "Decrease Cost", "Increase Operational Efficiency"]
@@ -286,161 +289,310 @@ function ProductionReadinessCheckDefault({ variant = "default" }: ProductionRead
   )
 }
 
-type ScenarioRound = {
-  letter: "A" | "G" | "E" | "N" | "T" | "S"
-  name: string
-  evidence: string
-  reference: Status
-  reason: string
+type ScenarioControl = typeof secureCarolinas2026Copy.scenarios.customerOrderException.controls[number]
+type ScenarioControlLetter = ScenarioControl["letter"]
+type ScenarioControlChoice = ScenarioControl["choices"][number]
+type ScenarioBusinessValue = typeof secureCarolinas2026Copy.scenarios.customerOrderException.businessValue.options[number]
+type OperatingProfileField = "AUTONOMY" | "HUMAN LOAD" | "OPERATIONAL RISK"
+type OperatingProfileLevel = "LOW" | "MODERATE" | "HIGH"
+type ScenarioProfileChoice = {
+  autonomy?: OperatingProfileLevel
+  humanLoad?: OperatingProfileLevel
+  operationalRisk?: OperatingProfileLevel
 }
 
-export type ScenarioConfig = {
-  title: string
-  name: string
-  subtitle: string
-  rounds: readonly ScenarioRound[]
+type ScenarioState = {
+  systemsInventory: FoundationAnswer
+  ownershipDefined: FoundationAnswer
+  businessValue: ScenarioBusinessValue | null
+  selections: Partial<Record<ScenarioControlLetter, ScenarioControlChoice>>
 }
 
-function ScenarioProductionReadinessCheck({ scenario }: { scenario: ScenarioConfig }) {
-  const totalSteps = 9
-  const [stepIndex, setStepIndex] = useState(0)
-  const [systemsInventory, setSystemsInventory] = useState<FoundationAnswer>(null)
-  const [ownershipDefined, setOwnershipDefined] = useState<FoundationAnswer>(null)
-  const [selectedValue, setSelectedValue] = useState<BusinessValue | null>(null)
-  const [controlAnswers, setControlAnswers] = useState<Partial<Record<ScenarioRound["letter"], Status>>>({})
-  const [revealed, setRevealed] = useState(false)
+const scenario = secureCarolinas2026Copy.scenarios.customerOrderException
+const levelValue: Record<OperatingProfileLevel, number> = { LOW: 0, MODERATE: 1, HIGH: 2 }
+const levelLabel: Record<number, OperatingProfileLevel> = { 0: "LOW", 1: "MODERATE", 2: "HIGH" }
+const profileFieldKeyMap: Record<OperatingProfileField, "autonomy" | "humanLoad" | "operationalRisk"> = {
+  AUTONOMY: "autonomy",
+  "HUMAN LOAD": "humanLoad",
+  "OPERATIONAL RISK": "operationalRisk",
+}
 
-  const isComplete = stepIndex >= totalSteps
-  const currentRound = stepIndex >= 3 && stepIndex < totalSteps ? scenario.rounds[stepIndex - 3] : undefined
-  const currentControlStep = stepIndex >= 3 && stepIndex < totalSteps ? stepIndex - 3 : -1
-  const currentRoundAnswer = currentRound ? controlAnswers[currentRound.letter] : undefined
-  const selectedStatusRecord = scenario.rounds.reduce((acc, round) => {
-    const answer = controlAnswers[round.letter]
-    if (answer) acc[round.letter] = answer
-    return acc
-  }, {} as Record<string, Status>)
-  const referenceStatusRecord = scenario.rounds.reduce((acc, round) => {
-    acc[round.letter] = round.reference
-    return acc
-  }, {} as Record<string, Status>)
+function getControlStatusTitle(status: Status) {
+  if (status === "DEFINED") return "DEFINED"
+  if (status === "PARTIAL") return "PARTIAL"
+  return "UNCLEAR"
+}
 
-  const audienceDecisionTitle = evaluateGateTitle({
-    systemsInventory,
-    ownershipDefined,
-    selectedValues: selectedValue ? [selectedValue] : [],
-    selectedStatuses: selectedStatusRecord,
-  })
-  const referenceDecisionTitle = evaluateGateTitle({
-    systemsInventory: "YES",
-    ownershipDefined: "YES",
-    selectedValues: [businessValues[0]],
-    selectedStatuses: referenceStatusRecord,
-  })
-
-  const audienceScore = scenario.rounds.reduce((score, round) => {
-    const answer = controlAnswers[round.letter]
-    return answer === round.reference ? score + 1 : score
-  }, 0)
-
-  const canAdvance =
-    stepIndex === 0
-      ? systemsInventory !== null
-      : stepIndex === 1
-        ? ownershipDefined !== null
-        : stepIndex === 2
-          ? selectedValue !== null
-          : revealed
-
-  const reset = () => {
-    setStepIndex(0)
-    setSystemsInventory(null)
-    setOwnershipDefined(null)
-    setSelectedValue(null)
-    setControlAnswers({})
-    setRevealed(false)
+function getDecisionFromState(state: ScenarioState) {
+  if (state.systemsInventory === null || state.ownershipDefined === null || state.businessValue === null) {
+    return "INCOMPLETE" as const
   }
 
-  const advance = () => {
-    if (stepIndex < totalSteps - 1) {
-      setStepIndex((current) => current + 1)
-      setRevealed(false)
-    } else {
-      setStepIndex(totalSteps)
+  if (state.systemsInventory === "NO" || state.ownershipDefined === "NO") {
+    return "NO GO" as const
+  }
+
+  const statuses = scenario.controls.map((control) => state.selections[control.letter]?.resultingStatus)
+  if (statuses.some((status) => status === undefined)) return "INCOMPLETE" as const
+  if (statuses.includes("UNCLEAR")) return "NO GO" as const
+  if (statuses.includes("PARTIAL")) return "GO WITH CONDITIONS" as const
+  return "GO" as const
+}
+
+function getOperatingProfile(state: ScenarioState) {
+  return scenario.profileFields.map((field) => {
+    const key = profileFieldKeyMap[field]
+    const samples = scenario.controls
+      .map((control) => {
+        const choice = state.selections[control.letter]
+        if (!choice) return undefined
+        return (choice as ScenarioProfileChoice)[key]
+      })
+      .filter((value): value is OperatingProfileLevel => value !== undefined)
+
+    if (samples.length === 0) {
+      return { field, value: "—" as const, average: null }
+    }
+
+    const average = samples.reduce((sum, level) => sum + levelValue[level], 0) / samples.length
+    const rounded = Math.round(average)
+    return {
+      field,
+      value: levelLabel[Math.max(0, Math.min(2, rounded))],
+      average,
+    }
+  })
+}
+
+function ScenarioProductionReadinessCheck() {
+  const totalSteps = 9
+  const [view, setView] = useState<"intro" | "assessment" | "result">("intro")
+  const [stepIndex, setStepIndex] = useState(0)
+  const [state, setState] = useState<ScenarioState>({
+    systemsInventory: null,
+    ownershipDefined: null,
+    businessValue: null,
+    selections: {},
+  })
+
+  const currentControl = stepIndex >= 3 ? scenario.controls[stepIndex - 3] : undefined
+  const currentControlSelection = currentControl ? state.selections[currentControl.letter] : undefined
+  const decision = getDecisionFromState(state)
+  const operatingProfile = getOperatingProfile(state)
+  const readyForCurrentStep =
+    stepIndex === 0
+      ? state.systemsInventory !== null
+      : stepIndex === 1
+        ? state.ownershipDefined !== null
+        : stepIndex === 2
+          ? state.businessValue !== null
+          : Boolean(currentControlSelection)
+
+  const isFoundationBlocked = (stepIndex === 0 && state.systemsInventory === "NO") || (stepIndex === 1 && state.ownershipDefined === "NO")
+
+  const reset = () => {
+    setView("intro")
+    setStepIndex(0)
+    setState({
+      systemsInventory: null,
+      ownershipDefined: null,
+      businessValue: null,
+      selections: {},
+    })
+  }
+
+  const start = () => {
+    setView("assessment")
+    setStepIndex(0)
+  }
+
+  const canGoNext = readyForCurrentStep && !isFoundationBlocked
+  const stepLabel = String(stepIndex + 1).padStart(2, "0")
+  const stepBoxLabel = view === "result" ? "RESULT" : "CURRENT STEP"
+  const stepBoxValue = view === "result" ? "FINAL" : `Step ${stepLabel} of ${String(totalSteps).padStart(2, "0")}`
+
+  const updateFoundation = (answer: Exclude<FoundationAnswer, null>) => {
+    if (stepIndex === 0) {
+      setState((current) => ({ ...current, systemsInventory: answer }))
+      return
+    }
+
+    if (stepIndex === 1) {
+      setState((current) => ({ ...current, ownershipDefined: answer }))
     }
   }
 
-  const chooseAnswer = (answer: Status) => {
-    if (!currentRound || revealed) return
-    setControlAnswers((current) => ({ ...current, [currentRound.letter]: answer }))
-    setRevealed(true)
+  const currentStepTitle =
+    stepIndex === 0
+      ? scenario.foundation.systemsQuestion
+      : stepIndex === 1
+        ? scenario.foundation.ownershipQuestion
+        : stepIndex === 2
+          ? scenario.businessValue.question
+          : currentControl
+            ? currentControl.question
+            : ""
+
+  const currentStepLabel =
+    stepIndex === 0
+      ? "SYSTEMS"
+      : stepIndex === 1
+        ? "OWNERSHIP"
+        : stepIndex === 2
+          ? "VALUE"
+          : currentControl?.letter ?? ""
+
+  const currentStepSuffix =
+    stepIndex === 0
+      ? "Inventory"
+      : stepIndex === 1
+        ? "Defined"
+        : stepIndex === 2
+          ? "Target"
+          : currentControl?.name ?? ""
+
+  const onNext = () => {
+    if (stepIndex < totalSteps - 1) {
+      setStepIndex((current) => current + 1)
+      return
+    }
+
+    setView("result")
   }
 
-  const currentStepNumber = String(stepIndex + 1).padStart(2, "0")
-  const scenarioLabelVisible = stepIndex >= 2
-  const scoreVisible = stepIndex >= 3 && !isComplete
-  const stepHeaderClass = "mb-3 grid grid-cols-[minmax(0,1fr)_1fr] items-stretch"
-  const stepHeaderLeftClass = "flex min-w-0 items-center gap-4 pr-5"
-  const stepHeaderRightClass = "flex min-w-0 items-center border-l border-white/15 pl-5"
-
-  if (isComplete) {
+  if (view === "intro") {
     return (
       <section aria-labelledby="production-readiness-check">
-        <div className="w-full border border-white/10 bg-[#222222] p-2 text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] md:p-3 lg:p-4">
-          <div className="flex min-h-[468px] flex-col rounded-[20px] border border-white/10 bg-[#222222] md:min-h-[500px] lg:min-h-[532px]">
-            <header className="flex min-h-[80px] flex-col justify-center gap-2 border-b border-white/10 px-4 py-2.5 md:px-5 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <div className="type-p5 font-bold uppercase tracking-[0.3em] text-[#9CA3AF]">Challenge Complete</div>
-                <h2 id="production-readiness-check" className="type-h3 mt-2 text-white">{scenario.title}</h2>
-                <p className="type-p4 mt-2 max-w-[720px] text-[#AEB5C0]">{scenario.subtitle}</p>
+        <div className="w-full border border-white/10 bg-[#222222] text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] p-2 md:p-3 lg:p-4">
+          <div className="flex min-h-[0] flex-col rounded-[20px] border border-white/10 bg-[#222222]">
+            <header className="flex min-h-[0] flex-col justify-center gap-2 border-b border-white/10 px-4 py-3 md:px-5 md:py-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="min-w-0">
+                <div className="type-p5 font-bold uppercase tracking-[0.3em] text-[#9CA3AF]">Audience challenge</div>
+                <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                  <h2 id="production-readiness-check" className="type-h3 text-white">{scenario.title}</h2>
+                  <div className="type-h4 text-[#8EB4F0]">{scenario.name}</div>
+                </div>
+                <p className="type-p4 mt-1 max-w-[780px] text-[#AEB5C0]">{scenario.subtitle}</p>
+              </div>
+              <div className="border border-white/10 bg-black/25 px-4 py-3 lg:text-right">
+                <div className="type-p5 uppercase tracking-[0.2em] text-[#9CA3AF]">Assessment</div>
+                <div className="type-p2 mt-1 text-white">9 steps · guided challenge</div>
               </div>
             </header>
 
-            <main className="flex flex-1 flex-col gap-3 px-4 py-3 md:px-5 md:py-4 lg:px-6 lg:py-5">
-              <div className="border border-[#447ACB]/60 bg-[#447ACB]/15 px-5 py-4 md:px-7 md:py-5" role="status" aria-live="polite">
-                <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">Audience decision</div>
-                <p className="type-h2 mt-2 text-white">{audienceDecisionTitle}</p>
-                <p className="type-p3 mt-2 max-w-[760px] text-[#D1D5DB]">
-                  {audienceDecisionTitle === "INCOMPLETE"
-                    ? "Complete the foundation steps before the audience can make a production decision."
-                    : audienceDecisionTitle === "NO GO"
-                      ? "Resolve the foundation or control gaps before production."
-                      : audienceDecisionTitle === "GO WITH CONDITIONS"
-                        ? "Complete the partial controls and document the conditions before production."
-                        : "The foundation is ready and all six A.G.E.N.T.S. controls are defined for production."}
-                </p>
-              </div>
-
-              <div className="grid gap-3 md:grid-cols-2">
-                <div className="border border-white/10 bg-white/[0.03] px-4 py-3">
-                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Audience score</div>
-                  <div className="type-p2 mt-1 text-white">{audienceScore} / 6</div>
+            <main className="flex flex-1 flex-col gap-4 px-4 py-4 md:px-5 md:py-5 lg:grid lg:grid-cols-[minmax(0,1.25fr)_minmax(260px,0.75fr)] lg:items-center lg:gap-5 lg:px-6 lg:py-6">
+              <div className="space-y-4">
+                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                  <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">{scenario.introLabel}</div>
+                  <p className="type-h5 mt-3 text-white">{scenario.introTitle}</p>
+                  <p className="type-p4 mt-3 max-w-[760px] text-[#D1D5DB]">{scenario.introBody}</p>
                 </div>
-                <div className="border border-white/10 bg-white/[0.03] px-4 py-3">
-                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Reference decision</div>
-                  <div className="type-p2 mt-1 text-white">{referenceDecisionTitle}</div>
+                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{scenario.contextLabel}</div>
+                  <p className="type-p4 mt-2 text-[#D1D5DB]">
+                    Start with the enterprise foundation, define the business value, then shape six operating decisions for the agent.
+                  </p>
                 </div>
               </div>
 
-              <div className="border border-[#447ACB]/40 bg-white/[0.03] px-5 py-3 md:px-7 md:py-4">
-                <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">Reference reveal</div>
-                <p className="type-p3 mt-1.5 max-w-[860px] text-[#D1D5DB]">
-                  The canonical Customer Order Exception Agent assessment resolves to <span className="font-semibold text-white">NO GO</span>.
+              <div className="rounded-[18px] border border-white/10 bg-black/20 p-4">
+                <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Ready to begin?</div>
+                <div className="type-h5 mt-3 text-white">Use the same challenge structure the audience will see in the presentation.</div>
+                <button type="button" className={`mt-5 flex min-h-14 w-full items-center justify-center border border-white bg-white px-5 type-p4 font-medium text-black transition-colors hover:bg-[#E6E9EE] ${focusClass}`} onClick={start}>
+                  Start Challenge
+                </button>
+              </div>
+            </main>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (view === "result") {
+    return (
+      <section aria-labelledby="production-readiness-check">
+        <div className="w-full border border-white/10 bg-[#222222] text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] p-2 md:p-3 lg:p-4">
+          <div className="flex min-h-[0] flex-col rounded-[20px] border border-white/10 bg-[#222222]">
+            <header className="flex min-h-[0] flex-col justify-center gap-2 border-b border-white/10 px-4 py-3 md:px-5 md:py-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="min-w-0">
+                <div className="type-p5 font-bold uppercase tracking-[0.3em] text-[#9CA3AF]">Challenge complete</div>
+                <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                  <h2 id="production-readiness-check" className="type-h3 text-white">{scenario.title}</h2>
+                  <div className="type-h4 text-[#8EB4F0]">{scenario.name}</div>
+                </div>
+                <p className="type-p4 mt-1 max-w-[780px] text-[#AEB5C0]">{scenario.subtitle}</p>
+              </div>
+              <div className="border border-white/10 bg-black/25 px-4 py-3 lg:text-right">
+                <div className="type-p5 uppercase tracking-[0.2em] text-[#9CA3AF]">Production</div>
+                <div className="type-p2 mt-1 text-white">Final decision</div>
+              </div>
+            </header>
+
+            <main className="flex min-h-0 flex-1 flex-col gap-4 px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6">
+              <div className="rounded-[18px] border border-[#447ACB]/50 bg-[#447ACB]/12 px-4 py-4 md:px-5 md:py-5" role="status" aria-live="polite">
+                <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">Production decision</div>
+                <p className="type-h2 mt-2 text-white">{decision}</p>
+                <p className="type-p3 mt-2 max-w-[840px] text-[#D1D5DB]">
+                  {decision === "INCOMPLETE"
+                    ? "Complete the challenge steps before making a production decision."
+                    : decision === "NO GO"
+                      ? "The operating model is not ready for production yet."
+                      : decision === "GO WITH CONDITIONS"
+                        ? "The operating model can proceed if the partial controls are addressed."
+                        : "The operating model is ready to go into production."}
                 </p>
-                <p className="type-p4 mt-1.5 text-white">
-                  {referenceDecisionTitle === "NO GO"
-                    ? "One unclear control killed the release."
-                    : referenceDecisionTitle === "GO WITH CONDITIONS"
-                      ? "The reference assessment requires conditions before release."
-                      : "All six controls are defined."}
-                </p>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                {scenario.controls.map((control) => {
+                  const choice = state.selections[control.letter]
+                  const status = choice?.resultingStatus ?? "UNCLEAR"
+                  return (
+                    <div key={control.letter} className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                      <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{control.letter} · {control.name}</div>
+                      <div className="mt-2 type-h5 text-white">{getControlStatusTitle(status)}</div>
+                      <p className="type-p4 mt-2 text-[#D1D5DB]">{choice?.tradeoff ?? "No choice was selected for this control."}</p>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-3">
+                {operatingProfile.map((item) => (
+                  <div key={item.field} className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                    <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{item.field}</div>
+                    <div className="mt-2 type-h5 text-white">{item.value}</div>
+                    <div className="type-p5 mt-2 text-[#AEB5C0]">
+                      {item.average === null ? "—" : `avg ${item.average.toFixed(1)} / 2`}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Selected business value</div>
+                  <div className="mt-2 type-h5 text-white">{state.businessValue ?? "—"}</div>
+                  <p className="type-p4 mt-2 text-[#D1D5DB]">
+                    {state.businessValue === scenario.businessValue.referenceValue
+                      ? scenario.businessValue.referenceExplanation
+                      : "Business value keeps the operating decision anchored to a specific production outcome."}
+                  </p>
+                </div>
+
+                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Discussion prompt</div>
+                  <p className="type-h5 mt-2 text-white">{scenario.result.discussionPrompt}</p>
+                </div>
               </div>
 
               <button
                 type="button"
-                className={`mt-auto min-h-[36px] self-start border border-white/25 px-3 py-1.5 type-p5 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-black ${focusClass}`}
+                className={`mt-auto min-h-[44px] self-start border border-white/25 px-4 py-2 type-p5 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-black ${focusClass}`}
                 onClick={reset}
               >
-                Restart Challenge
+                {scenario.result.resetLabel}
               </button>
             </main>
           </div>
@@ -449,67 +601,58 @@ function ScenarioProductionReadinessCheck({ scenario }: { scenario: ScenarioConf
     )
   }
 
-  const stepNumber = String(stepIndex + 1).padStart(2, "0")
-
   return (
     <section aria-labelledby="production-readiness-check">
-      <div className="w-full border border-white/10 bg-[#222222] p-2 text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] md:p-3 lg:p-4">
-        <div className="flex min-h-0 flex-col rounded-[20px] border border-white/10 bg-[#222222]">
-          <header className="flex min-h-0 flex-col justify-center gap-2 border-b border-white/10 px-4 py-3 md:px-5 sm:flex-row sm:items-center sm:justify-between">
-            <div>
+      <div className="w-full border border-white/10 bg-[#222222] text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] p-2 md:p-3 lg:p-4">
+        <div className="flex min-h-[0] flex-col rounded-[20px] border border-white/10 bg-[#222222]">
+          <header className="flex min-h-[0] flex-col justify-center gap-2 border-b border-white/10 px-4 py-3 md:px-5 md:py-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="min-w-0">
               <div className="type-p5 font-bold uppercase tracking-[0.3em] text-[#9CA3AF]">Audience challenge</div>
               <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
                 <h2 id="production-readiness-check" className="type-h3 text-white">{scenario.title}</h2>
-                <div className="type-h4 text-[#447ACB]">{scenario.name}</div>
+                <div className="type-h4 text-[#8EB4F0]">{scenario.name}</div>
               </div>
-              <p className="type-p4 mt-1 max-w-[720px] text-[#AEB5C0]">{scenario.subtitle}</p>
+              <p className="type-p4 mt-1 max-w-[780px] text-[#AEB5C0]">{scenario.subtitle}</p>
             </div>
-            <div className="flex flex-col gap-3 sm:items-end">
-              {scoreVisible ? (
-                <div className="border border-[#447ACB]/45 bg-[#447ACB]/12 px-4 py-2.5">
-                  <div className="type-p5 uppercase tracking-[0.2em] text-[#8EB4F0]">Audience score</div>
-                  <div className="type-p2 mt-1 text-white">{audienceScore} / 6</div>
-                </div>
-              ) : null}
-              <div className="border border-white/10 bg-black/25 px-4 py-2.5 sm:text-right">
-                <div className="type-p5 uppercase tracking-[0.2em] text-[#9CA3AF]">Current step</div>
-                <div className="type-p2 mt-1 text-white">Step {currentStepNumber} of 09</div>
-              </div>
+            <div className="border border-white/10 bg-black/25 px-4 py-3 lg:text-right">
+              <div className="type-p5 uppercase tracking-[0.2em] text-[#9CA3AF]">{stepBoxLabel}</div>
+              <div className="type-p2 mt-1 text-white">{stepBoxValue}</div>
             </div>
           </header>
 
-          <main className="flex min-h-0 flex-1 flex-col px-4 py-3 md:px-5 md:py-4 lg:px-6 lg:py-5">
-            {scenarioLabelVisible ? (
-                <div className="mb-3 flex items-center gap-3">
-                <div className="rounded-full border border-[#447ACB]/45 bg-[#447ACB]/12 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[#8EB4F0]">
-                  Customer Order Exception Agent
+          <main className="flex min-h-0 flex-1 flex-col px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6">
+            <section className="flex min-h-0 flex-1 flex-col">
+              <div className="grid gap-3 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center">
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 font-mono text-sm">
+                    {stepLabel}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span className="type-h4 text-[#8EB4F0]">{currentStepLabel}</span>
+                      <span className="type-h4 text-white">{currentStepSuffix}</span>
+                    </div>
+                    {stepIndex >= 3 ? <div className="type-p5 mt-1 text-[#8EB4F0]">{scenario.profileLabel}</div> : null}
+                  </div>
+                </div>
+                <div className="rounded-[16px] border border-white/10 bg-white/[0.03] px-4 py-3">
+                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{stepIndex < 3 ? "Step prompt" : "Control prompt"}</div>
+                  <p className="type-p4 mt-1 text-white">{currentStepTitle}</p>
                 </div>
               </div>
-            ) : null}
 
-            {stepIndex === 0 ? (
-              <section className="flex flex-1 flex-col">
-                <div className={stepHeaderClass}>
-                  <div className={stepHeaderLeftClass}>
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 font-mono text-xs">{currentStepNumber}</div>
-                    <span className="type-h4 text-[#8EB4F0]">SYSTEMS</span>
-                    <span className="type-h4 text-white">Inventory</span>
-                  </div>
-                  <div className={stepHeaderRightClass}>
-                    <span className="type-h4 min-w-0 text-white">Did you inventory your current systems and tools enterprise-wide?</span>
-                  </div>
-                </div>
-                <fieldset>
-                    <div className="mt-6 grid gap-3 sm:grid-cols-2" aria-label="Systems inventory answer">
+              {stepIndex === 0 || stepIndex === 1 ? (
+                <fieldset className="mt-4 flex min-h-0 flex-1 flex-col">
+                  <div className="grid gap-3 sm:grid-cols-2" aria-label={stepIndex === 0 ? "Systems inventory answer" : "Ownership answer"}>
                     {(["YES", "NO"] as const).map((answer) => {
-                      const selected = systemsInventory === answer
+                      const selected = (stepIndex === 0 ? state.systemsInventory : state.ownershipDefined) === answer
                       return (
                         <button
                           key={answer}
                           type="button"
                           aria-pressed={selected}
-                          className={`flex min-h-[122px] flex-col justify-between border p-4 text-left transition-colors lg:min-h-[132px] lg:p-5 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
-                          onClick={() => setSystemsInventory(answer)}
+                          className={`flex min-h-[126px] flex-col justify-between rounded-[18px] border p-4 text-left transition-colors lg:min-h-[136px] lg:p-5 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
+                          onClick={() => updateFoundation(answer)}
                         >
                           <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#8EB4F0]" : "text-[#9CA3AF]"}`}>Foundation answer</span>
                           <span className="type-h5">{answer}</span>
@@ -517,63 +660,29 @@ function ScenarioProductionReadinessCheck({ scenario }: { scenario: ScenarioConf
                       )
                     })}
                   </div>
+
+                  {(stepIndex === 0 ? state.systemsInventory : state.ownershipDefined) === "NO" ? (
+                    <div className="mt-4 rounded-[18px] border border-[#B12E2E]/50 bg-[#B12E2E]/12 px-4 py-4">
+                      <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#F2A3A3]">FOUNDATION BLOCKER</div>
+                      <p className="type-h5 mt-2 text-white">NO GO</p>
+                      <p className="type-p4 mt-2 text-[#D1D5DB]">
+                        {stepIndex === 0 ? scenario.foundation.systemsNoGoBody : scenario.foundation.ownershipNoGoBody}
+                      </p>
+                    </div>
+                  ) : null}
                 </fieldset>
-              </section>
-            ) : stepIndex === 1 ? (
-              <section className="flex flex-1 flex-col">
-                <div className={stepHeaderClass}>
-                  <div className={stepHeaderLeftClass}>
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 font-mono text-xs">{currentStepNumber}</div>
-                    <span className="type-h4 text-[#8EB4F0]">OWNERSHIP</span>
-                    <span className="type-h4 text-white">Defined</span>
-                  </div>
-                  <div className={stepHeaderRightClass}>
-                    <span className="type-h4 min-w-0 text-white">Do these systems and tools have defined owners enterprise-wide?</span>
-                  </div>
-                </div>
-                <fieldset>
-                  <div className="mt-6 grid gap-3 sm:grid-cols-2" aria-label="Ownership answer">
-                    {(["YES", "NO"] as const).map((answer) => {
-                      const selected = ownershipDefined === answer
-                      return (
-                        <button
-                          key={answer}
-                          type="button"
-                          aria-pressed={selected}
-                          className={`flex min-h-[122px] flex-col justify-between border p-4 text-left transition-colors lg:min-h-[132px] lg:p-5 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
-                          onClick={() => setOwnershipDefined(answer)}
-                        >
-                          <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#8EB4F0]" : "text-[#9CA3AF]"}`}>Foundation answer</span>
-                          <span className="type-h5">{answer}</span>
-                        </button>
-                      )
-                    })}
-                  </div>
-                </fieldset>
-              </section>
-            ) : stepIndex === 2 ? (
-              <section className="flex flex-1 flex-col">
-                <div className={stepHeaderClass}>
-                  <div className={stepHeaderLeftClass}>
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 font-mono text-xs">{currentStepNumber}</div>
-                    <span className="type-h4 text-[#8EB4F0]">VALUE</span>
-                    <span className="type-h4 text-white">Target</span>
-                  </div>
-                  <div className={stepHeaderRightClass}>
-                    <span className="type-h4 min-w-0 text-white">What business value is this agent primarily creating?</span>
-                  </div>
-                </div>
-                <fieldset>
-                  <div className="mt-6 grid gap-3 md:grid-cols-3" aria-label="Business value targets">
-                    {businessValues.map((value) => {
-                      const selected = selectedValue === value
+              ) : stepIndex === 2 ? (
+                <fieldset className="mt-4 flex min-h-0 flex-1 flex-col">
+                  <div className="grid gap-3 md:grid-cols-3" aria-label="Business value targets">
+                    {scenario.businessValue.options.map((value) => {
+                      const selected = state.businessValue === value
                       return (
                         <button
                           key={value}
                           type="button"
                           aria-pressed={selected}
-                          className={`flex min-h-[122px] flex-col justify-between border p-4 text-left transition-colors lg:min-h-[132px] lg:p-5 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
-                          onClick={() => setSelectedValue(selected ? null : value)}
+                          className={`flex min-h-[126px] flex-col justify-between rounded-[18px] border p-4 text-left transition-colors lg:min-h-[136px] lg:p-5 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
+                          onClick={() => setState((current) => ({ ...current, businessValue: value }))}
                         >
                           <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#8EB4F0]" : "text-[#9CA3AF]"}`}>Value target</span>
                           <span className="type-h5">{value}</span>
@@ -581,103 +690,82 @@ function ScenarioProductionReadinessCheck({ scenario }: { scenario: ScenarioConf
                       )
                     })}
                   </div>
+
+                  {state.businessValue ? (
+                    <div className="mt-4 rounded-[18px] border border-[#447ACB]/50 bg-[#447ACB]/12 px-4 py-4">
+                      <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">{scenario.businessValue.referenceLabel}</div>
+                      <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-3">
+                        <div className="type-h5 text-white">{scenario.businessValue.referenceValue}</div>
+                        <p className="type-p4 max-w-[780px] text-[#D1D5DB]">{scenario.businessValue.referenceExplanation}</p>
+                      </div>
+                    </div>
+                  ) : null}
                 </fieldset>
-                {selectedValue ? (
-                  <div className="mt-3 border border-white/10 bg-white/[0.03] px-4 py-2.5">
-                    <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Reference</div>
-                    <div className="mt-1.5 flex flex-col gap-1.5 md:flex-row md:items-center md:gap-3">
-                      <div className="type-p2 text-white">INCREASE OPERATIONAL EFFICIENCY</div>
-                      <p className="type-p4 max-w-[720px] text-[#D1D5DB]">
-                        Automates high-volume order exceptions and reduces manual intervention in fulfillment resolution.
-                      </p>
-                    </div>
-                  </div>
-                ) : null}
-              </section>
-            ) : currentRound ? (
-              <section className="flex flex-1 flex-col">
-                <div className={stepHeaderClass}>
-                  <div className={stepHeaderLeftClass}>
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 font-mono text-xs">{currentStepNumber}</div>
-                    <span className="type-h4 text-[#8EB4F0]">{currentRound.letter}</span>
-                    <span className="type-h4 text-white">{currentRound.name}</span>
-                  </div>
-                  <div className={stepHeaderRightClass}>
-                    <span className="type-h4 min-w-0 text-white">{currentRound.evidence}</span>
-                  </div>
-                </div>
-
-                {!revealed ? (
-                  <div className="flex flex-1 flex-col">
-                    <div className="mt-5 grid gap-3 md:grid-cols-3">
-                      {statuses.map((status) => (
+              ) : currentControl ? (
+                <fieldset className="mt-4 flex min-h-0 flex-1 flex-col">
+                  <div className="grid gap-3 md:grid-cols-3" aria-label={`${currentControl.name} choices`}>
+                    {currentControl.choices.map((choice) => {
+                      const selected = currentControlSelection?.id === choice.id
+                      return (
                         <button
-                          key={status}
+                          key={choice.id}
                           type="button"
-                          className={`flex min-h-[88px] flex-col justify-center border p-4 text-center transition-colors lg:min-h-[96px] lg:p-5 ${focusClass} border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]`}
-                          onClick={() => chooseAnswer(status)}
+                          aria-pressed={selected}
+                          className={`flex min-h-[132px] flex-col justify-between rounded-[18px] border p-4 text-left transition-colors lg:min-h-[144px] lg:p-5 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
+                          onClick={() => setState((current) => ({ ...current, selections: { ...current.selections, [currentControl.letter]: choice } }))}
                         >
-                          <span className="type-h5">{status}</span>
+                          <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#8EB4F0]" : "text-[#9CA3AF]"}`}>{choice.label}</span>
+                          <span className="type-p4 text-[#D1D5DB]">{choice.description}</span>
                         </button>
-                      ))}
-                    </div>
+                      )
+                    })}
                   </div>
-                ) : (
-                  <div className="flex flex-1 flex-col">
-                    <div className="border border-[#447ACB]/60 bg-[#447ACB]/15 px-4 py-4 md:px-5 md:py-5">
-                      <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">Reference assessment</div>
-                      <p className="type-h2 mt-2 text-white">{currentRound.reference}</p>
-                      <p className="type-p4 mt-2 max-w-[860px] text-[#D1D5DB]">{currentRound.reason}</p>
-                    </div>
 
-                    <div className="mt-3 grid gap-3 md:grid-cols-3">
-                      <div className="border border-white/10 bg-white/[0.03] px-4 py-3">
-                        <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Audience answer</div>
-                        <div className="type-p2 mt-1 text-white">{currentRoundAnswer}</div>
-                      </div>
-                      <div className="border border-white/10 bg-white/[0.03] px-4 py-3">
-                        <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Audience score</div>
-                        <div className="type-p2 mt-1 text-white">{audienceScore} / 6</div>
-                      </div>
-                      <div className="border border-white/10 bg-white/[0.03] px-4 py-3">
-                        <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Match status</div>
-                        <div className="type-p2 mt-1 text-white">{currentRoundAnswer === currentRound.reference ? "MATCH" : "MISS"}</div>
+                  {currentControlSelection ? (
+                    <div className="mt-4 rounded-[18px] border border-[#447ACB]/50 bg-[#447ACB]/12 px-4 py-4">
+                      <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">Resulting status</div>
+                      <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-3">
+                        <div className="type-h5 text-white">{currentControlSelection.resultingStatus}</div>
+                        <p className="type-p4 max-w-[780px] text-[#D1D5DB]">{currentControlSelection.tradeoff}</p>
                       </div>
                     </div>
-                  </div>
-                )}
-              </section>
-            ) : null}
+                  ) : null}
+                </fieldset>
+              ) : null}
 
-            <div className="mt-3 flex flex-wrap justify-between gap-3 border-t border-white/10 pt-0">
-              <button
-                type="button"
-                className={`min-h-[36px] border border-white/20 px-3 py-1.5 type-p5 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-black ${focusClass} ${stepIndex === 0 ? "cursor-not-allowed opacity-40 hover:bg-transparent hover:text-white" : ""}`}
-                onClick={() => {
-                  if (stepIndex === 0) return
-                  setStepIndex((current) => current - 1)
-                  setRevealed(false)
-                }}
-                disabled={stepIndex === 0}
-              >
-                Back
-              </button>
-              <button
-                type="button"
-                disabled={!canAdvance}
-                className={`min-h-[36px] border px-3 py-1.5 type-p5 font-bold uppercase tracking-[0.16em] transition-colors ${focusClass} ${canAdvance ? "border-white bg-white text-black hover:bg-[#E6E9EE]" : "cursor-not-allowed border-white/10 bg-white/5 text-white/35"}`}
-                onClick={() => {
-                  if (stepIndex === 2 && !selectedValue) return
-                  advance()
-                }}
-              >
-                {stepIndex === 2
-                  ? "Continue to A.G.E.N.T.S."
-                  : currentRound
-                    ? (revealed && stepIndex === 8 ? "See Production Decision" : "Next Control")
-                    : "Next Step"}
-              </button>
-            </div>
+              <div className="mt-4 flex flex-wrap justify-between gap-3 border-t border-white/10 pt-4">
+                <button
+                  type="button"
+                  className={`min-h-[40px] border border-white/20 px-4 py-2 type-p5 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-black ${focusClass} ${stepIndex === 0 ? "cursor-not-allowed opacity-40 hover:bg-transparent hover:text-white" : ""}`}
+                  onClick={() => {
+                    if (stepIndex === 0) return
+                    if (stepIndex === 3 && state.businessValue === null) {
+                      setStepIndex((current) => current - 1)
+                      return
+                    }
+                    if (stepIndex > 0) setStepIndex((current) => current - 1)
+                  }}
+                  disabled={stepIndex === 0}
+                >
+                  Back
+                </button>
+
+                <button
+                  type="button"
+                  disabled={!canGoNext}
+                  className={`min-h-[40px] border px-4 py-2 type-p5 font-bold uppercase tracking-[0.16em] transition-colors ${focusClass} ${canGoNext ? "border-white bg-white text-black hover:bg-[#E6E9EE]" : "cursor-not-allowed border-white/10 bg-white/5 text-white/35"}`}
+                  onClick={onNext}
+                >
+                  {isFoundationBlocked
+                    ? "FOUNDATION BLOCKER"
+                    : stepIndex === 2
+                      ? "Continue to A.G.E.N.T.S."
+                      : stepIndex === totalSteps - 1
+                        ? "See Production Decision"
+                        : "Next Step"}
+                </button>
+              </div>
+            </section>
           </main>
         </div>
       </div>
@@ -687,7 +775,7 @@ function ScenarioProductionReadinessCheck({ scenario }: { scenario: ScenarioConf
 
 export function ProductionReadinessCheck(props: ProductionReadinessCheckProps) {
   if (props.variant === "scenario" && props.scenario) {
-    return <ScenarioProductionReadinessCheck scenario={props.scenario} />
+    return <ScenarioProductionReadinessCheck />
   }
 
   return <ProductionReadinessCheckDefault variant={props.variant ?? "default"} />
