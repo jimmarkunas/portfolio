@@ -123,10 +123,10 @@ export const Slide01Title: React.FC = () => {
 };
 
 const executionFlowCardClass = (highlight: boolean) =>
-  `flex min-h-[180px] min-w-0 flex-1 items-center justify-center rounded-2xl border px-4 text-center transition-all lg:min-h-[220px] lg:px-6 ${
+  `flex min-w-0 flex-1 items-center justify-center rounded-2xl border px-4 text-center transition-all lg:px-6 ${
     highlight
-      ? 'border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
-      : 'border-[#E4E4E7] bg-[#F8F8F9]'
+      ? 'min-h-[195px] lg:min-h-[240px] border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
+      : 'min-h-[180px] lg:min-h-[220px] border-[#E4E4E7] bg-[#F8F8F9]'
   }`;
 
 const executionFlowLabelClass = (highlight: boolean) =>
