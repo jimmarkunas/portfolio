@@ -17,35 +17,38 @@ import {
   Sparkles
 } from 'lucide-react';
 import { SlideHeader } from '../../SlideHeader';
+import { secureCarolinas2026Copy } from '@/content/secure-carolinas-2026/presentationContent';
 
 // ==========================================
 export const Slide05Question: React.FC = () => {
-  const pillars = [
-    { letter: 'A', name: 'Authority', desc: 'What is the agent allowed to decide & do?', icon: <ShieldCheck className="w-4 h-4 text-[#3B71CA]" /> },
-    { letter: 'G', name: 'Guardrails', desc: 'Under what conditions may it act?', icon: <AlertOctagon className="w-4 h-4 text-[#3B71CA]" /> },
-    { letter: 'E', name: 'Evidence', desc: 'Can we reconstruct what occurred?', icon: <FileSearch className="w-4 h-4 text-[#3B71CA]" /> },
-    { letter: 'N', name: 'Network & Integrations', desc: 'What systems can it reach & affect?', icon: <Network className="w-4 h-4 text-[#3B71CA]" /> },
-    { letter: 'T', name: 'Transfer & Escalation', desc: 'What happens when it must stop?', icon: <ArrowRightLeft className="w-4 h-4 text-[#3B71CA]" /> },
-    { letter: 'S', name: 'Success & Accountability', desc: 'Who owns the final outcome?', icon: <Award className="w-4 h-4 text-[#3B71CA]" /> },
-  ];
+  const pillars = secureCarolinas2026Copy.slides.question.pillars.map((pillar) => ({
+    ...pillar,
+    icon:
+      pillar.letter === 'A' ? <ShieldCheck className="w-4 h-4 text-[#3B71CA]" /> :
+      pillar.letter === 'G' ? <AlertOctagon className="w-4 h-4 text-[#3B71CA]" /> :
+      pillar.letter === 'E' ? <FileSearch className="w-4 h-4 text-[#3B71CA]" /> :
+      pillar.letter === 'N' ? <Network className="w-4 h-4 text-[#3B71CA]" /> :
+      pillar.letter === 'T' ? <ArrowRightLeft className="w-4 h-4 text-[#3B71CA]" /> :
+      <Award className="w-4 h-4 text-[#3B71CA]" />,
+  }));
 
   return (
     <div className="sc26-slide-wrapper">
       <SlideHeader
-        actLabel="ACT II — The A.G.E.N.T.S. Operating Model"
-        title="The Question Before Production"
-        subtitle="Before granting autonomous agency, enterprise leadership must answer one fundamental question:"
-        extraBadge="Framework Launch"
+        actLabel={secureCarolinas2026Copy.acts.act2}
+        title={secureCarolinas2026Copy.slides.question.title}
+        subtitle={secureCarolinas2026Copy.slides.question.subtitle}
+        extraBadge={secureCarolinas2026Copy.slides.question.headerBadge}
       />
 
       <div className="space-y-5 my-auto">
         {/* Central Core Question Hero Card */}
         <div className="sc26-surface-card-accent p-6 lg:p-8 text-center space-y-2 relative overflow-hidden">
           <span className="sc26-type-mono-tag text-[#3B71CA] font-bold">
-            The Fundamental Production Gate
+            {secureCarolinas2026Copy.slides.question.bannerLabel}
           </span>
           <h3 className="text-xl lg:text-3xl font-light text-[#18181B] max-w-4xl mx-auto leading-tight">
-            “What must be true before we allow an AI agent to{' '}
+            “{secureCarolinas2026Copy.slides.question.questionQuote.replace(' before we allow an AI agent to act on behalf of the enterprise?', '')}{' '}
             <span className="font-semibold text-[#3B71CA] underline decoration-[#3B71CA]/30 decoration-2 underline-offset-4">
               act on behalf of the enterprise
             </span>?”
@@ -85,11 +88,11 @@ export const Slide05Question: React.FC = () => {
           <div className="flex items-center gap-3">
             <span className="w-2 h-2 rounded-full bg-[#3B71CA]" />
             <span className="text-xs lg:text-sm font-medium text-[#18181B]">
-              <strong className="text-[#3B71CA]">Governed Execution:</strong> This is not an AI ethics checklist. It is an enterprise operating model for governed autonomous execution.
+              <strong className="text-[#3B71CA]">{secureCarolinas2026Copy.slides.question.framingEmphasis}</strong> {secureCarolinas2026Copy.slides.question.framing.replace(`${secureCarolinas2026Copy.slides.question.framingEmphasis} `, '')}
             </span>
           </div>
           <span className="hidden sm:inline-block text-[10px] font-mono font-bold text-[#3B71CA] uppercase px-3 py-1 bg-[#EFF6FF] rounded-full border border-[#3B71CA]/30">
-            A.G.E.N.T.S. Standard
+            {secureCarolinas2026Copy.slides.question.framingLabel}
           </span>
         </div>
       </div>

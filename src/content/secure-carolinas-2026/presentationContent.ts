@@ -116,7 +116,7 @@ export const secureCarolinas2026Copy = {
         { name: "Delegated Authority" },
         { name: "Connected Systems" },
         { name: "Untrusted Inputs" },
-        { name: "Persistent State" },
+        { name: "Stored Context" },
         { name: "Autonomous Decisions" },
       ],
       coreTakeaway:
@@ -144,6 +144,7 @@ export const secureCarolinas2026Copy = {
       ],
       framingLabel: "A.G.E.N.T.S. Standard",
       framing: "Governed Execution: This is not an AI ethics checklist. It is an enterprise operating model for governed autonomous execution.",
+      framingEmphasis: "Governed Execution:",
     },
     authority: {
       id: "authority",
