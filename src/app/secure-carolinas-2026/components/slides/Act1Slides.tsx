@@ -273,11 +273,6 @@ export const Slide04AttackSurface: React.FC = () => {
 
         <div className="sc26-surface-card-accent p-3 lg:p-4">
           <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-2xl border border-[#BFD3FF] bg-[#EFF6FF] px-4 py-3.5 text-center lg:px-5 lg:py-4">
-              <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#3B71CA] lg:text-[1.85rem]">
-                {secureCarolinas2026Copy.slides.attackSurface.agenticLabel}
-              </div>
-            </div>
             {secureCarolinas2026Copy.slides.attackSurface.agentic.map((item) => (
               <div
                 key={item.name}
@@ -288,6 +283,11 @@ export const Slide04AttackSurface: React.FC = () => {
                 </div>
               </div>
             ))}
+            <div className="rounded-2xl border border-[#BFD3FF] bg-[#EFF6FF] px-4 py-3.5 text-center lg:px-5 lg:py-4">
+              <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#3B71CA] lg:text-[1.85rem]">
+                {secureCarolinas2026Copy.slides.attackSurface.agenticLabel}
+              </div>
+            </div>
           </div>
         </div>
       </div>
