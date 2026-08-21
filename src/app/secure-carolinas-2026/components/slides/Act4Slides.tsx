@@ -119,55 +119,50 @@ export const Slide16ClosingCta: React.FC = () => {
 
   return (
     <div className="sc26-slide-wrapper justify-center">
-      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(360px,0.8fr)] lg:gap-14">
-        <div className="space-y-7">
-          <div className="space-y-4">
-            <h1 className="sc26-type-hero max-w-4xl text-[#18181B]">{copy.title}</h1>
-            <p className="sc26-type-h2 max-w-3xl text-[#52525B]">{copy.subtitle}</p>
-          </div>
-
-          <div className="rounded-2xl border border-[#3B71CA] bg-[#EFF6FF] px-7 py-6 text-center lg:px-9 lg:py-8">
-            <div className="font-mono text-2xl font-bold tracking-[0.08em] text-[#3B71CA] lg:text-[2.2rem]">
-              {copy.primaryAction}
+      <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,0.72fr)] lg:items-center lg:gap-12">
+          <div className="space-y-7">
+            <div className="space-y-4">
+              <h1 className="sc26-type-hero max-w-4xl text-[#18181B]">{copy.title}</h1>
+              <p className="sc26-type-h2 max-w-3xl text-[#52525B]">{copy.subtitle}</p>
             </div>
+
+            <div className="rounded-[32px] border border-[#3B71CA]/35 bg-[#EFF6FF] px-7 py-7 shadow-[0_14px_40px_rgba(59,113,202,0.10)] lg:px-10 lg:py-9">
+              <div className="text-center font-mono text-[1.35rem] font-bold tracking-[0.12em] text-[#3B71CA] lg:text-[2rem]">
+                {copy.primaryAction}
+              </div>
+            </div>
+
+            <a
+              href={copy.linkHref}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex w-fit rounded-full border border-[#E4E4E7] bg-white px-6 py-3 text-xl font-semibold text-[#18181B] shadow-sm lg:text-2xl"
+            >
+              {copy.linkText}
+            </a>
           </div>
 
-          <a
-            href={copy.linkHref}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex rounded-full border border-[#E4E4E7] bg-white px-6 py-3 text-xl font-semibold text-[#18181B] shadow-sm lg:text-2xl"
-          >
-            {copy.linkText}
-          </a>
-
-          <div className="flex flex-wrap gap-2.5 pt-2">
-            {copy.actions.map((action) => (
-              <span
-                key={action}
-                className="rounded-full border border-[#3B71CA]/20 bg-[#EFF6FF] px-3.5 py-1.5 font-mono text-[11px] font-bold tracking-[0.14em] text-[#3B71CA] lg:text-xs"
-              >
-                {action}
-              </span>
-            ))}
+          <div className="flex justify-center lg:justify-end">
+            <div className="w-full max-w-[480px] rounded-[32px] border border-[#E4E4E7] bg-white p-6 shadow-[0_18px_48px_rgba(0,0,0,0.10)] lg:p-7">
+              <div className="mb-6 text-center font-mono text-sm font-bold tracking-[0.18em] text-[#3B71CA] lg:text-base">
+                {copy.primaryAction}
+              </div>
+              <div className="rounded-[24px] border border-[#F0F0F2] bg-white p-5">
+                <img
+                  src="/qr-codes/secure-carolinas-2026-agents.png"
+                  alt="QR code linking to the A.G.E.N.T.S. readiness check"
+                  className="aspect-square w-full select-none object-contain"
+                />
+              </div>
+              <p className="mt-5 text-center text-lg font-semibold text-[#18181B] lg:text-[1.15rem]">
+                {copy.linkText}
+              </p>
+              <p className="mt-2 text-center text-sm text-[#52525B] lg:text-base">{copy.scanText}</p>
+            </div>
           </div>
         </div>
 
-        <div className="flex justify-center lg:justify-end">
-          <div className="w-full max-w-[430px] rounded-[24px] border border-[#E4E4E7] bg-white p-6 shadow-[0_16px_40px_rgba(0,0,0,0.08)]">
-            <div className="mb-5 text-center font-mono text-sm font-bold tracking-[0.16em] text-[#3B71CA] lg:text-base">
-              {copy.primaryAction}
-            </div>
-            <div className="rounded-[20px] border border-[#F0F0F2] bg-white p-4">
-              <img
-                src="/qr-codes/secure-carolinas-2026-agents.png"
-                alt="QR code linking to the A.G.E.N.T.S. readiness check"
-                className="aspect-square w-full select-none object-contain"
-              />
-            </div>
-            <p className="mt-5 text-center text-lg font-semibold text-[#18181B]">{copy.linkText}</p>
-          </div>
-        </div>
       </div>
     </div>
   );
