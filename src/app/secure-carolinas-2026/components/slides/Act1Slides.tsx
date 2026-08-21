@@ -122,6 +122,22 @@ export const Slide01Title: React.FC = () => {
   );
 };
 
+const executionFlowCardClass = (highlight: boolean) =>
+  `flex min-h-[180px] min-w-0 flex-1 items-center justify-center rounded-2xl border px-4 text-center transition-all lg:min-h-[220px] lg:px-6 ${
+    highlight
+      ? 'border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
+      : 'border-[#E4E4E7] bg-[#F8F8F9]'
+  }`;
+
+const executionFlowLabelClass = (highlight: boolean) =>
+  `max-w-full break-words text-xl font-semibold leading-tight lg:text-3xl ${
+    highlight ? 'text-[#3B71CA]' : 'text-[#18181B]'
+  }`;
+
+const executionArrowClass = 'h-7 w-7 shrink-0 text-[#A1A1AA] lg:h-9 lg:w-9';
+const executionCalloutClass = 'sc26-surface-card-accent flex items-center justify-center px-8 py-7 text-center lg:py-8';
+const executionCalloutTextClass = 'flex items-center gap-3 text-2xl font-semibold leading-tight text-[#18181B] lg:text-3xl';
+
 // ==========================================
 // Slide 2 — Copilots Were Mostly an Information Problem
 // ==========================================
@@ -141,31 +157,21 @@ export const Slide02Copilots: React.FC = () => {
           <div className="flex items-center justify-between gap-3 lg:gap-5">
             {copilotSteps.map((step, index) => (
               <React.Fragment key={step.label}>
-                <div
-                  className={`flex min-h-[150px] min-w-0 flex-1 items-center justify-center rounded-2xl border px-4 text-center transition-all lg:min-h-[180px] lg:px-6 ${
-                    step.highlight
-                      ? 'min-h-[200px] lg:min-h-[260px] border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
-                      : 'border-[#E4E4E7] bg-[#F8F8F9]'
-                  }`}
-                >
-                  <span
-                    className={`max-w-full break-words text-xl font-semibold leading-tight lg:text-3xl ${
-                      step.highlight ? 'text-[#3B71CA]' : 'text-[#18181B]'
-                    }`}
-                  >
+                <div className={executionFlowCardClass(step.highlight)}>
+                  <span className={executionFlowLabelClass(step.highlight)}>
                     {step.label}
                   </span>
                 </div>
                 {index < copilotSteps.length - 1 && (
-                  <ArrowRight className="h-7 w-7 shrink-0 text-[#A1A1AA] lg:h-9 lg:w-9" aria-hidden="true" />
+                  <ArrowRight className={executionArrowClass} aria-hidden="true" />
                 )}
               </React.Fragment>
             ))}
           </div>
         </div>
 
-        <div className="sc26-surface-card-accent flex items-center justify-center px-8 py-7 text-center lg:py-8">
-          <p className="flex items-center gap-3 text-2xl font-semibold leading-tight text-[#18181B] lg:text-3xl">
+        <div className={executionCalloutClass}>
+          <p className={executionCalloutTextClass}>
             <span className="w-2.5 h-2.5 rounded-full bg-[#3B71CA] shrink-0 animate-ping" />
             <span>
               <span className="text-[#3B71CA]">{secureCarolinas2026Copy.slides.copilots.calloutLead}</span>{' '}
@@ -182,6 +188,8 @@ export const Slide02Copilots: React.FC = () => {
 // Slide 3 — Agents Move the Execution Boundary
 // ==========================================
 export const Slide03Agents: React.FC = () => {
+  const agentSteps = secureCarolinas2026Copy.slides.agents.flow;
+
   return (
     <div className="sc26-slide-wrapper">
       <SlideHeader
@@ -190,36 +198,26 @@ export const Slide03Agents: React.FC = () => {
         subtitle={secureCarolinas2026Copy.slides.agents.subtitle}
       />
 
-      <div className="space-y-8 my-auto">
-        <div className="sc26-surface-card p-8 lg:p-10">
-          <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 lg:gap-3">
-            {secureCarolinas2026Copy.slides.agents.flow.map((step, index) => (
+      <div className="my-auto flex flex-col gap-8">
+        <div className="sc26-surface-card px-8 py-10 lg:px-10 lg:py-12">
+          <div className="flex items-center justify-between gap-3 lg:gap-5">
+            {agentSteps.map((step, index) => (
               <React.Fragment key={step.label}>
-                <div
-                  className={`flex min-h-[180px] min-w-0 items-center justify-center rounded-2xl border px-3 text-center lg:min-h-[220px] lg:px-4 ${
-                    step.highlight
-                      ? 'border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
-                      : 'border-[#E4E4E7] bg-[#F8F8F9]'
-                  } ${step.label === 'SYSTEM' ? 'pr-6 lg:pr-8' : ''}`}
-                >
-                  <span
-                    className={`max-w-full whitespace-nowrap text-[1.95rem] font-semibold tracking-[0.01em] leading-none lg:text-[3rem] ${
-                      step.highlight ? 'text-[#3B71CA]' : 'text-[#18181B]'
-                    }`}
-                  >
+                <div className={executionFlowCardClass(step.highlight)}>
+                  <span className={executionFlowLabelClass(step.highlight)}>
                     {step.label}
                   </span>
                 </div>
-                {index < secureCarolinas2026Copy.slides.agents.flow.length - 1 && (
-                  <ArrowRight className="h-6 w-6 shrink-0 text-[#A1A1AA] lg:h-8 lg:w-8" aria-hidden="true" />
+                {index < agentSteps.length - 1 && (
+                  <ArrowRight className={executionArrowClass} aria-hidden="true" />
                 )}
               </React.Fragment>
             ))}
           </div>
         </div>
 
-        <div className="sc26-surface-card-accent p-4 lg:p-5 flex items-center justify-center">
-          <p className="flex items-center gap-4 text-xl font-semibold leading-tight text-[#18181B] lg:text-[2.15rem]">
+        <div className={executionCalloutClass}>
+          <p className={executionCalloutTextClass}>
             <span className="w-2.5 h-2.5 rounded-full bg-[#3B71CA] shrink-0 animate-ping" />
             <span>
               {secureCarolinas2026Copy.slides.agents.callout}{' '}
