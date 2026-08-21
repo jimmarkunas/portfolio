@@ -75,7 +75,7 @@ export function PresentationDeck({
           />
         </div>
 
-        <div className="absolute inset-x-0 top-0" style={{ bottom: `${contentBottomInset}px` }}>
+        <div className="absolute inset-x-0 top-0 overflow-hidden" style={{ bottom: `${contentBottomInset}px` }}>
           <PresentationSlideFrame
             isActive
             brandLogoSrc={brandLogo?.src}

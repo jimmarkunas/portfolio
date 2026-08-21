@@ -16,6 +16,7 @@ export const secureCarolinas2026SlideOrder = [
   "decisionBoard",
   "readinessStatus",
   "productionDecision",
+  "readinessCheck",
   "closingCta",
 ] as const;
 

@@ -362,9 +362,18 @@ export const secureCarolinas2026Copy = {
       finalLabel: "",
       finalQuote: "If any A.G.E.N.T.S. control is unclear, the agent is not ready.",
     },
+    readinessCheck: {
+      id: "readiness-check",
+      label: "Slide 16",
+      searchLabel: "Act 4, production readiness gate, interactive readiness check",
+      act: "ACT_IV",
+      actLabel: ACT_IV,
+      title: "Put an Agent Through the Gate",
+      subtitle: "Run the A.G.E.N.T.S. production readiness check.",
+    },
     closingCta: {
       id: "closing-cta",
-      label: "Slide 16",
+      label: "Slide 17",
       searchLabel: "Act 4, production readiness gate, executive decision",
       act: "ACT_IV",
       actLabel: ACT_IV,
@@ -376,6 +385,66 @@ export const secureCarolinas2026Copy = {
       scanText: "Scan to download the framework and use it in your next AI production review.",
       linkText: "greatestpmever.com/agents",
       linkHref: "https://greatestpmever.com/agents",
+    },
+  },
+  scenarios: {
+    customerOrderException: {
+      title: "Scenario Challenge",
+      name: "Customer Order Exception Agent",
+      subtitle: "The audience acts as the Production Review Board.",
+      rounds: [
+        {
+          letter: "A",
+          name: "Authority",
+          evidence:
+            "The agent may issue customer credits up to $100. Anything above $100 requires human approval.",
+          reference: "DEFINED",
+          reason: "Authority is explicitly bounded by a transaction limit and approval threshold.",
+        },
+        {
+          letter: "G",
+          name: "Guardrails",
+          evidence:
+            "Fraud flags and pricing restrictions are enforced outside the model. The agent cannot override them through prompting.",
+          reference: "DEFINED",
+          reason:
+            "Material controls are mechanically enforced by the surrounding system, not merely expressed through prompt instructions.",
+        },
+        {
+          letter: "E",
+          name: "Evidence",
+          evidence:
+            "Tool calls and enterprise state changes are logged, but human approval events are not consistently captured.",
+          reference: "PARTIAL",
+          reason:
+            "The operational record exists, but the approval trail cannot yet be completely reconstructed.",
+        },
+        {
+          letter: "N",
+          name: "Network & Integrations",
+          evidence:
+            "The agent can read order and inventory data. Write access is limited to approved credit and case-management capabilities.",
+          reference: "DEFINED",
+          reason: "The agent receives scoped capabilities rather than blanket administrative access.",
+        },
+        {
+          letter: "T",
+          name: "Transfer & Escalation",
+          evidence:
+            "The agent can stop and alert a human, but the team has not demonstrated that the human receives the full working state, prior actions, evidence, and escalation reason.",
+          reference: "UNCLEAR",
+          reason:
+            "The escalation path exists, but a stateful handoff has not been demonstrated.",
+        },
+        {
+          letter: "S",
+          name: "Success & Accountability",
+          evidence:
+            "An Operations Lead owns the agent, with outcome, accuracy, risk, and cost used to evaluate continued operation.",
+          reference: "DEFINED",
+          reason: "Operational ownership and success measures are explicit.",
+        },
+      ],
     },
   },
 } as const;
@@ -409,6 +478,7 @@ export const secureCarolinas2026Content: SecureCarolinas2026Content = {
     decisionBoard: slide(slides.decisionBoard.id, slides.decisionBoard.title, slides.decisionBoard.subtitle, slides.decisionBoard.act, slides.decisionBoard.actLabel),
     readinessStatus: slide(slides.readinessStatus.id, slides.readinessStatus.title, slides.readinessStatus.subtitle, slides.readinessStatus.act, slides.readinessStatus.actLabel),
     productionDecision: slide(slides.productionDecision.id, slides.productionDecision.title, slides.productionDecision.subtitle, slides.productionDecision.act, slides.productionDecision.actLabel),
+    readinessCheck: slide(slides.readinessCheck.id, slides.readinessCheck.title, slides.readinessCheck.subtitle, slides.readinessCheck.act, slides.readinessCheck.actLabel),
     closingCta: slide(slides.closingCta.id, slides.closingCta.title, slides.closingCta.subtitle, slides.closingCta.act, slides.closingCta.actLabel),
   },
 };

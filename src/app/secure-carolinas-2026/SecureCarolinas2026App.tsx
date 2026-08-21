@@ -23,7 +23,7 @@ export default function SecureCarolinas2026App() {
       return "ACT III • PUT A REAL AGENT THROUGH THE MODEL";
     }
 
-    if (key === "readinessStatus" || key === "productionDecision" || key === "closingCta") {
+    if (key === "readinessStatus" || key === "productionDecision" || key === "readinessCheck" || key === "closingCta") {
       return "ACT IV • THE PRODUCTION READINESS GATE";
     }
 

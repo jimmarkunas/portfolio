@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { SlideHeader } from '../SlideHeader';
+import { ProductionReadinessCheck } from "@/app/(site)/agents/ProductionReadinessCheck";
 import { secureCarolinas2026Copy } from '@/content/secure-carolinas-2026/presentationContent';
 
 export const Slide14DefinedPartialUnclear: React.FC = () => {
@@ -163,6 +164,22 @@ export const Slide16ClosingCta: React.FC = () => {
           </div>
         </div>
 
+      </div>
+    </div>
+  );
+};
+
+export const Slide16ReadinessCheck: React.FC = () => {
+  const copy = secureCarolinas2026Copy.slides.readinessCheck;
+
+  return (
+    <div className="sc26-slide-wrapper">
+      <SlideHeader actLabel={secureCarolinas2026Copy.acts.act4} title={copy.title} subtitle={copy.subtitle} />
+      <div className="my-auto flex min-h-0 flex-1 flex-col">
+        <ProductionReadinessCheck
+          variant="scenario"
+          scenario={secureCarolinas2026Copy.scenarios.customerOrderException}
+        />
       </div>
     </div>
   );

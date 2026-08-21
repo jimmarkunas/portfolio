@@ -19,7 +19,7 @@ export const SlideHeader: React.FC<SlideHeaderProps> = ({
   logoAlt = 'Jim Markunas logo',
 }) => {
   return (
-    <header className="mb-6 lg:mb-8 select-none">
+    <header className="select-none pb-[2px]">
       <div className="flex items-start justify-between gap-6">
         <div className="min-w-0 flex-1">
           <div className="flex min-w-0 items-center gap-4">

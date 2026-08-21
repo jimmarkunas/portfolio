@@ -25,7 +25,7 @@ export function PresentationSlideFrame({
           animate={presentationSlideMotion.animate}
           exit={presentationSlideMotion.exit}
           transition={presentationSlideMotion.transition}
-          className="slide-content relative h-full w-full"
+          className="slide-content relative h-full w-full overflow-hidden"
         >
           {brandLogoSrc ? (
             <img
