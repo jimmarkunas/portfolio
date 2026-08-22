@@ -542,7 +542,7 @@ function ScenarioProductionReadinessCheck() {
             <div className="shrink-0 whitespace-nowrap font-mono text-3xl font-semibold text-white lg:text-4xl">{overallStep}</div>
           </header>
 
-          <main className="grid min-h-0 flex-1 grid-rows-[82px_178px_96px_58px_48px] gap-3 px-5 py-4 lg:grid-rows-[88px_184px_100px_60px_48px] lg:px-7 lg:py-5">
+          <main className="grid min-h-0 flex-1 grid-rows-[82px_150px_84px_50px_40px] gap-2.5 px-5 py-3 lg:px-7 lg:py-4">
             <div className="flex min-h-0 flex-col justify-center">
               <div className="text-sm font-bold uppercase tracking-[0.18em] text-[#8EB4F0] lg:text-base">{currentStepLabel}</div>
               <h3 id="current-step-title" className="mt-2 max-w-[1180px] text-3xl font-semibold leading-[1.08] text-white lg:text-[2.25rem]">
@@ -594,7 +594,7 @@ function ScenarioProductionReadinessCheck() {
                         key={choice.id}
                         type="button"
                         aria-pressed={selected}
-                        className={`flex h-full min-w-0 flex-col justify-between rounded-[18px] border p-4 text-left transition-colors lg:p-5 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
+                        className={`flex h-full min-w-0 flex-col justify-between rounded-[18px] border p-4 text-left transition-colors ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
                         onClick={() => setState((current) => ({ ...current, selections: { ...current.selections, [currentControl.letter]: choice } }))}
                       >
                         <span className={`text-xl font-bold uppercase leading-tight tracking-[0.08em] lg:text-[1.55rem] ${selected ? "text-[#8EB4F0]" : "text-white"}`}>{choice.label}</span>
