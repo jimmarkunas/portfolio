@@ -366,7 +366,7 @@ function getOperatingProfile(state: ScenarioState) {
 
 function ScenarioProductionReadinessCheck() {
   const totalSteps = 9
-  const [view, setView] = useState<"assessment" | "result">("assessment")
+  const [view, setView] = useState<"intro" | "assessment" | "result">("intro")
   const [stepIndex, setStepIndex] = useState(0)
   const [state, setState] = useState<ScenarioState>({
     systemsInventory: null,
@@ -388,15 +388,10 @@ function ScenarioProductionReadinessCheck() {
           ? state.businessValue !== null
           : Boolean(currentControlSelection)
 
-  const foundationAnswer = stepIndex === 0 ? state.systemsInventory : stepIndex === 1 ? state.ownershipDefined : null
   const isFoundationBlocked = (stepIndex === 0 && state.systemsInventory === "NO") || (stepIndex === 1 && state.ownershipDefined === "NO")
-  const canGoNext = readyForCurrentStep && !isFoundationBlocked
-  const overallStep = `${stepIndex + 1}/${totalSteps}`
-  const phaseLabel = stepIndex < 3 ? "FOUNDATION" : "A.G.E.N.T.S."
-  const phaseProgress = stepIndex < 3 ? `${stepIndex + 1}/3` : `${stepIndex - 2}/6`
 
   const reset = () => {
-    setView("assessment")
+    setView("intro")
     setStepIndex(0)
     setState({
       systemsInventory: null,
@@ -405,6 +400,16 @@ function ScenarioProductionReadinessCheck() {
       selections: {},
     })
   }
+
+  const start = () => {
+    setView("assessment")
+    setStepIndex(0)
+  }
+
+  const canGoNext = readyForCurrentStep && !isFoundationBlocked
+  const stepLabel = String(stepIndex + 1).padStart(2, "0")
+  const stepBoxLabel = view === "result" ? "RESULT" : "CURRENT STEP"
+  const stepBoxValue = view === "result" ? "FINAL" : `Step ${stepLabel} of ${String(totalSteps).padStart(2, "0")}`
 
   const updateFoundation = (answer: Exclude<FoundationAnswer, null>) => {
     if (stepIndex === 0) {
@@ -430,14 +435,21 @@ function ScenarioProductionReadinessCheck() {
 
   const currentStepLabel =
     stepIndex === 0
-      ? "SYSTEMS INVENTORY"
+      ? "SYSTEMS"
       : stepIndex === 1
-        ? "DEFINED OWNERSHIP"
+        ? "OWNERSHIP"
         : stepIndex === 2
-          ? "BUSINESS VALUE"
-          : currentControl
-            ? `${currentControl.letter} · ${currentControl.name}`
-            : ""
+          ? "VALUE"
+          : currentControl?.letter ?? ""
+
+  const currentStepSuffix =
+    stepIndex === 0
+      ? "Inventory"
+      : stepIndex === 1
+        ? "Defined"
+        : stepIndex === 2
+          ? "Target"
+          : currentControl?.name ?? ""
 
   const onNext = () => {
     if (stepIndex < totalSteps - 1) {
@@ -448,73 +460,46 @@ function ScenarioProductionReadinessCheck() {
     setView("result")
   }
 
-  const statusTone = (status: Status) => {
-    if (status === "DEFINED") return "text-[#7DD3A7]"
-    if (status === "PARTIAL") return "text-[#F2C879]"
-    return "text-[#F2A3A3]"
-  }
-
-  if (view === "result") {
+  if (view === "intro") {
     return (
-      <section aria-labelledby="production-readiness-check" className="w-full">
-        <div className="h-[600px] w-full border border-white/10 bg-[#222222] p-2 text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] md:p-3 lg:p-4">
-          <div className="flex h-full flex-col overflow-hidden rounded-[20px] border border-white/10 bg-[#222222]">
-            <header className="flex h-[64px] shrink-0 items-center justify-between gap-5 border-b border-white/10 px-5 lg:px-7">
+      <section aria-labelledby="production-readiness-check">
+        <div className="w-full border border-white/10 bg-[#222222] text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] p-2 md:p-3 lg:p-4">
+          <div className="flex min-h-[0] flex-col rounded-[20px] border border-white/10 bg-[#222222]">
+            <header className="flex min-h-[0] flex-col justify-center gap-2 border-b border-white/10 px-4 py-3 md:px-5 md:py-4 lg:flex-row lg:items-center lg:justify-between">
               <div className="min-w-0">
-                <div id="production-readiness-check" className="text-base font-bold uppercase tracking-[0.22em] text-[#8EB4F0] lg:text-lg">
-                  {scenario.name}
+                <div className="type-p5 font-bold uppercase tracking-[0.3em] text-[#9CA3AF]">Audience challenge</div>
+                <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                  <h2 id="production-readiness-check" className="type-h3 text-white">{scenario.title}</h2>
+                  <div className="type-h4 text-[#8EB4F0]">{scenario.name}</div>
                 </div>
-                <div className="mt-1 text-sm font-semibold uppercase tracking-[0.18em] text-[#9CA3AF] lg:text-base">CHALLENGE COMPLETE</div>
+                <p className="type-p4 mt-1 max-w-[780px] text-[#AEB5C0]">{scenario.subtitle}</p>
               </div>
-              <div className="shrink-0 whitespace-nowrap font-mono text-3xl font-semibold text-white lg:text-4xl">RESULT</div>
+              <div className="border border-white/10 bg-black/25 px-4 py-3 lg:text-right">
+                <div className="type-p5 uppercase tracking-[0.2em] text-[#9CA3AF]">Assessment</div>
+                <div className="type-p2 mt-1 text-white">9 steps · guided challenge</div>
+              </div>
             </header>
 
-            <main className="grid min-h-0 flex-1 grid-rows-[auto_auto_auto_minmax(0,1fr)_auto] gap-3 px-5 py-4 lg:px-7 lg:py-5">
-              <div className="rounded-[16px] border border-[#447ACB]/55 bg-[#447ACB]/12 px-5 py-3" role="status" aria-live="polite">
-                <div className="text-sm font-bold uppercase tracking-[0.22em] text-[#8EB4F0] lg:text-base">PRODUCTION DECISION</div>
-                <div className="mt-1 text-4xl font-semibold leading-none text-white lg:text-5xl">{decision}</div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 lg:grid-cols-6">
-                {scenario.controls.map((control) => {
-                  const choice = state.selections[control.letter]
-                  const status = choice?.resultingStatus ?? "UNCLEAR"
-                  return (
-                    <div key={control.letter} className="rounded-[14px] border border-white/10 bg-white/[0.03] px-3 py-2 text-center">
-                      <div className="text-lg font-bold text-[#8EB4F0] lg:text-xl">{control.letter}</div>
-                      <div className={`mt-1 text-sm font-bold tracking-[0.08em] lg:text-base ${statusTone(status)}`}>{getControlStatusTitle(status)}</div>
-                    </div>
-                  )
-                })}
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 rounded-[14px] border border-white/10 bg-black/20 px-3 py-2">
-                {operatingProfile.map((item) => (
-                  <div key={item.field} className="text-center">
-                    <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#9CA3AF] lg:text-sm">{item.field}</div>
-                    <div className="mt-1 text-xl font-semibold text-white lg:text-2xl">{item.value}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid min-h-0 gap-3 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-                <div className="flex min-h-0 flex-col justify-center rounded-[16px] border border-white/10 bg-white/[0.03] px-4 py-3">
-                  <div className="text-sm font-bold uppercase tracking-[0.18em] text-[#9CA3AF] lg:text-base">PRIMARY BUSINESS VALUE</div>
-                  <div className="mt-2 text-2xl font-semibold leading-tight text-white lg:text-3xl">{state.businessValue ?? "—"}</div>
+            <main className="flex flex-1 flex-col gap-4 px-4 py-4 md:px-5 md:py-5 lg:grid lg:grid-cols-[minmax(0,1.25fr)_minmax(260px,0.75fr)] lg:items-center lg:gap-5 lg:px-6 lg:py-6">
+              <div className="space-y-4">
+                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                  <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">{scenario.introLabel}</div>
+                  <p className="type-h5 mt-3 text-white">{scenario.introTitle}</p>
+                  <p className="type-p4 mt-3 max-w-[760px] text-[#D1D5DB]">{scenario.introBody}</p>
                 </div>
-                <div className="flex min-h-0 flex-col justify-center rounded-[16px] border border-white/10 bg-white/[0.03] px-4 py-3">
-                  <div className="text-sm font-bold uppercase tracking-[0.18em] text-[#9CA3AF] lg:text-base">DISCUSSION</div>
-                  <p className="mt-2 text-xl font-semibold leading-snug text-white lg:text-2xl">{scenario.result.discussionPrompt}</p>
+                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{scenario.contextLabel}</div>
+                  <p className="type-p4 mt-2 text-[#D1D5DB]">
+                    Start with the enterprise foundation, define the business value, then shape six operating decisions for the agent.
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-end">
-                <button
-                  type="button"
-                  className={`min-h-[44px] border border-white/25 px-5 py-2 text-sm font-bold uppercase tracking-[0.15em] text-white transition-colors hover:border-white hover:bg-white hover:text-black lg:text-base ${focusClass}`}
-                  onClick={reset}
-                >
-                  {scenario.result.resetLabel}
+              <div className="rounded-[18px] border border-white/10 bg-black/20 p-4">
+                <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Ready to begin?</div>
+                <div className="type-h5 mt-3 text-white">Use the same challenge structure the audience will see in the presentation.</div>
+                <button type="button" className={`mt-5 flex min-h-14 w-full items-center justify-center border border-white bg-white px-5 type-p4 font-medium text-black transition-colors hover:bg-[#E6E9EE] ${focusClass}`} onClick={start}>
+                  Start Challenge
                 </button>
               </div>
             </main>
@@ -524,191 +509,263 @@ function ScenarioProductionReadinessCheck() {
     )
   }
 
+  if (view === "result") {
+    return (
+      <section aria-labelledby="production-readiness-check">
+        <div className="w-full border border-white/10 bg-[#222222] text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] p-2 md:p-3 lg:p-4">
+          <div className="flex min-h-[0] flex-col rounded-[20px] border border-white/10 bg-[#222222]">
+            <header className="flex min-h-[0] flex-col justify-center gap-2 border-b border-white/10 px-4 py-3 md:px-5 md:py-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="min-w-0">
+                <div className="type-p5 font-bold uppercase tracking-[0.3em] text-[#9CA3AF]">Challenge complete</div>
+                <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                  <h2 id="production-readiness-check" className="type-h3 text-white">{scenario.title}</h2>
+                  <div className="type-h4 text-[#8EB4F0]">{scenario.name}</div>
+                </div>
+                <p className="type-p4 mt-1 max-w-[780px] text-[#AEB5C0]">{scenario.subtitle}</p>
+              </div>
+              <div className="border border-white/10 bg-black/25 px-4 py-3 lg:text-right">
+                <div className="type-p5 uppercase tracking-[0.2em] text-[#9CA3AF]">Production</div>
+                <div className="type-p2 mt-1 text-white">Final decision</div>
+              </div>
+            </header>
+
+            <main className="flex min-h-0 flex-1 flex-col gap-4 px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6">
+              <div className="rounded-[18px] border border-[#447ACB]/50 bg-[#447ACB]/12 px-4 py-4 md:px-5 md:py-5" role="status" aria-live="polite">
+                <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">Production decision</div>
+                <p className="type-h2 mt-2 text-white">{decision}</p>
+                <p className="type-p3 mt-2 max-w-[840px] text-[#D1D5DB]">
+                  {decision === "INCOMPLETE"
+                    ? "Complete the challenge steps before making a production decision."
+                    : decision === "NO GO"
+                      ? "The operating model is not ready for production yet."
+                      : decision === "GO WITH CONDITIONS"
+                        ? "The operating model can proceed if the partial controls are addressed."
+                        : "The operating model is ready to go into production."}
+                </p>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                {scenario.controls.map((control) => {
+                  const choice = state.selections[control.letter]
+                  const status = choice?.resultingStatus ?? "UNCLEAR"
+                  return (
+                    <div key={control.letter} className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                      <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{control.letter} · {control.name}</div>
+                      <div className="mt-2 type-h5 text-white">{getControlStatusTitle(status)}</div>
+                      <p className="type-p4 mt-2 text-[#D1D5DB]">{choice?.tradeoff ?? "No choice was selected for this control."}</p>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-3">
+                {operatingProfile.map((item) => (
+                  <div key={item.field} className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                    <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{item.field}</div>
+                    <div className="mt-2 type-h5 text-white">{item.value}</div>
+                    <div className="type-p5 mt-2 text-[#AEB5C0]">
+                      {item.average === null ? "—" : `avg ${item.average.toFixed(1)} / 2`}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Selected business value</div>
+                  <div className="mt-2 type-h5 text-white">{state.businessValue ?? "—"}</div>
+                  <p className="type-p4 mt-2 text-[#D1D5DB]">
+                    {state.businessValue === scenario.businessValue.referenceValue
+                      ? scenario.businessValue.referenceExplanation
+                      : "Business value keeps the operating decision anchored to a specific production outcome."}
+                  </p>
+                </div>
+
+                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
+                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Discussion prompt</div>
+                  <p className="type-h5 mt-2 text-white">{scenario.result.discussionPrompt}</p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className={`mt-auto min-h-[44px] self-start border border-white/25 px-4 py-2 type-p5 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-black ${focusClass}`}
+                onClick={reset}
+              >
+                {scenario.result.resetLabel}
+              </button>
+            </main>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
-    <section aria-labelledby="production-readiness-check" className="w-full">
-      <div className="h-[600px] w-full border border-white/10 bg-[#222222] p-2 text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] md:p-3 lg:p-4">
-        <div className="flex h-full flex-col overflow-hidden rounded-[20px] border border-white/10 bg-[#222222]">
-          <header className="flex h-[64px] shrink-0 items-center justify-between gap-5 border-b border-white/10 px-5 lg:px-7">
+    <section aria-labelledby="production-readiness-check">
+      <div className="w-full border border-white/10 bg-[#222222] text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] p-2 md:p-3 lg:p-4">
+        <div className="flex min-h-[0] flex-col rounded-[20px] border border-white/10 bg-[#222222]">
+          <header className="flex min-h-[0] flex-col justify-center gap-2 border-b border-white/10 px-4 py-3 md:px-5 md:py-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="min-w-0">
-              <div id="production-readiness-check" className="truncate text-base font-bold uppercase tracking-[0.22em] text-[#8EB4F0] lg:text-lg">
-                {scenario.name}
+              <div className="type-p5 font-bold uppercase tracking-[0.3em] text-[#9CA3AF]">Audience challenge</div>
+              <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                <h2 id="production-readiness-check" className="type-h3 text-white">{scenario.title}</h2>
+                <div className="type-h4 text-[#8EB4F0]">{scenario.name}</div>
               </div>
-              <div className="mt-1 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-[#9CA3AF] lg:text-base">
-                <span>{phaseLabel}</span>
-                <span aria-hidden="true">·</span>
-                <span>{phaseProgress}</span>
-              </div>
+              <p className="type-p4 mt-1 max-w-[780px] text-[#AEB5C0]">{scenario.subtitle}</p>
             </div>
-            <div className="shrink-0 whitespace-nowrap font-mono text-3xl font-semibold text-white lg:text-4xl">{overallStep}</div>
+            <div className="border border-white/10 bg-black/25 px-4 py-3 lg:text-right">
+              <div className="type-p5 uppercase tracking-[0.2em] text-[#9CA3AF]">{stepBoxLabel}</div>
+              <div className="type-p2 mt-1 text-white">{stepBoxValue}</div>
+            </div>
           </header>
 
-          <main className="grid min-h-0 flex-1 grid-rows-[82px_150px_84px_50px_40px] gap-2.5 px-5 py-3 lg:px-7 lg:py-4">
-            <div className="flex min-h-0 flex-col justify-center">
-              <div className="text-sm font-bold uppercase tracking-[0.18em] text-[#8EB4F0] lg:text-base">{currentStepLabel}</div>
-              <h3 id="current-step-title" className="mt-2 max-w-[1180px] text-3xl font-semibold leading-[1.08] text-white lg:text-[2.25rem]">
-                {currentStepTitle}
-              </h3>
-            </div>
-
-            <div className="min-h-0">
-              {stepIndex === 0 || stepIndex === 1 ? (
-                <fieldset className="grid h-full grid-cols-2 gap-3" aria-labelledby="current-step-title">
-                  {(["YES", "NO"] as const).map((answer) => {
-                    const selected = foundationAnswer === answer
-                    return (
-                      <button
-                        key={answer}
-                        type="button"
-                        aria-pressed={selected}
-                        className={`flex h-full items-center justify-center rounded-[18px] border px-5 text-center transition-colors ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
-                        onClick={() => updateFoundation(answer)}
-                      >
-                        <span className="text-4xl font-semibold lg:text-5xl">{answer}</span>
-                      </button>
-                    )
-                  })}
-                </fieldset>
-              ) : stepIndex === 2 ? (
-                <fieldset className="grid h-full grid-cols-3 gap-3" aria-labelledby="current-step-title">
-                  {scenario.businessValue.options.map((value) => {
-                    const selected = state.businessValue === value
-                    return (
-                      <button
-                        key={value}
-                        type="button"
-                        aria-pressed={selected}
-                        className={`flex h-full items-center justify-center rounded-[18px] border px-4 text-center transition-colors lg:px-6 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
-                        onClick={() => setState((current) => ({ ...current, businessValue: value }))}
-                      >
-                        <span className="text-xl font-semibold leading-tight lg:text-[1.7rem]">{value}</span>
-                      </button>
-                    )
-                  })}
-                </fieldset>
-              ) : currentControl ? (
-                <fieldset className="grid h-full grid-cols-3 gap-3" aria-labelledby="current-step-title">
-                  {currentControl.choices.map((choice) => {
-                    const selected = currentControlSelection?.id === choice.id
-                    return (
-                      <button
-                        key={choice.id}
-                        type="button"
-                        aria-pressed={selected}
-                        className={`flex h-full min-w-0 flex-col justify-between rounded-[18px] border p-4 text-left transition-colors ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
-                        onClick={() => setState((current) => ({ ...current, selections: { ...current.selections, [currentControl.letter]: choice } }))}
-                      >
-                        <span className={`text-xl font-bold uppercase leading-tight tracking-[0.08em] lg:text-[1.55rem] ${selected ? "text-[#8EB4F0]" : "text-white"}`}>{choice.label}</span>
-                        <span className="mt-3 text-base leading-snug text-[#D1D5DB] lg:text-lg">{choice.description}</span>
-                      </button>
-                    )
-                  })}
-                </fieldset>
-              ) : null}
-            </div>
-
-            <div className="min-h-0 rounded-[16px] border border-white/10 bg-white/[0.03] px-4 py-3 lg:px-5">
-              {stepIndex === 0 || stepIndex === 1 ? (
-                foundationAnswer === "NO" ? (
-                  <div className="flex h-full items-center gap-4">
-                    <div className="shrink-0">
-                      <div className="text-sm font-bold uppercase tracking-[0.18em] text-[#F2A3A3] lg:text-base">FOUNDATION BLOCKER</div>
-                      <div className="mt-1 text-2xl font-semibold text-white lg:text-3xl">NO GO</div>
-                    </div>
-                    <p className="text-lg leading-snug text-[#D1D5DB] lg:text-xl">
-                      {stepIndex === 0 ? scenario.foundation.systemsNoGoBody : scenario.foundation.ownershipNoGoBody}
-                    </p>
+          <main className="flex min-h-0 flex-1 flex-col px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6">
+            <section className="flex min-h-0 flex-1 flex-col">
+              <div className="grid gap-3 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center">
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 font-mono text-sm">
+                    {stepLabel}
                   </div>
-                ) : foundationAnswer === "YES" ? (
-                  <div className="flex h-full items-center justify-between gap-4">
-                    <div>
-                      <div className="text-sm font-bold uppercase tracking-[0.18em] text-[#7DD3A7] lg:text-base">FOUNDATION GATE</div>
-                      <div className="mt-1 text-2xl font-semibold text-white lg:text-3xl">PASS</div>
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span className="type-h4 text-[#8EB4F0]">{currentStepLabel}</span>
+                      <span className="type-h4 text-white">{currentStepSuffix}</span>
                     </div>
-                    <p className="text-lg text-[#D1D5DB] lg:text-xl">Required foundation condition is defined.</p>
+                    {stepIndex >= 3 ? <div className="type-p5 mt-1 text-[#8EB4F0]">{scenario.profileLabel}</div> : null}
                   </div>
-                ) : (
-                  <div className="flex h-full items-center text-lg text-[#9CA3AF] lg:text-xl">YES is required to continue to the next foundation step.</div>
-                )
-              ) : stepIndex === 2 ? (
-                state.businessValue ? (
-                  <div className="flex h-full items-center gap-4">
-                    <div className="shrink-0">
-                      <div className="text-sm font-bold uppercase tracking-[0.18em] text-[#8EB4F0] lg:text-base">{scenario.businessValue.referenceLabel}</div>
-                      <div className="mt-1 text-xl font-semibold text-white lg:text-2xl">{scenario.businessValue.referenceValue}</div>
-                    </div>
-                    <p className="text-lg leading-snug text-[#D1D5DB] lg:text-xl">{scenario.businessValue.referenceExplanation}</p>
-                  </div>
-                ) : (
-                  <div className="flex h-full items-center text-lg text-[#9CA3AF] lg:text-xl">Choose the primary business value to continue.</div>
-                )
-              ) : currentControlSelection ? (
-                <div className="flex h-full items-center gap-4">
-                  <div className="shrink-0">
-                    <div className="text-sm font-bold uppercase tracking-[0.18em] text-[#8EB4F0] lg:text-base">RESULTING STATUS</div>
-                    <div className={`mt-1 text-2xl font-semibold lg:text-3xl ${statusTone(currentControlSelection.resultingStatus)}`}>
-                      {currentControlSelection.resultingStatus}
-                    </div>
-                  </div>
-                  <p className="text-lg leading-snug text-[#D1D5DB] lg:text-xl">{currentControlSelection.tradeoff}</p>
                 </div>
-              ) : (
-                <div className="flex h-full items-center text-lg text-[#9CA3AF] lg:text-xl">Choose a design to see the resulting control status and tradeoff.</div>
-              )}
-            </div>
+                <div className="rounded-[16px] border border-white/10 bg-white/[0.03] px-4 py-3">
+                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{stepIndex < 3 ? "Step prompt" : "Control prompt"}</div>
+                  <p className="type-p4 mt-1 text-white">{currentStepTitle}</p>
+                </div>
+              </div>
 
-            <div className="grid min-h-0 grid-cols-3 gap-2 rounded-[14px] border border-white/10 bg-black/20 px-3 py-2">
-              {stepIndex < 3 ? (
-                <>
-                  <div className="col-span-1 flex items-center">
-                    <div>
-                      <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#9CA3AF] lg:text-sm">PHASE</div>
-                      <div className="mt-1 text-xl font-semibold text-white lg:text-2xl">FOUNDATION</div>
-                    </div>
+              {stepIndex === 0 || stepIndex === 1 ? (
+                <fieldset className="mt-4 flex min-h-0 flex-1 flex-col">
+                  <div className="grid gap-3 sm:grid-cols-2" aria-label={stepIndex === 0 ? "Systems inventory answer" : "Ownership answer"}>
+                    {(["YES", "NO"] as const).map((answer) => {
+                      const selected = (stepIndex === 0 ? state.systemsInventory : state.ownershipDefined) === answer
+                      return (
+                        <button
+                          key={answer}
+                          type="button"
+                          aria-pressed={selected}
+                          className={`flex min-h-[126px] flex-col justify-between rounded-[18px] border p-4 text-left transition-colors lg:min-h-[136px] lg:p-5 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
+                          onClick={() => updateFoundation(answer)}
+                        >
+                          <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#8EB4F0]" : "text-[#9CA3AF]"}`}>Foundation answer</span>
+                          <span className="type-h5">{answer}</span>
+                        </button>
+                      )
+                    })}
                   </div>
-                  <div className="col-span-2 flex items-center justify-end text-right">
-                    <div>
-                      <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#9CA3AF] lg:text-sm">CURRENT STATE</div>
-                      <div className="mt-1 text-xl font-semibold text-white lg:text-2xl">
-                        {stepIndex === 2 ? state.businessValue ?? "—" : foundationAnswer === "YES" ? "PASS" : foundationAnswer === "NO" ? "BLOCKED" : "—"}
+
+                  {(stepIndex === 0 ? state.systemsInventory : state.ownershipDefined) === "NO" ? (
+                    <div className="mt-4 rounded-[18px] border border-[#B12E2E]/50 bg-[#B12E2E]/12 px-4 py-4">
+                      <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#F2A3A3]">FOUNDATION BLOCKER</div>
+                      <p className="type-h5 mt-2 text-white">NO GO</p>
+                      <p className="type-p4 mt-2 text-[#D1D5DB]">
+                        {stepIndex === 0 ? scenario.foundation.systemsNoGoBody : scenario.foundation.ownershipNoGoBody}
+                      </p>
+                    </div>
+                  ) : null}
+                </fieldset>
+              ) : stepIndex === 2 ? (
+                <fieldset className="mt-4 flex min-h-0 flex-1 flex-col">
+                  <div className="grid gap-3 md:grid-cols-3" aria-label="Business value targets">
+                    {scenario.businessValue.options.map((value) => {
+                      const selected = state.businessValue === value
+                      return (
+                        <button
+                          key={value}
+                          type="button"
+                          aria-pressed={selected}
+                          className={`flex min-h-[126px] flex-col justify-between rounded-[18px] border p-4 text-left transition-colors lg:min-h-[136px] lg:p-5 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
+                          onClick={() => setState((current) => ({ ...current, businessValue: value }))}
+                        >
+                          <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#8EB4F0]" : "text-[#9CA3AF]"}`}>Value target</span>
+                          <span className="type-h5">{value}</span>
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  {state.businessValue ? (
+                    <div className="mt-4 rounded-[18px] border border-[#447ACB]/50 bg-[#447ACB]/12 px-4 py-4">
+                      <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">{scenario.businessValue.referenceLabel}</div>
+                      <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-3">
+                        <div className="type-h5 text-white">{scenario.businessValue.referenceValue}</div>
+                        <p className="type-p4 max-w-[780px] text-[#D1D5DB]">{scenario.businessValue.referenceExplanation}</p>
                       </div>
                     </div>
+                  ) : null}
+                </fieldset>
+              ) : currentControl ? (
+                <fieldset className="mt-4 flex min-h-0 flex-1 flex-col">
+                  <div className="grid gap-3 md:grid-cols-3" aria-label={`${currentControl.name} choices`}>
+                    {currentControl.choices.map((choice) => {
+                      const selected = currentControlSelection?.id === choice.id
+                      return (
+                        <button
+                          key={choice.id}
+                          type="button"
+                          aria-pressed={selected}
+                          className={`flex min-h-[132px] flex-col justify-between rounded-[18px] border p-4 text-left transition-colors lg:min-h-[144px] lg:p-5 ${focusClass} ${selected ? selectedOptionClass : "border-white/15 bg-white/[0.03] text-white hover:border-white/60 hover:bg-white/[0.08]"}`}
+                          onClick={() => setState((current) => ({ ...current, selections: { ...current.selections, [currentControl.letter]: choice } }))}
+                        >
+                          <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#8EB4F0]" : "text-[#9CA3AF]"}`}>{choice.label}</span>
+                          <span className="type-p4 text-[#D1D5DB]">{choice.description}</span>
+                        </button>
+                      )
+                    })}
                   </div>
-                </>
-              ) : (
-                operatingProfile.map((item) => (
-                  <div key={item.field} className="text-center">
-                    <div className="text-xs font-bold uppercase tracking-[0.14em] text-[#9CA3AF] lg:text-sm">{item.field}</div>
-                    <div className="mt-1 text-xl font-semibold text-white lg:text-2xl">{item.value}</div>
-                  </div>
-                ))
-              )}
-            </div>
 
-            <div className="flex items-end justify-between gap-3 border-t border-white/10 pt-2">
-              <button
-                type="button"
-                className={`min-h-[40px] border border-white/20 px-4 py-2 text-sm font-bold uppercase tracking-[0.15em] text-white transition-colors hover:border-white hover:bg-white hover:text-black lg:text-base ${focusClass} ${stepIndex === 0 ? "cursor-not-allowed opacity-40 hover:bg-transparent hover:text-white" : ""}`}
-                onClick={() => stepIndex > 0 && setStepIndex((current) => current - 1)}
-                disabled={stepIndex === 0}
-              >
-                Back
-              </button>
+                  {currentControlSelection ? (
+                    <div className="mt-4 rounded-[18px] border border-[#447ACB]/50 bg-[#447ACB]/12 px-4 py-4">
+                      <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">Resulting status</div>
+                      <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-3">
+                        <div className="type-h5 text-white">{currentControlSelection.resultingStatus}</div>
+                        <p className="type-p4 max-w-[780px] text-[#D1D5DB]">{currentControlSelection.tradeoff}</p>
+                      </div>
+                    </div>
+                  ) : null}
+                </fieldset>
+              ) : null}
 
-              <button
-                type="button"
-                disabled={!canGoNext}
-                className={`min-h-[40px] border px-5 py-2 text-sm font-bold uppercase tracking-[0.15em] transition-colors lg:text-base ${focusClass} ${canGoNext ? "border-white bg-white text-black hover:bg-[#E6E9EE]" : "cursor-not-allowed border-white/10 bg-white/5 text-white/35"}`}
-                onClick={onNext}
-              >
-                {isFoundationBlocked
-                  ? "FOUNDATION BLOCKER"
-                  : stepIndex === 2
-                    ? "Continue to A.G.E.N.T.S."
-                    : stepIndex === totalSteps - 1
-                      ? "See Production Decision"
-                      : "Next Step"}
-              </button>
-            </div>
+              <div className="mt-4 flex flex-wrap justify-between gap-3 border-t border-white/10 pt-4">
+                <button
+                  type="button"
+                  className={`min-h-[40px] border border-white/20 px-4 py-2 type-p5 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-white hover:bg-white hover:text-black ${focusClass} ${stepIndex === 0 ? "cursor-not-allowed opacity-40 hover:bg-transparent hover:text-white" : ""}`}
+                  onClick={() => {
+                    if (stepIndex === 0) return
+                    if (stepIndex === 3 && state.businessValue === null) {
+                      setStepIndex((current) => current - 1)
+                      return
+                    }
+                    if (stepIndex > 0) setStepIndex((current) => current - 1)
+                  }}
+                  disabled={stepIndex === 0}
+                >
+                  Back
+                </button>
+
+                <button
+                  type="button"
+                  disabled={!canGoNext}
+                  className={`min-h-[40px] border px-4 py-2 type-p5 font-bold uppercase tracking-[0.16em] transition-colors ${focusClass} ${canGoNext ? "border-white bg-white text-black hover:bg-[#E6E9EE]" : "cursor-not-allowed border-white/10 bg-white/5 text-white/35"}`}
+                  onClick={onNext}
+                >
+                  {isFoundationBlocked
+                    ? "FOUNDATION BLOCKER"
+                    : stepIndex === 2
+                      ? "Continue to A.G.E.N.T.S."
+                      : stepIndex === totalSteps - 1
+                        ? "See Production Decision"
+                        : "Next Step"}
+                </button>
+              </div>
+            </section>
           </main>
         </div>
       </div>
