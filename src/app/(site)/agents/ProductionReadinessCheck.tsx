@@ -462,43 +462,34 @@ function ScenarioProductionReadinessCheck() {
   if (view === "intro") {
     return (
       <section aria-labelledby="production-readiness-check">
-        <div className="w-full border border-white/10 bg-[#222222] text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] p-2 md:p-3 lg:p-4">
-          <div className="flex min-h-[0] flex-col rounded-[20px] border border-white/10 bg-[#222222]">
-            <header className="flex min-h-[0] flex-col justify-center gap-2 border-b border-white/10 px-4 py-3 md:px-5 md:py-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="w-full border border-white/10 bg-[#222222] p-2 text-white shadow-[0_24px_70px_rgba(17,19,24,0.24)] md:p-3 lg:p-4">
+          <div className="flex min-h-0 flex-col rounded-[20px] border border-white/20 bg-[#222222]">
+            <header className="grid gap-4 border-b border-white/20 px-5 py-5 md:px-6 md:py-6 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:gap-6">
               <div className="min-w-0">
-                <div className="type-p5 font-bold uppercase tracking-[0.3em] text-[#9CA3AF]">Audience challenge</div>
-                <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                  <h2 id="production-readiness-check" className="type-h3 text-white">{scenario.title}</h2>
-                  <div className="type-h4 text-[#8EB4F0]">{scenario.name}</div>
-                </div>
-                <p className="type-p4 mt-1 max-w-[780px] text-[#AEB5C0]">{scenario.subtitle}</p>
+                <div className="type-p5 font-bold uppercase tracking-[0.3em] text-[#AEB5C0]">Audience challenge</div>
+                <h2 id="production-readiness-check" className="type-h2 mt-4 text-white">{scenario.title}</h2>
+                <div className="type-h4 mt-4 text-[#447ACB]">{scenario.name}</div>
+                <p className="type-p3 mt-3 max-w-[980px] text-[#AEB5C0]">{scenario.subtitle}</p>
               </div>
-              <div className="border border-white/10 bg-black/25 px-4 py-3 lg:text-right">
-                <div className="type-p5 uppercase tracking-[0.2em] text-[#9CA3AF]">Assessment</div>
-                <div className="type-p2 mt-1 text-white">9 steps · guided challenge</div>
+              <div className="rounded-[12px] border border-[#447ACB] bg-[#447ACB] px-6 py-5 text-white lg:text-right">
+                <div className="type-p5 font-bold uppercase tracking-[0.24em] text-white/90">Assessment</div>
+                <div className="type-p1 mt-3 text-white">9 steps · guided challenge</div>
               </div>
             </header>
 
-            <main className="flex flex-1 flex-col gap-4 px-4 py-4 md:px-5 md:py-5 lg:grid lg:grid-cols-[minmax(0,1.25fr)_minmax(260px,0.75fr)] lg:items-center lg:gap-5 lg:px-6 lg:py-6">
-              <div className="space-y-4">
-                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
-                  <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#8EB4F0]">{scenario.introLabel}</div>
-                  <p className="type-h5 mt-3 text-white">{scenario.introTitle}</p>
-                  <p className="type-p4 mt-3 max-w-[760px] text-[#D1D5DB]">{scenario.introBody}</p>
-                </div>
-                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] p-4">
-                  <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">{scenario.contextLabel}</div>
-                  <p className="type-p4 mt-2 text-[#D1D5DB]">
-                    Start with the enterprise foundation, define the business value, then shape six operating decisions for the agent.
-                  </p>
-                </div>
-              </div>
-
-              <div className="rounded-[18px] border border-white/10 bg-black/20 p-4">
-                <div className="type-p5 uppercase tracking-[0.24em] text-[#9CA3AF]">Ready to begin?</div>
-                <div className="type-h5 mt-3 text-white">Use the same challenge structure the audience will see in the presentation.</div>
-                <button type="button" className={`mt-5 flex min-h-14 w-full items-center justify-center border border-white bg-white px-5 type-p4 font-medium text-black transition-colors hover:bg-[#E6E9EE] ${focusClass}`} onClick={start}>
-                  Start Challenge
+            <main className="flex flex-1 px-5 py-5 md:px-6 md:py-6">
+              <div className="flex min-h-[360px] w-full flex-col rounded-[18px] border border-white/25 bg-[#222222] px-5 py-5 md:px-7 md:py-6 lg:min-h-[390px] lg:px-8 lg:py-7">
+                <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#447ACB]">The Challenge</div>
+                <p className="type-h2 mt-6 w-full max-w-none text-white">
+                  Test your agent’s controls + the foundation beneath them.
+                </p>
+                <button
+                  type="button"
+                  className={`mt-auto flex min-h-14 items-center justify-center gap-4 self-end rounded-[12px] border border-[#447ACB] bg-[#447ACB] px-7 type-p2 font-medium text-white transition-colors hover:border-[#2F5EA4] hover:bg-[#2F5EA4] ${focusClass}`}
+                  onClick={start}
+                >
+                  <span>Start Challenge</span>
+                  <span aria-hidden="true" className="text-[1.35em] leading-none">→</span>
                 </button>
               </div>
             </main>
