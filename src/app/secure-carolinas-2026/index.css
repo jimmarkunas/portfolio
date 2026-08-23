@@ -13,7 +13,7 @@
   --sc26-warning: #b45309;
   --sc26-danger: #b91c1c;
   min-height: 100dvh;
-  background: #000;
+  background: var(--sc26-soft);
   font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
