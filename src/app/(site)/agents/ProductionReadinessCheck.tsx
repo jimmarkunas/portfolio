@@ -408,8 +408,7 @@ function ScenarioProductionReadinessCheck() {
 
   const canGoNext = readyForCurrentStep && !isFoundationBlocked
   const stepLabel = String(stepIndex + 1).padStart(2, "0")
-  const stepBoxLabel = view === "result" ? "RESULT" : "CURRENT STEP"
-  const stepBoxValue = view === "result" ? "FINAL" : `Step ${stepLabel} of ${String(totalSteps).padStart(2, "0")}`
+  const stepBoxValue = view === "result" ? "FINAL" : `${stepIndex + 1}/${totalSteps}`
 
   const updateFoundation = (answer: Exclude<FoundationAnswer, null>) => {
     if (stepIndex === 0) {
@@ -614,9 +613,8 @@ function ScenarioProductionReadinessCheck() {
               </div>
               <p className="type-p4 mt-1 max-w-[780px] text-[#AEB5C0]">{scenario.subtitle}</p>
             </div>
-            <div className="border border-white/10 bg-black/25 px-4 py-3 lg:text-right">
-              <div className="type-p5 uppercase tracking-[0.2em] text-[#9CA3AF]">{stepBoxLabel}</div>
-              <div className="type-p2 mt-1 text-white">{stepBoxValue}</div>
+            <div className="flex min-h-[72px] items-center justify-center border border-white/10 bg-black/25 px-4 py-3 lg:min-w-[104px] lg:text-right">
+              <div className="type-p1 font-bold leading-none text-white">{stepBoxValue}</div>
             </div>
           </header>
 

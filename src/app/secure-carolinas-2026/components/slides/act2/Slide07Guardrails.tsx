@@ -30,7 +30,7 @@ export const Slide07Guardrails: React.FC = () => {
           </div>
 
           <div className="sc26-surface-card-accent flex min-h-[320px] flex-col justify-center p-8 lg:min-h-[380px] lg:p-10">
-            <div className="mb-6 flex items-center gap-3 font-mono text-sm font-bold uppercase tracking-[0.16em] text-[#3B71CA] lg:text-base">
+            <div className="mb-6 flex items-center gap-3 font-mono text-sm font-bold uppercase tracking-[0.16em] text-[#447ACB] lg:text-base">
               <CheckCircle2 className="h-6 w-6" />
               {copy.controlLabel}
             </div>

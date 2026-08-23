@@ -128,8 +128,8 @@ export const Slide16ClosingCta: React.FC = () => {
               <p className="sc26-type-h2 max-w-3xl text-[#52525B]">{copy.subtitle}</p>
             </div>
 
-            <div className="rounded-[32px] border border-[#3B71CA]/35 bg-[#EFF6FF] px-7 py-7 shadow-[0_14px_40px_rgba(59,113,202,0.10)] lg:px-10 lg:py-9">
-              <div className="text-center font-mono text-[1.35rem] font-bold tracking-[0.12em] text-[#3B71CA] lg:text-[2rem]">
+            <div className="rounded-[32px] border border-[#447ACB]/35 bg-[#EFF6FF] px-7 py-7 shadow-[0_14px_40px_rgba(68,122,203,0.10)] lg:px-10 lg:py-9">
+              <div className="text-center font-mono text-[1.35rem] font-bold tracking-[0.12em] text-[#447ACB] lg:text-[2rem]">
                 {copy.primaryAction}
               </div>
             </div>
@@ -146,7 +146,7 @@ export const Slide16ClosingCta: React.FC = () => {
 
           <div className="flex justify-center lg:justify-end">
             <div className="w-full max-w-[480px] rounded-[32px] border border-[#E4E4E7] bg-white p-6 shadow-[0_18px_48px_rgba(0,0,0,0.10)] lg:p-7">
-              <div className="mb-6 text-center font-mono text-sm font-bold tracking-[0.18em] text-[#3B71CA] lg:text-base">
+              <div className="mb-6 text-center font-mono text-sm font-bold tracking-[0.18em] text-[#447ACB] lg:text-base">
                 {copy.primaryAction}
               </div>
               <div className="rounded-[24px] border border-[#F0F0F2] bg-white p-5">

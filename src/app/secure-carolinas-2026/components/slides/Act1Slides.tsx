@@ -77,12 +77,12 @@ export const Slide01Title: React.FC = () => {
           transition={{ duration: 0.45, delay: 0.15 }}
           className="sc26-surface-card-accent p-6 lg:p-8 relative overflow-hidden"
         >
-          <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#3B71CA] uppercase tracking-wider mb-2.5">
+          <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#447ACB] uppercase tracking-wider mb-2.5">
             <Fingerprint className="w-3.5 h-3.5" /> Core Thesis
           </div>
           <blockquote className="text-lg lg:text-2xl text-[#18181B] font-normal leading-relaxed">
             “The dangerous moment isn't when the model gets smarter.{' '}
-            <span className="text-[#3B71CA] font-semibold underline decoration-[#3B71CA]/30 decoration-2 underline-offset-4">
+            <span className="text-[#447ACB] font-semibold underline decoration-[#447ACB]/30 decoration-2 underline-offset-4">
               It's when we give it permission to do things.
             </span>”
           </blockquote>
@@ -105,7 +105,7 @@ export const Slide01Title: React.FC = () => {
             href="https://greatestpmever.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[#3B71CA] font-medium hover:underline px-3 py-1 bg-white border border-[#E4E4E7] rounded-full shadow-sm"
+            className="inline-flex items-center gap-1 text-[#447ACB] font-medium hover:underline px-3 py-1 bg-white border border-[#E4E4E7] rounded-full shadow-sm"
           >
             <span>greatestpmever.com</span>
             <ArrowUpRight className="w-3 h-3" />
@@ -125,13 +125,13 @@ export const Slide01Title: React.FC = () => {
 const executionFlowCardClass = (highlight: boolean) =>
   `flex min-w-0 flex-1 items-center justify-center rounded-2xl border px-4 text-center transition-all lg:px-6 ${
     highlight
-      ? 'min-h-[210px] lg:min-h-[260px] border-[#3B71CA] bg-[#EFF6FF] shadow-sm ring-2 ring-[#3B71CA]/20'
+      ? 'min-h-[210px] lg:min-h-[260px] border-[#447ACB] bg-[#EFF6FF] shadow-sm ring-2 ring-[#447ACB]/20'
       : 'min-h-[180px] lg:min-h-[220px] border-[#E4E4E7] bg-[#F8F8F9]'
   }`;
 
 const executionFlowLabelClass = (highlight: boolean) =>
   `max-w-full break-words text-xl font-semibold leading-tight lg:text-3xl ${
-    highlight ? 'text-[#3B71CA]' : 'text-[#18181B]'
+    highlight ? 'text-[#447ACB]' : 'text-[#18181B]'
   }`;
 
 const executionArrowClass = 'h-7 w-7 shrink-0 text-[#A1A1AA] lg:h-9 lg:w-9';
@@ -172,9 +172,9 @@ export const Slide02Copilots: React.FC = () => {
 
         <div className={executionCalloutClass}>
           <p className={executionCalloutTextClass}>
-            <span className="w-2.5 h-2.5 rounded-full bg-[#3B71CA] shrink-0 animate-ping" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#447ACB] shrink-0 animate-ping" />
             <span>
-              <span className="text-[#3B71CA]">{secureCarolinas2026Copy.slides.copilots.calloutLead}</span>{' '}
+              <span className="text-[#447ACB]">{secureCarolinas2026Copy.slides.copilots.calloutLead}</span>{' '}
               remained the execution boundary.
             </span>
           </p>
@@ -218,10 +218,10 @@ export const Slide03Agents: React.FC = () => {
 
         <div className={executionCalloutClass}>
           <p className={executionCalloutTextClass}>
-            <span className="w-2.5 h-2.5 rounded-full bg-[#3B71CA] shrink-0 animate-ping" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#447ACB] shrink-0 animate-ping" />
             <span>
               {secureCarolinas2026Copy.slides.agents.callout}{' '}
-              <span className="text-[#3B71CA]">It became an operator.</span>
+              <span className="text-[#447ACB]">It became an operator.</span>
             </span>
           </p>
         </div>
@@ -246,7 +246,7 @@ export const Slide04AttackSurface: React.FC = () => {
         <div className="sc26-surface-card p-3 lg:p-4">
           <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-2xl border border-[#BFD3FF] bg-[#EFF6FF] px-4 py-3.5 text-center lg:px-5 lg:py-4">
-              <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#3B71CA] lg:text-[1.85rem]">
+              <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#447ACB] lg:text-[1.85rem]">
                 {secureCarolinas2026Copy.slides.attackSurface.traditionalLabel}
               </div>
             </div>
@@ -264,7 +264,7 @@ export const Slide04AttackSurface: React.FC = () => {
         </div>
 
         <div className="flex items-center justify-center py-0.5">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E4E4E7] bg-white text-xl font-semibold text-[#3B71CA] lg:h-12 lg:w-12 lg:text-3xl">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E4E4E7] bg-white text-xl font-semibold text-[#447ACB] lg:h-12 lg:w-12 lg:text-3xl">
             {secureCarolinas2026Copy.slides.attackSurface.plusLabel}
           </div>
         </div>
@@ -282,7 +282,7 @@ export const Slide04AttackSurface: React.FC = () => {
               </div>
             ))}
             <div className="rounded-2xl border border-[#BFD3FF] bg-[#EFF6FF] px-4 py-3.5 text-center lg:px-5 lg:py-4">
-              <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#3B71CA] lg:text-[1.85rem]">
+              <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#447ACB] lg:text-[1.85rem]">
                 {secureCarolinas2026Copy.slides.attackSurface.agenticLabel}
               </div>
             </div>

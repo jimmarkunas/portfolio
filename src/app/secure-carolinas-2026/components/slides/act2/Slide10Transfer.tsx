@@ -25,7 +25,7 @@ export const Slide10Transfer: React.FC = () => {
           </div>
 
           <div className="sc26-surface-card-accent flex min-h-[220px] flex-col justify-center p-7 lg:min-h-[250px]">
-            <span className="mb-4 font-mono text-[0.7rem] font-bold uppercase tracking-[0.14em] text-[#3B71CA] lg:text-sm">
+            <span className="mb-4 font-mono text-[0.7rem] font-bold uppercase tracking-[0.14em] text-[#447ACB] lg:text-sm">
               {copy.goodLabel}
             </span>
             <div className="text-2xl font-semibold leading-tight text-[#18181B] lg:text-[2.2rem]">
@@ -35,7 +35,7 @@ export const Slide10Transfer: React.FC = () => {
         </div>
 
         <div className="sc26-surface-card p-5 lg:p-6">
-          <div className="mb-5 font-mono text-lg font-semibold tracking-[0.04em] text-[#3B71CA] lg:text-xl">
+          <div className="mb-5 font-mono text-lg font-semibold tracking-[0.04em] text-[#447ACB] lg:text-xl">
             {copy.payloadLabel}
           </div>
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">

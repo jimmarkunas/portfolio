@@ -7,10 +7,10 @@ import { secureCarolinas2026Copy } from '@/content/secure-carolinas-2026/present
 export const Slide12MeetAgent: React.FC = () => {
   const copy = secureCarolinas2026Copy.slides.meetAgent;
   const icons = [
-    <Search key="read" className="h-7 w-7 text-[#3B71CA]" />,
-    <Truck key="fulfillment" className="h-7 w-7 text-[#3B71CA]" />,
-    <CreditCard key="credit" className="h-7 w-7 text-[#3B71CA]" />,
-    <Bell key="notify" className="h-7 w-7 text-[#3B71CA]" />,
+    <Search key="read" className="h-7 w-7 text-[#447ACB]" />,
+    <Truck key="fulfillment" className="h-7 w-7 text-[#447ACB]" />,
+    <CreditCard key="credit" className="h-7 w-7 text-[#447ACB]" />,
+    <Bell key="notify" className="h-7 w-7 text-[#447ACB]" />,
   ];
 
   return (
@@ -23,7 +23,7 @@ export const Slide12MeetAgent: React.FC = () => {
 
       <div className="my-auto space-y-5 lg:space-y-6">
         <div className="sc26-surface-card p-5 lg:p-6">
-          <div className="mb-4 font-mono text-xl font-semibold tracking-[0.06em] text-[#3B71CA] lg:text-2xl">{copy.capabilitiesLabel}</div>
+          <div className="mb-4 font-mono text-xl font-semibold tracking-[0.06em] text-[#447ACB] lg:text-2xl">{copy.capabilitiesLabel}</div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {copy.capabilities.map((capability, index) => (
               <motion.div

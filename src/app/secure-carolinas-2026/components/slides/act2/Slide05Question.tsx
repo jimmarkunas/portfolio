@@ -16,12 +16,12 @@ export const Slide05Question: React.FC = () => {
   const pillars = secureCarolinas2026Copy.slides.question.pillars.map((pillar) => ({
     ...pillar,
     icon:
-      pillar.letter === 'A' ? <ShieldCheck className="w-4 h-4 text-[#3B71CA]" /> :
-      pillar.letter === 'G' ? <AlertOctagon className="w-4 h-4 text-[#3B71CA]" /> :
-      pillar.letter === 'E' ? <FileSearch className="w-4 h-4 text-[#3B71CA]" /> :
-      pillar.letter === 'N' ? <Network className="w-4 h-4 text-[#3B71CA]" /> :
-      pillar.letter === 'T' ? <ArrowRightLeft className="w-4 h-4 text-[#3B71CA]" /> :
-      <Award className="w-4 h-4 text-[#3B71CA]" />,
+      pillar.letter === 'A' ? <ShieldCheck className="w-4 h-4 text-[#447ACB]" /> :
+      pillar.letter === 'G' ? <AlertOctagon className="w-4 h-4 text-[#447ACB]" /> :
+      pillar.letter === 'E' ? <FileSearch className="w-4 h-4 text-[#447ACB]" /> :
+      pillar.letter === 'N' ? <Network className="w-4 h-4 text-[#447ACB]" /> :
+      pillar.letter === 'T' ? <ArrowRightLeft className="w-4 h-4 text-[#447ACB]" /> :
+      <Award className="w-4 h-4 text-[#447ACB]" />,
   }));
 
   return (
@@ -40,11 +40,11 @@ export const Slide05Question: React.FC = () => {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.04 * idx }}
-              className="sc26-surface-card flex min-h-[220px] flex-col justify-between p-4 transition-all hover:border-[#3B71CA] group lg:min-h-[280px] lg:p-5"
+              className="sc26-surface-card flex min-h-[220px] flex-col justify-between p-4 transition-all hover:border-[#447ACB] group lg:min-h-[280px] lg:p-5"
             >
               <div>
                 <div className="mb-3 flex items-center justify-between border-b border-[#F0F0F2] pb-2">
-                  <span className="font-mono text-3xl font-bold text-[#3B71CA] transition-colors group-hover:text-[#3B71CA] lg:text-[3.25rem]">
+                  <span className="font-mono text-3xl font-bold text-[#447ACB] transition-colors group-hover:text-[#447ACB] lg:text-[3.25rem]">
                     {p.letter}
                   </span>
                   <div className="p-1 bg-[#F4F4F5] rounded-md border border-[#E4E4E7]">

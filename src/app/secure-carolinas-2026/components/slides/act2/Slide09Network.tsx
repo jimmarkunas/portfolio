@@ -36,11 +36,11 @@ export const Slide09Network: React.FC = () => {
           </div>
 
           <div className="sc26-surface-card-accent p-5 lg:p-6">
-            <div className="mb-4 flex items-center justify-between border-b border-[#3B71CA]/15 pb-3">
-              <span className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-[#3B71CA] lg:text-base">
+            <div className="mb-4 flex items-center justify-between border-b border-[#447ACB]/15 pb-3">
+              <span className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-[#447ACB] lg:text-base">
                 {copy.governedLabel}
               </span>
-              <CheckCircle2 className="h-6 w-6 text-[#3B71CA]" />
+              <CheckCircle2 className="h-6 w-6 text-[#447ACB]" />
             </div>
             <div className="space-y-2">
               {copy.capabilities.map((item) => (

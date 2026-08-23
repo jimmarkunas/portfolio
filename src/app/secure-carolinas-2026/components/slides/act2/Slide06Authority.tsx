@@ -16,7 +16,7 @@ export const Slide06Authority: React.FC = () => {
 
       <div className="my-auto space-y-8">
         <div className="sc26-surface-card p-8 lg:p-10">
-          <div className="mb-8 font-mono text-2xl font-semibold tracking-[0.06em] text-[#3B71CA] lg:text-3xl">
+          <div className="mb-8 font-mono text-2xl font-semibold tracking-[0.06em] text-[#447ACB] lg:text-3xl">
             {secureCarolinas2026Copy.slides.authority.ladderLabel}
           </div>
 
@@ -26,11 +26,11 @@ export const Slide06Authority: React.FC = () => {
                 <div
                   className={`flex min-h-[180px] min-w-0 flex-col items-center justify-center rounded-2xl border px-3 text-center lg:min-h-[220px] lg:px-4 ${
                     index >= 3
-                      ? 'border-[#3B71CA]/40 bg-[#EFF6FF]'
+                      ? 'border-[#447ACB]/40 bg-[#EFF6FF]'
                       : 'border-[#E4E4E7] bg-[#F8F8F9]'
                   }`}
                 >
-                  <span className="mb-3 font-mono text-sm font-bold text-[#3B71CA] lg:text-base">
+                  <span className="mb-3 font-mono text-sm font-bold text-[#447ACB] lg:text-base">
                     {step.level}
                   </span>
                   <span className="text-xl font-semibold leading-tight text-[#18181B] lg:text-[2rem]">

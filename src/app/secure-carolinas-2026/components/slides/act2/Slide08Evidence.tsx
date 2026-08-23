@@ -16,7 +16,7 @@ export const Slide08Evidence: React.FC = () => {
 
       <div className="my-auto space-y-8">
         <div className="sc26-surface-card p-8 lg:p-10">
-          <div className="mb-8 font-mono text-2xl font-semibold tracking-[0.06em] text-[#3B71CA] lg:text-3xl">
+          <div className="mb-8 font-mono text-2xl font-semibold tracking-[0.06em] text-[#447ACB] lg:text-3xl">
             {copy.timelineLabel}
           </div>
 
