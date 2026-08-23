@@ -175,7 +175,7 @@ export const Slide16ReadinessCheck: React.FC = () => {
   return (
     <div className="sc26-slide-wrapper">
       <SlideHeader actLabel={secureCarolinas2026Copy.acts.act4} title={copy.title} subtitle={copy.subtitle} />
-      <div className="my-auto flex min-h-0 flex-1 flex-col">
+      <div className="sc26-readiness-check-stage my-auto flex min-h-0 flex-1 flex-col">
         <ProductionReadinessCheck
           variant="scenario"
           scenario={secureCarolinas2026Copy.scenarios.customerOrderException}
