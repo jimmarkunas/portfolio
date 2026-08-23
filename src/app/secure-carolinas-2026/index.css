@@ -7,8 +7,8 @@
   --sc26-light: #f4f4f5;
   --sc26-border: #e4e4e7;
   --sc26-border-subtle: #f0f0f2;
-  --sc26-accent: #3b71ca;
-  --sc26-accent-subtle: #eff6ff;
+  --sc26-accent: #447ACB;
+  --sc26-accent-subtle: #447ACB;
   --sc26-success: #15803d;
   --sc26-warning: #b45309;
   --sc26-danger: #b91c1c;
@@ -129,15 +129,44 @@
 
 .secure-carolinas-2026-page .sc26-surface-card-accent {
   background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
-  border: 1px solid rgba(59, 113, 202, 0.16);
+  border: 1px solid rgba(68, 122, 203, 0.16);
   border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(59, 113, 202, 0.03), 0 6px 18px -6px rgba(59, 113, 202, 0.04);
+  box-shadow: 0 1px 3px rgba(68, 122, 203, 0.03), 0 6px 18px -6px rgba(68, 122, 203, 0.04);
 }
 
 .secure-carolinas-2026-page .sc26-surface-panel {
   background-color: #f8f8f9;
   border: 1px solid #ededf0;
   border-radius: 12px;
+}
+
+/* Secure Carolinas uses one blue only: the Finox brand accent. */
+.secure-carolinas-2026-page [class*="text-[#8EB4F0]"] {
+  color: #447ACB !important;
+}
+
+.secure-carolinas-2026-page [class*="border-[#8EB4F0]"] {
+  border-color: #447ACB !important;
+}
+
+.secure-carolinas-2026-page [class*="bg-[#EFF6FF]"] {
+  background-color: #447ACB !important;
+}
+
+.secure-carolinas-2026-page [class*="border-[#BFD3FF]"] {
+  border-color: #447ACB !important;
+}
+
+.secure-carolinas-2026-page [class*="focus-visible:outline-[#8EB4F0]"]:focus-visible {
+  outline-color: #447ACB !important;
+}
+
+.secure-carolinas-2026-page [class*="hover:bg-[#2F5EA4]"]:hover {
+  background-color: #447ACB !important;
+}
+
+.secure-carolinas-2026-page [class*="hover:border-[#2F5EA4]"]:hover {
+  border-color: #447ACB !important;
 }
 
 .secure-carolinas-2026-page :is(
