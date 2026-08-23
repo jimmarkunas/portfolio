@@ -129,9 +129,9 @@
 
 .secure-carolinas-2026-page .sc26-surface-card-accent {
   background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
-  border: 1px solid rgba(68, 122, 203, 0.16);
+  border: 1px solid #447ACB;
   border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(68, 122, 203, 0.03), 0 6px 18px -6px rgba(68, 122, 203, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 6px 18px -6px rgba(0, 0, 0, 0.04);
 }
 
 .secure-carolinas-2026-page .sc26-surface-panel {
@@ -140,32 +140,42 @@
   border-radius: 12px;
 }
 
-/* Secure Carolinas uses one blue only: the Finox brand accent. */
-.secure-carolinas-2026-page [class*="text-[#8EB4F0]"] {
+/* Secure Carolinas uses one blue only: #447ACB. */
+.secure-carolinas-2026-page [class*="text-[#8EB4F0]"],
+.secure-carolinas-2026-page [class*="text-[#447ACB]"] {
   color: #447ACB !important;
 }
 
-.secure-carolinas-2026-page [class*="border-[#8EB4F0]"] {
+.secure-carolinas-2026-page [class*="border-[#8EB4F0]"],
+.secure-carolinas-2026-page [class*="border-[#BFD3FF]"],
+.secure-carolinas-2026-page [class*="border-[#447ACB]"] {
   border-color: #447ACB !important;
 }
 
-.secure-carolinas-2026-page [class*="bg-[#EFF6FF]"] {
+.secure-carolinas-2026-page [class*="bg-[#EFF6FF]"],
+.secure-carolinas-2026-page [class*="bg-[#447ACB]"] {
   background-color: #447ACB !important;
 }
 
-.secure-carolinas-2026-page [class*="border-[#BFD3FF]"] {
-  border-color: #447ACB !important;
+.secure-carolinas-2026-page [class*="ring-[#447ACB]"] {
+  --tw-ring-color: #447ACB !important;
+}
+
+.secure-carolinas-2026-page [class*="decoration-[#447ACB]"] {
+  text-decoration-color: #447ACB !important;
 }
 
 .secure-carolinas-2026-page [class*="focus-visible:outline-[#8EB4F0]"]:focus-visible {
   outline-color: #447ACB !important;
 }
 
-.secure-carolinas-2026-page [class*="hover:bg-[#2F5EA4]"]:hover {
+.secure-carolinas-2026-page [class*="hover:bg-[#2F5EA4]"]:hover,
+.secure-carolinas-2026-page [class*="hover:bg-[#447ACB]"]:hover {
   background-color: #447ACB !important;
 }
 
-.secure-carolinas-2026-page [class*="hover:border-[#2F5EA4]"]:hover {
+.secure-carolinas-2026-page [class*="hover:border-[#2F5EA4]"]:hover,
+.secure-carolinas-2026-page [class*="hover:border-[#447ACB]"]:hover {
   border-color: #447ACB !important;
 }
 
