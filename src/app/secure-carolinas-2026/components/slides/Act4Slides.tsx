@@ -20,6 +20,11 @@ export const Slide14DefinedPartialUnclear: React.FC = () => {
     return 'border-[#B91C1C]/30 bg-[#B91C1C]/5 text-[#B91C1C]';
   };
 
+  const orderedGateRules = [...copy.gateRules].sort((a, b) => {
+    const order = ['GO', 'GO WITH CONDITIONS', 'NO GO'];
+    return order.indexOf(a.outcome) - order.indexOf(b.outcome);
+  });
+
   return (
     <div className="sc26-slide-wrapper">
       <SlideHeader
@@ -47,7 +52,7 @@ export const Slide14DefinedPartialUnclear: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {copy.gateRules.map((rule) => (
+          {orderedGateRules.map((rule) => (
             <div
               key={rule.outcome}
               className={`flex min-h-[125px] items-center justify-between rounded-2xl border px-6 lg:min-h-[145px] lg:px-7 ${ruleClasses(rule.outcome)}`}
@@ -120,7 +125,7 @@ export const Slide16ClosingCta: React.FC = () => {
 
   return (
     <div className="sc26-slide-wrapper justify-center">
-      <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-8 lg:gap-10">
+      <div className="sc26-enter-body mx-auto flex w-full max-w-[1500px] flex-col gap-8 lg:gap-10">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,0.72fr)] lg:items-center lg:gap-12">
           <div>
             <div className="space-y-4">
@@ -155,7 +160,7 @@ export const Slide16ClosingCta: React.FC = () => {
 export const Slide16ReadinessCheck: React.FC = () => {
   return (
     <div className="sc26-slide-wrapper justify-center">
-      <div className="sc26-readiness-check-stage flex min-h-0 flex-1 flex-col">
+      <div className="sc26-enter-body sc26-readiness-check-stage flex min-h-0 flex-1 flex-col">
         <ProductionReadinessCheck
           variant="scenario"
           scenario={secureCarolinas2026Copy.scenarios.customerOrderException}

@@ -55,6 +55,30 @@
   background-size: 32px 32px;
 }
 
+@keyframes sc26-header-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sc26-body-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .secure-carolinas-2026-page .sc26-slide-wrapper {
   width: 100%;
   height: 100%;
@@ -138,6 +162,18 @@
   background-color: #f8f8f9;
   border: 1px solid #ededf0;
   border-radius: 12px;
+}
+
+.secure-carolinas-2026-page .sc26-slide-wrapper > header {
+  animation: sc26-header-enter 0.45s ease-out both;
+}
+
+.secure-carolinas-2026-page .sc26-slide-wrapper > header + * {
+  animation: sc26-body-enter 0.45s ease-out 0.1s both;
+}
+
+.secure-carolinas-2026-page .sc26-slide-wrapper .sc26-enter-body {
+  animation: sc26-body-enter 0.45s ease-out 0.1s both;
 }
 
 /* Secure Carolinas uses one blue only: #447ACB. */
@@ -292,5 +328,13 @@
     min-height: 100%;
     height: auto;
     padding: 1rem 1rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .secure-carolinas-2026-page .sc26-slide-wrapper > header,
+  .secure-carolinas-2026-page .sc26-slide-wrapper > header + *,
+  .secure-carolinas-2026-page .sc26-slide-wrapper .sc26-enter-body {
+    animation: none !important;
   }
 }
