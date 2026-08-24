@@ -411,21 +411,21 @@ function ScenarioProductionReadinessCheck() {
   const stepBoxValue = view === "result" ? "FINAL" : `${stepIndex + 1}/${totalSteps}`
 const scenarioShellClass = "w-full border border-[#E4E4E7] bg-white text-[#18181B] shadow-[0_24px_70px_rgba(17,19,24,0.08)] p-2 md:p-3 lg:p-4"
 const scenarioInnerClass = "flex min-h-[0] flex-col rounded-[20px] border border-[#E4E4E7] bg-[#FAFAFA]"
-const scenarioHeaderClass = "grid gap-4 border-b border-[#E4E4E7] px-5 py-5 md:px-6 md:py-6 lg:grid-cols-[minmax(0,0.47fr)_1px_minmax(0,0.53fr)] lg:items-center lg:gap-0 lg:px-6 lg:py-6"
-const scenarioAssessmentHeaderClass = "grid gap-4 border-b border-[#E4E4E7] px-5 py-5 md:px-6 md:py-6 lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,360px)] lg:items-start lg:gap-0 lg:px-6 lg:py-6"
+const scenarioWorkingHeaderClass = "grid gap-4 border-b border-[#E4E4E7] px-5 py-5 md:px-6 md:py-6 lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,480px)] lg:items-stretch lg:gap-0 lg:px-6 lg:py-6"
+const scenarioHeaderRightPanelClass = "min-w-0 bg-[#F4F4F5] px-5 py-4 md:px-6 lg:flex lg:items-center lg:px-7 lg:py-5"
 const introHeaderClass = "grid gap-4 border-b border-[#E4E4E7] px-5 py-5 md:px-6 md:py-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-8 lg:px-6 lg:py-6"
 const scenarioDividerClass = "hidden h-full w-px bg-[#E4E4E7] lg:block"
 const scenarioEyebrowClass = "type-p5 font-bold uppercase tracking-[0.3em] text-[#71717A]"
 const scenarioTitleClass = "text-[#18181B]"
 const scenarioSubtitleClass = "text-[#52525B]"
-const scenarioQuestionClass = "text-[clamp(2.15rem,3vw,2.9rem)] leading-[1.08] tracking-[-0.045em] text-[#18181B]"
-const scenarioOptionBaseClass = "border-[#D4D4D8] bg-white text-[#18181B] hover:border-[#447ACB] hover:bg-[#F8FBFF]"
-const scenarioSelectedOptionClass = "border-[#447ACB] bg-white text-[#18181B] shadow-[inset_0_0_0_1px_rgba(68,122,203,0.12)]"
+const scenarioQuestionClass = "text-[40px] leading-[1.08] tracking-[-0.045em] text-[#18181B] md:text-[48px] lg:text-[52px]"
+const scenarioOptionBaseClass = "border-[#D4D4D8] bg-white text-[#18181B] hover:bg-[#F4F4F5]"
+const scenarioSelectedOptionClass = "border-[#447ACB] bg-white text-[#447ACB] shadow-[inset_0_0_0_1px_rgba(68,122,203,0.12)]"
 const scenarioSurfaceCardClass = "border border-[#E4E4E7] bg-white"
 const scenarioAccentPanelClass = "border border-[#447ACB]/20 bg-white"
-const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hover:border-[#447ACB] hover:bg-[#F8FBFF]"
+const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hover:bg-[#F4F4F5]"
 const scenarioStageSurfaceClass =
-  "flex min-h-0 flex-1 flex-col rounded-[20px] bg-[#F4F4F5] shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
+  "flex min-h-0 flex-1 flex-col bg-[#F4F4F5]"
 
   const updateFoundation = (answer: Exclude<FoundationAnswer, null>) => {
     if (stepIndex === 0) {
@@ -523,7 +523,7 @@ const scenarioStageSurfaceClass =
                 </p>
                 <button
                   type="button"
-                  className={`mt-auto flex min-h-14 w-fit items-center justify-center gap-4 self-end rounded-[12px] border border-[#447ACB] bg-[#447ACB] px-7 type-p2 font-medium text-white transition-colors hover:border-[#2F5EA4] hover:bg-[#2F5EA4] ${focusClass}`}
+                className={`mt-auto flex min-h-14 w-fit items-center justify-center gap-4 self-end rounded-[12px] border border-[#447ACB] bg-[#447ACB] px-7 type-p2 font-medium text-white transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${focusClass}`}
                   onClick={start}
                 >
                   <span>Start Challenge</span>
@@ -542,37 +542,34 @@ const scenarioStageSurfaceClass =
       <section aria-labelledby="production-readiness-check">
         <div className={scenarioShellClass}>
           <div className={scenarioInnerClass}>
-            <header className={scenarioHeaderClass}>
+            <header className={scenarioWorkingHeaderClass}>
               <div className="min-w-0">
-                <div className={scenarioEyebrowClass}>Challenge complete</div>
-                <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                  <h2
-                    id="production-readiness-check"
-                    className={`text-[clamp(2.5rem,3.3vw,3.3rem)] font-light leading-[1.02] tracking-[-0.05em] ${scenarioTitleClass}`}
-                  >
-                    {scenario.title}
-                  </h2>
-                  <div className="type-h4 text-[#447ACB]">{scenario.name}</div>
-                </div>
-                <p className={`type-p4 mt-1 max-w-[780px] ${scenarioSubtitleClass}`}>{scenario.subtitle}</p>
+                <div className={scenarioEyebrowClass}>Audience challenge</div>
+                <h2
+                  id="production-readiness-check"
+                  className={`type-h3 mt-2 lg:whitespace-nowrap ${scenarioTitleClass}`}
+                >
+                  {scenario.title}
+                </h2>
+                <div className="type-h4 mt-2 text-[#447ACB]">{scenario.name}</div>
+                <p className={`type-p4 mt-1 max-w-[820px] ${scenarioSubtitleClass}`}>{scenario.subtitle}</p>
               </div>
 
               <div className={scenarioDividerClass} aria-hidden="true" />
 
-              <div className="min-w-0 lg:pl-6">
-                <div className={scenarioEyebrowClass}>Production</div>
-                <div className={`mt-2 text-[clamp(2.8rem,3.6vw,4rem)] font-light leading-none tracking-[-0.055em] ${scenarioTitleClass}`}>
-                  {decision}
+              <div className={scenarioHeaderRightPanelClass}>
+                <div className="flex min-w-0 items-start gap-3">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#D4D4D8] font-mono text-[0.78rem] leading-none text-[#18181B] lg:h-14 lg:w-14 lg:text-[0.88rem]">
+                    FINAL
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-[clamp(2.35rem,3vw,3.05rem)] leading-none">
+                      <span className="font-light tracking-[-0.055em] text-[#447ACB]">PRODUCTION</span>
+                      <span className={`font-light tracking-[-0.055em] ${scenarioTitleClass}`}>Decision</span>
+                    </div>
+                    <div className={`type-p4 mt-2 text-[#52525B]`}>{decision}</div>
+                  </div>
                 </div>
-                <p className="type-p3 mt-2 max-w-[780px] text-[#52525B]">
-                  {decision === "INCOMPLETE"
-                    ? "Complete the challenge steps before making a production decision."
-                    : decision === "NO GO"
-                      ? "The operating model is not ready for production yet."
-                      : decision === "GO WITH CONDITIONS"
-                        ? "The operating model can proceed if the partial controls are addressed."
-                        : "The operating model is ready to go into production."}
-                </p>
               </div>
             </header>
 
@@ -637,7 +634,7 @@ const scenarioStageSurfaceClass =
 
                   <button
                     type="button"
-                    className={`absolute bottom-6 right-6 min-h-[44px] w-fit rounded-[12px] border border-[#447ACB] bg-[#447ACB] px-5 py-2 type-p5 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-[#2F5EA4] hover:bg-[#2F5EA4] ${focusClass}`}
+                    className={`absolute bottom-6 right-6 min-h-[44px] w-fit rounded-[12px] border border-[#447ACB] bg-[#447ACB] px-5 py-2 type-p5 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${focusClass}`}
                     onClick={reset}
                   >
                     {scenario.result.resetLabel}
@@ -655,19 +652,22 @@ const scenarioStageSurfaceClass =
     <section aria-labelledby="production-readiness-check">
       <div className={scenarioShellClass}>
         <div className={scenarioInnerClass}>
-          <header className={scenarioAssessmentHeaderClass}>
+          <header className={scenarioWorkingHeaderClass}>
             <div className="min-w-0">
               <div className={scenarioEyebrowClass}>Audience challenge</div>
-              <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                <h2 id="production-readiness-check" className={`type-h3 ${scenarioTitleClass}`}>{scenario.title}</h2>
-                <div className="type-h4 text-[#447ACB]">{scenario.name}</div>
-              </div>
-              <p className={`type-p4 mt-1 max-w-[780px] ${scenarioSubtitleClass}`}>{scenario.subtitle}</p>
+              <h2
+                id="production-readiness-check"
+                className={`type-h3 mt-2 lg:whitespace-nowrap ${scenarioTitleClass}`}
+              >
+                {scenario.title}
+              </h2>
+              <div className="type-h4 mt-2 text-[#447ACB]">{scenario.name}</div>
+              <p className={`type-p4 mt-1 max-w-[820px] ${scenarioSubtitleClass}`}>{scenario.subtitle}</p>
             </div>
 
             <div className={scenarioDividerClass} aria-hidden="true" />
 
-            <div className="min-w-0 lg:pl-6">
+            <div className={scenarioHeaderRightPanelClass}>
               <div className="flex min-w-0 items-start gap-3">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#D4D4D8] font-mono text-[1.05rem] text-[#18181B] lg:h-14 lg:w-14 lg:text-[1.15rem]">
                   {stepLabel}
@@ -677,7 +677,7 @@ const scenarioStageSurfaceClass =
                     <span className="font-light tracking-[-0.055em] text-[#447ACB]">{currentStepLabel}</span>
                     <span className={`font-light tracking-[-0.055em] ${scenarioTitleClass}`}>{currentStepSuffix}</span>
                   </div>
-                  <div className={`type-p4 mt-2 text-[#52525B] lg:max-w-[320px]`}>{currentStepDescriptor}</div>
+                  <div className="type-p4 mt-2 text-[#52525B]">{currentStepDescriptor}</div>
                   {stepIndex >= 3 ? <div className="type-p5 mt-2 text-[#447ACB]">{scenario.profileLabel}</div> : null}
                 </div>
               </div>
@@ -686,7 +686,7 @@ const scenarioStageSurfaceClass =
 
           <main className={scenarioStageSurfaceClass + " px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6"}>
             <section className="flex min-h-0 flex-1 flex-col">
-              <div className="min-h-0 pb-4 md:pb-5 lg:pb-6">
+              <div className="min-h-0 py-[25px]">
                 <p className={`${scenarioQuestionClass} max-w-none`}>{currentStepTitle}</p>
               </div>
 
@@ -703,8 +703,8 @@ const scenarioStageSurfaceClass =
                           className={`flex min-h-[126px] flex-col justify-between rounded-[18px] border p-4 text-left transition-colors lg:min-h-[136px] lg:p-5 ${focusClass} ${selected ? scenarioSelectedOptionClass : scenarioOptionBaseClass}`}
                           onClick={() => updateFoundation(answer)}
                         >
-                          <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#18181B]" : "text-[#71717A]"}`}>Foundation answer</span>
-                          <span className="type-h5">{answer}</span>
+                          <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#447ACB]" : "text-[#71717A]"}`}>Foundation answer</span>
+                          <span className={`type-h5 ${selected ? "text-[#447ACB]" : "text-[#18181B]"}`}>{answer}</span>
                         </button>
                       )
                     })}
@@ -712,9 +712,9 @@ const scenarioStageSurfaceClass =
 
                   {(stepIndex === 0 ? state.systemsInventory : state.ownershipDefined) === "NO" ? (
                     <div className="mt-4 rounded-[18px] border border-[#B12E2E]/20 bg-[#FDECEC] px-4 py-4">
-                      <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#F2A3A3]">FOUNDATION BLOCKER</div>
-                      <p className="type-h5 mt-2 text-[#18181B]">NO GO</p>
-                      <p className="type-p4 mt-2 text-[#52525B]">
+                      <div className="text-[22px] font-bold uppercase leading-none tracking-[0.08em] text-[#F2A3A3]">FOUNDATION BLOCKER</div>
+                      <p className="mt-2 text-[48px] font-semibold leading-none text-[#18181B]">NO GO</p>
+                      <p className="mt-2 text-[26px] leading-[1.35] text-[#52525B]">
                         {stepIndex === 0 ? scenario.foundation.systemsNoGoBody : scenario.foundation.ownershipNoGoBody}
                       </p>
                     </div>
@@ -733,22 +733,12 @@ const scenarioStageSurfaceClass =
                           className={`flex min-h-[126px] flex-col justify-between rounded-[18px] border p-4 text-left transition-colors lg:min-h-[136px] lg:p-5 ${focusClass} ${selected ? scenarioSelectedOptionClass : scenarioOptionBaseClass}`}
                           onClick={() => setState((current) => ({ ...current, businessValue: value }))}
                         >
-                          <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#18181B]" : "text-[#71717A]"}`}>Value target</span>
-                          <span className="type-h5">{value}</span>
+                          <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#447ACB]" : "text-[#71717A]"}`}>Value target</span>
+                          <span className={`type-h5 ${selected ? "text-[#447ACB]" : "text-[#18181B]"}`}>{value}</span>
                         </button>
                       )
                     })}
                   </div>
-
-                  {state.businessValue ? (
-                    <div className={`mt-4 rounded-[18px] px-4 py-4 ${scenarioAccentPanelClass}`}>
-                      <div className="type-p5 font-bold uppercase tracking-[0.28em] text-[#447ACB]">{scenario.businessValue.referenceLabel}</div>
-                      <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-3">
-                        <div className="type-h5 text-[#18181B]">{scenario.businessValue.referenceValue}</div>
-                        <p className="type-p4 max-w-[780px] text-[#52525B]">{scenario.businessValue.referenceExplanation}</p>
-                      </div>
-                    </div>
-                  ) : null}
                 </fieldset>
               ) : currentControl ? (
                 <fieldset className="flex min-h-0 flex-1 flex-col">
@@ -763,8 +753,8 @@ const scenarioStageSurfaceClass =
                           className={`flex min-h-[132px] flex-col justify-between rounded-[18px] border p-4 text-left transition-colors lg:min-h-[144px] lg:p-5 ${focusClass} ${selected ? scenarioSelectedOptionClass : scenarioOptionBaseClass}`}
                           onClick={() => setState((current) => ({ ...current, selections: { ...current.selections, [currentControl.letter]: choice } }))}
                         >
-                          <span className={`type-p5 font-bold uppercase tracking-[0.28em] ${selected ? "text-[#18181B]" : "text-[#71717A]"}`}>{choice.label}</span>
-                          <span className="type-p4 text-[#52525B]">{choice.description}</span>
+                          <span className={`text-[24px] font-bold leading-[1.15] tracking-[-0.01em] ${selected ? "text-[#447ACB]" : "text-[#18181B]"}`}>{choice.label}</span>
+                          <span className={`text-[22px] leading-[1.3] ${selected ? "text-[#447ACB]" : "text-[#52525B]"}`}>{choice.description}</span>
                         </button>
                       )
                     })}
@@ -802,7 +792,7 @@ const scenarioStageSurfaceClass =
                 <button
                   type="button"
                   disabled={!canGoNext}
-                  className={`min-h-[40px] border px-4 py-2 type-p5 font-bold uppercase tracking-[0.16em] transition-colors ${focusClass} ${canGoNext ? "border-[#447ACB] bg-[#447ACB] text-white hover:bg-[#2F5EA4]" : "cursor-not-allowed border-[#D4D4D8] bg-white text-[#A1A1AA]"}`}
+                  className={`min-h-[40px] border px-4 py-2 type-p5 font-bold uppercase tracking-[0.16em] transition-colors ${focusClass} ${canGoNext ? "border-[#447ACB] bg-[#447ACB] text-white hover:bg-[#447ACB]" : "cursor-not-allowed border-[#D4D4D8] bg-white text-[#A1A1AA]"}`}
                   onClick={onNext}
                 >
                   {isFoundationBlocked
