@@ -122,32 +122,62 @@ export const Slide15ProductionDecision: React.FC = () => {
 
 export const Slide16ClosingCta: React.FC = () => {
   const copy = secureCarolinas2026Copy.slides.closingCta;
+  const title = copy.title;
+  const titleEndsWithPeriod = title.endsWith('.');
+  const titleBody = titleEndsWithPeriod ? title.slice(0, -1) : title;
 
   return (
     <div className="sc26-slide-wrapper justify-center">
-      <div className="sc26-enter-body mx-auto flex w-full max-w-[1500px] flex-col gap-8 lg:gap-10">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,0.72fr)] lg:items-center lg:gap-12">
-          <div>
-            <div className="space-y-4">
-              <h1 className="sc26-type-hero max-w-4xl text-[#18181B]">{copy.title}</h1>
-              <p className="sc26-type-h2 max-w-3xl text-[#52525B]">{copy.subtitle}</p>
-            </div>
-          </div>
+      <div className="sc26-enter-body mx-auto flex w-full max-w-[1560px] flex-col gap-8 lg:gap-10">
+        <div className="space-y-4">
+          <h1 className="sc26-type-hero w-full max-w-none whitespace-nowrap text-[#18181B]">
+            {titleBody}
+            {titleEndsWithPeriod ? <span className="text-[#447ACB]">.</span> : null}
+          </h1>
+        </div>
 
-          <div className="flex justify-center lg:justify-end">
-            <div className="w-full max-w-[460px] rounded-[28px] border border-[#E4E4E7] bg-white p-7 shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
-              <div className="mb-5 text-center font-mono text-sm font-bold tracking-[0.18em] text-[#447ACB] lg:text-base">
-                {copy.primaryAction}
+        <div className="overflow-hidden rounded-[32px] border border-[#E4E4E7] bg-white shadow-[0_10px_28px_rgba(0,0,0,0.05)]">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-stretch">
+            <div className="flex min-h-full flex-col justify-between px-8 py-9 lg:px-10 lg:py-11">
+              <div className="space-y-8">
+                <p className="max-w-3xl text-[1.9rem] font-medium leading-[1.15] tracking-[-0.04em] text-[#18181B] lg:text-[2.45rem]">
+                  {copy.subtitle}
+                </p>
+                <div className="h-[3px] w-32 rounded-full bg-[#447ACB]" aria-hidden="true" />
+                <div className="space-y-6">
+                  <a
+                    href="https://greatestpmever.com/agents"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-fit text-[1.95rem] font-semibold leading-none tracking-[-0.045em] text-[#447ACB] lg:text-[2.6rem]"
+                  >
+                    greatestpmever.com/agents
+                  </a>
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-sm font-bold tracking-[0.16em] text-[#447ACB] lg:text-[0.98rem]">
+                    <span>USE IT</span>
+                    <span aria-hidden="true">•</span>
+                    <span>FORK IT</span>
+                    <span aria-hidden="true">•</span>
+                    <span>CHALLENGE IT</span>
+                    <span aria-hidden="true">•</span>
+                    <span>REPORT ADOPTION</span>
+                  </div>
+                </div>
               </div>
-              <img
-                src="/qr-codes/secure-carolinas-2026-agents.png"
-                alt="QR code linking to the A.G.E.N.T.S. framework and production readiness kit"
-                className="mx-auto aspect-square w-full max-w-[360px] select-none object-contain"
-              />
-              <p className="mt-5 text-center text-lg font-semibold text-[#18181B] lg:text-[1.15rem]">
-                {copy.linkText}
-              </p>
-              <p className="mt-2 text-center text-sm text-[#52525B] lg:text-base">{copy.scanText}</p>
+            </div>
+
+            <div className="border-t border-[#E4E4E7] px-8 py-9 lg:border-l lg:border-t-0 lg:px-10 lg:py-11">
+              <div className="flex h-full flex-col items-center justify-center text-center">
+                <div className="font-mono text-sm font-bold tracking-[0.18em] text-[#447ACB] lg:text-base">
+                  {copy.primaryAction}
+                </div>
+                <p className="mt-3 text-base font-medium text-[#71717A] lg:text-lg">{copy.scanText}</p>
+                <img
+                  src="/qr-codes/secure-carolinas-2026-agents.png"
+                  alt="QR code linking to the A.G.E.N.T.S. framework and production readiness kit"
+                  className="mt-6 aspect-square w-full max-w-[390px] select-none object-contain lg:mt-8"
+                />
+              </div>
             </div>
           </div>
         </div>
