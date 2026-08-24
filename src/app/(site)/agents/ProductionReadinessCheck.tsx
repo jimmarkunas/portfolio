@@ -82,8 +82,8 @@ function ProductionReadinessCheckDefault({ variant = "default" }: ProductionRead
   const shellMinHeight = isPresentation ? "min-h-[520px] md:min-h-[560px] lg:min-h-[600px]" : "min-h-[620px] md:min-h-[640px] lg:min-h-[700px]"
   const innerPadding = isPresentation ? "px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6" : "px-5 py-6 md:px-7 md:py-8"
   const headerMinHeight = isPresentation ? "min-h-[88px] gap-3 px-4 py-4 md:px-5" : "min-h-[112px] gap-4 px-5 py-5 md:px-7"
-  const introGridClass = isPresentation ? "grid flex-1 gap-5 md:grid-cols-[minmax(0,1fr)_280px] md:items-center" : "grid flex-1 gap-8 md:grid-cols-[minmax(0,1fr)_320px] md:items-center"
-  const introCardClass = isPresentation ? "border border-white/10 bg-white/[0.03] p-4 md:p-5" : "border border-white/10 bg-white/[0.03] p-5"
+  const introGridClass = isPresentation ? "flex flex-1 flex-col gap-6 md:gap-8" : "grid flex-1 gap-8 md:grid-cols-[minmax(0,1fr)_320px] md:items-center"
+  const introCardClass = isPresentation ? "w-full max-w-[320px] self-end border border-white/10 bg-white/[0.03] p-4 md:p-5" : "border border-white/10 bg-white/[0.03] p-5"
   const stepOuterClass = isPresentation ? "mb-6 flex flex-wrap items-center gap-3 md:mb-7" : "mb-8 flex flex-wrap items-center gap-4"
   const stepNumberClass = isPresentation ? "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 font-mono text-xs" : "flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/20 font-mono text-sm"
   const optionCardClass = isPresentation ? "flex min-h-[122px] flex-col justify-between border p-4 text-left transition-colors" : "flex min-h-[140px] flex-col justify-between border p-5 text-left transition-colors"
@@ -412,10 +412,13 @@ function ScenarioProductionReadinessCheck() {
 const scenarioShellClass = "w-full border border-[#E4E4E7] bg-white text-[#18181B] shadow-[0_24px_70px_rgba(17,19,24,0.08)] p-2 md:p-3 lg:p-4"
 const scenarioInnerClass = "flex min-h-[0] flex-col rounded-[20px] border border-[#E4E4E7] bg-[#FAFAFA]"
 const scenarioHeaderClass = "grid gap-4 border-b border-[#E4E4E7] px-5 py-5 md:px-6 md:py-6 lg:grid-cols-[minmax(0,0.47fr)_1px_minmax(0,0.53fr)] lg:items-center lg:gap-0 lg:px-6 lg:py-6"
+const scenarioAssessmentHeaderClass = "grid gap-4 border-b border-[#E4E4E7] px-5 py-5 md:px-6 md:py-6 lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,360px)] lg:items-start lg:gap-0 lg:px-6 lg:py-6"
+const introHeaderClass = "grid gap-4 border-b border-[#E4E4E7] px-5 py-5 md:px-6 md:py-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-8 lg:px-6 lg:py-6"
 const scenarioDividerClass = "hidden h-full w-px bg-[#E4E4E7] lg:block"
 const scenarioEyebrowClass = "type-p5 font-bold uppercase tracking-[0.3em] text-[#71717A]"
 const scenarioTitleClass = "text-[#18181B]"
 const scenarioSubtitleClass = "text-[#52525B]"
+const scenarioQuestionClass = "text-[clamp(2.15rem,3vw,2.9rem)] leading-[1.08] tracking-[-0.045em] text-[#18181B]"
 const scenarioOptionBaseClass = "border-[#D4D4D8] bg-white text-[#18181B] hover:border-[#447ACB] hover:bg-[#F8FBFF]"
 const scenarioSelectedOptionClass = "border-[#447ACB] bg-white text-[#18181B] shadow-[inset_0_0_0_1px_rgba(68,122,203,0.12)]"
 const scenarioSurfaceCardClass = "border border-[#E4E4E7] bg-white"
@@ -462,6 +465,25 @@ const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hove
           ? "Target"
           : currentControl?.name ?? ""
 
+  const currentStepDescriptor =
+    stepIndex === 0
+      ? "Enterprise foundation check"
+      : stepIndex === 1
+        ? "Ownership check"
+        : stepIndex === 2
+          ? "Business value target"
+          : stepIndex === 3
+            ? "Decision rights"
+            : stepIndex === 4
+              ? "Guardrail rules"
+              : stepIndex === 5
+                ? "Audit trail"
+                : stepIndex === 6
+                  ? "System access"
+                  : stepIndex === 7
+                    ? "Escalation path"
+                    : "Outcome ownership"
+
   const onNext = () => {
     if (stepIndex < totalSteps - 1) {
       setStepIndex((current) => current + 1)
@@ -476,17 +498,17 @@ const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hove
       <section aria-labelledby="production-readiness-check">
         <div className={scenarioShellClass}>
           <div className={scenarioInnerClass}>
-            <header className={scenarioHeaderClass}>
+            <header className={introHeaderClass}>
               <div className="min-w-0">
                 <div className={scenarioEyebrowClass}>Audience challenge</div>
                 <h2 id="production-readiness-check" className={`type-h2 mt-4 ${scenarioTitleClass}`}>{scenario.title}</h2>
                 <div className="type-h4 mt-4 text-[#447ACB]">{scenario.name}</div>
                 <p className={`type-p3 mt-3 max-w-[980px] ${scenarioSubtitleClass}`}>{scenario.subtitle}</p>
               </div>
-              <div className="flex min-h-[84px] items-center justify-center rounded-[12px] border border-[#447ACB] bg-[#447ACB] px-5 py-4 text-center text-white lg:min-w-[240px] lg:justify-center">
-                <div>
+              <div className="flex min-h-[72px] w-full max-w-[360px] items-center justify-center rounded-[14px] border border-[#447ACB] bg-[#447ACB] px-6 py-3 text-center text-white lg:justify-self-end lg:self-start">
+                <div className="flex flex-col items-center gap-2">
                   <div className="type-p5 font-bold uppercase tracking-[0.24em] text-white/90">Assessment</div>
-                  <div className="type-p1 mt-2 text-white">9 steps · guided challenge</div>
+                  <div className="type-p2 text-white">9 steps · guided challenge</div>
                 </div>
               </div>
             </header>
@@ -631,7 +653,7 @@ const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hove
     <section aria-labelledby="production-readiness-check">
       <div className={scenarioShellClass}>
         <div className={scenarioInnerClass}>
-          <header className={scenarioHeaderClass}>
+          <header className={scenarioAssessmentHeaderClass}>
             <div className="min-w-0">
               <div className={scenarioEyebrowClass}>Audience challenge</div>
               <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
@@ -644,7 +666,7 @@ const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hove
             <div className={scenarioDividerClass} aria-hidden="true" />
 
             <div className="min-w-0 lg:pl-6">
-              <div className="flex min-w-0 items-center gap-3">
+              <div className="flex min-w-0 items-start gap-3">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#D4D4D8] font-mono text-[1.05rem] text-[#18181B] lg:h-14 lg:w-14 lg:text-[1.15rem]">
                   {stepLabel}
                 </div>
@@ -653,17 +675,21 @@ const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hove
                     <span className="font-light tracking-[-0.055em] text-[#447ACB]">{currentStepLabel}</span>
                     <span className={`font-light tracking-[-0.055em] ${scenarioTitleClass}`}>{currentStepSuffix}</span>
                   </div>
-                  {stepIndex >= 3 ? <div className="type-p5 mt-1 text-[#447ACB]">{scenario.profileLabel}</div> : null}
+                  <div className={`type-p4 mt-2 text-[#52525B] lg:max-w-[320px]`}>{currentStepDescriptor}</div>
+                  {stepIndex >= 3 ? <div className="type-p5 mt-2 text-[#447ACB]">{scenario.profileLabel}</div> : null}
                 </div>
               </div>
-              <p className={`mt-4 max-w-none text-[clamp(2.15rem,3vw,2.9rem)] leading-[1.08] tracking-[-0.045em] ${scenarioTitleClass}`}>{currentStepTitle}</p>
             </div>
           </header>
 
           <main className="flex min-h-0 flex-1 flex-col px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6">
             <section className="flex min-h-0 flex-1 flex-col">
+              <div className="min-h-0 pb-4 md:pb-5 lg:pb-6">
+                <p className={`${scenarioQuestionClass} max-w-none`}>{currentStepTitle}</p>
+              </div>
+
               {stepIndex === 0 || stepIndex === 1 ? (
-                <fieldset className="mt-4 flex min-h-0 flex-1 flex-col">
+                <fieldset className="flex min-h-0 flex-1 flex-col">
                   <div className="grid gap-3 sm:grid-cols-2" aria-label={stepIndex === 0 ? "Systems inventory answer" : "Ownership answer"}>
                     {(["YES", "NO"] as const).map((answer) => {
                       const selected = (stepIndex === 0 ? state.systemsInventory : state.ownershipDefined) === answer
@@ -693,7 +719,7 @@ const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hove
                   ) : null}
                 </fieldset>
               ) : stepIndex === 2 ? (
-                <fieldset className="mt-4 flex min-h-0 flex-1 flex-col">
+                <fieldset className="flex min-h-0 flex-1 flex-col">
                   <div className="grid gap-3 md:grid-cols-3" aria-label="Business value targets">
                     {scenario.businessValue.options.map((value) => {
                       const selected = state.businessValue === value
@@ -723,7 +749,7 @@ const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hove
                   ) : null}
                 </fieldset>
               ) : currentControl ? (
-                <fieldset className="mt-4 flex min-h-0 flex-1 flex-col">
+                <fieldset className="flex min-h-0 flex-1 flex-col">
                   <div className="grid gap-3 md:grid-cols-3" aria-label={`${currentControl.name} choices`}>
                     {currentControl.choices.map((choice) => {
                       const selected = currentControlSelection?.id === choice.id
