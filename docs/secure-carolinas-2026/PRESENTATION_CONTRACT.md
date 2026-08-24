@@ -235,11 +235,37 @@ Approved QR-card presentation:
 - QR maximum width: `360px`
 - visible accent blue: `#447ACB`
 
+### Accent and Highlight System
+
+Secure Carolinas uses `#447ACB` as its visible blue accent.
+
+The one-blue rule does not mean that every accent-adjacent surface becomes a solid-blue background.
+
+Approved highlight behavior:
+
+- subtle highlighted surfaces use neutral `#F4F4F5` or white backgrounds
+- highlighted borders and accent text may use `#447ACB`
+- static solid-blue surfaces must use `#447ACB` intentionally
+- visible text on a static `#447ACB` surface must be white
+- `#447ACB` text must never be rendered on a `#447ACB` background
+- pale-blue `#EFF6FF` presentation surfaces are not used
+- static solid-blue CSS enforcement uses exact class-token matching and must not activate from variant utilities such as `hover:bg-[#447ACB]`
+
+Approved slide treatment:
+
+- Slide 2 highlights `Human` with a neutral background, blue border, and blue text
+- Slide 3 highlights `Agent` with a neutral background, blue border, and blue text
+- Slide 4 uses neutral backgrounds with blue border/text treatment for `Traditional Attack Surface` and `Agentic Attack Surface`
+- Slide 6 uses neutral backgrounds with blue borders for the higher Authority ladder states
+- Slide 8 uses neutral backgrounds with blue borders for the Evidence pipeline
+
+These treatments preserve visual hierarchy without using solid-blue blocks for subtle emphasis.
+
 ---
 
 ## Approved Baseline
 
-Commit SHA: 871ee5751fa4c3eb06a7cfdfe035d69cc5dd394a
+Commit SHA: c36fab08ba231e1018f14ee8b54187b7af3ef068
 
 Date approved: 2026-08-24
 
