@@ -13,6 +13,62 @@
 - Preserve mobile/tablet/desktop behavior when touching shared UI.
 - After 2 failed attempts on the same issue, stop and present a 3-step plan.
 
+## Secure Carolinas 2026 Presentation — Explicit Override
+
+For any task involving the Secure Carolinas 2026 presentation, including:
+
+- `src/app/secure-carolinas-2026/**`
+- `src/app/securecarolinas2026/**`
+- `src/content/secure-carolinas-2026/**`
+- Secure Carolinas scenario-mode code inside `src/app/(site)/agents/ProductionReadinessCheck.tsx`
+- `docs/secure-carolinas-2026/**`
+
+the canonical project contract is:
+
+`docs/secure-carolinas-2026/PRESENTATION_CONTRACT.md`
+
+Read that file before making any Secure Carolinas presentation change.
+
+For Secure Carolinas work ONLY, the following generic repository rules are OVERRIDDEN when they conflict with the current user request or the presentation contract:
+
+- "Prefer the smallest safe change that solves the request."
+- "For layout nudges, change one variable at a time."
+- "If user asks for one nudge, change only that value."
+- "Fix one root cause at a time; avoid speculative stacked changes."
+- "For single-bug fixes, touch at most 3 files per attempt unless approved."
+
+Secure Carolinas replacement rule:
+
+When the user requests multiple related presentation changes as one change set, implement the ENTIRE requested change set coherently in one pass.
+
+Do not:
+- implement only the easiest item
+- substitute a smaller safe change
+- stop after one visual adjustment
+- preserve an older conflicting instruction
+- reinterpret a multi-item request as separate single-variable nudges
+
+Before implementation:
+
+1. Read the current relevant source from `main`.
+2. Read `docs/secure-carolinas-2026/PRESENTATION_CONTRACT.md`.
+3. Map every requested change to its exact current JSX/class/helper/conditional/CSS target.
+4. Confirm the complete edit map before modifying code.
+5. Implement the full requested set.
+6. Verify the actual diff against every requested item.
+
+For visual work, successful typecheck/build is NOT visual approval.
+
+A visual task is complete only after:
+- requested diff is verified
+- build/typecheck pass
+- rendered output is reviewed
+- the user approves it
+
+If the current request conflicts with an older Secure Carolinas instruction, the CURRENT explicit user instruction wins.
+
+Do not apply this override to unrelated portfolio, case-study, deployment, or site work.
+
 ## Content Rules
 - Runtime truth: `src/content/case-studies/`.
 - Brief/source truth: `docs/case-studies/`.
