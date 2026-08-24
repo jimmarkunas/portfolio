@@ -424,6 +424,8 @@ const scenarioSelectedOptionClass = "border-[#447ACB] bg-white text-[#18181B] sh
 const scenarioSurfaceCardClass = "border border-[#E4E4E7] bg-white"
 const scenarioAccentPanelClass = "border border-[#447ACB]/20 bg-white"
 const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hover:border-[#447ACB] hover:bg-[#F8FBFF]"
+const scenarioStageSurfaceClass =
+  "flex min-h-0 flex-1 flex-col rounded-[20px] bg-[#F4F4F5] shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
 
   const updateFoundation = (answer: Exclude<FoundationAnswer, null>) => {
     if (stepIndex === 0) {
@@ -514,7 +516,7 @@ const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hove
             </header>
 
             <main className="flex flex-1 px-5 py-5 md:px-6 md:py-6">
-              <div className="flex w-full flex-1 flex-col rounded-[18px] border border-[#E4E4E7] bg-white px-5 py-5 md:px-7 md:py-6 lg:px-8 lg:py-7">
+              <div className="flex w-full flex-1 flex-col rounded-[18px] border border-[#DCE6F7] bg-white px-5 py-5 shadow-[0_1px_0_rgba(68,122,203,0.02)] md:px-7 md:py-6 lg:px-8 lg:py-7">
                 <div className="text-[2.9rem] font-bold uppercase tracking-[0.16em] text-[#447ACB] lg:text-[3.8rem]">The Challenge</div>
                 <p className="mt-4 w-full max-w-none text-[clamp(3.75rem,6vw,6.1rem)] leading-[1.04] tracking-[-0.06em] text-[#18181B]">
                   Test your agent’s controls + the foundation beneath them.
@@ -574,7 +576,7 @@ const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hove
               </div>
             </header>
 
-            <main className="relative flex min-h-0 flex-1 flex-col gap-3 rounded-[18px] bg-[#F4F7FC] px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6">
+            <main className={scenarioStageSurfaceClass + " relative gap-3 px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6"}>
               <div className="-mx-4 grid gap-4 border-b border-[#E4E4E7] px-4 pb-[30px] md:-mx-5 md:px-5 lg:-mx-6 lg:px-6 sm:grid-cols-2 lg:grid-cols-3">
                 <div className="min-w-0">
                   <div className={scenarioEyebrowClass}>Foundation inventory</div>
@@ -682,7 +684,7 @@ const scenarioFooterButtonClass = "border-[#D4D4D8] bg-white text-[#18181B] hove
             </div>
           </header>
 
-          <main className="flex min-h-0 flex-1 flex-col px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6">
+          <main className={scenarioStageSurfaceClass + " px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6"}>
             <section className="flex min-h-0 flex-1 flex-col">
               <div className="min-h-0 pb-4 md:pb-5 lg:pb-6">
                 <p className={`${scenarioQuestionClass} max-w-none`}>{currentStepTitle}</p>
