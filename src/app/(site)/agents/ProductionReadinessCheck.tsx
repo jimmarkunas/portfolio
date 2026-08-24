@@ -523,7 +523,7 @@ const scenarioStageSurfaceClass =
                 </p>
                 <button
                   type="button"
-                className={`mt-auto flex min-h-14 w-fit items-center justify-center gap-4 self-end rounded-[12px] border border-[#447ACB] bg-[#447ACB] px-7 type-p2 font-medium text-white transition-colors hover:border-[#447ACB] hover:bg-[#447ACB] ${focusClass}`}
+                  className={`mt-auto flex min-h-14 w-fit items-center justify-center gap-4 self-end rounded-[12px] border border-[#447ACB] bg-[#447ACB] px-7 type-p2 font-medium text-white transition-colors hover:border-[#2F5EA4] hover:bg-[#2F5EA4] ${focusClass}`}
                   onClick={start}
                 >
                   <span>Start Challenge</span>
