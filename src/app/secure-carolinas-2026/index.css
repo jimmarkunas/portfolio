@@ -152,8 +152,8 @@
   border-color: #447ACB !important;
 }
 
-.secure-carolinas-2026-page [class*="bg-[#EFF6FF]"],
-.secure-carolinas-2026-page [class*="bg-[#447ACB]"] {
+/* Solid accent backgrounds must be explicit. Never coerce subtle backgrounds into #447ACB. */
+.secure-carolinas-2026-page [class~="bg-[#447ACB]"] {
   background-color: #447ACB !important;
 }
 

@@ -23,7 +23,7 @@ export const Slide08Evidence: React.FC = () => {
           <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 lg:gap-3">
             {copy.pipeline.map((item, index) => (
               <React.Fragment key={item.step}>
-                <div className="flex min-h-[170px] min-w-0 items-center justify-center rounded-2xl border border-[#BFD3FF] bg-[#EFF6FF] px-3 text-center lg:min-h-[210px] lg:px-4">
+                <div className="flex min-h-[170px] min-w-0 items-center justify-center rounded-2xl border border-[#BFD3FF] bg-[#F4F4F5] px-3 text-center lg:min-h-[210px] lg:px-4">
                   <span className="text-xl font-semibold leading-tight text-[#18181B] lg:text-[2rem]">
                     {item.step}
                   </span>

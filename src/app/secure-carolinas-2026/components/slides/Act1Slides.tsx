@@ -125,7 +125,7 @@ export const Slide01Title: React.FC = () => {
 const executionFlowCardClass = (highlight: boolean) =>
   `flex min-w-0 flex-1 items-center justify-center rounded-2xl border px-4 text-center transition-all lg:px-6 ${
     highlight
-      ? 'min-h-[210px] lg:min-h-[260px] border-[#447ACB] bg-[#EFF6FF] shadow-sm ring-2 ring-[#447ACB]/20'
+      ? 'min-h-[210px] lg:min-h-[260px] border-[#447ACB] bg-[#F4F4F5] shadow-sm ring-2 ring-[#447ACB]/20'
       : 'min-h-[180px] lg:min-h-[220px] border-[#E4E4E7] bg-[#F8F8F9]'
   }`;
 
@@ -245,7 +245,7 @@ export const Slide04AttackSurface: React.FC = () => {
       <div className="my-auto space-y-2.5 lg:space-y-3">
         <div className="sc26-surface-card p-3 lg:p-4">
           <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-2xl border border-[#BFD3FF] bg-[#EFF6FF] px-4 py-3.5 text-center lg:px-5 lg:py-4">
+            <div className="rounded-2xl border border-[#BFD3FF] bg-[#F4F4F5] px-4 py-3.5 text-center lg:px-5 lg:py-4">
               <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#447ACB] lg:text-[1.85rem]">
                 {secureCarolinas2026Copy.slides.attackSurface.traditionalLabel}
               </div>
@@ -281,7 +281,7 @@ export const Slide04AttackSurface: React.FC = () => {
                 </div>
               </div>
             ))}
-            <div className="rounded-2xl border border-[#BFD3FF] bg-[#EFF6FF] px-4 py-3.5 text-center lg:px-5 lg:py-4">
+            <div className="rounded-2xl border border-[#BFD3FF] bg-[#F4F4F5] px-4 py-3.5 text-center lg:px-5 lg:py-4">
               <div className="text-[1.55rem] font-semibold tracking-[0.01em] text-[#447ACB] lg:text-[1.85rem]">
                 {secureCarolinas2026Copy.slides.attackSurface.agenticLabel}
               </div>

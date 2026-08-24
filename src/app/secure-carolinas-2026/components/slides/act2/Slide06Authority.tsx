@@ -26,7 +26,7 @@ export const Slide06Authority: React.FC = () => {
                 <div
                   className={`flex min-h-[180px] min-w-0 flex-col items-center justify-center rounded-2xl border px-3 text-center lg:min-h-[220px] lg:px-4 ${
                     index >= 3
-                      ? 'border-[#447ACB]/40 bg-[#EFF6FF]'
+                      ? 'border-[#447ACB]/40 bg-[#F4F4F5]'
                       : 'border-[#E4E4E7] bg-[#F8F8F9]'
                   }`}
                 >
