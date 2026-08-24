@@ -126,18 +126,121 @@ Identify the exact conflict before implementation.
 
 ## Current Approved Presentation State
 
-NOT YET BASELINED.
+### Secure Carolinas Scenario Challenge
 
-The current visual and implementation state must be audited from GitHub `main` and approved screenshots before this section is populated.
+The Secure Carolinas scenario challenge uses the existing `ScenarioProductionReadinessCheck` implementation inside `src/app/(site)/agents/ProductionReadinessCheck.tsx`.
 
-Do not infer or populate this section from historical conversation alone.
+The intro/title screen is locked.
+
+All nine post-intro assessment screens and the final result use one shared working-header architecture:
+
+- left side: `Audience challenge`, `Can You Get This Agent Into Production?`, `Customer Order Exception Agent`, and the scenario description
+- vertical divider between columns
+- right side: flat `#F4F4F5` step-identity panel
+- desktop right-column width: `480px`
+- assessment identity uses step number, step label/name, and short descriptor
+- final identity uses `FINAL`, `PRODUCTION`, `Decision`, and the calculated decision
+- the main challenge title remains on one line at normal fullscreen desktop presentation width
+
+Assessment questions remain outside the header, between the header and option cards.
+
+Question presentation:
+
+- `25px` top padding
+- `25px` bottom padding
+- desktop size: `52px`
+- question typography must not be reduced to solve layout fit
+
+The shared post-intro working surface uses:
+
+- background `#F4F4F5`
+- no giant rounded working-surface perimeter
+- no large working-surface shadow
+
+Option state:
+
+- selected border: `#447ACB`
+- selected primary text: `#447ACB`
+- selected A–S title and description: `#447ACB`
+- unselected border: neutral `#D4D4D8`
+- unselected text remains neutral
+
+Foundation blocker typography:
+
+- `FOUNDATION BLOCKER`: `22px`, bold, uppercase
+- `NO GO`: `48px`
+- explanation: `26px` with approximately `1.35` line-height
+
+Step 03 business-value selection does not display the former `REFERENCE CLASSIFICATION` reveal.
+
+Business-value state, progression, production-decision logic, and final business-value display remain intact.
+
+A–S choices use one shared renderer.
+
+A–S option typography:
+
+- title: `24px`, bold
+- description: `22px`
+- description line-height: `1.3`
+
+The fixed Secure Carolinas presentation-app height remains `830px` at desktop presentation width.
+
+Scenario behavior remains unchanged:
+
+- 9-step order
+- Systems foundation logic
+- Ownership foundation logic
+- business-value logic
+- A–S choice logic
+- DEFINED / PARTIAL / UNCLEAR behavior
+- GO / GO WITH CONDITIONS / NO GO calculation
+- Back / Next behavior
+- result calculations
+
+Visible Secure Carolinas scenario blue is `#447ACB`.
+
+The generic `/agents` experience is not modified by this presentation-specific state.
+
+### Slide 17 Closing CTA
+
+Slide 17 uses a two-column closing composition.
+
+The left column contains only:
+
+- `Take A.G.E.N.T.S. Back to Your Team.`
+- `Download the free enterprise AI operating model + production readiness kit.`
+
+The right column contains the single action surface.
+
+The QR card contains exactly one instance each of:
+
+- `DOWNLOAD THE A.G.E.N.T.S. KIT`
+- the QR code
+- `greatestpmever.com/agents`
+- the scan instruction
+
+There is no duplicate left-side CTA panel.
+
+There is no duplicate left-side URL pill.
+
+The QR code is rendered directly inside the main QR card without a nested QR container.
+
+Approved QR-card presentation:
+
+- maximum card width: `460px`
+- card radius: `28px`
+- white background
+- neutral border
+- subtle shadow
+- QR maximum width: `360px`
+- visible accent blue: `#447ACB`
 
 ---
 
 ## Approved Baseline
 
-Commit SHA: NOT YET SET
+Commit SHA: 871ee5751fa4c3eb06a7cfdfe035d69cc5dd394a
 
-Date approved: NOT YET SET
+Date approved: 2026-08-24
 
 The baseline is set only after the current presentation state has been audited and Jim explicitly approves it.
