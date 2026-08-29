@@ -27,8 +27,8 @@
   --space-80: 80px;
   --space-120: 120px;
 
-  --font-family-display: "Inter Display", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-family-body: "Inter Display", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-family-display: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-family-body: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
 
   --font-h1-size: 32px;
   --font-h2-size: 32px;
