@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Inter } from "next/font/google"
 import { Suspense } from "react"
 
 import "./globals.css"
@@ -12,6 +13,12 @@ import {
   SEO_SITE_URL,
 } from "@/lib/seo"
 import { createSiteStructuredData } from "@/lib/structured-data"
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(SEO_SITE_URL),
@@ -50,7 +57,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="bg-[#F3F3F3]">
+    <html lang="en" className={`${inter.variable} bg-[#F3F3F3]`}>
       <body className="bg-[#F3F3F3]">
         <StructuredData data={createSiteStructuredData()} />
         <GoogleAnalytics />
