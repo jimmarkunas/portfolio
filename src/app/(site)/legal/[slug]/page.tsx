@@ -3,7 +3,12 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { Container } from "@/components/Container"
-import { legalDocuments, legalSlugs, type LegalSlug } from "@/content/legal"
+import {
+  legalDocuments,
+  legalSlugs,
+  type LegalSection,
+  type LegalSlug,
+} from "@/content/legal"
 
 export function generateStaticParams() {
   return legalSlugs.map((slug) => ({ slug }))
@@ -33,38 +38,42 @@ export default function LegalPage({ params }: { params: { slug: string } }) {
           </header>
 
           <div className="mt-10 space-y-10">
-            {document.sections.map((section) => (
-              <section key={section.heading}>
-                <h2 className="type-h4 text-[#222222]">{section.heading}</h2>
+            {document.sections.map((rawSection) => {
+              const section = rawSection as LegalSection
 
-                {section.paragraphs?.map((paragraph) => (
-                  <p key={paragraph} className="type-p3 mt-4 text-[#4B5154]">
-                    {paragraph}
-                  </p>
-                ))}
+              return (
+                <section key={section.heading}>
+                  <h2 className="type-h4 text-[#222222]">{section.heading}</h2>
 
-                {section.bullets ? (
-                  <ul className="type-p3 mt-4 list-disc space-y-2 pl-6 text-[#4B5154]">
-                    {section.bullets.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                ) : null}
+                  {section.paragraphs?.map((paragraph) => (
+                    <p key={paragraph} className="type-p3 mt-4 text-[#4B5154]">
+                      {paragraph}
+                    </p>
+                  ))}
 
-                {section.link ? (
-                  <p className="type-p3 mt-4">
-                    <a
-                      href={section.link.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-[#447ACB] underline underline-offset-4 hover:text-[#2F5EA4]"
-                    >
-                      {section.link.label}
-                    </a>
-                  </p>
-                ) : null}
-              </section>
-            ))}
+                  {section.bullets ? (
+                    <ul className="type-p3 mt-4 list-disc space-y-2 pl-6 text-[#4B5154]">
+                      {section.bullets.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+
+                  {section.link ? (
+                    <p className="type-p3 mt-4">
+                      <a
+                        href={section.link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[#447ACB] underline underline-offset-4 hover:text-[#2F5EA4]"
+                      >
+                        {section.link.label}
+                      </a>
+                    </p>
+                  ) : null}
+                </section>
+              )
+            })}
           </div>
 
           <div className="mt-12 border-t border-[#E5E7EB] pt-6">
