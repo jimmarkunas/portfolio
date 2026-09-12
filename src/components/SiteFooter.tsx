@@ -9,6 +9,7 @@ import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
 import { ButtonLink } from "@/components/ButtonLink"
 import { TextLink } from "@/components/TextLink"
+import { legalRoutes } from "@/content/legal"
 import { footerNavLinks, footerSocialLinks, siteIdentity, siteRoutes } from "@/content/site"
 
 function SocialIcon({
@@ -139,6 +140,16 @@ export function SiteFooter() {
                   </div>
                 ))}
               </nav>
+            </div>
+
+            <div className="mt-2 flex items-center justify-center gap-2 text-[10px] leading-none text-white/30">
+              <Link href={legalRoutes.privacy} className="transition-colors hover:text-white/60">
+                Privacy
+              </Link>
+              <span aria-hidden="true">·</span>
+              <Link href={legalRoutes.terms} className="transition-colors hover:text-white/60">
+                Terms
+              </Link>
             </div>
           </div>
         </Container>
