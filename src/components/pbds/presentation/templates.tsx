@@ -7,7 +7,8 @@ import { SlideStage, type SlideTone } from "@/components/pbds/presentation/Slide
 const mutedClass = (tone: SlideTone) =>
   tone === "dark" ? "text-white opacity-[0.65]" : "text-mid"
 
-const markColor = (tone: SlideTone) => (tone === "dark" ? "magenta" : "ink") as const
+const markColor = (tone: SlideTone): "magenta" | "ink" =>
+  tone === "dark" ? "magenta" : "ink"
 
 export function CoverSlide({
   kicker = "JIM MARKUNAS / PERSONAL BRAND",
