@@ -32,7 +32,7 @@ export function SlideStage({
       {showGuides ? (
         <div
           aria-hidden
-          className="pointer-events-none absolute bottom-presentation-y left-presentation-x right-presentation-x top-presentation-y z-50 border border-dashed border-magenta/60"
+          className="pointer-events-none absolute bottom-presentation-y left-presentation-x right-presentation-x top-presentation-y z-50 border border-dashed border-magenta opacity-[0.6]"
         />
       ) : null}
       <div className="absolute bottom-presentation-y left-presentation-x right-presentation-x top-presentation-y">
