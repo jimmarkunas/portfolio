@@ -44,3 +44,10 @@ Protect work in progress, avoid destructive edits, and keep visual changes deter
 - Keep content in `src/content/`, not inline inside components.
 - Use project tokens and existing styles before ad-hoc values.
 - Preserve primary CTA copy: `Book a Call`.
+
+## Asset Encoding / Repository Hygiene
+- **Base64 is forbidden in the production codebase.** Do not commit base64-encoded assets, `data:*;base64,...` URLs, inline base64 blobs, or generated JS/TS/CSS strings containing base64 payloads.
+- Base64 is permitted inside Figma/design tooling only when required for canvas transfer, inspection, or temporary reference capture. It must never be copied from Figma into production source.
+- Prefer **SVG** for logos, icons, diagrams, and other vector artwork. Prefer **PNG/WebP/JPEG** for raster imagery, stored as normal files in the repository asset/public structure and referenced by path or URL.
+- If a tool exports an asset as base64, decode/export it to a normal asset file before committing code.
+- Before committing generated or AI-authored visual code, check for `base64` and `;base64,` payloads and remove them from source.
