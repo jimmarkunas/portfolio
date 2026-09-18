@@ -99,6 +99,14 @@ Do not apply this override to unrelated portfolio, case-study, deployment, or si
 - Primary CTA copy remains `Book a Call`.
 - DO NOT BE A FUCKING RETARDED MORON.
 
+## Asset Encoding — ABSOLUTE LOCK
+- **No base64 is allowed in the production codebase.** Do not commit base64-encoded assets, `data:*;base64,...` URLs, inline base64 blobs, or generated JS/TS/CSS strings containing base64 payloads.
+- Base64 may be used inside Figma or design-transfer tooling only. It is never a production asset format and must not be copied into repository source.
+- Prefer **SVG** for logos, icons, diagrams, and vector artwork. Prefer **PNG/WebP/JPEG** for raster imagery. Store assets as normal files and reference them by path or URL.
+- If an export/generator returns base64, convert it to a file-backed asset before committing.
+- Before committing AI-generated visual code, search for `base64` and `;base64,` and remove any encoded payloads.
+- `AGENT-GUARDRAILS.md` contains the same repository-hygiene rule and must remain aligned with this section.
+
 ### Icon and Glyph Rules
 
 Before creating or drawing any new icon:
