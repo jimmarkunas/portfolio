@@ -129,7 +129,7 @@ export function MetricSlide({
             value={metric}
             label={metricLabel}
             detail={metricDetail}
-            className={tone === "dark" ? "ring-1 ring-white/10" : "shadow-2"}
+            className={tone === "dark" ? "" : "shadow-2"}
           />
         </div>
       </div>
@@ -181,7 +181,7 @@ export function EvidenceSlide({
               title={item.title}
               source={item.source}
               tone={cardTone}
-              className={tone === "dark" ? "ring-1 ring-white/10" : "shadow-1"}
+              className={tone === "dark" ? "" : "shadow-1"}
             >
               {item.body}
             </EvidenceCard>
