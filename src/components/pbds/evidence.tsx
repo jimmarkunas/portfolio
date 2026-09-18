@@ -22,7 +22,7 @@ export function EvidenceMetric({
   detail?: string
   tone?: EvidenceTone
 }) {
-  const muted = tone === "ink" ? "text-white/65" : "text-mid"
+  const muted = tone === "ink" ? "text-white opacity-[0.65]" : "text-mid"
 
   return (
     <Surface
@@ -63,7 +63,7 @@ export function EvidenceCard({
   source?: string
   tone?: EvidenceTone
 }) {
-  const muted = tone === "ink" ? "text-white/65" : "text-mid"
+  const muted = tone === "ink" ? "text-white opacity-[0.65]" : "text-mid"
 
   return (
     <article {...props}>
