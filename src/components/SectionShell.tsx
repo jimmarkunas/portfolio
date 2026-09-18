@@ -11,9 +11,9 @@ type SectionShellProps<T extends ElementType = "section"> = {
 } & Omit<ComponentPropsWithoutRef<T>, "as" | "children" | "className">
 
 const surfaceClasses = {
-  surface: "bg-[#F3F3F3]",
+  surface: "bg-surface",
   white: "bg-white",
-  ink: "bg-[#222222]",
+  ink: "bg-ink text-white",
   transparent: "",
 }
 
