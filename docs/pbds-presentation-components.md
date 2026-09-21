@@ -30,7 +30,7 @@ The only approved mark is the **2012 five-leg asterisk**.
 
 **Figma component:** `Presentation / Visual / Systems Stack — Ambiguity → Judgment → Action`
 
-**Node:** `414:6`
+**Node:** `416:2`
 
 ### Purpose
 
@@ -42,13 +42,17 @@ Explain a layered systems relationship where ambiguous context is interpreted th
 
 Visual layers:
 
-1. **Ambiguity** — noisy / particulate / unresolved field.
-2. **Human Judgment** — relationships, paths, connections, interpretation.
-3. **Better Outcomes** — structured action / routes / system logic with magenta emphasis.
+1. **Ambiguity** — dimensional suspended plate with noisy / particulate / unresolved field.
+2. **Human Judgment** — dimensional translucent layer containing routes, relationships, paths, nodes, and interpretation.
+3. **Better Outcomes** — dimensional base layer with structured system logic and magenta edge / glow emphasis.
 
 Supporting microcopy may include:
 
 `HUMAN / CLARITY / SCALES / FURTHER`
+
+### Visual construction rule
+
+This component is intentionally **dimensional and material**. Preserve suspended planes, depth edges, glows, particulate detail, and diagrammatic relationships. Do not reduce it to stacked flat cards or generic boxes.
 
 ### Usage
 
@@ -62,7 +66,7 @@ Do **not** use this as recurring decoration on every slide.
 
 **Figma component:** `Presentation / Visual / Transformation Sequence — Uncertainty → Judgment → Systems → Impact`
 
-**Node:** `414:89`
+**Node:** `416:212`
 
 ### Purpose
 
@@ -76,7 +80,11 @@ Supporting action labels:
 
 `EXPLORE → SYNTHESIZE → OPERATIONALIZE → BETTER DECISIONS`
 
-The final stage may contain the canonical five-leg asterisk as the brand / outcome signal.
+The final stage contains an exact clone of the canonical five-leg asterisk as the brand / outcome signal.
+
+### Visual construction rule
+
+Preserve the sequence as four materially differentiated standing panels crossed by a magenta through-line: messy uncertainty, interpreted judgment, system structure, then illuminated impact. Keep depth, panel layering, glass / material cues, glow, and floor / reflection atmosphere. Do not flatten it into four ordinary cards.
 
 ### Usage
 
@@ -92,8 +100,8 @@ Do **not** repeat this component across every slide.
 2. Rotate them with typography-only slides, artifacts, screenshots, photography, charts, and simpler diagrams.
 3. Preserve the near-black presentation field, crisp white typography, and PBDS magenta `#FF2FAE`.
 4. Use Inter / Inter Display typography.
-5. Keep components editable: native Figma text, vectors, lines, and shapes.
-6. Do not flatten UI, labels, or diagrams into raster screenshots when building final slides.
+5. Keep semantic labels, lines, shapes, and the canonical mark editable in Figma.
+6. Preserve the dimensional / material visual character of these components; do not replace them with simplified schematic placeholders.
 7. If a component uses the logo, use only the exact canonical 2012 five-leg asterisk geometry from node `5:38`.
 8. Never substitute a six-leg asterisk, generated asterisk, Unicode asterisk, or approximate starburst.
 
