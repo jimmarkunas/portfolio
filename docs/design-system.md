@@ -2,6 +2,8 @@
 
 A lightweight reference of the active tokens, typography, and core interface primitives in this repo.
 
+> Presentation-specific PBDS 2.0 visual components are canonized separately in [`docs/pbds-presentation-components.md`](./pbds-presentation-components.md). That presentation system does **not** change the currently deployed portfolio-site color tokens.
+
 ---
 
 ## Colors
