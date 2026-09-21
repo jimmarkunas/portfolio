@@ -1,24 +1,47 @@
-# Finox Design System
+# PBDS 2.0 — Jim Markunas Personal Brand Design System
 
-A lightweight reference of the active tokens, typography, and core interface primitives in this repo.
+A lightweight reference of the active tokens, typography, and core interface primitives in this repo. Canonical visual values are owned in Figma; this document mirrors the production implementation contract.
 
 ---
 
 ## Colors
 
-| Name           | Value     | CSS Variable               |
-|----------------|-----------|----------------------------|
-| Ink            | `#222222` | `var(--color-ink)`         |
-| Secondary dark | `#4B5154` | `var(--color-secondary-dark)` |
-| Muted          | `#7B7B7B` | `var(--color-muted)`       |
-| White          | `#FFFFFF` | `var(--color-white)`       |
-| Soft white     | `#FEFEFE` | `var(--color-soft-white)`  |
-| Light gray     | `#F3F3F3` | —                          |
-| Border         | `#E5E7EB` | `var(--color-border)`      |
-| Accent         | `#447ACB` | `var(--color-accent)`      |
-| Accent hover   | `#2F5EA4` | `var(--color-accent-hover)`|
+### PBDS 2.0 core palette
 
-Design principle: neutral-first. Blue (`--color-accent`) is reserved for interaction states and moments of precision emphasis only.
+| Role | Value | CSS Variable |
+|------|-------|--------------|
+| Brand / Ink | `#090909` | `var(--color-ink)` |
+| Brand / Magenta | `#FF2FAE` | `var(--color-accent)` |
+| Neutral / Charcoal | `#2E2E2E` | `var(--color-secondary-dark)` |
+| Neutral / Mid | `#7A7A7A` | `var(--color-muted)` |
+| Neutral / Line | `#E6E6E6` | `var(--color-border)` |
+| Neutral / Canvas | `#F5F5F2` | `var(--color-canvas)` |
+| Neutral / White | `#FFFFFF` | `var(--color-white)` |
+
+`--color-soft-white` aliases `--color-white`, and `--color-accent-hover` aliases `--color-accent` for compatibility. They are not additional canonical colors.
+
+### Approved foreground / background pairings
+
+| Foreground | Background | Contrast | WCAG |
+|------------|------------|----------|------|
+| `#090909` | `#FFFFFF` | `19.91:1` | AAA |
+| `#090909` | `#F5F5F2` | `18.23:1` | AAA |
+| `#2E2E2E` | `#FFFFFF` | `13.58:1` | AAA |
+| `#2E2E2E` | `#F5F5F2` | `12.43:1` | AAA |
+| `#090909` | `#FF2FAE` | `5.95:1` | AA |
+| `#FF2FAE` | `#090909` | `5.95:1` | AA |
+
+**Recommended button pairing:** `#090909` text on `#FF2FAE` fill.
+
+### Accessibility and usage rules
+
+1. **Primary readable text:** use `#090909` or `#2E2E2E` for core body copy and important information.
+2. **Magenta usage:** use `#FF2FAE` for the asterisk mark, accent, display type, highlights, and backgrounds. Do not use it as small normal text on light surfaces.
+3. **Structural lines vs meaningful boundaries:** use `#E6E6E6` for passive decorative structure only; use `#7A7A7A` when a boundary must be perceptible.
+4. **Muted-text caution:** `#7A7A7A` is not for critical small body copy. Contrast is `4.29:1` on white and `3.93:1` on canvas.
+5. **Semantic colors:** success, warning, error, and info are not core brand colors. Add them only as a separate semantic namespace when a product/UI need requires them.
+
+Design principle: neutral-first, with Magenta as the unmistakable signature chromatic signal. Typography and structure should carry hierarchy before additional color is introduced.
 
 ---
 
@@ -123,54 +146,51 @@ CSS variables: `--space-{n}`
 ### Buttons
 
 **`.button-primary`**
-- Filled: `--color-ink` background, white text
-- Border: 1px solid `--color-ink`
+- Filled: `--color-accent` background, `--color-ink` text
+- Border: 1px solid `--color-accent`
 - Radius: `--radius-pill`
 - Min height: 48px, padding: 0 20px
-- Hover: background → `--color-accent`, border → `--color-accent`, `translateY(-1px)`
+- Hover: preserve the same canonical color pairing; use non-geometric feedback such as outline, shadow, or opacity
 
 **`.button-secondary`**
 - Transparent background, `--color-ink` text
 - Border: 1px solid `--color-ink`
 - Radius: `--radius-pill`
 - Min height: 48px, padding: 0 20px
-- Hover: text/border → `--color-accent-hover`, `translateY(-1px)`
+- Hover/focus: use canonical Ink/Magenta without introducing a second accent color
 
 **`.button-book-call`**
-- Filled: `--color-ink` background, white text
-- Border: 1px solid `--color-ink`
+- Filled: `--color-accent` background, `--color-ink` text
+- Border: 1px solid `--color-accent`
 - Radius: `--radius-pill`
 - Min height: 48px, padding: 0 20px
 - Text/icon gap: 8px
 - Font: 18px / 500, nowrap
-- Hover: background and border → `--color-accent`, `translateY(-1px)`
 - Used by the semantic `BookCallCta` wrapper and any visual-equivalent booking CTA
 
 **`.button-book-call--brand`**
-- Blue-filled booking tone for dark backgrounds
-- Background and border: `--color-accent`
-- Hover: background and border → `--color-accent-hover`
-- Used via `BookCallCta tone="brand"` when the CTA sits on a dark surface
+- Branded booking tone for dark backgrounds
+- Use only approved Ink/Magenta foreground/background pairings
+- Do not introduce a separate hover hue
 
 **`.inline-text-cta`**
 - Inline-flex with icon gap 6px
 - Underline with 4px offset
-- Hover/focus-visible: color → `--color-accent`
+- Because normal-size Magenta text on a light surface is not an approved AA pairing, keep readable link text Ink/Charcoal on light surfaces and use Magenta for focus/decoration only when contrast requirements remain satisfied
 - Typically paired with `type-p3` and a `<ArrowUpRight>` icon
 
 **`.text-link`**
 - Inline hyperlink primitive for standard text links
 - Color: inherit by default
-- Hover/focus-visible: color → `--color-accent`
-- Outline on focus-visible for keyboard accessibility
+- Focus-visible requires a non-color indicator such as underline/outline in addition to color
 - Used by the shared `TextLink` React primitive
 
 ### Icon button
 
 **`.icon-circle-button`**
 - 48×48px circle (`--radius-circle`)
-- Background: `--color-ink`, icon: white
-- Hover/focus-visible: background → `--color-accent`
+- Default dark treatment: background `--color-ink`, icon `--color-white`
+- Branded alternate: background `--color-accent`, icon `--color-ink`
 
 ### Labels & pills
 
@@ -184,7 +204,7 @@ CSS variables: `--space-{n}`
 - Inline-flex, min-height 28px, padding 4px 12px
 - Radius: `--radius-chip`
 - Transparent background, color: `--color-secondary-dark`
-- Border: 1px solid `rgba(34,34,34,0.06)`
+- Border: 1px solid `--color-border`
 - Modifier `.tag-chip--dark`: filled `--color-ink`, white text
 
 ### Section intro pattern
@@ -194,7 +214,7 @@ CSS variables: `--space-{n}`
   <span className="type-p5">Label</span>
 </div>
 <h2 className="type-h3 mt-6">Heading</h2>
-<p className="type-p3 mt-4 text-[#7B7B7B]">Support copy.</p>
+<p className="type-p3 mt-4 text-[var(--color-muted)]">Support copy.</p>
 ```
 
 ---
@@ -202,7 +222,10 @@ CSS variables: `--space-{n}`
 ## Design principles
 
 - Typography leads — let scale and weight do the work before reaching for color or decoration.
-- Surfaces stay quiet — white, light gray (`#F3F3F3`), and border (`#E5E7EB`) are the only surface colors.
-- Blue is an action color — `--color-accent` appears only on interactive states (hover, focus, CTA fills). Never use it decoratively.
+- Surfaces stay quiet — `#F5F5F2` canvas, `#FFFFFF` elevated surfaces, and `#E6E6E6` passive lines form the light structural system.
+- Magenta is the signature chromatic signal — use `#FF2FAE` for the asterisk, branded emphasis, display treatments, approved CTA fills, and deliberate highlights; never add a second decorative accent merely for variety.
+- Readable text stays dark — core body copy uses `#090909` or `#2E2E2E`; `#7A7A7A` is support-only and must not carry critical small text.
+- Borders have roles — `#E6E6E6` is passive/decorative; `#7A7A7A` is the available core neutral when a meaningful boundary must be perceptible.
+- Semantic state colors, if required, belong to a separate namespace and are not PBDS brand colors.
 - Transitions are fast and subtle - 160ms ease across color, background, border, outline, shadow, and opacity.
 - Interactive state changes must not alter component geometry. Use color, background, border color, outline, shadow, or opacity for feedback. Translation, scaling, dimensional changes, and typography changes are prohibited unless explicitly documented as an intentional motion variant.
