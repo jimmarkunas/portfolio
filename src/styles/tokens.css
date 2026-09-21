@@ -1,14 +1,17 @@
 :root {
-  --color-ink: #222222;
-  --color-secondary-dark: #4b5154;
-  --color-muted: #7b7b7b;
+  /* PBDS 2.0 core color canon */
+  --color-ink: #090909;
+  --color-secondary-dark: #2e2e2e;
+  --color-muted: #7a7a7a;
 
   --color-white: #ffffff;
-  --color-soft-white: #fefefe;
-  --color-border: #e5e7eb;
+  --color-canvas: #f5f5f2;
+  --color-border: #e6e6e6;
+  --color-accent: #ff2fae;
 
-  --color-accent: #447acb;
-  --color-accent-hover: #2f5ea4;
+  /* Compatibility aliases: not additional canonical colors. */
+  --color-soft-white: var(--color-white);
+  --color-accent-hover: var(--color-accent);
 
   --radius-sm: 12px;
   --radius-pill: 50px;
