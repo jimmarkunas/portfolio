@@ -26,6 +26,93 @@ The only approved mark is the **2012 five-leg asterisk**.
 
 ---
 
+## Canonical slide chrome — mandatory on every slide
+
+The approved header and footer from `PDMA / Reference 03 — Ambiguity Reactor / FRAME ONLY` are the canonical slide chrome for the PDMA presentation system.
+
+Every slide must use these Figma components rather than locally rebuilding the chrome.
+
+### Header
+
+**Figma component:** `Presentation / Chrome / Header — Canonical`
+
+**Node:** `423:5`
+
+**Placement:** `x=0`, `y=0`, `1920×100` on a `1920×1080` slide.
+
+Canonical structure:
+
+- Left event label: `PDMA 2026`.
+- Long muted-gray progress track.
+- PBDS magenta `#FF2FAE` progress fill.
+- Right navigation: `PEOPLE • PROBLEMS • PROGRESS`.
+- The separators are **text bullets (`•`)**, not slashes.
+- The bullets are PBDS magenta.
+- Right-side navigation must remain fully contained inside the slide frame; overflow is not acceptable.
+
+Approved geometry from the source slide:
+
+- `PDMA 2026`: `x=30`, `y=25`.
+- Progress track: `x=205`, `y=36`, `w=1275`, `h=2`.
+- Progress fill: `x=205`, `y=35`, `h=3`; **width varies by slide position**. The approved source example uses `w=420`.
+- `PEOPLE`: `x=1506`, `y=27`.
+- Bullet 1: `x=1602`, `y=27`.
+- `PROBLEMS`: `x=1632`, `y=27`.
+- Bullet 2: `x=1762`, `y=27`.
+- `PROGRESS`: `x=1792`, `y=27`, ending at `x=1894`, leaving a 26px right inset.
+
+Approved typography:
+
+- Event: Inter Semi Bold, 20px, 0.8px tracking.
+- Right labels: Inter Semi Bold, 15px, 3px tracking.
+- Bullets: Inter Semi Bold, 15px, 2px tracking.
+
+Approved colors:
+
+- Header field: `#090909`.
+- Event text: approximately `#F2F2F5`.
+- Progress track: `#44464A`.
+- Progress fill: `#FF2FAE`.
+- Right labels: `#7A7D85`.
+- Bullets: `#FF2FAE`.
+
+The progress fill width is the only intended per-slide visual variable in the header unless the user explicitly changes the chrome canon.
+
+### Footer
+
+**Figma component:** `Presentation / Chrome / Footer — Canonical`
+
+**Node:** `423:34`
+
+**Placement:** `x=0`, `y=985`, `1920×95` on a `1920×1080` slide.
+
+Canonical structure:
+
+- Left statement: `HUMAN JUDGMENT COMPOUNDS`.
+- Long muted-gray horizontal rule.
+- Exact canonical 2012 five-leg asterisk on the far right.
+- No generated, redrawn, Unicode, or six-leg substitute is permitted.
+
+Approved geometry within the `1920×95` footer component:
+
+- Statement: `x=26`, `y=45` (slide `y=1030`).
+- Horizontal rule: `x=431`, `y=57`, `w=1395`, `h=2` (slide `y=1042`).
+- Canonical asterisk: `x=1841`, `y=28`, `w=52`, `h=52` (slide `y=1013`).
+
+Approved typography and colors:
+
+- Statement: Inter Semi Bold, 15px, 4px tracking, `#7A7D85`.
+- Rule: `#44464A`.
+- Asterisk: exact geometry cloned from node `5:38`, PBDS magenta `#FF2FAE`.
+
+### Usage rule
+
+Header and footer chrome are **mandatory shared primitives**. They must be used consistently on every PDMA slide unless Jim explicitly approves a different slide-level exception.
+
+Do not recreate them manually per slide. Use component instances so future canon changes propagate consistently.
+
+---
+
 ## Component 01 — Systems Stack
 
 **Figma component:** `Presentation / Visual / Systems Stack — Ambiguity → Judgment → Action`
@@ -96,29 +183,29 @@ Do **not** repeat this component across every slide.
 
 ## Presentation component rules
 
-1. These are **high-impact explanatory visuals**, not default slide chrome.
-2. Rotate them with typography-only slides, artifacts, screenshots, photography, charts, and simpler diagrams.
-3. Preserve the near-black presentation field, crisp white typography, and PBDS magenta `#FF2FAE`.
-4. Use Inter / Inter Display typography.
-5. Keep semantic labels, lines, shapes, and the canonical mark editable in Figma.
-6. Preserve the dimensional / material visual character of these components; do not replace them with simplified schematic placeholders.
-7. If a component uses the logo, use only the exact canonical 2012 five-leg asterisk geometry from node `5:38`.
-8. Never substitute a six-leg asterisk, generated asterisk, Unicode asterisk, or approximate starburst.
+1. The canonical header and footer are mandatory shared slide chrome; use component instances on every PDMA slide unless Jim explicitly approves an exception.
+2. The explanatory visual components below are **high-impact explanatory visuals**, not default slide chrome.
+3. Rotate explanatory visuals with typography-only slides, artifacts, screenshots, photography, charts, and simpler diagrams.
+4. Preserve the near-black presentation field, crisp white typography, and PBDS magenta `#FF2FAE`.
+5. Use Inter / Inter Display typography.
+6. Keep semantic labels, lines, shapes, and the canonical mark editable in Figma.
+7. Preserve the dimensional / material visual character of explanatory components; do not replace them with simplified schematic placeholders.
+8. If a component uses the logo, use only the exact canonical 2012 five-leg asterisk geometry from node `5:38`.
+9. Never substitute a six-leg asterisk, generated asterisk, Unicode asterisk, or approximate starburst.
 
 ---
 
 ## Approved role in the slide system
 
-These components belong to the **visual explanation** layer of the presentation system.
+The canonical header and footer belong to the **shared chrome** layer and appear consistently across the deck.
 
-They are appropriate for slides where the visual carries conceptual meaning. They are intentionally **not** mandatory on every content slide.
+The dimensional explanatory components belong to the **visual explanation** layer of the presentation system. They are appropriate for slides where the visual carries conceptual meaning and are intentionally **not** mandatory on every content slide.
 
 The broader presentation system may also use:
 
 - bold editorial white + magenta content titles;
-- numbered circular markers with thin magenta rings;
-- the progressive header rule (gray track progressively filled with magenta as the deck advances);
-- editorial right-column architectural treatments;
-- restrained footer microcopy + divider + canonical five-leg asterisk.
+- numbered circular markers with thin magenta rings where numbering genuinely communicates multiple points;
+- designed non-numerical bullet markers for ordinary bullet content;
+- editorial architectural treatments where they carry meaning or materially support the composition.
 
-Those additional primitives should remain independently composable rather than being baked into these two visual components.
+Those additional primitives should remain independently composable rather than being baked into the explanatory visual components.
