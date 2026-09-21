@@ -74,11 +74,6 @@ export const cbdistilleryRevampCaseStudy = {
     "outcome": "Once payments were solved, the business could finally grow. The new stack supported subscriptions, retention, and real order volume.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Senior Product Manager & Solutions Architect"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "CBDistillery"

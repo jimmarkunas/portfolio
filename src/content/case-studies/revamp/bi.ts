@@ -77,11 +77,6 @@ export const biRevampCaseStudy = {
     "outcome": "10x online sales uplift. 15%+ order throughput improvement. 12% fewer service escalations. U.S. online sales grew from 3% to 30% of total animal health revenue. Five countries delivered. Program held through a mid-build ERP migration.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Senior Product & Program Manager"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "Boehringer Ingelheim"

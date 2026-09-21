@@ -23,6 +23,7 @@ export type PortfolioFounderSectionsProps = {
   ctaLabel?: string
   ctaHref?: string
   showCta?: boolean
+  showPortfolio?: boolean
 }
 
 export type PortfolioImageCardProps = {

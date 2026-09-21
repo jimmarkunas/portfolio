@@ -80,11 +80,6 @@ export const cpsRevampCaseStudy = {
     "outcome": "Repair calls fell 73%. Truck rolls fell 43%. Repair windows dropped from three weeks to 1-4 days. The deployed service supports 1.5 million San Antonio residents. The program won the 2025 Global Smart 20 Award.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Program & Product Lead"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "CPS Energy"

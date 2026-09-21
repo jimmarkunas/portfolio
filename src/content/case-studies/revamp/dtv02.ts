@@ -84,11 +84,6 @@ export const dtv02RevampCaseStudy = {
     "outcome": "DIRECTV Everywhere shipped as a real product across 5 device families, reached 5M+ downloads, and gave 20M+ subscribers authenticated streaming access across 400+ channels. It evolved into a standalone product still sold today.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Product Manager"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "DIRECTV"

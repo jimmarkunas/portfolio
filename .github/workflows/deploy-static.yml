@@ -52,7 +52,6 @@ jobs:
         run: |
           test -d out
           test -f out/index.html
-          test -f out/cv/index.html
           test -f out/work/index.html
           test -f out/agents/index.html
 

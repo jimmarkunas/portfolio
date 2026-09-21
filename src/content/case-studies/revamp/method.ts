@@ -74,11 +74,6 @@ export const methodRevampCaseStudy = {
     "outcome": "20% DTC revenue uplift across three launches. Organic traffic protected through the replatform. Retail relationships intact. SC Johnson had a proven model for future brand DTC entries.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Senior Program Manager"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "SC Johnson • Method"

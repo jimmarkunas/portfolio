@@ -1,6 +1,4 @@
 export { agentsContent } from "./agents"
-export { siteContent as cvContent } from "./cv"
-export { siteContent as freebiesContent } from "./freebies"
 
 export { siteContent as portfolioContent } from "./portfolio"
 

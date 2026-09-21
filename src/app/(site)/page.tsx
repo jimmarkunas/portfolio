@@ -3,9 +3,9 @@ import type { Metadata } from "next"
 import Homepage from "@/components/homepage/HomepageView"
 import { buildPageMetadata } from "@/lib/seo"
 
-const HOMEPAGE_TITLE = "Digital Product & Program Leader"
+const HOMEPAGE_TITLE = "Product Leader | Product Management"
 const HOMEPAGE_DESCRIPTION =
-  "Award-winning product and program leader delivering commerce transformation, platform modernization, and proven revenue impact."
+  "Product leader and product management partner who turns complex initiatives into clear priorities, shipped products, and measurable business outcomes."
 const HOMEPAGE_OG_IMAGE = "/jim/hero-jim-01-cutout.png"
 
 export const metadata: Metadata = buildPageMetadata({

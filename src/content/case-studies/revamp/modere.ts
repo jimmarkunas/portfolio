@@ -85,11 +85,6 @@ export const modereRevampCaseStudy = {
     "outcome": "$1B revenue target reached. 43% conversion uplift. 35% faster site. 10 markets supported on one composable system. MACH Impact Award nomination.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Senior Product & Program Manager"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "Modere"

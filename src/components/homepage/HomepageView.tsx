@@ -8,9 +8,9 @@ import { HomepageAwardsSection } from "@/components/homepage/sections/HomepageAw
 import { HomepageTestimonialsSection } from "@/components/homepage/sections/HomepageTestimonialsSection"
 import { HomepagePullQuoteSection } from "@/components/homepage/sections/HomepagePullQuoteSection"
 import { HomepageJourneySection } from "@/components/homepage/sections/HomepageJourneySection"
-import { PortfolioFounderSections } from "@/components/work/PortfolioFounderSections"
+import { HomepageFounderSection } from "@/components/homepage/HomepageFounderSection"
 import { ContentFlow } from "@/components/ContentFlow"
-import { siteRoutes } from "@/content/site"
+import { portfolioContent } from "@/content/site"
 import { portfolioSectionContent } from "@/content/site/portfolio"
 import {
   HOMEPAGE_SECTION_HEADER_TITLE_GROUP_CLASS,
@@ -88,12 +88,9 @@ export default function Homepage() {
         className="bg-[#F3F3F3]"
         paddingClassName="pt-10 pb-0 md:pt-12 md:pb-0 lg:pt-14 lg:pb-0"
       >
-        <PortfolioFounderSections
-          portfolio={portfolioSectionContent.portfolio}
+        <HomepageFounderSection
           founder={portfolioSectionContent.founder}
-          ctaLabel={portfolioSectionContent.ctaLabel}
-          ctaHref={siteRoutes.work}
-          showCta
+          cards={portfolioContent.founderShowcase}
         />
       </HomepageSectionShell>
 

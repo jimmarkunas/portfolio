@@ -86,11 +86,6 @@ export const muradRevampCaseStudy = {
     "outcome": "Murad got a global launch model, a smooth cutover, and a path off Magento that reduced dependence on a large internal dev team.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Program Manager & Solutions Architect"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "Murad (Unilever)"

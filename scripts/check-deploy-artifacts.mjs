@@ -26,7 +26,6 @@ const expectedSha = sha || execSync("git rev-parse HEAD", { encoding: "utf8" }).
 const root = process.cwd()
 const checks = [
   { route: "home", file: "out/index.html" },
-  { route: "cv", file: "out/cv/index.html" },
   { route: "work", file: "out/work/index.html" },
   { route: "agents", file: "out/agents/index.html" },
 ]

@@ -49,7 +49,6 @@ if (!sha) {
 
 const routes = [
   { path: "/", route: "home" },
-  { path: "/cv/", route: "cv" },
   { path: "/work/", route: "work" },
   { path: "/agents/", route: "agents" },
 ]

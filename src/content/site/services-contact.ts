@@ -63,14 +63,14 @@ type ServicesContactContent = {
 export const siteContent = {
   services: {
     eyebrow: "Services",
-    title: "How I Help Teams Ship",
+    title: "How I Lead Product Work",
     intro:
-      "I partner with founders and enterprise leaders to define product strategy, align execution, and deliver measurable outcomes across commerce, media, and platform programs.",
+      "I partner with founders and enterprise leaders to turn complex product problems into clear priorities, aligned teams, and measurable outcomes across commerce, media, and platform programs.",
     entries: [
       {
-        title: "Product Leadership",
+        title: "Product Management",
         summary:
-          "Roadmaps, prioritization, and delivery operating models that keep strategy connected to execution.",
+          "Product strategy, roadmaps, prioritization, and delivery operating models that keep customer value connected to execution.",
       },
       {
         title: "Platform Architecture",
@@ -78,9 +78,9 @@ export const siteContent = {
           "Scalable system planning across commerce, content, and data surfaces without unnecessary complexity.",
       },
       {
-        title: "Transformation Programs",
+        title: "Product Leadership",
         summary:
-          "Cross-functional program structure that aligns teams, reduces risk, and improves speed to value.",
+          "Cross-functional leadership that aligns teams, reduces risk, and improves speed to value.",
       },
     ] satisfies ServiceEntry[],
   },

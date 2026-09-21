@@ -11,7 +11,6 @@ const REQUIRED_SITE_ROUTE_KEYS = [
   "work",
   "services",
   "contact",
-  "cv",
   "freebies",
   "interview",
   "interviews",

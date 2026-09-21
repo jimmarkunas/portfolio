@@ -74,11 +74,6 @@ export const k2RevampCaseStudy = {
     "outcome": "We gave K2 a cleaner operating model, faster storefront creation, faster content velocity, and less dependence on engineering.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Program Manager & Solution Architect"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "K2 Sports"

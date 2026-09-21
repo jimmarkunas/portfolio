@@ -18,7 +18,6 @@ export const siteRoutes = {
   home: "/",
   work: "/work/",
   services: "/services/",
-  cv: "/cv/",
   contact: "/contact/",
   interview: "/interview/",
   interviews: "/interviews/",
@@ -38,7 +37,6 @@ function toCanonicalPath(route: SiteRoute): `/${string}` {
 // Canonical metadata paths intentionally strip trailing slashes.
 const CANONICAL_ROUTE_KEYS = [
   "work",
-  "cv",
   "contact",
   "interview",
   "geekle2026",
@@ -84,7 +82,6 @@ export const siteBookingUrls = {
 
 export const primaryNavLinks = [
   { href: siteRoutes.work, label: "Portfolio" },
-  { href: siteRoutes.cv, label: "CV" },
   { href: siteRoutes.agents, label: "A.G.E.N.T.S." },
   { href: siteRoutes.contact, label: "Contact" },
 ] satisfies SiteNavLink[]

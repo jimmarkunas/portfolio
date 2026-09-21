@@ -7,10 +7,9 @@ import { TrackedOutboundIconLink } from "@/components/analytics/TrackedSiteShell
 import { BookCallCta } from "@/components/BookCallCta"
 import { Container } from "@/components/Container"
 import { FinoxGlyph } from "@/components/FinoxGlyph"
-import { ButtonLink } from "@/components/ButtonLink"
 import { TextLink } from "@/components/TextLink"
 import { legalRoutes } from "@/content/legal"
-import { footerNavLinks, footerSocialLinks, siteIdentity, siteRoutes } from "@/content/site"
+import { footerNavLinks, footerSocialLinks, siteIdentity } from "@/content/site"
 
 function SocialIcon({
   href,
@@ -86,24 +85,15 @@ export function SiteFooter() {
           <div className="overflow-hidden bg-transparent">
             <div className="mx-auto flex min-h-[400px] max-w-[1040px] flex-col items-center justify-center px-8 py-20 text-center">
               <h2 className="type-h3 text-[#FEFEFE]">
-                <span className="block">Broken program. Impossible deadline.</span>
-                <span className="block">Skeptical stakeholders.</span>
+                <span className="block">Turn complexity into momentum.</span>
                 <span className="mt-3 block md:mt-4">
                   <span className="text-[#447ACB]">Sounds like a Tuesday.</span> Let&apos;s talk.
                 </span>
               </h2>
               <p className="type-p3 mt-5 max-w-[640px] text-[#F3F3F3]">
-                I&apos;m always excited to collaborate on new and innovative projects. Whether
-                you&apos;re starting from scratch or refining an existing idea
+                I help teams turn ambiguity, complexity, and stalled work into clear decisions and measurable outcomes.
               </p>
               <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-                <ButtonLink
-                  href={siteRoutes.cv}
-                  variant="secondary"
-                  className="footer-cv-cta type-ui-md font-medium"
-                >
-                  My CV
-                </ButtonLink>
                 <BookCallCta location="footer" tone="brand" />
               </div>
             </div>

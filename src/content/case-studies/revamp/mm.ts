@@ -74,11 +74,6 @@ export const mmRevampCaseStudy = {
     "outcome": "15% revenue uplift. A direct path to 10% of brand GMV through owned DTC. Retail relationships intact at launch and after. Caldrea and Method followed on the same architecture. SC Johnson proved the model worked.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Senior Program Manager"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "SC Johnson"

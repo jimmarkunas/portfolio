@@ -74,11 +74,6 @@ export const aaRevampCaseStudy = {
     "outcome": "Digital revenue grew 43%, store sales moved 14%, omni-channel orders grew 300%, and shrink fell 65%.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "eCommerce Program Manager"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "American Apparel"

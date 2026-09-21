@@ -70,11 +70,6 @@ export const fohRevampCaseStudy = {
     "outcome": "Frederick's launched in three months with 25% lower TCO, 3X faster promotional launches, and one unified DTC operating model.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Enterprise Program Manager"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "Frederick's of Hollywood / Authentic Brands Group"

@@ -78,11 +78,6 @@ export const newyorklifeRevampCaseStudy = {
     "outcome": "Site launches cut from 6 months to 2 weeks. Compliance review time cut 40% via AI automation. 12,000+ sites governed centrally. 200% lead uplift across the agent network. The product model became the foundation of Fusion92's CORECMS.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Product & Program Manager"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "New York Life • Fusion92"

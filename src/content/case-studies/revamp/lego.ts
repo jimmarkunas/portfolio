@@ -74,11 +74,6 @@ export const legoRevampCaseStudy = {
     "outcome": "We made the shop easier to navigate, easier to optimize, and easier to scale globally, while marrying the physical retail store experience.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Product Manager"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "BCG • LEGO"

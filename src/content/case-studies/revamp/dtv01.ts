@@ -80,11 +80,6 @@ export const dtv01RevampCaseStudy = {
     "outcome": "$221M in Q4 digital retention revenue. Campaign cycles cut by 60 days. Offers launching consistently across set-top box, web, and mobile, and for the first time, the platform had an owner.",
     "facts": [
       {
-        "icon": "role",
-        "label": "Role",
-        "value": "Program & Product Manager"
-      },
-      {
         "icon": "client",
         "label": "Client",
         "value": "DIRECTV"

@@ -45,6 +45,7 @@ export function PortfolioFounderSections({
   ctaLabel = "See More",
   ctaHref = siteRoutes.work,
   showCta = true,
+  showPortfolio = true,
 }: PortfolioFounderSectionsProps) {
   const reduceMotion = useReducedMotion()
   const reduceMotionEnabled = Boolean(reduceMotion)
@@ -62,7 +63,7 @@ export function PortfolioFounderSections({
 
   return (
     <div className="flex w-full flex-col items-stretch gap-8">
-      <div className="relative flex w-full flex-col items-stretch gap-8">
+      {showPortfolio ? <div className="relative flex w-full flex-col items-stretch gap-8">
         {!reduceMotionEnabled ? (
           <div
             ref={sentinelRefs.title}
@@ -118,9 +119,9 @@ export function PortfolioFounderSections({
             </>
           )}
         </PortfolioRevealWrap>
-      </div>
+      </div> : null}
 
-      <div className="flex w-full flex-col gap-6">
+      {showPortfolio ? <div className="flex w-full flex-col gap-6">
         {hasIntro ? <div className="w-full self-stretch">{topRow}</div> : (
           <div className="w-full self-stretch">{topRow}</div>
         )}
@@ -151,7 +152,7 @@ export function PortfolioFounderSections({
           lowerMiddleRow={portfolioShowcase.lowerMiddleRow}
           wideRows={portfolioShowcase.wideRows}
         />
-      </div>
+      </div> : null}
 
       <MotionReveal
         preset="section"

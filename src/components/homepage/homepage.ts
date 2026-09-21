@@ -2,23 +2,23 @@ import { siteCta } from "@/content/site"
 
 const fallbackHomepageText = {
   hero: {
-    role: "Program Fixer",
+    role: "Product Leader",
     year: "2008",
     title: "Fixer",
-    subtitle: "— I Fix Digital Programs Before They Crash",
+    subtitle: "— I Turn Complex Product Problems Into Shipped Outcomes",
     scroll: "Scroll down ↓",
     projectCompletedValue: "75",
-    projectCompletedLabel: "Projects Delivered",
+    projectCompletedLabel: "Initiatives Delivered",
     startupRaisedValue: "$1B",
     startupRaisedLabel: "ROI Delivered",
   },
   sections: {
     whatIDo: {
       pill: "What I Do",
-      title: "Programs I've Rescued",
+      title: "Products and Initiatives I've Led",
       description:
-        "Real engagements pulled from the case studies below. Same pattern every time: stabilize the program, align ownership, and convert delivery into measurable business outcomes.",
-      ctaLead: "If your program is in trouble",
+        "Real engagements pulled from the case studies below. The pattern is consistent: clarify the product problem, align ownership, and convert delivery into measurable business outcomes.",
+        ctaLead: "If your initiative is in trouble",
     },
     awards: {
       pill: "Awards",
@@ -31,15 +31,15 @@ const fallbackHomepageText = {
       title: "My Business Impact",
       description: [
         "I specialize in turning complex problems into elegant solutions. My approach blends creativity with strategic.",
-        "Here's a snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and digital transformation programs.",
+        "Here's a snapshot of the numbers behind the work: my revenue impact, platform scale, industry recognition, and long-horizon delivery experience across complex commerce and digital transformation initiatives.",
       ],
     },
     experience: {
       pill: "Experience",
-      title: "My Areas of Expertise",
+      title: "Product Leadership in Practice",
       description: [
-        "I sit at the intersection of three capabilities: program delivery (TPM), product thinking (PO), and platform/integration fluency (Solutions Architecture).",
-        "I’m a specialist who sequences: SA fluency to diagnose, PO instincts to prioritize, and TPM rigor to execute. That’s my superpower.",
+        "I lead at the intersection of product strategy, product management, and technical delivery across complex platforms.",
+        "I use technical fluency to diagnose, product judgment to prioritize, and delivery rigor to get the right thing shipped. That’s my superpower.",
       ],
     },
     testimonials: {
@@ -141,7 +141,7 @@ const fallbackHomepageText = {
       situation:
         "Streetlight repair operations were fragmented across intake, SAP, dispatch, and field crews with unclear ownership.",
       whatIDid:
-        "Led product and program design to connect resident reporting, field iPad workflows, and system integrations.",
+        "Led product and initiative design to connect resident reporting, field iPad workflows, and system integrations.",
       results:
         "73% Fewer CS Calls, 3w-4d Repair Window Cut",
     },
@@ -205,18 +205,18 @@ const fallbackHomepageText = {
       },
       {
         value: "75+",
-        title: "Enterprise Programs",
+        title: "Enterprise Initiatives",
         subtitle: "Led end-to-end",
       },
       {
         value: "40k",
         title: "Hours",
-        subtitle: "Leading complex digital programs",
+        subtitle: "Product & Digital Leadership",
       },
       {
         value: "5",
-        title: "Program Rescues",
-        subtitle: "Brought in after prior PM or agency failed",
+        title: "Transformation Rescues",
+        subtitle: "Brought in after prior lead or agency failed",
       },
     ],
     cards: [
@@ -248,7 +248,7 @@ const fallbackHomepageText = {
       },
       {
         value: "40k",
-        label: "Hours leading projects",
+        label: "Hours leading digital work",
       },
       {
         logoSrc: "/company-logos/svg/bi-logo.svg",
@@ -261,12 +261,12 @@ const fallbackHomepageText = {
   },
   services: [
     {
-      outcome: "Programs that were broken. Now they're not.",
-      category: "Technical Program Management",
+      outcome: "Transformation initiatives that were broken. Now they're not.",
+      category: "Product Leadership",
     },
     {
       outcome: "Strategy becomes backlog. Backlog becomes shipped.",
-      category: "Technical Product Management",
+      category: "Product Management",
     },
     {
       outcome: "Complex systems, untangled before a line of code is written.",
