@@ -4,10 +4,6 @@ export type Pdma2026Slide = {
   imageUrl: string;
 };
 
-// TEMPORARY / REJECTED IMPLEMENTATION DATA.
-// The branch originally mirrored flattened Figma frame exports here.
-// The accepted target is a native React translation of the approved Figma deck.
-// Codex/Claude should remove this file when the native slide components replace it.
 export const pdma2026Slides: Pdma2026Slide[] = [
   { id: 1, title: "The New PM Operating System", imageUrl: "https://www.figma.com/api/mcp/asset/b2230893-89c5-465e-ace8-98d397a8f808.png" },
   { id: 2, title: "What Shifts + Accountability", imageUrl: "https://www.figma.com/api/mcp/asset/909d2673-5947-477b-a415-d8d973ac3d88.png" },
