@@ -22,6 +22,7 @@ function Img({ src, x, y, w, h, opacity = 1, fit = "contain", style }: { src:str
 }
 function CanonicalChrome({ fill, labels, footer }: { fill:number; labels:[string,string,string]; footer:string }) {
   return <>
+    <div className="pdma-canonical-top-header" style={{position:"absolute", inset:0}}>
     <B x={0} y={0} w={1920} h={100} bg="#090909" />
     <T x={30} y={25} size={20} weight={600} tracking={.8}>PDMA 2026</T>
     <B x={205} y={36} w={1275} h={2} bg={LINE} />
@@ -31,10 +32,13 @@ function CanonicalChrome({ fill, labels, footer }: { fill:number; labels:[string
     <T x={1632} y={27} size={15} weight={600} color={MUTED} tracking={3}>{labels[1]}</T>
     <T x={1762} y={27} size={15} weight={600} color={MAGENTA} tracking={2}>•</T>
     <T x={1792} y={27} size={15} weight={600} color={MUTED} tracking={3}>{labels[2]}</T>
+    </div>
+    <div className="pdma-canonical-local-footer">
     <B x={0} y={985} w={1920} h={95} bg="#090909" />
     <T x={26} y={1030} size={15} weight={600} color={MUTED} tracking={4}>{footer}</T>
     <B x={431} y={1042} w={1395} h={2} bg={LINE} />
     <Img src="/pdma2026/slide-02/canonical-asterisk.svg" x={1841} y={1013} w={52} h={52} />
+    </div>
   </>;
 }
 
@@ -105,15 +109,12 @@ export function Slide08(){
   ] as const;
   const ell=[`${S8}/59d08.svg`,`${S8}/379c2.svg`,`${S8}/379c2.svg`,`${S8}/d8145.svg`,`${S8}/ca1fd.svg`];
   return <Stage background="#050505">
-    <B x={0} y={0} w={1920} h={78} bg="#090909"/><T x={67} y={22} w={150} size={18} weight={700} color={WHITE2}>PDMA 2026</T><B x={223} y={40} w={1213} h={1} bg={LINE}/><B x={223} y={39} w={318} h={3} bg={MAGENTA}/><T x={1471} y={23} w={380} size={14} weight={600} color="#909295" tracking={3}>OBSERVE  •  DECIDE  •  EXECUTE</T>
-    <T x={64} y={118} w={900} size={66} weight={800} color={WHITE2}>HOW MUCH AUTHORITY</T><T x={64} y={182} w={1100} size={66} weight={800} color={MAGENTA}>SHOULD THE ROBOTS HAVE?</T><T x={66} y={261} w={900} size={26} color={WHITE2}>The farther AI moves from observing to acting, the more deliberately{"\n"}the Product Manager has to design the boundary.</T>
     <Img src={`${S8}/7149b.png`} x={140} y={137} w={1632} h={918} fit="cover"/><div style={{position:"absolute",left:730,top:587,width:460,height:460,maskImage:`url(${S8}/3dc3f.svg)`,WebkitMaskImage:`url(${S8}/3dc3f.svg)`,maskSize:"460px 460px",WebkitMaskSize:"460px 460px",maskRepeat:"no-repeat",WebkitMaskRepeat:"no-repeat"}}><Img src={`${S8}/59b40.png`} x={0} y={0} w={460} h={460} fit="cover"/></div>
     {stages.map((s,i)=><div key={s[0]}><T x={s[3]} y={s[4]} w={90} size={18} weight={600} color={s[12]?MAGENTA:"#909295"}>{s[0]}</T><T x={s[5]} y={s[6]} w={220} size={25} weight={700} color={s[12]?MAGENTA:WHITE2}>{s[1]}</T><T x={s[7]} y={s[8]} w={235} size={18} color={WHITE2}>{s[2]}</T><Img src={ell[i]} x={s[9]} y={s[10]} w={i===0?73:i===3?75:i===4?74:71} h={i===0?73:i===3?75:i===4?74:71}/><Img src={s[11]} x={s[12] as unknown as number} y={0} w={0} h={0}/></div>)}
     <Img src={`${S8}/91b4d.svg`} x={463} y={654} w={38} h={38}/><Img src={`${S8}/d17aa.svg`} x={687} y={551} w={38} h={38}/><Img src={`${S8}/9244f.svg`} x={940} y={502} w={38} h={38}/><Img src={`${S8}/8b919.svg`} x={1194} y={549} w={38} h={38}/><Img src={`${S8}/97008.svg`} x={1419} y={655} w={38} h={38}/>
     <T x={155} y={694} w={270} size={16} weight={500} color="#909295" tracking={4}>OBSERVATION{"\n"}HUMAN IN THE LOOP</T><B x={390} y={735} w={305} h={2} bg="#73767b"/><T x={1490} y={694} w={300} size={16} weight={500} color="#909295" tracking={4}>DECISION &amp; EXECUTION{"\n"}AI TAKES ACTION</T><B x={1190} y={735} w={540} h={2} bg="#73767b"/>
     <T x={160} y={838} w={250} size={18} weight={600} color={WHITE2} tracking={4}>MORE AUTONOMY</T><B x={406} y={854} w={365} h={2} bg="#73767b"/><T x={775} y={834} w={40} size={30} color={MAGENTA}>→</T><T x={834} y={838} w={300} size={18} weight={600} color={WHITE2} tracking={4}>MORE CONSEQUENCE</T><B x={1118} y={854} w={310} h={2} bg="#73767b"/><T x={1408} y={834} w={40} size={30} color={MAGENTA}>→</T><T x={1471} y={838} w={360} size={18} weight={600} color={WHITE2} tracking={4}>MORE PRODUCT DESIGN</T>
     <B x={65} y={896} w={1794} h={2} bg="#44464a"/><B x={65} y={923} w={4} h={54} bg={MAGENTA}/><T x={100} y={934} w={1680} size={25} weight={700} color={WHITE2}>THE FARTHER RIGHT YOU GO, THE MORE PRODUCT DESIGN HAS TO ACCOUNT FOR THE CONSEQUENCES.</T>
-    <B x={0} y={985} w={1920} h={95} bg="#090909"/><T x={67} y={1028} w={470} size={13} weight={500} color="#909295" tracking={5}>AUTHORITY IS A PRODUCT DECISION</T><B x={478} y={1044} w={1319} h={2} bg="#44464a"/><Img src="/pdma2026/slide-02/canonical-asterisk.svg" x={1812} y={1002} w={52} h={52}/>
   </Stage>;
 }
 
@@ -146,12 +147,12 @@ export function Slide10(){
   ] as const;
   return <Stage>
     <Img src="/pdma2026/slide-10/0581d3e2-5eaa-4fa2-aa65-7272161757da.png" x={760} y={185} w={1160} h={720} opacity={.92} fit="cover"/><Img src="/pdma2026/slide-10/0fe576ac-b4aa-42eb-9c74-288c239abc05.png" x={1120} y={70} w={800} h={910} fit="cover"/><div style={{position:"absolute",left:0,top:70,width:1220,height:850,background:"linear-gradient(90deg,#090909 0%,rgba(9,9,9,.92) 72%,rgba(9,9,9,.12) 100%)"}}/>
-    <B x={0} y={0} w={1920} h={78} bg="#090909"/><T x={52} y={22} w={150} size={18} weight={700} color={WHITE2}>PDMA 2026</T><B x={220} y={40} w={1230} h={1} bg={LINE}/><B x={220} y={39} w={405} h={3} bg={MAGENTA}/><T x={1490} y={23} w={390} size={14} weight={600} color="#939598" tracking={3}>BACKLOG  •  CONTROLS  •  OUTCOMES</T>
-    <T x={55} y={110} w={520} size={16} weight={500} color="#939598" tracking={5}>FROM REQUIREMENTS TO REAL IMPACT</T><T x={64} y={118} w={1240} size={58} weight={800} color={WHITE2}>DESIGN PRODUCTION READINESS</T><T x={64} y={184} w={840} size={58} weight={800} color={MAGENTA}>INTO THE FEATURE.</T><T x={67} y={258} w={1120} size={24} color={WHITE2}>Guardrails, human intervention, and success measures belong in the product{"\n"}requirements before development begins.</T>
+    <div className="pdma-canonical-top-header" style={{position:"absolute", inset:0}}><B x={0} y={0} w={1920} h={78} bg="#090909"/><T x={52} y={22} w={150} size={18} weight={700} color={WHITE2}>PDMA 2026</T><B x={220} y={40} w={1230} h={1} bg={LINE}/><B x={220} y={39} w={405} h={3} bg={MAGENTA}/><T x={1490} y={23} w={390} size={14} weight={600} color="#939598" tracking={3}>BACKLOG  •  CONTROLS  •  OUTCOMES</T></div>
+    <T x={64} y={118} w={1240} size={58} weight={800} color={WHITE2}>DESIGN PRODUCTION READINESS</T><T x={64} y={184} w={840} size={58} weight={800} color={MAGENTA}>INTO THE FEATURE.</T><T x={67} y={258} w={1120} size={24} color={WHITE2}>Guardrails, human intervention, and success measures belong in the product{"\n"}requirements before development begins.</T>
     {cards.map(([x,n,title,body,icon,active])=><div key={n} style={{position:"absolute",left:x,top:420,width:360,height:250,background:active?"#250c20":"#16191c",border:`1.5px solid ${active?MAGENTA:"#4a4d50"}`,borderRadius:10,opacity:.93}}><T x={308} y={22} w={32} size={16} weight={500} color="#939598" tracking={3}>{n}</T><Img src={icon} x={28} y={24} w={54} h={54}/><T x={34} y={82} w={292} size={23} weight={700} color={active?MAGENTA:WHITE2}>{title}</T><B x={34} y={126} w={52} h={3} bg={MAGENTA}/><T x={34} y={148} w={292} size={19} color={WHITE2}>{body}</T></div>)}
     <T x={60} y={718} w={520} size={17} weight={600} color={MAGENTA} tracking={3}>OPERATIONALIZE IT AS PRODUCT WORK</T><B x={60} y={760} w={1140} h={2} bg="#5d6064"/>
     {[[62,"01","BACKLOG","Capture the requirements."],[392,"02","PRD","Define behavior and\nboundaries."],[690,"03","ACCEPTANCE CRITERIA","Make them testable."],[1010,"04","PRODUCTION","Prove they work."]].map(([x,n,t,d],i)=><div key={String(n)}><T x={Number(x)} y={770} w={40} size={15} weight={500} color="#939598" tracking={3}>{n}</T><T x={Number(x)+50} y={765} w={260} size={19} weight={700} color={i===3?MAGENTA:WHITE2}>{t}</T><T x={Number(x)+50} y={795} w={260} size={15} color={WHITE2}>{d}</T>{i<3&&<T x={Number(x)+285} y={777} size={28} color="#939598">→</T>}</div>)}
     <B x={50} y={870} w={1820} h={90} bg="#120a10" border={`1.5px solid ${MAGENTA}`} radius={8} opacity={.96}/><B x={65} y={890} w={4} h={52} bg={MAGENTA}/><T x={92} y={900} w={1350} size={25} weight={700} color={WHITE2}>IF IT MATTERS IN PRODUCTION, IT BELONGS IN THE PRODUCT DEFINITION.</T><T x={1655} y={894} w={150} size={12} weight={500} color="#939598" tracking={4}>REAL FEATURES.{"\n"}REAL OUTCOMES.</T>
-    <B x={0} y={985} w={1920} h={95} bg="#090909"/><T x={28} y={1028} w={560} size={13} weight={500} color="#939598" tracking={5}>PRODUCTION READINESS STARTS IN THE BACKLOG</T><B x={560} y={1044} w={1265} h={2} bg={LINE}/><Img src="/pdma2026/slide-02/canonical-asterisk.svg" x={1840} y={1002} w={52} h={52}/>
+    <div className="pdma-canonical-local-footer"><B x={0} y={985} w={1920} h={95} bg="#090909"/><T x={28} y={1028} w={560} size={13} weight={500} color="#939598" tracking={5}>PRODUCTION READINESS STARTS IN THE BACKLOG</T><B x={560} y={1044} w={1265} h={2} bg={LINE}/><Img src="/pdma2026/slide-02/canonical-asterisk.svg" x={1840} y={1002} w={52} h={52}/></div>
   </Stage>;
 }

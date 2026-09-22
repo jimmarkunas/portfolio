@@ -19,6 +19,7 @@ function Img({ src, x, y, w, h, fit = "contain" }: { src:string; x:number; y:num
 
 function Chrome() {
   return <>
+    <div className="pdma-canonical-top-header" style={{position:"absolute", inset:0}}>
     <B x={0} y={0} w={1920} h={100} bg="#090909" />
     <T x={30} y={25} size={20} weight={600} color="#f2f2f5" tracking={.8}>PDMA 2026</T>
     <B x={205} y={36} w={1275} h={2} bg={LINE} />
@@ -28,10 +29,13 @@ function Chrome() {
     <T x={1632} y={27} size={15} weight={600} color={MUTED} tracking={3}>DATA</T>
     <T x={1762} y={27} size={15} weight={600} color={MAGENTA} tracking={2}>•</T>
     <T x={1792} y={27} size={15} weight={600} color={MUTED} tracking={3}>OWNERSHIP</T>
+    </div>
+    <div className="pdma-canonical-local-footer">
     <B x={0} y={985} w={1920} h={95} bg="#090909" />
     <T x={26} y={1030} size={15} weight={600} color={MUTED} tracking={4}>AUTOMATION DOES NOT ERASE OWNERSHIP</T>
     <B x={431} y={1042} w={1395} h={2} bg={LINE} />
     <Img src="/pdma2026/slide-02/canonical-asterisk.svg" x={1841} y={1013} w={52} h={52} />
+    </div>
   </>;
 }
 

@@ -13,6 +13,12 @@
 - Preserve mobile/tablet/desktop behavior when touching shared UI.
 - After 2 failed attempts on the same issue, stop and present a 3-step plan.
 
+### Visual completion guardrail
+- Never report a visual fix as complete from source inspection or typecheck alone.
+- Before completion, audit every requested instance and verify the rendered output in the actual browser/runtime; if browser verification is unavailable or stale, report that explicitly and do not claim success.
+- For duplicate UI, search all render paths and remove the duplicate source rather than relying on a CSS hide or assuming hot reload applied.
+- After any visual edit, refresh/reload the runtime and compare the exact affected views against the user’s screenshot before reporting PASS.
+
 ## Secure Carolinas 2026 Presentation — Explicit Override
 
 For any task involving the Secure Carolinas 2026 presentation, including:

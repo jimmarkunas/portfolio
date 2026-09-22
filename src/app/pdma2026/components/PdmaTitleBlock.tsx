@@ -3,7 +3,7 @@ import { titleConfig } from "../pdmaTitleConfig";
 
 export function PdmaTitleBlock({ slide }: { slide: number }) {
   const reduced = useReducedMotion();
-  if (slide >= 6) return null;
+  if (slide > 15) return null;
   const config = titleConfig[slide];
   if (!config) return null;
 
