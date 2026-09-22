@@ -51,11 +51,11 @@ export function PdmaPresentationShell({ slides, slideTitles, slideIdOrder, navig
   const { currentSlide, isTocOpen, setIsTocOpen, nextSlide, prevSlide, jumpToSlide } = usePresentationNavigation({ slideCount: slides.length, onToggleFullscreen: toggleFullscreen });
   const reduced = useReducedMotion();
   const footer = footerLabels[Math.min(3, currentSlide)] ?? footerLabels[0];
-  const usesCanonicalFigmaChrome = currentSlide >= 5;
+  const usesCanonicalFigmaHeader = currentSlide >= 5;
   return <main ref={containerRef} className="pdma-presentation">
     <div className="pdma-stage"><AnimatePresence mode="wait" initial={false}><motion.div key={currentSlide} className="pdma-slide-layer" initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: reduced ? 0 : 0.45, ease: "easeOut" }}>{slides[currentSlide]}</motion.div></AnimatePresence><PdmaTitleBlock slide={currentSlide + 1} /></div>
-    {!usesCanonicalFigmaChrome && <PdmaHeader current={currentSlide} total={slides.length} />}
-    {!usesCanonicalFigmaChrome && <PdmaBottomBar current={currentSlide} total={slides.length} footer={footer} navigation={navigation} onPrev={prevSlide} onNext={nextSlide} onToc={() => setIsTocOpen(true)} onFullscreen={toggleFullscreen} isFullscreen={isFullscreen} />}
+    {!usesCanonicalFigmaHeader && <PdmaHeader current={currentSlide} total={slides.length} />}
+    <PdmaBottomBar current={currentSlide} total={slides.length} footer={footer} navigation={navigation} onPrev={prevSlide} onNext={nextSlide} onToc={() => setIsTocOpen(true)} onFullscreen={toggleFullscreen} isFullscreen={isFullscreen} />
     <PresentationTocDialog dialogId="pdma2026-slide-toc" isOpen={isTocOpen} currentSlide={currentSlide} slideTitles={slideTitles} slideIdOrder={slideIdOrder} totalSlides={slides.length} navCopy={navigation} onClose={() => setIsTocOpen(false)} onJumpToSlide={jumpToSlide} />
   </main>;
 }
