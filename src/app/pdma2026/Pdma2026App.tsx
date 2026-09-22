@@ -91,17 +91,6 @@ export default function Pdma2026App() {
   }, [goTo, next, previous, showControls, toggleFullscreen]);
 
   useEffect(() => {
-    const candidates = [slideIndex - 1, slideIndex + 1].filter(
-      (index) => index >= 0 && index <= LAST_INDEX,
-    );
-
-    for (const index of candidates) {
-      const image = new Image();
-      image.src = pdma2026Slides[index].imageUrl;
-    }
-  }, [slideIndex]);
-
-  useEffect(() => {
     return () => {
       if (hideTimer.current) clearTimeout(hideTimer.current);
     };
@@ -126,14 +115,10 @@ export default function Pdma2026App() {
           else next();
         }}
       >
-        {/* Exact Figma frame export. Figma remains the editable visual source. */}
-        <img
-          key={slide.imageUrl}
-          className="pdma2026-slide-image"
-          src={slide.imageUrl}
-          alt={`Slide ${slide.id}: ${slide.title}`}
-          draggable={false}
-        />
+        <div className="pdma2026-build-required" role="status">
+          <strong>PDMA 2026 React rebuild in progress.</strong>
+          <span>The rejected raster-mirror implementation has been disabled.</span>
+        </div>
       </section>
 
       <nav
