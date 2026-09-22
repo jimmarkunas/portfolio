@@ -1,22 +1,12 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { PdmaSlideCanvas } from "../PdmaPresentationShell";
 import { pdmaAssets } from "../pdmaAssets";
+import { B, Img } from "./pdmaSlidePrimitives";
 
-const FONT = "Inter, ui-sans-serif, system-ui, sans-serif";
 const WHITE = "#f2f2f2";
 const MAGENTA = "#ff2fae";
-const MUTED = "#7a7d85";
-const LINE = "#44464a";
-
-function T({ x, y, w, size, weight = 400, color = WHITE, line = "normal", tracking, children }: { x:number; y:number; w?:number; size:number; weight?:number; color?:string; line?:number|string; tracking?:number; children:ReactNode }) {
-  return <div style={{ position:"absolute", left:x, top:y, width:w, margin:0, fontFamily:FONT, fontSize:size, fontWeight:weight, color, lineHeight:typeof line === "number" ? `${line}px` : line, letterSpacing:tracking, whiteSpace:"pre-wrap" }}>{children}</div>;
-}
-function B({ x, y, w, h, bg, border, radius = 0 }: { x:number; y:number; w:number; h:number; bg?:string; border?:string; radius?:number }) {
-  return <div style={{ position:"absolute", left:x, top:y, width:w, height:h, boxSizing:"border-box", background:bg, border, borderRadius:radius }} />;
-}
-function Img({ src, x, y, w, h, fit = "contain" }: { src:string; x:number; y:number; w:number; h:number; fit?:CSSProperties["objectFit"] }) {
-  return <img alt="" src={src} style={{ position:"absolute", left:x, top:y, width:w, height:h, objectFit:fit, maxWidth:"none", display:"block" }} />;
-}
+const FONT = "Inter, ui-sans-serif, system-ui, sans-serif";
+const T = ({ x, y, w, size, weight = 400, color = WHITE, line = "normal", tracking, children }: { x:number; y:number; w?:number; size:number; weight?:number; color?:string; line?:number|string; tracking?:number; children:ReactNode }) => <div style={{ position:"absolute", left:x, top:y, width:w, margin:0, fontFamily:FONT, fontSize:size, fontWeight:weight, color, lineHeight:typeof line === "number" ? `${line}px` : line, letterSpacing:tracking, whiteSpace:"pre-wrap" }}>{children}</div>;
 
 const inventory = [
   ["SYSTEMS","What applications and\nplatforms are involved?","icon-systems.svg",27,24,34.74,36.54],
