@@ -21,6 +21,7 @@
     "check:guard-script-fixtures": "bash scripts/check-short.sh guard-script-fixtures node scripts/test-guard-scripts.mjs",
     "check:source-budgets": "bash scripts/check-short.sh source-budgets node scripts/check-source-budgets.mjs",
     "check:route-boundaries": "bash scripts/check-short.sh route-boundaries node scripts/check-route-boundaries.mjs",
+    "check:pdma-poc-guard": "node scripts/check-pdma-poc-guard.mjs",
     "check:bundle-budget-trends": "bash scripts/check-short.sh bundle-budget-trends node scripts/check-bundle-budget-trends.mjs",
     "check:bundle-budgets": "bash scripts/check-short.sh bundle-budgets node scripts/check-bundle-budgets.mjs",
     "prepush": "bash scripts/prepush.sh",
