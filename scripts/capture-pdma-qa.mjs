@@ -11,6 +11,13 @@ const qaRoot = path.join(root, "qa/pdma2026")
 const referenceRoot = path.join(qaRoot, "reference")
 const baseUrl = process.env.BASE_URL ?? "http://localhost:3000"
 const route = "/pdma2026/"
+const diffChannelThreshold = Number(process.env.PDMA_DIFF_CHANNEL_THRESHOLD ?? 16)
+const maxDiffPixels = Number(process.env.PDMA_MAX_DIFF_PIXELS ?? 250000)
+const maxDiffRatio = Number(process.env.PDMA_MAX_DIFF_RATIO ?? 0.12)
+const slideArgumentIndex = process.argv.indexOf("--slides")
+const requestedSlides = slideArgumentIndex >= 0 ? process.argv[slideArgumentIndex + 1]?.split(",").map((value) => value.padStart(2, "0")) : null
+const slidesToCapture = requestedSlides?.length ? requestedSlides : Array.from({ length: 15 }, (_, index) => String(index + 1).padStart(2, "0"))
+if (slidesToCapture.some((slide) => !/^0[1-9]$|^1[0-5]$/.test(slide))) throw new Error(`Invalid --slides value; expected comma-separated 01–15, received ${slidesToCapture.join(",")}`)
 let server
 
 async function isHealthy() {
@@ -52,18 +59,40 @@ async function createDiffArtifacts(slide) {
   if (referenceMeta.width !== 1920 || referenceMeta.height !== 1080) throw new Error(`Reference ${slide} is not 1920×1080`)
   await sharp(render).composite([{ input: reference, blend: "over", opacity: 0.5 }]).png().toFile(overlay)
   await sharp(render).composite([{ input: reference, blend: "difference" }]).png().toFile(diff)
+  const { data, info } = await sharp(render).raw().toBuffer({ resolveWithObject: true })
+  const { data: referenceData } = await sharp(reference).raw().toBuffer({ resolveWithObject: true })
+  let differingPixels = 0
+  for (let offset = 0; offset < data.length; offset += info.channels) {
+    let differs = false
+    for (let channel = 0; channel < Math.min(3, info.channels); channel += 1) {
+      if (Math.abs(data[offset + channel] - referenceData[offset + channel]) > diffChannelThreshold) differs = true
+    }
+    if (differs) differingPixels += 1
+  }
+  const ratio = differingPixels / (info.width * info.height)
+  if (differingPixels > maxDiffPixels || ratio > maxDiffRatio) {
+    throw new Error(`Slide ${slide} exceeds visual diff threshold: ${differingPixels} pixels (${(ratio * 100).toFixed(2)}%), limits ${maxDiffPixels} / ${(maxDiffRatio * 100).toFixed(2)}%`)
+  }
+  return { differingPixels, ratio }
 }
 
 async function main() {
   fs.mkdirSync(qaRoot, { recursive: true })
   await ensureServer()
-  const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_BIN ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" })
+  const browserOptions = { headless: true }
+  if (process.env.CHROME_BIN) browserOptions.executablePath = process.env.CHROME_BIN
+  const browser = await chromium.launch(browserOptions)
   try {
     const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 })
+    await page.emulateMedia({ reducedMotion: "reduce", colorScheme: "dark" })
     await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" })
     await page.evaluate(() => document.fonts?.ready)
     for (let index = 1; index <= 15; index += 1) {
       const slide = String(index).padStart(2, "0")
+      if (!slidesToCapture.includes(slide)) {
+        if (index < 15) await page.getByRole("button", { name: "Next slide" }).click()
+        continue
+      }
       await page.screenshot({ path: path.join(qaRoot, `slide-${slide}-render.png`), animations: "disabled" })
       await createDiffArtifacts(slide)
       if (index < 15) {
@@ -74,7 +103,9 @@ async function main() {
   } finally {
     await browser.close()
   }
-  console.log("PDMA QA capture passed (15 renders, overlays, and diffs generated).")
+  const { execFileSync } = await import("node:child_process")
+  execFileSync(process.execPath, [path.join(root, "scripts/generate-pdma-qa-index.mjs")], { cwd: root, stdio: "inherit" })
+  console.log(`PDMA QA capture passed (${slidesToCapture.length} slide${slidesToCapture.length === 1 ? "" : "s"}: ${slidesToCapture.join(", ")}).`)
 }
 
 try {

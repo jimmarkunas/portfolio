@@ -1,0 +1,15 @@
+import type { CSSProperties } from "react";
+import { PdmaSlideCanvas } from "../../PdmaPresentationShell";
+import { PdmaSlideBody } from "../PdmaSlideBody";
+import { pdmaSlideGeometry } from "../../pdmaSlideGeometry";
+import { ImageLayer, asset } from "./slideShared";
+
+const copilot = [["H", "HUMAN"], ["P", "PROMPT"], ["M", "MODEL"], ["O", "OUTPUT"]] as const;
+const agent = [["G", "GOAL"], ["A", "AGENT"], ["T", "TOOL / SYSTEM"], ["→", "ACTION"]] as const;
+function Process({ items, accentIndex = -1 }: { items: readonly (readonly [string, string])[]; accentIndex?: number }) { return <div className="s03-process">{items.map(([glyph, label], index) => <div className={`s03-step ${index === accentIndex ? "is-accent" : ""}`} key={label}><div className="s03-step-circle">{glyph}</div><span>{label}</span>{index < items.length - 1 && <b>→</b>}</div>)}</div>; }
+
+export function Slide03() {
+  const { slide03 } = pdmaSlideGeometry;
+  const style = { "--pdma-s03-panel-top": `${slide03.panelTop}px`, "--pdma-s03-panel-width": `${slide03.panelWidth}px`, "--pdma-s03-panel-height": `${slide03.panelHeight}px`, "--pdma-s03-copilot-left": `${slide03.copilotLeft}px`, "--pdma-s03-agent-left": `${slide03.agentLeft}px`, "--pdma-s03-divider-left": `${slide03.dividerLeft}px`, "--pdma-s03-divider-top": `${slide03.dividerTop}px`, "--pdma-s03-divider-height": `${slide03.dividerHeight}px` } as CSSProperties;
+  return <PdmaSlideCanvas><div className="pdma-slide-surface pdma-s03" style={style}><PdmaSlideBody className="pdma-slide-body-03"><ImageLayer className="s03-left" src={asset("slide-03", "02283.png")} /><ImageLayer className="s03-right" src={asset("slide-03", "44753.png")} delay={.2} /><section className="s03-panel s03-panel-copilot"><h2>C O P I L O T</h2><p className="s03-descriptor">A S S I S T S&nbsp;&nbsp; W I T H&nbsp;&nbsp; O U T P U T S</p><Process items={copilot} accentIndex={3}/><hr/><p className="s03-boundary-copy">Human remains the execution boundary.</p></section><section className="s03-panel s03-panel-agent"><h2>A G E N T</h2><p className="s03-descriptor">A C T S&nbsp;&nbsp; I N&nbsp;&nbsp; T H E&nbsp;&nbsp; R E A L&nbsp;&nbsp; W O R L D</p><Process items={agent} accentIndex={1}/><hr/><p className="s03-boundary-copy">AI can now cross the execution boundary.</p><p className="s03-capabilities">READ&nbsp;&nbsp; • &nbsp;&nbsp;WRITE&nbsp;&nbsp; • &nbsp;&nbsp;SEND&nbsp;&nbsp; • &nbsp;&nbsp;SPEND</p></section><i className="s03-panel-divider"/><div className="s03-takeaway"><i/> <strong>WHEN AI BECOMES AN OPERATOR, AUTHORITY BECOMES A PRODUCT DECISION.</strong></div></PdmaSlideBody></div></PdmaSlideCanvas>;
+}

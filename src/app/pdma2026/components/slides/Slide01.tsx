@@ -1,0 +1,5 @@
+import { motion } from "motion/react";
+import { PdmaSlideCanvas } from "../../PdmaPresentationShell";
+import { Layer, asset } from "./slideShared";
+
+export function Slide01() { return <PdmaSlideCanvas><div className="pdma-slide-surface pdma-s01"><img className="s01-wide" src={asset("slide-01", "title-atmosphere.png")} alt="" /><img className="s01-orb" src={asset("slide-01", "title-asterisk-scene.png")} alt="" /><Layer className="s01-title-white"><h1>THE NEW PM</h1></Layer><Layer className="s01-title-magenta" delay={.08}><h1>OPERATING SYSTEM</h1></Layer><Layer className="s01-subtitle" delay={.16}><p>What stays uniquely human.<br/>What shifts to AI.</p></Layer><motion.i className="s01-speaker-rule" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: .45, delay: .28 }} /><Layer className="s01-speaker-name" delay={.3}><strong>Jim Markunas</strong></Layer><Layer className="s01-speaker-role" delay={.36}><span>Head of Product, Bytalos</span></Layer></div></PdmaSlideCanvas>; }

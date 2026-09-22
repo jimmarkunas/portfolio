@@ -17,7 +17,7 @@ if (new Set(keys).size !== keys.length) failures.push("manifest slide keys must 
 if (new Set(ids).size !== ids.length) failures.push("manifest slide IDs must be unique")
 if (entries.some(([, key, id, title]) => key !== id || !title.trim())) failures.push("every manifest entry must have matching key/id and a TOC title")
 if (!/const\s+slides:\s+readonly/.test(manifest)) failures.push("manifest must own the slide collection")
-if (!/slideManifest\.map\(\(\{ render \}\) => render\(\)\)/.test(fs.readFileSync(path.join(root, "src/app/pdma2026/Pdma2026App.tsx"), "utf8"))) failures.push("app must render every manifest entry")
+if (!/slideManifest\.map\(\(\{ component: Component, key \}\) => <Component key=\{key\} \/>\)/.test(fs.readFileSync(path.join(root, "src/app/pdma2026/Pdma2026App.tsx"), "utf8"))) failures.push("app must render every manifest entry")
 
 if (failures.length) {
   console.error("PDMA manifest/render parity guard failed:\n- " + failures.join("\n- "))

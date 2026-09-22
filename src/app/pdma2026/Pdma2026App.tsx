@@ -6,7 +6,7 @@ import { assertPdma2026ManifestParity, buildPdma2026SlideManifest } from "./pdma
 
 export default function Pdma2026App() {
   const slideManifest = buildPdma2026SlideManifest(pdma2026Content);
-  const slides = slideManifest.map(({ render }) => render());
+  const slides = slideManifest.map(({ component: Component, key }) => <Component key={key} />);
   assertPdma2026ManifestParity(slideManifest, slides);
   return <PdmaPresentationShell slides={slides} slideManifest={slideManifest} navigation={pdma2026Content.navigation} />;
 }

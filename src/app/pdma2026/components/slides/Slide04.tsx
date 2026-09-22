@@ -1,0 +1,5 @@
+import { PdmaSlideCanvas } from "../../PdmaPresentationShell";
+import { PdmaSlideBody } from "../PdmaSlideBody";
+import { ImageLayer, Layer, asset } from "./slideShared";
+
+export function Slide04() { return <PdmaSlideCanvas><div className="pdma-slide-surface pdma-s04"><PdmaSlideBody className="pdma-slide-body-04"><ImageLayer className="s04-wide" src={asset("slide-04", "0c14e.png")} /><ImageLayer className="s04-diagram" src={asset("slide-04", "bd2f1.png")} delay={.22} /><div className="s04-cards">{[["01","AUTOMATE","AI owns execution of bounded, repeatable work."],["02","AUGMENT","AI improves speed, synthesis, or quality while a human still decides."],["03","HUMAN-OWNED","Judgment, accountability, and authority stays human."]].map(([n,t,d],i)=><Layer key={n} delay={i*.1}><article><small>{n}</small><h2>{t}</h2><p>{d}</p><b>{i===0?"EXECUTION":i===1?"DECISION":"ACCOUNTABILITY"}</b></article></Layer>)}</div><div className="s04-takeaway"><i/>THE GOAL: BUILD THE RIGHT OPERATING MODEL FOR THE WORK.</div></PdmaSlideBody></div></PdmaSlideCanvas>; }

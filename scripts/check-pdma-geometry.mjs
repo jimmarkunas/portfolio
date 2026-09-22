@@ -5,7 +5,10 @@ import path from "node:path"
 
 const root = process.cwd()
 const targets = [
-  "src/app/pdma2026/components/Batch01Slides.tsx",
+  "src/app/pdma2026/components/slides/Slide01.tsx",
+  "src/app/pdma2026/components/slides/Slide03.tsx",
+  "src/app/pdma2026/components/slides/Slide04.tsx",
+  "src/app/pdma2026/components/slides/Slide05.tsx",
   "src/app/pdma2026/components/CanonicalSlide08.tsx",
   "src/app/pdma2026/components/CanonicalSlides11to15.tsx",
   "src/app/pdma2026/components/slides",
