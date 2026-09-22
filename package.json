@@ -29,6 +29,7 @@
     "check:pdma-manifest-parity": "node scripts/check-pdma-manifest-parity.mjs",
     "check:pdma-qa": "node scripts/check-pdma-qa.mjs",
     "check:pdma": "npm run check:pdma-assets-manifest && npm run check:pdma-duplicate-selectors && npm run check:pdma-geometry && npm run check:pdma-immutable && npm run check:pdma-manifest-parity && npm run check:pdma-poc-guard",
+    "verify:pdma": "npm run check:pdma && npm run check:pdma-qa && npm run typecheck",
     "qa:pdma:index": "node scripts/generate-pdma-qa-index.mjs",
     "qa:pdma:capture": "node scripts/capture-pdma-qa.mjs",
     "check:bundle-budget-trends": "bash scripts/check-short.sh bundle-budget-trends node scripts/check-bundle-budget-trends.mjs",

@@ -4,7 +4,7 @@ import fs from "node:fs"
 import path from "node:path"
 
 const root = process.cwd()
-const cssFiles = ["index.css", "batch01.css", "batch02.css", "batch03.css", "batch04.css"]
+const cssFiles = ["index.css", "batch02.css", "batch03.css", "batch04.css"]
 const allowed = new Set([
   ".s03-left",
   ".s03-right",

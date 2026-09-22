@@ -2,6 +2,7 @@
 
 import fs from "node:fs"
 import path from "node:path"
+import crypto from "node:crypto"
 
 const root = process.cwd()
 const sourceRoot = path.join(root, "src/app/pdma2026")
@@ -11,6 +12,8 @@ const manifestPath = path.join(sourceRoot, "pdma2026SlideManifest.tsx")
 const failures = []
 const sourceFiles = []
 const maxRuntimeAssetBytes = 4 * 1024 * 1024
+const runtimeAssetHashes = new Map()
+const referencedRuntimeAssets = new Set()
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -26,8 +29,13 @@ function walkRuntimeAssets(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const file = path.join(dir, entry.name)
     if (entry.isDirectory()) walkRuntimeAssets(file)
-    else if (entry.isFile() && !file.includes(`${path.sep}originals${path.sep}`) && fs.statSync(file).size > maxRuntimeAssetBytes) {
-      failures.push(`${path.relative(root, file)} exceeds the 4 MB runtime asset limit`)
+    else if (entry.isFile() && !file.includes(`${path.sep}originals${path.sep}`)) {
+      const stats = fs.statSync(file)
+      if (stats.size > maxRuntimeAssetBytes) failures.push(`${path.relative(root, file)} exceeds the 4 MB runtime asset limit`)
+      const hash = crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex")
+      const files = runtimeAssetHashes.get(hash) ?? []
+      files.push(file)
+      runtimeAssetHashes.set(hash, files)
     }
   }
 }
@@ -56,7 +64,16 @@ for (const file of sourceFiles) {
     const absolute = path.join(publicRoot, assetPath.replace(/^\//, ""))
     if (!fs.existsSync(absolute)) {
       failures.push(`${path.relative(root, file)} references missing asset ${assetPath}`)
-    }
+    } else referencedRuntimeAssets.add(absolute)
+  }
+}
+
+for (const files of runtimeAssetHashes.values()) {
+  const referencedFiles = files.filter((file) => referencedRuntimeAssets.has(file))
+  if (referencedFiles.length < 2) continue
+  const slideDirectories = new Set(referencedFiles.map((file) => path.dirname(file)))
+  if (slideDirectories.size === 1) {
+    failures.push(`duplicate referenced asset bytes in ${referencedFiles.map((file) => path.relative(root, file)).join(", ")}`)
   }
 }
 
