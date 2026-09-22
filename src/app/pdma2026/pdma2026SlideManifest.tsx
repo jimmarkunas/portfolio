@@ -40,3 +40,9 @@ const slides: readonly Omit<Pdma2026SlideManifestEntry, "footerLabel">[] = [
 export function buildPdma2026SlideManifest(_content: Pdma2026Content): Pdma2026SlideManifestEntry[] {
   return slides.map((slide, index) => ({ ...slide, footerLabel: footerLabels[Math.min(index, footerLabels.length - 1)] }));
 }
+
+export function assertPdma2026ManifestParity(manifest: readonly Pdma2026SlideManifestEntry[], renderedSlides: readonly ReactNode[]) {
+  if (manifest.length !== 15 || renderedSlides.length !== manifest.length) throw new Error(`PDMA manifest/render parity failed: ${manifest.length} manifest entries, ${renderedSlides.length} rendered slides`);
+  if (new Set(manifest.map(({ key }) => key)).size !== manifest.length) throw new Error("PDMA manifest/render parity failed: duplicate slide key");
+  if (new Set(manifest.map(({ id }) => id)).size !== manifest.length) throw new Error("PDMA manifest/render parity failed: duplicate slide id");
+}
