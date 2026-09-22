@@ -97,3 +97,21 @@
 .pdma-s04 .s04-cards article p{max-height:96px;overflow:hidden}
 .pdma-s04 .s04-cards article b,.pdma-s04 .s04-cards article:last-child b{top:196px;bottom:auto}
 .pdma-s05 .s05-equals{top:675px}
+.pdma-s07 .s07-matrix{left:72px;top:398px;width:1776px;height:454px;grid-template-columns:278px repeat(3,1fr);background:#0d1114;border-radius:12px;overflow:hidden}
+.pdma-s07 .s07-matrix>aside,.pdma-s07 .s07-matrix>section{border-color:#3a4148}
+.pdma-s07 .s07-matrix aside{padding:28px 24px;background:#0d1114}
+.pdma-s07 .s07-matrix aside b{font-size:17px;letter-spacing:4px}
+.pdma-s07 .s07-matrix aside>i{display:block;width:48px;height:2px;margin:28px 0;background:#7a7d85}
+.pdma-s07 .s07-matrix aside strong{margin:0;font-size:28px;line-height:1.12}
+.pdma-s07 .s07-matrix aside span{margin-top:0;font-size:17px;line-height:24px}
+.pdma-s07 .s07-matrix section{background:#0d1114}
+.pdma-s07 .s07-matrix section.is-selected{background:rgba(255,47,174,.12);border-color:#ff2fae}
+.pdma-s07 .s07-matrix section h2{height:128px;margin:0;padding:31px 34px 0 112px;font-size:22px;line-height:28px;white-space:nowrap}
+.pdma-s07 .s07-matrix section p{height:0;margin:-66px 34px 0 112px;padding:0;font-size:17px;line-height:22px;white-space:normal}
+.pdma-s07 .s07-header-icon{position:absolute;left:34px;top:35px;width:48px;height:48px;color:#f2f2f5;stroke-width:1.7}
+.pdma-s07 .s07-matrix section.is-selected .s07-header-icon{color:#ff2fae}
+.pdma-s07 .s07-row{height:64px;padding:0 34px;border-color:#3a4148}
+.pdma-s07 .s07-row b{font-size:15px;letter-spacing:2px}
+.pdma-s07 .s07-row i{width:22px;height:22px}
+.pdma-s07 .s07-row:first-of-type i{border-color:#ff2fae;box-shadow:inset 0 0 0 5px #15181b;background:#ff2fae}
+.pdma-s07 .s07-takeaway{left:72px;top:878px;width:1776px;border-top:2px solid #44464a;padding-top:28px;font-size:26px}
