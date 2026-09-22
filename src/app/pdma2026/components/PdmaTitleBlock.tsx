@@ -1,11 +1,8 @@
 import { motion, useReducedMotion } from "motion/react";
-import { titleConfig } from "../pdmaTitleConfig";
+import type { PdmaTitleConfig } from "../pdmaTitleConfig";
 
-export function PdmaTitleBlock({ slide }: { slide: number }) {
+export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaTitleConfig }) {
   const reduced = useReducedMotion();
-  if (slide > 15) return null;
-  const config = titleConfig[slide];
-  if (!config) return null;
 
   const titleColor = config.titleColor ?? "#f2f2f5";
   const subtitle = config.exactSubtitleSize ? (

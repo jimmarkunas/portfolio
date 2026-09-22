@@ -8,8 +8,7 @@ import { usePresentationNavigation } from "@/hooks/usePresentationNavigation";
 import { PresentationTocDialog } from "@/components/presentation/PresentationTocDialog";
 import type { PresentationNavigationCopy } from "@/lib/presentation";
 import { PdmaTitleBlock } from "./components/PdmaTitleBlock";
-
-const footerLabels = ["HUMAN JUDGMENT COMPOUNDS", "THE NEW PM OPERATING SYSTEM", "AUTHORITY IS A PRODUCT DECISION", "BUILD THE RIGHT OPERATING MODEL"];
+import type { Pdma2026SlideManifestEntry } from "./pdma2026SlideManifest";
 
 export function PdmaSlideCanvas({ children }: { children: React.ReactNode }) {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -45,16 +44,16 @@ function PdmaBottomBar({ current, total, footer, navigation, onPrev, onNext, onT
   </motion.footer>;
 }
 
-export function PdmaPresentationShell({ slides, slideTitles, slideIdOrder, navigation }: { slides: React.ReactNode[]; slideTitles:string[]; slideIdOrder:string[]; navigation:PresentationNavigationCopy }) {
+export function PdmaPresentationShell({ slides, slideManifest, navigation }: { slides: React.ReactNode[]; slideManifest: Pdma2026SlideManifestEntry[]; navigation:PresentationNavigationCopy }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { isFullscreen, toggleFullscreen } = usePresentationFullscreen({ containerRef });
   const { currentSlide, isTocOpen, setIsTocOpen, nextSlide, prevSlide, jumpToSlide } = usePresentationNavigation({ slideCount: slides.length, onToggleFullscreen: toggleFullscreen });
   const reduced = useReducedMotion();
-  const footer = footerLabels[Math.min(3, currentSlide)] ?? footerLabels[0];
+  const currentManifestEntry = slideManifest[currentSlide];
   return <main ref={containerRef} className="pdma-presentation">
-    <div className="pdma-stage"><AnimatePresence mode="wait" initial={false}><motion.div key={currentSlide} className="pdma-slide-layer" initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: reduced ? 0 : 0.45, ease: "easeOut" }}>{slides[currentSlide]}</motion.div></AnimatePresence><PdmaTitleBlock slide={currentSlide + 1} /></div>
+    <div className="pdma-stage"><AnimatePresence mode="wait" initial={false}><motion.div key={currentSlide} className="pdma-slide-layer" initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: reduced ? 0 : 0.45, ease: "easeOut" }}>{slides[currentSlide]}</motion.div></AnimatePresence><PdmaTitleBlock slide={currentSlide + 1} config={currentManifestEntry.title} /></div>
     <PdmaHeader current={currentSlide} total={slides.length} />
-    <PdmaBottomBar current={currentSlide} total={slides.length} footer={footer} navigation={navigation} onPrev={prevSlide} onNext={nextSlide} onToc={() => setIsTocOpen(true)} onFullscreen={toggleFullscreen} isFullscreen={isFullscreen} />
-    <PresentationTocDialog dialogId="pdma2026-slide-toc" isOpen={isTocOpen} currentSlide={currentSlide} slideTitles={slideTitles} slideIdOrder={slideIdOrder} totalSlides={slides.length} navCopy={navigation} onClose={() => setIsTocOpen(false)} onJumpToSlide={jumpToSlide} />
+    <PdmaBottomBar current={currentSlide} total={slides.length} footer={currentManifestEntry.footerLabel} navigation={navigation} onPrev={prevSlide} onNext={nextSlide} onToc={() => setIsTocOpen(true)} onFullscreen={toggleFullscreen} isFullscreen={isFullscreen} />
+    <PresentationTocDialog dialogId="pdma2026-slide-toc" isOpen={isTocOpen} currentSlide={currentSlide} slideTitles={slideManifest.map(({ tocTitle }) => tocTitle)} slideIdOrder={slideManifest.map(({ id }) => id)} totalSlides={slides.length} navCopy={navigation} onClose={() => setIsTocOpen(false)} onJumpToSlide={jumpToSlide} />
   </main>;
 }
