@@ -10,6 +10,7 @@ const manifestPath = path.join(sourceRoot, "pdma2026SlideManifest.tsx")
 
 const failures = []
 const sourceFiles = []
+const maxRuntimeAssetBytes = 4 * 1024 * 1024
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -20,6 +21,18 @@ function walk(dir) {
 }
 
 walk(sourceRoot)
+
+function walkRuntimeAssets(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const file = path.join(dir, entry.name)
+    if (entry.isDirectory()) walkRuntimeAssets(file)
+    else if (entry.isFile() && !file.includes(`${path.sep}originals${path.sep}`) && fs.statSync(file).size > maxRuntimeAssetBytes) {
+      failures.push(`${path.relative(root, file)} exceeds the 4 MB runtime asset limit`)
+    }
+  }
+}
+
+walkRuntimeAssets(path.join(root, "public/pdma2026"))
 
 const manifest = fs.readFileSync(manifestPath, "utf8")
 const expectedKeys = Array.from({ length: 15 }, (_, index) => `slide-${String(index + 1).padStart(2, "0")}`)

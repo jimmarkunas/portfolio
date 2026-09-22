@@ -2,7 +2,10 @@ import type { ReactNode } from "react";
 import type { Pdma2026Content } from "@/content/pdma2026";
 import { Slide02 } from "./components/Slide02";
 import { Slide01, Slide03, Slide04, Slide05 } from "./components/Batch01Slides";
-import { Slide06, Slide07, Slide09, Slide10 } from "./components/CanonicalSlides06to10";
+import { Slide06 } from "./components/CanonicalSlides06to10";
+import { Slide07 } from "./components/slides/Slide07";
+import { Slide09 } from "./components/slides/Slide09";
+import { Slide10 } from "./components/slides/Slide10";
 import { Slide08 } from "./components/CanonicalSlide08";
 import { Slide11, Slide12, Slide13, Slide14, Slide15 } from "./components/CanonicalSlides11to15";
 

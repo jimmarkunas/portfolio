@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { PdmaSlideCanvas } from "../PdmaPresentationShell";
+import { pdmaAssets } from "../pdmaAssets";
 
 const FONT = "Inter, ui-sans-serif, system-ui, sans-serif";
 const WHITE = "#f2f2f2";
@@ -34,11 +35,11 @@ export function Slide06() {
   return <PdmaSlideCanvas><div style={{ position:"absolute", inset:0, width:1920, height:1080, overflow:"hidden", background:"#090909", color:WHITE, fontFamily:FONT }}>
     <div style={{ position:"absolute", left:0, top:76, width:1920, height:909, overflow:"hidden", background:"#040405" }}>
       {/* These files are already Figma-rendered node exports; do not apply node opacity a second time. */}
-      <Img src="/pdma2026/slide-06/figma-nebula.png" x={-120} y={0} w={980} h={909} fit="cover" />
-      <Img src="/pdma2026/slide-06/figma-planet.png" x={-590} y={-20} w={1020} h={1020} />
-      <Img src="/pdma2026/slide-06/figma-secondary-moon.png" x={370} y={350} w={128} h={128} />
-      <Img src="/pdma2026/slide-06/figma-small-moon.png" x={468} y={470} w={44} h={44} />
-      <Img src="/pdma2026/slide-06/figma-rings.png" x={1020} y={-18} w={820} h={340} fit="cover" />
+      <Img src={pdmaAssets.slide06.nebula} x={-120} y={0} w={980} h={909} fit="cover" />
+      <Img src={pdmaAssets.slide06.planet} x={-590} y={-20} w={1020} h={1020} />
+      <Img src={pdmaAssets.slide06.secondaryMoon} x={370} y={350} w={128} h={128} />
+      <Img src={pdmaAssets.slide06.smallMoon} x={468} y={470} w={44} h={44} />
+      <Img src={pdmaAssets.slide06.rings} x={1020} y={-18} w={820} h={340} fit="cover" />
 
       <T x={58} y={338} w={230} size={17} weight={500} color="#94969e" line={29} tracking={6}>MORE{"\n"}AWARENESS{"\n"}BETTER{"\n"}AUTONOMY</T>
       <B x={58} y={468} w={48} h={3} bg={MAGENTA} />
@@ -48,7 +49,7 @@ export function Slide06() {
       <T x={1415} y={288} w={360} size={17} weight={600} color={MAGENTA} tracking={5}>NAME THE OWNERS</T>
 
       {/* Exact Figma connector export: frame y=374/h=366 with -0.27% vertical inset => rendered y≈373/h=368. */}
-      <Img src="/pdma2026/slide-06/connectors.svg" x={1118} y={373} w={291} h={368} />
+      <Img src={pdmaAssets.slide06.connectors} x={1118} y={373} w={291} h={368} />
       <B x={1277} y={513} w={28} h={28} bg="rgba(255,47,174,.2)" radius={99} />
       <B x={1285} y={521} w={14} h={14} bg="#f2f2f2" border={`3px solid ${MAGENTA}`} radius={99} />
 

@@ -9,6 +9,7 @@ import { PresentationTocDialog } from "@/components/presentation/PresentationToc
 import type { PresentationNavigationCopy } from "@/lib/presentation";
 import { PdmaTitleBlock } from "./components/PdmaTitleBlock";
 import type { Pdma2026SlideManifestEntry } from "./pdma2026SlideManifest";
+import { pdmaAssets } from "./pdmaAssets";
 
 export function PdmaSlideCanvas({ children }: { children: React.ReactNode }) {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -38,7 +39,7 @@ function PdmaHeader({ current, total }: { current: number; total: number }) {
 function PdmaBottomBar({ current, total, footer, navigation, onPrev, onNext, onToc, onFullscreen, isFullscreen }: { current:number; total:number; footer:string; navigation:PresentationNavigationCopy; onPrev:()=>void; onNext:()=>void; onToc:()=>void; onFullscreen:()=>void; isFullscreen:boolean }) {
   const reduced = useReducedMotion();
   return <motion.footer className="pdma-bottom-bar" initial={reduced ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-    <div className="pdma-bottom-identity"><img src="/pdma2026/slide-01/canonical-asterisk.svg" alt="" /><i /><span>{footer}</span></div>
+    <div className="pdma-bottom-identity"><img src={pdmaAssets.asterisk} alt="" /><i /><span>{footer}</span></div>
     <div className="pdma-bottom-controls"><button onClick={onPrev} aria-label={navigation.previousAriaLabel}><ChevronLeft /></button><button onClick={onNext} aria-label={navigation.nextAriaLabel}><ChevronRight /></button></div>
     <div className="pdma-bottom-right"><button className="pdma-count" onClick={onToc} aria-label={navigation.openTocAriaLabel} aria-haspopup="dialog">{current + 1} / {total}</button><button onClick={onFullscreen} aria-label={navigation.toggleFullscreenAriaLabel}>{isFullscreen ? <Minimize /> : <Maximize />}</button></div>
   </motion.footer>;
