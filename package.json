@@ -24,6 +24,7 @@
     "check:pdma-poc-guard": "node scripts/check-pdma-poc-guard.mjs",
     "check:pdma-assets-manifest": "node scripts/check-pdma-assets-manifest.mjs",
     "check:pdma-duplicate-selectors": "node scripts/check-pdma-duplicate-selectors.mjs",
+    "check:pdma-qa": "node scripts/check-pdma-qa.mjs",
     "check:pdma": "npm run check:pdma-assets-manifest && npm run check:pdma-duplicate-selectors && npm run check:pdma-poc-guard",
     "qa:pdma:index": "node scripts/generate-pdma-qa-index.mjs",
     "check:bundle-budget-trends": "bash scripts/check-short.sh bundle-budget-trends node scripts/check-bundle-budget-trends.mjs",

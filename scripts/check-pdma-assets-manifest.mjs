@@ -7,8 +7,6 @@ const root = process.cwd()
 const sourceRoot = path.join(root, "src/app/pdma2026")
 const publicRoot = path.join(root, "public")
 const manifestPath = path.join(sourceRoot, "pdma2026SlideManifest.tsx")
-const contentPath = path.join(root, "src/content/pdma2026/types.ts")
-const titlePath = path.join(sourceRoot, "pdmaTitleConfig.tsx")
 
 const failures = []
 const sourceFiles = []
@@ -24,25 +22,15 @@ function walk(dir) {
 walk(sourceRoot)
 
 const manifest = fs.readFileSync(manifestPath, "utf8")
-const content = fs.readFileSync(contentPath, "utf8")
-const titleConfig = fs.readFileSync(titlePath, "utf8")
 const expectedKeys = Array.from({ length: 15 }, (_, index) => `slide-${String(index + 1).padStart(2, "0")}`)
-const manifestKeys = [...manifest.matchAll(/"(slide-\d{2})":\s*\(\)\s*=>/g)].map((match) => match[1])
-const contentKeys = [...content.matchAll(/`slide-\$\{String\(index \+ 1\)\.padStart\(2, "0"\)\}`/g)]
+const manifestKeys = [...manifest.matchAll(/key:\s*"(slide-\d{2})"/g)].map((match) => match[1])
 
 if (manifestKeys.join("|") !== expectedKeys.join("|")) {
   failures.push(`manifest renderers must contain slides 01–15 in order; found ${manifestKeys.join(", ")}`)
 }
 
-if (contentKeys.length !== 1) {
-  failures.push("PDMA content slide order must remain derived from the 15-slide sequence")
-}
-
-for (let slide = 1; slide <= 15; slide += 1) {
-  if (!new RegExp(`(?:^|,)\\s*${slide}:\\s*\\{`, "m").test(titleConfig)) {
-    failures.push(`missing title configuration for slide ${String(slide).padStart(2, "0")}`)
-  }
-}
+const manifestEntries = [...manifest.matchAll(/key:\s*"(slide-\d{2})"[\s\S]*?id:\s*"(slide-\d{2})"[\s\S]*?tocTitle:\s*"([^"]+)"[\s\S]*?title:\s*\{/g)]
+if (manifestEntries.length !== expectedKeys.length) failures.push(`manifest must define ${expectedKeys.length} complete slide entries; found ${manifestEntries.length}`)
 
 for (const file of sourceFiles) {
   const text = fs.readFileSync(file, "utf8")

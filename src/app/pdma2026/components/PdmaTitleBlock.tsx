@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "motion/react";
-import type { PdmaTitleConfig } from "../pdmaTitleConfig";
+import type { PdmaTitleConfig } from "../pdma2026SlideManifest";
 
 export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaTitleConfig }) {
   const reduced = useReducedMotion();
