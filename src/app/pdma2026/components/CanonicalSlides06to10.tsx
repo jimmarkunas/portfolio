@@ -20,44 +20,7 @@ function B({ x, y, w, h, bg, border, radius = 0, opacity = 1, style }: { x:numbe
 function Img({ src, x, y, w, h, opacity = 1, fit = "contain", style }: { src:string; x:number; y:number; w:number; h:number; opacity?:number; fit?:CSSProperties["objectFit"]; style?:CSSProperties }) {
   return <img alt="" src={src} style={{ position:"absolute", left:x, top:y, width:w, height:h, opacity, objectFit:fit, maxWidth:"none", display:"block", ...style }} />;
 }
-export function Slide06(){
-  const inv=[
-    ["SYSTEMS","What applications and\nplatforms are involved?","icon-systems.svg",27,24,34.736,36.544],
-    ["DATA","What information does the\nproduct depend on?","icon-data.svg",37.529,29.129,27.543,36.539],
-    ["PEOPLE","Who uses, owns, or\nsupports the workflow?","icon-people.svg",28.618,29.217,48.965,36.185],
-    ["DEPENDENCIES","What breaks if one\npart fails?","icon-dependencies.svg",32.13,28.228,39.237,40.145],
-  ] as const;
-  const own=[
-    ["SYSTEM OWNER","Who owns the system\nthe agent touches?","icon-system-owner.svg",37.63,43.932,29.341,35.369],
-    ["DECISION OWNER","Who owns the authority\nbeing delegated?","icon-decision-owner.svg",28,37,48.6,48.6],
-    ["OUTCOME OWNER","Who is accountable\nfor the result?","icon-outcome-owner.svg",34.932,43.932,34.736,34.736],
-  ] as const;
-  return <Stage>
-    <div style={{position:"absolute",left:0,top:76,width:1920,height:909,overflow:"hidden",background:"#040405"}}>
-      <Img src="/pdma2026/slide-06/figma-nebula.png" x={-120} y={0} w={980} h={909} opacity={.78} fit="cover" />
-      <Img src="/pdma2026/slide-06/figma-planet.png" x={-590} y={-20} w={1020} h={1020} />
-      <Img src="/pdma2026/slide-06/figma-secondary-moon.png" x={370} y={350} w={128} h={128} />
-      <Img src="/pdma2026/slide-06/figma-small-moon.png" x={468} y={470} w={44} h={44} />
-      <Img src="/pdma2026/slide-06/figma-rings.png" x={1020} y={-18} w={820} h={340} opacity={.82} fit="cover" />
-      <T x={58} y={338} w={230} size={17} weight={500} color="#94969e" line={29} tracking={6}>MORE{"\n"}AWARENESS{"\n"}BETTER{"\n"}AUTONOMY</T><B x={58} y={468} w={48} h={3} bg={MAGENTA}/>
-      <T x={64} y={42} w={1110} size={64} weight={800} color="#f2f2f2" line={70}>UNDERSTAND THE ENVIRONMENT.</T>
-      <T x={64} y={110} w={820} size={64} weight={800} color={MAGENTA} line={70}>NAME THE OWNERS.</T>
-      <T x={114} y={199} w={1050} size={29} color="#f2f2f2" line={36}>AI inherits systems, data, permissions, dependencies, and failure modes —{"\n"}while autonomous actions still cross human ownership boundaries.</T>
-      <T x={598} y={288} w={400} size={17} weight={600} color={MAGENTA} tracking={5}>DO THE INVENTORY</T>
-      <T x={1415} y={288} w={360} size={17} weight={600} color={MAGENTA} tracking={5}>NAME THE OWNERS</T>
-      <Img src="/pdma2026/slide-06/connectors.svg" x={1118} y={374} w={291} h={366}/>
-      <B x={1277} y={513} w={28} h={28} bg="rgba(255,47,174,.2)" radius={99}/><B x={1285} y={521} w={14} h={14} bg="#f2f2f2" border={`3px solid ${MAGENTA}`} radius={99}/>
-      {inv.map(([title,body,icon,ix,iy,iw,ih],i)=><div key={title} style={{position:"absolute",left:598,top:322+i*122,width:520,height:104,boxSizing:"border-box",background:"rgba(14,17,20,.88)",border:"1.5px solid rgba(255,47,174,.65)",borderRadius:12}}>
-        <Img src={`/pdma2026/slide-06/${icon}`} x={ix} y={iy} w={iw} h={ih}/><T x={137} y={18} w={310} size={22} weight={700} color="#f2f2f2" tracking={1.5}>{title}</T><T x={137} y={48} w={315} size={18} color="#f2f2f2" line={25}>{body}</T><T x={462} y={32} w={45} size={34} color={MAGENTA}>→</T><B x={514} y={47} w={10} h={10} bg="#f2f2f2" border={`2px solid ${MAGENTA}`} radius={99}/>
-      </div>)}
-      {own.map(([title,body,icon,ix,iy,iw,ih],i)=><div key={title} style={{position:"absolute",left:1415,top:322+i*152,width:430,height:140,boxSizing:"border-box",background:"rgba(31,3,20,.86)",border:"1.5px solid rgba(255,47,174,.8)",borderRadius:12}}>
-        <Img src={`/pdma2026/slide-06/${icon}`} x={ix} y={iy} w={iw} h={ih}/><T x={135} y={25} w={245} size={20} weight={700} color={MAGENTA} tracking={1.2}>{title}</T><B x={135} y={58} w={210} h={1.5} bg="rgba(255,47,174,.55)"/><T x={135} y={73} w={240} size={18} color="#f2f2f2" line={25}>{body}</T><B x={-6} y={65} w={10} h={10} bg="#f2f2f2" border={`2px solid ${MAGENTA}`} radius={99}/>
-      </div>)}
-      <B x={48} y={820} w={1820} h={1.5} bg="rgba(92,94,102,.9)"/><B x={48} y={850} w={3} h={44} bg={MAGENTA}/><T x={78} y={850} w={1320} size={26} weight={700} color="#f2f2f2">AUTOMATION CHANGES EXECUTION. IT DOES NOT ERASE OWNERSHIP.</T>
-    </div>
-  </Stage>;
-}
-
+export { Slide06 } from "./CanonicalSlide06Exact"
 export function Slide07(){
   const rows=[["ACQUIRE","LABOR","FASTER"],["CONVERT","COST-TO-SERVE","SIMPLER"],["RETAIN","REWORK","SCALABLE"],["EXPAND","WASTE","LESS MANUAL"]];
   const cols=[
