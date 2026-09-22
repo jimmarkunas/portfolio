@@ -2,8 +2,9 @@ import { motion, useReducedMotion } from "motion/react";
 import { titleConfig } from "../pdmaTitleConfig";
 
 export function PdmaTitleBlock({ slide }: { slide: number }) {
-  const config = titleConfig[slide];
   const reduced = useReducedMotion();
+  if (slide >= 6) return null;
+  const config = titleConfig[slide];
   if (!config) return null;
 
   const titleColor = config.titleColor ?? "#f2f2f5";
