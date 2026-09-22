@@ -17,7 +17,7 @@ if (!fs.existsSync(qaRoot)) failures.push("qa/pdma2026 directory is missing")
 else {
   for (let index = 1; index <= 15; index += 1) {
     const slide = String(index).padStart(2, "0")
-    for (const kind of ["overlay", "diff"]) {
+    for (const kind of ["render", "overlay", "diff"]) {
       const relative = `qa/pdma2026/slide-${slide}-${kind}.png`
       const file = path.join(root, relative)
       if (!fs.existsSync(file)) {
@@ -36,4 +36,4 @@ if (failures.length) {
   process.exit(1)
 }
 
-console.log("PDMA QA guard passed (15 overlays and 15 diffs at 1920×1080).")
+console.log("PDMA QA guard passed (15 renders, 15 overlays, and 15 diffs at 1920×1080).")

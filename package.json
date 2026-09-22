@@ -28,6 +28,7 @@
     "check:pdma-qa": "node scripts/check-pdma-qa.mjs",
     "check:pdma": "npm run check:pdma-assets-manifest && npm run check:pdma-duplicate-selectors && npm run check:pdma-geometry && npm run check:pdma-poc-guard",
     "qa:pdma:index": "node scripts/generate-pdma-qa-index.mjs",
+    "qa:pdma:capture": "node scripts/capture-pdma-qa.mjs",
     "check:bundle-budget-trends": "bash scripts/check-short.sh bundle-budget-trends node scripts/check-bundle-budget-trends.mjs",
     "check:bundle-budgets": "bash scripts/check-short.sh bundle-budgets node scripts/check-bundle-budgets.mjs",
     "prepush": "bash scripts/prepush.sh",
@@ -50,7 +51,9 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "autoprefixer": "^10.4.20",
+    "playwright": "^1.63.0",
     "postcss": "^8.4.49",
+    "sharp": "^0.35.4",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3"
   }

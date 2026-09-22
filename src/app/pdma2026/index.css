@@ -78,6 +78,7 @@
 .pdma-s02 .s02-diagram-cpu{left:755px;top:512px;width:120px;height:120px}.pdma-s02 .s02-diagram-brain{left:1021px;top:508px;width:128px;height:128px}
 .pdma-s02 .s02-boundary>b{display:none}
 .pdma-s02 .pdma-tile img{position:static;width:43.2432%;height:43.2432%}
+.pdma-s02 .pdma-list{position:absolute}.pdma-s02 .pdma-list h2{margin:0;line-height:1.1852;font-weight:600;letter-spacing:4px;white-space:nowrap}.pdma-s02 .pdma-list-rule{position:absolute;height:2px;background:#7a7d85}.pdma-s02 .pdma-item{position:absolute;display:flex;align-items:center;color:#f2f2f5;line-height:1.2;white-space:nowrap}.pdma-s02 .pdma-tile{display:grid;place-items:center;border:1px solid #2d3136;border-radius:10px;background:#15181b}.pdma-s02 .pdma-list-human .pdma-tile{border-color:#5c1a3d;background:#240e1d}.pdma-s02 .pdma-tile img{max-width:none}
 .pdma-s04 .s04-cards article:last-child b{transform:translateY(-32px)}
 .pdma-s04 .s04-cards article{position:relative;min-height:220px;box-sizing:border-box;padding-bottom:48px}.pdma-s04 .s04-cards article b,.pdma-s04 .s04-cards article:last-child b{position:absolute;left:34px;bottom:16px;margin:0;transform:none}
 .pdma-s04 .s04-takeaway{padding-top:60px;border-top:0}

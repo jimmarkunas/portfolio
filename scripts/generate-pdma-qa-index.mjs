@@ -11,10 +11,12 @@ const slides = Array.from({ length: 15 }, (_, index) => {
   const slide = String(index + 1).padStart(2, "0")
   const overlay = `slide-${slide}-overlay.png`
   const diff = `slide-${slide}-diff.png`
+  const render = `slide-${slide}-render.png`
+  const hasRender = fs.existsSync(path.join(qaRoot, render))
   const hasOverlay = fs.existsSync(path.join(qaRoot, overlay))
   const hasDiff = fs.existsSync(path.join(qaRoot, diff))
-  const state = hasOverlay && hasDiff ? "PASS ARTIFACTS PRESENT" : "AWAITING ARTIFACTS"
-  return `<article><h2>Slide ${slide}</h2><p>${state}</p><div><a href="${overlay}">Overlay</a> · <a href="${diff}">Diff</a></div></article>`
+  const state = hasRender && hasOverlay && hasDiff ? "PASS ARTIFACTS PRESENT" : "AWAITING ARTIFACTS"
+  return `<article><h2>Slide ${slide}</h2><p>${state}</p><div><a href="${render}">Render</a> · <a href="${overlay}">Overlay</a> · <a href="${diff}">Diff</a></div></article>`
 }).join("\n")
 
 const html = `<!doctype html>
