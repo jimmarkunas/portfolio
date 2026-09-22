@@ -286,6 +286,8 @@ Reusable concepts follow the accepted decomposition-first visual architecture:
 
 Legacy flattened concepts may use the approved full-background reconstruction exception when no clean plate exists. Pixel-forensic provenance is not a product requirement when deterministic recomposition, visual fidelity, and editability are achieved.
 
+Approved-reference matching follows the canonical [Reference Registration Protocol](https://github.com/jimmarkunas/figma-layer-decomposer/blob/main/docs/REFERENCE_REGISTRATION_PROTOCOL.md): **registration, not redesign**. Register supplied assets independently, preserve intentional overlap, render after meaningful passes, compare against the approved reference, correct demonstrated deltas only, and do not invent compensating layers to hide incorrect geometry.
+
 ## 13. Anti-drift rules
 
 Agents working on PBDS or Portfolio V2 must obey these rules:
@@ -300,6 +302,7 @@ Agents working on PBDS or Portfolio V2 must obey these rules:
 8. Do not copy Bytalos brand values; borrow its ownership architecture.
 9. Reuse before abstraction.
 10. Prefer one canonical live path after migration; remove superseded implementation when the replacement is accepted.
+11. For any approved-reference Figma task, read and follow `REFERENCE_REGISTRATION_PROTOCOL.md`; do not claim completion without a rendered direct comparison to the approved reference.
 
 ## 14. Agent bootstrap
 
@@ -308,7 +311,8 @@ For PBDS / Portfolio V2 work, the minimum bootstrap is:
 1. this contract;
 2. current Notion `Personal Career Brand` and `Design System` pages;
 3. canonical JM Personal Brand Figma foundations relevant to the task;
-4. exact implementation surface only when PBDS-5 or later authorizes code work.
+4. `REFERENCE_REGISTRATION_PROTOCOL.md` whenever an approved visual reference already exists;
+5. exact implementation surface only when PBDS-5 or later authorizes code work.
 
 Read Bytalos `packages/design-system` only when comparing implementation patterns or solving a concrete design-system packaging question. It is a reference implementation, not PBDS authority.
 
