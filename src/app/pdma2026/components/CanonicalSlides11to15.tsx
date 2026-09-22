@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { PdmaSlideCanvas } from "../PdmaPresentationShell";
+import { pdmaAssets } from "../pdmaAssets";
 
 const FONT="Inter, ui-sans-serif, system-ui, sans-serif";
 const WHITE="#f2f2f5"; const MAGENTA="#ff2fae"; const MUTED="#7a7d85"; const LINE="#44464a";
@@ -8,7 +9,7 @@ function T({x,y,w,size,weight=400,color=WHITE,line,tracking,children,align="left
 function B({x,y,w,h,bg,border,radius=0,opacity=1,style}:{x:number;y:number;w:number;h:number;bg?:string;border?:string;radius?:number;opacity?:number;style?:CSSProperties}){return <div style={{position:"absolute",left:x,top:y,width:w,height:h,boxSizing:"border-box",background:bg,border,borderRadius:radius,opacity,...style}}/>}
 function Img({src,x,y,w,h,opacity=1,fit="contain",style}:{src:string;x:number;y:number;w:number;h:number;opacity?:number;fit?:CSSProperties["objectFit"];style?:CSSProperties}){return <img alt="" src={src} style={{position:"absolute",left:x,top:y,width:w,height:h,opacity,objectFit:fit,maxWidth:"none",display:"block",...style}}/>}
 
-const S11="https://www.figma.com/api/mcp/asset/0cc99349-d768-4f9e-aa61-dc6f22187aa3";
+const S11 = pdmaAssets.slide11Root;
 export function Slide11(){
   const cards=[
     [60,330,"A","AUTHORITY","What may AI decide and do?",true],[60,494,"G","GUARDRAILS","What constraints must be built into the product?",false],[60,658,"E","EVIDENCE","What operational record must the product create?",false],
@@ -38,7 +39,7 @@ export function Slide12(){
   </Stage>;
 }
 
-const S13="https://www.figma.com/api/mcp/asset/1389eb2f-368a-4bf4-9249-a3da982426e0";
+const S13 = pdmaAssets.slide13Root;
 export function Slide13(){
   const before=["Unclear business value","No operating boundaries","Missing data and system context","No success criteria","High risk of rework"];
   const after=["Clear business value and success metrics","Defined authority and operating boundaries","Identified data sources and integrations","Evidence and decision record requirements","Ready for build, test, and operationalize"];
@@ -51,7 +52,7 @@ export function Slide13(){
   </Stage>;
 }
 
-const S14="https://www.figma.com/api/mcp/asset/c456ae37-dc88-44a8-9bb7-84e5d47639fd";
+const S14 = pdmaAssets.slide14Root;
 export function Slide14(){
   const rows=[["01","VALUE","Increase revenue, decrease cost, or\nstreamline operations?",`${S14}/66471.svg`],["02","AUTHORITY","What may AI observe, recommend,\nprepare, decide, or execute?",`${S14}/408a3.svg`],["03","A.G.E.N.T.S.","Define controls, evidence, systems,\ntransfer, and success.",`${S14}/a7ab0.svg`],["04","OUTPUT","Generate a mini productization brief /\nbacklog-ready artifact.",`${S14}/ea3ba.svg`]] as const;
   return <Stage><T x={58} y={304} w={700} size={18} weight={600} color={MAGENTA} line={22} tracking={1.26}>INTERACTIVE EXERCISE — FOLLOW-ON PHASE</T><T x={58} y={348} w={760} size={26} weight={600} line={32}>The live app will guide the audience through:</T>
@@ -62,7 +63,7 @@ export function Slide14(){
   </Stage>;
 }
 
-const S15="https://www.figma.com/api/mcp/asset/0739cfc7-fde2-4a4b-9c56-af5b12a404fe";
+const S15 = pdmaAssets.slide15Root;
 export function Slide15(){return <Stage>
   <Img src={`${S15}/9e4d6.svg`} x={1060} y={-70} w={840} h={610}/><Img src={`${S15}/38dc4.svg`} x={1330} y={170} w={720} h={950}/><Img src={`${S15}/f3a10.png`} x={0} y={288} w={1920} h={684} opacity={.68} fit="cover"/><Img src={`${S15}/c47cc.png`} x={1140} y={86} w={731} h={860} fit="cover"/>
 

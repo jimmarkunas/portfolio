@@ -47,6 +47,9 @@ if (manifestEntries.length !== expectedKeys.length) failures.push(`manifest must
 
 for (const file of sourceFiles) {
   const text = fs.readFileSync(file, "utf8")
+  if (/https?:\/\/www\.figma\.com\/api\/mcp\/asset\//.test(text)) {
+    failures.push(`${path.relative(root, file)} contains a remote Figma asset URL`)
+  }
   for (const match of text.matchAll(/["'`]([^"'`]*\/pdma2026\/[^"'`]*)["'`]/g)) {
     const assetPath = match[1]
     if (assetPath.includes("${")) continue

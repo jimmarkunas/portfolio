@@ -1,7 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
 import { PdmaSlideCanvas } from "../PdmaPresentationShell";
+import { pdmaAssets } from "../pdmaAssets";
 const FONT="Inter, ui-sans-serif, system-ui, sans-serif", WHITE="#f5f5f2", MAGENTA="#ff2fae", MUTED="#909295", LINE="#44464a";
-const S="https://www.figma.com/api/mcp/asset/9efb3016-e735-4409-8e2c-e8f7c8c69b11";
+const S = pdmaAssets.slide08Root;
 function T({x,y,w,size,weight=400,color=WHITE,tracking,children}:{x:number;y:number;w?:number;size:number;weight?:number;color?:string;tracking?:number;children:ReactNode}){return <div style={{position:"absolute",left:x,top:y,width:w,fontFamily:FONT,fontSize:size,fontWeight:weight,color,letterSpacing:tracking,lineHeight:"normal",whiteSpace:"pre-wrap"}}>{children}</div>}
 function B({x,y,w,h,bg}:{x:number;y:number;w:number;h:number;bg:string}){return <div style={{position:"absolute",left:x,top:y,width:w,height:h,background:bg}}/>}
 function I({src,x,y,w,h,fit="contain",style}:{src:string;x:number;y:number;w:number;h:number;fit?:CSSProperties["objectFit"];style?:CSSProperties}){return <img alt="" src={src} style={{position:"absolute",left:x,top:y,width:w,height:h,objectFit:fit,maxWidth:"none",display:"block",...style}}/>}

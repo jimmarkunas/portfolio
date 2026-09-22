@@ -8,4 +8,11 @@ export const pdmaAssets = {
     rings: "/pdma2026/slide-06/figma-rings.png",
     connectors: "/pdma2026/slide-06/connectors.svg",
   },
+  slide08Root: "/pdma2026/slide-08",
+  slide09Root: "/pdma2026/slide-09",
+  slide10Root: "/pdma2026/slide-10",
+  slide11Root: "/pdma2026/slide-11",
+  slide13Root: "/pdma2026/slide-13",
+  slide14Root: "/pdma2026/slide-14",
+  slide15Root: "/pdma2026/slide-15",
 } as const;

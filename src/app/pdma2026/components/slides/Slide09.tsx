@@ -1,6 +1,7 @@
 import { B, Img, MAGENTA, MUTED, Stage, T, WHITE, WHITE2 } from "../pdmaSlidePrimitives";
+import { pdmaAssets } from "../../pdmaAssets";
 
-const S9 = "https://www.figma.com/api/mcp/asset/ef254f86-3290-4a16-8451-b996471ad1d1";
+const S9 = pdmaAssets.slide09Root;
 export function Slide09(){
   const sources=[
     ["CRM","Customer data",`${S9}/ddd5d.svg`],

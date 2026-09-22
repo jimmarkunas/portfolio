@@ -1,6 +1,7 @@
 import { B, Img, MAGENTA, MUTED, Stage, T, WHITE, WHITE2 } from "../pdmaSlidePrimitives";
+import { pdmaAssets } from "../../pdmaAssets";
 
-const S10 = "https://www.figma.com/api/mcp/asset/7cf07793-539e-4b52-975d-d2cdd0a1aedc";
+const S10 = pdmaAssets.slide10Root;
 export function Slide10(){
   const cards=[
     [62,"01","GUARDRAILS","What must the product\nprevent or constrain?",`${S10}/0c0c4.svg`,false],
