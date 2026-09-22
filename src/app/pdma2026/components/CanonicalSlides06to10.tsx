@@ -20,28 +20,6 @@ function B({ x, y, w, h, bg, border, radius = 0, opacity = 1, style }: { x:numbe
 function Img({ src, x, y, w, h, opacity = 1, fit = "contain", style }: { src:string; x:number; y:number; w:number; h:number; opacity?:number; fit?:CSSProperties["objectFit"]; style?:CSSProperties }) {
   return <img alt="" src={src} style={{ position:"absolute", left:x, top:y, width:w, height:h, opacity, objectFit:fit, maxWidth:"none", display:"block", ...style }} />;
 }
-function CanonicalChrome({ fill, labels, footer }: { fill:number; labels:[string,string,string]; footer:string }) {
-  return <>
-    <div className="pdma-canonical-top-header" style={{position:"absolute", inset:0}}>
-    <B x={0} y={0} w={1920} h={100} bg="#090909" />
-    <T x={30} y={25} size={20} weight={600} tracking={.8}>PDMA 2026</T>
-    <B x={205} y={36} w={1275} h={2} bg={LINE} />
-    <B x={205} y={35} w={fill} h={3} bg={MAGENTA} />
-    <T x={1506} y={27} size={15} weight={600} color={MUTED} tracking={3}>{labels[0]}</T>
-    <T x={1602} y={27} size={15} weight={600} color={MAGENTA} tracking={2}>•</T>
-    <T x={1632} y={27} size={15} weight={600} color={MUTED} tracking={3}>{labels[1]}</T>
-    <T x={1762} y={27} size={15} weight={600} color={MAGENTA} tracking={2}>•</T>
-    <T x={1792} y={27} size={15} weight={600} color={MUTED} tracking={3}>{labels[2]}</T>
-    </div>
-    <div className="pdma-canonical-local-footer">
-    <B x={0} y={985} w={1920} h={95} bg="#090909" />
-    <T x={26} y={1030} size={15} weight={600} color={MUTED} tracking={4}>{footer}</T>
-    <B x={431} y={1042} w={1395} h={2} bg={LINE} />
-    <Img src="/pdma2026/slide-02/canonical-asterisk.svg" x={1841} y={1013} w={52} h={52} />
-    </div>
-  </>;
-}
-
 export function Slide06(){
   const inv=[
     ["SYSTEMS","What applications and\nplatforms are involved?","icon-systems.svg",27,24,34.736,36.544],
@@ -54,7 +32,7 @@ export function Slide06(){
     ["DECISION OWNER","Who owns the authority\nbeing delegated?","icon-decision-owner.svg",28,37,48.6,48.6],
     ["OUTCOME OWNER","Who is accountable\nfor the result?","icon-outcome-owner.svg",34.932,43.932,34.736,34.736],
   ] as const;
-  return <Stage><CanonicalChrome fill={510} labels={["SYSTEMS","DATA","OWNERSHIP"]} footer="AUTOMATION DOES NOT ERASE OWNERSHIP" />
+  return <Stage>
     <div style={{position:"absolute",left:0,top:76,width:1920,height:909,overflow:"hidden",background:"#040405"}}>
       <Img src="/pdma2026/slide-06/figma-nebula.png" x={-120} y={0} w={980} h={909} opacity={.78} fit="cover" />
       <Img src="/pdma2026/slide-06/figma-planet.png" x={-590} y={-20} w={1020} h={1020} />
@@ -87,8 +65,7 @@ export function Slide07(){
     ["DECREASE COST","Does it remove meaningful cost\nfrom the system?"],
     ["STREAMLINE OPERATIONS","Does it make work materially\neasier to run?"],
   ];
-  return <Stage><CanonicalChrome fill={595} labels={["REVENUE","COST","OPERATIONS"]} footer="PROVE THE VALUE BEFORE YOU BUILD" />
-    <T x={64} y={118} w={1760} size={76} weight={800} line={84}>BEFORE YOU BUILD IT,</T><T x={64} y={198} w={1760} size={76} weight={800} color={MAGENTA} line={84}>PROVE THE VALUE.</T><T x={66} y={296} w={1710} size={27} line={36}>Every Agentic Product should have a clear economic reason to exist. Pick one primary value driver.</T>
+  return <Stage>
     <B x={60} y={380} w={1800} h={392} bg="#121518" border="1px solid #3a3f44" radius={14}/><B x={60} y={380} w={286} h={392} bg="#15181b" border="1px solid #3a3f44" radius={14}/><B x={346} y={380} w={504.667} h={392} bg="rgba(36,14,29,.92)" border={`1px solid ${MAGENTA}`}/>
     <T x={86} y={406} w={180} size={15} weight={600} color={MAGENTA} line={20} tracking={3}>DECISION RULE</T><B x={86} y={443} w={44} h={2} bg={MUTED}/><T x={86} y={468} w={190} size={31} weight={800} line={32}>PICK ONE{"\n"}PRIMARY{"\n"}VALUE DRIVER.</T><B x={86} y={590} w={44} h={2} bg={MUTED}/><T x={86} y={594} w={180} size={15} color={MUTED} line={20}>Use this scorecard to{"\n"}evaluate your concept.{"\n"}A strong product should{"\n"}clearly map to one{"\n"}primary value driver.</T>
     {[346,850.67,1355.33].map((x,i)=><B key={x} x={x} y={380} w={1} h={392} bg="#3a3f44"/>)}{[508,574,640,706].map(y=><B key={y} x={346} y={y} w={1514} h={1} bg="#3a3f44"/>)}
@@ -126,8 +103,7 @@ export function Slide09(){
     ["SUPPORT","Support tickets",`${S9}/e2600.svg`],
     ["ACCOUNT HEALTH","Billing & health data",`${S9}/defdd.svg`],
   ];
-  return <Stage><CanonicalChrome fill={420} labels={["VALUE","SIGNAL","ACTION"]} footer="TURN THE BUSINESS CASE INTO A PRODUCT" />
-    <T x={64} y={118} w={650} size={76} weight={800}>LIVE SCENARIO:</T><T x={64} y={192} w={1150} size={76} weight={800} color={MAGENTA}>RETENTION AGENT.</T><T x={67} y={288} w={1680} size={29}>A real enterprise business case: detect churn risk across CRM, product-usage, and support data before it is too late to act.</T>
+  return <Stage>
     <div style={{position:"absolute",left:45,top:360,width:585,height:365,background:"#15181b",border:"1px solid #2d3136",borderRadius:14}}><T x={25} y={23} w={300} size={16} weight={600} color={MAGENTA} line={20}>BUSINESS PROBLEM</T><T x={25} y={69} w={515} size={28} weight={600} line={34}>Customer retention teams spend too{"\n"}much time manually identifying{"\n"}churn risk across fragmented{"\n"}enterprise systems.</T><B x={25} y={225} w={532} h={1} bg={MUTED}/><T x={25} y={247} w={300} size={15} weight={600} color={MUTED} line={18}>PRIMARY VALUE DRIVER</T><T x={25} y={279} w={360} size={26} weight={600} color={MAGENTA} line={30}>INCREASE REVENUE</T><T x={25} y={320} w={390} size={20} weight={600} line={24}>+ STREAMLINE OPERATIONS</T></div>
     {sources.map(([a,b,icon],i)=><div key={a} style={{position:"absolute",left:700,top:360+i*78,width:300,height:64,background:"#1a1c1f",border:"1px solid #2d3136",borderRadius:10}}><B x={13} y={9} w={44} h={44} bg="#240e1d" radius={8}/><Img src={icon} x={20} y={16} w={30} h={30}/><T x={71} y={9} w={190} size={17} weight={600} line={21}>{a}</T><T x={71} y={33} w={190} size={15} color={MUTED} line={18}>{b}</T><Img src={`${S9}/a0c4b.svg`} x={295} y={27} w={10} h={10}/></div>)}
     <Img src={`${S9}/885aa.svg`} x={1000} y={392} w={110} h={133}/><Img src={`${S9}/d98bc.svg`} x={1000} y={470} w={110} h={55}/><Img src={`${S9}/ca18f.svg`} x={1000} y={525} w={110} h={23}/><Img src={`${S9}/394fd.svg`} x={1000} y={525} w={110} h={101}/><Img src={`${S9}/1b2ef.svg`} x={1104} y={519} w={12} h={12}/>
@@ -147,12 +123,9 @@ export function Slide10(){
   ] as const;
   return <Stage>
     <Img src="/pdma2026/slide-10/0581d3e2-5eaa-4fa2-aa65-7272161757da.png" x={760} y={185} w={1160} h={720} opacity={.92} fit="cover"/><Img src="/pdma2026/slide-10/0fe576ac-b4aa-42eb-9c74-288c239abc05.png" x={1120} y={70} w={800} h={910} fit="cover"/><div style={{position:"absolute",left:0,top:70,width:1220,height:850,background:"linear-gradient(90deg,#090909 0%,rgba(9,9,9,.92) 72%,rgba(9,9,9,.12) 100%)"}}/>
-    <div className="pdma-canonical-top-header" style={{position:"absolute", inset:0}}><B x={0} y={0} w={1920} h={78} bg="#090909"/><T x={52} y={22} w={150} size={18} weight={700} color={WHITE2}>PDMA 2026</T><B x={220} y={40} w={1230} h={1} bg={LINE}/><B x={220} y={39} w={405} h={3} bg={MAGENTA}/><T x={1490} y={23} w={390} size={14} weight={600} color="#939598" tracking={3}>BACKLOG  •  CONTROLS  •  OUTCOMES</T></div>
-    <T x={64} y={118} w={1240} size={58} weight={800} color={WHITE2}>DESIGN PRODUCTION READINESS</T><T x={64} y={184} w={840} size={58} weight={800} color={MAGENTA}>INTO THE FEATURE.</T><T x={67} y={258} w={1120} size={24} color={WHITE2}>Guardrails, human intervention, and success measures belong in the product{"\n"}requirements before development begins.</T>
     {cards.map(([x,n,title,body,icon,active])=><div key={n} style={{position:"absolute",left:x,top:420,width:360,height:250,background:active?"#250c20":"#16191c",border:`1.5px solid ${active?MAGENTA:"#4a4d50"}`,borderRadius:10,opacity:.93}}><T x={308} y={22} w={32} size={16} weight={500} color="#939598" tracking={3}>{n}</T><Img src={icon} x={28} y={24} w={54} h={54}/><T x={34} y={82} w={292} size={23} weight={700} color={active?MAGENTA:WHITE2}>{title}</T><B x={34} y={126} w={52} h={3} bg={MAGENTA}/><T x={34} y={148} w={292} size={19} color={WHITE2}>{body}</T></div>)}
     <T x={60} y={718} w={520} size={17} weight={600} color={MAGENTA} tracking={3}>OPERATIONALIZE IT AS PRODUCT WORK</T><B x={60} y={760} w={1140} h={2} bg="#5d6064"/>
     {[[62,"01","BACKLOG","Capture the requirements."],[392,"02","PRD","Define behavior and\nboundaries."],[690,"03","ACCEPTANCE CRITERIA","Make them testable."],[1010,"04","PRODUCTION","Prove they work."]].map(([x,n,t,d],i)=><div key={String(n)}><T x={Number(x)} y={770} w={40} size={15} weight={500} color="#939598" tracking={3}>{n}</T><T x={Number(x)+50} y={765} w={260} size={19} weight={700} color={i===3?MAGENTA:WHITE2}>{t}</T><T x={Number(x)+50} y={795} w={260} size={15} color={WHITE2}>{d}</T>{i<3&&<T x={Number(x)+285} y={777} size={28} color="#939598">→</T>}</div>)}
     <B x={50} y={870} w={1820} h={90} bg="#120a10" border={`1.5px solid ${MAGENTA}`} radius={8} opacity={.96}/><B x={65} y={890} w={4} h={52} bg={MAGENTA}/><T x={92} y={900} w={1350} size={25} weight={700} color={WHITE2}>IF IT MATTERS IN PRODUCTION, IT BELONGS IN THE PRODUCT DEFINITION.</T><T x={1655} y={894} w={150} size={12} weight={500} color="#939598" tracking={4}>REAL FEATURES.{"\n"}REAL OUTCOMES.</T>
-    <div className="pdma-canonical-local-footer"><B x={0} y={985} w={1920} h={95} bg="#090909"/><T x={28} y={1028} w={560} size={13} weight={500} color="#939598" tracking={5}>PRODUCTION READINESS STARTS IN THE BACKLOG</T><B x={560} y={1044} w={1265} h={2} bg={LINE}/><Img src="/pdma2026/slide-02/canonical-asterisk.svg" x={1840} y={1002} w={52} h={52}/></div>
   </Stage>;
 }

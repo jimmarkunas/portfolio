@@ -17,28 +17,6 @@ function Img({ src, x, y, w, h, fit = "contain" }: { src:string; x:number; y:num
   return <img alt="" src={src} style={{ position:"absolute", left:x, top:y, width:w, height:h, objectFit:fit, maxWidth:"none", display:"block" }} />;
 }
 
-function Chrome() {
-  return <>
-    <div className="pdma-canonical-top-header" style={{position:"absolute", inset:0}}>
-    <B x={0} y={0} w={1920} h={100} bg="#090909" />
-    <T x={30} y={25} size={20} weight={600} color="#f2f2f5" tracking={.8}>PDMA 2026</T>
-    <B x={205} y={36} w={1275} h={2} bg={LINE} />
-    <B x={205} y={35} w={510} h={3} bg={MAGENTA} />
-    <T x={1506} y={27} size={15} weight={600} color={MUTED} tracking={3}>SYSTEMS</T>
-    <T x={1602} y={27} size={15} weight={600} color={MAGENTA} tracking={2}>•</T>
-    <T x={1632} y={27} size={15} weight={600} color={MUTED} tracking={3}>DATA</T>
-    <T x={1762} y={27} size={15} weight={600} color={MAGENTA} tracking={2}>•</T>
-    <T x={1792} y={27} size={15} weight={600} color={MUTED} tracking={3}>OWNERSHIP</T>
-    </div>
-    <div className="pdma-canonical-local-footer">
-    <B x={0} y={985} w={1920} h={95} bg="#090909" />
-    <T x={26} y={1030} size={15} weight={600} color={MUTED} tracking={4}>AUTOMATION DOES NOT ERASE OWNERSHIP</T>
-    <B x={431} y={1042} w={1395} h={2} bg={LINE} />
-    <Img src="/pdma2026/slide-02/canonical-asterisk.svg" x={1841} y={1013} w={52} h={52} />
-    </div>
-  </>;
-}
-
 const inventory = [
   ["SYSTEMS","What applications and\nplatforms are involved?","icon-systems.svg",27,24,34.74,36.54],
   ["DATA","What information does the\nproduct depend on?","icon-data.svg",37.53,29.13,27.54,36.54],
@@ -54,7 +32,6 @@ const owners = [
 
 export function Slide06() {
   return <PdmaSlideCanvas><div style={{ position:"absolute", inset:0, width:1920, height:1080, overflow:"hidden", background:"#090909", color:WHITE, fontFamily:FONT }}>
-    <Chrome />
     <div style={{ position:"absolute", left:0, top:76, width:1920, height:909, overflow:"hidden", background:"#040405" }}>
       {/* These files are already Figma-rendered node exports; do not apply node opacity a second time. */}
       <Img src="/pdma2026/slide-06/figma-nebula.png" x={-120} y={0} w={980} h={909} fit="cover" />
@@ -66,9 +43,6 @@ export function Slide06() {
       <T x={58} y={338} w={230} size={17} weight={500} color="#94969e" line={29} tracking={6}>MORE{"\n"}AWARENESS{"\n"}BETTER{"\n"}AUTONOMY</T>
       <B x={58} y={468} w={48} h={3} bg={MAGENTA} />
 
-      <T x={64} y={42} w={1110} size={64} weight={800} line={70}>UNDERSTAND THE ENVIRONMENT.</T>
-      <T x={64} y={110} w={820} size={64} weight={800} color={MAGENTA} line={70}>NAME THE OWNERS.</T>
-      <T x={114} y={199} w={1050} size={29} line={36}>AI inherits systems, data, permissions, dependencies, and failure modes —{"\n"}while autonomous actions still cross human ownership boundaries.</T>
 
       <T x={598} y={288} w={400} size={17} weight={600} color={MAGENTA} tracking={5}>DO THE INVENTORY</T>
       <T x={1415} y={288} w={360} size={17} weight={600} color={MAGENTA} tracking={5}>NAME THE OWNERS</T>
