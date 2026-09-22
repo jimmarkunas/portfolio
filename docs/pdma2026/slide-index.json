@@ -1,0 +1,430 @@
+{
+  "generatedBy": "scripts/generate-pdma-context.mjs",
+  "canvas": {
+    "width": 1920,
+    "height": 1080
+  },
+  "slides": [
+    {
+      "key": "slide-01",
+      "number": 1,
+      "title": "THE NEW PM OPERATING SYSTEM",
+      "component": "src/app/pdma2026/components/slides/Slide01.tsx",
+      "assets": [
+        "/pdma2026/slide-01/title-atmosphere.png",
+        "/pdma2026/slide-01/title-asterisk-scene.png"
+      ],
+      "contract": {
+        "required": [
+          "pdma-s01"
+        ],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [
+        ".pdma-s01",
+        ".s01-ai",
+        ".s01-ai-rule",
+        ".s01-copy",
+        ".s01-orb",
+        ".s01-people",
+        ".s01-people-rule",
+        ".s01-speaker-name",
+        ".s01-speaker-role",
+        ".s01-speaker-rule",
+        ".s01-subtitle",
+        ".s01-title-magenta",
+        ".s01-title-white",
+        ".s01-wide"
+      ],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 01",
+        "capture": "npm run qa:pdma:capture -- --slides 01"
+      }
+    },
+    {
+      "key": "slide-02",
+      "number": 2,
+      "title": "WHAT SHIFTS. WHAT STAYS.",
+      "component": "src/app/pdma2026/components/Slide02.tsx",
+      "assets": [
+        "/pdma2026/slide-02/ai-circle.svg",
+        "/pdma2026/slide-02/human-circle.svg",
+        "/pdma2026/slide-02/diagram-cpu.svg",
+        "/pdma2026/slide-02/diagram-brain.svg"
+      ],
+      "contract": {
+        "required": [
+          "pdma-s02"
+        ],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [
+        ".pdma-s02",
+        ".s02-ai",
+        ".s02-boundary",
+        ".s02-circle",
+        ".s02-copy",
+        ".s02-diagram-brain",
+        ".s02-diagram-cpu",
+        ".s02-human",
+        ".s02-list-ai",
+        ".s02-list-human"
+      ],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 02",
+        "capture": "npm run qa:pdma:capture -- --slides 02"
+      }
+    },
+    {
+      "key": "slide-03",
+      "number": 3,
+      "title": "COPILOTS GENERATE OUTPUTS. AGENTS TAKE ACTION.",
+      "component": "src/app/pdma2026/components/slides/Slide03.tsx",
+      "assets": [
+        "/pdma2026/slide-03/02283.png",
+        "/pdma2026/slide-03/44753.png"
+      ],
+      "contract": {
+        "required": [
+          "pdma-s03",
+          "s03-panel-copilot",
+          "s03-panel-agent",
+          "s03-panel-divider"
+        ],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [
+        ".pdma-s03",
+        ".s03-boundary-copy",
+        ".s03-callout",
+        ".s03-capabilities",
+        ".s03-columns",
+        ".s03-copy",
+        ".s03-descriptor",
+        ".s03-left",
+        ".s03-panel",
+        ".s03-panel-agent",
+        ".s03-panel-copilot",
+        ".s03-panel-divider",
+        ".s03-process",
+        ".s03-right",
+        ".s03-step",
+        ".s03-step-circle",
+        ".s03-takeaway"
+      ],
+      "geometry": "src/app/pdma2026/pdmaSlideGeometry.ts#slide03",
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 03",
+        "capture": "npm run qa:pdma:capture -- --slides 03"
+      }
+    },
+    {
+      "key": "slide-04",
+      "number": 4,
+      "title": "DON'T AUTOMATE EVERYTHING.",
+      "component": "src/app/pdma2026/components/slides/Slide04.tsx",
+      "assets": [
+        "/pdma2026/slide-04/0c14e.png",
+        "/pdma2026/slide-04/bd2f1.png"
+      ],
+      "contract": {
+        "required": [
+          "pdma-s04"
+        ],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [
+        ".pdma-s04",
+        ".s04-cards",
+        ".s04-copy",
+        ".s04-diagram",
+        ".s04-takeaway",
+        ".s04-wide"
+      ],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 04",
+        "capture": "npm run qa:pdma:capture -- --slides 04"
+      }
+    },
+    {
+      "key": "slide-05",
+      "number": 5,
+      "title": "DON'T AUTOMATE AMBIGUITY.",
+      "component": "src/app/pdma2026/components/slides/Slide05.tsx",
+      "assets": [
+        "/pdma2026/slide-05/51d1a.png",
+        "/pdma2026/slide-05/9f2f3.png"
+      ],
+      "contract": {
+        "required": [
+          "pdma-s05"
+        ],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [
+        ".pdma-s05",
+        ".s05-confusion",
+        ".s05-equals",
+        ".s05-orb",
+        ".s05-unclear",
+        ".s05-wide"
+      ],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 05",
+        "capture": "npm run qa:pdma:capture -- --slides 05"
+      }
+    },
+    {
+      "key": "slide-06",
+      "number": 6,
+      "title": "UNDERSTAND THE ENVIRONMENT. NAME THE OWNERS.",
+      "component": "src/app/pdma2026/components/CanonicalSlide06Exact.tsx",
+      "assets": [
+        "/pdma2026/slide-06"
+      ],
+      "contract": {
+        "required": [],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 06",
+        "capture": "npm run qa:pdma:capture -- --slides 06"
+      }
+    },
+    {
+      "key": "slide-07",
+      "number": 7,
+      "title": "BEFORE YOU BUILD IT, PROVE THE VALUE.",
+      "component": "src/app/pdma2026/components/slides/Slide07.tsx",
+      "assets": [],
+      "contract": {
+        "required": [],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 07",
+        "capture": "npm run qa:pdma:capture -- --slides 07"
+      }
+    },
+    {
+      "key": "slide-08",
+      "number": 8,
+      "title": "HOW MUCH AUTHORITY SHOULD THE ROBOTS HAVE?",
+      "component": "src/app/pdma2026/components/CanonicalSlide08.tsx",
+      "assets": [
+        "/pdma2026/slide-08"
+      ],
+      "contract": {
+        "required": [],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 08",
+        "capture": "npm run qa:pdma:capture -- --slides 08"
+      }
+    },
+    {
+      "key": "slide-09",
+      "number": 9,
+      "title": "LIVE SCENARIO: RETENTION AGENT.",
+      "component": "src/app/pdma2026/components/slides/Slide09.tsx",
+      "assets": [
+        "/pdma2026/slide-09"
+      ],
+      "contract": {
+        "required": [],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 09",
+        "capture": "npm run qa:pdma:capture -- --slides 09"
+      }
+    },
+    {
+      "key": "slide-10",
+      "number": 10,
+      "title": "DESIGN PRODUCTION READINESS INTO THE FEATURE.",
+      "component": "src/app/pdma2026/components/slides/Slide10.tsx",
+      "assets": [
+        "/pdma2026/slide-10"
+      ],
+      "contract": {
+        "required": [],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 10",
+        "capture": "npm run qa:pdma:capture -- --slides 10"
+      }
+    },
+    {
+      "key": "slide-11",
+      "number": 11,
+      "title": "A.G.E.N.T.S.",
+      "component": "src/app/pdma2026/components/CanonicalSlides11to15.tsx",
+      "assets": [
+        "/pdma2026/slide-11"
+      ],
+      "contract": {
+        "required": [],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 11",
+        "capture": "npm run qa:pdma:capture -- --slides 11"
+      }
+    },
+    {
+      "key": "slide-12",
+      "number": 12,
+      "title": "TURN THE FRAMEWORK INTO PRODUCT.",
+      "component": "src/app/pdma2026/components/CanonicalSlides11to15.tsx",
+      "assets": [
+        "/pdma2026/slide-12"
+      ],
+      "contract": {
+        "required": [],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 12",
+        "capture": "npm run qa:pdma:capture -- --slides 12"
+      }
+    },
+    {
+      "key": "slide-13",
+      "number": 13,
+      "title": "AN IDEA + AI ≠ PRODUCT SPEC.",
+      "component": "src/app/pdma2026/components/CanonicalSlides11to15.tsx",
+      "assets": [
+        "/pdma2026/slide-13"
+      ],
+      "contract": {
+        "required": [],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 13",
+        "capture": "npm run qa:pdma:capture -- --slides 13"
+      }
+    },
+    {
+      "key": "slide-14",
+      "number": 14,
+      "title": "NOW YOU DO IT.",
+      "component": "src/app/pdma2026/components/CanonicalSlides11to15.tsx",
+      "assets": [
+        "/pdma2026/slide-14"
+      ],
+      "contract": {
+        "required": [],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 14",
+        "capture": "npm run qa:pdma:capture -- --slides 14"
+      }
+    },
+    {
+      "key": "slide-15",
+      "number": 15,
+      "title": "TURN AI CAPABILITY INTO PRODUCT VALUE.",
+      "component": "src/app/pdma2026/components/CanonicalSlides11to15.tsx",
+      "assets": [
+        "/pdma2026/slide-15"
+      ],
+      "contract": {
+        "required": [],
+        "forbidden": [
+          "pdma-alt-slide",
+          "pdma-header",
+          "pdma-footer"
+        ]
+      },
+      "selectors": [],
+      "geometry": null,
+      "verification": {
+        "contract": "npm run check:pdma-slide -- --slides 15",
+        "capture": "npm run qa:pdma:capture -- --slides 15"
+      }
+    }
+  ]
+}

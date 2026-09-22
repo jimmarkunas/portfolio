@@ -1,0 +1,60 @@
+/* Generated from pdma-source.css. Edit the source, then run npm run pdma:css. */
+.s02-copy{position:absolute;left:64px;top:155px}
+.s02-copy h1{font-size:96px;line-height:1.05;font-weight:800}
+.s02-copy h1 em{margin-left:28px}
+.s02-copy p{margin-top:25px;font-size:38px;line-height:1.2}
+.s02-circle{top:392px;width:360px;height:360px}
+.s02-ai{left:635px}
+.s02-human{left:905px}
+.s02-boundary{position:absolute;left:0;top:810px;width:1920px;height:100px;border-top:2px solid #44464a;display:flex;align-items:center;gap:28px;padding-left:72px;font-size:34px;white-space:nowrap}
+.s02-boundary>b{font-size:18px;letter-spacing:4px;margin-right:100px}
+.s02-boundary em{font-size:40px}
+.s02-boundary i{height:70px;width:2px;background:#7a7d85;margin:0 30px}
+.s02-list-ai,.s02-list-human{top:390px}
+.pdma-s02 .pdma-list{top:392px}
+.pdma-s02 .pdma-list-human{left:1322px}
+.pdma-s02 .pdma-list-ai{left:70px}
+.pdma-s02 .pdma-list h2{font-size:27px}
+.pdma-s02 .pdma-item{font-size:30px}
+.pdma-s02 .pdma-tile{width:72px;height:72px;margin-right:36px}
+.pdma-s02 .pdma-item{height:72px}
+.pdma-s02 .pdma-list-rule{top:35px}
+.pdma-s02 .pdma-list-ai .pdma-list-rule{left:265px;width:245px}
+.pdma-s02 .pdma-list-human .pdma-list-rule{left:245px;width:275px}
+
+.pdma-slide-layer .pdma-s02 .s02-copy{display:none!important}
+
+.pdma-s02 .pdma-list{top:405px;width:600px;height:390px}
+.pdma-s02 .pdma-list-ai{left:72px}
+.pdma-s02 .pdma-list-human{left:1326px}
+.pdma-s02 .pdma-list h2{font-size:27px}
+.pdma-s02 .pdma-list-rule{top:20px}
+.pdma-s02 .pdma-item{left:0;height:74px;font-size:30px}
+.pdma-s02 .pdma-tile{width:74px;height:74px;margin-right:34px}
+
+.pdma-s02 .pdma-list-human .pdma-list-rule{left:265px;width:245px}
+
+.pdma-s02 .pdma-list,.pdma-s02 .s02-circle,.pdma-s02 .s02-diagram-cpu,.pdma-s02 .s02-diagram-brain{transform:translateY(35px)}
+
+.pdma-s02 .s02-boundary>strong,.pdma-s02 .s02-boundary>em,.pdma-s02 .s02-boundary>span{transform:translateY(12px)}
+
+.pdma-s02 .s02-boundary{justify-content:center;padding-left:0}
+
+.pdma-s02 .s02-boundary{top:845px}
+
+.pdma-s02 .s02-boundary>i{transform:translateY(15px)}
+
+.pdma-s02 .s02-diagram-cpu{left:755px;top:512px;width:120px;height:120px}
+.pdma-s02 .s02-diagram-brain{left:1021px;top:508px;width:128px;height:128px}
+
+.pdma-s02 .s02-boundary>b{display:none}
+
+.pdma-s02 .pdma-tile img{position:static;width:43.2432%;height:43.2432%}
+
+.pdma-s02 .pdma-list{position:absolute}
+.pdma-s02 .pdma-list h2{margin:0;line-height:1.1852;font-weight:600;letter-spacing:4px;white-space:nowrap}
+.pdma-s02 .pdma-list-rule{position:absolute;height:2px;background:#7a7d85}
+.pdma-s02 .pdma-item{position:absolute;display:flex;align-items:center;color:#f2f2f5;line-height:1.2;white-space:nowrap}
+.pdma-s02 .pdma-tile{display:grid;place-items:center;border:1px solid #2d3136;border-radius:10px;background:#15181b}
+.pdma-s02 .pdma-list-human .pdma-tile{border-color:#5c1a3d;background:#240e1d}
+.pdma-s02 .pdma-tile img{max-width:none}
