@@ -10,7 +10,6 @@ const targets = [
   "src/app/pdma2026/components/slides/Slide04.tsx",
   "src/app/pdma2026/components/slides/Slide05.tsx",
   "src/app/pdma2026/components/CanonicalSlide08.tsx",
-  "src/app/pdma2026/components/CanonicalSlides11to15.tsx",
   "src/app/pdma2026/components/slides",
 ]
 const failures = []

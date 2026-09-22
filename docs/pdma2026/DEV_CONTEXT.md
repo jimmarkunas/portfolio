@@ -14,10 +14,10 @@ Generated from the slide manifest, asset map, visual contracts, and active CSS. 
 | slide-08 | src/app/pdma2026/components/CanonicalSlide08.tsx | check:pdma-slide -- --slides 08 · qa:pdma:capture -- --slides 08 |
 | slide-09 | src/app/pdma2026/components/slides/Slide09.tsx | check:pdma-slide -- --slides 09 · qa:pdma:capture -- --slides 09 |
 | slide-10 | src/app/pdma2026/components/slides/Slide10.tsx | check:pdma-slide -- --slides 10 · qa:pdma:capture -- --slides 10 |
-| slide-11 | src/app/pdma2026/components/CanonicalSlides11to15.tsx | check:pdma-slide -- --slides 11 · qa:pdma:capture -- --slides 11 |
-| slide-12 | src/app/pdma2026/components/CanonicalSlides11to15.tsx | check:pdma-slide -- --slides 12 · qa:pdma:capture -- --slides 12 |
-| slide-13 | src/app/pdma2026/components/CanonicalSlides11to15.tsx | check:pdma-slide -- --slides 13 · qa:pdma:capture -- --slides 13 |
-| slide-14 | src/app/pdma2026/components/CanonicalSlides11to15.tsx | check:pdma-slide -- --slides 14 · qa:pdma:capture -- --slides 14 |
-| slide-15 | src/app/pdma2026/components/CanonicalSlides11to15.tsx | check:pdma-slide -- --slides 15 · qa:pdma:capture -- --slides 15 |
+| slide-11 | src/app/pdma2026/components/slides/Slide11.tsx | check:pdma-slide -- --slides 11 · qa:pdma:capture -- --slides 11 |
+| slide-12 | src/app/pdma2026/components/slides/Slide12.tsx | check:pdma-slide -- --slides 12 · qa:pdma:capture -- --slides 12 |
+| slide-13 | src/app/pdma2026/components/slides/Slide13.tsx | check:pdma-slide -- --slides 13 · qa:pdma:capture -- --slides 13 |
+| slide-14 | src/app/pdma2026/components/slides/Slide14.tsx | check:pdma-slide -- --slides 14 · qa:pdma:capture -- --slides 14 |
+| slide-15 | src/app/pdma2026/components/slides/Slide15.tsx | check:pdma-slide -- --slides 15 · qa:pdma:capture -- --slides 15 |
 
 Shared sources: `pdma2026SlideManifest.tsx`, `pdmaSlideAssets.ts`, `pdmaSlideGeometry.ts`, `index.css`.

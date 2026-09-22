@@ -78,6 +78,7 @@ async function createDiffArtifacts(slide) {
 
 async function main() {
   fs.mkdirSync(qaRoot, { recursive: true })
+  const summary = { generatedAt: new Date().toISOString(), viewport: { width: 1920, height: 1080 }, thresholds: { channel: diffChannelThreshold, maxPixels: maxDiffPixels, maxRatio: maxDiffRatio }, slides: [] }
   await ensureServer()
   const browserOptions = { headless: true }
   if (process.env.CHROME_BIN) browserOptions.executablePath = process.env.CHROME_BIN
@@ -94,7 +95,8 @@ async function main() {
         continue
       }
       await page.screenshot({ path: path.join(qaRoot, `slide-${slide}-render.png`), animations: "disabled" })
-      await createDiffArtifacts(slide)
+      const metrics = await createDiffArtifacts(slide)
+      summary.slides.push({ slide: `slide-${slide}`, ...metrics, pass: true })
       if (index < 15) {
         await page.getByRole("button", { name: "Next slide" }).click()
         await page.waitForTimeout(500)
@@ -103,6 +105,8 @@ async function main() {
   } finally {
     await browser.close()
   }
+  summary.pass = summary.slides.length === slidesToCapture.length && summary.slides.every(({ pass }) => pass)
+  fs.writeFileSync(path.join(qaRoot, "diff-summary.json"), `${JSON.stringify(summary, null, 2)}\n`)
   const { execFileSync } = await import("node:child_process")
   execFileSync(process.execPath, [path.join(root, "scripts/generate-pdma-qa-index.mjs")], { cwd: root, stdio: "inherit" })
   console.log(`PDMA QA capture passed (${slidesToCapture.length} slide${slidesToCapture.length === 1 ? "" : "s"}: ${slidesToCapture.join(", ")}).`)

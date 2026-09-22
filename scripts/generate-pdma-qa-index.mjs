@@ -6,6 +6,8 @@ import path from "node:path"
 const root = process.cwd()
 const qaRoot = path.join(root, "qa/pdma2026")
 const generatedAt = new Date().toISOString()
+const summaryPath = path.join(qaRoot, "diff-summary.json")
+const summary = fs.existsSync(summaryPath) ? JSON.parse(fs.readFileSync(summaryPath, "utf8")) : null
 fs.mkdirSync(qaRoot, { recursive: true })
 
 const slides = Array.from({ length: 15 }, (_, index) => {
@@ -16,15 +18,17 @@ const slides = Array.from({ length: 15 }, (_, index) => {
   const hasRender = fs.existsSync(path.join(qaRoot, render))
   const hasOverlay = fs.existsSync(path.join(qaRoot, overlay))
   const hasDiff = fs.existsSync(path.join(qaRoot, diff))
+  const metrics = summary?.slides?.find((entry) => entry.slide === `slide-${slide}`)
   const state = hasRender && hasOverlay && hasDiff ? "PASS ARTIFACTS PRESENT" : "AWAITING ARTIFACTS"
-  return `<article><h2>Slide ${slide}</h2><p>${state}</p><div><a href="${render}">Render</a> · <a href="${overlay}">Overlay</a> · <a href="${diff}">Diff</a></div></article>`
+  const metricCopy = metrics ? ` · ${metrics.differingPixels.toLocaleString()} differing pixels (${(metrics.ratio * 100).toFixed(2)}%)` : ""
+  return `<article><h2>Slide ${slide}</h2><p>${state}${metricCopy}</p><div><a href="${render}">Render</a> · <a href="${overlay}">Overlay</a> · <a href="${diff}">Diff</a></div></article>`
 }).join("\n")
 
 const html = `<!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PDMA 2026 Visual QA</title>
 <style>body{margin:0;padding:32px;background:#090909;color:#f2f2f5;font:16px/1.4 system-ui,sans-serif}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}article{padding:18px;border:1px solid #44464a;background:#15181b}h1,h2{margin:0 0 8px}p{color:#ff2fae;font-size:12px;letter-spacing:1px}a{color:#f2f2f5}</style></head>
-<body><h1>PDMA 2026 Visual QA</h1><p>Generated ${generatedAt}. Expected artifacts: one render, overlay, and diff per slide at 1920×1080. Diff thresholds are enforced during capture.</p><main>${slides}</main></body></html>
+<body><h1>PDMA 2026 Visual QA</h1><p>Generated ${generatedAt}. Expected artifacts: one render, overlay, and diff per slide at 1920×1080. Diff thresholds are enforced during capture. <a href="diff-summary.json">Diff summary JSON</a>.</p><main>${slides}</main></body></html>
 `
 
 fs.writeFileSync(path.join(qaRoot, "index.html"), html)
