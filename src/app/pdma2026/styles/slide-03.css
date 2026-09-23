@@ -55,3 +55,12 @@
 .pdma-s03 .s03-panel-divider{left:var(--pdma-s03-divider-left);top:var(--pdma-s03-divider-top);height:var(--pdma-s03-divider-height);background:#ff2fae}
 
 .pdma-s03 .s03-takeaway{border-top:0}
+
+.pdma-s03 .s03-process{top:var(--pdma-s03-process-top,107px);width:var(--pdma-s03-process-width,660px);height:var(--pdma-s03-process-height,115px)}
+.pdma-s03 .s03-step{width:var(--pdma-s03-step-width,88px)}
+.pdma-s03 .s03-step-circle{width:var(--pdma-s03-circle-size,88px);height:var(--pdma-s03-circle-size,88px);font-size:var(--pdma-s03-circle-font-size,32px)}
+.pdma-s03 .s03-step span{margin-top:var(--pdma-s03-label-margin-top,12px);min-height:var(--pdma-s03-label-min-height,42px);font-size:var(--pdma-s03-label-font-size,18px);line-height:var(--pdma-s03-label-line-height,20px)}
+.pdma-s03 .s03-step b{left:var(--pdma-s03-arrow-left,102px);top:var(--pdma-s03-arrow-top,19px);font-size:var(--pdma-s03-arrow-font-size,30px)}
+.pdma-s03 .s03-panel hr{top:var(--pdma-s03-rule-top,278px);width:var(--pdma-s03-rule-width,520px);height:var(--pdma-s03-rule-height,2px)}
+.pdma-s03 .s03-boundary-copy{top:var(--pdma-s03-copy-top,300px);font-size:var(--pdma-s03-copy-font-size,25px);line-height:var(--pdma-s03-copy-line-height,40px)}
+.pdma-s03 .s03-capabilities{top:var(--pdma-s03-capabilities-top,340px);width:var(--pdma-s03-capabilities-width,540px);font-size:var(--pdma-s03-capabilities-font-size,20px);line-height:var(--pdma-s03-capabilities-line-height,32px)}

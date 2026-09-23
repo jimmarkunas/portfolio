@@ -14,6 +14,11 @@ export type PdmaCssGeometry = Readonly<{
     boundary: Readonly<{ top: 885; borderTop: "0" }>;
     reveal: Readonly<{ left: 875; top: 572; size: 150 }>;
   }>;
+  slide03: Readonly<{
+    process: Readonly<{ top: 107; width: 660; height: 115; stepWidth: 88; circleSize: 88; circleFontSize: 32; labelMarginTop: 12; labelMinHeight: 42; labelFontSize: 18; labelLineHeight: 20; arrowLeft: 102; arrowTop: 19; arrowFontSize: 30 }>;
+    boundary: Readonly<{ ruleTop: 278; ruleWidth: 520; ruleHeight: 2; copyTop: 300; copyFontSize: 25; copyLineHeight: 40 }>;
+    capabilities: Readonly<{ top: 340; width: 540; fontSize: 20; lineHeight: 32 }>;
+  }>;
 }>;
 
 export const pdmaCssGeometry: PdmaCssGeometry = {
@@ -31,5 +36,10 @@ export const pdmaCssGeometry: PdmaCssGeometry = {
     brain: { left: 1021, top: 508, width: 128, height: 128 },
     boundary: { top: 885, borderTop: "0" },
     reveal: { left: 875, top: 572, size: 150 },
+  },
+  slide03: {
+    process: { top: 107, width: 660, height: 115, stepWidth: 88, circleSize: 88, circleFontSize: 32, labelMarginTop: 12, labelMinHeight: 42, labelFontSize: 18, labelLineHeight: 20, arrowLeft: 102, arrowTop: 19, arrowFontSize: 30 },
+    boundary: { ruleTop: 278, ruleWidth: 520, ruleHeight: 2, copyTop: 300, copyFontSize: 25, copyLineHeight: 40 },
+    capabilities: { top: 340, width: 540, fontSize: 20, lineHeight: 32 },
   },
 };
