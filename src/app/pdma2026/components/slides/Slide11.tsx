@@ -1,8 +1,9 @@
 import { pdmaAssets } from "../../pdmaAssets";
 import { pdmaGeometry } from "../../pdmaGeometry";
 import { B, Img, MAGENTA, Stage, T } from "../pdmaPrimitives";
+import { slide11Cards } from "../../content/slide-content";
 const S = pdmaAssets.slide11Root;
-const cards = [["A","AUTHORITY","What may AI decide and do?",true],["G","GUARDRAILS","What constraints must be built into the product?",false],["E","EVIDENCE","What operational record must the product create?",false],["N","NETWORK & INTEGRATIONS","What systems, data, and permissions may it touch?",false],["T","TRANSFER & ESCALATION","When must a human intervene?",false],["S","SUCCESS & ACCOUNTABILITY","What KPI defines success + which human owns the outcome?",false]] as const;
+const cards = slide11Cards;
 export function Slide11() {
   const g = pdmaGeometry.slide11;
   const rules = g.connectorRules as readonly { x:number; y:number; width:number; height:number; rotation?:number; origin?:string }[];

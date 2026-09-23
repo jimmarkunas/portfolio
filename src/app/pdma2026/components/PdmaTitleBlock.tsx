@@ -1,8 +1,9 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { PdmaTitleConfig } from "../pdma2026SlideManifest";
+import { pdmaTransition, usePdmaReducedMotion } from "./pdmaMotion";
 
 export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaTitleConfig }) {
-  const reduced = useReducedMotion();
+  const reduced = usePdmaReducedMotion();
 
   const titleColor = config.titleColor ?? "#f2f2f5";
   const subtitleContent = config.subtitle?.split("\n").map((line, index) => <span key={`${line}-${index}`}>{index > 0 && <br />}{line}</span>);
@@ -45,7 +46,7 @@ export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaT
       style={{ position: "relative", top: config.magentaRowShift ?? 0 }}
       initial={reduced ? false : { opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: reduced ? 0 : .08 }}
+      transition={pdmaTransition(reduced, .45, .08)}
     >
       <em>{config.magenta}</em>
     </motion.h1>}
@@ -53,7 +54,7 @@ export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaT
       style={{ marginLeft: config.subtitleX ?? 0 }}
       initial={reduced ? false : { opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: reduced ? 0 : .16 }}
+      transition={pdmaTransition(reduced, .45, .16)}
     >
       {subtitle}
     </motion.p>}

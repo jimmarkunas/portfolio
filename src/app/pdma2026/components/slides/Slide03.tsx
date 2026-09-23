@@ -2,9 +2,9 @@ import { PdmaSlideCanvas } from "../../PdmaPresentationShell";
 import { PdmaSlideBody } from "../PdmaSlideBody";
 import { pdmaGeometry } from "../../pdmaGeometry";
 import { ImageLayer, asset } from "./slideShared";
+import { slide03Processes } from "../../content/slide-content";
 
-const copilot = [["H", "HUMAN"], ["P", "PROMPT"], ["M", "MODEL"], ["O", "OUTPUT"]] as const;
-const agent = [["G", "GOAL"], ["A", "AGENT"], ["T", "TOOL / SYSTEM"], ["→", "ACTION"]] as const;
+const { copilot, agent } = slide03Processes;
 function Process({ items, accentIndex = -1 }: { items: readonly (readonly [string, string])[]; accentIndex?: number }) { return <div className="s03-process">{items.map(([glyph, label], index) => <div className={`s03-step ${index === accentIndex ? "is-accent" : ""}`} key={label}><div className="s03-step-circle">{glyph}</div><span>{label}</span>{index < items.length - 1 && <b>→</b>}</div>)}</div>; }
 
 export function Slide03() {

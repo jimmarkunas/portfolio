@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { usePresentationFullscreen } from "@/hooks/usePresentationFullscreen";
@@ -11,6 +11,7 @@ import { PdmaTitleBlock } from "./components/PdmaTitleBlock";
 import type { Pdma2026SlideManifestEntry } from "./pdma2026SlideManifest";
 import { pdmaAssets } from "./pdmaAssets";
 import { pdmaGeometry } from "./pdmaGeometry";
+import { usePdmaReducedMotion } from "./components/pdmaMotion";
 
 const PdmaTitleContext = createContext<{ slide: number; config: Pdma2026SlideManifestEntry["title"] } | null>(null);
 
@@ -38,14 +39,14 @@ export function PdmaSlideCanvas({ children }: { children: React.ReactNode }) {
 }
 
 function PdmaHeader({ current, total, labels }: { current: number; total: number; labels: readonly [string, string, string] }) {
-  const reduced = useReducedMotion();
+  const reduced = usePdmaReducedMotion();
   return <motion.header className="pdma-global-header" initial={reduced ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}>
     <div className="pdma-global-row"><span className="pdma-global-label">PDMA 2026</span><span className="pdma-global-rail"><motion.i initial={reduced ? false : { scaleX: 0 }} animate={{ scaleX: (current + 1) / total }} /></span><span className="pdma-global-right"><b>{labels[0]}</b><em>•</em><b>{labels[1]}</b><em>•</em><b>{labels[2]}</b></span></div>
   </motion.header>;
 }
 
 function PdmaBottomBar({ current, total, footer, navigation, onPrev, onNext, onToc, onFullscreen, isFullscreen }: { current:number; total:number; footer:string; navigation:PresentationNavigationCopy; onPrev:()=>void; onNext:()=>void; onToc:()=>void; onFullscreen:()=>void; isFullscreen:boolean }) {
-  const reduced = useReducedMotion();
+  const reduced = usePdmaReducedMotion();
   return <motion.footer className="pdma-bottom-bar" initial={reduced ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
     <div className="pdma-bottom-identity"><img src={pdmaAssets.asterisk} alt="" /><i /><span>{footer}</span></div>
     <div className="pdma-bottom-controls"><button onClick={onPrev} aria-label={navigation.previousAriaLabel}><ChevronLeft /></button><button onClick={onNext} aria-label={navigation.nextAriaLabel}><ChevronRight /></button></div>
@@ -57,7 +58,7 @@ export function PdmaPresentationShell({ slides, slideManifest, navigation }: { s
   const containerRef = useRef<HTMLDivElement>(null);
   const { isFullscreen, toggleFullscreen } = usePresentationFullscreen({ containerRef });
   const { currentSlide, isTocOpen, setIsTocOpen, nextSlide, prevSlide, jumpToSlide } = usePresentationNavigation({ slideCount: slides.length, onToggleFullscreen: toggleFullscreen });
-  const reduced = useReducedMotion();
+  const reduced = usePdmaReducedMotion();
   const currentManifestEntry = slideManifest[currentSlide];
   return <main ref={containerRef} className="pdma-presentation">
     <PdmaTitleContext.Provider value={{ slide: currentSlide + 1, config: currentManifestEntry.title }}><div className="pdma-stage"><AnimatePresence mode="wait" initial={false}><motion.div key={currentSlide} className="pdma-slide-layer" initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: reduced ? 0 : 0.45, ease: "easeOut" }}>{slides[currentSlide]}</motion.div></AnimatePresence></div></PdmaTitleContext.Provider>

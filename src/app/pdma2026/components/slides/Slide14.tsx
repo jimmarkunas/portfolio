@@ -1,11 +1,12 @@
 import { pdmaAssets } from "../../pdmaAssets";
 import { B, Img, MAGENTA, MUTED, Stage, T } from "../pdmaPrimitives";
 import { pdmaGeometry } from "../../pdmaGeometry";
+import { slide14Rows } from "../../content/slide-content";
 const LINE = "#44464a";
 const S14 = pdmaAssets.slide14Root;
 export function Slide14(){
   const g = pdmaGeometry.slide14;
-  const rows=[["01","VALUE","Increase revenue, decrease cost, or\nstreamline operations?",`${S14}/66471.svg`],["02","AUTHORITY","What may AI observe, recommend,\nprepare, decide, or execute?",`${S14}/408a3.svg`],["03","A.G.E.N.T.S.","Define controls, evidence, systems,\ntransfer, and success.",`${S14}/a7ab0.svg`],["04","OUTPUT","Generate a mini productization brief /\nbacklog-ready artifact.",`${S14}/ea3ba.svg`]] as const;
+  const rows = slide14Rows.map(([n, title, body, icon]) => [n, title, body, `${S14}/${icon}`] as const);
   return <Stage><T x={58} y={304} w={700} size={18} weight={600} color={MAGENTA} line={22} tracking={1.26}>INTERACTIVE EXERCISE — FOLLOW-ON PHASE</T><T x={58} y={348} w={760} size={26} weight={600} line={32}>The live app will guide the audience through:</T>
     {rows.map(([n,title,body,icon],i)=>{const y=412+i*105;return <div key={n}>{i>0&&<B x={58} y={386+i*105} w={840} h={1} bg={LINE}/>}<T x={58} y={429+i*105} w={55} size={18} weight={500} color={MUTED} line={22} tracking={.9}>{n}</T><Img src={i===3?`${S14}/cda5a.svg`:`${S14}/5cb15.svg`} x={120} y={y} w={64} h={64}/><Img src={icon} x={136} y={y+16} w={32} h={32}/><T x={214} y={430+i*105} w={165} size={22} weight={600} color={i===3?MAGENTA:"#f5f5f2"} line={26} tracking={.88}>{title}</T><B x={382} y={419+i*105} w={1} h={52} bg={LINE}/><T x={414} y={423+i*105} w={420} size={22} color="#f5f5f2" line={30}>{body}</T></div>})}
     <T x={872} y={372} w={145} size={18} weight={600} color={MUTED} tracking={1.44} line={24}>IDEAS{"\n"}THROUGH{"\n"}STRUCTURE{"\n"}TO IMPACT</T><B x={875} y={485} w={48} h={3} bg={MAGENTA}/><Img src={`${S14}/b1b9e.svg`} x={815} y={425} w={260} h={210}/>

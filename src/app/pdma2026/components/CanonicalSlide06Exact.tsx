@@ -3,8 +3,9 @@ import { PdmaSlideBody, PdmaSlideSurface } from "./PdmaSlideBody";
 import { pdmaAssets } from "../pdmaAssets";
 import { pdmaGeometry } from "../pdmaGeometry";
 import { B, Img, T } from "./pdmaPrimitives";
-const inventory = [["SYSTEMS", "What applications and\nplatforms are involved?", "icon-systems.svg"], ["DATA", "What information does the\nproduct depend on?", "icon-data.svg"], ["PEOPLE", "Who uses, owns, or\nsupports the workflow?", "icon-people.svg"], ["DEPENDENCIES", "What breaks if one\npart fails?", "icon-dependencies.svg"]] as const;
-const owners = [["SYSTEM OWNER", "Who owns the system\nthe agent touches?", "icon-system-owner.svg"], ["DECISION OWNER", "Who owns the authority\nbeing delegated?", "icon-decision-owner.svg"], ["OUTCOME OWNER", "Who is accountable\nfor the result?", "icon-outcome-owner.svg"]] as const;
+import { slide06Inventory, slide06Owners } from "../content/slide-content";
+const inventory = slide06Inventory;
+const owners = slide06Owners;
 const WHITE = "#f2f2f2", MAGENTA = "#ff2fae";
 export function Slide06() { const g = pdmaGeometry.slide06; return <PdmaSlideCanvas><PdmaSlideSurface className="pdma-s06-exact" style={{ background: "#090909", color: WHITE }}><PdmaSlideBody className="pdma-slide-body-06"><div style={{ position: "absolute", left: g.body.x, top: g.body.y, width: g.body.width, height: g.body.height, overflow: "hidden", background: "#040405" }}>
   <Img src={pdmaAssets.slide06.nebula} geometry={g.nebula} fit="cover"/><Img src={pdmaAssets.slide06.planet} geometry={g.planet}/><Img src={pdmaAssets.slide06.secondaryMoon} geometry={g.secondaryMoon}/><Img src={pdmaAssets.slide06.smallMoon} geometry={g.smallMoon}/><Img src={pdmaAssets.slide06.rings} geometry={g.rings} fit="cover"/>

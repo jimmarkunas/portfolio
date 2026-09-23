@@ -1,13 +1,14 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { PdmaSlideCanvas } from "../../PdmaPresentationShell";
 import { PdmaSlideBody } from "../PdmaSlideBody";
 import { pdmaAssets } from "../../pdmaAssets";
 import { pdmaGeometry } from "../../pdmaGeometry";
 import { Layer } from "./slideShared";
+import { pdmaTransition, usePdmaReducedMotion } from "../pdmaMotion";
 
 function AmbientImage({ src, geometry, className, duration, delay = 0, animate }: { src: string; geometry: { x: number; y: number; width: number; height: number }; className: string; duration: number; delay?: number; animate: Record<string, any> }) {
-  const reduced = useReducedMotion();
-  return <div className={className} style={{ position: "absolute", left: geometry.x, top: geometry.y, width: geometry.width, height: geometry.height, overflow: "visible" }}><motion.img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", transformOrigin: "50% 50%", willChange: "transform, opacity, filter" }} initial={false} animate={reduced ? { opacity: 1, x: 0, y: 0, scale: 1, filter: "brightness(1)" } : animate} transition={reduced ? { duration: 0 } : { duration, delay, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} /></div>;
+  const reduced = usePdmaReducedMotion();
+  return <div className={className} style={{ position: "absolute", left: geometry.x, top: geometry.y, width: geometry.width, height: geometry.height, overflow: "visible" }}><motion.img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", transformOrigin: "50% 50%", willChange: "transform, opacity, filter" }} initial={false} animate={reduced ? { opacity: 1, x: 0, y: 0, scale: 1, filter: "brightness(1)" } : animate} transition={reduced ? { duration: 0 } : { ...pdmaTransition(false, duration, delay), repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }} /></div>;
 }
 
 export function Slide01() { const g = pdmaGeometry.slide01; return <PdmaSlideCanvas><div className="pdma-slide-surface pdma-s01"><PdmaSlideBody className="pdma-slide-body-01">
