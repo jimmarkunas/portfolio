@@ -4,7 +4,7 @@ import fs from "node:fs"
 import path from "node:path"
 
 const root = process.cwd()
-const manifest = fs.readFileSync(path.join(root, "src/app/pdma2026/pdma2026SlideManifest.tsx"), "utf8")
+const manifest = fs.readFileSync(path.join(root, "src/app/pdma2026/pdma.config.ts"), "utf8")
 const entries = [...manifest.matchAll(/key:\s*"(slide-\d{2})"[\s\S]*?id:\s*"(slide-\d{2})"[\s\S]*?tocTitle:\s*"([^"]+)"[\s\S]*?title:\s*\{/g)]
 const keys = entries.map(([, key]) => key)
 const ids = entries.map(([, , id]) => id)
@@ -16,7 +16,7 @@ if (keys.join("|") !== expected.join("|")) failures.push(`manifest order must be
 if (new Set(keys).size !== keys.length) failures.push("manifest slide keys must be unique")
 if (new Set(ids).size !== ids.length) failures.push("manifest slide IDs must be unique")
 if (entries.some(([, key, id, title]) => key !== id || !title.trim())) failures.push("every manifest entry must have matching key/id and a TOC title")
-if (!/const\s+slides:\s+readonly/.test(manifest)) failures.push("manifest must own the slide collection")
+if (!/const\s+slides:\s+readonly/.test(manifest)) failures.push("config must own the slide collection")
 if (!/slideManifest\.map\(\(\{ component: Component, key \}\) => <Component key=\{key\} \/>\)/.test(fs.readFileSync(path.join(root, "src/app/pdma2026/Pdma2026App.tsx"), "utf8"))) failures.push("app must render every manifest entry")
 
 if (failures.length) {

@@ -6,7 +6,7 @@ import path from "node:path"
 const root = process.cwd()
 const read = (file) => fs.readFileSync(path.join(root, file), "utf8")
 const rel = (file) => path.relative(root, file)
-const manifestFile = "src/app/pdma2026/pdma2026SlideManifest.tsx"
+const manifestFile = "src/app/pdma2026/pdma.config.ts"
 const manifest = read(manifestFile)
 const sourceCssFile = "src/app/pdma2026/styles/base.css"
 const sourceCss = read(sourceCssFile)

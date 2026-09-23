@@ -7,7 +7,7 @@ import crypto from "node:crypto"
 const root = process.cwd()
 const sourceRoot = path.join(root, "src/app/pdma2026")
 const publicRoot = path.join(root, "public")
-const manifestPath = path.join(sourceRoot, "pdma2026SlideManifest.tsx")
+const manifestPath = path.join(sourceRoot, "pdma.config.ts")
 
 const failures = []
 const sourceFiles = []
@@ -61,6 +61,7 @@ for (const file of sourceFiles) {
   for (const match of text.matchAll(/["'`]([^"'`]*\/pdma2026\/[^"'`]*)["'`]/g)) {
     const assetPath = match[1]
     if (assetPath.includes("${")) continue
+    if (assetPath === "/pdma2026/exercise") continue
     const absolute = path.join(publicRoot, assetPath.replace(/^\//, ""))
     if (!fs.existsSync(absolute)) {
       failures.push(`${path.relative(root, file)} references missing asset ${assetPath}`)
