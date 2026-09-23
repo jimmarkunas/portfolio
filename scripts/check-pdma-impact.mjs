@@ -20,8 +20,12 @@ const allSlides = Array.from({ length: 15 }, (_, index) => String(index + 1).pad
 for (const file of changedFiles) {
   const slideMatch = file.match(/slide-(\d{2})/)
   if (slideMatch) { add(slideMatch[1], file); graph(file, "slide"); if (file.startsWith("public/") || file.startsWith("src/")) qaMode = qaMode === "full" ? "full" : "targeted" }
-  else if (/src\/app\/pdma2026\/components\/slides\/Slide(\d{2})\.tsx$/.test(file)) { add(file.match(/Slide(\d{2})/)?.[1], file); graph(file, "slide"); qaMode = qaMode === "full" ? "full" : "targeted" }
-  else if (/src\/app\/pdma2026\/(index\.css|layout\.tsx|Pdma2026App\.tsx|pdma2026SlideManifest\.tsx|pdmaAssets\.ts|pdmaSlideAssets\.ts|pdma\.config\.ts|pdma\.validation\.ts|pdmaGeometry\.ts|PdmaPresentationShell\.tsx|components\/(PdmaTitleBlock|PdmaSlideBody|pdmaPrimitives|pdmaPrimitives)\.tsx|components\/slides\/slideShared\.tsx)/.test(file)) {
+  else if (/src\/app\/pdma2026\/components\/(?:slides\/)?Slide(\d{2})\.tsx$/.test(file)) { add(file.match(/Slide(\d{2})/)?.[1], file); graph(file, "slide"); qaMode = qaMode === "full" ? "full" : "targeted" }
+  else if (file === "src/app/pdma2026/content/slide-content.ts") {
+    for (const slide of ["02", "03", "06", "08", "11", "14"]) add(slide, file)
+    graph(file, "metadata")
+    qaMode = qaMode === "full" ? "full" : "targeted"
+  } else if (/src\/app\/pdma2026\/(index\.css|layout\.tsx|Pdma2026App\.tsx|pdma2026SlideManifest\.tsx|pdmaAssets\.ts|pdmaSlideAssets\.ts|pdma\.config\.ts|pdma\.validation\.ts|pdmaGeometry\.ts|PdmaPresentationShell\.tsx|components\/(PdmaTitleBlock|PdmaSlideBody|pdmaPrimitives|pdmaMotion)\.tsx|components\/slides\/slideShared\.tsx)/.test(file)) {
     for (const slide of allSlides) add(slide, file)
     graph(file, /pdma\.config|pdma\.validation|Manifest|pdmaSlideAssets/.test(file) ? "metadata" : "shared")
     qaMode = "full"
@@ -45,4 +49,4 @@ console.log(`QA scope: ${qaMode === "full" ? "full-deck QA required" : "targeted
 console.log("Dependency graph:")
 for (const [file, edge] of graphReasons) console.log(`- ${file} → ${graphEdges[edge]}`)
 for (const slide of allSlides.filter((value) => slides.has(value))) console.log(`- slide-${slide}: ${reasons.get(slide).join(", ")}`)
-console.log(`Suggested QA: npm run qa:pdma:capture${qaMode === "full" ? "" : ` -- --slides ${allSlides.filter((value) => slides.has(value)).join(",")}`}`)
+console.log(`Suggested QA: npm run pdma:qa${qaMode === "full" ? "" : ` -- --slides ${allSlides.filter((value) => slides.has(value)).join(",")}`}`)
