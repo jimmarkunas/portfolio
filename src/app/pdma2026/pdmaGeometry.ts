@@ -17,7 +17,7 @@ export const pdmaGeometry = {
     boundary: { y: 885, width: 1920, height: 100, gap: 28, contentShiftY: 12, dividerShiftY: 15 }, reveal: { x: 875, y: 572, size: 150 },
   },
   slide03: {
-    leftPlanet: { x: -165, y: 135, width: 760, height: 760, opacity: .9 }, rightPlanet: { x: 1260, y: 105, width: 830, height: 830 },
+    leftPlanet: { x: -165, y: 251, width: 760, height: 760, opacity: .9 }, rightPlanet: { x: 1260, y: 242, width: 830, height: 830 },
     panel: { y: 428, width: 720, height: 380, copilotX: 304, agentX: 1028 }, divider: { x: 958, y: 430, height: 340 },
     process: { y: 107, width: 660, height: 115, stepWidth: 88, circleSize: 88, circleFontSize: 32, labelMarginTop: 12, labelMinHeight: 42, labelFontSize: 18, labelLineHeight: 20, arrowX: 102, arrowY: 19, arrowFontSize: 30 },
     heading: { size: 25, line: 40 }, descriptor: { size: 15, line: 24 },
