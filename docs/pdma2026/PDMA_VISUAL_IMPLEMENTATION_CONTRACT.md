@@ -169,9 +169,9 @@ A new/reconstructed Figma composition is required first. It must preserve approv
 
 Until approval, the current/baseline Figma frame is not the implementation oracle.
 
-## 7. Approved remaining-work order
+## 7. Recovery sequencing and parallel design
 
-Work sequentially in this order:
+React implementation remains serialized in this recovery order unless Jim explicitly changes it:
 
 `10 → 15 → 11 → 5 → 6 → 9 → 12 → 13`
 
@@ -181,9 +181,20 @@ For slides marked `DESIGN_REQUIRED`, the slide's unit of work is:
 
 Do not skip directly from baseline Figma to React implementation.
 
-Do not batch visual reconstruction across these slides.
+### Parallel concept-design authorization
 
-A slide must reach PASS and become LOCKED before moving to the next slide unless Jim explicitly changes the order.
+Jim has explicitly authorized a separate concept-design agent to work ahead on Figma concepts while the approval/integration agent manages approval, contract state, Codex handoff, and implementation verification.
+
+Therefore:
+
+- Figma concept design for future `DESIGN_REQUIRED` slides may proceed in parallel and ahead of the React implementation order;
+- concept design does **not** authorize React implementation;
+- each slide still requires Jim's explicit design approval and an approved implementation-frame node ID before Codex may touch React;
+- only one slide may be under active React/Codex visual mutation at a time;
+- locked slides remain immutable;
+- a future slide may have an approved Figma design waiting in the queue while the current React target is being implemented.
+
+This parallel-design authorization exists to compress elapsed delivery time without allowing parallel code drift.
 
 ## 8. Zero-discretion mutation boundary
 
@@ -242,23 +253,45 @@ If a proposed repair changes Slide 1, 2, 3, 4, 7, 8, or 14, the repair fails unl
 9. When Jim approves, record the approved node ID in §3 and change implementation design status to `APPROVED`.
 10. Only then may React implementation begin.
 
-### B. `IMPLEMENTATION_REPAIR` or any target with design status `APPROVED`
+### B. React implementation after design approval
 
 1. Read `src/app/pdma2026/AGENTS.md`, this contract, and `docs/pdma2026/CODEX_VISUAL_TASK_HEADER.md`.
 2. Confirm the exact **approved implementation Figma frame ID** from §3.
 3. Inspect that approved Figma frame and current React target only.
 4. Capture the current browser-rendered full slide at the canonical 1920×1080 QA viewport when available.
 5. Freeze the anchors that must remain unchanged.
-6. Identify one exact visible delta for the iteration.
-7. Make the smallest coherent implementation change for that delta.
-8. Run `npm run pdma:check -- --slide NN`.
-9. Run `npm run pdma:qa -- --slide NN` and inspect the browser capture.
-10. Compare render to the approved implementation Figma frame and state concrete remaining deltas.
-11. Correct demonstrated deltas only.
-12. When visual acceptance is proven, stop.
-13. With Jim's approval of the finished slide, change its registry state to `LOCKED` and update `immutable-surfaces.json` in the same bounded change.
+6. **Prompt 1:** implement the complete approved target-slide composition within the allowed slide-local mutation surface. Do not intentionally split a known approved composition into many micro-prompts.
+7. Run `npm run pdma:check -- --slide NN`.
+8. Run `npm run pdma:qa -- --slide NN` and inspect the browser capture.
+9. Compare the render to the approved implementation Figma frame and enumerate concrete visible deltas.
+10. **Prompt 2, if required:** correct all demonstrated implementation deltas that can be coherently repaired without changing the approved design or mutation boundary.
+11. Re-run targeted check and browser visual QA.
+12. **Prompt 3, if required:** make the final demonstrated corrections only.
+13. Re-run targeted check and browser visual QA.
+14. When visual acceptance is proven, stop.
+15. With Jim's approval of the finished slide, change its registry state to `LOCKED` and update `immutable-surfaces.json` in the same bounded change.
 
 Do not claim visual PASS from source inspection, typecheck, geometry values, or build success alone.
+
+### C. Codex implementation prompt budget — HARD REQUIREMENT
+
+Each slide has a maximum budget of **3 Codex implementation prompts** from first React mutation through visual PASS.
+
+The intended budget is **2 prompts**, with a third available only for a final demonstrated correction.
+
+- **Prompt 1 — full implementation:** exact approved Figma node, target-only allowed files, frozen anchors, current implementation context, required assets, canonical viewport, targeted checks, and browser QA. It must attempt the complete approved slide in one bounded pass.
+- **Prompt 2 — evidence-based correction:** use the actual rendered screenshot/QA result and correct all concrete remaining implementation deltas that can be safely addressed together.
+- **Prompt 3 — final correction only:** correct only the remaining demonstrated visual defects. No redesign, refactor, architecture work, or speculative cleanup.
+
+Do not spend a Codex prompt merely asking it to plan, inspect, explain, inventory, or report capability when that inspection can be included in the implementation prompt itself.
+
+If the slide is not at visual PASS after Prompt 3, stop with:
+
+`PDMA_PROMPT_BUDGET_EXHAUSTED — slide NN`
+
+Then report the exact remaining visual deltas and the root implementation blocker. A fourth implementation prompt requires Jim's explicit override.
+
+The approval/integration agent is responsible for making Prompt 1 implementation-complete enough that routine slides should finish in 1–2 prompts.
 
 ## 11. Visual acceptance
 
@@ -286,6 +319,10 @@ Do not continue speculative visual mutation and do not claim PASS.
 If React implementation is requested for a slide whose implementation design status is `DESIGN_REQUIRED`, stop with:
 
 `PDMA_DESIGN_REQUIRED — slide NN requires an approved Figma redesign before React implementation`
+
+If a third Codex implementation prompt has completed without visual PASS, stop with:
+
+`PDMA_PROMPT_BUDGET_EXHAUSTED — slide NN`
 
 If the requested change would require any of the following and the current task does not explicitly authorize it:
 
