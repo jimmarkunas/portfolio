@@ -1,13 +1,36 @@
-import { PdmaSlideCanvas } from "../PdmaPresentationShell";
+import type { LucideIcon } from "lucide-react";
+import { Eye, FileText, GitBranch, Settings, Zap } from "lucide-react";
 import { pdmaAssets } from "../pdmaAssets";
-import { pdmaGeometry } from "../pdmaGeometry";
-import { Stage, T, B, Img, MAGENTA, MUTED, WHITE } from "./pdmaPrimitives";
 import { slide08Stages } from "../content/slide-content";
-const S = pdmaAssets.slide08Root;
-const stages = slide08Stages;
-export function Slide08() { const g = pdmaGeometry.slide08; return <Stage background="#050505"><Img src={`${S}/7149b.png`} geometry={g.gauge} fit="cover"/><div style={{ position: "absolute", left: g.dial.x, top: g.dial.y, width: g.dial.width, height: g.dial.height, maskImage: `url(${S}/3dc3f.svg)`, WebkitMaskImage: `url(${S}/3dc3f.svg)`, maskSize: "460px 460px", WebkitMaskSize: "460px 460px", maskRepeat: "no-repeat", WebkitMaskRepeat: "no-repeat" }}><Img src={`${S}/59b40.png`} geometry={g.dialImage} fit="cover"/></div>
-  {stages.map((s, i) => { const sg = g.stages[i]; return <div key={s.n}><T geometry={sg.number} weight={600} color={s.active ? MAGENTA : MUTED}>{s.n}</T><T geometry={sg.title} weight={700} color={s.active ? MAGENTA : WHITE}>{s.title}</T><T geometry={sg.body}>{s.body}</T><Img src={`${S}/${s.ellipse}`} geometry={sg.ellipse}/><Img src={`${S}/${s.icon}`} geometry={sg.icon}/></div> })}
-  <T geometry={g.observation} weight={500} color={MUTED}>OBSERVATION{"\n"}HUMAN IN THE LOOP</T><B geometry={g.leftBoundary} bg="#73767b"/><T geometry={g.decisionExecution} weight={500} color={MUTED}>DECISION &amp; EXECUTION{"\n"}AI TAKES ACTION</T><B geometry={g.rightBoundary} bg="#73767b"/>
-  <T geometry={g.autonomy} weight={600} tracking={g.autonomy.tracking}>MORE AUTONOMY</T><B geometry={g.autonomyRule} bg="#73767b"/><T x={g.autonomyArrow.x} y={g.autonomyArrow.y} size={g.autonomyArrow.size} color={MAGENTA}>→</T><T geometry={g.consequence} weight={600} tracking={g.consequence.tracking}>MORE CONSEQUENCE</T><B geometry={g.consequenceRule} bg="#73767b"/><T x={g.consequenceArrow.x} y={g.consequenceArrow.y} size={g.consequenceArrow.size} color={MAGENTA}>→</T><T geometry={g.productDesign} weight={600} tracking={g.productDesign.tracking}>MORE PRODUCT DESIGN</T>
-  <B geometry={g.takeawayRule} bg="#44464a"/><B geometry={g.takeawayAccent} bg={MAGENTA}/><T geometry={g.takeaway} weight={700}>THE FARTHER RIGHT YOU GO, THE MORE PRODUCT DESIGN HAS TO ACCOUNT FOR THE CONSEQUENCES.</T>
- </Stage> }
+import { pdmaGeometry } from "../pdmaGeometry";
+import { B, Img, MAGENTA, MUTED, Stage, T, WHITE } from "./pdmaPrimitives";
+
+const stageIcons: LucideIcon[] = [Eye, FileText, Settings, GitBranch, Zap];
+
+function AuthorityNode({ active, Icon }: { active: boolean; Icon: LucideIcon }) {
+  const color = active ? MAGENTA : WHITE;
+  return <div style={{ width: 78, height: 78, borderRadius: "50%", border: `3px solid ${color}`, background: "#090909", display: "grid", placeItems: "center", boxSizing: "border-box" }}>
+    <Icon size={36} strokeWidth={2.1} color={color} aria-hidden />
+  </div>;
+}
+
+export function Slide08() {
+  const g = pdmaGeometry.slide08;
+  return <Stage background="#050505">
+    <Img src={`${pdmaAssets.slide08Root}/slide-08-planet-horizon.png`} geometry={g.planet} fit="contain" />
+    <Img src={`${pdmaAssets.slide08Root}/slide-08-authority-arc.png`} geometry={g.arc} fit="contain" />
+    {slide08Stages.map((stage, index) => {
+      const sg = g.stages[index];
+      const Icon = stageIcons[index];
+      return <div key={stage.n} style={{ position: "absolute", left: g.stageNodes[index].x, top: g.stageNodes[index].y, width: 78, zIndex: 2 }}>
+        <T geometry={sg.number} weight={600} color={stage.active ? MAGENTA : MUTED} align="center">{stage.n}</T>
+        <AuthorityNode active={stage.active} Icon={Icon} />
+        <T geometry={sg.title} weight={700} color={WHITE}>{stage.title}</T>
+        <T geometry={sg.body}>{stage.body}</T>
+      </div>;
+    })}
+    <T geometry={g.autonomy} weight={600} tracking={g.autonomy.tracking}>MORE AUTONOMY</T><T x={g.autonomyArrow.x} y={g.autonomyArrow.y} size={g.autonomyArrow.size} color={MAGENTA}>→</T>
+    <T geometry={g.consequence} weight={600} tracking={g.consequence.tracking}>MORE CONSEQUENCE</T><T x={g.consequenceArrow.x} y={g.consequenceArrow.y} size={g.consequenceArrow.size} color={MAGENTA}>→</T><T geometry={g.productDesign} weight={600} tracking={g.productDesign.tracking}>MORE PRODUCT DESIGN</T>
+    <B geometry={g.takeawayAccent} bg={MAGENTA} /><T geometry={g.takeaway} weight={700}>THE FARTHER RIGHT YOU GO, THE MORE PRODUCT DESIGN HAS TO ACCOUNT FOR THE CONSEQUENCES.</T>
+  </Stage>;
+}
