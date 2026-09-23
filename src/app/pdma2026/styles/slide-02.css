@@ -51,3 +51,27 @@
 .pdma-s02 .pdma-tile{display:grid;place-items:center;border:1px solid #2d3136;border-radius:10px;background:#15181b}
 .pdma-s02 .pdma-list-human .pdma-tile{border-color:#5c1a3d;background:#240e1d}
 .pdma-s02 .pdma-tile img{max-width:none}
+
+/* Slide 2 particulate hero and approved circular capability tiles. */
+.pdma-s02 .s02-visual-box{position:absolute;overflow:visible;pointer-events:none}
+
+.pdma-s02 .s02-visual-box img{position:static;width:100%;height:100%;object-fit:contain}
+
+.pdma-s02 .s02-particle-field{z-index:1;opacity:.72}
+
+.pdma-s02 .s02-ai-sphere{z-index:2}
+.pdma-s02 .s02-human-sphere{z-index:3}
+.pdma-s02 .s02-overlap-glow{z-index:4}
+
+.pdma-s02 .s02-diagram-cpu{z-index:2}
+.pdma-s02 .s02-diagram-brain{z-index:5}
+
+.pdma-s02 .pdma-tile{border-radius:50%}
+
+.pdma-s02 .pdma-list-human .pdma-tile{border-color:#8d245f}
+
+.pdma-s02 .s02-boundary{top:915px;border-top:0;justify-content:center;gap:46px;padding-left:0;font-size:27px}
+
+.pdma-s02 .s02-boundary strong{font-weight:600}
+.pdma-s02 .s02-boundary span{color:#ff2fae}
+.pdma-s02 .s02-boundary i{height:42px;width:1px;background:#7a7d85;margin:0}

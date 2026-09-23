@@ -4,7 +4,7 @@ export type PdmaSlideAssetMap = Readonly<Record<Pdma2026SlideKey, readonly strin
 
 export const pdmaSlideAssets: PdmaSlideAssetMap = {
   "slide-01": ["/pdma2026/slide-01/title-atmosphere.png", "/pdma2026/slide-01/title-asterisk-scene.png"],
-  "slide-02": ["/pdma2026/slide-02/ai-circle.svg", "/pdma2026/slide-02/human-circle.svg", "/pdma2026/slide-02/diagram-cpu.svg", "/pdma2026/slide-02/diagram-brain.svg"],
+  "slide-02": ["/pdma2026/slide-02/slide-02-ai-sphere.png", "/pdma2026/slide-02/slide-02-human-sphere.png", "/pdma2026/slide-02/slide-02-particle-field.png", "/pdma2026/slide-02/diagram-cpu.svg", "/pdma2026/slide-02/diagram-brain.svg"],
   "slide-03": ["/pdma2026/slide-03/02283.png", "/pdma2026/slide-03/44753.png"],
   "slide-04": ["/pdma2026/slide-04/0c14e.png", "/pdma2026/slide-04/bd2f1.png"],
   "slide-05": ["/pdma2026/slide-05/51d1a.png", "/pdma2026/slide-05/9f2f3.png"],

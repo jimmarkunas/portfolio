@@ -11,10 +11,10 @@ export const pdmaGeometry = {
     speakerRule: { x: 84, y: 466, width: 78, height: 4 }, speakerName: { x: 84, y: 498 }, speakerRole: { x: 84, y: 549 },
   },
   slide02: {
-    contentShiftY: 75,
-    list: { y: 405, width: 600, height: 390, aiX: 72, humanX: 1326, itemStart: 93, itemPitch: 100, headingSize: 27, itemSize: 30, itemHeight: 74, tileSize: 74, tileMarginRight: 34, ruleY: 20, ruleX: 265, ruleWidth: 245 },
-    circle: { y: 392, size: 360, aiX: 635, humanX: 905 }, cpu: { x: 755, y: 512, width: 120, height: 120 }, brain: { x: 1021, y: 508, width: 128, height: 128 },
-    boundary: { y: 885, width: 1920, height: 100, gap: 28, contentShiftY: 12, dividerShiftY: 15 }, reveal: { x: 875, y: 572, size: 150 },
+    contentShiftY: 135,
+    list: { y: 330, width: 600, height: 390, aiX: 72, humanX: 1326, itemStart: 93, itemPitch: 100, headingSize: 27, itemSize: 30, itemHeight: 74, tileSize: 74, tileMarginRight: 34, ruleY: 20, ruleX: 265, ruleWidth: 245 },
+    particleField: { x: 585, y: 330, width: 750, height: 360 }, aiSphere: { x: 610, y: 350, width: 390, height: 390 }, humanSphere: { x: 875, y: 350, width: 390, height: 390 }, cpu: { x: 815, y: 485, width: 120, height: 120 }, brain: { x: 1015, y: 485, width: 128, height: 128 },
+    boundary: { y: 915, width: 1920, height: 100, gap: 28 },
   },
   slide03: {
     leftPlanet: { x: -165, y: 251, width: 760, height: 760, opacity: .9 }, rightPlanet: { x: 1260, y: 242, width: 830, height: 830 },
