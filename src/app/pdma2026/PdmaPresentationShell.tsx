@@ -29,10 +29,10 @@ export function PdmaSlideCanvas({ children }: { children: React.ReactNode }) {
   return <div ref={stageRef} className="pdma-canvas-stage"><div className="pdma-logical-canvas" style={{ left: frame.left, top: frame.top, transform: `scale(${frame.scale})` }}>{children}</div></div>;
 }
 
-function PdmaHeader({ current, total }: { current: number; total: number }) {
+function PdmaHeader({ current, total, labels }: { current: number; total: number; labels: readonly [string, string, string] }) {
   const reduced = useReducedMotion();
   return <motion.header className="pdma-global-header" initial={reduced ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}>
-    <div className="pdma-global-row"><span className="pdma-global-label">PDMA 2026</span><span className="pdma-global-rail"><motion.i initial={reduced ? false : { scaleX: 0 }} animate={{ scaleX: (current + 1) / total }} /></span><span className="pdma-global-right"><b>HUMAN</b><em>•</em><b>MACHINE</b><em>•</em><b>OUTCOME</b></span></div>
+    <div className="pdma-global-row"><span className="pdma-global-label">PDMA 2026</span><span className="pdma-global-rail"><motion.i initial={reduced ? false : { scaleX: 0 }} animate={{ scaleX: (current + 1) / total }} /></span><span className="pdma-global-right"><b>{labels[0]}</b><em>•</em><b>{labels[1]}</b><em>•</em><b>{labels[2]}</b></span></div>
   </motion.header>;
 }
 
@@ -53,7 +53,7 @@ export function PdmaPresentationShell({ slides, slideManifest, navigation }: { s
   const currentManifestEntry = slideManifest[currentSlide];
   return <main ref={containerRef} className="pdma-presentation">
     <div className="pdma-stage"><AnimatePresence mode="wait" initial={false}><motion.div key={currentSlide} className="pdma-slide-layer" initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: reduced ? 0 : 0.45, ease: "easeOut" }}>{slides[currentSlide]}</motion.div></AnimatePresence><PdmaTitleBlock slide={currentSlide + 1} config={currentManifestEntry.title} /></div>
-    <PdmaHeader current={currentSlide} total={slides.length} />
+    <PdmaHeader current={currentSlide} total={slides.length} labels={currentManifestEntry.headerLabels} />
     <PdmaBottomBar current={currentSlide} total={slides.length} footer={currentManifestEntry.footerLabel} navigation={navigation} onPrev={prevSlide} onNext={nextSlide} onToc={() => setIsTocOpen(true)} onFullscreen={toggleFullscreen} isFullscreen={isFullscreen} />
     <PresentationTocDialog dialogId="pdma2026-slide-toc" isOpen={isTocOpen} currentSlide={currentSlide} slideTitles={slideManifest.map(({ tocTitle }) => tocTitle)} slideIdOrder={slideManifest.map(({ id }) => id)} totalSlides={slides.length} navCopy={navigation} onClose={() => setIsTocOpen(false)} onJumpToSlide={jumpToSlide} />
   </main>;
