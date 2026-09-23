@@ -30,17 +30,13 @@ export const pdmaGeometry = {
     takeaway: { x: 64, y: 947, width: 1790, height: 58, paddingTop: 60 },
   },
   slide05: {
-    wide: { x: 92, y: 404, width: 2172, opacity: .7 }, orb: { x: 1139, y: 197, width: 545 }, unclear: { x: 76, y: 449 }, equals: { x: 424, y: 717 }, confusion: { x: 76, y: 821 },
+    wide: { x: 92, y: 454, width: 2172, opacity: .7 }, orb: { x: 1139, y: 197, width: 545 }, unclear: { x: 76, y: 449 }, equals: { x: 424, y: 717 }, confusion: { x: 76, y: 821 },
   },
   slide06: {
-    body: { x: 0, y: 76, width: 1920, height: 909 },
-    nebula: { x: -120, y: 0, width: 980, height: 909 }, planet: { x: -590, y: -20, width: 1020, height: 1020 }, secondaryMoon: { x: 370, y: 350, width: 128, height: 128 }, smallMoon: { x: 468, y: 470, width: 44, height: 44 }, rings: { x: 1020, y: -18, width: 820, height: 340 },
-    awareness: { x: 58, y: 338, width: 230, size: 17, line: 29, tracking: 6 }, awarenessRule: { x: 58, y: 468, width: 48, height: 3 },
-    inventoryHeading: { x: 598, y: 288, width: 400, size: 17, tracking: 5 }, ownersHeading: { x: 1415, y: 288, width: 360, size: 17, tracking: 5 },
-    connector: { x: 1118, y: 373, width: 291, height: 368 }, outerNode: { x: 1277, y: 513, width: 28, height: 28 }, innerNode: { x: 1285, y: 521, width: 14, height: 14 },
-    inventoryCards: { x: 598, y: 322, width: 520, height: 104, pitch: 122, icon: [{ x: 27, y: 24, width: 34.74, height: 36.54 }, { x: 37.53, y: 29.13, width: 27.54, height: 36.54 }, { x: 28.62, y: 29.22, width: 48.97, height: 36.19 }, { x: 32.13, y: 28.23, width: 39.24, height: 40.15 }], title: { x: 137, y: 18, width: 310, size: 22, tracking: 1.5 }, body: { x: 137, y: 48, width: 315, size: 18, line: 25 }, arrow: { x: 462, y: 32, width: 45, size: 34 }, node: { x: 514, y: 47, width: 10, height: 10 } },
-    ownerCards: { x: 1415, y: 322, width: 430, height: 140, pitch: 152, icon: [{ x: 37.63, y: 43.93, width: 29.34, height: 35.37 }, { x: 28, y: 37, width: 48.6, height: 48.6 }, { x: 34.93, y: 43.93, width: 34.74, height: 34.74 }], title: { x: 135, y: 25, width: 245, size: 20, tracking: 1.2 }, rule: { x: 135, y: 58, width: 210, height: 1.5 }, body: { x: 135, y: 73, width: 240, size: 18, line: 25 }, node: { x: -6, y: 65, width: 10, height: 10 } },
-    takeawayRule: { x: 48, y: 820, width: 1820, height: 1.5 }, takeawayAccent: { x: 48, y: 850, width: 3, height: 44 }, takeaway: { x: 78, y: 850, width: 1320, size: 26 },
+    body: { x: 0, y: 76, width: 1920, height: 909 }, ring: { x: 700, y: 390, width: 520, height: 520 },
+    headings: { inventory: { x: 100, y: 380, width: 420, size: 18, tracking: 4 }, automation: { x: 760, y: 380, width: 400, size: 18, tracking: 4, align: "center" }, owners: { x: 1370, y: 380, width: 450, size: 18, tracking: 4, align: "left" } },
+    inventoryCards: { x: 100, y: 435, width: 450, height: 112, pitch: 120 }, ownerCards: { x: 1370, y: 435, width: 450, height: 120, pitch: 145 }, card: { radius: 12, title: { x: 76, y: 20, width: 300, size: 22, tracking: 1.5 }, body: { x: 76, y: 48, width: 340, size: 18, line: 24 }, icon: { x: 24, y: 22, size: 34 } }, ownerCard: { title: { x: 76, y: 22, width: 330, size: 20, tracking: 1.2 }, body: { x: 76, y: 54, width: 330, size: 18, line: 25 }, icon: { x: 24, y: 28, size: 34 } },
+    connectors: { left: [{ cardX: 550, cardY: 485, portX: 820, portY: 495, elbowX: 690 }, { cardX: 550, cardY: 605, portX: 790, portY: 560, elbowX: 690 }, { cardX: 550, cardY: 725, portX: 790, portY: 665, elbowX: 690 }, { cardX: 550, cardY: 845, portX: 820, portY: 730, elbowX: 690 }], right: [{ cardX: 1370, cardY: 495, portX: 1100, portY: 495, elbowX: 1230 }, { cardX: 1370, cardY: 640, portX: 1130, portY: 560, elbowX: 1230 }, { cardX: 1370, cardY: 785, portX: 1130, portY: 665, elbowX: 1230 }] }, core: { x: 960, y: 525, iconSize: 100, labelY: 665 }, awareness: { x: 760, y: 915, width: 400, size: 18, tracking: 3, align: "center" }, takeawayRule: { x: 48, y: 930, width: 1820, height: 2 }, takeawayAccent: { x: 48, y: 958, width: 3, height: 48 }, takeaway: { x: 78, y: 956, width: 1700, size: 27 },
   },
   slide07: {
     matrix: { x: 60, y: 395, width: 1800, height: 580 }, decisionColumn: { x: 60, y: 395, width: 286, height: 580 }, highlightColumn: { x: 346, y: 395, width: 504.667, height: 580 },

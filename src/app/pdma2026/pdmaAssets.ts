@@ -6,6 +6,7 @@ export const pdmaAssets = {
     heroAsterisk: "/pdma2026/slide-01/slide-01-asterisk-hero.png",
   },
   slide06: {
+    ring: "/pdma2026/slide-06/slide-06-ai-core-ring.png",
     nebula: "/pdma2026/slide-06/figma-nebula.png",
     planet: "/pdma2026/slide-06/figma-planet.png",
     secondaryMoon: "/pdma2026/slide-06/figma-secondary-moon.png",

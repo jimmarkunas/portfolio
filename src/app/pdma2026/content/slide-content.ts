@@ -8,8 +8,8 @@ export const slide03Processes = {
   agent: [["G", "GOAL"], ["A", "AGENT"], ["T", "TOOL / SYSTEM"], ["→", "ACTION"]],
 } as const;
 
-export const slide06Inventory = [["SYSTEMS", "What applications and\nplatforms are involved?", "icon-systems.svg"], ["DATA", "What information does the\nproduct depend on?", "icon-data.svg"], ["PEOPLE", "Who uses, owns, or\nsupports the workflow?", "icon-people.svg"], ["DEPENDENCIES", "What breaks if one\npart fails?", "icon-dependencies.svg"]] as const;
-export const slide06Owners = [["SYSTEM OWNER", "Who owns the system\nthe agent touches?", "icon-system-owner.svg"], ["DECISION OWNER", "Who owns the authority\nbeing delegated?", "icon-decision-owner.svg"], ["OUTCOME OWNER", "Who is accountable\nfor the result?", "icon-outcome-owner.svg"]] as const;
+export const slide06Inventory = [["SYSTEMS", "Applications, infrastructure, tools\nand integrations."], ["DATA", "Sources, types, sensitivity\nand quality."], ["PEOPLE", "Teams, roles, skills\nand working models."], ["DEPENDENCIES", "Upstream, downstream\nand external partners."]] as const;
+export const slide06Owners = [["SYSTEM OWNER", "Accountable for reliability,\nsecurity and lifecycle."], ["DECISION OWNER", "Accountable for policies,\ntrade-offs and approvals."], ["OUTCOME OWNER", "Accountable for value,\nresults and continuous improvement."]] as const;
 
 export const slide08Stages = [{ n: "01", title: "OBSERVE", body: "AI sees the state\nof the product\nor process.", ellipse: "59d08.svg", icon: "91b4d.svg", active: false }, { n: "02", title: "RECOMMEND", body: "AI proposes what\nshould happen.", ellipse: "379c2.svg", icon: "d17aa.svg", active: false }, { n: "03", title: "PREPARE", body: "AI stages the action\nfor human review.", ellipse: "379c2.svg", icon: "9244f.svg", active: false }, { n: "04", title: "DECIDE", body: "AI chooses the action\nwithin defined rules.", ellipse: "d8145.svg", icon: "8b919.svg", active: true }, { n: "05", title: "EXECUTE", body: "AI acts within\ndefined limits.", ellipse: "ca1fd.svg", icon: "97008.svg", active: true }] as const;
 
