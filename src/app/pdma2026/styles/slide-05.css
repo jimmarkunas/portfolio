@@ -1,8 +1,6 @@
 
-.pdma-s05 .s05-wide{left:92px;top:386px;width:2172px;object-fit:cover;opacity:.8;mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)}
+.pdma-s05 .s05-wide{width:2172px;object-fit:cover;mask-image:linear-gradient(to bottom,#000 0%,#000 90%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 90%,transparent 100%)}
 .pdma-s05 .s05-orb{left:1139px;top:197px;width:545px;height:auto}
 .pdma-s05 .s05-unclear{position:absolute;left:76px;top:449px;font-size:64px;line-height:1.31;letter-spacing:4px;font-weight:600;z-index:2}
-.pdma-s05 .s05-equals{position:absolute;left:424px;top:729px;font-size:128px;line-height:1;font-weight:600;z-index:2}
-.pdma-s05 .s05-confusion{position:absolute;left:76px;top:821px;font-size:64px;line-height:1.1;color:#ff2fae;z-index:2;white-space:nowrap}
-
-.pdma-s05 .s05-equals{top:675px}
+.pdma-s05 .s05-equals{position:absolute;font-size:128px;line-height:38px;font-weight:600;z-index:2}
+.pdma-s05 .s05-confusion{position:absolute;left:76px;top:821px;font-size:64px;line-height:64px;color:#ff2fae;z-index:2;white-space:nowrap}

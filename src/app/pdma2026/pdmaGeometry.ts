@@ -30,7 +30,7 @@ export const pdmaGeometry = {
     takeaway: { x: 64, y: 947, width: 1790, height: 58, paddingTop: 60 },
   },
   slide05: {
-    wide: { x: 92, y: 386, width: 2172, opacity: .8 }, orb: { x: 1139, y: 197, width: 545 }, unclear: { x: 76, y: 449 }, equals: { x: 424, y: 729 }, confusion: { x: 76, y: 821 },
+    wide: { x: 92, y: 404, width: 2172, opacity: .7 }, orb: { x: 1139, y: 197, width: 545 }, unclear: { x: 76, y: 449 }, equals: { x: 424, y: 717 }, confusion: { x: 76, y: 821 },
   },
   slide06: {
     body: { x: 0, y: 76, width: 1920, height: 909 },
@@ -43,9 +43,9 @@ export const pdmaGeometry = {
     takeawayRule: { x: 48, y: 820, width: 1820, height: 1.5 }, takeawayAccent: { x: 48, y: 850, width: 3, height: 44 }, takeaway: { x: 78, y: 850, width: 1320, size: 26 },
   },
   slide07: {
-    matrix: { x: 60, y: 380, width: 1800, height: 392 }, decisionColumn: { x: 60, y: 380, width: 286, height: 392 }, highlightColumn: { x: 346, y: 380, width: 504.667, height: 392 },
-    decisionRule: { label: { x: 86, y: 406, width: 180, size: 15, line: 20, tracking: 3 }, rule: { x: 86, y: 443, width: 44, height: 2 }, copy: { x: 86, y: 468, width: 190, size: 31, line: 32 }, supportingRule: { x: 86, y: 590, width: 44, height: 2 }, supportingCopy: { x: 86, y: 594, width: 180, size: 15, line: 20 } },
-    columnDividers: [346, 850.67, 1355.33], rowDividers: [508, 574, 640, 706], columnHeading: [{ x: 440, y: 405, width: 360, size: 25, line: 32 }, { x: 946.67, y: 405, width: 360, size: 25, line: 32 }, { x: 1455.33, y: 405, width: 360, size: 24, line: 32 }], columnBody: { y: 447, width: 345, size: 18, line: 23 }, row: { x: [366, 870.67, 1375.33], y: 529, pitch: 66, width: 220, size: 16, line: 22, tracking: 1.8 }, selector: { x: [640.67, 1147.33, 1652], yOffset: -2, size: 24, innerX: 6, innerY: 6, innerSize: 10 }, takeawayRule: { x: 60, y: 830, width: 1800, height: 2 }, takeawayAccent: { x: 64, y: 865, width: 3, height: 46 }, takeaway: { x: 92, y: 862, width: 1660, size: 27, line: 38 },
+    matrix: { x: 60, y: 395, width: 1800, height: 580 }, decisionColumn: { x: 60, y: 395, width: 286, height: 580 }, highlightColumn: { x: 346, y: 395, width: 504.667, height: 580 },
+    decisionRule: { label: { x: 86, y: 421, width: 180, size: 18, line: 24, tracking: 3 }, rule: { x: 86, y: 466, width: 44, height: 2 }, copy: { x: 86, y: 493, width: 190, size: 36, line: 38 }, supportingRule: { x: 86, y: 680, width: 44, height: 2 }, supportingCopy: { x: 86, y: 715, width: 180, size: 18, line: 24 } },
+    columnDividers: [346, 850.67, 1355.33], rowDividers: [675, 771, 867], columnHeading: [{ x: 440, y: 420, width: 360, size: 28, line: 34 }, { x: 946.67, y: 420, width: 360, size: 28, line: 34 }, { x: 1455.33, y: 420, width: 360, size: 28, line: 34 }], columnBody: [{ x: 400, y: 495, width: 410, size: 22, line: 28 }, { x: 905, y: 495, width: 410, size: 22, line: 28 }, { x: 1410, y: 495, width: 410, size: 22, line: 28 }], row: { x: [366, 870.67, 1375.33], y: 615, pitch: 96, width: 220, size: 21, line: 27, tracking: 1.8 }, selector: { x: [640.67, 1147.33, 1652], yOffset: -3, size: 30, innerX: 7.5, innerY: 7.5, innerSize: 12 }, takeawayRule: { x: 60, y: 995, width: 1800, height: 2 }, takeawayAccent: { x: 64, y: 1025, width: 3, height: 46 }, takeaway: { x: 92, y: 1022, width: 1660, size: 27, line: 38 },
   },
   slide08: {
     gauge: { x: 140, y: 137, width: 1632, height: 918 }, dial: { x: 730, y: 587, width: 460, height: 460 }, dialImage: { x: 0, y: 0, width: 460, height: 460 },
