@@ -8,9 +8,11 @@ Within this scope, these rules override conflicting generic repository guidance.
 ## Mission
 Optimize for fast, accurate, deterministic slide work.
 
-Default workflow:
+Default non-visual workflow:
 
-`inspect target → make bounded change → run targeted check → capture target slide → compare → stop`
+`inspect target → make bounded change → run targeted check → verify → stop`
+
+For visual work, the **Canonical visual-edit loop** below is mandatory.
 
 Do not turn a slide task into an architecture review, cleanup program, or repo-wide audit.
 
@@ -45,12 +47,41 @@ Being behind `origin/main` is not, by itself, a blocker. Do not pull, merge, reb
 
 ## Slide mutation rules
 - Make the smallest coherent change that satisfies the current request.
-- If the user gives multiple related fixes for one slide, implement the full requested set in one pass.
+- For non-visual implementation work, related fixes may be implemented together when they form one coherent change.
+- For visual work, follow the Canonical visual-edit loop: **one visible change per iteration** unless the user explicitly authorizes a batch visual pass.
 - Do not change unrelated slides.
 - Do not change shared primitives, shell, geometry, tokens, or global CSS for a slide-local defect unless direct evidence proves the defect is shared and the user authorizes the broader scope.
 - Preserve existing approved composition unless the user explicitly asks for redesign.
 - Never substitute a new visual concept for a parity/fix task.
 - No base64 production assets.
+
+## Canonical visual-edit loop
+Use this loop for every slide visual edit. Its purpose is to eliminate geometry guessing and finish visual work quickly.
+
+1. **Start from one full-slide browser screenshot at the actual rendered browser size.** The screenshot must show the entire affected slide, not a crop that hides surrounding relationships.
+2. **Freeze that screenshot as the baseline for the iteration.** Compare every subsequent render against it until the requested change is approved.
+3. **Identify one exact visible target.** Examples: `secondary descriptions`, `bottom of table`, `selected circle`, `planet horizon`, `equals sign`.
+4. **State the anchors that must not move or change.** Explicitly freeze relevant headings, table top, table bottom, takeaway, colors, font size, chrome, or other approved elements.
+5. **State the desired direction and relationship precisely.** Prefer instructions such as `move the table down 20px`, `increase the gap below descriptions`, or `center the dot inside the ring` over vague instructions such as `add breathing room`.
+6. **If the request is visually ambiguous, describe the intended geometry before editing.** Do not guess. State what will move, what will remain fixed, and the resulting relationship; obtain clarification when necessary.
+7. **Make one visible change per iteration.** Do not bundle typography, spacing, borders, color, and layout into one visual iteration. One visible change may require coordinated implementation values when they are inseparable parts of the same visual relationship—for example, moving table rows and their row dividers together.
+8. **After every edit, refresh the actual browser and capture a new full-slide screenshot at the same viewport.** Do not rely on source inspection, geometry values, typecheck, or targeted checks for visual approval.
+9. **Compare the new screenshot to the frozen baseline and requested delta.** If the result is wrong, report the exact visible failure (`last row clipped`, `dot still high inside ring`, `description gap unchanged`) rather than a general statement such as `it looks bad`.
+10. **Once the requested visual change is correct, stop.** Lock the slide/version and do not continue architecture cleanup, opportunistic refactoring, or unrelated polish.
+
+### Browser-capture requirement
+Reliable browser screenshots are part of the implementation loop, not optional evidence. If browser capture is unavailable, do not continue making speculative visual changes. Report:
+
+`VISUAL_QA: REQUIRES_EXTERNAL_REVIEW`
+
+and wait for a rendered screenshot or explicit user direction before another visual mutation.
+
+### Canonical instruction pattern
+A strong bounded visual instruction names the frozen anchors, the one moving relationship, and the containment behavior. Example:
+
+> Keep headings, descriptions, and takeaway fixed. Move only the table rows and row dividers down until the last row is fully visible. Extend the matrix surfaces to contain the rows. Do not use a fixed height that clips content. Then show me the rendered screenshot.
+
+This pattern is preferred over broad requests such as `make the table more spacious` because it gives a deterministic visual relationship to implement and verify.
 
 ## CSS ownership
 PDMA must have **one** canonical CSS editing model.
@@ -91,14 +122,14 @@ Shared changes to shell, global geometry, global CSS, shared primitives, manifes
 Do not repeat checks unless code or runtime state materially changed.
 
 ## Visual completion
-A visual change is not complete from source inspection, typecheck, or unit checks alone.
+A visual change is not complete from source inspection, typecheck, unit checks, or geometry review alone.
 
 Before claiming PASS:
-- render/capture the affected slide in the actual runtime when tooling allows;
-- compare it with the approved Figma/reference or user screenshot;
-- verify every requested visual delta.
+- render/capture the affected slide in the actual runtime at the actual browser size;
+- compare it with the frozen baseline and approved Figma/reference/user screenshot;
+- verify the single requested visual delta while confirming frozen anchors stayed fixed.
 
-If runtime capture is unavailable, report `VISUAL_QA: REQUIRES_EXTERNAL_REVIEW` rather than claiming visual completion.
+If runtime capture is unavailable, report `VISUAL_QA: REQUIRES_EXTERNAL_REVIEW` rather than claiming visual completion or making another speculative visual edit.
 
 ## Failure handling
 Unrelated pre-existing failures do not authorize unrelated fixes.
@@ -115,9 +146,9 @@ Do not patch around it with a second system.
 For implementation tasks, report only:
 - status;
 - changed files;
-- requested fixes completed;
+- requested fix completed;
 - targeted verification;
 - visual QA status;
-- exact blocker, if any.
+- exact visible failure or blocker, if any.
 
 Do not append modernization recommendations, architecture audits, file counts, cleanup proposals, or unrelated backlog unless the user asked for them.
