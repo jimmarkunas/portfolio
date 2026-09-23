@@ -10,6 +10,9 @@ export const pdmaValidation = {
   routeLinks: pdmaConfig.routes,
   docs: pdmaConfig.slideDocs,
   contracts: pdmaConfig.slideContracts,
+  rendering: pdmaConfig.rendering,
+  canvas: pdmaConfig.canvas,
+  slides: pdmaConfig.slides,
 } as const;
 
 export type PdmaValidationSlideKey = typeof pdmaValidation.slideKeys[number];

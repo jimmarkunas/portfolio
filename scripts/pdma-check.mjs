@@ -17,15 +17,10 @@ const run = (command, commandArgs) => {
 }
 
 if (slide) {
-  run("npm", ["run", "check:pdma-slide", "--", "--slides", slide])
-  run("npm", ["run", "check:pdma-assets-manifest"])
-  run("npm", ["run", "check:pdma-geometry"])
-  run("npm", ["run", "typecheck"])
+  run(process.execPath, ["scripts/check-pdma-slide-contracts.mjs", "--slides", slide])
   console.log(`PDMA targeted check passed for slide-${slide}.`)
 } else if (hasAll) {
-  run("npm", ["run", "check:pdma"])
-  run("npm", ["run", "check:pdma-geometry-inventory"])
-  run("npm", ["run", "check:pdma-unified-geometry"])
+  for (const script of ["check-pdma-assets-manifest.mjs", "check-pdma-duplicate-selectors.mjs", "check-pdma-geometry.mjs", "check-pdma-immutable.mjs", "check-pdma-manifest-parity.mjs", "check-pdma-slide-contracts.mjs", "check-pdma-import-boundaries.mjs", "check-pdma-poc-guard.mjs", "check-pdma-geometry-inventory.mjs", "check-pdma-unified-geometry.mjs"]) run(process.execPath, [`scripts/${script}`])
   run("npm", ["run", "typecheck"])
   console.log("PDMA full check passed.")
 }

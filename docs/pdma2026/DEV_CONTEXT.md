@@ -20,6 +20,6 @@ Generated exclusively from the typed PDMA validation configuration. Use `slide-i
 | slide-14 | slide-14 | pdmaGeometry.slide14 | npm run pdma:check -- --slide 14 · npm run pdma:qa -- --slide 14 |
 | slide-15 | slide-15 | pdmaGeometry.slide15 | npm run pdma:check -- --slide 15 · npm run pdma:qa -- --slide 15 |
 
-Shared rendering contract: `PdmaSlideCanvas` → `PdmaSlideSurface` → `PdmaSlideBody` → typed geometry/primitives/animation.
+Shared rendering contract: PdmaSlideCanvas → PdmaSlideSurface → PdmaSlideBody → typed geometry/pdmaPrimitives/pdmaMotion.
 
 Canonical configuration: `src/app/pdma2026/pdma.config.ts` and its typed validation declarations.

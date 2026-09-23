@@ -16,21 +16,22 @@ const geometryFile = "src/app/pdma2026/pdmaGeometry.ts"
 const geometry = read(geometryFile)
 const failures = []
 
-const imports = new Map(
-  [...manifest.matchAll(/import \{ (\w+) \} from "(.+?)";/g)].map(([, name, importPath]) => [name, importPath]),
-)
-const entries = [...manifest.matchAll(/\{ key: "(slide-\d{2})"[\s\S]*?component: (\w+),/g)]
+const componentPaths = Object.fromEntries(Array.from({ length: 15 }, (_, index) => {
+  const slide = String(index + 1).padStart(2, "0")
+  const name = slide === "02" ? "components/Slide02" : slide === "06" ? "components/CanonicalSlide06Exact" : slide === "08" ? "components/CanonicalSlide08" : `components/slides/Slide${slide}`
+  return [`slide-${slide}`, `src/app/pdma2026/${name}.tsx`]
+}))
+const entries = [...manifest.matchAll(/\{ key: "(slide-\d{2})"[\s\S]*?component: "(slide-\d{2})",/g)]
 
 if (entries.length !== 15) failures.push(`expected 15 manifest entries, found ${entries.length}`)
 
 const inventory = entries.map(([, slide, component]) => {
-  const importPath = imports.get(component)
-  if (!importPath) {
-    failures.push(`${slide}: component import not found for ${component}`)
+  const file = componentPaths[component]
+  if (!file) {
+    failures.push(`${slide}: component path not found for ${component}`)
     return { slide, component, importPath: null, file: null, ownership: "unknown" }
   }
 
-  const file = `${path.posix.normalize(path.posix.join(path.posix.dirname(manifestFile), importPath))}.tsx`
   const absolute = path.join(root, file)
   if (!fs.existsSync(absolute)) {
     failures.push(`${slide}: component file not found at ${file}`)
@@ -44,6 +45,7 @@ const inventory = entries.map(([, slide, component]) => {
   const ownership = usesInlineGeometry ? "inline" : usesSharedPrimitives ? "shared-primitives" : "stylesheet"
 
   if (!usesCanvas) failures.push(`${slide}: does not render through PdmaSlideCanvas`)
+  if (!text.includes("pdmaGeometry")) failures.push(`${slide}: does not import the typed pdmaGeometry declaration`)
   if (/\b(?:vw|vh|dvw|dvh)\b/.test(text)) failures.push(`${slide}: contains viewport-relative geometry`)
 
   return { slide, component, file, ownership }

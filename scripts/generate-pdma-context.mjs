@@ -6,7 +6,6 @@ import path from "node:path"
 const root = process.cwd()
 const docsRoot = path.join(root, "docs/pdma2026")
 const { pdmaValidation } = await import("../src/app/pdma2026/pdma.validation.ts")
-const canvas = { width: 1920, height: 1080 }
 const slides = pdmaValidation.slideKeys.map((key, index) => {
   const doc = pdmaValidation.docs[key]
   const contract = pdmaValidation.contracts[key]
@@ -16,17 +15,10 @@ const slides = pdmaValidation.slideKeys.map((key, index) => {
     title: doc.title,
     component: doc.component,
     assets: pdmaValidation.runtimeAssets[key],
-    routeLinks: key === "slide-14" ? [pdmaValidation.routeLinks.exercise] : [],
+    routeLinks: pdmaValidation.slides[index].routeLinks ?? [],
     contract,
     geometry: doc.geometry,
-    rendering: {
-      canvas: "PdmaSlideCanvas",
-      surface: "PdmaSlideSurface",
-      body: "PdmaSlideBody",
-      geometry: doc.geometry,
-      primitives: "pdmaPrimitives",
-      animation: "motion/react + useReducedMotion",
-    },
+    rendering: { ...pdmaValidation.rendering, geometry: doc.geometry },
     verification: {
       check: `npm run pdma:check -- --slide ${key.slice(-2)}`,
       capture: `npm run pdma:qa -- --slide ${key.slice(-2)}`,
@@ -36,7 +28,7 @@ const slides = pdmaValidation.slideKeys.map((key, index) => {
 
 fs.mkdirSync(docsRoot, { recursive: true })
 const indexPath = path.join(docsRoot, "slide-index.json")
-fs.writeFileSync(indexPath, `${JSON.stringify({ generatedBy: "scripts/generate-pdma-context.mjs", canvas, slides }, null, 2)}\n`)
+fs.writeFileSync(indexPath, `${JSON.stringify({ generatedBy: "scripts/generate-pdma-context.mjs", canvas: pdmaValidation.canvas, rendering: pdmaValidation.rendering, slides }, null, 2)}\n`)
 
 const markdown = [
   "# PDMA 2026 Developer Context",
@@ -47,7 +39,7 @@ const markdown = [
   "| --- | --- | --- | --- |",
   ...slides.map((slide) => `| ${slide.key} | ${slide.component} | ${slide.geometry} | ${slide.verification.check} · ${slide.verification.capture} |`),
   "",
-  "Shared rendering contract: `PdmaSlideCanvas` → `PdmaSlideSurface` → `PdmaSlideBody` → typed geometry/primitives/animation.",
+  `Shared rendering contract: ${pdmaValidation.rendering.canvas} → ${pdmaValidation.rendering.surface} → ${pdmaValidation.rendering.body} → typed geometry/${pdmaValidation.rendering.primitives}/${pdmaValidation.rendering.animation}.`,
   "",
   "Canonical configuration: `src/app/pdma2026/pdma.config.ts` and its typed validation declarations.",
 ].join("\n") + "\n"

@@ -4,6 +4,13 @@
     "width": 1920,
     "height": 1080
   },
+  "rendering": {
+    "canvas": "PdmaSlideCanvas",
+    "surface": "PdmaSlideSurface",
+    "body": "PdmaSlideBody",
+    "primitives": "pdmaPrimitives",
+    "animation": "pdmaMotion"
+  },
   "slides": [
     {
       "key": "slide-01",
@@ -30,9 +37,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide01",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide01"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 01",
@@ -67,9 +74,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide02",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide02"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 02",
@@ -104,9 +111,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide03",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide03"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 03",
@@ -138,9 +145,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide04",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide04"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 04",
@@ -172,9 +179,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide05",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide05"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 05",
@@ -203,9 +210,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide06",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide06"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 06",
@@ -232,9 +239,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide07",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide07"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 07",
@@ -263,9 +270,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide08",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide08"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 08",
@@ -294,9 +301,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide09",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide09"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 09",
@@ -325,9 +332,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide10",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide10"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 10",
@@ -356,9 +363,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide11",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide11"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 11",
@@ -387,9 +394,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide12",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide12"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 12",
@@ -418,9 +425,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide13",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide13"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 13",
@@ -451,9 +458,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide14",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide14"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 14",
@@ -482,9 +489,9 @@
         "canvas": "PdmaSlideCanvas",
         "surface": "PdmaSlideSurface",
         "body": "PdmaSlideBody",
-        "geometry": "pdmaGeometry.slide15",
         "primitives": "pdmaPrimitives",
-        "animation": "motion/react + useReducedMotion"
+        "animation": "pdmaMotion",
+        "geometry": "pdmaGeometry.slide15"
       },
       "verification": {
         "check": "npm run pdma:check -- --slide 15",

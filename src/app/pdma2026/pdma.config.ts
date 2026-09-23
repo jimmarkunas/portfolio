@@ -12,6 +12,7 @@ export type Pdma2026SlideComponent = Pdma2026SlideKey;
 export type PdmaQaScope = "targeted" | "full";
 export type PdmaSlideContract = { required: readonly string[]; forbidden: readonly string[] };
 export type PdmaSlideDoc = { title: string; component: Pdma2026SlideComponent; geometry: string };
+export type PdmaRenderingContract = { canvas: string; surface: string; body: string; primitives: string; animation: string };
 export type Pdma2026SlideDefinition = {
   key: Pdma2026SlideKey; id: Pdma2026SlideKey; tocTitle: string; headerLabels: PdmaHeaderLabels; footerLabel: string;
   title: PdmaTitleConfig; component: Pdma2026SlideComponent; assets: readonly string[]; routeLinks?: readonly string[]; qa: PdmaQaScope;
@@ -25,6 +26,7 @@ export type Pdma2026Config = {
   runtimeAssets: Record<Pdma2026SlideKey, readonly string[]>;
   slideDocs: Record<Pdma2026SlideKey, PdmaSlideDoc>;
   slideContracts: Record<Pdma2026SlideKey, PdmaSlideContract>;
+  rendering: PdmaRenderingContract;
   slides: readonly Pdma2026SlideDefinition[];
 };
 
@@ -52,6 +54,7 @@ const slideDocs: Pdma2026Config["slideDocs"] = Object.fromEntries([
 const slideContracts: Pdma2026Config["slideContracts"] = Object.fromEntries([
   ["slide-01", ["pdma-s01"]], ["slide-02", ["pdma-s02"]], ["slide-03", ["pdma-s03", "s03-panel-copilot", "s03-panel-agent", "s03-panel-divider"]], ["slide-04", ["pdma-s04"]], ["slide-05", ["pdma-s05"]], ...Array.from({ length: 10 }, (_, index) => [`slide-${String(index + 6).padStart(2, "0")}`, []]),
 ].map(([key, required]) => [key, { required, forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] }])) as Pdma2026Config["slideContracts"];
+const rendering: PdmaRenderingContract = { canvas: "PdmaSlideCanvas", surface: "PdmaSlideSurface", body: "PdmaSlideBody", primitives: "pdmaPrimitives", animation: "pdmaMotion" };
 
 const slides: readonly Pdma2026SlideDefinition[] = [
   { key: "slide-01", id: "slide-01", tocTitle: "THE NEW PM OPERATING SYSTEM", headerLabels: ["JUDGMENT", "AUTHORITY", "ACCOUNTABILITY"], footerLabel: "HUMAN JUDGMENT COMPOUNDS", title: { white: "THE NEW PM", magenta: "OPERATING SYSTEM", subtitle: lines("What stays uniquely human.", "What shifts to AI."), size: 82, leading: 88, tracking: -2.4, subtitleSize: 30, subtitleLeading: 36 }, component: "slide-01", assets: runtimeAssets["slide-01"], qa: "targeted" },
@@ -71,7 +74,7 @@ const slides: readonly Pdma2026SlideDefinition[] = [
   { key: "slide-15", id: "slide-15", tocTitle: "TURN AI CAPABILITY INTO PRODUCT VALUE.", headerLabels: ["VALUE", "AUTHORITY", "ACCOUNTABILITY"], footerLabel: "NEVER AUTOMATE AWAY ACCOUNTABILITY", title: { ...standard, white: "TURN AI CAPABILITY", magenta: "INTO PRODUCT VALUE.", subtitle: "Start with the business case. Define the authority. Productize the controls. Measure the outcome.", subtitleSize: 30 }, component: "slide-15", assets: runtimeAssets["slide-15"], qa: "targeted" },
 ];
 
-export const pdmaConfig: Pdma2026Config = { canvas: { width: 1920, height: 1080 }, routes, assetRoots, geometry: pdmaGeometry, qa: { defaultScope: "targeted", sharedChangeScope: "full" }, runtimeAssets, slideDocs, slideContracts, slides };
+export const pdmaConfig: Pdma2026Config = { canvas: { width: 1920, height: 1080 }, routes, assetRoots, geometry: pdmaGeometry, qa: { defaultScope: "targeted", sharedChangeScope: "full" }, runtimeAssets, slideDocs, slideContracts, rendering, slides };
 
 export function buildPdmaConfig(_content: Pdma2026Content): Pdma2026Config {
   return pdmaConfig;
