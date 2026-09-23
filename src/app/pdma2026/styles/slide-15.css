@@ -1,0 +1,26 @@
+.pdma-slide15-download {
+  position: absolute;
+  left: 111px;
+  top: 643px;
+  width: 345px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  border: 1px solid #ff2fae;
+  border-radius: 12px;
+  background: #ff2fae;
+  color: #090909;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.pdma-slide15-download:hover {
+  background: #090909;
+  color: #ff2fae;
+}

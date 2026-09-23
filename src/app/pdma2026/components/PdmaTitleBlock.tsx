@@ -19,7 +19,7 @@ export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaT
     >
       {subtitleContent}
     </span>
-  ) : config.subtitle;
+  ) : subtitleContent;
 
   return <div
     className={`pdma-title-block pdma-title-${slide}`}
