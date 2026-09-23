@@ -47,6 +47,17 @@
 
 .pdma-s02 .s02-boundary>i{transform:translateY(15px)}
 
+.pdma-s02 .pdma-list{top:var(--pdma-s02-list-top,405px);width:var(--pdma-s02-list-width,600px);height:var(--pdma-s02-list-height,390px)}
+.pdma-s02 .pdma-list-ai{left:var(--pdma-s02-list-ai-left,72px)}
+.pdma-s02 .pdma-list-human{left:var(--pdma-s02-list-human-left,1326px)}
+.pdma-s02 .s02-circle{top:var(--pdma-s02-circle-top,392px);width:var(--pdma-s02-circle-size,360px);height:var(--pdma-s02-circle-size,360px)}
+.pdma-s02 .s02-ai{left:var(--pdma-s02-circle-ai-left,635px)}
+.pdma-s02 .s02-human{left:var(--pdma-s02-circle-human-left,905px)}
+.pdma-s02 .s02-diagram-cpu{left:var(--pdma-s02-cpu-left,755px);top:var(--pdma-s02-cpu-top,512px);width:var(--pdma-s02-cpu-width,120px);height:var(--pdma-s02-cpu-height,120px)}
+.pdma-s02 .s02-diagram-brain{left:var(--pdma-s02-brain-left,1021px);top:var(--pdma-s02-brain-top,508px);width:var(--pdma-s02-brain-width,128px);height:var(--pdma-s02-brain-height,128px)}
+.pdma-s02 .s02-boundary{top:var(--pdma-s02-boundary-top,885px)}
+.pdma-s02::after{left:var(--pdma-s02-reveal-left,875px);top:var(--pdma-s02-reveal-top,572px);width:var(--pdma-s02-reveal-size,150px);height:var(--pdma-s02-reveal-size,150px)}
+
 .pdma-s02 .s02-diagram-cpu{left:755px;top:512px;width:120px;height:120px}
 .pdma-s02 .s02-diagram-brain{left:1021px;top:508px;width:128px;height:128px}
 

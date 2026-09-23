@@ -6,6 +6,14 @@ export type PdmaCssGeometry = Readonly<{
     speakerName: Readonly<{ left: 84; top: 498 }>;
     speakerRole: Readonly<{ left: 84; top: 549 }>;
   }>;
+  slide02: Readonly<{
+    list: Readonly<{ top: 405; width: 600; height: 390; aiLeft: 72; humanLeft: 1326; itemStart: 93; itemPitch: 100 }>;
+    circle: Readonly<{ top: 392; size: 360; aiLeft: 635; humanLeft: 905 }>;
+    cpu: Readonly<{ left: 755; top: 512; width: 120; height: 120 }>;
+    brain: Readonly<{ left: 1021; top: 508; width: 128; height: 128 }>;
+    boundary: Readonly<{ top: 885; borderTop: "0" }>;
+    reveal: Readonly<{ left: 875; top: 572; size: 150 }>;
+  }>;
 }>;
 
 export const pdmaCssGeometry: PdmaCssGeometry = {
@@ -15,5 +23,13 @@ export const pdmaCssGeometry: PdmaCssGeometry = {
     speakerRule: { left: 84, top: 466, width: 78, height: 4 },
     speakerName: { left: 84, top: 498 },
     speakerRole: { left: 84, top: 549 },
+  },
+  slide02: {
+    list: { top: 405, width: 600, height: 390, aiLeft: 72, humanLeft: 1326, itemStart: 93, itemPitch: 100 },
+    circle: { top: 392, size: 360, aiLeft: 635, humanLeft: 905 },
+    cpu: { left: 755, top: 512, width: 120, height: 120 },
+    brain: { left: 1021, top: 508, width: 128, height: 128 },
+    boundary: { top: 885, borderTop: "0" },
+    reveal: { left: 875, top: 572, size: 150 },
   },
 };
