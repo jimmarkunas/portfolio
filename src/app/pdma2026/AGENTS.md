@@ -12,38 +12,55 @@ Default non-visual workflow:
 
 `inspect target → make bounded change → run targeted check → verify → stop`
 
-For visual work, the **Canonical visual-edit loop** below is mandatory.
+For visual work, the **Canonical visual-edit loop** below is mandatory once an approved implementation design exists.
 
 Do not turn a slide task into an architecture review, cleanup program, or repo-wide audit.
 
 ## Mandatory PDMA visual contract
 
-For every PDMA visual mutation, read these before editing:
+For every PDMA visual task, read these before editing:
 
 1. `docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md`
-2. `docs/pdma2026/CODEX_VISUAL_TASK_HEADER.md`
+2. `docs/pdma2026/CODEX_VISUAL_TASK_HEADER.md` for React implementation tasks
 3. `docs/pbds-presentation-components.md` only for the PBDS/runtime rules relevant to the target
 
-`docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md` is the canonical slide-state registry and visual implementation authority beneath Jim's explicit current instruction and the canonical final Figma frame.
+`docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md` is the canonical slide-state/design-gate registry and visual implementation authority beneath Jim's explicit current instruction and an explicitly approved implementation Figma frame.
 
-Slides marked `LOCKED` in that contract are not writable. If a task targets one without Jim explicitly reopening it, return:
+### Design gate
+
+Before any React visual mutation, read the target slide's `Implementation design status` in the visual contract.
+
+If it is `DESIGN_REQUIRED`, return:
+
+`PDMA_DESIGN_REQUIRED — slide NN requires an approved Figma redesign before React implementation`
+
+and make no React visual mutation.
+
+For `STYLE_REWORK` and `REBUILD_STYLE`, the current/baseline final-deck Figma frame is content/structure evidence only until Jim approves a redesigned composition and the contract records its node ID as the approved implementation frame.
+
+Do not use Codex/React implementation to invent the missing design.
+
+Slides marked `LOCKED` in the contract are not writable. If a task targets one without Jim explicitly reopening it, return:
 
 `PDMA_SCOPE_STOP — slide NN is LOCKED`
 
-`docs/pdma2026/immutable-surfaces.json` is the mechanical implementation lock for currently accepted surfaces. Do not bypass, weaken, or casually rewrite it. When Jim explicitly changes a slide state, update the visual contract and immutable snapshot together so the human state and enforcement state remain aligned.
+`docs/pdma2026/immutable-surfaces.json` is the mechanical implementation lock for currently accepted surfaces. Do not bypass, weaken, or casually rewrite it. When Jim explicitly changes a locked slide state, update the visual contract and immutable snapshot together so the human state and enforcement state remain aligned.
 
-For every Codex/agent visual task, use the control block and hard execution rules in `docs/pdma2026/CODEX_VISUAL_TASK_HEADER.md`. The allowed-file list is a hard mutation boundary, not a suggestion.
+For every Codex/agent React visual task, use the control block and hard execution rules in `docs/pdma2026/CODEX_VISUAL_TASK_HEADER.md`. The allowed-file list is a hard mutation boundary, not a suggestion.
 
-If a visual task requires inventing a new visual language, changing a locked slide, changing shared presentation behavior, deviating from the Slides 1–3 visual imperative, or choosing between materially different new compositions without explicit authorization, return:
+If an implementation task requires inventing a new visual language, changing a locked slide, changing shared presentation behavior, deviating from the approved implementation frame, or choosing between materially different new compositions without explicit authorization, return:
 
 `PDMA_VISUAL_DECISION_STOP — <exact unresolved design decision>`
 
 Do not improvise around the decision.
 
 ## Canonical ownership
+- **Jim's explicit current instruction** is highest authority.
 - **Current GitHub `main`** owns implementation truth.
-- **Canonical approved Figma frame** owns visual truth for a slide when one is explicitly designated.
-- **`docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md`** owns PDMA visual state, remaining recovery order, and the Slides 1–3 style imperative.
+- **Approved implementation Figma frame** owns visual truth for React implementation when explicitly designated in the visual contract.
+- **Current/baseline Figma frame** for `STYLE_REWORK`/`REBUILD_STYLE` owns baseline content/structure evidence only until a redesign is approved.
+- **Slides 1–3** are the visual north star for redesign work.
+- **`docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md`** owns PDMA visual state, design gate, approved implementation-frame designation, remaining recovery order, and style imperative.
 - **Current slide manifest/content** owns production copy/chrome semantics unless the user explicitly changes them.
 - **`pdmaGeometry.ts`** owns shared logical geometry until/unless the approved typed-config backlog replaces it.
 - **1920×1080** is the canonical logical slide canvas. Runtime scaling preserves that composition.
@@ -51,12 +68,13 @@ Do not improvise around the decision.
 
 ## Bounded reads
 For a one-slide task, read only what is needed for that slide:
-1. target slide component;
-2. target slide style file / current canonical style source;
-3. target entry in `pdmaGeometry.ts`;
-4. shared primitive used by the affected element, only if needed;
-5. target manifest entry, only if title/chrome/copy/assets are involved;
-6. canonical Figma frame, when visual parity is required.
+1. visual contract state/design status;
+2. target baseline or approved Figma frame, as appropriate;
+3. target slide component for implementation work;
+4. target slide style file / current canonical style source;
+5. target entry in `pdmaGeometry.ts`;
+6. shared primitive used by the affected element, only if needed;
+7. target manifest entry, only if title/chrome/copy/assets are involved.
 
 Do not inventory the full PDMA subtree unless the task explicitly asks for architecture or full-deck work.
 
@@ -72,16 +90,18 @@ Being behind `origin/main` is not, by itself, a blocker. Do not pull, merge, reb
 
 ## Slide mutation rules
 - Make the smallest coherent change that satisfies the current request.
+- For `STYLE_REWORK`/`REBUILD_STYLE` with `DESIGN_REQUIRED`, mutate Figma only; do not mutate React visuals.
 - For non-visual implementation work, related fixes may be implemented together when they form one coherent change.
-- For visual work, follow the Canonical visual-edit loop: **one visible change per iteration** unless the user explicitly authorizes a batch visual pass.
+- For React visual work with an approved implementation frame, follow the Canonical visual-edit loop: **one visible change per iteration** unless the user explicitly authorizes a batch visual pass.
 - Do not change unrelated slides.
 - Do not change shared primitives, shell, geometry, tokens, or global CSS for a slide-local defect unless direct evidence proves the defect is shared and the user authorizes the broader scope.
 - Preserve existing approved composition unless the user explicitly asks for redesign.
 - Never substitute a new visual concept for a parity/fix task.
+- Never substitute the old baseline frame for a newly approved redesign.
 - No base64 production assets.
 
 ## Canonical visual-edit loop
-Use this loop for every slide visual edit. Its purpose is to eliminate geometry guessing and finish visual work quickly.
+Use this loop for every React slide visual edit **after** the target has an approved implementation Figma frame. Its purpose is to eliminate geometry guessing and finish visual work quickly.
 
 1. **Start from one full-slide browser screenshot at the actual rendered browser size.** The screenshot must show the entire affected slide, not a crop that hides surrounding relationships.
 2. **Freeze that screenshot as the baseline for the iteration.** Compare every subsequent render against it until the requested change is approved.
@@ -91,7 +111,7 @@ Use this loop for every slide visual edit. Its purpose is to eliminate geometry 
 6. **If the request is visually ambiguous, describe the intended geometry before editing.** Do not guess. State what will move, what will remain fixed, and the resulting relationship; obtain clarification when necessary.
 7. **Make one visible change per iteration.** Do not bundle typography, spacing, borders, color, and layout into one visual iteration. One visible change may require coordinated implementation values when they are inseparable parts of the same visual relationship—for example, moving table rows and their row dividers together.
 8. **After every edit, refresh the actual browser and capture a new full-slide screenshot at the same viewport.** Do not rely on source inspection, geometry values, typecheck, or targeted checks for visual approval.
-9. **Compare the new screenshot to the frozen baseline and requested delta.** If the result is wrong, report the exact visible failure (`last row clipped`, `dot still high inside ring`, `description gap unchanged`) rather than a general statement such as `it looks bad`.
+9. **Compare the new screenshot to the approved implementation Figma frame and requested delta.** If the result is wrong, report the exact visible failure (`last row clipped`, `dot still high inside ring`, `description gap unchanged`) rather than a general statement such as `it looks bad`.
 10. **Once the requested visual change is correct, stop.** Lock the slide/version and do not continue architecture cleanup, opportunistic refactoring, or unrelated polish.
 
 ### Browser-capture requirement
@@ -138,7 +158,7 @@ A slide may remain visually special while still using the shared canvas/surface/
 ## Validation
 Use the narrowest available verification first.
 
-For a slide-local change:
+For a slide-local React change:
 - run the targeted PDMA check for that slide;
 - run targeted capture/QA for that slide when available;
 - do not run full-deck validation unless a shared/global surface changed or the user asks for it.
@@ -148,11 +168,12 @@ Shared changes to shell, global geometry, global CSS, shared primitives, manifes
 Do not repeat checks unless code or runtime state materially changed.
 
 ## Visual completion
-A visual change is not complete from source inspection, typecheck, unit checks, or geometry review alone.
+A React visual change is not complete from source inspection, typecheck, unit checks, or geometry review alone.
 
 Before claiming PASS:
+- confirm the contract names an approved implementation Figma frame;
 - render/capture the affected slide in the actual runtime at the actual browser size;
-- compare it with the frozen baseline and approved Figma/reference/user screenshot;
+- compare it with the approved implementation Figma frame;
 - verify the single requested visual delta while confirming frozen anchors stayed fixed.
 
 If runtime capture is unavailable, report `VISUAL_QA: REQUIRES_EXTERNAL_REVIEW` rather than claiming visual completion or making another speculative visual edit.
@@ -171,6 +192,7 @@ Do not patch around it with a second system.
 ## Output discipline
 For implementation tasks, report only:
 - status;
+- design status / approved implementation frame;
 - changed files;
 - requested fix completed;
 - targeted verification;

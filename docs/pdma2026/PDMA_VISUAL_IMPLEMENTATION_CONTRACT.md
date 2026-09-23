@@ -1,34 +1,51 @@
 # PDMA 2026 — Visual Implementation Contract
 
 **Status:** Canonical visual implementation contract  
-**Applies to:** `/pdma2026` React presentation, PDMA Figma translation, and all PDMA visual repair/redesign tasks  
+**Applies to:** `/pdma2026` React presentation, PDMA Figma design/rework, and all PDMA visual repair/redesign tasks  
 **Approved:** 2026-09-23  
 
 ## 1. Purpose
 
-The PDMA presentation is already designed. Implementation work must translate approved design intent into React without rediscovering the visual language, redesigning unrelated slides, or reopening accepted work.
+PDMA work has two distinct modes and they must not be conflated:
 
-The operating loop is:
+1. **Design work in Figma** — required when the current composition/style is not approved.
+2. **Implementation work in React** — permitted only after the target design is already approved.
 
-> **Figma reference → bounded React implementation → browser capture → compare → demonstrated correction → PASS → LOCK**
+The operating loop depends on slide state.
 
-Do not substitute architecture work, generalized cleanup, or creative reinterpretation for this loop.
+For `IMPLEMENTATION_REPAIR`:
+
+> **approved Figma reference → bounded React implementation → browser capture → compare → demonstrated correction → PASS → LOCK**
+
+For `STYLE_REWORK` or `REBUILD_STYLE`:
+
+> **current content/baseline → bounded Figma redesign → Jim approval → designate approved implementation frame → bounded React implementation → browser capture → compare → demonstrated correction → PASS → LOCK**
+
+Do not use React/Codex implementation to discover or invent the missing design.
+
+Do not substitute architecture work, generalized cleanup, or creative reinterpretation for these loops.
 
 ## 2. Authority order
 
 For PDMA visual work, resolve conflicts in this order:
 
 1. Jim's explicit current instruction.
-2. Canonical PDMA Figma final-deck frame for the target slide.
+2. The **approved implementation Figma frame**, when one has been explicitly approved for the target slide.
 3. This contract.
 4. `docs/pbds-presentation-components.md` for PBDS presentation primitives and runtime geometry.
 5. The current approved slide-specific task brief.
 6. Current React implementation on GitHub `main` for what actually exists.
-7. Historical chats, old screenshots, retired concepts, and previous reconstruction attempts.
+7. The current/baseline Figma frame when the slide is still in `STYLE_REWORK` or `REBUILD_STYLE` and no redesign has yet been approved.
+8. Historical chats, old screenshots, retired concepts, and previous reconstruction attempts.
 
-Do not reconstruct design intent from historical chat when the canonical Figma frame and this contract answer the question.
+Important distinction:
 
-## 3. Canonical Figma references
+- For `LOCKED` and `IMPLEMENTATION_REPAIR`, the designated approved Figma frame is the visual oracle for implementation.
+- For `STYLE_REWORK` and `REBUILD_STYLE`, the existing final-deck frame is initially a **content/structure/baseline reference only**. It does **not** become the React implementation oracle until Jim explicitly approves a redesigned composition and that frame is designated as the approved implementation frame.
+
+Do not reconstruct design intent from historical chat when the approved Figma frame and this contract answer the question.
+
+## 3. Canonical Figma references and design gate
 
 Canonical file:
 
@@ -36,27 +53,43 @@ Canonical file:
 
 Final-deck section: `475:258` — `PDMA / FINAL DECK — 15 SLIDES`
 
-| Slide | Canonical final frame | State |
-| --- | --- | --- |
-| 01 | `475:259` | `LOCKED` — north star |
-| 02 | `475:274` | `LOCKED` — north star |
-| 03 | `475:366` | `LOCKED` — north star |
-| 04 | `475:369` | `LOCKED` |
-| 05 | `475:372` | `STYLE_REWORK` |
-| 06 | `475:397` | `STYLE_REWORK` |
-| 07 | `475:400` | `LOCKED` |
-| 08 | `475:403` | `LOCKED` |
-| 09 | `475:406` | `STYLE_REWORK` |
-| 10 | `475:409` | `REBUILD_STYLE` |
-| 11 | `475:412` | `IMPLEMENTATION_REPAIR` |
-| 12 | `475:415` | `STYLE_REWORK` |
-| 13 | `475:418` | `STYLE_REWORK` |
-| 14 | `475:421` | `LOCKED` |
-| 15 | `475:424` | `REBUILD_STYLE` |
+| Slide | Current/baseline frame | State | Implementation design status |
+| --- | --- | --- | --- |
+| 01 | `475:259` | `LOCKED` — north star | `APPROVED` |
+| 02 | `475:274` | `LOCKED` — north star | `APPROVED` |
+| 03 | `475:366` | `LOCKED` — north star | `APPROVED` |
+| 04 | `475:369` | `LOCKED` | `APPROVED` |
+| 05 | `475:372` | `STYLE_REWORK` | `DESIGN_REQUIRED` |
+| 06 | `475:397` | `STYLE_REWORK` | `DESIGN_REQUIRED` |
+| 07 | `475:400` | `LOCKED` | `APPROVED` |
+| 08 | `475:403` | `LOCKED` | `APPROVED` |
+| 09 | `475:406` | `STYLE_REWORK` | `DESIGN_REQUIRED` |
+| 10 | `475:409` | `REBUILD_STYLE` | `DESIGN_REQUIRED` |
+| 11 | `475:412` | `IMPLEMENTATION_REPAIR` | `APPROVED` |
+| 12 | `475:415` | `STYLE_REWORK` | `DESIGN_REQUIRED` |
+| 13 | `475:418` | `STYLE_REWORK` | `DESIGN_REQUIRED` |
+| 14 | `475:421` | `LOCKED` | `APPROVED` |
+| 15 | `475:424` | `REBUILD_STYLE` | `DESIGN_REQUIRED` |
 
-This table is the canonical PDMA slide-state registry. Do not create another status registry.
+This table is the canonical PDMA slide-state registry and design-gate registry. Do not create another status registry.
 
-`docs/pdma2026/immutable-surfaces.json` is the mechanical enforcement snapshot for currently locked implementation surfaces. It is derived from this state registry; it is not a competing source of design state.
+### Design gate
+
+`DESIGN_REQUIRED` means:
+
+- the current/baseline Figma frame may be used for content, hierarchy, semantic intent, and elements worth preserving;
+- Slides 1–3 provide the style north star;
+- Figma design work is permitted;
+- **React visual implementation is not permitted yet**;
+- after Jim approves the redesigned slide, record the newly approved Figma node ID as the approved implementation frame and change `Implementation design status` to `APPROVED` before React implementation begins.
+
+If a React/Codex implementation task targets a `DESIGN_REQUIRED` slide, stop with:
+
+`PDMA_DESIGN_REQUIRED — slide NN requires an approved Figma redesign before React implementation`
+
+Do not treat the baseline frame as the final oracle simply because it has a stable node ID.
+
+`docs/pdma2026/immutable-surfaces.json` is the mechanical enforcement snapshot for currently locked implementation surfaces. It is derived from this registry; it is not a competing source of design state.
 
 ## 4. Visual north star — Slides 1, 2, and 3
 
@@ -116,21 +149,25 @@ Do not change its component, slide-specific styles, assets, geometry, copy, or v
 
 ### `IMPLEMENTATION_REPAIR`
 
-The design direction is accepted; implementation is wrong.
+The design direction is already accepted and implementation is wrong.
 
-Repair React against the canonical approved reference. Do not invent a new concept or restyle the slide.
+The designated approved Figma frame owns visual truth. Repair React against that reference. Do not redesign.
 
 ### `STYLE_REWORK`
 
-The slide's semantic content and hierarchy remain useful, but its visual treatment does not sufficiently follow the Slides 1–3 imperative.
+The slide's semantic content and hierarchy remain useful, but its current visual treatment does not sufficiently follow the Slides 1–3 imperative.
 
-Preserve the message and information architecture unless Jim explicitly changes them. Rework the presentation treatment using the approved visual language.
+Preserve the message and information architecture unless Jim explicitly changes them. First create/revise the composition in Figma using the approved visual language. Jim must approve that design before React implementation begins.
+
+Until approval, the current/baseline Figma frame is not the implementation oracle.
 
 ### `REBUILD_STYLE`
 
-The current implementation/composition is materially broken and the design treatment is also off-system.
+The current implementation/composition is materially broken and the visual treatment is also off-system.
 
-A structural visual reconstruction is permitted for the target slide, but it must preserve approved content semantics, PBDS/runtime boundaries, and the Slides 1–3 visual imperative.
+A new/reconstructed Figma composition is required first. It must preserve approved content semantics, PBDS/runtime boundaries, and the Slides 1–3 visual imperative. Jim must approve the rebuilt design before any React visual implementation begins.
+
+Until approval, the current/baseline Figma frame is not the implementation oracle.
 
 ## 7. Approved remaining-work order
 
@@ -138,13 +175,29 @@ Work sequentially in this order:
 
 `10 → 15 → 11 → 5 → 6 → 9 → 12 → 13`
 
+For slides marked `DESIGN_REQUIRED`, the slide's unit of work is:
+
+`design in Figma → Jim approval → designate approved frame → implement in React → visual QA → LOCK`
+
+Do not skip directly from baseline Figma to React implementation.
+
 Do not batch visual reconstruction across these slides.
 
 A slide must reach PASS and become LOCKED before moving to the next slide unless Jim explicitly changes the order.
 
 ## 8. Zero-discretion mutation boundary
 
-For a one-slide visual task, only modify files explicitly listed in that task's allowed mutation surface.
+### Figma design phase
+
+For `STYLE_REWORK` and `REBUILD_STYLE`, only the target slide/design composition may be changed unless Jim explicitly authorizes shared design-system work.
+
+Do not alter locked Figma slides as collateral work.
+
+### React implementation phase
+
+React mutation is permitted only when `Implementation design status` is `APPROVED`.
+
+For a one-slide implementation task, only modify files explicitly listed in that task's allowed mutation surface.
 
 The normal allowed surface may contain:
 
@@ -172,22 +225,35 @@ No `while I'm here` changes.
 
 Any authorized change to a shared presentation surface must run expanded/full-deck visual validation and prove currently locked slides remain unchanged in the affected behavior.
 
-If a proposed repair to Slide 10 changes Slide 1, 2, 3, 4, 7, 8, or 14, the repair fails unless Jim explicitly approved reopening the affected slide.
+If a proposed repair changes Slide 1, 2, 3, 4, 7, 8, or 14, the repair fails unless Jim explicitly approved reopening the affected slide.
 
-## 10. Mandatory visual implementation loop
+## 10. Mandatory visual workflow
 
-For each target slide:
+### A. `STYLE_REWORK` / `REBUILD_STYLE` while `DESIGN_REQUIRED`
+
+1. Read `src/app/pdma2026/AGENTS.md` and this contract.
+2. Confirm target state and baseline Figma frame from §3.
+3. Inspect Slides 1–3 as style references.
+4. Inspect target content/structure and current baseline frame.
+5. Create/revise the target design in Figma only.
+6. Compare the proposed design to Slides 1–3 and PBDS invariants.
+7. Present the actual Figma result for Jim's approval.
+8. If rejected, revise in Figma only.
+9. When Jim approves, record the approved node ID in §3 and change implementation design status to `APPROVED`.
+10. Only then may React implementation begin.
+
+### B. `IMPLEMENTATION_REPAIR` or any target with design status `APPROVED`
 
 1. Read `src/app/pdma2026/AGENTS.md`, this contract, and `docs/pdma2026/CODEX_VISUAL_TASK_HEADER.md`.
-2. Confirm the target slide state and exact canonical Figma frame ID from §3.
-3. Inspect the canonical Figma frame and current React target only.
+2. Confirm the exact **approved implementation Figma frame ID** from §3.
+3. Inspect that approved Figma frame and current React target only.
 4. Capture the current browser-rendered full slide at the canonical 1920×1080 QA viewport when available.
 5. Freeze the anchors that must remain unchanged.
 6. Identify one exact visible delta for the iteration.
 7. Make the smallest coherent implementation change for that delta.
 8. Run `npm run pdma:check -- --slide NN`.
 9. Run `npm run pdma:qa -- --slide NN` and inspect the browser capture.
-10. Compare render to the canonical Figma/reference and state concrete remaining deltas.
+10. Compare render to the approved implementation Figma frame and state concrete remaining deltas.
 11. Correct demonstrated deltas only.
 12. When visual acceptance is proven, stop.
 13. With Jim's approval of the finished slide, change its registry state to `LOCKED` and update `immutable-surfaces.json` in the same bounded change.
@@ -198,14 +264,15 @@ Do not claim visual PASS from source inspection, typecheck, geometry values, or 
 
 A target slide reaches PASS only when all applicable conditions hold:
 
-- canonical Figma composition / explicitly approved visual intent is reproduced;
-- the slide clearly belongs to the Slides 1–3 visual universe when its state requires style work;
+- for a redesigned slide, Jim approved the Figma design before React implementation began;
+- the React render reproduces the designated approved implementation Figma frame;
+- the slide clearly belongs to the Slides 1–3 visual universe when its state required style work;
 - title/body alignment and PBDS hierarchy are correct;
 - no unintended clipping, overlap, distortion, crop error, or asset substitution exists;
 - approved shared chrome is unchanged;
 - frozen anchors remained fixed;
 - targeted PDMA check passes;
-- browser visual QA was performed against the canonical reference;
+- browser visual QA was performed against the approved implementation reference;
 - no locked slide was modified or regressed.
 
 If browser capture is unavailable, report:
@@ -214,7 +281,11 @@ If browser capture is unavailable, report:
 
 Do not continue speculative visual mutation and do not claim PASS.
 
-## 12. Ambiguity stop rule
+## 12. Stop rules
+
+If React implementation is requested for a slide whose implementation design status is `DESIGN_REQUIRED`, stop with:
+
+`PDMA_DESIGN_REQUIRED — slide NN requires an approved Figma redesign before React implementation`
 
 If the requested change would require any of the following and the current task does not explicitly authorize it:
 
@@ -222,7 +293,7 @@ If the requested change would require any of the following and the current task 
 - changing a `LOCKED` slide;
 - altering shared presentation behavior;
 - deviating from the Slides 1–3 visual imperative;
-- choosing between materially different new compositions;
+- choosing between materially different new compositions during an implementation/parity task;
 
 stop with:
 
@@ -240,7 +311,7 @@ This contract changes process and authority, not the established presentation ar
 
 Continue using:
 
-- canonical Figma for visual truth;
+- Figma for visual design truth and approved implementation references;
 - current GitHub `main` for implementation truth;
 - `pdma.config.ts` / current manifest for production metadata;
 - `pdmaGeometry.ts` for current shared logical geometry ownership;
@@ -252,4 +323,8 @@ Do not create another manifest, geometry registry, scheduler, asset registry, st
 
 ## 14. Current completion target
 
-The remaining visual recovery is complete when Slides `10, 15, 11, 5, 6, 9, 12, 13` have individually passed visual QA, have been explicitly accepted, and have transitioned to `LOCKED` without regression to the already locked slides.
+The remaining visual recovery is complete when Slides `10, 15, 11, 5, 6, 9, 12, 13` have individually passed the correct state-specific workflow, have been explicitly accepted, and have transitioned to `LOCKED` without regression to the already locked slides.
+
+Current immediate target:
+
+> **Slide 10 is `REBUILD_STYLE` + `DESIGN_REQUIRED`. Design and approve it in Figma first. Do not begin React implementation yet.**
