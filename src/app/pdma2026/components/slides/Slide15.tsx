@@ -1,5 +1,7 @@
 import { pdmaAssets } from "../../pdmaAssets";
-import { B, Img, LINE, MAGENTA, MUTED, Stage, T } from "./canonicalShared";
+import { B, Img, MAGENTA, MUTED, Stage, T } from "../pdmaSlidePrimitives";
+import { pdmaGeometry } from "../../pdmaGeometry";
+const LINE = "#44464a";
 const S15 = pdmaAssets.slide15Root;
 export function Slide15(){return <Stage>
   <Img src={`${S15}/9e4d6.svg`} x={1060} y={-70} w={840} h={610}/><Img src={`${S15}/38dc4.svg`} x={1330} y={170} w={720} h={950}/><Img src={`${S15}/f3a10.png`} x={0} y={288} w={1920} h={684} opacity={.68} fit="cover"/><Img src={`${S15}/c47cc.png`} x={1140} y={86} w={731} h={860} fit="cover"/>
