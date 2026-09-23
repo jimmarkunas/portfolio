@@ -33,7 +33,6 @@
     "check:pdma-slide": "node scripts/check-pdma-slide-contracts.mjs",
     "check:pdma-impact": "node scripts/check-pdma-impact.mjs",
     "pdma:context": "node scripts/generate-pdma-context.mjs",
-    "pdma:css": "node scripts/generate-pdma-css.mjs",
     "pdma:edit-check": "node scripts/check-pdma-edit.mjs",
     "check:pdma-qa": "node scripts/check-pdma-qa.mjs",
     "check:pdma": "npm run check:pdma-assets-manifest && npm run check:pdma-duplicate-selectors && npm run check:pdma-geometry && npm run check:pdma-immutable && npm run check:pdma-manifest-parity && npm run check:pdma-slide-contracts && npm run check:pdma-poc-guard",

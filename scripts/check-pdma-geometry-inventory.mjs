@@ -8,7 +8,7 @@ const read = (file) => fs.readFileSync(path.join(root, file), "utf8")
 const rel = (file) => path.relative(root, file)
 const manifestFile = "src/app/pdma2026/pdma2026SlideManifest.tsx"
 const manifest = read(manifestFile)
-const sourceCssFile = "src/app/pdma2026/styles/pdma-source.css"
+const sourceCssFile = "src/app/pdma2026/styles/base.css"
 const sourceCss = read(sourceCssFile)
 const shellFile = "src/app/pdma2026/PdmaPresentationShell.tsx"
 const shell = read(shellFile)
