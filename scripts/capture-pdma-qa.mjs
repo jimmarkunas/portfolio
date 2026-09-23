@@ -114,6 +114,12 @@ async function main() {
 
 try {
   await main()
+} catch (error) {
+  const message = error instanceof Error ? error.message : String(error)
+  const unavailable = /browser|chromium|executable|launch|connect|timed out waiting|ECONNREFUSED|fetch failed/i.test(message)
+  console.error(`${unavailable ? "PDMA_QA_UNAVAILABLE" : "PDMA_QA_FAILED"}: ${message}`)
+  if (unavailable) console.error("Provide a usable Playwright browser via CHROME_BIN or start the PDMA dev server, then rerun the targeted QA command.")
+  process.exitCode = 1
 } finally {
   if (server) server.kill("SIGTERM")
 }
