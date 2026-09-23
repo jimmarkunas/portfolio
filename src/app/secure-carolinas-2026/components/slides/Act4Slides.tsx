@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { SlideHeader } from '../SlideHeader';
-import { ProductionReadinessCheck } from "@/app/(site)/agents/ProductionReadinessCheck";
+import { SecureCarolinasScenarioExercise } from '../SecureCarolinasScenarioExercise';
 import { secureCarolinas2026Copy } from '@/content/secure-carolinas-2026/presentationContent';
 
 export const Slide14DefinedPartialUnclear: React.FC = () => {
@@ -191,10 +191,7 @@ export const Slide16ReadinessCheck: React.FC = () => {
   return (
     <div className="sc26-slide-wrapper justify-center">
       <div className="sc26-enter-body sc26-readiness-check-stage flex min-h-0 flex-1 flex-col">
-        <ProductionReadinessCheck
-          variant="scenario"
-          scenario={secureCarolinas2026Copy.scenarios.customerOrderException}
-        />
+        <SecureCarolinasScenarioExercise />
       </div>
     </div>
   );
