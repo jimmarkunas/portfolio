@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "approved_date": "2026-09-23",
+  "route": "/pdma2026-templates",
+  "existing_pdma_untouched": true,
+  "library_root": "/LifeOS/PDMA 2026/Template Canon/v1/",
+  "archive": "/LifeOS/PDMA 2026/Template Canon/v1/pdma2026-template-canon-v1.zip",
+  "templates": {
+    "end-card": {
+      "status": "APPROVED",
+      "reference": {
+        "path": "end-card/end-card-reference-v1.png",
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "sha256": "2bbed561cc050fae11b033284982a1f4aaca1b2151b82eeea2920ceccab452cb"
+      },
+      "assets": [
+        {
+          "path": "end-card/end-card-electric-orb-right-v1.png",
+          "role": "approved decorative electric-orb composition",
+          "width": 1672,
+          "height": 941,
+          "mode": "RGBA",
+          "sha256": "b48416ac607b5e3b0682815db560ad380949cbaf94fb9befbdd454ea4b9c9761"
+        }
+      ]
+    },
+    "flow-scenario": {
+      "status": "APPROVED",
+      "reference": {
+        "path": "flow-scenario/flow-scenario-reference-v1.png",
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "sha256": "223ade4becd2dd2926899c2601e03ca5ef37e41467ab4b7cde7c16d72d4ed7ab"
+      },
+      "assets": [
+        {
+          "path": "flow-scenario/slide-09-left-orb-white-v1.png",
+          "role": "left outer decorative white metallic-dot orb",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "sha256": "5c874a9eb47dc100ad1c3a6de660666450694a36d0bccc862df5f554f634b01f"
+        },
+        {
+          "path": "flow-scenario/slide-09-right-orb-magenta-v1.png",
+          "role": "right outer decorative magenta metallic-dot orb",
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGBA",
+          "sha256": "217fd72f9157613ed40d39ddb1450c82c415583b890bd7fcba87b1207e9bb903"
+        }
+      ]
+    }
+  }
+}
