@@ -25,6 +25,7 @@
     "pdma:qa": "node scripts/pdma-qa.mjs",
     "pdma:impact": "node scripts/check-pdma-impact.mjs",
     "pdma:context": "node scripts/generate-pdma-context.mjs",
+    "pdma:edit": "node scripts/pdma-edit.mjs",
     "verify:pdma": "npm run pdma:check && npm run pdma:qa",
     "check:bundle-budget-trends": "bash scripts/check-short.sh bundle-budget-trends node scripts/check-bundle-budget-trends.mjs",
     "check:bundle-budgets": "bash scripts/check-short.sh bundle-budgets node scripts/check-bundle-budgets.mjs",

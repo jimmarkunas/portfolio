@@ -1,7 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { ImageGeometry, Rect, TextGeometry } from "../pdmaGeometry";
-import { PdmaSlideCanvas } from "../PdmaPresentationShell";
-import { PdmaSlideBody, PdmaSlideSurface } from "./PdmaSlideBody";
+import { PdmaSlide } from "./PdmaSlideBody";
 
 export const FONT = "Inter, ui-sans-serif, system-ui, sans-serif";
 export const WHITE = "#f2f2f5";
@@ -10,7 +9,7 @@ export const MAGENTA = "#ff2fae";
 export const MUTED = "#7a7d85";
 
 export function Stage({ children, background = "#090909" }: { children: ReactNode; background?: string }) {
-  return <PdmaSlideCanvas><PdmaSlideSurface className="pdma-inline-surface" style={{ background, color: WHITE, fontFamily: FONT }}><PdmaSlideBody className="pdma-inline-body">{children}</PdmaSlideBody></PdmaSlideSurface></PdmaSlideCanvas>;
+  return <PdmaSlide surfaceClassName="pdma-inline-surface" bodyClassName="pdma-inline-body" surfaceStyle={{ background, color: WHITE, fontFamily: FONT }}>{children}</PdmaSlide>;
 }
 
 export function T({ geometry, x, y, w, size, weight = 400, color = WHITE, line, tracking, children, align = "left", style, className }: { geometry?:TextGeometry; x?:number; y?:number; w?:number; size?:number; weight?:number; color?:string; line?:number|string; tracking?:number; children:ReactNode; align?:CSSProperties["textAlign"]; style?:CSSProperties; className?:string }) {

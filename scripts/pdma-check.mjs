@@ -20,7 +20,7 @@ if (slide) {
   run(process.execPath, ["scripts/check-pdma-slide-contracts.mjs", "--slides", slide])
   console.log(`PDMA targeted check passed for slide-${slide}.`)
 } else if (hasAll) {
-  for (const script of ["check-pdma-assets-manifest.mjs", "check-pdma-duplicate-selectors.mjs", "check-pdma-geometry.mjs", "check-pdma-immutable.mjs", "check-pdma-manifest-parity.mjs", "check-pdma-slide-contracts.mjs", "check-pdma-import-boundaries.mjs", "check-pdma-poc-guard.mjs", "check-pdma-geometry-inventory.mjs", "check-pdma-unified-geometry.mjs"]) run(process.execPath, [`scripts/${script}`])
+  for (const script of ["check-pdma-metadata.mjs", "check-pdma-assets-manifest.mjs", "check-pdma-duplicate-selectors.mjs", "check-pdma-geometry.mjs", "check-pdma-immutable.mjs", "check-pdma-manifest-parity.mjs", "check-pdma-slide-contracts.mjs", "check-pdma-import-boundaries.mjs", "check-pdma-poc-guard.mjs", "check-pdma-geometry-inventory.mjs", "check-pdma-unified-geometry.mjs"]) run(process.execPath, [`scripts/${script}`])
   run("npm", ["run", "typecheck"])
   console.log("PDMA full check passed.")
 }
