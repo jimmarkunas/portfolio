@@ -14,6 +14,7 @@
         "/pdma2026/slide-01/title-atmosphere.png",
         "/pdma2026/slide-01/title-asterisk-scene.png"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [
           "pdma-s01"
@@ -24,11 +25,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide01",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide01",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 01",
-        "capture": "npm run qa:pdma:capture -- --slides 01"
+        "check": "npm run pdma:check -- --slide 01",
+        "capture": "npm run pdma:qa -- --slide 01"
       }
     },
     {
@@ -37,11 +45,13 @@
       "title": "WHAT SHIFTS. WHAT STAYS.",
       "component": "src/app/pdma2026/components/Slide02.tsx",
       "assets": [
-        "/pdma2026/slide-02/ai-circle.svg",
-        "/pdma2026/slide-02/human-circle.svg",
+        "/pdma2026/slide-02/slide-02-ai-sphere.png",
+        "/pdma2026/slide-02/slide-02-human-sphere.png",
+        "/pdma2026/slide-02/slide-02-particle-field.png",
         "/pdma2026/slide-02/diagram-cpu.svg",
         "/pdma2026/slide-02/diagram-brain.svg"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [
           "pdma-s02"
@@ -52,11 +62,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide02",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide02",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 02",
-        "capture": "npm run qa:pdma:capture -- --slides 02"
+        "check": "npm run pdma:check -- --slide 02",
+        "capture": "npm run pdma:qa -- --slide 02"
       }
     },
     {
@@ -68,6 +85,7 @@
         "/pdma2026/slide-03/02283.png",
         "/pdma2026/slide-03/44753.png"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [
           "pdma-s03",
@@ -81,11 +99,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": "src/app/pdma2026/pdmaSlideGeometry.ts#slide03",
+      "geometry": "pdmaGeometry.slide03",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide03",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 03",
-        "capture": "npm run qa:pdma:capture -- --slides 03"
+        "check": "npm run pdma:check -- --slide 03",
+        "capture": "npm run pdma:qa -- --slide 03"
       }
     },
     {
@@ -97,6 +122,7 @@
         "/pdma2026/slide-04/0c14e.png",
         "/pdma2026/slide-04/bd2f1.png"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [
           "pdma-s04"
@@ -107,11 +133,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide04",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide04",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 04",
-        "capture": "npm run qa:pdma:capture -- --slides 04"
+        "check": "npm run pdma:check -- --slide 04",
+        "capture": "npm run pdma:qa -- --slide 04"
       }
     },
     {
@@ -123,6 +156,7 @@
         "/pdma2026/slide-05/51d1a.png",
         "/pdma2026/slide-05/9f2f3.png"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [
           "pdma-s05"
@@ -133,11 +167,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide05",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide05",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 05",
-        "capture": "npm run qa:pdma:capture -- --slides 05"
+        "check": "npm run pdma:check -- --slide 05",
+        "capture": "npm run pdma:qa -- --slide 05"
       }
     },
     {
@@ -148,6 +189,7 @@
       "assets": [
         "/pdma2026/slide-06"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [],
         "forbidden": [
@@ -156,11 +198,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide06",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide06",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 06",
-        "capture": "npm run qa:pdma:capture -- --slides 06"
+        "check": "npm run pdma:check -- --slide 06",
+        "capture": "npm run pdma:qa -- --slide 06"
       }
     },
     {
@@ -169,6 +218,7 @@
       "title": "BEFORE YOU BUILD IT, PROVE THE VALUE.",
       "component": "src/app/pdma2026/components/slides/Slide07.tsx",
       "assets": [],
+      "routeLinks": [],
       "contract": {
         "required": [],
         "forbidden": [
@@ -177,11 +227,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide07",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide07",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 07",
-        "capture": "npm run qa:pdma:capture -- --slides 07"
+        "check": "npm run pdma:check -- --slide 07",
+        "capture": "npm run pdma:qa -- --slide 07"
       }
     },
     {
@@ -192,6 +249,7 @@
       "assets": [
         "/pdma2026/slide-08"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [],
         "forbidden": [
@@ -200,11 +258,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide08",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide08",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 08",
-        "capture": "npm run qa:pdma:capture -- --slides 08"
+        "check": "npm run pdma:check -- --slide 08",
+        "capture": "npm run pdma:qa -- --slide 08"
       }
     },
     {
@@ -215,6 +280,7 @@
       "assets": [
         "/pdma2026/slide-09"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [],
         "forbidden": [
@@ -223,11 +289,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide09",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide09",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 09",
-        "capture": "npm run qa:pdma:capture -- --slides 09"
+        "check": "npm run pdma:check -- --slide 09",
+        "capture": "npm run pdma:qa -- --slide 09"
       }
     },
     {
@@ -238,6 +311,7 @@
       "assets": [
         "/pdma2026/slide-10"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [],
         "forbidden": [
@@ -246,11 +320,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide10",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide10",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 10",
-        "capture": "npm run qa:pdma:capture -- --slides 10"
+        "check": "npm run pdma:check -- --slide 10",
+        "capture": "npm run pdma:qa -- --slide 10"
       }
     },
     {
@@ -261,6 +342,7 @@
       "assets": [
         "/pdma2026/slide-11"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [],
         "forbidden": [
@@ -269,11 +351,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide11",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide11",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 11",
-        "capture": "npm run qa:pdma:capture -- --slides 11"
+        "check": "npm run pdma:check -- --slide 11",
+        "capture": "npm run pdma:qa -- --slide 11"
       }
     },
     {
@@ -284,6 +373,7 @@
       "assets": [
         "/pdma2026/slide-12"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [],
         "forbidden": [
@@ -292,11 +382,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide12",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide12",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 12",
-        "capture": "npm run qa:pdma:capture -- --slides 12"
+        "check": "npm run pdma:check -- --slide 12",
+        "capture": "npm run pdma:qa -- --slide 12"
       }
     },
     {
@@ -307,6 +404,7 @@
       "assets": [
         "/pdma2026/slide-13"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [],
         "forbidden": [
@@ -315,11 +413,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide13",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide13",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 13",
-        "capture": "npm run qa:pdma:capture -- --slides 13"
+        "check": "npm run pdma:check -- --slide 13",
+        "capture": "npm run pdma:qa -- --slide 13"
       }
     },
     {
@@ -330,6 +435,9 @@
       "assets": [
         "/pdma2026/slide-14"
       ],
+      "routeLinks": [
+        "/pdma2026/exercise"
+      ],
       "contract": {
         "required": [],
         "forbidden": [
@@ -338,11 +446,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide14",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide14",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 14",
-        "capture": "npm run qa:pdma:capture -- --slides 14"
+        "check": "npm run pdma:check -- --slide 14",
+        "capture": "npm run pdma:qa -- --slide 14"
       }
     },
     {
@@ -353,6 +468,7 @@
       "assets": [
         "/pdma2026/slide-15"
       ],
+      "routeLinks": [],
       "contract": {
         "required": [],
         "forbidden": [
@@ -361,11 +477,18 @@
           "pdma-footer"
         ]
       },
-      "selectors": [],
-      "geometry": null,
+      "geometry": "pdmaGeometry.slide15",
+      "rendering": {
+        "canvas": "PdmaSlideCanvas",
+        "surface": "PdmaSlideSurface",
+        "body": "PdmaSlideBody",
+        "geometry": "pdmaGeometry.slide15",
+        "primitives": "pdmaSlidePrimitives",
+        "animation": "motion/react + useReducedMotion"
+      },
       "verification": {
-        "contract": "npm run check:pdma-slide -- --slides 15",
-        "capture": "npm run qa:pdma:capture -- --slides 15"
+        "check": "npm run pdma:check -- --slide 15",
+        "capture": "npm run pdma:qa -- --slide 15"
       }
     }
   ]

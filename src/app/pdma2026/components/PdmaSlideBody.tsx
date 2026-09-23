@@ -1,4 +1,8 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
+
+export function PdmaSlideSurface({ className = "", style, children }: { className?: string; style?: CSSProperties; children: ReactNode }) {
+  return <div className={`pdma-slide-surface ${className}`.trim()} style={style}>{children}</div>;
+}
 
 /**
  * Boundary for imported slide-body work. Presentation chrome is deliberately

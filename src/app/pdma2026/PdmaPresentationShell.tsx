@@ -10,6 +10,7 @@ import type { PresentationNavigationCopy } from "@/lib/presentation";
 import { PdmaTitleBlock } from "./components/PdmaTitleBlock";
 import type { Pdma2026SlideManifestEntry } from "./pdma2026SlideManifest";
 import { pdmaAssets } from "./pdmaAssets";
+import { pdmaGeometry } from "./pdmaGeometry";
 
 const PdmaTitleContext = createContext<{ slide: number; config: Pdma2026SlideManifestEntry["title"] } | null>(null);
 
@@ -21,9 +22,9 @@ export function PdmaSlideCanvas({ children }: { children: React.ReactNode }) {
     const stage = stageRef.current;
     if (!stage) return;
     const update = () => {
-      const scale = Math.min(stage.clientWidth / 1920, stage.clientHeight / 1080);
-      const renderedWidth = 1920 * scale;
-      const renderedHeight = 1080 * scale;
+      const scale = Math.min(stage.clientWidth / pdmaGeometry.canvas.width, stage.clientHeight / pdmaGeometry.canvas.height);
+      const renderedWidth = pdmaGeometry.canvas.width * scale;
+      const renderedHeight = pdmaGeometry.canvas.height * scale;
       const extraX = Math.max(0, stage.clientWidth - renderedWidth);
       const extraY = Math.max(0, stage.clientHeight - renderedHeight);
       setFrame({ scale, left: extraX / 2, top: extraY * 0.25 });
