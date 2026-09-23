@@ -1,63 +1,15 @@
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+const { pdmaConfig } = require("jiti")(import.meta.url)("./pdma.config.ts") as typeof import("./pdma.config");
+
+/** Derived validation view. Edit pdma.config.ts, never this file. */
 export const pdmaValidation = {
-  slideKeys: [
-    "slide-01", "slide-02", "slide-03", "slide-04", "slide-05", "slide-06", "slide-07", "slide-08",
-    "slide-09", "slide-10", "slide-11", "slide-12", "slide-13", "slide-14", "slide-15",
-  ] as const,
-  runtimeAssets: {
-    "slide-01": ["/pdma2026/slide-01/title-atmosphere.png", "/pdma2026/slide-01/title-asterisk-scene.png"],
-    "slide-02": ["/pdma2026/slide-02/slide-02-ai-sphere.png", "/pdma2026/slide-02/slide-02-human-sphere.png", "/pdma2026/slide-02/slide-02-particle-field.png", "/pdma2026/slide-02/diagram-cpu.svg", "/pdma2026/slide-02/diagram-brain.svg"],
-    "slide-03": ["/pdma2026/slide-03/02283.png", "/pdma2026/slide-03/44753.png"],
-    "slide-04": ["/pdma2026/slide-04/0c14e.png", "/pdma2026/slide-04/bd2f1.png"],
-    "slide-05": ["/pdma2026/slide-05/51d1a.png", "/pdma2026/slide-05/9f2f3.png"],
-    "slide-06": ["/pdma2026/slide-06"],
-    "slide-07": [],
-    "slide-08": ["/pdma2026/slide-08"],
-    "slide-09": ["/pdma2026/slide-09"],
-    "slide-10": ["/pdma2026/slide-10"],
-    "slide-11": ["/pdma2026/slide-11"],
-    "slide-12": ["/pdma2026/slide-12"],
-    "slide-13": ["/pdma2026/slide-13"],
-    "slide-14": ["/pdma2026/slide-14"],
-    "slide-15": ["/pdma2026/slide-15"],
-  },
-  routeLinks: {
-    presentation: "/pdma2026/",
-    exercise: "/pdma2026/exercise",
-  },
-  docs: {
-    "slide-01": { title: "THE NEW PM OPERATING SYSTEM", component: "src/app/pdma2026/components/slides/Slide01.tsx", geometry: "pdmaGeometry.slide01" },
-    "slide-02": { title: "WHAT SHIFTS. WHAT STAYS.", component: "src/app/pdma2026/components/Slide02.tsx", geometry: "pdmaGeometry.slide02" },
-    "slide-03": { title: "COPILOTS GENERATE OUTPUTS. AGENTS TAKE ACTION.", component: "src/app/pdma2026/components/slides/Slide03.tsx", geometry: "pdmaGeometry.slide03" },
-    "slide-04": { title: "DON'T AUTOMATE EVERYTHING.", component: "src/app/pdma2026/components/slides/Slide04.tsx", geometry: "pdmaGeometry.slide04" },
-    "slide-05": { title: "DON'T AUTOMATE AMBIGUITY.", component: "src/app/pdma2026/components/slides/Slide05.tsx", geometry: "pdmaGeometry.slide05" },
-    "slide-06": { title: "UNDERSTAND THE ENVIRONMENT. NAME THE OWNERS.", component: "src/app/pdma2026/components/CanonicalSlide06Exact.tsx", geometry: "pdmaGeometry.slide06" },
-    "slide-07": { title: "BEFORE YOU BUILD IT, PROVE THE VALUE.", component: "src/app/pdma2026/components/slides/Slide07.tsx", geometry: "pdmaGeometry.slide07" },
-    "slide-08": { title: "HOW MUCH AUTHORITY SHOULD THE ROBOTS HAVE?", component: "src/app/pdma2026/components/CanonicalSlide08.tsx", geometry: "pdmaGeometry.slide08" },
-    "slide-09": { title: "LIVE SCENARIO: RETENTION AGENT.", component: "src/app/pdma2026/components/slides/Slide09.tsx", geometry: "pdmaGeometry.slide09" },
-    "slide-10": { title: "DESIGN PRODUCTION READINESS INTO THE FEATURE.", component: "src/app/pdma2026/components/slides/Slide10.tsx", geometry: "pdmaGeometry.slide10" },
-    "slide-11": { title: "A.G.E.N.T.S.", component: "src/app/pdma2026/components/slides/Slide11.tsx", geometry: "pdmaGeometry.slide11" },
-    "slide-12": { title: "TURN THE FRAMEWORK INTO PRODUCT.", component: "src/app/pdma2026/components/slides/Slide12.tsx", geometry: "pdmaGeometry.slide12" },
-    "slide-13": { title: "AN IDEA + AI ≠ PRODUCT SPEC.", component: "src/app/pdma2026/components/slides/Slide13.tsx", geometry: "pdmaGeometry.slide13" },
-    "slide-14": { title: "NOW YOU DO IT.", component: "src/app/pdma2026/components/slides/Slide14.tsx", geometry: "pdmaGeometry.slide14" },
-    "slide-15": { title: "TURN AI CAPABILITY INTO PRODUCT VALUE.", component: "src/app/pdma2026/components/slides/Slide15.tsx", geometry: "pdmaGeometry.slide15" },
-  },
-  contracts: {
-    "slide-01": { required: ["pdma-s01"], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-02": { required: ["pdma-s02"], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-03": { required: ["pdma-s03", "s03-panel-copilot", "s03-panel-agent", "s03-panel-divider"], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-04": { required: ["pdma-s04"], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-05": { required: ["pdma-s05"], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-06": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-07": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-08": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-09": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-10": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-11": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-12": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-13": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-14": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-    "slide-15": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
-  },
+  slideKeys: pdmaConfig.slides.map(({ key }) => key),
+  runtimeAssets: Object.fromEntries(pdmaConfig.slides.map(({ key }) => [key, pdmaConfig.runtimeAssets[key]])),
+  routeLinks: pdmaConfig.routes,
+  docs: pdmaConfig.slideDocs,
+  contracts: pdmaConfig.slideContracts,
 } as const;
 
 export type PdmaValidationSlideKey = typeof pdmaValidation.slideKeys[number];
