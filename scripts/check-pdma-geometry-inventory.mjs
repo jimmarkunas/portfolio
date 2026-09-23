@@ -12,7 +12,7 @@ const sourceCssFile = "src/app/pdma2026/styles/pdma-source.css"
 const sourceCss = read(sourceCssFile)
 const shellFile = "src/app/pdma2026/PdmaPresentationShell.tsx"
 const shell = read(shellFile)
-const geometryFile = "src/app/pdma2026/pdmaSlideGeometry.ts"
+const geometryFile = "src/app/pdma2026/pdmaGeometry.ts"
 const geometry = read(geometryFile)
 const failures = []
 

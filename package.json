@@ -25,6 +25,7 @@
     "check:pdma-assets-manifest": "node scripts/check-pdma-assets-manifest.mjs",
     "check:pdma-duplicate-selectors": "node scripts/check-pdma-duplicate-selectors.mjs",
     "check:pdma-geometry": "node scripts/check-pdma-geometry.mjs",
+    "check:pdma-unified-geometry": "node scripts/check-pdma-unified-geometry.mjs",
     "check:pdma-geometry-inventory": "node scripts/check-pdma-geometry-inventory.mjs",
     "check:pdma-immutable": "node scripts/check-pdma-immutable.mjs",
     "check:pdma-manifest-parity": "node scripts/check-pdma-manifest-parity.mjs",

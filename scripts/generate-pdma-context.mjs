@@ -29,7 +29,7 @@ const slides = Array.from({ length: 15 }, (_, index) => {
     assets: assetMatch ? [...assetMatch[1].matchAll(/"([^\"]+)"/g)].map((match) => match[1]) : [],
     contract: contracts[key] ?? { required: [], forbidden: [] },
     selectors,
-    geometry: key === "slide-03" ? "src/app/pdma2026/pdmaSlideGeometry.ts#slide03" : null,
+    geometry: key === "slide-03" ? "src/app/pdma2026/pdmaGeometry.ts#slide03" : null,
     verification: {
       contract: `npm run check:pdma-slide -- --slides ${String(index + 1).padStart(2, "0")}`,
       capture: `npm run qa:pdma:capture -- --slides ${String(index + 1).padStart(2, "0")}`,
@@ -50,7 +50,7 @@ const markdown = [
   "| --- | --- | --- |",
   ...slides.map((slide) => `| ${slide.key} | ${slide.component ?? "missing"} | check:pdma-slide -- --slides ${slide.key.slice(-2)} · qa:pdma:capture -- --slides ${slide.key.slice(-2)} |`),
   "",
-  "Shared sources: `pdma2026SlideManifest.tsx`, `pdmaSlideAssets.ts`, `pdmaSlideGeometry.ts`, `index.css`.",
+  "Shared sources: `pdma2026SlideManifest.tsx`, `pdmaAssets.ts`, `pdmaGeometry.ts`, `index.css`.",
 ].join("\n") + "\n"
 fs.writeFileSync(path.join(docsRoot, "DEV_CONTEXT.md"), markdown)
 console.log(`Generated ${path.relative(root, indexPath)} and ${path.relative(root, path.join(docsRoot, "DEV_CONTEXT.md"))}.`)
