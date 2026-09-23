@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 
 import { useGuidedExerciseFlow } from "@/components/exercise/useGuidedExerciseFlow";
 import {
@@ -23,7 +23,7 @@ type ExerciseChromeProps = {
   leftLabel: string;
   nav: readonly [string, string, string];
   onReturn: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const initialState: ExerciseState = {
@@ -34,10 +34,6 @@ const initialState: ExerciseState = {
 };
 
 const focusClass = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#FF2FAE]";
-const magenta = "#FF2FAE";
-const white = "#F2F2F5";
-const muted = "#7A7D85";
-const line = "#44464A";
 
 const introRows = [
   ["01", "VALUE", "Increase revenue, decrease cost, or streamline operations?", `${pdmaAssets.slide14Root}/66471.svg`, `${pdmaAssets.slide14Root}/5cb15.svg`],
@@ -321,7 +317,7 @@ export function PdmaProductizationExercise() {
             <EditorialTitle whiteText="How much authority" magentaText="should the robots have?" compact />
             <p className="mt-4 max-w-[980px] text-[clamp(1.05rem,1.6vw,1.4rem)] leading-[1.4] text-[#F2F2F5]">The farther AI moves from observing to acting, the more deliberately the Product Manager has to design the boundary.</p>
             <div className="relative mt-8 grid gap-3 md:grid-cols-5 md:items-end">
-              <div className="pointer-events-none absolute inset-x-[8%] bottom-[34px] hidden h-[220px] rounded-[50%_50%_0_0/100%_100%_0_0] border-t border-[#34383D] md:block" aria-hidden="true" />
+              <div className="pointer-events-none absolute inset-x-[8%] bottom-[34px] hidden h-[220px] rounded-t-[50%] border-t border-[#34383D] md:block" aria-hidden="true" />
               {pdma2026ExerciseContent.authority.map((authority, index) => {
                 const selected = state.authority === authority;
                 const meta = authorityMeta[index];
