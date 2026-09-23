@@ -39,6 +39,12 @@
 
 .pdma-s01 .s01-people-rule,.pdma-s01 .s01-ai-rule{display:none}
 
+.pdma-s01 .s01-wide{left:var(--pdma-s01-wide-left,415px);top:var(--pdma-s01-wide-top,209px);width:var(--pdma-s01-wide-width,1672px);height:var(--pdma-s01-wide-height,941px);opacity:var(--pdma-s01-wide-opacity,.75)}
+.pdma-s01 .s01-orb{left:var(--pdma-s01-orb-left,1024px);top:var(--pdma-s01-orb-top,219px);width:var(--pdma-s01-orb-width,832px);height:var(--pdma-s01-orb-height,832px);opacity:var(--pdma-s01-orb-opacity,.75)}
+.pdma-s01 .s01-speaker-rule{left:var(--pdma-s01-speaker-rule-left,84px);top:var(--pdma-s01-speaker-rule-top,466px);width:var(--pdma-s01-speaker-rule-width,78px);height:var(--pdma-s01-speaker-rule-height,4px)}
+.pdma-s01 .s01-speaker-name{left:var(--pdma-s01-speaker-name-left,84px);top:var(--pdma-s01-speaker-name-top,498px)}
+.pdma-s01 .s01-speaker-role{left:var(--pdma-s01-speaker-role-left,84px);top:var(--pdma-s01-speaker-role-top,549px)}
+
 .pdma-s01::before{content:"";position:absolute;left:24%;bottom:0;width:66%;height:22%;background:radial-gradient(ellipse at center,rgba(255,47,174,.42),transparent 68%);pointer-events:none;z-index:3;transform-origin:center bottom;animation:pdma-s01-reflection 7s ease-in-out infinite}
 
 .pdma-s01 .s01-orb{position:relative;z-index:2;animation:pdma-s01-orb-drift 14s ease-in-out infinite}
