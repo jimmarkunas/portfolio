@@ -25,9 +25,6 @@
 
 .pdma-slide-layer .pdma-s02 .s02-copy{display:none!important}
 
-.pdma-s02 .pdma-list{top:405px;width:600px;height:390px}
-.pdma-s02 .pdma-list-ai{left:72px}
-.pdma-s02 .pdma-list-human{left:1326px}
 .pdma-s02 .pdma-list h2{font-size:27px}
 .pdma-s02 .pdma-list-rule{top:20px}
 .pdma-s02 .pdma-item{left:0;height:74px;font-size:30px}
@@ -41,7 +38,7 @@
 
 .pdma-s02 .s02-boundary{justify-content:center;padding-left:0}
 
-.pdma-s02 .s02-boundary{top:885px;border-top:0}
+.pdma-s02 .s02-boundary{border-top:0}
 
 .pdma-s02::after{content:"";position:absolute;left:875px;top:572px;width:150px;height:150px;border:2px solid rgba(255,47,174,.38);border-radius:50%;opacity:0;pointer-events:none;z-index:1;transform:scale(.72);animation:pdma-s02-intersection-reveal 1050ms ease-out forwards}
 
@@ -57,9 +54,6 @@
 .pdma-s02 .s02-diagram-brain{left:var(--pdma-s02-brain-left,1021px);top:var(--pdma-s02-brain-top,508px);width:var(--pdma-s02-brain-width,128px);height:var(--pdma-s02-brain-height,128px)}
 .pdma-s02 .s02-boundary{top:var(--pdma-s02-boundary-top,885px)}
 .pdma-s02::after{left:var(--pdma-s02-reveal-left,875px);top:var(--pdma-s02-reveal-top,572px);width:var(--pdma-s02-reveal-size,150px);height:var(--pdma-s02-reveal-size,150px)}
-
-.pdma-s02 .s02-diagram-cpu{left:755px;top:512px;width:120px;height:120px}
-.pdma-s02 .s02-diagram-brain{left:1021px;top:508px;width:128px;height:128px}
 
 .pdma-s02 .s02-boundary>b{display:none}
 
