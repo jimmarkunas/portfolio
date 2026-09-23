@@ -1,18 +1,20 @@
 import { B, Img, MAGENTA, MUTED, Stage, T, WHITE, WHITE2 } from "../pdmaSlidePrimitives";
 import { pdmaAssets } from "../../pdmaAssets";
+import { pdmaGeometry } from "../../pdmaGeometry";
 
 const S10 = pdmaAssets.slide10Root;
 export function Slide10(){
+  const g = pdmaGeometry.slide10;
   const cards=[
-    [62,"01","GUARDRAILS","What must the product\nprevent or constrain?",`${S10}/0c0c4.svg`,false],
-    [442,"02","HUMAN INTERVENTION","When must a person review,\napprove, or take over?",`${S10}/75654.svg`,true],
-    [822,"03","SUCCESS MEASURES","What proves the feature\ncreates the intended\noutcome?",`${S10}/27fd2.svg`,false],
+    ["01","GUARDRAILS","What must the product\nprevent or constrain?",`${S10}/0c0c4.svg`,false],
+    ["02","HUMAN INTERVENTION","When must a person review,\napprove, or take over?",`${S10}/75654.svg`,true],
+    ["03","SUCCESS MEASURES","What proves the feature\ncreates the intended\noutcome?",`${S10}/27fd2.svg`,false],
   ] as const;
   return <Stage>
-    <Img src="/pdma2026/slide-10/0581d3e2-5eaa-4fa2-aa65-7272161757da.png" x={760} y={185} w={1160} h={720} opacity={.92} fit="cover"/><Img src="/pdma2026/slide-10/0fe576ac-b4aa-42eb-9c74-288c239abc05.png" x={1120} y={70} w={800} h={910} fit="cover"/><div style={{position:"absolute",left:0,top:70,width:1220,height:850,background:"linear-gradient(90deg,#090909 0%,rgba(9,9,9,.92) 72%,rgba(9,9,9,.12) 100%)"}}/>
-    {cards.map(([x,n,title,body,icon,active])=><div key={n} style={{position:"absolute",left:x,top:420,width:360,height:250,background:active?"#250c20":"#16191c",border:`1.5px solid ${active?MAGENTA:"#4a4d50"}`,borderRadius:10,opacity:.93}}><T x={308} y={22} w={32} size={16} weight={500} color="#939598" tracking={3}>{n}</T><Img src={icon} x={28} y={24} w={54} h={54}/><T x={34} y={82} w={292} size={23} weight={700} color={active?MAGENTA:WHITE2}>{title}</T><B x={34} y={126} w={52} h={3} bg={MAGENTA}/><T x={34} y={148} w={292} size={19} color={WHITE2}>{body}</T></div>)}
-    <T x={60} y={718} w={520} size={17} weight={600} color={MAGENTA} tracking={3}>OPERATIONALIZE IT AS PRODUCT WORK</T><B x={60} y={760} w={1140} h={2} bg="#5d6064"/>
-    {[[62,"01","BACKLOG","Capture the requirements."],[392,"02","PRD","Define behavior and\nboundaries."],[690,"03","ACCEPTANCE CRITERIA","Make them testable."],[1010,"04","PRODUCTION","Prove they work."]].map(([x,n,t,d],i)=><div key={String(n)}><T x={Number(x)} y={770} w={40} size={15} weight={500} color="#939598" tracking={3}>{n}</T><T x={Number(x)+50} y={765} w={260} size={19} weight={700} color={i===3?MAGENTA:WHITE2}>{t}</T><T x={Number(x)+50} y={795} w={260} size={15} color={WHITE2}>{d}</T>{i<3&&<T x={Number(x)+285} y={777} size={28} color="#939598">→</T>}</div>)}
-    <B x={50} y={870} w={1820} h={90} bg="#120a10" border={`1.5px solid ${MAGENTA}`} radius={8} opacity={.96}/><B x={65} y={890} w={4} h={52} bg={MAGENTA}/><T x={92} y={900} w={1350} size={25} weight={700} color={WHITE2}>IF IT MATTERS IN PRODUCTION, IT BELONGS IN THE PRODUCT DEFINITION.</T><T x={1655} y={894} w={150} size={12} weight={500} color="#939598" tracking={4}>REAL FEATURES.{"\n"}REAL OUTCOMES.</T>
+    <Img src="/pdma2026/slide-10/0581d3e2-5eaa-4fa2-aa65-7272161757da.png" geometry={g.backgrounds.one} fit="cover"/><Img src="/pdma2026/slide-10/0fe576ac-b4aa-42eb-9c74-288c239abc05.png" geometry={g.backgrounds.two} fit="cover"/><div style={{position:"absolute",left:g.backgrounds.gradient.x,top:g.backgrounds.gradient.y,width:g.backgrounds.gradient.width,height:g.backgrounds.gradient.height,background:"linear-gradient(90deg,#090909 0%,rgba(9,9,9,.92) 72%,rgba(9,9,9,.12) 100%)"}}/>
+    {cards.map(([n,title,body,icon,active],i)=>{const c=g.cards;return <div key={n} style={{position:"absolute",left:c.x[i],top:c.y,width:c.width,height:c.height,background:active?"#250c20":"#16191c",border:`1.5px solid ${active?MAGENTA:"#4a4d50"}`,borderRadius:10,opacity:.93}}><T geometry={c.number} weight={500} color="#939598" tracking={3}>{n}</T><Img src={icon} geometry={c.icon}/><T geometry={c.title} weight={700} color={active?MAGENTA:WHITE2}>{title}</T><B geometry={c.rule} bg={MAGENTA}/><T geometry={c.body} color={WHITE2}>{body}</T></div>})}
+    <T geometry={g.operationalize} weight={600} color={MAGENTA}>OPERATIONALIZE IT AS PRODUCT WORK</T><B geometry={g.workflowRule} bg="#5d6064"/>
+    {[["01","BACKLOG","Capture the requirements."],["02","PRD","Define behavior and\nboundaries."],["03","ACCEPTANCE CRITERIA","Make them testable."],["04","PRODUCTION","Prove they work."]].map(([n,t,d],i)=>{const w=g.workflow;return <div key={n}><T x={w.x[i]} y={w.number.y} w={w.number.width} size={w.number.size} weight={500} color="#939598" tracking={3}>{n}</T><T x={w.x[i]+w.title.dx} y={w.title.y} w={w.title.width} size={w.title.size} weight={700} color={i===3?MAGENTA:WHITE2}>{t}</T><T x={w.x[i]+w.description.dx} y={w.description.y} w={w.description.width} size={w.description.size} color={WHITE2}>{d}</T>{i<3&&<T x={w.x[i]+w.arrow.dx} y={w.arrow.y} size={w.arrow.size} color="#939598">→</T>}</div>})}
+    <B geometry={g.takeaway.container} bg="#120a10" border={`1.5px solid ${MAGENTA}`} radius={8} opacity={.96}/><B geometry={g.takeaway.accent} bg={MAGENTA}/><T geometry={g.takeaway.copy} weight={700} color={WHITE2}>IF IT MATTERS IN PRODUCTION, IT BELONGS IN THE PRODUCT DEFINITION.</T><T geometry={g.takeaway.right} weight={500} color="#939598">REAL FEATURES.{"\n"}REAL OUTCOMES.</T>
   </Stage>;
 }
