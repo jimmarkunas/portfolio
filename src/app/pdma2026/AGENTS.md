@@ -60,7 +60,7 @@ Do not improvise around the decision.
 - **Approved implementation Figma frame** owns visual truth for React implementation when explicitly designated in the visual contract.
 - **Current/baseline Figma frame** for `STYLE_REWORK`/`REBUILD_STYLE` owns baseline content/structure evidence only until a redesign is approved.
 - **Slides 1–3** are the visual north star for redesign work.
-- **`docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md`** owns PDMA visual state, design gate, approved implementation-frame designation, remaining recovery order, and style imperative.
+- **`docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md`** owns PDMA visual state, design gate, approved implementation-frame designation, remaining recovery order, parallel-design authorization, implementation prompt budget, and style imperative.
 - **Current slide manifest/content** owns production copy/chrome semantics unless the user explicitly changes them.
 - **`pdmaGeometry.ts`** owns shared logical geometry until/unless the approved typed-config backlog replaces it.
 - **1920×1080** is the canonical logical slide canvas. Runtime scaling preserves that composition.
@@ -91,8 +91,9 @@ Being behind `origin/main` is not, by itself, a blocker. Do not pull, merge, reb
 ## Slide mutation rules
 - Make the smallest coherent change that satisfies the current request.
 - For `STYLE_REWORK`/`REBUILD_STYLE` with `DESIGN_REQUIRED`, mutate Figma only; do not mutate React visuals.
+- Figma concept design may run ahead in parallel when Jim authorizes it; React/Codex mutation remains one slide at a time.
 - For non-visual implementation work, related fixes may be implemented together when they form one coherent change.
-- For React visual work with an approved implementation frame, follow the Canonical visual-edit loop: **one visible change per iteration** unless the user explicitly authorizes a batch visual pass.
+- For React visual work with an approved implementation frame, use the **three-prompt recovery mode** below. It overrides the older one-visible-change-per-prompt rule for this recovery sequence.
 - Do not change unrelated slides.
 - Do not change shared primitives, shell, geometry, tokens, or global CSS for a slide-local defect unless direct evidence proves the defect is shared and the user authorizes the broader scope.
 - Preserve existing approved composition unless the user explicitly asks for redesign.
@@ -100,19 +101,58 @@ Being behind `origin/main` is not, by itself, a blocker. Do not pull, merge, reb
 - Never substitute the old baseline frame for a newly approved redesign.
 - No base64 production assets.
 
+## Three-prompt recovery mode — HARD
+
+For each slide's React implementation, the hard maximum is **3 Codex implementation prompts** from first mutation through visual PASS.
+
+The target is 1–2 prompts.
+
+### Prompt 1 — complete implementation
+
+Prompt 1 must include the target inspection and attempt the **complete approved target-slide implementation** in one bounded pass. Do not spend a separate prompt merely asking Codex to inspect, plan, inventory, or explain capability.
+
+Prompt 1 must include:
+- exact approved Figma node ID;
+- exact allowed files;
+- frozen anchors;
+- current target component/geometry/assets to inspect;
+- complete approved composition as the goal;
+- canonical 1920×1080 visual QA viewport;
+- `npm run pdma:check -- --slide NN`;
+- `npm run pdma:qa -- --slide NN`;
+- required browser screenshot comparison.
+
+### Prompt 2 — evidence-based correction
+
+If Prompt 1 is not visually correct, Prompt 2 uses the actual browser render/QA evidence and corrects **all demonstrated remaining implementation deltas that can be coherently repaired together**.
+
+Do not redesign. Do not broaden scope.
+
+### Prompt 3 — final correction only
+
+If needed, Prompt 3 corrects only the final demonstrated visual defects.
+
+No architecture work, cleanup, refactor, redesign, or speculative changes.
+
+If the slide is still not at visual PASS after Prompt 3, stop with:
+
+`PDMA_PROMPT_BUDGET_EXHAUSTED — slide NN`
+
+A fourth implementation prompt requires Jim's explicit override.
+
 ## Canonical visual-edit loop
-Use this loop for every React slide visual edit **after** the target has an approved implementation Figma frame. Its purpose is to eliminate geometry guessing and finish visual work quickly.
+Use this loop for every React slide visual implementation **after** the target has an approved implementation Figma frame.
 
 1. **Start from one full-slide browser screenshot at the actual rendered browser size.** The screenshot must show the entire affected slide, not a crop that hides surrounding relationships.
-2. **Freeze that screenshot as the baseline for the iteration.** Compare every subsequent render against it until the requested change is approved.
-3. **Identify one exact visible target.** Examples: `secondary descriptions`, `bottom of table`, `selected circle`, `planet horizon`, `equals sign`.
-4. **State the anchors that must not move or change.** Explicitly freeze relevant headings, table top, table bottom, takeaway, colors, font size, chrome, or other approved elements.
-5. **State the desired direction and relationship precisely.** Prefer instructions such as `move the table down 20px`, `increase the gap below descriptions`, or `center the dot inside the ring` over vague instructions such as `add breathing room`.
-6. **If the request is visually ambiguous, describe the intended geometry before editing.** Do not guess. State what will move, what will remain fixed, and the resulting relationship; obtain clarification when necessary.
-7. **Make one visible change per iteration.** Do not bundle typography, spacing, borders, color, and layout into one visual iteration. One visible change may require coordinated implementation values when they are inseparable parts of the same visual relationship—for example, moving table rows and their row dividers together.
-8. **After every edit, refresh the actual browser and capture a new full-slide screenshot at the same viewport.** Do not rely on source inspection, geometry values, typecheck, or targeted checks for visual approval.
-9. **Compare the new screenshot to the approved implementation Figma frame and requested delta.** If the result is wrong, report the exact visible failure (`last row clipped`, `dot still high inside ring`, `description gap unchanged`) rather than a general statement such as `it looks bad`.
-10. **Once the requested visual change is correct, stop.** Lock the slide/version and do not continue architecture cleanup, opportunistic refactoring, or unrelated polish.
+2. **Freeze the approved implementation Figma frame and browser viewport as the comparison basis.**
+3. **Prompt 1 implements the full approved composition.** Freeze shared chrome and all explicitly named anchors.
+4. **After the mutation, refresh the actual browser and capture a new full-slide screenshot at the same viewport.** Do not rely on source inspection, geometry values, typecheck, or targeted checks for visual approval.
+5. **Compare the render to the approved implementation Figma frame.** Enumerate concrete visible deltas such as crop, scale, spacing, clipping, alignment, missing asset, wrong hierarchy, or wrong atmospheric treatment.
+6. **Prompt 2 corrects the demonstrated deltas coherently.** It may correct multiple visible defects because the 3-prompt budget is a hard delivery constraint.
+7. **Capture and compare again.**
+8. **Prompt 3, if required, corrects only the final demonstrated defects.**
+9. **Once the slide is correct, stop.** Lock the slide/version and do not continue architecture cleanup, opportunistic refactoring, or unrelated polish.
+10. **If Prompt 3 does not reach PASS, stop and report `PDMA_PROMPT_BUDGET_EXHAUSTED — slide NN`.**
 
 ### Browser-capture requirement
 Reliable browser screenshots are part of the implementation loop, not optional evidence. If browser capture is unavailable, do not continue making speculative visual changes. Report:
@@ -122,11 +162,13 @@ Reliable browser screenshots are part of the implementation loop, not optional e
 and wait for a rendered screenshot or explicit user direction before another visual mutation.
 
 ### Canonical instruction pattern
-A strong bounded visual instruction names the frozen anchors, the one moving relationship, and the containment behavior. Example:
+For Prompt 1, give Codex the entire approved slide target and frozen boundaries so it can build the slide correctly in one pass.
 
-> Keep headings, descriptions, and takeaway fixed. Move only the table rows and row dividers down until the last row is fully visible. Extend the matrix surfaces to contain the rows. Do not use a fixed height that clips content. Then show me the rendered screenshot.
+For Prompt 2 or 3, give exact demonstrated corrections. Example:
 
-This pattern is preferred over broad requests such as `make the table more spacious` because it gives a deterministic visual relationship to implement and verify.
+> Keep headings, descriptions, takeaway, chrome, colors, and type scale fixed. Move the table rows and row dividers down until the last row is fully visible, extend the matrix surfaces to contain the rows, and preserve the approved frame geometry. Then capture and compare the full rendered slide.
+
+Avoid vague instructions such as `make it better` or `add breathing room`.
 
 ## CSS ownership
 PDMA must have **one** canonical CSS editing model.
@@ -174,7 +216,7 @@ Before claiming PASS:
 - confirm the contract names an approved implementation Figma frame;
 - render/capture the affected slide in the actual runtime at the actual browser size;
 - compare it with the approved implementation Figma frame;
-- verify the single requested visual delta while confirming frozen anchors stayed fixed.
+- verify all demonstrated implementation deltas are resolved while frozen anchors stayed fixed.
 
 If runtime capture is unavailable, report `VISUAL_QA: REQUIRES_EXTERNAL_REVIEW` rather than claiming visual completion or making another speculative visual edit.
 
@@ -189,12 +231,19 @@ If the task exposes a missing shared architectural boundary, return:
 
 Do not patch around it with a second system.
 
+If the slide uses all three implementation prompts without visual PASS, return:
+
+`PDMA_PROMPT_BUDGET_EXHAUSTED — slide NN`
+
+and report the exact remaining visual defects/root blocker. Do not send a fourth implementation prompt without Jim's explicit override.
+
 ## Output discipline
 For implementation tasks, report only:
 - status;
+- prompt number / 3;
 - design status / approved implementation frame;
 - changed files;
-- requested fix completed;
+- requested implementation/correction completed;
 - targeted verification;
 - visual QA status;
 - exact visible failure or blocker, if any.
