@@ -18,10 +18,10 @@ export const pdmaGeometry = {
   },
   slide03: {
     leftPlanet: { x: -165, y: 251, width: 760, height: 760, opacity: .9 }, rightPlanet: { x: 1260, y: 242, width: 830, height: 830 },
-    panel: { y: 428, width: 720, height: 380, copilotX: 304, agentX: 1028 }, divider: { x: 958, y: 430, height: 340 },
+    panel: { y: 452, width: 720, height: 380, copilotX: 304, agentX: 1028 }, divider: { x: 958, y: 430, height: 340 },
     process: { y: 107, width: 660, height: 115, stepWidth: 88, circleSize: 88, circleFontSize: 32, labelMarginTop: 12, labelMinHeight: 42, labelFontSize: 18, labelLineHeight: 20, arrowX: 102, arrowY: 19, arrowFontSize: 30 },
     heading: { size: 25, line: 40 }, descriptor: { size: 15, line: 24 },
-    takeaway: { x: 0, y: 838, width: 1790, height: 80, accentX: 192, accentY: 33, accentWidth: 4, accentHeight: 54, copyX: 220, copyY: 32, copySize: 31, copyLine: 38 },
+    takeaway: { x: 0, y: 888, width: 1790, height: 80, accentX: 192, accentY: 33, accentWidth: 4, accentHeight: 54, copyX: 220, copyY: 32, copySize: 31, copyLine: 38 },
     boundary: { ruleY: 278, ruleWidth: 520, ruleHeight: 2, copyY: 300, copyFontSize: 25, copyLineHeight: 40 }, capabilities: { y: 340, width: 540, fontSize: 20, lineHeight: 32 },
   },
   slide04: {
