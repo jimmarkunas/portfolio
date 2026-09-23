@@ -1,7 +1,10 @@
 import { pdmaAssets } from "../../pdmaAssets";
-import { B, Img, LINE, MAGENTA, MUTED, Stage, T } from "./canonicalShared";
+import { B, Img, MAGENTA, MUTED, Stage, T } from "../pdmaSlidePrimitives";
+import { pdmaGeometry } from "../../pdmaGeometry";
+const LINE = "#44464a";
 const S13 = pdmaAssets.slide13Root;
 export function Slide13(){
+  const g = pdmaGeometry.slide13;
   const before=["Unclear business value","No operating boundaries","Missing data and system context","No success criteria","High risk of rework"];
   const after=["Clear business value and success metrics","Defined authority and operating boundaries","Identified data sources and integrations","Evidence and decision record requirements","Ready for build, test, and operationalize"];
   return <Stage>
@@ -12,5 +15,3 @@ export function Slide13(){
     <B x={55} y={860} w={1810} h={2} bg={LINE}/><B x={55} y={897} w={3} h={52} bg={MAGENTA}/><T x={82} y={891} w={980} size={29} weight={600}>SAME IDEA. COMPLETELY DIFFERENT PRODUCT.</T>{[[1286,"LESS","REWORK"],[1483,"FASTER","DELIVERY"],[1680,"HIGHER","CONFIDENCE"]].map(([x,a,b],i)=><div key={String(a)}><T x={Number(x)} y={887} w={140} size={20} weight={600} color={MAGENTA} align="center" tracking={1}>{a}</T><T x={Number(x)} y={914} w={140} size={14} weight={600} color={MUTED} align="center" tracking={2}>{b}</T>{i<2&&<B x={Number(x)+170} y={883} w={1} h={48} bg={LINE}/>}</div>)}
   </Stage>;
 }
-
-const S14 = pdmaAssets.slide14Root;
