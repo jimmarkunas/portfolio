@@ -54,10 +54,10 @@
 .pdma-slide-layer .pdma-s02 .s02-copy{display:none!important}.pdma-title-2>h1:first-child,.pdma-title-2>.pdma-title-magenta-row{left:0!important}
 .pdma-s02 .pdma-list{top:405px;width:600px;height:390px}.pdma-s02 .pdma-list-ai{left:72px}.pdma-s02 .pdma-list-human{left:1326px}.pdma-s02 .pdma-list h2{font-size:27px}.pdma-s02 .pdma-list-rule{top:20px}.pdma-s02 .pdma-item{left:0;height:74px;font-size:30px}.pdma-s02 .pdma-tile{width:74px;height:74px;margin-right:34px}
 .pdma-s02 .pdma-list-human .pdma-list-rule{left:265px;width:245px}
-.pdma-s02 .pdma-list,.pdma-s02 .s02-circle,.pdma-s02 .s02-diagram-cpu,.pdma-s02 .s02-diagram-brain{transform:translateY(35px)}
+.pdma-s02 .pdma-list,.pdma-s02 .s02-circle,.pdma-s02 .s02-diagram-cpu,.pdma-s02 .s02-diagram-brain{transform:translateY(75px)}
 .pdma-s02 .s02-boundary>strong,.pdma-s02 .s02-boundary>em,.pdma-s02 .s02-boundary>span{transform:translateY(12px)}
 .pdma-s02 .s02-boundary{justify-content:center;padding-left:0}
-.pdma-s02 .s02-boundary{top:845px}
+.pdma-s02 .s02-boundary{top:885px;border-top:0}
 .pdma-s03 .s03-step span{width:132px;margin-left:-22px;white-space:normal}
 .pdma-s03 .s03-step{flex:0 0 162px}
 .pdma-s03 .s03-panel-agent .s03-step:last-child .s03-step-circle{border-color:#ff2fae;color:#ff2fae;box-shadow:0 0 18px 1px rgba(255,47,174,.35)}

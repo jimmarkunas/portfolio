@@ -34,13 +34,13 @@
 
 .pdma-s02 .pdma-list-human .pdma-list-rule{left:265px;width:245px}
 
-.pdma-s02 .pdma-list,.pdma-s02 .s02-circle,.pdma-s02 .s02-diagram-cpu,.pdma-s02 .s02-diagram-brain{transform:translateY(35px)}
+.pdma-s02 .pdma-list,.pdma-s02 .s02-circle,.pdma-s02 .s02-diagram-cpu,.pdma-s02 .s02-diagram-brain{transform:translateY(75px)}
 
 .pdma-s02 .s02-boundary>strong,.pdma-s02 .s02-boundary>em,.pdma-s02 .s02-boundary>span{transform:translateY(12px)}
 
 .pdma-s02 .s02-boundary{justify-content:center;padding-left:0}
 
-.pdma-s02 .s02-boundary{top:845px}
+.pdma-s02 .s02-boundary{top:885px;border-top:0}
 
 .pdma-s02 .s02-boundary>i{transform:translateY(15px)}
 
