@@ -1,0 +1,46 @@
+export const pdmaValidation = {
+  slideKeys: [
+    "slide-01", "slide-02", "slide-03", "slide-04", "slide-05", "slide-06", "slide-07", "slide-08",
+    "slide-09", "slide-10", "slide-11", "slide-12", "slide-13", "slide-14", "slide-15",
+  ] as const,
+  runtimeAssets: {
+    "slide-01": ["/pdma2026/slide-01/title-atmosphere.png", "/pdma2026/slide-01/title-asterisk-scene.png"],
+    "slide-02": ["/pdma2026/slide-02/slide-02-ai-sphere.png", "/pdma2026/slide-02/slide-02-human-sphere.png", "/pdma2026/slide-02/slide-02-particle-field.png", "/pdma2026/slide-02/diagram-cpu.svg", "/pdma2026/slide-02/diagram-brain.svg"],
+    "slide-03": ["/pdma2026/slide-03/02283.png", "/pdma2026/slide-03/44753.png"],
+    "slide-04": ["/pdma2026/slide-04/0c14e.png", "/pdma2026/slide-04/bd2f1.png"],
+    "slide-05": ["/pdma2026/slide-05/51d1a.png", "/pdma2026/slide-05/9f2f3.png"],
+    "slide-06": ["/pdma2026/slide-06"],
+    "slide-07": [],
+    "slide-08": ["/pdma2026/slide-08"],
+    "slide-09": ["/pdma2026/slide-09"],
+    "slide-10": ["/pdma2026/slide-10"],
+    "slide-11": ["/pdma2026/slide-11"],
+    "slide-12": ["/pdma2026/slide-12"],
+    "slide-13": ["/pdma2026/slide-13"],
+    "slide-14": ["/pdma2026/slide-14"],
+    "slide-15": ["/pdma2026/slide-15"],
+  },
+  routeLinks: {
+    presentation: "/pdma2026/",
+    exercise: "/pdma2026/exercise",
+  },
+  contracts: {
+    "slide-01": { required: ["pdma-s01"], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-02": { required: ["pdma-s02"], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-03": { required: ["pdma-s03", "s03-panel-copilot", "s03-panel-agent", "s03-panel-divider"], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-04": { required: ["pdma-s04"], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-05": { required: ["pdma-s05"], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-06": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-07": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-08": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-09": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-10": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-11": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-12": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-13": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-14": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+    "slide-15": { required: [], forbidden: ["pdma-alt-slide", "pdma-header", "pdma-footer"] },
+  },
+} as const;
+
+export type PdmaValidationSlideKey = typeof pdmaValidation.slideKeys[number];

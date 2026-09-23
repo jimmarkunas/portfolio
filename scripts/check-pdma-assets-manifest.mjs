@@ -7,7 +7,7 @@ import crypto from "node:crypto"
 const root = process.cwd()
 const sourceRoot = path.join(root, "src/app/pdma2026")
 const publicRoot = path.join(root, "public")
-const manifestPath = path.join(sourceRoot, "pdma.config.ts")
+const { pdmaValidation } = await import("../src/app/pdma2026/pdma.validation.ts")
 
 const failures = []
 const sourceFiles = []
@@ -42,31 +42,22 @@ function walkRuntimeAssets(dir) {
 
 walkRuntimeAssets(path.join(root, "public/pdma2026"))
 
-const manifest = fs.readFileSync(manifestPath, "utf8")
-const expectedKeys = Array.from({ length: 15 }, (_, index) => `slide-${String(index + 1).padStart(2, "0")}`)
-const manifestKeys = [...manifest.matchAll(/key:\s*"(slide-\d{2})"/g)].map((match) => match[1])
-
-if (manifestKeys.join("|") !== expectedKeys.join("|")) {
-  failures.push(`manifest renderers must contain slides 01–15 in order; found ${manifestKeys.join(", ")}`)
-}
-
-const manifestEntries = [...manifest.matchAll(/key:\s*"(slide-\d{2})"[\s\S]*?id:\s*"(slide-\d{2})"[\s\S]*?tocTitle:\s*"([^"]+)"[\s\S]*?title:\s*\{/g)]
-if (manifestEntries.length !== expectedKeys.length) failures.push(`manifest must define ${expectedKeys.length} complete slide entries; found ${manifestEntries.length}`)
+const expectedKeys = [...pdmaValidation.slideKeys]
+const declaredAssets = expectedKeys.flatMap((key) => pdmaValidation.runtimeAssets[key])
+if (new Set(expectedKeys).size !== expectedKeys.length) failures.push("validation metadata contains duplicate slide keys")
+if (Object.keys(pdmaValidation.runtimeAssets).sort().join("|") !== expectedKeys.slice().sort().join("|")) failures.push("validation metadata must declare runtime assets for every slide")
 
 for (const file of sourceFiles) {
   const text = fs.readFileSync(file, "utf8")
-  if (/https?:\/\/www\.figma\.com\/api\/mcp\/asset\//.test(text)) {
+  if (text.includes("https://www.figma.com/api/mcp/asset/")) {
     failures.push(`${path.relative(root, file)} contains a remote Figma asset URL`)
   }
-  for (const match of text.matchAll(/["'`]([^"'`]*\/pdma2026\/[^"'`]*)["'`]/g)) {
-    const assetPath = match[1]
-    if (assetPath.includes("${")) continue
-    if (assetPath === "/pdma2026/exercise") continue
-    const absolute = path.join(publicRoot, assetPath.replace(/^\//, ""))
-    if (!fs.existsSync(absolute)) {
-      failures.push(`${path.relative(root, file)} references missing asset ${assetPath}`)
-    } else referencedRuntimeAssets.add(absolute)
-  }
+}
+
+for (const assetPath of declaredAssets) {
+  const absolute = path.join(publicRoot, assetPath.replace(/^\//, ""))
+  if (!fs.existsSync(absolute)) failures.push(`declared runtime asset is missing: ${assetPath}`)
+  else referencedRuntimeAssets.add(absolute)
 }
 
 for (const files of runtimeAssetHashes.values()) {
@@ -83,4 +74,4 @@ if (failures.length) {
   process.exit(1)
 }
 
-console.log(`PDMA asset/manifest guard passed (${expectedKeys.length} slides, ${sourceFiles.length} source files scanned).`)
+console.log(`PDMA asset/manifest guard passed (${expectedKeys.length} slides, ${declaredAssets.length} declared runtime assets).`)

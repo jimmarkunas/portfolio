@@ -4,7 +4,7 @@ import fs from "node:fs"
 import path from "node:path"
 
 const root = process.cwd()
-const contracts = JSON.parse(fs.readFileSync(path.join(root, "docs/pdma2026/slide-contracts.json"), "utf8"))
+const { pdmaValidation } = await import("../src/app/pdma2026/pdma.validation.ts")
 const sourceRoot = path.join(root, "src/app/pdma2026")
 const sourceFiles = []
 function walk(dir) {
@@ -15,12 +15,13 @@ function walk(dir) {
   }
 }
 walk(sourceRoot)
-const source = sourceFiles.map((file) => fs.readFileSync(file, "utf8")).join("\n")
+const source = sourceFiles.filter((file) => !file.endsWith("pdma.validation.ts")).map((file) => fs.readFileSync(file, "utf8")).join("\n")
 const failures = []
-const expected = Array.from({ length: 15 }, (_, index) => `slide-${String(index + 1).padStart(2, "0")}`)
+const expected = [...pdmaValidation.slideKeys]
 const slideArgumentIndex = process.argv.indexOf("--slides")
 const requestedSlides = slideArgumentIndex >= 0 ? process.argv[slideArgumentIndex + 1]?.split(",").map((value) => value.padStart(2, "0")).map((value) => `slide-${value}`) : expected
-if (Object.keys(contracts).sort().join("|") !== expected.join("|")) failures.push("contracts must define exactly slides 01–15")
+const contracts = pdmaValidation.contracts
+if (Object.keys(contracts).sort().join("|") !== expected.join("|")) failures.push("validation metadata must define exactly slides 01–15")
 for (const slide of requestedSlides) {
   const contract = contracts[slide]
   if (!contract) { failures.push(`${slide} has no contract`); continue }
