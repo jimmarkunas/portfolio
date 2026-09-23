@@ -1,4 +1,4 @@
-import { B, Img, MAGENTA, MUTED, Stage, T } from "../pdmaSlidePrimitives";
+import { B, Img, MAGENTA, MUTED, Stage, T } from "../pdmaPrimitives";
 import { pdmaAssets } from "../../pdmaAssets";
 import { pdmaGeometry } from "../../pdmaGeometry";
 const S = pdmaAssets.slide09Root;

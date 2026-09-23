@@ -5,6 +5,7 @@ export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaT
   const reduced = useReducedMotion();
 
   const titleColor = config.titleColor ?? "#f2f2f5";
+  const subtitleContent = config.subtitle?.split("\n").map((line, index) => <span key={`${line}-${index}`}>{index > 0 && <br />}{line}</span>);
   const subtitle = config.exactSubtitleSize ? (
     <span
       style={{
@@ -15,7 +16,7 @@ export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaT
         letterSpacing: `${config.subtitleTracking ?? -0.4}px`,
       }}
     >
-      {config.subtitle}
+      {subtitleContent}
     </span>
   ) : config.subtitle;
 

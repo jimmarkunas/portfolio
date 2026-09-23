@@ -1,4 +1,4 @@
-import { B, Img, MAGENTA, MUTED, Stage, T, WHITE, WHITE2 } from "../pdmaSlidePrimitives";
+import { B, Img, MAGENTA, MUTED, Stage, T, WHITE, WHITE2 } from "../pdmaPrimitives";
 import { pdmaAssets } from "../../pdmaAssets";
 import { pdmaGeometry } from "../../pdmaGeometry";
 

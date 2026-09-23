@@ -11,8 +11,6 @@ function AmbientImage({ src, geometry, className, duration, delay = 0, animate }
 }
 
 export function Slide01() { const g = pdmaGeometry.slide01; return <PdmaSlideCanvas><div className="pdma-slide-surface pdma-s01"><PdmaSlideBody className="pdma-slide-body-01">
-  <AmbientImage src={pdmaAssets.slide01.particleOverlay} geometry={g.particleOverlay} className="s01-particles s01-particles-a" duration={8.8} animate={{ opacity: [.55, .88, .68, .8, .55], x: [0, 6, -3, 2, 0], y: [0, -5, 3, -2, 0] }} />
-  <AmbientImage src={pdmaAssets.slide01.particleOverlay} geometry={g.particleOverlay} className="s01-particles s01-particles-b" duration={12.1} delay={2.1} animate={{ opacity: [.18, .48, .28, .42, .18], x: [0, -7, 4, -2, 0], y: [0, 5, -3, 2, 0] }} />
   <AmbientImage src={pdmaAssets.slide01.planetBack} geometry={g.planetBack} className="s01-planet-back" duration={15} animate={{ opacity: [1, 1, 1, 1], x: [0, 4, -2, 0], y: [0, -4, 2, 0], scale: [1, 1.02, 1.006, 1], filter: ["brightness(1)", "brightness(1.1)", "brightness(1.03)", "brightness(1)"] }} />
   <AmbientImage src={pdmaAssets.slide01.planetForeground} geometry={g.planetForeground} className="s01-planet-foreground" duration={17} animate={{ opacity: [.92, 1, .96, .92], x: [0, -2, 2, 0], y: [0, 3, -1, 0], scale: [1, 1.012, 1.004, 1] }} />
   <AmbientImage src={pdmaAssets.slide01.heroAsterisk} geometry={g.heroAsterisk} className="s01-hero-asterisk" duration={15} animate={{ y: [0, -7, 1, 0], scale: [1, 1.008, 1.002, 1] }} />

@@ -24,7 +24,7 @@ const slides = pdmaValidation.slideKeys.map((key, index) => {
       surface: "PdmaSlideSurface",
       body: "PdmaSlideBody",
       geometry: doc.geometry,
-      primitives: "pdmaSlidePrimitives",
+      primitives: "pdmaPrimitives",
       animation: "motion/react + useReducedMotion",
     },
     verification: {

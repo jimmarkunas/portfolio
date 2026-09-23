@@ -1,4 +1,4 @@
-import { B, Img, MAGENTA, Stage, T } from "../pdmaSlidePrimitives";
+import { B, Img, MAGENTA, Stage, T } from "../pdmaPrimitives";
 import { pdmaGeometry } from "../../pdmaGeometry";
 export function Slide12(){
   const g = pdmaGeometry.slide12;

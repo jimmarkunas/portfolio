@@ -6,7 +6,7 @@ export type TextGeometry = Point & { width?: number; size?: number; line?: numbe
 export const pdmaGeometry = {
   canvas: { width: 1920, height: 1080 },
   slide01: {
-    particleOverlay: { x: 415, y: 209, width: 1672, height: 941 }, planetBack: { x: 780, y: 115, width: 930, height: 698 }, planetForeground: { x: 1060, y: 250, width: 780, height: 780 }, heroAsterisk: { x: 960, y: 150, width: 760, height: 760 },
+    planetBack: { x: 780, y: 115, width: 930, height: 698 }, planetForeground: { x: 1060, y: 250, width: 780, height: 780 }, heroAsterisk: { x: 960, y: 150, width: 760, height: 760 },
     wide: { x: 415, y: 209, width: 1672, height: 941, opacity: .75 }, orb: { x: 1024, y: 219, width: 832, height: 832, opacity: .75 },
     speakerRule: { x: 84, y: 466, width: 78, height: 4 }, speakerName: { x: 84, y: 498 }, speakerRole: { x: 84, y: 549 },
   },

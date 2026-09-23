@@ -2,7 +2,7 @@ import { PdmaSlideCanvas } from "../PdmaPresentationShell";
 import { PdmaSlideBody, PdmaSlideSurface } from "./PdmaSlideBody";
 import { pdmaAssets } from "../pdmaAssets";
 import { pdmaGeometry } from "../pdmaGeometry";
-import { B, Img, T } from "./pdmaSlidePrimitives";
+import { B, Img, T } from "./pdmaPrimitives";
 const inventory = [["SYSTEMS", "What applications and\nplatforms are involved?", "icon-systems.svg"], ["DATA", "What information does the\nproduct depend on?", "icon-data.svg"], ["PEOPLE", "Who uses, owns, or\nsupports the workflow?", "icon-people.svg"], ["DEPENDENCIES", "What breaks if one\npart fails?", "icon-dependencies.svg"]] as const;
 const owners = [["SYSTEM OWNER", "Who owns the system\nthe agent touches?", "icon-system-owner.svg"], ["DECISION OWNER", "Who owns the authority\nbeing delegated?", "icon-decision-owner.svg"], ["OUTCOME OWNER", "Who is accountable\nfor the result?", "icon-outcome-owner.svg"]] as const;
 const WHITE = "#f2f2f2", MAGENTA = "#ff2fae";

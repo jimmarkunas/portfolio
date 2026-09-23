@@ -15,7 +15,7 @@ function walk(dir) {
   }
 }
 walk(sourceRoot)
-const source = sourceFiles.filter((file) => !file.endsWith("pdma.validation.ts")).map((file) => fs.readFileSync(file, "utf8")).join("\n")
+const source = sourceFiles.filter((file) => !file.endsWith("pdma.validation.ts") && !file.endsWith("pdma.config.ts")).map((file) => fs.readFileSync(file, "utf8")).join("\n")
 const failures = []
 const expected = [...pdmaValidation.slideKeys]
 const slideArgumentIndex = process.argv.indexOf("--slides")

@@ -1,6 +1,6 @@
 import { PdmaSlideCanvas } from "../PdmaPresentationShell";
 import { PdmaSlideBody } from "./PdmaSlideBody";
-import { Img } from "./pdmaSlidePrimitives";
+import { Img } from "./pdmaPrimitives";
 import { pdmaGeometry } from "../pdmaGeometry";
 import { motion } from "motion/react";
 const ROOT = "/pdma2026/slide-02";

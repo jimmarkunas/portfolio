@@ -1,6 +1,6 @@
 import { pdmaAssets } from "../../pdmaAssets";
 import { pdmaGeometry } from "../../pdmaGeometry";
-import { B, Img, MAGENTA, Stage, T } from "../pdmaSlidePrimitives";
+import { B, Img, MAGENTA, Stage, T } from "../pdmaPrimitives";
 const S = pdmaAssets.slide11Root;
 const cards = [["A","AUTHORITY","What may AI decide and do?",true],["G","GUARDRAILS","What constraints must be built into the product?",false],["E","EVIDENCE","What operational record must the product create?",false],["N","NETWORK & INTEGRATIONS","What systems, data, and permissions may it touch?",false],["T","TRANSFER & ESCALATION","When must a human intervene?",false],["S","SUCCESS & ACCOUNTABILITY","What KPI defines success + which human owns the outcome?",false]] as const;
 export function Slide11() {

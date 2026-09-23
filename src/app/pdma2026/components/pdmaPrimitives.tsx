@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import type { ImageGeometry, Point, Rect, TextGeometry } from "../pdmaGeometry";
+import type { ImageGeometry, Rect, TextGeometry } from "../pdmaGeometry";
 import { PdmaSlideCanvas } from "../PdmaPresentationShell";
 import { PdmaSlideBody, PdmaSlideSurface } from "./PdmaSlideBody";
 

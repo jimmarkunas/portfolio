@@ -27,10 +27,14 @@ export type {
 } from "./pdma.config";
 import type { Pdma2026SlideDefinition } from "./pdma.config";
 export type Pdma2026SlideManifestEntry = Omit<Pdma2026SlideDefinition, "component"> & { component: ComponentType };
-const components = { Slide01, Slide02, Slide03, Slide04, Slide05, Slide06, Slide07, Slide08, Slide09, Slide10, Slide11, Slide12, Slide13, Slide14, Slide15 };
+const components = {
+  "slide-01": Slide01, "slide-02": Slide02, "slide-03": Slide03, "slide-04": Slide04, "slide-05": Slide05,
+  "slide-06": Slide06, "slide-07": Slide07, "slide-08": Slide08, "slide-09": Slide09, "slide-10": Slide10,
+  "slide-11": Slide11, "slide-12": Slide12, "slide-13": Slide13, "slide-14": Slide14, "slide-15": Slide15,
+} satisfies Record<Pdma2026SlideDefinition["key"], ComponentType>;
 
 export function buildPdma2026SlideManifest(_content: Pdma2026Content): Pdma2026SlideManifestEntry[] {
-  return buildPdmaConfig(_content).slides.map((slide) => ({ ...slide, component: components[`Slide${slide.key.slice(-2)}` as keyof typeof components] }));
+  return buildPdmaConfig(_content).slides.map((slide) => ({ ...slide, component: components[slide.component] }));
 }
 
 export function assertPdma2026ManifestParity(manifest: readonly Pdma2026SlideManifestEntry[], renderedSlides: readonly ReactNode[]) {

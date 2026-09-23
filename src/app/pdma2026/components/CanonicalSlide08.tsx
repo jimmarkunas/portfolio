@@ -1,7 +1,7 @@
 import { PdmaSlideCanvas } from "../PdmaPresentationShell";
 import { pdmaAssets } from "../pdmaAssets";
 import { pdmaGeometry } from "../pdmaGeometry";
-import { Stage, T, B, Img, MAGENTA, MUTED, WHITE } from "./pdmaSlidePrimitives";
+import { Stage, T, B, Img, MAGENTA, MUTED, WHITE } from "./pdmaPrimitives";
 const S = pdmaAssets.slide08Root;
 const stages = [{ n: "01", title: "OBSERVE", body: "AI sees the state\nof the product\nor process.", ellipse: "59d08.svg", icon: "91b4d.svg", active: false }, { n: "02", title: "RECOMMEND", body: "AI proposes what\nshould happen.", ellipse: "379c2.svg", icon: "d17aa.svg", active: false }, { n: "03", title: "PREPARE", body: "AI stages the action\nfor human review.", ellipse: "379c2.svg", icon: "9244f.svg", active: false }, { n: "04", title: "DECIDE", body: "AI chooses the action\nwithin defined rules.", ellipse: "d8145.svg", icon: "8b919.svg", active: true }, { n: "05", title: "EXECUTE", body: "AI acts within\ndefined limits.", ellipse: "ca1fd.svg", icon: "97008.svg", active: true }] as const;
 export function Slide08() { const g = pdmaGeometry.slide08; return <Stage background="#050505"><Img src={`${S}/7149b.png`} geometry={g.gauge} fit="cover"/><div style={{ position: "absolute", left: g.dial.x, top: g.dial.y, width: g.dial.width, height: g.dial.height, maskImage: `url(${S}/3dc3f.svg)`, WebkitMaskImage: `url(${S}/3dc3f.svg)`, maskSize: "460px 460px", WebkitMaskSize: "460px 460px", maskRepeat: "no-repeat", WebkitMaskRepeat: "no-repeat" }}><Img src={`${S}/59b40.png`} geometry={g.dialImage} fit="cover"/></div>

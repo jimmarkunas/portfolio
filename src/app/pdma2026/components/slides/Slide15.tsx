@@ -1,5 +1,5 @@
 import { pdmaAssets } from "../../pdmaAssets";
-import { B, Img, MAGENTA, MUTED, Stage, T } from "../pdmaSlidePrimitives";
+import { B, Img, MAGENTA, MUTED, Stage, T } from "../pdmaPrimitives";
 import { pdmaGeometry } from "../../pdmaGeometry";
 const LINE = "#44464a";
 const S15 = pdmaAssets.slide15Root;

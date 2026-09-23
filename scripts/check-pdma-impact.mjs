@@ -18,7 +18,7 @@ for (const file of changedFiles) {
   const slideMatch = file.match(/slide-(\d{2})/)
   if (slideMatch) { add(slideMatch[1], file); if (file.startsWith("public/") || file.startsWith("src/")) qaMode = qaMode === "full" ? "full" : "targeted" }
   else if (/src\/app\/pdma2026\/components\/slides\/Slide(\d{2})\.tsx$/.test(file)) { add(file.match(/Slide(\d{2})/)?.[1], file); qaMode = qaMode === "full" ? "full" : "targeted" }
-  else if (/src\/app\/pdma2026\/(index\.css|layout\.tsx|Pdma2026App\.tsx|pdma2026SlideManifest\.tsx|pdmaAssets\.ts|pdmaSlideAssets\.ts|pdma\.config\.ts|pdma\.validation\.ts|pdmaGeometry\.ts|PdmaPresentationShell\.tsx|components\/(PdmaTitleBlock|PdmaSlideBody|pdmaSlidePrimitives|pdmaInlinePrimitives)\.tsx|components\/slides\/slideShared\.tsx)/.test(file)) {
+  else if (/src\/app\/pdma2026\/(index\.css|layout\.tsx|Pdma2026App\.tsx|pdma2026SlideManifest\.tsx|pdmaAssets\.ts|pdmaSlideAssets\.ts|pdma\.config\.ts|pdma\.validation\.ts|pdmaGeometry\.ts|PdmaPresentationShell\.tsx|components\/(PdmaTitleBlock|PdmaSlideBody|pdmaPrimitives|pdmaPrimitives)\.tsx|components\/slides\/slideShared\.tsx)/.test(file)) {
     for (const slide of allSlides) add(slide, file)
     qaMode = "full"
   } else if (/scripts\/.*pdma|docs\/pdma2026\/(slide-contracts|immutable-surfaces)/.test(file) || file === "package.json") {

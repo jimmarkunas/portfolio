@@ -1,4 +1,4 @@
-import { B, MAGENTA, MUTED, Stage, T, WHITE } from "../pdmaSlidePrimitives";
+import { B, MAGENTA, MUTED, Stage, T, WHITE } from "../pdmaPrimitives";
 import { pdmaGeometry } from "../../pdmaGeometry";
 
 export function Slide07() {
