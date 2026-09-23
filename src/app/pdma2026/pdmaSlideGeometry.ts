@@ -15,13 +15,13 @@ export type PdmaSlideGeometry = Readonly<{
 export const pdmaSlideGeometry: PdmaSlideGeometry = {
   canvas: { width: 1920, height: 1080 },
   slide03: {
-    panelTop: 428,
+    panelTop: 455,
     panelWidth: 720,
     panelHeight: 380,
     copilotLeft: 304,
     agentLeft: 1028,
     dividerLeft: 936,
-    dividerTop: 428,
-    dividerHeight: 340,
+    dividerTop: 455,
+    dividerHeight: 313,
   },
 };

@@ -36,18 +36,18 @@
 
 .pdma-s03 .s03-descriptor{margin:0;color:#7a7d85;font-size:15px;line-height:24px;font-weight:600;letter-spacing:4px;white-space:nowrap}
 
-.s03-process{position:absolute;left:0;top:107px;display:flex;align-items:flex-start;width:660px;height:115px}
-.s03-step{position:relative;width:88px;text-align:center;color:#f2f2f5}
-.s03-step-circle{display:grid;place-items:center;width:88px;height:88px;border:2px solid #4d4f57;border-radius:50%;font-size:32px;font-weight:600}
+.s03-process{position:absolute;left:0;top:80px;display:flex;align-items:flex-start;gap:70px;width:690px;height:135px}
+.s03-step{position:relative;width:104px;text-align:center;color:#f2f2f5}
+.s03-step-circle{display:grid;place-items:center;width:104px;height:104px;border:2px solid #4d4f57;border-radius:50%;font-size:38px;font-weight:600}
 .s03-step.is-accent .s03-step-circle{border-color:#f2f2f5;box-shadow:0 0 18px 1px rgba(255,47,174,.35)}
 .s03-panel-agent .s03-step.is-accent .s03-step-circle{border-color:#ff2fae;color:#ff2fae}
-.s03-step span{display:block;margin-top:12px;min-height:42px;font-size:18px;line-height:20px;font-weight:600;letter-spacing:1px;white-space:nowrap}
+.s03-step span{display:block;margin-top:14px;min-height:44px;font-size:20px;line-height:22px;font-weight:600;letter-spacing:1px;white-space:normal}
 .s03-panel-agent .s03-step.is-accent span,.s03-panel-agent .s03-step:last-child span{color:#ff2fae}
-.s03-step b{position:absolute;left:102px;top:19px;color:#7a7d85;font-size:30px;font-weight:400}
-.s03-panel hr{position:absolute;left:0;top:278px;width:520px;height:2px;margin:0;border:0;background:#4d4f57}
-.s03-boundary-copy{position:absolute;left:0;top:300px;margin:0;font-size:25px;line-height:40px;white-space:nowrap}
-.s03-capabilities{position:absolute;left:0;top:340px;width:540px;margin:0;text-align:center;color:#ff2fae;font-size:20px;line-height:32px;font-weight:600;letter-spacing:4px;white-space:nowrap}
-.s03-panel-divider{position:absolute;left:654px;top:2px;width:2px;height:340px;background:#5c0d3b}
+.s03-step b{position:absolute;left:122px;top:32px;color:#7a7d85;font-size:34px;font-weight:400}
+.s03-panel hr{position:absolute;left:0;top:251px;width:520px;height:2px;margin:0;border:0;background:#4d4f57}
+.s03-boundary-copy{position:absolute;left:0;top:273px;margin:0;font-size:28px;line-height:40px;white-space:nowrap}
+.s03-capabilities{position:absolute;left:0;top:313px;width:540px;margin:0;text-align:center;color:#ff2fae;font-size:22px;line-height:32px;font-weight:600;letter-spacing:4px;white-space:nowrap}
+.s03-panel-divider{position:absolute;left:654px;top:2px;width:2px;height:313px;background:#5c0d3b}
 .s03-takeaway{position:absolute;left:0;top:838px;width:1790px;height:80px;border-top:2px solid #44464a;z-index:2;color:#f2f2f5}
 .s03-takeaway i{position:absolute;left:128px;top:33px;width:4px;height:54px;background:#ff2fae}
 .s03-takeaway strong{position:absolute;left:156px;top:32px;font-size:31px;line-height:38px;letter-spacing:.5px;white-space:nowrap}
