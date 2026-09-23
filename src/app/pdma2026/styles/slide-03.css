@@ -26,10 +26,7 @@
 
 .pdma-s03 .s03-right{left:1260px;top:105px;width:830px;height:830px;object-fit:cover}
 
-.pdma-s03 .s03-panel{position:absolute;top:var(--pdma-s03-panel-top);width:var(--pdma-s03-panel-width);height:var(--pdma-s03-panel-height);z-index:2;color:#f2f2f5}
-
-.pdma-s03 .s03-panel-copilot{left:var(--pdma-s03-copilot-left)}
-.pdma-s03 .s03-panel-agent{left:var(--pdma-s03-agent-left)}
+.pdma-s03 .s03-panel{position:absolute;z-index:2;color:#f2f2f5}
 
 .pdma-s03 .s03-panel h2{margin:0;font-size:25px;line-height:40px;font-weight:600;letter-spacing:3px}
 .pdma-s03 .s03-panel-agent h2{color:#ff2fae;letter-spacing:4px}
