@@ -16,13 +16,38 @@ For visual work, the **Canonical visual-edit loop** below is mandatory.
 
 Do not turn a slide task into an architecture review, cleanup program, or repo-wide audit.
 
+## Mandatory PDMA visual contract
+
+For every PDMA visual mutation, read these before editing:
+
+1. `docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md`
+2. `docs/pdma2026/CODEX_VISUAL_TASK_HEADER.md`
+3. `docs/pbds-presentation-components.md` only for the PBDS/runtime rules relevant to the target
+
+`docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md` is the canonical slide-state registry and visual implementation authority beneath Jim's explicit current instruction and the canonical final Figma frame.
+
+Slides marked `LOCKED` in that contract are not writable. If a task targets one without Jim explicitly reopening it, return:
+
+`PDMA_SCOPE_STOP — slide NN is LOCKED`
+
+`docs/pdma2026/immutable-surfaces.json` is the mechanical implementation lock for currently accepted surfaces. Do not bypass, weaken, or casually rewrite it. When Jim explicitly changes a slide state, update the visual contract and immutable snapshot together so the human state and enforcement state remain aligned.
+
+For every Codex/agent visual task, use the control block and hard execution rules in `docs/pdma2026/CODEX_VISUAL_TASK_HEADER.md`. The allowed-file list is a hard mutation boundary, not a suggestion.
+
+If a visual task requires inventing a new visual language, changing a locked slide, changing shared presentation behavior, deviating from the Slides 1–3 visual imperative, or choosing between materially different new compositions without explicit authorization, return:
+
+`PDMA_VISUAL_DECISION_STOP — <exact unresolved design decision>`
+
+Do not improvise around the decision.
+
 ## Canonical ownership
 - **Current GitHub `main`** owns implementation truth.
 - **Canonical approved Figma frame** owns visual truth for a slide when one is explicitly designated.
+- **`docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md`** owns PDMA visual state, remaining recovery order, and the Slides 1–3 style imperative.
 - **Current slide manifest/content** owns production copy/chrome semantics unless the user explicitly changes them.
 - **`pdmaGeometry.ts`** owns shared logical geometry until/unless the approved typed-config backlog replaces it.
 - **1920×1080** is the canonical logical slide canvas. Runtime scaling preserves that composition.
-- Do not create a second geometry registry, second manifest, second asset registry, or second styling pipeline.
+- Do not create a second geometry registry, second manifest, second asset registry, second slide-state registry, or second styling pipeline.
 
 ## Bounded reads
 For a one-slide task, read only what is needed for that slide:
@@ -105,6 +130,7 @@ Do not introduce:
 - another manifest/config registry;
 - another primitive family;
 - another CSS ownership model;
+- another slide-state registry;
 - repo-wide cleanup as part of a slide fix.
 
 A slide may remain visually special while still using the shared canvas/surface/body contract.
