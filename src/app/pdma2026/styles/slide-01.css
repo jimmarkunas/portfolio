@@ -39,9 +39,6 @@
 
 .pdma-s01 .s01-people-rule,.pdma-s01 .s01-ai-rule{display:none}
 
-.pdma-s01 .s01-wide{animation:pdma-s01-shimmer 9s ease-in-out infinite}
-
 .pdma-s01::before{content:"";position:absolute;left:24%;bottom:0;width:66%;height:22%;background:radial-gradient(ellipse at center,rgba(255,47,174,.42),transparent 68%);pointer-events:none;z-index:3;transform-origin:center bottom;animation:pdma-s01-reflection 7s ease-in-out infinite}
 
-.pdma-s01 .s01-orb{position:relative;z-index:2;animation:pdma-s01-shimmer 7s ease-in-out infinite}
-.pdma-s01 .s01-wide,.pdma-s01::before{animation:none}
+.pdma-s01 .s01-orb{position:relative;z-index:2;animation:pdma-s01-orb-drift 14s ease-in-out infinite}
