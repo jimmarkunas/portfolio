@@ -38,7 +38,7 @@ export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaT
       initial={reduced ? false : { opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      {config.white && <span>{config.white}</span>}
+      {config.white && config.plusMagenta ? (() => { const [before, after] = config.white.split(" + "); return <><span>{before}</span><em style={{ marginLeft: 0 }}> + </em><span>{after}</span></>; })() : config.white && <span>{config.white}</span>}
       {config.sameRow && config.magenta && <em>{config.magenta}</em>}
     </motion.h1>
     {!config.sameRow && config.magenta && <motion.h1
