@@ -247,6 +247,24 @@ Supporting microcopy may include:
 
 This component is intentionally **dimensional and material**. Preserve suspended planes, depth edges, glows, particulate detail, and diagrammatic relationships. Do not reduce it to stacked flat cards or generic boxes.
 
+## Presentation Spacing Grammar
+
+The PDMA presentation uses one shared spacing rhythm across its 1920×1080 logical canvas:
+
+- **Canvas:** logical canvas is 1920×1080.
+- **Chrome:** header occupies y 0–100; footer begins at y 985; slide semantics must not collide with either.
+- **Horizontal rails:** primary semantic rail is x 64; secondary rail is approximately x 72 only where approved Figma geometry uses it; major two-column gutters are at least 64px, normally 80–96px.
+- **Title:** normal title anchor is approximately y 118; title/subtitle generally resolve by y 340–360; the title remains part of the shared semantic plane.
+- **Title → body:** minimum breathing gap is 48px; preferred gap is 64–96px, measured from the visual bottom of the title/subtitle block to the first major semantic body element.
+- **Body start:** normal primary body start band is y 392–440. Complete compositions should not be pushed lower by local patches.
+- **Section rhythm:** section heading to first semantic element is 40–56px; repeated rows normally use approximately 96–104px pitch; micro spacing favors 16 / 24 / 32 / 40 / 48; major spacing favors 64 / 80 / 96.
+- **Body stop:** major semantic body should generally resolve by y 800–820.
+- **Takeaway / boundary band:** reserve roughly y 810–925 for takeaway, boundary, principle, or conclusion content; do not use it as overflow for a cramped main composition.
+- **Footer quiet zone:** y 925–985 should normally remain semantically quiet, with at least 60px between the last semantic content and footer chrome.
+- **Default density:** title → breathing space → primary body → breathing space → takeaway/synthesis → footer quiet zone. Do not stack extra semantic bands merely because canvas space remains.
+- **Art:** decorative imagery and atmosphere may bleed or crop responsively; semantic text, diagrams, controls, cards, and labels stay inside the spacing grammar.
+- **Exceptions:** approved Figma geometry may intentionally override these defaults. Existing implementation hacks do not become spacing authority merely because they already exist.
+
 ### Usage
 
 Use selectively when a layered-system metaphor materially improves understanding.
