@@ -45,7 +45,6 @@
 .pdma-s01 .s01-people-rule,.pdma-s01 .s01-ai-rule{display:none}
 @keyframes pdma-s01-orb-drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5px,-4px) scale(1.005)}}
 @keyframes pdma-s01-reflection{0%,100%{opacity:.12;transform:scaleX(.9)}50%{opacity:.38;transform:scaleX(1.08)}}
-.pdma-s01::before{content:"";position:absolute;left:24%;bottom:0;width:66%;height:22%;background:radial-gradient(ellipse at center,rgba(255,47,174,.42),transparent 68%);pointer-events:none;z-index:3;transform-origin:center bottom;animation:pdma-s01-reflection 7s ease-in-out infinite}
 .pdma-s01 .s01-orb{position:relative;z-index:2;animation:pdma-s01-orb-drift 14s ease-in-out infinite}
 .pdma-slide-body-02{position:absolute;inset:0}
 @media (prefers-reduced-motion:reduce){.pdma-s01 .s01-wide,.pdma-s01 .s01-orb,.pdma-s01::before,.pdma-s02::after{animation:none}.pdma-s02::after{opacity:.08;transform:scale(1)}}

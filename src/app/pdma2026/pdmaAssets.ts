@@ -1,5 +1,11 @@
 export const pdmaAssets = {
   asterisk: "/pdma2026/slide-01/canonical-asterisk.svg",
+  slide01: {
+    particleOverlay: "/pdma2026/slide-01/slide-01-particle-overlay.png",
+    planetBack: "/pdma2026/slide-01/slide-01-planet-back.png",
+    planetForeground: "/pdma2026/slide-01/slide-01-planet-foreground.png",
+    heroAsterisk: "/pdma2026/slide-01/slide-01-asterisk-hero.png",
+  },
   slide06: {
     nebula: "/pdma2026/slide-06/figma-nebula.png",
     planet: "/pdma2026/slide-06/figma-planet.png",
