@@ -1,5 +1,7 @@
-import { B, Img, MAGENTA, Stage, T } from "./canonicalShared";
+import { B, Img, MAGENTA, Stage, T } from "../pdmaSlidePrimitives";
+import { pdmaGeometry } from "../../pdmaGeometry";
 export function Slide12(){
+  const g = pdmaGeometry.slide12;
   const framework=[["A","Authority"],["G","Guardrails"],["E","Evidence"],["N","Network & Integrations"],["T","Transfer & Escalation"],["S","Success & Accountability"]];
   const req=[["A","The agent may recommend a\nretention intervention, but cannot\npublish or launch it."],["G","Recommendations must stay within\napproved product surfaces and\nbusiness rules."],["E","Keep a clear record of the recommendation,\nthe inputs that drove it, and the final\ndecision."],["N","Agent has read/write access to Salesforce,\nbut cannot change customer payment data."],["T","CS Lead approval is required before an agent\ncan update a customer’s payment data."],["S","Measure retention lift, recommendation\naccuracy, false-positive rate, and human\noverride rate."]];
   return <Stage>
