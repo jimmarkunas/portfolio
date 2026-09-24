@@ -316,7 +316,7 @@ export const slide11: AgentsRevealContent = {
   ],
 };
 
-// 12 — TURN THE FRAMEWORK INTO PRODUCT. · preserved production composition
+// 12 — TURN THE FRAMEWORK INTO PRODUCT. · Translation / Traceability v1 (approved 2026-09-24)
 export const slide12: FrameworkToProductContent = {
   kind: "framework-to-product",
   chrome: {
@@ -324,7 +324,7 @@ export const slide12: FrameworkToProductContent = {
     tocTitle: "TURN THE FRAMEWORK INTO PRODUCT.",
     headerLabels: ["FRAMEWORK", "REQUIREMENTS", "PRODUCT"],
     footerLabel: "FRAMEWORK → REQUIREMENTS → BUILDABLE PRODUCT",
-    title: { ...standardTitle, white: "TURN THE FRAMEWORK", magenta: "INTO PRODUCT.", subtitle: "A.G.E.N.T.S. changes how you write your backlog.", size: 90, leading: 96, subtitleSize: 28 },
+    title: { ...standardTitle, white: "TURN THE FRAMEWORK", magenta: "INTO PRODUCT.", subtitle: "A.G.E.N.T.S. changes how you write your backlog.", size: 85, leading: 78, tracking: -1, subtitleSize: 29.8, subtitleLeading: 36, subtitleOffset: 7 },
   },
   framework: {
     heading: "A.G.E.N.T.S FRAMEWORK",
@@ -343,7 +343,7 @@ export const slide12: FrameworkToProductContent = {
   },
 };
 
-// 13 — AN IDEA + AI ≠ PRODUCT SPEC. · preserved production composition
+// 13 — AN IDEA + AI ≠ PRODUCT SPEC. · approved v1 composition (2026-09-24)
 export const slide13: IdeaToSpecContent = {
   kind: "idea-to-spec",
   chrome: {
@@ -351,7 +351,7 @@ export const slide13: IdeaToSpecContent = {
     tocTitle: "AN IDEA + AI ≠ PRODUCT SPEC.",
     headerLabels: ["IDEA", "REQUIREMENTS", "PRODUCT"],
     footerLabel: "LESS REWORK • FASTER DELIVERY • HIGHER CONFIDENCE",
-    title: { ...standardTitle, white: "AN IDEA + AI", magenta: "≠ PRODUCT SPEC.", subtitle: "Same starting point. Different outcomes.", subtitleSize: 30, sameRow: true, magentaX: 760, plusMagenta: true },
+    title: { ...standardTitle, white: "AN IDEA + AI", magenta: "≠ PRODUCT SPEC.", subtitle: "Same starting point. Different outcomes.", size: 78, tracking: 2, subtitleSize: 33, subtitleLeading: 36, subtitleOffset: 9, sameRow: true, magentaX: 757, plusMagenta: true },
   },
   sideStatement: "CLARITY\nTURNS IDEAS\nINTO IMPACT.",
   before: {

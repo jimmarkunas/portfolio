@@ -5,10 +5,10 @@
  * Per viewport × slide: no document scroll, one uniformly scaled 16:9 canvas, logical layout
  * identical across viewports (no stacking), header/footer/count intact, canonical copy present
  * and unclipped, decoration loaded, A.G.E.N.T.S. not named before Slide 11.
- * Fidelity: template-mapped slides vs the accepted /pdma2026-templates renders; 05 (HERO) and
- * 11 (Brand / Reveal) vs their approved references (--approved-dir, the unzipped
- * PDMA_PBDS_Hero_BrandReveal_v1 bundle); other preserved slides vs pre-migration reference
- * captures (--reference-dir, files 1920x1080-sNN.png).
+ * Fidelity: template-mapped slides vs the accepted /pdma2026-templates renders; 05 (HERO),
+ * 11 (Brand / Reveal), 12 and 13 vs their approved references (--approved-dir: the unzipped
+ * PDMA_PBDS_Hero_BrandReveal_v1 bundle plus slide-12/13-approved-reference.png); other
+ * preserved slides vs pre-migration reference captures (--reference-dir, files 1920x1080-sNN.png).
  * Functional: arrow navigation, TOC, fullscreen, Slide 14 exercise link + route, Slide 16 CTA/QR.
  * (The Slide 15 embedded exercise is walked frame by frame by pdma-exercise-qa.mjs.)
  *
@@ -37,17 +37,20 @@ const templateMap = { 1: 1, 3: 5, 6: 8, 7: 9, 8: 7, 9: 6, 10: 10, 14: 3, 15: 4, 
  * Preserved slides vs pre-migration captures. 04/11/12 intentionally expose copy the legacy
  * geometry hid beneath the footer, so their budgets allow that measured shift.
  */
-const preservedBudget = { 2: 1.5, 4: 6, 12: 12, 13: 3 }
+const preservedBudget = { 2: 1.5, 4: 6 }
 /**
  * Approved full-slide references (docs/pdma2026/PDMA_VISUAL_APPROVALS_2026-09-24.md). Budgets cover
  * Inter vs the reference face and the supplied decorative asset vs the reference's rendering of it;
- * the replaced compositions scored 38.2 (05) and 29.6 (11), accepted builds 23.9 and 20.6.
+ * the replaced compositions scored 38.2 / 29.6 / 28.3 / 22.7 (05 / 11 / 12 / 13), accepted builds
+ * 23.9 / 20.6 / 12.3 / 11.8.
  */
 const approvedReferences = {
   5: "slide-05-hero-centered-signal-field/slide-05-hero-approved-reference.png",
   11: "slide-11-brand-reveal-particle-horizon/slide-11-brand-reveal-approved-reference.png",
+  12: "slide-12-approved-reference.png",
+  13: "slide-13-approved-reference.png",
 }
-const approvedBudget = { 5: 26, 11: 23 }
+const approvedBudget = { 5: 26, 11: 23, 12: 14, 13: 13 }
 const TEMPLATE_BUDGET = 0.8
 const viewports = [
   { name: "desktop-1920x1080", width: 1920, height: 1080 },

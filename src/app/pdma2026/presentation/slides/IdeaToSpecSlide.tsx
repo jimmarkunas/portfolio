@@ -1,6 +1,15 @@
+import type { DecorItem } from "@/app/pdma2026-templates/components/DecorativeLayer";
 import { TakeawayBand } from "@/app/pdma2026-templates/components/shared/TakeawayBand";
 import { TemplateSlide } from "@/app/pdma2026-templates/components/TemplateSlide";
 import type { IdeaToSpecContent } from "../presentationTypes";
+
+const ORBS = "/pdma2026-templates/assets/flow-scenario";
+
+/** Existing white-left / magenta-right edge orbs, cropped for this slide. Decorative only. */
+export const ideaToSpecDecor: readonly DecorItem[] = [
+  { src: `${ORBS}/slide-09-left-orb-white-v1.png`, x: -731, y: -13, w: 950, h: 950 },
+  { src: `${ORBS}/slide-09-right-orb-magenta-v1.png`, x: 1710, y: 11, w: 900, h: 900 },
+];
 
 function SpecPanel({ panel, tone }: { panel: IdeaToSpecContent["before"]; tone: "before" | "after" }) {
   return <article className={`pdmat-spec__panel pdmat-spec__panel--${tone}`}>
@@ -13,9 +22,8 @@ function SpecPanel({ panel, tone }: { panel: IdeaToSpecContent["before"]; tone: 
 }
 
 export function IdeaToSpecSlide({ content }: { content: IdeaToSpecContent }) {
-  return <TemplateSlide kind={content.kind} title={content.chrome.title}>
+  return <TemplateSlide kind={content.kind} title={content.chrome.title} decorItems={ideaToSpecDecor}>
     <section className="pdmat-template pdmat-spec">
-      <aside className="pdmat-spec__side"><p>{content.sideStatement}</p><i aria-hidden="true" /></aside>
       <SpecPanel panel={content.before} tone="before" />
       <div className="pdmat-spec__bridge">
         <img src={content.bridge.art} alt="" />

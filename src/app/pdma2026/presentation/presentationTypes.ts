@@ -71,6 +71,7 @@ export type FrameworkToProductContent = PreservedBase<"framework-to-product"> & 
 
 type SpecPanel = { label: string; title: string; quote: string; items: readonly string[]; marker: string };
 export type IdeaToSpecContent = PreservedBase<"idea-to-spec"> & {
+  /** Retained canonical copy; the approved v1 composition does not render it. */
   sideStatement: string;
   before: SpecPanel;
   bridge: { art: string; label: string };
