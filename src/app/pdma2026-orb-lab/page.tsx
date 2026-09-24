@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import "../pdma2026-templates/styles/templates.css";
@@ -264,10 +264,10 @@ export default function PdmaOrbLabPage() {
     <div className="pdma2026-page pdma2026-orb-lab">
       <PdmaPresentationShell
         slides={[
-          <div key="slide-12-orb-lab">
+          <Fragment key="slide-12-orb-lab">
             <Slide12Component />
             <OrbOverlay mode={mode} strength={strength} paused={paused} />
-          </div>,
+          </Fragment>,
         ]}
         slideManifest={[slide12]}
         navigation={pdma2026Content.navigation}
