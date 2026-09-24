@@ -226,7 +226,7 @@ Architecture is satisfied only when:
 ## 16. Production cutover (2026-09-24)
 
 - Template baseline `c350ce713d2414296a5018674b9408f8a6f7931b` accepted.
-- `/pdma2026` is now the production consumer of this architecture: 9 slides use the approved templates, 6 keep their approved production composition rebuilt on the same primitives (`src/app/pdma2026/presentation/`).
+- `/pdma2026` is now the production consumer of this architecture: 16 slides; 10 use the approved templates (Slide 15 is the Embedded App template running the PDMA scenario exercise), 6 keep their approved production composition rebuilt on the same primitives (`src/app/pdma2026/presentation/`).
 - `/pdma2026-templates` remains the template gallery.
 - Pre-cutover rollback checkpoint: `3e343570ab1957513fdf8883e2efcdaa56226a5d`. The cutover commit is recorded in git history; roll back with `git revert`.
 - The build-phase restrictions in the header, §4 and §14 (legacy `/pdma2026` read-only) applied to template construction only and are superseded.

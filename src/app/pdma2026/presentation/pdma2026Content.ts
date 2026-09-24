@@ -22,6 +22,7 @@ import {
 import type {
   CompareContrastTemplateContent,
   DecisionSpectrumTemplateContent,
+  EmbeddedAppTemplateContent,
   EndCardTemplateContent,
   ExerciseTemplateContent,
   FlowScenarioTemplateContent,
@@ -41,7 +42,7 @@ import type {
 
 /*
  * PDMA 2026 production deck — the single source of presentation copy for /pdma2026.
- * Nine slides use approved template compositions; six keep their approved production
+ * Ten slides use approved template compositions; six keep their approved production
  * composition. Copy is verbatim from the pre-cutover production deck (ROLLBACK_SHA
  * 3e343570ab1957513fdf8883e2efcdaa56226a5d). The /pdma2026-templates gallery consumes the
  * template-mapped objects below as its exemplar content.
@@ -51,7 +52,7 @@ const standardTitle = { size: 82, leading: 88, tracking: -2.4 } as const;
 const lines = (...values: string[]) => values.join("\n");
 const S = (slide: string, file: string) => `/pdma2026/${slide}/${file}`;
 
-/** Slide 15 destination. The End Card QR and round CTA both read this value. */
+/** Slide 16 destination. The End Card QR and round CTA both read this value. */
 export const PDMA_KIT_URL = "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model";
 /** Slide 14 worksheet destination. */
 export const PDMA_EXERCISE_ROUTE = "/pdma2026/exercise";
@@ -408,8 +409,22 @@ export const slide14: ExerciseTemplateContent = {
   takeaway: "ARE YOU READY TO PRODUCTIZE YOUR AI?",
 };
 
-// 15 — TURN AI CAPABILITY INTO PRODUCT VALUE. · End Card template
-export const slide15: EndCardTemplateContent = {
+// 15 — EMBEDDED APPS. REAL WORK. · Embedded App template (live PDMA scenario exercise)
+export const slide15: EmbeddedAppTemplateContent = {
+  kind: "embedded-app",
+  decorativeVariant: "embedded-dual-orbs",
+  chrome: {
+    sourceSlide: null,
+    tocTitle: "EMBEDDED APPS. REAL WORK.",
+    headerLabels: ["APPLY", "DECIDE", "BUILD"],
+    footerLabel: "USEFUL PM ARTIFACT • NOT JUST A QUIZ RESULT",
+    title: { ...standardTitle, white: "EMBEDDED APPS.", magenta: "REAL WORK.", subtitle: "Put live tools, data, and workflows directly in the presentation.", subtitleSize: 30, sameRow: true, magentaX: 746 },
+  },
+  frameLabel: "Live PDMA productization exercise",
+};
+
+// 16 — TURN AI CAPABILITY INTO PRODUCT VALUE. · End Card template
+export const slide16: EndCardTemplateContent = {
   kind: "end-card",
   decorativeVariant: "end-card-orb",
   chrome: {
@@ -432,11 +447,12 @@ export const slide15: EndCardTemplateContent = {
   },
 };
 
-/** Narrative order is fixed: 15 slides, A.G.E.N.T.S. first named on Slide 11. */
+/** Narrative order is fixed: 16 slides, A.G.E.N.T.S. first named on Slide 11. */
 export const pdma2026Slides = [
   slide01, slide02, slide03, slide04, slide05,
   slide06, slide07, slide08, slide09, slide10,
   slide11, slide12, slide13, slide14, slide15,
+  slide16,
 ] as const;
 
 export type Pdma2026SlideContent = (typeof pdma2026Slides)[number];

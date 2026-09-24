@@ -105,7 +105,7 @@ async function measure(page) {
         if (outsideCanvas || underChrome) clippedText.push(`${node.textContent.trim().slice(0, 60)} [${Math.round(rect.top)}–${Math.round(rect.bottom)}]`)
       }
     }
-    const hiddenOverflow = [...slide.querySelectorAll(".pdmat-app-frame__viewport, .pdmat-xapp__panel, .pdmat-worksheet, .pdmat-card, .pdmat-scorecard__matrix")]
+    const hiddenOverflow = [...slide.querySelectorAll(".pdmat-app-frame__viewport, .pdmax, .pdmat-worksheet, .pdmat-card, .pdmat-scorecard__matrix")]
       .filter((element) => element.scrollHeight > element.clientHeight + 2 || element.scrollWidth > element.clientWidth + 2)
       .map((element) => `${element.className.toString().split(" ")[0]} ${element.scrollWidth}x${element.scrollHeight} > ${element.clientWidth}x${element.clientHeight}`)
     const deco = slide.querySelector(".pdmat-deco")
@@ -175,30 +175,37 @@ for (const viewport of viewports) {
     if (!urls.qr || urls.qr !== urls.cta || urls.qrLink !== urls.cta) fail(`end-card: QR/CTA URL mismatch ${JSON.stringify(urls)}`)
     await page.locator(".pdmat-download__qr").screenshot({ path: path.join(outDir, "end-card-qr.png") })
 
-    // Embedded app: live, contained, keyboard-isolated, completes the full exercise flow.
+    // Embedded app: the PDMA scenario exercise runs live, contained, keyboard-isolated, intro → brief.
     await goToSlide(page, 3)
-    const input = page.locator(".pdmat-xapp__initiative input")
-    await input.fill("Retention agent")
-    for (const key of ["ArrowRight", "Space", "f", "ArrowLeft"]) await input.press(key)
-    if ((await page.locator(".pdma-count").textContent())?.trim() !== "4 / 10") fail("embedded-app: typing inside the app changed the slide")
-    await page.getByRole("button", { name: /Start exercise/ }).click()
-    for (let step = 0; step < 8; step += 1) {
-      await page.locator(".pdmat-xapp__choice").first().click()
-      const overflow = await page.evaluate(() => { const panel = document.querySelector(".pdmat-xapp__panel"); return panel.scrollHeight > panel.clientHeight + 2 })
-      if (overflow) fail(`embedded-app: decision ${step + 1} panel overflows its frame`)
-      await page.screenshot({ path: path.join(outDir, `embedded-app-step-${step + 1}.png`) })
-      await page.locator(".pdmat-xapp__footer .is-primary").click()
-    }
-    const result = await page.evaluate(() => {
+    const fits = () => page.evaluate(() => {
       const frame = document.querySelector(".pdmat-app-frame__viewport").getBoundingClientRect()
-      const app = document.querySelector(".pdmat-xapp").getBoundingClientRect()
-      const panel = document.querySelector(".pdmat-xapp__panel")
-      return { text: panel.innerText, contained: app.left >= frame.left - 1 && app.right <= frame.right + 1 && app.top >= frame.top - 1 && app.bottom <= frame.bottom + 1, overflow: panel.scrollHeight > panel.clientHeight + 2 }
+      const app = document.querySelector(".pdmax")
+      const rect = app.getBoundingClientRect()
+      return { frame: app.getAttribute("data-frame"), contained: rect.left >= frame.left - 1 && rect.right <= frame.right + 1 && rect.top >= frame.top - 1 && rect.bottom <= frame.bottom + 1, overflow: app.scrollHeight > app.clientHeight + 1 || app.scrollWidth > app.clientWidth + 1 }
     })
-    await page.screenshot({ path: path.join(outDir, "embedded-app-result.png") })
-    if (!/PRODUCTIZATION BRIEF/i.test(result.text) || !result.text.includes("Retention agent")) fail("embedded-app: result brief not generated from live state")
-    if (!result.contained) fail("embedded-app: app escapes its frame")
-    if (result.overflow) fail("embedded-app: result panel overflows")
+    const checkFrame = async (label) => {
+      const m = await fits()
+      if (!m.contained || m.overflow) fail(`embedded-app: ${label} (${m.frame}) overflows or escapes its frame`)
+      await page.screenshot({ path: path.join(outDir, `embedded-app-${label}.png`) })
+    }
+    await checkFrame("intro")
+    await page.getByRole("button", { name: /Start Challenge/ }).click()
+    await page.keyboard.press("ArrowRight")
+    if ((await page.locator(".pdma-count").textContent())?.trim() !== "4 / 10") fail("embedded-app: keys pressed inside the app changed the slide")
+    const app = page.locator(".pdmax")
+    for (const answer of ["YES", "YES"]) { await app.getByRole("button", { name: new RegExp(`${answer}$`) }).click(); await app.locator(".pdmax__footer .is-primary").click() }
+    await app.locator(".pdmax__choice").first().click()
+    await app.locator(".pdmax__footer .is-primary").click()
+    for (let control = 0; control < 6; control += 1) {
+      await app.locator(".pdmax__choice").nth(1).click()
+      await checkFrame(`control-${"AGENTS"[control]}`)
+      await app.locator(".pdmax__footer .is-primary").click()
+    }
+    await checkFrame("decision")
+    if ((await app.getAttribute("data-decision")) !== "GO WITH CONDITIONS") fail(`embedded-app: unexpected decision ${await app.getAttribute("data-decision")}`)
+    await app.getByRole("button", { name: /BUILD MY PRODUCTIZATION BRIEF/ }).click()
+    await checkFrame("brief")
+    if ((await app.getAttribute("data-frame")) !== "brief") fail("embedded-app: productization brief did not open after the decision")
   }
   await context.close()
 }

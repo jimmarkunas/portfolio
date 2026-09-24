@@ -7,7 +7,8 @@
  * and unclipped, decoration loaded, A.G.E.N.T.S. not named before Slide 11.
  * Fidelity: template-mapped slides vs the accepted /pdma2026-templates renders; preserved slides
  * vs pre-migration reference captures (--reference-dir, files 1920x1080-sNN.png).
- * Functional: arrow navigation, TOC, fullscreen, Slide 14 exercise link + route, Slide 15 CTA/QR.
+ * Functional: arrow navigation, TOC, fullscreen, Slide 14 exercise link + route, Slide 16 CTA/QR.
+ * (The Slide 15 embedded exercise is walked frame by frame by pdma-exercise-qa.mjs.)
  *
  * Usage: node scripts/pdma-deck-visual-qa.mjs [--route /pdma2026/] [--reference-dir <dir>] [--out <dir>]
  * Exit: 0 PASS · 1 FAIL · 2 VISUAL_QA: REQUIRES_EXTERNAL_REVIEW (browser or server unavailable)
@@ -26,9 +27,9 @@ const route = arg("--route", "/pdma2026/")
 const referenceDir = arg("--reference-dir", null)
 const outDir = path.resolve(arg("--out", path.join(os.tmpdir(), "pdma-deck-qa")))
 const KIT_URL = "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model"
-const compositions = ["title", "shift-boundary", "compare-contrast", "work-map", "ambiguity-gate", "hub-ecosystem", "scorecard", "decision-spectrum", "flow-scenario", "structured-content-action", "agents-reveal", "framework-to-product", "idea-to-spec", "exercise", "end-card"]
+const compositions = ["title", "shift-boundary", "compare-contrast", "work-map", "ambiguity-gate", "hub-ecosystem", "scorecard", "decision-spectrum", "flow-scenario", "structured-content-action", "agents-reveal", "framework-to-product", "idea-to-spec", "exercise", "embedded-app", "end-card"]
 /** Production slide → accepted template gallery slide. */
-const templateMap = { 1: 1, 3: 5, 6: 8, 7: 9, 8: 7, 9: 6, 10: 10, 14: 3, 15: 2 }
+const templateMap = { 1: 1, 3: 5, 6: 8, 7: 9, 8: 7, 9: 6, 10: 10, 14: 3, 15: 4, 16: 2 }
 /**
  * Preserved slides vs pre-migration captures. 04/11/12 intentionally expose copy the legacy
  * geometry hid beneath the footer, so their budgets allow that measured shift.
@@ -120,7 +121,7 @@ for (const viewport of viewports) {
   await page.waitForSelector(".pdmat-slide")
   await page.waitForTimeout(700)
   fs.mkdirSync(path.join(outDir, viewport.name), { recursive: true })
-  for (let index = 0; index < 15; index += 1) {
+  for (let index = 0; index < 16; index += 1) {
     if (index > 0) await goTo(page, index)
     const shot = path.join(outDir, viewport.name, `s${String(index + 1).padStart(2, "0")}.png`)
     await page.screenshot({ path: shot })
@@ -129,7 +130,7 @@ for (const viewport of viewports) {
     const tag = `[${viewport.name}] ${String(index + 1).padStart(2, "0")}`
     const expected = deckCopyRegistry[index]
     if (m.kind !== compositions[index]) fail(`${tag}: composition ${m.kind} ≠ ${compositions[index]}`)
-    if (m.count !== `${index + 1} / 15`) fail(`${tag}: slide count "${m.count}"`)
+    if (m.count !== `${index + 1} / 16`) fail(`${tag}: slide count "${m.count}"`)
     if (m.doc[0] > m.viewport[0] + 1 || m.doc[1] > m.viewport[1] + 1 || m.doc[2] !== 0) fail(`${tag}: document scrolls ${m.doc}`)
     if (Math.abs(m.canvas[2] / m.canvas[3] - 16 / 9) > 0.01 || m.canvas[0] < -1 || m.canvas[1] < -1 || m.canvas[0] + m.canvas[2] > m.viewport[0] + 1 || m.canvas[1] + m.canvas[3] > m.viewport[1] + 1) fail(`${tag}: canvas not a contained 16:9 plane ${m.canvas}`)
     if (!m.title || m.nav < 4) fail(`${tag}: title block or navigation missing`)
@@ -150,15 +151,15 @@ for (const viewport of viewports) {
 
   if (viewport.name.startsWith("desktop")) {
     // Navigation: back through the deck with ArrowLeft.
-    for (let index = 13; index >= 0; index -= 1) { await page.keyboard.press("ArrowLeft"); await page.waitForTimeout(90) }
+    for (let index = 14; index >= 0; index -= 1) { await page.keyboard.press("ArrowLeft"); await page.waitForTimeout(90) }
     await page.waitForTimeout(600)
     if ((await currentIndex(page)) !== 0) fail("navigation: ArrowLeft did not return to slide 1")
-    // TOC: 15 entries, selecting entry 9 lands on Slide 09.
+    // TOC: 16 entries, selecting entry 9 lands on Slide 09.
     await page.locator(".pdma-count").click()
     const dialog = page.getByRole("dialog")
     await dialog.waitFor()
     const entries = await dialog.locator("li").count()
-    if (entries !== 15) fail(`TOC: ${entries} entries`)
+    if (entries !== 16) fail(`TOC: ${entries} entries`)
     const tocTitles = (await dialog.locator("li").allInnerTexts()).map((text) => normalize(text).replace(/^\d+ \/ \d+ /, ""))
     deckCopyRegistry.forEach(({ toc }, i) => { if (!normalize(tocTitles[i] ?? "").includes(toc)) fail(`TOC entry ${i + 1}: "${tocTitles[i]}" ≠ "${toc}"`) })
     await dialog.locator("li").nth(8).locator("button, a").first().click()
@@ -175,20 +176,21 @@ for (const viewport of viewports) {
     await exercisePage.waitForLoadState("networkidle")
     const response = await fetch(`${baseUrl}/pdma2026/exercise`)
     if (response.status !== 200) fail(`/pdma2026/exercise returned ${response.status}`)
-    await exercisePage.getByRole("button", { name: /Start exercise/ }).click()
-    await exercisePage.getByRole("button", { name: /Increase revenue/i }).first().click()
-    const nextEnabled = await exercisePage.getByRole("button", { name: /Next decision/ }).isEnabled()
-    if (!nextEnabled) fail("/pdma2026/exercise: not interactive (value selection did not enable Next)")
+    await exercisePage.getByRole("button", { name: /Start Challenge/ }).click()
+    const next = exercisePage.locator(".pdmax__footer .is-primary")
+    const disabledBefore = await next.isDisabled()
+    await exercisePage.getByRole("button", { name: /YES$/ }).click()
+    if (!disabledBefore || !(await next.isEnabled())) fail("/pdma2026/exercise: not interactive (foundation answer did not enable Next)")
     notes.push(`exercise: opened from Slide 14 (${exercisePage.url().replace(baseUrl, "")}), 200, interactive`)
     await exercisePage.close()
-    // Slide 15 CTA + QR share one URL; decode the rendered QR.
-    await goTo(page, 14)
+    // Slide 16 CTA + QR share one URL; decode the rendered QR.
+    await goTo(page, 15)
     const urls = await page.evaluate(() => ({ qr: document.querySelector(".pdmat-qr")?.getAttribute("data-qr-value"), qrLink: document.querySelector(".pdmat-download__qr")?.getAttribute("href"), cta: document.querySelector(".pdmat-download__cta")?.getAttribute("href"), ctaText: document.querySelector(".pdmat-download__cta")?.textContent }))
-    if (urls.cta !== KIT_URL || urls.qr !== KIT_URL || urls.qrLink !== KIT_URL) fail(`Slide 15 QR/CTA URL mismatch ${JSON.stringify(urls)}`)
-    const qrShot = path.join(outDir, "slide-15-qr.png")
+    if (urls.cta !== KIT_URL || urls.qr !== KIT_URL || urls.qrLink !== KIT_URL) fail(`Slide 16 QR/CTA URL mismatch ${JSON.stringify(urls)}`)
+    const qrShot = path.join(outDir, "slide-16-qr.png")
     await page.locator(".pdmat-download__qr").screenshot({ path: qrShot })
     const decode = spawnSync("python3", ["-c", "import cv2,sys; v,_,_=cv2.QRCodeDetector().detectAndDecode(cv2.imread(sys.argv[1])); print(v)", qrShot], { encoding: "utf8" })
-    if (decode.status === 0) { const value = decode.stdout.trim(); if (value !== KIT_URL) fail(`Slide 15 QR decodes to "${value}"`); else notes.push(`QR decode: ${value}`) } else notes.push("QR decode: decoder unavailable")
+    if (decode.status === 0) { const value = decode.stdout.trim(); if (value !== KIT_URL) fail(`Slide 16 QR decodes to "${value}"`); else notes.push(`QR decode: ${value}`) } else notes.push("QR decode: decoder unavailable")
   }
   await context.close()
 }
@@ -211,7 +213,7 @@ await browser.close()
 const band = (file) => sharp(file).extract({ left: 0, top: 100, width: 1920, height: 885 }).resize(480, 221, { fit: "fill" }).greyscale().raw().toBuffer()
 const meanDiff = async (a, b) => { const [x, y] = await Promise.all([band(a), band(b)]); return x.reduce((sum, value, i) => sum + Math.abs(value - y[i]), 0) / x.length }
 const fidelity = []
-for (let slide = 1; slide <= 15; slide += 1) {
+for (let slide = 1; slide <= 16; slide += 1) {
   const render = path.join(outDir, viewports[0].name, `s${String(slide).padStart(2, "0")}.png`)
   if (templateMap[slide]) {
     const diff = await meanDiff(render, galleryShots[templateMap[slide]])
@@ -231,4 +233,4 @@ console.log(`screenshots: ${outDir}`)
 console.table(fidelity)
 for (const note of notes) console.log(`note: ${note}`)
 if (failures.length) { console.error(`VISUAL_QA: FAIL (${failures.length})`); for (const message of failures) console.error(`  ✗ ${message}`); process.exit(1) }
-console.log(`VISUAL_QA: PASS — ${captures} captures across ${viewports.length} viewports; 15/15 slides, no scroll, no stacking, chrome intact, canonical copy present, fidelity within budget`)
+console.log(`VISUAL_QA: PASS — ${captures} captures across ${viewports.length} viewports; 16/16 slides, no scroll, no stacking, chrome intact, canonical copy present, fidelity within budget`)

@@ -155,11 +155,21 @@
     {
       "number": 15,
       "key": "slide-15",
+      "title": "EMBEDDED APPS. REAL WORK.",
+      "composition": "embedded-app",
+      "component": "src/app/pdma2026-templates/components/templates/EmbeddedAppTemplate.tsx",
+      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide15)",
+      "family": "approved template"
+    },
+    {
+      "number": 16,
+      "key": "slide-16",
       "title": "TURN AI CAPABILITY INTO PRODUCT VALUE.",
       "composition": "end-card",
       "component": "src/app/pdma2026-templates/components/templates/EndCardTemplate.tsx",
       "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
-      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide15)",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide16)",
       "family": "approved template"
     }
   ]

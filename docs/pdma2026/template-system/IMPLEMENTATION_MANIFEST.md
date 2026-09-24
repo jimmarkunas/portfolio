@@ -570,7 +570,8 @@ The implementation run may start only when Canon v4 is available in the Codex wo
 ## 9. Production cutover
 
 - Accepted template baseline: `c350ce713d2414296a5018674b9408f8a6f7931b`.
-- `/pdma2026` renders the migrated 15-slide deck from `src/app/pdma2026/presentation/` (content: `pdma2026Content.ts`; manifest: `pdma2026Manifest.tsx`). Template-mapped: 01, 03, 06, 07, 08, 09, 10, 14, 15. Preserved compositions: 02, 04, 05, 11, 12, 13.
-- `/pdma2026-templates` remains the gallery; its nine mapped exemplars render the production content objects.
+- `/pdma2026` renders the migrated 16-slide deck from `src/app/pdma2026/presentation/` (content: `pdma2026Content.ts`; manifest: `pdma2026Manifest.tsx`). Template-mapped: 01, 03, 06, 07, 08, 09, 10, 14, 15, 16. Preserved compositions: 02, 04, 05, 11, 12, 13.
+- `/pdma2026-templates` remains the gallery; all ten exemplars render the production content objects.
+- Slide 15 (Embedded App template) runs `PdmaScenarioExercise`: the Secure Carolinas "Customer Order Exception Agent" challenge (shared logic: `src/components/exercise/customerOrderExceptionScenario.ts`) in the PDMA skin, plus a deterministic mini productization brief after the decision. The same component renders in the gallery and at `/pdma2026/exercise` (Slide 14's worksheet link).
 - Rollback checkpoint: `3e343570ab1957513fdf8883e2efcdaa56226a5d` (roll back the cutover commit with `git revert`).
-- Checks: `npm run pdma:check` (deck + gallery static contracts) and `npm run pdma:qa` (deck + gallery browser QA).
+- Checks: `npm run pdma:check` (deck + gallery static contracts) and `npm run pdma:qa` (deck + gallery browser QA, then `pdma-exercise-qa.mjs`: SCC parity, brief, and fit).

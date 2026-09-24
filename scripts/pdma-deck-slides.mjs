@@ -17,6 +17,7 @@ export const compositionFiles = {
   "flow-scenario": [`${T}/FlowScenarioTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
   "structured-content-action": [`${T}/StructuredActionTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
   exercise: [`${T}/ExerciseTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
+  "embedded-app": [`${T}/EmbeddedAppTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
   "end-card": [`${T}/EndCardTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
   "shift-boundary": [`${P}/ShiftBoundarySlide.tsx`, "src/app/pdma2026/presentation/presentation.css"],
   "work-map": [`${P}/WorkMapSlide.tsx`, "src/app/pdma2026/presentation/presentation.css"],

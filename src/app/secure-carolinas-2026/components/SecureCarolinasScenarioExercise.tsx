@@ -3,76 +3,17 @@
 import { useState } from "react";
 
 import { useGuidedExerciseFlow } from "@/components/exercise/useGuidedExerciseFlow";
-import { secureCarolinas2026Copy } from "@/content/secure-carolinas-2026/presentationContent";
+import {
+  getControlStatusTitle,
+  getDecisionFromState,
+  getOperatingProfile,
+  initialState,
+  scenario,
+  type FoundationAnswer,
+  type ScenarioState,
+} from "@/components/exercise/customerOrderExceptionScenario";
 
-type Status = "DEFINED" | "PARTIAL" | "UNCLEAR";
-type FoundationAnswer = "YES" | "NO" | null;
-type ScenarioControl = typeof secureCarolinas2026Copy.scenarios.customerOrderException.controls[number];
-type ScenarioControlLetter = ScenarioControl["letter"];
-type ScenarioControlChoice = ScenarioControl["choices"][number];
-type ScenarioBusinessValue = typeof secureCarolinas2026Copy.scenarios.customerOrderException.businessValue.options[number];
-type OperatingProfileField = "AUTONOMY" | "HUMAN LOAD" | "OPERATIONAL RISK";
-type OperatingProfileLevel = "LOW" | "MODERATE" | "HIGH";
-type ScenarioProfileChoice = {
-  autonomy?: OperatingProfileLevel;
-  humanLoad?: OperatingProfileLevel;
-  operationalRisk?: OperatingProfileLevel;
-};
-type ScenarioState = {
-  systemsInventory: FoundationAnswer;
-  ownershipDefined: FoundationAnswer;
-  businessValue: ScenarioBusinessValue | null;
-  selections: Partial<Record<ScenarioControlLetter, ScenarioControlChoice>>;
-};
-
-const scenario = secureCarolinas2026Copy.scenarios.customerOrderException;
-const initialState: ScenarioState = {
-  systemsInventory: null,
-  ownershipDefined: null,
-  businessValue: null,
-  selections: {},
-};
 const focusClass = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8EB4F0]";
-const levelValue: Record<OperatingProfileLevel, number> = { LOW: 0, MODERATE: 1, HIGH: 2 };
-const levelLabel: Record<number, OperatingProfileLevel> = { 0: "LOW", 1: "MODERATE", 2: "HIGH" };
-const profileFieldKeyMap: Record<OperatingProfileField, "autonomy" | "humanLoad" | "operationalRisk"> = {
-  AUTONOMY: "autonomy",
-  "HUMAN LOAD": "humanLoad",
-  "OPERATIONAL RISK": "operationalRisk",
-};
-
-function getControlStatusTitle(status: Status) {
-  if (status === "DEFINED") return "DEFINED";
-  if (status === "PARTIAL") return "PARTIAL";
-  return "UNCLEAR";
-}
-
-function getDecisionFromState(state: ScenarioState) {
-  if (state.systemsInventory === null || state.ownershipDefined === null || state.businessValue === null) return "INCOMPLETE" as const;
-  if (state.systemsInventory === "NO" || state.ownershipDefined === "NO") return "NO GO" as const;
-  const statuses = scenario.controls.map((control) => state.selections[control.letter]?.resultingStatus);
-  if (statuses.some((status) => status === undefined)) return "INCOMPLETE" as const;
-  if (statuses.includes("UNCLEAR")) return "NO GO" as const;
-  if (statuses.includes("PARTIAL")) return "GO WITH CONDITIONS" as const;
-  return "GO" as const;
-}
-
-function getOperatingProfile(state: ScenarioState) {
-  return scenario.profileFields.map((field) => {
-    const key = profileFieldKeyMap[field];
-    const samples = scenario.controls
-      .map((control) => {
-        const choice = state.selections[control.letter];
-        if (!choice) return undefined;
-        return (choice as ScenarioProfileChoice)[key];
-      })
-      .filter((value): value is OperatingProfileLevel => value !== undefined);
-
-    if (samples.length === 0) return { field, value: "—" as const, average: null };
-    const average = samples.reduce((sum, level) => sum + levelValue[level], 0) / samples.length;
-    return { field, value: levelLabel[Math.max(0, Math.min(2, Math.round(average)))], average };
-  });
-}
 
 export function SecureCarolinasScenarioExercise() {
   const [state, setState] = useState<ScenarioState>(initialState);

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// PDMA browser QA: production /pdma2026 deck, then the /pdma2026-templates gallery.
+// PDMA browser QA: production /pdma2026 deck, the /pdma2026-templates gallery, then the
+// Slide 15 exercise (SCC parity, brief, fit).
 // Extra args (--out, --reference-dir, --route) pass through to the deck QA.
 import { spawnSync } from "node:child_process"
 
@@ -12,3 +13,4 @@ const run = (script, args = []) => {
 
 run("pdma-deck-visual-qa.mjs", passthrough)
 run("pdma-template-visual-qa.mjs")
+run("pdma-exercise-qa.mjs")

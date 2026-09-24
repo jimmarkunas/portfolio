@@ -18,7 +18,8 @@ Generated from the production deck content (`npm run pdma:context`). Use `slide-
 | slide-12 | TURN THE FRAMEWORK INTO PRODUCT. | framework-to-product | `src/app/pdma2026/presentation/slides/FrameworkToProductSlide.tsx` |
 | slide-13 | AN IDEA + AI ≠ PRODUCT SPEC. | idea-to-spec | `src/app/pdma2026/presentation/slides/IdeaToSpecSlide.tsx` |
 | slide-14 | NOW YOU DO IT. | exercise | `src/app/pdma2026-templates/components/templates/ExerciseTemplate.tsx` |
-| slide-15 | TURN AI CAPABILITY INTO PRODUCT VALUE. | end-card | `src/app/pdma2026-templates/components/templates/EndCardTemplate.tsx` |
+| slide-15 | EMBEDDED APPS. REAL WORK. | embedded-app | `src/app/pdma2026-templates/components/templates/EmbeddedAppTemplate.tsx` |
+| slide-16 | TURN AI CAPABILITY INTO PRODUCT VALUE. | end-card | `src/app/pdma2026-templates/components/templates/EndCardTemplate.tsx` |
 
 Rendering: PdmaSlideCanvas (1920×1080, uniform contain scaling) → TemplateSlide (Grid/Flex content, bounded DecorativeLayer).
 

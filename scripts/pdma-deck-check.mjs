@@ -29,12 +29,12 @@ const normalize = (text) => text
   .replace(/\s+/g, " ")
   .trim()
 
-const expectedCompositions = ["title", "shift-boundary", "compare-contrast", "work-map", "ambiguity-gate", "hub-ecosystem", "scorecard", "decision-spectrum", "flow-scenario", "structured-content-action", "agents-reveal", "framework-to-product", "idea-to-spec", "exercise", "end-card"]
+const expectedCompositions = ["title", "shift-boundary", "compare-contrast", "work-map", "ambiguity-gate", "hub-ecosystem", "scorecard", "decision-spectrum", "flow-scenario", "structured-content-action", "agents-reveal", "framework-to-product", "idea-to-spec", "exercise", "embedded-app", "end-card"]
 
-// 1. Fifteen slide blocks, in narrative order, one composition each.
+// 1. Sixteen slide blocks, in narrative order, one composition each.
 const content = read(CONTENT)
 const blocks = content.split(/\n(?=\/\/ \d\d — )/).filter((block) => /^\/\/ \d\d — /.test(block))
-if (blocks.length !== 15) fail(`pdma2026Content.ts: expected 15 slide blocks, found ${blocks.length}`)
+if (blocks.length !== 16) fail(`pdma2026Content.ts: expected 16 slide blocks, found ${blocks.length}`)
 blocks.forEach((block, index) => {
   const number = Number(block.slice(3, 5))
   if (number !== index + 1) fail(`pdma2026Content.ts: block ${index + 1} is labelled slide ${number}`)
@@ -42,7 +42,7 @@ blocks.forEach((block, index) => {
   if (kind !== expectedCompositions[index]) fail(`slide ${index + 1}: composition ${kind} ≠ ${expectedCompositions[index]}`)
 })
 const order = (content.match(/export const pdma2026Slides = \[([^\]]*)\]/)?.[1] ?? "").split(",").map((name) => name.trim()).filter(Boolean)
-if (JSON.stringify(order) !== JSON.stringify(Array.from({ length: 15 }, (_, i) => `slide${String(i + 1).padStart(2, "0")}`))) fail(`pdma2026Slides order drifted: ${order.join(", ")}`)
+if (JSON.stringify(order) !== JSON.stringify(Array.from({ length: 16 }, (_, i) => `slide${String(i + 1).padStart(2, "0")}`))) fail(`pdma2026Slides order drifted: ${order.join(", ")}`)
 
 // 2. Canonical copy + chrome parity per slide.
 let checked = 0
@@ -95,4 +95,4 @@ if (failures.length) {
   for (const message of failures) console.error(`  ✗ ${message}`)
   process.exit(1)
 }
-console.log(`pdma-deck-check: PASS — 15 slides in narrative order, ${checked} canonical copy/chrome strings verified, A.G.E.N.T.S. first named on Slide 11, no pdmaGeometry, bounded positioning only`)
+console.log(`pdma-deck-check: PASS — 16 slides in narrative order, ${checked} canonical copy/chrome strings verified, A.G.E.N.T.S. first named on Slide 11, no pdmaGeometry, bounded positioning only`)

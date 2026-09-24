@@ -2,6 +2,7 @@ import type { ComponentType, ReactNode } from "react";
 import { decorativeVariants, isDecorImage, type DecorItem } from "@/app/pdma2026-templates/components/DecorativeLayer";
 import { CompareContrastTemplate } from "@/app/pdma2026-templates/components/templates/CompareContrastTemplate";
 import { DecisionSpectrumTemplate } from "@/app/pdma2026-templates/components/templates/DecisionSpectrumTemplate";
+import { EmbeddedAppTemplate } from "@/app/pdma2026-templates/components/templates/EmbeddedAppTemplate";
 import { EndCardTemplate } from "@/app/pdma2026-templates/components/templates/EndCardTemplate";
 import { ExerciseTemplate } from "@/app/pdma2026-templates/components/templates/ExerciseTemplate";
 import { FlowScenarioTemplate } from "@/app/pdma2026-templates/components/templates/FlowScenarioTemplate";
@@ -9,6 +10,7 @@ import { HubEcosystemTemplate } from "@/app/pdma2026-templates/components/templa
 import { ScorecardTemplate } from "@/app/pdma2026-templates/components/templates/ScorecardTemplate";
 import { StructuredActionTemplate } from "@/app/pdma2026-templates/components/templates/StructuredActionTemplate";
 import { TitleTemplate } from "@/app/pdma2026-templates/components/templates/TitleTemplate";
+import { PdmaScenarioExercise } from "../exercise/PdmaScenarioExercise";
 import { PDMA_EXERCISE_ROUTE, PDMA_KIT_URL, pdma2026Slides, type Pdma2026SlideContent } from "./pdma2026Content";
 import type { PdmaSlideKey, PdmaSlideManifestEntry } from "./presentationTypes";
 import { AgentsRevealSlide } from "./slides/AgentsRevealSlide";
@@ -18,11 +20,11 @@ import { IdeaToSpecSlide } from "./slides/IdeaToSpecSlide";
 import { ShiftBoundarySlide, shiftBoundaryDecor } from "./slides/ShiftBoundarySlide";
 import { WorkMapSlide, workMapDecor } from "./slides/WorkMapSlide";
 
-export const PDMA2026_SLIDE_COUNT = 15;
+export const PDMA2026_SLIDE_COUNT = 16;
 
 export type Pdma2026ManifestEntry = PdmaSlideManifestEntry & { composition: Pdma2026SlideContent["kind"]; qa: "targeted" };
 
-/** One composition per slide: nine approved templates, six preserved production compositions. */
+/** One composition per slide: ten approved templates, six preserved production compositions. */
 function renderSlide(content: Pdma2026SlideContent): ReactNode {
   switch (content.kind) {
     case "title": return <TitleTemplate content={content} />;
@@ -39,6 +41,7 @@ function renderSlide(content: Pdma2026SlideContent): ReactNode {
     case "framework-to-product": return <FrameworkToProductSlide content={content} />;
     case "idea-to-spec": return <IdeaToSpecSlide content={content} />;
     case "exercise": return <ExerciseTemplate content={content} />;
+    case "embedded-app": return <EmbeddedAppTemplate content={content} app={<PdmaScenarioExercise />} />;
     case "end-card": return <EndCardTemplate content={content} />;
   }
 }
@@ -58,7 +61,7 @@ function slideAssets(content: Pdma2026SlideContent): readonly string[] {
   }
 }
 
-const routeLinks = (content: Pdma2026SlideContent) => content.kind === "exercise" ? [PDMA_EXERCISE_ROUTE] : content.kind === "end-card" ? [PDMA_KIT_URL] : undefined;
+const routeLinks = (content: Pdma2026SlideContent) => content.kind === "exercise" || content.kind === "embedded-app" ? [PDMA_EXERCISE_ROUTE] : content.kind === "end-card" ? [PDMA_KIT_URL] : undefined;
 
 /** The production /pdma2026 manifest: order, IDs, TOC, chrome, and composition per slide. */
 export const pdma2026Manifest: readonly Pdma2026ManifestEntry[] = pdma2026Slides.map((content, index) => {

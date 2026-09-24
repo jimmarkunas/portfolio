@@ -1,6 +1,6 @@
 import type { ComponentType, ReactNode } from "react";
 import type { PdmaSlideKey, PdmaSlideManifestEntry } from "@/app/pdma2026/presentation/presentationTypes";
-import { ProductizationExerciseApp } from "./components/apps/ProductizationExerciseApp";
+import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
 import { decorativeVariants, isDecorImage } from "./components/DecorativeLayer";
 import { CompareContrastTemplate } from "./components/templates/CompareContrastTemplate";
 import { DecisionSpectrumTemplate } from "./components/templates/DecisionSpectrumTemplate";
@@ -37,7 +37,7 @@ function renderTemplate(content: TemplateContent): ReactNode {
     case "title": return <TitleTemplate content={content} />;
     case "end-card": return <EndCardTemplate content={content} />;
     case "exercise": return <ExerciseTemplate content={content} />;
-    case "embedded-app": return <EmbeddedAppTemplate content={content} app={<ProductizationExerciseApp />} />;
+    case "embedded-app": return <EmbeddedAppTemplate content={content} app={<PdmaScenarioExercise />} />;
     case "compare-contrast": return <CompareContrastTemplate content={content} />;
     case "flow-scenario": return <FlowScenarioTemplate content={content} />;
     case "decision-spectrum": return <DecisionSpectrumTemplate content={content} />;
