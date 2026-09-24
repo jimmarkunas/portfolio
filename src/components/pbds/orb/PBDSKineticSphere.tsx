@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useRef } from "react";
 import type { PBDSKineticSphereProps } from "./orbTypes";
 
 type RGB = { r: number; g: number; b: number };
+type LimbShape = { outer: number; mid: number; core: number; coreWidth: number };
 type LimbColors = { outer: { hex: string; rgb: string }; mid: { hex: string; rgb: string }; core: { hex: string; rgb: string; raw: RGB } };
 type StippleDot = { bx:number; by:number; bz:number; x:number; y:number; z:number; vx:number; vy:number; vz:number; baseSize:number; phase:number };
 type Plasma = { angle:number; distFactor:number; size:number; alpha:number; speed:number; radialVelocity:number; life:number; maxLife:number };
@@ -17,7 +18,7 @@ function hexToRgb(hex:string, fallback:RGB):RGB {
 }
 function lerpRgb(a:RGB,b:RGB,t:number):RGB { const q=Math.max(0,Math.min(1,t)); return {r:Math.round(a.r+(b.r-a.r)*q),g:Math.round(a.g+(b.g-a.g)*q),b:Math.round(a.b+(b.b-a.b)*q)}; }
 
-function drawAtmosphericLimb(ctx:CanvasRenderingContext2D,cx:number,cy:number,radius:number,lightAngle:number,strokeMode:"crescent"|"tapered"|"full"|"none",intensity:number,glowSpread:number,coreHotness:number,strokeWidth:number,innerWash:number,shadowOpacity:number,glowHex:string,glowRgb:string,rawRgb:RGB,limb?:LimbColors){
+function drawAtmosphericLimb(ctx:CanvasRenderingContext2D,cx:number,cy:number,radius:number,lightAngle:number,strokeMode:"crescent"|"tapered"|"full"|"none",intensity:number,glowSpread:number,coreHotness:number,strokeWidth:number,innerWash:number,shadowOpacity:number,glowHex:string,glowRgb:string,rawRgb:RGB,limb?:LimbColors,shape?:LimbShape){
   if(intensity<=0||strokeMode==="none")return;
   ctx.save(); ctx.globalAlpha=1;
   const outerHex=limb?.outer.hex??glowHex,outerRgb=limb?.outer.rgb??glowRgb,midHex=limb?.mid.hex??glowHex,midRgb=limb?.mid.rgb??glowRgb,coreHex=limb?.core.hex??glowHex,coreRgb=limb?.core.rgb??glowRgb;
@@ -32,12 +33,36 @@ function drawAtmosphericLimb(ctx:CanvasRenderingContext2D,cx:number,cy:number,ra
     ctx.restore();
   };
   if(strokeMode==="full"){draw(0,Math.PI*2,Math.min(1,intensity));}
+  else if(shape){
+    // Directional shaping: each pass follows its own crescent falloff cos^(1.35·focus), rescaled so its total energy
+    // over the lit limb matches the default falloff (focus concentrates light at the lit peak rather than dimming it).
+    // Each pass is one continuous arc whose alpha follows a conic gradient (no segment seams). Outer/mid/wash render
+    // as shadow-only glows (stroke drawn off-canvas) so they read as atmosphere, not bands; the hot core is a filled
+    // crescent whose thickness tapers with its own falloff.
+    const N=180,cs:number[]=[];for(let i=0;i<=N;i++)cs.push(Math.cos((i/N)*Math.PI*2-lightAngle));
+    const energy=(k:number)=>cs.reduce((t,c)=>c>0?t+Math.pow(c,k):t,0),base=energy(1.35);
+    const gainOf=(focus:number)=>base/energy(1.35*focus),gO=gainOf(shape.outer),gM=gainOf(shape.mid),gC=gainOf(shape.core);
+    const lv=(c:number,focus:number,g:number)=>c>0?Math.min(1,Math.pow(c,1.35*focus)*g*intensity):0;
+    const conic=(rgb:string,focus:number,g:number,scale:number)=>{const gr=ctx.createConicGradient(0,cx,cy);cs.forEach((c,i)=>gr.addColorStop(i/N,`rgba(${rgb}, ${lv(c,focus,g)*scale})`));return gr;};
+    // Shadow-only glows lose the stroke's own contribution; GLOW_COMP restores comparable atmospheric weight.
+    const GLOW_COMP=2.2,glow=(hex:string,rgb:string,focus:number,g:number,scale:number,blur:number,width:number,r:number)=>{const off=4096;scale*=GLOW_COMP;ctx.save();ctx.translate(-off,0);ctx.shadowOffsetX=off;ctx.shadowColor=hex;ctx.shadowBlur=blur;ctx.strokeStyle=conic(rgb,focus,g,scale);ctx.lineWidth=width;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();ctx.restore();};
+    const crescent=(rgb:string,hex:string,blur:number,width:number,scale:number)=>{ctx.save();ctx.shadowColor=hex;ctx.shadowBlur=blur;ctx.fillStyle=conic(rgb,shape.core,gC,scale);ctx.beginPath();
+      const M=120,from=lightAngle-Math.PI/2,span=Math.PI,pts:number[][]=[];for(let i=0;i<=M;i++){const a=from+(i/M)*span,fc=Math.pow(Math.max(0,Math.cos(a-lightAngle)),1.35*shape.core),w=width*(1+(shape.coreWidth-1)*fc)*.5;pts.push([a,w]);}
+      pts.forEach(([a,w],i)=>{const x=cx+Math.cos(a)*(radius+w),y=cy+Math.sin(a)*(radius+w);if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);});
+      for(let i=pts.length-1;i>=0;i--){const [a,w]=pts[i];ctx.lineTo(cx+Math.cos(a)*(radius-w),cy+Math.sin(a)*(radius-w));}
+      ctx.closePath();ctx.fill();ctx.restore();};
+    glow(outerHex,outerRgb,shape.outer,gO,.30,glowSpread*1.1,glowSpread*.65,radius+glowSpread*.28);
+    glow(midHex,midRgb,shape.mid,gM,.52,glowSpread*.55,glowSpread*.32,radius+glowSpread*.1);
+    crescent(coreRgb,coreHex,10*intensity,Math.max(1.8,strokeWidth*2.2),.78);
+    crescent(`${hot.r}, ${hot.g}, ${hot.b}`,coreHex,3*intensity,strokeWidth,.98);
+    if(innerWash>0)glow(outerHex,glowRgb,shape.outer,gO,.24*innerWash,6*intensity,glowSpread*.22,radius-glowSpread*.1);
+  }
   else { const segments=80,d=(Math.PI*2)/segments; for(let i=0;i<segments;i++){const a0=i*d,a1=a0+d+.015,mid=a0+d*.5,c=Math.cos(mid-lightAngle);let alpha=c>0?Math.pow(c,1.35):(strokeMode==="tapered"?Math.max(.04,shadowOpacity):shadowOpacity);if(alpha<=.005)continue;draw(a0,a1,Math.min(1,alpha*intensity));} }
   ctx.restore();
 }
 
 export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
-  radius=290,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,outerGlowColor,midGlowColor,hotCoreColor,solarFlareIntensity=1,
+  radius=290,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,outerGlowColor,midGlowColor,hotCoreColor,solarFlareIntensity=1,outerGlowFocus=1,midGlowFocus=1,hotCoreFocus=1,hotCoreWidthMultiplier=1,
 })=>{
   const canvasRef=useRef<HTMLCanvasElement|null>(null);
   const palette=useMemo(()=>{
@@ -75,6 +100,7 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
       const rot=rotationRef.current,mouse=mouseRef.current;if(!mouse.isDragging){rot.rotY+=autoRotateSpeed+rot.velY;rot.rotX+=rot.velX;rot.velX*=.92;rot.velY*=.92;}
       const sinX=Math.sin(rot.rotX),cosX=Math.cos(rot.rotX),sinY=Math.sin(rot.rotY),cosY=Math.cos(rot.rotY),glowRgb=palette.glowRgb,glowHex=palette.glowHex;
       if(bodyOpacity>0){ctx.save();ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);const g=ctx.createRadialGradient(cx,cy,0,cx,cy,radius);g.addColorStop(0,`${palette.bodyGradStart}${bodyOpacity})`);g.addColorStop(.85,`${palette.bodyGradStart}${Math.min(1,bodyOpacity*1.5)})`);g.addColorStop(1,`${palette.bodyGradEnd}${Math.min(1,bodyOpacity*2.2)})`);ctx.fillStyle=g;ctx.fill();ctx.restore();}
+      const limbShape=outerGlowFocus!==1||midGlowFocus!==1||hotCoreFocus!==1||hotCoreWidthMultiplier!==1?{outer:outerGlowFocus,mid:midGlowFocus,core:hotCoreFocus,coreWidth:hotCoreWidthMultiplier}:undefined;
       // Solar flare: brighter, slightly larger, further-reaching existing plasma. Identity at solarFlareIntensity=1.
       const flare=solarFlareIntensity-1,flareAlpha=1+flare*.85,flareSize=1+flare*.25,flareReach=flare*.45;
       ctx.save();for(const p of plasmaRef.current){p.life++;if(p.life>p.maxLife){p.life=0;p.distFactor=1.002+Math.random()*.02;}else p.distFactor+=p.radialVelocity*plasmaNoiseIntensity;p.angle+=p.speed;const noise=Math.sin(p.angle*12+time*3)*.015+Math.cos(p.angle*24-time*2)*.01,base=p.distFactor+noise*plasmaNoiseIntensity,dist=radius*base+radius*(base-1)*flareReach,px=cx+Math.cos(p.angle)*dist,py=cy+Math.sin(p.angle)*dist,fade=Math.sin((p.life/p.maxLife)*Math.PI)*p.alpha;let bias=1;if(cropPosition==="orb-right")bias=Math.max(.12,-Math.cos(p.angle));else if(cropPosition==="orb-left")bias=Math.max(.12,Math.cos(p.angle));ctx.fillStyle=`rgba(${palette.plasmaRgb}, ${fade*bias*.85*flareAlpha})`;ctx.beginPath();ctx.arc(px,py,p.size*flareSize,0,Math.PI*2);ctx.fill();}ctx.restore();
@@ -88,10 +114,10 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
         if(dotHarmonization==="unified"){color=palette.glowHex;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.25));}else if(dotHarmonization==="subtle-specular"){const sf=Math.pow(Math.max(0,(rad-.78)/.22),2)*Math.max(0,nDotL),blend=lerpRgb(palette.rawRgb,{r:255,g:255,b:255},sf*.65);color=`rgb(${blend.r}, ${blend.g}, ${blend.b})`;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.2));}else if(rad>.88&&nDotL>.4){color=palette.highlightDot;alpha=.95;size*=1.15;}else if(rad>.55||nDotL>.1){color=palette.midDot;alpha=.45+brightness*.45;}else{color=palette.shadowDot;alpha=.25+brightness*.35;}visible.push({sx,sy,z:p.z,size,color,alpha:Math.min(1,alpha*brightness)});
       }
       visible.sort((a,b)=>a.z-b.z);for(const d of visible){ctx.globalAlpha=d.alpha;ctx.fillStyle=d.color;ctx.beginPath();ctx.arc(d.sx,d.sy,d.size,0,Math.PI*2);ctx.fill();}
-      if(glowingStrokeIntensity>0&&strokeMode!=="none")drawAtmosphericLimb(ctx,cx,cy,radius,Math.atan2(lightY,lightX),strokeMode,glowingStrokeIntensity,glowSpread,coreHotness,strokeWidth,innerWashIntensity,strokeShadowOpacity,glowHex,glowRgb,palette.rawRgb,palette.limb);
+      if(glowingStrokeIntensity>0&&strokeMode!=="none")drawAtmosphericLimb(ctx,cx,cy,radius,Math.atan2(lightY,lightX),strokeMode,glowingStrokeIntensity,glowSpread,coreHotness,strokeWidth,innerWashIntensity,strokeShadowOpacity,glowHex,glowRgb,palette.rawRgb,palette.limb,limbShape);
       ctx.globalAlpha=1;animId=requestAnimationFrame(render);
     };render();return()=>{window.removeEventListener("resize",resize);cancelAnimationFrame(animId);};
-  },[radius,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity,solarFlareIntensity]);
+  },[radius,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity,solarFlareIntensity,outerGlowFocus,midGlowFocus,hotCoreFocus,hotCoreWidthMultiplier]);
 
   // Pointer → canvas backing-store coordinates. Identity when unscaled (standalone embed); corrects for
   // ancestor CSS transforms such as the PDMA shell's uniform scale(), where the rendered rect ≠ canvas size.

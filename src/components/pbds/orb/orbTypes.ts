@@ -32,4 +32,10 @@ export interface PBDSKineticSphereProps {
   hotCoreColor?: string;
   /** Scales the existing plasma's brightness, size and outward reach. 1 = current output; practical 0.5–1.5. */
   solarFlareIntensity?: number;
+  /** Per-pass crescent focus (1 = current falloff; higher = tighter around the lit peak, energy-preserving). */
+  outerGlowFocus?: number;
+  midGlowFocus?: number;
+  hotCoreFocus?: number;
+  /** Hot-core width at the lit peak, tapering with the core's falloff. 1 = current width. */
+  hotCoreWidthMultiplier?: number;
 }
