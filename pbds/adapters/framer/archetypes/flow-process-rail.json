@@ -1,0 +1,30 @@
+{
+  "id": "flow-process-rail",
+  "intent": "Express sequence, transformation, progression, or operating flow.",
+  "composition": {
+    "nodes": "native",
+    "connectors": "sparse",
+    "rail": "single-clear-path",
+    "negativeSpace": "medium-high"
+  },
+  "semanticSlots": [
+    "headline",
+    "subtitle",
+    "steps",
+    "optionalQuestion",
+    "optionalTakeaway"
+  ],
+  "decoration": {
+    "required": false,
+    "allowedFamilies": [
+      "dual-orb",
+      "orb-plus-system-overlay"
+    ]
+  },
+  "preferNativeFramer": true,
+  "reject": [
+    "technical-spaghetti",
+    "connector-as-main-art",
+    "excess-labeling"
+  ]
+}

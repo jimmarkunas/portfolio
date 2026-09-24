@@ -1,0 +1,121 @@
+{
+  "name": "PBDS Framer Forge",
+  "version": "1.0.0",
+  "status": "design-stage-adapter",
+  "authority": {
+    "visualTruth": "Canonical JM Personal Brand Figma",
+    "architecture": "docs/PBDS_V2_ARCHITECTURE_CONTRACT.md",
+    "modality": "Notion: PBDS Presentation Modality \u2014 Editorial Orb System",
+    "adapter": "docs/PBDS_FRAMER_FORGE_CONTRACT.md"
+  },
+  "designModality": "editorial-orb-system",
+  "outputModes": [
+    "native-framer-recipe",
+    "framer-code-component"
+  ],
+  "referenceTokens": {
+    "color": {
+      "brandMagenta": "#FF2FAE",
+      "brandInk": "#090909",
+      "neutralCharcoal": "#2E2E2E",
+      "neutralMid": "#7A7A7A",
+      "neutralLine": "#E6E6E6",
+      "neutralCanvas": "#F5F5F2",
+      "neutralWhite": "#FFFFFF"
+    },
+    "fontFamily": "Inter",
+    "note": "Reference-only snapshot. Figma/PBDS package remain authoritative."
+  },
+  "visualPriorities": [
+    "one-dominant-visual-move",
+    "massive-negative-space",
+    "editorial-hierarchy",
+    "white-primary-magenta-surgical",
+    "bold-edge-cropping",
+    "native-semantic-content",
+    "sparse-connectors",
+    "minimal-dark-surfaces"
+  ],
+  "decorativeFamilies": [
+    "orb-right",
+    "orb-left",
+    "orb-horizon",
+    "dual-orb",
+    "orb-plus-system-overlay"
+  ],
+  "semanticMustRemainNative": [
+    "headline",
+    "subtitle",
+    "body-copy",
+    "cards",
+    "cta",
+    "labels",
+    "buttons",
+    "app-frame",
+    "tables",
+    "rails",
+    "flow-nodes",
+    "decision-controls"
+  ],
+  "antiPatterns": [
+    "generic-saas-dashboard",
+    "ui-glow-soup",
+    "random-space-art",
+    "fantasy-planets",
+    "poster-board-collage",
+    "multiple-competing-metaphors",
+    "magenta-everywhere",
+    "centered-poster-by-default",
+    "flattened-ui-or-text",
+    "decoration-to-fill-space"
+  ],
+  "archetypes": [
+    {
+      "id": "editorial-hero",
+      "file": "archetypes/editorial-hero.json"
+    },
+    {
+      "id": "orb-hero",
+      "file": "archetypes/orb-hero.json"
+    },
+    {
+      "id": "dual-orb-composition",
+      "file": "archetypes/dual-orb-composition.json"
+    },
+    {
+      "id": "structured-content-cards",
+      "file": "archetypes/structured-content-cards.json"
+    },
+    {
+      "id": "flow-process-rail",
+      "file": "archetypes/flow-process-rail.json"
+    },
+    {
+      "id": "embedded-app-media-frame",
+      "file": "archetypes/embedded-app-media-frame.json"
+    },
+    {
+      "id": "cta-takeaway-band",
+      "file": "archetypes/cta-takeaway-band.json"
+    }
+  ],
+  "responsivePrinciples": [
+    "preserve-hierarchy",
+    "preserve-crop-intent",
+    "prefer-native-framer-sizing",
+    "do-not-create-a-different-composition-per-breakpoint",
+    "semantic-content-may-not-disappear",
+    "decorative-crop-may-adjust"
+  ],
+  "validation": [
+    "archetype-selected",
+    "single-dominant-idea",
+    "semantic-content-editable",
+    "pbds-styles-reused",
+    "decoration-separate",
+    "no-second-token-system",
+    "no-base64",
+    "anti-patterns-absent",
+    "result-compared-to-pbds-references"
+  ]
+}

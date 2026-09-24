@@ -1,0 +1,34 @@
+{
+  "id": "embedded-app-media-frame",
+  "intent": "Make a live app, demo, prototype, video, or rich viewport the dominant object.",
+  "composition": {
+    "dominantViewport": "large-contained-frame",
+    "surroundingAtmosphere": "secondary",
+    "negativeSpace": "controlled"
+  },
+  "semanticSlots": [
+    "headline",
+    "subtitle",
+    "contentSlot",
+    "frameLabel"
+  ],
+  "decoration": {
+    "required": false,
+    "allowedFamilies": [
+      "dual-orb",
+      "orb-right",
+      "orb-left"
+    ]
+  },
+  "preferNativeFramer": true,
+  "codeComponentWhen": [
+    "live-interaction",
+    "custom-generated-behavior",
+    "complex-animation"
+  ],
+  "reject": [
+    "screenshot-as-app",
+    "decorative-frame-over-content",
+    "tiny-demo-window"
+  ]
+}

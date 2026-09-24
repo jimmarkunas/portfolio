@@ -1,0 +1,33 @@
+{
+  "id": "dual-orb-composition",
+  "intent": "Frame a semantic center or create controlled visual tension.",
+  "composition": {
+    "edgeFrames": 2,
+    "center": "native-semantic-system",
+    "negativeSpace": "medium-high",
+    "dominantVisual": "dual-cropped-electric-orbs"
+  },
+  "semanticSlots": [
+    "headline",
+    "subtitle",
+    "centerContent",
+    "optionalTakeaway"
+  ],
+  "centerContentTypes": [
+    "comparison",
+    "process",
+    "ownership-model",
+    "app-frame",
+    "diagram"
+  ],
+  "decoration": {
+    "required": true,
+    "assetRole": "frame-only"
+  },
+  "preferNativeFramer": true,
+  "reject": [
+    "orbs-as-functional-nodes",
+    "orb-overload",
+    "glow-soup"
+  ]
+}

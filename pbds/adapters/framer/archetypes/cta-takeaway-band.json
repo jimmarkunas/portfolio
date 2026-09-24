@@ -1,0 +1,29 @@
+{
+  "id": "cta-takeaway-band",
+  "intent": "Create forceful closure, transition, download action, or final takeaway.",
+  "composition": {
+    "statement": "editorial-forceful",
+    "supportingMetadata": "restrained",
+    "cta": "optional-native",
+    "negativeSpace": "high"
+  },
+  "semanticSlots": [
+    "statement",
+    "support",
+    "cta",
+    "optionalMeta"
+  ],
+  "decoration": {
+    "required": false,
+    "allowedFamilies": [
+      "orb-right",
+      "orb-horizon"
+    ]
+  },
+  "preferNativeFramer": true,
+  "reject": [
+    "generic-marketing-banner",
+    "multi-cta-clutter",
+    "heavy-gradient-strip"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "orb-hero",
+  "intent": "One branded recognition object dominates while message stays editorial.",
+  "composition": {
+    "messageField": "opposite-orb",
+    "negativeSpace": "high",
+    "dominantVisual": "electric-metallic-dot-orb",
+    "variants": [
+      "orb-right",
+      "orb-left",
+      "orb-horizon"
+    ],
+    "crop": "aggressive-edge"
+  },
+  "semanticSlots": [
+    "eyebrow",
+    "headline",
+    "subtitle",
+    "cta"
+  ],
+  "decoration": {
+    "required": true,
+    "assetRole": "atmosphere-only"
+  },
+  "preferNativeFramer": true,
+  "reject": [
+    "functional-content-inside-orb",
+    "fantasy-planet",
+    "fully-visible-small-orb"
+  ]
+}

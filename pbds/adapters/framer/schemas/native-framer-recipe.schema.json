@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PBDS Native Framer Recipe",
+  "type": "object",
+  "required": [
+    "archetype",
+    "intent",
+    "layerTree",
+    "styleReferences",
+    "layout",
+    "decoration",
+    "responsive",
+    "validation"
+  ],
+  "properties": {
+    "archetype": {
+      "type": "string"
+    },
+    "intent": {
+      "type": "string"
+    },
+    "layerTree": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "styleReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "layout": {
+      "type": "object"
+    },
+    "decoration": {
+      "type": "object"
+    },
+    "responsive": {
+      "type": "object"
+    },
+    "validation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

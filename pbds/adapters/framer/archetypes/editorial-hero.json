@@ -1,0 +1,34 @@
+{
+  "id": "editorial-hero",
+  "intent": "Message and proof lead; decoration remains secondary.",
+  "composition": {
+    "messageField": "left-dominant",
+    "visualField": "right-or-lower",
+    "negativeSpace": "high",
+    "headline": "large-editorial",
+    "headlineColorBehavior": "white-primary-magenta-emphasis",
+    "dominantVisualCount": 1
+  },
+  "semanticSlots": [
+    "eyebrow",
+    "headline",
+    "subtitle",
+    "proof",
+    "cta",
+    "optionalVisualSlot"
+  ],
+  "decoration": {
+    "required": false,
+    "allowedFamilies": [
+      "orb-right",
+      "orb-left",
+      "orb-horizon"
+    ]
+  },
+  "preferNativeFramer": true,
+  "reject": [
+    "generic-landing-hero",
+    "centered-poster",
+    "multiple-hero-objects"
+  ]
+}

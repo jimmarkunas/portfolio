@@ -1,0 +1,85 @@
+{
+  "package": "pbds-framer-forge-v1",
+  "files": [
+    {
+      "path": "AI_STUDIO_START_HERE.md",
+      "sha256": "2461154e2a9396ee08426317c5882531d9af6c6e2b338959d4b2185d44d0621a",
+      "bytes": 1592
+    },
+    {
+      "path": "PBDS_FRAMER_FORGE_CONTRACT.md",
+      "sha256": "b51b4af11ebc76f7672212daa8c886910194cca6c8cd3529e15bcd86b6ad1181",
+      "bytes": 2575
+    },
+    {
+      "path": "README.md",
+      "sha256": "930538aae2a7edf4a5866c35d01a024fd210c699b0b38adeeddf99938c1e1e5d",
+      "bytes": 1660
+    },
+    {
+      "path": "SOURCE_OF_TRUTH.md",
+      "sha256": "c6a12e2149ef649013885c8ee503f3c1cd4ea7ac9fe61160a32d53657563bcd5",
+      "bytes": 610
+    },
+    {
+      "path": "archetypes/cta-takeaway-band.json",
+      "sha256": "13073e8b5d9ba7330258daafdabf83b00c9ac50eaaf6e83c2a2b7fcc3036b7b7",
+      "bytes": 617
+    },
+    {
+      "path": "archetypes/dual-orb-composition.json",
+      "sha256": "c905dc73fc49f0fdef8837f125ca74b3973a3d7adf9d4bd0910c7d765f6023c4",
+      "bytes": 694
+    },
+    {
+      "path": "archetypes/editorial-hero.json",
+      "sha256": "5d0880d2510fef90a32e04465721109ef2f3465b9e64ab78335212ce4dc64f43",
+      "bytes": 735
+    },
+    {
+      "path": "archetypes/embedded-app-media-frame.json",
+      "sha256": "1894bfcdd7c493b9199bac1f39d56bc1e2a39d7b4f050d9708db9868c953b783",
+      "bytes": 751
+    },
+    {
+      "path": "archetypes/flow-process-rail.json",
+      "sha256": "f36b5da386f7ecc253208d40b7fe85db2aa2c2b03bd7bb424a7b0ceef9699116",
+      "bytes": 627
+    },
+    {
+      "path": "archetypes/orb-hero.json",
+      "sha256": "5000d4222fe6105373f07f3e067d64625f40b9f701e6994a8422346a747a304b",
+      "bytes": 662
+    },
+    {
+      "path": "archetypes/structured-content-cards.json",
+      "sha256": "d3454da20de4f105d4f2be4f86741be27746403a1095d15bdf8cf69eec560cf0",
+      "bytes": 656
+    },
+    {
+      "path": "framer-manifest.json",
+      "sha256": "5a92fee4142c80394f1102e8b034eed294784b3235b5d946384fd2588a28b66d",
+      "bytes": 3037
+    },
+    {
+      "path": "prompts/framer-code-component.md",
+      "sha256": "a4249cffb4118c224d34a8031489aa35332b93f0d936dbced8d814a722816703",
+      "bytes": 1335
+    },
+    {
+      "path": "prompts/native-framer-recipe.md",
+      "sha256": "d5f66f2b35f1c3bebe6af8f1d73b24dc345dd58ebeadc2cd3acc65f7fa2bc9b5",
+      "bytes": 969
+    },
+    {
+      "path": "schemas/native-framer-recipe.schema.json",
+      "sha256": "8761895b0d2ac9c12153bdcdcfc74d68f23d4335b04871cd1048fddf625a5a23",
+      "bytes": 881
+    },
+    {
+      "path": "skills/pbds.md",
+      "sha256": "18c6d2c76b8a00f780ef9ba18ba044a5882cba9cb83d160ceb4aab898495edad",
+      "bytes": 2395
+    }
+  ]
+}

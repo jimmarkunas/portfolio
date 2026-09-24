@@ -1,0 +1,33 @@
+{
+  "id": "structured-content-cards",
+  "intent": "Present three to five scan-friendly ideas with one coherent hierarchy.",
+  "composition": {
+    "cardCountPreferred": [
+      3,
+      4,
+      5
+    ],
+    "surface": "minimal-dark-thin-edge",
+    "emphasis": "zero-or-one-accent-card",
+    "negativeSpace": "medium"
+  },
+  "semanticSlots": [
+    "headline",
+    "subtitle",
+    "cards",
+    "optionalTakeaway"
+  ],
+  "decoration": {
+    "required": false,
+    "allowedFamilies": [
+      "orb-left",
+      "orb-right"
+    ]
+  },
+  "preferNativeFramer": true,
+  "reject": [
+    "saas-dashboard-grid",
+    "uniform-magenta-cards",
+    "too-many-cards"
+  ]
+}
