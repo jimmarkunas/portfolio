@@ -1,153 +1,111 @@
 # PDMA 2026 — Visual Remediation Roadmap
 
-**Status:** LOCKED — September 24, 2026  
-**Scope:** Current PDMA presentation visual remediation only  
-**Accepted production baseline:** `9c4b0ad0a352577755af49a24ee9e403bfdcd706`
+**Status:** COMPLETE / HISTORICAL PLAN — September 24, 2026  
+**Scope:** PDMA presentation visual remediation only  
+**Accepted production baseline:** `116c8f7d40c845e27601e578effba992a28ef050`
 
-This document preserves Jim Markunas's approved sequence and design intent for the remaining PDMA visual work so future chats and implementation agents do not reconstruct the plan from conversation history.
+This document preserves the completed remediation sequence and design intent. It no longer represents open work.
+
+The **single live slide-state/design-gate registry** is `docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md`. Do not use this roadmap as a competing state registry.
 
 ## Authority
 
-Use the normal PBDS authority chain:
-
 1. Jim's explicit current instruction.
-2. Canonical JM Personal Brand Figma for exact approved visual truth.
-3. `docs/PBDS_V2_ARCHITECTURE_CONTRACT.md` for PBDS implementation boundaries.
-4. `docs/pbds-presentation-components.md` for presentation runtime/primitives.
-5. Notion `PBDS Presentation Modality — Editorial Orb System` for durable presentation visual grammar.
-6. This document for the **current PDMA remediation sequence and slide-specific design status**.
+2. `docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md` for live slide state/design gates.
+3. The approved implementation reference registered for the target slide.
+4. Canonical JM Personal Brand Figma where the contract registers Figma visual truth.
+5. `docs/PBDS_V2_ARCHITECTURE_CONTRACT.md` for PBDS implementation boundaries.
+6. `docs/pbds-presentation-components.md` for presentation runtime/primitives.
+7. Notion `PBDS Presentation Modality — Editorial Orb System` for durable presentation visual grammar.
+8. This file for historical remediation sequence/rationale only.
 
-This roadmap does not replace the PBDS modality or Figma. It records what is approved, what is still open, and what must happen next.
+## Accepted production baseline
 
-## Accepted migration baseline
+The current production deck contains **16 accepted slides** at:
 
-The 15-slide production migration is accepted at:
+`116c8f7d40c845e27601e578effba992a28ef050`
 
-`9c4b0ad0a352577755af49a24ee9e403bfdcd706`
+The prior 15-slide migration checkpoint `9c4b0ad0a352577755af49a24ee9e403bfdcd706` is historical.
 
-The migrated deck is the baseline. Do not reopen the migration architecture while performing this visual pass.
+The four visual outliers that originally drove this roadmap are now complete:
 
-Manual visual QA identified exactly four remaining visual outliers:
+- Slide 05 — `DON'T AUTOMATE AMBIGUITY.` — HERO / Centered Signal Field.
+- Slide 11 — `A.G.E.N.T.S.` — Brand / Reveal / Particle Horizon.
+- Slide 12 — `TURN THE FRAMEWORK INTO PRODUCT.` — Translation / Traceability.
+- Slide 13 — `AN IDEA + AI ≠ PRODUCT SPEC.` — Before / Bridge / After.
 
-- Slide 05 — `DON'T AUTOMATE AMBIGUITY.`
-- Slide 11 — `A.G.E.N.T.S.`
-- Slide 12 — `TURN THE FRAMEWORK INTO PRODUCT.`
-- Slide 13 — `AN IDEA + AI ≠ PRODUCT SPEC.`
+All 16 production slides are accepted and locked unless Jim explicitly reopens a target slide or bounded surface.
 
-All other production slides are accepted and frozen for this remediation pass.
+## Completed sequence
 
-## Locked sequence
+The approved sequence was executed in this order:
 
-The work order is mandatory unless Jim explicitly changes it:
-
-1. **Design a HERO template.**
-2. **Design a Brand / Reveal template.**
-3. **Design the new Slide 13.**
-4. **Determine and approve a Slide 12 tracking plan.**
-
-Do not jump ahead and implement Slide 12 while its information-tracking model remains unresolved.
+1. **HERO template / Slide 05** — COMPLETE.
+2. **Brand / Reveal template / Slide 11** — COMPLETE.
+3. **New Slide 13** — COMPLETE.
+4. **Slide 12 tracking plan and implementation** — COMPLETE.
 
 ---
 
-## 1 — HERO template
+## 1 — HERO template — COMPLETE
 
-**First intended consumer:** Slide 05 — `DON'T AUTOMATE AMBIGUITY.`
+**First consumer:** Slide 05 — `DON'T AUTOMATE AMBIGUITY.`
 
-### Purpose
+The accepted HERO direction is **Centered Signal Field**:
 
-Create a reusable PBDS presentation archetype for a slide that needs:
+- huge editorial title hierarchy;
+- one dominant thesis;
+- centered diagnostic row;
+- centered equation/payoff moment;
+- restrained white/silver and PBDS-magenta signal atmosphere;
+- semantic copy native/editable;
+- no card grid, tangled atom, reflective-floor spectacle, or generic sci-fi scene.
 
-**one dominant idea + one dominant visual move.**
+The older tangled-core Slide 05 direction is retired.
 
-### Required behavior
-
-- Huge editorial title hierarchy.
-- Minimal supporting copy.
-- One hero visual system.
-- Massive negative space.
-- No dashboard/card-grid composition.
-- No decorative filler merely to occupy space.
-- No generic sci-fi wallpaper, random fantasy planets, glow soup, or reflective-floor spectacle as the concept itself.
-- Optional takeaway/closure zone when the message requires it.
-- Semantic copy remains native/editable.
-- Decorative atmosphere remains independently decomposable.
-
-### Design method
-
-**SLIDE FIRST. TEMPLATE SECOND.**
-
-Design one finished premium HERO slide first. Only after Jim approves that composition should the reusable HERO template contract be extracted.
-
-Slide 05 is the first proving ground. Its current tangled-orb / reflective-floor treatment is not the desired forward PBDS direction.
-
-Do not implement a replacement Slide 05 before the HERO direction is visually approved.
+Approved reference details live in `PDMA_VISUAL_APPROVALS_2026-09-24.md` and the live implementation contract.
 
 ---
 
-## 2 — Brand / Reveal template
+## 2 — Brand / Reveal template — COMPLETE
 
-**First intended consumer:** Slide 11 — `A.G.E.N.T.S.`
+**First consumer:** Slide 11 — `A.G.E.N.T.S.`
 
-### Purpose
+The accepted Brand / Reveal direction is **Particle Horizon Reveal**:
 
-Create a reusable PBDS archetype for framework, product, system, method, or brand introduction moments.
+- oversized naming moment;
+- centered proposition;
+- giant cropped magenta particle hemisphere/horizon;
+- six equal native semantic columns;
+- thin magenta separators rather than card containers;
+- semantic content remains editable.
 
-The audience should feel that they are **meeting the thing**, not inspecting an architecture diagram.
+The rejected six-card-around-a-hub reveal is not the accepted pattern.
 
-### Required behavior
-
-- Oversized branded naming moment.
-- Typography carries the reveal before diagram mechanics do.
-- Clean matrix or structured reveal rather than a SaaS-style system map.
-- Strong negative space.
-- Surgical PBDS magenta.
-- Optional canonical asterisk / signature PBDS motif when it materially strengthens recognition.
-- Clearly communicates both **what it is** and **why it matters**.
-- Native editable semantic content.
-
-### Explicit rejection
-
-The current Slide 11 six-card-around-a-hub treatment is not the target reveal pattern.
-
-Do not generalize that current composition into the Brand / Reveal template.
+Approved reference details live in `PDMA_VISUAL_APPROVALS_2026-09-24.md` and the live implementation contract.
 
 ---
 
-## 3 — New Slide 13
+## 3 — Slide 13 — COMPLETE
 
 **Slide:** `AN IDEA + AI ≠ PRODUCT SPEC.`
 
-The thesis and before → after narrative remain locked.
+Accepted composition:
 
-### Approved composition direction
+- smaller/weaker BEFORE artifact on the left;
+- unmistakable A.G.E.N.T.S. transformation bridge in the middle;
+- visually dominant production-ready AFTER artifact on the right;
+- outcome closure remains `LESS REWORK · FASTER DELIVERY · HIGHER CONFIDENCE`.
 
-- **Left:** intentionally smaller/weaker vague-prompt / idea artifact.
-- **Middle:** unmistakable transformation moment / bridge.
-- **Right:** visually dominant production-ready-spec artifact.
-- The right-side artifact should read like a real structured product deliverable, not another generic UI card.
-- Preserve the existing semantic content unless Jim explicitly changes it.
-- Preserve the outcome closure:
-  - `LESS REWORK`
-  - `FASTER DELIVERY`
-  - `HIGHER CONFIDENCE`
-
-The exact visual reference is not yet approved. Design and approve the reference before implementation.
+The approved implementation reference is `slide-13-approved-reference.png`.
 
 ---
 
-## 4 — Slide 12 tracking plan
+## 4 — Slide 12 tracking plan — COMPLETE
 
 **Slide:** `TURN THE FRAMEWORK INTO PRODUCT.`
 
-### Status
-
-**NO NEW COMPOSITION IS APPROVED YET.**
-
-This is an information-tracking / translation design problem, not merely a styling problem.
-
-### Non-negotiable audience requirement
-
-The audience must be able to visually track the one-to-one mapping from each A.G.E.N.T.S. domain to its corresponding product requirement:
+The accepted tracking solution preserves effortless one-to-one mapping:
 
 - `A` → Authority requirement
 - `G` → Guardrails requirement
@@ -156,48 +114,32 @@ The audience must be able to visually track the one-to-one mapping from each A.G
 - `T` → Transfer & Escalation requirement
 - `S` → Success & Accountability requirement
 
-### Design constraints
+The final composition uses a framework panel, six row-aligned magenta rails, one transformation node, and a requirements panel. The rail geometry shares the same row tracks as the framework rows so each mapping starts from its own domain.
 
-- Preserve one-to-one mapping.
-- Make framework → requirement scanning effortless from presentation distance.
-- Do not sacrifice trackability for minimalism.
-- Avoid a generic two-box consulting composition if a stronger PBDS treatment can preserve the mapping.
-- The previously proposed simple no-container / translation-rail treatment is **not approved**.
-- Do not implement the Slide 12 redesign until Jim approves the tracking composition.
-
-Slide 12 may ultimately justify its own translation/tracking archetype. Do not force it into HERO, Brand / Reveal, Compare / Contrast, or another existing template merely to reduce template count.
+The approved implementation reference is `slide-12-approved-reference.png`.
 
 ---
 
-## Scope freeze
+## Final scope state
 
-During this roadmap:
+The remediation program is closed.
 
-- Do not alter Slides 01–04, 06–10, 14, or 15.
-- Do not alter shared header, footer, navigation, fullscreen behavior, or title system.
-- Do not change canonical slide copy as part of visual-template work unless Jim explicitly changes it.
-- Do not merge HERO, Brand / Reveal, and Slide 12 tracking into one generic archetype.
-- Do not reinterpret the accepted Editorial Orb System.
-- Do not rebuild approved slides simply to make their internals more uniform.
+- Do not reopen any slide from this historical roadmap by inference.
+- Do not treat an old `DESIGN_REQUIRED` or “next task” statement from prior versions as current authority.
+- Do not alter shared header, footer, navigation, fullscreen behavior, title system, or slide composition without current explicit authorization.
+- Do not create another slide-state registry.
+- Future visual work starts only when Jim explicitly reopens a named slide or bounded surface and the live implementation contract governs the task.
 
-## Concurrent exercise work
+## Completion rule retained for future visual work
 
-The PDMA interactive exercise correction is a separate workstream: exact Secure Carolinas quiz behavior + PDMA/PBDS reskin + final productization brief.
+For any future reopened visual direction:
 
-Do not mix exercise migration changes into this visual-remediation package unless required by an explicitly approved slide integration step.
-
-## Completion rule
-
-For each new visual direction:
-
-1. Design the actual slide.
-2. Obtain Jim's visual approval.
-3. Reconstruct deterministically with semantic content native and decoration decomposable.
-4. Verify against the approved reference.
-5. Only then promote reusable behavior into a PBDS template/pattern contract.
+1. approve the target/reference or bounded delta;
+2. reconstruct deterministically with semantic content native and decoration decomposable;
+3. verify against the approved reference in the actual browser runtime;
+4. preserve non-target locked surfaces;
+5. lock again after acceptance.
 
 ## Immediate next step
 
-**Design the HERO template concept.**
-
-Do not start Slide 12 implementation.
+None. The visual-remediation roadmap is complete. Future work requires a new explicit Jim instruction against the accepted 16-slide baseline.
