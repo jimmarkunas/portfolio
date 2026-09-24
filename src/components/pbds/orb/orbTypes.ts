@@ -38,4 +38,10 @@ export interface PBDSKineticSphereProps {
   hotCoreFocus?: number;
   /** Hot-core width at the lit peak, tapering with the core's falloff. 1 = current width. */
   hotCoreWidthMultiplier?: number;
+  /** Limb primitive: "stroke" (default, accepted arc passes) or experimental "field" (volumetric heat field). */
+  atmosphereMode?: "stroke" | "field";
+  /** Field mode: radial reach of the magenta atmosphere (px), light focus, and overall heat. */
+  atmosphereWidth?: number;
+  atmosphereFocus?: number;
+  atmosphereIntensity?: number;
 }

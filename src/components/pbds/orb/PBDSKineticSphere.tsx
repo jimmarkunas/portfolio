@@ -6,7 +6,7 @@ import type { PBDSKineticSphereProps } from "./orbTypes";
 
 type RGB = { r: number; g: number; b: number };
 type LimbShape = { outer: number; mid: number; core: number; coreWidth: number };
-type LimbColors = { outer: { hex: string; rgb: string }; mid: { hex: string; rgb: string }; core: { hex: string; rgb: string; raw: RGB } };
+type LimbColors = { outer: { hex: string; rgb: string; raw: RGB }; mid: { hex: string; rgb: string; raw: RGB }; core: { hex: string; rgb: string; raw: RGB } };
 type StippleDot = { bx:number; by:number; bz:number; x:number; y:number; z:number; vx:number; vy:number; vz:number; baseSize:number; phase:number };
 type Plasma = { angle:number; distFactor:number; size:number; alpha:number; speed:number; radialVelocity:number; life:number; maxLife:number };
 
@@ -61,10 +61,39 @@ function drawAtmosphericLimb(ctx:CanvasRenderingContext2D,cx:number,cy:number,ra
   ctx.restore();
 }
 
+type FieldCanvas = HTMLCanvasElement | OffscreenCanvas;
+/**
+ * Atmospheric limb field (experimental "field" mode): a smooth heat field around the sphere boundary instead of stroked
+ * arcs. heat = radial edge profile × directional light term × intensity, mapped through a continuous
+ * transparent → outer → mid → pale → hot color ramp. Static for a given orb geometry/light, so it is rendered once into a
+ * tightly bounded offscreen canvas at full resolution and composited each frame.
+ */
+function buildAtmosphereField(width:number,height:number,cx:number,cy:number,radius:number,lightAngle:number,atmosphereWidth:number,focus:number,intensity:number,outer:RGB,mid:RGB,hot:RGB):{canvas:FieldCanvas;x:number;y:number}|null{
+  const reach=atmosphereWidth*3,x0=Math.max(0,Math.floor(cx-radius-reach)),x1=Math.min(width,Math.ceil(cx+radius+reach)),y0=Math.max(0,Math.floor(cy-radius-reach)),y1=Math.min(height,Math.ceil(cy+radius+reach)),w=x1-x0,h=y1-y0;
+  if(w<=0||h<=0)return null;
+  const canvas:FieldCanvas=typeof OffscreenCanvas!=="undefined"?new OffscreenCanvas(w,h):Object.assign(document.createElement("canvas"),{width:w,height:h});
+  const fctx=canvas.getContext("2d") as CanvasRenderingContext2D|OffscreenCanvasRenderingContext2D|null;if(!fctx)return null;
+  const img=fctx.createImageData(w,h),data=img.data,lx=Math.cos(lightAngle),ly=Math.sin(lightAngle),aw=atmosphereWidth,core=aw*.2,pale=lerpRgb(mid,hot,.6);
+  // Continuous heat→color ramp (heat, r, g, b, alpha), flattened so the per-pixel loop allocates nothing.
+  const R=[0,outer.r,outer.g,outer.b,0, .2,outer.r,outer.g,outer.b,.35, .5,mid.r,mid.g,mid.b,.7, .8,pale.r,pale.g,pale.b,.9, 1,hot.r,hot.g,hot.b,1];
+  const lightPow=focus/3.5,invOut=1/aw,invOutCore=1/core,invIn=1/(aw*.5),invInCore=1/(core*.5);
+  for(let j=0;j<h;j++){const dy=y0+j+.5-cy;for(let i=0;i<w;i++){
+    const dx=x0+i+.5-cx,dist=Math.sqrt(dx*dx+dy*dy)||1,L=(dx*lx+dy*ly)/dist;if(L<=.4)continue;
+    const d=dist-radius;if(d<-aw*1.2||d>aw*3)continue; // outside these bands the field contributes < ~0.2%
+    const u=d*(d>=0?invOut:invIn),v=d*(d>=0?invOutCore:invInCore),e=.55*Math.exp(-u*u)+.45*Math.exp(-v*v);
+    let t=(L-.4)/.54;t=t>=1?1:t*t*(3-2*t);if(lightPow!==1)t=Math.pow(t,lightPow);
+    const heat=Math.min(1,e*t*intensity);if(heat<.004)continue;
+    let k=5;while(k<20&&heat>R[k])k+=5;const q=(heat-R[k-5])/(R[k]-R[k-5]),o=(j*w+i)*4;
+    data[o]=R[k-4]+(R[k+1]-R[k-4])*q;data[o+1]=R[k-3]+(R[k+2]-R[k-3])*q;data[o+2]=R[k-2]+(R[k+3]-R[k-2])*q;data[o+3]=(R[k-1]+(R[k+4]-R[k-1])*q)*255;
+  }}
+  fctx.putImageData(img,0,0);return {canvas,x:x0,y:y0};
+}
+
 export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
-  radius=290,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,outerGlowColor,midGlowColor,hotCoreColor,solarFlareIntensity=1,outerGlowFocus=1,midGlowFocus=1,hotCoreFocus=1,hotCoreWidthMultiplier=1,
+  radius=290,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,outerGlowColor,midGlowColor,hotCoreColor,solarFlareIntensity=1,outerGlowFocus=1,midGlowFocus=1,hotCoreFocus=1,hotCoreWidthMultiplier=1,atmosphereMode="stroke",atmosphereWidth=24,atmosphereFocus=3.5,atmosphereIntensity=1,
 })=>{
   const canvasRef=useRef<HTMLCanvasElement|null>(null);
+  const fieldRef=useRef<{key:string;field:ReturnType<typeof buildAtmosphereField>}|null>(null);
   const palette=useMemo(()=>{
     let active:string,fallback:RGB,shadow:string,bodyStart:string,bodyEnd:string;
     if(skinStyle==="obsidian-ice"){active=accentColor||"#38BDF8";fallback={r:56,g:189,b:248};shadow="#64748B";bodyStart="rgba(5, 9, 20, ";bodyEnd="rgba(12, 35, 60, ";}
@@ -114,10 +143,13 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
         if(dotHarmonization==="unified"){color=palette.glowHex;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.25));}else if(dotHarmonization==="subtle-specular"){const sf=Math.pow(Math.max(0,(rad-.78)/.22),2)*Math.max(0,nDotL),blend=lerpRgb(palette.rawRgb,{r:255,g:255,b:255},sf*.65);color=`rgb(${blend.r}, ${blend.g}, ${blend.b})`;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.2));}else if(rad>.88&&nDotL>.4){color=palette.highlightDot;alpha=.95;size*=1.15;}else if(rad>.55||nDotL>.1){color=palette.midDot;alpha=.45+brightness*.45;}else{color=palette.shadowDot;alpha=.25+brightness*.35;}visible.push({sx,sy,z:p.z,size,color,alpha:Math.min(1,alpha*brightness)});
       }
       visible.sort((a,b)=>a.z-b.z);for(const d of visible){ctx.globalAlpha=d.alpha;ctx.fillStyle=d.color;ctx.beginPath();ctx.arc(d.sx,d.sy,d.size,0,Math.PI*2);ctx.fill();}
-      if(glowingStrokeIntensity>0&&strokeMode!=="none")drawAtmosphericLimb(ctx,cx,cy,radius,Math.atan2(lightY,lightX),strokeMode,glowingStrokeIntensity,glowSpread,coreHotness,strokeWidth,innerWashIntensity,strokeShadowOpacity,glowHex,glowRgb,palette.rawRgb,palette.limb,limbShape);
+      if(atmosphereMode==="field"){const la=Math.atan2(lightY,lightX),key=`${width}x${height}|${cx}|${cy}|${radius}|${la}|${atmosphereWidth}|${atmosphereFocus}|${atmosphereIntensity}|${outerGlowColor}|${midGlowColor}|${hotCoreColor}|${palette.glowHex}`;
+        if(fieldRef.current?.key!==key){const l=palette.limb;fieldRef.current={key,field:buildAtmosphereField(width,height,cx,cy,radius,la,atmosphereWidth,atmosphereFocus,atmosphereIntensity,l?.outer.raw??palette.rawRgb,l?.mid.raw??palette.rawRgb,l?.core.raw??palette.rawRgb)};}
+        const f=fieldRef.current.field;if(f){ctx.save();ctx.globalAlpha=1;ctx.globalCompositeOperation="screen";ctx.drawImage(f.canvas,f.x,f.y);ctx.restore();}}
+      else if(glowingStrokeIntensity>0&&strokeMode!=="none")drawAtmosphericLimb(ctx,cx,cy,radius,Math.atan2(lightY,lightX),strokeMode,glowingStrokeIntensity,glowSpread,coreHotness,strokeWidth,innerWashIntensity,strokeShadowOpacity,glowHex,glowRgb,palette.rawRgb,palette.limb,limbShape);
       ctx.globalAlpha=1;animId=requestAnimationFrame(render);
     };render();return()=>{window.removeEventListener("resize",resize);cancelAnimationFrame(animId);};
-  },[radius,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity,solarFlareIntensity,outerGlowFocus,midGlowFocus,hotCoreFocus,hotCoreWidthMultiplier]);
+  },[radius,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity,solarFlareIntensity,outerGlowFocus,midGlowFocus,hotCoreFocus,hotCoreWidthMultiplier,atmosphereMode,atmosphereWidth,atmosphereFocus,atmosphereIntensity]);
 
   // Pointer → canvas backing-store coordinates. Identity when unscaled (standalone embed); corrects for
   // ancestor CSS transforms such as the PDMA shell's uniform scale(), where the rendered rect ≠ canvas size.

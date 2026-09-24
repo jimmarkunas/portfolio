@@ -20,9 +20,9 @@ const flow = templateContent.find((content) => content.kind === "flow-scenario")
 const canonical = (kind: TemplateManifestEntry["kind"]) => templateManifest.find((entry) => entry.kind === kind)!;
 
 const TitleExperiment: ComponentType = () => title.kind === "title" ? <TitleTemplate content={title} decorItems={decorativeVariants[title.decorativeVariant]} /> : null;
-/** ORB-VISUAL-1/1B: hot-limb colors, directional limb focus and stronger solar flare on the right magenta orb only; grey orb untouched. */
+/** ORB-VISUAL-1C: volumetric atmospheric limb field + hot-limb colors + stronger solar flare on the right magenta orb only; grey orb untouched. */
 const flowExperimentDecor = decorativeVariants[flow.decorativeVariant].map((item) => isDecorOrb(item) && item.orb === "magentaRight"
-  ? { ...item, props: { outerGlowColor: "#FF2FAE", midGlowColor: "#FF65C7", hotCoreColor: "#FFF7FC", solarFlareIntensity: 1.35, outerGlowFocus: 2.15, midGlowFocus: 3.9, hotCoreFocus: 12, hotCoreWidthMultiplier: 2 } }
+  ? { ...item, props: { atmosphereMode: "field" as const, atmosphereWidth: 24, atmosphereFocus: 3.5, atmosphereIntensity: 1, outerGlowColor: "#FF2FAE", midGlowColor: "#FF65C7", hotCoreColor: "#FFF7FC", solarFlareIntensity: 1.35 } }
   : item);
 const FlowExperiment: ComponentType = () => flow.kind === "flow-scenario" ? <FlowScenarioTemplate content={flow} decorItems={flowExperimentDecor} /> : null;
 
