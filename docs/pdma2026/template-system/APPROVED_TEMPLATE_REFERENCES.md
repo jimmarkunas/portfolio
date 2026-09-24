@@ -1,4 +1,4 @@
-# PDMA 2026 Template System — Approved Visual References v3
+# PDMA 2026 Template System — Approved Visual References v4
 
 **Status:** CANONICAL for the new `/pdma2026-templates` build  
 **Approved:** 2026-09-24  
@@ -10,11 +10,11 @@ For the new template deck, visual implementation must follow this file plus the 
 
 Persistent source bytes:
 
-`/LifeOS/PDMA 2026/Template Canon/v3/`
+`/LifeOS/PDMA 2026/Template Canon/v4/`
 
 Bundled archive:
 
-`/LifeOS/PDMA 2026/Template Canon/v3/pdma2026-template-canon-v3.zip`
+`/LifeOS/PDMA 2026/Template Canon/v4/pdma2026-template-canon-v4.zip`
 
 ## 1. End Card — APPROVED
 
@@ -85,6 +85,24 @@ SHA-256: `e03b137756f9ace8518283224084ca6e5e2cc30f408084583e2adc28a7749af0`
 - Human Intervention is the emphasized magenta card.
 - Action rail: Backlog → PRD → Acceptance Criteria → Production.
 - Cards, rail, icons, and text are native React/CSS; orb assets are decorative edge crops only.
+
+## 5. Embedded Interactive App — APPROVED
+
+**Reference**  
+`embedded-app/embedded-app-reference-v1.png`  
+SHA-256: `de3c6f5b8dffcbe5f6635fa57b92a96cc1ce9b074724380a88eab381900baff9`
+
+**Assets**
+- `embedded-app/embedded-app-left-orb-magenta-v1.png` — SHA-256 `adf511d9a911a20d6ad1bd341ab9c67f731d75b6e7b3b237efad4751d8f00ba1`
+- `embedded-app/embedded-app-right-orb-white-v1.png` — SHA-256 `58ccbec91e6986e42f08add2feacb2ddd458b8c0f0bddf93765aa8d0eff31725`
+
+**Implementation intent**
+- Reference owns composition and visual relationships.
+- The app itself is a live native React/HTML container, never a flattened screenshot.
+- The app viewport is the dominant content region.
+- The app shell must accept arbitrary embedded interactive content without changing slide architecture.
+- Orb assets are decorative edge crops only.
+- Shared PDMA title/subtitle/header/footer/navigation behavior remains unchanged.
 
 ## Shared template-system rules
 
