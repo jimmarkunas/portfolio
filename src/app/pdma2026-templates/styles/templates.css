@@ -291,7 +291,7 @@
 .pdmat-slide .pdmat-compare__process .pdmat-connector--glyph { justify-content: flex-start; padding-left: 14px; }
 .pdmat-slide .pdmat-compare__rule { width: 520px; height: 2px; margin-top: 29px; border: 0; background: #4d4f57; }
 .pdmat-slide .pdmat-compare__boundary { margin-top: 20px; font-size: 25px; line-height: 40px; white-space: nowrap; }
-.pdmat-slide .pdmat-compare__capabilities { display: flex; justify-content: center; gap: 30px; width: 540px; font-size: 20px; line-height: 32px; font-weight: 600; letter-spacing: 4px; color: var(--pdmat-magenta); white-space: nowrap; }
+.pdmat-slide.pdmat-slide--compare-contrast .pdmat-compare__capabilities { display: flex; justify-content: flex-start; gap: 30px; width: 600px; font-size: 20px; line-height: 32px; font-weight: 600; letter-spacing: 4px; color: var(--pdmat-magenta); white-space: nowrap; }
 .pdmat-slide .pdmat-compare__capabilities > span { display: flex; gap: 30px; }
 .pdmat-slide .pdmat-compare__capabilities b { font-weight: 600; letter-spacing: 0; }
 .pdmat-slide .pdmat-compare__takeaway { grid-row: 3; margin-left: 128px; min-height: 54px; }
@@ -335,7 +335,9 @@
 .pdmat-slide .pdmat-flow__question p { display: flex; flex-direction: column; gap: 6px; }
 .pdmat-slide .pdmat-flow__question-label { font-size: 15px; line-height: 18px; font-weight: 600; letter-spacing: .35em; color: #9a9ca3; }
 .pdmat-slide .pdmat-flow__question-body { font-size: 26px; line-height: 32px; font-weight: 500; }
+.pdmat-slide .pdmat-flow__question-follow-up { font-size: 22px; line-height: 30px; font-weight: 500; color: var(--pdmat-magenta); }
 .pdmat-slide .pdmat-flow__takeaway { margin-left: 27px; min-height: 46px; }
+.pdmat-slide.pdmat-slide--flow-scenario .pdmat-flow__takeaway { display: none; }
 .pdmat-slide .pdmat-flow__takeaway .pdmat-takeaway__text { font-size: 30px; line-height: 36px; font-weight: 600; }
 
 /* ── T07 Decision / Spectrum ───────────────────────────────────── */
@@ -357,6 +359,7 @@
 .pdmat-slide .pdmat-spectrum__progression { grid-row: 3; display: flex; justify-content: center; align-items: center; gap: 110px; font-size: 19px; line-height: 24px; font-weight: 600; letter-spacing: 4px; }
 .pdmat-slide .pdmat-spectrum__progression > b { font-size: 30px; font-weight: 400; letter-spacing: 0; color: var(--pdmat-magenta); }
 .pdmat-slide .pdmat-spectrum__takeaway { grid-row: 4; margin-top: 26px; min-height: 50px; }
+.pdmat-slide.pdmat-slide--decision-spectrum .pdmat-spectrum__takeaway { display: none; }
 .pdmat-slide .pdmat-spectrum__takeaway .pdmat-takeaway__text { font-size: 27px; line-height: 34px; font-weight: 700; }
 
 /* ── T08 Hub / Ecosystem ───────────────────────────────────────── */
@@ -366,6 +369,7 @@
 .pdmat-slide .pdmat-hub__heading--inventory { grid-column: 1; padding-left: 6px; }
 .pdmat-slide .pdmat-hub__heading--core { grid-column: 3; justify-self: center; }
 .pdmat-slide .pdmat-hub__heading--owners { grid-column: 5; padding-left: 3px; }
+.pdmat-slide.pdmat-slide--hub-ecosystem .pdmat-hub__heading--core { display: none; }
 .pdmat-slide .pdmat-hub__bank { grid-row: 2; display: grid; }
 .pdmat-slide .pdmat-hub__bank--inventory { grid-column: 1; grid-template-rows: repeat(4, 1fr); }
 .pdmat-slide .pdmat-hub__bank--owners { grid-column: 5; grid-template-rows: repeat(3, 1fr); }
@@ -445,7 +449,8 @@
 .pdmat-slide .pdmat-structured__rail .pdmat-rail__title { font-size: 21px; line-height: 26px; font-weight: 700; letter-spacing: .02em; }
 .pdmat-slide .pdmat-structured__rail .pdmat-rail__body { font-size: 19px; line-height: 26px; color: #c9cbd0; white-space: pre-line; }
 .pdmat-slide .pdmat-structured__rail .pdmat-rail__connector { padding-inline: 18px; }
-.pdmat-slide .pdmat-structured__takeaway { grid-row: 5; margin-left: 48px; min-height: 46px; }
+.pdmat-slide .pdmat-structured__takeaway { grid-row: 5; margin-left: 0; min-height: 46px; justify-content: center; }
+.pdmat-slide.pdmat-slide--structured-content-action .pdmat-structured__takeaway .pdmat-takeaway__aside { display: none; }
 .pdmat-slide .pdmat-structured__takeaway .pdmat-takeaway__text { font-size: 26px; line-height: 32px; font-weight: 700; }
 
 @media (prefers-reduced-motion: reduce) {

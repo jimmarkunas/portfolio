@@ -52,7 +52,7 @@ export function FlowScenarioTemplate({ content }: { content: FlowScenarioTemplat
       <div className="pdmat-flow__question">
         <IconCircle source={question} size={54} iconSize={30} tone="accent" />
         <i className="pdmat-flow__question-rule" aria-hidden="true" />
-        <p><span className="pdmat-flow__question-label">{question.label}</span><span className="pdmat-flow__question-body">{question.body}</span></p>
+        <p><span className="pdmat-flow__question-label">{question.label}</span><span className="pdmat-flow__question-body">{question.body}</span>{question.followUp && <span className="pdmat-flow__question-follow-up">{question.followUp}</span>}</p>
       </div>
       <TakeawayBand text={takeaway} className="pdmat-flow__takeaway" />
     </section>

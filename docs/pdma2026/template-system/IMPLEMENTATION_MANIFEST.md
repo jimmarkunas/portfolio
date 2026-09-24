@@ -456,7 +456,7 @@ Inventory bank → native rounded AI/Automation HTML box → owner bank. Straigh
 - Requirement cards:
   1. `GUARDRAILS` — `What must the product prevent or constrain?`
   2. `HUMAN INTERVENTION` — `When must a person review, approve, or take over?`
-  3. `SUCCESS MEASURES` — `What proves the feature creates the intended outcome?`
+  3. `SUCCESS METRICS` — `What proves the feature creates the intended outcome?`
 - Section label: `OPERATIONALIZE IT AS PRODUCT WORK`
 - Action rail:
   1. `BACKLOG` — `Capture the requirements.`

@@ -265,7 +265,7 @@ export const slide09: FlowScenarioTemplateContent = {
     { title: "IDENTIFY", body: "Detect meaningful churn-risk patterns across enterprise customer data.", icon: ChartColumn },
     { title: "RECOMMEND", body: "Recommend an approved intervention to the responsible team.", icon: Lightbulb },
   ],
-  question: { label: "PRODUCT QUESTION", body: "How much authority should this agent have?", icon: CircleHelp },
+  question: { label: "PRODUCT QUESTION", body: "How much authority should this agent have?", followUp: "How do we turn this business case into a production-ready enterprise product?", icon: CircleHelp },
   takeaway: "HOW DO WE TURN THIS BUSINESS CASE INTO A PRODUCTION-READY ENTERPRISE PRODUCT?",
 };
 
@@ -278,12 +278,12 @@ export const slide10: StructuredActionTemplateContent = {
     tocTitle: "DESIGN PRODUCTION READINESS INTO THE FEATURE.",
     headerLabels: ["BACKLOG", "CONTROLS", "OUTCOMES"],
     footerLabel: "PRODUCTION READINESS STARTS IN THE BACKLOG",
-    title: { ...standardTitle, white: "DESIGN PRODUCTION READINESS", magenta: "INTO THE FEATURE.", subtitle: lines("Guardrails, human intervention, and success measures belong in the product", "requirements before development begins."), subtitleSize: 24 },
+  title: { ...standardTitle, white: "DESIGN PRODUCTION READINESS", magenta: "INTO THE FEATURE.", subtitle: "Guardrails, human intervention, and success measures belong in the product requirements before development begins.", subtitleSize: 24 },
   },
   requirements: [
     { number: "01", title: "GUARDRAILS", body: "What must the product\nprevent or constrain?", emphasis: false, icon: Shield },
     { number: "02", title: "HUMAN INTERVENTION", body: "When must a person review,\napprove, or take over?", emphasis: true, icon: UserRound },
-    { number: "03", title: "SUCCESS MEASURES", body: "What proves the feature\ncreates the intended\noutcome?", emphasis: false, icon: BarChart3 },
+    { number: "03", title: "SUCCESS METRICS", body: "What proves the feature\ncreates the intended\noutcome?", emphasis: false, icon: BarChart3 },
   ],
   sectionLabel: "OPERATIONALIZE IT AS PRODUCT WORK",
   steps: [

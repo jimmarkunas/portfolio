@@ -42,7 +42,7 @@
 .pdmat-slide .pdmat-workmap__title { margin-top: 7px; font-size: 32px; line-height: 48px; font-weight: 400; color: var(--pdmat-magenta); }
 .pdmat-slide .pdmat-workmap__body { margin-top: 12px; font-size: 24px; line-height: 32.4px; }
 .pdmat-slide .pdmat-workmap__label { margin-top: auto; font-size: 16px; line-height: 24px; font-weight: 700; letter-spacing: 6px; color: var(--pdmat-magenta); }
-.pdmat-slide .pdmat-workmap__takeaway { grid-row: 3; gap: 28px; min-height: 54px; margin-top: 13px; }
+.pdmat-slide .pdmat-workmap__takeaway { grid-row: 3; gap: 28px; min-height: 54px; margin-top: 32px; padding-top: 20px; }
 .pdmat-slide .pdmat-workmap__takeaway .pdmat-takeaway__text { font-size: 30px; line-height: 40px; font-weight: 600; }
 
 /* ── 05 DON'T AUTOMATE AMBIGUITY. · HERO v1 — Centered Signal Field ─ */

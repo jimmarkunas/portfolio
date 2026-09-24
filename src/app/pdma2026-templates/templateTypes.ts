@@ -115,7 +115,7 @@ export type FlowScenarioTemplateContent = TemplateBase<"flow-scenario"> & {
   } & IconSource;
   signals: readonly FlowSignal[];
   stages: readonly [FlowStage, FlowStage];
-  question: { label: string; body: string } & IconSource;
+  question: { label: string; body: string; followUp?: string } & IconSource;
   takeaway: string;
 };
 
