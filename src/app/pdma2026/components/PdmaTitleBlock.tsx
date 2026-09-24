@@ -2,6 +2,18 @@ import { motion } from "motion/react";
 import type { PdmaTitleConfig } from "../presentation/presentationTypes";
 import { pdmaTransition, usePdmaReducedMotion } from "./pdmaMotion";
 
+/** Splits `text` into runs so the listed glyphs render magenta and the rest keep the title color. */
+function accentGlyphs(text: string, glyphs: string) {
+  const runs: { text: string; accent: boolean }[] = [];
+  for (const char of text) {
+    const accent = glyphs.includes(char);
+    const last = runs[runs.length - 1];
+    if (last && last.accent === accent) last.text += char;
+    else runs.push({ text: char, accent });
+  }
+  return runs.map(({ text: run, accent }, index) => accent ? <span key={index} style={{ color: "#ff2fae" }}>{run}</span> : run);
+}
+
 export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaTitleConfig }) {
   const reduced = usePdmaReducedMotion();
 
@@ -38,7 +50,7 @@ export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaT
       initial={reduced ? false : { opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      {config.white && config.plusMagenta ? (() => { const [before, after] = config.white.split(" + "); return <><span>{before}</span><em style={{ marginLeft: 0 }}> + </em><span>{after}</span></>; })() : config.white && <span>{config.white}</span>}
+      {config.white && config.magentaGlyphs ? accentGlyphs(config.white, config.magentaGlyphs) : config.white && config.plusMagenta ? (() => { const [before, after] = config.white.split(" + "); return <><span>{before}</span><em style={{ marginLeft: 0 }}> + </em><span>{after}</span></>; })() : config.white && <span>{config.white}</span>}
       {config.sameRow && config.magenta && <em>{config.magenta}</em>}
     </motion.h1>
     {!config.sameRow && config.magenta && <motion.h1

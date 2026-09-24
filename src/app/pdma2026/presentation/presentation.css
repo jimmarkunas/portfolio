@@ -1,16 +1,15 @@
 /*
- * PDMA 2026 production deck — the six preserved-composition slides (02, 04, 05, 11, 12, 13).
+ * PDMA 2026 production deck — the six deck-specific compositions (02, 04, 05, 11, 12, 13).
+ * 05 is HERO v1 and 11 is Brand / Reveal v1 (docs/pdma2026/PDMA_VISUAL_APPROVALS_2026-09-24.md).
  * Template-mapped slides use /pdma2026-templates/styles/templates.css unchanged.
  * Units are logical-canvas pixels (1920×1080, scaled uniformly by the shell).
- * Content is Grid/Flex flow; absolute positioning appears only in the decorative layer
- * and the Slide 11 connector layer.
+ * Content is Grid/Flex flow; absolute positioning appears only in the decorative layer.
  */
 
 /* ── Decorative motion / treatments for production artwork ───────── */
 .pdmat-slide .pdmat-deco-item--shift-field { animation: pdmat-shift-field 15s ease-in-out infinite; }
 .pdmat-slide .pdmat-deco-item--shift-ai { animation: pdmat-shift-ai 14s ease-in-out infinite; }
 .pdmat-slide .pdmat-deco-item--shift-human { animation: pdmat-shift-human 16s ease-in-out infinite; }
-.pdmat-slide .pdmat-deco-item--floor-fade { -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%); }
 @keyframes pdmat-shift-field { 0%, 100% { transform: none; opacity: .49; } 50% { transform: translateX(2px); opacity: .58; } }
 @keyframes pdmat-shift-ai { 0%, 100% { transform: none; } 50% { transform: translate(2px, -2px) scale(1.006); } }
 @keyframes pdmat-shift-human { 0%, 100% { transform: none; } 50% { transform: translate(-2px, 2px) scale(1.008); } }
@@ -46,58 +45,38 @@
 .pdmat-slide .pdmat-workmap__takeaway { grid-row: 3; gap: 28px; min-height: 54px; margin-top: 13px; }
 .pdmat-slide .pdmat-workmap__takeaway .pdmat-takeaway__text { font-size: 30px; line-height: 40px; font-weight: 600; }
 
-/* ── 05 DON'T AUTOMATE AMBIGUITY. ───────────────────────────────── */
-.pdmat-slide.pdmat-slide--ambiguity-gate .pdmat-stage { --pdmat-title-gap: 155px; }
-.pdmat-slide .pdmat-ambiguity { display: flex; flex-direction: column; align-items: flex-start; padding-left: 12px; }
-.pdmat-slide .pdmat-ambiguity__equation { display: grid; justify-items: center; }
-.pdmat-slide .pdmat-ambiguity__conditions { justify-self: start; display: flex; flex-direction: column; font-size: 64px; line-height: 83.84px; font-weight: 400; letter-spacing: 4px; white-space: nowrap; }
-.pdmat-slide .pdmat-ambiguity__equals { margin-top: 16px; font-size: 128px; line-height: 38px; font-weight: 600; }
-.pdmat-slide .pdmat-ambiguity__result { margin-top: 66px; font-size: 64px; line-height: 64px; font-weight: 600; color: var(--pdmat-magenta); white-space: nowrap; }
+/* ── 05 DON'T AUTOMATE AMBIGUITY. · HERO v1 — Centered Signal Field ─ */
+/* Approved HERO exception: the whole composition, shell title included, is centered. */
+.pdma-logical-canvas .pdma-title-5 { top: 226px; text-align: center; }
+.pdma-logical-canvas .pdma-title-5 .pdma-title-magenta-row { font-size: 154px; line-height: 129px; letter-spacing: -7.7px; }
+.pdmat-slide.pdmat-slide--ambiguity-gate .pdmat-stage { --pdmat-title-gap: 179px; }
+.pdmat-slide .pdmat-hero { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.pdmat-slide .pdmat-hero__conditions { display: flex; align-items: flex-start; }
+.pdmat-slide .pdmat-hero__conditions > li { display: flex; align-items: flex-start; }
+.pdmat-slide .pdmat-hero__conditions p { display: flex; flex-direction: column; width: 180px; line-height: 31px; white-space: nowrap; }
+.pdmat-slide .pdmat-hero__conditions span { font-size: 25px; font-weight: 400; letter-spacing: 3px; }
+.pdmat-slide .pdmat-hero__conditions strong { font-size: 27px; font-weight: 800; }
+.pdmat-slide .pdmat-hero__link {
+  flex: 0 0 76px;
+  height: 6px;
+  margin: 25px 6px 0;
+  background:
+    radial-gradient(circle at calc(100% - 3px) 50%, var(--pdmat-magenta) 2.5px, transparent 3px),
+    linear-gradient(90deg, var(--pdmat-magenta), rgba(255, 47, 174, .5) 55%, var(--pdmat-magenta)) left center / calc(100% - 3px) 2px no-repeat;
+}
+.pdmat-slide .pdmat-hero__equals { margin-top: 20px; font-size: 90px; line-height: 70px; font-weight: 800; -webkit-text-stroke: 3px currentColor; }
+.pdmat-slide .pdmat-hero__result { margin-top: 23px; font-size: 94px; line-height: 83px; font-weight: 800; letter-spacing: -5.4px; color: var(--pdmat-magenta); white-space: pre-line; }
 
-/* ── 11 A.G.E.N.T.S. ────────────────────────────────────────────── */
-.pdmat-slide.pdmat-slide--agents-reveal .pdmat-stage { --pdmat-title-gap: 60px; --pdmat-stage-bottom: 104px; }
-.pdmat-slide .pdmat-agents { display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; }
-.pdmat-slide .pdmat-agents__system {
-  position: relative;
-  justify-self: center;
-  display: grid;
-  grid-template-columns: var(--agents-card) var(--agents-lane) var(--agents-hub) var(--agents-lane) var(--agents-card);
-  grid-template-rows: repeat(3, var(--agents-row));
-  row-gap: var(--agents-gap);
-}
-.pdmat-slide .pdmat-agents__connectors { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.pdmat-slide .pdmat-agents__connectors line { stroke: #b81773; stroke-width: 2; stroke-linecap: round; }
-.pdmat-slide .pdmat-agents__connectors circle { fill: var(--pdmat-ink); stroke: var(--pdmat-magenta); stroke-width: 2; }
-.pdmat-slide .pdmat-agents__bank { position: relative; grid-row: 1 / -1; display: grid; grid-template-rows: subgrid; }
-.pdmat-slide .pdmat-agents__bank--left { grid-column: 1; }
-.pdmat-slide .pdmat-agents__bank--right { grid-column: 5; }
-.pdmat-slide .pdmat-agents__card { box-sizing: border-box; display: grid; grid-template-columns: 64px 2px minmax(0, 1fr); column-gap: 24px; align-items: center; padding: 18px 26px; border: 1px solid rgba(184, 23, 115, .78); border-radius: 14px; background: #0e0c0e; }
-.pdmat-slide .pdmat-agents__card.is-active { border-color: #b81773; background: #130911; }
-.pdmat-slide .pdmat-agents__letter { font-size: 50px; line-height: 56px; font-weight: 800; color: var(--pdmat-magenta); text-align: center; }
-.pdmat-slide .pdmat-agents__bar { width: 2px; height: 64px; background: rgba(255, 47, 174, .65); }
-.pdmat-slide .pdmat-agents__copy { display: flex; flex-direction: column; min-width: 0; }
-.pdmat-slide .pdmat-agents__copy > strong { font-size: 22px; line-height: 27px; font-weight: 600; letter-spacing: .6px; }
-.pdmat-slide .pdmat-agents__copy > span { margin-top: 11px; font-size: 18px; line-height: 25px; color: rgba(242, 242, 245, .78); }
-.pdmat-slide .pdmat-agents__hub {
-  position: relative;
-  grid-column: 3;
-  grid-row: 1 / -1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: var(--agents-ring) center / contain no-repeat;
-}
-.pdmat-slide .pdmat-agents__hub > svg { margin-bottom: 12px; color: var(--pdmat-magenta); }
-.pdmat-slide .pdmat-agents__count { font-size: 48px; line-height: 52px; font-weight: 800; color: var(--pdmat-magenta); }
-.pdmat-slide .pdmat-agents__standard { margin-top: 12px; font-size: 28px; line-height: 32px; font-weight: 600; white-space: pre-line; }
-.pdmat-slide .pdmat-agents__hub-rule { width: 70px; height: 3px; margin-top: 20px; background: var(--pdmat-magenta); }
-.pdmat-slide .pdmat-agents__proposition { margin-top: 22px; font-size: 16px; line-height: 23px; font-weight: 600; letter-spacing: 2px; white-space: pre-line; }
-.pdmat-slide .pdmat-agents__usage { grid-row: 3; box-sizing: border-box; display: grid; grid-template-columns: 210px minmax(0, 1fr); align-items: center; min-height: 64px; padding: 0 20px; border-top: 1px solid var(--pdmat-line); border-bottom: 1px solid var(--pdmat-line); font-size: 18px; line-height: 24px; font-weight: 600; }
-.pdmat-slide .pdmat-agents__usage > span:first-child { letter-spacing: 2px; color: var(--pdmat-magenta); }
-.pdmat-slide .pdmat-agents__takeaway { grid-row: 4; gap: 28px; min-height: 54px; margin-top: 16px; }
-.pdmat-slide .pdmat-agents__takeaway .pdmat-takeaway__text { font-size: 30px; line-height: 37px; font-weight: 600; }
+/* ── 11 A.G.E.N.T.S. · Brand / Reveal v1 — Particle Horizon Reveal ─ */
+/* Approved reveal: centered wordmark over the horizon; six equal domain columns, no cards or hub. */
+.pdma-logical-canvas .pdma-title-11 { top: 304px; text-align: center; }
+.pdmat-slide.pdmat-slide--agents-reveal .pdmat-stage { --pdmat-title-gap: 236px; --pdmat-stage-inline: 36px; }
+.pdmat-slide .pdmat-reveal__domains { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.pdmat-slide .pdmat-reveal__domains > li { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.pdmat-slide .pdmat-reveal__domains > li + li { border-left: 2px solid rgba(255, 47, 174, .72); }
+.pdmat-slide .pdmat-reveal__initial { font-size: 77px; line-height: 77px; font-weight: 800; color: var(--pdmat-magenta); }
+.pdmat-slide .pdmat-reveal__name { min-height: 56px; margin-top: 2px; font-size: 23px; line-height: 28px; font-weight: 800; white-space: pre-line; }
+.pdmat-slide .pdmat-reveal__question { margin-top: 15px; font-size: 24.5px; line-height: 30px; color: #d9dade; white-space: pre-line; }
 
 /* ── 12 TURN THE FRAMEWORK INTO PRODUCT. ────────────────────────── */
 .pdmat-slide.pdmat-slide--framework-to-product { background: linear-gradient(to bottom, var(--pdmat-ink) 0 330px, #0a0b0d 330px 1000px, var(--pdmat-ink) 1000px); }

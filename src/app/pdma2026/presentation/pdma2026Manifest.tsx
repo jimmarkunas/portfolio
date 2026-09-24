@@ -13,7 +13,7 @@ import { TitleTemplate } from "@/app/pdma2026-templates/components/templates/Tit
 import { PdmaScenarioExercise } from "../exercise/PdmaScenarioExercise";
 import { PDMA_EXERCISE_ROUTE, PDMA_KIT_URL, pdma2026Slides, type Pdma2026SlideContent } from "./pdma2026Content";
 import type { PdmaSlideKey, PdmaSlideManifestEntry } from "./presentationTypes";
-import { AgentsRevealSlide } from "./slides/AgentsRevealSlide";
+import { AgentsRevealSlide, agentsDecor } from "./slides/AgentsRevealSlide";
 import { AmbiguityGateSlide, ambiguityDecor } from "./slides/AmbiguityGateSlide";
 import { FrameworkToProductSlide } from "./slides/FrameworkToProductSlide";
 import { IdeaToSpecSlide } from "./slides/IdeaToSpecSlide";
@@ -53,7 +53,7 @@ function slideAssets(content: Pdma2026SlideContent): readonly string[] {
     case "shift-boundary": return [...decorSources(shiftBoundaryDecor), ...content.lists.flatMap(({ items }) => items.map(({ glyph }) => glyph))];
     case "work-map": return decorSources(workMapDecor);
     case "ambiguity-gate": return decorSources(ambiguityDecor);
-    case "agents-reveal": return [content.hub.ring];
+    case "agents-reveal": return decorSources(agentsDecor);
     case "framework-to-product": return [];
     case "idea-to-spec": return [content.before.marker, content.after.marker, content.bridge.art];
     case "exercise": return [...decorSources(decorativeVariants[content.decorativeVariant]), ...content.rows.map(({ glyph }) => glyph), content.connectorArt];

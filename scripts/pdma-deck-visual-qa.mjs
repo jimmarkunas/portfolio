@@ -5,12 +5,14 @@
  * Per viewport × slide: no document scroll, one uniformly scaled 16:9 canvas, logical layout
  * identical across viewports (no stacking), header/footer/count intact, canonical copy present
  * and unclipped, decoration loaded, A.G.E.N.T.S. not named before Slide 11.
- * Fidelity: template-mapped slides vs the accepted /pdma2026-templates renders; preserved slides
- * vs pre-migration reference captures (--reference-dir, files 1920x1080-sNN.png).
+ * Fidelity: template-mapped slides vs the accepted /pdma2026-templates renders; 05 (HERO) and
+ * 11 (Brand / Reveal) vs their approved references (--approved-dir, the unzipped
+ * PDMA_PBDS_Hero_BrandReveal_v1 bundle); other preserved slides vs pre-migration reference
+ * captures (--reference-dir, files 1920x1080-sNN.png).
  * Functional: arrow navigation, TOC, fullscreen, Slide 14 exercise link + route, Slide 16 CTA/QR.
  * (The Slide 15 embedded exercise is walked frame by frame by pdma-exercise-qa.mjs.)
  *
- * Usage: node scripts/pdma-deck-visual-qa.mjs [--route /pdma2026/] [--reference-dir <dir>] [--out <dir>]
+ * Usage: node scripts/pdma-deck-visual-qa.mjs [--route /pdma2026/] [--reference-dir <dir>] [--approved-dir <dir>] [--out <dir>]
  * Exit: 0 PASS · 1 FAIL · 2 VISUAL_QA: REQUIRES_EXTERNAL_REVIEW (browser or server unavailable)
  */
 import { spawnSync } from "node:child_process"
@@ -25,6 +27,7 @@ const arg = (name, fallback) => { const index = process.argv.indexOf(name); retu
 const baseUrl = process.env.BASE_URL ?? "http://localhost:3000"
 const route = arg("--route", "/pdma2026/")
 const referenceDir = arg("--reference-dir", null)
+const approvedDir = arg("--approved-dir", null)
 const outDir = path.resolve(arg("--out", path.join(os.tmpdir(), "pdma-deck-qa")))
 const KIT_URL = "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model"
 const compositions = ["title", "shift-boundary", "compare-contrast", "work-map", "ambiguity-gate", "hub-ecosystem", "scorecard", "decision-spectrum", "flow-scenario", "structured-content-action", "agents-reveal", "framework-to-product", "idea-to-spec", "exercise", "embedded-app", "end-card"]
@@ -34,7 +37,17 @@ const templateMap = { 1: 1, 3: 5, 6: 8, 7: 9, 8: 7, 9: 6, 10: 10, 14: 3, 15: 4, 
  * Preserved slides vs pre-migration captures. 04/11/12 intentionally expose copy the legacy
  * geometry hid beneath the footer, so their budgets allow that measured shift.
  */
-const preservedBudget = { 2: 1.5, 4: 6, 5: 1.5, 11: 12, 12: 12, 13: 3 }
+const preservedBudget = { 2: 1.5, 4: 6, 12: 12, 13: 3 }
+/**
+ * Approved full-slide references (docs/pdma2026/PDMA_VISUAL_APPROVALS_2026-09-24.md). Budgets cover
+ * Inter vs the reference face and the supplied decorative asset vs the reference's rendering of it;
+ * the replaced compositions scored 38.2 (05) and 29.6 (11), accepted builds 23.9 and 20.6.
+ */
+const approvedReferences = {
+  5: "slide-05-hero-centered-signal-field/slide-05-hero-approved-reference.png",
+  11: "slide-11-brand-reveal-particle-horizon/slide-11-brand-reveal-approved-reference.png",
+}
+const approvedBudget = { 5: 26, 11: 23 }
 const TEMPLATE_BUDGET = 0.8
 const viewports = [
   { name: "desktop-1920x1080", width: 1920, height: 1080 },
@@ -210,7 +223,7 @@ for (let slide = 1; slide <= 10; slide += 1) {
 await gallery.close()
 await browser.close()
 
-const band = (file) => sharp(file).extract({ left: 0, top: 100, width: 1920, height: 885 }).resize(480, 221, { fit: "fill" }).greyscale().raw().toBuffer()
+const band = async (file) => sharp(await sharp(file).resize(1920, 1080, { fit: "fill" }).toBuffer()).extract({ left: 0, top: 100, width: 1920, height: 885 }).resize(480, 221, { fit: "fill" }).greyscale().raw().toBuffer()
 const meanDiff = async (a, b) => { const [x, y] = await Promise.all([band(a), band(b)]); return x.reduce((sum, value, i) => sum + Math.abs(value - y[i]), 0) / x.length }
 const fidelity = []
 for (let slide = 1; slide <= 16; slide += 1) {
@@ -219,6 +232,13 @@ for (let slide = 1; slide <= 16; slide += 1) {
     const diff = await meanDiff(render, galleryShots[templateMap[slide]])
     fidelity.push({ slide, against: `template ${templateMap[slide]}`, meanAbsDiff: Number(diff.toFixed(3)), budget: TEMPLATE_BUDGET })
     if (diff > TEMPLATE_BUDGET) fail(`fidelity: slide ${slide} differs from accepted template ${templateMap[slide]} (${diff.toFixed(2)})`)
+  } else if (approvedReferences[slide]) {
+    if (!approvedDir) { notes.push(`slide ${slide}: no --approved-dir supplied; approved-reference fidelity not asserted`); continue }
+    const reference = path.join(approvedDir, approvedReferences[slide])
+    if (!fs.existsSync(reference)) { fail(`fidelity: missing approved reference for slide ${slide}`); continue }
+    const diff = await meanDiff(render, reference)
+    fidelity.push({ slide, against: "approved reference", meanAbsDiff: Number(diff.toFixed(3)), budget: approvedBudget[slide] })
+    if (diff > approvedBudget[slide]) fail(`fidelity: slide ${slide} drifted from its approved reference (${diff.toFixed(2)} > ${approvedBudget[slide]})`)
   } else if (referenceDir) {
     const reference = path.join(referenceDir, `1920x1080-s${String(slide).padStart(2, "0")}.png`)
     if (!fs.existsSync(reference)) { fail(`fidelity: missing pre-migration reference for slide ${slide}`); continue }

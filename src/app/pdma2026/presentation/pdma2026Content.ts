@@ -142,7 +142,7 @@ export const slide04: WorkMapContent = {
   takeaway: "THE GOAL: BUILD THE RIGHT OPERATING MODEL FOR THE WORK.",
 };
 
-// 05 — DON'T AUTOMATE AMBIGUITY. · preserved production composition
+// 05 — DON'T AUTOMATE AMBIGUITY. · HERO template v1 — Centered Signal Field (approved 2026-09-24)
 export const slide05: AmbiguityGateContent = {
   kind: "ambiguity-gate",
   chrome: {
@@ -150,11 +150,11 @@ export const slide05: AmbiguityGateContent = {
     tocTitle: "DON'T AUTOMATE AMBIGUITY.",
     headerLabels: ["PROBLEM", "OWNER", "AUTHORITY"],
     footerLabel: "CONFUSION AT MACHINE SPEED",
-    title: { ...standardTitle, white: "DON'T AUTOMATE", magenta: "AMBIGUITY", tracking: -5 },
+    title: { size: 131, leading: 129, tracking: -9.5, white: "DON'T AUTOMATE", magenta: "AMBIGUITY." },
   },
   conditions: ["UNCLEAR PROBLEM.", "UNCLEAR OWNER.", "UNCLEAR AUTHORITY."],
   equals: "=",
-  result: "CONFUSION AT MACHINE SPEED.",
+  result: "CONFUSION AT\nMACHINE SPEED.",
 };
 
 // 06 — UNDERSTAND THE ENVIRONMENT. NAME THE OWNERS. · Hub / Ecosystem template
@@ -296,7 +296,7 @@ export const slide10: StructuredActionTemplateContent = {
   supportingTakeaway: "REAL FEATURES.\nREAL OUTCOMES.",
 };
 
-// 11 — A.G.E.N.T.S. · preserved production composition (first named framework reveal)
+// 11 — A.G.E.N.T.S. · Brand / Reveal template v1 — Particle Horizon Reveal (approved 2026-09-24; first named framework reveal)
 export const slide11: AgentsRevealContent = {
   kind: "agents-reveal",
   chrome: {
@@ -304,19 +304,16 @@ export const slide11: AgentsRevealContent = {
     tocTitle: "A.G.E.N.T.S.",
     headerLabels: ["STANDARD", "PRODUCT", "GOVERN"],
     footerLabel: "6 QUESTIONS • 1 PRODUCTIZATION STANDARD",
-    title: { ...standardTitle, magenta: "A.G.E.N.T.S.", subtitle: "Six product questions that turn an Agentic AI idea into something a team can safely build, test, and operate.", subtitleSize: 29 },
+    title: { size: 214, leading: 200, tracking: -13.5, white: "A.G.E.N.T.S.", magentaGlyphs: "A.S", subtitle: "Six product questions that turn an Agentic AI idea\ninto something a team can safely build, test, and operate.", subtitleSize: 37, subtitleLeading: 47, subtitleOffset: 0 },
   },
   questions: [
-    { letter: "A", title: "AUTHORITY", question: "What may AI decide and do?", active: true },
-    { letter: "G", title: "GUARDRAILS", question: "What constraints must be built into the product?", active: false },
-    { letter: "E", title: "EVIDENCE", question: "What operational record must the product create?", active: false },
-    { letter: "N", title: "NETWORK & INTEGRATIONS", question: "What systems, data, and permissions may it touch?", active: false },
-    { letter: "T", title: "TRANSFER & ESCALATION", question: "When must a human intervene?", active: false },
-    { letter: "S", title: "SUCCESS & ACCOUNTABILITY", question: "What KPI defines success + which human owns the outcome?", active: false },
+    { letter: "A", title: "AUTHORITY", question: "What may AI\ndecide and do?" },
+    { letter: "G", title: "GUARDRAILS", question: "What constraints\nmust be built into\nthe product?" },
+    { letter: "E", title: "EVIDENCE", question: "What operational\nrecord must the\nproduct create?" },
+    { letter: "N", title: "NETWORK &\nINTEGRATIONS", question: "What systems, data,\nand permissions\nmay it touch?" },
+    { letter: "T", title: "TRANSFER &\nESCALATION", question: "When must a\nhuman intervene?" },
+    { letter: "S", title: "SUCCESS &\nACCOUNTABILITY", question: "What KPI defines\nsuccess + which human\nowns the outcome?" },
   ],
-  hub: { count: "1", label: "PRODUCTIZATION\nSTANDARD", proposition: "SAME QUESTIONS.\nSAFER PRODUCTS.\nHIGHER CONFIDENCE.", ring: S("slide-11", "6fbf9.svg") },
-  usage: { label: "USE A.G.E.N.T.S. TO", body: "write better requirements, define operating boundaries, and make production behavior explicit." },
-  takeaway: "6 QUESTIONS • 1 PRODUCTIZATION STANDARD",
 };
 
 // 12 — TURN THE FRAMEWORK INTO PRODUCT. · preserved production composition

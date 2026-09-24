@@ -4,8 +4,8 @@
  *
  * Fails on: wrong slide order/count, TOC/header/footer drift, any canonical copy string missing
  * from its slide's content block, the named A.G.E.N.T.S. framework appearing before Slide 11,
- * pdmaGeometry anywhere in /pdma2026, absolute-positioned content outside decorative/connector
- * layers, inline layout offsets, legacy slide imports, and base64 payloads.
+ * pdmaGeometry anywhere in /pdma2026, absolute-positioned content outside the decorative
+ * layer, inline layout offsets, legacy slide imports, and base64 payloads.
  */
 import fs from "node:fs"
 import path from "node:path"
@@ -72,10 +72,10 @@ for (const file of sources) {
   if (/components\/slides\/Slide\d\d|CanonicalSlide0\d|pdmaPrimitives|PdmaSlideBody|pdma\.config|pdma2026SlideManifest/.test(text)) fail(`${file}: references a removed legacy slide module`)
   if (/data:[a-z]+\/[a-z0-9.+-]+;base64,/i.test(text) || /[A-Za-z0-9+/]{400,}={0,2}/.test(text)) fail(`${file}: base64 payload detected`)
 }
-const allowedAbsolute = /\.pdmat-deco|\.pdmat-agents__connectors/
+const allowedAbsolute = /\.pdmat-deco/
 for (const match of read(`${PRESENTATION}/presentation.css`).matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
   const [, selector, body] = match
-  if (/position\s*:\s*(absolute|fixed)/.test(body) && !allowedAbsolute.test(selector)) fail(`presentation.css: absolute/fixed positioning outside decorative/connector layer → ${selector.trim()}`)
+  if (/position\s*:\s*(absolute|fixed)/.test(body) && !allowedAbsolute.test(selector)) fail(`presentation.css: absolute/fixed positioning outside the decorative layer → ${selector.trim()}`)
   if (/overflow(-[xy])?\s*:\s*(auto|scroll)/.test(body)) fail(`presentation.css: scrolling overflow → ${selector.trim()}`)
 }
 for (const file of walk(PRESENTATION).filter((f) => f.endsWith(".tsx"))) {

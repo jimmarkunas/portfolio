@@ -8,6 +8,8 @@ export type PdmaTitleConfig = {
   white?: string; magenta?: string; subtitle?: string; size: number; leading?: number; tracking?: number;
   subtitleSize?: number; subtitleLeading?: number; subtitleOffset?: number; subtitleX?: number; subtitleTracking?: number;
   exactSubtitleSize?: boolean; titleColor?: string; subtitleColor?: string; magentaRowShift?: number; magentaX?: number; sameRow?: boolean; plusMagenta?: boolean;
+  /** Characters of `white` drawn in magenta (e.g. "A.S" for the A.G.E.N.T.S. wordmark). */
+  magentaGlyphs?: string;
 };
 
 export type PdmaHeaderLabels = readonly [string, string, string];
@@ -59,10 +61,7 @@ export type AmbiguityGateContent = PreservedBase<"ambiguity-gate"> & {
 };
 
 export type AgentsRevealContent = PreservedBase<"agents-reveal"> & {
-  questions: readonly { letter: string; title: string; question: string; active: boolean }[];
-  hub: { count: string; label: string; proposition: string; ring: string };
-  usage: { label: string; body: string };
-  takeaway: string;
+  questions: readonly { letter: string; title: string; question: string }[];
 };
 
 export type FrameworkToProductContent = PreservedBase<"framework-to-product"> & {
