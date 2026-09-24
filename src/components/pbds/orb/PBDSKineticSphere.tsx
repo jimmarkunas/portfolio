@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useRef } from "react";
 import type { PBDSKineticSphereProps } from "./orbTypes";
 
 type RGB = { r: number; g: number; b: number };
+type LimbColors = { outer: { hex: string; rgb: string }; mid: { hex: string; rgb: string }; core: { hex: string; rgb: string; raw: RGB } };
 type StippleDot = { bx:number; by:number; bz:number; x:number; y:number; z:number; vx:number; vy:number; vz:number; baseSize:number; phase:number };
 type Plasma = { angle:number; distFactor:number; size:number; alpha:number; speed:number; radialVelocity:number; life:number; maxLife:number };
 
@@ -16,15 +17,16 @@ function hexToRgb(hex:string, fallback:RGB):RGB {
 }
 function lerpRgb(a:RGB,b:RGB,t:number):RGB { const q=Math.max(0,Math.min(1,t)); return {r:Math.round(a.r+(b.r-a.r)*q),g:Math.round(a.g+(b.g-a.g)*q),b:Math.round(a.b+(b.b-a.b)*q)}; }
 
-function drawAtmosphericLimb(ctx:CanvasRenderingContext2D,cx:number,cy:number,radius:number,lightAngle:number,strokeMode:"crescent"|"tapered"|"full"|"none",intensity:number,glowSpread:number,coreHotness:number,strokeWidth:number,innerWash:number,shadowOpacity:number,glowHex:string,glowRgb:string,rawRgb:RGB){
+function drawAtmosphericLimb(ctx:CanvasRenderingContext2D,cx:number,cy:number,radius:number,lightAngle:number,strokeMode:"crescent"|"tapered"|"full"|"none",intensity:number,glowSpread:number,coreHotness:number,strokeWidth:number,innerWash:number,shadowOpacity:number,glowHex:string,glowRgb:string,rawRgb:RGB,limb?:LimbColors){
   if(intensity<=0||strokeMode==="none")return;
   ctx.save(); ctx.globalAlpha=1;
-  const hot=lerpRgb(rawRgb,{r:255,g:255,b:255},coreHotness);
+  const outerHex=limb?.outer.hex??glowHex,outerRgb=limb?.outer.rgb??glowRgb,midHex=limb?.mid.hex??glowHex,midRgb=limb?.mid.rgb??glowRgb,coreHex=limb?.core.hex??glowHex,coreRgb=limb?.core.rgb??glowRgb;
+  const hot=lerpRgb(limb?.core.raw??rawRgb,{r:255,g:255,b:255},coreHotness);
   const draw=(a0:number,a1:number,eff:number)=>{
     ctx.save();
-    ctx.shadowColor=glowHex; ctx.shadowBlur=glowSpread*1.1; ctx.strokeStyle=`rgba(${glowRgb}, ${eff*.30})`; ctx.lineWidth=glowSpread*.65; ctx.beginPath(); ctx.arc(cx,cy,radius+glowSpread*.28,a0,a1); ctx.stroke();
-    ctx.shadowBlur=glowSpread*.55; ctx.strokeStyle=`rgba(${glowRgb}, ${eff*.52})`; ctx.lineWidth=glowSpread*.32; ctx.beginPath(); ctx.arc(cx,cy,radius+glowSpread*.1,a0,a1); ctx.stroke();
-    ctx.shadowBlur=10*intensity; ctx.strokeStyle=`rgba(${glowRgb}, ${eff*.78})`; ctx.lineWidth=Math.max(1.8,strokeWidth*2.2); ctx.beginPath(); ctx.arc(cx,cy,radius,a0,a1); ctx.stroke();
+    ctx.shadowColor=outerHex; ctx.shadowBlur=glowSpread*1.1; ctx.strokeStyle=`rgba(${outerRgb}, ${eff*.30})`; ctx.lineWidth=glowSpread*.65; ctx.beginPath(); ctx.arc(cx,cy,radius+glowSpread*.28,a0,a1); ctx.stroke();
+    ctx.shadowColor=midHex; ctx.shadowBlur=glowSpread*.55; ctx.strokeStyle=`rgba(${midRgb}, ${eff*.52})`; ctx.lineWidth=glowSpread*.32; ctx.beginPath(); ctx.arc(cx,cy,radius+glowSpread*.1,a0,a1); ctx.stroke();
+    ctx.shadowColor=coreHex; ctx.shadowBlur=10*intensity; ctx.strokeStyle=`rgba(${coreRgb}, ${eff*.78})`; ctx.lineWidth=Math.max(1.8,strokeWidth*2.2); ctx.beginPath(); ctx.arc(cx,cy,radius,a0,a1); ctx.stroke();
     ctx.shadowBlur=3*intensity; ctx.strokeStyle=`rgba(${hot.r}, ${hot.g}, ${hot.b}, ${eff*.98})`; ctx.lineWidth=strokeWidth; ctx.beginPath(); ctx.arc(cx,cy,radius,a0,a1); ctx.stroke();
     if(innerWash>0){ctx.shadowBlur=6*intensity;ctx.strokeStyle=`rgba(${glowRgb}, ${eff*.24*innerWash})`;ctx.lineWidth=glowSpread*.22;ctx.beginPath();ctx.arc(cx,cy,radius-glowSpread*.1,a0,a1);ctx.stroke();}
     ctx.restore();
@@ -35,7 +37,7 @@ function drawAtmosphericLimb(ctx:CanvasRenderingContext2D,cx:number,cy:number,ra
 }
 
 export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
-  radius=290,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,
+  radius=290,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,outerGlowColor,midGlowColor,hotCoreColor,solarFlareIntensity=1,
 })=>{
   const canvasRef=useRef<HTMLCanvasElement|null>(null);
   const palette=useMemo(()=>{
@@ -45,8 +47,10 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
     else if(skinStyle==="custom"){active=accentColor||"#38BDF8";fallback={r:56,g:189,b:248};shadow="#475569";bodyStart="rgba(8, 8, 12, ";bodyEnd=`rgba(${fallback.r}, ${fallback.g}, ${fallback.b}, `;}
     else {active=accentColor||"#FF2FAE";fallback={r:255,g:47,b:174};shadow="#C21882";bodyStart="rgba(10, 2, 8, ";bodyEnd="rgba(74, 6, 54, ";}
     const raw=hexToRgb(active,fallback),rgb=`${raw.r}, ${raw.g}, ${raw.b}`;
-    return {glowHex:active,glowRgb:rgb,rawRgb:raw,highlightDot:primaryDotColor&&primaryDotColor!=="#FFFFFF"?primaryDotColor:active,midDot:active,shadowDot:shadowDotColor||shadow,plasmaRgb:rgb,bodyGradStart:bodyStart,bodyGradEnd:bodyEnd};
-  },[skinStyle,accentColor,primaryDotColor,shadowDotColor]);
+    const tone=(hex:string|undefined,fallbackRgb:RGB)=>{const c=hexToRgb(hex??"",fallbackRgb);return {hex:hex??active,rgb:`${c.r}, ${c.g}, ${c.b}`,raw:c};};
+    const limb:LimbColors|undefined=outerGlowColor||midGlowColor||hotCoreColor?{outer:tone(outerGlowColor,raw),mid:tone(midGlowColor,raw),core:tone(hotCoreColor,raw)}:undefined;
+    return {limb,glowHex:active,glowRgb:rgb,rawRgb:raw,highlightDot:primaryDotColor&&primaryDotColor!=="#FFFFFF"?primaryDotColor:active,midDot:active,shadowDot:shadowDotColor||shadow,plasmaRgb:rgb,bodyGradStart:bodyStart,bodyGradEnd:bodyEnd};
+  },[skinStyle,accentColor,primaryDotColor,shadowDotColor,outerGlowColor,midGlowColor,hotCoreColor]);
 
   const mouseRef=useRef({x:-9999,y:-9999,prevX:-9999,prevY:-9999,isHovered:false,isDragging:false});
   const rotationRef=useRef({rotX:.08,rotY:skinStyle==="canonical-magenta"?-.85:.85,velX:0,velY:0});
@@ -71,7 +75,9 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
       const rot=rotationRef.current,mouse=mouseRef.current;if(!mouse.isDragging){rot.rotY+=autoRotateSpeed+rot.velY;rot.rotX+=rot.velX;rot.velX*=.92;rot.velY*=.92;}
       const sinX=Math.sin(rot.rotX),cosX=Math.cos(rot.rotX),sinY=Math.sin(rot.rotY),cosY=Math.cos(rot.rotY),glowRgb=palette.glowRgb,glowHex=palette.glowHex;
       if(bodyOpacity>0){ctx.save();ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);const g=ctx.createRadialGradient(cx,cy,0,cx,cy,radius);g.addColorStop(0,`${palette.bodyGradStart}${bodyOpacity})`);g.addColorStop(.85,`${palette.bodyGradStart}${Math.min(1,bodyOpacity*1.5)})`);g.addColorStop(1,`${palette.bodyGradEnd}${Math.min(1,bodyOpacity*2.2)})`);ctx.fillStyle=g;ctx.fill();ctx.restore();}
-      ctx.save();for(const p of plasmaRef.current){p.life++;if(p.life>p.maxLife){p.life=0;p.distFactor=1.002+Math.random()*.02;}else p.distFactor+=p.radialVelocity*plasmaNoiseIntensity;p.angle+=p.speed;const noise=Math.sin(p.angle*12+time*3)*.015+Math.cos(p.angle*24-time*2)*.01,dist=radius*(p.distFactor+noise*plasmaNoiseIntensity),px=cx+Math.cos(p.angle)*dist,py=cy+Math.sin(p.angle)*dist,fade=Math.sin((p.life/p.maxLife)*Math.PI)*p.alpha;let bias=1;if(cropPosition==="orb-right")bias=Math.max(.12,-Math.cos(p.angle));else if(cropPosition==="orb-left")bias=Math.max(.12,Math.cos(p.angle));ctx.fillStyle=`rgba(${palette.plasmaRgb}, ${fade*bias*.85})`;ctx.beginPath();ctx.arc(px,py,p.size,0,Math.PI*2);ctx.fill();}ctx.restore();
+      // Solar flare: brighter, slightly larger, further-reaching existing plasma. Identity at solarFlareIntensity=1.
+      const flare=solarFlareIntensity-1,flareAlpha=1+flare*.85,flareSize=1+flare*.25,flareReach=flare*.45;
+      ctx.save();for(const p of plasmaRef.current){p.life++;if(p.life>p.maxLife){p.life=0;p.distFactor=1.002+Math.random()*.02;}else p.distFactor+=p.radialVelocity*plasmaNoiseIntensity;p.angle+=p.speed;const noise=Math.sin(p.angle*12+time*3)*.015+Math.cos(p.angle*24-time*2)*.01,base=p.distFactor+noise*plasmaNoiseIntensity,dist=radius*base+radius*(base-1)*flareReach,px=cx+Math.cos(p.angle)*dist,py=cy+Math.sin(p.angle)*dist,fade=Math.sin((p.life/p.maxLife)*Math.PI)*p.alpha;let bias=1;if(cropPosition==="orb-right")bias=Math.max(.12,-Math.cos(p.angle));else if(cropPosition==="orb-left")bias=Math.max(.12,Math.cos(p.angle));ctx.fillStyle=`rgba(${palette.plasmaRgb}, ${fade*bias*.85*flareAlpha})`;ctx.beginPath();ctx.arc(px,py,p.size*flareSize,0,Math.PI*2);ctx.fill();}ctx.restore();
       let lightX=-.92,lightY=-.15,lightZ=.35;if(cropPosition==="orb-left")lightX=.92;const ll=Math.sqrt(lightX*lightX+lightY*lightY+lightZ*lightZ);lightX/=ll;lightY/=ll;lightZ/=ll;
       const mouseRelX=mouse.x-cx,mouseRelY=mouse.y-cy,mouseDist=Math.sqrt(mouseRelX*mouseRelX+mouseRelY*mouseRelY),interactionRadius=radius*1.35;const visible:Array<{sx:number;sy:number;z:number;size:number;color:string;alpha:number}>=[];
       for(const p of dotsRef.current){const x1=p.bx*cosY+p.bz*sinY,z1=-p.bx*sinY+p.bz*cosY,y1=p.by*cosX-z1*sinX,nz=p.by*sinX+z1*cosX,nx=x1,ny=y1,nDotL=nx*lightX+ny*lightY+nz*lightZ,effective=Math.max(0,nDotL)+ambientLuminance*.45,tx=nx*radius,ty=ny*radius,tz=nz*radius;
@@ -82,10 +88,10 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
         if(dotHarmonization==="unified"){color=palette.glowHex;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.25));}else if(dotHarmonization==="subtle-specular"){const sf=Math.pow(Math.max(0,(rad-.78)/.22),2)*Math.max(0,nDotL),blend=lerpRgb(palette.rawRgb,{r:255,g:255,b:255},sf*.65);color=`rgb(${blend.r}, ${blend.g}, ${blend.b})`;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.2));}else if(rad>.88&&nDotL>.4){color=palette.highlightDot;alpha=.95;size*=1.15;}else if(rad>.55||nDotL>.1){color=palette.midDot;alpha=.45+brightness*.45;}else{color=palette.shadowDot;alpha=.25+brightness*.35;}visible.push({sx,sy,z:p.z,size,color,alpha:Math.min(1,alpha*brightness)});
       }
       visible.sort((a,b)=>a.z-b.z);for(const d of visible){ctx.globalAlpha=d.alpha;ctx.fillStyle=d.color;ctx.beginPath();ctx.arc(d.sx,d.sy,d.size,0,Math.PI*2);ctx.fill();}
-      if(glowingStrokeIntensity>0&&strokeMode!=="none")drawAtmosphericLimb(ctx,cx,cy,radius,Math.atan2(lightY,lightX),strokeMode,glowingStrokeIntensity,glowSpread,coreHotness,strokeWidth,innerWashIntensity,strokeShadowOpacity,glowHex,glowRgb,palette.rawRgb);
+      if(glowingStrokeIntensity>0&&strokeMode!=="none")drawAtmosphericLimb(ctx,cx,cy,radius,Math.atan2(lightY,lightX),strokeMode,glowingStrokeIntensity,glowSpread,coreHotness,strokeWidth,innerWashIntensity,strokeShadowOpacity,glowHex,glowRgb,palette.rawRgb,palette.limb);
       ctx.globalAlpha=1;animId=requestAnimationFrame(render);
     };render();return()=>{window.removeEventListener("resize",resize);cancelAnimationFrame(animId);};
-  },[radius,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity]);
+  },[radius,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity,solarFlareIntensity]);
 
   // Pointer → canvas backing-store coordinates. Identity when unscaled (standalone embed); corrects for
   // ancestor CSS transforms such as the PDMA shell's uniform scale(), where the rendered rect ≠ canvas size.

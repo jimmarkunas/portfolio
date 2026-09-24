@@ -4,7 +4,7 @@ import type { ComponentType } from "react";
 import { PdmaPresentationShell } from "@/app/pdma2026/PdmaPresentationShell";
 import type { PdmaSlideKey } from "@/app/pdma2026/presentation/presentationTypes";
 import { pdma2026Content } from "@/content/pdma2026";
-import { decorativeVariants } from "../pdma2026-templates/components/DecorativeLayer";
+import { decorativeVariants, isDecorOrb } from "../pdma2026-templates/components/DecorativeLayer";
 import { FlowScenarioTemplate } from "../pdma2026-templates/components/templates/FlowScenarioTemplate";
 import { TitleTemplate } from "../pdma2026-templates/components/templates/TitleTemplate";
 import { templateContent } from "../pdma2026-templates/templateContent";
@@ -20,7 +20,11 @@ const flow = templateContent.find((content) => content.kind === "flow-scenario")
 const canonical = (kind: TemplateManifestEntry["kind"]) => templateManifest.find((entry) => entry.kind === kind)!;
 
 const TitleExperiment: ComponentType = () => title.kind === "title" ? <TitleTemplate content={title} decorItems={decorativeVariants[title.decorativeVariant]} /> : null;
-const FlowExperiment: ComponentType = () => flow.kind === "flow-scenario" ? <FlowScenarioTemplate content={flow} decorItems={decorativeVariants[flow.decorativeVariant]} /> : null;
+/** ORB-VISUAL-1: hot-limb colors + stronger solar flare on the right magenta orb only; grey orb untouched. */
+const flowExperimentDecor = decorativeVariants[flow.decorativeVariant].map((item) => isDecorOrb(item) && item.orb === "magentaRight"
+  ? { ...item, props: { outerGlowColor: "#FF2FAE", midGlowColor: "#FF65C7", hotCoreColor: "#FFF7FC", solarFlareIntensity: 1.35 } }
+  : item);
+const FlowExperiment: ComponentType = () => flow.kind === "flow-scenario" ? <FlowScenarioTemplate content={flow} decorItems={flowExperimentDecor} /> : null;
 
 const labSlides = [
   { label: "SLIDE 1 — BASELINE", entry: canonical("title"), component: canonical("title").component },

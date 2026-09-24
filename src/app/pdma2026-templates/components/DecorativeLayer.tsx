@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { PBDSOrb } from "@/components/pbds/orb/PBDSOrb";
+import { PBDSOrb, type PBDSOrbProps } from "@/components/pbds/orb/PBDSOrb";
 import { orbPresets, type PBDSOrbPresetName } from "@/components/pbds/orb/orbPresets";
 import type { DecorativeVariant } from "../templateTypes";
 
@@ -24,7 +24,7 @@ type DecorFade = { fade: "bottom"; y: number; h: number };
  * Live PBDS kinetic orb. Always mounted on the full 1920×1080 decorative plane: the renderer's
  * crop geometry is edge-anchored to its parent, so it must never be boxed into a still's rectangle.
  */
-type DecorOrb = { orb: PBDSOrbPresetName; radius?: number; interactive?: boolean };
+type DecorOrb = { orb: PBDSOrbPresetName; radius?: number; interactive?: boolean; props?: Omit<PBDSOrbProps, "preset" | "radius" | "interactive"> };
 
 export type DecorItem = DecorImage | DecorFade | DecorOrb;
 
@@ -79,7 +79,7 @@ export function DecorativeLayer({ variant, items: explicitItems }: { variant: De
   const items = explicitItems ?? decorativeVariants[variant];
   return <div className="pdmat-deco" aria-hidden="true" data-decorative-variant={explicitItems ? "custom" : variant}>
     {items.map((item) => isDecorOrb(item) ? <div key={`orb-${item.orb}`} className={`pdmat-deco-orb pdmat-deco-orb--${orbSide(item.orb)}`}>
-      <PBDSOrb preset={item.orb} radius={item.radius} interactive={item.interactive} />
+      <PBDSOrb {...item.props} preset={item.orb} radius={item.radius} interactive={item.interactive} />
     </div> : isDecorImage(item) ? <img
       key={item.src}
       className={`pdmat-deco-item${item.ambient ? ` pdmat-deco-item--${item.ambient}` : ""}`}

@@ -26,4 +26,10 @@ export interface PBDSKineticSphereProps {
   strokeShadowOpacity?: number;
   strokeWidth?: number;
   bodyOpacity?: number;
+  /** Atmospheric-limb pass colors (color only; alpha/geometry/coreHotness unchanged). Unset → accent glow color. */
+  outerGlowColor?: string;
+  midGlowColor?: string;
+  hotCoreColor?: string;
+  /** Scales the existing plasma's brightness, size and outward reach. 1 = current output; practical 0.5–1.5. */
+  solarFlareIntensity?: number;
 }
