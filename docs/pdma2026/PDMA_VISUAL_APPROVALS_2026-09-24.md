@@ -1,30 +1,32 @@
 # PDMA 2026 — Visual Approvals — September 24, 2026
 
 **Status:** CANONICAL CURRENT APPROVALS  
-**Scope:** PDMA visual remediation only  
-**Production baseline:** `9c4b0ad0a352577755af49a24ee9e403bfdcd706`
+**Scope:** PDMA visual remediation and accepted reference status  
+**Accepted production baseline:** `116c8f7d40c845e27601e578effba992a28ef050`
 
-This document records Jim Markunas's accepted visual references for the HERO and Brand / Reveal patterns so future chats and implementation agents can resume without reconstructing decisions from conversation history.
+This document records Jim Markunas's accepted remediation references for Slides 05, 11, 12, and 13 so future chats and implementation agents do not reconstruct decisions from conversation history.
 
-This file **supersedes the pending Step 1 / Step 2 design status** in `docs/pdma2026/PDMA_VISUAL_REMEDIATION_ROADMAP.md`. The remediation roadmap still owns the sequence; this file owns the accepted visual status for the two completed steps.
+The full 16-slide state/design-gate registry lives only in `docs/pdma2026/PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md`. This file is supporting approval context, **not a second slide-state registry**.
 
 ## Authority
 
 1. Jim's explicit current instruction.
-2. Canonical JM Personal Brand Figma for exact approved visual truth after reconstruction/promotion.
-3. `docs/PBDS_V2_ARCHITECTURE_CONTRACT.md` for PBDS implementation boundaries.
-4. `docs/pbds-presentation-components.md` for runtime/chrome/primitives.
-5. Notion `PBDS Presentation Modality — Editorial Orb System` for durable visual grammar.
-6. This document for the current accepted HERO and Brand / Reveal references.
+2. The approved implementation reference registered in `PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md`.
+3. Canonical JM Personal Brand Figma where the contract registers Figma visual truth.
+4. `docs/PBDS_V2_ARCHITECTURE_CONTRACT.md` for PBDS implementation boundaries.
+5. `docs/pbds-presentation-components.md` for runtime/chrome/primitives.
+6. Notion `PBDS Presentation Modality — Editorial Orb System` for durable visual grammar.
+7. This document for the accepted remediation-reference details below.
 
-The approved reference PNGs are QA/composition targets only. Semantic text and UI must remain native/editable in React/Figma.
+Approved full-slide reference PNGs are QA/composition targets only. Semantic text and UI remain native/editable in React/Figma.
 
 ---
 
 # 1 — HERO Template v1 — Centered Signal Field
 
-**Status:** APPROVED REFERENCE — READY FOR DETERMINISTIC RECONSTRUCTION  
-**First approved consumer:** Slide 05 — `DON'T AUTOMATE AMBIGUITY.`
+**Status:** APPROVED · IMPLEMENTED · LOCKED  
+**Approved consumer:** Slide 05 — `DON'T AUTOMATE AMBIGUITY.`  
+**Approved reference:** `slide-05-hero-centered-signal-field/slide-05-hero-approved-reference.png`
 
 ## Purpose
 
@@ -40,8 +42,8 @@ For this archetype, the core semantic composition may be **centered** when the a
 
 - Near-black field.
 - Oversized centered headline.
-- Centered diagnostic / input row beneath the headline.
-- Centered operator / equation moment.
+- Centered diagnostic/input row beneath the headline.
+- Centered operator/equation moment.
 - Centered closing payoff statement.
 - One restrained abstract signal field behind the content.
 - Generous negative space.
@@ -79,42 +81,15 @@ Use opposing vertical signal curtains / waveform fields:
 - subtle vertical signal/glitch rhythm;
 - atmosphere stays behind the semantic content and never becomes the subject.
 
-## Native vs decorative split
-
-Keep native/editable:
-
-- headline;
-- diagnostic row;
-- operator;
-- payoff;
-- header;
-- footer;
-- navigation;
-- rules;
-- canonical asterisk;
-- all spacing/alignment behavior.
-
-Decorative image only:
-
-- signal-field atmosphere.
-
-## Reject
-
-- planets;
-- portals;
-- reflective floors;
-- tangled atom graphics;
-- generic sci-fi scenes;
-- card layouts;
-- decorative objects competing with the message;
-- flattened semantic text in the background asset.
+The older tangled-core / reflective-floor Slide 05 package is rejected and retired.
 
 ---
 
 # 2 — Brand / Reveal Template v1 — Particle Horizon Reveal
 
-**Status:** APPROVED REFERENCE — READY FOR DETERMINISTIC RECONSTRUCTION  
-**First approved consumer:** Slide 11 — `A.G.E.N.T.S.`
+**Status:** APPROVED · IMPLEMENTED · LOCKED  
+**Approved consumer:** Slide 11 — `A.G.E.N.T.S.`  
+**Approved reference:** `slide-11-brand-reveal-particle-horizon/slide-11-brand-reveal-approved-reference.png`
 
 ## Purpose
 
@@ -129,10 +104,7 @@ The audience should feel that they are **meeting the thing**, not inspecting an 
 - Centered one-line supporting proposition directly underneath.
 - One giant cropped magenta particle hemisphere / horizon behind the upper title field.
 - Six equal native semantic columns across the lower half.
-- Each column contains:
-  - oversized magenta initial;
-  - bold domain name;
-  - exact corresponding product question.
+- Each column contains an oversized magenta initial, bold domain name, and exact product question.
 - Thin magenta vertical separators provide rhythm without creating card containers.
 - Existing presentation header/footer/navigation remain unchanged.
 - Footer closure remains `6 QUESTIONS • 1 PRODUCTIZATION STANDARD`.
@@ -150,76 +122,84 @@ Supporting proposition:
 
 `Six product questions that turn an Agentic AI idea into something a team can safely build, test, and operate.`
 
-## Decorative asset
+---
 
-The only required image asset is a giant magenta particle hemisphere / horizon:
+# 3 — Slide 12 — Translation / Traceability v1
 
-- cropped by the frame;
-- electric metallic-dot / particulate construction;
-- strong magenta rim energy;
-- subtle particle scatter;
-- positioned behind the title field;
-- visually subordinate to `A.G.E.N.T.S.` and the six semantic columns.
+**Status:** APPROVED · IMPLEMENTED · LOCKED  
+**Slide:** `TURN THE FRAMEWORK INTO PRODUCT.`  
+**Approved reference:** `slide-12-approved-reference.png`
 
-## Native vs decorative split
+## Approved composition
 
-Keep native/editable:
+- Left A.G.E.N.T.S. framework panel with circled A–S initials.
+- Six magenta rails originate from their corresponding framework rows.
+- Rails converge on one magenta transformation node.
+- Right magenta requirements panel preserves one-to-one A/G/E/N/T/S mapping.
+- Framework and requirement rows remain directly trackable from presentation distance.
+- Semantic copy remains native/editable.
+- Decorative edge orbs remain independently controlled.
 
-- `A.G.E.N.T.S.`;
-- supporting proposition;
-- all six initials;
-- all six domain labels;
-- all six product questions;
-- separators;
-- header;
-- footer;
-- navigation;
-- canonical asterisk.
+## Acceptance
 
-Decorative image only:
+The accepted implementation aligns rail origins to the same row tracks used by the framework panel and was visually compared against the approved 1920×1080 reference. Production QA records the accepted visual score as `12.3` against a limit of `14`.
 
-- particle hemisphere / horizon.
+---
 
-## Reject
+# 4 — Slide 13 — Before / Bridge / After v1
 
-- six cards around a hub;
-- architecture-diagram treatment;
-- generic SaaS dashboard styling;
-- extra orbital UI;
-- flattened framework text inside the particle asset;
-- a decorative hemisphere that overwhelms the naming moment;
-- additional decorative objects added only to fill space.
+**Status:** APPROVED · IMPLEMENTED · LOCKED  
+**Slide:** `AN IDEA + AI ≠ PRODUCT SPEC.`  
+**Approved reference:** `slide-13-approved-reference.png`
+
+## Approved composition
+
+- Left BEFORE artifact is intentionally smaller/weaker.
+- Center bridge uses the A.G.E.N.T.S. transformation statement.
+- Right AFTER artifact is the visually dominant production-ready spec.
+- Takeaway and three outcomes preserve:
+  - `LESS REWORK`
+  - `FASTER DELIVERY`
+  - `HIGHER CONFIDENCE`
+- The obsolete side statement `CLARITY / TURNS IDEAS / INTO IMPACT.` is not rendered in the accepted composition; its source copy remains preserved in `pdma2026Content.ts`.
+- Semantic copy remains native/editable.
+- Decorative edge orbs remain independently controlled.
+
+## Acceptance
+
+The accepted implementation was visually compared against the approved 1920×1080 reference. Production QA records the accepted visual score as `11.8` against a limit of `13`.
 
 ---
 
 # Current remediation status
 
-1. HERO template — **APPROVED**.
-2. Brand / Reveal template — **APPROVED**.
-3. New Slide 13 — **NEXT DESIGN TASK**.
-4. Slide 12 tracking plan — **OPEN / NO COMPOSITION APPROVED**.
+The remediation sequence is complete:
 
-Slide 12 still requires effortless one-to-one audience tracking from every A.G.E.N.T.S. domain to its corresponding product requirement. Do not implement a new Slide 12 composition before Jim approves that tracking model.
+1. HERO template / Slide 05 — **COMPLETE / LOCKED**.
+2. Brand / Reveal template / Slide 11 — **COMPLETE / LOCKED**.
+3. Slide 13 before→after composition — **COMPLETE / LOCKED**.
+4. Slide 12 translation/traceability composition — **COMPLETE / LOCKED**.
+
+The full production deck now contains 16 accepted slides. There is no active remediation target.
 
 ## Implementation rule
 
-For both approved templates:
+For accepted references:
 
-1. Use the approved full-slide image only as a composition / QA reference.
-2. Rebuild semantic content natively.
+1. Use approved full-slide images only as composition / QA references.
+2. Keep semantic content native/editable.
 3. Keep decorative artwork independently controllable.
 4. Preserve the one-plane 1920×1080 presentation runtime.
-5. Do not modify shared header/footer/navigation/title behavior merely to fit the new compositions.
-6. Verify the reconstructed slide against the approved reference before promoting the pattern into the reusable PBDS template set.
+5. Do not modify shared header/footer/navigation/title behavior merely to fit a slide-local change.
+6. Any future visual mutation requires Jim to explicitly reopen the target slide or bounded surface.
 
-## Asset package naming
+## Reference package naming
 
-The working asset bundle for these approvals uses:
+Current remediation QA references include:
 
-- `slide-05-hero-approved-reference.png`
-- `slide-05-hero-signal-field.png`
-- `slide-11-brand-reveal-approved-reference.png`
-- `slide-11-brand-reveal-particle-horizon-primary.png`
-- `slide-11-brand-reveal-particle-horizon-alt.png`
+- `slide-05-hero-centered-signal-field/slide-05-hero-approved-reference.png`
+- `slide-11-brand-reveal-particle-horizon/slide-11-brand-reveal-approved-reference.png`
+- `slide-12-approved-reference.png`
+- `slide-13-approved-reference.png`
 
-Reference images are QA-only. Decorative asset PNGs are implementation inputs.
+Reference images are QA-only. Decorative asset files remain implementation inputs where applicable.
