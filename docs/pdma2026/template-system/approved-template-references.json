@@ -1,38 +1,59 @@
 {
-  "version": 3,
+  "version": 4,
   "approved_date": "2026-09-24",
   "route": "/pdma2026-templates",
   "existing_pdma_untouched": true,
-  "library_root": "/LifeOS/PDMA 2026/Template Canon/v3/",
-  "archive": "/LifeOS/PDMA 2026/Template Canon/v3/pdma2026-template-canon-v3.zip",
+  "library_root": "/LifeOS/PDMA 2026/Template Canon/v4/",
+  "archive": "/LifeOS/PDMA 2026/Template Canon/v4/pdma2026-template-canon-v4.zip",
   "templates": {
     "end-card": {
       "status": "APPROVED",
       "reference": "end-card/end-card-reference-v1.png",
-      "assets": ["end-card/end-card-electric-orb-right-v1.png"],
-      "implementation_notes": ["Reference owns composition and visual relationships.", "QR and round CTA are native React and share one URL.", "All copy is native React text."]
+      "assets": ["end-card/end-card-electric-orb-right-v1.png"]
     },
     "flow-scenario": {
       "status": "APPROVED",
       "reference": "flow-scenario/flow-scenario-reference-v1.png",
-      "assets": ["flow-scenario/slide-09-left-orb-white-v1.png", "flow-scenario/slide-09-right-orb-magenta-v1.png"],
-      "implementation_notes": ["Outer orbs are decorative only.", "Synopsis is an outlined HTML box.", "Enterprise signals are native rows with glyphs inside circles.", "IDENTIFY and RECOMMEND are native circular glyph nodes."]
+      "assets": ["flow-scenario/slide-09-left-orb-white-v1.png", "flow-scenario/slide-09-right-orb-magenta-v1.png"]
     },
     "hub-ecosystem": {
       "status": "APPROVED",
       "reference": "hub-ecosystem/hub-ecosystem-reference-v1.png",
-      "assets": ["hub-ecosystem/slide-06-left-orb-white-v1.png", "hub-ecosystem/slide-06-right-orb-magenta-v1.png"],
-      "implementation_notes": ["Functional structure is Inventory the Environment -> AI / Automation Layer -> Name Human Owners.", "Center AI / Automation layer is a native HTML/CSS rounded box, not an image.", "Connectors are straight and owned by the component.", "Outer orbs are decorative edge crops only."]
+      "assets": ["hub-ecosystem/slide-06-left-orb-white-v1.png", "hub-ecosystem/slide-06-right-orb-magenta-v1.png"]
     },
     "structured-content-action": {
       "status": "APPROVED",
       "reference": "structured-content-action/structured-content-action-reference-v1.png",
-      "assets": ["structured-content-action/slide-10-left-orb-magenta-v1.png", "structured-content-action/slide-10-right-orb-magenta-orbit-v1.png"],
-      "implementation_notes": ["Functional structure is 3 product-definition requirements -> 4-step operationalization rail -> takeaway.", "Three primary requirement cards: Guardrails, Human Intervention, Success Measures.", "Human Intervention is the emphasized magenta card.", "Action rail: Backlog -> PRD -> Acceptance Criteria -> Production.", "All cards, rail, icons, and text are native React/CSS; planet assets are decorative edge crops only."]
+      "assets": ["structured-content-action/slide-10-left-orb-magenta-v1.png", "structured-content-action/slide-10-right-orb-magenta-orbit-v1.png"]
+    },
+    "embedded-app": {
+      "status": "APPROVED",
+      "reference": "embedded-app/embedded-app-reference-v1.png",
+      "assets": ["embedded-app/embedded-app-left-orb-magenta-v1.png", "embedded-app/embedded-app-right-orb-white-v1.png"],
+      "implementation_notes": [
+        "Reference owns composition and visual relationships.",
+        "The app itself is a live native React/HTML container, not a screenshot.",
+        "The app viewport is the dominant content region.",
+        "The app shell must accept arbitrary embedded interactive content without changing slide architecture.",
+        "Orb assets are decorative edge crops only.",
+        "Shared PDMA title/subtitle/header/footer/navigation behavior remains unchanged."
+      ]
     }
   },
-  "build_rules": ["Old /pdma2026 deck remains untouched.", "Reuse exact current header/footer/navigation/title behavior.", "No copy removal, hiding, truncation, or substitution.", "Normal Grid/Flex flow for content.", "No pdmaGeometry.ts dependency.", "No absolute-positioned content; only bounded decoration/connectors may overlay.", "Fixed 16:9 canvas scales uniformly; no stacking; no scrolling.", "Approved references are visual authority; approved assets must not be regenerated during implementation."],
+  "build_rules": [
+    "Old /pdma2026 deck remains untouched.",
+    "Reuse exact current header/footer/navigation/title behavior.",
+    "No copy removal, hiding, truncation, or substitution.",
+    "Normal Grid/Flex flow for content.",
+    "No pdmaGeometry.ts dependency.",
+    "No absolute-positioned content; only bounded decoration/connectors may overlay.",
+    "Fixed 16:9 canvas scales uniformly; no stacking; no scrolling.",
+    "Approved references are visual authority; approved assets must not be regenerated during implementation."
+  ],
   "files": {
+    "embedded-app/embedded-app-left-orb-magenta-v1.png": {"width": 1254, "height": 1254, "mode": "RGBA", "sha256": "adf511d9a911a20d6ad1bd341ab9c67f731d75b6e7b3b237efad4751d8f00ba1"},
+    "embedded-app/embedded-app-reference-v1.png": {"width": 1672, "height": 941, "mode": "RGB", "sha256": "de3c6f5b8dffcbe5f6635fa57b92a96cc1ce9b074724380a88eab381900baff9"},
+    "embedded-app/embedded-app-right-orb-white-v1.png": {"width": 1254, "height": 1254, "mode": "RGBA", "sha256": "58ccbec91e6986e42f08add2feacb2ddd458b8c0f0bddf93765aa8d0eff31725"},
     "end-card/end-card-electric-orb-right-v1.png": {"width": 1672, "height": 941, "mode": "RGBA", "sha256": "b48416ac607b5e3b0682815db560ad380949cbaf94fb9befbdd454ea4b9c9761"},
     "end-card/end-card-reference-v1.png": {"width": 1672, "height": 941, "mode": "RGB", "sha256": "2bbed561cc050fae11b033284982a1f4aaca1b2151b82eeea2920ceccab452cb"},
     "flow-scenario/flow-scenario-reference-v1.png": {"width": 1672, "height": 941, "mode": "RGB", "sha256": "223ade4becd2dd2926899c2601e03ca5ef37e41467ab4b7cde7c16d72d4ed7ab"},
