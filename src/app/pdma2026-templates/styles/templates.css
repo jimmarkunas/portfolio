@@ -58,6 +58,14 @@
   object-fit: contain;
   user-select: none;
 }
+/* Live PBDS orbs: each renderer sees the full 1920×1080 plane (its crop math is edge-anchored). The
+   half-plane clip only partitions pointer hit-testing between stacked orbs; each orb's painted extent
+   stays within its own half. The stage passes pointer input through to the orbs; real controls keep it. */
+.pdmat-slide .pdmat-deco-orb { position: absolute; inset: 0; pointer-events: auto; }
+.pdmat-slide .pdmat-deco-orb--left { clip-path: inset(0 50% 0 0); }
+.pdmat-slide .pdmat-deco-orb--right { clip-path: inset(0 0 0 50%); }
+.pdmat-slide:has(.pdmat-deco-orb) .pdmat-stage { pointer-events: none; }
+.pdmat-slide:has(.pdmat-deco-orb) .pdmat-stage :is(a, button, input, select, textarea, iframe, [tabindex]) { pointer-events: auto; }
 .pdmat-slide .pdmat-deco-fade { position: absolute; left: 0; right: 0; }
 .pdmat-slide .pdmat-deco-fade--bottom { top: var(--y); bottom: 0; background: linear-gradient(to bottom, rgba(9, 9, 9, 0) 0, var(--pdmat-ink) var(--h)); }
 .pdmat-slide .pdmat-deco-item--drift-back { animation: pdmat-drift-back 15s ease-in-out infinite alternate; will-change: transform, filter; }

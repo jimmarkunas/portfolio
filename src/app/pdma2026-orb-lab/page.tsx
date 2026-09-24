@@ -9,7 +9,7 @@ import "../pdma2026/presentation/presentation.css";
 import { pdma2026Content } from "@/content/pdma2026";
 import { PdmaPresentationShell } from "@/app/pdma2026/PdmaPresentationShell";
 import { pdma2026Manifest } from "@/app/pdma2026/presentation/pdma2026Manifest";
-import { PBDSKineticSphere } from "./PBDSKineticSphereLab";
+import { PBDSKineticSphere } from "@/components/pbds/orb/PBDSKineticSphere";
 
 type LabMode = "reference" | "direct-port";
 

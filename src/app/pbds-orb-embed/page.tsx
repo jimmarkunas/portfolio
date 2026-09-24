@@ -1,29 +1,11 @@
 "use client";
 
-import { PBDSKineticSphere } from "@/app/pdma2026-orb-lab/PBDSKineticSphereLab";
+import { PBDSOrb } from "@/components/pbds/orb/PBDSOrb";
 
 export default function PbdsOrbEmbedPage() {
   return (
     <main className="pbds-orb-embed" aria-label="PBDS kinetic orb animation">
-      <PBDSKineticSphere
-        radius={290}
-        skinStyle="canonical-magenta"
-        accentColor="#FF2FAE"
-        primaryDotColor="#FF2FAE"
-        interactionMode="repel"
-        interactionStrength={1}
-        autoRotateSpeed={0.0012}
-        cropPosition="orb-right"
-        plasmaNoiseIntensity={1}
-        stippleDensity={8500}
-        ambientLuminance={0.38}
-        glowingStrokeIntensity={0.2}
-        strokeMode="crescent"
-        strokeShadowOpacity={0}
-        strokeWidth={0.5}
-        bodyOpacity={0}
-        interactive
-      />
+      <PBDSOrb preset="magentaRight" />
 
       <style jsx global>{`
         html,

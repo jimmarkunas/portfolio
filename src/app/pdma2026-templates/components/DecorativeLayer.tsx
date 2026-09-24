@@ -1,4 +1,6 @@
 import type { CSSProperties } from "react";
+import { PBDSOrb } from "@/components/pbds/orb/PBDSOrb";
+import { orbPresets, type PBDSOrbPresetName } from "@/components/pbds/orb/orbPresets";
 import type { DecorativeVariant } from "../templateTypes";
 
 const A = "/pdma2026-templates/assets";
@@ -18,9 +20,16 @@ type DecorImage = {
 /** Non-content overlay that dissolves an asset's cropped edge into the canvas background. */
 type DecorFade = { fade: "bottom"; y: number; h: number };
 
-export type DecorItem = DecorImage | DecorFade;
+/**
+ * Live PBDS kinetic orb. Always mounted on the full 1920×1080 decorative plane: the renderer's
+ * crop geometry is edge-anchored to its parent, so it must never be boxed into a still's rectangle.
+ */
+type DecorOrb = { orb: PBDSOrbPresetName; radius?: number; interactive?: boolean };
+
+export type DecorItem = DecorImage | DecorFade | DecorOrb;
 
 export const isDecorImage = (item: DecorItem): item is DecorImage => "src" in item;
+export const isDecorOrb = (item: DecorItem): item is DecorOrb => "orb" in item;
 
 /**
  * Decorative layer registry. Items are bounded to the slide's decorative layer and never
@@ -41,8 +50,9 @@ export const decorativeVariants: Record<DecorativeVariant, readonly DecorItem[]>
     { src: "/pdma2026/slide-03/44753.png", x: 1260, y: 242, w: 830, h: 830 },
   ],
   "flow-dual-orbs": [
-    { src: `${A}/flow-scenario/slide-09-left-orb-white-v1.png`, x: -316, y: 335, w: 537, h: 537 },
-    { src: `${A}/flow-scenario/slide-09-right-orb-magenta-v1.png`, x: 1685, y: 30, w: 980, h: 980 },
+    // Live replacements for the approved stills slide-09-left-orb-white-v1.png / slide-09-right-orb-magenta-v1.png.
+    { orb: "greyLeft", radius: 250 },
+    { orb: "magentaRight", radius: 228 },
   ],
   "spectrum-horizon": [
     { src: "/pdma2026/slide-08/slide-08-planet-horizon.png", x: 0, y: 300, w: 1920, h: 640 },
@@ -63,10 +73,15 @@ export const decorativeVariants: Record<DecorativeVariant, readonly DecorItem[]>
   none: [],
 };
 
+/** Which half of the plane an orb owns for pointer hit-testing (its crop anchor). */
+const orbSide = (preset: PBDSOrbPresetName) => orbPresets[preset].cropPosition === "orb-left" ? "left" : "right";
+
 export function DecorativeLayer({ variant, items: explicitItems }: { variant: DecorativeVariant; items?: readonly DecorItem[] }) {
   const items = explicitItems ?? decorativeVariants[variant];
   return <div className="pdmat-deco" aria-hidden="true" data-decorative-variant={explicitItems ? "custom" : variant}>
-    {items.map((item) => isDecorImage(item) ? <img
+    {items.map((item) => isDecorOrb(item) ? <div key={`orb-${item.orb}`} className={`pdmat-deco-orb pdmat-deco-orb--${orbSide(item.orb)}`}>
+      <PBDSOrb preset={item.orb} radius={item.radius} interactive={item.interactive} />
+    </div> : isDecorImage(item) ? <img
       key={item.src}
       className={`pdmat-deco-item${item.ambient ? ` pdmat-deco-item--${item.ambient}` : ""}`}
       src={item.src}

@@ -2,35 +2,7 @@
 
 import React, { useEffect, useMemo, useRef } from "react";
 
-export type InteractionMode = "repel" | "attract" | "swirl";
-export type CropPosition = "center" | "orb-right" | "orb-left" | "orb-horizon";
-export type OrbSkinStyle = "canonical-magenta" | "canonical-white" | "obsidian-ice" | "custom";
-
-export interface PBDSKineticSphereProps {
-  radius?: number;
-  interactionMode?: InteractionMode;
-  interactionStrength?: number;
-  autoRotateSpeed?: number;
-  cropPosition?: CropPosition;
-  skinStyle?: OrbSkinStyle;
-  accentColor?: string;
-  primaryDotColor?: string;
-  shadowDotColor?: string;
-  className?: string;
-  interactive?: boolean;
-  plasmaNoiseIntensity?: number;
-  stippleDensity?: number;
-  ambientLuminance?: number;
-  glowingStrokeIntensity?: number;
-  glowSpread?: number;
-  coreHotness?: number;
-  innerWashIntensity?: number;
-  dotHarmonization?: "unified" | "subtle-specular" | "split-tone";
-  strokeMode?: "crescent" | "tapered" | "full" | "none";
-  strokeShadowOpacity?: number;
-  strokeWidth?: number;
-  bodyOpacity?: number;
-}
+import type { PBDSKineticSphereProps } from "./orbTypes";
 
 type RGB = { r: number; g: number; b: number };
 type StippleDot = { bx:number; by:number; bz:number; x:number; y:number; z:number; vx:number; vy:number; vz:number; baseSize:number; phase:number };
@@ -111,6 +83,9 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
     };render();return()=>{window.removeEventListener("resize",resize);cancelAnimationFrame(animId);};
   },[radius,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity]);
 
-  const handleMouseMove=(e:React.MouseEvent<HTMLCanvasElement>)=>{const rect=canvasRef.current?.getBoundingClientRect();if(!rect)return;const x=e.clientX-rect.left,y=e.clientY-rect.top,m=mouseRef.current;if(m.isDragging){const dx=x-m.prevX,dy=y-m.prevY;rotationRef.current.rotY+=dx*.006;rotationRef.current.rotX-=dy*.006;rotationRef.current.velY=dx*.0012;rotationRef.current.velX=-dy*.0012;}m.prevX=m.x;m.prevY=m.y;m.x=x;m.y=y;m.isHovered=true;};
-  return <div className={`relative w-full h-full overflow-hidden select-none ${className}`}><canvas ref={canvasRef} onMouseMove={handleMouseMove} onMouseDown={e=>{const r=canvasRef.current?.getBoundingClientRect();if(!r)return;mouseRef.current.isDragging=true;mouseRef.current.prevX=e.clientX-r.left;mouseRef.current.prevY=e.clientY-r.top;}} onMouseUp={()=>mouseRef.current.isDragging=false} onMouseLeave={()=>{mouseRef.current.isHovered=false;mouseRef.current.isDragging=false;mouseRef.current.x=-9999;mouseRef.current.y=-9999;}} className="w-full h-full block cursor-grab active:cursor-grabbing touch-none"/></div>;
+  // Pointer → canvas backing-store coordinates. Identity when unscaled (standalone embed); corrects for
+  // ancestor CSS transforms such as the PDMA shell's uniform scale(), where the rendered rect ≠ canvas size.
+  const toCanvas=(e:React.MouseEvent<HTMLCanvasElement>)=>{const c=canvasRef.current,rect=c?.getBoundingClientRect();if(!c||!rect||!rect.width||!rect.height)return null;return {x:(e.clientX-rect.left)*(c.width/rect.width),y:(e.clientY-rect.top)*(c.height/rect.height)};};
+  const handleMouseMove=(e:React.MouseEvent<HTMLCanvasElement>)=>{const pt=toCanvas(e);if(!pt)return;const x=pt.x,y=pt.y,m=mouseRef.current;if(m.isDragging){const dx=x-m.prevX,dy=y-m.prevY;rotationRef.current.rotY+=dx*.006;rotationRef.current.rotX-=dy*.006;rotationRef.current.velY=dx*.0012;rotationRef.current.velX=-dy*.0012;}m.prevX=m.x;m.prevY=m.y;m.x=x;m.y=y;m.isHovered=true;};
+  return <div className={`relative w-full h-full overflow-hidden select-none ${className}`}><canvas ref={canvasRef} onMouseMove={handleMouseMove} onMouseDown={e=>{const pt=toCanvas(e);if(!pt)return;mouseRef.current.isDragging=true;mouseRef.current.prevX=pt.x;mouseRef.current.prevY=pt.y;}} onMouseUp={()=>mouseRef.current.isDragging=false} onMouseLeave={()=>{mouseRef.current.isHovered=false;mouseRef.current.isDragging=false;mouseRef.current.x=-9999;mouseRef.current.y=-9999;}} className="w-full h-full block cursor-grab active:cursor-grabbing touch-none"/></div>;
 };
