@@ -36,7 +36,7 @@ An approved implementation reference may be:
 - `APPROVED_ASSET_PACKAGE`
 - `APPROVED_SCREENSHOT_REFERENCE`
 
-Do not force Figma into a workflow when the contract registers another reference type.
+Do not force Figma into a workflow when the contract registers another approved reference type.
 
 If status is `DESIGN_REQUIRED`, return:
 
@@ -84,7 +84,7 @@ For a one-slide task, read only what is needed:
 2. approved implementation reference;
 3. target component;
 4. target style source if needed;
-5. target geometry entry;
+5. target decorative geometry/assets if needed;
 6. shared primitive only if directly relevant;
 7. target manifest entry only if copy/chrome/assets are involved.
 
@@ -109,22 +109,24 @@ Being behind `origin/main` is not by itself a blocker. Do not pull, merge, rebas
 - Preserve the approved composition; never redesign during a parity/fix task.
 - Never substitute an older reference for the registered approved implementation reference.
 - No base64 production assets.
+- A bounded reopen authorizes only the named surface; all non-target surfaces remain frozen.
 
 ## Three-prompt recovery mode — HARD
 
-Each slide's React implementation has a hard maximum of **3 Codex implementation prompts** from first mutation through visual PASS. Target is 1–2.
+Each reopened slide's React implementation has a hard maximum of **3 Codex implementation prompts** from first mutation through visual PASS. Target is 1–2.
 
 ### Prompt 1 — complete implementation
 
-Prompt 1 includes inspection and attempts the complete approved target-slide implementation in one bounded pass. Do not spend a prompt only planning, inventorying, or explaining capability.
+Prompt 1 includes inspection and attempts the complete approved target-slide delta in one bounded pass. Do not spend a prompt only planning, inventorying, or explaining capability.
 
 Prompt 1 must include:
 
 - approved reference type and exact reference;
+- explicit reopen authorization;
 - exact allowed files;
 - frozen anchors;
-- current component/geometry/assets to inspect;
-- complete approved composition;
+- current component/decorative geometry/assets to inspect;
+- complete approved delta;
 - canonical QA viewport;
 - `npm run pdma:check -- --slide NN`;
 - `npm run pdma:qa -- --slide NN`;
@@ -148,7 +150,7 @@ A fourth prompt requires Jim's explicit override.
 
 1. Start from/capture one full-slide browser screenshot at the actual rendered browser size.
 2. Freeze the registered approved implementation reference and browser viewport as comparison basis.
-3. Prompt 1 implements the full approved composition.
+3. Prompt 1 implements the full approved delta.
 4. Capture a new full-slide screenshot at the same viewport.
 5. Compare against the approved implementation reference and enumerate concrete visible deltas.
 6. Prompt 2 corrects demonstrated deltas coherently.
@@ -205,6 +207,7 @@ A React visual change is not complete from source inspection, typecheck, unit ch
 Before claiming PASS:
 
 - confirm the contract registers an approved implementation reference;
+- confirm the target/surface was explicitly reopened;
 - render/capture the affected slide in the actual runtime;
 - compare it to the registered approved reference;
 - verify demonstrated deltas are resolved and frozen anchors stayed fixed.
@@ -223,16 +226,13 @@ If three implementation prompts are exhausted without visual PASS:
 
 Do not send a fourth prompt without Jim's explicit override.
 
-## Current Slide 05 instruction
+## Current production state
 
-Slide 05 is currently `STYLE_REWORK / APPROVED` with an `APPROVED_ASSET_PACKAGE` reference.
+The production deck contains **16 accepted, locked slides**. There is no active recovery target.
 
-For Slide 05:
+Do not infer permission to mutate a slide from historical `STYLE_REWORK`, `REBUILD_STYLE`, `IMPLEMENTATION_REPAIR`, `DESIGN_REQUIRED`, or “current target” language in old artifacts or chats.
 
-- do not require or read Figma;
-- use the three approved assets and composition instructions from `PDMA_VISUAL_IMPLEMENTATION_CONTRACT.md` §4;
-- keep shared shell/chrome frozen;
-- finish within the remaining Codex prompt budget.
+Future visual mutation begins only when Jim explicitly reopens a named slide or bounded surface. If only a decorative surface is reopened, semantic composition, copy, shared chrome, and existing logical-canvas anchors remain frozen unless Jim explicitly changes them too.
 
 ## Output discipline
 
@@ -241,6 +241,7 @@ For implementation tasks, report only:
 - status;
 - prompt number / 3;
 - approved reference type/reference;
+- explicit reopen authorization;
 - changed files;
 - requested implementation/correction;
 - targeted verification;
