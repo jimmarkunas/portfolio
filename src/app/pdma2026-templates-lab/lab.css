@@ -1,0 +1,10 @@
+/*
+ * The shared shell tags its title block with the deck position (pdma-title-<n>), and base.css
+ * gives position 2 the production slide-2 title geometry. Lab position 2 is a gallery Title
+ * slide, so restore the default title-block flow there (values mirror .pdma-title-block rules
+ * in base.css; the magenta row's inline top is 0 for Title and Flow).
+ */
+.pdma2026-templates-lab .pdma-title-2 { height: auto; }
+.pdma2026-templates-lab .pdma-title-2 > h1:first-child { position: static; left: auto !important; top: auto; }
+.pdma2026-templates-lab .pdma-title-2 > .pdma-title-magenta-row { position: relative !important; left: auto !important; top: 0 !important; }
+.pdma2026-templates-lab .pdma-title-2 > p { position: static; top: auto; margin: var(--subtitle-offset, 18px) 0 0; }

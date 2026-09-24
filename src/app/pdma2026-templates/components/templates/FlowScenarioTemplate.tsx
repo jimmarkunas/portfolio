@@ -3,6 +3,7 @@ import { Connector } from "../shared/Connector";
 import { ContentCard } from "../shared/ContentCard";
 import { IconCircle } from "../shared/IconCircle";
 import { TakeawayBand } from "../shared/TakeawayBand";
+import type { DecorItem } from "../DecorativeLayer";
 import { TemplateSlide } from "../TemplateSlide";
 
 const index = (position: number) => String(position).padStart(2, "0");
@@ -16,10 +17,10 @@ function StageNode({ stage, position, slot }: { stage: FlowStage; position: numb
 }
 
 /** Synopsis → signal rows → glyph stages; the track owns every connector between them. */
-export function FlowScenarioTemplate({ content }: { content: FlowScenarioTemplateContent }) {
+export function FlowScenarioTemplate({ content, decorItems }: { content: FlowScenarioTemplateContent; decorItems?: readonly DecorItem[] }) {
   const { synopsis, signals, stages, question, takeaway } = content;
   const SynopsisIcon = "icon" in synopsis ? synopsis.icon : null;
-  return <TemplateSlide kind={content.kind} title={content.chrome.title} decorativeVariant={content.decorativeVariant}>
+  return <TemplateSlide kind={content.kind} title={content.chrome.title} decorativeVariant={content.decorativeVariant} decorItems={decorItems}>
     <section className="pdmat-template pdmat-flow">
       <div className="pdmat-flow__track">
         <Connector kind="flow" endDot className="pdmat-flow__link pdmat-flow__link--lead" />
