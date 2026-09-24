@@ -44,4 +44,13 @@ export interface PBDSKineticSphereProps {
   atmosphereWidth?: number;
   atmosphereFocus?: number;
   atmosphereIntensity?: number;
+  /** Draw-time sphere-surface color gradient over the existing per-dot lit-ness. Legacy (default) is unchanged. */
+  surfaceColorMode?: "legacy" | "lit-gradient";
+  surfaceShadowColor?: string;
+  surfaceDarkColor?: string;
+  surfaceMidColor?: string;
+  surfaceLightColor?: string;
+  surfaceHotColor?: string;
+  /** Lit-ness above which color blends from surfaceLightColor toward surfaceHotColor. 1 = no hot highlight. */
+  surfaceHotThreshold?: number;
 }

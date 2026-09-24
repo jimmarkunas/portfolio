@@ -6,6 +6,7 @@ import type { PBDSKineticSphereProps } from "./orbTypes";
 
 type RGB = { r: number; g: number; b: number };
 type LimbShape = { outer: number; mid: number; core: number; coreWidth: number };
+type SurfaceStops = { bp: number[]; cols: RGB[]; hot: RGB; hotStart: number };
 type LimbColors = { outer: { hex: string; rgb: string; raw: RGB }; mid: { hex: string; rgb: string; raw: RGB }; core: { hex: string; rgb: string; raw: RGB } };
 type StippleDot = { bx:number; by:number; bz:number; x:number; y:number; z:number; vx:number; vy:number; vz:number; baseSize:number; phase:number };
 type Plasma = { angle:number; distFactor:number; size:number; alpha:number; speed:number; radialVelocity:number; life:number; maxLife:number };
@@ -90,7 +91,7 @@ function buildAtmosphereField(width:number,height:number,cx:number,cy:number,rad
 }
 
 export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
-  radius=290,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,outerGlowColor,midGlowColor,hotCoreColor,solarFlareIntensity=1,outerGlowFocus=1,midGlowFocus=1,hotCoreFocus=1,hotCoreWidthMultiplier=1,atmosphereMode="stroke",atmosphereWidth=24,atmosphereFocus=3.5,atmosphereIntensity=1,
+  radius=290,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,outerGlowColor,midGlowColor,hotCoreColor,solarFlareIntensity=1,outerGlowFocus=1,midGlowFocus=1,hotCoreFocus=1,hotCoreWidthMultiplier=1,atmosphereMode="stroke",atmosphereWidth=24,atmosphereFocus=3.5,atmosphereIntensity=1,surfaceColorMode="legacy",surfaceShadowColor,surfaceDarkColor,surfaceMidColor,surfaceLightColor,surfaceHotColor,surfaceHotThreshold=.9,
 })=>{
   const canvasRef=useRef<HTMLCanvasElement|null>(null);
   const fieldRef=useRef<{key:string;field:ReturnType<typeof buildAtmosphereField>}|null>(null);
@@ -103,8 +104,14 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
     const raw=hexToRgb(active,fallback),rgb=`${raw.r}, ${raw.g}, ${raw.b}`;
     const tone=(hex:string|undefined,fallbackRgb:RGB)=>{const c=hexToRgb(hex??"",fallbackRgb);return {hex:hex??active,rgb:`${c.r}, ${c.g}, ${c.b}`,raw:c};};
     const limb:LimbColors|undefined=outerGlowColor||midGlowColor||hotCoreColor?{outer:tone(outerGlowColor,raw),mid:tone(midGlowColor,raw),core:tone(hotCoreColor,raw)}:undefined;
-    return {limb,glowHex:active,glowRgb:rgb,rawRgb:raw,highlightDot:primaryDotColor&&primaryDotColor!=="#FFFFFF"?primaryDotColor:active,midDot:active,shadowDot:shadowDotColor||shadow,plasmaRgb:rgb,bodyGradStart:bodyStart,bodyGradEnd:bodyEnd};
-  },[skinStyle,accentColor,primaryDotColor,shadowDotColor,outerGlowColor,midGlowColor,hotCoreColor]);
+    const surface:SurfaceStops|undefined=surfaceColorMode==="lit-gradient"?(()=>{
+      const hotStart=Math.min(.98,Math.max(.3,surfaceHotThreshold));
+      // shadow/dark/mid/light span the full non-hot range up to hotStart (no flat plateau before the hot
+      // blend begins), so the transition into the rare hot highlight is continuous rather than a filled patch.
+      return {bp:[0,hotStart*.35,hotStart*.68,hotStart],cols:[hexToRgb(surfaceShadowColor??"",raw),hexToRgb(surfaceDarkColor??"",raw),hexToRgb(surfaceMidColor??"",raw),hexToRgb(surfaceLightColor??"",raw)],hot:hexToRgb(surfaceHotColor??"",raw),hotStart};
+    })():undefined;
+    return {limb,surface,glowHex:active,glowRgb:rgb,rawRgb:raw,highlightDot:primaryDotColor&&primaryDotColor!=="#FFFFFF"?primaryDotColor:active,midDot:active,shadowDot:shadowDotColor||shadow,plasmaRgb:rgb,bodyGradStart:bodyStart,bodyGradEnd:bodyEnd};
+  },[skinStyle,accentColor,primaryDotColor,shadowDotColor,outerGlowColor,midGlowColor,hotCoreColor,surfaceColorMode,surfaceShadowColor,surfaceDarkColor,surfaceMidColor,surfaceLightColor,surfaceHotColor,surfaceHotThreshold]);
 
   const mouseRef=useRef({x:-9999,y:-9999,prevX:-9999,prevY:-9999,isHovered:false,isDragging:false});
   const rotationRef=useRef({rotX:.08,rotY:skinStyle==="canonical-magenta"?-.85:.85,velX:0,velY:0});
@@ -123,6 +130,15 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
     const canvas=canvasRef.current;if(!canvas)return;const ctx=canvas.getContext("2d",{alpha:true});if(!ctx)return;
     let animId=0,width=canvas.width=canvas.parentElement?.clientWidth||600,height=canvas.height=canvas.parentElement?.clientHeight||600,time=0;
     const resize=()=>{if(!canvas.parentElement)return;width=canvas.width=canvas.parentElement.clientWidth;height=canvas.height=canvas.parentElement.clientHeight;};window.addEventListener("resize",resize);
+    // Surface color gradient (experimental): maps each visible dot's existing lit-ness (illum, 0..1) onto
+    // shadow -> dark -> mid -> light continuously, then -> hot only above surfaceHotThreshold (rare highlights).
+    // Existing brightness/alpha/size/visibility stay authoritative; this only replaces the fill color.
+    const surfaceColor=palette.surface?(illum:number):RGB=>{
+      const st=palette.surface!,bp=st.bp,cols=st.cols;
+      for(let i=1;i<bp.length;i++)if(illum<=bp[i])return lerpRgb(cols[i-1],cols[i],(illum-bp[i-1])/(bp[i]-bp[i-1]));
+      if(illum<=st.hotStart)return cols[cols.length-1];
+      return lerpRgb(cols[cols.length-1],st.hot,Math.min(1,(illum-st.hotStart)/(1-st.hotStart)));
+    }:null;
     const render=()=>{
       time+=.025;ctx.clearRect(0,0,width,height);
       let cx=width/2,cy=height/2;if(cropPosition==="orb-right"){cx=width+radius*.32;cy=height/2;}else if(cropPosition==="orb-left"){cx=-radius*.32;cy=height/2;}else if(cropPosition==="orb-horizon"){cx=width/2;cy=height+radius*.45;}
@@ -140,7 +156,10 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
         if(nz<-.05||effective<.1){p.x=tx;p.y=ty;p.z=tz;p.vx=p.vy=p.vz=0;continue;}
         if(interactive&&mouse.isHovered&&mouseDist<interactionRadius){const dx=p.x-mouseRelX,dy=p.y-mouseRelY,d=Math.sqrt(dx*dx+dy*dy)||1,influence=Math.max(0,1-d/(radius*.9))*interactionStrength;if(interactionMode==="repel"){const f=influence*18;p.vx+=(dx/d)*f;p.vy+=(dy/d)*f;}else if(interactionMode==="attract"){const f=influence*14;p.vx-=(dx/d)*f;p.vy-=(dy/d)*f;}else{const a=Math.atan2(dy,dx),f=influence*18;p.vx+=Math.cos(a+Math.PI/2)*f;p.vy+=Math.sin(a+Math.PI/2)*f;}}
         const k=.09,damp=.82;p.vx=(p.vx+(tx-p.x)*k)*damp;p.vy=(p.vy+(ty-p.y)*k)*damp;p.vz=(p.vz+(tz-p.z)*k)*damp;p.x+=p.vx;p.y+=p.vy;p.z+=p.vz;const fov=850,scale=fov/(fov+p.z),sx=cx+p.x*scale,sy=cy+p.y*scale,rad=Math.sqrt(p.x*p.x+p.y*p.y)/radius,illum=Math.pow(Math.min(1,effective),1.6),limb=Math.pow(Math.min(1,rad),2.2),brightness=Math.min(1,illum*.45+limb*.55+ambientLuminance*.25);if(brightness<.08)continue;let color:string,alpha:number,size=p.baseSize*scale*(.75+brightness*.5);
-        if(dotHarmonization==="unified"){color=palette.glowHex;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.25));}else if(dotHarmonization==="subtle-specular"){const sf=Math.pow(Math.max(0,(rad-.78)/.22),2)*Math.max(0,nDotL),blend=lerpRgb(palette.rawRgb,{r:255,g:255,b:255},sf*.65);color=`rgb(${blend.r}, ${blend.g}, ${blend.b})`;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.2));}else if(rad>.88&&nDotL>.4){color=palette.highlightDot;alpha=.95;size*=1.15;}else if(rad>.55||nDotL>.1){color=palette.midDot;alpha=.45+brightness*.45;}else{color=palette.shadowDot;alpha=.25+brightness*.35;}visible.push({sx,sy,z:p.z,size,color,alpha:Math.min(1,alpha*brightness)});
+        // Compressed toward the peak (matches the renderer's own rad>.88&&nDotL>.4 rarity behavior for the highlight branch)
+        // so brightness stays rare and the sphere body reads as dominantly magenta, per the accepted reference.
+        if(surfaceColor){const c=surfaceColor(Math.pow(Math.max(0,nDotL),1.9));color=`rgb(${c.r}, ${c.g}, ${c.b})`;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.25));}
+        else if(dotHarmonization==="unified"){color=palette.glowHex;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.25));}else if(dotHarmonization==="subtle-specular"){const sf=Math.pow(Math.max(0,(rad-.78)/.22),2)*Math.max(0,nDotL),blend=lerpRgb(palette.rawRgb,{r:255,g:255,b:255},sf*.65);color=`rgb(${blend.r}, ${blend.g}, ${blend.b})`;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.2));}else if(rad>.88&&nDotL>.4){color=palette.highlightDot;alpha=.95;size*=1.15;}else if(rad>.55||nDotL>.1){color=palette.midDot;alpha=.45+brightness*.45;}else{color=palette.shadowDot;alpha=.25+brightness*.35;}visible.push({sx,sy,z:p.z,size,color,alpha:Math.min(1,alpha*brightness)});
       }
       visible.sort((a,b)=>a.z-b.z);for(const d of visible){ctx.globalAlpha=d.alpha;ctx.fillStyle=d.color;ctx.beginPath();ctx.arc(d.sx,d.sy,d.size,0,Math.PI*2);ctx.fill();}
       if(atmosphereMode==="field"){const la=Math.atan2(lightY,lightX),key=`${width}x${height}|${cx}|${cy}|${radius}|${la}|${atmosphereWidth}|${atmosphereFocus}|${atmosphereIntensity}|${outerGlowColor}|${midGlowColor}|${hotCoreColor}|${palette.glowHex}`;
@@ -149,7 +168,7 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
       else if(glowingStrokeIntensity>0&&strokeMode!=="none")drawAtmosphericLimb(ctx,cx,cy,radius,Math.atan2(lightY,lightX),strokeMode,glowingStrokeIntensity,glowSpread,coreHotness,strokeWidth,innerWashIntensity,strokeShadowOpacity,glowHex,glowRgb,palette.rawRgb,palette.limb,limbShape);
       ctx.globalAlpha=1;animId=requestAnimationFrame(render);
     };render();return()=>{window.removeEventListener("resize",resize);cancelAnimationFrame(animId);};
-  },[radius,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity,solarFlareIntensity,outerGlowFocus,midGlowFocus,hotCoreFocus,hotCoreWidthMultiplier,atmosphereMode,atmosphereWidth,atmosphereFocus,atmosphereIntensity]);
+  },[radius,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity,solarFlareIntensity,outerGlowFocus,midGlowFocus,hotCoreFocus,hotCoreWidthMultiplier,atmosphereMode,atmosphereWidth,atmosphereFocus,atmosphereIntensity,surfaceColorMode,surfaceShadowColor,surfaceDarkColor,surfaceMidColor,surfaceLightColor,surfaceHotColor,surfaceHotThreshold]);
 
   // Pointer → canvas backing-store coordinates. Identity when unscaled (standalone embed); corrects for
   // ancestor CSS transforms such as the PDMA shell's uniform scale(), where the rendered rect ≠ canvas size.
