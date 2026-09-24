@@ -2,7 +2,7 @@
 
 **Status:** CANONICAL for the new `/pdma2026-templates` build  
 **Approved:** 2026-09-24  
-**Existing `/pdma2026` presentation:** MUST REMAIN UNTOUCHED
+**Existing `/pdma2026` presentation:** production consumer of these templates since cutover (rollback checkpoint `3e343570`)
 
 ## Authority
 
@@ -106,7 +106,7 @@ SHA-256: `de3c6f5b8dffcbe5f6635fa57b92a96cc1ce9b074724380a88eab381900baff9`
 
 ## Shared template-system rules
 
-- New route/component tree: `/pdma2026-templates`; old presentation untouched.
+- New route/component tree: `/pdma2026-templates` (gallery); `/pdma2026` consumes the same templates in production.
 - Shared header/footer/navigation/title styling and behavior reused from current PDMA presentation.
 - No copy may be removed, hidden, truncated, or replaced.
 - Content layout uses normal CSS Grid/Flex document flow.

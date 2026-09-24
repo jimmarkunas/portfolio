@@ -1,9 +1,9 @@
 # PDMA 2026 Template System — Deterministic Implementation Manifest
 
-**Status:** PRE-FLIGHT COMPLETE — IMPLEMENTATION NOT YET STARTED  
+**Status:** IMPLEMENTED — baseline `c350ce7` accepted; production cutover complete (§9)  
 **Date:** 2026-09-24  
 **Target route:** `/pdma2026-templates`  
-**Existing `/pdma2026`:** READ-ONLY / MUST REMAIN UNTOUCHED
+**Existing `/pdma2026`:** production consumer since cutover (§9)
 
 This manifest is the final build handoff. It is subordinate only to Jim's explicit current instruction, `TEMPLATE_ARCHITECTURE_CONTRACT.md`, and `APPROVED_TEMPLATE_REFERENCES.md` / `approved-template-references.json`.
 
@@ -558,11 +558,19 @@ Never convert browser unavailability into PASS.
 **Template mapping:** VERIFIED  
 **Canonical references/assets:** VERIFIED in Canon v4  
 **New route existence:** VERIFIED ABSENT — clean build target  
-**Implementation files:** NOT YET CREATED  
+**Implementation files:** CREATED (`c350ce7`)  
 **Asset staging into local Codex working tree:** REQUIRED BEFORE BUILD  
-**React implementation:** NOT STARTED  
-**Visual QA:** NOT STARTED
+**React implementation:** COMPLETE  
+**Visual QA:** COMPLETE (gallery + production deck)
 
 ### Build authorization gate
 
 The implementation run may start only when Canon v4 is available in the Codex working tree and the run explicitly accepts this manifest plus `TEMPLATE_ARCHITECTURE_CONTRACT.md` and `APPROVED_TEMPLATE_REFERENCES.md` as the complete implementation authority.
+
+## 9. Production cutover
+
+- Accepted template baseline: `c350ce713d2414296a5018674b9408f8a6f7931b`.
+- `/pdma2026` renders the migrated 15-slide deck from `src/app/pdma2026/presentation/` (content: `pdma2026Content.ts`; manifest: `pdma2026Manifest.tsx`). Template-mapped: 01, 03, 06, 07, 08, 09, 10, 14, 15. Preserved compositions: 02, 04, 05, 11, 12, 13.
+- `/pdma2026-templates` remains the gallery; its nine mapped exemplars render the production content objects.
+- Rollback checkpoint: `3e343570ab1957513fdf8883e2efcdaa56226a5d` (roll back the cutover commit with `git revert`).
+- Checks: `npm run pdma:check` (deck + gallery static contracts) and `npm run pdma:qa` (deck + gallery browser QA).

@@ -5,498 +5,162 @@
     "height": 1080
   },
   "rendering": {
-    "canvas": "PdmaSlideCanvas",
-    "surface": "PdmaSlideSurface",
-    "body": "PdmaSlideBody",
-    "primitives": "pdmaPrimitives",
-    "animation": "pdmaMotion"
+    "canvas": "PdmaSlideCanvas (1920×1080, uniform contain scaling)",
+    "slide": "TemplateSlide",
+    "decoration": "DecorativeLayer",
+    "content": "src/app/pdma2026/presentation/pdma2026Content.ts",
+    "manifest": "src/app/pdma2026/presentation/pdma2026Manifest.tsx"
   },
   "slides": [
     {
-      "key": "slide-01",
       "number": 1,
+      "key": "slide-01",
       "title": "THE NEW PM OPERATING SYSTEM",
-      "component": "slide-01",
-      "assets": [
-        "/pdma2026/slide-01/title-atmosphere.png",
-        "/pdma2026/slide-01/title-asterisk-scene.png"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [
-          "pdma-s01"
-        ],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide01",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide01"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 01",
-        "capture": "npm run pdma:qa -- --slide 01"
-      }
+      "composition": "title",
+      "component": "src/app/pdma2026-templates/components/templates/TitleTemplate.tsx",
+      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide01)",
+      "family": "approved template"
     },
     {
-      "key": "slide-02",
       "number": 2,
+      "key": "slide-02",
       "title": "WHAT SHIFTS. WHAT STAYS.",
-      "component": "slide-02",
-      "assets": [
-        "/pdma2026/slide-02/slide-02-ai-sphere.png",
-        "/pdma2026/slide-02/slide-02-human-sphere.png",
-        "/pdma2026/slide-02/slide-02-particle-field.png",
-        "/pdma2026/slide-02/diagram-cpu.svg",
-        "/pdma2026/slide-02/diagram-brain.svg"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [
-          "pdma-s02"
-        ],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide02",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide02"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 02",
-        "capture": "npm run pdma:qa -- --slide 02"
-      }
+      "composition": "shift-boundary",
+      "component": "src/app/pdma2026/presentation/slides/ShiftBoundarySlide.tsx",
+      "stylesheet": "src/app/pdma2026/presentation/presentation.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide02)",
+      "family": "preserved production composition"
     },
     {
-      "key": "slide-03",
       "number": 3,
+      "key": "slide-03",
       "title": "COPILOTS GENERATE OUTPUTS. AGENTS TAKE ACTION.",
-      "component": "slide-03",
-      "assets": [
-        "/pdma2026/slide-03/02283.png",
-        "/pdma2026/slide-03/44753.png"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [
-          "pdma-s03",
-          "s03-panel-copilot",
-          "s03-panel-agent",
-          "s03-panel-divider"
-        ],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide03",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide03"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 03",
-        "capture": "npm run pdma:qa -- --slide 03"
-      }
+      "composition": "compare-contrast",
+      "component": "src/app/pdma2026-templates/components/templates/CompareContrastTemplate.tsx",
+      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide03)",
+      "family": "approved template"
     },
     {
-      "key": "slide-04",
       "number": 4,
+      "key": "slide-04",
       "title": "DON'T AUTOMATE EVERYTHING.",
-      "component": "slide-04",
-      "assets": [
-        "/pdma2026/slide-04/0c14e.png",
-        "/pdma2026/slide-04/bd2f1.png"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [
-          "pdma-s04"
-        ],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide04",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide04"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 04",
-        "capture": "npm run pdma:qa -- --slide 04"
-      }
+      "composition": "work-map",
+      "component": "src/app/pdma2026/presentation/slides/WorkMapSlide.tsx",
+      "stylesheet": "src/app/pdma2026/presentation/presentation.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide04)",
+      "family": "preserved production composition"
     },
     {
-      "key": "slide-05",
       "number": 5,
+      "key": "slide-05",
       "title": "DON'T AUTOMATE AMBIGUITY.",
-      "component": "slide-05",
-      "assets": [
-        "/pdma2026/slide-05/51d1a.png",
-        "/pdma2026/slide-05/9f2f3.png"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [
-          "pdma-s05"
-        ],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide05",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide05"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 05",
-        "capture": "npm run pdma:qa -- --slide 05"
-      }
+      "composition": "ambiguity-gate",
+      "component": "src/app/pdma2026/presentation/slides/AmbiguityGateSlide.tsx",
+      "stylesheet": "src/app/pdma2026/presentation/presentation.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide05)",
+      "family": "preserved production composition"
     },
     {
-      "key": "slide-06",
       "number": 6,
+      "key": "slide-06",
       "title": "UNDERSTAND THE ENVIRONMENT. NAME THE OWNERS.",
-      "component": "slide-06",
-      "assets": [
-        "/pdma2026/slide-06"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide06",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide06"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 06",
-        "capture": "npm run pdma:qa -- --slide 06"
-      }
+      "composition": "hub-ecosystem",
+      "component": "src/app/pdma2026-templates/components/templates/HubEcosystemTemplate.tsx",
+      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide06)",
+      "family": "approved template"
     },
     {
-      "key": "slide-07",
       "number": 7,
+      "key": "slide-07",
       "title": "BEFORE YOU BUILD IT, PROVE THE VALUE.",
-      "component": "slide-07",
-      "assets": [],
-      "routeLinks": [],
-      "contract": {
-        "required": [],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide07",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide07"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 07",
-        "capture": "npm run pdma:qa -- --slide 07"
-      }
+      "composition": "scorecard",
+      "component": "src/app/pdma2026-templates/components/templates/ScorecardTemplate.tsx",
+      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide07)",
+      "family": "approved template"
     },
     {
-      "key": "slide-08",
       "number": 8,
+      "key": "slide-08",
       "title": "HOW MUCH AUTHORITY SHOULD THE ROBOTS HAVE?",
-      "component": "slide-08",
-      "assets": [
-        "/pdma2026/slide-08"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide08",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide08"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 08",
-        "capture": "npm run pdma:qa -- --slide 08"
-      }
+      "composition": "decision-spectrum",
+      "component": "src/app/pdma2026-templates/components/templates/DecisionSpectrumTemplate.tsx",
+      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide08)",
+      "family": "approved template"
     },
     {
-      "key": "slide-09",
       "number": 9,
+      "key": "slide-09",
       "title": "LIVE SCENARIO: RETENTION AGENT.",
-      "component": "slide-09",
-      "assets": [
-        "/pdma2026/slide-09"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide09",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide09"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 09",
-        "capture": "npm run pdma:qa -- --slide 09"
-      }
+      "composition": "flow-scenario",
+      "component": "src/app/pdma2026-templates/components/templates/FlowScenarioTemplate.tsx",
+      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide09)",
+      "family": "approved template"
     },
     {
-      "key": "slide-10",
       "number": 10,
+      "key": "slide-10",
       "title": "DESIGN PRODUCTION READINESS INTO THE FEATURE.",
-      "component": "slide-10",
-      "assets": [
-        "/pdma2026/slide-10"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide10",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide10"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 10",
-        "capture": "npm run pdma:qa -- --slide 10"
-      }
+      "composition": "structured-content-action",
+      "component": "src/app/pdma2026-templates/components/templates/StructuredActionTemplate.tsx",
+      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide10)",
+      "family": "approved template"
     },
     {
-      "key": "slide-11",
       "number": 11,
+      "key": "slide-11",
       "title": "A.G.E.N.T.S.",
-      "component": "slide-11",
-      "assets": [
-        "/pdma2026/slide-11"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide11",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide11"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 11",
-        "capture": "npm run pdma:qa -- --slide 11"
-      }
+      "composition": "agents-reveal",
+      "component": "src/app/pdma2026/presentation/slides/AgentsRevealSlide.tsx",
+      "stylesheet": "src/app/pdma2026/presentation/presentation.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide11)",
+      "family": "preserved production composition"
     },
     {
-      "key": "slide-12",
       "number": 12,
+      "key": "slide-12",
       "title": "TURN THE FRAMEWORK INTO PRODUCT.",
-      "component": "slide-12",
-      "assets": [
-        "/pdma2026/slide-12"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide12",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide12"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 12",
-        "capture": "npm run pdma:qa -- --slide 12"
-      }
+      "composition": "framework-to-product",
+      "component": "src/app/pdma2026/presentation/slides/FrameworkToProductSlide.tsx",
+      "stylesheet": "src/app/pdma2026/presentation/presentation.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide12)",
+      "family": "preserved production composition"
     },
     {
-      "key": "slide-13",
       "number": 13,
+      "key": "slide-13",
       "title": "AN IDEA + AI ≠ PRODUCT SPEC.",
-      "component": "slide-13",
-      "assets": [
-        "/pdma2026/slide-13"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide13",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide13"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 13",
-        "capture": "npm run pdma:qa -- --slide 13"
-      }
+      "composition": "idea-to-spec",
+      "component": "src/app/pdma2026/presentation/slides/IdeaToSpecSlide.tsx",
+      "stylesheet": "src/app/pdma2026/presentation/presentation.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide13)",
+      "family": "preserved production composition"
     },
     {
-      "key": "slide-14",
       "number": 14,
+      "key": "slide-14",
       "title": "NOW YOU DO IT.",
-      "component": "slide-14",
-      "assets": [
-        "/pdma2026/slide-14"
-      ],
-      "routeLinks": [
-        "/pdma2026/exercise"
-      ],
-      "contract": {
-        "required": [],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide14",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide14"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 14",
-        "capture": "npm run pdma:qa -- --slide 14"
-      }
+      "composition": "exercise",
+      "component": "src/app/pdma2026-templates/components/templates/ExerciseTemplate.tsx",
+      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide14)",
+      "family": "approved template"
     },
     {
-      "key": "slide-15",
       "number": 15,
+      "key": "slide-15",
       "title": "TURN AI CAPABILITY INTO PRODUCT VALUE.",
-      "component": "slide-15",
-      "assets": [
-        "/pdma2026/slide-15"
-      ],
-      "routeLinks": [],
-      "contract": {
-        "required": [],
-        "forbidden": [
-          "pdma-alt-slide",
-          "pdma-header",
-          "pdma-footer"
-        ]
-      },
-      "geometry": "pdmaGeometry.slide15",
-      "rendering": {
-        "canvas": "PdmaSlideCanvas",
-        "surface": "PdmaSlideSurface",
-        "body": "PdmaSlideBody",
-        "primitives": "pdmaPrimitives",
-        "animation": "pdmaMotion",
-        "geometry": "pdmaGeometry.slide15"
-      },
-      "verification": {
-        "check": "npm run pdma:check -- --slide 15",
-        "capture": "npm run pdma:qa -- --slide 15"
-      }
+      "composition": "end-card",
+      "component": "src/app/pdma2026-templates/components/templates/EndCardTemplate.tsx",
+      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide15)",
+      "family": "approved template"
     }
   ]
 }

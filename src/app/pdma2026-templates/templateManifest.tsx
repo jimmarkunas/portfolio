@@ -1,6 +1,5 @@
 import type { ComponentType, ReactNode } from "react";
-import type { Pdma2026SlideKey } from "@/app/pdma2026/pdma.config";
-import type { Pdma2026SlideManifestEntry } from "@/app/pdma2026/pdma2026SlideManifest";
+import type { PdmaSlideKey, PdmaSlideManifestEntry } from "@/app/pdma2026/presentation/presentationTypes";
 import { ProductizationExerciseApp } from "./components/apps/ProductizationExerciseApp";
 import { decorativeVariants, isDecorImage } from "./components/DecorativeLayer";
 import { CompareContrastTemplate } from "./components/templates/CompareContrastTemplate";
@@ -31,7 +30,7 @@ export const templateNames: Record<TemplateKind, string> = {
   "structured-content-action": "Structured Content / Action",
 };
 
-export type TemplateManifestEntry = Pdma2026SlideManifestEntry & { kind: TemplateKind; templateName: string; sourceSlide: number | null };
+export type TemplateManifestEntry = PdmaSlideManifestEntry & { kind: TemplateKind; templateName: string; sourceSlide: number | null; qa: "targeted" };
 
 function renderTemplate(content: TemplateContent): ReactNode {
   switch (content.kind) {
@@ -56,7 +55,7 @@ function templateAssets(content: TemplateContent) {
 
 /** Shell-compatible manifest: one entry per template, chrome taken from the mapped live slide. */
 export const templateManifest: readonly TemplateManifestEntry[] = templateContent.map((content, index) => {
-  const key = `slide-${String(index + 1).padStart(2, "0")}` as Pdma2026SlideKey;
+  const key = `slide-${String(index + 1).padStart(2, "0")}` as PdmaSlideKey;
   const templateName = templateNames[content.kind];
   const Component: ComponentType = () => renderTemplate(content);
   Component.displayName = `PdmaTemplate(${content.kind})`;

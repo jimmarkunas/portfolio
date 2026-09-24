@@ -1,52 +1,20 @@
 #!/usr/bin/env node
-
+// Maps working-tree changes to the PDMA surfaces they affect and the checks to run.
 import { execFileSync } from "node:child_process"
+import { readDeck } from "./pdma-deck-slides.mjs"
 
-const status = execFileSync("git", ["status", "--short"], { encoding: "utf8" })
-const changedFiles = status.split("\n").filter(Boolean).map((line) => line.slice(3).trim()).filter(Boolean)
-const slides = new Set()
-const reasons = new Map()
-const graphReasons = new Map()
-let qaMode = "none"
-const graphEdges = { slide: "slide component/asset → one slide", shared: "shared shell/primitives/geometry → all slides", metadata: "config/manifest metadata → validation/context → full deck", tooling: "tooling only → no rendered slide" }
-const add = (slide, reason) => {
-  slides.add(slide)
-  const prior = reasons.get(slide) ?? []
-  reasons.set(slide, [...prior, reason])
+const changed = execFileSync("git", ["status", "--short"], { encoding: "utf8" }).split("\n").filter(Boolean).map((line) => line.slice(3).trim())
+const deck = readDeck()
+const shared = /^src\/app\/pdma2026\/(PdmaPresentationShell|components\/|styles\/|presentation\/(presentationTypes|pdma2026Manifest|Pdma2026Presentation))|^src\/app\/pdma2026-templates\/(components\/(TemplateSlide|DecorativeLayer|shared\/)|styles\/)/
+const impact = new Map()
+for (const file of changed) {
+  if (shared.test(file)) { impact.set("all slides + gallery", [...(impact.get("all slides + gallery") ?? []), file]); continue }
+  if (file.includes("pdma2026Content.ts") || file.startsWith("public/pdma2026")) { impact.set("deck copy/assets", [...(impact.get("deck copy/assets") ?? []), file]); continue }
+  for (const slide of deck) if (file === slide.component) impact.set(slide.key, [...(impact.get(slide.key) ?? []), file])
+  if (file.startsWith("src/app/pdma2026-templates/") || file.startsWith("public/pdma2026-templates/")) impact.set("template gallery", [...(impact.get("template gallery") ?? []), file])
+  if (file.startsWith("src/app/pdma2026/exercise/")) impact.set("/pdma2026/exercise", [...(impact.get("/pdma2026/exercise") ?? []), file])
 }
-const graph = (file, edge) => graphReasons.set(file, edge)
-const allSlides = Array.from({ length: 15 }, (_, index) => String(index + 1).padStart(2, "0"))
-
-for (const file of changedFiles) {
-  const slideMatch = file.match(/slide-(\d{2})/)
-  if (slideMatch) { add(slideMatch[1], file); graph(file, "slide"); if (file.startsWith("public/") || file.startsWith("src/")) qaMode = qaMode === "full" ? "full" : "targeted" }
-  else if (/src\/app\/pdma2026\/components\/(?:slides\/)?Slide(\d{2})\.tsx$/.test(file)) { add(file.match(/Slide(\d{2})/)?.[1], file); graph(file, "slide"); qaMode = qaMode === "full" ? "full" : "targeted" }
-  else if (file === "src/app/pdma2026/content/slide-content.ts") {
-    for (const slide of ["02", "03", "06", "08", "11", "14"]) add(slide, file)
-    graph(file, "metadata")
-    qaMode = qaMode === "full" ? "full" : "targeted"
-  } else if (/src\/app\/pdma2026\/(index\.css|layout\.tsx|Pdma2026App\.tsx|pdma2026SlideManifest\.tsx|pdmaAssets\.ts|pdmaSlideAssets\.ts|pdma\.config\.ts|pdma\.validation\.ts|pdmaGeometry\.ts|PdmaPresentationShell\.tsx|components\/(PdmaTitleBlock|PdmaSlideBody|pdmaPrimitives|pdmaMotion)\.tsx|components\/slides\/slideShared\.tsx)/.test(file)) {
-    for (const slide of allSlides) add(slide, file)
-    graph(file, /pdma\.config|pdma\.validation|Manifest|pdmaSlideAssets/.test(file) ? "metadata" : "shared")
-    qaMode = "full"
-  } else if (/scripts\/.*pdma|docs\/pdma2026\/(slide-contracts|immutable-surfaces)/.test(file) || file === "package.json") {
-    graph(file, "tooling")
-    console.log(`PDMA impact: tooling-only change ${file}; no screenshot QA required.`)
-  }
-}
-
-if (slides.size === 0) {
-  console.log("PDMA impact: no changed files detected.")
-  if (graphReasons.size) {
-    console.log("Dependency graph:")
-    for (const [file, edge] of graphReasons) console.log(`- ${file} → ${graphEdges[edge]}`)
-  }
-  process.exit(0)
-}
-
-console.log(`PDMA impact: ${slides.size} affected slide${slides.size === 1 ? "" : "s"}.`)
-console.log(`QA scope: ${qaMode === "full" ? "full-deck QA required" : "targeted QA sufficient"}.`)
-console.log("Dependency graph:")
-for (const [file, edge] of graphReasons) console.log(`- ${file} → ${graphEdges[edge]}`)
-for (const slide of allSlides.filter((value) => slides.has(value))) console.log(`- slide-${slide}: ${reasons.get(slide).join(", ")}`)
-console.log(`Suggested QA: npm run pdma:qa${qaMode === "full" ? "" : ` -- --slides ${allSlides.filter((value) => slides.has(value)).join(",")}`}`)
+if (!impact.size) { console.log("No PDMA surface changed."); process.exit(0) }
+console.log("PDMA impact:")
+for (const [surface, files] of impact) console.log(`- ${surface}: ${files.join(", ")}`)
+console.log("Run: npm run pdma:check && npm run pdma:qa")

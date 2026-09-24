@@ -2,7 +2,8 @@
   "version": 4,
   "approved_date": "2026-09-24",
   "route": "/pdma2026-templates",
-  "existing_pdma_untouched": true,
+  "existing_pdma_untouched": false,
+  "production_cutover": { "accepted_template_baseline": "c350ce713d2414296a5018674b9408f8a6f7931b", "rollback_sha": "3e343570ab1957513fdf8883e2efcdaa56226a5d", "production_route": "/pdma2026", "gallery_route": "/pdma2026-templates" },
   "library_root": "/LifeOS/PDMA 2026/Template Canon/v4/",
   "archive": "/LifeOS/PDMA 2026/Template Canon/v4/pdma2026-template-canon-v4.zip",
   "templates": {
@@ -41,7 +42,7 @@
     }
   },
   "build_rules": [
-    "Old /pdma2026 deck remains untouched.",
+    "/pdma2026 is the production consumer of the accepted templates (cutover from 3e343570).",
     "Reuse exact current header/footer/navigation/title behavior.",
     "No copy removal, hiding, truncation, or substitution.",
     "Normal Grid/Flex flow for content.",

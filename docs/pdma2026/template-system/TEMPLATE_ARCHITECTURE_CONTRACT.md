@@ -1,9 +1,9 @@
 # PDMA 2026 Template System — Architecture Contract
 
-**Status:** FROZEN FOR IMPLEMENTATION  
+**Status:** ACCEPTED — PRODUCTION CUTOVER COMPLETE (§16)  
 **Date:** 2026-09-24  
 **Target route:** `/pdma2026-templates`  
-**Existing `/pdma2026`:** MUST REMAIN UNTOUCHED
+**Existing `/pdma2026`:** production consumer of this architecture since cutover (§16)
 
 ## 1. Goal
 
@@ -207,7 +207,7 @@ A browser-access failure is `VISUAL_QA: REQUIRES_EXTERNAL_REVIEW`, never PASS.
 
 Allowed implementation scope is the new `/pdma2026-templates` route/tree, its new public asset root, and template-system documentation/tests.
 
-Existing `/pdma2026` slide components, geometry, shell, header/footer/navigation/title code, assets, and styles are read-only for this build.
+Existing `/pdma2026` slide components, geometry, shell, header/footer/navigation/title code, assets, and styles were read-only for this build. (Build phase only — superseded by §16.)
 
 ## 15. Definition of done
 
@@ -222,3 +222,11 @@ Architecture is satisfied only when:
 - the canvas scales uniformly through portrait tablet;
 - approved references/assets are used exactly;
 - visual QA is complete or explicitly marked external-review-required.
+
+## 16. Production cutover (2026-09-24)
+
+- Template baseline `c350ce713d2414296a5018674b9408f8a6f7931b` accepted.
+- `/pdma2026` is now the production consumer of this architecture: 9 slides use the approved templates, 6 keep their approved production composition rebuilt on the same primitives (`src/app/pdma2026/presentation/`).
+- `/pdma2026-templates` remains the template gallery.
+- Pre-cutover rollback checkpoint: `3e343570ab1957513fdf8883e2efcdaa56226a5d`. The cutover commit is recorded in git history; roll back with `git revert`.
+- The build-phase restrictions in the header, §4 and §14 (legacy `/pdma2026` read-only) applied to template construction only and are superseded.

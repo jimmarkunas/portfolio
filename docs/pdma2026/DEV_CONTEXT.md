@@ -1,25 +1,25 @@
 # PDMA 2026 Developer Context
 
-Generated exclusively from the typed PDMA validation configuration. Use `slide-index.json` for machine-readable detail.
+Generated from the production deck content (`npm run pdma:context`). Use `slide-index.json` for machine-readable detail.
 
-| Slide | Component | Geometry | Targeted checks |
+| Slide | Title | Composition | Component |
 | --- | --- | --- | --- |
-| slide-01 | slide-01 | pdmaGeometry.slide01 | npm run pdma:check -- --slide 01 · npm run pdma:qa -- --slide 01 |
-| slide-02 | slide-02 | pdmaGeometry.slide02 | npm run pdma:check -- --slide 02 · npm run pdma:qa -- --slide 02 |
-| slide-03 | slide-03 | pdmaGeometry.slide03 | npm run pdma:check -- --slide 03 · npm run pdma:qa -- --slide 03 |
-| slide-04 | slide-04 | pdmaGeometry.slide04 | npm run pdma:check -- --slide 04 · npm run pdma:qa -- --slide 04 |
-| slide-05 | slide-05 | pdmaGeometry.slide05 | npm run pdma:check -- --slide 05 · npm run pdma:qa -- --slide 05 |
-| slide-06 | slide-06 | pdmaGeometry.slide06 | npm run pdma:check -- --slide 06 · npm run pdma:qa -- --slide 06 |
-| slide-07 | slide-07 | pdmaGeometry.slide07 | npm run pdma:check -- --slide 07 · npm run pdma:qa -- --slide 07 |
-| slide-08 | slide-08 | pdmaGeometry.slide08 | npm run pdma:check -- --slide 08 · npm run pdma:qa -- --slide 08 |
-| slide-09 | slide-09 | pdmaGeometry.slide09 | npm run pdma:check -- --slide 09 · npm run pdma:qa -- --slide 09 |
-| slide-10 | slide-10 | pdmaGeometry.slide10 | npm run pdma:check -- --slide 10 · npm run pdma:qa -- --slide 10 |
-| slide-11 | slide-11 | pdmaGeometry.slide11 | npm run pdma:check -- --slide 11 · npm run pdma:qa -- --slide 11 |
-| slide-12 | slide-12 | pdmaGeometry.slide12 | npm run pdma:check -- --slide 12 · npm run pdma:qa -- --slide 12 |
-| slide-13 | slide-13 | pdmaGeometry.slide13 | npm run pdma:check -- --slide 13 · npm run pdma:qa -- --slide 13 |
-| slide-14 | slide-14 | pdmaGeometry.slide14 | npm run pdma:check -- --slide 14 · npm run pdma:qa -- --slide 14 |
-| slide-15 | slide-15 | pdmaGeometry.slide15 | npm run pdma:check -- --slide 15 · npm run pdma:qa -- --slide 15 |
+| slide-01 | THE NEW PM OPERATING SYSTEM | title | `src/app/pdma2026-templates/components/templates/TitleTemplate.tsx` |
+| slide-02 | WHAT SHIFTS. WHAT STAYS. | shift-boundary | `src/app/pdma2026/presentation/slides/ShiftBoundarySlide.tsx` |
+| slide-03 | COPILOTS GENERATE OUTPUTS. AGENTS TAKE ACTION. | compare-contrast | `src/app/pdma2026-templates/components/templates/CompareContrastTemplate.tsx` |
+| slide-04 | DON'T AUTOMATE EVERYTHING. | work-map | `src/app/pdma2026/presentation/slides/WorkMapSlide.tsx` |
+| slide-05 | DON'T AUTOMATE AMBIGUITY. | ambiguity-gate | `src/app/pdma2026/presentation/slides/AmbiguityGateSlide.tsx` |
+| slide-06 | UNDERSTAND THE ENVIRONMENT. NAME THE OWNERS. | hub-ecosystem | `src/app/pdma2026-templates/components/templates/HubEcosystemTemplate.tsx` |
+| slide-07 | BEFORE YOU BUILD IT, PROVE THE VALUE. | scorecard | `src/app/pdma2026-templates/components/templates/ScorecardTemplate.tsx` |
+| slide-08 | HOW MUCH AUTHORITY SHOULD THE ROBOTS HAVE? | decision-spectrum | `src/app/pdma2026-templates/components/templates/DecisionSpectrumTemplate.tsx` |
+| slide-09 | LIVE SCENARIO: RETENTION AGENT. | flow-scenario | `src/app/pdma2026-templates/components/templates/FlowScenarioTemplate.tsx` |
+| slide-10 | DESIGN PRODUCTION READINESS INTO THE FEATURE. | structured-content-action | `src/app/pdma2026-templates/components/templates/StructuredActionTemplate.tsx` |
+| slide-11 | A.G.E.N.T.S. | agents-reveal | `src/app/pdma2026/presentation/slides/AgentsRevealSlide.tsx` |
+| slide-12 | TURN THE FRAMEWORK INTO PRODUCT. | framework-to-product | `src/app/pdma2026/presentation/slides/FrameworkToProductSlide.tsx` |
+| slide-13 | AN IDEA + AI ≠ PRODUCT SPEC. | idea-to-spec | `src/app/pdma2026/presentation/slides/IdeaToSpecSlide.tsx` |
+| slide-14 | NOW YOU DO IT. | exercise | `src/app/pdma2026-templates/components/templates/ExerciseTemplate.tsx` |
+| slide-15 | TURN AI CAPABILITY INTO PRODUCT VALUE. | end-card | `src/app/pdma2026-templates/components/templates/EndCardTemplate.tsx` |
 
-Shared rendering contract: PdmaSlideCanvas → PdmaSlideSurface → PdmaSlideBody → typed geometry/pdmaPrimitives/pdmaMotion.
+Rendering: PdmaSlideCanvas (1920×1080, uniform contain scaling) → TemplateSlide (Grid/Flex content, bounded DecorativeLayer).
 
-Canonical configuration: `src/app/pdma2026/pdma.config.ts` and its typed validation declarations.
+Copy: `src/app/pdma2026/presentation/pdma2026Content.ts`. Checks: `npm run pdma:check` · `npm run pdma:qa`.

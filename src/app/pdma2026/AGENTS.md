@@ -48,7 +48,7 @@ Slides marked `LOCKED` are not writable unless Jim explicitly reopens them:
 
 `PDMA_SCOPE_STOP — slide NN is LOCKED`
 
-`docs/pdma2026/immutable-surfaces.json` is the mechanical implementation lock for accepted surfaces. Do not bypass or weaken it.
+Since the template-architecture cutover, `npm run pdma:check` (deck + gallery contracts) and `npm run pdma:qa` (browser QA) are the mechanical guards. `docs/pdma2026/immutable-surfaces.json` describes the retired geometry deck and is historical.
 
 ## Canonical ownership
 
@@ -56,8 +56,8 @@ Slides marked `LOCKED` are not writable unless Jim explicitly reopens them:
 - Current GitHub `main` owns implementation truth.
 - The approved implementation reference registered in the visual contract owns target-slide visual truth.
 - Slides 1–3 are the deck's visual north star for new/reworked concepts.
-- Current slide manifest/content owns production copy/chrome semantics unless Jim explicitly changes them.
-- `pdmaGeometry.ts` owns current logical geometry.
+- `presentation/pdma2026Content.ts` owns production copy; `presentation/pdma2026Manifest.tsx` owns order/chrome/composition, unless Jim explicitly changes them.
+- Layout is Grid/Flex in the template architecture (`docs/pdma2026/template-system/`); there is no geometry registry.
 - 1920×1080 is the canonical logical slide canvas.
 - Do not create a second geometry registry, manifest, asset registry, slide-state registry, or styling pipeline.
 

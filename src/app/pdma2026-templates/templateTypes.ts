@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import type { PdmaHeaderLabels, PdmaTitleConfig } from "@/app/pdma2026/pdma.config";
+import type { PdmaHeaderLabels, PdmaTitleConfig } from "@/app/pdma2026/presentation/presentationTypes";
 
 export type TemplateKind =
   | "title"

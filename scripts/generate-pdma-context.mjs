@@ -1,47 +1,28 @@
 #!/usr/bin/env node
-
+// Regenerates docs/pdma2026/slide-index.json and DEV_CONTEXT.md from the production deck content.
 import fs from "node:fs"
 import path from "node:path"
+import { CONTENT, readDeck } from "./pdma-deck-slides.mjs"
 
 const root = process.cwd()
 const docsRoot = path.join(root, "docs/pdma2026")
-const { pdmaValidation } = await import("../src/app/pdma2026/pdma.validation.ts")
-const slides = pdmaValidation.slideKeys.map((key, index) => {
-  const doc = pdmaValidation.docs[key]
-  const contract = pdmaValidation.contracts[key]
-  return {
-    key,
-    number: index + 1,
-    title: doc.title,
-    component: doc.component,
-    assets: pdmaValidation.runtimeAssets[key],
-    routeLinks: pdmaValidation.slides[index].routeLinks ?? [],
-    contract,
-    geometry: doc.geometry,
-    rendering: { ...pdmaValidation.rendering, geometry: doc.geometry },
-    verification: {
-      check: `npm run pdma:check -- --slide ${key.slice(-2)}`,
-      capture: `npm run pdma:qa -- --slide ${key.slice(-2)}`,
-    },
-  }
-})
-
+const slides = readDeck(root)
+const rendering = { canvas: "PdmaSlideCanvas (1920×1080, uniform contain scaling)", slide: "TemplateSlide", decoration: "DecorativeLayer", content: CONTENT, manifest: "src/app/pdma2026/presentation/pdma2026Manifest.tsx" }
 fs.mkdirSync(docsRoot, { recursive: true })
 const indexPath = path.join(docsRoot, "slide-index.json")
-fs.writeFileSync(indexPath, `${JSON.stringify({ generatedBy: "scripts/generate-pdma-context.mjs", canvas: pdmaValidation.canvas, rendering: pdmaValidation.rendering, slides }, null, 2)}\n`)
-
+fs.writeFileSync(indexPath, `${JSON.stringify({ generatedBy: "scripts/generate-pdma-context.mjs", canvas: { width: 1920, height: 1080 }, rendering, slides }, null, 2)}\n`)
 const markdown = [
   "# PDMA 2026 Developer Context",
   "",
-  "Generated exclusively from the typed PDMA validation configuration. Use `slide-index.json` for machine-readable detail.",
+  "Generated from the production deck content (`npm run pdma:context`). Use `slide-index.json` for machine-readable detail.",
   "",
-  "| Slide | Component | Geometry | Targeted checks |",
+  "| Slide | Title | Composition | Component |",
   "| --- | --- | --- | --- |",
-  ...slides.map((slide) => `| ${slide.key} | ${slide.component} | ${slide.geometry} | ${slide.verification.check} · ${slide.verification.capture} |`),
+  ...slides.map((slide) => `| ${slide.key} | ${slide.title} | ${slide.composition} | \`${slide.component}\` |`),
   "",
-  `Shared rendering contract: ${pdmaValidation.rendering.canvas} → ${pdmaValidation.rendering.surface} → ${pdmaValidation.rendering.body} → typed geometry/${pdmaValidation.rendering.primitives}/${pdmaValidation.rendering.animation}.`,
+  `Rendering: ${rendering.canvas} → ${rendering.slide} (Grid/Flex content, bounded ${rendering.decoration}).`,
   "",
-  "Canonical configuration: `src/app/pdma2026/pdma.config.ts` and its typed validation declarations.",
+  `Copy: \`${CONTENT}\`. Checks: \`npm run pdma:check\` · \`npm run pdma:qa\`.`,
 ].join("\n") + "\n"
 fs.writeFileSync(path.join(docsRoot, "DEV_CONTEXT.md"), markdown)
-console.log(`Generated ${path.relative(root, indexPath)} and ${path.relative(root, path.join(docsRoot, "DEV_CONTEXT.md"))}.`)
+console.log(`Generated ${path.relative(root, indexPath)} and docs/pdma2026/DEV_CONTEXT.md.`)

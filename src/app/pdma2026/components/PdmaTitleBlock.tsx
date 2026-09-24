@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import type { PdmaTitleConfig } from "../pdma2026SlideManifest";
+import type { PdmaTitleConfig } from "../presentation/presentationTypes";
 import { pdmaTransition, usePdmaReducedMotion } from "./pdmaMotion";
 
 export function PdmaTitleBlock({ slide, config }: { slide: number; config: PdmaTitleConfig }) {

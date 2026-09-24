@@ -8,12 +8,11 @@ import { usePresentationNavigation } from "@/hooks/usePresentationNavigation";
 import { PresentationTocDialog } from "@/components/presentation/PresentationTocDialog";
 import type { PresentationNavigationCopy } from "@/lib/presentation";
 import { PdmaTitleBlock } from "./components/PdmaTitleBlock";
-import type { Pdma2026SlideManifestEntry } from "./pdma2026SlideManifest";
 import { pdmaAssets } from "./pdmaAssets";
-import { pdmaGeometry } from "./pdmaGeometry";
+import { PDMA_LOGICAL_CANVAS, type PdmaSlideManifestEntry } from "./presentation/presentationTypes";
 import { usePdmaReducedMotion } from "./components/pdmaMotion";
 
-const PdmaTitleContext = createContext<{ slide: number; config: Pdma2026SlideManifestEntry["title"] } | null>(null);
+const PdmaTitleContext = createContext<{ slide: number; config: PdmaSlideManifestEntry["title"] } | null>(null);
 
 export function PdmaSlideCanvas({ children }: { children: React.ReactNode }) {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -23,9 +22,9 @@ export function PdmaSlideCanvas({ children }: { children: React.ReactNode }) {
     const stage = stageRef.current;
     if (!stage) return;
     const update = () => {
-      const scale = Math.min(stage.clientWidth / pdmaGeometry.canvas.width, stage.clientHeight / pdmaGeometry.canvas.height);
-      const renderedWidth = pdmaGeometry.canvas.width * scale;
-      const renderedHeight = pdmaGeometry.canvas.height * scale;
+      const scale = Math.min(stage.clientWidth / PDMA_LOGICAL_CANVAS.width, stage.clientHeight / PDMA_LOGICAL_CANVAS.height);
+      const renderedWidth = PDMA_LOGICAL_CANVAS.width * scale;
+      const renderedHeight = PDMA_LOGICAL_CANVAS.height * scale;
       const extraX = Math.max(0, stage.clientWidth - renderedWidth);
       const extraY = Math.max(0, stage.clientHeight - renderedHeight);
       setFrame({ scale, left: extraX / 2, top: extraY * 0.25 });
@@ -54,7 +53,7 @@ function PdmaBottomBar({ current, total, footer, navigation, onPrev, onNext, onT
   </motion.footer>;
 }
 
-export function PdmaPresentationShell({ slides, slideManifest, navigation }: { slides: React.ReactNode[]; slideManifest: Pdma2026SlideManifestEntry[]; navigation:PresentationNavigationCopy }) {
+export function PdmaPresentationShell({ slides, slideManifest, navigation }: { slides: React.ReactNode[]; slideManifest: readonly PdmaSlideManifestEntry[]; navigation:PresentationNavigationCopy }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { isFullscreen, toggleFullscreen } = usePresentationFullscreen({ containerRef });
   const { currentSlide, isTocOpen, setIsTocOpen, nextSlide, prevSlide, jumpToSlide } = usePresentationNavigation({ slideCount: slides.length, onToggleFullscreen: toggleFullscreen });

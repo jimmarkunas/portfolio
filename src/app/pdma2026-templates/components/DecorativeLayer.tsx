@@ -11,13 +11,14 @@ type DecorImage = {
   w: number;
   h: number;
   opacity?: number;
-  ambient?: "drift-back" | "drift-front" | "drift-hero";
+  /** Ambient motion class suffix (pdmat-deco-item--<ambient>), defined next to the owning styles. */
+  ambient?: string;
 };
 
 /** Non-content overlay that dissolves an asset's cropped edge into the canvas background. */
 type DecorFade = { fade: "bottom"; y: number; h: number };
 
-type DecorItem = DecorImage | DecorFade;
+export type DecorItem = DecorImage | DecorFade;
 
 export const isDecorImage = (item: DecorItem): item is DecorImage => "src" in item;
 
@@ -62,9 +63,9 @@ export const decorativeVariants: Record<DecorativeVariant, readonly DecorItem[]>
   none: [],
 };
 
-export function DecorativeLayer({ variant }: { variant: DecorativeVariant }) {
-  const items = decorativeVariants[variant];
-  return <div className="pdmat-deco" aria-hidden="true" data-decorative-variant={variant}>
+export function DecorativeLayer({ variant, items: explicitItems }: { variant: DecorativeVariant; items?: readonly DecorItem[] }) {
+  const items = explicitItems ?? decorativeVariants[variant];
+  return <div className="pdmat-deco" aria-hidden="true" data-decorative-variant={explicitItems ? "custom" : variant}>
     {items.map((item) => isDecorImage(item) ? <img
       key={item.src}
       className={`pdmat-deco-item${item.ambient ? ` pdmat-deco-item--${item.ambient}` : ""}`}
