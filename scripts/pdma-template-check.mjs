@@ -114,8 +114,21 @@ for (const [file, meta] of Object.entries(references.files)) {
   if (digest !== meta.sha256) fail(`SHA-256 mismatch ${ASSETS}/${file}`)
 }
 const decorative = read(`${TREE}/components/DecorativeLayer.tsx`)
+// Templates whose approved stills are superseded by live PBDS orbs: the variant must declare exactly
+// these orb presets (in order) and no image entries. Their Canon v4 stills stay byte-checked above.
+const liveOrbTemplates = { "flow-scenario": { variant: "flow-dual-orbs", orbs: ["greyLeft", "magentaRight"] } }
 for (const [kind, entry] of Object.entries(references.templates)) {
-  for (const asset of entry.assets) if (!decorative.includes(asset.split("/").pop())) fail(`DecorativeLayer.tsx: approved ${kind} asset not used → ${asset}`)
+  const live = liveOrbTemplates[kind]
+  if (!live) {
+    for (const asset of entry.assets) if (!decorative.includes(asset.split("/").pop())) fail(`DecorativeLayer.tsx: approved ${kind} asset not used → ${asset}`)
+    continue
+  }
+  const block = decorative.match(new RegExp(`"${live.variant}":\\s*\\[([\\s\\S]*?)\\n\\s*\\],`))?.[1]
+  if (!block) { fail(`DecorativeLayer.tsx: live-orb variant ${live.variant} not found for ${kind}`); continue }
+  const orbs = [...block.matchAll(/\{\s*orb:\s*"([^"]+)"/g)].map(([, preset]) => preset)
+  if (orbs.join() !== live.orbs.join()) fail(`DecorativeLayer.tsx: ${live.variant} must declare live orbs [${live.orbs}] → found [${orbs}]`)
+  if (/\bsrc:/.test(block)) fail(`DecorativeLayer.tsx: ${live.variant} must not render static image entries alongside live orbs`)
+  if (!galleryContent.includes(`decorativeVariant: "${live.variant}"`)) fail(`gallery content: ${kind} must select the ${live.variant} decorative variant`)
 }
 
 // 8. No base64 payloads in the new tree or its scripts.

@@ -50,7 +50,6 @@ export const decorativeVariants: Record<DecorativeVariant, readonly DecorItem[]>
     { src: "/pdma2026/slide-03/44753.png", x: 1260, y: 242, w: 830, h: 830 },
   ],
   "flow-dual-orbs": [
-    // Live replacements for the approved stills slide-09-left-orb-white-v1.png / slide-09-right-orb-magenta-v1.png.
     { orb: "greyLeft", radius: 250 },
     { orb: "magentaRight", radius: 228 },
   ],
