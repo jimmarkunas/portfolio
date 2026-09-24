@@ -4,9 +4,14 @@ Canonical reusable visual components for Jim Markunas presentation work.
 
 This document governs **presentation visuals and PDMA presentation runtime geometry**. It does **not** migrate the live portfolio site to PBDS 2.0 colors or replace the current production site tokens.
 
-Canonical Figma file:
+Canonical PBDS visual authority:
 
-`https://www.figma.com/design/3ZYkEtZVyRH9B2DfVpersf/JM-Personal-Brand-V2`
+`JM Personal Brand` — `euxFg8XeKtFJRw7PWOJRWa`
+
+The PDMA/V2 Figma (`JM-Personal-Brand-V2`, `3ZYk...`) may be referenced only
+as the working/approved source for presentation precedents not yet promoted
+into the canonical PBDS library. Do not treat it as the global canonical PBDS
+Figma and do not mutate Figma.
 
 Canonical Figma page:
 
@@ -302,6 +307,60 @@ Do **not** repeat this component across every slide.
 11. If a component uses the logo, use only the exact canonical 2012 five-leg asterisk geometry from node `5:38`.
 12. Never substitute a six-leg asterisk, generated asterisk, Unicode asterisk, or approximate starburst.
 13. Structural responsive reflow of slide content is prohibited unless Jim explicitly approves a slide-level exception; use uniform scaling plus controlled decorative bleed instead.
+
+## Approved presentation precedents
+
+These are reusable presentation precedents, not mandatory universal PBDS page
+templates. The Design Brain and these approved references describe a mature
+PBDS presentation expression, reusable presentation precedent, and composition
+judgment/continuity. They do not define the entire global PBDS aesthetic and
+do not require presentation-specific dark-field, orb, spatial, cinematic, or
+chrome treatments in Portfolio, Social, One-Pager, PDF, or other output
+adapters.
+
+### HERO v1 — Centered Signal Field
+
+- **Purpose:** Make a thesis or punchline unmistakable.
+- **Use when:** One idea should dominate the audience's first read.
+- **Canonical semantic structure:** A centered thesis/punchline led by typography.
+- **Visual behavior:** Centered composition as a bounded HERO exception with one restrained atmospheric field.
+- **Native vs decorative boundary:** Typography and semantic content remain native/editable; atmosphere is decorative only.
+- **Reject / anti-patterns:** Generic sci-fi object spectacle and generic cards.
+- **Approved reference:** `hero-centered-signal-field-v1` — `presentation-references/hero-centered-signal-field-v1.png`
+- **First proven consumer:** PDMA Slide 05.
+
+### Brand / Reveal v1 — Particle Horizon Reveal
+
+- **Purpose:** Introduce a named framework, product, system, or method.
+- **Use when:** The audience should feel they are “meeting the thing.”
+- **Canonical semantic structure:** Oversized naming moment followed by a structured semantic reveal.
+- **Visual behavior:** Minimal containers with a restrained particle horizon/atmosphere.
+- **Native vs decorative boundary:** Naming and reveal content remain native/editable; particles and atmosphere are decorative only.
+- **Reject / anti-patterns:** Hub-and-spoke and SaaS architecture treatment.
+- **Approved reference:** `brand-reveal-particle-horizon-v1` — `presentation-references/brand-reveal-particle-horizon-v1.png`
+- **First proven consumer:** PDMA Slide 11.
+
+### Translation / Traceability v1 — Framework → Requirements
+
+- **Purpose:** Make a one-to-one mapping legible.
+- **Use when:** Framework domains must visibly translate into concrete requirements.
+- **Canonical semantic structure:** Aligned identifiers/tracks connecting each framework item to its corresponding requirement.
+- **Visual behavior:** Preserve traceability and eliminate crossing ambiguity; editorial rather than spreadsheet-like.
+- **Native vs decorative boundary:** Mapping labels, identifiers, and relationships remain native/editable; atmosphere is decorative only.
+- **Reject / anti-patterns:** Ambiguous crossings and minimalism that hides the mapping.
+- **Approved reference:** `translation-traceability-v1` — `presentation-references/translation-traceability-framework-to-requirements-v1.png`
+- **First proven consumer:** PDMA Slide 12.
+
+### Before / After Transformation v1 — Idea → Production-Ready Spec
+
+- **Purpose:** Show weak input becoming a stronger output through transformation.
+- **Use when:** The value is in the movement from an idea or prompt to a production-ready specification.
+- **Canonical semantic structure:** Weak input → explicit bridge/transformation → stronger output.
+- **Visual behavior:** Output may and often should dominate; visual weight communicates semantic value.
+- **Native vs decorative boundary:** Input, bridge, and output remain native/editable; atmosphere is decorative only.
+- **Reject / anti-patterns:** Equal generic cards when the result has higher semantic value.
+- **Approved reference:** `before-after-transformation-v1` — `presentation-references/before-after-idea-to-spec-v1.png`
+- **First proven consumer:** PDMA Slide 13.
 
 ---
 

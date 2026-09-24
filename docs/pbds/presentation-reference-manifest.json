@@ -1,0 +1,50 @@
+{
+  "status": "canonical approved presentation precedent",
+  "not_a_slide_state_registry": true,
+  "entries": [
+    {
+      "id": "hero-centered-signal-field-v1",
+      "status": "approved",
+      "role": "hero-thesis",
+      "reference": "presentation-references/hero-centered-signal-field-v1.png",
+      "first_proven_consumer": "PDMA Slide 05",
+      "sha256": "7e658152e4489b8a630c002001ed5cfada5bc9ef8f2c7b1ad5e376f01c89ae86",
+      "semantic_content_native": true,
+      "decorative_assets_only": true,
+      "authority_note": "Approved presentation reference evidence; exact PBDS visual truth remains with canonical Figma where promoted."
+    },
+    {
+      "id": "brand-reveal-particle-horizon-v1",
+      "status": "approved",
+      "role": "brand-reveal",
+      "reference": "presentation-references/brand-reveal-particle-horizon-v1.png",
+      "first_proven_consumer": "PDMA Slide 11",
+      "sha256": "3e6d83ee1fe5b198a411e567d7d0501fdfd7d6ca67fa3e16a1102aa65394e4a4",
+      "semantic_content_native": true,
+      "decorative_assets_only": true,
+      "authority_note": "Approved presentation reference evidence; exact PBDS visual truth remains with canonical Figma where promoted."
+    },
+    {
+      "id": "translation-traceability-v1",
+      "status": "approved",
+      "role": "framework-to-requirements",
+      "reference": "presentation-references/translation-traceability-framework-to-requirements-v1.png",
+      "first_proven_consumer": "PDMA Slide 12",
+      "sha256": "85eda9592c70654b57a7d884d2aa77346e8189f0ff1b52e537250a8e169b8509",
+      "semantic_content_native": true,
+      "decorative_assets_only": true,
+      "authority_note": "Approved presentation reference evidence; exact PBDS visual truth remains with canonical Figma where promoted."
+    },
+    {
+      "id": "before-after-transformation-v1",
+      "status": "approved",
+      "role": "idea-to-production-ready-spec",
+      "reference": "presentation-references/before-after-idea-to-spec-v1.png",
+      "first_proven_consumer": "PDMA Slide 13",
+      "sha256": "876258e6b490e8c9c7875c8892bea572c3a0cc9634ae83d0eae5698992981b5f",
+      "semantic_content_native": true,
+      "decorative_assets_only": true,
+      "authority_note": "Approved presentation reference evidence; exact PBDS visual truth remains with canonical Figma where promoted."
+    }
+  ]
+}
