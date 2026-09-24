@@ -1,440 +1,116 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 
-export type OrbTone = "white" | "magenta";
 export type InteractionMode = "repel" | "attract" | "swirl";
+export type CropPosition = "center" | "orb-right" | "orb-left" | "orb-horizon";
+export type OrbSkinStyle = "canonical-magenta" | "canonical-white" | "obsidian-ice" | "custom";
 
-type Dot = {
-  bx: number; by: number; bz: number;
-  x: number; y: number; z: number;
-  vx: number; vy: number; vz: number;
-  baseSize: number;
-};
-
-type Plasma = {
-  angle: number;
-  distFactor: number;
-  size: number;
-  alpha: number;
-  speed: number;
-  radialVelocity: number;
-  life: number;
-  maxLife: number;
-};
-
-type PointerState = {
-  x: number; y: number;
-  prevX: number; prevY: number;
-  vx: number; vy: number;
-  active: boolean;
-  dragging: boolean;
-  lastT: number;
-};
-
-type Props = {
-  tone: OrbTone;
-  radius: number;
-  seed: number;
+export interface PBDSKineticSphereProps {
+  radius?: number;
   interactionMode?: InteractionMode;
   interactionStrength?: number;
   autoRotateSpeed?: number;
-  rotationScale?: number;
+  cropPosition?: CropPosition;
+  skinStyle?: OrbSkinStyle;
+  accentColor?: string;
+  primaryDotColor?: string;
+  shadowDotColor?: string;
+  className?: string;
+  interactive?: boolean;
+  plasmaNoiseIntensity?: number;
   stippleDensity?: number;
   ambientLuminance?: number;
-  plasmaNoiseIntensity?: number;
-  glowIntensity?: number;
+  glowingStrokeIntensity?: number;
   glowSpread?: number;
   coreHotness?: number;
   innerWashIntensity?: number;
+  dotHarmonization?: "unified" | "subtle-specular" | "split-tone";
+  strokeMode?: "crescent" | "tapered" | "full" | "none";
+  strokeShadowOpacity?: number;
   strokeWidth?: number;
-  paused?: boolean;
-};
-
-function seededRandom(seed: number) {
-  let value = seed >>> 0;
-  return () => {
-    value += 0x6d2b79f5;
-    let t = value;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
+  bodyOpacity?: number;
 }
 
-function lerp(a: number, b: number, t: number) {
-  return Math.round(a + (b - a) * Math.max(0, Math.min(1, t)));
+type RGB = { r: number; g: number; b: number };
+type StippleDot = { bx:number; by:number; bz:number; x:number; y:number; z:number; vx:number; vy:number; vz:number; baseSize:number; phase:number };
+type Plasma = { angle:number; distFactor:number; size:number; alpha:number; speed:number; radialVelocity:number; life:number; maxLife:number };
+
+function hexToRgb(hex:string, fallback:RGB):RGB {
+  let c=hex.replace("#","").trim();
+  if(c.length===3)c=c.split("").map(x=>x+x).join("");
+  const n=parseInt(c,16); if(Number.isNaN(n)) return fallback;
+  return {r:(n>>16)&255,g:(n>>8)&255,b:n&255};
 }
+function lerpRgb(a:RGB,b:RGB,t:number):RGB { const q=Math.max(0,Math.min(1,t)); return {r:Math.round(a.r+(b.r-a.r)*q),g:Math.round(a.g+(b.g-a.g)*q),b:Math.round(a.b+(b.b-a.b)*q)}; }
 
-function drawLimb(
-  ctx: CanvasRenderingContext2D,
-  cx: number,
-  cy: number,
-  radius: number,
-  tone: OrbTone,
-  intensity: number,
-  spread: number,
-  coreHotness: number,
-  innerWash: number,
-  strokeWidth: number,
-) {
-  if (intensity <= 0) return;
-
-  const rgb = tone === "magenta" ? { r: 255, g: 47, b: 174 } : { r: 226, g: 232, b: 240 };
-  const hot = {
-    r: lerp(rgb.r, 255, coreHotness),
-    g: lerp(rgb.g, 255, coreHotness),
-    b: lerp(rgb.b, 255, coreHotness),
-  };
-  const lightAngle = tone === "white" ? 0 : Math.PI;
-  const segments = 88;
-  const dTheta = (Math.PI * 2) / segments;
-
-  ctx.save();
-  for (let i = 0; i < segments; i += 1) {
-    const a0 = i * dTheta;
-    const a1 = a0 + dTheta + 0.012;
-    const mid = a0 + dTheta * 0.5;
-    const cosine = Math.cos(mid - lightAngle);
-    if (cosine <= 0) continue;
-    const lit = Math.pow(cosine, 1.55) * intensity;
-    if (lit < 0.004) continue;
-
+function drawAtmosphericLimb(ctx:CanvasRenderingContext2D,cx:number,cy:number,radius:number,lightAngle:number,strokeMode:"crescent"|"tapered"|"full"|"none",intensity:number,glowSpread:number,coreHotness:number,strokeWidth:number,innerWash:number,shadowOpacity:number,glowHex:string,glowRgb:string,rawRgb:RGB){
+  if(intensity<=0||strokeMode==="none")return;
+  ctx.save(); ctx.globalAlpha=1;
+  const hot=lerpRgb(rawRgb,{r:255,g:255,b:255},coreHotness);
+  const draw=(a0:number,a1:number,eff:number)=>{
     ctx.save();
-    ctx.shadowColor = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-    ctx.shadowBlur = spread * 0.4;
-    ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${Math.min(0.16, lit * 0.18)})`;
-    ctx.lineWidth = Math.max(1, spread * 0.16);
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius + spread * 0.05, a0, a1);
-    ctx.stroke();
-
-    ctx.shadowBlur = 2.5 * intensity;
-    ctx.strokeStyle = `rgba(${hot.r}, ${hot.g}, ${hot.b}, ${Math.min(0.72, lit * 0.82)})`;
-    ctx.lineWidth = Math.max(0.5, strokeWidth);
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, a0, a1);
-    ctx.stroke();
-
-    if (innerWash > 0) {
-      ctx.shadowBlur = 2;
-      ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${Math.min(0.08, lit * innerWash * 0.12)})`;
-      ctx.lineWidth = Math.max(1, spread * 0.08);
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius - spread * 0.04, a0, a1);
-      ctx.stroke();
-    }
+    ctx.shadowColor=glowHex; ctx.shadowBlur=glowSpread*1.1; ctx.strokeStyle=`rgba(${glowRgb}, ${eff*.30})`; ctx.lineWidth=glowSpread*.65; ctx.beginPath(); ctx.arc(cx,cy,radius+glowSpread*.28,a0,a1); ctx.stroke();
+    ctx.shadowBlur=glowSpread*.55; ctx.strokeStyle=`rgba(${glowRgb}, ${eff*.52})`; ctx.lineWidth=glowSpread*.32; ctx.beginPath(); ctx.arc(cx,cy,radius+glowSpread*.1,a0,a1); ctx.stroke();
+    ctx.shadowBlur=10*intensity; ctx.strokeStyle=`rgba(${glowRgb}, ${eff*.78})`; ctx.lineWidth=Math.max(1.8,strokeWidth*2.2); ctx.beginPath(); ctx.arc(cx,cy,radius,a0,a1); ctx.stroke();
+    ctx.shadowBlur=3*intensity; ctx.strokeStyle=`rgba(${hot.r}, ${hot.g}, ${hot.b}, ${eff*.98})`; ctx.lineWidth=strokeWidth; ctx.beginPath(); ctx.arc(cx,cy,radius,a0,a1); ctx.stroke();
+    if(innerWash>0){ctx.shadowBlur=6*intensity;ctx.strokeStyle=`rgba(${glowRgb}, ${eff*.24*innerWash})`;ctx.lineWidth=glowSpread*.22;ctx.beginPath();ctx.arc(cx,cy,radius-glowSpread*.1,a0,a1);ctx.stroke();}
     ctx.restore();
-  }
+  };
+  if(strokeMode==="full"){draw(0,Math.PI*2,Math.min(1,intensity));}
+  else { const segments=80,d=(Math.PI*2)/segments; for(let i=0;i<segments;i++){const a0=i*d,a1=a0+d+.015,mid=a0+d*.5,c=Math.cos(mid-lightAngle);let alpha=c>0?Math.pow(c,1.35):(strokeMode==="tapered"?Math.max(.04,shadowOpacity):shadowOpacity);if(alpha<=.005)continue;draw(a0,a1,Math.min(1,alpha*intensity));} }
   ctx.restore();
 }
 
-export function PBDSKineticSphereLab({
-  tone,
-  radius,
-  seed,
-  interactionMode = "repel",
-  interactionStrength = 1,
-  autoRotateSpeed = 0.0012,
-  rotationScale = 1,
-  stippleDensity = 8500,
-  ambientLuminance = 0.38,
-  plasmaNoiseIntensity = 1,
-  glowIntensity = 0.12,
-  glowSpread = 10,
-  coreHotness = 0.35,
-  innerWashIntensity = 0.06,
-  strokeWidth = 0.5,
-  paused = false,
-}: Props) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const strengthRef = useRef(interactionStrength);
-  const rotationScaleRef = useRef(rotationScale);
-  const glowRef = useRef(glowIntensity);
-  const pausedRef = useRef(paused);
-  const pointerRef = useRef<PointerState>({
-    x: -9999, y: -9999,
-    prevX: -9999, prevY: -9999,
-    vx: 0, vy: 0,
-    active: false,
-    dragging: false,
-    lastT: 0,
-  });
-  const rotationRef = useRef({
-    rotX: 0.08,
-    rotY: tone === "magenta" ? -0.85 : 0.85,
-    velX: 0,
-    velY: 0,
-  });
+export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
+  radius=290,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,
+})=>{
+  const canvasRef=useRef<HTMLCanvasElement|null>(null);
+  const palette=useMemo(()=>{
+    let active:string,fallback:RGB,shadow:string,bodyStart:string,bodyEnd:string;
+    if(skinStyle==="obsidian-ice"){active=accentColor||"#38BDF8";fallback={r:56,g:189,b:248};shadow="#64748B";bodyStart="rgba(5, 9, 20, ";bodyEnd="rgba(12, 35, 60, ";}
+    else if(skinStyle==="canonical-white"){active=accentColor||"#FFFFFF";fallback={r:230,g:240,b:255};shadow="#94A3B8";bodyStart="rgba(10, 13, 18, ";bodyEnd="rgba(51, 65, 85, ";}
+    else if(skinStyle==="custom"){active=accentColor||"#38BDF8";fallback={r:56,g:189,b:248};shadow="#475569";bodyStart="rgba(8, 8, 12, ";bodyEnd=`rgba(${fallback.r}, ${fallback.g}, ${fallback.b}, `;}
+    else {active=accentColor||"#FF2FAE";fallback={r:255,g:47,b:174};shadow="#C21882";bodyStart="rgba(10, 2, 8, ";bodyEnd="rgba(74, 6, 54, ";}
+    const raw=hexToRgb(active,fallback),rgb=`${raw.r}, ${raw.g}, ${raw.b}`;
+    return {glowHex:active,glowRgb:rgb,rawRgb:raw,highlightDot:primaryDotColor&&primaryDotColor!=="#FFFFFF"?primaryDotColor:active,midDot:active,shadowDot:shadowDotColor||shadow,plasmaRgb:rgb,bodyGradStart:bodyStart,bodyGradEnd:bodyEnd};
+  },[skinStyle,accentColor,primaryDotColor,shadowDotColor]);
 
-  useEffect(() => { strengthRef.current = interactionStrength; }, [interactionStrength]);
-  useEffect(() => { rotationScaleRef.current = rotationScale; }, [rotationScale]);
-  useEffect(() => { glowRef.current = glowIntensity; }, [glowIntensity]);
-  useEffect(() => { pausedRef.current = paused; }, [paused]);
+  const mouseRef=useRef({x:-9999,y:-9999,prevX:-9999,prevY:-9999,isHovered:false,isDragging:false});
+  const rotationRef=useRef({rotX:.08,rotY:skinStyle==="canonical-magenta"?-.85:.85,velX:0,velY:autoRotateSpeed});
+  const dotsRef=useRef<StippleDot[]>([]),plasmaRef=useRef<Plasma[]>([]);
 
-  const rgb = useMemo(() => tone === "magenta" ? { r: 255, g: 47, b: 174 } : { r: 226, g: 232, b: 240 }, [tone]);
+  useEffect(()=>{
+    const dots:StippleDot[]=[],gold=Math.PI*(3-Math.sqrt(5));
+    for(let i=0;i<stippleDensity;i++){const y=1-(i/(stippleDensity-1))*2,ry=Math.sqrt(Math.max(0,1-y*y)),theta=gold*i,x=Math.cos(theta)*ry,z=Math.sin(theta)*ry;dots.push({bx:x,by:y,bz:z,x:x*radius,y:y*radius,z:z*radius,vx:0,vy:0,vz:0,baseSize:.65+Math.random()*.45,phase:Math.random()*Math.PI*2});}
+    dotsRef.current=dots;
+    const plasma:Plasma[]=[];for(let i=0;i<380;i++)plasma.push({angle:Math.random()*Math.PI*2,distFactor:1+Math.random()*.1,size:.5+Math.random()*1.1,alpha:.25+Math.random()*.75,speed:(Math.random()-.5)*.003,radialVelocity:.0005+Math.random()*.0016,life:Math.random()*100,maxLife:60+Math.random()*80});plasmaRef.current=plasma;
+  },[radius,stippleDensity]);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const parent = canvas?.parentElement;
-    if (!canvas || !parent) return;
-    const ctx = canvas.getContext("2d", { alpha: true });
-    if (!ctx) return;
-
-    const random = seededRandom(seed);
-    const dots: Dot[] = [];
-    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-    for (let i = 0; i < stippleDensity; i += 1) {
-      const by = 1 - (i / (stippleDensity - 1)) * 2;
-      const ring = Math.sqrt(Math.max(0, 1 - by * by));
-      const theta = goldenAngle * i;
-      const bx = Math.cos(theta) * ring;
-      const bz = Math.sin(theta) * ring;
-      dots.push({
-        bx, by, bz,
-        x: bx * radius,
-        y: by * radius,
-        z: bz * radius,
-        vx: 0, vy: 0, vz: 0,
-        baseSize: 0.65 + random() * 0.45,
-      });
-    }
-
-    const plasma: Plasma[] = Array.from({ length: 380 }, () => ({
-      angle: random() * Math.PI * 2,
-      distFactor: 1.002 + random() * 0.02,
-      size: 0.5 + random() * 1.1,
-      alpha: 0.18 + random() * 0.42,
-      speed: (random() - 0.5) * 0.003,
-      radialVelocity: 0.00035 + random() * 0.0011,
-      life: random() * 100,
-      maxLife: 60 + random() * 80,
-    }));
-
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let width = 1;
-    let height = 1;
-    let dpr = 1;
-    let raf = 0;
-    let time = 0;
-
-    const resize = () => {
-      width = Math.max(1, parent.clientWidth);
-      height = Math.max(1, parent.clientHeight);
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-    resize();
-    const observer = new ResizeObserver(resize);
-    observer.observe(parent);
-
-    const inside = (clientX: number, clientY: number, margin = 50) => {
-      const rect = canvas.getBoundingClientRect();
-      return clientX >= rect.left - margin && clientX <= rect.right + margin && clientY >= rect.top - margin && clientY <= rect.bottom + margin;
-    };
-
-    const onMove = (event: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      if (!rect.width || !rect.height) return;
-      const x = ((event.clientX - rect.left) / rect.width) * width;
-      const y = ((event.clientY - rect.top) / rect.height) * height;
-      const now = performance.now();
-      const pointer = pointerRef.current;
-      const dt = pointer.lastT ? Math.max(8, now - pointer.lastT) : 16;
-      const frameScale = 16 / dt;
-      const dx = pointer.lastT ? x - pointer.prevX : 0;
-      const dy = pointer.lastT ? y - pointer.prevY : 0;
-      pointer.vx = dx * frameScale;
-      pointer.vy = dy * frameScale;
-      pointer.x = x;
-      pointer.y = y;
-      pointer.active = inside(event.clientX, event.clientY);
-
-      if (pointer.dragging && !pausedRef.current && !media.matches) {
-        rotationRef.current.rotY += dx * 0.006;
-        rotationRef.current.rotX -= dy * 0.006;
-        rotationRef.current.velY = dx * 0.0012;
-        rotationRef.current.velX = -dy * 0.0012;
+  useEffect(()=>{
+    const canvas=canvasRef.current;if(!canvas)return;const ctx=canvas.getContext("2d",{alpha:true});if(!ctx)return;
+    let animId=0,width=canvas.width=canvas.parentElement?.clientWidth||600,height=canvas.height=canvas.parentElement?.clientHeight||600,time=0;
+    const resize=()=>{if(!canvas.parentElement)return;width=canvas.width=canvas.parentElement.clientWidth;height=canvas.height=canvas.parentElement.clientHeight;};window.addEventListener("resize",resize);
+    const render=()=>{
+      time+=.025;ctx.clearRect(0,0,width,height);
+      let cx=width/2,cy=height/2;if(cropPosition==="orb-right"){cx=width+radius*.32;cy=height/2;}else if(cropPosition==="orb-left"){cx=-radius*.32;cy=height/2;}else if(cropPosition==="orb-horizon"){cx=width/2;cy=height+radius*.45;}
+      const rot=rotationRef.current,mouse=mouseRef.current;if(!mouse.isDragging){rot.rotY+=autoRotateSpeed+rot.velY;rot.rotX+=rot.velX;rot.velX*=.92;rot.velY*=.92;}
+      const sinX=Math.sin(rot.rotX),cosX=Math.cos(rot.rotX),sinY=Math.sin(rot.rotY),cosY=Math.cos(rot.rotY),glowRgb=palette.glowRgb,glowHex=palette.glowHex;
+      if(bodyOpacity>0){ctx.save();ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);const g=ctx.createRadialGradient(cx,cy,0,cx,cy,radius);g.addColorStop(0,`${palette.bodyGradStart}${bodyOpacity})`);g.addColorStop(.85,`${palette.bodyGradStart}${Math.min(1,bodyOpacity*1.5)})`);g.addColorStop(1,`${palette.bodyGradEnd}${Math.min(1,bodyOpacity*2.2)})`);ctx.fillStyle=g;ctx.fill();ctx.restore();}
+      ctx.save();for(const p of plasmaRef.current){p.life++;if(p.life>p.maxLife){p.life=0;p.distFactor=1.002+Math.random()*.02;}else p.distFactor+=p.radialVelocity*plasmaNoiseIntensity;p.angle+=p.speed;const noise=Math.sin(p.angle*12+time*3)*.015+Math.cos(p.angle*24-time*2)*.01,dist=radius*(p.distFactor+noise*plasmaNoiseIntensity),px=cx+Math.cos(p.angle)*dist,py=cy+Math.sin(p.angle)*dist,fade=Math.sin((p.life/p.maxLife)*Math.PI)*p.alpha;let bias=1;if(cropPosition==="orb-right")bias=Math.max(.12,-Math.cos(p.angle));else if(cropPosition==="orb-left")bias=Math.max(.12,Math.cos(p.angle));ctx.fillStyle=`rgba(${palette.plasmaRgb}, ${fade*bias*.85})`;ctx.beginPath();ctx.arc(px,py,p.size,0,Math.PI*2);ctx.fill();}ctx.restore();
+      let lightX=-.92,lightY=-.15,lightZ=.35;if(cropPosition==="orb-left")lightX=.92;const ll=Math.sqrt(lightX*lightX+lightY*lightY+lightZ*lightZ);lightX/=ll;lightY/=ll;lightZ/=ll;
+      const mouseRelX=mouse.x-cx,mouseRelY=mouse.y-cy,mouseDist=Math.sqrt(mouseRelX*mouseRelX+mouseRelY*mouseRelY),interactionRadius=radius*1.35;const visible:Array<{sx:number;sy:number;z:number;size:number;color:string;alpha:number}>=[];
+      for(const p of dotsRef.current){const x1=p.bx*cosY+p.bz*sinY,z1=-p.bx*sinY+p.bz*cosY,y1=p.by*cosX-z1*sinX,nz=p.by*sinX+z1*cosX,nx=x1,ny=y1;if(nz<-.05)continue;const nDotL=nx*lightX+ny*lightY+nz*lightZ,effective=Math.max(0,nDotL)+ambientLuminance*.45;if(effective<.1)continue;const tx=nx*radius,ty=ny*radius,tz=nz*radius;
+        if(interactive&&mouse.isHovered&&mouseDist<interactionRadius){const dx=p.x-mouseRelX,dy=p.y-mouseRelY,d=Math.sqrt(dx*dx+dy*dy)||1,influence=Math.max(0,1-d/(radius*.9))*interactionStrength;if(interactionMode==="repel"){const f=influence*18;p.vx+=(dx/d)*f;p.vy+=(dy/d)*f;}else if(interactionMode==="attract"){const f=influence*14;p.vx-=(dx/d)*f;p.vy-=(dy/d)*f;}else{const a=Math.atan2(dy,dx),f=influence*18;p.vx+=Math.cos(a+Math.PI/2)*f;p.vy+=Math.sin(a+Math.PI/2)*f;}}
+        const k=.09,damp=.82;p.vx=(p.vx+(tx-p.x)*k)*damp;p.vy=(p.vy+(ty-p.y)*k)*damp;p.vz=(p.vz+(tz-p.z)*k)*damp;p.x+=p.vx;p.y+=p.vy;p.z+=p.vz;const fov=850,scale=fov/(fov+p.z),sx=cx+p.x*scale,sy=cy+p.y*scale,rad=Math.sqrt(p.x*p.x+p.y*p.y)/radius,illum=Math.pow(Math.min(1,effective),1.6),limb=Math.pow(Math.min(1,rad),2.2),brightness=Math.min(1,illum*.45+limb*.55+ambientLuminance*.25);if(brightness<.08)continue;let color:string,alpha:number,size=p.baseSize*scale*(.75+brightness*.5);
+        if(dotHarmonization==="unified"){color=palette.glowHex;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.25));}else if(dotHarmonization==="subtle-specular"){const sf=Math.pow(Math.max(0,(rad-.78)/.22),2)*Math.max(0,nDotL),blend=lerpRgb(palette.rawRgb,{r:255,g:255,b:255},sf*.65);color=`rgb(${blend.r}, ${blend.g}, ${blend.b})`;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.2));}else if(rad>.88&&nDotL>.4){color=palette.highlightDot;alpha=.95;size*=1.15;}else if(rad>.55||nDotL>.1){color=palette.midDot;alpha=.45+brightness*.45;}else{color=palette.shadowDot;alpha=.25+brightness*.35;}visible.push({sx,sy,z:p.z,size,color,alpha:Math.min(1,alpha*brightness)});
       }
+      visible.sort((a,b)=>a.z-b.z);for(const d of visible){ctx.globalAlpha=d.alpha;ctx.fillStyle=d.color;ctx.beginPath();ctx.arc(d.sx,d.sy,d.size,0,Math.PI*2);ctx.fill();}
+      if(glowingStrokeIntensity>0&&strokeMode!=="none")drawAtmosphericLimb(ctx,cx,cy,radius,Math.atan2(lightY,lightX),strokeMode,glowingStrokeIntensity,glowSpread,coreHotness,strokeWidth,innerWashIntensity,strokeShadowOpacity,glowHex,glowRgb,palette.rawRgb);
+      ctx.globalAlpha=1;animId=requestAnimationFrame(render);
+    };render();return()=>{window.removeEventListener("resize",resize);cancelAnimationFrame(animId);};
+  },[radius,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity]);
 
-      pointer.prevX = x;
-      pointer.prevY = y;
-      pointer.lastT = now;
-    };
-
-    const onDown = (event: PointerEvent) => {
-      if (!inside(event.clientX, event.clientY, 0)) return;
-      pointerRef.current.dragging = true;
-    };
-    const onUp = () => { pointerRef.current.dragging = false; };
-    const onBlur = () => {
-      pointerRef.current.active = false;
-      pointerRef.current.dragging = false;
-      pointerRef.current.vx = 0;
-      pointerRef.current.vy = 0;
-    };
-
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("pointerdown", onDown, { passive: true });
-    window.addEventListener("pointerup", onUp, { passive: true });
-    window.addEventListener("blur", onBlur);
-
-    const render = () => {
-      time += 0.025;
-      ctx.clearRect(0, 0, width, height);
-
-      const cx = width / 2;
-      const cy = height / 2;
-      const rot = rotationRef.current;
-      const pointer = pointerRef.current;
-      const frozen = pausedRef.current || media.matches;
-
-      if (!frozen && !pointer.dragging) {
-        rot.rotY += autoRotateSpeed * rotationScaleRef.current + rot.velY;
-        rot.rotX += rot.velX;
-        rot.velX *= 0.92;
-        rot.velY *= 0.92;
-      }
-
-      const sinX = Math.sin(rot.rotX);
-      const cosX = Math.cos(rot.rotX);
-      const sinY = Math.sin(rot.rotY);
-      const cosY = Math.cos(rot.rotY);
-
-      for (const p of plasma) {
-        if (!frozen) {
-          p.life += 1;
-          if (p.life > p.maxLife) {
-            p.life = 0;
-            p.distFactor = 1.002 + random() * 0.02;
-          } else {
-            p.distFactor += p.radialVelocity * plasmaNoiseIntensity;
-          }
-          p.angle += p.speed;
-        }
-        const noise = Math.sin(p.angle * 12 + time * 3) * 0.01 + Math.cos(p.angle * 24 - time * 2) * 0.006;
-        const dist = radius * (p.distFactor + noise * plasmaNoiseIntensity);
-        const px = cx + Math.cos(p.angle) * dist;
-        const py = cy + Math.sin(p.angle) * dist;
-        const fade = Math.sin((p.life / p.maxLife) * Math.PI) * p.alpha;
-        const bias = tone === "white" ? Math.max(0.08, Math.cos(p.angle)) : Math.max(0.08, -Math.cos(p.angle));
-        ctx.globalAlpha = fade * bias * 0.42;
-        ctx.fillStyle = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-        ctx.beginPath();
-        ctx.arc(px, py, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      let lightX = tone === "white" ? 0.92 : -0.92;
-      let lightY = -0.15;
-      let lightZ = 0.35;
-      const lightLength = Math.hypot(lightX, lightY, lightZ);
-      lightX /= lightLength;
-      lightY /= lightLength;
-      lightZ /= lightLength;
-
-      const mouseRelX = pointer.x - cx;
-      const mouseRelY = pointer.y - cy;
-      const pointerVelocity = Math.min(42, Math.hypot(pointer.vx, pointer.vy));
-      const interactionRadius = radius * 1.35;
-      const visible: Array<{ x: number; y: number; z: number; size: number; alpha: number; color: string }> = [];
-
-      for (const dot of dots) {
-        const x1 = dot.bx * cosY + dot.bz * sinY;
-        const z1 = -dot.bx * sinY + dot.bz * cosY;
-        const ny = dot.by * cosX - z1 * sinX;
-        const nz = dot.by * sinX + z1 * cosX;
-        const nx = x1;
-        if (nz < -0.05) continue;
-
-        const nDotL = nx * lightX + ny * lightY + nz * lightZ;
-        const effectiveLight = Math.max(0, nDotL) + ambientLuminance * 0.45;
-        if (effectiveLight < 0.1) continue;
-
-        const targetX = nx * radius;
-        const targetY = ny * radius;
-        const targetZ = nz * radius;
-
-        if (!frozen && pointer.active) {
-          const dx = dot.x - mouseRelX;
-          const dy = dot.y - mouseRelY;
-          const distance = Math.hypot(dx, dy) || 1;
-          const influence = Math.max(0, 1 - distance / (radius * 0.9)) * strengthRef.current;
-          if (influence > 0) {
-            const velocityBoost = 1 + Math.min(2.2, pointerVelocity / 10);
-            const sign = interactionMode === "attract" ? -1 : 1;
-            if (interactionMode === "swirl") {
-              const angle = Math.atan2(dy, dx) + Math.PI / 2;
-              const force = influence * 12 * velocityBoost;
-              dot.vx += Math.cos(angle) * force;
-              dot.vy += Math.sin(angle) * force;
-            } else {
-              const force = influence * 11 * velocityBoost * sign;
-              dot.vx += (dx / distance) * force;
-              dot.vy += (dy / distance) * force;
-            }
-            dot.vx += pointer.vx * influence * 0.03;
-            dot.vy += pointer.vy * influence * 0.03;
-          }
-        }
-
-        const k = 0.09;
-        const damp = 0.82;
-        dot.vx = (dot.vx + (targetX - dot.x) * k) * damp;
-        dot.vy = (dot.vy + (targetY - dot.y) * k) * damp;
-        dot.vz = (dot.vz + (targetZ - dot.z) * k) * damp;
-        dot.x += dot.vx;
-        dot.y += dot.vy;
-        dot.z += dot.vz;
-
-        const fov = 850;
-        const scale = fov / (fov + dot.z);
-        const sx = cx + dot.x * scale;
-        const sy = cy + dot.y * scale;
-        const radial = Math.sqrt(dot.x * dot.x + dot.y * dot.y) / radius;
-        const illumination = Math.pow(Math.min(1, effectiveLight), 1.6);
-        const limb = Math.pow(Math.min(1, radial), 2.2);
-        const brightness = Math.min(1, illumination * 0.45 + limb * 0.55 + ambientLuminance * 0.25);
-        if (brightness < 0.08) continue;
-
-        const specular = tone === "white" ? Math.pow(Math.max(0, (radial - 0.76) / 0.24), 2) * Math.max(0, nDotL) : 0;
-        const color = tone === "white"
-          ? `rgb(${lerp(rgb.r, 255, specular * 0.55)}, ${lerp(rgb.g, 255, specular * 0.55)}, ${lerp(rgb.b, 255, specular * 0.55)})`
-          : `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-        const alpha = Math.min(1, (0.32 + 0.66 * illumination) * Math.pow(brightness, 1.25) * brightness);
-        const size = dot.baseSize * scale * (0.76 + brightness * 0.46);
-        visible.push({ x: sx, y: sy, z: dot.z, size, alpha, color });
-      }
-
-      visible.sort((a, b) => a.z - b.z);
-      for (const dot of visible) {
-        ctx.globalAlpha = dot.alpha;
-        ctx.fillStyle = dot.color;
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, dot.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      ctx.globalAlpha = 1;
-      drawLimb(ctx, cx, cy, radius, tone, glowRef.current, glowSpread, coreHotness, innerWashIntensity, strokeWidth);
-      raf = requestAnimationFrame(render);
-    };
-
-    raf = requestAnimationFrame(render);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      observer.disconnect();
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerdown", onDown);
-      window.removeEventListener("pointerup", onUp);
-      window.removeEventListener("blur", onBlur);
-    };
-  }, [ambientLuminance, autoRotateSpeed, coreHotness, glowSpread, innerWashIntensity, interactionMode, plasmaNoiseIntensity, radius, rgb, seed, stippleDensity, strokeWidth, tone]);
-
-  return <canvas ref={canvasRef} aria-hidden="true" style={{ display: "block", width: "100%", height: "100%", pointerEvents: "none", userSelect: "none" }} />;
-}
+  const handleMouseMove=(e:React.MouseEvent<HTMLCanvasElement>)=>{const rect=canvasRef.current?.getBoundingClientRect();if(!rect)return;const x=e.clientX-rect.left,y=e.clientY-rect.top,m=mouseRef.current;if(m.isDragging){const dx=x-m.prevX,dy=y-m.prevY;rotationRef.current.rotY+=dx*.006;rotationRef.current.rotX-=dy*.006;rotationRef.current.velY=dx*.0012;rotationRef.current.velX=-dy*.0012;}m.prevX=m.x;m.prevY=m.y;m.x=x;m.y=y;m.isHovered=true;};
+  return <div className={`relative w-full h-full overflow-hidden select-none ${className}`}><canvas ref={canvasRef} onMouseMove={handleMouseMove} onMouseDown={e=>{const r=canvasRef.current?.getBoundingClientRect();if(!r)return;mouseRef.current.isDragging=true;mouseRef.current.prevX=e.clientX-r.left;mouseRef.current.prevY=e.clientY-r.top;}} onMouseUp={()=>mouseRef.current.isDragging=false} onMouseLeave={()=>{mouseRef.current.isHovered=false;mouseRef.current.isDragging=false;mouseRef.current.x=-9999;mouseRef.current.y=-9999;}} className="w-full h-full block cursor-grab active:cursor-grabbing touch-none"/></div>;
+};
