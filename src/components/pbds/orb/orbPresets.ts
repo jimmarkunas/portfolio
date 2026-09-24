@@ -36,7 +36,11 @@ export const orbPresets = {
     plasmaNoiseIntensity: 1,
     stippleDensity: 8500,
     ambientLuminance: 0.38,
-    glowingStrokeIntensity: 0.2,
+    glowingStrokeIntensity: 0.14,
+    // Tight metallic rim: narrow bloom, cooler core, minimal inner wash (renderer defaults 28 / 0.85 / 0.35).
+    glowSpread: 12,
+    coreHotness: 0.55,
+    innerWashIntensity: 0.08,
     strokeMode: "crescent",
     strokeShadowOpacity: 0,
     strokeWidth: 0.7,
