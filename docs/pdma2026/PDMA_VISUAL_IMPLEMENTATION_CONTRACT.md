@@ -2,7 +2,8 @@
 
 **Status:** Canonical visual implementation contract  
 **Applies to:** `/pdma2026` concept design, React implementation, visual repair, and redesign work  
-**Approved:** 2026-09-23
+**Reconciled:** 2026-09-24  
+**Accepted production baseline:** `116c8f7d40c845e27601e578effba992a28ef050`
 
 ## 1. Purpose
 
@@ -32,59 +33,47 @@ Resolve conflicts in this order:
 
 ## 3. Canonical slide-state and design-gate registry
 
-| Slide | Baseline reference | State | Implementation design status | Approved implementation reference |
+The current production deck contains **16 accepted slides**. Every slide is `APPROVED` and `LOCKED` at baseline `116c8f7d40c845e27601e578effba992a28ef050`.
+
+| Slide | Accepted implementation reference | State | Implementation design status | Approved implementation reference type |
 | --- | --- | --- | --- | --- |
 | 01 | Figma `475:259` | `LOCKED` — north star | `APPROVED` | `APPROVED_FIGMA_FRAME` |
 | 02 | Figma `475:274` | `LOCKED` — north star | `APPROVED` | `APPROVED_FIGMA_FRAME` |
 | 03 | Figma `475:366` | `LOCKED` — north star | `APPROVED` | `APPROVED_FIGMA_FRAME` |
 | 04 | Figma `475:369` | `LOCKED` | `APPROVED` | `APPROVED_FIGMA_FRAME` |
-| 05 | baseline `475:372` | `STYLE_REWORK` | `APPROVED` | `APPROVED_ASSET_PACKAGE` — see §4 |
-| 06 | baseline `475:397` | `STYLE_REWORK` | `DESIGN_REQUIRED` | none |
+| 05 | `slide-05-hero-centered-signal-field/slide-05-hero-approved-reference.png` | `LOCKED` | `APPROVED` | `APPROVED_SCREENSHOT_REFERENCE` |
+| 06 | Template Canon v4 `hub-ecosystem/hub-ecosystem-reference-v1.png` | `LOCKED` | `APPROVED` | `APPROVED_SCREENSHOT_REFERENCE` |
 | 07 | Figma `475:400` | `LOCKED` | `APPROVED` | `APPROVED_FIGMA_FRAME` |
 | 08 | Figma `475:403` | `LOCKED` | `APPROVED` | `APPROVED_FIGMA_FRAME` |
-| 09 | baseline `475:406` | `STYLE_REWORK` | `DESIGN_REQUIRED` | none |
-| 10 | baseline `475:409` | `REBUILD_STYLE` | `DESIGN_REQUIRED` | none |
-| 11 | Figma `475:412` | `IMPLEMENTATION_REPAIR` | `APPROVED` | `APPROVED_FIGMA_FRAME` |
-| 12 | baseline `475:415` | `STYLE_REWORK` | `DESIGN_REQUIRED` | none |
-| 13 | baseline `475:418` | `STYLE_REWORK` | `DESIGN_REQUIRED` | none |
+| 09 | Template Canon v4 `flow-scenario/flow-scenario-reference-v1.png` | `LOCKED` | `APPROVED` | `APPROVED_SCREENSHOT_REFERENCE` |
+| 10 | Template Canon v4 `structured-content-action/structured-content-action-reference-v1.png` | `LOCKED` | `APPROVED` | `APPROVED_SCREENSHOT_REFERENCE` |
+| 11 | `slide-11-brand-reveal-particle-horizon/slide-11-brand-reveal-approved-reference.png` | `LOCKED` | `APPROVED` | `APPROVED_SCREENSHOT_REFERENCE` |
+| 12 | `slide-12-approved-reference.png` | `LOCKED` | `APPROVED` | `APPROVED_SCREENSHOT_REFERENCE` |
+| 13 | `slide-13-approved-reference.png` | `LOCKED` | `APPROVED` | `APPROVED_SCREENSHOT_REFERENCE` |
 | 14 | Figma `475:421` | `LOCKED` | `APPROVED` | `APPROVED_FIGMA_FRAME` |
-| 15 | baseline `475:424` | `REBUILD_STYLE` | `DESIGN_REQUIRED` | none |
+| 15 | Template Canon v4 `embedded-app/embedded-app-reference-v1.png` | `LOCKED` | `APPROVED` | `APPROVED_SCREENSHOT_REFERENCE` |
+| 16 | Template Canon v4 `end-card/end-card-reference-v1.png` | `LOCKED` | `APPROVED` | `APPROVED_SCREENSHOT_REFERENCE` |
 
-This table is the canonical PDMA slide-state/design-gate registry. Do not create a second registry.
+This table is the **single canonical PDMA slide-state/design-gate registry**. Do not create a second registry.
 
-`DESIGN_REQUIRED` means React visual mutation is blocked until Jim approves an implementation reference of any valid type above.
+Template Canon v4 references are defined by `docs/pdma2026/template-system/APPROVED_TEMPLATE_REFERENCES.md`. Slides 05/11/12/13 are scored against their approved full-slide references by `scripts/pdma-deck-visual-qa.mjs`.
 
-`APPROVED` means React may implement against the explicitly approved reference type. Do not substitute another reference type or older concept because it is easier.
+`DESIGN_REQUIRED` remains a valid future state only when Jim explicitly opens a new visual direction without yet approving an implementation reference.
 
-## 4. Slide 05 — approved asset package; NO FIGMA REQUIRED
+`APPROVED` means an implementation reference exists. `LOCKED` means the accepted production slide is not writable unless Jim explicitly reopens the target slide or a bounded surface within it.
 
-Jim explicitly approved Slide 05 implementation from this asset/composition package. Figma is **not required** for Slide 05 implementation and agents must not block on a Figma node.
+## 4. Accepted remediation references
 
-Approved assets:
+The prior Slide 05 tangled-core asset package is **retired** and is not an approved implementation reference.
 
-- `public/pdma2026/slide-05/slide-05-ambiguity-core.png` — main right-side hero graphic;
-- `public/pdma2026/slide-05/slide-05-input-streams.png` — three incoming signal lines;
-- `public/pdma2026/slide-05/slide-05-ambiguity-composite-reference.png` — composition reference only; do not render it in the final slide.
+Current accepted remediation references are:
 
-Approved semantic composition:
+- Slide 05 — HERO / Centered Signal Field: `slide-05-hero-centered-signal-field/slide-05-hero-approved-reference.png`.
+- Slide 11 — Brand / Reveal / Particle Horizon: `slide-11-brand-reveal-particle-horizon/slide-11-brand-reveal-approved-reference.png`.
+- Slide 12 — Translation / Traceability: `slide-12-approved-reference.png`.
+- Slide 13 — Before / Bridge / After: `slide-13-approved-reference.png`.
 
-- `UNCLEAR PROBLEM.`
-- `UNCLEAR OWNER.`
-- `UNCLEAR AUTHORITY.`
-
-feed into the tangled ambiguity core, producing:
-
-- `CONFUSION AT MACHINE SPEED.`
-
-Implementation requirements:
-
-- native React/CSS for all text, shell, header, footer, and layout structure;
-- approved PNGs only for visual graphics;
-- the composite-reference image owns the relative stream/core geometry;
-- no new effects, cards, panels, alternate metaphors, or redesign;
-- shared shell/chrome remain unchanged.
-
-For Slide 05, any instruction saying an approved Figma node is required is superseded by this section.
+Semantic text remains native/editable. Decorative artwork remains independently controllable. The approved full-slide images are composition/QA references, not flattened production slides.
 
 ## 5. Visual north star
 
@@ -116,7 +105,7 @@ A separate concept-design agent may work ahead in parallel.
 
 Its job is to produce **concept images, approved assets, composition references, and implementation-critical notes**. It does not need Figma unless Jim explicitly asks for Figma.
 
-For `DESIGN_REQUIRED` slides:
+For a future `DESIGN_REQUIRED` target:
 
 `concept/reference package → Jim approval → record approved implementation reference → React implementation → browser QA → LOCK`
 
@@ -124,15 +113,16 @@ Only one slide may be under active React/Codex visual mutation at a time. Concep
 
 ## 8. React mutation boundary
 
+All 16 current production slides are locked. A visual mutation requires Jim to explicitly reopen the target slide or a bounded target surface.
+
 For a one-slide task, modify only files explicitly allowed by the implementation prompt.
 
 Normal slide-local surface may include:
 
 1. target slide component;
 2. target-owned slide style source;
-3. target-owned geometry entry;
-4. target-dedicated assets;
-5. shared primitive only with Jim's explicit authorization.
+3. target-owned decorative geometry/assets;
+4. shared primitive only with Jim's explicit authorization.
 
 Forbidden without explicit authorization:
 
@@ -146,13 +136,15 @@ Forbidden without explicit authorization:
 
 No `while I'm here` changes.
 
+If Jim explicitly reopens only a decorative surface, semantic composition, copy, shared chrome, and the existing logical-canvas `x/y/w/h` anchors remain frozen unless the same instruction explicitly changes them.
+
 ## 9. Three-prompt implementation budget — HARD
 
-Each slide has a maximum of **3 Codex implementation prompts** from first React mutation through visual PASS. Target is 1–2 prompts.
+Each reopened slide has a maximum of **3 Codex implementation prompts** from first React mutation through visual PASS. Target is 1–2 prompts.
 
 ### Prompt 1 — complete implementation
 
-Implement the complete approved composition in one bounded pass. Inspection must happen inside the same prompt; do not waste a prompt on planning/capability reporting.
+Implement the complete approved delta in one bounded pass. Inspection must happen inside the same prompt; do not waste a prompt on planning/capability reporting.
 
 ### Prompt 2 — evidence-based correction
 
@@ -188,9 +180,9 @@ Do not continue speculative mutation.
 
 ## 11. Locked-slide regression rule
 
-Locked Slides 01, 02, 03, 04, 07, 08, and 14 are immutable unless Jim explicitly reopens them.
+Slides **01–16 are locked** at the accepted production baseline unless Jim explicitly reopens a target.
 
-Any authorized shared change must prove locked slides remain visually unchanged.
+Any authorized shared change must prove all non-target locked slides remain visually unchanged. If only a bounded surface is reopened, all other surfaces on that slide remain frozen too.
 
 ## 12. Stop rules
 
@@ -198,11 +190,11 @@ If target status is `DESIGN_REQUIRED`:
 
 `PDMA_DESIGN_REQUIRED — slide NN requires an approved implementation reference before React implementation`
 
-If the target is `LOCKED`:
+If the target is `LOCKED` and Jim has not explicitly reopened the requested target/surface:
 
 `PDMA_SCOPE_STOP — slide NN is LOCKED`
 
-If a task requires an unapproved visual decision, shared-system change, locked-slide change, or materially different composition:
+If a task requires an unapproved visual decision, shared-system change, locked-slide change outside the explicit reopen, or materially different composition:
 
 `PDMA_VISUAL_DECISION_STOP — <exact unresolved design decision>`
 
@@ -212,14 +204,14 @@ If Prompt 3 finishes without visual PASS:
 
 ## 13. No second system
 
-Continue using current GitHub implementation, `pdma.config.ts`, current manifest, `pdmaGeometry.ts`, current PDMA styling ownership, `immutable-surfaces.json`, and existing targeted checks/QA.
+Continue using the current GitHub implementation, `presentation/pdma2026Content.ts`, `presentation/pdma2026Manifest.tsx`, the existing `/pdma2026-templates` component system, current PDMA styling ownership, `DecorativeLayer`, and existing targeted checks/QA.
 
 Do not create another manifest, geometry registry, asset registry, styling pipeline, scheduler, or slide-state database.
 
-## 14. Current active recovery target
+## 14. Current production state
 
-Jim's current active React recovery target is **Slide 05**.
+There is **no active recovery target**.
 
-Slide 05 is `STYLE_REWORK` + `APPROVED` with an `APPROVED_ASSET_PACKAGE` reference as defined in §4.
+The entire 16-slide production deck is accepted and locked at `116c8f7d40c845e27601e578effba992a28ef050`.
 
-Do not require or read Figma for Slide 05 unless Jim explicitly changes that instruction.
+Future visual work begins only from Jim's explicit instruction reopening a named slide or bounded visual surface. That instruction must define the allowed mutation surface; everything else stays frozen.
