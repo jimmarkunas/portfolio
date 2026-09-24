@@ -1,58 +1,48 @@
 {
-  "version": 1,
-  "approved_date": "2026-09-23",
+  "version": 3,
+  "approved_date": "2026-09-24",
   "route": "/pdma2026-templates",
   "existing_pdma_untouched": true,
-  "library_root": "/LifeOS/PDMA 2026/Template Canon/v1/",
-  "archive": "/LifeOS/PDMA 2026/Template Canon/v1/pdma2026-template-canon-v1.zip",
+  "library_root": "/LifeOS/PDMA 2026/Template Canon/v3/",
+  "archive": "/LifeOS/PDMA 2026/Template Canon/v3/pdma2026-template-canon-v3.zip",
   "templates": {
     "end-card": {
       "status": "APPROVED",
-      "reference": {
-        "path": "end-card/end-card-reference-v1.png",
-        "width": 1672,
-        "height": 941,
-        "mode": "RGB",
-        "sha256": "2bbed561cc050fae11b033284982a1f4aaca1b2151b82eeea2920ceccab452cb"
-      },
-      "assets": [
-        {
-          "path": "end-card/end-card-electric-orb-right-v1.png",
-          "role": "approved decorative electric-orb composition",
-          "width": 1672,
-          "height": 941,
-          "mode": "RGBA",
-          "sha256": "b48416ac607b5e3b0682815db560ad380949cbaf94fb9befbdd454ea4b9c9761"
-        }
-      ]
+      "reference": "end-card/end-card-reference-v1.png",
+      "assets": ["end-card/end-card-electric-orb-right-v1.png"],
+      "implementation_notes": ["Reference owns composition and visual relationships.", "QR and round CTA are native React and share one URL.", "All copy is native React text."]
     },
     "flow-scenario": {
       "status": "APPROVED",
-      "reference": {
-        "path": "flow-scenario/flow-scenario-reference-v1.png",
-        "width": 1672,
-        "height": 941,
-        "mode": "RGB",
-        "sha256": "223ade4becd2dd2926899c2601e03ca5ef37e41467ab4b7cde7c16d72d4ed7ab"
-      },
-      "assets": [
-        {
-          "path": "flow-scenario/slide-09-left-orb-white-v1.png",
-          "role": "left outer decorative white metallic-dot orb",
-          "width": 1254,
-          "height": 1254,
-          "mode": "RGBA",
-          "sha256": "5c874a9eb47dc100ad1c3a6de660666450694a36d0bccc862df5f554f634b01f"
-        },
-        {
-          "path": "flow-scenario/slide-09-right-orb-magenta-v1.png",
-          "role": "right outer decorative magenta metallic-dot orb",
-          "width": 1254,
-          "height": 1254,
-          "mode": "RGBA",
-          "sha256": "217fd72f9157613ed40d39ddb1450c82c415583b890bd7fcba87b1207e9bb903"
-        }
-      ]
+      "reference": "flow-scenario/flow-scenario-reference-v1.png",
+      "assets": ["flow-scenario/slide-09-left-orb-white-v1.png", "flow-scenario/slide-09-right-orb-magenta-v1.png"],
+      "implementation_notes": ["Outer orbs are decorative only.", "Synopsis is an outlined HTML box.", "Enterprise signals are native rows with glyphs inside circles.", "IDENTIFY and RECOMMEND are native circular glyph nodes."]
+    },
+    "hub-ecosystem": {
+      "status": "APPROVED",
+      "reference": "hub-ecosystem/hub-ecosystem-reference-v1.png",
+      "assets": ["hub-ecosystem/slide-06-left-orb-white-v1.png", "hub-ecosystem/slide-06-right-orb-magenta-v1.png"],
+      "implementation_notes": ["Functional structure is Inventory the Environment -> AI / Automation Layer -> Name Human Owners.", "Center AI / Automation layer is a native HTML/CSS rounded box, not an image.", "Connectors are straight and owned by the component.", "Outer orbs are decorative edge crops only."]
+    },
+    "structured-content-action": {
+      "status": "APPROVED",
+      "reference": "structured-content-action/structured-content-action-reference-v1.png",
+      "assets": ["structured-content-action/slide-10-left-orb-magenta-v1.png", "structured-content-action/slide-10-right-orb-magenta-orbit-v1.png"],
+      "implementation_notes": ["Functional structure is 3 product-definition requirements -> 4-step operationalization rail -> takeaway.", "Three primary requirement cards: Guardrails, Human Intervention, Success Measures.", "Human Intervention is the emphasized magenta card.", "Action rail: Backlog -> PRD -> Acceptance Criteria -> Production.", "All cards, rail, icons, and text are native React/CSS; planet assets are decorative edge crops only."]
     }
+  },
+  "build_rules": ["Old /pdma2026 deck remains untouched.", "Reuse exact current header/footer/navigation/title behavior.", "No copy removal, hiding, truncation, or substitution.", "Normal Grid/Flex flow for content.", "No pdmaGeometry.ts dependency.", "No absolute-positioned content; only bounded decoration/connectors may overlay.", "Fixed 16:9 canvas scales uniformly; no stacking; no scrolling.", "Approved references are visual authority; approved assets must not be regenerated during implementation."],
+  "files": {
+    "end-card/end-card-electric-orb-right-v1.png": {"width": 1672, "height": 941, "mode": "RGBA", "sha256": "b48416ac607b5e3b0682815db560ad380949cbaf94fb9befbdd454ea4b9c9761"},
+    "end-card/end-card-reference-v1.png": {"width": 1672, "height": 941, "mode": "RGB", "sha256": "2bbed561cc050fae11b033284982a1f4aaca1b2151b82eeea2920ceccab452cb"},
+    "flow-scenario/flow-scenario-reference-v1.png": {"width": 1672, "height": 941, "mode": "RGB", "sha256": "223ade4becd2dd2926899c2601e03ca5ef37e41467ab4b7cde7c16d72d4ed7ab"},
+    "flow-scenario/slide-09-left-orb-white-v1.png": {"width": 1254, "height": 1254, "mode": "RGBA", "sha256": "5c874a9eb47dc100ad1c3a6de660666450694a36d0bccc862df5f554f634b01f"},
+    "flow-scenario/slide-09-right-orb-magenta-v1.png": {"width": 1254, "height": 1254, "mode": "RGBA", "sha256": "217fd72f9157613ed40d39ddb1450c82c415583b890bd7fcba87b1207e9bb903"},
+    "hub-ecosystem/hub-ecosystem-reference-v1.png": {"width": 1672, "height": 941, "mode": "RGB", "sha256": "b787e4bb4b452b6a65751365d35bdcd94cd1d606f60f68fac458290158526f2a"},
+    "hub-ecosystem/slide-06-left-orb-white-v1.png": {"width": 1254, "height": 1254, "mode": "RGBA", "sha256": "a0dff3586680a3ce2989835ce4ace4722adf560bc4fa7e1e184c49d916733a08"},
+    "hub-ecosystem/slide-06-right-orb-magenta-v1.png": {"width": 1254, "height": 1254, "mode": "RGBA", "sha256": "d256d9c1bd7dc7665ff219c369fe6e067c48d0ef94ae40068ca94ed84bd81408"},
+    "structured-content-action/slide-10-left-orb-magenta-v1.png": {"width": 1254, "height": 1254, "mode": "RGBA", "sha256": "e1057439a2ff5396b4988179fbdb09bda447ae3518c932b506538bfe1b7b02f9"},
+    "structured-content-action/slide-10-right-orb-magenta-orbit-v1.png": {"width": 1254, "height": 1254, "mode": "RGBA", "sha256": "dbbe5407562e207f550c3c268a109df8ef03a3d115bca73053dbdf090394d1ea"},
+    "structured-content-action/structured-content-action-reference-v1.png": {"width": 1672, "height": 941, "mode": "RGB", "sha256": "e03b137756f9ace8518283224084ca6e5e2cc30f408084583e2adc28a7749af0"}
   }
 }
