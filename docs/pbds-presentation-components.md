@@ -8,14 +8,23 @@ Canonical PBDS visual authority:
 
 `JM Personal Brand` — `euxFg8XeKtFJRw7PWOJRWa`
 
-The PDMA/V2 Figma (`JM-Personal-Brand-V2`, `3ZYk...`) may be referenced only
-as the working/approved source for presentation precedents not yet promoted
-into the canonical PBDS library. Do not treat it as the global canonical PBDS
-Figma and do not mutate Figma.
+Current approved presentation working source:
 
-Canonical Figma page:
+`JM-Personal-Brand-V2` — `3ZYkEtZVyRH9B2DfVpersf`
+
+Working presentation page:
 
 `PBDS — Presentation Components` (`414:2`)
+
+The PDMA/V2 working Figma owns presentation precedents and node references that
+have not yet been promoted into the canonical PBDS Figma library. Do not treat
+those page/node IDs as belonging to the global canonical PBDS file, and do not
+mutate Figma.
+
+Accordingly, the node references in this presentation contract—including
+`5:38`, `423:5`, `423:34`, `416:2`, and `416:212`—are references into the
+PDMA/V2 working presentation source unless separately promoted and re-registered
+in the canonical PBDS Figma.
 
 ---
 
@@ -121,7 +130,7 @@ For Figma authoring, use the canonical chrome components. For the live `/pdma202
 
 ### Header
 
-**Figma component:** `Presentation / Chrome / Header — Canonical`
+**Figma component:** `Presentation / Chrome / Header — Canonical` (PDMA/V2 working Figma)
 
 **Node:** `423:5`
 
@@ -177,7 +186,7 @@ Approved colors:
 
 ### Footer
 
-**Figma component:** `Presentation / Chrome / Footer — Canonical`
+**Figma component:** `Presentation / Chrome / Footer — Canonical` (PDMA/V2 working Figma)
 
 **Node:** `423:34`
 
@@ -226,7 +235,7 @@ Do not recreate them manually per slide. In React, render them from one shell an
 
 ## Component 01 — Systems Stack
 
-**Figma component:** `Presentation / Visual / Systems Stack — Ambiguity → Judgment → Action`
+**Figma component:** `Presentation / Visual / Systems Stack — Ambiguity → Judgment → Action` (PDMA/V2 working Figma)
 
 **Node:** `416:2`
 
@@ -262,7 +271,7 @@ Do **not** use this as recurring decoration on every slide.
 
 ## Component 02 — Transformation Sequence
 
-**Figma component:** `Presentation / Visual / Transformation Sequence — Uncertainty → Judgment → Systems → Impact`
+**Figma component:** `Presentation / Visual / Transformation Sequence — Uncertainty → Judgment → Systems → Impact` (PDMA/V2 working Figma)
 
 **Node:** `416:212`
 
