@@ -314,6 +314,21 @@ For PBDS / Portfolio V2 work, the minimum bootstrap is:
 4. `REFERENCE_REGISTRATION_PROTOCOL.md` whenever an approved visual reference already exists;
 5. exact implementation surface only when PBDS-5 or later authorizes code work.
 
+For presentation-design work, also read:
+
+1. `docs/pbds-presentation-components.md`;
+2. `docs/PBDS_PRESENTATION_DESIGN_BRAIN.md`;
+3. relevant approved presentation-reference manifest entries and exact images;
+4. `REFERENCE_REGISTRATION_PROTOCOL.md` when implementing an already-approved visual reference.
+
+Canonical Figma owns visual truth; this contract owns system boundaries; the
+presentation contract owns reusable presentation runtime/component/pattern
+truth; approved references own accepted presentation precedent; and the
+Design Brain owns composition judgment/continuity only. PBDS presentation
+continuity is one mature expression of the global PBDS visual language;
+presentation-specific dark-field, orb, spatial, cinematic, or chrome
+treatments are not mandatory in other PBDS output adapters.
+
 Read Bytalos `packages/design-system` only when comparing implementation patterns or solving a concrete design-system packaging question. It is a reference implementation, not PBDS authority.
 
 ## 15. Immediate next package
