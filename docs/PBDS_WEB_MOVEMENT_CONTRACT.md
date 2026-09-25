@@ -213,10 +213,14 @@ It is functional motion. It must help a viewer understand direction, relationshi
 ### Canonical behavior
 
 - Connector geometry is authoritative. Particles remain on the path; they do not free-float.
+- Canonical BI-reference connector stroke is **1 px Brand Ink `#090909`**.
+- Every Flow Signal dot is centered on its **governing connector path**. Alignment is determined per path, never by a universal global offset.
+- On horizontal connector segments, center the dot vertically on the connector centerline while preserving its horizontal progress.
+- On vertical connector segments, center the dot horizontally on the connector centerline while preserving its vertical progress.
+- Canonical BI-reference Flow Signal dot size is **8 px diameter**.
 - Direction is semantic.
-- Color is semantic and must not become decorative noise.
+- Connector color remains Brand Ink; dot color may carry semantic direction/state and must not become decorative noise.
 - Default density is **3 particles per active path** unless a specific diagram demonstrates that another density improves comprehension.
-- Canonical desktop particle-size territory is approximately **2–4 px radius** at the BI reference scale.
 - Particle speed must be slow enough that the viewer can read topology and direction.
 - Flow is autonomous after activation; it is **not scroll-scrubbed**.
 - Flow begins only after the diagram has resolved and connector relationships are perceptible.
@@ -236,7 +240,7 @@ The current Portfolio V1 BI diagram is the behavioral reference that established
 - the BI diagram uses semantic blue, red, and ink particle/path families;
 - V1 already disables continuous particles when reduced motion is requested.
 
-The implementation itself is not PBDS authority. The behavior above is the promoted reusable contract.
+The V1 implementation is historical evidence, not current geometry authority. The approved canonical PBDS geometry above — **1 px Brand Ink connector, 8 px dot, per-path centering with no global offset** — governs PBDS-5 and later consumers.
 
 ## 9. Page + diagram integration sequence
 
@@ -304,7 +308,7 @@ The board owns the visual representation of:
 - web movement primitives;
 - Scroll Score phases;
 - scroll-distance pacing bands;
-- Flow Signal specimen and rules;
+- Flow Signal specimen and rules, including the approved **1 px Brand Ink connector + 8 px per-path-centered dot** geometry;
 - page + diagram activation sequence;
 - PBDS-5 implementation boundary.
 
