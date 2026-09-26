@@ -1,0 +1,61 @@
+name: Verify Live Deployment
+
+on:
+  workflow_run:
+    workflows:
+      - Build and Publish Static Site
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-live-deployment
+  cancel-in-progress: true
+
+jobs:
+  verify-live-deployment:
+    if: >-
+      ${{ github.event.workflow_run.conclusion == 'success' &&
+          github.event.workflow_run.head_branch == 'main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+
+    steps:
+      - name: Checkout verified source SHA
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 1
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: Verify exact production SHA
+        env:
+          EXPECTED_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          npm run check:live-deployment -- \
+            --base-url https://greatestpmever.com \
+            --sha "${EXPECTED_SHA}" \
+            --retries 48 \
+            --delay-ms 5000 \
+            --request-timeout-ms 15000
+
+      - name: Record production verification
+        env:
+          EXPECTED_SHA: ${{ github.event.workflow_run.head_sha }}
+          SOURCE_RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          {
+            echo "## Production deployment verified"
+            echo
+            echo "- Source SHA: \`${EXPECTED_SHA}\`"
+            echo "- Source build/release: ${SOURCE_RUN_URL}"
+            echo "- Routes: \`/\`, \`/work/\`, \`/agents/\`"
+            echo "- Result: exact public SHA read-back PASS"
+          } >> "${GITHUB_STEP_SUMMARY}"
