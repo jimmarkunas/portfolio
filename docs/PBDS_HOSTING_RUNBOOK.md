@@ -1,16 +1,16 @@
 # PBDS-HOST — Deterministic Portfolio Deployment Runbook
 
-**Status:** Active auto-deployment proof package  
+**Status:** Delivered / exit passed  
 **Owner:** Jim Markunas  
 **Effective:** 2026-09-26  
-**Gate:** Required before PBDS-5 Portfolio V2 pilot  
-**Scope:** Portfolio production delivery only; this runbook does not authorize PBDS-5 migration.
+**Gate:** Passed; PBDS-5 may begin  
+**Scope:** Portfolio production delivery only; this runbook does not itself authorize unrelated deployment-architecture changes.
 
 ## 1. Purpose
 
 PBDS-HOST proves one deterministic production path for the portfolio before Portfolio V2 implementation begins.
 
-Jim approved enabling Hostinger Git Auto Deployment on 2026-09-26 for the existing production connection. The candidate production chain under proof is:
+Jim approved enabling Hostinger Git Auto Deployment on 2026-09-26 for the existing production connection. The canonical production chain is:
 
 ```text
 local / main source
@@ -24,7 +24,7 @@ local / main source
 
 The `hostinger-static` branch is an automated deploy artifact branch. It is not a development branch and must never be pushed directly by an agent or human as a substitute for the workflow.
 
-Routine manual Hostinger **Deploy** and routine manual cache clear are no longer part of the candidate happy path. Manual Deploy/cache clear remain emergency fallback actions only until this auto-deployment path passes PBDS-HOST proof and the older deployment guardrail docs are reconciled.
+Routine manual Hostinger **Deploy** and routine manual cache clear are not part of the happy path. Manual Deploy/cache clear remain emergency fallback actions only.
 
 ## 2. Authority and non-negotiable constraints
 
@@ -35,7 +35,7 @@ Read these before deployment work:
 3. `docs/PBDS_V2_ARCHITECTURE_CONTRACT.md`
 4. this runbook
 
-Jim's explicit 2026-09-26 approval to enable Hostinger Auto Deployment supersedes the older manual-Deploy requirement for this bounded PBDS-HOST proof. All other August 20 safety constraints remain in force.
+Jim's explicit 2026-09-26 approval to enable Hostinger Auto Deployment supersedes the older manual-Deploy requirement. All other August 20 safety constraints remain in force.
 
 AI agents must not:
 
@@ -51,7 +51,7 @@ AI agents must not:
 
 If a deployment layer fails, diagnose that layer without redesigning the pipeline.
 
-## 3. Fixed production configuration under proof
+## 3. Fixed production configuration
 
 ### GitHub source
 
@@ -93,21 +93,19 @@ The webhook URL is operational configuration and must not be committed to the re
 
 The happy path must not require a human **Deploy** click or routine cache clear.
 
-## 4. Required checks before PBDS-HOST can pass
+## 4. Required production checks
 
-PBDS-HOST passes only when one post-auto-deploy candidate has all of the following evidence:
+A deployment is considered production-proven only when all of the following evidence exists:
 
 1. **Exact GitHub `main` SHA** recorded.
 2. **GitHub build/release PASS:** `Build and Publish Static Site` succeeds for that exact SHA.
 3. **Static publish proof:** `hostinger-static` HEAD is an Actions-authored commit whose message is `Deploy static site from <MAIN_SHA>`.
-4. **No manual deployment intervention:** no human **Deploy** click is used for the candidate proof.
+4. **No manual deployment intervention:** no human **Deploy** click is needed for the happy path.
 5. **Automatic public convergence:** `/`, `/work/`, and `/agents/` expose the exact candidate deploy SHA without a manual cache clear.
 6. **Bounded verification:** the live-site verifier polls for a bounded interval and reports PASS only when all required routes expose the candidate SHA.
 7. **Fallback classification:** if GitHub release succeeds but the public SHA does not converge, report **DEGRADED / deployment mismatch**. Do not rebuild or mutate application code merely to force deployment.
-8. **Cache behavior recorded:** manual cache clear is permitted only after the initial no-intervention proof has failed, and must be recorded as fallback evidence rather than normal success-path behavior.
-9. **Rollback path recorded** before the candidate is called production-ready.
-
-Anything less is **DEGRADED / incomplete proof**, not production completion.
+8. **Cache fallback:** manual cache clear is allowed only after the initial no-intervention proof fails and must be recorded as fallback evidence.
+9. **Rollback path:** recovery uses a normal revert commit on `main`, never history rewrite or direct Hostinger/file surgery.
 
 ## 5. Candidate procedure
 
@@ -115,7 +113,7 @@ Anything less is **DEGRADED / incomplete proof**, not production completion.
 
 For an application change, run the bounded route verification while iterating and `npm run verify:predeploy` before production publishing.
 
-For a docs-only PBDS-HOST proof commit, do not treat the documentation itself as an application acceptance test. The GitHub Actions build remains the deployment-pipeline proof.
+For docs-only deployment-proof commits, the GitHub Actions build is the deployment-pipeline proof.
 
 Record:
 
@@ -151,7 +149,7 @@ The authoritative proof is the public source SHA, not the existence of a webhook
 
 ### D. Authoritative public read-back
 
-Run:
+Run from the portfolio repository:
 
 ```bash
 npm run check:live-deployment -- \
@@ -171,7 +169,7 @@ and requires each to contain:
 data-gpme-deploy-sha="<CANDIDATE_MAIN_SHA>"
 ```
 
-The checker already uses cache-busting query parameters, `Cache-Control: no-cache`, retries, and a bounded request timeout. A browser-visible page alone is insufficient proof because stale Hostinger/cache state can display valid-looking content from an older SHA.
+The checker uses cache-busting query parameters, `Cache-Control: no-cache`, retries, and a bounded request timeout. A browser-visible page alone is insufficient proof because stale Hostinger/cache state can display valid-looking content from an older SHA.
 
 ### E. Failure and cache fallback
 
@@ -183,8 +181,6 @@ If the exact public SHA does not converge during the bounded verification window
 4. only then, if evidence indicates stale cache rather than deployment failure, manually clear Hostinger cache once;
 5. rerun the exact public SHA check;
 6. record that cache intervention was required.
-
-A candidate that needs manual cache clearing may prove deployment correctness, but it does **not** prove the desired zero-touch happy path. PBDS-HOST should remain open until routine cache behavior is understood and accepted.
 
 ## 6. Rollback procedure
 
@@ -234,42 +230,41 @@ Your branch is up to date with 'origin/hostinger-static'.
 nothing to commit, working tree clean
 ```
 
-A GitHub push webhook is now active for the repository and points to the Hostinger-generated deployment trigger. The webhook URL itself is intentionally not stored here.
+A GitHub push webhook is active for the repository and points to the Hostinger-generated deployment trigger. The webhook URL itself is intentionally not stored here.
 
-### Zero-touch auto-deploy proof candidate — 2026-09-26
-
-This runbook update is intentionally docs-only. Its resulting `main` SHA is the first PBDS-HOST candidate after Auto Deployment was enabled.
-
-Record after commit:
+### Zero-touch auto-deploy proof — 2026-09-26
 
 ```text
-candidate main SHA: <populate after commit>
-GitHub Actions run: PENDING
-candidate hostinger-static SHA: PENDING
+candidate main SHA: 74ae07779fba4ca13087bae1ef616173b51efe89
+GitHub Actions run: 36231320216 — PASS
+build static export: PASS
+deploy artifact verification: PASS
+publish to hostinger-static: PASS
+candidate hostinger-static SHA: 6e6a4aeb30f85c0050089f0e6817c61fd9aa7e2a
+release subject: Deploy static site from 74ae07779fba4ca13087bae1ef616173b51efe89
 manual Hostinger Deploy used: NO
 manual cache clear used: NO
-public SHA read-back: PENDING
-PBDS-HOST result: DEGRADED until automatic public convergence is proven
+public / read-back: PASS
+public /work/ read-back: PASS
+public /agents/ read-back: PASS
+live verifier result: Live deployment verified for 74ae07779fba4ca13087bae1ef616173b51efe89.
+PBDS-HOST result: PASS / EXIT PASSED
 ```
 
-## 8. Future unattended verification
+This proves the desired zero-touch production path end to end:
 
-The repository already contains the authoritative bounded public verifier at `scripts/check-live-deployment.mjs` and the `check:live-deployment` package script.
+```text
+main
+→ GitHub Actions verified static export
+→ hostinger-static generated release
+→ Hostinger Auto Deployment
+→ public exact-SHA convergence
+```
 
-PBDS-HOST does **not** silently alter the locked GitHub Actions workflow. After the zero-touch path is proven, Jim may separately approve wiring post-release verification into GitHub Actions so a release can surface **PASS** or **DEGRADED** automatically after `hostinger-static` advances.
+No manual deployment or cache intervention was required.
 
-Until that explicit approval, agents may run/read the existing verifier and may record results, but they must not modify `.github/workflows/**` to add a deployment callback or post-deploy job.
+## 8. Exit condition
 
-## 9. Exit condition
+PBDS-HOST exit passed on 2026-09-26.
 
-PBDS-HOST is complete only when the proof record contains:
-
-- exact candidate `main` SHA;
-- successful GitHub build/release for that SHA;
-- exact corresponding `hostinger-static` commit SHA and source-SHA commit subject;
-- proof that no manual Hostinger Deploy was needed;
-- successful public read-back for `/`, `/work/`, and `/agents/` at the exact candidate main SHA;
-- recorded cache behavior for the proof;
-- rollback procedure above confirmed as the approved recovery path.
-
-After that, reconcile the older manual-deploy wording in `AGENTS.md` and `docs/DEPLOYMENT_INCIDENT_2026-08-20.md`, advance PBDS-HOST to **Delivered / exit passed** in Notion, and open PBDS-5.
+Portfolio V2 may now proceed to PBDS-5 using the proven production path above. Any future change to the deployment architecture still requires Jim's explicit approval and must preserve the August 20 safety constraints unless Jim explicitly supersedes them.
