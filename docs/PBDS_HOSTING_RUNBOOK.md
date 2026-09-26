@@ -19,7 +19,7 @@ local / main source
       → hostinger-static generated release branch
         → Hostinger Git Auto Deployment
           → greatestpmever.com
-            → bounded public SHA read-back
+            → automatic bounded public SHA verification
 ```
 
 The `hostinger-static` branch is an automated deploy artifact branch. It is not a development branch and must never be pushed directly by an agent or human as a substitute for the workflow.
@@ -35,7 +35,7 @@ Read these before deployment work:
 3. `docs/PBDS_V2_ARCHITECTURE_CONTRACT.md`
 4. this runbook
 
-Jim's explicit 2026-09-26 approval to enable Hostinger Auto Deployment supersedes the older manual-Deploy requirement. All other August 20 safety constraints remain in force.
+Jim's explicit 2026-09-26 approval to enable Hostinger Auto Deployment and the separate live-deployment verification workflow supersedes the older manual-Deploy/manual-verification requirement. All other August 20 safety constraints remain in force.
 
 AI agents must not:
 
@@ -59,7 +59,7 @@ If a deployment layer fails, diagnose that layer without redesigning the pipelin
 - Production source branch: `main`
 - Development branch policy: `main` only for this repository
 
-### GitHub Actions
+### GitHub Actions — build and release
 
 Workflow:
 
@@ -78,6 +78,27 @@ The workflow must:
 4. verify route and deploy-SHA markers;
 5. publish only `out/` to `hostinger-static`;
 6. create the deploy commit as `Deploy static site from <MAIN_SHA>`.
+
+### GitHub Actions — production verification
+
+Workflow:
+
+`.github/workflows/verify-live-deployment.yml`
+
+Trigger:
+
+- successful completion of `Build and Publish Static Site` for `main`
+
+The workflow is verification-only. It must not deploy, mutate Hostinger, change Git refs, or schedule itself. It:
+
+1. takes the completed build/release run's exact `head_sha` as the expected production SHA;
+2. checks out that exact source SHA;
+3. runs the existing bounded `check:live-deployment` verifier against `https://greatestpmever.com`;
+4. requires `/`, `/work/`, and `/agents/` to expose the exact source SHA;
+5. retries for a bounded interval while Hostinger auto-deploy converges;
+6. reports PASS only after exact public SHA convergence; otherwise the workflow fails closed.
+
+Concurrency cancels an older in-progress live verification when a newer production candidate supersedes it, preventing stale candidates from producing false deployment failures.
 
 ### Hostinger
 
@@ -102,7 +123,7 @@ A deployment is considered production-proven only when all of the following evid
 3. **Static publish proof:** `hostinger-static` HEAD is an Actions-authored commit whose message is `Deploy static site from <MAIN_SHA>`.
 4. **No manual deployment intervention:** no human **Deploy** click is needed for the happy path.
 5. **Automatic public convergence:** `/`, `/work/`, and `/agents/` expose the exact candidate deploy SHA without a manual cache clear.
-6. **Bounded verification:** the live-site verifier polls for a bounded interval and reports PASS only when all required routes expose the candidate SHA.
+6. **Automatic bounded verification PASS:** `Verify Live Deployment` uses the source workflow's exact `head_sha` and reports PASS only after all required routes expose that SHA.
 7. **Fallback classification:** if GitHub release succeeds but the public SHA does not converge, report **DEGRADED / deployment mismatch**. Do not rebuild or mutate application code merely to force deployment.
 8. **Cache fallback:** manual cache clear is allowed only after the initial no-intervention proof fails and must be recorded as fallback evidence.
 9. **Rollback path:** recovery uses a normal revert commit on `main`, never history rewrite or direct Hostinger/file surgery.
@@ -135,27 +156,20 @@ Deploy static site from <CANDIDATE_MAIN_SHA>
 
 If `hostinger-static` does not advance to the exact candidate source SHA, stop. Do not touch Hostinger or application code to compensate.
 
-### C. Hostinger automatic deployment proof
+### C. Hostinger automatic deployment
 
 After `hostinger-static` advances:
 
 1. do **not** click Hostinger **Deploy**;
 2. do **not** clear Hostinger cache;
 3. allow the GitHub push webhook to trigger Hostinger Git Auto Deployment;
-4. use Hostinger deployment output/history as supplemental evidence when available;
-5. proceed to bounded public read-back.
+4. use Hostinger deployment output/history as supplemental evidence when available.
 
 The authoritative proof is the public source SHA, not the existence of a webhook delivery alone.
 
-### D. Authoritative public read-back
+### D. Automatic authoritative public read-back
 
-Run from the portfolio repository:
-
-```bash
-npm run check:live-deployment -- \
-  --base-url https://greatestpmever.com \
-  --sha <CANDIDATE_MAIN_SHA>
-```
+After `Build and Publish Static Site` completes successfully, `Verify Live Deployment` automatically runs the existing live checker against the source workflow's exact `head_sha`.
 
 The checker validates all three production surfaces:
 
@@ -171,9 +185,17 @@ data-gpme-deploy-sha="<CANDIDATE_MAIN_SHA>"
 
 The checker uses cache-busting query parameters, `Cache-Control: no-cache`, retries, and a bounded request timeout. A browser-visible page alone is insufficient proof because stale Hostinger/cache state can display valid-looking content from an older SHA.
 
+For manual diagnosis or explicit re-check, run from the portfolio repository:
+
+```bash
+npm run check:live-deployment -- \
+  --base-url https://greatestpmever.com \
+  --sha <CANDIDATE_MAIN_SHA>
+```
+
 ### E. Failure and cache fallback
 
-If the exact public SHA does not converge during the bounded verification window:
+If `Verify Live Deployment` cannot observe the exact public SHA within its bounded verification window:
 
 1. classify the result **DEGRADED / deployment mismatch**;
 2. confirm `main` and `hostinger-static` still represent the expected candidate;
@@ -192,7 +214,7 @@ If a deployed candidate must be rolled back:
 2. create a normal **revert commit on `main`**; do not reset/rebase/force-push;
 3. allow the existing GitHub Actions workflow to publish the reverted static output to `hostinger-static`;
 4. allow Hostinger Auto Deployment to deploy the new generated release;
-5. run `check:live-deployment` against the new revert commit SHA;
+5. allow `Verify Live Deployment` to prove the new revert commit SHA publicly;
 6. use manual Hostinger Deploy/cache clear only as explicitly recorded fallback if auto-deployment/public convergence fails;
 7. report rollback complete only after public read-back matches the revert SHA.
 
@@ -251,17 +273,22 @@ live verifier result: Live deployment verified for 74ae07779fba4ca13087bae1ef616
 PBDS-HOST result: PASS / EXIT PASSED
 ```
 
-This proves the desired zero-touch production path end to end:
+### Automatic verification workflow proof — 2026-09-26
+
+Jim explicitly approved adding a separate post-deploy live-verification workflow.
 
 ```text
-main
-→ GitHub Actions verified static export
-→ hostinger-static generated release
-→ Hostinger Auto Deployment
-→ public exact-SHA convergence
+workflow: .github/workflows/verify-live-deployment.yml
+workflow source commit: c7fcc681df2274407ad4a4462f7e6bdc01c31820
+source build/release run: 36232455328 — PASS
+Verify Live Deployment run: 36232528707 — PASS
+Verify exact production SHA step: PASS
+manual verification command required: NO
+manual Hostinger Deploy required: NO
+manual cache clear required: NO
 ```
 
-No manual deployment or cache intervention was required.
+This proves the verification control is event-triggered from the successful build/release workflow, uses the exact source SHA, and independently fails closed if production does not converge.
 
 ## 8. Exit condition
 
