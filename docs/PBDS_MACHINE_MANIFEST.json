@@ -1,12 +1,12 @@
 {
   "meta": {
     "name": "PBDS Machine-Addressable Figma Manifest",
-    "schemaVersion": "0.2.0",
+    "schemaVersion": "0.2.1",
     "status": "PBDS-FREEZE-A_IN_PROGRESS",
     "purpose": "Deterministic machine index into canonical PBDS Figma. This file is a compiled index, never visual authority.",
     "figmaFileKey": "euxFg8XeKtFJRw7PWOJRWa",
     "figmaFileName": "JM Personal Brand",
-    "generatedFromMainSha": "159cc1bcbe26f452a5a1aadca948d11504b378ff",
+    "generatedFromMainSha": "542a12b3022f9de07e50b9c43386bb4ba51b336b",
     "checkedDate": "2026-09-27"
   },
   "authority": {
@@ -65,11 +65,16 @@
     {"id": "2552:234", "name": "07 — Components / Site Shell"},
     {"id": "2575:83", "name": "08 — AI Handoff / Unified Design System", "authorityClass": "compiled-mirror"},
     {"id": "2592:87", "name": "09 — Brand / Logo Source of Truth", "status": "CONFLICT_REVIEW"},
-    {"id": "2898:2", "name": "10 — Responsive Wireframes / Canonical", "authorityClass": "canonical-responsive-visual-contract"},
     {"id": "2845:83", "name": "PBDS-4 — Patterns & Templates"}
   ],
+  "referencePages": [
+    {"id": "2898:2", "name": "10 — Responsive Structure Study / Non-Canonical Visuals", "authorityClass": "structural-breakpoint-reference", "visualAuthority": false, "contentAuthority": false, "allowedUse": "Inspect the approved four breakpoint regimes only. Do not copy page content, component styling, spacing, shell treatment, proof UI, CTA treatment, metrics, artifacts, recognition composition, or information architecture from this study."}
+  ],
   "responsiveWireframes": {
-    "status": "CANONICAL_BASELINE",
+    "status": "STRUCTURAL_REFERENCE_ONLY",
+    "authorityClass": "structural-breakpoint-reference",
+    "visualAuthority": false,
+    "contentAuthority": false,
     "pageId": "2898:2",
     "boardId": "2898:84",
     "frames": [
@@ -78,8 +83,8 @@
       {"id": "2898:265", "mode": "Small Web", "canvasWidth": 1024, "range": "1024–1279px"},
       {"id": "2898:359", "mode": "Web", "canvasWidth": 1440, "range": "1280px+"}
     ],
-    "compositionRule": "Wireframes define global responsive composition and hierarchy, not final page content. Mobile uses stacked navigation/hero/proof/capability/work composition; Tablet keeps compact navigation and a stacked editorial hero with two-column capability behavior; Small Web introduces desktop navigation and a split hero while keeping featured-work evidence stacked; Web uses the full desktop navigation, split-wide hero, three-column capability row, and split thesis/evidence composition.",
-    "qa": "Screenshot QA completed for all four canonical canvases after overlap/clipping correction."
+    "rule": "Only the four breakpoint regimes and their canonical canvas widths are approved. Every visible page design decision inside this study is schematic and non-canonical until separately designed and approved from PBDS primitives, components, patterns, recognition, and motion contracts.",
+    "qa": "Demotion QA completed after the board/page were relabeled NOT Visual Canon. Prior screenshot QA only proved the study rendered without overlap; it did not approve the design."
   },
   "componentSets": [
     {"id": "2449:121", "name": "Pill/Tag", "owner": "PBDS", "allowedConsumers": ["web"], "legacy": false, "implementationDestination": "PBDS package"},
@@ -160,7 +165,8 @@
     "motionSpecimensEnumerated": true,
     "breakpointLabelsCaptured": true,
     "breakpointThresholdsFrozen": true,
-    "responsiveWireframesCanonized": true,
+    "responsiveStructureStudyCreated": true,
+    "responsiveVisualDesignsApproved": false,
     "conflictsResolved": false,
     "status": "INCOMPLETE"
   }
