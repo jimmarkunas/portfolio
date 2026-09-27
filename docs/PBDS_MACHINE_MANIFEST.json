@@ -1,12 +1,12 @@
 {
   "meta": {
     "name": "PBDS Machine-Addressable Figma Manifest",
-    "schemaVersion": "0.1.0",
+    "schemaVersion": "0.2.0",
     "status": "PBDS-FREEZE-A_IN_PROGRESS",
     "purpose": "Deterministic machine index into canonical PBDS Figma. This file is a compiled index, never visual authority.",
     "figmaFileKey": "euxFg8XeKtFJRw7PWOJRWa",
     "figmaFileName": "JM Personal Brand",
-    "generatedFromMainSha": "8d66c779208e6e04e58a7b2a021aad0919bafb13",
+    "generatedFromMainSha": "159cc1bcbe26f452a5a1aadca948d11504b378ff",
     "checkedDate": "2026-09-27"
   },
   "authority": {
@@ -29,26 +29,28 @@
   },
   "responsive": {
     "requiredBreakpointCount": 4,
-    "requiredNames": ["Web", "Small Web", "Tablet", "Mobile"],
-    "status": "NEEDS_NUMERIC_CANON",
-    "candidateMappingUsingExistingFigmaThresholds": {
-      "Mobile": {"min": 0, "max": 767},
-      "Tablet": {"min": 768, "max": 1023},
-      "Small Web": {"min": 1024, "max": 1279},
-      "Web": {"min": 1280, "max": null}
+    "requiredNames": ["Mobile", "Tablet", "Small Web", "Web"],
+    "status": "CANONICAL",
+    "rule": "PBDS has exactly four global responsive modes. 640px and 1536px are not global PBDS breakpoints; local fluid/component behavior may resolve inside a canonical mode without creating a fifth global mode.",
+    "canonicalRanges": {
+      "Mobile": {"min": 0, "max": 767, "figmaCanvasWidth": 390, "figmaModeId": "2445:0"},
+      "Tablet": {"min": 768, "max": 1023, "figmaCanvasWidth": 768, "figmaModeId": "2445:2"},
+      "Small Web": {"min": 1024, "max": 1279, "figmaCanvasWidth": 1024, "figmaModeId": "2445:3"},
+      "Web": {"min": 1280, "max": null, "figmaCanvasWidth": 1440, "figmaModeId": "2445:4"}
     },
-    "existingFigmaBreakpointVariables": [
-      {"id": "VariableID:2445:155", "name": "web/breakpoint/sm", "value": 640, "status": "RECONCILE"},
-      {"id": "VariableID:2445:156", "name": "web/breakpoint/md", "value": 768, "status": "CANDIDATE_TABLET_START"},
-      {"id": "VariableID:2445:157", "name": "web/breakpoint/lg", "value": 1024, "status": "CANDIDATE_SMALL_WEB_START"},
-      {"id": "VariableID:2445:158", "name": "web/breakpoint/xl", "value": 1280, "status": "CANDIDATE_WEB_START"},
-      {"id": "VariableID:2445:159", "name": "web/breakpoint/2xl", "value": 1536, "status": "RECONCILE"}
-    ]
+    "canonicalFigmaBreakpointVariables": [
+      {"id": "VariableID:2445:155", "name": "web/breakpoint/mobile", "value": 0},
+      {"id": "VariableID:2445:156", "name": "web/breakpoint/tablet", "value": 768},
+      {"id": "VariableID:2445:157", "name": "web/breakpoint/small-web", "value": 1024},
+      {"id": "VariableID:2445:158", "name": "web/breakpoint/web", "value": 1280}
+    ],
+    "retiredGlobalThresholds": [640, 1536],
+    "goldenEdgeFixturesRequired": [767, 768, 1023, 1024, 1279, 1280]
   },
   "figmaCollections": [
-    {"id": "VariableCollectionId:2445:2", "name": "Web / Responsive Typography", "variableCount": 42, "status": "ENUMERATE"},
+    {"id": "VariableCollectionId:2445:2", "name": "Web / Responsive Typography", "variableCount": 42, "modes": ["Mobile", "Tablet", "Small Web", "Web"], "status": "RESPONSIVE_MODES_CANONICAL"},
     {"id": "VariableCollectionId:2445:126", "name": "Brand / Color", "variableCount": 33, "status": "ENUMERATE"},
-    {"id": "VariableCollectionId:2445:139", "name": "Shared / Dimensions", "variableCount": 37, "status": "ENUMERATE"},
+    {"id": "VariableCollectionId:2445:139", "name": "Shared / Dimensions", "variableCount": 36, "status": "ENUMERATE"},
     {"id": "VariableCollectionId:2445:167", "name": "Web / Typography Foundations", "variableCount": 4, "status": "ENUMERATE"},
     {"id": "VariableCollectionId:2445:172", "name": "Web / Component Foundations", "variableCount": 13, "status": "ENUMERATE"},
     {"id": "VariableCollectionId:2592:83", "name": "Brand / Logo", "variableCount": 3, "status": "CONFLICT_REVIEW"}
@@ -63,8 +65,22 @@
     {"id": "2552:234", "name": "07 — Components / Site Shell"},
     {"id": "2575:83", "name": "08 — AI Handoff / Unified Design System", "authorityClass": "compiled-mirror"},
     {"id": "2592:87", "name": "09 — Brand / Logo Source of Truth", "status": "CONFLICT_REVIEW"},
+    {"id": "2898:2", "name": "10 — Responsive Wireframes / Canonical", "authorityClass": "canonical-responsive-visual-contract"},
     {"id": "2845:83", "name": "PBDS-4 — Patterns & Templates"}
   ],
+  "responsiveWireframes": {
+    "status": "CANONICAL_BASELINE",
+    "pageId": "2898:2",
+    "boardId": "2898:84",
+    "frames": [
+      {"id": "2898:88", "mode": "Mobile", "canvasWidth": 390, "range": "0–767px"},
+      {"id": "2898:175", "mode": "Tablet", "canvasWidth": 768, "range": "768–1023px"},
+      {"id": "2898:265", "mode": "Small Web", "canvasWidth": 1024, "range": "1024–1279px"},
+      {"id": "2898:359", "mode": "Web", "canvasWidth": 1440, "range": "1280px+"}
+    ],
+    "compositionRule": "Wireframes define global responsive composition and hierarchy, not final page content. Mobile uses stacked navigation/hero/proof/capability/work composition; Tablet keeps compact navigation and a stacked editorial hero with two-column capability behavior; Small Web introduces desktop navigation and a split hero while keeping featured-work evidence stacked; Web uses the full desktop navigation, split-wide hero, three-column capability row, and split thesis/evidence composition.",
+    "qa": "Screenshot QA completed for all four canonical canvases after overlap/clipping correction."
+  },
   "componentSets": [
     {"id": "2449:121", "name": "Pill/Tag", "owner": "PBDS", "allowedConsumers": ["web"], "legacy": false, "implementationDestination": "PBDS package"},
     {"id": "2449:129", "name": "Link/Text", "owner": "PBDS", "allowedConsumers": ["web"], "legacy": false, "implementationDestination": "PBDS package"},
@@ -143,7 +159,8 @@
     "recognitionEnumerated": true,
     "motionSpecimensEnumerated": true,
     "breakpointLabelsCaptured": true,
-    "breakpointThresholdsFrozen": false,
+    "breakpointThresholdsFrozen": true,
+    "responsiveWireframesCanonized": true,
     "conflictsResolved": false,
     "status": "INCOMPLETE"
   }
