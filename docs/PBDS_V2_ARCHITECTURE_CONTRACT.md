@@ -3,7 +3,7 @@
 **Status:** Accepted architecture direction; design-system stage only  
 **Owner:** Jim Markunas  
 **Effective:** 2026-09-21  
-**Production migration gate:** PBDS-5 only, after Figma library + architecture acceptance
+**Production migration gate:** PBDS-5 only, after PBDS-FREEZE-A and PBDS-FREEZE-B pass
 
 ## 1. Purpose
 
@@ -250,9 +250,32 @@ Before production migration, explicitly accept:
 - migration sequencing;
 - one proven reusable template contract capable of driving more than one output surface.
 
+### PBDS-FREEZE-A — Machine Specification
+
+Close the machine-determinism gaps before Portfolio V2 implementation. The canonical granular execution plan and current item live in Notion `PBDS 2.0 — Roadmap & Delivery Status`; this contract owns only the architectural gate.
+
+PBDS-FREEZE-A must leave no unresolved machine-authority ambiguity across:
+
+- canonical identity and favicon/browser identity;
+- Figma variables, styles, components, patterns, recognition artifacts, and motion references;
+- component/pattern inputs and interaction-state contracts;
+- the approved four-mode responsive model and explicit interpolation rules;
+- machine-readable motion behavior;
+- content stress fixtures and golden visual fixtures;
+- production package/API ownership;
+- Figma ↔ GitHub deterministic mapping and deprecation rules;
+- mechanical anti-drift enforcement;
+- one cross-output semantic contract.
+
+A rendered or screenshot-QA'd visual is not canonical merely because it exists. New visual designs require Jim's explicit approval before they become visual authority.
+
+### PBDS-FREEZE-B — Cold-Run Proof
+
+Prove the machine specification from a cold start. At least two independent fresh-agent runs must consume only the canonical bootstrap and reproduce the bounded PBDS specimen without relying on prior chat context or invention. Material divergence means PBDS-FREEZE remains open.
+
 ### PBDS-5 — Portfolio V2 pilot
 
-Implement a bounded representative pilot only after the PBDS-4 exit gate. Recommended pilot scope: homepage + representative case study + site shell + one complex proof/data section.
+Implement a bounded representative pilot only after **PBDS-FREEZE-A and PBDS-FREEZE-B both pass**. Recommended pilot scope: homepage + representative case study + site shell + one complex proof/data section.
 
 The pilot consumes PBDS rather than recreating it.
 
@@ -303,6 +326,7 @@ Agents working on PBDS or Portfolio V2 must obey these rules:
 9. Reuse before abstraction.
 10. Prefer one canonical live path after migration; remove superseded implementation when the replacement is accepted.
 11. For any approved-reference Figma task, read and follow `REFERENCE_REGISTRATION_PROTOCOL.md`; do not claim completion without a rendered direct comparison to the approved reference.
+12. Do not begin PBDS-5 until PBDS-FREEZE-A and PBDS-FREEZE-B are both recorded PASS in the canonical Notion roadmap.
 
 ## 14. Agent bootstrap
 
@@ -333,23 +357,17 @@ Read Bytalos `packages/design-system` only when comparing implementation pattern
 
 ## 15. Immediate next package
 
-**PBDS-2A — Foundation Architecture Audit**
+**PBDS-FREEZE-A — Machine Specification**
 
-Inventory the current canonical Figma variable collections, text styles, effects/styles, and component bindings. Produce a precise map into the accepted architecture using these dispositions:
+The canonical granular execution plan is maintained in Notion `PBDS 2.0 — Roadmap & Delivery Status`. Work exactly one numbered FREEZE item at a time by default. Do not advance to the next item until the current item's exit proof is recorded, and do not promote new visual work to canon without Jim's explicit approval.
 
-- KEEP
-- RENAME
-- ALIAS
-- RETIRE
-- MOVE
+Current sequence:
 
-The audit must also identify whether each item belongs to:
+```text
+PBDS-HOST ✅
+→ PBDS-FREEZE-A / Machine Specification
+→ PBDS-FREEZE-B / Cold-Run Proof
+→ PBDS-5 / Portfolio V2 Pilot
+```
 
-- Primitive;
-- Semantic;
-- Component;
-- Brand universal;
-- Web/output-specific;
-- historical/reference.
-
-No production website migration is part of PBDS-2A.
+No production website migration is part of PBDS-FREEZE-A or PBDS-FREEZE-B.
