@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "PBDS Machine-Addressable Figma Manifest",
-    "schemaVersion": "0.2.1",
+    "schemaVersion": "0.2.2",
     "status": "PBDS-FREEZE-A_IN_PROGRESS",
     "purpose": "Deterministic machine index into canonical PBDS Figma. This file is a compiled index, never visual authority.",
     "figmaFileKey": "euxFg8XeKtFJRw7PWOJRWa",
@@ -137,18 +137,19 @@
       {"id": "S:ddc80f488f8a43f023a30b2148660829f93e3ebd,", "name": "PBDS/Material/Elevation/Overlay"}
     ]
   },
+  "retiredArtifacts": [
+    {
+      "path": "docs/design-system-chatgpt-export.json",
+      "status": "DELETED_FROM_LIVE_TREE",
+      "retiredReason": "Legacy V1 machine handoff encoded obsolete md/lg/xl breakpoint language and blue/red design semantics that conflict with PBDS 2.0. Git history remains the archive; cold-start agents must not use it."
+    }
+  ],
   "knownConflicts": [
     {
       "id": "logo-sot-vs-approved-asterisk",
       "severity": "BLOCK_FREEZE",
       "figmaNode": "2592:87",
       "problem": "The page named Brand / Logo Source of Truth currently exposes Brand / 5×5 Glyph components, while approved PBDS recognition artifacts use the Exact 2012 Asterisk and PBDS contract identifies Asterisk Placement. Machine authority is therefore ambiguous until the logo source page is reconciled."
-    },
-    {
-      "id": "legacy-chatgpt-export",
-      "severity": "BLOCK_FREEZE",
-      "githubPath": "docs/design-system-chatgpt-export.json",
-      "problem": "Legacy compiled summary still declares md/lg/xl breakpoints and blue/red design language. It must be marked retired or replaced before cold-start machine use."
     },
     {
       "id": "code-connect-unavailable",
