@@ -1,12 +1,12 @@
 {
   "meta": {
     "name": "PBDS Machine-Addressable Figma Manifest",
-    "schemaVersion": "0.2.2",
+    "schemaVersion": "0.2.3",
     "status": "PBDS-FREEZE-A_IN_PROGRESS",
     "purpose": "Deterministic machine index into canonical PBDS Figma. This file is a compiled index, never visual authority.",
     "figmaFileKey": "euxFg8XeKtFJRw7PWOJRWa",
     "figmaFileName": "JM Personal Brand",
-    "generatedFromMainSha": "542a12b3022f9de07e50b9c43386bb4ba51b336b",
+    "generatedFromMainSha": "6f5dea90db8e25ee399c4b48aff5b7d70b94b13d",
     "checkedDate": "2026-09-27"
   },
   "authority": {
@@ -47,13 +47,34 @@
     "retiredGlobalThresholds": [640, 1536],
     "goldenEdgeFixturesRequired": [767, 768, 1023, 1024, 1279, 1280]
   },
+  "identity": {
+    "status": "CANONICAL_F1_1",
+    "globalMark": {
+      "id": "2905:127",
+      "name": "Brand / Exact 2012 Asterisk",
+      "sourceGeometryNode": "2795:167",
+      "sourceGeometryContainer": "2795:166",
+      "owner": "PBDS Brand",
+      "allowedConsumers": ["all"],
+      "legacy": false,
+      "implementationDestination": "PBDS brand package/exports",
+      "rule": "Exact 2012 five-leg asterisk geometry is invariant. Do not redraw, approximate, rotate, distort, simplify, or substitute."
+    },
+    "legacyMark": {
+      "id": "2593:166",
+      "name": "Legacy / Brand / 5×5 Glyph",
+      "status": "RETIRED_FOR_NEW_PBDS_WORK",
+      "newUseAllowed": false,
+      "migrationPolicy": "Existing historical consumers remain in place until a separately approved bounded migration step."
+    }
+  },
   "figmaCollections": [
     {"id": "VariableCollectionId:2445:2", "name": "Web / Responsive Typography", "variableCount": 42, "modes": ["Mobile", "Tablet", "Small Web", "Web"], "status": "RESPONSIVE_MODES_CANONICAL"},
     {"id": "VariableCollectionId:2445:126", "name": "Brand / Color", "variableCount": 33, "status": "ENUMERATE"},
     {"id": "VariableCollectionId:2445:139", "name": "Shared / Dimensions", "variableCount": 36, "status": "ENUMERATE"},
     {"id": "VariableCollectionId:2445:167", "name": "Web / Typography Foundations", "variableCount": 4, "status": "ENUMERATE"},
     {"id": "VariableCollectionId:2445:172", "name": "Web / Component Foundations", "variableCount": 13, "status": "ENUMERATE"},
-    {"id": "VariableCollectionId:2592:83", "name": "Brand / Logo", "variableCount": 3, "status": "CONFLICT_REVIEW"}
+    {"id": "VariableCollectionId:2592:83", "name": "Brand / Logo", "variableCount": 3, "status": "IDENTITY_AUTHORITY_RECONCILED_F2_1_VARIABLE_AUDIT_PENDING"}
   ],
   "canonicalPages": [
     {"id": "2552:228", "name": "01 — Foundations / Brand"},
@@ -64,7 +85,7 @@
     {"id": "2552:233", "name": "06 — Components / Forms"},
     {"id": "2552:234", "name": "07 — Components / Site Shell"},
     {"id": "2575:83", "name": "08 — AI Handoff / Unified Design System", "authorityClass": "compiled-mirror"},
-    {"id": "2592:87", "name": "09 — Brand / Logo Source of Truth", "status": "CONFLICT_REVIEW"},
+    {"id": "2592:87", "name": "09 — Brand / Logo Source of Truth", "status": "CANONICAL_IDENTITY_SOT"},
     {"id": "2845:83", "name": "PBDS-4 — Patterns & Templates"}
   ],
   "referencePages": [
@@ -105,7 +126,11 @@
   ],
   "standaloneComponents": [
     {"id": "2449:111", "name": "Pill/Eyebrow", "owner": "PBDS", "allowedConsumers": ["web", "presentation", "one-pager"], "legacy": false, "implementationDestination": "PBDS package/adapters"},
-    {"id": "2450:84", "name": "Icon/External Link Mini", "owner": "PBDS", "allowedConsumers": ["web"], "legacy": false, "implementationDestination": "PBDS package"}
+    {"id": "2450:84", "name": "Icon/External Link Mini", "owner": "PBDS", "allowedConsumers": ["web"], "legacy": false, "implementationDestination": "PBDS package"},
+    {"id": "2905:127", "name": "Brand / Exact 2012 Asterisk", "owner": "PBDS Brand", "allowedConsumers": ["all"], "legacy": false, "implementationDestination": "PBDS brand package/exports"}
+  ],
+  "legacyComponents": [
+    {"id": "2593:166", "name": "Legacy / Brand / 5×5 Glyph", "owner": "PBDS Brand", "allowedConsumers": ["historical-existing-only"], "legacy": true, "newUseAllowed": false, "implementationDestination": "none-new; bounded migration later"}
   ],
   "patterns": [
     {"id": "2845:165", "name": "PBDS/Pattern/CTA/Case Study Cluster", "owner": "PBDS", "allowedConsumers": ["web", "one-pager"], "legacy": false, "implementationDestination": "PBDS patterns"},
@@ -146,12 +171,6 @@
   ],
   "knownConflicts": [
     {
-      "id": "logo-sot-vs-approved-asterisk",
-      "severity": "BLOCK_FREEZE",
-      "figmaNode": "2592:87",
-      "problem": "The page named Brand / Logo Source of Truth currently exposes Brand / 5×5 Glyph components, while approved PBDS recognition artifacts use the Exact 2012 Asterisk and PBDS contract identifies Asterisk Placement. Machine authority is therefore ambiguous until the logo source page is reconciled."
-    },
-    {
       "id": "code-connect-unavailable",
       "severity": "NON_BLOCKING_FOR_MANIFEST_BLOCKING_FOR_AUTOMATIC_CODE_MAPPING",
       "problem": "Current Figma plan/seat does not expose Code Connect enumeration. PBDS must not depend on Code Connect for determinism unless availability changes."
@@ -168,6 +187,8 @@
     "breakpointThresholdsFrozen": true,
     "responsiveStructureStudyCreated": true,
     "responsiveVisualDesignsApproved": false,
+    "identitySourceResolved": true,
+    "blockingConflictsResolved": true,
     "conflictsResolved": false,
     "status": "INCOMPLETE"
   }
