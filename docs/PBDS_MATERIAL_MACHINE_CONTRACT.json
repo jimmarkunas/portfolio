@@ -1,13 +1,13 @@
 {
   "meta": {
     "name": "PBDS Material Machine Contract",
-    "schemaVersion": "1.0.0",
+    "schemaVersion": "1.0.1",
     "status": "M6_COMPILED_MIRROR",
     "authorityClass": "compiled-figma-material-contract",
     "visualAuthority": false,
     "figmaFileKey": "euxFg8XeKtFJRw7PWOJRWa",
     "compiledDateCT": "2026-09-30",
-    "githubBaseSha": "1fd03ed747c3303745b6e527867f65f1d8da3ddb",
+    "githubBaseSha": "30faf078812af40440bff0d7ad5420e665c741db",
     "rule": "This is a deterministic compiled mirror of approved Figma M1-M5 canon. Figma remains visual authority. Missing or conflicting inputs fail closed."
   },
   "authority": {
@@ -37,7 +37,7 @@
     "M4.A1":{"node":"3387:45","id":"asset.human.image","roles":"brand_subject.hero | brand_subject.documentary | quote_attributor | explicitly_named_human_slot","required":"bindingId · role · subjectIdentity · sourceKind · sourceRef · approvalState","missing":"FAIL CLOSED"},
     "M4.A2":{"node":"3400:2","id":"asset.device.product-proof","slots":"M3.R1 evidence | M3.R2 evidence | M3.R5 cluster object","required":"bindingId · m3Slot · sourceKind · shellSourceRef · screenContentSourceRef · approvalState","canonical":{"shell":"3011:1693","screen":"3011:1694"},"boundary":"shell and screen materially distinct","missing":"FAIL CLOSED"},
     "M4.A3":{"node":"3408:2","id":"asset.paper.proof","slots":"M3.R1 evidence | M3.R2 evidence | M3.R3 subordinate paper plane | M3.R5 contextual object","required":"bindingId · m3Slot · planeMode · frontSourceRef · backSourceRef? · approvalState","planeModes":["front_only","front_back_pair"],"canonical":{"front":"3011:1075","back":"3011:1068"},"missing":"FAIL CLOSED"},
-    "M4.A4":{"node":"3414:2","id":"asset.environment.clean-plate","slot":"M3.R5 environment 100% — REQUIRED","required":"bindingId · m3Slot · sourceKind · environmentSourceRef · approvalState","currentSourceRef":null,"prohibit":["3009:57","3009:60"],"missing":"FAIL CLOSED — M3.R5 cannot compile to a production instance without an approved clean environment binding"},
+    "M4.A4":{"node":"3414:2","id":"asset.environment.clean-plate","slot":"M3.R5 environment 100% — REQUIRED","required":"bindingId · m3Slot · sourceKind · environmentSourceRef · approvalState","bindings":{"Light":{"environmentSourceRef":"3532:37","fill":"#F5F5F2","sourceDerivedFrom":"3011:1382","approvalState":"APPROVED — CANONICAL"},"Dark":{"environmentSourceRef":"3532:38","fill":"#090909","sourceDerivedFrom":"3011:1767","approvalState":"APPROVED — CANONICAL"}},"prohibit":["3009:57","3009:60"],"missing":"FAIL CLOSED for any future required clean-environment source without an exact approved binding"},
     "M4.A5":{"node":"3420:2","id":"asset.external.system-partner-mark","slots":"CONTEXTUAL ONLY","required":"bindingId · consumerRef · sourceKind · markSourceRef · variantSourceRef? · approvalState","identityBoundary":"M2.2 asterisk excluded","variantRule":"exact approved source variant only; no silent recolor/redraw/trace/retype","missing":"FAIL CLOSED for requested mark"},
     "M4.A6":{"node":"3425:2","id":"content.semantic-copy-data","scope":"only named fields already defined by approved M3/canonical consumers","required":"bindingId · consumerRef · fieldMap · sourceKind · sourceRef? · approvalState","proofRule":"do not invent, guess, silently round, or substitute factual proof","sampleRule":"sample strings are examples only, never universal defaults","missing":"FAIL CLOSED for required semantic field"}
   },
@@ -47,12 +47,12 @@
     "R2":{"node":"3460:154","source":"M3.R2","transform":"mobile stack; tablet stack with metric sibling overlay; small_web split; web split","evidence":["3456:123","3456:531","3456:939","3456:1346"],"prohibit":"generic black card/glow/glass substitute; light binding substitution"},
     "R3":{"node":"3467:304","source":"M3.R3","transform":"mobile vertical 2-plane centered-text reflow; tablet/small_web/web native 760×300","evidence":["3466:206","3466:283","3466:324","3466:365"],"prohibit":"one-card fallback; remove paper plane; third plane; proportional type shrink"},
     "R4":{"node":"3479:406","source":"M3.R4","transform":"mobile vertical 3-row; tablet compressed 720×150; small_web/web native 770×150","evidence":["3478:410","3478:437","3478:464","3478:491"],"prohibit":"drop metric/divider; card/depth; internal magenta; type below 50/11"},
-    "R5":{"node":"3486:406","source":"M3.R5","transform":"mobile asymmetric vertical; tablet/small_web/web directional 16:9 grammar","evidence":["3485:411","3485:600","3485:1093","3485:1586"],"direction":"mobile upper-left thesis + lower-right cluster + lower band; other modes left thesis + right cluster + lower band","mobileType":{"bodyMin":14,"primary":13,"secondary":11,"proofValue":28},"environmentSourceRef":null,"prohibit":"center-stack; reverse hierarchy; remove overlap/asterisk/lower band; invent environment"}
+    "R5":{"node":"3486:406","source":"M3.R5","transform":"mobile asymmetric vertical; tablet/small_web/web directional 16:9 grammar","evidence":["3485:411","3485:600","3485:1093","3485:1586"],"direction":"mobile upper-left thesis + lower-right cluster + lower band; other modes left thesis + right cluster + lower band","mobileType":{"bodyMin":14,"primary":13,"secondary":11,"proofValue":28},"environmentSourceRefs":{"Light":"3532:37","Dark":"3532:38"},"prohibit":"center-stack; reverse hierarchy; remove overlap/asterisk/lower band; invent or substitute environment"}
   },
   "cta": {
     "primary":{"fill":"#FF2FAE","label":"#090909","rule":"solid Brand Magenta primary in every tone and breakpoint; black-fill and outline-only primary variants prohibited"},
     "mobile":{"structure":"ONE centered primary pill + ONE centered secondary text action","secondarySignal":"circular #FF2FAE bullet","secondaryIsButton":false,"primaryAlignment":"center/center","radius":"50% of button height","r5Exact":{"width":156,"height":40,"radius":20,"primaryLabel":13,"secondaryLabel":11},"prohibitedSecondaryMarkers":["horizontal rule","slash","dash","line"]}
   },
-  "unresolved":[{"id":"M4.A4","node":"3414:2","requiredBy":"M3.R5","status":"FAIL_CLOSED","currentSourceRef":null}],
+  "unresolved":[],
   "compileRules":{"noRuntimeVisualInvention":true,"figmaVisualAuthority":true,"githubCompiledMirrorOnly":true,"nonCanonicalValidationFramesAreNotAuthority":true}
 }
