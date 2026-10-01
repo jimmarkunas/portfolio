@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "name": "PBDS Material Machine Contract",
+    "schemaVersion": "1.0.0",
+    "status": "M6_COMPILED_MIRROR",
+    "authorityClass": "compiled-figma-material-contract",
+    "visualAuthority": false,
+    "figmaFileKey": "euxFg8XeKtFJRw7PWOJRWa",
+    "compiledDateCT": "2026-09-30",
+    "githubBaseSha": "1fd03ed747c3303745b6e527867f65f1d8da3ddb",
+    "rule": "This is a deterministic compiled mirror of approved Figma M1-M5 canon. Figma remains visual authority. Missing or conflicting inputs fail closed."
+  },
+  "authority": {
+    "architecture": "docs/PBDS_V2_ARCHITECTURE_CONTRACT.md",
+    "manifest": "docs/PBDS_MACHINE_MANIFEST.json",
+    "roadmap": "Notion: PBDS 2.0 — Roadmap & Delivery Status",
+    "figmaRoots": {"M1":"3009:4","M2":"3015:3","M3":"3115:13","M4":"3387:8","M5":"3431:3"}
+  },
+  "primitives": {
+    "M2.1":{"node":"3033:2","id":"material.canvas-surface","modes":["Light","Dark"],"depth":0,"texture":"NONE","gradient":"NONE","magentaCanvas":"PROHIBITED","breakpointSemantics":"UNCHANGED; M5 owns composition"},
+    "M2.2":{"node":"3048:2","id":"identity.asterisk","source":"3011:5","geometry":"EXACT 2012 ASTERISK","color":"#FF2FAE","role":"IDENTITY / RECOGNITION","crop":"INTENTIONAL CROP ALLOWED","decorativeUse":"PROHIBITED","approximation":"PROHIBITED"},
+    "M2.3":{"node":"3058:2","id":"artifact.paper","sources":["3011:1075","3011:1068"],"structure":"FRONT + BACK PAPER PLANES","surface":"#FFFFFF","role":"PHYSICAL PROOF / EVIDENCE","depth":"OVERLAP / CROP / ANGLE ALLOWED","boundary":"MATERIAL DISTINCT FROM CANVAS / DEVICE"},
+    "M2.4":{"node":"3071:2","id":"artifact.device","sources":["3009:82","3011:1693","3011:1694"],"structure":"DEVICE SHELL / BEZEL + CONTEXTUAL SCREEN CONTENT","surface":"CHARCOAL / BLACK DEVICE MATERIAL","role":"PRODUCT / PROOF IN CONTEXT","boundary":"MATERIAL DISTINCT FROM CANVAS / PAPER / STONE / METAL"},
+    "M2.5":{"node":"3084:2","id":"material.structural-plane","sources":["3009:74","3011:1260","3011:1264","3011:1268"],"structure":"PLANAR SLAB / STRUCTURAL SUPPORT SURFACE","surface":"INK / DARK STRUCTURAL PLANE MATERIAL","role":"DARK STRUCTURAL PLANE"},
+    "M2.6":{"node":"3090:2","id":"depth.contact-edge","mechanisms":"CONTACT DEPTH + EDGE LIFT","role":"OBJECT-GROUND + CRISP MATERIAL-EDGE SEPARATION","priority":"OVERLAP / OCCLUSION / CONTACT DEPTH / REFLECTION / SCALE BEFORE VISIBLE SHADOW","shadow":"CONTROLLED / SECONDARY; NOT DEFAULT ELEVATION","fixedValues":"INSTANCE-CONTEXTUAL; NOT FIXED DEPTH TOKENS"},
+    "M2.7":{"node":"3097:2","id":"signal.emissive-magenta","color":"#FF2FAE","role":"SIGNAL / LIGHT","mechanisms":"SEAM LIGHT / EDGE LIGHT / RIM LIGHT / PROOF SIGNAL","fixedValues":"COLOR FIXED; EFFECT / OPACITY / GEOMETRY VALUES INSTANCE-CONTEXTUAL"},
+    "M2.8":{"node":"3104:2","id":"effect.reflection-atmosphere","sources":["3009:53","3009:59","3009:62","3009:97","3009:100","3009:105","3009:108","3009:175"],"mechanisms":"REFLECTION + ATMOSPHERE","role":"SELECTIVE PREMIUM SURFACE + DEPTH / HAZE / DISTANCE","rendering":"PURPOSEFUL / SELECTIVE; NOT DEFAULT GLASSMORPHISM","fixedValues":"INSTANCE-CONTEXTUAL","breakpointSemantics":"UNCHANGED; M5 owns composition"}
+  },
+  "recipes": {
+    "M3.R1":{"node":"3116:2","id":"recipe.hero.light-editorial","mode":"LIGHT MATERIAL","reference":"1660×780","objects":"1 thesis + 1 evidence + 1 signal edge + 1 CTA cluster + 1 metric band","required":"kicker + headline + body + primary evidence + CTA cluster + metric band","allowedPrimitives":"M2.1 + one of M2.3/M2.4/M2.5 + M2.7; M2.2/M2.6/M2.8 optional","prohibit":"generic undifferentiated UI card/panel"},
+    "M3.R2":{"node":"3116:52","id":"recipe.hero.dark-material","mode":"DARK MATERIAL","reference":"1660×780","objects":"1 thesis + 1 evidence + 1 signal edge + 1 CTA cluster + 1 metric band","required":"kicker + headline + body + primary evidence + CTA cluster + metric band","allowedPrimitives":"M2.1 + one of M2.3/M2.4/M2.5 + M2.7; M2.2/M2.6/M2.8 optional","prohibit":"generic undifferentiated dark card/panel"},
+    "M3.R3":{"node":"3116:102","id":"recipe.evidence.artifact-stack","mode":"LIGHT | DARK","reference":"760×300","objects":"1 primary UI plane + 1 subordinate M2.3 paper plane + 1 signal edge + 1 divider + 2 text groups","required":"metadata + title + body + proof label + value + context + source","allowedPrimitives":"M2.1 + M2.3 + M2.5 + M2.6 + M2.7; M2.8 contextual","prohibit":"duplicate rounded-card silhouette; fewer or more than 2 visible material planes"},
+    "M3.R4":{"node":"3117:2","id":"recipe.proof-cluster","mode":"LIGHT | DARK","reference":"770×150","objects":"exactly 3 metrics + exactly 2 dividers","required":"3 metric values + 3 metric labels","crop":"PROHIBITED internally","depth":"NONE / flat proof band","magenta":"0 internal decorative signals"},
+    "M3.R5":{"node":"3117:52","id":"recipe.hero.spatial-epic","mode":"LIGHT | DARK","reference":"16:9","objects":"1 environment + 1 oversized thesis + 1 overlapping proof cluster (2–4 objects) + atmosphere 1–2 + signals 1–3 + 1 lower proof/CTA band + 1 exact asterisk crop","zones":"ENVIRONMENT 100% · LEFT thesis · RIGHT cluster 35–70% · LOWER band ≤25%","allowedPrimitives":"M2.1 + M2.2 + M2.5 + M2.7 + M2.8 required; M2.3/M2.4/M2.6 contextual","prohibit":"centered grid; left/right reversal; standalone decorative floating asterisk; isolated metric card plus decorative planes"}
+  },
+  "assets": {
+    "M4.A1":{"node":"3387:45","id":"asset.human.image","roles":"brand_subject.hero | brand_subject.documentary | quote_attributor | explicitly_named_human_slot","required":"bindingId · role · subjectIdentity · sourceKind · sourceRef · approvalState","missing":"FAIL CLOSED"},
+    "M4.A2":{"node":"3400:2","id":"asset.device.product-proof","slots":"M3.R1 evidence | M3.R2 evidence | M3.R5 cluster object","required":"bindingId · m3Slot · sourceKind · shellSourceRef · screenContentSourceRef · approvalState","canonical":{"shell":"3011:1693","screen":"3011:1694"},"boundary":"shell and screen materially distinct","missing":"FAIL CLOSED"},
+    "M4.A3":{"node":"3408:2","id":"asset.paper.proof","slots":"M3.R1 evidence | M3.R2 evidence | M3.R3 subordinate paper plane | M3.R5 contextual object","required":"bindingId · m3Slot · planeMode · frontSourceRef · backSourceRef? · approvalState","planeModes":["front_only","front_back_pair"],"canonical":{"front":"3011:1075","back":"3011:1068"},"missing":"FAIL CLOSED"},
+    "M4.A4":{"node":"3414:2","id":"asset.environment.clean-plate","slot":"M3.R5 environment 100% — REQUIRED","required":"bindingId · m3Slot · sourceKind · environmentSourceRef · approvalState","currentSourceRef":null,"prohibit":["3009:57","3009:60"],"missing":"FAIL CLOSED — M3.R5 cannot compile to a production instance without an approved clean environment binding"},
+    "M4.A5":{"node":"3420:2","id":"asset.external.system-partner-mark","slots":"CONTEXTUAL ONLY","required":"bindingId · consumerRef · sourceKind · markSourceRef · variantSourceRef? · approvalState","identityBoundary":"M2.2 asterisk excluded","variantRule":"exact approved source variant only; no silent recolor/redraw/trace/retype","missing":"FAIL CLOSED for requested mark"},
+    "M4.A6":{"node":"3425:2","id":"content.semantic-copy-data","scope":"only named fields already defined by approved M3/canonical consumers","required":"bindingId · consumerRef · fieldMap · sourceKind · sourceRef? · approvalState","proofRule":"do not invent, guess, silently round, or substitute factual proof","sampleRule":"sample strings are examples only, never universal defaults","missing":"FAIL CLOSED for required semantic field"}
+  },
+  "responsive": {
+    "B1":{"node":"3431:39","bands":{"mobile":[0,767],"tablet":[768,1023],"small_web":[1024,1279],"web":[1280,null]},"qa":{"mobile":390,"tablet":768,"small_web":1024,"web":1440},"input":"viewportWidthPx","missing":"FAIL CLOSED — never infer recipe transform from nearest mode or non-canonical study"},
+    "R1":{"node":"3451:54","source":"M3.R1","transform":"mobile stack; tablet stack with metric sibling overlay; small_web split; web split","evidence":["3435:19","3435:428","3435:837","3435:1245"],"prohibit":"metric band becoming child of device proof; proportional text shrink below canonical roles"},
+    "R2":{"node":"3460:154","source":"M3.R2","transform":"mobile stack; tablet stack with metric sibling overlay; small_web split; web split","evidence":["3456:123","3456:531","3456:939","3456:1346"],"prohibit":"generic black card/glow/glass substitute; light binding substitution"},
+    "R3":{"node":"3467:304","source":"M3.R3","transform":"mobile vertical 2-plane centered-text reflow; tablet/small_web/web native 760×300","evidence":["3466:206","3466:283","3466:324","3466:365"],"prohibit":"one-card fallback; remove paper plane; third plane; proportional type shrink"},
+    "R4":{"node":"3479:406","source":"M3.R4","transform":"mobile vertical 3-row; tablet compressed 720×150; small_web/web native 770×150","evidence":["3478:410","3478:437","3478:464","3478:491"],"prohibit":"drop metric/divider; card/depth; internal magenta; type below 50/11"},
+    "R5":{"node":"3486:406","source":"M3.R5","transform":"mobile asymmetric vertical; tablet/small_web/web directional 16:9 grammar","evidence":["3485:411","3485:600","3485:1093","3485:1586"],"direction":"mobile upper-left thesis + lower-right cluster + lower band; other modes left thesis + right cluster + lower band","mobileType":{"bodyMin":14,"primary":13,"secondary":11,"proofValue":28},"environmentSourceRef":null,"prohibit":"center-stack; reverse hierarchy; remove overlap/asterisk/lower band; invent environment"}
+  },
+  "cta": {
+    "primary":{"fill":"#FF2FAE","label":"#090909","rule":"solid Brand Magenta primary in every tone and breakpoint; black-fill and outline-only primary variants prohibited"},
+    "mobile":{"structure":"ONE centered primary pill + ONE centered secondary text action","secondarySignal":"circular #FF2FAE bullet","secondaryIsButton":false,"primaryAlignment":"center/center","radius":"50% of button height","r5Exact":{"width":156,"height":40,"radius":20,"primaryLabel":13,"secondaryLabel":11},"prohibitedSecondaryMarkers":["horizontal rule","slash","dash","line"]}
+  },
+  "unresolved":[{"id":"M4.A4","node":"3414:2","requiredBy":"M3.R5","status":"FAIL_CLOSED","currentSourceRef":null}],
+  "compileRules":{"noRuntimeVisualInvention":true,"figmaVisualAuthority":true,"githubCompiledMirrorOnly":true,"nonCanonicalValidationFramesAreNotAuthority":true}
+}
