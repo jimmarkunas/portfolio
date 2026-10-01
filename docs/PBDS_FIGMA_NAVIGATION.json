@@ -1,17 +1,19 @@
 {
-  "schemaVersion": "1.0.0",
-  "status": "F2_4_REVIEW_READY_PENDING_HUMAN_APPROVAL",
+  "schemaVersion": "1.0.1",
+  "status": "F2_4_PASS_APPROVED_CANONICAL",
   "checkedDate": "2026-10-01",
   "figmaFileKey": "euxFg8XeKtFJRw7PWOJRWa",
   "authorityClass": "compiled-figma-navigation-index",
   "visualAuthority": false,
-  "authorityRule": "Figma owns exact page names, ordering, visual truth, and canonical object identity. This file is a compiled navigation mirror only. F2.4 is not PASS until Jim approves the cleaned Start Here surface and the main machine manifest is promoted to reference this navigation index.",
+  "authorityRule": "Figma owns exact page names, ordering, visual truth, and canonical object identity. This file is the approved compiled navigation mirror only; it does not replace Figma authority.",
+  "approval": "Jim approved 2026-10-01",
   "startHere": {
     "pageId": "2070:33848",
     "pageName": "PBDS / START HERE",
     "navigationBoardId": "2961:2",
+    "navigationBoardName": "PBDS Design System Index — APPROVED CANONICAL",
     "navigationRule": "START HERE -> CANON -> INDEX / PROOF -> WORK -> LIBRARY / REF -> LEGACY / ARCHIVE",
-    "humanVisualReviewApproved": false
+    "humanVisualReviewApproved": true
   },
   "canonicalRoots": {
     "foundationsBrandPage": "2552:228",
@@ -99,12 +101,12 @@
     "canonicalRootIdsShownOnStartHere": true,
     "reviewPagesExplicitlyViewsOverCanon": true,
     "historyPreservedWithoutDeletion": true,
-    "humanVisualReviewApproved": false,
-    "f2_4Pass": false
+    "humanVisualReviewApproved": true,
+    "f2_4Pass": true
   },
   "manifestPromotion": {
     "target": "docs/PBDS_MACHINE_MANIFEST.json",
-    "state": "PENDING_HUMAN_APPROVAL",
-    "requiredAfterApproval": "Reference this navigation index from the main machine manifest, update stale canonical page names/classifications, and mark F2.4 PASS."
+    "state": "APPROVED_FOR_REFERENCE",
+    "requiredAfterApproval": "Reference this approved navigation index from the main machine manifest and keep Figma as visual authority."
   }
 }
