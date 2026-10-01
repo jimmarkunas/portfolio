@@ -252,7 +252,12 @@
           "labelFontSize": 13,
           "fill": "#FF2FAE",
           "labelFill": "#090909",
-          "labelAlign": "CENTER"
+          "labelAlign": "CENTER",
+          "labelFontName": {"family": "Inter", "style": "Semi Bold"},
+          "labelLineHeight": {"unit": "AUTO"},
+          "labelLetterSpacing": {"unit": "PERCENT", "value": 0},
+          "labelTextCase": "ORIGINAL",
+          "labelCharacters": "VIEW CASE STUDY  ↗"
         },
         "secondary": {
           "labelSourceRef": "3011:1784",
@@ -271,7 +276,12 @@
             "height": 22,
             "fontSize": 11,
             "fill": "#FFFFFF",
-            "align": "CENTER"
+            "align": "CENTER",
+            "fontName": {"family": "Inter", "style": "Semi Bold"},
+            "lineHeight": {"unit": "AUTO"},
+            "letterSpacing": {"unit": "PERCENT", "value": 0},
+            "textCase": "ORIGINAL",
+            "characters": "SEE THE TRANSFORMATION  ↗"
           }
         }
       },
