@@ -19,7 +19,12 @@
       "smallWeb": "3485:1483",
       "web": "3485:1976"
     },
-    "prohibitedBuildRefs": ["3485:504", "3485:990", "3485:1483", "3485:1976"]
+    "prohibitedBuildRefs": [
+      "3485:504",
+      "3485:990",
+      "3485:1483",
+      "3485:1976"
+    ]
   },
   "tolerance": {
     "geometryPx": 0.5,
@@ -28,60 +33,331 @@
     "color": "exact",
     "text": "exact",
     "identityAspectDeltaPctMax": 0.1,
-    "requiredBreakpoints": ["mobile", "tablet", "smallWeb", "web"]
+    "requiredBreakpoints": [
+      "mobile",
+      "tablet",
+      "smallWeb",
+      "web"
+    ]
   },
   "breakpoints": {
     "tablet": {
-      "frame": {"width": 720, "height": 396.73468017578125},
-      "build": {"type": "uniformRescaleSourceArtifact", "scale": 1.3680505921541617},
+      "frame": {
+        "width": 720,
+        "height": 396.73468017578125
+      },
+      "build": {
+        "type": "uniformRescaleSourceArtifact",
+        "scale": 1.3680505921541617
+      },
       "secondaryPatch": {
         "removeSourceNodeName": "CTA / Secondary Rule",
-        "label": {"name": "CTA / Secondary", "x": 51, "y": 280.265625, "width": 132.24488830566406, "height": 5, "fontSize": 4.040815830230713},
-        "bullet": {"x": 39, "y": 280.765625, "width": 4, "height": 4, "fill": "#FF2FAE"}
+        "label": {
+          "name": "CTA / Secondary",
+          "x": 51,
+          "y": 280.265625,
+          "width": 132.24488830566406,
+          "height": 5,
+          "fontSize": 4.040815830230713
+        },
+        "bullet": {
+          "x": 39,
+          "y": 280.765625,
+          "width": 4,
+          "height": 4,
+          "fill": "#FF2FAE"
+        }
       }
     },
     "smallWeb": {
-      "frame": {"width": 956, "height": 526.7754516601562},
-      "build": {"type": "uniformRescaleSourceArtifact", "scale": 1.816467175138026},
-      "secondaryPatch": {"deriveFrom": "tablet", "scale": 1.3277777777777777}
+      "frame": {
+        "width": 956,
+        "height": 526.7754516601562
+      },
+      "build": {
+        "type": "uniformRescaleSourceArtifact",
+        "scale": 1.816467175138026
+      },
+      "secondaryPatch": {
+        "removeSourceNodeName": "CTA / Secondary Rule",
+        "label": {
+          "name": "CTA / Secondary",
+          "x": 73,
+          "y": 372.224609375,
+          "width": 175.59182739257812,
+          "height": 6,
+          "fontSize": 5.3653059005737305
+        },
+        "bullet": {
+          "x": 61,
+          "y": 373.224609375,
+          "width": 4,
+          "height": 4,
+          "fill": "#FF2FAE"
+        }
+      }
     },
     "web": {
-      "frame": {"width": 1352, "height": 744.9795532226562},
-      "build": {"type": "uniformRescaleSourceArtifact", "scale": 2.5688950008228146},
-      "secondaryPatch": {"deriveFrom": "tablet", "scale": 1.8777777777777778}
+      "frame": {
+        "width": 1352,
+        "height": 744.9795532226562
+      },
+      "build": {
+        "type": "uniformRescaleSourceArtifact",
+        "scale": 2.5688950008228146
+      },
+      "secondaryPatch": {
+        "removeSourceNodeName": "CTA / Secondary Rule",
+        "label": {
+          "name": "CTA / Secondary",
+          "x": 90.17333984375,
+          "y": 519.0205078125,
+          "width": 248.32650756835938,
+          "height": 9,
+          "fontSize": 7.587754726409912
+        },
+        "bullet": {
+          "x": 78,
+          "y": 521.43359375,
+          "width": 4.173264980316162,
+          "height": 4.173264980316162,
+          "fill": "#FF2FAE"
+        }
+      }
     },
     "mobile": {
-      "frame": {"width": 350, "height": 798, "fill": "#090909", "clipsContent": true},
-      "depthField": {"x": 135, "y": 190, "width": 250, "height": 230, "fill": "#0A0A0B", "opacity": 0.55},
-      "dominantAsterisk": {"sourceRef": "3011:5", "x": 205.18682861328125, "y": -10.296773910522461, "width": 241.66778564453125, "height": 241.4951629638672, "rotation": 15.300631770505548, "fill": "#FF2FAE"},
+      "frame": {
+        "width": 350,
+        "height": 798,
+        "fill": "#090909",
+        "clipsContent": true
+      },
+      "depthField": {
+        "x": 135,
+        "y": 190,
+        "width": 250,
+        "height": 230,
+        "fill": "#0A0A0B",
+        "opacity": 0.55
+      },
+      "dominantAsterisk": {
+        "sourceRef": "3011:5",
+        "x": 205.18682861328125,
+        "y": -10.296773910522461,
+        "width": 241.66778564453125,
+        "height": 241.4951629638672,
+        "rotation": 15.300631770505548,
+        "fill": "#FF2FAE"
+      },
       "textNodes": [
-        {"sourceRef": "3011:1775", "name": "Kicker", "x": 18, "y": 28, "width": 300, "height": 16, "fontSize": 11},
-        {"sourceRef": "3011:1776", "name": "Headline / From", "x": 18, "y": 56, "width": 310, "height": 31, "fontSize": 34},
-        {"sourceRef": "3011:1777", "name": "Headline / Complexity", "x": 18, "y": 98, "width": 310, "height": 31, "fontSize": 34},
-        {"sourceRef": "3011:1778", "name": "Headline / To", "x": 18, "y": 140, "width": 54, "height": 31, "fontSize": 34},
-        {"sourceRef": "3011:1779", "name": "Headline / Control", "x": 72, "y": 140, "width": 240, "height": 31, "fontSize": 34},
-        {"sourceRef": "3011:1780", "name": "Body / Description", "x": 18, "y": 190, "width": 305, "height": 80, "fontSize": 14}
+        {
+          "sourceRef": "3011:1775",
+          "name": "Kicker",
+          "x": 18,
+          "y": 28,
+          "width": 300,
+          "height": 16,
+          "fontSize": 11
+        },
+        {
+          "sourceRef": "3011:1776",
+          "name": "Headline / From",
+          "x": 18,
+          "y": 56,
+          "width": 310,
+          "height": 31,
+          "fontSize": 34
+        },
+        {
+          "sourceRef": "3011:1777",
+          "name": "Headline / Complexity",
+          "x": 18,
+          "y": 98,
+          "width": 310,
+          "height": 31,
+          "fontSize": 34
+        },
+        {
+          "sourceRef": "3011:1778",
+          "name": "Headline / To",
+          "x": 18,
+          "y": 140,
+          "width": 54,
+          "height": 31,
+          "fontSize": 34
+        },
+        {
+          "sourceRef": "3011:1779",
+          "name": "Headline / Control",
+          "x": 72,
+          "y": 140,
+          "width": 240,
+          "height": 31,
+          "fontSize": 34
+        },
+        {
+          "sourceRef": "3011:1780",
+          "name": "Body / Description",
+          "x": 18,
+          "y": 190,
+          "width": 305,
+          "height": 80,
+          "fontSize": 14
+        }
       ],
       "proofCluster": {
-        "frame": {"x": 52, "y": 305, "width": 290, "height": 247.92745971679688},
+        "frame": {
+          "x": 52,
+          "y": 305,
+          "width": 290,
+          "height": 247.92745971679688
+        },
         "scale": 1.1191710092152132,
         "children": [
-          {"sourceRef": "3011:1795", "name": "Artifact / Program Performance", "x": 25.54403305053711, "y": 0},
-          {"sourceRef": "3011:1849", "name": "Artifact / Operating Model", "x": 0, "y": 163.78237915039062},
-          {"sourceRef": "3011:1868", "name": "Artifact / Accent Edge", "x": 13.523327827453613, "y": 246.72540283203125}
+          {
+            "sourceRef": "3011:1795",
+            "name": "Artifact / Program Performance",
+            "x": 25.54403305053711,
+            "y": 0
+          },
+          {
+            "sourceRef": "3011:1849",
+            "name": "Artifact / Operating Model",
+            "x": 0,
+            "y": 163.78237915039062
+          },
+          {
+            "sourceRef": "3011:1868",
+            "name": "Artifact / Accent Edge",
+            "x": 13.523327827453613,
+            "y": 246.72540283203125
+          }
         ]
       },
       "cta": {
-        "frame": {"x": 18, "y": 585, "width": 314, "height": 78},
-        "primary": {"rectSourceRef": "3011:1781", "labelSourceRef": "3011:1782", "x": 79, "y": 0, "width": 156, "height": 40, "radius": 20, "labelFontSize": 13, "fill": "#FF2FAE", "labelFill": "#090909", "labelAlign": "CENTER"},
-        "secondary": {"labelSourceRef": "3011:1784", "bullet": {"x": 50.5, "y": 58.5, "width": 7, "height": 7, "radius": 3.5, "fill": "#FF2FAE"}, "label": {"x": 67.5, "y": 51, "width": 196, "height": 22, "fontSize": 11, "fill": "#FFFFFF", "align": "CENTER"}}
+        "frame": {
+          "x": 18,
+          "y": 585,
+          "width": 314,
+          "height": 78
+        },
+        "primary": {
+          "rectSourceRef": "3011:1781",
+          "labelSourceRef": "3011:1782",
+          "x": 79,
+          "y": 0,
+          "width": 156,
+          "height": 40,
+          "radius": 20,
+          "labelFontSize": 13,
+          "fill": "#FF2FAE",
+          "labelFill": "#090909",
+          "labelAlign": "CENTER"
+        },
+        "secondary": {
+          "labelSourceRef": "3011:1784",
+          "bullet": {
+            "x": 50.5,
+            "y": 58.5,
+            "width": 7,
+            "height": 7,
+            "radius": 3.5,
+            "fill": "#FF2FAE"
+          },
+          "label": {
+            "x": 67.5,
+            "y": 51,
+            "width": 196,
+            "height": 22,
+            "fontSize": 11,
+            "fill": "#FFFFFF",
+            "align": "CENTER"
+          }
+        }
       },
       "proofBand": {
-        "row": {"sourceRef": "3011:1785", "x": 18, "y": 687, "width": 314, "height": 1},
+        "row": {
+          "sourceRef": "3011:1785",
+          "x": 18,
+          "y": 687,
+          "width": 314,
+          "height": 1
+        },
         "items": [
-          {"valueSourceRef": "3011:1786", "labelSourceRef": "3011:1787", "value": "120M", "label": "ANNUAL UPLIFT", "valueBox": {"x": 18, "y": 703, "width": 90, "height": 32, "fontSize": 28}, "labelBox": {"x": 18, "y": 741, "width": 92, "height": 28, "fontSize": 11}},
-          {"dividerSourceRef": "3011:1788", "divider": {"x": 114, "y": 701, "width": 1, "height": 58}, "valueSourceRef": "3011:1789", "labelSourceRef": "3011:1790", "value": "$1B+", "label": "ROI DELIVERED", "valueBox": {"x": 124, "y": 703, "width": 90, "height": 32, "fontSize": 28}, "labelBox": {"x": 124, "y": 741, "width": 92, "height": 28, "fontSize": 11}},
-          {"dividerSourceRef": "3011:1791", "divider": {"x": 220, "y": 701, "width": 1, "height": 58}, "valueSourceRef": "3011:1792", "labelSourceRef": "3011:1793", "value": "38%", "label": "FASTER EXECUTION", "valueBox": {"x": 230, "y": 703, "width": 90, "height": 32, "fontSize": 28}, "labelBox": {"x": 230, "y": 741, "width": 92, "height": 28, "fontSize": 11}}
+          {
+            "valueSourceRef": "3011:1786",
+            "labelSourceRef": "3011:1787",
+            "value": "120M",
+            "label": "ANNUAL UPLIFT",
+            "valueBox": {
+              "x": 18,
+              "y": 703,
+              "width": 90,
+              "height": 32,
+              "fontSize": 28
+            },
+            "labelBox": {
+              "x": 18,
+              "y": 741,
+              "width": 92,
+              "height": 28,
+              "fontSize": 11
+            }
+          },
+          {
+            "dividerSourceRef": "3011:1788",
+            "divider": {
+              "x": 114,
+              "y": 701,
+              "width": 1,
+              "height": 58
+            },
+            "valueSourceRef": "3011:1789",
+            "labelSourceRef": "3011:1790",
+            "value": "$1B+",
+            "label": "ROI DELIVERED",
+            "valueBox": {
+              "x": 124,
+              "y": 703,
+              "width": 90,
+              "height": 32,
+              "fontSize": 28
+            },
+            "labelBox": {
+              "x": 124,
+              "y": 741,
+              "width": 92,
+              "height": 28,
+              "fontSize": 11
+            }
+          },
+          {
+            "dividerSourceRef": "3011:1791",
+            "divider": {
+              "x": 220,
+              "y": 701,
+              "width": 1,
+              "height": 58
+            },
+            "valueSourceRef": "3011:1792",
+            "labelSourceRef": "3011:1793",
+            "value": "38%",
+            "label": "FASTER EXECUTION",
+            "valueBox": {
+              "x": 230,
+              "y": 703,
+              "width": 90,
+              "height": 32,
+              "fontSize": 28
+            },
+            "labelBox": {
+              "x": 230,
+              "y": 741,
+              "width": 92,
+              "height": 28,
+              "fontSize": 11
+            }
+          }
         ]
       }
     }
