@@ -1,6 +1,6 @@
 {
   "schema": "personal-career-brand/v1",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "status": "IN_PROGRESS",
   "last_approved_date": "2026-10-02",
   "authority": {
@@ -330,6 +330,27 @@
           "to": "$40M",
           "attribution": "growth unlocked by the negotiated commerce/payments solution"
         }
+      }
+    },
+    "fredericks_of_hollywood": {
+      "primary": "eCommerce Growth",
+      "secondary": "Product + Architecture Bridge",
+      "context": "Consumer DTC",
+      "career_story": "Create → Grow",
+      "signature_angle": "Relaunching Frederick's of Hollywood as a celebrity-driven DTC brand around Megan Fox, turning a bankrupt retail brand into a campaign-ready digital flagship in three months.",
+      "internal_dynamics": [
+        "Zero-to-One",
+        "Commercial Growth",
+        "Operating Model Transformation",
+        "Operational Efficiency",
+        "Platform Product Influence"
+      ],
+      "positioning_rule": "Lead with the Megan Fox / celebrity-driven brand resurrection and rapid DTC launch. Architecture and operating-model judgment support the story rather than lead it.",
+      "approved_public_metrics": {
+        "lower_TCO": "25%",
+        "promo_launch_speed": "3X faster",
+        "launch_timeline": "3 months",
+        "system_integrations": 6
       }
     }
   },
