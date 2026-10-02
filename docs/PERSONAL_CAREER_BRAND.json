@@ -1,6 +1,6 @@
 {
   "schema": "personal-career-brand/v1",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "status": "IN_PROGRESS",
   "last_approved_date": "2026-10-02",
   "authority": {
@@ -56,7 +56,8 @@
     "Commercial Negotiation / Deal Making",
     "Matrixed Influence",
     "Business Development / Channel Growth",
-    "Platform Product Influence"
+    "Platform Product Influence",
+    "Strategic Judgment / Go-No-Go"
   ],
   "case_study_system": {
     "portfolio_case_study_count": 17,
@@ -417,10 +418,30 @@
         "global_contributors": "40+"
       },
       "recognition": "Yahoo recognition as a top online music publication"
+    },
+    "zevo": {
+      "primary": "Founder / Product Leadership",
+      "secondary": null,
+      "context": "Media & Streaming",
+      "career_story": "Create → Decide",
+      "signature_angle": "Co-founding an interactive internet TV startup before streaming was mainstream—leading product vision, roadmap and institutional fundraising, then making the evidence-based decision to stop when capital and market timing no longer supported the bet.",
+      "internal_dynamics": [
+        "Zero-to-One",
+        "Commercial Negotiation / Deal Making",
+        "Business Development / Channel Growth",
+        "Strategic Judgment / Go-No-Go"
+      ],
+      "positioning_rule": "Lead with founder/product leadership, frontier product vision, investor-market validation, and strategic judgment. Treat the shutdown decision as evidence of disciplined go/no-go leadership rather than framing ZEVO as either a commercial success or a generic failure story.",
+      "approved_public_metrics": {
+        "concept_video_views": "30k+",
+        "tier_1_investor_pitches": 3,
+        "raise_target": "$20M",
+        "team_size": 10
+      }
     }
   },
   "pending": {
-    "case_studies_remaining_to_classify": true,
-    "note": "This canon is intentionally IN_PROGRESS until all 17 portfolio case studies and remaining component/portfolio brand decisions are classified and approved."
+    "case_studies_remaining_to_classify": false,
+    "note": "All 17 portfolio case studies are classified and approved. This canon remains IN_PROGRESS until remaining component/portfolio brand decisions are complete."
   }
 }
