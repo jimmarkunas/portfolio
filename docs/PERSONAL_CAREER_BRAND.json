@@ -1,0 +1,214 @@
+{
+  "schema": "personal-career-brand/v1",
+  "version": "0.1.0",
+  "status": "IN_PROGRESS",
+  "last_approved_date": "2026-10-01",
+  "authority": {
+    "canonical_source": "Notion: Personal Career Brand",
+    "notion_url": "https://app.notion.com/p/2dc3c5a059268011b6f6e6fad2cbe7a3?pvs=204",
+    "github_projection": "docs/PERSONAL_CAREER_BRAND.json",
+    "rule": "Notion is authoritative. GitHub is a deterministic machine-readable projection and must not override Notion."
+  },
+  "audience_priority": [
+    "Prospective consulting/fractional clients and executives",
+    "Hiring managers",
+    "Recruiters",
+    "Press / speaking / podcast / awards / GTV audiences"
+  ],
+  "top_line_identity": "AI leader who solves complex business problems and turns broken systems into measurable commercial outcomes.",
+  "ai_leadership_definition": {
+    "mode": "hybrid",
+    "primary": [
+      "AI implementation leadership",
+      "AI transformation leadership"
+    ],
+    "secondary": [
+      "AI product leadership"
+    ],
+    "boundary": "Does not imply ML model development, data science, or hands-on AI infrastructure engineering."
+  },
+  "supporting_pillars": [
+    "AI Transformation & Implementation",
+    "Digital Transformation & Platform Modernization",
+    "Product & Operating Model Leadership",
+    "Complex Systems Integration & Solution Design"
+  ],
+  "public_career_dynamics": [
+    "Transform",
+    "Fix",
+    "Scale",
+    "Grow"
+  ],
+  "internal_career_dynamics": [
+    "AI Implementation",
+    "AI Transformation",
+    "Platform Modernization",
+    "Productization",
+    "Operating Model Transformation",
+    "Systems Integration",
+    "Recovery / Stabilization",
+    "Platform Consolidation",
+    "Commercial Growth",
+    "Operational Efficiency",
+    "Multi-market / Global Scale",
+    "Zero-to-One"
+  ],
+  "case_study_system": {
+    "portfolio_case_study_count": 17,
+    "narrative_spine": [
+      "Problem / Stakes",
+      "What it was",
+      "Solution",
+      "Business impact",
+      "Proof"
+    ],
+    "classification_rules": {
+      "primary_category": "Exactly one controlled primary category per case study.",
+      "secondary_category": "Optional second controlled primary category when materially useful.",
+      "context_sub_bucket": "Exactly one controlled context sub-bucket per case study.",
+      "secondary_angle": "Optional distinctive innovation/leadership angle unique to the case.",
+      "signature_angle": "Optional technical or strategic differentiator that should not be forced into taxonomy.",
+      "internal_dynamics": "Multiple controlled internal career dynamics may apply."
+    },
+    "primary_categories": [
+      "Digital Transformation / Platform Modernization",
+      "Operating Model / Organizational Clarity",
+      "High-Risk Delivery Rescue",
+      "eCommerce Growth",
+      "Product + Architecture Bridge",
+      "Founder / Product Leadership"
+    ],
+    "context_sub_buckets": [
+      "International Retail",
+      "Global B2B Commerce",
+      "Regulated Enterprise",
+      "Enterprise Revenue Operations",
+      "Multi-Market, Multi-Brand eCommerce",
+      "Consumer DTC",
+      "Subscription Commerce",
+      "Media & Streaming",
+      "Enterprise Platform / SaaS",
+      "Agentic Commerce / AI",
+      "Enterprise ERP / SAP",
+      "Digital Learning / Creator Platform"
+    ]
+  },
+  "approved_case_studies": {
+    "cps_energy": {
+      "primary": "Digital Transformation / Platform Modernization",
+      "secondary": null,
+      "context": "Enterprise ERP / SAP",
+      "internal_dynamics": [
+        "Systems Integration",
+        "Operational Efficiency",
+        "Operating Model Transformation"
+      ]
+    },
+    "american_apparel": {
+      "primary": "eCommerce Growth",
+      "secondary": null,
+      "secondary_angle": "Pioneering BOPIS & Omni-Channel Retail Integration",
+      "context": "International Retail",
+      "internal_dynamics": [
+        "Platform Modernization",
+        "Systems Integration",
+        "Operating Model Transformation",
+        "Multi-market / Global Scale",
+        "Commercial Growth"
+      ],
+      "approved_public_metrics": {
+        "AOV_uplift": "15%",
+        "conversion_growth": "20%"
+      },
+      "external_proof": "https://aijourn.com/before-bopis-went-mainstream-james-markunas-on-pioneering-one-of-the-worlds-first-true-global-omni-channel-ecosystems-for-american-apparel-across-16-countries/"
+    },
+    "boehringer_ingelheim": {
+      "primary": "Digital Transformation / Platform Modernization",
+      "secondary": "High-Risk Delivery Rescue",
+      "context": "Global B2B Commerce",
+      "signature_technical_angle": "Oracle-to-SAP Migration",
+      "story_label": "Recovering a Global B2B Commerce Transformation During an Oracle-to-SAP Migration",
+      "internal_dynamics": [
+        "Platform Modernization",
+        "Systems Integration",
+        "Recovery / Stabilization",
+        "Multi-market / Global Scale",
+        "Operational Efficiency",
+        "Commercial Growth"
+      ]
+    },
+    "directv_revenue_platform": {
+      "primary": "Operating Model / Organizational Clarity",
+      "secondary": "Product + Architecture Bridge",
+      "context": "Enterprise Revenue Operations",
+      "signature_angle": "Rebuilding cross-channel offer decisioning across 13 organizations and 20+ systems",
+      "internal_dynamics": [
+        "Systems Integration",
+        "Operating Model Transformation",
+        "Operational Efficiency",
+        "Commercial Growth"
+      ]
+    },
+    "fusion92_core_cms": {
+      "primary": "Product + Architecture Bridge",
+      "secondary": "Operating Model / Organizational Clarity",
+      "context": "Enterprise Platform / SaaS",
+      "signature_angle": "Productizing a bespoke enterprise CMS into a reusable governed multi-tenant commercial product",
+      "internal_dynamics": [
+        "Productization",
+        "Platform Modernization",
+        "Operating Model Transformation",
+        "Systems Integration"
+      ],
+      "positioning_rule": "Fusion92 / CORE CMS is the headline story. New York Life is incubation/customer context and should be de-emphasized.",
+      "gtv_significance": "Major product-leadership evidence."
+    },
+    "domestika": {
+      "primary": "Product + Architecture Bridge",
+      "secondary": "Digital Transformation / Platform Modernization",
+      "context": "Digital Learning / Creator Platform",
+      "signature_angle": "Launching a new digital product through a staged Unity-to-native platform strategy",
+      "internal_dynamics": [
+        "Zero-to-One",
+        "Platform Modernization",
+        "Productization"
+      ],
+      "gtv_significance": "Major product-leadership evidence."
+    },
+    "modere": {
+      "primary": "Digital Transformation / Platform Modernization",
+      "secondary": "Product + Architecture Bridge",
+      "context": "Multi-Market, Multi-Brand eCommerce",
+      "signature_angle": "Re-architecting a global composable commerce ecosystem across 10 markets, 7 languages, 10+ vendors and 20+ integrations",
+      "internal_dynamics": [
+        "Platform Modernization",
+        "Systems Integration",
+        "Multi-market / Global Scale",
+        "Operational Efficiency",
+        "Commercial Growth"
+      ],
+      "approved_direct_outcomes": {
+        "gmv": {
+          "from": "~$500M",
+          "to": "$1B",
+          "approx_absolute_increase": "~$500M",
+          "approx_growth": "~100%",
+          "attribution": "direct transformation outcome",
+          "approved_wording": [
+            "grew Modere from approximately $500M to $1B GMV",
+            "doubled Modere GMV from approximately $500M to $1B"
+          ]
+        },
+        "conversion": "+43%",
+        "site_speed": "+35%",
+        "infrastructure_cost": "-35%",
+        "gtm_speed": "+65%+"
+      },
+      "recognition": "MACH Impact Award nomination"
+    }
+  },
+  "pending": {
+    "case_studies_remaining_to_classify": true,
+    "note": "This canon is intentionally IN_PROGRESS until all 17 portfolio case studies and remaining component/portfolio brand decisions are classified and approved."
+  }
+}
