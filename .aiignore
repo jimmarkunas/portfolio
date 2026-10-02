@@ -1,3 +1,4 @@
+# Dependencies and generated build output
 node_modules/
 node_modules.stale-*/
 .next/
@@ -5,3 +6,30 @@ node_modules.stale-*/
 .next.bak-*/
 out/
 *.tsbuildinfo
+
+# Historical/export material: opt in only when a task explicitly targets it
+archive/
+exports/
+
+# Specialized PBDS corpus: opt in only for PBDS work
+pbds/
+docs/PBDS_*
+
+# Presentation/reference corpora: opt in only when explicitly targeted
+public/reference/
+public/test/
+public/pdma2026-templates/
+public/pdma2026/
+
+# Tool/editor-specific metadata that normal Codex tasks do not need
+.claude/
+.vscode/
+
+# Binary/raster assets are addressable by path but should not be indexed by default
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.webp
+**/*.gif
+**/*.ico
+**/*.pdf
