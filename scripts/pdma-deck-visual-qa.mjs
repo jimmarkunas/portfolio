@@ -89,6 +89,7 @@ async function measure(page) {
     slide.querySelectorAll(".pdmat-stage [class*='pdmat-']").forEach((element, index) => {
       if (getComputedStyle(element).display === "none" || element.getClientRects().length === 0) return
       const rect = element.getBoundingClientRect()
+      if (!rect.width && !rect.height) return // display:none has no logical position
       layout[`${index}:${element.className.toString().split(" ")[0]}`] = [rect.left - canvasRect.left, rect.top - canvasRect.top, rect.width, rect.height].map((value) => Math.round(value / scale))
     })
     window.scrollTo(0, 5000)
@@ -121,7 +122,8 @@ async function measure(page) {
       title: Boolean(document.querySelector(".pdma-logical-canvas .pdma-title-block h1")),
       bodyText: document.querySelector(".pdma-slide-layer").innerText,
       nodes: (() => { const out = []; const w = document.createTreeWalker(document.querySelector(".pdma-slide-layer"), NodeFilter.SHOW_TEXT); while (w.nextNode()) out.push(w.currentNode.textContent); return out.join(" ") })(),
-      decoImages: [...slide.querySelectorAll(".pdmat-deco-item")].map((img) => img.complete && img.naturalWidth > 0),
+      decoration: document.querySelector(".pdma-decoration-host .pdmat-deco")?.getAttribute("data-decorative-variant"),
+      decoImages: [...document.querySelectorAll(".pdma-decoration-host .pdmat-deco-item")].map((img) => img.complete && img.naturalWidth > 0),
       layout, clipped, overflow,
     }
   })
@@ -157,7 +159,7 @@ for (const viewport of viewports) {
     if (index < 10 && /A\.G\.E\.N\.T\.S/.test(m.bodyText)) fail(`${tag}: names A.G.E.N.T.S. before Slide 11`)
     if (m.clipped.length) fail(`${tag}: text clipped or under chrome → ${m.clipped.slice(0, 3).join(" | ")}`)
     if (m.overflow.length) fail(`${tag}: hidden overflow → ${m.overflow.join(", ")}`)
-    if (m.decoImages.some((loaded) => !loaded)) fail(`${tag}: decoration failed to load`)
+    if (!m.decoration || (m.decoration !== "none" && !m.decoImages.length) || m.decoImages.some((loaded) => !loaded)) fail(`${tag}: decoration failed to load`)
     if (!baseline[index]) baseline[index] = m.layout
     else {
       const drift = Object.entries(baseline[index]).filter(([key, rect]) => !m.layout[key] || rect.some((value, i) => Math.abs(value - m.layout[key][i]) > 2))

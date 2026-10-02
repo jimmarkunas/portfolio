@@ -582,3 +582,14 @@ The implementation run may start only when Canon v4 is available in the Codex wo
 - Slide 15 (Embedded App template) runs `PdmaScenarioExercise`: the Secure Carolinas "Customer Order Exception Agent" challenge (shared logic: `src/components/exercise/customerOrderExceptionScenario.ts`) in the PDMA skin, plus a deterministic mini productization brief after the decision. The same component renders in the gallery and at `/pdma2026/exercise` (Slide 14's worksheet link).
 - Rollback checkpoint: `3e343570ab1957513fdf8883e2efcdaa56226a5d` (roll back the cutover commit with `git revert`).
 - Checks: `npm run pdma:check` (deck + gallery static contracts) and `npm run pdma:qa` (deck + gallery browser QA, then `pdma-exercise-qa.mjs`: SCC parity, brief, and fit).
+
+
+## Shared orb ownership and regression checks (2026-10-02)
+
+- `src/components/pbds/orb/PBDSKineticSphere.tsx` is the only kinetic orb renderer. The historical orb lab adapter preserves its spring-in startup through `initialMotion`; the embed imports the shared renderer directly.
+- `orbPresets.ts` owns crop/interaction presets and accepted `orbAppearanceProfiles`. Lab/deck consumers own placement, radius, and explicit per-instance speed overrides. Reuse an appearance profile rather than copying its atmosphere/color fields into a consumer.
+- `orbTiming.ts` owns the fixed 60 Hz simulation step. Respect reduced motion, pause hidden-tab work, and clean up animation callbacks/listeners/observers on unmount.
+- `DecorativeLayer` owns portal rendering. Orb positioning/hit-testing styles live in shared `templates.css`, never in a lab-only stylesheet. Semantic composition remains on the existing 1920×1080 canvas.
+- `npm run pdma:check` includes refresh-rate/catch-up timing checks. `npm run pdma:qa` covers production, gallery, exercise, and the eight-slide lab, including painted canvases and live reduced-motion changes.
+- Browser geometry comparisons exclude `display:none` nodes. Canonical copy checks include accepted hidden DOM copy, matching production QA; visible text clipping remains separately checked. This does not authorize hiding additional content.
+- For a shared change, freeze current runtime captures and compare after refreshing the affected routes. Wait for fonts and all decorative images to load before capturing. Production gallery fidelity alone cannot establish preservation of the lab or historical embed.

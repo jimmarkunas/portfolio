@@ -1,6 +1,7 @@
 "use client";
 
 import type { ComponentType, CSSProperties } from "react";
+import { orbAppearanceProfiles } from "@/components/pbds/orb/orbPresets";
 import { PdmaPresentationShell, PdmaSlideCanvas } from "@/app/pdma2026/PdmaPresentationShell";
 import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
 import type { PdmaSlideKey } from "@/app/pdma2026/presentation/presentationTypes";
@@ -15,33 +16,32 @@ import { templateContent } from "../pdma2026-templates/templateContent";
 import { templateManifest, type TemplateManifestEntry } from "../pdma2026-templates/templateManifest";
 
 /*
- * Temporary A/B lab: gallery Slide 1 (Title) and Slide 6 (Flow / Scenario), each as the canonical
- * gallery entry (baseline) and as an experiment copy. Experiments render the same template
- * component + content; only their decorItems may diverge. They start as the exact current variant.
+ * Eight-slide decoration lab. Templates/content come from the gallery; accepted orb appearance
+ * profiles come from shared PBDS presets. This route owns experiment selection and placement.
  */
 const flow = templateContent.find((content) => content.kind === "flow-scenario")!;
 const structured = templateContent.find((content) => content.kind === "structured-content-action")!;
 const hub = templateContent.find((content) => content.kind === "hub-ecosystem")!;
 const embedded = templateContent.find((content) => content.kind === "embedded-app")!;
 const canonical = (kind: TemplateManifestEntry["kind"]) => templateManifest.find((entry) => entry.kind === kind)!;
-/** ORB-VISUAL-1C: volumetric atmospheric limb field + hot-limb colors + stronger solar flare on the right magenta orb only; grey orb untouched. */
+/** ORB-VISUAL-1C: accepted atmospheric profiles on both edge orbs; placement remains lab-owned. */
 const flowExperimentDecor = [{ orb: "greyLeft" as const, radius: 250 }, { orb: "magentaRight" as const, radius: 228 }].map((item) => isDecorOrb(item) && item.orb === "magentaRight"
-  ? { ...item, radius: 228, props: { atmosphereMode: "field" as const, atmosphereWidth: 11, atmosphereFocus: 3.5, atmosphereIntensity: 0.48, innerGlowWidth: 8, innerGlowIntensity: 0.11, innerGlowColor: "#FF2FAE", innerGlowFocus: 5, ambientLuminance: 0.52, autoRotateSpeed: 0.00045, plasmaSpeed: 0.8, outerGlowColor: "#FF2FAE", midGlowColor: "#FF65C7", hotCoreColor: "#FFF7FC", solarFlareIntensity: 1.35, surfaceColorMode: "lit-gradient" as const, surfaceShadowColor: "#3A0B28", surfaceDarkColor: "#7E165A", surfaceMidColor: "#FF2FAE", surfaceLightColor: "#FF78CB", surfaceHotColor: "#FF8FD5", surfaceHotThreshold: 0.9 } }
+  ? { ...item, radius: 228, props: orbAppearanceProfiles.magentaAtmosphere }
   : isDecorOrb(item) && item.orb === "greyLeft"
-    ? { ...item, radius: 250, props: { atmosphereMode: "field" as const, atmosphereWidth: 10, atmosphereFocus: 3.5, atmosphereIntensity: 0.38, innerGlowWidth: 8, innerGlowIntensity: 0.09, innerGlowColor: "#C9D3DE", innerGlowFocus: 5, ambientLuminance: 0.48, autoRotateSpeed: 0.00035, plasmaSpeed: 0.8, outerGlowColor: "#94A3B8", midGlowColor: "#CBD5E1", hotCoreColor: "#F6F8FA", solarFlareIntensity: 1.25, surfaceColorMode: "lit-gradient" as const, surfaceShadowColor: "#1F2933", surfaceDarkColor: "#56616F", surfaceMidColor: "#AEB8C4", surfaceLightColor: "#DCE3EA", surfaceHotColor: "#F6F8FA", surfaceHotThreshold: 0.9 } }
+    ? { ...item, radius: 250, props: orbAppearanceProfiles.greyAtmosphere }
     : item);
 
 const FlowExperiment: ComponentType = () => flow.kind === "flow-scenario" ? <FlowScenarioTemplate content={flow} decorItems={flowExperimentDecor} hideLeadConnector hideTailConnector /> : null;
 const FlowBaseline: ComponentType = () => flow.kind === "flow-scenario" ? <FlowScenarioTemplate content={flow} hideLeadConnector hideTailConnector /> : null;
 const structuredAnimatedMagentaDecor = [
-  { orb: "greyLeft" as const, radius: 228, offsetY: 56, props: { skinStyle: "canonical-magenta" as const, accentColor: "#FF2FAE", primaryDotColor: "#FF2FAE", glowingStrokeIntensity: 0.2, autoRotateSpeed: 0.0012, plasmaSpeed: 0.8, atmosphereMode: "field" as const, atmosphereWidth: 11, atmosphereFocus: 3.5, atmosphereIntensity: 0.48, innerGlowWidth: 8, innerGlowIntensity: 0.11, innerGlowColor: "#FF2FAE", innerGlowFocus: 5, ambientLuminance: 0.52, outerGlowColor: "#FF2FAE", midGlowColor: "#FF65C7", hotCoreColor: "#FFF7FC", solarFlareIntensity: 1.35, surfaceColorMode: "lit-gradient" as const, surfaceShadowColor: "#3A0B28", surfaceDarkColor: "#7E165A", surfaceMidColor: "#FF2FAE", surfaceLightColor: "#FF78CB", surfaceHotColor: "#FF8FD5", surfaceHotThreshold: 0.9 } },
-  { orb: "magentaRight" as const, radius: 228, offsetY: -170, props: { atmosphereMode: "field" as const, atmosphereWidth: 11, atmosphereFocus: 3.5, atmosphereIntensity: 0.48, innerGlowWidth: 8, innerGlowIntensity: 0.11, innerGlowColor: "#FF2FAE", innerGlowFocus: 5, ambientLuminance: 0.52, autoRotateSpeed: 0.0012, plasmaSpeed: 0.8, outerGlowColor: "#FF2FAE", midGlowColor: "#FF65C7", hotCoreColor: "#FFF7FC", solarFlareIntensity: 1.35, surfaceColorMode: "lit-gradient" as const, surfaceShadowColor: "#3A0B28", surfaceDarkColor: "#7E165A", surfaceMidColor: "#FF2FAE", surfaceLightColor: "#FF78CB", surfaceHotColor: "#FF8FD5", surfaceHotThreshold: 0.9 } },
+  { orb: "greyLeft" as const, radius: 228, offsetY: 56, props: { ...orbAppearanceProfiles.magentaAtmosphere, skinStyle: "canonical-magenta" as const, accentColor: "#FF2FAE", primaryDotColor: "#FF2FAE", glowingStrokeIntensity: 0.2, autoRotateSpeed: 0.0012 } },
+  { orb: "magentaRight" as const, radius: 228, offsetY: -170, props: { ...orbAppearanceProfiles.magentaAtmosphere, autoRotateSpeed: 0.0012 } },
 ];
 const StructuredAnimatedMagenta: ComponentType = () => structured.kind === "structured-content-action" ? <StructuredActionTemplate content={structured} decorItems={structuredAnimatedMagentaDecor} /> : null;
 const hubAnimatedDecor = [
   // Mirror the unchanged upper-right orb: 1080 - 60 - 440 = 580.
-  { orb: "greyLeft" as const, radius: 228, viewport: { x: 0, y: 580, w: 440, h: 440 }, props: { atmosphereMode: "field" as const, atmosphereWidth: 10, atmosphereFocus: 3.5, atmosphereIntensity: 0.38, innerGlowWidth: 8, innerGlowIntensity: 0.09, innerGlowColor: "#C9D3DE", innerGlowFocus: 5, ambientLuminance: 0.48, autoRotateSpeed: 0.00035, plasmaSpeed: 0.8, outerGlowColor: "#94A3B8", midGlowColor: "#CBD5E1", hotCoreColor: "#F6F8FA", solarFlareIntensity: 1.25, surfaceColorMode: "lit-gradient" as const, surfaceShadowColor: "#1F2933", surfaceDarkColor: "#56616F", surfaceMidColor: "#AEB8C4", surfaceLightColor: "#DCE3EA", surfaceHotColor: "#F6F8FA", surfaceHotThreshold: 0.9 } },
-  { orb: "magentaRight" as const, radius: 228, viewport: { x: 1480, y: 60, w: 440, h: 440 }, props: { autoRotateSpeed: 0.0012, plasmaSpeed: 0.8, outerGlowColor: "#FF2FAE", midGlowColor: "#FF65C7", hotCoreColor: "#FFF7FC", solarFlareIntensity: 1.35 } },
+  { orb: "greyLeft" as const, radius: 228, viewport: { x: 0, y: 580, w: 440, h: 440 }, props: orbAppearanceProfiles.greyAtmosphere },
+  { orb: "magentaRight" as const, radius: 228, viewport: { x: 1480, y: 60, w: 440, h: 440 }, props: orbAppearanceProfiles.magentaRim },
 ];
 const HubAnimatedPlanets: ComponentType = () => hub.kind === "hub-ecosystem" ? <HubEcosystemTemplate content={hub} decorItems={hubAnimatedDecor} /> : null;
 const staticEmbeddedPlanets = [
@@ -73,7 +73,7 @@ const labSlides = [
   { label: "TEMPLATE 2/10 — END CARD — TEST", entry: templateManifest.find((item) => item.kind === "end-card")!, component: templateManifest.find((item) => item.kind === "end-card")!.component },
   {
     label: "TEMPLATE 4/10 — EMBEDDED INTERACTIVE APP — TEST",
-    entry: templateManifest[3],
+    entry: canonical("embedded-app"),
     component: EmbeddedStaticPlanets,
     preserveProductionChrome: true,
   },

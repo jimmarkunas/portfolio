@@ -463,3 +463,10 @@
 .pdma-decoration-host .pdmat-deco-item--field { left: var(--x); width: calc(var(--w) + var(--pdma-art-extra)); object-fit: cover; }
 
 .pdma-decoration-host [data-decorative-variant="title-hero"] .pdmat-deco-item--right { left: calc(var(--x) + var(--pdma-art-extra) + 80px); }
+
+/* Shared live-orb support belongs to the decorative renderer, not a consumer route. */
+.pdmat-deco-orb { position: absolute; inset: 0; pointer-events: auto; }
+.pdmat-deco-orb--left { clip-path: inset(0 50% 0 0); }
+.pdmat-deco-orb--right { clip-path: inset(0 0 0 50%); }
+.pdma-canvas-stage:has(.pdmat-deco-orb) .pdma-logical-canvas { pointer-events: none; }
+.pdma-canvas-stage:has(.pdmat-deco-orb) .pdmat-stage :is(a, button, input, select, textarea, iframe, [tabindex]) { pointer-events: auto; }

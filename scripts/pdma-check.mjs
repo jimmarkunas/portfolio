@@ -11,5 +11,6 @@ const run = (command, args) => {
 
 run(process.execPath, ["scripts/pdma-deck-check.mjs"])
 run(process.execPath, ["scripts/pdma-template-check.mjs"])
+run(process.execPath, ["scripts/pdma-orb-timing-check.mjs"])
 run("npm", ["run", "typecheck"])
 console.log("PDMA full check passed.")

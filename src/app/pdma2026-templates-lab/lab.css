@@ -26,10 +26,3 @@
 .pdma2026-templates-lab .pdmat-slide--hub-ecosystem {
   background: transparent;
 }
-
-/* Recovered live-orb support stays scoped to the lab. */
-.pdma2026-templates-lab .pdmat-deco-orb { position: absolute; inset: 0; pointer-events: auto; }
-.pdma2026-templates-lab .pdmat-deco-orb--left { clip-path: inset(0 50% 0 0); }
-.pdma2026-templates-lab .pdmat-deco-orb--right { clip-path: inset(0 0 0 50%); }
-.pdma2026-templates-lab .pdmat-slide:has(.pdmat-deco-orb) .pdmat-stage { pointer-events: none; }
-.pdma2026-templates-lab .pdmat-slide:has(.pdmat-deco-orb) .pdmat-stage :is(a, button, input, select, textarea, iframe, [tabindex]) { pointer-events: auto; }

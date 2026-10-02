@@ -1,11 +1,12 @@
 "use client";
 
-import { PBDSKineticSphere } from "@/app/pdma2026-orb-lab/PBDSKineticSphereLab";
+import { PBDSKineticSphere } from "@/components/pbds/orb/PBDSKineticSphere";
 
 export default function PbdsOrbEmbedPage() {
   return (
     <main className="pbds-orb-embed" aria-label="PBDS kinetic orb animation">
       <PBDSKineticSphere
+        initialMotion="spring-in"
         radius={290}
         skinStyle="canonical-magenta"
         accentColor="#FF2FAE"

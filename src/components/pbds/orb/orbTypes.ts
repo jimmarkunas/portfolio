@@ -3,6 +3,8 @@ export type CropPosition = "center" | "orb-right" | "orb-left" | "orb-horizon";
 export type OrbSkinStyle = "canonical-magenta" | "canonical-white" | "obsidian-ice" | "custom";
 
 export interface PBDSKineticSphereProps {
+  /** Preserve the historical embed spring-in; presentations use a settled surface. */
+  initialMotion?: "settled" | "spring-in";
   centerOffsetX?: number;
   centerOffsetY?: number;
   radius?: number;

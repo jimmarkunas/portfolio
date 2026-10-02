@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useRef } from "react";
 
+import { advanceOrbClock } from "./orbTiming";
 import type { PBDSKineticSphereProps } from "./orbTypes";
 
 type RGB = { r: number; g: number; b: number };
@@ -119,7 +120,7 @@ function buildAtmosphereField(width:number,height:number,cx:number,cy:number,rad
 }
 
 export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
-  surfaceDensityScale=1,surfaceClipToSilhouette=false,
+  initialMotion="settled",surfaceDensityScale=1,surfaceClipToSilhouette=false,
   radius=290,centerOffsetX=0,centerOffsetY=0,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,plasmaSpeed=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,outerGlowColor,midGlowColor,hotCoreColor,solarFlareIntensity=1,outerGlowFocus=1,midGlowFocus=1,hotCoreFocus=1,hotCoreWidthMultiplier=1,atmosphereMode="stroke",atmosphereWidth=24,atmosphereFocus=3.5,atmosphereIntensity=1,innerGlowWidth=14,innerGlowIntensity=0,innerGlowColor="#FF78CB",innerGlowFocus=3.5,surfaceColorMode="legacy",surfaceShadowColor,surfaceDarkColor,surfaceMidColor,surfaceLightColor,surfaceHotColor,surfaceHotThreshold=.9,orbitalSystem,
 })=>{
   const canvasRef=useRef<HTMLCanvasElement|null>(null);
@@ -143,7 +144,7 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
   },[skinStyle,accentColor,primaryDotColor,shadowDotColor,outerGlowColor,midGlowColor,hotCoreColor,surfaceColorMode,surfaceShadowColor,surfaceDarkColor,surfaceMidColor,surfaceLightColor,surfaceHotColor,surfaceHotThreshold]);
 
   const mouseRef=useRef({x:-9999,y:-9999,prevX:-9999,prevY:-9999,isHovered:false,isDragging:false});
-  const rotationRef=useRef({rotX:.08,rotY:skinStyle==="canonical-magenta"?-.85:.85,velX:0,velY:0});
+  const rotationRef=useRef({rotX:.08,rotY:skinStyle==="canonical-magenta"?-.85:.85,velX:0,velY:initialMotion==="spring-in"?autoRotateSpeed:0});
   const dotsRef=useRef<StippleDot[]>([]),plasmaRef=useRef<Plasma[]>([]);
   const orbitalRef=useRef<OrbitalState>({ring:[],bodies:[],phase:0});
 
@@ -151,10 +152,10 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
     const dots:StippleDot[]=[],gold=Math.PI*(3-Math.sqrt(5));
     // Start every dot on its rotated target (same transform as the render loop) so no spring-settling is visible.
     const {rotX,rotY}=rotationRef.current,sinX=Math.sin(rotX),cosX=Math.cos(rotX),sinY=Math.sin(rotY),cosY=Math.cos(rotY);
-    for(let i=0;i<stippleDensity;i++){const y=1-(i/(stippleDensity-1))*2,ry=Math.sqrt(Math.max(0,1-y*y)),theta=gold*i,x=Math.cos(theta)*ry,z=Math.sin(theta)*ry,x1=x*cosY+z*sinY,z1=-x*sinY+z*cosY;dots.push({bx:x,by:y,bz:z,x:x1*radius,y:(y*cosX-z1*sinX)*radius,z:(y*sinX+z1*cosX)*radius,vx:0,vy:0,vz:0,baseSize:.65+Math.random()*.45,phase:Math.random()*Math.PI*2});}
+    for(let i=0;i<stippleDensity;i++){const y=1-(i/(stippleDensity-1))*2,ry=Math.sqrt(Math.max(0,1-y*y)),theta=gold*i,x=Math.cos(theta)*ry,z=Math.sin(theta)*ry,x1=x*cosY+z*sinY,z1=-x*sinY+z*cosY;dots.push({bx:x,by:y,bz:z,x:(initialMotion==="spring-in"?x:x1)*radius,y:(initialMotion==="spring-in"?y:y*cosX-z1*sinX)*radius,z:(initialMotion==="spring-in"?z:y*sinX+z1*cosX)*radius,vx:0,vy:0,vz:0,baseSize:.65+Math.random()*.45,phase:Math.random()*Math.PI*2});}
     dotsRef.current=dots;
     const plasma:Plasma[]=[];for(let i=0;i<380;i++)plasma.push({angle:Math.random()*Math.PI*2,distFactor:1+Math.random()*.1,size:.5+Math.random()*1.1,alpha:.25+Math.random()*.75,speed:(Math.random()-.5)*.003,radialVelocity:.0005+Math.random()*.0016,life:Math.random()*100,maxLife:60+Math.random()*80});plasmaRef.current=plasma;
-  },[radius,stippleDensity,surfaceDensityScale]);
+  },[radius,stippleDensity,surfaceDensityScale,initialMotion]);
 
   useEffect(()=>{
     if(!orbitalSystem?.enabled){orbitalRef.current={ring:[],bodies:[],phase:0};return;}
@@ -168,9 +169,11 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
   useEffect(()=>{
     const canvas=canvasRef.current;if(!canvas)return;const ctx=canvas.getContext("2d",{alpha:true});if(!ctx)return;
     let animId=0,width=0,height=0,time=0;
+    const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+    let redraw=()=>{};
     const host=canvas.parentElement;
     if(!host)return;
-    const resize=()=>{const nextWidth=host.clientWidth||600,nextHeight=host.clientHeight||600;if(nextWidth===width&&nextHeight===height)return;width=canvas.width=nextWidth;height=canvas.height=nextHeight;};
+    const resize=()=>{const nextWidth=host.clientWidth||600,nextHeight=host.clientHeight||600;if(nextWidth===width&&nextHeight===height)return;width=canvas.width=nextWidth;height=canvas.height=nextHeight;redraw();};
     resize();
     const observer=new ResizeObserver(resize);observer.observe(host);
     // Surface color gradient (experimental): maps each visible dot's existing lit-ness (illum, 0..1) onto
@@ -182,7 +185,7 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
       if(illum<=st.hotStart)return cols[cols.length-1];
       return lerpRgb(cols[cols.length-1],st.hot,Math.min(1,(illum-st.hotStart)/(1-st.hotStart)));
     }:null;
-    const render=()=>{
+    const draw=()=>{
       time+=.025;ctx.clearRect(0,0,width,height);
       const {cx,cy}=resolveOrbCenter({width,height,radius,cropPosition,offsetX:centerOffsetX,offsetY:centerOffsetY});
       const rot=rotationRef.current,mouse=mouseRef.current;if(!mouse.isDragging){rot.rotY+=autoRotateSpeed+rot.velY;rot.rotX+=rot.velX;rot.velX*=.92;rot.velY*=.92;}
@@ -208,8 +211,8 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
       const mouseRelX=mouse.x-cx,mouseRelY=mouse.y-cy,mouseDist=Math.sqrt(mouseRelX*mouseRelX+mouseRelY*mouseRelY),interactionRadius=radius*1.35;const visible:Array<{sx:number;sy:number;z:number;size:number;color:string;alpha:number}>=[];
       for(const p of dotsRef.current){const x1=p.bx*cosY+p.bz*sinY,z1=-p.bx*sinY+p.bz*cosY,y1=p.by*cosX-z1*sinX,nz=p.by*sinX+z1*cosX,nx=x1,ny=y1,nDotL=nx*lightX+ny*lightY+nz*lightZ,effective=Math.max(0,nDotL)+ambientLuminance*.45,tx=nx*radius,ty=ny*radius,tz=nz*radius;
         // Undrawn (back-facing / unlit) dots track their targets, so they re-enter view in place instead of springing in from a stale position.
-        if(nz<-.05||effective<.1){p.x=tx;p.y=ty;p.z=tz;p.vx=p.vy=p.vz=0;continue;}
-        if(interactive&&mouse.isHovered&&mouseDist<interactionRadius){const dx=p.x-mouseRelX,dy=p.y-mouseRelY,d=Math.sqrt(dx*dx+dy*dy)||1,influence=Math.max(0,1-d/(radius*.9))*interactionStrength;if(interactionMode==="repel"){const f=influence*18;p.vx+=(dx/d)*f;p.vy+=(dy/d)*f;}else if(interactionMode==="attract"){const f=influence*14;p.vx-=(dx/d)*f;p.vy-=(dy/d)*f;}else{const a=Math.atan2(dy,dx),f=influence*18;p.vx+=Math.cos(a+Math.PI/2)*f;p.vy+=Math.sin(a+Math.PI/2)*f;}}
+        if(nz<-.05||effective<.1){if(initialMotion==="spring-in")continue;p.x=tx;p.y=ty;p.z=tz;p.vx=p.vy=p.vz=0;continue;}
+        if(interactive&&!reducedMotion.matches&&mouse.isHovered&&mouseDist<interactionRadius){const dx=p.x-mouseRelX,dy=p.y-mouseRelY,d=Math.sqrt(dx*dx+dy*dy)||1,influence=Math.max(0,1-d/(radius*.9))*interactionStrength;if(interactionMode==="repel"){const f=influence*18;p.vx+=(dx/d)*f;p.vy+=(dy/d)*f;}else if(interactionMode==="attract"){const f=influence*14;p.vx-=(dx/d)*f;p.vy-=(dy/d)*f;}else{const a=Math.atan2(dy,dx),f=influence*18;p.vx+=Math.cos(a+Math.PI/2)*f;p.vy+=Math.sin(a+Math.PI/2)*f;}}
         const k=.09,damp=.82;p.vx=(p.vx+(tx-p.x)*k)*damp;p.vy=(p.vy+(ty-p.y)*k)*damp;p.vz=(p.vz+(tz-p.z)*k)*damp;p.x+=p.vx;p.y+=p.vy;p.z+=p.vz;const fov=850,scale=fov/(fov+p.z),sx=cx+p.x*scale,sy=cy+p.y*scale,rad=Math.sqrt(p.x*p.x+p.y*p.y)/radius,illum=Math.pow(Math.min(1,effective),1.6),limb=Math.pow(Math.min(1,rad),2.2),brightness=Math.min(1,illum*.45+limb*.55+ambientLuminance*.25);if(brightness<.08)continue;let color:string,alpha:number,size=p.baseSize*scale*(.75+brightness*.5);
         // Compressed toward the peak (matches the renderer's own rad>.88&&nDotL>.4 rarity behavior for the highlight branch)
         // so brightness stays rare and the sphere body reads as dominantly magenta, per the accepted reference.
@@ -222,13 +225,31 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
         const f=fieldRef.current.field;if(f){ctx.save();ctx.globalAlpha=1;ctx.globalCompositeOperation="screen";ctx.drawImage(f.canvas,f.x,f.y);ctx.restore();}}
       else if(glowingStrokeIntensity>0&&strokeMode!=="none")drawAtmosphericLimb(ctx,cx,cy,radius,Math.atan2(lightY,lightX),strokeMode,glowingStrokeIntensity,glowSpread,coreHotness,strokeWidth,innerWashIntensity,strokeShadowOpacity,glowHex,glowRgb,palette.rawRgb,palette.limb,limbShape);
       drawOrbitals(true);
-      ctx.globalAlpha=1;animId=requestAnimationFrame(render);
-    };render();return()=>{observer.disconnect();cancelAnimationFrame(animId);};
-  },[radius,centerOffsetX,centerOffsetY,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,plasmaSpeed,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity,solarFlareIntensity,outerGlowFocus,midGlowFocus,hotCoreFocus,hotCoreWidthMultiplier,atmosphereMode,atmosphereWidth,atmosphereFocus,atmosphereIntensity,innerGlowWidth,innerGlowIntensity,innerGlowColor,innerGlowFocus,surfaceColorMode,surfaceShadowColor,surfaceDarkColor,surfaceMidColor,surfaceLightColor,surfaceHotThreshold,orbitalSystem]);
+      ctx.globalAlpha=1;
+    };
+    // Preserve the accepted 60 Hz simulation speed on 30/60/120/144 Hz displays.
+    // Keep spring physics unchanged; bound catch-up work after a stalled frame.
+    const clock={lastFrame:0,accumulator:0};
+    const tick=(timestamp:number)=>{
+      if(document.hidden||reducedMotion.matches){animId=0;return;}
+      const steps=advanceOrbClock(clock,timestamp);
+      for(let i=0;i<steps;i++)draw();
+      animId=requestAnimationFrame(tick);
+    };
+    const syncMotion=()=>{
+      cancelAnimationFrame(animId);animId=0;clock.accumulator=0;
+      if(!document.hidden&&!reducedMotion.matches){clock.lastFrame=performance.now();animId=requestAnimationFrame(tick);}
+    };
+    redraw=()=>{if(reducedMotion.matches)draw();};
+    draw();syncMotion();
+    reducedMotion.addEventListener("change",syncMotion);
+    document.addEventListener("visibilitychange",syncMotion);
+    return()=>{observer.disconnect();cancelAnimationFrame(animId);reducedMotion.removeEventListener("change",syncMotion);document.removeEventListener("visibilitychange",syncMotion);};
+  },[initialMotion,radius,centerOffsetX,centerOffsetY,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,plasmaSpeed,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity,solarFlareIntensity,outerGlowFocus,midGlowFocus,hotCoreFocus,hotCoreWidthMultiplier,atmosphereMode,atmosphereWidth,atmosphereFocus,atmosphereIntensity,innerGlowWidth,innerGlowIntensity,innerGlowColor,innerGlowFocus,surfaceColorMode,surfaceShadowColor,surfaceDarkColor,surfaceMidColor,surfaceLightColor,surfaceHotThreshold,orbitalSystem]);
 
   // Pointer → canvas backing-store coordinates. Identity when unscaled (standalone embed); corrects for
   // ancestor CSS transforms such as the PDMA shell's uniform scale(), where the rendered rect ≠ canvas size.
   const toCanvas=(e:React.MouseEvent<HTMLCanvasElement>)=>{const c=canvasRef.current,rect=c?.getBoundingClientRect();if(!c||!rect||!rect.width||!rect.height)return null;return {x:(e.clientX-rect.left)*(c.width/rect.width),y:(e.clientY-rect.top)*(c.height/rect.height)};};
-  const handleMouseMove=(e:React.MouseEvent<HTMLCanvasElement>)=>{const pt=toCanvas(e);if(!pt)return;const x=pt.x,y=pt.y,m=mouseRef.current;if(m.isDragging){const dx=x-m.prevX,dy=y-m.prevY;rotationRef.current.rotY+=dx*.008;rotationRef.current.rotX-=dy*.008;rotationRef.current.velY=dx*.0012;rotationRef.current.velX=-dy*.0012;}m.prevX=x;m.prevY=y;m.x=x;m.y=y;m.isHovered=true;};
-  return <div className={`relative w-full h-full overflow-hidden select-none ${className}`}><canvas ref={canvasRef} onMouseMove={handleMouseMove} onMouseDown={e=>{const pt=toCanvas(e);if(!pt)return;mouseRef.current.isDragging=true;mouseRef.current.prevX=pt.x;mouseRef.current.prevY=pt.y;}} onMouseUp={()=>mouseRef.current.isDragging=false} onMouseLeave={()=>{mouseRef.current.isHovered=false;mouseRef.current.isDragging=false;mouseRef.current.x=-9999;mouseRef.current.y=-9999;}} className="w-full h-full block cursor-grab active:cursor-grabbing touch-none"/></div>;
+  const handleMouseMove=(e:React.MouseEvent<HTMLCanvasElement>)=>{if(!interactive||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;const pt=toCanvas(e);if(!pt)return;const x=pt.x,y=pt.y,m=mouseRef.current;if(m.isDragging){const dx=x-m.prevX,dy=y-m.prevY;rotationRef.current.rotY+=dx*.008;rotationRef.current.rotX-=dy*.008;rotationRef.current.velY=dx*.0012;rotationRef.current.velX=-dy*.0012;}m.prevX=x;m.prevY=y;m.x=x;m.y=y;m.isHovered=true;};
+  return <div className={`relative w-full h-full overflow-hidden select-none ${className}`}><canvas ref={canvasRef} onMouseMove={handleMouseMove} onMouseDown={e=>{if(!interactive||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;const pt=toCanvas(e);if(!pt)return;mouseRef.current.isDragging=true;mouseRef.current.prevX=pt.x;mouseRef.current.prevY=pt.y;}} onMouseUp={()=>mouseRef.current.isDragging=false} onMouseLeave={()=>{mouseRef.current.isHovered=false;mouseRef.current.isDragging=false;mouseRef.current.x=-9999;mouseRef.current.y=-9999;}} className="w-full h-full block cursor-grab active:cursor-grabbing touch-none"/></div>;
 };

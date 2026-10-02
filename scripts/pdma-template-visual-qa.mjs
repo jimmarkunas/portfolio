@@ -88,8 +88,9 @@ async function measure(page) {
     const layout = {}
     slide.querySelectorAll(".pdmat-stage [class*='pdmat-']").forEach((element, index) => {
       if (element.closest(".pdmat-deco")) return
-      if (getComputedStyle(element).display === "none" || element.getClientRects().length === 0) return
-      layout[`${index}:${element.className.toString().split(" ")[0]}`] = toLogical(element.getBoundingClientRect())
+      const rect = element.getBoundingClientRect()
+      if (getComputedStyle(element).display === "none" || element.getClientRects().length === 0 || (!rect.width && !rect.height)) return
+      layout[`${index}:${element.className.toString().split(" ")[0]}`] = toLogical(rect)
     })
     window.scrollTo(0, 5000)
     const scrolled = window.scrollY
@@ -126,6 +127,9 @@ async function measure(page) {
       navigation: [...document.querySelectorAll(".pdma-bottom-bar button")].filter((b) => { const r = b.getBoundingClientRect(); return r.width > 0 && r.height > 0 && r.bottom <= innerHeight }).length,
       titleBlock: Boolean(document.querySelector(".pdma-logical-canvas .pdma-title-block h1")),
       text: document.body.innerText,
+      // Match the production QA contract: canonical DOM copy includes accepted hidden
+      // takeaway/aside nodes. Visible text is separately checked for clipping above.
+      nodes: (() => { const values=[]; const walker=document.createTreeWalker(slide,NodeFilter.SHOW_TEXT); while(walker.nextNode()) values.push(walker.currentNode.textContent); return values.join(" ") })(),
       hrefs: [...document.querySelectorAll("a[href]")].map((a) => a.getAttribute("href")),
       layout,
       clippedText,
@@ -157,7 +161,7 @@ for (const viewport of viewports) {
     if (m.canvas.x < -1 || m.canvas.y < -1 || m.canvas.x + m.canvas.width > m.viewport.width + 1 || m.canvas.y + m.canvas.height > m.viewport.height + 1) fail(`${tag}: canvas exceeds viewport`)
     if (!m.titleBlock) fail(`${tag}: shell title block missing`)
     if (m.navigation < 4) fail(`${tag}: navigation controls not visible (${m.navigation})`)
-    const text = normalize(m.text)
+    const text = `${normalize(m.nodes)} || ${normalize(m.text)}`
     for (const value of copyFor(kind)) {
       if (intentionallyHiddenCopy.has(value.toUpperCase())) continue
       if (value.startsWith("/") || value.startsWith("http")) { if (!m.hrefs.includes(value)) fail(`${tag}: link target missing ${value}`); continue }
