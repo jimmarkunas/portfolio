@@ -35,7 +35,7 @@ git rev-list --objects --all \
   | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' \
   | awk '$1 == "blob" { printf "%012d\t%s\t%s\n", $3, $2, substr($0, index($0,$4)) }' \
   | sort -nr \
-  | head -n "$limit" > "$tmp"
+  | sed -n "1,${limit}p" > "$tmp"
 
 awk -F '\t' '{ printf "%10.2f MiB  %s  %s\n", $1/1048576, $2, $3 }' "$tmp"
 
