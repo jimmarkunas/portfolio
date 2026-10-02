@@ -24,7 +24,9 @@ Protect work in progress, avoid destructive edits, and keep visual changes deter
 ## Token + Execution Efficiency
 - Solve one root cause per attempt; no stacked speculative edits.
 - For single-fix requests, limit each attempt to a maximum of 3 files changed.
-- Verify with smallest possible check first, then run broader checks once.
+- For ordinary source/content/UI work, the smallest sufficient verification is authoritative: `npm run verify:route -- <affected-route>`.
+- For visual work, follow the route check with one browser/runtime review of the affected view.
+- Do not automatically escalate a passing route check into lint, typecheck, test, build, `npm run prepush`, or `npm run verify:predeploy`; broader validation is reserved for explicit user requests, release/deployment work, or cases the route check cannot exercise.
 - If an edit worsens output, revert that edit immediately before trying again.
 - After two failed attempts on the same issue, stop and present a short 3-step plan.
 
