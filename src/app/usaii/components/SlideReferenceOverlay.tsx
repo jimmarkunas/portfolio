@@ -8,7 +8,7 @@ export function SlideReferenceOverlay() {
 
   return (
     <img
-      src="/usaii/reference/slide01.png"
+      src="/usaii/reference-v2/slide01.png"
       alt=""
       aria-hidden="true"
       className="pointer-events-none absolute left-0 top-0 z-[100] h-[941px] w-[1672px]"
