@@ -1,6 +1,6 @@
 {
   "schema": "personal-career-brand/v1",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "status": "IN_PROGRESS",
   "last_approved_date": "2026-10-02",
   "authority": {
@@ -351,6 +351,28 @@
         "promo_launch_speed": "3X faster",
         "launch_timeline": "3 months",
         "system_integrations": 6
+      }
+    },
+    "bcg_lego": {
+      "primary": "Product + Architecture Bridge",
+      "secondary": "Digital Transformation / Platform Modernization",
+      "context": "International Retail",
+      "career_story": "Transform",
+      "signature_angle": "Turning BCG's global transformation strategy into shippable omni-channel product behavior across LEGO's retail and digital ecosystem.",
+      "secondary_story": "Helping execute LEGO's broader global digital turnaround by translating transformation strategy into customer-facing product, commerce, and omni-channel capabilities.",
+      "internal_dynamics": [
+        "Platform Modernization",
+        "Systems Integration",
+        "Operating Model Transformation",
+        "Multi-market / Global Scale",
+        "Matrixed Influence"
+      ],
+      "positioning_rule": "Lead with strategy-to-product translation. Use LEGO's broader global digital turnaround as the secondary story that establishes scale and business context.",
+      "approved_public_metrics": {
+        "revenue_growth": "3X",
+        "cost_savings": "$50M",
+        "digital_sales_uplift": "24%",
+        "AOV_lift": "$25"
       }
     }
   },
