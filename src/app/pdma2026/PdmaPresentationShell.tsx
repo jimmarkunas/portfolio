@@ -1,16 +1,15 @@
 "use client";
 
-import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
-import { createContext, useContext, useEffect, useRef, useState, type CSSProperties } from "react";
+import { createContext, useContext, useRef } from "react";
 import { usePresentationFullscreen } from "@/hooks/usePresentationFullscreen";
 import { usePresentationNavigation } from "@/hooks/usePresentationNavigation";
 import { PresentationTocDialog } from "@/components/presentation/PresentationTocDialog";
+import { PresentationCanvas, PresentationCanvasOverlayProvider } from "@/components/presentation/PresentationCanvas";
 import type { PresentationNavigationCopy } from "@/lib/presentation";
 import { PdmaTitleBlock } from "./components/PdmaTitleBlock";
 import { pdmaAssets } from "./pdmaAssets";
-import { PDMA_LOGICAL_CANVAS } from "./presentation/presentationTypes";
 import type { PdmaSlideManifestEntry } from "@/components/presentation/presentationTypes";
 import { usePdmaReducedMotion } from "./components/pdmaMotion";
 
@@ -18,40 +17,12 @@ const PdmaTitleContext = createContext<{ slide: number; config: PdmaSlideManifes
 
 export function PdmaTitleBlockOverlay() {
   const title = useContext(PdmaTitleContext);
-  const { titleInCanvas } = useContext(PdmaDecorationContext);
-  return title && !titleInCanvas ? <PdmaTitleBlock slide={title.slide} config={title.config} /> : null;
+  return title ? <PdmaTitleBlock slide={title.slide} config={title.config} /> : null;
 }
 
-const PdmaDecorationContext = createContext<{ host: HTMLDivElement | null; extraWidth: number; titleInCanvas: boolean }>({ host: null, extraWidth: 0, titleInCanvas: false });
-
-/** Decoration owns viewport width; semantic content keeps its canonical contain transform. */
-export function PdmaDecorativePlane({ children }: { children: React.ReactNode }) {
-  const { host, extraWidth } = useContext(PdmaDecorationContext);
-  return host ? createPortal(<div className="pdmat-slide pdma-decorative-plane" style={{ "--pdma-art-extra": `${extraWidth}px` } as CSSProperties}>{children}</div>, host) : <>{children}</>;
-}
-
+/** PDMA route adapter retained for standalone exercise slides. */
 export function PdmaSlideCanvas({ children }: { children: React.ReactNode }) {
-  const stageRef = useRef<HTMLDivElement>(null);
-  const [frame, setFrame] = useState({ scale: 1, left: 0, top: 0, extraWidth: 0 });
-  const [decorHost, setDecorHost] = useState<HTMLDivElement | null>(null);
-  const title = useContext(PdmaTitleContext);
-  useEffect(() => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    const update = () => {
-      const scale = Math.min(stage.clientWidth / PDMA_LOGICAL_CANVAS.width, stage.clientHeight / PDMA_LOGICAL_CANVAS.height);
-      const renderedWidth = PDMA_LOGICAL_CANVAS.width * scale;
-      const renderedHeight = PDMA_LOGICAL_CANVAS.height * scale;
-      const extraX = Math.max(0, stage.clientWidth - renderedWidth);
-      const extraY = Math.max(0, stage.clientHeight - renderedHeight);
-      setFrame({ scale, left: extraX / 2, top: extraY * 0.25, extraWidth: extraX / scale });
-    };
-    update();
-    const observer = new ResizeObserver(update);
-    observer.observe(stage);
-    return () => observer.disconnect();
-  }, []);
-  return <PdmaDecorationContext.Provider value={{ host: decorHost, extraWidth: frame.extraWidth, titleInCanvas: true }}><div ref={stageRef} className="pdma-canvas-stage"><div className="pdma-logical-canvas" style={{ left: frame.left, top: frame.top, transform: `scale(${frame.scale})` }}>{children}{title && <PdmaTitleBlock slide={title.slide} config={title.config} />}</div><div ref={setDecorHost} className="pdma-decoration-host" style={{ width: PDMA_LOGICAL_CANVAS.width + frame.extraWidth, top: frame.top, transform: `scale(${frame.scale})` }} /></div></PdmaDecorationContext.Provider>;
+  return <PresentationCanvas>{children}</PresentationCanvas>;
 }
 
 function PdmaHeader({ current, total, labels }: { current: number; total: number; labels: readonly [string, string, string] }) {
@@ -77,7 +48,7 @@ export function PdmaPresentationShell({ slides, slideManifest, navigation }: { s
   const reduced = usePdmaReducedMotion();
   const currentManifestEntry = slideManifest[currentSlide];
   return <main ref={containerRef} className="pdma-presentation">
-    <PdmaTitleContext.Provider value={{ slide: currentSlide + 1, config: currentManifestEntry.title }}><div className="pdma-stage"><AnimatePresence mode="wait" initial={false}><motion.div key={currentSlide} className="pdma-slide-layer" initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: reduced ? 0 : 0.45, ease: "easeOut" }}>{slides[currentSlide]}</motion.div></AnimatePresence></div></PdmaTitleContext.Provider>
+    <PdmaTitleContext.Provider value={{ slide: currentSlide + 1, config: currentManifestEntry.title }}><PresentationCanvasOverlayProvider overlay={<PdmaTitleBlockOverlay />}><div className="pdma-stage"><AnimatePresence mode="wait" initial={false}><motion.div key={currentSlide} className="pdma-slide-layer" initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: reduced ? 0 : 0.45, ease: "easeOut" }}>{slides[currentSlide]}</motion.div></AnimatePresence></div></PresentationCanvasOverlayProvider></PdmaTitleContext.Provider>
     <PdmaHeader current={currentSlide} total={slides.length} labels={currentManifestEntry.headerLabels} />
     <PdmaBottomBar current={currentSlide} total={slides.length} footer={currentManifestEntry.footerLabel} navigation={navigation} onPrev={prevSlide} onNext={nextSlide} onToc={() => setIsTocOpen(true)} onFullscreen={toggleFullscreen} isFullscreen={isFullscreen} />
     <PresentationTocDialog dialogId="pdma2026-slide-toc" isOpen={isTocOpen} currentSlide={currentSlide} slideTitles={slideManifest.map(({ tocTitle }) => tocTitle)} slideIdOrder={slideManifest.map(({ id }) => id)} totalSlides={slides.length} navCopy={navigation} onClose={() => setIsTocOpen(false)} onJumpToSlide={jumpToSlide} />

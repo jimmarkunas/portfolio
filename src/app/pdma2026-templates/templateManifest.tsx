@@ -30,7 +30,7 @@ export const templateNames: Record<TemplateKind, string> = {
   "structured-content-action": "Structured Content / Action",
 };
 
-export type TemplateManifestEntry = PdmaSlideManifestEntry & { kind: TemplateKind; templateName: string; sourceSlide: number | null; qa: "targeted" };
+export type TemplateManifestEntry = PresentationSlideManifestEntry & { kind: TemplateKind; templateName: string; sourceSlide: number | null; qa: "targeted" };
 
 function renderTemplate(content: TemplateContent): ReactNode {
   switch (content.kind) {
@@ -55,7 +55,7 @@ function templateAssets(content: TemplateContent) {
 
 /** Shell-compatible manifest: one entry per template, chrome taken from the mapped live slide. */
 export const templateManifest: readonly TemplateManifestEntry[] = templateContent.map((content, index) => {
-  const key = `slide-${String(index + 1).padStart(2, "0")}` as PdmaSlideKey;
+  const key = `slide-${String(index + 1).padStart(2, "0")}`;
   const templateName = templateNames[content.kind];
   const Component: ComponentType = () => renderTemplate(content);
   Component.displayName = `PdmaTemplate(${content.kind})`;

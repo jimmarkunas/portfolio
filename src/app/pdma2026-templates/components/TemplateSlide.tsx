@@ -2,7 +2,6 @@
 
 import type { CSSProperties, ReactNode } from "react";
 import { PresentationCanvas } from "@/components/presentation/PresentationCanvas";
-import { PdmaTitleBlockOverlay } from "@/app/pdma2026/PdmaPresentationShell";
 import type { PdmaTitleConfig } from "@/components/presentation/presentationTypes";
 import type { DecorativeVariant, TemplateKind } from "@/components/presentation/presentationTypes";
 import { DecorativeLayer, type DecorItem } from "./DecorativeLayer";
@@ -32,6 +31,5 @@ export function TemplateSlide({ kind, title, decorativeVariant = "none", decorIt
       <DecorativeLayer variant={decorativeVariant} items={decorItems} />
       <div className="pdmat-stage">{children}</div>
     </div>
-    <PdmaTitleBlockOverlay />
   </PresentationCanvas>;
 }

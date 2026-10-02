@@ -3,6 +3,7 @@ import type { LucideIcon } from "lucide-react";
 
 /** The single 1920×1080 semantic plane shared by the PDMA deck and template gallery. */
 export const PDMA_LOGICAL_CANVAS = { width: 1920, height: 1080 } as const;
+export const PRESENTATION_LOGICAL_CANVAS = PDMA_LOGICAL_CANVAS;
 
 /** Title-block configuration consumed by PdmaTitleBlock (title/subtitle styling lives in the shell). */
 export type PdmaTitleConfig = {

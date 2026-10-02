@@ -1,4 +1,4 @@
-import { PdmaDecorativePlane } from "@/app/pdma2026/PdmaPresentationShell";
+import { PresentationDecorativePlane } from "@/components/presentation/PresentationCanvas";
 import type { CSSProperties } from "react";
 import { PBDSOrb, type PBDSOrbProps } from "@/components/pbds/orb/PBDSOrb";
 import { orbPresets, type PBDSOrbPresetName } from "@/components/pbds/orb/orbPresets";
@@ -78,7 +78,7 @@ const orbSide = (preset: PBDSOrbPresetName) => orbPresets[preset].cropPosition =
 
 export function DecorativeLayer({ variant, items: explicitItems }: { variant: DecorativeVariant; items?: readonly DecorItem[] }) {
   const items = explicitItems ?? decorativeVariants[variant];
-  return <PdmaDecorativePlane><div className="pdmat-deco" aria-hidden="true" data-decorative-variant={explicitItems ? "custom" : variant}>
+  return <PresentationDecorativePlane><div className="pdmat-deco" aria-hidden="true" data-decorative-variant={explicitItems ? "custom" : variant}>
     {items.map((item) => isDecorOrb(item) ? <div key={`orb-${item.orb}`} className={`pdmat-deco-orb${item.fullPlane ? "" : ` pdmat-deco-orb--${orbSide(item.orb)}`}`} style={item.viewport ? { inset: "auto", left: `calc(${item.viewport.x}px + ${orbSide(item.orb) === "right" ? "var(--pdma-art-extra)" : "0px"})`, top: item.viewport.y, width: item.viewport.w, height: item.viewport.h } : item.visualScale || item.offsetX || item.offsetY ? { transform: `${item.offsetX || item.offsetY ? `translate(${item.offsetX ?? 0}px, ${item.offsetY ?? 0}px)` : ""}${item.visualScale ? ` scale(${item.visualScale})` : ""}`, transformOrigin: "0 0" } : undefined}>
       <PBDSOrb {...item.props} preset={item.orb} radius={item.radius} interactive={item.interactive} />
     </div> : isDecorImage(item) ? <img
@@ -89,5 +89,5 @@ export function DecorativeLayer({ variant, items: explicitItems }: { variant: De
       draggable={false}
       style={{ "--x": `${item.x}px`, "--y": `${item.y}px`, "--w": `${item.w}px`, "--h": `${item.h}px`, "--o": item.opacity ?? 1 } as CSSProperties}
     /> : <span key={`fade-${item.fade}`} className={`pdmat-deco-fade pdmat-deco-fade--${item.fade}`} style={{ "--y": `${item.y}px`, "--h": `${item.h}px` } as CSSProperties} />)}
-  </div></PdmaDecorativePlane>;
+  </div></PresentationDecorativePlane>;
 }

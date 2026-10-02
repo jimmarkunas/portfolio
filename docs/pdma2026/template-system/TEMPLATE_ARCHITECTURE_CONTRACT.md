@@ -37,9 +37,11 @@ The mapped live PDMA slide/config is the copy authority. **No approved concept i
 
 ## 4. Existing shell reuse
 
-Reuse `PdmaPresentationShell` and `PdmaTitleBlock` for navigation, title, header, and footer. The shared `PresentationCanvas` owns the single 1920×1080 logical plane used by the production deck, gallery, and exercise route. Keep its current scale, centering, and top-bias equation unchanged. **No file under `/src/app/pdma2026-templates/**` may import `pdmaGeometry.ts`.**
+Keep `PdmaPresentationShell`, `PdmaTitleBlock`, navigation, header, and footer as the PDMA route's visual chrome. Shared presentation canvas sizing, overlay context, and decorative portal primitives live under `src/components/presentation/`; the PDMA shell supplies its title overlay and continues to own its deck-specific chrome.
 
-This preserves the approved shell chrome while keeping template bodies in normal flow.
+The `/pdma2026-templates` route may consume the PDMA shell as its route adapter. Shared template components and presentation types must not import from `/src/app/pdma2026/**`. **No file under `/src/app/pdma2026-templates/**` may import `pdmaGeometry.ts`.** The shared canvas keeps the existing 1920×1080 contain behavior and decorative overflow geometry.
+
+The shared canvas keeps its current scale, centering, and top-bias equation unchanged. This preserves the approved shell chrome while keeping template bodies and canvas infrastructure reusable and geometry-free.
 
 ## 5. Required source tree
 

@@ -13,6 +13,7 @@ type StippleDot = { bx:number; by:number; bz:number; x:number; y:number; z:numbe
 type Plasma = { angle:number; distFactor:number; size:number; alpha:number; speed:number; radialVelocity:number; life:number; maxLife:number };
 type OrbitalParticle = { angle:number; thickness:number; size:number; phase:number };
 type OrbitalState = { ring:OrbitalParticle[]; bodies:OrbitalParticle[]; phase:number };
+type VisibleDot = { sx:number; sy:number; z:number; size:number; color:string; alpha:number };
 
 type OrbCenterInput = {
   width: number;
@@ -186,39 +187,56 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
       if(illum<=st.hotStart)return cols[cols.length-1];
       return lerpRgb(cols[cols.length-1],st.hot,Math.min(1,(illum-st.hotStart)/(1-st.hotStart)));
     }:null;
-    const draw=(advance=true)=>{
-      if(advance)time+=.025;ctx.clearRect(0,0,width,height);
+    const orbital=orbitalSystem?.enabled?orbitalSystem:null;
+    const visibleRecords:Array<VisibleDot|undefined>=[];
+    const visible:VisibleDot[]=[];
+    // Preserve the back orbital phase from before the final simulated step.
+    let backOrbitalPhase=orbitalRef.current.phase;
+    const simulate=(advance=true)=>{
+      if(advance)time+=.025;
       const {cx,cy}=resolveOrbCenter({width,height,radius,cropPosition,offsetX:centerOffsetX,offsetY:centerOffsetY});
-      const rot=rotationRef.current,mouse=mouseRef.current;if(advance&&!mouse.isDragging){rot.rotY+=autoRotateSpeed+rot.velY;rot.rotX+=rot.velX;rot.velX*=.92;rot.velY*=.92;}
+      const rot=rotationRef.current,mouse=mouseRef.current;
+      if(advance&&!mouse.isDragging){rot.rotY+=autoRotateSpeed+rot.velY;rot.rotX+=rot.velX;rot.velX*=.92;rot.velY*=.92;}
+      const sinX=Math.sin(rot.rotX),cosX=Math.cos(rot.rotX),sinY=Math.sin(rot.rotY),cosY=Math.cos(rot.rotY);
+      backOrbitalPhase=orbitalRef.current.phase;
+      if(orbital&&advance)orbitalRef.current.phase+=(orbital.orbitSpeed??.00022);
+      if(advance)for(const p of plasmaRef.current){p.life++;if(p.life>p.maxLife){p.life=0;p.distFactor=1.002+Math.random()*.02;}else p.distFactor+=p.radialVelocity*plasmaNoiseIntensity;p.angle+=p.speed*plasmaSpeed;}
+      let lightX=-.92,lightY=-.15,lightZ=.35;if(cropPosition==="orb-left")lightX=.92;const ll=Math.sqrt(lightX*lightX+lightY*lightY+lightZ*lightZ);lightX/=ll;lightY/=ll;lightZ/=ll;
+      const mouseRelX=mouse.x-cx,mouseRelY=mouse.y-cy,mouseDist=Math.sqrt(mouseRelX*mouseRelX+mouseRelY*mouseRelY),interactionRadius=radius*1.35;
+      for(const p of dotsRef.current){const x1=p.bx*cosY+p.bz*sinY,z1=-p.bx*sinY+p.bz*cosY,y1=p.by*cosX-z1*sinX,nz=p.by*sinX+z1*cosX,nx=x1,ny=y1,nDotL=nx*lightX+ny*lightY+nz*lightZ,effective=Math.max(0,nDotL)+ambientLuminance*.45,tx=nx*radius,ty=ny*radius,tz=nz*radius;
+        if(nz<-.05||effective<.1){if(initialMotion==="spring-in")continue;p.x=tx;p.y=ty;p.z=tz;p.vx=p.vy=p.vz=0;continue;}
+        if(interactive&&(!reducedMotion.matches||mouse.isDragging)&&mouse.isHovered&&mouseDist<interactionRadius){const dx=p.x-mouseRelX,dy=p.y-mouseRelY,d=Math.sqrt(dx*dx+dy*dy)||1,influence=Math.max(0,1-d/(radius*.9))*interactionStrength;if(interactionMode==="repel"){const f=influence*18;p.vx+=(dx/d)*f;p.vy+=(dy/d)*f;}else if(interactionMode==="attract"){const f=influence*14;p.vx-=(dx/d)*f;p.vy-=(dy/d)*f;}else{const a=Math.atan2(dy,dx),f=influence*18;p.vx+=Math.cos(a+Math.PI/2)*f;p.vy+=Math.sin(a+Math.PI/2)*f;}}
+        const k=.09,damp=.82;p.vx=(p.vx+(tx-p.x)*k)*damp;p.vy=(p.vy+(ty-p.y)*k)*damp;p.vz=(p.vz+(tz-p.z)*k)*damp;p.x+=p.vx;p.y+=p.vy;p.z+=p.vz;
+      }
+    };
+    const paint=()=>{
+      ctx.clearRect(0,0,width,height);
+      const {cx,cy}=resolveOrbCenter({width,height,radius,cropPosition,offsetX:centerOffsetX,offsetY:centerOffsetY});
+      const rot=rotationRef.current,mouse=mouseRef.current;
       const sinX=Math.sin(rot.rotX),cosX=Math.cos(rot.rotX),sinY=Math.sin(rot.rotY),cosY=Math.cos(rot.rotY),glowRgb=palette.glowRgb,glowHex=palette.glowHex;
-      const orbital=orbitalSystem?.enabled?orbitalSystem:null;
       const drawOrbitals=(front:boolean)=>{
         if(!orbital)return;
         const state=orbitalRef.current,tilt=(orbital.ringTilt??64)*Math.PI/180,roll=(orbital.ringRoll??-16)*Math.PI/180,ct=Math.cos(tilt),st=Math.sin(tilt),cr=Math.cos(roll),sr=Math.sin(roll),orbitRadius=radius*(orbital.ringRadius??1.32),fov=850;
         const project=(p:OrbitalParticle,angle:number)=>{const x=orbitRadius*Math.cos(angle),z=orbitRadius*Math.sin(angle),y=radius*p.thickness,z1=y*st+z*ct,y1=y*ct-z*st,x2=x*cr-y1*sr,y2=x*sr+y1*cr,scale=fov/(fov+z1),sx=cx+x2*scale,sy=cy+y2*scale,inside=x2*x2+y2*y2<radius*radius,frontSurface=Math.sqrt(Math.max(0,radius*radius-x2*x2-y2*y2));return {sx,sy,z:z1,scale,occluded:inside&&z1<frontSurface};};
-        const drawPoint=(p:OrbitalParticle,angle:number,body:boolean)=>{const q=project(p,angle);if(q.occluded||(front!== (q.z>=0)))return;const alpha=(orbital.ringOpacity??.5)*(.55+.45*Math.min(1,Math.abs(q.z)/orbitRadius));ctx.save();ctx.globalAlpha=body?Math.min(1,alpha*1.8):alpha;const color=body?(orbital.bodyColor??"#FFF0FA"):(orbital.ringColor??"#FF65C7");if(body){ctx.shadowColor=orbital.bodyGlowColor??"#FF2FAE";ctx.shadowBlur=(orbital.bodyGlowSize??10)*q.scale;}else ctx.shadowBlur=1.5*q.scale;ctx.fillStyle=color;ctx.beginPath();ctx.arc(q.sx,q.sy,(body?p.size:p.size)*q.scale,0,Math.PI*2);ctx.fill();ctx.restore();};
-        const drawSolidRing=()=>{const points=state.ring.map((p)=>project(p,p.angle)),widthPx=orbital.ringWidth??1.5,opacity=orbital.ringOpacity??.82,ringColor=orbital.ringColor??"#FF65C7",glowColor=orbital.ringGlowColor??"#FF2FAE";const drawSegments=(glow:boolean)=>{ctx.save();ctx.globalAlpha=opacity*(glow?.34:1);ctx.strokeStyle=glow?glowColor:ringColor;ctx.lineWidth=glow?Math.max(widthPx*2.2,3):widthPx;ctx.shadowColor=glowColor;ctx.shadowBlur=glow?(orbital.ringGlowSize??7):1.5;let open=false;for(let i=0;i<=points.length;i++){const q=points[i%points.length],visible=!q.occluded&&(front===(q.z>=0));if(visible){if(!open){ctx.beginPath();ctx.moveTo(q.sx,q.sy);open=true;}else ctx.lineTo(q.sx,q.sy);}else if(open){ctx.stroke();open=false;}}if(open)ctx.stroke();ctx.restore();};drawSegments(true);drawSegments(false);};
-        if(orbital.ringStyle==="solid")drawSolidRing();else for(const p of state.ring)drawPoint(p,p.angle+state.phase,false);
-        for(const p of state.bodies)drawPoint(p,p.angle+state.phase,true);
+        const drawPoint=(p:OrbitalParticle,angle:number,body:boolean)=>{const q=project(p,angle);if(q.occluded||(front!== (q.z>=0)))return;const alpha=(orbital.ringOpacity??.5)*(.55+.45*Math.min(1,Math.abs(q.z)/orbitRadius));ctx.save();ctx.globalAlpha=body?Math.min(1,alpha*1.8):alpha;const color=body?(orbital.bodyColor??"#FFF0FA"):(orbital.ringColor??"#FF65C7");if(body){ctx.shadowColor=orbital.bodyGlowColor??"#FF2FAE";ctx.shadowBlur=(orbital.bodyGlowSize??10)*q.scale;}else ctx.shadowBlur=1.5*q.scale;ctx.fillStyle=color;ctx.beginPath();ctx.arc(q.sx,q.sy,p.size*q.scale,0,Math.PI*2);ctx.fill();ctx.restore();};
+        const drawSolidRing=()=>{const points=state.ring.map((p)=>project(p,p.angle)),widthPx=orbital.ringWidth??1.5,opacity=orbital.ringOpacity??.82,ringColor=orbital.ringColor??"#FF65C7",glowColor=orbital.ringGlowColor??"#FF2FAE";const drawSegments=(glow:boolean)=>{ctx.save();ctx.globalAlpha=opacity*(glow?.34:1);ctx.strokeStyle=glow?glowColor:ringColor;ctx.lineWidth=glow?Math.max(widthPx*2.2,3):widthPx;ctx.shadowColor=glowColor;ctx.shadowBlur=glow?(orbital.ringGlowSize??7):1.5;let open=false;for(let i=0;i<=points.length;i++){const q=points[i%points.length],visiblePoint=!q.occluded&&(front===(q.z>=0));if(visiblePoint){if(!open){ctx.beginPath();ctx.moveTo(q.sx,q.sy);open=true;}else ctx.lineTo(q.sx,q.sy);}else if(open){ctx.stroke();open=false;}}if(open)ctx.stroke();ctx.restore();};drawSegments(true);drawSegments(false);};
+        const phase=front?state.phase:backOrbitalPhase;
+        if(orbital.ringStyle==="solid")drawSolidRing();else for(const p of state.ring)drawPoint(p,p.angle+phase,false);
+        for(const p of state.bodies)drawPoint(p,p.angle+phase,true);
       };
       drawOrbitals(false);
-      if(orbital&&advance)orbitalRef.current.phase+=(orbital.orbitSpeed??.00022);
       if(bodyOpacity>0){ctx.save();ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);const g=ctx.createRadialGradient(cx,cy,0,cx,cy,radius);g.addColorStop(0,`${palette.bodyGradStart}${bodyOpacity})`);g.addColorStop(.85,`${palette.bodyGradStart}${Math.min(1,bodyOpacity*1.5)})`);g.addColorStop(1,`${palette.bodyGradEnd}${Math.min(1,bodyOpacity*2.2)})`);ctx.fillStyle=g;ctx.fill();ctx.restore();}
       const limbShape=outerGlowFocus!==1||midGlowFocus!==1||hotCoreFocus!==1||hotCoreWidthMultiplier!==1?{outer:outerGlowFocus,mid:midGlowFocus,core:hotCoreFocus,coreWidth:hotCoreWidthMultiplier}:undefined;
-      // Solar flare: brighter, slightly larger, further-reaching existing plasma. Identity at solarFlareIntensity=1.
       const flare=solarFlareIntensity-1,flareAlpha=1+flare*.85,flareSize=1+flare*.25,flareReach=flare*.45;
-      ctx.save();for(const p of plasmaRef.current){if(advance){p.life++;if(p.life>p.maxLife){p.life=0;p.distFactor=1.002+Math.random()*.02;}else p.distFactor+=p.radialVelocity*plasmaNoiseIntensity;p.angle+=p.speed*plasmaSpeed;}const noise=Math.sin(p.angle*12+time*3)*.015+Math.cos(p.angle*24-time*2)*.01,base=p.distFactor+noise*plasmaNoiseIntensity,dist=radius*base+radius*(base-1)*flareReach,px=cx+Math.cos(p.angle)*dist,py=cy+Math.sin(p.angle)*dist,fade=Math.sin((p.life/p.maxLife)*Math.PI)*p.alpha;let bias=1;if(cropPosition==="orb-right")bias=Math.max(.12,-Math.cos(p.angle));else if(cropPosition==="orb-left")bias=Math.max(.12,Math.cos(p.angle));ctx.fillStyle=`rgba(${palette.plasmaRgb}, ${fade*bias*.85*flareAlpha})`;ctx.beginPath();ctx.arc(px,py,p.size*flareSize,0,Math.PI*2);ctx.fill();}ctx.restore();
+      ctx.save();for(const p of plasmaRef.current){const noise=Math.sin(p.angle*12+time*3)*.015+Math.cos(p.angle*24-time*2)*.01,base=p.distFactor+noise*plasmaNoiseIntensity,dist=radius*base+radius*(base-1)*flareReach,px=cx+Math.cos(p.angle)*dist,py=cy+Math.sin(p.angle)*dist,fade=Math.sin((p.life/p.maxLife)*Math.PI)*p.alpha;let bias=1;if(cropPosition==="orb-right")bias=Math.max(.12,-Math.cos(p.angle));else if(cropPosition==="orb-left")bias=Math.max(.12,Math.cos(p.angle));ctx.fillStyle=`rgba(${palette.plasmaRgb}, ${fade*bias*.85*flareAlpha})`;ctx.beginPath();ctx.arc(px,py,p.size*flareSize,0,Math.PI*2);ctx.fill();}ctx.restore();
       let lightX=-.92,lightY=-.15,lightZ=.35;if(cropPosition==="orb-left")lightX=.92;const ll=Math.sqrt(lightX*lightX+lightY*lightY+lightZ*lightZ);lightX/=ll;lightY/=ll;lightZ/=ll;
-      const mouseRelX=mouse.x-cx,mouseRelY=mouse.y-cy,mouseDist=Math.sqrt(mouseRelX*mouseRelX+mouseRelY*mouseRelY),interactionRadius=radius*1.35;const visible:Array<{sx:number;sy:number;z:number;size:number;color:string;alpha:number}>=[];
-      for(const p of dotsRef.current){const x1=p.bx*cosY+p.bz*sinY,z1=-p.bx*sinY+p.bz*cosY,y1=p.by*cosX-z1*sinX,nz=p.by*sinX+z1*cosX,nx=x1,ny=y1,nDotL=nx*lightX+ny*lightY+nz*lightZ,effective=Math.max(0,nDotL)+ambientLuminance*.45,tx=nx*radius,ty=ny*radius,tz=nz*radius;
-        // Undrawn (back-facing / unlit) dots track their targets, so they re-enter view in place instead of springing in from a stale position.
-        if(nz<-.05||effective<.1){if(initialMotion==="spring-in")continue;p.x=tx;p.y=ty;p.z=tz;p.vx=p.vy=p.vz=0;continue;}
-        if(interactive&&(!reducedMotion.matches||mouse.isDragging)&&mouse.isHovered&&mouseDist<interactionRadius){const dx=p.x-mouseRelX,dy=p.y-mouseRelY,d=Math.sqrt(dx*dx+dy*dy)||1,influence=Math.max(0,1-d/(radius*.9))*interactionStrength;if(interactionMode==="repel"){const f=influence*18;p.vx+=(dx/d)*f;p.vy+=(dy/d)*f;}else if(interactionMode==="attract"){const f=influence*14;p.vx-=(dx/d)*f;p.vy-=(dy/d)*f;}else{const a=Math.atan2(dy,dx),f=influence*18;p.vx+=Math.cos(a+Math.PI/2)*f;p.vy+=Math.sin(a+Math.PI/2)*f;}}
-        const k=.09,damp=.82;p.vx=(p.vx+(tx-p.x)*k)*damp;p.vy=(p.vy+(ty-p.y)*k)*damp;p.vz=(p.vz+(tz-p.z)*k)*damp;p.x+=p.vx;p.y+=p.vy;p.z+=p.vz;const fov=850,scale=fov/(fov+p.z),sx=cx+p.x*scale,sy=cy+p.y*scale,rad=Math.sqrt(p.x*p.x+p.y*p.y)/radius,illum=Math.pow(Math.min(1,effective),1.6),limb=Math.pow(Math.min(1,rad),2.2),brightness=Math.min(1,illum*.45+limb*.55+ambientLuminance*.25);if(brightness<.08)continue;let color:string,alpha:number,size=p.baseSize*scale*(.75+brightness*.5);
-        // Compressed toward the peak (matches the renderer's own rad>.88&&nDotL>.4 rarity behavior for the highlight branch)
-        // so brightness stays rare and the sphere body reads as dominantly magenta, per the accepted reference.
+      visible.length=0;
+      for(let i=0;i<dotsRef.current.length;i++){const p=dotsRef.current[i],x1=p.bx*cosY+p.bz*sinY,z1=-p.bx*sinY+p.bz*cosY,y1=p.by*cosX-z1*sinX,nz=p.by*sinX+z1*cosX,nx=x1,ny=y1,nDotL=nx*lightX+ny*lightY+nz*lightZ,effective=Math.max(0,nDotL)+ambientLuminance*.45;
+        if(nz<-.05||effective<.1)continue;
+        const fov=850,scale=fov/(fov+p.z),sx=cx+p.x*scale,sy=cy+p.y*scale,rad=Math.sqrt(p.x*p.x+p.y*p.y)/radius,illum=Math.pow(Math.min(1,effective),1.6),limb=Math.pow(Math.min(1,rad),2.2),brightness=Math.min(1,illum*.45+limb*.55+ambientLuminance*.25);if(brightness<.08)continue;let color:string,alpha:number,size=p.baseSize*scale*(.75+brightness*.5);
         if(surfaceColor){const c=surfaceColor(Math.pow(Math.max(0,nDotL),1.9));color=`rgb(${c.r}, ${c.g}, ${c.b})`;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.25));}
-        else if(dotHarmonization==="unified"){color=palette.glowHex;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.25));}else if(dotHarmonization==="subtle-specular"){const sf=Math.pow(Math.max(0,(rad-.78)/.22),2)*Math.max(0,nDotL),blend=lerpRgb(palette.rawRgb,{r:255,g:255,b:255},sf*.65);color=`rgb(${blend.r}, ${blend.g}, ${blend.b})`;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.2));}else if(rad>.88&&nDotL>.4){color=palette.highlightDot;alpha=.95;size*=1.15;}else if(rad>.55||nDotL>.1){color=palette.midDot;alpha=.45+brightness*.45;}else{color=palette.shadowDot;alpha=.25+brightness*.35;}visible.push({sx,sy,z:p.z,size,color,alpha:Math.min(1,alpha*brightness)});
+        else if(dotHarmonization==="unified"){color=palette.glowHex;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.25));}else if(dotHarmonization==="subtle-specular"){const sf=Math.pow(Math.max(0,(rad-.78)/.22),2)*Math.max(0,nDotL),blend=lerpRgb(palette.rawRgb,{r:255,g:255,b:255},sf*.65);color=`rgb(${blend.r}, ${blend.g}, ${blend.b})`;alpha=Math.min(1,(.35+.65*illum)*Math.pow(brightness,1.2));}else if(rad>.88&&nDotL>.4){color=palette.highlightDot;alpha=.95;size*=1.15;}else if(rad>.55||nDotL>.1){color=palette.midDot;alpha=.45+brightness*.45;}else{color=palette.shadowDot;alpha=.25+brightness*.35;}
+        const d=visibleRecords[i]??(visibleRecords[i]={sx,sy,z:p.z,size,color,alpha:0});d.sx=sx;d.sy=sy;d.z=p.z;d.size=size;d.color=color;d.alpha=Math.min(1,alpha*brightness);visible.push(d);
       }
       visible.sort((a,b)=>a.z-b.z);for(const d of visible){ctx.globalAlpha=d.alpha;ctx.fillStyle=d.color;ctx.beginPath();ctx.arc(d.sx,d.sy,d.size,0,Math.PI*2);ctx.fill();}
       if(atmosphereMode==="field"){const la=Math.atan2(lightY,lightX),key=`${width}x${height}|${cx}|${cy}|${radius}|${la}|${atmosphereWidth}|${atmosphereFocus}|${atmosphereIntensity}|${outerGlowColor}|${midGlowColor}|${hotCoreColor}|${palette.glowHex}|${innerGlowWidth}|${innerGlowIntensity}|${innerGlowColor}|${innerGlowFocus}`;
@@ -234,16 +252,17 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
     const tick=(timestamp:number)=>{
       if(document.hidden||reducedMotion.matches){animId=0;return;}
       const steps=advanceOrbClock(clock,timestamp);
-      for(let i=0;i<steps;i++)draw();
+      for(let i=0;i<steps;i++)simulate();
+      if(steps>0)paint();
       animId=requestAnimationFrame(tick);
     };
     const syncMotion=()=>{
       cancelAnimationFrame(animId);animId=0;clock.accumulator=0;
       if(!document.hidden&&!reducedMotion.matches){clock.lastFrame=performance.now();animId=requestAnimationFrame(tick);}
     };
-    redraw=()=>{if(reducedMotion.matches)draw(false);};
+    redraw=()=>{if(reducedMotion.matches){simulate(false);paint();}};
     redrawOnInputRef.current=redraw;
-    draw();syncMotion();
+    simulate();paint();syncMotion();
     reducedMotion.addEventListener("change",syncMotion);
     document.addEventListener("visibilitychange",syncMotion);
     return()=>{redrawOnInputRef.current=()=>{};observer.disconnect();cancelAnimationFrame(animId);reducedMotion.removeEventListener("change",syncMotion);document.removeEventListener("visibilitychange",syncMotion);};
