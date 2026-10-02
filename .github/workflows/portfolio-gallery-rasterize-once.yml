@@ -1,0 +1,194 @@
+name: Portfolio gallery rasterize once
+
+on:
+  push:
+    branches:
+      - chore/portfolio-gallery-rasterize-once
+
+permissions:
+  contents: write
+
+jobs:
+  rasterize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Rasterize five oversized gallery SVGs losslessly
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const sharp = require('sharp');
+
+          const names = ['aa', 'cbdistillery', 'cps', 'directv01', 'method'];
+          const contentPath = 'src/content/site/portfolio.ts';
+
+          (async () => {
+            const results = [];
+            for (const name of names) {
+              const svgPath = `public/portfolio-gallery/${name}.svg`;
+              const webpPath = `public/portfolio-gallery/${name}.webp`;
+              const svg = fs.readFileSync(svgPath);
+
+              const before = await sharp(svg)
+                .ensureAlpha()
+                .raw()
+                .toBuffer({ resolveWithObject: true });
+
+              const webp = await sharp(svg)
+                .webp({ lossless: true, effort: 6 })
+                .toBuffer();
+              fs.writeFileSync(webpPath, webp);
+
+              const after = await sharp(webp)
+                .ensureAlpha()
+                .raw()
+                .toBuffer({ resolveWithObject: true });
+
+              if (before.info.width !== after.info.width || before.info.height !== after.info.height || before.info.channels !== after.info.channels) {
+                throw new Error(`${name}: rendered geometry changed (${JSON.stringify(before.info)} -> ${JSON.stringify(after.info)})`);
+              }
+              if (!before.data.equals(after.data)) {
+                let changed = 0;
+                for (let i = 0; i < before.data.length; i++) {
+                  if (before.data[i] !== after.data[i]) changed++;
+                }
+                throw new Error(`${name}: lossless pixel comparison failed (${changed} channel bytes changed)`);
+              }
+
+              results.push({
+                name,
+                width: before.info.width,
+                height: before.info.height,
+                svgBytes: svg.length,
+                webpBytes: webp.length,
+                savedBytes: svg.length - webp.length,
+              });
+            }
+
+            let content = fs.readFileSync(contentPath, 'utf8');
+            for (const name of names) {
+              const from = `/portfolio-gallery/${name}.svg`;
+              const to = `/portfolio-gallery/${name}.webp`;
+              if (!content.includes(from)) throw new Error(`Missing live reference: ${from}`);
+              content = content.replaceAll(from, to);
+              if (content.includes(from)) throw new Error(`Old reference remains after replacement: ${from}`);
+            }
+            fs.writeFileSync(contentPath, content);
+
+            for (const name of names) {
+              fs.unlinkSync(`public/portfolio-gallery/${name}.svg`);
+            }
+
+            console.table(results.map(r => ({
+              asset: r.name,
+              dimensions: `${r.width}x${r.height}`,
+              svgMiB: (r.svgBytes / 1048576).toFixed(2),
+              webpMiB: (r.webpBytes / 1048576).toFixed(2),
+              savedMiB: (r.savedBytes / 1048576).toFixed(2),
+              pixelMatch: 'EXACT',
+            })));
+          })().catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Confirm bounded source diff
+        run: |
+          git diff --check
+          changed="$(git status --short | awk '{print $2}' | sort)"
+          printf '%s\n' "$changed"
+          printf '%s\n' "$changed" | grep -Ev '^$|^public/portfolio-gallery/(aa|cbdistillery|cps|directv01|method)\.(svg|webp)$|^src/content/site/portfolio\.ts$' && {
+            echo 'Unexpected file in bounded conversion diff.' >&2
+            exit 1
+          } || true
+
+      - name: Install Chromium for browser verification
+        run: npx playwright install --with-deps chromium
+
+      - name: Start dev server
+        run: |
+          npm run dev > /tmp/portfolio-dev.log 2>&1 &
+          echo $! > /tmp/portfolio-dev.pid
+          for i in $(seq 1 60); do
+            if curl --silent --fail http://127.0.0.1:3000/work/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/portfolio-dev.log
+          exit 1
+
+      - name: Fast route check
+        run: BASE_URL=http://127.0.0.1:3000 npm run verify:route -- /work/
+
+      - name: Browser-render the five replacement assets
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          const targets = ['aa', 'cbdistillery', 'cps', 'directv01', 'method']
+            .map(name => `/portfolio-gallery/${name}.webp`);
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } });
+            const failed = [];
+            page.on('requestfailed', req => {
+              if (targets.some(t => req.url().endsWith(t))) failed.push(`${req.url()} :: ${req.failure()?.errorText || 'request failed'}`);
+            });
+            page.on('response', res => {
+              if (targets.some(t => res.url().endsWith(t)) && !res.ok()) failed.push(`${res.status()} ${res.url()}`);
+            });
+
+            const response = await page.goto('http://127.0.0.1:3000/work/', { waitUntil: 'domcontentloaded' });
+            if (!response || !response.ok()) throw new Error(`Portfolio route failed: ${response?.status()}`);
+
+            for (const target of targets) {
+              const img = page.locator(`img[src="${target}"]`).first();
+              if (await img.count() !== 1) throw new Error(`Expected one live <img> reference for ${target}`);
+              await img.scrollIntoViewIfNeeded();
+              await img.evaluate(async el => {
+                if (el.complete && el.naturalWidth > 0) return;
+                await new Promise((resolve, reject) => {
+                  const timer = setTimeout(() => reject(new Error(`Image load timeout: ${el.src}`)), 10000);
+                  el.addEventListener('load', () => { clearTimeout(timer); resolve(); }, { once: true });
+                  el.addEventListener('error', () => { clearTimeout(timer); reject(new Error(`Image load failed: ${el.src}`)); }, { once: true });
+                });
+              });
+              const state = await img.evaluate(el => ({ src: el.getAttribute('src'), naturalWidth: el.naturalWidth, naturalHeight: el.naturalHeight }));
+              if (!state.naturalWidth || !state.naturalHeight) throw new Error(`Zero-sized browser render: ${target}`);
+              console.log(`BROWSER PASS ${state.src} ${state.naturalWidth}x${state.naturalHeight}`);
+            }
+
+            if (failed.length) throw new Error(`Replacement asset request failures:\n${failed.join('\n')}`);
+            await browser.close();
+          })().catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Remove one-off workflow from final diff
+        run: git rm .github/workflows/portfolio-gallery-rasterize-once.yml
+
+      - name: Commit converted assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/site/portfolio.ts public/portfolio-gallery
+          git commit -m "fix: replace oversized portfolio gallery SVGs"
+          git push origin HEAD:chore/portfolio-gallery-rasterize-once
