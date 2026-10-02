@@ -1,6 +1,6 @@
 {
   "schema": "personal-career-brand/v1",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "status": "IN_PROGRESS",
   "last_approved_date": "2026-10-01",
   "authority": {
@@ -236,6 +236,24 @@
         "DTC_revenue_uplift": "20%",
         "launches": 3,
         "SEO_traffic_loss": "0"
+      }
+    },
+    "murad": {
+      "primary": "High-Risk Delivery Rescue",
+      "secondary": "Product + Architecture Bridge",
+      "context": "Subscription Commerce",
+      "career_story": "Fix",
+      "signature_angle": "Rescuing a third-agency global replatform by solving Oracle EBS, subscription, and payment architecture under launch pressure",
+      "internal_dynamics": [
+        "Recovery / Stabilization",
+        "Systems Integration",
+        "Platform Modernization",
+        "Multi-market / Global Scale",
+        "Operational Efficiency"
+      ],
+      "approved_public_metrics": {
+        "markets_launched": 3,
+        "launch_issues": 0
       }
     }
   },
