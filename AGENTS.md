@@ -92,10 +92,12 @@ Do not apply this override to unrelated portfolio, case-study, deployment, or si
 ## Efficiency Guardrails
 - Fix one root cause at a time; avoid speculative stacked changes.
 - For single-bug fixes, touch at most 3 files per attempt unless approved.
-- Default local verification: `npm run verify:route -- /work/<slug>`.
-- Full build is pre-deploy only: `npm run verify:predeploy`.
+- Authoritative default completion path for ordinary source/content/UI work: `edit -> npm run verify:route -- <affected-route> -> browser/runtime verification only when visual -> commit`.
+- A passing `verify:route` is sufficient for ordinary task completion. Do not automatically escalate to broader checks when the affected route is healthy.
+- Do not run `npm run prepush`, `npm run typecheck`, `npm run build`, or `npm run verify:predeploy` for ordinary task completion unless the user explicitly requests broader validation, the task is a release/deployment task, or the route check cannot exercise the changed behavior.
+- Full release gate is pre-deploy only: `npm run verify:predeploy`.
 - Don’t repeat commands unless code/process state materially changed.
-- Respect `.aiignore` by default; use short log reads (`tail -n 40`).
+- Respect `.aiignore` by default. Do not recursively enumerate ignored paths unless the current task explicitly targets them. Use short log reads (`tail -n 40`).
 
 ## Conventions
 - Prefer design tokens/system styles before ad-hoc values.
@@ -146,7 +148,7 @@ Icon selection priority:
 - CWG and ZEVO are founder case studies and are explicitly excluded from the standard case-study template migration.
 - Maintain responsive behavior, semantic HTML, keyboard accessibility, and existing performance standards.
 - Check git status before modifying files and do not overwrite unrelated uncommitted work.
-- Run the repository’s existing lint, typecheck, test, and build commands after implementation.
+- Use the repository-wide authoritative default completion path in `Efficiency Guardrails`; do not add lint/typecheck/test/build work solely because the change is a case study.
 
 ## Next.js runtime isolation
 
