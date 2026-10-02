@@ -124,6 +124,7 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
   radius=290,centerOffsetX=0,centerOffsetY=0,interactionMode="repel",interactionStrength=1,autoRotateSpeed=.0012,cropPosition="orb-right",skinStyle="canonical-magenta",accentColor,primaryDotColor="#FFFFFF",shadowDotColor,className="",interactive=true,plasmaNoiseIntensity=1,plasmaSpeed=1,stippleDensity=8000,ambientLuminance=.38,glowingStrokeIntensity=1.4,glowSpread=28,coreHotness=.85,innerWashIntensity=.35,dotHarmonization="unified",strokeMode="crescent",strokeShadowOpacity=0,strokeWidth=1,bodyOpacity=0,outerGlowColor,midGlowColor,hotCoreColor,solarFlareIntensity=1,outerGlowFocus=1,midGlowFocus=1,hotCoreFocus=1,hotCoreWidthMultiplier=1,atmosphereMode="stroke",atmosphereWidth=24,atmosphereFocus=3.5,atmosphereIntensity=1,innerGlowWidth=14,innerGlowIntensity=0,innerGlowColor="#FF78CB",innerGlowFocus=3.5,surfaceColorMode="legacy",surfaceShadowColor,surfaceDarkColor,surfaceMidColor,surfaceLightColor,surfaceHotColor,surfaceHotThreshold=.9,orbitalSystem,
 })=>{
   const canvasRef=useRef<HTMLCanvasElement|null>(null);
+  const redrawOnInputRef=useRef<()=>void>(()=>{});
   const fieldRef=useRef<{key:string;field:ReturnType<typeof buildAtmosphereField>}|null>(null);
   const palette=useMemo(()=>{
     let active:string,fallback:RGB,shadow:string,bodyStart:string,bodyEnd:string;
@@ -143,7 +144,7 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
     return {limb,surface,glowHex:active,glowRgb:rgb,rawRgb:raw,highlightDot:primaryDotColor&&primaryDotColor!=="#FFFFFF"?primaryDotColor:active,midDot:active,shadowDot:shadowDotColor||shadow,plasmaRgb:rgb,bodyGradStart:bodyStart,bodyGradEnd:bodyEnd};
   },[skinStyle,accentColor,primaryDotColor,shadowDotColor,outerGlowColor,midGlowColor,hotCoreColor,surfaceColorMode,surfaceShadowColor,surfaceDarkColor,surfaceMidColor,surfaceLightColor,surfaceHotColor,surfaceHotThreshold]);
 
-  const mouseRef=useRef({x:-9999,y:-9999,prevX:-9999,prevY:-9999,isHovered:false,isDragging:false});
+  const mouseRef=useRef({x:-9999,y:-9999,prevX:-9999,prevY:-9999,isHovered:false,isDragging:false,pointerId:null as number|null});
   const rotationRef=useRef({rotX:.08,rotY:skinStyle==="canonical-magenta"?-.85:.85,velX:0,velY:initialMotion==="spring-in"?autoRotateSpeed:0});
   const dotsRef=useRef<StippleDot[]>([]),plasmaRef=useRef<Plasma[]>([]);
   const orbitalRef=useRef<OrbitalState>({ring:[],bodies:[],phase:0});
@@ -185,10 +186,10 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
       if(illum<=st.hotStart)return cols[cols.length-1];
       return lerpRgb(cols[cols.length-1],st.hot,Math.min(1,(illum-st.hotStart)/(1-st.hotStart)));
     }:null;
-    const draw=()=>{
-      time+=.025;ctx.clearRect(0,0,width,height);
+    const draw=(advance=true)=>{
+      if(advance)time+=.025;ctx.clearRect(0,0,width,height);
       const {cx,cy}=resolveOrbCenter({width,height,radius,cropPosition,offsetX:centerOffsetX,offsetY:centerOffsetY});
-      const rot=rotationRef.current,mouse=mouseRef.current;if(!mouse.isDragging){rot.rotY+=autoRotateSpeed+rot.velY;rot.rotX+=rot.velX;rot.velX*=.92;rot.velY*=.92;}
+      const rot=rotationRef.current,mouse=mouseRef.current;if(advance&&!mouse.isDragging){rot.rotY+=autoRotateSpeed+rot.velY;rot.rotX+=rot.velX;rot.velX*=.92;rot.velY*=.92;}
       const sinX=Math.sin(rot.rotX),cosX=Math.cos(rot.rotX),sinY=Math.sin(rot.rotY),cosY=Math.cos(rot.rotY),glowRgb=palette.glowRgb,glowHex=palette.glowHex;
       const orbital=orbitalSystem?.enabled?orbitalSystem:null;
       const drawOrbitals=(front:boolean)=>{
@@ -201,18 +202,18 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
         for(const p of state.bodies)drawPoint(p,p.angle+state.phase,true);
       };
       drawOrbitals(false);
-      if(orbital)orbitalRef.current.phase+=(orbital.orbitSpeed??.00022);
+      if(orbital&&advance)orbitalRef.current.phase+=(orbital.orbitSpeed??.00022);
       if(bodyOpacity>0){ctx.save();ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);const g=ctx.createRadialGradient(cx,cy,0,cx,cy,radius);g.addColorStop(0,`${palette.bodyGradStart}${bodyOpacity})`);g.addColorStop(.85,`${palette.bodyGradStart}${Math.min(1,bodyOpacity*1.5)})`);g.addColorStop(1,`${palette.bodyGradEnd}${Math.min(1,bodyOpacity*2.2)})`);ctx.fillStyle=g;ctx.fill();ctx.restore();}
       const limbShape=outerGlowFocus!==1||midGlowFocus!==1||hotCoreFocus!==1||hotCoreWidthMultiplier!==1?{outer:outerGlowFocus,mid:midGlowFocus,core:hotCoreFocus,coreWidth:hotCoreWidthMultiplier}:undefined;
       // Solar flare: brighter, slightly larger, further-reaching existing plasma. Identity at solarFlareIntensity=1.
       const flare=solarFlareIntensity-1,flareAlpha=1+flare*.85,flareSize=1+flare*.25,flareReach=flare*.45;
-      ctx.save();for(const p of plasmaRef.current){p.life++;if(p.life>p.maxLife){p.life=0;p.distFactor=1.002+Math.random()*.02;}else p.distFactor+=p.radialVelocity*plasmaNoiseIntensity;p.angle+=p.speed*plasmaSpeed;const noise=Math.sin(p.angle*12+time*3)*.015+Math.cos(p.angle*24-time*2)*.01,base=p.distFactor+noise*plasmaNoiseIntensity,dist=radius*base+radius*(base-1)*flareReach,px=cx+Math.cos(p.angle)*dist,py=cy+Math.sin(p.angle)*dist,fade=Math.sin((p.life/p.maxLife)*Math.PI)*p.alpha;let bias=1;if(cropPosition==="orb-right")bias=Math.max(.12,-Math.cos(p.angle));else if(cropPosition==="orb-left")bias=Math.max(.12,Math.cos(p.angle));ctx.fillStyle=`rgba(${palette.plasmaRgb}, ${fade*bias*.85*flareAlpha})`;ctx.beginPath();ctx.arc(px,py,p.size*flareSize,0,Math.PI*2);ctx.fill();}ctx.restore();
+      ctx.save();for(const p of plasmaRef.current){if(advance){p.life++;if(p.life>p.maxLife){p.life=0;p.distFactor=1.002+Math.random()*.02;}else p.distFactor+=p.radialVelocity*plasmaNoiseIntensity;p.angle+=p.speed*plasmaSpeed;}const noise=Math.sin(p.angle*12+time*3)*.015+Math.cos(p.angle*24-time*2)*.01,base=p.distFactor+noise*plasmaNoiseIntensity,dist=radius*base+radius*(base-1)*flareReach,px=cx+Math.cos(p.angle)*dist,py=cy+Math.sin(p.angle)*dist,fade=Math.sin((p.life/p.maxLife)*Math.PI)*p.alpha;let bias=1;if(cropPosition==="orb-right")bias=Math.max(.12,-Math.cos(p.angle));else if(cropPosition==="orb-left")bias=Math.max(.12,Math.cos(p.angle));ctx.fillStyle=`rgba(${palette.plasmaRgb}, ${fade*bias*.85*flareAlpha})`;ctx.beginPath();ctx.arc(px,py,p.size*flareSize,0,Math.PI*2);ctx.fill();}ctx.restore();
       let lightX=-.92,lightY=-.15,lightZ=.35;if(cropPosition==="orb-left")lightX=.92;const ll=Math.sqrt(lightX*lightX+lightY*lightY+lightZ*lightZ);lightX/=ll;lightY/=ll;lightZ/=ll;
       const mouseRelX=mouse.x-cx,mouseRelY=mouse.y-cy,mouseDist=Math.sqrt(mouseRelX*mouseRelX+mouseRelY*mouseRelY),interactionRadius=radius*1.35;const visible:Array<{sx:number;sy:number;z:number;size:number;color:string;alpha:number}>=[];
       for(const p of dotsRef.current){const x1=p.bx*cosY+p.bz*sinY,z1=-p.bx*sinY+p.bz*cosY,y1=p.by*cosX-z1*sinX,nz=p.by*sinX+z1*cosX,nx=x1,ny=y1,nDotL=nx*lightX+ny*lightY+nz*lightZ,effective=Math.max(0,nDotL)+ambientLuminance*.45,tx=nx*radius,ty=ny*radius,tz=nz*radius;
         // Undrawn (back-facing / unlit) dots track their targets, so they re-enter view in place instead of springing in from a stale position.
         if(nz<-.05||effective<.1){if(initialMotion==="spring-in")continue;p.x=tx;p.y=ty;p.z=tz;p.vx=p.vy=p.vz=0;continue;}
-        if(interactive&&!reducedMotion.matches&&mouse.isHovered&&mouseDist<interactionRadius){const dx=p.x-mouseRelX,dy=p.y-mouseRelY,d=Math.sqrt(dx*dx+dy*dy)||1,influence=Math.max(0,1-d/(radius*.9))*interactionStrength;if(interactionMode==="repel"){const f=influence*18;p.vx+=(dx/d)*f;p.vy+=(dy/d)*f;}else if(interactionMode==="attract"){const f=influence*14;p.vx-=(dx/d)*f;p.vy-=(dy/d)*f;}else{const a=Math.atan2(dy,dx),f=influence*18;p.vx+=Math.cos(a+Math.PI/2)*f;p.vy+=Math.sin(a+Math.PI/2)*f;}}
+        if(interactive&&(!reducedMotion.matches||mouse.isDragging)&&mouse.isHovered&&mouseDist<interactionRadius){const dx=p.x-mouseRelX,dy=p.y-mouseRelY,d=Math.sqrt(dx*dx+dy*dy)||1,influence=Math.max(0,1-d/(radius*.9))*interactionStrength;if(interactionMode==="repel"){const f=influence*18;p.vx+=(dx/d)*f;p.vy+=(dy/d)*f;}else if(interactionMode==="attract"){const f=influence*14;p.vx-=(dx/d)*f;p.vy-=(dy/d)*f;}else{const a=Math.atan2(dy,dx),f=influence*18;p.vx+=Math.cos(a+Math.PI/2)*f;p.vy+=Math.sin(a+Math.PI/2)*f;}}
         const k=.09,damp=.82;p.vx=(p.vx+(tx-p.x)*k)*damp;p.vy=(p.vy+(ty-p.y)*k)*damp;p.vz=(p.vz+(tz-p.z)*k)*damp;p.x+=p.vx;p.y+=p.vy;p.z+=p.vz;const fov=850,scale=fov/(fov+p.z),sx=cx+p.x*scale,sy=cy+p.y*scale,rad=Math.sqrt(p.x*p.x+p.y*p.y)/radius,illum=Math.pow(Math.min(1,effective),1.6),limb=Math.pow(Math.min(1,rad),2.2),brightness=Math.min(1,illum*.45+limb*.55+ambientLuminance*.25);if(brightness<.08)continue;let color:string,alpha:number,size=p.baseSize*scale*(.75+brightness*.5);
         // Compressed toward the peak (matches the renderer's own rad>.88&&nDotL>.4 rarity behavior for the highlight branch)
         // so brightness stays rare and the sphere body reads as dominantly magenta, per the accepted reference.
@@ -240,16 +241,54 @@ export const PBDSKineticSphere:React.FC<PBDSKineticSphereProps>=({
       cancelAnimationFrame(animId);animId=0;clock.accumulator=0;
       if(!document.hidden&&!reducedMotion.matches){clock.lastFrame=performance.now();animId=requestAnimationFrame(tick);}
     };
-    redraw=()=>{if(reducedMotion.matches)draw();};
+    redraw=()=>{if(reducedMotion.matches)draw(false);};
+    redrawOnInputRef.current=redraw;
     draw();syncMotion();
     reducedMotion.addEventListener("change",syncMotion);
     document.addEventListener("visibilitychange",syncMotion);
-    return()=>{observer.disconnect();cancelAnimationFrame(animId);reducedMotion.removeEventListener("change",syncMotion);document.removeEventListener("visibilitychange",syncMotion);};
+    return()=>{redrawOnInputRef.current=()=>{};observer.disconnect();cancelAnimationFrame(animId);reducedMotion.removeEventListener("change",syncMotion);document.removeEventListener("visibilitychange",syncMotion);};
   },[initialMotion,radius,centerOffsetX,centerOffsetY,interactionMode,interactionStrength,autoRotateSpeed,cropPosition,skinStyle,palette,accentColor,primaryDotColor,shadowDotColor,interactive,plasmaNoiseIntensity,plasmaSpeed,stippleDensity,ambientLuminance,glowingStrokeIntensity,glowSpread,coreHotness,innerWashIntensity,dotHarmonization,strokeMode,strokeShadowOpacity,strokeWidth,bodyOpacity,solarFlareIntensity,outerGlowFocus,midGlowFocus,hotCoreFocus,hotCoreWidthMultiplier,atmosphereMode,atmosphereWidth,atmosphereFocus,atmosphereIntensity,innerGlowWidth,innerGlowIntensity,innerGlowColor,innerGlowFocus,surfaceColorMode,surfaceShadowColor,surfaceDarkColor,surfaceMidColor,surfaceLightColor,surfaceHotThreshold,orbitalSystem]);
 
-  // Pointer → canvas backing-store coordinates. Identity when unscaled (standalone embed); corrects for
-  // ancestor CSS transforms such as the PDMA shell's uniform scale(), where the rendered rect ≠ canvas size.
-  const toCanvas=(e:React.MouseEvent<HTMLCanvasElement>)=>{const c=canvasRef.current,rect=c?.getBoundingClientRect();if(!c||!rect||!rect.width||!rect.height)return null;return {x:(e.clientX-rect.left)*(c.width/rect.width),y:(e.clientY-rect.top)*(c.height/rect.height)};};
-  const handleMouseMove=(e:React.MouseEvent<HTMLCanvasElement>)=>{if(!interactive||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;const pt=toCanvas(e);if(!pt)return;const x=pt.x,y=pt.y,m=mouseRef.current;if(m.isDragging){const dx=x-m.prevX,dy=y-m.prevY;rotationRef.current.rotY+=dx*.008;rotationRef.current.rotX-=dy*.008;rotationRef.current.velY=dx*.0012;rotationRef.current.velX=-dy*.0012;}m.prevX=x;m.prevY=y;m.x=x;m.y=y;m.isHovered=true;};
-  return <div className={`relative w-full h-full overflow-hidden select-none ${className}`}><canvas ref={canvasRef} onMouseMove={handleMouseMove} onMouseDown={e=>{if(!interactive||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;const pt=toCanvas(e);if(!pt)return;mouseRef.current.isDragging=true;mouseRef.current.prevX=pt.x;mouseRef.current.prevY=pt.y;}} onMouseUp={()=>mouseRef.current.isDragging=false} onMouseLeave={()=>{mouseRef.current.isHovered=false;mouseRef.current.isDragging=false;mouseRef.current.x=-9999;mouseRef.current.y=-9999;}} className="w-full h-full block cursor-grab active:cursor-grabbing touch-none"/></div>;
+  // Map input through the existing uniform presentation transform.
+  const toCanvas=(e:React.PointerEvent<HTMLCanvasElement>)=>{
+    const canvas=canvasRef.current,rect=canvas?.getBoundingClientRect();
+    if(!canvas||!rect||!rect.width||!rect.height)return null;
+    return {x:(e.clientX-rect.left)*(canvas.width/rect.width),y:(e.clientY-rect.top)*(canvas.height/rect.height)};
+  };
+  const clearHover=()=>{const mouse=mouseRef.current;mouse.isHovered=false;mouse.x=-9999;mouse.y=-9999;};
+  const handlePointerMove=(e:React.PointerEvent<HTMLCanvasElement>)=>{
+    if(!interactive)return;
+    const point=toCanvas(e);if(!point)return;
+    const mouse=mouseRef.current;
+    if(mouse.isDragging&&mouse.pointerId!==e.pointerId)return;
+    if(mouse.isDragging){
+      const dx=point.x-mouse.prevX,dy=point.y-mouse.prevY;
+      rotationRef.current.rotY+=dx*.008;rotationRef.current.rotX-=dy*.008;
+      rotationRef.current.velY=dx*.0012;rotationRef.current.velX=-dy*.0012;
+    }
+    mouse.prevX=point.x;mouse.prevY=point.y;mouse.x=point.x;mouse.y=point.y;mouse.isHovered=true;
+    // Reduced motion stops autonomous animation, not deliberate rotation.
+    if(mouse.isDragging)redrawOnInputRef.current();
+  };
+  const handlePointerDown=(e:React.PointerEvent<HTMLCanvasElement>)=>{
+    if(!interactive||e.button!==0||mouseRef.current.isDragging)return;
+    const point=toCanvas(e);if(!point)return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    const mouse=mouseRef.current;
+    mouse.isDragging=true;mouse.pointerId=e.pointerId;mouse.isHovered=true;
+    mouse.prevX=point.x;mouse.prevY=point.y;mouse.x=point.x;mouse.y=point.y;
+  };
+  const finishDrag=(e:React.PointerEvent<HTMLCanvasElement>)=>{
+    const mouse=mouseRef.current;
+    if(mouse.pointerId!==e.pointerId)return;
+    mouse.isDragging=false;mouse.pointerId=null;
+    if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);
+    if(document.elementFromPoint(e.clientX,e.clientY)!==e.currentTarget)clearHover();
+  };
+  return <div className={`relative w-full h-full overflow-hidden select-none ${className}`}>
+    <canvas ref={canvasRef} onPointerMove={handlePointerMove} onPointerDown={handlePointerDown}
+      onPointerUp={finishDrag} onPointerCancel={finishDrag} onLostPointerCapture={finishDrag}
+      onPointerLeave={()=>{if(!mouseRef.current.isDragging)clearHover();}}
+      className="w-full h-full block cursor-grab active:cursor-grabbing touch-none" />
+  </div>;
 };

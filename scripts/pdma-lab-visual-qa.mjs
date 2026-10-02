@@ -23,6 +23,7 @@ try {
     page.on("pageerror", error => errors.push(String(error)))
     await page.addInitScript(() => {
       window.orbDraws = 0
+      document.addEventListener("pointerdown",event=>{ window.orbPointerId=event.pointerId })
       const clear = CanvasRenderingContext2D.prototype.clearRect
       CanvasRenderingContext2D.prototype.clearRect = function(...args) { window.orbDraws++; return clear.apply(this,args) }
     })
@@ -60,6 +61,34 @@ try {
       if (!baseline[index]) baseline[index]=state.layout
       else state.layout.forEach((rect,i)=>assert.ok(rect===null?baseline[index][i]===null:baseline[index][i]&&rect.every((v,j)=>Math.abs(v-baseline[index][i][j])<=2),`${tag}: semantic reflow at ${i}`))
       await page.screenshot({ path:path.join(outDir,`${width}x${height}-s${index+1}.png`) });captures++
+      if ([3,6,7].includes(index)) {
+        for (let orb=0;orb<2;orb++) {
+          const canvas=page.locator(".pdma-decoration-host canvas").nth(orb)
+          const point=await canvas.evaluate((el,radius)=>{
+            const r=el.getBoundingClientRect(),scale=r.width/el.width
+            return {x:orbSide(el)==="left"?r.x+30:r.right-30,y:r.y+r.height/2-radius*.65*scale,exitX:innerWidth/2,exitY:Math.max(120,r.top-20)}
+            function orbSide(el){return el.closest(".pdmat-deco-orb").classList.contains("pdmat-deco-orb--left")?"left":"right"}
+          },index===3&&orb===0?250:228)
+          const fingerprint=()=>canvas.evaluate(el=>{
+            const pixels=el.getContext("2d").getImageData(0,0,el.width,el.height).data
+            let hash=2166136261;for(let i=0;i<pixels.length;i++)hash=Math.imul(hash^pixels[i],16777619)
+            return hash>>>0
+          })
+          const beforeDrag=await fingerprint()
+          await page.mouse.move(point.x,point.y)
+          await page.mouse.down()
+          assert.ok(await canvas.evaluate(el=>el.hasPointerCapture(window.orbPointerId)),`${tag} orb ${orb}: drag not captured`)
+          // Leave the clipped orb surface while holding the button; the same orb must keep dragging.
+          await page.mouse.move(point.exitX,point.exitY,{steps:12})
+          assert.ok(await canvas.evaluate(el=>el.hasPointerCapture(window.orbPointerId)),`${tag} orb ${orb}: upper-edge drag dropped`)
+          assert.notEqual(await fingerprint(),beforeDrag,`${tag} orb ${orb}: deliberate drag did not rotate under reduced motion`)
+          await page.mouse.up()
+          assert.equal(await canvas.evaluate(el=>el.hasPointerCapture(window.orbPointerId)),false,`${tag} orb ${orb}: capture stuck after release`)
+          const afterRelease=await page.evaluate(()=>window.orbDraws)
+          await page.waitForTimeout(100)
+          assert.equal(await page.evaluate(()=>window.orbDraws),afterRelease,`${tag} orb ${orb}: reduced-motion drag started idle animation`)
+        }
+      }
       if (index===3) {
         const before=await page.evaluate(()=>window.orbDraws)
         await page.waitForTimeout(200)
@@ -95,6 +124,6 @@ try {
     assert.deepEqual(errors,[],`${width}x${height}: page errors`)
     await page.close()
   }
-  console.log(`VISUAL_QA: PASS — lab ${captures} captures; painted orbs, shared styles, no scroll/reflow, reduced-motion stop/resume`)
+  console.log(`VISUAL_QA: PASS — lab ${captures} captures; painted orbs, shared styles, no scroll/reflow, reduced-motion stop/resume, upper-edge drag capture/release on all live orbs`)
   console.log(`screenshots: ${outDir}`)
 } finally { await browser.close() }
