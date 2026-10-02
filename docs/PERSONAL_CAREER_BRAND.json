@@ -1,6 +1,6 @@
 {
   "schema": "personal-career-brand/v1",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "status": "IN_PROGRESS",
   "last_approved_date": "2026-10-01",
   "authority": {
@@ -210,6 +210,7 @@
       "primary": "Product + Architecture Bridge",
       "secondary": "eCommerce Growth",
       "context": "Consumer DTC",
+      "career_story": "Create",
       "signature_angle": "Launching SC Johnson’s first direct-to-consumer commerce channel and establishing a reusable SAP-connected DTC pattern",
       "internal_dynamics": [
         "Zero-to-One",
@@ -217,6 +218,25 @@
         "Productization",
         "Commercial Growth"
       ]
+    },
+    "method_sc_johnson": {
+      "primary": "Digital Transformation / Platform Modernization",
+      "secondary": "eCommerce Growth",
+      "context": "Consumer DTC",
+      "career_story": "Transform",
+      "signature_angle": "Migrating an existing DTC business onto shared enterprise rails without losing SEO or retail-channel equity, while adding AEM/AEP personalization and analytics",
+      "internal_dynamics": [
+        "Platform Modernization",
+        "Systems Integration",
+        "Operational Efficiency",
+        "Commercial Growth"
+      ],
+      "differentiation_rule": "Mrs. Meyer’s proved SC Johnson could create the reusable DTC model; Method proved the model could evolve without breaking what already worked.",
+      "approved_public_metrics": {
+        "DTC_revenue_uplift": "20%",
+        "launches": 3,
+        "SEO_traffic_loss": "0"
+      }
     }
   },
   "pending": {
