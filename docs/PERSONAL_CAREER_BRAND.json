@@ -1,6 +1,6 @@
 {
   "schema": "personal-career-brand/v1",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "status": "IN_PROGRESS",
   "last_approved_date": "2026-10-02",
   "authority": {
@@ -51,7 +51,12 @@
     "Commercial Growth",
     "Operational Efficiency",
     "Multi-market / Global Scale",
-    "Zero-to-One"
+    "Zero-to-One",
+    "Partner Ecosystem Leadership",
+    "Commercial Negotiation / Deal Making",
+    "Matrixed Influence",
+    "Business Development / Channel Growth",
+    "Platform Product Influence"
   ],
   "case_study_system": {
     "portfolio_case_study_count": 17,
@@ -90,7 +95,8 @@
       "Enterprise Platform / SaaS",
       "Agentic Commerce / AI",
       "Enterprise ERP / SAP",
-      "Digital Learning / Creator Platform"
+      "Digital Learning / Creator Platform",
+      "Payments / Fintech Commerce"
     ]
   },
   "approved_case_studies": {
@@ -301,6 +307,30 @@
           "artifact": "/k2/files/2021-11-09_bc-casestudy-02.pdf"
         }
       ]
+    },
+    "cbdistillery": {
+      "primary": "High-Risk Delivery Rescue",
+      "secondary": "Product + Architecture Bridge",
+      "context": "Payments / Fintech Commerce",
+      "career_story": "Fix → Grow",
+      "signature_angle": "Orchestrating a cross-company deal across CBDistillery, BigCommerce, Square, and OrderGroove to solve an existential payments constraint, reshape platform capabilities, and unlock growth from $15M to $40M GMV.",
+      "internal_dynamics": [
+        "Partner Ecosystem Leadership",
+        "Commercial Negotiation / Deal Making",
+        "Matrixed Influence",
+        "Business Development / Channel Growth",
+        "Platform Product Influence",
+        "Recovery / Stabilization",
+        "Commercial Growth"
+      ],
+      "positioning_rule": "Lead with ecosystem deal-making, matrixed negotiation, business development, partner/channel sales, and platform product influence. Treat implementation as supporting evidence rather than the center of the story.",
+      "approved_direct_outcomes": {
+        "gmv": {
+          "from": "$15M",
+          "to": "$40M",
+          "attribution": "growth unlocked by the negotiated commerce/payments solution"
+        }
+      }
     }
   },
   "pending": {
