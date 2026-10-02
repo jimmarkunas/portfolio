@@ -1,6 +1,6 @@
 {
   "schema": "personal-career-brand/v1",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "status": "IN_PROGRESS",
   "last_approved_date": "2026-10-02",
   "authority": {
@@ -373,6 +373,29 @@
         "cost_savings": "$50M",
         "digital_sales_uplift": "24%",
         "AOV_lift": "$25"
+      }
+    },
+    "directv_everywhere": {
+      "primary": "Operating Model / Organizational Clarity",
+      "secondary": "Product + Architecture Bridge",
+      "context": "Media & Streaming",
+      "career_story": "Fix → Scale",
+      "signature_angle": "Rescuing a nationally advertised streaming product before it existed by aligning 35+ teams around one product truth and turning the promise into a cross-platform product for 20M+ subscribers.",
+      "internal_dynamics": [
+        "Operating Model Transformation",
+        "Systems Integration",
+        "Recovery / Stabilization",
+        "Platform Modernization",
+        "Multi-market / Global Scale",
+        "Matrixed Influence"
+      ],
+      "positioning_rule": "Lead with the operating-model and organizational-clarity problem: a nationally advertised product did not yet exist, 35+ teams were working from competing definitions, and the product needed one shared truth. Product requirements, entitlement/authentication decisions, and cross-device architecture are supporting evidence for how that organizational problem was solved.",
+      "approved_public_metrics": {
+        "downloads": "5M+",
+        "subscriber_base": "20M+",
+        "channels": "400+",
+        "device_families": 5,
+        "teams_aligned": "35+"
       }
     }
   },
