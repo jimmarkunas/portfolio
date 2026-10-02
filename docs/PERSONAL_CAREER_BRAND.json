@@ -1,6 +1,6 @@
 {
   "schema": "personal-career-brand/v1",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "status": "IN_PROGRESS",
   "last_approved_date": "2026-10-02",
   "authority": {
@@ -397,6 +397,26 @@
         "device_families": 5,
         "teams_aligned": "35+"
       }
+    },
+    "chicks_with_guns": {
+      "primary": "Founder / Product Leadership",
+      "secondary": null,
+      "context": "Media & Streaming",
+      "career_story": "Create → Scale",
+      "signature_angle": "Building a zero-budget digital-native media product into a multi-surface platform spanning web, native mobile, video, and a 40+ person global contributor network.",
+      "internal_dynamics": [
+        "Zero-to-One",
+        "Productization",
+        "Operating Model Transformation",
+        "Multi-market / Global Scale"
+      ],
+      "positioning_rule": "Lead with founder/product leadership: Jim created the company and product, designed its operating model, built the distributed contributor organization, and scaled the audience. Treat the web/iOS/video product architecture as supporting evidence rather than a secondary category.",
+      "approved_public_metrics": {
+        "monthly_uniques": "250k+",
+        "iOS_app_downloads": "10k+",
+        "global_contributors": "40+"
+      },
+      "recognition": "Yahoo recognition as a top online music publication"
     }
   },
   "pending": {
