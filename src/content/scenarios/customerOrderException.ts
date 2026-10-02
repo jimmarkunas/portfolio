@@ -1,4 +1,4 @@
-/** Shared Customer Order Exception exercise copy used by the PDMA and Secure Carolinas UIs. */
+/** Customer order exception scenario shared by presentation exercise UIs. */
 export const customerOrderException = {
       title: "Can You Get This Agent Into Production?",
       name: "Customer Order Exception Agent",

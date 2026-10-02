@@ -41,7 +41,7 @@ const normalize = (text) => text
 
 const files = walk(TREE)
 const sourceFiles = files.filter((file) => /\.(tsx?|css)$/.test(file))
-const templateContent = read(`${TREE}/templateContent.ts`)
+const templateContent = read(`${TREE}/templateManifest.tsx`)
 // Nine gallery exemplars render the production deck's content objects; the gallery owns the rest.
 const galleryContent = `${templateContent}\n${read(PRODUCTION_CONTENT)}`
 
@@ -76,7 +76,7 @@ for (const file of sourceFiles.filter((f) => f.endsWith(".tsx"))) {
 const requiredKinds = ["title", "end-card", "exercise", "embedded-app", "compare-contrast", "flow-scenario", "decision-spectrum", "hub-ecosystem", "scorecard", "structured-content-action"]
 const galleryOrder = ["title", "endCard", "exercise", "embeddedApp", "compareContrast", "flowScenario", "decisionSpectrum", "hubEcosystem", "scorecard", "structuredAction"]
 const declaredOrder = (templateContent.match(/export const templateContent = \[([^\]]*)\]/)?.[1] ?? "").split(",").map((name) => name.trim()).filter(Boolean)
-if (JSON.stringify(declaredOrder) !== JSON.stringify(galleryOrder)) fail(`templateContent.ts: gallery order ${JSON.stringify(declaredOrder)} ≠ ${JSON.stringify(galleryOrder)}`)
+if (JSON.stringify(declaredOrder) !== JSON.stringify(galleryOrder)) fail(`templateManifest.tsx: gallery order ${JSON.stringify(declaredOrder)} ≠ ${JSON.stringify(galleryOrder)}`)
 const declaredKinds = new Set([...galleryContent.matchAll(/^\s*kind:\s*"([a-z-]+)"/gm)].map(([, kind]) => kind))
 for (const kind of requiredKinds) if (!declaredKinds.has(kind)) fail(`gallery content: no ${kind} template content declared`)
 const manifestSource = read(`${TREE}/templateManifest.tsx`)
@@ -109,7 +109,7 @@ if ([...galleryContent.matchAll(/footerLabel:\s*"([^"]+)"/g)].length !== headerB
 // 6. Single-URL rule for the End Card download module.
 const downloadModule = sharedPresentationSource
 const hrefs = [...downloadModule.matchAll(/href=\{([^}]+)\}/g)].map(([, expr]) => expr.trim())
-if (hrefs.length < 2 || new Set(hrefs).size !== 1 || !/<NativeQrCode value=\{url\}/.test(downloadModule)) fail("DownloadModule.tsx: QR code and round CTA must consume the same single url value")
+if (hrefs.length < 2 || new Set(hrefs).size !== 1 || !/<NativeQrCode value=\{url\}/.test(downloadModule)) fail("TemplatePrimitives.tsx: QR code and round CTA must consume the same single url value")
 
 // 7. Canon v4 assets: present and byte-identical.
 const references = JSON.parse(read(REFERENCES))
@@ -126,6 +126,10 @@ for (const [kind, entry] of Object.entries(references.templates)) {
 
 // 8. No base64 payloads in the new tree or its scripts.
 for (const file of [...sourceFiles, "scripts/pdma-template-check.mjs", "scripts/pdma-template-visual-qa.mjs", "scripts/pdma-template-copy.mjs"].filter((f) => fs.existsSync(path.join(root, f)))) {
+  const text = read(file)
+  if (/data:[a-z]+\/[a-z0-9.+-]+;base64,/i.test(text) || /[A-Za-z0-9+/]{400,}={0,2}/.test(text)) fail(`${file}: base64 payload detected`)
+}
+for (const file of ["src/components/presentation/TemplatePrimitives.tsx", "src/components/presentation/qrMatrix.ts"]) {
   const text = read(file)
   if (/data:[a-z]+\/[a-z0-9.+-]+;base64,/i.test(text) || /[A-Za-z0-9+/]{400,}={0,2}/.test(text)) fail(`${file}: base64 payload detected`)
 }

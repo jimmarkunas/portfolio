@@ -1,6 +1,18 @@
 import type { ComponentType, ReactNode } from "react";
-import type { PdmaSlideKey, PdmaSlideManifestEntry } from "@/components/presentation/presentationTypes";
+import type { PresentationSlideManifestEntry } from "@/components/presentation/presentationTypes";
 import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
+import {
+  slide01 as title,
+  slide03 as compareContrast,
+  slide06 as hubEcosystem,
+  slide07 as scorecard,
+  slide08 as decisionSpectrum,
+  slide09 as flowScenario,
+  slide10 as structuredAction,
+  slide14 as exercise,
+  slide15 as embeddedApp,
+  slide16 as endCard,
+} from "@/app/pdma2026/presentation/pdma2026Content";
 import { decorativeVariants, isDecorImage } from "./components/DecorativeLayer";
 import { CompareContrastTemplate } from "./components/templates/CompareContrastTemplate";
 import { DecisionSpectrumTemplate } from "./components/templates/DecisionSpectrumTemplate";
@@ -12,7 +24,6 @@ import { HubEcosystemTemplate } from "./components/templates/HubEcosystemTemplat
 import { ScorecardTemplate } from "./components/templates/ScorecardTemplate";
 import { StructuredActionTemplate } from "./components/templates/StructuredActionTemplate";
 import { TitleTemplate } from "./components/templates/TitleTemplate";
-import { templateContent } from "./templateContent";
 import type { TemplateContent, TemplateKind } from "@/components/presentation/presentationTypes";
 
 export const TEMPLATE_COUNT = 10;
@@ -31,6 +42,9 @@ export const templateNames: Record<TemplateKind, string> = {
 };
 
 export type TemplateManifestEntry = PresentationSlideManifestEntry & { kind: TemplateKind; templateName: string; sourceSlide: number | null; qa: "targeted" };
+
+/** Gallery order from the ten production slide exemplars. */
+export const templateContent = [title, endCard, exercise, embeddedApp, compareContrast, flowScenario, decisionSpectrum, hubEcosystem, scorecard, structuredAction] as const satisfies readonly TemplateContent[];
 
 function renderTemplate(content: TemplateContent): ReactNode {
   switch (content.kind) {

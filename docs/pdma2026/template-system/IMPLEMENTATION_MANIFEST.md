@@ -53,7 +53,6 @@ src/app/pdma2026-templates/
   page.tsx
   TemplatePresentation.tsx
   templateManifest.tsx
-  templateContent.ts
   styles/templates.css
   components/TemplateSlide.tsx
   components/DecorativeLayer.tsx
@@ -67,6 +66,9 @@ src/app/pdma2026-templates/
   components/templates/HubEcosystemTemplate.tsx
   components/templates/ScorecardTemplate.tsx
   components/templates/StructuredActionTemplate.tsx
+
+src/components/presentation/presentationTypes.ts
+src/components/presentation/TemplatePrimitives.tsx
 ```
 
 ### Layout rules

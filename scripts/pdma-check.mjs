@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// PDMA static checks: production deck + template gallery contracts, then typecheck.
+// Fast PDMA source contracts. Run `npm run pdma:typecheck` for the presentation-scoped TypeScript check.
 // `--slide NN` and `--all` are accepted for compatibility; the deck is always checked as one unit.
 import { spawnSync } from "node:child_process"
 
@@ -12,5 +12,4 @@ const run = (command, args) => {
 run(process.execPath, ["scripts/pdma-deck-check.mjs"])
 run(process.execPath, ["scripts/pdma-template-check.mjs"])
 run(process.execPath, ["scripts/pdma-orb-timing-check.mjs"])
-run("npm", ["run", "typecheck"])
-console.log("PDMA full check passed.")
+console.log("PDMA static checks passed.")

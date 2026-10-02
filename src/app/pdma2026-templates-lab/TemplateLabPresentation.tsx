@@ -7,12 +7,12 @@ import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExerci
 import type { PdmaSlideKey } from "@/app/pdma2026/presentation/presentationTypes";
 import { pdma2026Content } from "@/content/pdma2026";
 import { DecorativeLayer, isDecorOrb } from "../pdma2026-templates/components/DecorativeLayer";
-import { EmbeddedAppFrame } from "../pdma2026-templates/components/shared/EmbeddedAppFrame";
+import { EmbeddedAppFrame } from "@/components/presentation/TemplatePrimitives";
 import { shellTitleBottom } from "../pdma2026-templates/components/TemplateSlide";
 import { FlowScenarioTemplate } from "../pdma2026-templates/components/templates/FlowScenarioTemplate";
 import { StructuredActionTemplate } from "../pdma2026-templates/components/templates/StructuredActionTemplate";
 import { HubEcosystemTemplate } from "../pdma2026-templates/components/templates/HubEcosystemTemplate";
-import { templateContent } from "../pdma2026-templates/templateContent";
+import { templateContent } from "../pdma2026-templates/templateManifest";
 import { templateManifest, type TemplateManifestEntry } from "../pdma2026-templates/templateManifest";
 
 /*

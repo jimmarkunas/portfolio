@@ -50,7 +50,6 @@ src/app/pdma2026-templates/
   page.tsx
   TemplatePresentation.tsx
   templateManifest.tsx
-  templateContent.ts
   styles/
     templates.css
   components/
@@ -68,6 +67,10 @@ src/app/pdma2026-templates/
       ScorecardTemplate.tsx
       StructuredActionTemplate.tsx
 
+src/components/presentation/
+  presentationTypes.ts
+  TemplatePrimitives.tsx
+
 public/pdma2026-templates/assets/
   end-card/
   flow-scenario/
@@ -80,7 +83,7 @@ No second geometry file. No per-slide coordinate registry. No alternate shell.
 
 ## 6. Content model
 
-`templateContent.ts` is the gallery mapping populated from the mapped live PDMA copy. The discriminated template content types live in `src/components/presentation/presentationTypes.ts` with the shared presentation contracts.
+`templateManifest.tsx` owns the gallery order and maps the ten production slide content objects into template entries. Production copy remains in `src/app/pdma2026/presentation/pdma2026Content.ts`; shared template types live in `src/components/presentation/presentationTypes.ts`.
 
 Every template component receives content through props. Template components must not hard-code presentation copy except structural labels that are part of the component itself.
 

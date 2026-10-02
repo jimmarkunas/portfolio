@@ -15,6 +15,8 @@ export type PdmaTitleConfig = {
 };
 
 export type PdmaHeaderLabels = readonly [string, string, string];
+export type PresentationHeaderLabels = PdmaHeaderLabels;
+export type PresentationTitleConfig = PdmaTitleConfig;
 
 export type PdmaSlideKey = `slide-${"01" | "02" | "03" | "04" | "05" | "06" | "07" | "08" | "09" | "10" | "11" | "12" | "13" | "14" | "15" | "16"}`;
 
@@ -26,6 +28,19 @@ export type PdmaSlideManifestEntry = {
   headerLabels: PdmaHeaderLabels;
   footerLabel: string;
   title: PdmaTitleConfig;
+  component: ComponentType;
+  assets: readonly string[];
+  routeLinks?: readonly string[];
+};
+
+/** Generic shared manifest contract used by gallery views that are not deck-keyed. */
+export type PresentationSlideManifestEntry<Key extends string = string> = {
+  key: Key;
+  id: Key;
+  tocTitle: string;
+  headerLabels: PresentationHeaderLabels;
+  footerLabel: string;
+  title: PresentationTitleConfig;
   component: ComponentType;
   assets: readonly string[];
   routeLinks?: readonly string[];

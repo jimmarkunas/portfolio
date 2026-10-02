@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "incremental": false
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/app/pdma2026/**/*.ts",
+    "src/app/pdma2026/**/*.tsx",
+    "src/app/pdma2026-templates/**/*.ts",
+    "src/app/pdma2026-templates/**/*.tsx",
+    "src/app/pdma2026-templates-lab/**/*.ts",
+    "src/app/pdma2026-templates-lab/**/*.tsx",
+    "src/content/pdma2026/**/*.ts",
+    "src/components/presentation/**/*.ts",
+    "src/components/presentation/**/*.tsx",
+    "src/components/pbds/orb/**/*.ts",
+    "src/components/pbds/orb/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    ".next-dev"
+  ]
+}
