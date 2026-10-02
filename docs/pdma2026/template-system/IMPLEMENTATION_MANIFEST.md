@@ -28,8 +28,23 @@ No mapped copy may be removed, hidden, truncated, paraphrased, or replaced by co
 
 ```text
 src/app/pdma2026-templates/
+src/components/presentation/PresentationCanvas.tsx
+src/components/presentation/TemplatePrimitives.tsx
+src/components/presentation/presentationTypes.ts
+src/components/presentation/qrMatrix.ts
 public/pdma2026-templates/assets/
 ```
+
+### Shared presentation owners
+
+```text
+src/components/presentation/PresentationCanvas.tsx
+src/components/presentation/TemplatePrimitives.tsx
+src/components/presentation/presentationTypes.ts
+src/components/presentation/qrMatrix.ts
+```
+
+The production deck, template gallery, and exercise route consume these common canvas, primitive, type, and QR sources.
 
 ### New component targets
 
@@ -39,17 +54,9 @@ src/app/pdma2026-templates/
   TemplatePresentation.tsx
   templateManifest.tsx
   templateContent.ts
-  templateTypes.ts
   styles/templates.css
   components/TemplateSlide.tsx
   components/DecorativeLayer.tsx
-  components/shared/ContentCard.tsx
-  components/shared/IconCircle.tsx
-  components/shared/FlowRail.tsx
-  components/shared/Connector.tsx
-  components/shared/TakeawayBand.tsx
-  components/shared/DownloadModule.tsx
-  components/shared/EmbeddedAppFrame.tsx
   components/templates/TitleTemplate.tsx
   components/templates/EndCardTemplate.tsx
   components/templates/ExerciseTemplate.tsx

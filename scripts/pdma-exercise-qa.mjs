@@ -181,8 +181,8 @@ async function runPdma([picks, value], { walk = false, label = "case" } = {}) {
 }
 
 // Brief expectations come from the SCC scenario data itself.
-const scenarioSource = fs.readFileSync("src/content/secure-carolinas-2026/presentationContent.ts", "utf8")
-const scenarioBlock = scenarioSource.slice(scenarioSource.indexOf("customerOrderException: {"), scenarioSource.indexOf("resetLabel"))
+const scenarioSource = fs.readFileSync("src/content/scenarios/customerOrderException.ts", "utf8")
+const scenarioBlock = scenarioSource.slice(scenarioSource.indexOf("export const customerOrderException = {"), scenarioSource.indexOf("resetLabel"))
 const controlData = scenarioBlock.split(/\n\s+\{\n\s+letter: /).slice(1).map((chunk) => ({
   letter: chunk.match(/^"(\w)"/)[1],
   choices: [...chunk.matchAll(/label: "([^"]+)",\s+description:\s+"([^"]+)",\s+resultingStatus: "(\w+)",\s+tradeoff: "([^"]+)"/g)].map(([, label, description, status, tradeoff]) => ({ label, description, status, tradeoff })),

@@ -1,5 +1,5 @@
 import type { ComponentType, ReactNode } from "react";
-import type { PdmaSlideKey, PdmaSlideManifestEntry } from "@/app/pdma2026/presentation/presentationTypes";
+import type { PdmaSlideKey, PdmaSlideManifestEntry } from "@/components/presentation/presentationTypes";
 import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
 import { decorativeVariants, isDecorImage } from "./components/DecorativeLayer";
 import { CompareContrastTemplate } from "./components/templates/CompareContrastTemplate";
@@ -13,7 +13,7 @@ import { ScorecardTemplate } from "./components/templates/ScorecardTemplate";
 import { StructuredActionTemplate } from "./components/templates/StructuredActionTemplate";
 import { TitleTemplate } from "./components/templates/TitleTemplate";
 import { templateContent } from "./templateContent";
-import type { TemplateContent, TemplateKind } from "./templateTypes";
+import type { TemplateContent, TemplateKind } from "@/components/presentation/presentationTypes";
 
 export const TEMPLATE_COUNT = 10;
 

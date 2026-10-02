@@ -87,6 +87,7 @@ async function measure(page) {
     const scale = canvasRect.width / 1920
     const layout = {}
     slide.querySelectorAll(".pdmat-stage [class*='pdmat-']").forEach((element, index) => {
+      if (getComputedStyle(element).display === "none" || element.getClientRects().length === 0) return
       const rect = element.getBoundingClientRect()
       layout[`${index}:${element.className.toString().split(" ")[0]}`] = [rect.left - canvasRect.left, rect.top - canvasRect.top, rect.width, rect.height].map((value) => Math.round(value / scale))
     })

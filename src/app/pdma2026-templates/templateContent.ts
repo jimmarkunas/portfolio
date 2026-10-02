@@ -1,4 +1,4 @@
-import type { TemplateContent } from "./templateTypes";
+import type { TemplateContent } from "@/components/presentation/presentationTypes";
 import {
   slide01 as title,
   slide03 as compareContrast,

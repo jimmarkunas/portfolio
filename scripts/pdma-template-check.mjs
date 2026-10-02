@@ -83,7 +83,13 @@ const manifestSource = read(`${TREE}/templateManifest.tsx`)
 for (const kind of requiredKinds) if (!new RegExp(`case "${kind}": return <`).test(manifestSource)) fail(`templateManifest.tsx: no renderer for ${kind}`)
 const componentTargets = ["TitleTemplate", "EndCardTemplate", "ExerciseTemplate", "EmbeddedAppTemplate", "CompareContrastTemplate", "FlowScenarioTemplate", "DecisionSpectrumTemplate", "HubEcosystemTemplate", "ScorecardTemplate", "StructuredActionTemplate"]
 for (const name of componentTargets) if (!fs.existsSync(path.join(root, TREE, "components/templates", `${name}.tsx`))) fail(`missing component target components/templates/${name}.tsx`)
-for (const name of ["ContentCard", "IconCircle", "FlowRail", "Connector", "TakeawayBand", "DownloadModule", "EmbeddedAppFrame"]) if (!fs.existsSync(path.join(root, TREE, "components/shared", `${name}.tsx`))) fail(`missing shared component components/shared/${name}.tsx`)
+const sharedPresentation = "src/components/presentation/TemplatePrimitives.tsx";
+const sharedPresentationSource = read(sharedPresentation);
+for (const name of ["ContentCard", "IconCircle", "FlowRail", "Connector", "TakeawayBand", "DownloadModule", "EmbeddedAppFrame"]) {
+  if (!new RegExp(`export function ${name}\\b`).test(sharedPresentationSource)) fail(`missing shared presentation primitive ${name}`);
+}
+if (!fs.existsSync(path.join(root, "src/components/presentation/PresentationCanvas.tsx"))) fail("missing shared PDMA PresentationCanvas");
+for (const file of sourceFiles) if (/components\/shared\/|templateTypes/.test(read(file))) fail(`${file}: stale template-local shared ownership`);
 
 // 5. Mapped copy parity. Every string must exist verbatim in its copy authority AND in the gallery's content sources.
 const normalizedContent = normalize(galleryContent)
@@ -101,7 +107,7 @@ if (headerBlocks.some((labels) => labels.length !== 3)) fail("gallery content: e
 if ([...galleryContent.matchAll(/footerLabel:\s*"([^"]+)"/g)].length !== headerBlocks.length) fail("gallery content: every template needs a footer label")
 
 // 6. Single-URL rule for the End Card download module.
-const downloadModule = read(`${TREE}/components/shared/DownloadModule.tsx`)
+const downloadModule = sharedPresentationSource
 const hrefs = [...downloadModule.matchAll(/href=\{([^}]+)\}/g)].map(([, expr]) => expr.trim())
 if (hrefs.length < 2 || new Set(hrefs).size !== 1 || !/<NativeQrCode value=\{url\}/.test(downloadModule)) fail("DownloadModule.tsx: QR code and round CTA must consume the same single url value")
 

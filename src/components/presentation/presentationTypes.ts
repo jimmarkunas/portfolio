@@ -1,5 +1,43 @@
+import type { ComponentType } from "react";
 import type { LucideIcon } from "lucide-react";
-import type { PdmaHeaderLabels, PdmaTitleConfig } from "@/app/pdma2026/presentation/presentationTypes";
+
+/** The single 1920×1080 semantic plane shared by the PDMA deck and template gallery. */
+export const PDMA_LOGICAL_CANVAS = { width: 1920, height: 1080 } as const;
+
+/** Title-block configuration consumed by PdmaTitleBlock (title/subtitle styling lives in the shell). */
+export type PdmaTitleConfig = {
+  white?: string; magenta?: string; subtitle?: string; size: number; leading?: number; tracking?: number;
+  subtitleSize?: number; subtitleLeading?: number; subtitleOffset?: number; subtitleX?: number; subtitleTracking?: number;
+  exactSubtitleSize?: boolean; titleColor?: string; subtitleColor?: string; magentaRowShift?: number; magentaX?: number; sameRow?: boolean; plusMagenta?: boolean;
+  /** Characters of `white` drawn in magenta (e.g. "A.S" for the A.G.E.N.T.S. wordmark). */
+  magentaGlyphs?: string;
+};
+
+export type PdmaHeaderLabels = readonly [string, string, string];
+
+export type PdmaSlideKey = `slide-${"01" | "02" | "03" | "04" | "05" | "06" | "07" | "08" | "09" | "10" | "11" | "12" | "13" | "14" | "15" | "16"}`;
+
+/** Chrome contract between a deck manifest and PdmaPresentationShell. */
+export type PdmaSlideManifestEntry = {
+  key: PdmaSlideKey;
+  id: PdmaSlideKey;
+  tocTitle: string;
+  headerLabels: PdmaHeaderLabels;
+  footerLabel: string;
+  title: PdmaTitleConfig;
+  component: ComponentType;
+  assets: readonly string[];
+  routeLinks?: readonly string[];
+};
+
+/** Shell chrome for one production slide (same contract the template gallery uses). */
+export type PdmaSlideChrome = {
+  tocTitle: string;
+  headerLabels: PdmaHeaderLabels;
+  footerLabel: string;
+  title: PdmaTitleConfig;
+  sourceSlide: number | null;
+};
 
 export type TemplateKind =
   | "title"

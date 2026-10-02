@@ -1,7 +1,7 @@
-import type { HubCard, HubEcosystemTemplateContent } from "../../templateTypes";
-import { FanConnector } from "../shared/Connector";
-import { ContentCard } from "../shared/ContentCard";
-import { IconCircle } from "../shared/IconCircle";
+import type { HubCard, HubEcosystemTemplateContent } from "@/components/presentation/presentationTypes";
+import { FanConnector } from "@/components/presentation/TemplatePrimitives";
+import { ContentCard } from "@/components/presentation/TemplatePrimitives";
+import { IconCircle } from "@/components/presentation/TemplatePrimitives";
 import { TemplateSlide } from "../TemplateSlide";
 
 /** Row centers for a bank of equal-height rows (row gap lives inside each row). */

@@ -1,7 +1,7 @@
-import type { CompareContrastTemplateContent, ComparePanel } from "../../templateTypes";
-import { FlowRail } from "../shared/FlowRail";
-import { IconCircle } from "../shared/IconCircle";
-import { TakeawayBand } from "../shared/TakeawayBand";
+import type { CompareContrastTemplateContent, ComparePanel } from "@/components/presentation/presentationTypes";
+import { FlowRail } from "@/components/presentation/TemplatePrimitives";
+import { IconCircle } from "@/components/presentation/TemplatePrimitives";
+import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
 import { TemplateSlide } from "../TemplateSlide";
 
 function Panel({ panel }: { panel: ComparePanel }) {

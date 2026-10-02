@@ -7,7 +7,7 @@ import { CONTENT, readDeck } from "./pdma-deck-slides.mjs"
 const root = process.cwd()
 const docsRoot = path.join(root, "docs/pdma2026")
 const slides = readDeck(root)
-const rendering = { canvas: "PdmaSlideCanvas (1920×1080, uniform contain scaling)", slide: "TemplateSlide", decoration: "DecorativeLayer", content: CONTENT, manifest: "src/app/pdma2026/presentation/pdma2026Manifest.tsx" }
+const rendering = { canvas: "PresentationCanvas (1920×1080, uniform contain scaling)", slide: "TemplateSlide", decoration: "DecorativeLayer", content: CONTENT, manifest: "src/app/pdma2026/presentation/pdma2026Manifest.tsx" }
 fs.mkdirSync(docsRoot, { recursive: true })
 const indexPath = path.join(docsRoot, "slide-index.json")
 fs.writeFileSync(indexPath, `${JSON.stringify({ generatedBy: "scripts/generate-pdma-context.mjs", canvas: { width: 1920, height: 1080 }, rendering, slides }, null, 2)}\n`)

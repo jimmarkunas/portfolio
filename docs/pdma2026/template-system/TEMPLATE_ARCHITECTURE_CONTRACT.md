@@ -37,11 +37,9 @@ The mapped live PDMA slide/config is the copy authority. **No approved concept i
 
 ## 4. Existing shell reuse
 
-Reuse `PdmaPresentationShell` and `PdmaTitleBlock` **as-is**. Do not modify the existing PDMA shell, title block, navigation, header, footer, or existing presentation files.
+Reuse `PdmaPresentationShell` and `PdmaTitleBlock` for navigation, title, header, and footer. The shared `PresentationCanvas` owns the single 1920×1080 logical plane used by the production deck, gallery, and exercise route. Keep its current scale, centering, and top-bias equation unchanged. **No file under `/src/app/pdma2026-templates/**` may import `pdmaGeometry.ts`.**
 
-The new template system may consume the existing shell as an external dependency. **No file under `/src/app/pdma2026-templates/**` may import `pdmaGeometry.ts`.** The reused legacy shell may continue to use its existing 1920×1080 canvas internals unchanged.
-
-This preserves exact current navigation/header/footer/title behavior while keeping all new template bodies geometry-free.
+This preserves the approved shell chrome while keeping template bodies in normal flow.
 
 ## 5. Required source tree
 
@@ -51,20 +49,11 @@ src/app/pdma2026-templates/
   TemplatePresentation.tsx
   templateManifest.tsx
   templateContent.ts
-  templateTypes.ts
   styles/
     templates.css
   components/
     TemplateSlide.tsx
     DecorativeLayer.tsx
-    shared/
-      ContentCard.tsx
-      IconCircle.tsx
-      FlowRail.tsx
-      Connector.tsx
-      TakeawayBand.tsx
-      DownloadModule.tsx
-      EmbeddedAppFrame.tsx
     templates/
       TitleTemplate.tsx
       EndCardTemplate.tsx
@@ -89,7 +78,7 @@ No second geometry file. No per-slide coordinate registry. No alternate shell.
 
 ## 6. Content model
 
-`templateContent.ts` is the only source for template body content in the new deck. It is populated from the mapped live PDMA copy and typed as a discriminated union by template kind.
+`templateContent.ts` is the gallery mapping populated from the mapped live PDMA copy. The discriminated template content types live in `src/components/presentation/presentationTypes.ts` with the shared presentation contracts.
 
 Every template component receives content through props. Template components must not hard-code presentation copy except structural labels that are part of the component itself.
 

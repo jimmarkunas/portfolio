@@ -54,7 +54,12 @@ for (const options of [{}, { channel: "chrome" }]) {
 if (!browser) requireExternalReview("no Playwright-compatible browser could be launched")
 fs.mkdirSync(outDir, { recursive: true })
 
-const normalize = (text) => text.replace(/ /g, " ").replace(/\s+/g, " ").trim()
+const normalize = (text) => text.replace(/ /g, " ").replace(/\s+/g, " ").trim().toUpperCase()
+// These values remain in canonical content, but approved CSS intentionally hides them.
+const intentionallyHiddenCopy = new Set([
+  "THE FARTHER RIGHT YOU GO, THE MORE PRODUCT DESIGN HAS TO ACCOUNT FOR THE CONSEQUENCES.",
+  "REAL FEATURES. REAL OUTCOMES.",
+])
 const copyFor = (kind) => copyRegistry.filter((entry) => entry.kind === kind).flatMap((entry) => entry.strings)
 
 async function openDeck(page) {
@@ -83,6 +88,7 @@ async function measure(page) {
     const layout = {}
     slide.querySelectorAll(".pdmat-stage [class*='pdmat-']").forEach((element, index) => {
       if (element.closest(".pdmat-deco")) return
+      if (getComputedStyle(element).display === "none" || element.getClientRects().length === 0) return
       layout[`${index}:${element.className.toString().split(" ")[0]}`] = toLogical(element.getBoundingClientRect())
     })
     window.scrollTo(0, 5000)
@@ -153,6 +159,7 @@ for (const viewport of viewports) {
     if (m.navigation < 4) fail(`${tag}: navigation controls not visible (${m.navigation})`)
     const text = normalize(m.text)
     for (const value of copyFor(kind)) {
+      if (intentionallyHiddenCopy.has(value.toUpperCase())) continue
       if (value.startsWith("/") || value.startsWith("http")) { if (!m.hrefs.includes(value)) fail(`${tag}: link target missing ${value}`); continue }
       if (!text.includes(normalize(value))) fail(`${tag}: copy missing "${value}"`)
     }

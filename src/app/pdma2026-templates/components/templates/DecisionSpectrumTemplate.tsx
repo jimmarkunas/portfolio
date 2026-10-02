@@ -1,7 +1,7 @@
 import { Fragment, type CSSProperties } from "react";
-import type { DecisionSpectrumTemplateContent } from "../../templateTypes";
-import { IconCircle } from "../shared/IconCircle";
-import { TakeawayBand } from "../shared/TakeawayBand";
+import type { DecisionSpectrumTemplateContent } from "@/components/presentation/presentationTypes";
+import { IconCircle } from "@/components/presentation/TemplatePrimitives";
+import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
 import { TemplateSlide } from "../TemplateSlide";
 
 /** Five authority stages on the horizon arc. `lift` is data: how far a stage rises along the arc. */

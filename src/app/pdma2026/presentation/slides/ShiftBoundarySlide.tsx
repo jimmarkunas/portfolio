@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import type { DecorItem } from "@/app/pdma2026-templates/components/DecorativeLayer";
-import { IconCircle } from "@/app/pdma2026-templates/components/shared/IconCircle";
+import { IconCircle } from "@/components/presentation/TemplatePrimitives";
 import { TemplateSlide } from "@/app/pdma2026-templates/components/TemplateSlide";
 import type { ShiftBoundaryContent } from "../presentationTypes";
 

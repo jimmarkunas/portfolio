@@ -1,4 +1,4 @@
-import { secureCarolinas2026Copy } from "@/content/secure-carolinas-2026/presentationContent";
+import { customerOrderException } from "@/content/scenarios/customerOrderException";
 
 /*
  * Customer Order Exception Agent scenario — shared pure state + scoring.
@@ -8,10 +8,10 @@ import { secureCarolinas2026Copy } from "@/content/secure-carolinas-2026/present
 
 export type Status = "DEFINED" | "PARTIAL" | "UNCLEAR";
 export type FoundationAnswer = "YES" | "NO" | null;
-export type ScenarioControl = typeof secureCarolinas2026Copy.scenarios.customerOrderException.controls[number];
+export type ScenarioControl = typeof customerOrderException.controls[number];
 export type ScenarioControlLetter = ScenarioControl["letter"];
 export type ScenarioControlChoice = ScenarioControl["choices"][number];
-export type ScenarioBusinessValue = typeof secureCarolinas2026Copy.scenarios.customerOrderException.businessValue.options[number];
+export type ScenarioBusinessValue = typeof customerOrderException.businessValue.options[number];
 export type OperatingProfileField = "AUTONOMY" | "HUMAN LOAD" | "OPERATIONAL RISK";
 export type OperatingProfileLevel = "LOW" | "MODERATE" | "HIGH";
 type ScenarioProfileChoice = {
@@ -26,7 +26,7 @@ export type ScenarioState = {
   selections: Partial<Record<ScenarioControlLetter, ScenarioControlChoice>>;
 };
 
-export const scenario = secureCarolinas2026Copy.scenarios.customerOrderException;
+export const scenario = customerOrderException;
 export const SCENARIO_STEP_COUNT = 9;
 export const initialState: ScenarioState = {
   systemsInventory: null,

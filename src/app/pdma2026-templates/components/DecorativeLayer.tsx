@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { DecorativeVariant } from "../templateTypes";
+import type { DecorativeVariant } from "@/components/presentation/presentationTypes";
 
 const A = "/pdma2026-templates/assets";
 

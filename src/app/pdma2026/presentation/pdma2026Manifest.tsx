@@ -12,7 +12,7 @@ import { StructuredActionTemplate } from "@/app/pdma2026-templates/components/te
 import { TitleTemplate } from "@/app/pdma2026-templates/components/templates/TitleTemplate";
 import { PdmaScenarioExercise } from "../exercise/PdmaScenarioExercise";
 import { PDMA_EXERCISE_ROUTE, PDMA_KIT_URL, pdma2026Slides, type Pdma2026SlideContent } from "./pdma2026Content";
-import type { PdmaSlideKey, PdmaSlideManifestEntry } from "./presentationTypes";
+import type { PdmaSlideKey, PdmaSlideManifestEntry } from "@/components/presentation/presentationTypes";
 import { AgentsRevealSlide, agentsDecor } from "./slides/AgentsRevealSlide";
 import { AmbiguityGateSlide, ambiguityDecor } from "./slides/AmbiguityGateSlide";
 import { FrameworkToProductSlide, frameworkDecor } from "./slides/FrameworkToProductSlide";

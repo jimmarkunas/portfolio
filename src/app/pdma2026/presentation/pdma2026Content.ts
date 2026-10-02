@@ -30,7 +30,7 @@ import type {
   ScorecardTemplateContent,
   StructuredActionTemplateContent,
   TitleTemplateContent,
-} from "@/app/pdma2026-templates/templateTypes";
+} from "@/components/presentation/presentationTypes";
 import type {
   AgentsRevealContent,
   AmbiguityGateContent,

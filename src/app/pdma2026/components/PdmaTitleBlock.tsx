@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import type { PdmaTitleConfig } from "../presentation/presentationTypes";
+import type { PdmaTitleConfig } from "@/components/presentation/presentationTypes";
 import { pdmaTransition, usePdmaReducedMotion } from "./pdmaMotion";
 
 /** Splits `text` into runs so the listed glyphs render magenta and the rest keep the title color. */

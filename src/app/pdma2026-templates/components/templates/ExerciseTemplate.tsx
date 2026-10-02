@@ -1,6 +1,6 @@
-import type { ExerciseTemplateContent } from "../../templateTypes";
-import { IconCircle } from "../shared/IconCircle";
-import { TakeawayBand } from "../shared/TakeawayBand";
+import type { ExerciseTemplateContent } from "@/components/presentation/presentationTypes";
+import { IconCircle } from "@/components/presentation/TemplatePrimitives";
+import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
 import { TemplateSlide } from "../TemplateSlide";
 
 export function ExerciseTemplate({ content }: { content: ExerciseTemplateContent }) {

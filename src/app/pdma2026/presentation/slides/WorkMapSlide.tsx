@@ -1,5 +1,5 @@
 import type { DecorItem } from "@/app/pdma2026-templates/components/DecorativeLayer";
-import { TakeawayBand } from "@/app/pdma2026-templates/components/shared/TakeawayBand";
+import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
 import { TemplateSlide } from "@/app/pdma2026-templates/components/TemplateSlide";
 import type { WorkMapContent } from "../presentationTypes";
 

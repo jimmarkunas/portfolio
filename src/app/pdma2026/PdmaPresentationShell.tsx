@@ -2,39 +2,21 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useRef } from "react";
 import { usePresentationFullscreen } from "@/hooks/usePresentationFullscreen";
 import { usePresentationNavigation } from "@/hooks/usePresentationNavigation";
 import { PresentationTocDialog } from "@/components/presentation/PresentationTocDialog";
 import type { PresentationNavigationCopy } from "@/lib/presentation";
 import { PdmaTitleBlock } from "./components/PdmaTitleBlock";
 import { pdmaAssets } from "./pdmaAssets";
-import { PDMA_LOGICAL_CANVAS, type PdmaSlideManifestEntry } from "./presentation/presentationTypes";
+import type { PdmaSlideManifestEntry } from "@/components/presentation/presentationTypes";
 import { usePdmaReducedMotion } from "./components/pdmaMotion";
 
 const PdmaTitleContext = createContext<{ slide: number; config: PdmaSlideManifestEntry["title"] } | null>(null);
 
-export function PdmaSlideCanvas({ children }: { children: React.ReactNode }) {
-  const stageRef = useRef<HTMLDivElement>(null);
-  const [frame, setFrame] = useState({ scale: 1, left: 0, top: 0 });
+export function PdmaTitleBlockOverlay() {
   const title = useContext(PdmaTitleContext);
-  useEffect(() => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    const update = () => {
-      const scale = Math.min(stage.clientWidth / PDMA_LOGICAL_CANVAS.width, stage.clientHeight / PDMA_LOGICAL_CANVAS.height);
-      const renderedWidth = PDMA_LOGICAL_CANVAS.width * scale;
-      const renderedHeight = PDMA_LOGICAL_CANVAS.height * scale;
-      const extraX = Math.max(0, stage.clientWidth - renderedWidth);
-      const extraY = Math.max(0, stage.clientHeight - renderedHeight);
-      setFrame({ scale, left: extraX / 2, top: extraY * 0.25 });
-    };
-    update();
-    const observer = new ResizeObserver(update);
-    observer.observe(stage);
-    return () => observer.disconnect();
-  }, []);
-  return <div ref={stageRef} className="pdma-canvas-stage"><div className="pdma-logical-canvas" style={{ left: frame.left, top: frame.top, transform: `scale(${frame.scale})` }}>{children}{title && <PdmaTitleBlock slide={title.slide} config={title.config} />}</div></div>;
+  return title ? <PdmaTitleBlock slide={title.slide} config={title.config} /> : null;
 }
 
 function PdmaHeader({ current, total, labels }: { current: number; total: number; labels: readonly [string, string, string] }) {

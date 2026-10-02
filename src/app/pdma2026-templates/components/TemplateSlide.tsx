@@ -1,9 +1,10 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
-import { PdmaSlideCanvas } from "@/app/pdma2026/PdmaPresentationShell";
-import type { PdmaTitleConfig } from "@/app/pdma2026/presentation/presentationTypes";
-import type { DecorativeVariant, TemplateKind } from "../templateTypes";
+import { PresentationCanvas } from "@/components/presentation/PresentationCanvas";
+import { PdmaTitleBlockOverlay } from "@/app/pdma2026/PdmaPresentationShell";
+import type { PdmaTitleConfig } from "@/components/presentation/presentationTypes";
+import type { DecorativeVariant, TemplateKind } from "@/components/presentation/presentationTypes";
 import { DecorativeLayer, type DecorItem } from "./DecorativeLayer";
 
 /** `.pdma-title-block` top edge in the shared shell stylesheet (10.925926% of the 1080 logical canvas). */
@@ -26,10 +27,11 @@ export function shellTitleBottom(config: PdmaTitleConfig) {
  * preserved production slide). Decoration comes from a registered variant or explicit items.
  */
 export function TemplateSlide({ kind, title, decorativeVariant = "none", decorItems, children }: { kind: TemplateKind | (string & {}); title: PdmaTitleConfig; decorativeVariant?: DecorativeVariant; decorItems?: readonly DecorItem[]; children: ReactNode }) {
-  return <PdmaSlideCanvas>
+  return <PresentationCanvas>
     <div className={`pdmat-slide pdmat-slide--${kind}`} data-template-kind={kind} style={{ "--pdmat-title-bottom": `${shellTitleBottom(title)}px` } as CSSProperties}>
       <DecorativeLayer variant={decorativeVariant} items={decorItems} />
       <div className="pdmat-stage">{children}</div>
     </div>
-  </PdmaSlideCanvas>;
+    <PdmaTitleBlockOverlay />
+  </PresentationCanvas>;
 }

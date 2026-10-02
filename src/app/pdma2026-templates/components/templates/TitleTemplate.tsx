@@ -1,4 +1,4 @@
-import type { TitleTemplateContent } from "../../templateTypes";
+import type { TitleTemplateContent } from "@/components/presentation/presentationTypes";
 import { TemplateSlide } from "../TemplateSlide";
 
 export function TitleTemplate({ content }: { content: TitleTemplateContent }) {

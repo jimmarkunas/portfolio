@@ -1,8 +1,8 @@
-import type { FlowScenarioTemplateContent, FlowStage } from "../../templateTypes";
-import { Connector } from "../shared/Connector";
-import { ContentCard } from "../shared/ContentCard";
-import { IconCircle } from "../shared/IconCircle";
-import { TakeawayBand } from "../shared/TakeawayBand";
+import type { FlowScenarioTemplateContent, FlowStage } from "@/components/presentation/presentationTypes";
+import { Connector } from "@/components/presentation/TemplatePrimitives";
+import { ContentCard } from "@/components/presentation/TemplatePrimitives";
+import { IconCircle } from "@/components/presentation/TemplatePrimitives";
+import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
 import { TemplateSlide } from "../TemplateSlide";
 
 const index = (position: number) => String(position).padStart(2, "0");
