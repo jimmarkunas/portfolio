@@ -31,51 +31,104 @@ jobs:
         run: |
           node <<'NODE'
           const fs = require('fs');
+          const path = require('path');
           const sharp = require('sharp');
 
           const names = ['aa', 'cbdistillery', 'cps', 'directv01', 'method'];
           const contentPath = 'src/content/site/portfolio.ts';
+          const tempRoot = '.tmp-portfolio-raster';
+          fs.rmSync(tempRoot, { recursive: true, force: true });
+          fs.mkdirSync(tempRoot, { recursive: true });
+
+          function extForMime(mime) {
+            const normalized = mime.toLowerCase();
+            if (normalized === 'png') return 'png';
+            if (normalized === 'jpeg' || normalized === 'jpg') return 'jpg';
+            if (normalized === 'webp') return 'webp';
+            if (normalized === 'gif') return 'gif';
+            throw new Error(`Unsupported embedded raster MIME: image/${mime}`);
+          }
+
+          function externalizeEmbeddedRasters(name, svgText) {
+            let count = 0;
+            const sanitized = svgText.replace(/data:image\/([a-zA-Z0-9.+-]+);base64,([A-Za-z0-9+/=\r\n]+)/g, (whole, mime, payload) => {
+              const normalizedPayload = payload.replace(/\s+/g, '');
+              const bytes = Buffer.from(normalizedPayload, 'base64');
+              const roundTrip = bytes.toString('base64');
+              if (roundTrip.replace(/=+$/, '') !== normalizedPayload.replace(/=+$/, '')) {
+                throw new Error(`${name}: embedded raster ${count} failed base64 round-trip validation`);
+              }
+              const ext = extForMime(mime);
+              const filename = `${name}-embedded-${String(count).padStart(2, '0')}.${ext}`;
+              fs.writeFileSync(path.join(tempRoot, filename), bytes);
+              count += 1;
+              return filename;
+            });
+            if (count === 0) throw new Error(`${name}: no embedded base64 raster found`);
+            return { sanitized, count };
+          }
+
+          function assertSamePixels(name, before, after, label) {
+            if (before.info.width !== after.info.width || before.info.height !== after.info.height || before.info.channels !== after.info.channels) {
+              throw new Error(`${name}: ${label} geometry changed (${JSON.stringify(before.info)} -> ${JSON.stringify(after.info)})`);
+            }
+            if (!before.data.equals(after.data)) {
+              let changed = 0;
+              for (let i = 0; i < before.data.length; i++) {
+                if (before.data[i] !== after.data[i]) changed += 1;
+              }
+              throw new Error(`${name}: ${label} pixel comparison failed (${changed} channel bytes changed)`);
+            }
+          }
 
           (async () => {
             const results = [];
             for (const name of names) {
               const svgPath = `public/portfolio-gallery/${name}.svg`;
               const webpPath = `public/portfolio-gallery/${name}.webp`;
-              const svg = fs.readFileSync(svgPath);
+              const svgText = fs.readFileSync(svgPath, 'utf8');
+              const svgBytes = Buffer.byteLength(svgText);
+              const { sanitized, count } = externalizeEmbeddedRasters(name, svgText);
+              const tempSvgPath = path.join(tempRoot, `${name}.svg`);
+              fs.writeFileSync(tempSvgPath, sanitized);
 
-              const before = await sharp(svg)
+              // The sanitized SVG retains every original SVG element/transform and replaces
+              // only each data: URI with the exact decoded bytes in a local file.
+              const sanitizedRender = await sharp(tempSvgPath)
                 .ensureAlpha()
                 .raw()
                 .toBuffer({ resolveWithObject: true });
 
-              const webp = await sharp(svg)
+              // AA is small enough for librsvg to parse directly; use it as a control proving
+              // that externalizing the data URI does not alter the rendered result.
+              if (name === 'aa') {
+                const originalRender = await sharp(svgPath)
+                  .ensureAlpha()
+                  .raw()
+                  .toBuffer({ resolveWithObject: true });
+                assertSamePixels(name, originalRender, sanitizedRender, 'externalized-wrapper control');
+              }
+
+              const webp = await sharp(tempSvgPath)
                 .webp({ lossless: true, effort: 6 })
                 .toBuffer();
               fs.writeFileSync(webpPath, webp);
 
-              const after = await sharp(webp)
+              const webpRender = await sharp(webp)
                 .ensureAlpha()
                 .raw()
                 .toBuffer({ resolveWithObject: true });
-
-              if (before.info.width !== after.info.width || before.info.height !== after.info.height || before.info.channels !== after.info.channels) {
-                throw new Error(`${name}: rendered geometry changed (${JSON.stringify(before.info)} -> ${JSON.stringify(after.info)})`);
-              }
-              if (!before.data.equals(after.data)) {
-                let changed = 0;
-                for (let i = 0; i < before.data.length; i++) {
-                  if (before.data[i] !== after.data[i]) changed++;
-                }
-                throw new Error(`${name}: lossless pixel comparison failed (${changed} channel bytes changed)`);
-              }
+              assertSamePixels(name, sanitizedRender, webpRender, 'lossless WebP');
 
               results.push({
                 name,
-                width: before.info.width,
-                height: before.info.height,
-                svgBytes: svg.length,
+                width: sanitizedRender.info.width,
+                height: sanitizedRender.info.height,
+                embeddedRasters: count,
+                svgBytes,
+                sanitizedSvgBytes: Buffer.byteLength(sanitized),
                 webpBytes: webp.length,
-                savedBytes: svg.length - webp.length,
+                savedBytes: svgBytes - webp.length,
               });
             }
 
@@ -83,8 +136,9 @@ jobs:
             for (const name of names) {
               const from = `/portfolio-gallery/${name}.svg`;
               const to = `/portfolio-gallery/${name}.webp`;
-              if (!content.includes(from)) throw new Error(`Missing live reference: ${from}`);
-              content = content.replaceAll(from, to);
+              const occurrences = content.split(from).length - 1;
+              if (occurrences !== 1) throw new Error(`Expected exactly one live reference for ${from}; found ${occurrences}`);
+              content = content.replace(from, to);
               if (content.includes(from)) throw new Error(`Old reference remains after replacement: ${from}`);
             }
             fs.writeFileSync(contentPath, content);
@@ -92,11 +146,14 @@ jobs:
             for (const name of names) {
               fs.unlinkSync(`public/portfolio-gallery/${name}.svg`);
             }
+            fs.rmSync(tempRoot, { recursive: true, force: true });
 
             console.table(results.map(r => ({
               asset: r.name,
               dimensions: `${r.width}x${r.height}`,
+              embeds: r.embeddedRasters,
               svgMiB: (r.svgBytes / 1048576).toFixed(2),
+              sanitizedKiB: (r.sanitizedSvgBytes / 1024).toFixed(1),
               webpMiB: (r.webpBytes / 1048576).toFixed(2),
               savedMiB: (r.savedBytes / 1048576).toFixed(2),
               pixelMatch: 'EXACT',
@@ -112,10 +169,12 @@ jobs:
           git diff --check
           changed="$(git status --short | awk '{print $2}' | sort)"
           printf '%s\n' "$changed"
-          printf '%s\n' "$changed" | grep -Ev '^$|^public/portfolio-gallery/(aa|cbdistillery|cps|directv01|method)\.(svg|webp)$|^src/content/site/portfolio\.ts$' && {
-            echo 'Unexpected file in bounded conversion diff.' >&2
+          unexpected="$(printf '%s\n' "$changed" | grep -Ev '^$|^public/portfolio-gallery/(aa|cbdistillery|cps|directv01|method)\.(svg|webp)$|^src/content/site/portfolio\.ts$' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected file in bounded conversion diff:" >&2
+            printf '%s\n' "$unexpected" >&2
             exit 1
-          } || true
+          fi
 
       - name: Install Chromium for browser verification
         run: npx playwright install --with-deps chromium
