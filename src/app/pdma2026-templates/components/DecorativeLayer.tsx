@@ -1,4 +1,7 @@
+import { PdmaDecorativePlane } from "@/app/pdma2026/PdmaPresentationShell";
 import type { CSSProperties } from "react";
+import { PBDSOrb, type PBDSOrbProps } from "@/components/pbds/orb/PBDSOrb";
+import { orbPresets, type PBDSOrbPresetName } from "@/components/pbds/orb/orbPresets";
 import type { DecorativeVariant } from "@/components/presentation/presentationTypes";
 
 const A = "/pdma2026-templates/assets";
@@ -18,9 +21,16 @@ type DecorImage = {
 /** Non-content overlay that dissolves an asset's cropped edge into the canvas background. */
 type DecorFade = { fade: "bottom"; y: number; h: number };
 
-export type DecorItem = DecorImage | DecorFade;
+/**
+ * Live PBDS kinetic orb. Always mounted on the full 1920×1080 decorative plane: the renderer's
+ * crop geometry is edge-anchored to its parent, so it must never be boxed into a still's rectangle.
+ */
+type DecorOrb = { orb: PBDSOrbPresetName; radius?: number; viewport?: { x: number; y: number; w: number; h: number }; fullPlane?: boolean; visualScale?: number; offsetX?: number; offsetY?: number; interactive?: boolean; props?: Omit<PBDSOrbProps, "preset" | "radius" | "interactive"> };
+
+export type DecorItem = DecorImage | DecorFade | DecorOrb;
 
 export const isDecorImage = (item: DecorItem): item is DecorImage => "src" in item;
+export const isDecorOrb = (item: DecorItem): item is DecorOrb => "orb" in item;
 
 /**
  * Decorative layer registry. Items are bounded to the slide's decorative layer and never
@@ -63,16 +73,21 @@ export const decorativeVariants: Record<DecorativeVariant, readonly DecorItem[]>
   none: [],
 };
 
+/** Which half of the plane an orb owns for pointer hit-testing (its crop anchor). */
+const orbSide = (preset: PBDSOrbPresetName) => orbPresets[preset].cropPosition === "orb-left" ? "left" : "right";
+
 export function DecorativeLayer({ variant, items: explicitItems }: { variant: DecorativeVariant; items?: readonly DecorItem[] }) {
   const items = explicitItems ?? decorativeVariants[variant];
-  return <div className="pdmat-deco" aria-hidden="true" data-decorative-variant={explicitItems ? "custom" : variant}>
-    {items.map((item) => isDecorImage(item) ? <img
+  return <PdmaDecorativePlane><div className="pdmat-deco" aria-hidden="true" data-decorative-variant={explicitItems ? "custom" : variant}>
+    {items.map((item) => isDecorOrb(item) ? <div key={`orb-${item.orb}`} className={`pdmat-deco-orb${item.fullPlane ? "" : ` pdmat-deco-orb--${orbSide(item.orb)}`}`} style={item.viewport ? { inset: "auto", left: `calc(${item.viewport.x}px + ${orbSide(item.orb) === "right" ? "var(--pdma-art-extra)" : "0px"})`, top: item.viewport.y, width: item.viewport.w, height: item.viewport.h } : item.visualScale || item.offsetX || item.offsetY ? { transform: `${item.offsetX || item.offsetY ? `translate(${item.offsetX ?? 0}px, ${item.offsetY ?? 0}px)` : ""}${item.visualScale ? ` scale(${item.visualScale})` : ""}`, transformOrigin: "0 0" } : undefined}>
+      <PBDSOrb {...item.props} preset={item.orb} radius={item.radius} interactive={item.interactive} />
+    </div> : isDecorImage(item) ? <img
       key={item.src}
-      className={`pdmat-deco-item${item.ambient ? ` pdmat-deco-item--${item.ambient}` : ""}`}
+      className={`pdmat-deco-item pdmat-deco-item--${variant === "title-hero" || variant === "end-card-orb" ? "right" : item.w >= 1500 ? "field" : item.x + item.w / 2 < 640 ? "left" : item.x + item.w / 2 > 1280 ? "right" : "center"}${item.ambient ? ` pdmat-deco-item--${item.ambient}` : ""}`}
       src={item.src}
       alt=""
       draggable={false}
       style={{ "--x": `${item.x}px`, "--y": `${item.y}px`, "--w": `${item.w}px`, "--h": `${item.h}px`, "--o": item.opacity ?? 1 } as CSSProperties}
     /> : <span key={`fade-${item.fade}`} className={`pdmat-deco-fade pdmat-deco-fade--${item.fade}`} style={{ "--y": `${item.y}px`, "--h": `${item.h}px` } as CSSProperties} />)}
-  </div>;
+  </div></PdmaDecorativePlane>;
 }

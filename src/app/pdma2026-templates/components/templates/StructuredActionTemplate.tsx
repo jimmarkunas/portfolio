@@ -1,4 +1,5 @@
 import type { StructuredActionTemplateContent } from "@/components/presentation/presentationTypes";
+import type { DecorItem } from "../DecorativeLayer";
 import { ContentCard } from "@/components/presentation/TemplatePrimitives";
 import { FlowRail } from "@/components/presentation/TemplatePrimitives";
 import { IconCircle } from "@/components/presentation/TemplatePrimitives";
@@ -6,9 +7,9 @@ import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
 import { TemplateSlide } from "../TemplateSlide";
 
 /** Three requirement cards → four-step operationalization rail → takeaway. */
-export function StructuredActionTemplate({ content }: { content: StructuredActionTemplateContent }) {
+export function StructuredActionTemplate({ content, decorItems }: { content: StructuredActionTemplateContent; decorItems?: readonly DecorItem[] }) {
   const { requirements, sectionLabel, steps, takeaway, supportingTakeaway } = content;
-  return <TemplateSlide kind={content.kind} title={content.chrome.title} decorativeVariant={content.decorativeVariant}>
+  return <TemplateSlide kind={content.kind} title={content.chrome.title} decorativeVariant={content.decorativeVariant} decorItems={decorItems}>
     <section className="pdmat-template pdmat-structured">
       <ul className="pdmat-structured__requirements">
         {requirements.map((requirement) => <li key={requirement.title}>

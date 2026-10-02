@@ -114,8 +114,8 @@ async function measure(page) {
     const hiddenOverflow = [...slide.querySelectorAll(".pdmat-app-frame__viewport, .pdmax, .pdmat-worksheet, .pdmat-card, .pdmat-scorecard__matrix")]
       .filter((element) => element.scrollHeight > element.clientHeight + 2 || element.scrollWidth > element.clientWidth + 2)
       .map((element) => `${element.className.toString().split(" ")[0]} ${element.scrollWidth}x${element.scrollHeight} > ${element.clientWidth}x${element.clientHeight}`)
-    const deco = slide.querySelector(".pdmat-deco")
-    const decoImages = [...slide.querySelectorAll(".pdmat-deco-item")]
+    const deco = canvas.parentElement.querySelector(".pdmat-deco")
+    const decoImages = [...canvas.parentElement.querySelectorAll(".pdmat-deco-item")]
     return {
       kind: slide.getAttribute("data-template-kind"),
       viewport: { width: innerWidth, height: innerHeight },

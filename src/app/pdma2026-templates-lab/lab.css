@@ -1,0 +1,35 @@
+/*
+ * The shared shell tags its title block with the deck position (pdma-title-<n>), and base.css
+ * gives position 2 the production slide-2 title geometry. Lab position 2 is a gallery Title
+ * slide, so restore the default title-block flow there (values mirror .pdma-title-block rules
+ * in base.css; the magenta row's inline top is 0 for Title and Flow).
+ */
+.pdma2026-templates-lab .pdma-title-2 { height: auto; }
+.pdma2026-templates-lab .pdma-title-2 > h1:first-child { position: static; left: auto !important; top: auto; }
+.pdma2026-templates-lab .pdma-title-2 > .pdma-title-magenta-row { position: relative !important; left: auto !important; top: 0 !important; }
+.pdma2026-templates-lab .pdma-title-2 > p { position: static; top: auto; margin: var(--subtitle-offset, 18px) 0 0; }
+
+/* Historical Lab slide-06 planet treatment: keep the full static planets visible
+ * through the logical canvas, slide layer, and shell stage without changing the
+ * production template overflow contract. */
+.pdma2026-templates-lab .pdma-logical-canvas:has(.pdmat-slide--embedded-app),
+.pdma2026-templates-lab .pdmat-slide--embedded-app,
+.pdma2026-templates-lab .pdma-lab-embedded-static .pdmat-deco,
+.pdma2026-templates-lab .pdma-canvas-stage:has(.pdmat-slide--embedded-app),
+.pdma2026-templates-lab .pdma-slide-layer:has(.pdmat-slide--embedded-app),
+.pdma2026-templates-lab .pdma-stage:has(.pdma-slide-layer .pdmat-slide--embedded-app) {
+  overflow: visible;
+}
+
+/* Keep the Hub slide and the shell footer on one continuous ink surface. */
+.pdma2026-templates-lab .pdma-logical-canvas:has(.pdmat-slide--hub-ecosystem),
+.pdma2026-templates-lab .pdmat-slide--hub-ecosystem {
+  background: transparent;
+}
+
+/* Recovered live-orb support stays scoped to the lab. */
+.pdma2026-templates-lab .pdmat-deco-orb { position: absolute; inset: 0; pointer-events: auto; }
+.pdma2026-templates-lab .pdmat-deco-orb--left { clip-path: inset(0 50% 0 0); }
+.pdma2026-templates-lab .pdmat-deco-orb--right { clip-path: inset(0 0 0 50%); }
+.pdma2026-templates-lab .pdmat-slide:has(.pdmat-deco-orb) .pdmat-stage { pointer-events: none; }
+.pdma2026-templates-lab .pdmat-slide:has(.pdmat-deco-orb) .pdmat-stage :is(a, button, input, select, textarea, iframe, [tabindex]) { pointer-events: auto; }

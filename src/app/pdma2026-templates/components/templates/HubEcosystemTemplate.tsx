@@ -1,4 +1,5 @@
 import type { HubCard, HubEcosystemTemplateContent } from "@/components/presentation/presentationTypes";
+import type { DecorItem } from "../DecorativeLayer";
 import { FanConnector } from "@/components/presentation/TemplatePrimitives";
 import { ContentCard } from "@/components/presentation/TemplatePrimitives";
 import { IconCircle } from "@/components/presentation/TemplatePrimitives";
@@ -21,10 +22,10 @@ function Bank({ cards, tone }: { cards: readonly HubCard[]; tone: "inventory" | 
 }
 
 /** Inventory bank → native AI / Automation core → owner bank, joined by straight connectors. */
-export function HubEcosystemTemplate({ content }: { content: HubEcosystemTemplateContent }) {
+export function HubEcosystemTemplate({ content, decorItems }: { content: HubEcosystemTemplateContent; decorItems?: readonly DecorItem[] }) {
   const { inventory, core, owners, caption } = content;
   const [emphasis, ...rest] = core.label.split(" ");
-  return <TemplateSlide kind={content.kind} title={content.chrome.title} decorativeVariant={content.decorativeVariant}>
+  return <TemplateSlide kind={content.kind} title={content.chrome.title} decorativeVariant={content.decorativeVariant} decorItems={decorItems}>
     <section className="pdmat-template pdmat-hub">
       <h2 className="pdmat-hub__heading pdmat-hub__heading--inventory">{inventory.heading}</h2>
       <h2 className="pdmat-hub__heading pdmat-hub__heading--core">{core.heading}</h2>

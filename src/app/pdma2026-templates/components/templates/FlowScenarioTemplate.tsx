@@ -3,6 +3,7 @@ import { Connector } from "@/components/presentation/TemplatePrimitives";
 import { ContentCard } from "@/components/presentation/TemplatePrimitives";
 import { IconCircle } from "@/components/presentation/TemplatePrimitives";
 import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
+import type { DecorItem } from "../DecorativeLayer";
 import { TemplateSlide } from "../TemplateSlide";
 
 const index = (position: number) => String(position).padStart(2, "0");
@@ -16,13 +17,13 @@ function StageNode({ stage, position, slot }: { stage: FlowStage; position: numb
 }
 
 /** Synopsis → signal rows → glyph stages; the track owns every connector between them. */
-export function FlowScenarioTemplate({ content }: { content: FlowScenarioTemplateContent }) {
+export function FlowScenarioTemplate({ content, decorItems, hideLeadConnector = false, hideTailConnector = false }: { content: FlowScenarioTemplateContent; decorItems?: readonly DecorItem[]; hideLeadConnector?: boolean; hideTailConnector?: boolean }) {
   const { synopsis, signals, stages, question, takeaway } = content;
   const SynopsisIcon = "icon" in synopsis ? synopsis.icon : null;
-  return <TemplateSlide kind={content.kind} title={content.chrome.title} decorativeVariant={content.decorativeVariant}>
+  return <TemplateSlide kind={content.kind} title={content.chrome.title} decorativeVariant={content.decorativeVariant} decorItems={decorItems}>
     <section className="pdmat-template pdmat-flow">
       <div className="pdmat-flow__track">
-        <Connector kind="flow" endDot className="pdmat-flow__link pdmat-flow__link--lead" />
+        {!hideLeadConnector && <Connector kind="flow" endDot className="pdmat-flow__link pdmat-flow__link--lead" />}
         <ContentCard tone="outline" className="pdmat-flow__synopsis">
           <p className="pdmat-flow__index">{index(1)}</p>
           <h2 className="pdmat-flow__synopsis-label">{synopsis.label}</h2>
@@ -47,7 +48,7 @@ export function FlowScenarioTemplate({ content }: { content: FlowScenarioTemplat
         <StageNode stage={stages[0]} position={3} slot="identify" />
         <Connector kind="flow" arrow className="pdmat-flow__link pdmat-flow__link--recommend" />
         <StageNode stage={stages[1]} position={4} slot="recommend" />
-        <Connector kind="flow" endDot className="pdmat-flow__link pdmat-flow__link--tail" />
+        {!hideTailConnector && <Connector kind="flow" endDot className="pdmat-flow__link pdmat-flow__link--tail" />}
       </div>
       <div className="pdmat-flow__question">
         <IconCircle source={question} size={54} iconSize={30} tone="accent" />
