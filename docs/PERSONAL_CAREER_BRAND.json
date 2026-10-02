@@ -1,6 +1,6 @@
 {
   "schema": "personal-career-brand/v1",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "IN_PROGRESS",
   "last_approved_date": "2026-10-01",
   "authority": {
@@ -205,6 +205,18 @@
         "gtm_speed": "+65%+"
       },
       "recognition": "MACH Impact Award nomination"
+    },
+    "mrs_meyers_sc_johnson": {
+      "primary": "Product + Architecture Bridge",
+      "secondary": "eCommerce Growth",
+      "context": "Consumer DTC",
+      "signature_angle": "Launching SC Johnson’s first direct-to-consumer commerce channel and establishing a reusable SAP-connected DTC pattern",
+      "internal_dynamics": [
+        "Zero-to-One",
+        "Systems Integration",
+        "Productization",
+        "Commercial Growth"
+      ]
     }
   },
   "pending": {
