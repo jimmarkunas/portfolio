@@ -33,3 +33,6 @@ public/pdma2026/
 **/*.gif
 **/*.ico
 **/*.pdf
+*.zip
+*.mp3
+*.mp4
