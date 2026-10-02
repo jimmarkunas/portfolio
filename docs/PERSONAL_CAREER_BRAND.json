@@ -1,8 +1,8 @@
 {
   "schema": "personal-career-brand/v1",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "status": "IN_PROGRESS",
-  "last_approved_date": "2026-10-01",
+  "last_approved_date": "2026-10-02",
   "authority": {
     "canonical_source": "Notion: Personal Career Brand",
     "notion_url": "https://app.notion.com/p/2dc3c5a059268011b6f6e6fad2cbe7a3?pvs=204",
@@ -255,6 +255,52 @@
         "markets_launched": 3,
         "launch_issues": 0
       }
+    },
+    "k2_sports": {
+      "primary": "Product + Architecture Bridge",
+      "secondary": "Digital Transformation / Platform Modernization",
+      "context": "Multi-Market, Multi-Brand eCommerce",
+      "career_story": "Scale",
+      "signature_angle": "Architected a first-of-its-kind multi-brand, multi-site headless commerce ecosystem on BigCommerce, before native Multi-Storefront capability existed.",
+      "internal_dynamics": [
+        "Platform Consolidation",
+        "Systems Integration",
+        "Platform Modernization",
+        "Multi-market / Global Scale",
+        "Operational Efficiency"
+      ],
+      "approved_first_of_kind_claim": {
+        "wording": "Architected a first-of-its-kind multi-brand, multi-site headless commerce ecosystem on BigCommerce, before native Multi-Storefront capability existed.",
+        "boundary": "Do not expand this to an unqualified world's-first claim without new evidence."
+      },
+      "approved_public_metrics": {
+        "brands": 8,
+        "sites": 16,
+        "delivery_window": "under 9 months",
+        "site_creation_speed": "+75%",
+        "content_publishing_speed": "+90%",
+        "productivity": "+50%"
+      },
+      "external_proof": [
+        {
+          "publisher": "BigCommerce",
+          "date": "2020-01-18",
+          "type": "dedicated case study",
+          "artifact": "/k2/files/2020-01-18_bc-casestudy-01.pdf"
+        },
+        {
+          "publisher": "Contentstack",
+          "date": "2020-02-18",
+          "type": "case study",
+          "artifact": "/k2/files/2020-02-18cs-casestudy-02.pdf"
+        },
+        {
+          "publisher": "BigCommerce",
+          "date": "2021-11-09",
+          "type": "headless commerce success story",
+          "artifact": "/k2/files/2021-11-09_bc-casestudy-02.pdf"
+        }
+      ]
     }
   },
   "pending": {
