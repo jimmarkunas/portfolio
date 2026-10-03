@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function Pdma2026Page() {
-  return <div className="pdma2026-page"><Pdma2026Presentation /></div>;
+  return <div className="pdma2026-page pdma2026-production"><Pdma2026Presentation /></div>;
 }

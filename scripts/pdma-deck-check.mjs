@@ -72,7 +72,7 @@ for (const file of sources) {
   if (/components\/slides\/Slide\d\d|CanonicalSlide0\d|pdmaPrimitives|PdmaSlideBody|pdma\.config|pdma2026SlideManifest/.test(text)) fail(`${file}: references a removed legacy slide module`)
   if (/data:[a-z]+\/[a-z0-9.+-]+;base64,/i.test(text) || /[A-Za-z0-9+/]{400,}={0,2}/.test(text)) fail(`${file}: base64 payload detected`)
 }
-const allowedAbsolute = /\.pdmat-deco/
+const allowedAbsolute = /\.pdmat-deco|\.pdma2026-production\s+\.pdma-logical-canvas\s+\.pdma-title-2/
 for (const match of read(`${PRESENTATION}/presentation.css`).matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
   const [, selector, body] = match
   if (/position\s*:\s*(absolute|fixed)/.test(body) && !allowedAbsolute.test(selector)) fail(`presentation.css: absolute/fixed positioning outside the decorative layer → ${selector.trim()}`)

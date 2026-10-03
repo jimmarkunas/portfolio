@@ -24,7 +24,12 @@ const outIndex = process.argv.indexOf("--out")
 const outDir = outIndex > 0 ? path.resolve(process.argv[outIndex + 1]) : path.join(os.tmpdir(), "pdma-template-qa")
 const route = "/pdma2026-templates/"
 const assets = "public/pdma2026-templates/assets"
-const kinds = ["title", "end-card", "exercise", "embedded-app", "compare-contrast", "flow-scenario", "decision-spectrum", "hub-ecosystem", "scorecard", "structured-content-action"]
+const slides = [
+  { kind: "title" }, { kind: "end-card" }, { kind: "exercise" }, { kind: "embedded-app" }, { kind: "compare-contrast" },
+  { kind: "flow-scenario" }, { kind: "decision-spectrum" }, { kind: "hub-ecosystem" }, { kind: "scorecard" }, { kind: "structured-content-action" },
+  { kind: "flow-scenario", variantId: "flow-animated-atmosphere" }, { kind: "embedded-app", variantId: "embedded-full-planets" },
+  { kind: "hub-ecosystem", variantId: "hub-animated-planets" }, { kind: "structured-content-action", variantId: "structured-animated-magenta" },
+]
 const references = { "end-card": "end-card/end-card-reference-v1.png", "flow-scenario": "flow-scenario/flow-scenario-reference-v1.png", "hub-ecosystem": "hub-ecosystem/hub-ecosystem-reference-v1.png", "structured-content-action": "structured-content-action/structured-content-action-reference-v1.png", "embedded-app": "embedded-app/embedded-app-reference-v1.png" }
 const liveExemplars = { title: 1, exercise: 14, "compare-contrast": 3, "decision-spectrum": 8, scorecard: 7 }
 const viewports = [
@@ -73,7 +78,7 @@ async function goToSlide(page, index) {
   const current = Number((await page.locator(".pdma-count").textContent()).split("/")[0].trim()) - 1
   const key = index > current ? "ArrowRight" : "ArrowLeft"
   for (let i = 0; i < Math.abs(index - current); i += 1) { await page.keyboard.press(key); await page.waitForTimeout(120) }
-  await page.waitForFunction((kind) => document.querySelector(".pdmat-slide")?.getAttribute("data-template-kind") === kind, kinds[index])
+  await page.waitForFunction(({ kind, position }) => document.querySelector(".pdmat-slide")?.getAttribute("data-template-kind") === kind && document.querySelector(".pdma-count")?.textContent?.trim() === `${position} / 14`, { kind: slides[index].kind, position: index + 1 })
   await page.waitForTimeout(650)
 }
 
@@ -96,8 +101,52 @@ async function measure(page) {
     const scrolled = window.scrollY
     window.scrollTo(0, 0)
     // Shell chrome glyphs (not the transparent gradient boxes) that slide copy must never sit under.
-    const chrome = [...document.querySelectorAll(".pdma-global-row > *, .pdma-bottom-identity > *, .pdma-bottom-bar button")].map((element) => element.getBoundingClientRect()).filter((rect) => rect.width > 0 && rect.height > 0)
+    const chrome = [...document.querySelectorAll(".pdma-global-label, .pdma-global-right b, .pdma-global-right em, .pdma-bottom-identity span, .pdma-bottom-identity img, .pdma-bottom-bar button")].map((element) => element.getBoundingClientRect()).filter((rect) => rect.width > 0 && rect.height > 0)
+    const chromeBands = [".pdma-global-header", ".pdma-bottom-bar"].map((selector) => document.querySelector(selector)?.getBoundingClientRect()).filter((rect) => rect && rect.width > 0 && rect.height > 0)
     const intersects = (a, b) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top
+    const titleBlock = document.querySelector(".pdma-logical-canvas .pdma-title-block")
+    const titleRows = titleBlock ? [...titleBlock.querySelectorAll(":scope > h1, :scope > p")] : []
+    const titleSafety = []
+    const rowBounds = []
+    for (const [index, element] of titleRows.entries()) {
+      const elementName = element.tagName === "P" ? "subtitle" : (element.classList.contains("pdma-title-magenta-row") ? "magenta-title" : "first-title")
+      const visible = getComputedStyle(element).display !== "none" && getComputedStyle(element).visibility !== "hidden" && element.getClientRects().length > 0
+      if (!visible) continue
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT)
+      const ranges = []
+      while (walker.nextNode()) {
+        if (!walker.currentNode.textContent.trim()) continue
+        const range = document.createRange()
+        range.selectNodeContents(walker.currentNode)
+        ranges.push(...range.getClientRects())
+      }
+      if (!ranges.length) {
+        titleSafety.push({ element: elementName, reason: "zero/invalid visible text bounds", rect: element.getBoundingClientRect().toJSON() })
+        continue
+      }
+      const union = ranges.reduce((bounds, rect) => ({ left: Math.min(bounds.left, rect.left), top: Math.min(bounds.top, rect.top), right: Math.max(bounds.right, rect.right), bottom: Math.max(bounds.bottom, rect.bottom) }), { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity })
+      const valid = [union.left, union.top, union.right, union.bottom].every(Number.isFinite) && union.right > union.left && union.bottom > union.top
+      const inCanvas = valid && union.left >= canvasRect.left - 1 && union.right <= canvasRect.right + 1 && union.top >= canvasRect.top - 1 && union.bottom <= canvasRect.bottom + 1
+      if (!valid) titleSafety.push({ element: elementName, reason: "zero/invalid visible text bounds", rect: union })
+      else if (!inCanvas) titleSafety.push({ element: elementName, reason: "outside logical canvas", rect: union })
+      for (const chromeRect of [...chromeBands, ...chrome]) if (valid && intersects(union, chromeRect)) titleSafety.push({ element: elementName, reason: "intersects visible header/footer chrome", rect: union, chrome: chromeRect.toJSON() })
+      for (let ancestor = element.parentElement; ancestor && ancestor !== canvas; ancestor = ancestor.parentElement) {
+        const style = getComputedStyle(ancestor)
+        const clipsX = ["hidden", "clip"].includes(style.overflowX)
+        const clipsY = ["hidden", "clip"].includes(style.overflowY)
+        const bounds = ancestor.getBoundingClientRect()
+        if ((clipsX && (union.left < bounds.left - 1 || union.right > bounds.right + 1)) || (clipsY && (union.top < bounds.top - 1 || union.bottom > bounds.bottom + 1))) {
+          titleSafety.push({ element: elementName, reason: `clipped by overflow ancestor ${ancestor.className || ancestor.tagName}`, rect: union, ancestor: bounds.toJSON() })
+        }
+      }
+      const rowRect = element.getBoundingClientRect()
+      rowBounds.push({ index, element: elementName, rect: { left: rowRect.left, top: rowRect.top, right: rowRect.right, bottom: rowRect.bottom } })
+    }
+    for (let left = 0; left < rowBounds.length; left += 1) for (let right = left + 1; right < rowBounds.length; right += 1) {
+      const verticalOverlap = Math.min(rowBounds[left].rect.bottom, rowBounds[right].rect.bottom) - Math.max(rowBounds[left].rect.top, rowBounds[right].rect.top)
+      const horizontalOverlap = Math.min(rowBounds[left].rect.right, rowBounds[right].rect.right) - Math.max(rowBounds[left].rect.left, rowBounds[right].rect.left)
+      if (verticalOverlap > 2 && horizontalOverlap > 2) titleSafety.push({ element: `${rowBounds[left].element}/${rowBounds[right].element}`, reason: "title rows overlap", rect: rowBounds[left].rect, other: rowBounds[right].rect })
+    }
     const clippedText = []
     const walker = document.createTreeWalker(slide.querySelector(".pdmat-stage"), NodeFilter.SHOW_TEXT)
     while (walker.nextNode()) {
@@ -125,7 +174,8 @@ async function measure(page) {
       headerLabels: [...document.querySelectorAll(".pdma-global-right b")].map((b) => b.textContent.trim()),
       footerLabel: document.querySelector(".pdma-bottom-identity span")?.textContent.trim(),
       navigation: [...document.querySelectorAll(".pdma-bottom-bar button")].filter((b) => { const r = b.getBoundingClientRect(); return r.width > 0 && r.height > 0 && r.bottom <= innerHeight }).length,
-      titleBlock: Boolean(document.querySelector(".pdma-logical-canvas .pdma-title-block h1")),
+      titleBlock: Boolean(titleBlock?.querySelector(":scope > h1")),
+      titleSafety,
       text: document.body.innerText,
       // Match the production QA contract: canonical DOM copy includes accepted hidden
       // takeaway/aside nodes. Visible text is separately checked for clipping above.
@@ -135,6 +185,7 @@ async function measure(page) {
       clippedText,
       hiddenOverflow,
       decoVariant: deco?.getAttribute("data-decorative-variant"),
+      decoOrbs: canvas.parentElement.querySelectorAll(".pdmat-deco-orb").length,
       decoImages: decoImages.map((img) => ({ src: img.getAttribute("src"), loaded: img.complete && img.naturalWidth > 0 })),
     }
   })
@@ -149,17 +200,19 @@ for (const viewport of viewports) {
   page.on("pageerror", (error) => errors.push(String(error)))
   await openDeck(page)
   fs.mkdirSync(path.join(outDir, viewport.name), { recursive: true })
-  for (const [index, kind] of kinds.entries()) {
+  for (const [index, { kind, variantId }] of slides.entries()) {
     if (index > 0) await goToSlide(page, index)
     const shot = path.join(outDir, viewport.name, `t${String(index + 1).padStart(2, "0")}-${kind}.png`)
     await page.screenshot({ path: shot })
     const m = await measure(page)
-    const tag = `[${viewport.name}] ${String(index + 1).padStart(2, "0")} ${kind}`
+    const slideLabel = `slide ${String(index + 1).padStart(2, "0")} ${kind}${variantId ? ` variant=${variantId}` : ""}`
+    const tag = `[${viewport.name}] ${slideLabel}`
     if (m.kind !== kind) fail(`${tag}: rendered kind ${m.kind}`)
     if (m.document.scrollHeight > m.viewport.height + 1 || m.document.scrollWidth > m.viewport.width + 1 || m.document.scrolled !== 0) fail(`${tag}: document scrolls (${m.document.scrollWidth}x${m.document.scrollHeight}, scrolled ${m.document.scrolled})`)
     if (Math.abs(m.canvas.width / m.canvas.height - 16 / 9) > 0.01) fail(`${tag}: canvas not 16:9 (${m.canvas.width}x${m.canvas.height})`)
     if (m.canvas.x < -1 || m.canvas.y < -1 || m.canvas.x + m.canvas.width > m.viewport.width + 1 || m.canvas.y + m.canvas.height > m.viewport.height + 1) fail(`${tag}: canvas exceeds viewport`)
     if (!m.titleBlock) fail(`${tag}: shell title block missing`)
+    for (const issue of m.titleSafety) fail(`TITLE_CLIP: ${tag} ${issue.element} ${issue.reason} rect=${JSON.stringify(issue.rect)} canvas=${JSON.stringify(m.canvas)} chrome=${JSON.stringify(issue.chrome ?? null)} ancestor=${JSON.stringify(issue.ancestor ?? null)}`)
     if (m.navigation < 4) fail(`${tag}: navigation controls not visible (${m.navigation})`)
     const text = `${normalize(m.nodes)} || ${normalize(m.text)}`
     for (const value of copyFor(kind)) {
@@ -169,13 +222,15 @@ for (const viewport of viewports) {
     }
     if (m.clippedText.length) fail(`${tag}: text outside canvas or under header/footer chrome → ${m.clippedText.slice(0, 4).join(" | ")}`)
     if (m.hiddenOverflow.length) fail(`${tag}: hidden overflow → ${m.hiddenOverflow.join(" | ")}`)
-    if (m.decoVariant !== "none" && (m.decoImages.length === 0 || m.decoImages.some((img) => !img.loaded))) fail(`${tag}: decorative layer missing/unloaded ${JSON.stringify(m.decoImages)}`)
-    if (!baseline[kind]) baseline[kind] = m.layout
-    else {
+    if (variantId === "embedded-full-planets" && (m.decoImages.length < 2 || m.decoImages.some((img) => !img.loaded))) fail(`${tag}: decorative planet layer missing/unloaded ${JSON.stringify(m.decoImages)}`)
+    else if (variantId && variantId !== "embedded-full-planets" && m.decoOrbs < 2) fail(`${tag}: expected animated orb variant, found ${m.decoOrbs}`)
+    else if (!variantId && m.decoVariant !== "none" && (m.decoImages.length === 0 || m.decoImages.some((img) => !img.loaded))) fail(`${tag}: decorative layer missing/unloaded ${JSON.stringify(m.decoImages)}`)
+    if (index < 10 && !baseline[kind]) baseline[kind] = m.layout
+    else if (index < 10) {
       const drift = Object.entries(baseline[kind]).filter(([key, rect]) => { const other = m.layout[key]; return !other || Math.abs(other.x - rect.x) > 2 || Math.abs(other.y - rect.y) > 2 || Math.abs(other.w - rect.w) > 2 || Math.abs(other.h - rect.h) > 2 })
       if (drift.length) fail(`${tag}: logical layout differs from desktop (stacking/reflow) → ${drift.slice(0, 3).map(([key]) => key).join(", ")}`)
     }
-    report.push({ viewport: viewport.name, slide: index + 1, kind, scale: Number(m.canvas.scale.toFixed(4)), header: m.headerLabels.join(" • "), footer: m.footerLabel, deco: m.decoImages.length, screenshot: shot })
+    report.push({ viewport: viewport.name, slide: index + 1, kind, variantId: variantId ?? null, scale: Number(m.canvas.scale.toFixed(4)), header: m.headerLabels.join(" • "), footer: m.footerLabel, deco: m.decoImages.length, screenshot: shot })
   }
   if (errors.length) fail(`[${viewport.name}] page errors: ${errors.join(" | ")}`)
 
@@ -202,7 +257,7 @@ for (const viewport of viewports) {
     await checkFrame("intro")
     await page.getByRole("button", { name: /Start Challenge/ }).click()
     await page.keyboard.press("ArrowRight")
-    if ((await page.locator(".pdma-count").textContent())?.trim() !== "4 / 10") fail("embedded-app: keys pressed inside the app changed the slide")
+    if ((await page.locator(".pdma-count").textContent())?.trim() !== "4 / 14") fail("embedded-app: keys pressed inside the app changed the slide")
     const app = page.locator(".pdmax")
     for (const answer of ["YES", "YES"]) { await app.getByRole("button", { name: new RegExp(`${answer}$`) }).click(); await app.locator(".pdmax__footer .is-primary").click() }
     await app.locator(".pdmax__choice").first().click()
@@ -241,7 +296,7 @@ const compareDir = path.join(outDir, "compare")
 fs.mkdirSync(compareDir, { recursive: true })
 const similarity = []
 const grey = (file) => sharp(file).resize(192, 108, { fit: "fill" }).greyscale().raw().toBuffer()
-for (const [index, kind] of kinds.entries()) {
+for (const [index, { kind }] of slides.slice(0, 10).entries()) {
   const target = references[kind] ? path.join(assets, references[kind]) : liveShots[kind]
   if (!target) continue
   const render = path.join(outDir, viewports[0].name, `t${String(index + 1).padStart(2, "0")}-${kind}.png`)
