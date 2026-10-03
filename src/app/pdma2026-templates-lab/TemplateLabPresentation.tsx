@@ -9,6 +9,7 @@ import { pdma2026Content } from "@/content/pdma2026";
 import { DecorativeLayer, isDecorOrb } from "@/components/presentation/templates/DecorativeLayer";
 import { EmbeddedAppFrame } from "@/components/presentation/TemplatePrimitives";
 import { shellTitleBottom } from "@/components/presentation/templates/TemplateSlide";
+import { renderTemplate } from "@/components/presentation/templates/renderTemplate";
 import { FlowScenarioTemplate } from "@/components/presentation/templates/FlowScenarioTemplate";
 import { StructuredActionTemplate } from "@/components/presentation/templates/StructuredActionTemplate";
 import { HubEcosystemTemplate } from "@/components/presentation/templates/HubEcosystemTemplate";
@@ -24,6 +25,9 @@ const structured = templateContent.find((content) => content.kind === "structure
 const hub = templateContent.find((content) => content.kind === "hub-ecosystem")!;
 const embedded = templateContent.find((content) => content.kind === "embedded-app")!;
 const canonical = (kind: TemplateManifestEntry["kind"]) => templateManifest.find((entry) => entry.kind === kind)!;
+const template = (kind: TemplateManifestEntry["kind"]) => templateContent.find((content) => content.kind === kind)!;
+const TitleBaseline: ComponentType = () => renderTemplate(template("title"));
+const EndCardBaseline: ComponentType = () => renderTemplate(template("end-card"));
 /** ORB-VISUAL-1C: accepted atmospheric profiles on both edge orbs; placement remains lab-owned. */
 const flowExperimentDecor = [{ orb: "greyLeft" as const, radius: 250 }, { orb: "magentaRight" as const, radius: 228 }].map((item) => isDecorOrb(item) && item.orb === "magentaRight"
   ? { ...item, radius: 228, props: orbAppearanceProfiles.magentaAtmosphere }
@@ -66,11 +70,11 @@ const EmbeddedStaticPlanets: ComponentType = () => embedded.kind === "embedded-a
 ) : null;
 
 const labSlides = [
-  { label: "SLIDE 1 — BASELINE", entry: canonical("title"), component: canonical("title").component },
-  { label: "SLIDE 2 — BASELINE", entry: canonical("end-card"), component: canonical("end-card").component },
+  { label: "SLIDE 1 — BASELINE", entry: canonical("title"), component: TitleBaseline },
+  { label: "SLIDE 2 — BASELINE", entry: canonical("end-card"), component: EndCardBaseline },
   { label: "SLIDE 6 — BASELINE", entry: canonical("flow-scenario"), component: FlowBaseline },
   { label: "SLIDE 6 — APPROVED LIVE", entry: canonical("flow-scenario"), component: FlowExperiment },
-  { label: "TEMPLATE 2/10 — END CARD — TEST", entry: templateManifest.find((item) => item.kind === "end-card")!, component: templateManifest.find((item) => item.kind === "end-card")!.component },
+  { label: "TEMPLATE 2/10 — END CARD — TEST", entry: canonical("end-card"), component: EndCardBaseline },
   {
     label: "TEMPLATE 4/10 — EMBEDDED INTERACTIVE APP — TEST",
     entry: canonical("embedded-app"),

@@ -80,8 +80,8 @@ const declaredOrder = (templateContent.match(/export const templateContent = \[(
 if (JSON.stringify(declaredOrder) !== JSON.stringify(galleryOrder)) fail(`templateManifest.tsx: gallery order ${JSON.stringify(declaredOrder)} ≠ ${JSON.stringify(galleryOrder)}`)
 const declaredKinds = new Set([...galleryContent.matchAll(/^\s*kind:\s*"([a-z-]+)"/gm)].map(([, kind]) => kind))
 for (const kind of requiredKinds) if (!declaredKinds.has(kind)) fail(`gallery content: no ${kind} template content declared`)
-const manifestSource = read(`${TREE}/templateManifest.tsx`)
-for (const kind of requiredKinds) if (!new RegExp(`case "${kind}": return <`).test(manifestSource)) fail(`templateManifest.tsx: no renderer for ${kind}`)
+const templateRendererSource = read(`${TEMPLATE_ROOT}/renderTemplate.tsx`)
+for (const kind of requiredKinds) if (!new RegExp(`case "${kind}": return`).test(templateRendererSource)) fail(`renderTemplate.tsx: no renderer for ${kind}`)
 const componentTargets = ["TitleTemplate", "EndCardTemplate", "ExerciseTemplate", "EmbeddedAppTemplate", "CompareContrastTemplate", "FlowScenarioTemplate", "DecisionSpectrumTemplate", "HubEcosystemTemplate", "ScorecardTemplate", "StructuredActionTemplate"]
 for (const name of componentTargets) if (!fs.existsSync(path.join(root, TEMPLATE_ROOT, `${name}.tsx`))) fail(`missing component target components/templates/${name}.tsx`)
 const sharedPresentation = "src/components/presentation/TemplatePrimitives.tsx";

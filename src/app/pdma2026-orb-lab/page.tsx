@@ -8,13 +8,14 @@ import "../pdma2026/presentation/presentation.css";
 
 import { pdma2026Content } from "@/content/pdma2026";
 import { PdmaPresentationShell } from "@/app/pdma2026/PdmaPresentationShell";
-import { pdma2026Manifest } from "@/app/pdma2026/presentation/pdma2026Manifest";
+import { pdma2026Manifest, renderPdma2026Slide } from "@/app/pdma2026/presentation/pdma2026Manifest";
+import { pdma2026Slides } from "@/app/pdma2026/presentation/pdma2026Content";
 import { PBDSKineticSphere } from "./PBDSKineticSphereLab";
 
 type LabMode = "reference" | "direct-port";
 
 const slide12 = pdma2026Manifest[11];
-const Slide12Component = slide12.component;
+const slide12Content = pdma2026Slides[11];
 
 function DirectPortOrbs({ mode }: { mode: LabMode }) {
   const [host, setHost] = useState<HTMLElement | null>(null);
@@ -82,7 +83,7 @@ export default function PdmaOrbLabPage() {
       <PdmaPresentationShell
         slides={[
           <Fragment key="slide-12-orb-lab">
-            <Slide12Component />
+            {renderPdma2026Slide(slide12Content)}
             <DirectPortOrbs mode={mode} />
           </Fragment>,
         ]}

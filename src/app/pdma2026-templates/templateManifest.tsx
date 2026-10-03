@@ -1,6 +1,5 @@
-import type { ComponentType, ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { PresentationSlideManifestEntry } from "@/components/presentation/presentationTypes";
-import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
 import {
   slide01 as title,
   slide03 as compareContrast,
@@ -14,16 +13,6 @@ import {
   slide16 as endCard,
 } from "@/app/pdma2026/presentation/pdma2026Content";
 import { decorativeVariants, isDecorImage } from "@/components/presentation/templates/DecorativeLayer";
-import { CompareContrastTemplate } from "@/components/presentation/templates/CompareContrastTemplate";
-import { DecisionSpectrumTemplate } from "@/components/presentation/templates/DecisionSpectrumTemplate";
-import { EmbeddedAppTemplate } from "@/components/presentation/templates/EmbeddedAppTemplate";
-import { EndCardTemplate } from "@/components/presentation/templates/EndCardTemplate";
-import { ExerciseTemplate } from "@/components/presentation/templates/ExerciseTemplate";
-import { FlowScenarioTemplate } from "@/components/presentation/templates/FlowScenarioTemplate";
-import { HubEcosystemTemplate } from "@/components/presentation/templates/HubEcosystemTemplate";
-import { ScorecardTemplate } from "@/components/presentation/templates/ScorecardTemplate";
-import { StructuredActionTemplate } from "@/components/presentation/templates/StructuredActionTemplate";
-import { TitleTemplate } from "@/components/presentation/templates/TitleTemplate";
 import type { TemplateContent, TemplateKind } from "@/components/presentation/presentationTypes";
 
 export const TEMPLATE_COUNT = 10;
@@ -46,21 +35,6 @@ export type TemplateManifestEntry = PresentationSlideManifestEntry & { kind: Tem
 /** Gallery order from the ten production slide exemplars. */
 export const templateContent = [title, endCard, exercise, embeddedApp, compareContrast, flowScenario, decisionSpectrum, hubEcosystem, scorecard, structuredAction] as const satisfies readonly TemplateContent[];
 
-function renderTemplate(content: TemplateContent): ReactNode {
-  switch (content.kind) {
-    case "title": return <TitleTemplate content={content} />;
-    case "end-card": return <EndCardTemplate content={content} />;
-    case "exercise": return <ExerciseTemplate content={content} />;
-    case "embedded-app": return <EmbeddedAppTemplate content={content} app={<PdmaScenarioExercise />} />;
-    case "compare-contrast": return <CompareContrastTemplate content={content} />;
-    case "flow-scenario": return <FlowScenarioTemplate content={content} />;
-    case "decision-spectrum": return <DecisionSpectrumTemplate content={content} />;
-    case "hub-ecosystem": return <HubEcosystemTemplate content={content} />;
-    case "scorecard": return <ScorecardTemplate content={content} />;
-    case "structured-content-action": return <StructuredActionTemplate content={content} />;
-  }
-}
-
 function templateAssets(content: TemplateContent) {
   const decorative = decorativeVariants[content.decorativeVariant].filter(isDecorImage).map(({ src }) => src);
   if (content.kind === "exercise") return [...decorative, ...content.rows.map(({ glyph }) => glyph), content.connectorArt];
@@ -71,8 +45,6 @@ function templateAssets(content: TemplateContent) {
 export const templateManifest: readonly TemplateManifestEntry[] = templateContent.map((content, index) => {
   const key = `slide-${String(index + 1).padStart(2, "0")}`;
   const templateName = templateNames[content.kind];
-  const Component: ComponentType = () => renderTemplate(content);
-  Component.displayName = `PdmaTemplate(${content.kind})`;
   return {
     key,
     id: key,
@@ -83,7 +55,6 @@ export const templateManifest: readonly TemplateManifestEntry[] = templateConten
     headerLabels: content.chrome.headerLabels,
     footerLabel: content.chrome.footerLabel,
     title: content.chrome.title,
-    component: Component,
     assets: templateAssets(content),
     qa: "targeted",
   };

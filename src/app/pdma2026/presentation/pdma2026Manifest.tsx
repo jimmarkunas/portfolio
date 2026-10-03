@@ -1,15 +1,5 @@
-import type { ComponentType, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { decorativeVariants, isDecorImage, type DecorItem } from "@/components/presentation/templates/DecorativeLayer";
-import { CompareContrastTemplate } from "@/components/presentation/templates/CompareContrastTemplate";
-import { DecisionSpectrumTemplate } from "@/components/presentation/templates/DecisionSpectrumTemplate";
-import { EmbeddedAppTemplate } from "@/components/presentation/templates/EmbeddedAppTemplate";
-import { EndCardTemplate } from "@/components/presentation/templates/EndCardTemplate";
-import { ExerciseTemplate } from "@/components/presentation/templates/ExerciseTemplate";
-import { FlowScenarioTemplate } from "@/components/presentation/templates/FlowScenarioTemplate";
-import { HubEcosystemTemplate } from "@/components/presentation/templates/HubEcosystemTemplate";
-import { ScorecardTemplate } from "@/components/presentation/templates/ScorecardTemplate";
-import { StructuredActionTemplate } from "@/components/presentation/templates/StructuredActionTemplate";
-import { TitleTemplate } from "@/components/presentation/templates/TitleTemplate";
 import { PdmaScenarioExercise } from "../exercise/PdmaScenarioExercise";
 import { PDMA_EXERCISE_ROUTE, PDMA_KIT_URL, pdma2026Slides, type Pdma2026SlideContent } from "./pdma2026Content";
 import type { PdmaSlideKey, PdmaSlideManifestEntry } from "@/components/presentation/presentationTypes";
@@ -19,30 +9,31 @@ import { FrameworkToProductSlide, frameworkDecor } from "./slides/FrameworkToPro
 import { IdeaToSpecSlide, ideaToSpecDecor } from "./slides/IdeaToSpecSlide";
 import { ShiftBoundarySlide, shiftBoundaryDecor } from "./slides/ShiftBoundarySlide";
 import { WorkMapSlide, workMapDecor } from "./slides/WorkMapSlide";
+import { renderTemplate } from "@/components/presentation/templates/renderTemplate";
 
 export const PDMA2026_SLIDE_COUNT = 16;
 
 export type Pdma2026ManifestEntry = PdmaSlideManifestEntry & { composition: Pdma2026SlideContent["kind"]; qa: "targeted" };
 
 /** One composition per slide: ten approved templates, six preserved production compositions. */
-function renderSlide(content: Pdma2026SlideContent): ReactNode {
+export function renderPdma2026Slide(content: Pdma2026SlideContent): ReactNode {
   switch (content.kind) {
-    case "title": return <TitleTemplate content={content} />;
+    case "title": return renderTemplate(content);
     case "shift-boundary": return <ShiftBoundarySlide content={content} />;
-    case "compare-contrast": return <CompareContrastTemplate content={content} />;
+    case "compare-contrast": return renderTemplate(content);
     case "work-map": return <WorkMapSlide content={content} />;
     case "ambiguity-gate": return <AmbiguityGateSlide content={content} />;
-    case "hub-ecosystem": return <HubEcosystemTemplate content={content} />;
-    case "scorecard": return <ScorecardTemplate content={content} />;
-    case "decision-spectrum": return <DecisionSpectrumTemplate content={content} />;
-    case "flow-scenario": return <FlowScenarioTemplate content={content} />;
-    case "structured-content-action": return <StructuredActionTemplate content={content} />;
+    case "hub-ecosystem": return renderTemplate(content);
+    case "scorecard": return renderTemplate(content);
+    case "decision-spectrum": return renderTemplate(content);
+    case "flow-scenario": return renderTemplate(content);
+    case "structured-content-action": return renderTemplate(content);
     case "agents-reveal": return <AgentsRevealSlide content={content} />;
     case "framework-to-product": return <FrameworkToProductSlide content={content} />;
     case "idea-to-spec": return <IdeaToSpecSlide content={content} />;
-    case "exercise": return <ExerciseTemplate content={content} />;
-    case "embedded-app": return <EmbeddedAppTemplate content={content} app={<PdmaScenarioExercise />} />;
-    case "end-card": return <EndCardTemplate content={content} />;
+    case "exercise": return renderTemplate(content);
+    case "embedded-app": return renderTemplate(content, { app: <PdmaScenarioExercise /> });
+    case "end-card": return renderTemplate(content);
   }
 }
 
@@ -66,8 +57,6 @@ const routeLinks = (content: Pdma2026SlideContent) => content.kind === "exercise
 /** The production /pdma2026 manifest: order, IDs, TOC, chrome, and composition per slide. */
 export const pdma2026Manifest: readonly Pdma2026ManifestEntry[] = pdma2026Slides.map((content, index) => {
   const key = `slide-${String(index + 1).padStart(2, "0")}` as PdmaSlideKey;
-  const Component: ComponentType = () => renderSlide(content);
-  Component.displayName = `Pdma2026Slide(${key}:${content.kind})`;
   return {
     key,
     id: key,
@@ -76,7 +65,6 @@ export const pdma2026Manifest: readonly Pdma2026ManifestEntry[] = pdma2026Slides
     headerLabels: content.chrome.headerLabels,
     footerLabel: content.chrome.footerLabel,
     title: content.chrome.title,
-    component: Component,
     assets: slideAssets(content),
     routeLinks: routeLinks(content),
     qa: "targeted",

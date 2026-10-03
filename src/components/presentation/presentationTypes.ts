@@ -1,4 +1,3 @@
-import type { ComponentType } from "react";
 import type { LucideIcon } from "lucide-react";
 
 /** The single 1920×1080 semantic plane shared by the PDMA deck and template gallery. */
@@ -28,7 +27,6 @@ export type PdmaSlideManifestEntry = {
   headerLabels: PdmaHeaderLabels;
   footerLabel: string;
   title: PdmaTitleConfig;
-  component: ComponentType;
   assets: readonly string[];
   routeLinks?: readonly string[];
 };
@@ -41,7 +39,6 @@ export type PresentationSlideManifestEntry<Key extends string = string> = {
   headerLabels: PresentationHeaderLabels;
   footerLabel: string;
   title: PresentationTitleConfig;
-  component: ComponentType;
   assets: readonly string[];
   routeLinks?: readonly string[];
 };

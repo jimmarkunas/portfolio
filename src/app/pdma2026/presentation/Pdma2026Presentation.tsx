@@ -1,12 +1,14 @@
 "use client";
 
+import { Fragment } from "react";
 import { pdma2026Content } from "@/content/pdma2026";
 import { PdmaPresentationShell } from "../PdmaPresentationShell";
-import { assertPdma2026ManifestParity, pdma2026Manifest } from "./pdma2026Manifest";
+import { assertPdma2026ManifestParity, pdma2026Manifest, renderPdma2026Slide } from "./pdma2026Manifest";
+import { pdma2026Slides } from "./pdma2026Content";
 
 /** The production PDMA 2026 deck, rendered through the shared presentation shell. */
 export default function Pdma2026Presentation() {
-  const slides = pdma2026Manifest.map(({ component: Component, key }) => <Component key={key} />);
+  const slides = pdma2026Slides.map((content, index) => <Fragment key={pdma2026Manifest[index].key}>{renderPdma2026Slide(content)}</Fragment>);
   assertPdma2026ManifestParity(pdma2026Manifest, slides);
   return <PdmaPresentationShell slides={slides} slideManifest={[...pdma2026Manifest]} navigation={pdma2026Content.navigation} />;
 }
