@@ -4,7 +4,7 @@ import type { ComponentType, CSSProperties } from "react";
 import { orbAppearanceProfiles } from "@/components/pbds/orb/orbPresets";
 import { PdmaPresentationShell, PdmaSlideCanvas } from "@/app/pdma2026/PdmaPresentationShell";
 import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
-import type { PdmaSlideKey } from "@/app/pdma2026/presentation/presentationTypes";
+import type { PdmaSlideKey } from "@/components/presentation/presentationTypes";
 import { pdma2026Content } from "@/content/pdma2026";
 import { DecorativeLayer, isDecorOrb } from "../pdma2026-templates/components/DecorativeLayer";
 import { EmbeddedAppFrame } from "@/components/presentation/TemplatePrimitives";

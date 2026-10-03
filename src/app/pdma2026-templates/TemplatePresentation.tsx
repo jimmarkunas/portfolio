@@ -1,7 +1,7 @@
 "use client";
 
 import { PdmaPresentationShell } from "@/app/pdma2026/PdmaPresentationShell";
-import type { PdmaSlideManifestEntry } from "@/app/pdma2026/presentation/presentationTypes";
+import type { PdmaSlideManifestEntry } from "@/components/presentation/presentationTypes";
 import { pdma2026Content } from "@/content/pdma2026";
 import { assertTemplateManifestParity, templateManifest } from "./templateManifest";
 
