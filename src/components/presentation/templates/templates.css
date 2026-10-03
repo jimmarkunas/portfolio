@@ -24,6 +24,13 @@
   color: var(--pdmat-white);
   font-family: var(--pdmat-font);
 }
+/* The promoted full-planet variant alone opens the canvas clipping chain. */
+.pdma-logical-canvas:has(.pdmat-embedded--full-planets),
+.pdma-canvas-stage:has(.pdmat-embedded--full-planets),
+.pdma-slide-layer:has(.pdmat-embedded--full-planets),
+.pdma-stage:has(.pdmat-embedded--full-planets),
+.pdmat-embedded--full-planets,
+.pdmat-embedded--full-planets .pdmat-deco { overflow: visible; }
 .pdmat-slide :where(h2, .pdmat-slide h3, .pdmat-slide p, .pdmat-slide ul, .pdmat-slide ol, .pdmat-slide li, .pdmat-slide dl, .pdmat-slide dt, .pdmat-slide dd, .pdmat-slide hr) { margin: 0; padding: 0; }
 .pdmat-slide :where(ul, .pdmat-slide ol) { list-style: none; }
 .pdmat-slide :where(button, .pdmat-slide input) { font: inherit; color: inherit; }

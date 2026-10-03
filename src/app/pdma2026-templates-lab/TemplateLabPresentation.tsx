@@ -1,16 +1,12 @@
 "use client";
 
-import type { ComponentType, CSSProperties } from "react";
-import { orbAppearanceProfiles } from "@/components/pbds/orb/orbPresets";
+import type { ComponentType } from "react";
 import { PresentationShell, PresentationSlideCanvas } from "@/components/presentation/PresentationShell";
 import { pdmaAssets } from "@/app/pdma2026/pdmaAssets";
 import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
 import type { PdmaSlideKey } from "@/components/presentation/presentationTypes";
 import { pdma2026Content } from "@/content/pdma2026";
-import { DecorativeLayer, isDecorOrb } from "@/components/presentation/templates/DecorativeLayer";
-import { EmbeddedAppFrame } from "@/components/presentation/TemplatePrimitives";
-import { shellTitleBottom } from "@/components/presentation/templates/TemplateSlide";
-import { renderTemplate } from "@/components/presentation/templates/renderTemplate";
+import { renderTemplate, renderTemplateVariant } from "@/components/presentation/templates/renderTemplate";
 import { FlowScenarioTemplate } from "@/components/presentation/templates/FlowScenarioTemplate";
 import { StructuredActionTemplate } from "@/components/presentation/templates/StructuredActionTemplate";
 import { HubEcosystemTemplate } from "@/components/presentation/templates/HubEcosystemTemplate";
@@ -29,46 +25,11 @@ const canonical = (kind: TemplateManifestEntry["kind"]) => templateManifest.find
 const template = (kind: TemplateManifestEntry["kind"]) => templateContent.find((content) => content.kind === kind)!;
 const TitleBaseline: ComponentType = () => renderTemplate(template("title"));
 const EndCardBaseline: ComponentType = () => renderTemplate(template("end-card"));
-/** ORB-VISUAL-1C: accepted atmospheric profiles on both edge orbs; placement remains lab-owned. */
-const flowExperimentDecor = [{ orb: "greyLeft" as const, radius: 250 }, { orb: "magentaRight" as const, radius: 228 }].map((item) => isDecorOrb(item) && item.orb === "magentaRight"
-  ? { ...item, radius: 228, props: orbAppearanceProfiles.magentaAtmosphere }
-  : isDecorOrb(item) && item.orb === "greyLeft"
-    ? { ...item, radius: 250, props: orbAppearanceProfiles.greyAtmosphere }
-    : item);
-
-const FlowExperiment: ComponentType = () => flow.kind === "flow-scenario" ? <FlowScenarioTemplate content={flow} decorItems={flowExperimentDecor} hideLeadConnector hideTailConnector /> : null;
+const FlowExperiment: ComponentType = () => renderTemplateVariant(flow, "flow-animated-atmosphere");
 const FlowBaseline: ComponentType = () => flow.kind === "flow-scenario" ? <FlowScenarioTemplate content={flow} hideLeadConnector hideTailConnector /> : null;
-const structuredAnimatedMagentaDecor = [
-  { orb: "greyLeft" as const, radius: 228, offsetY: 56, props: { ...orbAppearanceProfiles.magentaAtmosphere, skinStyle: "canonical-magenta" as const, accentColor: "#FF2FAE", primaryDotColor: "#FF2FAE", glowingStrokeIntensity: 0.2, autoRotateSpeed: 0.0012 } },
-  { orb: "magentaRight" as const, radius: 228, offsetY: -170, props: { ...orbAppearanceProfiles.magentaAtmosphere, autoRotateSpeed: 0.0012 } },
-];
-const StructuredAnimatedMagenta: ComponentType = () => structured.kind === "structured-content-action" ? <StructuredActionTemplate content={structured} decorItems={structuredAnimatedMagentaDecor} /> : null;
-const hubAnimatedDecor = [
-  // Mirror the unchanged upper-right orb: 1080 - 60 - 440 = 580.
-  { orb: "greyLeft" as const, radius: 228, viewport: { x: 0, y: 580, w: 440, h: 440 }, props: orbAppearanceProfiles.greyAtmosphere },
-  { orb: "magentaRight" as const, radius: 228, viewport: { x: 1480, y: 60, w: 440, h: 440 }, props: orbAppearanceProfiles.magentaRim },
-];
-const HubAnimatedPlanets: ComponentType = () => hub.kind === "hub-ecosystem" ? <HubEcosystemTemplate content={hub} decorItems={hubAnimatedDecor} /> : null;
-const staticEmbeddedPlanets = [
-  { src: "/pdma2026-templates-lab/assets/slide-06/planet-left.png", x: -112, y: 275, w: 1000, h: 1000, fullPlane: true },
-  { src: "/pdma2026-templates-lab/assets/slide-06/planet-right.png", x: 917, y: -48, w: 1253, h: 1253, fullPlane: true },
-] as const;
-const EmbeddedStaticPlanets: ComponentType = () => embedded.kind === "embedded-app" ? (
-  <PresentationSlideCanvas>
-    <div
-      className="pdmat-slide pdmat-slide--embedded-app pdma-lab-embedded-static"
-      data-template-kind="embedded-app"
-      style={{ "--pdmat-title-bottom": `${shellTitleBottom(embedded.chrome.title)}px` } as CSSProperties}
-    >
-      <DecorativeLayer variant="embedded-dual-orbs" items={staticEmbeddedPlanets} />
-      <div className="pdmat-stage">
-        <section className="pdmat-template pdmat-embedded">
-          <EmbeddedAppFrame label={embedded.frameLabel}><PdmaScenarioExercise /></EmbeddedAppFrame>
-        </section>
-      </div>
-    </div>
-  </PresentationSlideCanvas>
-) : null;
+const StructuredAnimatedMagenta: ComponentType = () => renderTemplateVariant(structured, "structured-animated-magenta");
+const HubAnimatedPlanets: ComponentType = () => renderTemplateVariant(hub, "hub-animated-planets");
+const EmbeddedStaticPlanets: ComponentType = () => renderTemplateVariant(embedded, "embedded-full-planets", { app: <PdmaScenarioExercise /> });
 
 const labSlides = [
   { label: "SLIDE 1 — BASELINE", entry: canonical("title"), component: TitleBaseline },

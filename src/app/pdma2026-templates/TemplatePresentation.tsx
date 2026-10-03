@@ -5,14 +5,16 @@ import { PresentationShell } from "@/components/presentation/PresentationShell";
 import { pdmaAssets } from "@/app/pdma2026/pdmaAssets";
 import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
 import type { PdmaSlideManifestEntry } from "@/components/presentation/presentationTypes";
-import { renderTemplate } from "@/components/presentation/templates/renderTemplate";
+import { renderTemplate, renderTemplateVariant } from "@/components/presentation/templates/renderTemplate";
 import { pdma2026Content } from "@/content/pdma2026";
-import { assertTemplateManifestParity, templateContent, templateManifest } from "./templateManifest";
+import { assertTemplateManifestParity, templateGalleryEntries, templateManifest } from "./templateManifest";
 
 export default function TemplatePresentation() {
-  const slides = templateContent.map((content, index) => (
+  const slides = templateGalleryEntries.map(({ content, variantId }, index) => (
     <Fragment key={templateManifest[index].key}>
-      {renderTemplate(content, { app: content.kind === "embedded-app" ? <PdmaScenarioExercise /> : undefined })}
+      {variantId
+        ? renderTemplateVariant(content, variantId, { app: content.kind === "embedded-app" ? <PdmaScenarioExercise /> : undefined })
+        : renderTemplate(content, { app: content.kind === "embedded-app" ? <PdmaScenarioExercise /> : undefined })}
     </Fragment>
   ));
   assertTemplateManifestParity(templateManifest, slides);

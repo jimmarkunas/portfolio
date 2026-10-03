@@ -25,9 +25,9 @@ export function shellTitleBottom(config: PdmaTitleConfig) {
  * `kind` names the composition (a template kind, or a deck-specific composition such as a
  * preserved production slide). Decoration comes from a registered variant or explicit items.
  */
-export function TemplateSlide({ kind, title, decorativeVariant = "none", decorItems, children }: { kind: TemplateKind | (string & {}); title: PdmaTitleConfig; decorativeVariant?: DecorativeVariant; decorItems?: readonly DecorItem[]; children: ReactNode }) {
+export function TemplateSlide({ kind, title, decorativeVariant = "none", decorItems, className, children }: { kind: TemplateKind | (string & {}); title: PdmaTitleConfig; decorativeVariant?: DecorativeVariant; decorItems?: readonly DecorItem[]; className?: string; children: ReactNode }) {
   return <PresentationCanvas>
-    <div className={`pdmat-slide pdmat-slide--${kind}`} data-template-kind={kind} style={{ "--pdmat-title-bottom": `${shellTitleBottom(title)}px` } as CSSProperties}>
+    <div className={`pdmat-slide pdmat-slide--${kind}${className ? ` ${className}` : ""}`} data-template-kind={kind} style={{ "--pdmat-title-bottom": `${shellTitleBottom(title)}px` } as CSSProperties}>
       <DecorativeLayer variant={decorativeVariant} items={decorItems} />
       <div className="pdmat-stage">{children}</div>
     </div>
