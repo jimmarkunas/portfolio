@@ -1,7 +1,7 @@
 import type { ExerciseTemplateContent } from "@/components/presentation/presentationTypes";
 import { IconCircle } from "@/components/presentation/TemplatePrimitives";
 import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
-import { TemplateSlide } from "./TemplateSlide";
+import { TemplateSlide } from "../TemplateSlide";
 
 export function ExerciseTemplate({ content }: { content: ExerciseTemplateContent }) {
   const { rows, supportingLabel, connectorArt, worksheet, takeaway } = content;

@@ -201,7 +201,6 @@ for (const viewport of viewports) {
     }
     await checkFrame("intro")
     await page.getByRole("button", { name: /Start Challenge/ }).click()
-    await page.locator(".pdmax").evaluate((element) => { element.tabIndex = 0; element.focus() })
     await page.keyboard.press("ArrowRight")
     if ((await page.locator(".pdma-count").textContent())?.trim() !== "4 / 10") fail("embedded-app: keys pressed inside the app changed the slide")
     const app = page.locator(".pdmax")

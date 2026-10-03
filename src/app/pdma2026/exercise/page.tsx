@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import "@/components/presentation/templates/templates.css";
+import "../../pdma2026-templates/styles/templates.css";
 import { PdmaExerciseRoute } from "./PdmaExerciseRoute";
 
 export const metadata: Metadata = {

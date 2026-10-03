@@ -204,7 +204,7 @@ If Prompt 3 finishes without visual PASS:
 
 ## 13. No second system
 
-Continue using the current GitHub implementation, the serializable spec in `presentation/pdma2026Content.ts`, `presentation/pdma2026Registry.tsx`, the shared `/src/components/presentation/templates/` system, PDMA-owned recipes, `DecorativeLayer`, and existing targeted checks/QA. This ownership change does not reopen any locked visual surface.
+Continue using the current GitHub implementation, `presentation/pdma2026Content.ts`, `presentation/pdma2026Manifest.tsx`, the existing `/pdma2026-templates` component system, current PDMA styling ownership, `DecorativeLayer`, and existing targeted checks/QA.
 
 Do not create another manifest, geometry registry, asset registry, styling pipeline, scheduler, or slide-state database.
 

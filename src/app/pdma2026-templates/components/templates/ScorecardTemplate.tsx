@@ -1,6 +1,6 @@
 import type { ScorecardTemplateContent } from "@/components/presentation/presentationTypes";
 import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
-import { TemplateSlide } from "./TemplateSlide";
+import { TemplateSlide } from "../TemplateSlide";
 
 /** Decision rule + native evaluation table. One primary value driver is highlighted. */
 export function ScorecardTemplate({ content }: { content: ScorecardTemplateContent }) {

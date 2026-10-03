@@ -1,28 +1,61 @@
-/** Shared semantic plane for PBDS presentations. */
-export const PRESENTATION_LOGICAL_CANVAS = { width: 1920, height: 1080 } as const;
+import type { ComponentType } from "react";
+import type { LucideIcon } from "lucide-react";
 
-/** Serializable title data with compatibility fields for existing accepted layouts. */
-export type PresentationTitleConfig = {
+/** The single 1920×1080 semantic plane shared by the PDMA deck and template gallery. */
+export const PDMA_LOGICAL_CANVAS = { width: 1920, height: 1080 } as const;
+export const PRESENTATION_LOGICAL_CANVAS = PDMA_LOGICAL_CANVAS;
+
+/** Title-block configuration consumed by PdmaTitleBlock (title/subtitle styling lives in the shell). */
+export type PdmaTitleConfig = {
   white?: string; magenta?: string; subtitle?: string; size: number; leading?: number; tracking?: number;
   subtitleSize?: number; subtitleLeading?: number; subtitleOffset?: number; subtitleX?: number; subtitleTracking?: number;
   exactSubtitleSize?: boolean; titleColor?: string; subtitleColor?: string; magentaRowShift?: number; magentaX?: number; sameRow?: boolean; plusMagenta?: boolean;
-  /** Characters of `white` drawn in magenta. */
+  /** Characters of `white` drawn in magenta (e.g. "A.S" for the A.G.E.N.T.S. wordmark). */
   magentaGlyphs?: string;
 };
 
-export type PresentationHeaderLabels = readonly [string, string, string];
-export type PresentationSlideId = string;
-export type PresentationSlideChrome = {
+export type PdmaHeaderLabels = readonly [string, string, string];
+export type PresentationHeaderLabels = PdmaHeaderLabels;
+export type PresentationTitleConfig = PdmaTitleConfig;
+
+export type PdmaSlideKey = `slide-${"01" | "02" | "03" | "04" | "05" | "06" | "07" | "08" | "09" | "10" | "11" | "12" | "13" | "14" | "15" | "16"}`;
+
+/** Chrome contract between a deck manifest and PdmaPresentationShell. */
+export type PdmaSlideManifestEntry = {
+  key: PdmaSlideKey;
+  id: PdmaSlideKey;
+  tocTitle: string;
+  headerLabels: PdmaHeaderLabels;
+  footerLabel: string;
+  title: PdmaTitleConfig;
+  component: ComponentType;
+  assets: readonly string[];
+  routeLinks?: readonly string[];
+};
+
+/** Generic shared manifest contract used by gallery views that are not deck-keyed. */
+export type PresentationSlideManifestEntry<Key extends string = string> = {
+  key: Key;
+  id: Key;
   tocTitle: string;
   headerLabels: PresentationHeaderLabels;
   footerLabel: string;
   title: PresentationTitleConfig;
+  component: ComponentType;
+  assets: readonly string[];
+  routeLinks?: readonly string[];
 };
 
-export type JsonPrimitive = string | number | boolean | null;
-export type JsonValue = JsonPrimitive | readonly JsonValue[] | { readonly [key: string]: JsonValue };
+/** Shell chrome for one production slide (same contract the template gallery uses). */
+export type PdmaSlideChrome = {
+  tocTitle: string;
+  headerLabels: PdmaHeaderLabels;
+  footerLabel: string;
+  title: PdmaTitleConfig;
+  sourceSlide: number | null;
+};
 
-export type PresentationTemplateKind =
+export type TemplateKind =
   | "title"
   | "end-card"
   | "exercise"
@@ -33,44 +66,27 @@ export type PresentationTemplateKind =
   | "hub-ecosystem"
   | "scorecard"
   | "structured-content-action";
-export type TemplateKind = PresentationTemplateKind;
 
-export type PresentationCompositionSpec =
-  | { readonly type: "template"; readonly templateId: PresentationTemplateKind; readonly content: JsonValue }
-  | { readonly type: "deck-local"; readonly compositionId: string; readonly content: JsonValue };
+/** Decoration is selected by variant; template body structure never changes with it. */
+export type DecorativeVariant =
+  | "title-hero"
+  | "end-card-orb"
+  | "compare-edge-planets"
+  | "flow-dual-orbs"
+  | "spectrum-horizon"
+  | "hub-corner-orbs"
+  | "structured-dual-orbs"
+  | "embedded-dual-orbs"
+  | "none";
 
-export type PresentationSlideSpec = {
-  readonly id: PresentationSlideId;
-  readonly tocTitle: string;
-  readonly headerLabels: PresentationHeaderLabels;
-  readonly footerLabel: string;
-  readonly title: PresentationTitleConfig;
-  readonly composition: PresentationCompositionSpec;
-  readonly decoration?: { readonly recipeId: string };
-  readonly assetIds?: readonly string[];
-  readonly routeLinks?: readonly { readonly label: string; readonly href: string }[];
-  readonly slots?: Readonly<Record<string, string>>;
-};
-
-export type PresentationSpec = {
-  readonly schemaVersion: 1;
-  readonly id: string;
-  readonly chromeId: string;
-  readonly metadata: { readonly title: string; readonly brandLabel: string };
-  readonly navigationCopyId: string;
-  readonly slides: readonly PresentationSlideSpec[];
-};
-
-/** Decoration is selected by a consumer-owned registered recipe ID. */
-export type PresentationDecorationRecipeId = string;
-export type DecorativeVariant = PresentationDecorationRecipeId;
-
-/** Shared chrome semantics for one template slide. */
+/** Shell chrome for one template slide. Consumed unchanged by PdmaPresentationShell. */
 export type TemplateChrome = {
   tocTitle: string;
-  headerLabels: PresentationHeaderLabels;
+  headerLabels: PdmaHeaderLabels;
   footerLabel: string;
-  title: PresentationTitleConfig;
+  title: PdmaTitleConfig;
+  /** Live PDMA slide that owns this template's copy; null when the approved concept owns it. */
+  sourceSlide: number | null;
 };
 
 type TemplateBase<K extends TemplateKind> = {
@@ -79,11 +95,7 @@ type TemplateBase<K extends TemplateKind> = {
   decorativeVariant: DecorativeVariant;
 };
 
-export type PresentationIconId =
-  | "bar-chart-3" | "box" | "chart-column" | "check" | "circle-help" | "clipboard-list"
-  | "database" | "eye" | "file-text" | "git-branch" | "headset" | "layers-3"
-  | "lightbulb" | "link" | "settings" | "shield" | "user-round" | "users-round" | "zap";
-export type IconSource = { iconId: PresentationIconId } | { src: string };
+export type IconSource = { icon: LucideIcon } | { src: string };
 
 export type TitleTemplateContent = TemplateBase<"title"> & {
   speaker: { name: string; role: string };

@@ -1,21 +1,5 @@
-import type { ComponentType } from "react";
-import type { PresentationSlideChrome, PresentationTitleConfig } from "@/components/presentation/presentationTypes";
-export { PRESENTATION_LOGICAL_CANVAS as PDMA_LOGICAL_CANVAS } from "@/components/presentation/presentationTypes";
-
-export type PdmaTitleConfig = PresentationTitleConfig;
-export type PdmaSlideKey = `slide-${"01" | "02" | "03" | "04" | "05" | "06" | "07" | "08" | "09" | "10" | "11" | "12" | "13" | "14" | "15" | "16"}`;
-export type PdmaSlideChrome = PresentationSlideChrome;
-export type PdmaSlideManifestEntry = {
-  key: PdmaSlideKey;
-  id: PdmaSlideKey;
-  tocTitle: string;
-  headerLabels: readonly [string, string, string];
-  footerLabel: string;
-  title: PdmaTitleConfig;
-  component: ComponentType;
-  assets: readonly string[];
-  routeLinks?: readonly string[];
-};
+import type { PdmaSlideChrome } from "@/components/presentation/presentationTypes";
+export { PDMA_LOGICAL_CANVAS } from "@/components/presentation/presentationTypes";
 
 type PreservedBase<K extends string> = { kind: K; chrome: PdmaSlideChrome };
 export type TextRun = { text: string; emphasis?: boolean };

@@ -1,5 +1,5 @@
 /*
- * Shared presentation templates. Existing pdmat-* selectors remain stable for visual parity.
+ * PDMA 2026 template system — /pdma2026-templates only. Every rule is namespaced pdmat-*.
  * Units are logical-canvas pixels: the reused shell scales the 1920×1080 canvas uniformly.
  * Content uses Grid/Flex flow. Absolute positioning appears only in the decorative layer
  * (.pdmat-deco) and inside bounded connector cells (.pdmat-connector, .pdmat-fan).
@@ -43,7 +43,7 @@
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: [title-start] var(--pdmat-title-zone) [title-end body-start] minmax(0, 1fr) [body-end];
 }
-/* The title zone is reserved for the shared chrome title overlay; template bodies flow beneath it. */
+/* The title zone is reserved for the shell's PdmaTitleBlock; template bodies flow beneath it. */
 .pdmat-slide .pdmat-template { grid-column: 1; grid-row: body-start / body-end; min-width: 0; min-height: 0; }
 
 /* ── Decorative layer (bounded, non-content) ───────────────────── */

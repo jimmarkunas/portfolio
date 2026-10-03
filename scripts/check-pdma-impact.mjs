@@ -5,7 +5,7 @@ import { readDeck } from "./pdma-deck-slides.mjs"
 
 const changed = execFileSync("git", ["status", "--short"], { encoding: "utf8" }).split("\n").filter(Boolean).map((line) => line.slice(3).trim())
 const deck = readDeck()
-const shared = /^src\/components\/presentation\/|^src\/app\/pdma2026\/(PdmaPresentationShell|presentation\/(presentationTypes|pdma2026Content|pdma2026Registry|pdma2026Slots|pdmaDecorativeRecipes|Pdma2026Presentation)|styles\/)|^src\/app\/pdma2026-templates\/(templateGalleryFixtures|galleryDecorationRecipes|TemplatePresentation|templateManifest|styles\/)/
+const shared = /^src\/app\/pdma2026\/(PdmaPresentationShell|components\/|styles\/|presentation\/(presentationTypes|pdma2026Manifest|Pdma2026Presentation))|^src\/app\/pdma2026-templates\/(components\/(TemplateSlide|DecorativeLayer|shared\/)|styles\/)/
 const impact = new Map()
 for (const file of changed) {
   if (shared.test(file)) { impact.set("all slides + gallery", [...(impact.get("all slides + gallery") ?? []), file]); continue }

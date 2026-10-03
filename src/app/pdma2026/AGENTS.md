@@ -56,7 +56,7 @@ Since the template-architecture cutover, `npm run pdma:check` (deck + gallery co
 - Current GitHub `main` owns implementation truth.
 - The approved implementation reference registered in the visual contract owns target-slide visual truth.
 - Slides 1–3 are the deck's visual north star for new/reworked concepts.
-- `presentation/pdma2026Content.ts` owns the serializable production spec and copy; `presentation/pdma2026Registry.tsx` owns the six deck-local composition renderers and slot/registry resolution. Shared template order and rendering come from the spec and shared presentation registry.
+- `presentation/pdma2026Content.ts` owns production copy; `presentation/pdma2026Manifest.tsx` owns order/chrome/composition, unless Jim explicitly changes them.
 - Layout is Grid/Flex in the template architecture (`docs/pdma2026/template-system/`); there is no geometry registry.
 - 1920×1080 is the canonical logical slide canvas.
 - Do not create a second geometry registry, manifest, asset registry, slide-state registry, or styling pipeline.

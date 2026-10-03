@@ -1,10 +1,10 @@
 import type { StructuredActionTemplateContent } from "@/components/presentation/presentationTypes";
-import type { DecorItem } from "./DecorativeLayer";
+import type { DecorItem } from "../DecorativeLayer";
 import { ContentCard } from "@/components/presentation/TemplatePrimitives";
 import { FlowRail } from "@/components/presentation/TemplatePrimitives";
 import { IconCircle } from "@/components/presentation/TemplatePrimitives";
 import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
-import { TemplateSlide } from "./TemplateSlide";
+import { TemplateSlide } from "../TemplateSlide";
 
 /** Three requirement cards → four-step operationalization rail → takeaway. */
 export function StructuredActionTemplate({ content, decorItems }: { content: StructuredActionTemplateContent; decorItems?: readonly DecorItem[] }) {

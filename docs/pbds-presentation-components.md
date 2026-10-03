@@ -42,7 +42,7 @@ The only approved mark is the **2012 five-leg asterisk**.
 
 ## PDMA runtime sizing + responsive geometry — HARD RULES
 
-These rules govern PBDS presentation consumers, including the live `/pdma2026` React presentation. They exist to prevent viewport-by-viewport tuning, title/body drift, distorted artwork, and accidental redesign of the approved chrome.
+These rules govern the live `/pdma2026` React presentation. They exist to prevent viewport-by-viewport tuning, title/body drift, distorted artwork, and accidental redesign of the approved chrome.
 
 ### Coordinate systems
 
@@ -81,7 +81,7 @@ Do **not** scale the slide body and title independently. A title, diagram, card,
 - Do not hard-code runtime layout around screenshot pixel dimensions.
 - Do not structurally reflow presentation content at ordinary viewport breakpoints.
 
-The exact top-bias equation belongs to `src/components/presentation/PresentationCanvas.tsx` and must be calibrated from live DOM measurements. It must not be duplicated or reimplemented by individual slides.
+The exact top-bias equation belongs to the shared shell implementation and must be calibrated from live DOM measurements. It must not be duplicated or reimplemented by individual slides.
 
 ### Extra runtime space
 
@@ -126,7 +126,7 @@ The currently approved live React header/footer geometry is **locked** unless Ji
 
 The approved PDMA chrome is one shared system, not locally rebuilt slide furniture.
 
-For Figma authoring, use the canonical chrome components. For React presentations, use the shared `PresentationRuntime` and PBDS presentation chrome. Do not recreate header/footer markup inside individual slide components.
+For Figma authoring, use the canonical chrome components. For the live `/pdma2026` React presentation, use the single shared runtime shell. Do not recreate header/footer markup inside individual slide components.
 
 ### Header
 
@@ -316,27 +316,6 @@ Do **not** repeat this component across every slide.
 11. If a component uses the logo, use only the exact canonical 2012 five-leg asterisk geometry from node `5:38`.
 12. Never substitute a six-leg asterisk, generated asterisk, Unicode asterisk, or approximate starburst.
 13. Structural responsive reflow of slide content is prohibited unless Jim explicitly approves a slide-level exception; use uniform scaling plus controlled decorative bleed instead.
-
----
-
-## Presentation machine contract and ownership
-
-The canonical implementation lives in the existing `src/components/presentation/` surface:
-
-- `presentationTypes.ts` owns generic serializable presentation/spec types and the independent `PRESENTATION_LOGICAL_CANVAS` value.
-- `presentationSpec.ts` validates schema versions, required fields, and registered template, composition, recipe, slot, and asset IDs.
-- `PresentationRuntime.tsx` owns slide selection, navigation, keyboard/fullscreen behavior, TOC state, transitions, stage hosting, and current-slide selection.
-- `PresentationChrome.tsx` owns the shared PBDS event label, progress rail, semantic triad, footer identity/principle, controls, and title overlay renderer.
-- `presentationTemplateRegistry.tsx` is the single executable registry for the ten shared templates under `templates/`.
-- `templates/DecorativeLayer.tsx` renders caller-supplied decoration items; consuming decks own their recipe IDs and artwork selection.
-
-Shared presentation infrastructure must never import from `src/app/pdma2026/**` or `src/content/pdma2026/**`. Machine-authored specs are JSON-compatible data and cannot contain JSX, `ReactNode`, functions, component constructors, or Lucide components. Executable selection belongs in registries. Specs refer to registered assets and interactive components by stable IDs; a deck resolves slot IDs to React at the rendering boundary.
-
-PDMA 2026 is the first consumer. Its six bespoke compositions, PDMA-only decoration recipes, and interactive slots remain PDMA-owned. The ten template IDs are `title`, `end-card`, `exercise`, `embedded-app`, `compare-contrast`, `flow-scenario`, `decision-spectrum`, `hub-ecosystem`, `scorecard`, and `structured-content-action`.
-
-The `/pdma2026-templates` route is the canonical immutable fixture/example surface. Its fixture data is copied from the accepted exemplars and is not a second production copy authority. The `/pdma2026-templates-lab` route is experimental only and cannot promote a recipe or behavior by itself.
-
-Future deck creation starts with a serializable `PresentationSpec`, content, registered assets, navigation/chrome IDs, and optional deck-local composition/slot registries. Existing shared runtime, PBDS chrome, canvas, shared renderers, and template registry should not need edits for ordinary new decks. The legacy `PresentationDeck` remains the compatibility runtime for existing USAII, LLM Day, DSH Hacks, and Secure Carolinas presentations; those consumers are explicitly outside this extraction.
 
 ## Approved presentation precedents
 

@@ -1,17 +1,12 @@
 "use client";
 
-import { PresentationRuntime } from "@/components/presentation/PresentationRuntime";
-import { galleryDecorationRecipes } from "./galleryDecorationRecipes";
-import { galleryNavigationCopy, galleryPresentationSpec, renderGallerySlide, validateGallerySpec } from "./templateManifest";
+import { PdmaPresentationShell } from "@/app/pdma2026/PdmaPresentationShell";
+import type { PdmaSlideManifestEntry } from "@/app/pdma2026/presentation/presentationTypes";
+import { pdma2026Content } from "@/content/pdma2026";
+import { assertTemplateManifestParity, templateManifest } from "./templateManifest";
 
 export default function TemplatePresentation() {
-  validateGallerySpec();
-  return <PresentationRuntime
-    spec={galleryPresentationSpec}
-    navigation={galleryNavigationCopy}
-    brandAsset="/pdma2026/slide-01/canonical-asterisk.svg"
-    tocDialogId="pdma2026-slide-toc"
-    decorationRecipes={galleryDecorationRecipes}
-    renderSlide={renderGallerySlide}
-  />;
+  const slides = templateManifest.map(({ component: Component, key }) => <Component key={key} />);
+  assertTemplateManifestParity(templateManifest, slides);
+  return <PdmaPresentationShell slides={slides} slideManifest={[...templateManifest] as PdmaSlideManifestEntry[]} navigation={pdma2026Content.navigation} />;
 }
