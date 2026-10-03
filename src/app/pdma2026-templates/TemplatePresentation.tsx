@@ -1,7 +1,8 @@
 "use client";
 
 import { Fragment } from "react";
-import { PdmaPresentationShell } from "@/app/pdma2026/PdmaPresentationShell";
+import { PresentationShell } from "@/components/presentation/PresentationShell";
+import { pdmaAssets } from "@/app/pdma2026/pdmaAssets";
 import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
 import type { PdmaSlideManifestEntry } from "@/components/presentation/presentationTypes";
 import { renderTemplate } from "@/components/presentation/templates/renderTemplate";
@@ -15,5 +16,5 @@ export default function TemplatePresentation() {
     </Fragment>
   ));
   assertTemplateManifestParity(templateManifest, slides);
-  return <PdmaPresentationShell slides={slides} slideManifest={[...templateManifest] as PdmaSlideManifestEntry[]} navigation={pdma2026Content.navigation} />;
+  return <PresentationShell slides={slides} slideManifest={[...templateManifest] as PdmaSlideManifestEntry[]} navigation={pdma2026Content.navigation} brandLabel="PDMA 2026" brandAsset={pdmaAssets.asterisk} tocDialogId="pdma2026-slide-toc" />;
 }

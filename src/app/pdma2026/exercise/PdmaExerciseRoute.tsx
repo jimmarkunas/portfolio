@@ -1,7 +1,7 @@
 "use client";
 
 import { EmbeddedAppFrame } from "@/components/presentation/TemplatePrimitives";
-import { PdmaSlideCanvas } from "../PdmaPresentationShell";
+import { PresentationSlideCanvas } from "@/components/presentation/PresentationShell";
 import { PdmaScenarioExercise } from "./PdmaScenarioExercise";
 
 /**
@@ -11,11 +11,11 @@ import { PdmaScenarioExercise } from "./PdmaScenarioExercise";
 export function PdmaExerciseRoute() {
   return <main className="pdma-presentation">
     <div className="pdma-stage">
-      <PdmaSlideCanvas>
+      <PresentationSlideCanvas>
         <div className="pdmax-route">
           <EmbeddedAppFrame label="PDMA productization exercise"><PdmaScenarioExercise /></EmbeddedAppFrame>
         </div>
-      </PdmaSlideCanvas>
+      </PresentationSlideCanvas>
     </div>
   </main>;
 }

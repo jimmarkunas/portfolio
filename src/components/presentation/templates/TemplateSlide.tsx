@@ -10,7 +10,7 @@ import { DecorativeLayer, type DecorItem } from "./DecorativeLayer";
 const SHELL_TITLE_TOP = 118;
 
 /**
- * The reused shell renders PdmaTitleBlock above the slide body. Its bottom edge is
+ * The reused shell renders PresentationTitleBlock above the slide body. Its bottom edge is
  * derived from the same title config, so template bodies start in normal flow below it.
  */
 export function shellTitleBottom(config: PdmaTitleConfig) {

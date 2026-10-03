@@ -7,7 +7,8 @@ import "@/components/presentation/templates/templates.css";
 import "../pdma2026/presentation/presentation.css";
 
 import { pdma2026Content } from "@/content/pdma2026";
-import { PdmaPresentationShell } from "@/app/pdma2026/PdmaPresentationShell";
+import { PresentationShell } from "@/components/presentation/PresentationShell";
+import { pdmaAssets } from "@/app/pdma2026/pdmaAssets";
 import { pdma2026Manifest, renderPdma2026Slide } from "@/app/pdma2026/presentation/pdma2026Manifest";
 import { pdma2026Slides } from "@/app/pdma2026/presentation/pdma2026Content";
 import { PBDSKineticSphere } from "./PBDSKineticSphereLab";
@@ -80,7 +81,7 @@ export default function PdmaOrbLabPage() {
 
   return (
     <div className={`pdma2026-page pdma2026-orb-lab ${mode === "direct-port" ? "is-direct-port" : "is-reference"}`}>
-      <PdmaPresentationShell
+      <PresentationShell
         slides={[
           <Fragment key="slide-12-orb-lab">
             {renderPdma2026Slide(slide12Content)}
@@ -89,6 +90,9 @@ export default function PdmaOrbLabPage() {
         ]}
         slideManifest={[slide12]}
         navigation={pdma2026Content.navigation}
+        brandLabel="PDMA 2026"
+        brandAsset={pdmaAssets.asterisk}
+        tocDialogId="pdma2026-slide-toc"
       />
 
       <aside className="pbds-orb-lab__toolbar" aria-label="PBDS orb lab controls">

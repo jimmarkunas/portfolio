@@ -4,7 +4,7 @@ import type { LucideIcon } from "lucide-react";
 export const PDMA_LOGICAL_CANVAS = { width: 1920, height: 1080 } as const;
 export const PRESENTATION_LOGICAL_CANVAS = PDMA_LOGICAL_CANVAS;
 
-/** Title-block configuration consumed by PdmaTitleBlock (title/subtitle styling lives in the shell). */
+/** Title-block configuration consumed by PresentationTitleBlock (title/subtitle styling lives in the shell). */
 export type PdmaTitleConfig = {
   white?: string; magenta?: string; subtitle?: string; size: number; leading?: number; tracking?: number;
   subtitleSize?: number; subtitleLeading?: number; subtitleOffset?: number; subtitleX?: number; subtitleTracking?: number;
@@ -19,7 +19,7 @@ export type PresentationTitleConfig = PdmaTitleConfig;
 
 export type PdmaSlideKey = `slide-${"01" | "02" | "03" | "04" | "05" | "06" | "07" | "08" | "09" | "10" | "11" | "12" | "13" | "14" | "15" | "16"}`;
 
-/** Chrome contract between a deck manifest and PdmaPresentationShell. */
+/** Chrome contract between a deck manifest and PresentationShell. */
 export type PdmaSlideManifestEntry = {
   key: PdmaSlideKey;
   id: PdmaSlideKey;
@@ -76,7 +76,7 @@ export type DecorativeVariant =
   | "embedded-dual-orbs"
   | "none";
 
-/** Shell chrome for one template slide. Consumed unchanged by PdmaPresentationShell. */
+/** Shell chrome for one template slide. Consumed unchanged by PresentationShell. */
 export type TemplateChrome = {
   tocTitle: string;
   headerLabels: PdmaHeaderLabels;

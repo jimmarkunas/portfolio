@@ -2,7 +2,8 @@
 
 import type { ComponentType, CSSProperties } from "react";
 import { orbAppearanceProfiles } from "@/components/pbds/orb/orbPresets";
-import { PdmaPresentationShell, PdmaSlideCanvas } from "@/app/pdma2026/PdmaPresentationShell";
+import { PresentationShell, PresentationSlideCanvas } from "@/components/presentation/PresentationShell";
+import { pdmaAssets } from "@/app/pdma2026/pdmaAssets";
 import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
 import type { PdmaSlideKey } from "@/components/presentation/presentationTypes";
 import { pdma2026Content } from "@/content/pdma2026";
@@ -53,7 +54,7 @@ const staticEmbeddedPlanets = [
   { src: "/pdma2026-templates-lab/assets/slide-06/planet-right.png", x: 917, y: -48, w: 1253, h: 1253, fullPlane: true },
 ] as const;
 const EmbeddedStaticPlanets: ComponentType = () => embedded.kind === "embedded-app" ? (
-  <PdmaSlideCanvas>
+  <PresentationSlideCanvas>
     <div
       className="pdmat-slide pdmat-slide--embedded-app pdma-lab-embedded-static"
       data-template-kind="embedded-app"
@@ -66,7 +67,7 @@ const EmbeddedStaticPlanets: ComponentType = () => embedded.kind === "embedded-a
         </section>
       </div>
     </div>
-  </PdmaSlideCanvas>
+  </PresentationSlideCanvas>
 ) : null;
 
 const labSlides = [
@@ -100,6 +101,6 @@ const labManifest = labSlides.map(({ label, entry, component, preserveProduction
 export default function TemplateLabPresentation() {
   const slides = labManifest.map(({ component: Component, key }) => Component === EmbeddedStaticPlanets
     ? <Component key={key} />
-    : <PdmaSlideCanvas key={key}><Component /></PdmaSlideCanvas>);
-  return <PdmaPresentationShell slides={slides} slideManifest={labManifest} navigation={pdma2026Content.navigation} />;
+    : <PresentationSlideCanvas key={key}><Component /></PresentationSlideCanvas>);
+  return <PresentationShell slides={slides} slideManifest={labManifest} navigation={pdma2026Content.navigation} brandLabel="PDMA 2026" brandAsset={pdmaAssets.asterisk} tocDialogId="pdma2026-slide-toc" />;
 }
