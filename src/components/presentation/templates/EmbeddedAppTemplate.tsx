@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { EmbeddedAppTemplateContent } from "@/components/presentation/presentationTypes";
 import { EmbeddedAppFrame } from "@/components/presentation/TemplatePrimitives";
-import { TemplateSlide } from "../TemplateSlide";
+import { TemplateSlide } from "./TemplateSlide";
 
 /** Title/subtitle + dominant live app frame. `app` is any interactive React child. */
 export function EmbeddedAppTemplate({ content, app }: { content: EmbeddedAppTemplateContent; app: ReactNode }) {

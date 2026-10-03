@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-import "../pdma2026-templates/styles/templates.css";
+import "@/components/presentation/templates/templates.css";
 import "../pdma2026/presentation/presentation.css";
 
 import { pdma2026Content } from "@/content/pdma2026";

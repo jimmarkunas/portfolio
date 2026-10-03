@@ -1,6 +1,6 @@
 import type { EndCardTemplateContent } from "@/components/presentation/presentationTypes";
 import { DownloadModule } from "@/components/presentation/TemplatePrimitives";
-import { TemplateSlide } from "../TemplateSlide";
+import { TemplateSlide } from "./TemplateSlide";
 
 export function EndCardTemplate({ content }: { content: EndCardTemplateContent }) {
   const { statement, download } = content;

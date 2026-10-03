@@ -1,5 +1,5 @@
-import type { DecorItem } from "@/app/pdma2026-templates/components/DecorativeLayer";
-import { TemplateSlide } from "@/app/pdma2026-templates/components/TemplateSlide";
+import type { DecorItem } from "@/components/presentation/templates/DecorativeLayer";
+import { TemplateSlide } from "@/components/presentation/templates/TemplateSlide";
 import type { AmbiguityGateContent } from "../presentationTypes";
 
 /** HERO v1 signal field (white curtain left, magenta right), full-frame behind the copy. Decorative only. */

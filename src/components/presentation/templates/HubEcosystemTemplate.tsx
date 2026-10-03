@@ -1,9 +1,9 @@
 import type { HubCard, HubEcosystemTemplateContent } from "@/components/presentation/presentationTypes";
-import type { DecorItem } from "../DecorativeLayer";
+import type { DecorItem } from "./DecorativeLayer";
 import { FanConnector } from "@/components/presentation/TemplatePrimitives";
 import { ContentCard } from "@/components/presentation/TemplatePrimitives";
 import { IconCircle } from "@/components/presentation/TemplatePrimitives";
-import { TemplateSlide } from "../TemplateSlide";
+import { TemplateSlide } from "./TemplateSlide";
 
 /** Row centers for a bank of equal-height rows (row gap lives inside each row). */
 const rowCenters = (count: number) => Array.from({ length: count }, (_, index) => ((index + 0.5) / count) * 100);

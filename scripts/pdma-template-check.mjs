@@ -16,6 +16,7 @@ import { copyRegistry } from "./pdma-template-copy.mjs"
 
 const root = process.cwd()
 const TREE = "src/app/pdma2026-templates"
+const TEMPLATE_ROOT = "src/components/presentation/templates"
 const PRODUCTION_CONTENT = "src/app/pdma2026/presentation/pdma2026Content.ts"
 const ASSETS = "public/pdma2026-templates/assets"
 const REFERENCES = "docs/pdma2026/template-system/approved-template-references.json"
@@ -40,7 +41,7 @@ const normalize = (text) => text
   .replace(/\s+/g, " ")
 
 const files = walk(TREE)
-const sourceFiles = files.filter((file) => /\.(tsx?|css)$/.test(file))
+const sourceFiles = [...files, ...walk(TEMPLATE_ROOT)].filter((file) => /\.(tsx?|css)$/.test(file))
 const templateContent = read(`${TREE}/templateManifest.tsx`)
 // Nine gallery exemplars render the production deck's content objects; the gallery owns the rest.
 const galleryContent = `${templateContent}\n${read(PRODUCTION_CONTENT)}`
@@ -57,7 +58,7 @@ for (const file of sourceFiles.filter((f) => f.endsWith(".tsx") || f.endsWith(".
 }
 
 // 3. Absolute positioning only inside bounded decorative/connector layers.
-const css = read(`${TREE}/styles/templates.css`)
+const css = read(`${TEMPLATE_ROOT}/templates.css`)
 const allowedAbsolute = /\.pdmat-deco\b|\.pdmat-deco-item|\.pdmat-deco-fade|\.pdmat-connector__dot|\.pdmat-fan\b|\.pdmat-fan >|\.pdmat-fan__dot/
 for (const match of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
   const [, selector, body] = match
@@ -82,7 +83,7 @@ for (const kind of requiredKinds) if (!declaredKinds.has(kind)) fail(`gallery co
 const manifestSource = read(`${TREE}/templateManifest.tsx`)
 for (const kind of requiredKinds) if (!new RegExp(`case "${kind}": return <`).test(manifestSource)) fail(`templateManifest.tsx: no renderer for ${kind}`)
 const componentTargets = ["TitleTemplate", "EndCardTemplate", "ExerciseTemplate", "EmbeddedAppTemplate", "CompareContrastTemplate", "FlowScenarioTemplate", "DecisionSpectrumTemplate", "HubEcosystemTemplate", "ScorecardTemplate", "StructuredActionTemplate"]
-for (const name of componentTargets) if (!fs.existsSync(path.join(root, TREE, "components/templates", `${name}.tsx`))) fail(`missing component target components/templates/${name}.tsx`)
+for (const name of componentTargets) if (!fs.existsSync(path.join(root, TEMPLATE_ROOT, `${name}.tsx`))) fail(`missing component target components/templates/${name}.tsx`)
 const sharedPresentation = "src/components/presentation/TemplatePrimitives.tsx";
 const sharedPresentationSource = read(sharedPresentation);
 for (const name of ["ContentCard", "IconCircle", "FlowRail", "Connector", "TakeawayBand", "DownloadModule", "EmbeddedAppFrame"]) {
@@ -119,7 +120,7 @@ for (const [file, meta] of Object.entries(references.files)) {
   const digest = crypto.createHash("sha256").update(fs.readFileSync(full)).digest("hex")
   if (digest !== meta.sha256) fail(`SHA-256 mismatch ${ASSETS}/${file}`)
 }
-const decorative = read(`${TREE}/components/DecorativeLayer.tsx`)
+const decorative = read(`${TEMPLATE_ROOT}/DecorativeLayer.tsx`)
 for (const [kind, entry] of Object.entries(references.templates)) {
   for (const asset of entry.assets) if (!decorative.includes(asset.split("/").pop())) fail(`DecorativeLayer.tsx: approved ${kind} asset not used → ${asset}`)
 }

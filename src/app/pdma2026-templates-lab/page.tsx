@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import "../pdma2026/styles/base.css";
-import "../pdma2026-templates/styles/templates.css";
+import "@/components/presentation/templates/templates.css";
 import "../pdma2026/presentation/presentation.css";
 import "./lab.css";
 import TemplateLabPresentation from "./TemplateLabPresentation";

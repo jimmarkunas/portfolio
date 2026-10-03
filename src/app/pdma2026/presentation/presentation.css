@@ -1,7 +1,7 @@
 /*
  * PDMA 2026 production deck — the six deck-specific compositions (02, 04, 05, 11, 12, 13).
  * 05 is HERO v1 and 11 is Brand / Reveal v1 (docs/pdma2026/PDMA_VISUAL_APPROVALS_2026-09-24.md).
- * Template-mapped slides use /pdma2026-templates/styles/templates.css unchanged.
+ * Template-mapped slides use /components/presentation/templates/templates.css unchanged.
  * Units are logical-canvas pixels (1920×1080, scaled uniformly by the shell).
  * Content is Grid/Flex flow; absolute positioning appears only in the decorative layer.
  */

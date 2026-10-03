@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import type { DecorItem } from "@/app/pdma2026-templates/components/DecorativeLayer";
+import type { DecorItem } from "@/components/presentation/templates/DecorativeLayer";
 import { IconCircle } from "@/components/presentation/TemplatePrimitives";
-import { TemplateSlide } from "@/app/pdma2026-templates/components/TemplateSlide";
+import { TemplateSlide } from "@/components/presentation/templates/TemplateSlide";
 import type { ShiftBoundaryContent } from "../presentationTypes";
 
 const R = "/pdma2026/slide-02";

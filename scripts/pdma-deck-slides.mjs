@@ -6,19 +6,19 @@ import fs from "node:fs"
 import path from "node:path"
 
 export const CONTENT = "src/app/pdma2026/presentation/pdma2026Content.ts"
-const T = "src/app/pdma2026-templates/components/templates"
+const T = "src/components/presentation/templates"
 const P = "src/app/pdma2026/presentation/slides"
 export const compositionFiles = {
-  title: [`${T}/TitleTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
-  "compare-contrast": [`${T}/CompareContrastTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
-  "hub-ecosystem": [`${T}/HubEcosystemTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
-  scorecard: [`${T}/ScorecardTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
-  "decision-spectrum": [`${T}/DecisionSpectrumTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
-  "flow-scenario": [`${T}/FlowScenarioTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
-  "structured-content-action": [`${T}/StructuredActionTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
-  exercise: [`${T}/ExerciseTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
-  "embedded-app": [`${T}/EmbeddedAppTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
-  "end-card": [`${T}/EndCardTemplate.tsx`, "src/app/pdma2026-templates/styles/templates.css"],
+  title: [`${T}/TitleTemplate.tsx`, "src/components/presentation/templates/templates.css"],
+  "compare-contrast": [`${T}/CompareContrastTemplate.tsx`, "src/components/presentation/templates/templates.css"],
+  "hub-ecosystem": [`${T}/HubEcosystemTemplate.tsx`, "src/components/presentation/templates/templates.css"],
+  scorecard: [`${T}/ScorecardTemplate.tsx`, "src/components/presentation/templates/templates.css"],
+  "decision-spectrum": [`${T}/DecisionSpectrumTemplate.tsx`, "src/components/presentation/templates/templates.css"],
+  "flow-scenario": [`${T}/FlowScenarioTemplate.tsx`, "src/components/presentation/templates/templates.css"],
+  "structured-content-action": [`${T}/StructuredActionTemplate.tsx`, "src/components/presentation/templates/templates.css"],
+  exercise: [`${T}/ExerciseTemplate.tsx`, "src/components/presentation/templates/templates.css"],
+  "embedded-app": [`${T}/EmbeddedAppTemplate.tsx`, "src/components/presentation/templates/templates.css"],
+  "end-card": [`${T}/EndCardTemplate.tsx`, "src/components/presentation/templates/templates.css"],
   "shift-boundary": [`${P}/ShiftBoundarySlide.tsx`, "src/app/pdma2026/presentation/presentation.css"],
   "work-map": [`${P}/WorkMapSlide.tsx`, "src/app/pdma2026/presentation/presentation.css"],
   "ambiguity-gate": [`${P}/AmbiguityGateSlide.tsx`, "src/app/pdma2026/presentation/presentation.css"],
@@ -41,7 +41,7 @@ export function readDeck(root = process.cwd()) {
       component,
       stylesheet,
       content: `${CONTENT} (export slide${String(number).padStart(2, "0")})`,
-      family: component?.includes("pdma2026-templates") ? "approved template" : "preserved production composition",
+      family: component?.includes("src/components/presentation/templates") ? "approved template" : "preserved production composition",
     }
   })
 }

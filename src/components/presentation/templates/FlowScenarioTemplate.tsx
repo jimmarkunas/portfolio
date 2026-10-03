@@ -3,8 +3,8 @@ import { Connector } from "@/components/presentation/TemplatePrimitives";
 import { ContentCard } from "@/components/presentation/TemplatePrimitives";
 import { IconCircle } from "@/components/presentation/TemplatePrimitives";
 import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
-import type { DecorItem } from "../DecorativeLayer";
-import { TemplateSlide } from "../TemplateSlide";
+import type { DecorItem } from "./DecorativeLayer";
+import { TemplateSlide } from "./TemplateSlide";
 
 const index = (position: number) => String(position).padStart(2, "0");
 

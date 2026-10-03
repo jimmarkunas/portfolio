@@ -2,7 +2,7 @@ import type { CompareContrastTemplateContent, ComparePanel } from "@/components/
 import { FlowRail } from "@/components/presentation/TemplatePrimitives";
 import { IconCircle } from "@/components/presentation/TemplatePrimitives";
 import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
-import { TemplateSlide } from "../TemplateSlide";
+import { TemplateSlide } from "./TemplateSlide";
 
 function Panel({ panel }: { panel: ComparePanel }) {
   const last = panel.steps.length - 1;

@@ -13,17 +13,17 @@ import {
   slide15 as embeddedApp,
   slide16 as endCard,
 } from "@/app/pdma2026/presentation/pdma2026Content";
-import { decorativeVariants, isDecorImage } from "./components/DecorativeLayer";
-import { CompareContrastTemplate } from "./components/templates/CompareContrastTemplate";
-import { DecisionSpectrumTemplate } from "./components/templates/DecisionSpectrumTemplate";
-import { EmbeddedAppTemplate } from "./components/templates/EmbeddedAppTemplate";
-import { EndCardTemplate } from "./components/templates/EndCardTemplate";
-import { ExerciseTemplate } from "./components/templates/ExerciseTemplate";
-import { FlowScenarioTemplate } from "./components/templates/FlowScenarioTemplate";
-import { HubEcosystemTemplate } from "./components/templates/HubEcosystemTemplate";
-import { ScorecardTemplate } from "./components/templates/ScorecardTemplate";
-import { StructuredActionTemplate } from "./components/templates/StructuredActionTemplate";
-import { TitleTemplate } from "./components/templates/TitleTemplate";
+import { decorativeVariants, isDecorImage } from "@/components/presentation/templates/DecorativeLayer";
+import { CompareContrastTemplate } from "@/components/presentation/templates/CompareContrastTemplate";
+import { DecisionSpectrumTemplate } from "@/components/presentation/templates/DecisionSpectrumTemplate";
+import { EmbeddedAppTemplate } from "@/components/presentation/templates/EmbeddedAppTemplate";
+import { EndCardTemplate } from "@/components/presentation/templates/EndCardTemplate";
+import { ExerciseTemplate } from "@/components/presentation/templates/ExerciseTemplate";
+import { FlowScenarioTemplate } from "@/components/presentation/templates/FlowScenarioTemplate";
+import { HubEcosystemTemplate } from "@/components/presentation/templates/HubEcosystemTemplate";
+import { ScorecardTemplate } from "@/components/presentation/templates/ScorecardTemplate";
+import { StructuredActionTemplate } from "@/components/presentation/templates/StructuredActionTemplate";
+import { TitleTemplate } from "@/components/presentation/templates/TitleTemplate";
 import type { TemplateContent, TemplateKind } from "@/components/presentation/presentationTypes";
 
 export const TEMPLATE_COUNT = 10;
