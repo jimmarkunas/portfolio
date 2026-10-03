@@ -1,6 +1,6 @@
-import type { DecorItem } from "@/app/pdma2026-templates/components/DecorativeLayer";
+import type { DecorItem } from "@/components/presentation/templates/DecorativeLayer";
 import { TakeawayBand } from "@/components/presentation/TemplatePrimitives";
-import { TemplateSlide } from "@/app/pdma2026-templates/components/TemplateSlide";
+import { TemplateSlide } from "@/components/presentation/templates/TemplateSlide";
 import type { WorkMapContent } from "../presentationTypes";
 
 /** Approved terrain + work-map path artwork (PBDS north star). Decorative only. */

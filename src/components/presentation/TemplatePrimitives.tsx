@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { ArrowRight } from "lucide-react";
 import type { EndCardTemplateContent, IconSource } from "@/components/presentation/presentationTypes";
 import { createQrMatrix } from "./qrMatrix";
+import { presentationIcons } from "./presentationIcons";
 
 type ConnectorKind = "glyph" | "rail" | "flow";
 
@@ -93,7 +94,7 @@ export function IconCircle({ source, glyph, size, iconSize, tone = "neutral", gl
   const inner = iconSize ?? Math.round(size * 0.46);
   let content = null;
   if (glyph) content = <span className="pdmat-icon-circle__glyph">{glyph}</span>;
-  else if (source && "icon" in source) { const Icon = source.icon; content = <Icon aria-hidden="true" size={inner} strokeWidth={1.8} />; }
+  else if (source && "iconId" in source) { const Icon = presentationIcons[source.iconId]; content = <Icon aria-hidden="true" size={inner} strokeWidth={1.8} />; }
   else if (source) content = <img src={source.src} alt="" width={inner} height={inner} />;
   return <span className={`pdmat-icon-circle pdmat-icon-circle--${tone}${glow ? " is-glow" : ""} ${className}`.trim()} style={{ "--pdmat-circle": `${size}px`, "--pdmat-icon": `${inner}px` } as CSSProperties}>{content}</span>;
 }

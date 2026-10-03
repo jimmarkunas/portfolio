@@ -1,24 +1,3 @@
-import {
-  BarChart3,
-  Box,
-  ChartColumn,
-  Check,
-  CircleHelp,
-  ClipboardList,
-  Database,
-  Eye,
-  FileText,
-  GitBranch,
-  Headset,
-  Layers3,
-  Lightbulb,
-  Link,
-  Settings,
-  Shield,
-  UserRound,
-  UsersRound,
-  Zap,
-} from "lucide-react";
 import type {
   CompareContrastTemplateContent,
   DecisionSpectrumTemplateContent,
@@ -31,6 +10,8 @@ import type {
   StructuredActionTemplateContent,
   TitleTemplateContent,
 } from "@/components/presentation/presentationTypes";
+import type { JsonValue, PresentationSpec } from "@/components/presentation/presentationTypes";
+import { pdmaDecorativeRecipes } from "./pdmaDecorativeRecipes";
 import type {
   AgentsRevealContent,
   AmbiguityGateContent,
@@ -44,8 +25,8 @@ import type {
  * PDMA 2026 production deck — the single source of presentation copy for /pdma2026.
  * Ten slides use approved template compositions; six keep their approved production
  * composition. Copy is verbatim from the pre-cutover production deck (ROLLBACK_SHA
- * 3e343570ab1957513fdf8883e2efcdaa56226a5d). The /pdma2026-templates gallery consumes the
- * template-mapped objects below as its exemplar content.
+ * 3e343570ab1957513fdf8883e2efcdaa56226a5d). The /pdma2026-templates gallery maintains
+ * independent fixture content so it cannot become coupled to production copy or behavior.
  */
 
 const standardTitle = { size: 82, leading: 88, tracking: -2.4 } as const;
@@ -62,7 +43,6 @@ export const slide01: TitleTemplateContent = {
   kind: "title",
   decorativeVariant: "title-hero",
   chrome: {
-    sourceSlide: 1,
     tocTitle: "THE NEW PM OPERATING SYSTEM",
     headerLabels: ["JUDGMENT", "AUTHORITY", "ACCOUNTABILITY"],
     footerLabel: "HUMAN JUDGMENT COMPOUNDS",
@@ -75,7 +55,6 @@ export const slide01: TitleTemplateContent = {
 export const slide02: ShiftBoundaryContent = {
   kind: "shift-boundary",
   chrome: {
-    sourceSlide: 2,
     tocTitle: "WHAT SHIFTS. WHAT STAYS.",
     headerLabels: ["OWNERSHIP", "JUDGMENT", "AUTOMATION"],
     footerLabel: "DELEGATED WORK • HUMAN JUDGMENT",
@@ -96,7 +75,6 @@ export const slide03: CompareContrastTemplateContent = {
   kind: "compare-contrast",
   decorativeVariant: "compare-edge-planets",
   chrome: {
-    sourceSlide: 3,
     tocTitle: "COPILOTS GENERATE OUTPUTS. AGENTS TAKE ACTION.",
     headerLabels: ["OUTPUTS", "AUTHORITY", "ACTION"],
     footerLabel: "AUTHORITY IS A PRODUCT DECISION",
@@ -128,7 +106,6 @@ export const slide03: CompareContrastTemplateContent = {
 export const slide04: WorkMapContent = {
   kind: "work-map",
   chrome: {
-    sourceSlide: 4,
     tocTitle: "DON'T AUTOMATE EVERYTHING.",
     headerLabels: ["AUTOMATE", "AUGMENT", "HUMAN-OWNED"],
     footerLabel: "BUILD THE RIGHT OPERATING MODEL",
@@ -146,7 +123,6 @@ export const slide04: WorkMapContent = {
 export const slide05: AmbiguityGateContent = {
   kind: "ambiguity-gate",
   chrome: {
-    sourceSlide: 5,
     tocTitle: "DON'T AUTOMATE AMBIGUITY.",
     headerLabels: ["PROBLEM", "OWNER", "AUTHORITY"],
     footerLabel: "CONFUSION AT MACHINE SPEED",
@@ -162,7 +138,6 @@ export const slide06: HubEcosystemTemplateContent = {
   kind: "hub-ecosystem",
   decorativeVariant: "hub-corner-orbs",
   chrome: {
-    sourceSlide: 6,
     tocTitle: "UNDERSTAND THE ENVIRONMENT. NAME THE OWNERS.",
     headerLabels: ["SYSTEMS", "DATA", "OWNERSHIP"],
     footerLabel: "AUTOMATION DOES NOT ERASE OWNERSHIP",
@@ -171,19 +146,19 @@ export const slide06: HubEcosystemTemplateContent = {
   inventory: {
     heading: "DO THE INVENTORY",
     cards: [
-      { title: "SYSTEMS", body: "Applications, infrastructure, tools\nand integrations.", icon: Layers3 },
-      { title: "DATA", body: "Sources, types, sensitivity\nand quality.", icon: Database },
-      { title: "PEOPLE", body: "Teams, roles, skills\nand working models.", icon: UsersRound },
-      { title: "DEPENDENCIES", body: "Upstream, downstream\nand external partners.", icon: Link },
+      { title: "SYSTEMS", body: "Applications, infrastructure, tools\nand integrations.", iconId: "layers-3" },
+      { title: "DATA", body: "Sources, types, sensitivity\nand quality.", iconId: "database" },
+      { title: "PEOPLE", body: "Teams, roles, skills\nand working models.", iconId: "users-round" },
+      { title: "DEPENDENCIES", body: "Upstream, downstream\nand external partners.", iconId: "link" },
     ],
   },
   core: { heading: "AUTOMATION", label: "AI / AUTOMATION", emphasis: "AI" },
   owners: {
     heading: "NAME THE OWNERS",
     cards: [
-      { title: "SYSTEM OWNER", body: "Accountable for reliability,\nsecurity and lifecycle.", icon: UserRound },
-      { title: "DECISION OWNER", body: "Accountable for policies,\ntrade-offs and approvals.", icon: FileText },
-      { title: "OUTCOME OWNER", body: "Accountable for value,\nresults and continuous improvement.", icon: BarChart3 },
+      { title: "SYSTEM OWNER", body: "Accountable for reliability,\nsecurity and lifecycle.", iconId: "user-round" },
+      { title: "DECISION OWNER", body: "Accountable for policies,\ntrade-offs and approvals.", iconId: "file-text" },
+      { title: "OUTCOME OWNER", body: "Accountable for value,\nresults and continuous improvement.", iconId: "bar-chart-3" },
     ],
   },
   caption: ["MORE AWARENESS", "BETTER AUTONOMY"],
@@ -194,7 +169,6 @@ export const slide07: ScorecardTemplateContent = {
   kind: "scorecard",
   decorativeVariant: "none",
   chrome: {
-    sourceSlide: 7,
     tocTitle: "BEFORE YOU BUILD IT, PROVE THE VALUE.",
     headerLabels: ["REVENUE", "COST", "OPERATIONS"],
     footerLabel: "PICK ONE PRIMARY VALUE DRIVER",
@@ -219,18 +193,17 @@ export const slide08: DecisionSpectrumTemplateContent = {
   kind: "decision-spectrum",
   decorativeVariant: "spectrum-horizon",
   chrome: {
-    sourceSlide: 8,
     tocTitle: "HOW MUCH AUTHORITY SHOULD THE ROBOTS HAVE?",
     headerLabels: ["OBSERVE", "DECIDE", "EXECUTE"],
     footerLabel: "AUTHORITY IS A PRODUCT DECISION",
     title: { ...standardTitle, white: "HOW MUCH AUTHORITY", magenta: "SHOULD THE ROBOTS HAVE?", subtitle: lines("The farther AI moves from observing to acting, the more deliberately", "the Product Manager has to design the boundary."), subtitleSize: 26 },
   },
   stages: [
-    { number: "01", title: "OBSERVE", body: "AI sees the state\nof the product\nor process.", active: false, lift: 0, icon: Eye },
-    { number: "02", title: "RECOMMEND", body: "AI proposes what\nshould happen.", active: false, lift: 105, icon: FileText },
-    { number: "03", title: "PREPARE", body: "AI stages the action\nfor human review.", active: false, lift: 145, icon: Settings },
-    { number: "04", title: "DECIDE", body: "AI chooses the action\nwithin defined rules.", active: true, lift: 105, icon: GitBranch },
-    { number: "05", title: "EXECUTE", body: "AI acts within\ndefined limits.", active: true, lift: 0, icon: Zap },
+    { number: "01", title: "OBSERVE", body: "AI sees the state\nof the product\nor process.", active: false, lift: 0, iconId: "eye" },
+    { number: "02", title: "RECOMMEND", body: "AI proposes what\nshould happen.", active: false, lift: 105, iconId: "file-text" },
+    { number: "03", title: "PREPARE", body: "AI stages the action\nfor human review.", active: false, lift: 145, iconId: "settings" },
+    { number: "04", title: "DECIDE", body: "AI chooses the action\nwithin defined rules.", active: true, lift: 105, iconId: "git-branch" },
+    { number: "05", title: "EXECUTE", body: "AI acts within\ndefined limits.", active: true, lift: 0, iconId: "zap" },
   ],
   progression: ["MORE AUTONOMY", "MORE CONSEQUENCE", "MORE PRODUCT DESIGN"],
   takeaway: "THE FARTHER RIGHT YOU GO, THE MORE PRODUCT DESIGN HAS TO ACCOUNT FOR THE CONSEQUENCES.",
@@ -241,7 +214,6 @@ export const slide09: FlowScenarioTemplateContent = {
   kind: "flow-scenario",
   decorativeVariant: "flow-dual-orbs",
   chrome: {
-    sourceSlide: 9,
     tocTitle: "LIVE SCENARIO: RETENTION AGENT.",
     headerLabels: ["VALUE", "SIGNAL", "ACTION"],
     footerLabel: "PRODUCTION-READY ENTERPRISE PRODUCT",
@@ -253,19 +225,19 @@ export const slide09: FlowScenarioTemplateContent = {
     valueLabel: "PRIMARY VALUE DRIVER",
     primaryValue: "INCREASE REVENUE",
     supportingValue: "+ STREAMLINE OPERATIONS",
-    icon: FileText,
+    iconId: "file-text",
   },
   signals: [
-    { title: "CRM", body: "Customer data", icon: UsersRound },
-    { title: "PRODUCT USAGE", body: "Behavioral data", icon: BarChart3 },
-    { title: "SUPPORT", body: "Support tickets", icon: Headset },
-    { title: "ACCOUNT HEALTH", body: "Billing & health data", icon: Database },
+    { title: "CRM", body: "Customer data", iconId: "users-round" },
+    { title: "PRODUCT USAGE", body: "Behavioral data", iconId: "bar-chart-3" },
+    { title: "SUPPORT", body: "Support tickets", iconId: "headset" },
+    { title: "ACCOUNT HEALTH", body: "Billing & health data", iconId: "database" },
   ],
   stages: [
-    { title: "IDENTIFY", body: "Detect meaningful churn-risk patterns across enterprise customer data.", icon: ChartColumn },
-    { title: "RECOMMEND", body: "Recommend an approved intervention to the responsible team.", icon: Lightbulb },
+    { title: "IDENTIFY", body: "Detect meaningful churn-risk patterns across enterprise customer data.", iconId: "chart-column" },
+    { title: "RECOMMEND", body: "Recommend an approved intervention to the responsible team.", iconId: "lightbulb" },
   ],
-  question: { label: "PRODUCT QUESTION", body: "How much authority should this agent have?", followUp: "How do we turn this business case into a production-ready enterprise product?", icon: CircleHelp },
+  question: { label: "PRODUCT QUESTION", body: "How much authority should this agent have?", followUp: "How do we turn this business case into a production-ready enterprise product?", iconId: "circle-help" },
   takeaway: "HOW DO WE TURN THIS BUSINESS CASE INTO A PRODUCTION-READY ENTERPRISE PRODUCT?",
 };
 
@@ -274,23 +246,22 @@ export const slide10: StructuredActionTemplateContent = {
   kind: "structured-content-action",
   decorativeVariant: "structured-dual-orbs",
   chrome: {
-    sourceSlide: 10,
     tocTitle: "DESIGN PRODUCTION READINESS INTO THE FEATURE.",
     headerLabels: ["BACKLOG", "CONTROLS", "OUTCOMES"],
     footerLabel: "PRODUCTION READINESS STARTS IN THE BACKLOG",
   title: { ...standardTitle, white: "DESIGN PRODUCTION READINESS", magenta: "INTO THE FEATURE.", subtitle: "Guardrails, human intervention, and success measures belong in the product requirements before development begins.", subtitleSize: 24 },
   },
   requirements: [
-    { number: "01", title: "GUARDRAILS", body: "What must the product\nprevent or constrain?", emphasis: false, icon: Shield },
-    { number: "02", title: "HUMAN INTERVENTION", body: "When must a person review,\napprove, or take over?", emphasis: true, icon: UserRound },
-    { number: "03", title: "SUCCESS METRICS", body: "What proves the feature\ncreates the intended\noutcome?", emphasis: false, icon: BarChart3 },
+    { number: "01", title: "GUARDRAILS", body: "What must the product\nprevent or constrain?", emphasis: false, iconId: "shield" },
+    { number: "02", title: "HUMAN INTERVENTION", body: "When must a person review,\napprove, or take over?", emphasis: true, iconId: "user-round" },
+    { number: "03", title: "SUCCESS METRICS", body: "What proves the feature\ncreates the intended\noutcome?", emphasis: false, iconId: "bar-chart-3" },
   ],
   sectionLabel: "OPERATIONALIZE IT AS PRODUCT WORK",
   steps: [
-    { number: "01", title: "BACKLOG", body: "Capture the requirements.", emphasis: false, icon: ClipboardList },
-    { number: "02", title: "PRD", body: "Define behavior and\nboundaries.", emphasis: false, icon: FileText },
-    { number: "03", title: "ACCEPTANCE CRITERIA", body: "Make them testable.", emphasis: false, icon: Check },
-    { number: "04", title: "PRODUCTION", body: "Prove they work.", emphasis: true, icon: Box },
+    { number: "01", title: "BACKLOG", body: "Capture the requirements.", emphasis: false, iconId: "clipboard-list" },
+    { number: "02", title: "PRD", body: "Define behavior and\nboundaries.", emphasis: false, iconId: "file-text" },
+    { number: "03", title: "ACCEPTANCE CRITERIA", body: "Make them testable.", emphasis: false, iconId: "check" },
+    { number: "04", title: "PRODUCTION", body: "Prove they work.", emphasis: true, iconId: "box" },
   ],
   takeaway: "IF IT MATTERS IN PRODUCTION, IT BELONGS IN THE PRODUCT DEFINITION.",
   supportingTakeaway: "REAL FEATURES.\nREAL OUTCOMES.",
@@ -300,7 +271,6 @@ export const slide10: StructuredActionTemplateContent = {
 export const slide11: AgentsRevealContent = {
   kind: "agents-reveal",
   chrome: {
-    sourceSlide: 11,
     tocTitle: "A.G.E.N.T.S.",
     headerLabels: ["STANDARD", "PRODUCT", "GOVERN"],
     footerLabel: "6 QUESTIONS • 1 PRODUCTIZATION STANDARD",
@@ -320,7 +290,6 @@ export const slide11: AgentsRevealContent = {
 export const slide12: FrameworkToProductContent = {
   kind: "framework-to-product",
   chrome: {
-    sourceSlide: 12,
     tocTitle: "TURN THE FRAMEWORK INTO PRODUCT.",
     headerLabels: ["FRAMEWORK", "REQUIREMENTS", "PRODUCT"],
     footerLabel: "FRAMEWORK → REQUIREMENTS → BUILDABLE PRODUCT",
@@ -347,7 +316,6 @@ export const slide12: FrameworkToProductContent = {
 export const slide13: IdeaToSpecContent = {
   kind: "idea-to-spec",
   chrome: {
-    sourceSlide: 13,
     tocTitle: "AN IDEA + AI ≠ PRODUCT SPEC.",
     headerLabels: ["IDEA", "REQUIREMENTS", "PRODUCT"],
     footerLabel: "LESS REWORK • FASTER DELIVERY • HIGHER CONFIDENCE",
@@ -378,7 +346,6 @@ export const slide14: ExerciseTemplateContent = {
   kind: "exercise",
   decorativeVariant: "none",
   chrome: {
-    sourceSlide: 14,
     tocTitle: "NOW YOU DO IT.",
     headerLabels: ["APPLY", "DECIDE", "BUILD"],
     footerLabel: "USEFUL PM ARTIFACT • NOT JUST A QUIZ RESULT",
@@ -411,7 +378,6 @@ export const slide15: EmbeddedAppTemplateContent = {
   kind: "embedded-app",
   decorativeVariant: "embedded-dual-orbs",
   chrome: {
-    sourceSlide: null,
     tocTitle: "EMBEDDED APPS. REAL WORK.",
     headerLabels: ["APPLY", "DECIDE", "BUILD"],
     footerLabel: "USEFUL PM ARTIFACT • NOT JUST A QUIZ RESULT",
@@ -425,7 +391,6 @@ export const slide16: EndCardTemplateContent = {
   kind: "end-card",
   decorativeVariant: "end-card-orb",
   chrome: {
-    sourceSlide: 15,
     tocTitle: "TURN AI CAPABILITY INTO PRODUCT VALUE.",
     headerLabels: ["VALUE", "AUTHORITY", "ACCOUNTABILITY"],
     footerLabel: "NEVER AUTOMATE AWAY ACCOUNTABILITY",
@@ -453,3 +418,47 @@ export const pdma2026Slides = [
 ] as const;
 
 export type Pdma2026SlideContent = (typeof pdma2026Slides)[number];
+
+const fileReferences = (value: unknown): string[] => {
+  if (typeof value === "string") return /^\/.*\.(?:svg|png|jpe?g|webp)$/i.test(value) ? [value] : [];
+  if (Array.isArray(value)) return value.flatMap(fileReferences);
+  if (value && typeof value === "object") return Object.values(value).flatMap(fileReferences);
+  return [];
+};
+
+const payloadOf = (content: Pdma2026SlideContent): JsonValue => {
+  const payload = { ...content } as Record<string, unknown>;
+  delete payload.kind; delete payload.chrome; delete payload.decorativeVariant;
+  return payload as JsonValue;
+};
+
+/** First declarative consumer spec; component resolution stays in executable registries. */
+export const pdma2026Spec: PresentationSpec = {
+  schemaVersion: 1,
+  id: "pdma2026",
+  chromeId: "pbds-presentation",
+  metadata: { title: "PDMA 2026", brandLabel: "PDMA 2026" },
+  navigationCopyId: "pdma2026-navigation",
+  slides: pdma2026Slides.map((content, index) => {
+    const { chrome } = content;
+    const templateKinds = ["title", "end-card", "exercise", "embedded-app", "compare-contrast", "flow-scenario", "decision-spectrum", "hub-ecosystem", "scorecard", "structured-content-action"];
+    const isTemplate = templateKinds.includes(content.kind);
+    const routeLinks = content.kind === "exercise" || content.kind === "embedded-app"
+      ? [{ label: "Open the PDMA productization exercise", href: PDMA_EXERCISE_ROUTE }]
+      : content.kind === "end-card" ? [{ label: "Download the A.G.E.N.T.S. productization kit", href: PDMA_KIT_URL }] : undefined;
+    return {
+      id: `slide-${String(index + 1).padStart(2, "0")}`,
+      tocTitle: chrome.tocTitle,
+      headerLabels: chrome.headerLabels,
+      footerLabel: chrome.footerLabel,
+      title: chrome.title,
+      composition: isTemplate
+        ? { type: "template" as const, templateId: content.kind as import("@/components/presentation/presentationTypes").PresentationTemplateKind, content: payloadOf(content) }
+        : { type: "deck-local" as const, compositionId: content.kind, content: payloadOf(content) },
+      ...("decorativeVariant" in content && content.decorativeVariant ? { decoration: { recipeId: content.decorativeVariant } } : {}),
+      assetIds: [...new Set([...fileReferences(content), ...("decorativeVariant" in content ? (pdmaDecorativeRecipes[content.decorativeVariant] ?? []).flatMap(fileReferences) : [])])],
+      ...(routeLinks ? { routeLinks } : {}),
+      ...(content.kind === "embedded-app" ? { slots: { app: "pdma-scenario-exercise" } } : {}),
+    };
+  }),
+};

@@ -6,12 +6,12 @@ import { PdmaPresentationShell, PdmaSlideCanvas } from "@/app/pdma2026/PdmaPrese
 import { PdmaScenarioExercise } from "@/app/pdma2026/exercise/PdmaScenarioExercise";
 import type { PdmaSlideKey } from "@/app/pdma2026/presentation/presentationTypes";
 import { pdma2026Content } from "@/content/pdma2026";
-import { DecorativeLayer, isDecorOrb } from "../pdma2026-templates/components/DecorativeLayer";
+import { DecorativeLayer, isDecorOrb } from "@/components/presentation/templates/DecorativeLayer";
 import { EmbeddedAppFrame } from "@/components/presentation/TemplatePrimitives";
-import { shellTitleBottom } from "../pdma2026-templates/components/TemplateSlide";
-import { FlowScenarioTemplate } from "../pdma2026-templates/components/templates/FlowScenarioTemplate";
-import { StructuredActionTemplate } from "../pdma2026-templates/components/templates/StructuredActionTemplate";
-import { HubEcosystemTemplate } from "../pdma2026-templates/components/templates/HubEcosystemTemplate";
+import { shellTitleBottom } from "@/components/presentation/templates/TemplateSlide";
+import { FlowScenarioTemplate } from "@/components/presentation/templates/FlowScenarioTemplate";
+import { StructuredActionTemplate } from "@/components/presentation/templates/StructuredActionTemplate";
+import { HubEcosystemTemplate } from "@/components/presentation/templates/HubEcosystemTemplate";
 import { templateContent } from "../pdma2026-templates/templateManifest";
 import { templateManifest, type TemplateManifestEntry } from "../pdma2026-templates/templateManifest";
 
@@ -55,7 +55,7 @@ const EmbeddedStaticPlanets: ComponentType = () => embedded.kind === "embedded-a
       data-template-kind="embedded-app"
       style={{ "--pdmat-title-bottom": `${shellTitleBottom(embedded.chrome.title)}px` } as CSSProperties}
     >
-      <DecorativeLayer variant="embedded-dual-orbs" items={staticEmbeddedPlanets} />
+      <DecorativeLayer recipeId="embedded-dual-orbs" items={staticEmbeddedPlanets} />
       <div className="pdmat-stage">
         <section className="pdmat-template pdmat-embedded">
           <EmbeddedAppFrame label={embedded.frameLabel}><PdmaScenarioExercise /></EmbeddedAppFrame>

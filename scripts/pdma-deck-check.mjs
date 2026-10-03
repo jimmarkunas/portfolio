@@ -43,6 +43,13 @@ blocks.forEach((block, index) => {
 })
 const order = (content.match(/export const pdma2026Slides = \[([^\]]*)\]/)?.[1] ?? "").split(",").map((name) => name.trim()).filter(Boolean)
 if (JSON.stringify(order) !== JSON.stringify(Array.from({ length: 16 }, (_, i) => `slide${String(i + 1).padStart(2, "0")}`))) fail(`pdma2026Slides order drifted: ${order.join(", ")}`)
+if (!/export const pdma2026Spec:\s*PresentationSpec\s*=\s*\{/.test(content)) fail("pdma2026Content.ts: missing serializable pdma2026Spec")
+for (const required of ['schemaVersion: 1', 'id: "pdma2026"', 'chromeId:', 'navigationCopyId:', 'slides: pdma2026Slides.map']) if (!content.includes(required)) fail(`pdma2026Spec: missing ${required}`)
+if (/from\s+["'](?:react|lucide-react)["']/.test(content) || /\b(?:ComponentType|ReactNode|LucideIcon)\b/.test(content)) fail("pdma2026Content.ts: machine data must not contain executable React/icon values")
+const registry = read(`${PRESENTATION}/pdma2026Registry.tsx`)
+const localCompositionIds = [...registry.matchAll(/^\s*"([a-z-]+)":\s*\(content/mg)].map(([, id]) => id)
+if (JSON.stringify(localCompositionIds) !== JSON.stringify(["shift-boundary", "work-map", "ambiguity-gate", "agents-reveal", "framework-to-product", "idea-to-spec"])) fail(`pdma2026Registry.tsx: expected exactly six local compositions, found ${localCompositionIds.join(", ")}`)
+if (!read(`${PRESENTATION}/pdma2026Slots.tsx`).includes('"pdma-scenario-exercise"')) fail("pdma2026Slots.tsx: missing registered embedded exercise slot")
 
 // 2. Canonical copy + chrome parity per slide.
 let checked = 0

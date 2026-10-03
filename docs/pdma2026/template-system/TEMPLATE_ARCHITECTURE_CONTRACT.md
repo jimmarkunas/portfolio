@@ -35,13 +35,13 @@ The mapped live PDMA slide/config is the copy authority. **No approved concept i
 - Approved references own composition and visual relationships.
 - Approved assets must not be regenerated or reinterpreted during implementation.
 
-## 4. Existing shell reuse
+## 4. Shared presentation ownership
 
-Keep `PdmaPresentationShell`, `PdmaTitleBlock`, navigation, header, and footer as the PDMA route's visual chrome. Shared presentation canvas sizing, overlay context, and decorative portal primitives live under `src/components/presentation/`; the PDMA shell supplies its title overlay and continues to own its deck-specific chrome.
+Reusable presentation templates, their registry, serializable schema, shared runtime mechanics, PBDS chrome, and decoration renderer are shared infrastructure under `src/components/presentation/`. PDMA 2026 is the first consumer of that infrastructure. Shared presentation code must never import from `src/app/pdma2026/**` or `src/content/pdma2026/**`.
 
-The `/pdma2026-templates` route may consume the PDMA shell as its route adapter. Shared template components and presentation types must not import from `/src/app/pdma2026/**`. **No file under `/src/app/pdma2026-templates/**` may import `pdmaGeometry.ts`.** The shared canvas keeps the existing 1920×1080 contain behavior and decorative overflow geometry.
+PDMA may retain its six deck-local bespoke compositions, artwork recipes, navigation copy, and interactive slot implementations under its app-owned registry. The gallery owns immutable declarative fixtures copied from the accepted examples; it does not import production PDMA slide content or the live PDMA exercise. The lab remains an experimental consumer and is not an authority for production templates.
 
-The shared canvas keeps its current scale, centering, and top-bias equation unchanged. This preserves the approved shell chrome while keeping template bodies and canvas infrastructure reusable and geometry-free.
+The shared runtime and chrome preserve the accepted DOM, classes, controls, title rendering, transitions, 1920×1080 contain behavior, and decorative overflow geometry. Deck metadata supplies the event/brand label and deck identity. The canvas scale, centering, and top-bias equation remain unchanged. The existing nested-canvas behavior is intentionally retained during this ownership extraction.
 
 ## 5. Required source tree
 
@@ -49,27 +49,29 @@ The shared canvas keeps its current scale, centering, and top-bias equation unch
 src/app/pdma2026-templates/
   page.tsx
   TemplatePresentation.tsx
-  templateManifest.tsx
-  styles/
-    templates.css
-  components/
-    TemplateSlide.tsx
-    DecorativeLayer.tsx
-    templates/
-      TitleTemplate.tsx
-      EndCardTemplate.tsx
-      ExerciseTemplate.tsx
-      EmbeddedAppTemplate.tsx
-      CompareContrastTemplate.tsx
-      FlowScenarioTemplate.tsx
-      DecisionSpectrumTemplate.tsx
-      HubEcosystemTemplate.tsx
-      ScorecardTemplate.tsx
-      StructuredActionTemplate.tsx
+  templateGalleryFixtures.ts
+  galleryDecorationRecipes.ts
 
 src/components/presentation/
   presentationTypes.ts
+  presentationSpec.ts
+  presentationTemplateRegistry.tsx
+  PresentationRuntime.tsx
+  PresentationChrome.tsx
+  presentationIcons.tsx
+  templates/
+    TemplateSlide.tsx
+    DecorativeLayer.tsx
+    templateDecorationRecipes.ts
+    templates.css
+    [the ten shared template renderers]
   TemplatePrimitives.tsx
+
+src/app/pdma2026/presentation/
+  pdma2026Content.ts             # serializable PDMA spec and payload data
+  pdma2026Registry.tsx           # six deck-local composition renderers
+  pdma2026Slots.tsx              # registered PDMA interactive slots
+  pdmaDecorativeRecipes.ts       # PDMA-only artwork recipes
 
 public/pdma2026-templates/assets/
   end-card/
@@ -81,15 +83,15 @@ public/pdma2026-templates/assets/
 
 No second geometry file. No per-slide coordinate registry. No alternate shell.
 
-## 6. Content model
+## 6. Machine-write content model
 
-`templateManifest.tsx` owns the gallery order and maps the ten production slide content objects into template entries. Production copy remains in `src/app/pdma2026/presentation/pdma2026Content.ts`; shared template types live in `src/components/presentation/presentationTypes.ts`.
+`PresentationSpec` and `PresentationSlideSpec` are JSON-compatible data. Specs contain IDs, content, chrome semantics, recipe IDs, asset IDs, route links, and slot IDs. They contain no JSX, React nodes, component constructors, functions, or Lucide component values. Runtime validation reports deck/slide context for invalid or unknown references.
 
-Every template component receives content through props. Template components must not hard-code presentation copy except structural labels that are part of the component itself.
+The shared executable template registry maps the ten stable template IDs to their renderers. Each consuming deck owns its optional custom composition registry and interactive slot registry. A new deck ordinarily adds only a declarative spec, content, registered assets, and optional deck-local renderers/slots; it does not modify shared runtime, chrome, canvas, shared renderers, or the shared template registry.
 
-The Embedded App body accepts a `ReactNode`/component slot for the live app so the app can change without changing slide architecture.
+The gallery fixtures are intentionally immutable examples copied from accepted PDMA exemplars. They are not a second production copy authority. The embedded gallery example is a gallery-owned, harmless interactive slot fixture; it does not import production PDMA slide content or the live PDMA exercise.
 
-The End Card download module owns one URL value; QR and round CTA both consume that same URL.
+Every template component receives content through props. Template components must not hard-code presentation copy except structural labels that are part of the component itself. The End Card download module owns one URL value; QR and round CTA both consume that same value.
 
 ## 7. Layout rules
 
@@ -151,7 +153,7 @@ Approved use patterns:
 - dual edge framing
 - horizon/crescent crop where the approved reference calls for it
 
-Decoration is selected with a typed `decorativeVariant` prop/config. The template body structure does not change when the decorative variant changes.
+Decoration is selected by a registered `recipeId` in the consuming deck's spec. The shared `DecorativeLayer` owns how items render; shared template, PDMA, gallery, and lab recipe owners decide which artwork and placement to supply. The template body structure does not change when the recipe changes.
 
 Initial implementation uses only canonized approved variants/assets. Additional variants may be added later without changing template component structure.
 
@@ -175,7 +177,7 @@ Title/subtitle + dominant contained `EmbeddedAppFrame`. The frame hosts the real
 ## 12. Styling rules
 
 - Reuse PBDS tokens: magenta `#FF2FAE`, ink/black, approved neutrals, Inter typography.
-- Exact title/subtitle styling comes from existing `PdmaTitleBlock` configuration.
+- Exact title/subtitle styling comes from the shared title renderer and compatibility fields in `PresentationTitleConfig`.
 - New template CSS is namespaced under `pdmat-*` classes.
 - Every editable region has a semantic parent class and contained child classes.
 - Avoid inline layout styles except data-driven CSS custom properties where truly necessary.
@@ -224,3 +226,12 @@ Architecture is satisfied only when:
 - `/pdma2026-templates` remains the template gallery.
 - Pre-cutover rollback checkpoint: `3e343570ab1957513fdf8883e2efcdaa56226a5d`. The cutover commit is recorded in git history; roll back with `git revert`.
 - The build-phase restrictions in the header, §4 and §14 (legacy `/pdma2026` read-only) applied to template construction only and are superseded.
+
+## 17. Presentation machine-contract extraction (2026-10-02)
+
+- The ten reusable template implementations and their CSS are owned by `src/components/presentation/templates/`. There is one implementation and one shared executable template registry.
+- Shared schema/runtime/chrome/template code has no dependency on PDMA app or content files. `PresentationDeck` and its existing USAII, LLM Day, DSH Hacks, and Secure Carolinas consumers remain outside this runtime migration.
+- `pdma2026Content.ts` exports the serializable 16-slide PDMA spec. Six bespoke renderers, PDMA-only recipes, and the `pdma-scenario-exercise` slot remain in PDMA-owned registries.
+- `/pdma2026-templates` renders ten frozen fixture slides from gallery-owned data and recipes. `/pdma2026-templates-lab` remains experimental and non-authoritative.
+- New presentations must use declarative specs with stable template/composition/decoration/asset/slot IDs. Executable render selection belongs to registries. Interactive components are referenced only through slot IDs.
+- Public asset paths, accepted visuals, CSS class names, runtime behavior, canvas equations, and the existing nested-canvas behavior remain locked during extraction.

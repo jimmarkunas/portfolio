@@ -3,18 +3,19 @@
 import { Fragment, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-import "../pdma2026-templates/styles/templates.css";
+import "@/components/presentation/templates/templates.css";
 import "../pdma2026/presentation/presentation.css";
 
 import { pdma2026Content } from "@/content/pdma2026";
 import { PdmaPresentationShell } from "@/app/pdma2026/PdmaPresentationShell";
-import { pdma2026Manifest } from "@/app/pdma2026/presentation/pdma2026Manifest";
+import { pdma2026Spec } from "@/app/pdma2026/presentation/pdma2026Content";
+import { renderPdma2026Slide } from "@/app/pdma2026/presentation/pdma2026Registry";
 import { PBDSKineticSphere } from "./PBDSKineticSphereLab";
 
 type LabMode = "reference" | "direct-port";
 
-const slide12 = pdma2026Manifest[11];
-const Slide12Component = slide12.component;
+const slide12 = pdma2026Spec.slides[11];
+const orbLabSpec = { ...pdma2026Spec, id: "pdma2026-orb-lab", slides: [slide12] };
 
 function DirectPortOrbs({ mode }: { mode: LabMode }) {
   const [host, setHost] = useState<HTMLElement | null>(null);
@@ -80,13 +81,8 @@ export default function PdmaOrbLabPage() {
   return (
     <div className={`pdma2026-page pdma2026-orb-lab ${mode === "direct-port" ? "is-direct-port" : "is-reference"}`}>
       <PdmaPresentationShell
-        slides={[
-          <Fragment key="slide-12-orb-lab">
-            <Slide12Component />
-            <DirectPortOrbs mode={mode} />
-          </Fragment>,
-        ]}
-        slideManifest={[slide12]}
+        spec={orbLabSpec}
+        renderSpecSlide={(slide) => <Fragment>{renderPdma2026Slide(slide)}<DirectPortOrbs mode={mode} /></Fragment>}
         navigation={pdma2026Content.navigation}
       />
 

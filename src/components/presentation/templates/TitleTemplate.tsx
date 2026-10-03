@@ -1,5 +1,5 @@
 import type { TitleTemplateContent } from "@/components/presentation/presentationTypes";
-import { TemplateSlide } from "../TemplateSlide";
+import { TemplateSlide } from "./TemplateSlide";
 
 export function TitleTemplate({ content }: { content: TitleTemplateContent }) {
   const { speaker } = content;

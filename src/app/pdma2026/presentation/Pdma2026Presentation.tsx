@@ -1,12 +1,12 @@
 "use client";
 
-import { pdma2026Content } from "@/content/pdma2026";
+import { pdma2026Spec } from "./pdma2026Content";
 import { PdmaPresentationShell } from "../PdmaPresentationShell";
-import { assertPdma2026ManifestParity, pdma2026Manifest } from "./pdma2026Manifest";
+import { assertPdma2026Spec, renderPdma2026Slide } from "./pdma2026Registry";
+import { pdma2026Content } from "@/content/pdma2026";
 
-/** The production PDMA 2026 deck, rendered through the shared presentation shell. */
+/** PDMA is the first deck rendered from a serializable presentation specification. */
 export default function Pdma2026Presentation() {
-  const slides = pdma2026Manifest.map(({ component: Component, key }) => <Component key={key} />);
-  assertPdma2026ManifestParity(pdma2026Manifest, slides);
-  return <PdmaPresentationShell slides={slides} slideManifest={[...pdma2026Manifest]} navigation={pdma2026Content.navigation} />;
+  assertPdma2026Spec();
+  return <PdmaPresentationShell spec={pdma2026Spec} renderSpecSlide={renderPdma2026Slide} navigation={pdma2026Content.navigation} />;
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import "../pdma2026/styles/base.css";
-import "./styles/templates.css";
+import "@/components/presentation/templates/templates.css";
 import TemplatePresentation from "./TemplatePresentation";
 
 export const metadata: Metadata = {

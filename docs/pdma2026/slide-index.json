@@ -5,11 +5,14 @@
     "height": 1080
   },
   "rendering": {
-    "canvas": "PdmaSlideCanvas (1920×1080, uniform contain scaling)",
-    "slide": "TemplateSlide",
-    "decoration": "DecorativeLayer",
+    "canvas": "PresentationCanvas (1920×1080, uniform contain scaling)",
+    "runtime": "src/components/presentation/PresentationRuntime.tsx",
+    "chrome": "src/components/presentation/PresentationChrome.tsx",
+    "slide": "src/components/presentation/templates/TemplateSlide.tsx",
+    "decoration": "src/components/presentation/templates/DecorativeLayer.tsx",
     "content": "src/app/pdma2026/presentation/pdma2026Content.ts",
-    "manifest": "src/app/pdma2026/presentation/pdma2026Manifest.tsx"
+    "spec": "pdma2026Spec",
+    "deckRegistry": "src/app/pdma2026/presentation/pdma2026Registry.tsx"
   },
   "slides": [
     {
@@ -17,10 +20,10 @@
       "key": "slide-01",
       "title": "THE NEW PM OPERATING SYSTEM",
       "composition": "title",
-      "component": "src/app/pdma2026-templates/components/templates/TitleTemplate.tsx",
-      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "component": "src/components/presentation/templates/TitleTemplate.tsx",
+      "stylesheet": "src/components/presentation/templates/templates.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide01)",
-      "family": "approved template"
+      "family": "shared template"
     },
     {
       "number": 2,
@@ -30,17 +33,17 @@
       "component": "src/app/pdma2026/presentation/slides/ShiftBoundarySlide.tsx",
       "stylesheet": "src/app/pdma2026/presentation/presentation.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide02)",
-      "family": "preserved production composition"
+      "family": "PDMA deck-local composition"
     },
     {
       "number": 3,
       "key": "slide-03",
       "title": "COPILOTS GENERATE OUTPUTS. AGENTS TAKE ACTION.",
       "composition": "compare-contrast",
-      "component": "src/app/pdma2026-templates/components/templates/CompareContrastTemplate.tsx",
-      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "component": "src/components/presentation/templates/CompareContrastTemplate.tsx",
+      "stylesheet": "src/components/presentation/templates/templates.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide03)",
-      "family": "approved template"
+      "family": "shared template"
     },
     {
       "number": 4,
@@ -50,7 +53,7 @@
       "component": "src/app/pdma2026/presentation/slides/WorkMapSlide.tsx",
       "stylesheet": "src/app/pdma2026/presentation/presentation.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide04)",
-      "family": "preserved production composition"
+      "family": "PDMA deck-local composition"
     },
     {
       "number": 5,
@@ -60,57 +63,57 @@
       "component": "src/app/pdma2026/presentation/slides/AmbiguityGateSlide.tsx",
       "stylesheet": "src/app/pdma2026/presentation/presentation.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide05)",
-      "family": "preserved production composition"
+      "family": "PDMA deck-local composition"
     },
     {
       "number": 6,
       "key": "slide-06",
       "title": "UNDERSTAND THE ENVIRONMENT. NAME THE OWNERS.",
       "composition": "hub-ecosystem",
-      "component": "src/app/pdma2026-templates/components/templates/HubEcosystemTemplate.tsx",
-      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "component": "src/components/presentation/templates/HubEcosystemTemplate.tsx",
+      "stylesheet": "src/components/presentation/templates/templates.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide06)",
-      "family": "approved template"
+      "family": "shared template"
     },
     {
       "number": 7,
       "key": "slide-07",
       "title": "BEFORE YOU BUILD IT, PROVE THE VALUE.",
       "composition": "scorecard",
-      "component": "src/app/pdma2026-templates/components/templates/ScorecardTemplate.tsx",
-      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "component": "src/components/presentation/templates/ScorecardTemplate.tsx",
+      "stylesheet": "src/components/presentation/templates/templates.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide07)",
-      "family": "approved template"
+      "family": "shared template"
     },
     {
       "number": 8,
       "key": "slide-08",
       "title": "HOW MUCH AUTHORITY SHOULD THE ROBOTS HAVE?",
       "composition": "decision-spectrum",
-      "component": "src/app/pdma2026-templates/components/templates/DecisionSpectrumTemplate.tsx",
-      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "component": "src/components/presentation/templates/DecisionSpectrumTemplate.tsx",
+      "stylesheet": "src/components/presentation/templates/templates.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide08)",
-      "family": "approved template"
+      "family": "shared template"
     },
     {
       "number": 9,
       "key": "slide-09",
       "title": "LIVE SCENARIO: RETENTION AGENT.",
       "composition": "flow-scenario",
-      "component": "src/app/pdma2026-templates/components/templates/FlowScenarioTemplate.tsx",
-      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "component": "src/components/presentation/templates/FlowScenarioTemplate.tsx",
+      "stylesheet": "src/components/presentation/templates/templates.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide09)",
-      "family": "approved template"
+      "family": "shared template"
     },
     {
       "number": 10,
       "key": "slide-10",
       "title": "DESIGN PRODUCTION READINESS INTO THE FEATURE.",
       "composition": "structured-content-action",
-      "component": "src/app/pdma2026-templates/components/templates/StructuredActionTemplate.tsx",
-      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "component": "src/components/presentation/templates/StructuredActionTemplate.tsx",
+      "stylesheet": "src/components/presentation/templates/templates.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide10)",
-      "family": "approved template"
+      "family": "shared template"
     },
     {
       "number": 11,
@@ -120,7 +123,7 @@
       "component": "src/app/pdma2026/presentation/slides/AgentsRevealSlide.tsx",
       "stylesheet": "src/app/pdma2026/presentation/presentation.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide11)",
-      "family": "preserved production composition"
+      "family": "PDMA deck-local composition"
     },
     {
       "number": 12,
@@ -130,7 +133,7 @@
       "component": "src/app/pdma2026/presentation/slides/FrameworkToProductSlide.tsx",
       "stylesheet": "src/app/pdma2026/presentation/presentation.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide12)",
-      "family": "preserved production composition"
+      "family": "PDMA deck-local composition"
     },
     {
       "number": 13,
@@ -140,37 +143,37 @@
       "component": "src/app/pdma2026/presentation/slides/IdeaToSpecSlide.tsx",
       "stylesheet": "src/app/pdma2026/presentation/presentation.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide13)",
-      "family": "preserved production composition"
+      "family": "PDMA deck-local composition"
     },
     {
       "number": 14,
       "key": "slide-14",
       "title": "NOW YOU DO IT.",
       "composition": "exercise",
-      "component": "src/app/pdma2026-templates/components/templates/ExerciseTemplate.tsx",
-      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "component": "src/components/presentation/templates/ExerciseTemplate.tsx",
+      "stylesheet": "src/components/presentation/templates/templates.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide14)",
-      "family": "approved template"
+      "family": "shared template"
     },
     {
       "number": 15,
       "key": "slide-15",
       "title": "EMBEDDED APPS. REAL WORK.",
       "composition": "embedded-app",
-      "component": "src/app/pdma2026-templates/components/templates/EmbeddedAppTemplate.tsx",
-      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "component": "src/components/presentation/templates/EmbeddedAppTemplate.tsx",
+      "stylesheet": "src/components/presentation/templates/templates.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide15)",
-      "family": "approved template"
+      "family": "shared template"
     },
     {
       "number": 16,
       "key": "slide-16",
       "title": "TURN AI CAPABILITY INTO PRODUCT VALUE.",
       "composition": "end-card",
-      "component": "src/app/pdma2026-templates/components/templates/EndCardTemplate.tsx",
-      "stylesheet": "src/app/pdma2026-templates/styles/templates.css",
+      "component": "src/components/presentation/templates/EndCardTemplate.tsx",
+      "stylesheet": "src/components/presentation/templates/templates.css",
       "content": "src/app/pdma2026/presentation/pdma2026Content.ts (export slide16)",
-      "family": "approved template"
+      "family": "shared template"
     }
   ]
 }

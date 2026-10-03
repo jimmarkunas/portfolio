@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
-import type { DecorItem } from "@/app/pdma2026-templates/components/DecorativeLayer";
-import { TemplateSlide } from "@/app/pdma2026-templates/components/TemplateSlide";
+import type { DecorItem } from "@/components/presentation/templates/DecorativeLayer";
+import { TemplateSlide } from "@/components/presentation/templates/TemplateSlide";
 import type { FrameworkToProductContent } from "../presentationTypes";
 
 const ORBS = "/pdma2026-templates/assets/flow-scenario";
