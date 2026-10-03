@@ -9,7 +9,7 @@
  * and one URL shared by the End Card QR + CTA. Approved references and live exemplars are
  * rendered side by side for review.
  *
- * Usage: node scripts/pdma-template-visual-qa.mjs [--out <dir>]   (BASE_URL defaults to http://localhost:3000)
+ * Usage: node scripts/pdma-template-visual-qa.mjs [--slide 1-14] [--out <dir>]   (BASE_URL defaults to http://localhost:3000)
  * Exit: 0 PASS · 1 FAIL · 2 VISUAL_QA: REQUIRES_EXTERNAL_REVIEW (browser or server unavailable)
  */
 import fs from "node:fs"
@@ -21,7 +21,9 @@ import { copyRegistry } from "./pdma-template-copy.mjs"
 
 const baseUrl = process.env.BASE_URL ?? "http://localhost:3000"
 const outIndex = process.argv.indexOf("--out")
-const outDir = outIndex > 0 ? path.resolve(process.argv[outIndex + 1]) : path.join(os.tmpdir(), "pdma-template-qa")
+const slideIndex = process.argv.indexOf("--slide")
+const slideValue = slideIndex > 0 ? process.argv[slideIndex + 1] : null
+const targetSlide = slideValue === null ? null : Number(slideValue)
 const route = "/pdma2026-templates/"
 const assets = "public/pdma2026-templates/assets"
 const slides = [
@@ -30,6 +32,8 @@ const slides = [
   { kind: "flow-scenario", variantId: "flow-animated-atmosphere" }, { kind: "embedded-app", variantId: "embedded-full-planets" },
   { kind: "hub-ecosystem", variantId: "hub-animated-planets" }, { kind: "structured-content-action", variantId: "structured-animated-magenta" },
 ]
+if (targetSlide !== null && (!Number.isInteger(targetSlide) || targetSlide < 1 || targetSlide > slides.length)) throw new Error(`--slide must be an integer from 1 to ${slides.length}; received ${slideValue}`)
+const outDir = outIndex > 0 ? path.resolve(process.argv[outIndex + 1]) : path.join(os.tmpdir(), targetSlide === null ? "pdma-template-qa" : `pdma-template-qa-slide-${targetSlide}`)
 const references = { "end-card": "end-card/end-card-reference-v1.png", "flow-scenario": "flow-scenario/flow-scenario-reference-v1.png", "hub-ecosystem": "hub-ecosystem/hub-ecosystem-reference-v1.png", "structured-content-action": "structured-content-action/structured-content-action-reference-v1.png", "embedded-app": "embedded-app/embedded-app-reference-v1.png" }
 const liveExemplars = { title: 1, exercise: 14, "compare-contrast": 3, "decision-spectrum": 8, scorecard: 7 }
 const viewports = [
@@ -70,7 +74,7 @@ const copyFor = (kind) => copyRegistry.filter((entry) => entry.kind === kind).fl
 async function openDeck(page) {
   await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" })
   await page.waitForSelector(".pdmat-slide")
-  await page.waitForTimeout(700)
+  await page.waitForTimeout(targetSlide === null ? 700 : 100)
 }
 
 async function goToSlide(page, index) {
@@ -80,6 +84,15 @@ async function goToSlide(page, index) {
   for (let i = 0; i < Math.abs(index - current); i += 1) { await page.keyboard.press(key); await page.waitForTimeout(120) }
   await page.waitForFunction(({ kind, position }) => document.querySelector(".pdmat-slide")?.getAttribute("data-template-kind") === kind && document.querySelector(".pdma-count")?.textContent?.trim() === `${position} / 14`, { kind: slides[index].kind, position: index + 1 })
   await page.waitForTimeout(650)
+}
+
+async function jumpToSlide(page, index) {
+  if (index === 0) return
+  await page.locator(".pdma-count").click()
+  const dialog = page.getByRole("dialog")
+  await dialog.waitFor()
+  await dialog.locator("li").nth(index).locator("button, a").first().click()
+  await page.waitForFunction(({ kind, position }) => document.querySelector(".pdmat-slide")?.getAttribute("data-template-kind") === kind && document.querySelector(".pdma-count")?.textContent?.trim() === `${position} / 14`, { kind: slides[index].kind, position: index + 1 })
 }
 
 /** In-page measurements for the current slide. Layout is reported in logical canvas pixels. */
@@ -200,8 +213,11 @@ for (const viewport of viewports) {
   page.on("pageerror", (error) => errors.push(String(error)))
   await openDeck(page)
   fs.mkdirSync(path.join(outDir, viewport.name), { recursive: true })
-  for (const [index, { kind, variantId }] of slides.entries()) {
-    if (index > 0) await goToSlide(page, index)
+  const slideIndices = targetSlide === null ? slides.map((_, index) => index) : [targetSlide - 1]
+  for (const index of slideIndices) {
+    const { kind, variantId } = slides[index]
+    if (targetSlide !== null) await jumpToSlide(page, index)
+    else if (index > 0) await goToSlide(page, index)
     const shot = path.join(outDir, viewport.name, `t${String(index + 1).padStart(2, "0")}-${kind}.png`)
     await page.screenshot({ path: shot })
     const m = await measure(page)
@@ -222,6 +238,10 @@ for (const viewport of viewports) {
     }
     if (m.clippedText.length) fail(`${tag}: text outside canvas or under header/footer chrome → ${m.clippedText.slice(0, 4).join(" | ")}`)
     if (m.hiddenOverflow.length) fail(`${tag}: hidden overflow → ${m.hiddenOverflow.join(" | ")}`)
+    if (targetSlide === 2) {
+      const urls = await page.evaluate(() => ({ qr: document.querySelector(".pdmat-qr")?.getAttribute("data-qr-value"), qrLink: document.querySelector(".pdmat-download__qr")?.getAttribute("href"), cta: document.querySelector(".pdmat-download__cta")?.getAttribute("href") }))
+      if (!urls.qr || urls.qr !== urls.cta || urls.qrLink !== urls.cta) fail(`${tag}: QR/CTA URL mismatch ${JSON.stringify(urls)}`)
+    }
     if (variantId === "embedded-full-planets" && (m.decoImages.length < 2 || m.decoImages.some((img) => !img.loaded))) fail(`${tag}: decorative planet layer missing/unloaded ${JSON.stringify(m.decoImages)}`)
     else if (variantId && variantId !== "embedded-full-planets" && m.decoOrbs < 2) fail(`${tag}: expected animated orb variant, found ${m.decoOrbs}`)
     else if (!variantId && m.decoVariant !== "none" && (m.decoImages.length === 0 || m.decoImages.some((img) => !img.loaded))) fail(`${tag}: decorative layer missing/unloaded ${JSON.stringify(m.decoImages)}`)
@@ -234,7 +254,7 @@ for (const viewport of viewports) {
   }
   if (errors.length) fail(`[${viewport.name}] page errors: ${errors.join(" | ")}`)
 
-  if (viewport.name.startsWith("desktop")) {
+  if (targetSlide === null && viewport.name.startsWith("desktop")) {
     // End Card: QR and CTA share one URL value.
     await goToSlide(page, 1)
     const urls = await page.evaluate(() => ({ qr: document.querySelector(".pdmat-qr")?.getAttribute("data-qr-value"), qrLink: document.querySelector(".pdmat-download__qr")?.getAttribute("href"), cta: document.querySelector(".pdmat-download__cta")?.getAttribute("href") }))
@@ -274,6 +294,18 @@ for (const viewport of viewports) {
     if ((await app.getAttribute("data-frame")) !== "brief") fail("embedded-app: productization brief did not open after the decision")
   }
   await context.close()
+}
+
+if (targetSlide !== null) {
+  await browser.close()
+  fs.writeFileSync(path.join(outDir, "report.json"), JSON.stringify({ baseUrl, targetSlide, failures, report }, null, 2))
+  if (failures.length) {
+    console.error(`VISUAL_QA: FAIL (${failures.length})`)
+    for (const message of failures) console.error(`  ✗ ${message}`)
+    process.exit(1)
+  }
+  console.log(`VISUAL_QA: PASS — targeted gallery slide ${targetSlide}; ${report.length} viewport captures; copy, title safety, chrome, and composition assertions passed`)
+  process.exit(0)
 }
 
 // Live exemplars for side-by-side review (desktop).

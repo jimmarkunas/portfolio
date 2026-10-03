@@ -12,7 +12,7 @@
  * Functional: arrow navigation, TOC, fullscreen, Slide 14 exercise link + route, Slide 16 CTA/QR.
  * (The Slide 15 embedded exercise is walked frame by frame by pdma-exercise-qa.mjs.)
  *
- * Usage: node scripts/pdma-deck-visual-qa.mjs [--route /pdma2026/] [--reference-dir <dir>] [--approved-dir <dir>] [--out <dir>]
+ * Usage: node scripts/pdma-deck-visual-qa.mjs [--route /pdma2026/] [--slide 1-16] [--reference-dir <dir>] [--approved-dir <dir>] [--out <dir>]
  * Exit: 0 PASS · 1 FAIL · 2 VISUAL_QA: REQUIRES_EXTERNAL_REVIEW (browser or server unavailable)
  */
 import { spawnSync } from "node:child_process"
@@ -24,11 +24,14 @@ import sharp from "sharp"
 import { deckCopyRegistry } from "./pdma-deck-copy.mjs"
 
 const arg = (name, fallback) => { const index = process.argv.indexOf(name); return index > 0 ? process.argv[index + 1] : fallback }
+const slideValue = arg("--slide", null)
+const targetSlide = slideValue === null ? null : Number(slideValue)
+if (targetSlide !== null && (!Number.isInteger(targetSlide) || targetSlide < 1 || targetSlide > 16)) throw new Error(`--slide must be an integer from 1 to 16; received ${slideValue}`)
 const baseUrl = process.env.BASE_URL ?? "http://localhost:3000"
 const route = arg("--route", "/pdma2026/")
 const referenceDir = arg("--reference-dir", null)
 const approvedDir = arg("--approved-dir", null)
-const outDir = path.resolve(arg("--out", path.join(os.tmpdir(), "pdma-deck-qa")))
+const outDir = path.resolve(arg("--out", path.join(os.tmpdir(), targetSlide === null ? "pdma-deck-qa" : `pdma-deck-qa-slide-${targetSlide}`)))
 const KIT_URL = "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model"
 const compositions = ["title", "shift-boundary", "compare-contrast", "work-map", "ambiguity-gate", "hub-ecosystem", "scorecard", "decision-spectrum", "flow-scenario", "structured-content-action", "agents-reveal", "framework-to-product", "idea-to-spec", "exercise", "embedded-app", "end-card"]
 /** Production slide → accepted template gallery slide. */
@@ -78,6 +81,15 @@ async function goTo(page, index) {
   for (let i = 0; i < Math.abs(index - current); i += 1) { await page.keyboard.press(key); await page.waitForTimeout(110) }
   await page.waitForFunction((kind) => document.querySelector(".pdmat-slide")?.getAttribute("data-template-kind") === kind, compositions[index])
   await page.waitForTimeout(650)
+}
+
+async function jumpTo(page, index) {
+  if (index === 0) return
+  await page.locator(".pdma-count").click()
+  const dialog = page.getByRole("dialog")
+  await dialog.waitFor()
+  await dialog.locator("li").nth(index).locator("button, a").first().click()
+  await page.waitForFunction(({ position, kind }) => document.querySelector(".pdma-count")?.textContent?.trim() === `${position} / 16` && document.querySelector(".pdmat-slide")?.getAttribute("data-template-kind") === kind, { position: index + 1, kind: compositions[index] })
 }
 
 async function measure(page) {
@@ -138,10 +150,12 @@ for (const viewport of viewports) {
   page.on("pageerror", (error) => errors.push(String(error)))
   await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" })
   await page.waitForSelector(".pdmat-slide")
-  await page.waitForTimeout(700)
+  await page.waitForTimeout(targetSlide === null ? 700 : 100)
   fs.mkdirSync(path.join(outDir, viewport.name), { recursive: true })
-  for (let index = 0; index < 16; index += 1) {
-    if (index > 0) await goTo(page, index)
+  const slideIndices = targetSlide === null ? compositions.map((_, index) => index) : [targetSlide - 1]
+  for (const index of slideIndices) {
+    if (targetSlide !== null) await jumpTo(page, index)
+    else if (index > 0) await goTo(page, index)
     const shot = path.join(outDir, viewport.name, `s${String(index + 1).padStart(2, "0")}.png`)
     await page.screenshot({ path: shot })
     captures += 1
@@ -168,7 +182,7 @@ for (const viewport of viewports) {
   }
   if (errors.length) fail(`[${viewport.name}] page errors: ${errors.join(" | ")}`)
 
-  if (viewport.name.startsWith("desktop")) {
+  if (targetSlide === null && viewport.name.startsWith("desktop")) {
     // Navigation: back through the deck with ArrowLeft.
     for (let index = 14; index >= 0; index -= 1) { await page.keyboard.press("ArrowLeft"); await page.waitForTimeout(90) }
     await page.waitForTimeout(600)
@@ -212,6 +226,14 @@ for (const viewport of viewports) {
     if (decode.status === 0) { const value = decode.stdout.trim(); if (value !== KIT_URL) fail(`Slide 16 QR decodes to "${value}"`); else notes.push(`QR decode: ${value}`) } else notes.push("QR decode: decoder unavailable")
   }
   await context.close()
+}
+
+if (targetSlide !== null) {
+  await browser.close()
+  fs.writeFileSync(path.join(outDir, "report.json"), JSON.stringify({ route, targetSlide, failures, notes, captures }, null, 2))
+  if (failures.length) { console.error(`VISUAL_QA: FAIL (${failures.length})`); for (const message of failures) console.error(`  ✗ ${message}`); process.exit(1) }
+  console.log(`VISUAL_QA: PASS — targeted production slide ${targetSlide}; ${captures} captures across ${viewports.length} viewports`)
+  process.exit(0)
 }
 
 // Fidelity comparisons (desktop, slide body band only — chrome labels/progress legitimately differ).
