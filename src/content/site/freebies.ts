@@ -1,10 +1,10 @@
-type FreebieAssetKind = "PDF" | "DOCX" | "ZIP"
+type FreebieAssetKind = "PDF" | "DOCX" | "ZIP" | "Toolkit"
 
 type FreebieAsset = {
   title: string
   description: string
-  href: `/${string}`
-  fileName: string
+  href: `/${string}` | `https://${string}`
+  fileName?: string
   kind: FreebieAssetKind
 }
 
@@ -58,28 +58,13 @@ export const siteContent = {
     {
       id: "usaii-agents",
       title: "USAII + Jim Markunas — A.G.E.N.T.S.",
-      description: "The A.G.E.N.T.S. methodology and supporting typography files.",
+      description: "The complete A.G.E.N.T.S. methodology, editable files, and supporting typography assets.",
       assets: [
         {
-          title: "A.G.E.N.T.S. Methodology",
-          description: "The USAII + Jim Markunas A.G.E.N.T.S. methodology guide.",
-          href: "/freebies/USAII_AGENTS_by_Jim_Markunas_20260817.pdf",
-          fileName: "USAII_AGENTS_by_Jim_Markunas_20260817.pdf",
-          kind: "PDF",
-        },
-        {
-          title: "A.G.E.N.T.S. Methodology (Editable)",
-          description: "An editable DOCX version of the methodology guide.",
-          href: "/freebies/USAII_AGENTS_by_Jim_Markunas_20260817.docx",
-          fileName: "USAII_AGENTS_by_Jim_Markunas_20260817.docx",
-          kind: "DOCX",
-        },
-        {
-          title: "Typography Pack",
-          description: "Inter, Montserrat, and Red Hat Display font files.",
-          href: "/freebies/Inter,Montserrat,Red_Hat_Display.zip",
-          fileName: "Inter,Montserrat,Red_Hat_Display.zip",
-          kind: "ZIP",
+          title: "A.G.E.N.T.S. Enterprise AI Operating Model Toolkit",
+          description: "Complete A.G.E.N.T.S. toolkit including the methodology, editable files, and supporting typography assets.",
+          href: "https://github.com/jimmarkunas/agents-enterprise-ai-operating-model",
+          kind: "Toolkit",
         },
       ],
     },

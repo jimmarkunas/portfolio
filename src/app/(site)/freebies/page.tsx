@@ -7,10 +7,11 @@ import { siteCanonicalPaths } from "@/content/site"
 import { ArrowUpRight } from "lucide-react"
 import { buildPageMetadata } from "@/lib/seo"
 import { FreebiesDownloadButton } from "./FreebiesDownloadButton"
+import { siteContent as freebiesContent } from "@/content/site/freebies"
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Freebies",
-  description: "Downloadable resources from Jim Markunas.",
+  title: freebiesContent.meta.title,
+  description: freebiesContent.meta.description,
   canonicalPath: siteCanonicalPaths.freebies,
   useDefaultImage: false,
 })
@@ -22,63 +23,66 @@ export default function FreebiesPage() {
         <Container className="pb-14 pt-8 md:pb-16 md:pt-10 lg:pb-[80px] lg:pt-[42px]">
           <div className="flex flex-col gap-5">
             <EyebrowPill className="w-fit bg-white" labelClassName="type-p2 text-[#222222]">
-              Freebies
+              {freebiesContent.hero.eyebrow}
             </EyebrowPill>
-            <h1 className="type-h2 max-w-[920px] text-[#232323]">Downloadable Assets</h1>
+            <h1 className="type-h2 max-w-[920px] text-[#232323]">{freebiesContent.hero.title}</h1>
             <p className="type-p2 max-w-[900px] text-[#2E2E2E]">
-              A growing library of practical resources you can download right now.
+              {freebiesContent.hero.intro}
             </p>
           </div>
 
           <div className="mt-10 flex flex-col gap-6 md:mt-12">
-            <section className="rounded-[10px] bg-[#ECECEC] px-5 py-5 md:px-8 md:py-7">
+            {freebiesContent.collections.map((collection) => (
+            <section key={collection.id} className="rounded-[10px] bg-[#ECECEC] px-5 py-5 md:px-8 md:py-7">
               <div className="border-b border-black/10 pb-5">
-                <h2 className="type-h5 text-[#2A2A2A]">Product Management</h2>
+                <h2 className="type-h5 text-[#2A2A2A]">{collection.title}</h2>
                 <p className="type-p3 mt-2 max-w-[760px] text-[#4B5154]">
-                  Actionable tools and templates for PM workflows.
+                  {collection.description}
                 </p>
               </div>
 
               <ul className="mt-4 space-y-3 md:mt-5">
-                <li>
+                {collection.assets.map((asset) => (
+                <li key={asset.href}>
                   <article className="rounded-[10px] bg-white px-4 py-4 outline outline-1 outline-black/5 md:px-5">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                       <div className="flex flex-col gap-2">
                         <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="type-p2 text-[#2A2A2A]">PMF Checklist (Mind The Product)</h3>
+                          <h3 className="type-p2 text-[#2A2A2A]">{asset.title}</h3>
                           <span className="type-ui-sm inline-flex min-h-[24px] items-center rounded-[999px] bg-[#F3F3F3] px-2.5 text-[#555555]">
-                            PDF
+                            {asset.kind}
                           </span>
                         </div>
                         <p className="type-p4 max-w-[780px] text-[#4B5154]">
-                          A practical checklist to evaluate product-market fit signal quality and next actions.
+                          {asset.description}
                         </p>
                       </div>
 
                       <div className="flex flex-wrap items-center gap-3">
-                        <FreebiesDownloadButton
-                          href="/freebies/PMF_Checklist_MindTheProduct.pdf"
-                          title="PMF Checklist (Mind The Product)"
-                          fileName="PMF_Checklist_MindTheProduct.pdf"
-                        />
-
-                        <TrackedExternalLink
-                          href="/freebies/PMF_Checklist_MindTheProduct.pdf"
-                          label="Open PMF Checklist (Mind The Product)"
-                          location="freebies_open"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-text-cta type-p4"
-                        >
-                          <span>Open</span>
-                          <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                        </TrackedExternalLink>
+                        {asset.href.startsWith("https://") ? (
+                          <TrackedExternalLink
+                            href={asset.href}
+                            label={`Open ${asset.title}`}
+                            location="freebies_toolkit"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="button-primary !text-white hover:!text-white"
+                            ariaLabel={`Open ${asset.title} on GitHub`}
+                          >
+                            <span>Open toolkit on GitHub</span>
+                            <ArrowUpRight className="ml-2 inline h-4 w-4" aria-hidden="true" />
+                          </TrackedExternalLink>
+                        ) : asset.fileName ? (
+                          <FreebiesDownloadButton href={asset.href} title={asset.title} fileName={asset.fileName} />
+                        ) : null}
                       </div>
                     </div>
                   </article>
                 </li>
+                ))}
               </ul>
             </section>
+            ))}
           </div>
         </Container>
       </section>
