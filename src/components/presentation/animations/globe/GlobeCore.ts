@@ -58,6 +58,9 @@ export const parseColor = (colorStr: string): { rgb: THREE.Color; alpha: number 
       if (!Number.isNaN(parsed)) {
         result.alpha = clamp(alphaStr.endsWith('%') ? parsed / 100 : parsed, 0, 1);
       }
+      if (rgbMatch[1].toLowerCase() === 'rgba' || rgbMatch[1].toLowerCase() === 'hsla') {
+        str = `${rgbMatch[1].slice(0, 3)}(${parts.slice(0, 3).join(', ')})`;
+      }
     }
   }
   try {
