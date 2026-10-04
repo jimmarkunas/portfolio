@@ -149,10 +149,16 @@ function GlobeComposerSlide() {
           <PBDSKineticSphere
             {...orbPresets.magentaRight}
             {...orbAppearanceProfiles.magentaAtmosphere}
-            radius={355}
+            radius={330}
+            centerOffsetX={0}
+            centerOffsetY={70}
             cropPosition="center"
             bodyOpacity={0}
             stippleDensity={0}
+            atmosphereWidth={9}
+            atmosphereIntensity={0.3}
+            innerGlowIntensity={0.04}
+            glowingStrokeIntensity={0}
             interactive={false}
           />
         </div>}
