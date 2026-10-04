@@ -2,7 +2,7 @@
 
 import { Container } from "@/components/Container"
 import { MotionReveal } from "@/components/motion/MotionReveal"
-import { GlobalLocationsMap } from "@/components/case-study/GlobalLocationsMap"
+import { GlobalRetailFootprintGlobe } from "@/components/case-study/revamp/aa/GlobalRetailFootprintGlobe"
 import { americanapparelStoreLocations } from "@/content/case-studies/revamp/aa-locations"
 
 export function CaseStudyRevampAaMapSection() {
@@ -11,7 +11,7 @@ export function CaseStudyRevampAaMapSection() {
       <Container className="pb-14 md:pb-16 lg:pb-20">
         <div className="flex flex-col gap-6">
           <MotionReveal preset="image" className="w-full overflow-hidden">
-            <GlobalLocationsMap title="American Apparel · Global Retail Footprint" locations={americanapparelStoreLocations} />
+            <GlobalRetailFootprintGlobe title="American Apparel · Global Retail Footprint" locations={americanapparelStoreLocations} />
           </MotionReveal>
           <MotionReveal preset="cardStrong" className="w-full bg-white p-6 md:p-8">
             <div className="rounded-[24px] border border-black/8 bg-[#F8F8F8] p-6">

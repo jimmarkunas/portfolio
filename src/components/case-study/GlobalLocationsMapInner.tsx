@@ -157,7 +157,7 @@ export function GlobalLocationsMapInner({ title, locations, clusterMarkers = tru
         zoom={initialZoom}
         scrollWheelZoom={false}
         zoomControl={false}
-        attributionControl={false}
+        attributionControl={true}
         zoomSnap={0.25}
         minZoom={2.75}
         maxBounds={[[-85, -180], [85, 180]] as [[number, number], [number, number]]}
@@ -167,8 +167,8 @@ export function GlobalLocationsMapInner({ title, locations, clusterMarkers = tru
         <MapRef mapRef={mapRef} />
         <ZoomTracker onChange={handleZoomChange} />
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-          subdomains="abcd"
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           maxZoom={19}
           noWrap={true}
         />
