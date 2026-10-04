@@ -1,0 +1,22 @@
+.animation-lab-page{position:fixed;inset:0;width:100vw;height:100dvh;overflow:hidden;background:#070e1f;overscroll-behavior:none;isolation:isolate}
+.animation-lab-page .pdma-presentation{background:#070e1f}
+.animation-lab-slide{position:absolute;inset:0;overflow:hidden;background:#070e1f;color:#eaf1ff;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+.animation-lab-identity{position:absolute;z-index:4;top:132px;left:84px;display:flex;flex-direction:column;gap:9px;pointer-events:none}
+.animation-lab-identity span:first-child{font-size:15px;font-weight:600;letter-spacing:4px;color:#eaf1ff}
+.animation-lab-identity span:last-child{font-size:11px;font-weight:500;letter-spacing:3px;color:#7fb2ff}
+.animation-lab-globe{position:absolute;left:100px;right:100px;top:145px;bottom:112px;overflow:hidden;border-radius:4px;background:#070e1f}
+.animation-lab-globe-loading{position:absolute;inset:0;background:#070e1f}
+.animation-lab-globe .motion-globe{position:absolute;inset:0;width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;touch-action:none;user-select:none}
+.animation-lab-globe .motion-globe__webgl{position:absolute;z-index:1;inset:0;touch-action:none;cursor:grab}
+.animation-lab-globe .motion-globe__webgl:active{cursor:grabbing}
+.animation-lab-globe .motion-globe__webgl canvas{display:block;width:100%;height:100%}
+.animation-lab-globe .motion-globe__labels{position:absolute;z-index:2;inset:0;overflow:visible;pointer-events:none}
+.animation-lab-globe .motion-globe__tag{position:absolute;top:0;left:0;display:flex;align-items:center;gap:9px;padding:6px 13px 6px 10px;border-radius:999px;white-space:nowrap;line-height:1;translate:-50% -50%;will-change:transform,opacity}
+.animation-lab-globe .motion-globe__tag--pin{padding:5px 13px 5px 7px;translate:-50% -100%}
+.animation-lab-globe .motion-globe__marker{position:relative;display:grid;place-items:center;width:11px;height:11px;flex:0 0 auto;border-radius:50%;box-shadow:0 0 9px currentColor}
+.animation-lab-globe .motion-globe__marker i{position:absolute;top:8px;width:1px;height:13px;background:currentColor;opacity:.7}
+.animation-lab-globe .motion-globe__marker b{width:6px;height:6px;border-radius:50%;box-shadow:0 0 8px currentColor}
+.animation-lab-globe .motion-globe__tag--beacon .motion-globe__marker::before,.animation-lab-globe .motion-globe__tag--beacon .motion-globe__marker::after{position:absolute;inset:-3px;border:1px solid currentColor;border-radius:50%;content:"";animation:animation-lab-beacon-ping 2.4s ease-out infinite}
+.animation-lab-globe .motion-globe__tag--beacon .motion-globe__marker::after{animation-delay:1.2s}
+@keyframes animation-lab-beacon-ping{0%{transform:scale(.45);opacity:.55}65%,100%{transform:scale(2.5);opacity:0}}
+@media (prefers-reduced-motion:reduce){.animation-lab-globe .motion-globe__tag--beacon .motion-globe__marker::before,.animation-lab-globe .motion-globe__tag--beacon .motion-globe__marker::after{animation:none}}
