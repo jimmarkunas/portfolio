@@ -12,9 +12,16 @@ type Props = {
   locations: GlobalLocation[]
 }
 
-type Pin = GlobalLocation & { key: string }
+type Pin = GlobalLocation
 
-const LABEL_CITIES = new Set(["new york", "london", "paris", "tokyo", "sydney", "são paulo", "sao paulo"])
+function getStableLabelOffset(pin: Pin) {
+  const key = `${pin.city}|${pin.country}`
+  let hash = 0
+  for (const character of key) hash = (hash * 31 + character.charCodeAt(0)) >>> 0
+  const angle = (hash % 16) * (Math.PI / 8) - Math.PI / 2
+  const distance = 22 + ((hash >>> 4) % 3) * 10
+  return { x: Math.cos(angle) * distance, y: Math.sin(angle) * distance }
+}
 
 function uniqueCityLocations(locations: GlobalLocation[]): Pin[] {
   const seen = new Set<string>()
@@ -26,17 +33,12 @@ function uniqueCityLocations(locations: GlobalLocation[]): Pin[] {
       seen.add(key)
       return true
     })
-    .map((location) => ({ ...location, key: `${location.city}|${location.country}` }))
 }
 
 export function GlobalRetailFootprintGlobe({ title, locations }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const pausedRef = useRef(false)
-  const selectedPinRef = useRef<string | null>(null)
-  const rotationRef = useRef({ longitude: -0.35, tilt: 0.16 })
-  const zoomRef = useRef(1)
-  const targetZoomRef = useRef(1)
-  const [isPaused, setIsPaused] = useState(false)
+  const rotationRef = useRef({ longitude: -0.35, tilt: 0.02 })
   const pins = useMemo(() => uniqueCityLocations(locations), [locations])
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export function GlobalRetailFootprintGlobe({ title, locations }: Props) {
     if (!canvas || !context) return undefined
 
     const rotation = rotationRef.current
-    let drag: { pointerId: number; x: number; y: number; longitude: number; tilt: number; moved: boolean } | null = null
+    let drag: { pointerId: number; x: number; y: number; longitude: number; tilt: number } | null = null
     let projectedPins: { pin: Pin; x: number; y: number; depth: number }[] = []
     let width = 0
     let height = 0
@@ -86,49 +88,18 @@ export function GlobalRetailFootprintGlobe({ title, locations }: Props) {
       if (!pausedRef.current && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         rotation.longitude += delta * 0.000025
       }
-      zoomRef.current += (targetZoomRef.current - zoomRef.current) * Math.min(1, delta * 0.006)
-
       context.clearRect(0, 0, width, height)
       const cx = width / 2
       const cy = height / 2
-      const radius = Math.max(1, Math.min(width * 0.46, height * 0.475)) * zoomRef.current
+      const radius = Math.max(1, Math.min(width * 0.46, height * 0.475))
 
       context.save()
       context.beginPath()
       context.arc(cx, cy, radius, 0, Math.PI * 2)
       context.clip()
 
-      context.strokeStyle = "rgba(68,122,203,.12)"
-      context.lineWidth = 0.7
-      for (let lat = -60; lat <= 60; lat += 30) {
-        context.beginPath()
-        let drawing = false
-        for (let lon = -180; lon <= 180; lon += 4) {
-          const point = project(lat, lon, cx, cy, radius)
-          if (point.depth > 0) {
-            if (!drawing) context.moveTo(point.x, point.y)
-            else context.lineTo(point.x, point.y)
-            drawing = true
-          } else drawing = false
-        }
-        context.stroke()
-      }
-      for (let lon = -150; lon <= 180; lon += 30) {
-        context.beginPath()
-        let drawing = false
-        for (let lat = -88; lat <= 88; lat += 3) {
-          const point = project(lat, lon, cx, cy, radius)
-          if (point.depth > 0) {
-            if (!drawing) context.moveTo(point.x, point.y)
-            else context.lineTo(point.x, point.y)
-            drawing = true
-          } else drawing = false
-        }
-        context.stroke()
-      }
-
-      context.strokeStyle = "rgba(68,122,203,.82)"
-      context.lineWidth = Math.max(0.55, radius / 460)
+      context.strokeStyle = "rgba(70,78,74,.62)"
+      context.lineWidth = Math.max(0.65, radius / 520)
       context.lineCap = "round"
       context.lineJoin = "round"
       for (const line of geometry.borders) {
@@ -162,36 +133,34 @@ export function GlobalRetailFootprintGlobe({ title, locations }: Props) {
         context.fill()
       }
 
-      const selectedPin = pins.find((pin) => pin.key === selectedPinRef.current)
-      const nearbyPins = selectedPin
-        ? pins.filter((pin) => {
-            const lonDiff = Math.abs(pin.coordinates[0] - selectedPin.coordinates[0])
-            const latDiff = Math.abs(pin.coordinates[1] - selectedPin.coordinates[1])
-            return lonDiff < 20 && latDiff < 14
-          })
-        : []
-      const labelPins = projectedPins.filter(({ pin }) => LABEL_CITIES.has(pin.city.toLocaleLowerCase()) || nearbyPins.some((nearby) => nearby.key === pin.key))
-      context.font = "11px Inter, ui-sans-serif, system-ui, sans-serif"
+      context.restore()
+      context.font = "8px Inter, ui-sans-serif, system-ui, sans-serif"
       context.textAlign = "center"
       context.textBaseline = "middle"
-      for (const { pin, x, y, depth } of labelPins) {
+      for (const { pin, x, y, depth } of projectedPins) {
         const label = pin.city
-        const labelWidth = context.measureText(label).width + 14
-        const labelY = y - 19
-        context.fillStyle = "rgba(20,35,59,.9)"
+        const labelWidth = context.measureText(label).width + 12
+        const labelHeight = 13
+        const offset = getStableLabelOffset(pin)
+        const labelX = x + offset.x
+        const labelY = y + offset.y
+        const box = { left: labelX - labelWidth / 2, top: labelY - labelHeight / 2 }
+        const lineX = labelX - offset.x * Math.min(1, (labelWidth / 2) / Math.abs(offset.x || 1), (labelHeight / 2) / Math.abs(offset.y || 1))
+        const lineY = labelY - offset.y * Math.min(1, (labelWidth / 2) / Math.abs(offset.x || 1), (labelHeight / 2) / Math.abs(offset.y || 1))
+        context.strokeStyle = "rgba(76,84,80,.68)"
+        context.lineWidth = 1
         context.beginPath()
-        context.roundRect(x - labelWidth / 2, labelY - 8, labelWidth, 16, 8)
+        context.moveTo(x, y)
+        context.lineTo(lineX, lineY)
+        context.stroke()
+        context.fillStyle = "rgba(22,35,31,.94)"
+        context.beginPath()
+        context.roundRect(box.left, box.top, labelWidth, labelHeight, 7)
         context.fill()
-        context.fillStyle = `rgba(255,255,255,${Math.min(1, 0.62 + depth * 0.38)})`
-        context.fillText(label, x, labelY)
+        context.fillStyle = `rgba(235,239,235,${Math.min(1, 0.72 + depth * 0.28)})`
+        context.fillText(label, labelX, labelY)
       }
 
-      context.restore()
-      context.beginPath()
-      context.arc(cx, cy, radius - 0.5, 0, Math.PI * 2)
-      context.strokeStyle = "rgba(68,122,203,.42)"
-      context.lineWidth = 1
-      context.stroke()
       frame = requestAnimationFrame(draw)
     }
 
@@ -210,7 +179,7 @@ export function GlobalRetailFootprintGlobe({ title, locations }: Props) {
       })
 
     const handlePointerDown = (event: PointerEvent) => {
-      drag = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, longitude: rotation.longitude, tilt: rotation.tilt, moved: false }
+      drag = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, longitude: rotation.longitude, tilt: rotation.tilt }
       canvas.setPointerCapture(event.pointerId)
       canvas.style.cursor = "grabbing"
     }
@@ -218,30 +187,11 @@ export function GlobalRetailFootprintGlobe({ title, locations }: Props) {
       if (!drag || drag.pointerId !== event.pointerId) return
       const dx = event.clientX - drag.x
       const dy = event.clientY - drag.y
-      if (Math.abs(dx) + Math.abs(dy) > 4) drag.moved = true
       rotation.longitude = drag.longitude + dx / Math.max(1, Math.min(width, height))
       rotation.tilt = Math.max(-0.8, Math.min(0.8, drag.tilt + dy / Math.max(1, Math.min(width, height))))
     }
     const handlePointerUp = (event: PointerEvent) => {
       if (!drag || drag.pointerId !== event.pointerId) return
-      if (!drag.moved) {
-        const rect = canvas.getBoundingClientRect()
-        const x = event.clientX - rect.left
-        const y = event.clientY - rect.top
-        let nearest: { pin: Pin; distance: number } | null = null
-        for (const point of projectedPins) {
-          const distance = Math.hypot(point.x - x, point.y - y)
-          if (distance < 18 && (!nearest || distance < nearest.distance)) nearest = { pin: point.pin, distance }
-        }
-        if (nearest) {
-          selectedPinRef.current = nearest.pin.key
-          rotation.longitude = (-nearest.pin.coordinates[0] * Math.PI) / 180
-          rotation.tilt = (nearest.pin.coordinates[1] * Math.PI) / 180
-          targetZoomRef.current = 1.9
-          pausedRef.current = true
-          setIsPaused(true)
-        }
-      }
       drag = null
       canvas.style.cursor = "grab"
     }
@@ -274,77 +224,15 @@ export function GlobalRetailFootprintGlobe({ title, locations }: Props) {
     }
   }, [pins])
 
-  function toggleRotation() {
-    pausedRef.current = !pausedRef.current
-    setIsPaused(pausedRef.current)
-  }
-
-  function resetGlobe() {
-    selectedPinRef.current = null
-    rotationRef.current.longitude = -0.35
-    rotationRef.current.tilt = 0.16
-    zoomRef.current = 1
-    targetZoomRef.current = 1
-    setIsPaused(false)
-    pausedRef.current = false
-  }
-
-  function zoomGlobe(factor: number) {
-    targetZoomRef.current = Math.max(1, Math.min(3.2, targetZoomRef.current * factor))
-    pausedRef.current = true
-    setIsPaused(true)
-  }
-
   return (
     <div className="global-locations-globe relative h-[300px] overflow-hidden md:h-[420px] lg:h-[500px]">
       <canvas
         ref={canvasRef}
         role="img"
-        aria-label={`${title}. Interactive rotating globe with ${pins.length} retail city locations. Drag to rotate, click a location to drill down, or use the arrow keys.`}
+        aria-label={`${title}. Rotating globe with ${pins.length} labeled retail city locations. Drag to rotate or use the arrow keys.`}
         tabIndex={0}
         className="absolute inset-0 h-full w-full touch-none cursor-grab outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#14233b]"
       />
-      <div className="absolute bottom-4 left-4 z-10 rounded-lg bg-black/50 px-3 py-1.5 backdrop-blur-sm">
-        <span className="text-[13px] font-medium tracking-wide text-[#E5E7EB]">{title}</span>
-      </div>
-      <div className="absolute right-4 top-4 z-10 flex flex-col gap-1.5">
-        <button
-          type="button"
-          onClick={() => zoomGlobe(1.35)}
-          aria-label="Zoom in to locations"
-          title="Zoom in"
-          className="flex h-8 w-8 items-center justify-center rounded-lg bg-black/50 text-[18px] text-white backdrop-blur-sm transition-colors hover:bg-black/70"
-        >
-          +
-        </button>
-        <button
-          type="button"
-          onClick={() => zoomGlobe(1 / 1.35)}
-          aria-label="Zoom out from locations"
-          title="Zoom out"
-          className="flex h-8 w-8 items-center justify-center rounded-lg bg-black/50 text-[18px] text-white backdrop-blur-sm transition-colors hover:bg-black/70"
-        >
-          −
-        </button>
-        <button
-          type="button"
-          onClick={toggleRotation}
-          aria-label={isPaused ? "Resume globe rotation" : "Pause globe rotation"}
-          title={isPaused ? "Resume rotation" : "Pause rotation"}
-          className="flex h-8 w-8 items-center justify-center rounded-lg bg-black/50 text-[13px] text-white backdrop-blur-sm transition-colors hover:bg-black/70"
-        >
-          {isPaused ? "▶" : "Ⅱ"}
-        </button>
-        <button
-          type="button"
-          onClick={resetGlobe}
-          aria-label="Reset globe view and zoom out"
-          title="Reset view"
-          className="flex h-8 w-8 items-center justify-center rounded-lg bg-black/50 text-[15px] text-white backdrop-blur-sm transition-colors hover:bg-black/70"
-        >
-          ↺
-        </button>
-      </div>
     </div>
   )
 }
