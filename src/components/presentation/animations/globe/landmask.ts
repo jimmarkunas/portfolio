@@ -199,3 +199,25 @@ export const generateFieldPoints = (targetCount: number): FieldPointsData => {
     count: seeds.length,
   };
 };
+
+/** Deterministic full-sphere Fibonacci distribution for the dot-orb surface. */
+export const generateSpherePoints = (targetCount: number): FieldPointsData => {
+  const count = Math.max(0, Math.floor(targetCount));
+  const position = new Float32Array(count * 3);
+  const seed = new Float32Array(count);
+  const coast = new Float32Array(count);
+  const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+
+  for (let i = 0; i < count; i++) {
+    const y = 1 - 2 * ((i + 0.5) / count);
+    const radius = Math.sqrt(Math.max(0, 1 - y * y));
+    const theta = goldenAngle * i;
+    position[i * 3] = Math.cos(theta) * radius;
+    position[i * 3 + 1] = y;
+    position[i * 3 + 2] = Math.sin(theta) * radius;
+    seed[i] = ((i * 2654435761) >>> 0) / 8388608;
+    coast[i] = 0;
+  }
+
+  return { position, seed, coast, count };
+};

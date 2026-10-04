@@ -1,6 +1,7 @@
 import type {
   GlobeAnimationRecipe,
   GlobeBodyPreset,
+  GlobeColorId,
   GlobePresetId,
   LocationTagPreset,
   LocationTagPresetId,
@@ -185,8 +186,19 @@ export const orbitPresets: Record<OrbitPresetId, OrbitPreset> = {
 };
 
 export const originalGlobeRecipes: Record<`original-${1 | 2 | 3 | 4}`, GlobeAnimationRecipe> = {
-  "original-1": { globe: "globe-1", locationTag: "tag-1", orbit: "orbit-1", particleField: "off" },
-  "original-2": { globe: "globe-2", locationTag: "tag-2", orbit: "orbit-2", particleField: "off" },
-  "original-3": { globe: "globe-3", locationTag: "tag-3", orbit: "orbit-3", particleField: "off" },
-  "original-4": { globe: "globe-4", locationTag: "tag-4", orbit: "orbit-4", particleField: "lychee" },
+  "original-1": { globe: "globe-1", locationTag: "tag-1", orbit: "orbit-1", particleField: "off", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source" },
+  "original-2": { globe: "globe-2", locationTag: "tag-2", orbit: "orbit-2", particleField: "off", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source" },
+  "original-3": { globe: "globe-3", locationTag: "tag-3", orbit: "orbit-3", particleField: "off", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source" },
+  "original-4": { globe: "globe-4", locationTag: "tag-4", orbit: "orbit-4", particleField: "lychee", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source" },
 };
+
+/** Narrow adapter from canonical PBDS values for globe composition previews. */
+export const PBDS_GLOBE_COLOR_ADAPTER: Record<Exclude<GlobeColorId, "source">, string> = {
+  magenta: "#FF2FAE",
+  white: "#FFFFFF",
+  mid: "#7A7A7A",
+  line: "#E6E6E6",
+};
+
+export const resolveGlobeColor = (color: GlobeColorId): string | null =>
+  color === "source" ? null : PBDS_GLOBE_COLOR_ADAPTER[color];

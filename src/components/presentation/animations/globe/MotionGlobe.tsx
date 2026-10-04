@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { GlobeCore } from "./GlobeCore";
 import { DEFAULT_PLACES, type GlobeConfig, type GlobeAnimationRecipe } from "./globeTypes";
-import { globeBodyPresets, locationTagPresets, orbitPresets } from "./globePresets";
+import { globeBodyPresets, locationTagPresets, orbitPresets, resolveGlobeColor } from "./globePresets";
 
 export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -12,16 +12,28 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
   const body = globeBodyPresets[recipe.globe];
   const tag = locationTagPresets[recipe.locationTag];
   const orbit = orbitPresets[recipe.orbit];
+  const globeOverride = resolveGlobeColor(recipe.globeColor);
+  const orbitOverride = resolveGlobeColor(recipe.orbitColor);
+  const effectivePalette = globeOverride
+    ? { ...body.palette, backdrop: "#090909", ink: globeOverride, tint: globeOverride }
+    : body.palette;
+  const effectiveTag = globeOverride
+    ? { ...tag, labelFill: "#2E2E2E", labelInk: "#FFFFFF", accent: globeOverride, accentInk: "#090909" }
+    : tag;
   const config = useMemo<GlobeConfig>(() => ({
     ...body,
     ...orbit,
+    palette: effectivePalette,
+    routeColor: orbitOverride ?? orbit.routeColor,
+    coastLift: recipe.surface === "dot-orb" ? 0 : body.coastLift,
     places: DEFAULT_PLACES,
+    surfaceMode: recipe.surface,
     density: body.density,
     quality: "auto",
     routesOn: true,
     replayOnScroll: true,
     formation: recipe.particleField === "lychee" ? "drift" : body.formation,
-  }), [body, orbit, recipe.particleField]);
+  }), [body, orbit, effectivePalette, orbitOverride, recipe.particleField, recipe.surface]);
 
   useEffect(() => {
     const host = hostRef.current;
@@ -43,42 +55,34 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
   }, [config]);
 
   useEffect(() => {
-    coreRef.current?.setPlaces(DEFAULT_PLACES, tag.marker === "pin" ? tag.placeLift : 0);
-    coreRef.current?.setPlaceNodes(labelRefs.current);
-  }, [recipe.locationTag, tag]);
-
-  useEffect(() => {
-    coreRef.current?.buildField();
-  }, [body.density]);
-
-  useEffect(() => {
-    coreRef.current?.buildRoutes();
-  }, [orbit]);
+    coreRef.current?.setPlaces(DEFAULT_PLACES, effectiveTag.marker === "pin" ? effectiveTag.placeLift : 0);
+    coreRef.current?.setPlaceNodes(recipe.cityUi === "show" ? labelRefs.current : []);
+  }, [recipe.locationTag, recipe.cityUi, effectiveTag]);
 
   useEffect(() => {
     coreRef.current?.replayEntrance();
   }, [config.formation, config.entranceSeconds]);
 
-  return <div className="motion-globe" style={{ background: body.palette.backdrop }}>
+  return <div className="motion-globe" style={{ background: effectivePalette.backdrop }}>
     <div ref={hostRef} className="motion-globe__webgl" aria-hidden="true" />
     <div className="motion-globe__labels" aria-label="Global locations">
-      {DEFAULT_PLACES.map((place, index) => (
+      {recipe.cityUi === "show" && DEFAULT_PLACES.map((place, index) => (
         <div
           key={place.label}
           ref={(node) => { labelRefs.current[index] = node; }}
-          className={`motion-globe__tag motion-globe__tag--${tag.marker}`}
+          className={`motion-globe__tag motion-globe__tag--${effectiveTag.marker}`}
           style={{
-            color: tag.labelInk,
-            background: tag.labelFill,
-            boxShadow: `0 2px 10px rgba(0,0,0,.22), 0 0 0 1px ${tag.accent}55`,
-            fontFamily: tag.labelFont.fontFamily,
-            fontSize: tag.labelFont.fontSize,
-            fontWeight: tag.labelFont.fontWeight,
-            letterSpacing: tag.labelFont.letterSpacing,
+            color: effectiveTag.labelInk,
+            background: effectiveTag.labelFill,
+            boxShadow: `0 2px 10px rgba(0,0,0,.22), 0 0 0 1px ${effectiveTag.accent}55`,
+            fontFamily: effectiveTag.labelFont.fontFamily,
+            fontSize: effectiveTag.labelFont.fontSize,
+            fontWeight: effectiveTag.labelFont.fontWeight,
+            letterSpacing: effectiveTag.labelFont.letterSpacing,
           }}
         >
-          <span className="motion-globe__marker" style={{ background: tag.accent, color: tag.accentInk }} aria-hidden="true">
-            {tag.marker === "pin" ? <i /> : <b />}
+          <span className="motion-globe__marker" style={{ background: effectiveTag.accent, color: effectiveTag.accentInk }} aria-hidden="true">
+            {effectiveTag.marker === "pin" ? <i /> : <b />}
           </span>
           <span>{place.label}</span>
         </div>

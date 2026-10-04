@@ -8,6 +8,7 @@ import {
   clamp,
   DEG2RAD,
   generateFieldPoints,
+  generateSpherePoints,
 } from './landmask';
 import {
   FIELD_FRAGMENT_SHADER,
@@ -299,6 +300,7 @@ export class GlobeCore {
   }
 
   apply(cfg: GlobeConfig) {
+    const previous = this.cfg;
     this.cfg = cfg;
     const fUni = this.fieldUniforms;
     const rUni = this.routeUniforms;
@@ -343,6 +345,8 @@ export class GlobeCore {
     lineUni.uStyle.value = ROUTE_STYLES_LINES[cfg.routeStyle || 'solid'] ?? 0;
 
     this.routeGroup.visible = !!cfg.routesOn;
+    if (previous.surfaceMode !== cfg.surfaceMode || (cfg.surfaceMode === "terrestrial" && previous.density !== cfg.density)) this.buildField();
+    if (previous.places !== cfg.places || previous.routeMode !== cfg.routeMode || previous.routeStyle !== cfg.routeStyle || previous.routeAltitude !== cfg.routeAltitude || previous.routeDots !== cfg.routeDots || previous.routesOn !== cfg.routesOn) this.buildRoutes();
     if (this.still) this.paintStatic();
   }
 
@@ -369,9 +373,10 @@ export class GlobeCore {
   buildField() {
     this.disposeField();
     const factor = this.tier > 0 ? 1 : 0.45;
-    const targetDots = DENSITY_MAP[this.cfg.density];
-
-    const data = generateFieldPoints(Math.max(600, Math.round(targetDots * factor)));
+    const targetDots = this.cfg.surfaceMode === "dot-orb" ? 8500 : DENSITY_MAP[this.cfg.density];
+    const data = this.cfg.surfaceMode === "dot-orb"
+      ? generateSpherePoints(Math.max(600, Math.round(targetDots * factor)))
+      : generateFieldPoints(Math.max(600, Math.round(targetDots * factor)));
     if (!data.count) return;
 
     const geom = new THREE.BufferGeometry();

@@ -4,12 +4,19 @@ export type GlobePresetId = "globe-1" | "globe-2" | "globe-3" | "globe-4";
 export type LocationTagPresetId = "tag-1" | "tag-2" | "tag-3" | "tag-4";
 export type OrbitPresetId = "orbit-1" | "orbit-2" | "orbit-3" | "orbit-4";
 export type ParticleFieldEffect = "off" | "pbds-lab" | "lychee";
+export type GlobeSurfaceMode = "terrestrial" | "dot-orb";
+export type CityUiMode = "show" | "hide";
+export type GlobeColorId = "source" | "magenta" | "white" | "mid" | "line";
 
 export type GlobeAnimationRecipe = {
   globe: GlobePresetId;
   locationTag: LocationTagPresetId;
   orbit: OrbitPresetId;
   particleField: ParticleFieldEffect;
+  surface: GlobeSurfaceMode;
+  cityUi: CityUiMode;
+  globeColor: GlobeColorId;
+  orbitColor: GlobeColorId;
 };
 
 export interface PlaceItem {
@@ -31,6 +38,7 @@ export type RouteStyle = "comet" | "beads" | "dashed" | "pulse";
 export type PlaceMarker = "beacon" | "pin";
 
 export interface GlobeConfig {
+  surfaceMode: GlobeSurfaceMode;
   palette: GlobePalette;
   places: PlaceItem[];
   density: "balanced" | "dense" | "ultra";
