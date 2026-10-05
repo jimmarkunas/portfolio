@@ -53,7 +53,7 @@
 .animation-lab-composer-globe .motion-globe__tag--beacon .motion-globe__marker::after{animation-delay:1.2s}
 @media (prefers-reduced-motion:reduce){.animation-lab-composer-option{transition:none}.animation-lab-composer-globe .motion-globe__tag--beacon .motion-globe__marker::before,.animation-lab-composer-globe .motion-globe__tag--beacon .motion-globe__marker::after{animation:none}}
 .animation-lab-composer-panel{display:flex;flex-direction:column;gap:16px}
-.animation-lab-composer-pages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.animation-lab-composer-pages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .animation-lab-composer-page{min-width:0;min-height:96px;padding:0 8px;border:1px solid #2E2E2E;border-radius:3px;background:#2E2E2E;color:#FFFFFF;font:700 22px/1 Inter,ui-sans-serif,system-ui,sans-serif;letter-spacing:1px;cursor:pointer}
 .animation-lab-composer-page:hover{border-color:#7A7A7A}
 .animation-lab-composer-page:focus-visible{outline:2px solid #FF2FAE;outline-offset:2px}
@@ -74,4 +74,23 @@
 .animation-lab-composer-page-content.is-compose .animation-lab-composer-option{font-size:22px;letter-spacing:0}
 .animation-lab-composer-page-content.is-compose .animation-lab-composer-group[aria-label="SURFACE"] .animation-lab-composer-option{font-size:16px}
 .animation-lab-composer-page-content.is-compose .animation-lab-composer-group[aria-label="CITY UI"] .animation-lab-composer-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+.animation-lab-composer-page-content.is-compose .animation-lab-composer-range{grid-column:1/-1}
+.animation-lab-range{display:grid;gap:11px;padding:4px 2px 8px}
+.animation-lab-range-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:22px;font-weight:700;letter-spacing:1.5px;color:#7A7A7A}
+.animation-lab-range-heading output{flex:0 0 auto;color:#FFFFFF;font-size:20px;letter-spacing:.5px}
+.animation-lab-range input{width:100%;height:34px;margin:0;accent-color:#FF2FAE;cursor:pointer}
+.animation-lab-composer-page-content.is-style .animation-lab-composer-group .animation-lab-composer-options{grid-template-columns:repeat(6,minmax(0,1fr))}
+.animation-lab-composer-page-content.is-style .animation-lab-composer-option{font-size:13px}
+.animation-lab-composer-page-content.is-interact{gap:13px}
+.animation-lab-composer-subpages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.animation-lab-composer-subpage{min-height:46px;border:1px solid #2E2E2E;border-radius:3px;background:#2E2E2E;color:#FFFFFF;font:700 15px/1 Inter,ui-sans-serif,system-ui,sans-serif;letter-spacing:1px;cursor:pointer}
+.animation-lab-composer-subpage.is-active{border-color:#FF2FAE;background:#FF2FAE;color:#090909}
+.animation-lab-composer-page-content.is-interact .animation-lab-composer-group-label{font-size:20px}
+.animation-lab-composer-page-content.is-interact .animation-lab-composer-options{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.animation-lab-composer-page-content.is-interact .animation-lab-composer-option{min-height:58px;padding-inline:4px;font-size:17px}
+.animation-lab-composer-page-content.is-interact .animation-lab-range-heading{font-size:18px}
+.animation-lab-composer-page-content.is-interact .animation-lab-range-heading output{font-size:18px}
+.animation-lab-composer-page-content.is-interact .animation-lab-composer-group[aria-label="DRAG"] .animation-lab-composer-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+.animation-lab-composer-page-content.is-interact .animation-lab-composer-group[aria-label="DRAG TILT"] .animation-lab-composer-options{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:1000px){.animation-lab-identity{top:76px;left:32px}.animation-lab-composer-panel{top:132px;left:32px;width:min(620px,calc(100vw - 64px));padding:14px;gap:12px}.animation-lab-composer-preview{inset:132px 32px 32px auto;width:calc(100vw - 64px);pointer-events:none;opacity:.2}.animation-lab-composer-pages{gap:5px}.animation-lab-composer-page{min-height:58px;padding:0 4px;font-size:14px;letter-spacing:.3px}.animation-lab-composer-group-label{font-size:19px;letter-spacing:1px}.animation-lab-composer-page-content{gap:12px}.animation-lab-composer-option{min-height:58px;font-size:19px}.animation-lab-composer-page-content.is-compose .animation-lab-composer-option{font-size:16px}.animation-lab-composer-page-content.is-compose .animation-lab-composer-group[aria-label="SURFACE"] .animation-lab-composer-option{font-size:14px}.animation-lab-composer-page-content.is-compose .animation-lab-composer-options{gap:5px}.animation-lab-composer-color-choice{gap:4px;font-size:10px}.animation-lab-composer-color-choice i{width:16px;height:16px}.animation-lab-composer-page-content.is-style .animation-lab-composer-group .animation-lab-composer-options{grid-template-columns:repeat(3,minmax(0,1fr))}.animation-lab-composer-page-content.is-style .animation-lab-composer-option{min-height:52px;font-size:13px}.animation-lab-composer-page-content.is-interact .animation-lab-composer-option{min-height:48px;font-size:13px}.animation-lab-range-heading{font-size:17px}.animation-lab-range-heading output{font-size:16px}}
 @media (prefers-reduced-motion:reduce){.animation-lab-composer-page{transition:none}}

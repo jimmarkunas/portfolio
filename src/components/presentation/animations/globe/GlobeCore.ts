@@ -408,7 +408,7 @@ export class GlobeCore {
     lineUni.uStyle.value = ROUTE_STYLES_LINES[cfg.routeStyle || 'solid'] ?? 0;
 
     this.routeGroup.visible = !!cfg.routesOn;
-    if (previous.surfaceMode !== cfg.surfaceMode || (cfg.surfaceMode === "terrestrial" && previous.density !== cfg.density)) this.buildField();
+    if (previous.surfaceMode !== cfg.surfaceMode || previous.dotDensity !== cfg.dotDensity || (cfg.surfaceMode === "terrestrial" && previous.density !== cfg.density)) this.buildField();
     if (previous.places !== cfg.places || previous.routeMode !== cfg.routeMode || previous.routeStyle !== cfg.routeStyle || previous.routeAltitude !== cfg.routeAltitude || previous.routeDots !== cfg.routeDots || previous.routesOn !== cfg.routesOn) this.buildRoutes();
     if (this.still) this.paintStatic();
   }
@@ -437,9 +437,10 @@ export class GlobeCore {
     this.disposeField();
     const factor = this.tier > 0 ? 1 : 0.45;
     const targetDots = this.cfg.surfaceMode === "dot-orb" ? 8500 : DENSITY_MAP[this.cfg.density];
+    const effectiveDots = Math.max(600, Math.round(targetDots * clamp(this.cfg.dotDensity ?? 1, 0.25, 2) * factor));
     const data = this.cfg.surfaceMode === "dot-orb"
-      ? generateSpherePoints(Math.max(600, Math.round(targetDots * factor)))
-      : generateFieldPoints(Math.max(600, Math.round(targetDots * factor)));
+      ? generateSpherePoints(effectiveDots)
+      : generateFieldPoints(effectiveDots);
     if (!data.count) return;
 
     const geom = new THREE.BufferGeometry();
@@ -609,7 +610,7 @@ export class GlobeCore {
 
   onDown = (e: PointerEvent) => {
     const target = e.target as HTMLElement | null;
-    if (target && target.closest('.mg-interactive')) return;
+    if (!this.cfg.dragEnabled || (target && target.closest('.mg-interactive'))) return;
     this.dragging = true;
     this.flingX = 0;
     this.dragFrom.x = e.clientX;
@@ -642,7 +643,7 @@ export class GlobeCore {
     this.dragFrom.x = e.clientX;
     this.dragFrom.y = e.clientY;
 
-    const SENSITIVITY = 0.0075;
+    const SENSITIVITY = 0.0075 * clamp(this.cfg.dragSensitivity ?? 1, 0.25, 2);
     this.flingX = dx * SENSITIVITY;
     this.spinAngle += this.flingX;
 
@@ -810,7 +811,12 @@ export class GlobeCore {
     if (!this.dragging) {
       this.spinAngle += ((cfg.spin ?? 0.06) * 0.016 + (1 - this.progress) * 0.014) * n;
       this.spinAngle += this.flingX * n;
-      this.flingX *= Math.pow(0.94, n);
+      const inertia = clamp(this.cfg.dragInertia ?? 0.5, 0, 1);
+      // 50% preserves c78's 0.94 decay; the endpoints map to 0.5 and 0.99.
+      const decayPerFrame = inertia <= 0.5
+        ? 0.5 + (0.94 - 0.5) * (inertia / 0.5)
+        : 0.94 + (0.99 - 0.94) * ((inertia - 0.5) / 0.5);
+      this.flingX *= Math.pow(decayPerFrame, n);
       this.tiltAngle += ((cfg.tilt ?? 18) * DEG2RAD - this.tiltAngle) * decay(0.055);
     }
 

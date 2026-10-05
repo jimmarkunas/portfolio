@@ -37,11 +37,16 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
     cursorMode: recipe.hoverPhysics === "source" ? body.cursorMode : recipe.hoverPhysics,
     interactionStrength: recipe.hoverStrength,
     density: body.density,
+    dotDensity: recipe.dotDensity,
+    dragEnabled: recipe.dragEnabled,
+    dragSensitivity: recipe.dragSensitivity,
+    dragInertia: recipe.dragInertia,
+    allowTiltDrag: recipe.dragTilt === "source" ? body.allowTiltDrag : recipe.dragTilt === "on",
     quality: "auto",
     routesOn: true,
     replayOnScroll: true,
     formation: recipe.particleField === "lychee" ? "drift" : body.formation,
-  }), [body, orbit, effectivePalette, surfaceColorProfile, orbitColors, recipe.globeColor, recipe.surfaceShading, recipe.particleField, recipe.surface, recipe.hoverPhysics, recipe.hoverStrength]);
+  }), [body, orbit, effectivePalette, surfaceColorProfile, orbitColors, recipe.globeColor, recipe.surfaceShading, recipe.particleField, recipe.surface, recipe.hoverPhysics, recipe.hoverStrength, recipe.dotDensity, recipe.dragEnabled, recipe.dragSensitivity, recipe.dragInertia, recipe.dragTilt]);
 
   useEffect(() => {
     const host = hostRef.current;

@@ -6,7 +6,7 @@ export type OrbitPresetId = "orbit-1" | "orbit-2" | "orbit-3" | "orbit-4";
 export type ParticleFieldEffect = "off" | "pbds-lab" | "lychee";
 export type GlobeSurfaceMode = "terrestrial" | "dot-orb";
 export type CityUiMode = "show" | "hide";
-export type GlobeColorId = "source" | "magenta" | "white" | "mid" | "line";
+export type GlobeColorId = "source" | "magenta" | "template-magenta" | "white" | "mid" | "line";
 export type GlobeHoverPhysics = "source" | "off" | "repel" | "attract" | "swirl" | "sonar" | "halo" | "wake";
 
 export type GlobeAnimationRecipe = {
@@ -21,6 +21,11 @@ export type GlobeAnimationRecipe = {
   hoverPhysics: GlobeHoverPhysics;
   hoverStrength: number;
   surfaceShading: number;
+  dotDensity: number;
+  dragEnabled: boolean;
+  dragSensitivity: number;
+  dragInertia: number;
+  dragTilt: "source" | "on" | "off";
 };
 
 export interface PlaceItem {
@@ -56,6 +61,10 @@ export interface GlobeConfig {
   palette: GlobePalette;
   surfaceColorProfile?: GlobeSurfaceColorProfile;
   surfaceShading: number;
+  dotDensity: number;
+  dragEnabled: boolean;
+  dragSensitivity: number;
+  dragInertia: number;
   places: PlaceItem[];
   density: "balanced" | "dense" | "ultra";
   dotSize: number;
