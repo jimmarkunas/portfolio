@@ -207,6 +207,7 @@ export const resolveGlobeColor = (color: GlobeColorId): string | null =>
 /** Narrow adapter from accepted PBDS surface lighting colors to the globe field shader. */
 export const PBDS_GLOBE_SURFACE_PROFILES: Record<Exclude<GlobeColorId, "source">, GlobeSurfaceColorProfile> = {
   magenta: {
+    pbdsMagentaParity: true,
     shadow: "#3A0B28", dark: "#7E165A", mid: "#FF2FAE", light: "#FF78CB", hot: "#FF8FD5", hotThreshold: 0.9,
   },
   white: {

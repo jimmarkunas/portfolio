@@ -36,6 +36,7 @@ export interface GlobePalette {
 }
 
 export interface GlobeSurfaceColorProfile {
+  pbdsMagentaParity?: boolean;
   shadow: string;
   dark: string;
   mid: string;

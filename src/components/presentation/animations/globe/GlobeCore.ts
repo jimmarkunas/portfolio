@@ -238,6 +238,7 @@ export class GlobeCore {
       uInkAlpha: { value: 1 },
       uTint: { value: new THREE.Color(0x7fb2ff) },
       uSurfaceLit: { value: 0 },
+      uSurfacePBDSMagenta: { value: 0 },
       uSurfaceShadow: { value: new THREE.Color(0x000000) },
       uSurfaceDark: { value: new THREE.Color(0x000000) },
       uSurfaceMid: { value: new THREE.Color(0xffffff) },
@@ -346,12 +347,22 @@ export class GlobeCore {
     fUni.uTint.value.copy(parseColor(tintColor).rgb);
     const surfaceProfile = cfg.surfaceColorProfile;
     fUni.uSurfaceLit.value = surfaceProfile ? 1 : 0;
+    fUni.uSurfacePBDSMagenta.value = surfaceProfile?.pbdsMagentaParity ? 1 : 0;
     if (surfaceProfile) {
-      fUni.uSurfaceShadow.value.copy(parseColor(surfaceProfile.shadow).rgb);
-      fUni.uSurfaceDark.value.copy(parseColor(surfaceProfile.dark).rgb);
-      fUni.uSurfaceMid.value.copy(parseColor(surfaceProfile.mid).rgb);
-      fUni.uSurfaceLight.value.copy(parseColor(surfaceProfile.light).rgb);
-      fUni.uSurfaceHot.value.copy(parseColor(surfaceProfile.hot).rgb);
+      const setSurfaceColor = (uniform: THREE.IUniform, color: string) => {
+        const parsed = parseColor(color).rgb;
+        if (surfaceProfile.pbdsMagentaParity) {
+          const srgb = parsed.getHex();
+          uniform.value.set(((srgb >> 16) & 0xff) / 255, ((srgb >> 8) & 0xff) / 255, (srgb & 0xff) / 255);
+        } else {
+          uniform.value.copy(parsed);
+        }
+      };
+      setSurfaceColor(fUni.uSurfaceShadow, surfaceProfile.shadow);
+      setSurfaceColor(fUni.uSurfaceDark, surfaceProfile.dark);
+      setSurfaceColor(fUni.uSurfaceMid, surfaceProfile.mid);
+      setSurfaceColor(fUni.uSurfaceLight, surfaceProfile.light);
+      setSurfaceColor(fUni.uSurfaceHot, surfaceProfile.hot);
       fUni.uSurfaceHotThreshold.value = clamp(surfaceProfile.hotThreshold, 0, 1);
     }
     fUni.uBackFade.value = clamp(backFade, 0, 1);
