@@ -17,7 +17,6 @@ uniform float uSizeJitter;
 uniform float uCoastLift;
 uniform float uBackFade;
 uniform float uSurfaceLit;
-uniform float uSurfacePBDSMagenta;
 
 uniform float uCursorMode;
 uniform vec3  uCursor;
@@ -36,7 +35,6 @@ varying float vFade;
 varying float vGrain;
 varying float vPx;
 varying float vLight;
-varying float vPBDSAlpha;
 
 float noise1(float s) {
     return fract(sin(s * 78.233 + 12.9898) * 43758.5453);
@@ -169,24 +167,9 @@ void main() {
 
     vec3 rotatedNormal = normalize(normalMatrix * nrm);
     float facing = rotatedNormal.z;
-    vPBDSAlpha = 1.0;
-    if (uSurfacePBDSMagenta > 0.5) {
-        vec3 lightDirection = normalize(vec3(-0.92, -0.15, 0.35));
-        float nDotL = dot(rotatedNormal, lightDirection);
-        float surfaceIllum = pow(max(0.0, nDotL), 1.9);
-        float effective = max(0.0, nDotL) + 0.234;
-        float illum = pow(min(1.0, effective), 1.6);
-        float rad = sqrt(max(0.0, 1.0 - facing * facing));
-        float limb = pow(min(1.0, rad), 2.2);
-        float brightness = min(1.0, illum * 0.45 + limb * 0.55 + 0.52 * 0.25);
-        vPBDSAlpha = (0.35 + 0.65 * illum) * pow(brightness, 1.25);
-        vFade = smoothstep(-0.12, 0.02, facing) * born;
-        vLight = surfaceIllum;
-    } else {
-        vFade = mix(uBackFade, 1.0, smoothstep(-0.22, 0.28, facing)) * born;
-        float directionalLight = max(dot(rotatedNormal, normalize(vec3(-0.38, 0.52, 0.76))), 0.0);
-        vLight = clamp(0.16 + directionalLight * 0.84, 0.0, 1.0);
-    }
+    vFade = mix(uBackFade, 1.0, smoothstep(-0.22, 0.28, facing)) * born;
+    float directionalLight = max(dot(rotatedNormal, normalize(vec3(-0.38, 0.52, 0.76))), 0.0);
+    vLight = clamp(0.16 + directionalLight * 0.84, 0.0, 1.0);
     vHeat = clamp(heat * uGlow, 0.0, 1.0);
     vGrain = 0.45 + 0.55 * rC;
 }
@@ -197,7 +180,8 @@ uniform vec3  uInk;
 uniform float uInkAlpha;
 uniform vec3  uTint;
 uniform float uSurfaceLit;
-uniform float uSurfacePBDSMagenta;
+uniform float uSurfaceShading;
+uniform vec3  uSurfaceBaseColor;
 uniform vec3  uSurfaceShadow;
 uniform vec3  uSurfaceDark;
 uniform vec3  uSurfaceMid;
@@ -210,7 +194,6 @@ varying float vFade;
 varying float vGrain;
 varying float vPx;
 varying float vLight;
-varying float vPBDSAlpha;
 
 void main() {
     // Round dot with a one-pixel edge regardless of how large it is on screen.
@@ -221,27 +204,20 @@ void main() {
 
     vec3 rgb = mix(uInk, uTint, vHeat);
     if (uSurfaceLit > 0.5) {
-        if (uSurfacePBDSMagenta > 0.5) {
-            float lit = clamp(vLight, 0.0, 1.0);
-            if (lit <= 0.315) {
-                rgb = mix(uSurfaceShadow, uSurfaceDark, lit / 0.315);
-            } else if (lit <= 0.612) {
-                rgb = mix(uSurfaceDark, uSurfaceMid, (lit - 0.315) / (0.612 - 0.315));
-            } else if (lit <= 0.9) {
-                rgb = mix(uSurfaceMid, uSurfaceLight, (lit - 0.612) / (0.9 - 0.612));
-            } else {
-                rgb = mix(uSurfaceLight, uSurfaceHot, (lit - 0.9) / 0.1);
-            }
+        float lit = clamp(vLight, 0.0, 1.0);
+        vec3 shaded = uSurfaceShadow;
+        if (lit <= 0.315) {
+            shaded = mix(uSurfaceShadow, uSurfaceDark, lit / 0.315);
+        } else if (lit <= 0.612) {
+            shaded = mix(uSurfaceDark, uSurfaceMid, (lit - 0.315) / (0.612 - 0.315));
+        } else if (lit <= 0.9) {
+            shaded = mix(uSurfaceMid, uSurfaceLight, (lit - 0.612) / (0.9 - 0.612));
         } else {
-            float lit = clamp(vLight * mix(0.9, 1.1, vGrain), 0.0, 1.0);
-            rgb = mix(uSurfaceShadow, uSurfaceDark, smoothstep(0.08, 0.42, lit));
-            rgb = mix(rgb, uSurfaceMid, smoothstep(0.30, 0.62, lit));
-            rgb = mix(rgb, uSurfaceLight, smoothstep(0.58, 0.88, lit));
-            rgb = mix(rgb, uSurfaceHot, smoothstep(uSurfaceHotThreshold, 1.0, lit));
+            shaded = mix(uSurfaceLight, uSurfaceHot, (lit - 0.9) / 0.1);
         }
+        rgb = mix(uSurfaceBaseColor, shaded, clamp(uSurfaceShading, 0.0, 1.0));
     }
     float a = disc * uInkAlpha * vGrain * vFade * (1.0 + vHeat * 0.85);
-    if (uSurfacePBDSMagenta > 0.5) a = disc * vPBDSAlpha * vFade;
     gl_FragColor = vec4(rgb, clamp(a, 0.0, 1.0));
 }
 `;
@@ -316,8 +292,10 @@ void main() {
 
 export const ROUTE_DOTS_FRAGMENT_SHADER = `
 uniform vec3  uColor;
+uniform vec3  uActiveColor;
 uniform float uRest;
 uniform float uProgress;
+uniform float uStyle;
 
 varying float vComet;
 varying float vFront;
@@ -330,7 +308,8 @@ void main() {
     if (disc <= 0.0) discard;
 
     float a = (uRest + vComet * (1.0 - uRest)) * disc * vFront * uProgress;
-    gl_FragColor = vec4(uColor, clamp(a, 0.0, 1.0));
+    vec3 color = uStyle < 0.5 ? mix(uColor, uActiveColor, vComet) : uColor;
+    gl_FragColor = vec4(color, clamp(a, 0.0, 1.0));
 }
 `;
 
@@ -371,6 +350,7 @@ void main() {
 
 export const ROUTE_LINE_FRAGMENT_SHADER = `
 uniform vec3  uColor;
+uniform vec3  uActiveColor;
 uniform float uTime;
 uniform float uSpeed;
 uniform float uTrail;
@@ -385,6 +365,7 @@ varying float vFront;
 
 void main() {
     float a;
+    float pulse = 0.0;
     if (uStyle < 0.5) {
         // Solid.
         a = uRest;
@@ -399,8 +380,10 @@ void main() {
         float behind = head - vStep;
         if (behind < 0.0) behind += 1.0;
         float comet = pow(clamp(1.0 - behind / max(uTrail, 0.01), 0.0, 1.0), 2.5);
+        pulse = comet;
         a = uRest + comet * (1.0 - uRest);
     }
-    gl_FragColor = vec4(uColor, clamp(a * vFront * uProgress, 0.0, 1.0));
+    vec3 color = uStyle > 1.5 ? mix(uColor, uActiveColor, pulse) : uColor;
+    gl_FragColor = vec4(color, clamp(a * vFront * uProgress, 0.0, 1.0));
 }
 `;

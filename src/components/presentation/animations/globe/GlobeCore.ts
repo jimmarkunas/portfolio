@@ -238,7 +238,8 @@ export class GlobeCore {
       uInkAlpha: { value: 1 },
       uTint: { value: new THREE.Color(0x7fb2ff) },
       uSurfaceLit: { value: 0 },
-      uSurfacePBDSMagenta: { value: 0 },
+      uSurfaceShading: { value: 0 },
+      uSurfaceBaseColor: { value: new THREE.Vector3(1, 1, 1) },
       uSurfaceShadow: { value: new THREE.Color(0x000000) },
       uSurfaceDark: { value: new THREE.Color(0x000000) },
       uSurfaceMid: { value: new THREE.Color(0xffffff) },
@@ -265,6 +266,7 @@ export class GlobeCore {
       uStyle: { value: 0 },
       uProgress: { value: 0 },
       uColor: { value: new THREE.Color(0x5b9bff) },
+      uActiveColor: { value: new THREE.Color(0x5b9bff) },
     };
 
     this.routeMaterial = new THREE.ShaderMaterial({
@@ -287,6 +289,7 @@ export class GlobeCore {
       uDashCount: { value: 18 },
       uResolution: { value: new THREE.Vector2(this.width, this.height) },
       uColor: { value: new THREE.Color(0x5b9bff) },
+      uActiveColor: { value: new THREE.Color(0x5b9bff) },
     };
 
     this.routeLineMaterial = new THREE.ShaderMaterial({
@@ -347,17 +350,15 @@ export class GlobeCore {
     fUni.uTint.value.copy(parseColor(tintColor).rgb);
     const surfaceProfile = cfg.surfaceColorProfile;
     fUni.uSurfaceLit.value = surfaceProfile ? 1 : 0;
-    fUni.uSurfacePBDSMagenta.value = surfaceProfile?.pbdsMagentaParity ? 1 : 0;
+    fUni.uSurfaceShading.value = clamp(cfg.surfaceShading, 0, 1);
     if (surfaceProfile) {
       const setSurfaceColor = (uniform: THREE.IUniform, color: string) => {
         const parsed = parseColor(color).rgb;
-        if (surfaceProfile.pbdsMagentaParity) {
-          const srgb = parsed.getHex();
-          uniform.value.set(((srgb >> 16) & 0xff) / 255, ((srgb >> 8) & 0xff) / 255, (srgb & 0xff) / 255);
-        } else {
-          uniform.value.copy(parsed);
-        }
+        const srgb = parsed.getHex();
+        uniform.value.set(((srgb >> 16) & 0xff) / 255, ((srgb >> 8) & 0xff) / 255, (srgb & 0xff) / 255);
       };
+      const baseSrgb = parseColor(cfg.palette.ink).rgb.getHex();
+      fUni.uSurfaceBaseColor.value.set(((baseSrgb >> 16) & 0xff) / 255, ((baseSrgb >> 8) & 0xff) / 255, (baseSrgb & 0xff) / 255);
       setSurfaceColor(fUni.uSurfaceShadow, surfaceProfile.shadow);
       setSurfaceColor(fUni.uSurfaceDark, surfaceProfile.dark);
       setSurfaceColor(fUni.uSurfaceMid, surfaceProfile.mid);
@@ -379,8 +380,17 @@ export class GlobeCore {
     fUni.uSwell.value = cfg.swell ?? 1.2;
     fUni.uGlow.value = cfg.glow ?? 1;
 
-    const accentParsed = parseColor(accentColor).rgb;
-    rUni.uColor.value.copy(accentParsed);
+    const setRouteColor = (uniform: THREE.IUniform, color: string) => {
+      const parsed = parseColor(color).rgb;
+      if (cfg.routeColorIsSrgb) {
+        const srgb = parsed.getHex();
+        uniform.value.set(((srgb >> 16) & 0xff) / 255, ((srgb >> 8) & 0xff) / 255, (srgb & 0xff) / 255);
+      } else {
+        uniform.value.copy(parsed);
+      }
+    };
+    setRouteColor(rUni.uColor, accentColor);
+    setRouteColor(rUni.uActiveColor, cfg.routeActiveColor);
     rUni.uSpeed.value = cfg.routeSpeed ?? 0.22;
     rUni.uTrail.value = clamp(cfg.routeTrail ?? 0.3, 0.02, 1);
     rUni.uSize.value = cfg.routeSize ?? 6;
@@ -388,7 +398,8 @@ export class GlobeCore {
     rUni.uStyle.value = ROUTE_STYLES_DOTS[cfg.routeStyle || 'comet'] ?? 0;
 
     const lineUni = this.routeLineUniforms;
-    lineUni.uColor.value.copy(accentParsed);
+    setRouteColor(lineUni.uColor, accentColor);
+    setRouteColor(lineUni.uActiveColor, cfg.routeActiveColor);
     lineUni.uSpeed.value = cfg.routeSpeed ?? 0.22;
     lineUni.uTrail.value = clamp(cfg.routeTrail ?? 0.3, 0.02, 1);
     lineUni.uRest.value = clamp(cfg.routeRest ?? 0.32, 0, 1);

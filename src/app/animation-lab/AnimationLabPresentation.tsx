@@ -56,6 +56,7 @@ const fieldChoices: readonly ParticleFieldEffect[] = ["off", "pbds-lab", "lychee
 const surfaceChoices: readonly GlobeSurfaceMode[] = ["terrestrial", "dot-orb"];
 const cityUiChoices: readonly CityUiMode[] = ["show", "hide"];
 const colorChoices: readonly GlobeColorId[] = ["source", "magenta", "white", "mid", "line"];
+const shadingChoices = [0, 0.25, 0.5, 0.75, 1] as const;
 const colorSwatches: Partial<Record<GlobeColorId, string>> = {
   magenta: "#FF2FAE",
   white: "#FFFFFF",
@@ -106,7 +107,8 @@ function GlobeComposerSlide() {
       && source.surface === recipe.surface
       && source.cityUi === recipe.cityUi
       && source.globeColor === recipe.globeColor
-      && source.orbitColor === recipe.orbitColor;
+      && source.orbitColor === recipe.orbitColor
+      && source.surfaceShading === recipe.surfaceShading;
   });
   const selectOriginal = (number: 1 | 2 | 3 | 4) => {
     setRecipe(originalGlobeRecipes[`original-${number}`]);
@@ -153,6 +155,7 @@ function GlobeComposerSlide() {
           <ChoiceGroup label="GLOBE COLOR" choices={colorChoices} selected={recipe.globeColor} onSelect={(globeColor) => setRecipe((current) => ({ ...current, globeColor }))} names={(choice) => `${choice.toUpperCase()} globe color`} buttonContent={colorButton} />
           <ChoiceGroup label="ORBIT COLOR" choices={colorChoices} selected={recipe.orbitColor} onSelect={(orbitColor) => setRecipe((current) => ({ ...current, orbitColor }))} names={(choice) => `${choice.toUpperCase()} orbit color`} buttonContent={colorButton} />
           <ChoiceGroup label="RADIOACTIVE FIELD" choices={fieldChoices} selected={recipe.particleField} onSelect={(particleField) => setRecipe((current) => ({ ...current, particleField }))} names={(choice) => choice === "off" ? "Off" : choice === "pbds-lab" ? "PBDS Lab" : "Lychee"} buttonContent={(choice) => choice === "pbds-lab" ? "PBDS LAB" : choice.toUpperCase()} />
+          <ChoiceGroup label="SHADING" choices={shadingChoices} selected={recipe.surfaceShading} onSelect={(surfaceShading) => setRecipe((current) => ({ ...current, surfaceShading }))} names={(choice) => choice === 0 ? "OFF" : `${Math.round(choice * 100)}%`} buttonContent={(choice) => choice === 0 ? "OFF" : `${Math.round(choice * 100)}%`} />
         </div>}
       </aside>
       <div className="animation-lab-composer-preview">

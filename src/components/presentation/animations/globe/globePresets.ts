@@ -187,10 +187,10 @@ export const orbitPresets: Record<OrbitPresetId, OrbitPreset> = {
 };
 
 export const originalGlobeRecipes: Record<`original-${1 | 2 | 3 | 4}`, GlobeAnimationRecipe> = {
-  "original-1": { globe: "globe-1", locationTag: "tag-1", orbit: "orbit-1", particleField: "off", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source", hoverPhysics: "source", hoverStrength: 1 },
-  "original-2": { globe: "globe-2", locationTag: "tag-2", orbit: "orbit-2", particleField: "off", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source", hoverPhysics: "source", hoverStrength: 1 },
-  "original-3": { globe: "globe-3", locationTag: "tag-3", orbit: "orbit-3", particleField: "off", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source", hoverPhysics: "source", hoverStrength: 1 },
-  "original-4": { globe: "globe-4", locationTag: "tag-4", orbit: "orbit-4", particleField: "lychee", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source", hoverPhysics: "source", hoverStrength: 1 },
+  "original-1": { globe: "globe-1", locationTag: "tag-1", orbit: "orbit-1", particleField: "off", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source", hoverPhysics: "source", hoverStrength: 1, surfaceShading: 0 },
+  "original-2": { globe: "globe-2", locationTag: "tag-2", orbit: "orbit-2", particleField: "off", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source", hoverPhysics: "source", hoverStrength: 1, surfaceShading: 0 },
+  "original-3": { globe: "globe-3", locationTag: "tag-3", orbit: "orbit-3", particleField: "off", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source", hoverPhysics: "source", hoverStrength: 1, surfaceShading: 0 },
+  "original-4": { globe: "globe-4", locationTag: "tag-4", orbit: "orbit-4", particleField: "lychee", surface: "terrestrial", cityUi: "show", globeColor: "source", orbitColor: "source", hoverPhysics: "source", hoverStrength: 1, surfaceShading: 0 },
 };
 
 /** Narrow adapter from canonical PBDS values for globe composition previews. */
@@ -207,7 +207,6 @@ export const resolveGlobeColor = (color: GlobeColorId): string | null =>
 /** Narrow adapter from accepted PBDS surface lighting colors to the globe field shader. */
 export const PBDS_GLOBE_SURFACE_PROFILES: Record<Exclude<GlobeColorId, "source">, GlobeSurfaceColorProfile> = {
   magenta: {
-    pbdsMagentaParity: true,
     shadow: "#3A0B28", dark: "#7E165A", mid: "#FF2FAE", light: "#FF78CB", hot: "#FF8FD5", hotThreshold: 0.9,
   },
   white: {
@@ -220,6 +219,16 @@ export const PBDS_GLOBE_SURFACE_PROFILES: Record<Exclude<GlobeColorId, "source">
     shadow: "#666666", dark: "#A0A0A0", mid: "#E6E6E6", light: "#F2F2F2", hot: "#FFFFFF", hotThreshold: 0.9,
   },
 };
+
+export const PBDS_GLOBE_ORBIT_PROFILES: Record<Exclude<GlobeColorId, "source">, { base: string; active: string }> = {
+  magenta: { base: "#FF65C7", active: "#FF2FAE" },
+  white: { base: "#FFFFFF", active: "#FFFFFF" },
+  mid: { base: "#7A7A7A", active: "#7A7A7A" },
+  line: { base: "#E6E6E6", active: "#E6E6E6" },
+};
+
+export const resolveGlobeOrbitColors = (color: GlobeColorId) =>
+  color === "source" ? null : PBDS_GLOBE_ORBIT_PROFILES[color];
 
 export const resolveGlobeSurfaceProfile = (color: GlobeColorId): GlobeSurfaceColorProfile | null =>
   color === "source" ? null : PBDS_GLOBE_SURFACE_PROFILES[color];

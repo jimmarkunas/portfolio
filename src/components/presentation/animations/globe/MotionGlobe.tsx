@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { GlobeCore } from "./GlobeCore";
 import { DEFAULT_PLACES, type GlobeConfig, type GlobeAnimationRecipe } from "./globeTypes";
-import { globeBodyPresets, locationTagPresets, orbitPresets, resolveGlobeColor, resolveGlobeSurfaceProfile } from "./globePresets";
+import { globeBodyPresets, locationTagPresets, orbitPresets, resolveGlobeColor, resolveGlobeOrbitColors, resolveGlobeSurfaceProfile } from "./globePresets";
 
 export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -14,7 +14,7 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
   const orbit = orbitPresets[recipe.orbit];
   const globeOverride = resolveGlobeColor(recipe.globeColor);
   const surfaceColorProfile = resolveGlobeSurfaceProfile(recipe.globeColor);
-  const orbitOverride = resolveGlobeColor(recipe.orbitColor);
+  const orbitColors = resolveGlobeOrbitColors(recipe.orbitColor);
   const effectivePalette = globeOverride
     ? { ...body.palette, backdrop: "#090909", ink: globeOverride, tint: globeOverride }
     : body.palette;
@@ -27,7 +27,10 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
     pbdsAtmosphereOn: recipe.particleField === "pbds-lab",
     palette: effectivePalette,
     surfaceColorProfile: surfaceColorProfile ?? undefined,
-    routeColor: orbitOverride ?? orbit.routeColor,
+    surfaceShading: recipe.globeColor === "source" ? 0 : recipe.surfaceShading,
+    routeColor: orbitColors?.base ?? orbit.routeColor,
+    routeActiveColor: orbitColors?.active ?? orbit.routeColor,
+    routeColorIsSrgb: orbitColors !== null,
     coastLift: recipe.surface === "dot-orb" ? 0 : body.coastLift,
     places: DEFAULT_PLACES,
     surfaceMode: recipe.surface,
@@ -38,7 +41,7 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
     routesOn: true,
     replayOnScroll: true,
     formation: recipe.particleField === "lychee" ? "drift" : body.formation,
-  }), [body, orbit, effectivePalette, surfaceColorProfile, orbitOverride, recipe.particleField, recipe.surface, recipe.hoverPhysics, recipe.hoverStrength]);
+  }), [body, orbit, effectivePalette, surfaceColorProfile, orbitColors, recipe.globeColor, recipe.surfaceShading, recipe.particleField, recipe.surface, recipe.hoverPhysics, recipe.hoverStrength]);
 
   useEffect(() => {
     const host = hostRef.current;

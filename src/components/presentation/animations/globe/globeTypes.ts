@@ -20,6 +20,7 @@ export type GlobeAnimationRecipe = {
   orbitColor: GlobeColorId;
   hoverPhysics: GlobeHoverPhysics;
   hoverStrength: number;
+  surfaceShading: number;
 };
 
 export interface PlaceItem {
@@ -36,7 +37,6 @@ export interface GlobePalette {
 }
 
 export interface GlobeSurfaceColorProfile {
-  pbdsMagentaParity?: boolean;
   shadow: string;
   dark: string;
   mid: string;
@@ -55,6 +55,7 @@ export interface GlobeConfig {
   pbdsAtmosphereOn: boolean;
   palette: GlobePalette;
   surfaceColorProfile?: GlobeSurfaceColorProfile;
+  surfaceShading: number;
   places: PlaceItem[];
   density: "balanced" | "dense" | "ultra";
   dotSize: number;
@@ -92,6 +93,8 @@ export interface GlobeConfig {
   routeSize: number;
   routeRest: number;
   routeColor: string;
+  routeActiveColor: string;
+  routeColorIsSrgb?: boolean;
   quality: "auto";
 }
 
