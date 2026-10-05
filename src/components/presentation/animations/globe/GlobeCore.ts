@@ -100,7 +100,7 @@ export const getQualityTier = (quality?: 'auto' | 'high' | 'low'): number => {
 const FOV = 45;
 const CAMERA_DISTANCE = 3.5;
 const SWEEP_AXIS = new THREE.Vector3(-0.78, 0.46, 0.42).normalize();
-const CURSOR_MODES: Record<string, number> = { sonar: 0, halo: 1, wake: 2, off: 3 };
+const CURSOR_MODES: Record<string, number> = { sonar: 0, halo: 1, wake: 2, repel: 3, attract: 4, swirl: 5, off: 6 };
 const ROUTE_STYLES_DOTS: Record<string, number> = { comet: 0, beads: 1 };
 const ROUTE_STYLES_LINES: Record<string, number> = { solid: 0, dashed: 1, pulse: 2 };
 const FORMATIONS: Record<string, number> = { sweep: 0, bloom: 1, fall: 2, drift: 3, instant: 4 };
@@ -226,6 +226,7 @@ export class GlobeCore {
       uCursorMode: { value: 0 },
       uCursor: { value: new THREE.Vector3(0, 0, 1) },
       uCursorGain: { value: 0 },
+      uInteractionStrength: { value: 1 },
       uReach: { value: 0.5 },
       uWaveLength: { value: 0.22 },
       uWaveSpeed: { value: 0.55 },
@@ -358,7 +359,8 @@ export class GlobeCore {
     fUni.uSizeJitter.value = clamp(cfg.sizeJitter ?? 0.6, 0, 1);
     fUni.uCoastLift.value = clamp(cfg.coastLift ?? 0.35, 0, 1);
     fUni.uFormation.value = FORMATIONS[cfg.formation || 'sweep'] ?? 0;
-    fUni.uCursorMode.value = CURSOR_MODES[cfg.cursorMode || 'sonar'] ?? 3;
+    fUni.uCursorMode.value = CURSOR_MODES[cfg.cursorMode || 'sonar'] ?? 6;
+    fUni.uInteractionStrength.value = clamp(cfg.interactionStrength ?? 1, 0.25, 2);
     fUni.uReach.value = Math.max(0.05, cfg.reach ?? 0.5);
     fUni.uWaveLength.value = Math.max(0.02, cfg.waveLength ?? 0.22);
     fUni.uWaveSpeed.value = cfg.waveSpeed ?? 0.55;

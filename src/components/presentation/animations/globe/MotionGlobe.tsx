@@ -31,12 +31,14 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
     coastLift: recipe.surface === "dot-orb" ? 0 : body.coastLift,
     places: DEFAULT_PLACES,
     surfaceMode: recipe.surface,
+    cursorMode: recipe.hoverPhysics === "source" ? body.cursorMode : recipe.hoverPhysics,
+    interactionStrength: recipe.hoverStrength,
     density: body.density,
     quality: "auto",
     routesOn: true,
     replayOnScroll: true,
     formation: recipe.particleField === "lychee" ? "drift" : body.formation,
-  }), [body, orbit, effectivePalette, surfaceColorProfile, orbitOverride, recipe.particleField, recipe.surface]);
+  }), [body, orbit, effectivePalette, surfaceColorProfile, orbitOverride, recipe.particleField, recipe.surface, recipe.hoverPhysics, recipe.hoverStrength]);
 
   useEffect(() => {
     const host = hostRef.current;

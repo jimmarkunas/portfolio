@@ -21,6 +21,7 @@ uniform float uSurfaceLit;
 uniform float uCursorMode;
 uniform vec3  uCursor;
 uniform float uCursorGain;
+uniform float uInteractionStrength;
 uniform float uReach;
 uniform float uWaveLength;
 uniform float uWaveSpeed;
@@ -98,7 +99,7 @@ void main() {
     float heat = 0.0;
     float swell = 1.0;
 
-    if (uCursorMode < 2.5 && uCursorGain > 0.002) {
+    if (uCursorMode < 5.5 && uCursorGain > 0.002) {
         float ang = acos(clamp(dot(nrm, uCursor), -1.0, 1.0));
         float env = 1.0 - smoothstep(0.0, uReach, ang);
         env *= env;
@@ -119,12 +120,33 @@ void main() {
             float breathe = 0.78 + 0.22 * sin(uTime * 1.7);
             heat = amp * breathe;
             swell = 1.0 + heat * uSwell * 0.6;
-        } else {
+        } else if (uCursorMode < 2.5) {
             // Wake: the surface is combed along the pointer's travel.
             vec3 tangent = uDrift - dot(uDrift, nrm) * nrm;
             pos += tangent * amp * uCrest * 8.0;
             heat = amp * clamp(length(uDrift) * 24.0, 0.0, 1.0);
             swell = 1.0 + heat * uSwell * 0.5;
+        } else {
+            vec3 contact = normalize(uCursor);
+            vec3 tangentToContact = contact - nrm * dot(contact, nrm);
+            float tangentLength = length(tangentToContact);
+            if (tangentLength > 0.0001) {
+                vec3 toward = tangentToContact / tangentLength;
+                vec3 displacement = vec3(0.0);
+                float physicsScale = amp * uInteractionStrength;
+                if (uCursorMode < 3.5) {
+                    displacement = -toward * physicsScale * uCrest * 2.0;
+                } else if (uCursorMode < 4.5) {
+                    displacement = toward * physicsScale * uCrest * 2.0;
+                } else if (uCursorMode < 5.5) {
+                    vec3 swirlDirection = cross(contact, nrm);
+                    float swirlLength = length(swirlDirection);
+                    if (swirlLength > 0.0001) {
+                        displacement = (swirlDirection / swirlLength) * physicsScale * uCrest * 2.0;
+                    }
+                }
+                pos = normalize(pos + displacement) * radius;
+            }
         }
     }
 
