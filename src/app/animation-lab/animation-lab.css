@@ -52,3 +52,26 @@
 .animation-lab-composer-globe .motion-globe__tag--beacon .motion-globe__marker::before,.animation-lab-composer-globe .motion-globe__tag--beacon .motion-globe__marker::after{position:absolute;inset:-3px;border:1px solid currentColor;border-radius:50%;content:"";animation:animation-lab-beacon-ping 2.4s ease-out infinite}
 .animation-lab-composer-globe .motion-globe__tag--beacon .motion-globe__marker::after{animation-delay:1.2s}
 @media (prefers-reduced-motion:reduce){.animation-lab-composer-option{transition:none}.animation-lab-composer-globe .motion-globe__tag--beacon .motion-globe__marker::before,.animation-lab-composer-globe .motion-globe__tag--beacon .motion-globe__marker::after{animation:none}}
+.animation-lab-composer-panel{display:flex;flex-direction:column;gap:16px}
+.animation-lab-composer-pages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.animation-lab-composer-page{min-width:0;min-height:96px;padding:0 8px;border:1px solid #2E2E2E;border-radius:3px;background:#2E2E2E;color:#FFFFFF;font:700 22px/1 Inter,ui-sans-serif,system-ui,sans-serif;letter-spacing:1px;cursor:pointer}
+.animation-lab-composer-page:hover{border-color:#7A7A7A}
+.animation-lab-composer-page:focus-visible{outline:2px solid #FF2FAE;outline-offset:2px}
+.animation-lab-composer-page.is-active{border-color:#FF2FAE;background:#FF2FAE;color:#090909}
+.animation-lab-composer-page-content{min-width:0;display:grid;align-content:start;gap:18px}
+.animation-lab-composer-page-content.is-presets{grid-template-columns:minmax(0,1fr)}
+.animation-lab-composer-page-content.is-presets .animation-lab-composer-options{grid-template-columns:repeat(4,minmax(0,1fr))}
+.animation-lab-composer-page-content.is-compose{grid-template-columns:repeat(2,minmax(0,1fr))}
+.animation-lab-composer-page-content.is-compose .animation-lab-composer-group[aria-label="GLOBE"] .animation-lab-composer-options,.animation-lab-composer-page-content.is-compose .animation-lab-composer-group[aria-label="LOCATION TAGS"] .animation-lab-composer-options,.animation-lab-composer-page-content.is-compose .animation-lab-composer-group[aria-label="ORBIT"] .animation-lab-composer-options{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.animation-lab-composer-page-content.is-style{grid-template-columns:minmax(0,1fr)}
+.animation-lab-composer-page-content.is-style .animation-lab-composer-group{grid-column:1}
+.animation-lab-composer-page-content.is-style .animation-lab-composer-group:not([aria-label="RADIOACTIVE FIELD"]) .animation-lab-composer-options{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.animation-lab-composer-page-content.is-style .animation-lab-composer-group[aria-label="RADIOACTIVE FIELD"] .animation-lab-composer-options{grid-template-columns:repeat(3,minmax(0,1fr))}
+.animation-lab-composer-page-content.is-style .animation-lab-composer-option{min-height:96px;padding-inline:4px;font-size:15px;letter-spacing:0}
+.animation-lab-composer-color-choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
+.animation-lab-composer-color-choice i{display:block;width:22px;height:22px;border:1px solid #7A7A7A;border-radius:50%;background-color:#F5F5F2}
+.animation-lab-composer-color-choice i.is-source{background:repeating-linear-gradient(135deg,#F5F5F2 0 4px,#7A7A7A 4px 8px)}
+.animation-lab-composer-page-content.is-compose .animation-lab-composer-option{font-size:22px;letter-spacing:0}
+.animation-lab-composer-page-content.is-compose .animation-lab-composer-group[aria-label="SURFACE"] .animation-lab-composer-option{font-size:16px}
+.animation-lab-composer-page-content.is-compose .animation-lab-composer-group[aria-label="CITY UI"] .animation-lab-composer-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (prefers-reduced-motion:reduce){.animation-lab-composer-page{transition:none}}

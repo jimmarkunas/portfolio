@@ -1,12 +1,12 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { PresentationShell, PresentationSlideCanvas } from "@/components/presentation/PresentationShell";
 import type { PresentationSlideManifestEntry } from "@/components/presentation/presentationTypes";
 import type { PresentationNavigationCopy } from "@/lib/presentation";
 import { originalGlobeRecipes } from "@/components/presentation/animations/globe/globePresets";
-import type { GlobeAnimationRecipe, GlobePresetId, LocationTagPresetId, OrbitPresetId, ParticleFieldEffect } from "@/components/presentation/animations/globe/globeTypes";
+import type { CityUiMode, GlobeAnimationRecipe, GlobeColorId, GlobePresetId, GlobeSurfaceMode, LocationTagPresetId, OrbitPresetId, ParticleFieldEffect } from "@/components/presentation/animations/globe/globeTypes";
 import { orbAppearanceProfiles, orbPresets } from "@/components/pbds/orb/orbPresets";
 
 const MotionGlobe = dynamic(
@@ -59,47 +59,68 @@ const globeChoices: readonly GlobePresetId[] = ["globe-1", "globe-2", "globe-3",
 const tagChoices: readonly LocationTagPresetId[] = ["tag-1", "tag-2", "tag-3", "tag-4"];
 const orbitChoices: readonly OrbitPresetId[] = ["orbit-1", "orbit-2", "orbit-3", "orbit-4"];
 const fieldChoices: readonly ParticleFieldEffect[] = ["off", "pbds-lab", "lychee"];
+const surfaceChoices: readonly GlobeSurfaceMode[] = ["terrestrial", "dot-orb"];
+const cityUiChoices: readonly CityUiMode[] = ["show", "hide"];
+const colorChoices: readonly GlobeColorId[] = ["source", "magenta", "white", "mid", "line"];
+const colorSwatches: Partial<Record<GlobeColorId, string>> = {
+  magenta: "#FF2FAE",
+  white: "#FFFFFF",
+  mid: "#7A7A7A",
+  line: "#E6E6E6",
+};
+type ComposerPage = "presets" | "compose" | "style";
 
-function ChoiceGroup<T extends string>({
+function ChoiceGroup<T extends string | number>({
   label,
   choices,
   selected,
   onSelect,
   names,
+  buttonContent,
 }: {
   label: string;
   choices: readonly T[];
   selected: T | null;
   onSelect: (choice: T) => void;
   names: (choice: T) => string;
+  buttonContent?: (choice: T, index: number) => ReactNode;
 }) {
   return <div className="animation-lab-composer-group" role="group" aria-label={label}>
     <span className="animation-lab-composer-group-label">{label}</span>
     <div className="animation-lab-composer-options">
       {choices.map((choice, index) => <button
-        key={choice}
+        key={`${typeof choice}:${choice}`}
         type="button"
         className={`animation-lab-composer-option${selected === choice ? " is-active" : ""}`}
         aria-label={names(choice)}
         aria-pressed={selected === choice}
         onClick={() => onSelect(choice)}
-      >{label === "RADIOACTIVE FIELD" ? names(choice) : index + 1}</button>)}
+      >{buttonContent ? buttonContent(choice, index) : names(choice)}</button>)}
     </div>
   </div>;
 }
 
 function GlobeComposerSlide() {
   const [recipe, setRecipe] = useState<GlobeAnimationRecipe>(originalGlobeRecipes["original-1"]);
+  const [page, setPage] = useState<ComposerPage>("compose");
   const activeOriginal = originals.find((original) => {
     const source = originalGlobeRecipes[original];
     return source.globe === recipe.globe
       && source.locationTag === recipe.locationTag
       && source.orbit === recipe.orbit
-      && source.particleField === recipe.particleField;
+      && source.particleField === recipe.particleField
+      && source.surface === recipe.surface
+      && source.cityUi === recipe.cityUi
+      && source.globeColor === recipe.globeColor
+      && source.orbitColor === recipe.orbitColor;
   });
   const selectOriginal = (number: 1 | 2 | 3 | 4) => {
     setRecipe(originalGlobeRecipes[`original-${number}`]);
   };
+  const colorButton = (choice: GlobeColorId) => <span className="animation-lab-composer-color-choice">
+    <span>{choice.toUpperCase()}</span>
+    <i className={choice === "source" ? "is-source" : undefined} style={choice === "source" ? undefined : { backgroundColor: colorSwatches[choice] }} aria-hidden="true" />
+  </span>;
 
   return <PresentationSlideCanvas key="animation-globe-composer">
     <section className="animation-lab-slide animation-lab-composer" aria-label="Globe Composer">
@@ -108,41 +129,37 @@ function GlobeComposerSlide() {
         <span>GLOBE COMPOSER</span>
       </div>
       <aside className="animation-lab-composer-panel" aria-label="Globe composition controls">
-        <ChoiceGroup
-          label="ORIGINAL"
-          choices={[1, 2, 3, 4] as const}
-          selected={activeOriginal ? Number(activeOriginal.slice(-1)) as 1 | 2 | 3 | 4 : null}
-          onSelect={selectOriginal}
-          names={(choice) => `Original ${choice}`}
-        />
-        <ChoiceGroup
-          label="GLOBE"
-          choices={globeChoices}
-          selected={recipe.globe}
-          onSelect={(globe) => setRecipe((current) => ({ ...current, globe }))}
-          names={(choice) => `Globe ${choice.slice(-1)}`}
-        />
-        <ChoiceGroup
-          label="LOCATION TAGS"
-          choices={tagChoices}
-          selected={recipe.locationTag}
-          onSelect={(locationTag) => setRecipe((current) => ({ ...current, locationTag }))}
-          names={(choice) => `Location tags ${choice.slice(-1)}`}
-        />
-        <ChoiceGroup
-          label="ORBIT"
-          choices={orbitChoices}
-          selected={recipe.orbit}
-          onSelect={(orbit) => setRecipe((current) => ({ ...current, orbit }))}
-          names={(choice) => `Orbit ${choice.slice(-1)}`}
-        />
-        <ChoiceGroup
-          label="RADIOACTIVE FIELD"
-          choices={fieldChoices}
-          selected={recipe.particleField}
-          onSelect={(particleField) => setRecipe((current) => ({ ...current, particleField }))}
-          names={(choice) => choice === "off" ? "Off" : choice === "pbds-lab" ? "PBDS Lab" : "Lychee"}
-        />
+        <nav className="animation-lab-composer-pages" aria-label="Composer control pages">
+          {(["presets", "compose", "style"] as const).map((composerPage) => <button
+            key={composerPage}
+            type="button"
+            className={`animation-lab-composer-page${page === composerPage ? " is-active" : ""}`}
+            aria-pressed={page === composerPage}
+            onClick={() => setPage(composerPage)}
+          >{composerPage.toUpperCase()}</button>)}
+        </nav>
+        {page === "presets" && <div className="animation-lab-composer-page-content is-presets">
+          <ChoiceGroup
+            label="ORIGINAL"
+            choices={[1, 2, 3, 4] as const}
+            selected={activeOriginal ? Number(activeOriginal.slice(-1)) as 1 | 2 | 3 | 4 : null}
+            onSelect={selectOriginal}
+            names={(choice) => `Original ${choice}`}
+            buttonContent={(choice) => String(choice)}
+          />
+        </div>}
+        {page === "compose" && <div className="animation-lab-composer-page-content is-compose">
+          <ChoiceGroup label="GLOBE" choices={globeChoices} selected={recipe.globe} onSelect={(globe) => setRecipe((current) => ({ ...current, globe }))} names={(choice) => `Globe ${choice.slice(-1)}`} buttonContent={(_, index) => String(index + 1)} />
+          <ChoiceGroup label="LOCATION TAGS" choices={tagChoices} selected={recipe.locationTag} onSelect={(locationTag) => setRecipe((current) => ({ ...current, locationTag }))} names={(choice) => `Location tags ${choice.slice(-1)}`} buttonContent={(_, index) => String(index + 1)} />
+          <ChoiceGroup label="ORBIT" choices={orbitChoices} selected={recipe.orbit} onSelect={(orbit) => setRecipe((current) => ({ ...current, orbit }))} names={(choice) => `Orbit ${choice.slice(-1)}`} buttonContent={(_, index) => String(index + 1)} />
+          <ChoiceGroup label="SURFACE" choices={surfaceChoices} selected={recipe.surface} onSelect={(surface) => setRecipe((current) => ({ ...current, surface }))} names={(choice) => choice === "dot-orb" ? "Dot orb" : "Terrestrial"} buttonContent={(choice) => choice === "dot-orb" ? "DOT ORB" : "TERRESTRIAL"} />
+          <ChoiceGroup label="CITY UI" choices={cityUiChoices} selected={recipe.cityUi} onSelect={(cityUi) => setRecipe((current) => ({ ...current, cityUi }))} names={(choice) => choice.toUpperCase()} buttonContent={(choice) => choice.toUpperCase()} />
+        </div>}
+        {page === "style" && <div className="animation-lab-composer-page-content is-style">
+          <ChoiceGroup label="GLOBE COLOR" choices={colorChoices} selected={recipe.globeColor} onSelect={(globeColor) => setRecipe((current) => ({ ...current, globeColor }))} names={(choice) => `${choice.toUpperCase()} globe color`} buttonContent={colorButton} />
+          <ChoiceGroup label="ORBIT COLOR" choices={colorChoices} selected={recipe.orbitColor} onSelect={(orbitColor) => setRecipe((current) => ({ ...current, orbitColor }))} names={(choice) => `${choice.toUpperCase()} orbit color`} buttonContent={colorButton} />
+          <ChoiceGroup label="RADIOACTIVE FIELD" choices={fieldChoices} selected={recipe.particleField} onSelect={(particleField) => setRecipe((current) => ({ ...current, particleField }))} names={(choice) => choice === "off" ? "Off" : choice === "pbds-lab" ? "PBDS Lab" : "Lychee"} buttonContent={(choice) => choice === "pbds-lab" ? "PBDS LAB" : choice.toUpperCase()} />
+        </div>}
       </aside>
       <div className="animation-lab-composer-preview">
         {recipe.particleField === "pbds-lab" && <div className="animation-lab-composer-field" aria-hidden="true">
