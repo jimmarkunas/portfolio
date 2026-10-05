@@ -57,7 +57,7 @@ export const k2RevampCaseStudy = {
       },
       {
         "label": "Contentstack",
-        "icon": "/tool-icons/svg/contentstack-logo.svg"
+        "icon": "/tool-icons/svg/contentstack-logo.png"
       },
       {
         "label": "WordPress",
@@ -65,7 +65,7 @@ export const k2RevampCaseStudy = {
       },
       {
         "label": "Quivers",
-        "icon": "/tool-icons/svg/quivers-logo.svg"
+        "icon": "/tool-icons/svg/quivers-logo.png"
       }
     ],
     "problem": "Demandware was sunsetting, reconciliation across systems was too manual, and nobody had a clean answer for how Quivers, Avante, payments, CMS, SEO, and nine storefronts were supposed to work together in SaaS. The business needed a model that could move at speedboat speed without turning headless commerce into an engineering science project.",

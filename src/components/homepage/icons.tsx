@@ -47,11 +47,11 @@ function ExperienceToolIcon({ src }: { src: string }) {
 }
 
 export function GanttIcon() {
-  return <ExperienceToolIcon src="/tool-icons/svg/icon-gantt.svg" />
+  return <ExperienceToolIcon src="/tool-icons/svg/icon-gantt.png" />
 }
 
 export function NetworkIcon() {
-  return <ExperienceToolIcon src="/tool-icons/svg/icon-network.svg" />
+  return <ExperienceToolIcon src="/tool-icons/svg/icon-network.png" />
 }
 
 export function CodeIcon() {
@@ -59,7 +59,7 @@ export function CodeIcon() {
 }
 
 export function StatsIcon() {
-  return <ExperienceToolIcon src="/tool-icons/svg/icon-stats.svg" />
+  return <ExperienceToolIcon src="/tool-icons/svg/icon-stats.png" />
 }
 
 export function ZentroxLogo() {

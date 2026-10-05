@@ -117,7 +117,7 @@ export const siteContent = {
     title: "Marquee Projects I've Led",
     logos: [
       {
-        src: "/company-logos/svg/method-logo.svg",
+        src: "/company-logos/svg/method-logo.png",
         alt: "Method",
         caseStudyHref: "/work/method",
         scaleClass: "scale-110 md:scale-115 lg:scale-125",
@@ -147,7 +147,7 @@ export const siteContent = {
         scaleClass: "scale-110 md:scale-115 lg:scale-125",
       },
       {
-        src: "/company-logos/svg/mm-logo.svg",
+        src: "/company-logos/svg/mm-logo.png",
         alt: "Mrs. Meyer's Clean Day",
         caseStudyHref: "/work/mm",
         scaleClass: "scale-110 md:scale-115 lg:scale-125",

@@ -72,7 +72,7 @@ export const modereRevampCaseStudy = {
       },
       {
         "label": "Contentstack",
-        "icon": "/tool-icons/svg/contentstack-logo.svg"
+        "icon": "/tool-icons/svg/contentstack-logo.png"
       },
       {
         "label": "Azure",

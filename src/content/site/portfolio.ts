@@ -41,35 +41,35 @@ type PortfolioSectionContent = {
 export const siteContent = {
   portfolioShowcase: {
     topRow: [
-      { href: "/work/dtv01/", src: "/portfolio-gallery/directv02.svg", alt: "DIRECTV project", aspectRatio: "433 / 240" },
+      { href: "/work/dtv01/", src: "/portfolio-gallery/directv02.png", alt: "DIRECTV project", aspectRatio: "433 / 240" },
       { href: "/work/cps/", src: "/portfolio-gallery/cps.webp", alt: "CPS project", aspectRatio: "433 / 240" },
-      { href: "/work/newyorklife/", src: "/portfolio-gallery/nyl.svg", alt: "New York Life project", aspectRatio: "433 / 240" },
+      { href: "/work/newyorklife/", src: "/portfolio-gallery/nyl.png", alt: "New York Life project", aspectRatio: "433 / 240" },
     ] satisfies PortfolioShowcaseCard[],
-    feature: { href: "/work/modere/", src: "/portfolio-gallery/modere.svg", alt: "Modere project", aspectRatio: "882 / 500" } satisfies PortfolioShowcaseCard,
+    feature: { href: "/work/modere/", src: "/portfolio-gallery/modere.png", alt: "Modere project", aspectRatio: "882 / 500" } satisfies PortfolioShowcaseCard,
     sideStack: [
-      { href: "/work/bi/", src: "/portfolio-gallery/bi.svg", alt: "BI project", aspectRatio: "433 / 250" },
-      { href: "/work/mm/", src: "/portfolio-gallery/mm.svg", alt: "MM project", aspectRatio: "433 / 250" },
+      { href: "/work/bi/", src: "/portfolio-gallery/bi.png", alt: "BI project", aspectRatio: "433 / 250" },
+      { href: "/work/mm/", src: "/portfolio-gallery/mm.png", alt: "MM project", aspectRatio: "433 / 250" },
     ] satisfies PortfolioShowcaseCard[],
     middleRow: [
       { href: "/work/method/", src: "/portfolio-gallery/method.webp", alt: "Method project", aspectRatio: "660 / 300" },
-      { href: "/work/murad/", src: "/portfolio-gallery/murad.svg", alt: "Murad project", aspectRatio: "660 / 300" },
+      { href: "/work/murad/", src: "/portfolio-gallery/murad.png", alt: "Murad project", aspectRatio: "660 / 300" },
     ] satisfies PortfolioShowcaseCard[],
     lowerRow: [
-      { href: "/work/k2/", src: "/portfolio-gallery/k2.svg", alt: "K2 project", aspectRatio: "660 / 300" },
+      { href: "/work/k2/", src: "/portfolio-gallery/k2.png", alt: "K2 project", aspectRatio: "660 / 300" },
       { href: "/work/cbdistillery/", src: "/portfolio-gallery/cbdistillery.webp", alt: "CBDistillery project", aspectRatio: "660 / 300" },
     ] satisfies PortfolioShowcaseCard[],
     lowerMiddleRow: [
-      { href: "/work/lego/", src: "/portfolio-gallery/lego.svg", alt: "LEGO project", aspectRatio: "660 / 300" },
+      { href: "/work/lego/", src: "/portfolio-gallery/lego.png", alt: "LEGO project", aspectRatio: "660 / 300" },
       { href: "/work/aa/", src: "/portfolio-gallery/aa.webp", alt: "American Apparel project", aspectRatio: "660 / 300" },
     ] satisfies PortfolioShowcaseCard[],
     wideRows: [
-      { href: "/work/foh/", src: "/portfolio-gallery/foh.svg", alt: "FOH project", aspectRatio: "1336 / 460" },
+      { href: "/work/foh/", src: "/portfolio-gallery/foh.png", alt: "FOH project", aspectRatio: "1336 / 460" },
       { href: "/work/dtv02/", src: "/portfolio-gallery/directv01.webp", alt: "DIRECTV project", aspectRatio: "1336 / 460" },
     ] satisfies PortfolioShowcaseCard[],
   },
   founderShowcase: [
-    { href: "/work/zevo/", src: "/portfolio-gallery/zevo.svg", alt: "ZEVO project", aspectRatio: "703 / 282" },
-    { href: "/work/cwg/", src: "/portfolio-gallery/cwg.svg", alt: "CWG project", aspectRatio: "703 / 282" },
+    { href: "/work/zevo/", src: "/portfolio-gallery/zevo.png", alt: "ZEVO project", aspectRatio: "703 / 282" },
+    { href: "/work/cwg/", src: "/portfolio-gallery/cwg.png", alt: "CWG project", aspectRatio: "703 / 282" },
   ] satisfies PortfolioShowcaseCard[],
 } satisfies PortfolioContent
 

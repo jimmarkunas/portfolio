@@ -12,7 +12,7 @@ type PastClientsSectionProps = {
 
 const clientLogos = [
   {
-    src: "/company-logos/svg/disney-logo.svg",
+    src: "/company-logos/svg/disney-logo.png",
     alt: "Disney",
     scaleClass: "scale-110 md:scale-115 lg:scale-125",
   },

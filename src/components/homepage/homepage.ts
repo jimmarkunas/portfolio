@@ -104,7 +104,7 @@ const fallbackHomepageText = {
     {
       company: "Mrs. Meyer's",
       href: "/work/mm",
-      logoSrc: "/company-logos/svg/mm-logo.svg",
+      logoSrc: "/company-logos/svg/mm-logo.png",
       situation:
         "No DTC channel, no owned customer relationship, and enterprise systems not built for consumer commerce.",
       whatIDid:
@@ -115,7 +115,7 @@ const fallbackHomepageText = {
     {
       company: "Method",
       href: "/work/method",
-      logoSrc: "/company-logos/svg/method-logo.svg",
+      logoSrc: "/company-logos/svg/method-logo.png",
       situation:
         "Strong brand equity but no DTC channel, with pressure to launch fast on shared enterprise rails.",
       whatIDid:

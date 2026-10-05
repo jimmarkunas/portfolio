@@ -17,7 +17,7 @@ Audit date: 2026-07-15
 - `BreadcrumbHomeIcon` from `src/components/case-study/template/CaseStudyTemplateIcons.tsx` for breadcrumbs and home links
 - `ProofPointArrowIcon` from `src/components/case-study/template/CaseStudyTemplateIcons.tsx` for proof points, bullets, and callout arrows
 - `UserExperienceIcon` from `src/components/case-study/diagram-shared/SCJDiagramPrimitives.tsx` for generic UX-layer badges
-- `public/tool-icons/svg/icon-code.svg`, `icon-gantt.svg`, `icon-network.svg`, `icon-stats.svg`, `icon-shopping-bag.svg`, and `icon-web.svg` for generic diagram labels and capability badges
+- `public/tool-icons/svg/icon-code.svg`, `icon-gantt.png`, `icon-network.png`, `icon-stats.png`, `icon-shopping-bag.svg`, and `icon-web.svg` for generic diagram labels and capability badges
 
 ## Reusable Custom Non-Logo Icon Components
 
@@ -50,16 +50,16 @@ Audit date: 2026-07-15
 | `svg/icon-dashboard.svg` | Generic dashboard glyph |
 | `svg/icon-database.svg` | Generic database glyph |
 | `svg/icon-email.svg` | Generic email glyph |
-| `svg/icon-gantt.svg` | Generic Gantt glyph; wrapped by `GanttIcon` |
+| `svg/icon-gantt.png` | Generic Gantt glyph; wrapped by `GanttIcon` |
 | `svg/icon-headphones.svg` | Generic media / support glyph |
 | `svg/icon-laptop.svg` | Generic laptop glyph; overlaps with `LaptopIcon` |
 | `svg/icon-mobile.svg` | Generic mobile glyph |
-| `svg/icon-network.svg` | Generic network glyph; wrapped by `NetworkIcon` |
+| `svg/icon-network.png` | Generic network glyph; wrapped by `NetworkIcon` |
 | `svg/icon-pie-chart.svg` | Generic analytics glyph |
 | `svg/icon-shipping.svg` | Generic shipping / fulfillment glyph |
 | `svg/icon-shopping-bag.svg` | Generic commerce glyph; overlaps with `ShoppingBag` |
 | `svg/icon-slider.svg` | Generic merchandising / slider glyph |
-| `svg/icon-stats.svg` | Generic stats glyph; wrapped by `StatsIcon` |
+| `svg/icon-stats.png` | Generic stats glyph; wrapped by `StatsIcon` |
 | `svg/icon-system.svg` | Generic system glyph |
 | `svg/icon-tablet.svg` | Generic tablet glyph |
 | `svg/icon-ugc.svg` | Generic user-generated-content glyph |
@@ -70,7 +70,7 @@ Audit date: 2026-07-15
 
 Notable consumers:
 
-- `src/components/homepage/icons.tsx` wraps `icon-gantt.svg`, `icon-network.svg`, `icon-code.svg`, and `icon-stats.svg`
+- `src/components/homepage/icons.tsx` wraps `icon-gantt.png`, `icon-network.png`, `icon-code.svg`, and `icon-stats.png`
 - `src/components/case-study/diagram-config/scj-architecture.config.ts` maps many of the generic glyphs above directly into the SCJ architecture diagram
 - `src/components/case-study/diagram-shared/BiDiagramCards.tsx` consumes `icon-tablet.svg` and `icon-mobile.svg` directly as generic device badges
 
@@ -137,7 +137,7 @@ Notable consumers:
 | `BreadcrumbHomeIcon`, `House`-style home icons | Same breadcrumb/home concept | Reuse the existing breadcrumb icon before drawing a new home glyph |
 | `ProofPointArrowIcon`, `ArrowRight` | Same proof-point / bullet arrow concept | Reuse the proof-point arrow when the arrow is used as a text cue |
 | `UserExperienceIcon`, `ShoppingBag`, `public/tool-icons/svg/icon-shopping-bag.svg` | Same commerce/experience badge concept | Prefer the shared badge when the use case is UI chrome rather than a brand logo |
-| `GanttIcon`, `NetworkIcon`, `CodeIcon`, `StatsIcon` and `public/tool-icons/svg/icon-gantt.svg`, `icon-network.svg`, `icon-code.svg`, `icon-stats.svg` | The components are thin wrappers around the generic assets | Reuse the wrapper or the asset, but do not redraw them inline |
+| `GanttIcon`, `NetworkIcon`, `CodeIcon`, `StatsIcon` and `public/tool-icons/svg/icon-gantt.png`, `icon-network.png`, `icon-code.svg`, `icon-stats.png` | The components are thin wrappers around the generic assets | Reuse the wrapper or the asset, but do not redraw them inline |
 | `public/tool-icons/svg/icon-user.svg`, `icon-user-blk.svg`, `iscon-user-02.svg` | Multiple user silhouettes with very similar semantics | Reuse the closest existing user glyph instead of adding another user icon |
 | `DiagramGlyph` database/monitor/devices shapes and `public/tool-icons/svg/icon-database.svg`, `icon-computer.svg`, `icon-mobile.svg` | Same diagram concepts in two rendering styles | Use the diagram glyph when a line-art connector style is needed; use the asset glyph when you want the shared tool-icon language |
 
@@ -225,7 +225,7 @@ svg/bc-logo-blk.svg
 svg/bc-logo-icon.svg
 svg/bc-logo.svg
 svg/contentful-logo.svg
-svg/contentstack-logo.svg
+svg/contentstack-logo.png
 svg/cps-energy-logo.svg
 svg/domo-logo.svg
 svg/epicor-logo.svg
@@ -240,7 +240,7 @@ svg/mulesoft-logo.svg
 svg/oracle-logo.svg
 svg/ordergroove-logo.svg
 svg/pimcore-logo.svg
-svg/quivers-logo.svg
+svg/quivers-logo.png
 svg/salesforce-logo.svg
 svg/salsify-logo.svg
 svg/sap-logo.svg

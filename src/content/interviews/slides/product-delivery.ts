@@ -37,8 +37,8 @@ export const slides = {
         logos: [
           { id: "bi", src: "/panels/02-interview/bi-logo-int.svg", alt: "Boehringer Ingelheim" },
           { id: "lego", src: "/panels/02-interview/lego-logo-int.svg", alt: "LEGO" },
-          { id: "method", src: "/panels/02-interview/method-logo-int.svg", alt: "method" },
-          { id: "mm", src: "/panels/02-interview/mm-logo-int.svg", alt: "Mrs. MEYER'S" },
+          { id: "method", src: "/panels/02-interview/method-logo-int.png", alt: "method" },
+          { id: "mm", src: "/panels/02-interview/mm-logo-int.png", alt: "Mrs. MEYER'S" },
           { id: "modere", src: "/panels/02-interview/modere-logo-int.svg", alt: "MODERE" },
           { id: "nyl", src: "/panels/02-interview/nyl-logo-int.svg", alt: "New York Life" },
         ],
