@@ -48,6 +48,7 @@ export type PlaceMarker = "beacon" | "pin";
 
 export interface GlobeConfig {
   surfaceMode: GlobeSurfaceMode;
+  pbdsAtmosphereOn: boolean;
   palette: GlobePalette;
   surfaceColorProfile?: GlobeSurfaceColorProfile;
   places: PlaceItem[];

@@ -24,6 +24,7 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
   const config = useMemo<GlobeConfig>(() => ({
     ...body,
     ...orbit,
+    pbdsAtmosphereOn: recipe.particleField === "pbds-lab",
     palette: effectivePalette,
     surfaceColorProfile: surfaceColorProfile ?? undefined,
     routeColor: orbitOverride ?? orbit.routeColor,

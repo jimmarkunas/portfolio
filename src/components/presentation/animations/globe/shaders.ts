@@ -191,6 +191,39 @@ void main() {
 }
 `;
 
+export const PBDS_ATMOSPHERE_VERTEX_SHADER = `
+varying vec3 vLocalNormal;
+varying vec3 vViewNormal;
+
+void main() {
+    vec4 viewPosition = modelViewMatrix * vec4(position, 1.0);
+    vLocalNormal = normalize(normal);
+    vViewNormal = normalize(normalMatrix * normal);
+    gl_Position = projectionMatrix * viewPosition;
+}
+`;
+
+export const PBDS_ATMOSPHERE_FRAGMENT_SHADER = `
+uniform float uProgress;
+varying vec3 vLocalNormal;
+varying vec3 vViewNormal;
+
+void main() {
+    float viewFacing = abs(normalize(vViewNormal).z);
+    float fresnel = pow(clamp(1.0 - viewFacing, 0.0, 1.0), 2.4);
+    float directional = dot(normalize(vLocalNormal), normalize(vec3(-0.55, 0.35, 0.75)));
+    directional = smoothstep(-0.4, 0.8, directional);
+    float entrance = smoothstep(0.15, 0.9, uProgress);
+    float heat = fresnel * mix(0.30, 1.0, directional) * entrance;
+    vec3 outerColor = vec3(1.0, 0.1843, 0.6824);
+    vec3 midColor = vec3(1.0, 0.3961, 0.7804);
+    vec3 hotColor = vec3(1.0, 0.9686, 0.9882);
+    vec3 color = mix(outerColor, midColor, smoothstep(0.08, 0.55, heat));
+    color = mix(color, hotColor, smoothstep(0.65, 0.98, heat));
+    gl_FragColor = vec4(color, heat * 0.72);
+}
+`;
+
 export const ROUTE_DOTS_VERTEX_SHADER = `
 attribute float aStep;
 attribute float aOffset;

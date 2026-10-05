@@ -7,16 +7,10 @@ import type { PresentationSlideManifestEntry } from "@/components/presentation/p
 import type { PresentationNavigationCopy } from "@/lib/presentation";
 import { originalGlobeRecipes } from "@/components/presentation/animations/globe/globePresets";
 import type { CityUiMode, GlobeAnimationRecipe, GlobeColorId, GlobePresetId, GlobeSurfaceMode, LocationTagPresetId, OrbitPresetId, ParticleFieldEffect } from "@/components/presentation/animations/globe/globeTypes";
-import { orbAppearanceProfiles, orbPresets } from "@/components/pbds/orb/orbPresets";
 
 const MotionGlobe = dynamic(
   () => import("@/components/presentation/animations/globe/MotionGlobe").then(({ MotionGlobe: Globe }) => Globe),
   { ssr: false, loading: () => <div className="animation-lab-globe-loading" aria-label="Loading globe" /> },
-);
-
-const PBDSKineticSphere = dynamic(
-  () => import("@/components/pbds/orb/PBDSKineticSphere").then(({ PBDSKineticSphere: Sphere }) => Sphere),
-  { ssr: false },
 );
 
 const originals = ["original-1", "original-2", "original-3", "original-4"] as const;
@@ -162,23 +156,6 @@ function GlobeComposerSlide() {
         </div>}
       </aside>
       <div className="animation-lab-composer-preview">
-        {recipe.particleField === "pbds-lab" && <div className="animation-lab-composer-field" aria-hidden="true">
-          <PBDSKineticSphere
-            {...orbPresets.magentaRight}
-            {...orbAppearanceProfiles.magentaAtmosphere}
-            radius={330}
-            centerOffsetX={0}
-            centerOffsetY={70}
-            cropPosition="center"
-            bodyOpacity={0}
-            stippleDensity={0}
-            atmosphereWidth={9}
-            atmosphereIntensity={0.3}
-            innerGlowIntensity={0.04}
-            glowingStrokeIntensity={0}
-            interactive={false}
-          />
-        </div>}
         <div className="animation-lab-composer-globe">
           <MotionGlobe recipe={recipe} />
         </div>

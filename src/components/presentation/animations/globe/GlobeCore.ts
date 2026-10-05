@@ -17,6 +17,8 @@ import {
   ROUTE_DOTS_VERTEX_SHADER,
   ROUTE_LINE_FRAGMENT_SHADER,
   ROUTE_LINE_VERTEX_SHADER,
+  PBDS_ATMOSPHERE_FRAGMENT_SHADER,
+  PBDS_ATMOSPHERE_VERTEX_SHADER,
 } from './shaders';
 import {
   DENSITY_MAP,
@@ -121,6 +123,8 @@ export class GlobeCore {
   pivot: THREE.Group;
   routeGroup: THREE.Group;
   field: THREE.Points | null = null;
+  atmosphere: THREE.Mesh<THREE.SphereGeometry, THREE.ShaderMaterial>;
+  atmosphereUniforms: Record<string, THREE.IUniform>;
   fieldMaterial: THREE.ShaderMaterial;
   routeMaterial: THREE.ShaderMaterial;
   routeLineMaterial: THREE.ShaderMaterial;
@@ -188,6 +192,23 @@ export class GlobeCore {
     this.pivot = new THREE.Group();
     this.pivot.rotation.order = 'XYZ';
     this.scene.add(this.pivot);
+
+    this.atmosphereUniforms = { uProgress: { value: 0 } };
+    const atmosphereMaterial = new THREE.ShaderMaterial({
+      uniforms: this.atmosphereUniforms,
+      vertexShader: PBDS_ATMOSPHERE_VERTEX_SHADER,
+      fragmentShader: PBDS_ATMOSPHERE_FRAGMENT_SHADER,
+      transparent: true,
+      depthTest: false,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      side: THREE.FrontSide,
+    });
+    this.atmosphere = new THREE.Mesh(new THREE.SphereGeometry(1.03, 48, 32), atmosphereMaterial);
+    this.atmosphere.frustumCulled = false;
+    this.atmosphere.renderOrder = 0;
+    this.atmosphere.visible = !!cfg.pbdsAtmosphereOn;
+    this.pivot.add(this.atmosphere);
 
     this.routeGroup = new THREE.Group();
     this.routeGroup.renderOrder = 2;
@@ -309,6 +330,7 @@ export class GlobeCore {
   apply(cfg: GlobeConfig) {
     const previous = this.cfg;
     this.cfg = cfg;
+    this.atmosphere.visible = !!cfg.pbdsAtmosphereOn;
     const fUni = this.fieldUniforms;
     const rUni = this.routeUniforms;
 
@@ -648,6 +670,7 @@ export class GlobeCore {
   paintStatic() {
     this.progress = 1;
     this.fieldUniforms.uProgress.value = 1;
+    this.atmosphereUniforms.uProgress.value = 1;
     this.routeUniforms.uProgress.value = 1;
     this.routeLineUniforms.uProgress.value = 1;
     this.scale = this.fitScale();
@@ -754,6 +777,7 @@ export class GlobeCore {
 
     this.fieldUniforms.uTime.value = timeSec;
     this.fieldUniforms.uProgress.value = this.progress;
+    this.atmosphereUniforms.uProgress.value = this.progress;
     this.routeUniforms.uTime.value = timeSec;
     this.routeUniforms.uProgress.value = this.progress;
     this.routeLineUniforms.uTime.value = timeSec;
@@ -809,6 +833,8 @@ export class GlobeCore {
     this.disposeField();
     this.disposeRoutes();
     this.fieldMaterial.dispose();
+    this.atmosphere.geometry.dispose();
+    this.atmosphere.material.dispose();
     this.routeMaterial.dispose();
     this.routeLineMaterial.dispose();
     this.scene.clear();
