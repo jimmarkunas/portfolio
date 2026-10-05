@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { GlobeCore } from "./GlobeCore";
 import { DEFAULT_PLACES, type GlobeConfig, type GlobeAnimationRecipe } from "./globeTypes";
-import { globeBodyPresets, locationTagPresets, orbitPresets, resolveGlobeColor } from "./globePresets";
+import { globeBodyPresets, locationTagPresets, orbitPresets, resolveGlobeColor, resolveGlobeSurfaceProfile } from "./globePresets";
 
 export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -13,6 +13,7 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
   const tag = locationTagPresets[recipe.locationTag];
   const orbit = orbitPresets[recipe.orbit];
   const globeOverride = resolveGlobeColor(recipe.globeColor);
+  const surfaceColorProfile = resolveGlobeSurfaceProfile(recipe.globeColor);
   const orbitOverride = resolveGlobeColor(recipe.orbitColor);
   const effectivePalette = globeOverride
     ? { ...body.palette, backdrop: "#090909", ink: globeOverride, tint: globeOverride }
@@ -24,6 +25,7 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
     ...body,
     ...orbit,
     palette: effectivePalette,
+    surfaceColorProfile: surfaceColorProfile ?? undefined,
     routeColor: orbitOverride ?? orbit.routeColor,
     coastLift: recipe.surface === "dot-orb" ? 0 : body.coastLift,
     places: DEFAULT_PLACES,
@@ -33,7 +35,7 @@ export function MotionGlobe({ recipe }: { recipe: GlobeAnimationRecipe }) {
     routesOn: true,
     replayOnScroll: true,
     formation: recipe.particleField === "lychee" ? "drift" : body.formation,
-  }), [body, orbit, effectivePalette, orbitOverride, recipe.particleField, recipe.surface]);
+  }), [body, orbit, effectivePalette, surfaceColorProfile, orbitOverride, recipe.particleField, recipe.surface]);
 
   useEffect(() => {
     const host = hostRef.current;

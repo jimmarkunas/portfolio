@@ -32,6 +32,15 @@ export interface GlobePalette {
   tint: string;
 }
 
+export interface GlobeSurfaceColorProfile {
+  shadow: string;
+  dark: string;
+  mid: string;
+  light: string;
+  hot: string;
+  hotThreshold: number;
+}
+
 export type EntranceFormation = "sweep" | "bloom" | "fall" | "drift" | "instant";
 export type RouteMode = "chain" | "hub" | "mesh";
 export type RouteStyle = "comet" | "beads" | "dashed" | "pulse";
@@ -40,6 +49,7 @@ export type PlaceMarker = "beacon" | "pin";
 export interface GlobeConfig {
   surfaceMode: GlobeSurfaceMode;
   palette: GlobePalette;
+  surfaceColorProfile?: GlobeSurfaceColorProfile;
   places: PlaceItem[];
   density: "balanced" | "dense" | "ultra";
   dotSize: number;

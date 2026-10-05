@@ -3,6 +3,7 @@ import type {
   GlobeBodyPreset,
   GlobeColorId,
   GlobePresetId,
+  GlobeSurfaceColorProfile,
   LocationTagPreset,
   LocationTagPresetId,
   OrbitPreset,
@@ -202,3 +203,22 @@ export const PBDS_GLOBE_COLOR_ADAPTER: Record<Exclude<GlobeColorId, "source">, s
 
 export const resolveGlobeColor = (color: GlobeColorId): string | null =>
   color === "source" ? null : PBDS_GLOBE_COLOR_ADAPTER[color];
+
+/** Narrow adapter from accepted PBDS surface lighting colors to the globe field shader. */
+export const PBDS_GLOBE_SURFACE_PROFILES: Record<Exclude<GlobeColorId, "source">, GlobeSurfaceColorProfile> = {
+  magenta: {
+    shadow: "#3A0B28", dark: "#7E165A", mid: "#FF2FAE", light: "#FF78CB", hot: "#FF8FD5", hotThreshold: 0.9,
+  },
+  white: {
+    shadow: "#1F2933", dark: "#56616F", mid: "#AEB8C4", light: "#DCE3EA", hot: "#F6F8FA", hotThreshold: 0.9,
+  },
+  mid: {
+    shadow: "#252525", dark: "#4A4A4A", mid: "#7A7A7A", light: "#B0B0B0", hot: "#E6E6E6", hotThreshold: 0.9,
+  },
+  line: {
+    shadow: "#666666", dark: "#A0A0A0", mid: "#E6E6E6", light: "#F2F2F2", hot: "#FFFFFF", hotThreshold: 0.9,
+  },
+};
+
+export const resolveGlobeSurfaceProfile = (color: GlobeColorId): GlobeSurfaceColorProfile | null =>
+  color === "source" ? null : PBDS_GLOBE_SURFACE_PROFILES[color];

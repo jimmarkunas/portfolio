@@ -215,6 +215,13 @@ export class GlobeCore {
       uInk: { value: new THREE.Color(0xc9dcff) },
       uInkAlpha: { value: 1 },
       uTint: { value: new THREE.Color(0x7fb2ff) },
+      uSurfaceLit: { value: 0 },
+      uSurfaceShadow: { value: new THREE.Color(0x000000) },
+      uSurfaceDark: { value: new THREE.Color(0x000000) },
+      uSurfaceMid: { value: new THREE.Color(0xffffff) },
+      uSurfaceLight: { value: new THREE.Color(0xffffff) },
+      uSurfaceHot: { value: new THREE.Color(0xffffff) },
+      uSurfaceHotThreshold: { value: 0.9 },
     };
 
     this.fieldMaterial = new THREE.ShaderMaterial({
@@ -314,6 +321,16 @@ export class GlobeCore {
     fUni.uInk.value.copy(inkParsed.rgb);
     fUni.uInkAlpha.value = inkParsed.alpha;
     fUni.uTint.value.copy(parseColor(tintColor).rgb);
+    const surfaceProfile = cfg.surfaceColorProfile;
+    fUni.uSurfaceLit.value = surfaceProfile ? 1 : 0;
+    if (surfaceProfile) {
+      fUni.uSurfaceShadow.value.copy(parseColor(surfaceProfile.shadow).rgb);
+      fUni.uSurfaceDark.value.copy(parseColor(surfaceProfile.dark).rgb);
+      fUni.uSurfaceMid.value.copy(parseColor(surfaceProfile.mid).rgb);
+      fUni.uSurfaceLight.value.copy(parseColor(surfaceProfile.light).rgb);
+      fUni.uSurfaceHot.value.copy(parseColor(surfaceProfile.hot).rgb);
+      fUni.uSurfaceHotThreshold.value = clamp(surfaceProfile.hotThreshold, 0, 1);
+    }
     fUni.uBackFade.value = clamp(backFade, 0, 1);
     fUni.uDotSize.value = cfg.dotSize ?? 5;
     fUni.uSizeJitter.value = clamp(cfg.sizeJitter ?? 0.6, 0, 1);

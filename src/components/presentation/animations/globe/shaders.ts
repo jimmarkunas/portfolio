@@ -16,6 +16,7 @@ uniform float uDotSize;
 uniform float uSizeJitter;
 uniform float uCoastLift;
 uniform float uBackFade;
+uniform float uSurfaceLit;
 
 uniform float uCursorMode;
 uniform vec3  uCursor;
@@ -32,6 +33,7 @@ varying float vHeat;
 varying float vFade;
 varying float vGrain;
 varying float vPx;
+varying float vLight;
 
 float noise1(float s) {
     return fract(sin(s * 78.233 + 12.9898) * 43758.5453);
@@ -133,7 +135,7 @@ void main() {
     // the outlines legible as density drops.
     float shore = mix(1.0 + uCoastLift * 0.9, 1.0 - uCoastLift * 0.35, aCoast);
     float jitter = 1.0 + (rB - 0.5) * 2.0 * uSizeJitter;
-    float breath = 0.88 + 0.12 * sin(uTime * 1.9 + rA * 21.0);
+    float breath = uSurfaceLit > 0.5 ? 1.0 : 0.88 + 0.12 * sin(uTime * 1.9 + rA * 21.0);
 
     gl_PointSize = max(
         0.0,
@@ -141,10 +143,13 @@ void main() {
     );
     vPx = gl_PointSize;
 
-    float facing = normalize(normalMatrix * nrm).z;
+    vec3 rotatedNormal = normalize(normalMatrix * nrm);
+    float facing = rotatedNormal.z;
     vFade = mix(uBackFade, 1.0, smoothstep(-0.22, 0.28, facing)) * born;
     vHeat = clamp(heat * uGlow, 0.0, 1.0);
     vGrain = 0.45 + 0.55 * rC;
+    float directionalLight = max(dot(rotatedNormal, normalize(vec3(-0.38, 0.52, 0.76))), 0.0);
+    vLight = clamp(0.16 + directionalLight * 0.84, 0.0, 1.0);
 }
 `;
 
@@ -152,11 +157,19 @@ export const FIELD_FRAGMENT_SHADER = `
 uniform vec3  uInk;
 uniform float uInkAlpha;
 uniform vec3  uTint;
+uniform float uSurfaceLit;
+uniform vec3  uSurfaceShadow;
+uniform vec3  uSurfaceDark;
+uniform vec3  uSurfaceMid;
+uniform vec3  uSurfaceLight;
+uniform vec3  uSurfaceHot;
+uniform float uSurfaceHotThreshold;
 
 varying float vHeat;
 varying float vFade;
 varying float vGrain;
 varying float vPx;
+varying float vLight;
 
 void main() {
     // Round dot with a one-pixel edge regardless of how large it is on screen.
@@ -166,6 +179,13 @@ void main() {
     if (disc <= 0.0) discard;
 
     vec3 rgb = mix(uInk, uTint, vHeat);
+    if (uSurfaceLit > 0.5) {
+        float lit = clamp(vLight * mix(0.9, 1.1, vGrain), 0.0, 1.0);
+        rgb = mix(uSurfaceShadow, uSurfaceDark, smoothstep(0.08, 0.42, lit));
+        rgb = mix(rgb, uSurfaceMid, smoothstep(0.30, 0.62, lit));
+        rgb = mix(rgb, uSurfaceLight, smoothstep(0.58, 0.88, lit));
+        rgb = mix(rgb, uSurfaceHot, smoothstep(uSurfaceHotThreshold, 1.0, lit));
+    }
     float a = disc * uInkAlpha * vGrain * vFade * (1.0 + vHeat * 0.85);
     gl_FragColor = vec4(rgb, clamp(a, 0.0, 1.0));
 }
