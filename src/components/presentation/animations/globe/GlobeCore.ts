@@ -19,8 +19,6 @@ import {
   ROUTE_LINE_VERTEX_SHADER,
   PBDS_ATMOSPHERE_FRAGMENT_SHADER,
   PBDS_ATMOSPHERE_VERTEX_SHADER,
-  ORBIT_PARTICLE_FRAGMENT_SHADER,
-  ORBIT_PARTICLE_VERTEX_SHADER,
 } from './shaders';
 import {
   DENSITY_MAP,
@@ -106,12 +104,6 @@ const CURSOR_MODES: Record<string, number> = { sonar: 0, halo: 1, wake: 2, repel
 const ROUTE_STYLES_DOTS: Record<string, number> = { comet: 0, beads: 1 };
 const ROUTE_STYLES_LINES: Record<string, number> = { solid: 0, dashed: 1, pulse: 2 };
 const FORMATIONS: Record<string, number> = { sweep: 0, bloom: 1, fall: 2, drift: 3, instant: 4 };
-const ORBIT_TILT = 64 * DEG2RAD;
-const ORBIT_ROLL = -16 * DEG2RAD;
-const ORBIT_RADIUS = 1.32;
-const ORBIT_PARTICLE_COUNT = 150;
-const ORBIT_SPEED = 0.22;
-
 export interface InternalPlaceNode {
   vec: THREE.Vector3;
   node: HTMLElement | null;
@@ -130,11 +122,6 @@ export class GlobeCore {
   pivot: THREE.Group;
   routeGroup: THREE.Group;
   field: THREE.Points | null = null;
-  orbitalFrame: THREE.Group;
-  orbitalSpin: THREE.Group;
-  orbitalPoints: THREE.Points;
-  orbitalMaterial: THREE.ShaderMaterial;
-  orbitOcclusionSphere: THREE.Mesh<THREE.SphereGeometry, THREE.MeshBasicMaterial>;
   atmosphere: THREE.Mesh<THREE.SphereGeometry, THREE.ShaderMaterial>;
   atmosphereUniforms: Record<string, THREE.IUniform>;
   fieldMaterial: THREE.ShaderMaterial;
@@ -148,6 +135,7 @@ export class GlobeCore {
   progress = 0;
   elapsed = 0;
   spinAngle = 0;
+  surfaceOrbitAngle = 0;
   tiltAngle = 0;
   scale = 1;
   flingX = 0;
@@ -205,56 +193,6 @@ export class GlobeCore {
     this.pivot.rotation.order = 'XYZ';
     this.scene.add(this.pivot);
 
-    this.orbitOcclusionSphere = new THREE.Mesh(
-      new THREE.SphereGeometry(1, 32, 24),
-      new THREE.MeshBasicMaterial({ colorWrite: false, depthTest: true, depthWrite: true, side: THREE.FrontSide, transparent: true, opacity: 0 }),
-    );
-    this.orbitOcclusionSphere.renderOrder = 2.5;
-    this.orbitOcclusionSphere.visible = cfg.orbitMotionMode === "pdma-orbit";
-    this.pivot.add(this.orbitOcclusionSphere);
-
-    const orbitGeometry = new THREE.BufferGeometry();
-    const orbitPositions = new Float32Array(ORBIT_PARTICLE_COUNT * 3);
-    const orbitSizes = new Float32Array(ORBIT_PARTICLE_COUNT);
-    const orbitAlphas = new Float32Array(ORBIT_PARTICLE_COUNT);
-    for (let i = 0; i < ORBIT_PARTICLE_COUNT; i++) {
-      const angle = i * 2.399963229728653;
-      const thickness = ((((i * 37) % 101) / 100) - 0.5) * 0.035;
-      orbitPositions[i * 3] = Math.cos(angle) * ORBIT_RADIUS;
-      orbitPositions[i * 3 + 1] = thickness;
-      orbitPositions[i * 3 + 2] = Math.sin(angle) * ORBIT_RADIUS;
-      orbitSizes[i] = 5.2 * (0.82 + ((i * 17) % 19) / 100);
-      orbitAlphas[i] = 0.84 + ((i * 23) % 16) / 100;
-    }
-    orbitGeometry.setAttribute('position', new THREE.BufferAttribute(orbitPositions, 3));
-    orbitGeometry.setAttribute('aSize', new THREE.BufferAttribute(orbitSizes, 1));
-    orbitGeometry.setAttribute('aAlpha', new THREE.BufferAttribute(orbitAlphas, 1));
-    this.orbitalMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        uColor: { value: new THREE.Color(0xff65c7) },
-        uOpacity: { value: 1 },
-        uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, this.tier > 0 ? 2 : 1.5) },
-      },
-      vertexShader: ORBIT_PARTICLE_VERTEX_SHADER,
-      fragmentShader: ORBIT_PARTICLE_FRAGMENT_SHADER,
-      transparent: true,
-      depthTest: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
-    this.orbitalPoints = new THREE.Points(orbitGeometry, this.orbitalMaterial);
-    this.orbitalPoints.frustumCulled = false;
-    this.orbitalPoints.renderOrder = 3;
-    this.orbitalSpin = new THREE.Group();
-    this.orbitalSpin.add(this.orbitalPoints);
-    this.orbitalFrame = new THREE.Group();
-    this.orbitalFrame.rotation.order = 'XZY';
-    this.orbitalFrame.rotation.set(ORBIT_TILT, 0, ORBIT_ROLL);
-    this.orbitalFrame.renderOrder = 3;
-    this.orbitalFrame.add(this.orbitalSpin);
-    this.orbitalFrame.visible = cfg.orbitMotionMode === "pdma-orbit";
-    this.scene.add(this.orbitalFrame);
-
     this.atmosphereUniforms = { uProgress: { value: 0 } };
     const atmosphereMaterial = new THREE.ShaderMaterial({
       uniforms: this.atmosphereUniforms,
@@ -278,6 +216,8 @@ export class GlobeCore {
 
     this.fieldUniforms = {
       uTime: { value: 0 },
+      uSurfaceOrbitX: { value: 0 },
+      uSurfaceOrbitY: { value: 0 },
       uProgress: { value: 0 },
       uFormation: { value: 0 },
       uSweepAxis: { value: SWEEP_AXIS.clone() },
@@ -458,14 +398,6 @@ export class GlobeCore {
     rUni.uSize.value = cfg.routeSize ?? 6;
     rUni.uRest.value = clamp(cfg.routeRest ?? 0.22, 0, 1);
     rUni.uStyle.value = ROUTE_STYLES_DOTS[cfg.routeStyle || 'comet'] ?? 0;
-    const orbitColor = parseColor(accentColor).rgb;
-    if (cfg.routeColorIsSrgb) {
-      const srgb = orbitColor.getHex();
-      this.orbitalMaterial.uniforms.uColor.value.set(((srgb >> 16) & 0xff) / 255, ((srgb >> 8) & 0xff) / 255, (srgb & 0xff) / 255);
-    } else {
-      this.orbitalMaterial.uniforms.uColor.value.copy(orbitColor);
-    }
-
     const lineUni = this.routeLineUniforms;
     setRouteColor(lineUni.uColor, accentColor);
     setRouteColor(lineUni.uActiveColor, cfg.routeActiveColor);
@@ -477,8 +409,11 @@ export class GlobeCore {
     lineUni.uStyle.value = ROUTE_STYLES_LINES[cfg.routeStyle || 'solid'] ?? 0;
 
     this.routeGroup.visible = !!cfg.routesOn;
-    this.orbitalFrame.visible = cfg.orbitMotionMode === "pdma-orbit";
-    this.orbitOcclusionSphere.visible = cfg.orbitMotionMode === "pdma-orbit";
+    if (cfg.orbitMotionMode !== "pdma-orbit") {
+      this.surfaceOrbitAngle = 0;
+      fUni.uSurfaceOrbitX.value = 0;
+      fUni.uSurfaceOrbitY.value = 0;
+    }
     if (previous.surfaceMode !== cfg.surfaceMode || previous.dotDensity !== cfg.dotDensity || (cfg.surfaceMode === "terrestrial" && previous.density !== cfg.density)) this.buildField();
     if (previous.places !== cfg.places || previous.routeMode !== cfg.routeMode || previous.routeStyle !== cfg.routeStyle || previous.routeAltitude !== cfg.routeAltitude || previous.routeDots !== cfg.routeDots || previous.routesOn !== cfg.routesOn) this.buildRoutes();
     if (this.still) this.paintStatic();
@@ -879,6 +814,15 @@ export class GlobeCore {
     this.routeLineUniforms.uTime.value = timeSec;
     this.routeLineUniforms.uProgress.value = this.progress;
 
+    if (cfg.orbitMotionMode === "pdma-orbit") {
+      this.surfaceOrbitAngle += ((cfg.spin ?? 0.06) * 0.016) * n;
+      this.fieldUniforms.uSurfaceOrbitY.value = this.surfaceOrbitAngle;
+    } else {
+      this.surfaceOrbitAngle = 0;
+      this.fieldUniforms.uSurfaceOrbitX.value = 0;
+      this.fieldUniforms.uSurfaceOrbitY.value = 0;
+    }
+
     if (!this.dragging) {
       if (cfg.orbitMotionMode !== "pdma-orbit") {
         this.spinAngle += ((cfg.spin ?? 0.06) * 0.016 + (1 - this.progress) * 0.014) * n;
@@ -900,10 +844,6 @@ export class GlobeCore {
     this.pivot.position.set(cfg.offsetX || 0, cfg.offsetY || 0, 0);
     this.pivot.rotation.y += (this.spinAngle - this.pivot.rotation.y) * decay(0.1);
     this.pivot.rotation.x += (this.tiltAngle - this.pivot.rotation.x) * decay(0.1);
-    this.orbitalFrame.position.copy(this.pivot.position);
-    this.orbitalFrame.scale.copy(this.pivot.scale);
-    this.orbitalSpin.rotation.y = timeSec * ORBIT_SPEED;
-
     this.trackCursor(delta);
     if (this.field) this.field.renderOrder = cfg.cursorMode !== "off" && this.cursorGain > 0.02 ? 4 : 1;
     this.renderer.render(this.scene, this.camera);
@@ -942,10 +882,6 @@ export class GlobeCore {
     this.fieldMaterial.dispose();
     this.atmosphere.geometry.dispose();
     this.atmosphere.material.dispose();
-    this.orbitOcclusionSphere.geometry.dispose();
-    this.orbitOcclusionSphere.material.dispose();
-    this.orbitalPoints.geometry.dispose();
-    this.orbitalMaterial.dispose();
     this.routeMaterial.dispose();
     this.routeLineMaterial.dispose();
     this.scene.clear();

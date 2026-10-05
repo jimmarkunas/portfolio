@@ -8,6 +8,8 @@ attribute float aSeed;
 attribute float aCoast;
 
 uniform float uTime;
+uniform float uSurfaceOrbitX;
+uniform float uSurfaceOrbitY;
 uniform float uProgress;
 uniform float uFormation;
 uniform vec3  uSweepAxis;
@@ -41,7 +43,28 @@ float noise1(float s) {
 }
 
 void main() {
-    vec3 nrm = normalize(position);
+    vec3 canonical = normalize(position);
+    float sinY = sin(uSurfaceOrbitY);
+    float cosY = cos(uSurfaceOrbitY);
+    float sinX = sin(uSurfaceOrbitX);
+    float cosX = cos(uSurfaceOrbitX);
+    float x1 = canonical.x * cosY + canonical.z * sinY;
+    float z1 = -canonical.x * sinY + canonical.z * cosY;
+    vec3 nrm = normalize(vec3(
+        x1,
+        canonical.y * cosX - z1 * sinX,
+        canonical.y * sinX + z1 * cosX
+    ));
+    vec3 cursor = normalize(vec3(
+        uCursor.x * cosY + uCursor.z * sinY,
+        uCursor.y * cosX - (-uCursor.x * sinY + uCursor.z * cosY) * sinX,
+        uCursor.y * sinX + (-uCursor.x * sinY + uCursor.z * cosY) * cosX
+    ));
+    vec3 drift = vec3(
+        uDrift.x * cosY + uDrift.z * sinY,
+        uDrift.y * cosX - (-uDrift.x * sinY + uDrift.z * cosY) * sinX,
+        uDrift.y * sinX + (-uDrift.x * sinY + uDrift.z * cosY) * cosX
+    );
     float rA = noise1(aSeed);
     float rB = noise1(aSeed + 4.77);
     float rC = noise1(aSeed + 9.13);
@@ -100,7 +123,7 @@ void main() {
     float swell = 1.0;
 
     if (uCursorMode < 6.5 && uCursorGain > 0.002) {
-        float ang = acos(clamp(dot(nrm, uCursor), -1.0, 1.0));
+        float ang = acos(clamp(dot(nrm, cursor), -1.0, 1.0));
         float env = 1.0 - smoothstep(0.0, uReach, ang);
         env *= env;
         float amp = env * uCursorGain;
@@ -122,12 +145,12 @@ void main() {
             swell = 1.0 + heat * uSwell * 0.6;
         } else if (uCursorMode < 2.5) {
             // Wake: the surface is combed along the pointer's travel.
-            vec3 tangent = uDrift - dot(uDrift, nrm) * nrm;
+            vec3 tangent = drift - dot(drift, nrm) * nrm;
             pos += tangent * amp * uCrest * 8.0;
-            heat = amp * clamp(length(uDrift) * 24.0, 0.0, 1.0);
+            heat = amp * clamp(length(drift) * 24.0, 0.0, 1.0);
             swell = 1.0 + heat * uSwell * 0.5;
         } else {
-            vec3 contact = normalize(uCursor);
+            vec3 contact = cursor;
             vec3 tangentToContact = contact - nrm * dot(contact, nrm);
             float tangentLength = length(tangentToContact);
             if (tangentLength > 0.0001) {
@@ -180,34 +203,6 @@ void main() {
     vLight = clamp(0.16 + directionalLight * 0.84, 0.0, 1.0);
     vHeat = clamp(heat * uGlow, 0.0, 1.0);
     vGrain = 0.45 + 0.55 * rC;
-}
-`;
-
-export const ORBIT_PARTICLE_VERTEX_SHADER = `
-attribute float aSize;
-attribute float aAlpha;
-uniform float uPixelRatio;
-varying float vAlpha;
-
-void main() {
-    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-    gl_Position = projectionMatrix * mvPosition;
-    gl_PointSize = aSize * uPixelRatio;
-    vAlpha = aAlpha;
-}
-`;
-
-export const ORBIT_PARTICLE_FRAGMENT_SHADER = `
-uniform vec3 uColor;
-uniform float uOpacity;
-varying float vAlpha;
-
-void main() {
-    float r = length(gl_PointCoord - vec2(0.5)) * 2.0;
-    if (r > 1.0) discard;
-    float core = 1.0 - smoothstep(0.22, 0.72, r);
-    float halo = 1.0 - smoothstep(0.2, 1.0, r);
-    gl_FragColor = vec4(uColor, uOpacity * vAlpha * (core * 0.78 + halo * 0.22));
 }
 `;
 
