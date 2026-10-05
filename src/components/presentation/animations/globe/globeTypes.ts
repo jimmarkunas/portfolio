@@ -7,7 +7,8 @@ export type ParticleFieldEffect = "off" | "pbds-lab" | "lychee";
 export type GlobeSurfaceMode = "terrestrial" | "dot-orb";
 export type CityUiMode = "show" | "hide";
 export type GlobeColorId = "source" | "magenta" | "template-magenta" | "white" | "mid" | "line";
-export type GlobeHoverPhysics = "source" | "off" | "repel" | "attract" | "swirl" | "sonar" | "halo" | "wake";
+export type GlobeHoverPhysics = "source" | "off" | "repel" | "attract" | "swirl" | "burst" | "sonar" | "halo" | "wake";
+export type GlobeOrbitMotionMode = "linked" | "pdma-orbit";
 
 export type GlobeAnimationRecipe = {
   globe: GlobePresetId;
@@ -26,6 +27,8 @@ export type GlobeAnimationRecipe = {
   dragSensitivity: number;
   dragInertia: number;
   dragTilt: "source" | "on" | "off";
+  orbitLinesOn: boolean;
+  orbitMotionMode: GlobeOrbitMotionMode;
 };
 
 export interface PlaceItem {
@@ -65,6 +68,7 @@ export interface GlobeConfig {
   dragEnabled: boolean;
   dragSensitivity: number;
   dragInertia: number;
+  orbitMotionMode: GlobeOrbitMotionMode;
   places: PlaceItem[];
   density: "balanced" | "dense" | "ultra";
   dotSize: number;
@@ -81,7 +85,7 @@ export interface GlobeConfig {
   formation: EntranceFormation;
   entranceSeconds: number;
   replayOnScroll: boolean;
-  cursorMode: "sonar" | "halo" | "wake" | "repel" | "attract" | "swirl" | "off";
+  cursorMode: "sonar" | "halo" | "wake" | "repel" | "attract" | "swirl" | "burst" | "off";
   interactionStrength: number;
   reach: number;
   waveLength: number;

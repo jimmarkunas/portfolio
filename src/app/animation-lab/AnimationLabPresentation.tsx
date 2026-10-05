@@ -57,7 +57,7 @@ const surfaceChoices: readonly GlobeSurfaceMode[] = ["terrestrial", "dot-orb"];
 const cityUiChoices: readonly CityUiMode[] = ["show", "hide"];
 const colorChoices: readonly GlobeColorId[] = ["source", "magenta", "template-magenta", "white", "mid", "line"];
 const shadingChoices = [0, 0.25, 0.5, 0.75, 1] as const;
-const hoverChoices = ["source", "off", "repel", "attract", "swirl", "sonar", "halo", "wake"] as const;
+const hoverChoices = ["source", "off", "repel", "attract", "swirl", "burst", "sonar", "halo", "wake"] as const;
 const colorSwatches: Partial<Record<GlobeColorId, string>> = {
   magenta: "#FF2FAE",
   "template-magenta": "#F10F8A",
@@ -109,7 +109,6 @@ function ChoiceGroup<T extends string | number | boolean>({
 function GlobeComposerSlide() {
   const [recipe, setRecipe] = useState<GlobeAnimationRecipe>(originalGlobeRecipes["original-1"]);
   const [page, setPage] = useState<ComposerPage>("compose");
-  const [interactPage, setInteractPage] = useState<"hover" | "drag">("hover");
   const activeOriginal = originals.find((original) => {
     const source = originalGlobeRecipes[original];
     return source.globe === recipe.globe
@@ -127,7 +126,9 @@ function GlobeComposerSlide() {
       && source.dragEnabled === recipe.dragEnabled
       && source.dragSensitivity === recipe.dragSensitivity
       && source.dragInertia === recipe.dragInertia
-      && source.dragTilt === recipe.dragTilt;
+      && source.dragTilt === recipe.dragTilt
+      && source.orbitLinesOn === recipe.orbitLinesOn
+      && source.orbitMotionMode === recipe.orbitMotionMode;
   });
   const selectOriginal = (number: 1 | 2 | 3 | 4) => {
     setRecipe(originalGlobeRecipes[`original-${number}`]);
@@ -168,6 +169,8 @@ function GlobeComposerSlide() {
           <ChoiceGroup label="GLOBE" choices={globeChoices} selected={recipe.globe} onSelect={(globe) => setRecipe((current) => ({ ...current, globe }))} names={(choice) => `Globe ${choice.slice(-1)}`} buttonContent={(_, index) => String(index + 1)} />
           <ChoiceGroup label="LOCATION TAGS" choices={tagChoices} selected={recipe.locationTag} onSelect={(locationTag) => setRecipe((current) => ({ ...current, locationTag }))} names={(choice) => `Location tags ${choice.slice(-1)}`} buttonContent={(_, index) => String(index + 1)} />
           <ChoiceGroup label="ORBIT" choices={orbitChoices} selected={recipe.orbit} onSelect={(orbit) => setRecipe((current) => ({ ...current, orbit }))} names={(choice) => `Orbit ${choice.slice(-1)}`} buttonContent={(_, index) => String(index + 1)} />
+          <ChoiceGroup label="ORBIT LINES" choices={[true, false]} selected={recipe.orbitLinesOn} onSelect={(orbitLinesOn) => setRecipe((current) => ({ ...current, orbitLinesOn }))} names={(choice) => `Orbit lines ${choice ? "on" : "off"}`} buttonContent={(choice) => choice ? "ON" : "OFF"} />
+          <ChoiceGroup label="ORBIT MOTION" choices={["linked", "pdma-orbit"] as const} selected={recipe.orbitMotionMode} onSelect={(orbitMotionMode) => setRecipe((current) => ({ ...current, orbitMotionMode }))} names={(choice) => choice === "linked" ? "Linked orbit motion" : "PDMA orbit motion"} buttonContent={(choice) => choice === "linked" ? "LINKED" : "PDMA ORBIT"} />
           <ChoiceGroup label="SURFACE" choices={surfaceChoices} selected={recipe.surface} onSelect={(surface) => setRecipe((current) => ({ ...current, surface }))} names={(choice) => choice === "dot-orb" ? "Dot orb" : "Terrestrial"} buttonContent={(choice) => choice === "dot-orb" ? "DOT ORB" : "TERRESTRIAL"} />
           <ChoiceGroup label="CITY UI" choices={cityUiChoices} selected={recipe.cityUi} onSelect={(cityUi) => setRecipe((current) => ({ ...current, cityUi }))} names={(choice) => choice.toUpperCase()} buttonContent={(choice) => choice.toUpperCase()} />
           <RangeControl label="DOT DENSITY" min={0.25} max={2} step={0.05} value={recipe.dotDensity} displayValue={`${Math.round(recipe.dotDensity * 100)}%`} onChange={(dotDensity) => setRecipe((current) => ({ ...current, dotDensity }))} />
@@ -179,18 +182,12 @@ function GlobeComposerSlide() {
           <ChoiceGroup label="RADIOACTIVE FIELD" choices={fieldChoices} selected={recipe.particleField} onSelect={(particleField) => setRecipe((current) => ({ ...current, particleField }))} names={(choice) => choice === "off" ? "Off" : choice === "pbds-lab" ? "PBDS Lab" : "Lychee"} buttonContent={(choice) => choice === "pbds-lab" ? "PBDS LAB" : choice.toUpperCase()} />
         </div>}
         {page === "interact" && <div className="animation-lab-composer-page-content is-interact">
-          <nav className="animation-lab-composer-subpages" aria-label="Interaction controls">
-            {(["hover", "drag"] as const).map((subpage) => <button key={subpage} type="button" className={`animation-lab-composer-subpage${interactPage === subpage ? " is-active" : ""}`} aria-pressed={interactPage === subpage} onClick={() => setInteractPage(subpage)}>{subpage.toUpperCase()}</button>)}
-          </nav>
-          {interactPage === "hover" ? <>
-            <ChoiceGroup label="HOVER PHYSICS" choices={hoverChoices} selected={recipe.hoverPhysics} onSelect={(hoverPhysics) => setRecipe((current) => ({ ...current, hoverPhysics }))} names={(choice) => choice.toUpperCase()} buttonContent={(choice) => choice.toUpperCase()} />
-            <RangeControl label="HOVER STRENGTH" min={0.25} max={2} step={0.05} value={recipe.hoverStrength} displayValue={`${recipe.hoverStrength.toFixed(2)}×`} onChange={(hoverStrength) => setRecipe((current) => ({ ...current, hoverStrength }))} />
-          </> : <>
-            <ChoiceGroup label="DRAG" choices={[true, false]} selected={recipe.dragEnabled} onSelect={(dragEnabled) => setRecipe((current) => ({ ...current, dragEnabled }))} names={(choice) => choice ? "Drag on" : "Drag off"} buttonContent={(choice) => choice ? "ON" : "OFF"} />
-            <ChoiceGroup label="DRAG TILT" choices={["source", "on", "off"] as const} selected={recipe.dragTilt} onSelect={(dragTilt) => setRecipe((current) => ({ ...current, dragTilt }))} names={(choice) => `Drag tilt ${choice}`} buttonContent={(choice) => choice.toUpperCase()} />
-            <RangeControl label="DRAG SENSITIVITY" min={0.25} max={2} step={0.05} value={recipe.dragSensitivity} displayValue={`${recipe.dragSensitivity.toFixed(2)}×`} onChange={(dragSensitivity) => setRecipe((current) => ({ ...current, dragSensitivity }))} />
-            <RangeControl label="DRAG INERTIA" min={0} max={1} step={0.05} value={recipe.dragInertia} displayValue={`${Math.round(recipe.dragInertia * 100)}%`} onChange={(dragInertia) => setRecipe((current) => ({ ...current, dragInertia }))} />
-          </>}
+          <ChoiceGroup label="HOVER PHYSICS" choices={hoverChoices} selected={recipe.hoverPhysics} onSelect={(hoverPhysics) => setRecipe((current) => ({ ...current, hoverPhysics }))} names={(choice) => choice === "burst" ? "EXPLODE" : choice.toUpperCase()} buttonContent={(choice) => choice === "burst" ? "EXPLODE" : choice.toUpperCase()} />
+          <RangeControl label="HOVER STRENGTH" min={0.25} max={2} step={0.05} value={recipe.hoverStrength} displayValue={`${recipe.hoverStrength.toFixed(2)}×`} onChange={(hoverStrength) => setRecipe((current) => ({ ...current, hoverStrength }))} />
+          <ChoiceGroup label="DRAG" choices={[true, false]} selected={recipe.dragEnabled} onSelect={(dragEnabled) => setRecipe((current) => ({ ...current, dragEnabled }))} names={(choice) => choice ? "Drag on" : "Drag off"} buttonContent={(choice) => choice ? "ON" : "OFF"} />
+          <ChoiceGroup label="DRAG TILT" choices={["source", "on", "off"] as const} selected={recipe.dragTilt} onSelect={(dragTilt) => setRecipe((current) => ({ ...current, dragTilt }))} names={(choice) => `Drag tilt ${choice}`} buttonContent={(choice) => choice.toUpperCase()} />
+          <RangeControl label="DRAG SENSITIVITY" min={0.25} max={2} step={0.05} value={recipe.dragSensitivity} displayValue={`${recipe.dragSensitivity.toFixed(2)}×`} onChange={(dragSensitivity) => setRecipe((current) => ({ ...current, dragSensitivity }))} />
+          <RangeControl label="DRAG INERTIA" min={0} max={1} step={0.05} value={recipe.dragInertia} displayValue={`${Math.round(recipe.dragInertia * 100)}%`} onChange={(dragInertia) => setRecipe((current) => ({ ...current, dragInertia }))} />
         </div>}
       </aside>
       <div className="animation-lab-composer-preview">

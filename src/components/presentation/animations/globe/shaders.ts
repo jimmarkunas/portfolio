@@ -99,7 +99,7 @@ void main() {
     float heat = 0.0;
     float swell = 1.0;
 
-    if (uCursorMode < 5.5 && uCursorGain > 0.002) {
+    if (uCursorMode < 6.5 && uCursorGain > 0.002) {
         float ang = acos(clamp(dot(nrm, uCursor), -1.0, 1.0));
         float env = 1.0 - smoothstep(0.0, uReach, ang);
         env *= env;
@@ -144,8 +144,16 @@ void main() {
                     if (swirlLength > 0.0001) {
                         displacement = (swirlDirection / swirlLength) * physicsScale * uCrest * 2.0;
                     }
+                } else {
+                    float pulse = 0.92 + 0.08 * sin(uTime * 12.0 + aSeed * 20.0);
+                    displacement = -toward * physicsScale * (0.22 * pulse)
+                        + nrm * physicsScale * (0.24 + 0.08 * pulse);
                 }
-                pos = normalize(pos + displacement) * radius;
+                if (uCursorMode < 5.5) {
+                    pos = normalize(pos + displacement) * radius;
+                } else {
+                    pos += displacement;
+                }
             }
         }
     }
@@ -172,6 +180,34 @@ void main() {
     vLight = clamp(0.16 + directionalLight * 0.84, 0.0, 1.0);
     vHeat = clamp(heat * uGlow, 0.0, 1.0);
     vGrain = 0.45 + 0.55 * rC;
+}
+`;
+
+export const ORBIT_PARTICLE_VERTEX_SHADER = `
+attribute float aSize;
+attribute float aAlpha;
+uniform float uPixelRatio;
+varying float vAlpha;
+
+void main() {
+    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+    gl_Position = projectionMatrix * mvPosition;
+    gl_PointSize = aSize * uPixelRatio;
+    vAlpha = aAlpha;
+}
+`;
+
+export const ORBIT_PARTICLE_FRAGMENT_SHADER = `
+uniform vec3 uColor;
+uniform float uOpacity;
+varying float vAlpha;
+
+void main() {
+    float r = length(gl_PointCoord - vec2(0.5)) * 2.0;
+    if (r > 1.0) discard;
+    float core = 1.0 - smoothstep(0.22, 0.72, r);
+    float halo = 1.0 - smoothstep(0.2, 1.0, r);
+    gl_FragColor = vec4(uColor, uOpacity * vAlpha * (core * 0.78 + halo * 0.22));
 }
 `;
 
