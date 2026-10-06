@@ -85,9 +85,7 @@ export function DiagramIcon({ src, hovered, size }: { src: string; hovered: bool
 
   if (Component) return <Component hovered={hovered} size={size} />
 
-  // Raster fallback (contentstack, quivers) — use SVG version
-  const svgSrc = src
-    .replace("/tool-icons/", "/tool-icons/svg/")
-    .replace(".png", ".svg")
-  return <RasterIcon hovered={hovered} size={size} src={svgSrc} />
+  // Keep the file-backed raster source. Some legacy SVG wrappers were
+  // removed, so deriving an SVG URL here can point at a missing asset.
+  return <RasterIcon hovered={hovered} size={size} src={src} />
 }
