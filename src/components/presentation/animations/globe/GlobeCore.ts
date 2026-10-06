@@ -104,6 +104,9 @@ const CURSOR_MODES: Record<string, number> = { sonar: 0, halo: 1, wake: 2, repel
 const ROUTE_STYLES_DOTS: Record<string, number> = { comet: 0, beads: 1 };
 const ROUTE_STYLES_LINES: Record<string, number> = { solid: 0, dashed: 1, pulse: 2 };
 const FORMATIONS: Record<string, number> = { sweep: 0, bloom: 1, fall: 2, drift: 3, instant: 4 };
+const PDMA_INITIAL_ROT_X = 0.08;
+const PDMA_INITIAL_ROT_Y = -0.85;
+const PDMA_AUTO_ROTATE_SPEED = 0.0012;
 export interface InternalPlaceNode {
   vec: THREE.Vector3;
   node: HTMLElement | null;
@@ -135,7 +138,7 @@ export class GlobeCore {
   progress = 0;
   elapsed = 0;
   spinAngle = 0;
-  surfaceOrbitAngle = 0;
+  surfaceOrbitAngle = PDMA_INITIAL_ROT_Y;
   tiltAngle = 0;
   scale = 1;
   flingX = 0;
@@ -216,8 +219,8 @@ export class GlobeCore {
 
     this.fieldUniforms = {
       uTime: { value: 0 },
-      uSurfaceOrbitX: { value: 0 },
-      uSurfaceOrbitY: { value: 0 },
+      uSurfaceOrbitX: { value: cfg.orbitMotionMode === 'pdma-orbit' ? PDMA_INITIAL_ROT_X : 0 },
+      uSurfaceOrbitY: { value: cfg.orbitMotionMode === 'pdma-orbit' ? PDMA_INITIAL_ROT_Y : 0 },
       uProgress: { value: 0 },
       uFormation: { value: 0 },
       uSweepAxis: { value: SWEEP_AXIS.clone() },
@@ -409,7 +412,13 @@ export class GlobeCore {
     lineUni.uStyle.value = ROUTE_STYLES_LINES[cfg.routeStyle || 'solid'] ?? 0;
 
     this.routeGroup.visible = !!cfg.routesOn;
-    if (cfg.orbitMotionMode !== "pdma-orbit") {
+    if (cfg.orbitMotionMode === "pdma-orbit") {
+      if (previous.orbitMotionMode !== "pdma-orbit") {
+        this.surfaceOrbitAngle = PDMA_INITIAL_ROT_Y;
+      }
+      fUni.uSurfaceOrbitX.value = PDMA_INITIAL_ROT_X;
+      fUni.uSurfaceOrbitY.value = this.surfaceOrbitAngle;
+    } else {
       this.surfaceOrbitAngle = 0;
       fUni.uSurfaceOrbitX.value = 0;
       fUni.uSurfaceOrbitY.value = 0;
@@ -815,7 +824,8 @@ export class GlobeCore {
     this.routeLineUniforms.uProgress.value = this.progress;
 
     if (cfg.orbitMotionMode === "pdma-orbit") {
-      this.surfaceOrbitAngle += ((cfg.spin ?? 0.06) * 0.016) * n;
+      this.surfaceOrbitAngle += PDMA_AUTO_ROTATE_SPEED * n;
+      this.fieldUniforms.uSurfaceOrbitX.value = PDMA_INITIAL_ROT_X;
       this.fieldUniforms.uSurfaceOrbitY.value = this.surfaceOrbitAngle;
     } else {
       this.surfaceOrbitAngle = 0;

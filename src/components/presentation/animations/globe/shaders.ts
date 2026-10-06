@@ -42,29 +42,28 @@ float noise1(float s) {
     return fract(sin(s * 78.233 + 12.9898) * 43758.5453);
 }
 
-void main() {
-    vec3 canonical = normalize(position);
+// PBDS applies its Y rotation first, then its small X orientation.
+vec3 rotateSurface(vec3 point) {
     float sinY = sin(uSurfaceOrbitY);
     float cosY = cos(uSurfaceOrbitY);
     float sinX = sin(uSurfaceOrbitX);
     float cosX = cos(uSurfaceOrbitX);
-    float x1 = canonical.x * cosY + canonical.z * sinY;
-    float z1 = -canonical.x * sinY + canonical.z * cosY;
-    vec3 nrm = normalize(vec3(
+    float x1 = point.x * cosY + point.z * sinY;
+    float z1 = -point.x * sinY + point.z * cosY;
+    return vec3(
         x1,
-        canonical.y * cosX - z1 * sinX,
-        canonical.y * sinX + z1 * cosX
-    ));
-    vec3 cursor = normalize(vec3(
-        uCursor.x * cosY + uCursor.z * sinY,
-        uCursor.y * cosX - (-uCursor.x * sinY + uCursor.z * cosY) * sinX,
-        uCursor.y * sinX + (-uCursor.x * sinY + uCursor.z * cosY) * cosX
-    ));
-    vec3 drift = vec3(
-        uDrift.x * cosY + uDrift.z * sinY,
-        uDrift.y * cosX - (-uDrift.x * sinY + uDrift.z * cosY) * sinX,
-        uDrift.y * sinX + (-uDrift.x * sinY + uDrift.z * cosY) * cosX
+        point.y * cosX - z1 * sinX,
+        point.y * sinX + z1 * cosX
     );
+}
+
+void main() {
+    vec3 canonical = normalize(position);
+    vec3 nrm = normalize(rotateSurface(canonical));
+    // Pointer contact and travel are already expressed once in pivot-local space.
+    // Surface motion moves dot targets beneath them; it must not move the pointer.
+    vec3 cursor = normalize(uCursor);
+    vec3 drift = uDrift;
     float rA = noise1(aSeed);
     float rB = noise1(aSeed + 4.77);
     float rC = noise1(aSeed + 9.13);
@@ -153,16 +152,18 @@ void main() {
             vec3 contact = cursor;
             vec3 tangentToContact = contact - nrm * dot(contact, nrm);
             float tangentLength = length(tangentToContact);
-            if (tangentLength > 0.0001) {
-                vec3 toward = tangentToContact / tangentLength;
+            if (tangentLength > 0.0001 || uCursorMode > 5.5) {
+                vec3 toward = tangentLength > 0.0001
+                    ? tangentToContact / tangentLength
+                    : vec3(0.0);
                 vec3 displacement = vec3(0.0);
                 float physicsScale = amp * uInteractionStrength;
                 if (uCursorMode < 3.5) {
                     displacement = -toward * physicsScale * uCrest * 2.0;
                 } else if (uCursorMode < 4.5) {
-                    displacement = toward * physicsScale * uCrest * 2.0;
+                    displacement = toward * physicsScale * uCrest * 2.0 * (14.0 / 18.0);
                 } else if (uCursorMode < 5.5) {
-                    vec3 swirlDirection = cross(contact, nrm);
+                    vec3 swirlDirection = cross(nrm, contact);
                     float swirlLength = length(swirlDirection);
                     if (swirlLength > 0.0001) {
                         displacement = (swirlDirection / swirlLength) * physicsScale * uCrest * 2.0;
