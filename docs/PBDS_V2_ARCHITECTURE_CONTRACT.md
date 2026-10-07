@@ -156,7 +156,7 @@ The large AI handoff is a compiled mirror, not a source of truth. It must be reb
 
 ## 7. Production application + package direction
 
-**Jim override — October 7, 2026:** Portfolio V2 is a **clean application boundary**, not a refactor of the bloated V1 application. The earlier in-place/strangler assumption is superseded.
+**Jim override — October 7, 2026:** Portfolio V2 is a **clean application boundary**, not a refactor of the bloated V1 application. The earlier in-place migration assumption is superseded. Shared cross-output interaction mechanics belong in the bounded `packages/interactive/` boundary when they have at least two real consumers.
 
 Target migration shape:
 
