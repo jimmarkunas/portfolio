@@ -312,9 +312,32 @@ Two explicit new case-study deliverables are part of the Portfolio V2 rollout:
 - **Domestika / Awwwards case study** — source-backed portfolio case study using the existing career/GTV evidence; exact narrative and proof must come from canonical evidence rather than memory.
 - **Bytalos case study** — source-backed case study of the current Bytalos product/company work using canonical Bytalos business/product/design-system/repository evidence; no unsupported metrics or retrospective claims.
 
-### PBDS-6 — cross-channel rollout
+### PBDS-6 — bounded cross-output rollout
 
-After the architecture and Portfolio V2 pilot are accepted, extend the same PBDS system to presentations, one-pagers, social/LinkedIn, GTV/speaker collateral, and other approved surfaces. This phase may also extract remaining presentation/tool routes into a cleaner app boundary if doing so materially reduces coupling; it is not required merely for directory aesthetics.
+After Portfolio V2 is accepted, complete only the approved Phase-1 cross-output surfaces:
+
+- **Presentation adapter consolidation** — keep the mature 1920×1080 presentation runtime and PBDS presentation semantics; consolidate onto canonical PBDS/shared interaction mechanics where appropriate without redesigning historical decks.
+- **Client Document adapter** — deterministic editable DOCX/Word + fixed PDF output, including cover/title hierarchy, margins/grid, headers/footers, tables, callouts, executive-summary/recommendation patterns, imagery, co-branding and source/reference handling. One-pagers are a compact Document-adapter composition, not a separate system.
+- **LinkedIn graphics** — canonical LinkedIn post graphics and LinkedIn banners. This is a bounded Phase-1 social scope, not authorization for an unlimited social/campaign asset factory.
+- **Diagram Gallery** — a bounded reusable semantic diagram/data-visualization gallery for web, presentation and client-document consumers. Promote shared mechanics/patterns where reuse is proven; do not build an exhaustive illustration subsystem.
+
+Broader GTV/speaker collateral, generic social/campaign expansion and future branded surfaces are Phase 2 / demand-driven.
+
+### PBDS-7 — reduced completion proof + successor handoff
+
+PBDS completes after one reduced cold-AI determinism proof across exactly three representative output families:
+
+1. **Web** — Portfolio V2 composition through the web adapter.
+2. **Presentation** — representative PBDS presentation composition through the presentation adapter.
+3. **Client Document** — representative client-facing document composition through the document adapter.
+
+The cold agent receives canonical PBDS sources only and must not require historical chats, bespoke aesthetic coaching, manually supplied brand values or random prior screenshots. LinkedIn graphics/banners and the Diagram Gallery remain required Phase-1 shipped capabilities but are not additional cold-test gates.
+
+Record the reusable architecture concisely as:
+
+`Foundation → Output Adapter → Semantic Pattern → Implementation`
+
+After PBDS-7 PASS, PBDS is complete and the Bytalos Design System starts immediately. Reuse the PBDS system architecture/operating model, not Jim-specific brand expression.
 
 ## 11. Accessibility
 
@@ -402,7 +425,9 @@ PBDS-HOST ✅
 → PBDS-FREEZE-B / Cold-Run Proof
 → PBDS-INT / Shared Interaction Consolidation
 → PBDS-5 / Clean Portfolio V2 App + Pilot + Rollout
-→ PBDS-6 / Cross-channel expansion
+→ PBDS-6 / Presentation + Client Documents + LinkedIn Graphics/Banners + Diagram Gallery
+→ PBDS-7 / Three-output cold proof + successor handoff
+→ BYT-DS1 / Bytalos Design System
 ```
 
 No production website migration is part of PBDS-FREEZE-A or PBDS-FREEZE-B.
