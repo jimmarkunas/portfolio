@@ -154,38 +154,33 @@ All reusable PBDS assets should bind through the approved token hierarchy rather
 
 The large AI handoff is a compiled mirror, not a source of truth. It must be rebuilt only after PBDS foundations/components stabilize. Until then, any legacy AI handoff that conflicts with current Figma foundations is non-authoritative.
 
-## 7. Production package direction
+## 7. Production application + package direction
 
-The target production boundary is a dedicated package, modeled after Bytalos:
+**Jim override — October 7, 2026:** Portfolio V2 is a **clean application boundary**, not a refactor of the bloated V1 application. The earlier in-place/strangler assumption is superseded.
+
+Target migration shape:
 
 ```text
 portfolio/
+├── apps/
+│   └── portfolio-v2/            # clean public-site application
 ├── packages/
-│   └── design-system/
-│       ├── package.json
-│       ├── README.md
-│       ├── tailwind.preset.ts        # only if still justified by final architecture
-│       └── src/
-│           ├── index.ts
-│           ├── tokens/
-│           │   ├── primitives.ts
-│           │   ├── semantic.ts
-│           │   ├── components.ts
-│           │   └── index.ts
-│           ├── brand/
-│           ├── typography/
-│           ├── layout/
-│           ├── components/
-│           ├── patterns/
-│           ├── motion/
-│           ├── icons/
-│           └── styles.css
-└── current portfolio application
+│   ├── pbds/                    # working name; F7.1 freezes final package/API
+│   └── interactive/             # shared cross-output interaction mechanics
+├── src/                         # existing V1 application during migration only
+└── current presentation/tool routes remain legacy consumers until explicitly extracted
 ```
 
-The package name is intentionally not locked yet. Naming is an implementation detail to resolve before PBDS-5.
+The exact package names are finalized at PBDS-FREEZE F7.1, but these ownership boundaries are now locked:
 
-The current portfolio application does **not** need to be moved into `apps/web` merely to imitate Bytalos. The architectural requirement is the design-system dependency boundary, not directory aesthetics. A workspace/monorepo restructure should happen only if a real second application or package boundary makes it useful.
+- **Portfolio V2 app:** public portfolio composition, routing, SEO, web-specific page behavior and web adapter use.
+- **PBDS package:** global brand foundations, tokens, reusable components/patterns and semantic motion intent.
+- **Interactive package:** reusable mechanics proven to have more than one consumer, such as animation clock/visibility/reduced-motion behavior, path/particle motion, Flow Signal mechanics, globe/scene engines where reuse is real, and other cross-output interaction infrastructure.
+- **Presentation runtime:** remains a distinct output adapter with its 1920×1080 logical-plane rules. It may consume PBDS and shared interaction mechanics without becoming the Portfolio app or forcing web behavior onto slides.
+
+Portfolio V2 **must not import V1 UI, V1 styles, V1 page composition, V1 motion wrappers or V1 runtime architecture**. V1 may be consulted as a behavioral/content/evidence source. Typed content, source assets and proven interactive mechanics may be deliberately migrated or extracted through explicit seams.
+
+The new app should stay low-context and composable: thin routes, bounded feature/page assemblies, typed content, PBDS-owned shared visual primitives, and no page-local design system.
 
 ## 8. Portfolio V2 rule
 
@@ -195,29 +190,42 @@ The intended flow is:
 
 ```text
 approved Figma foundation
-→ PBDS token/component contract
-→ production design-system package
-→ V2 component composition
-→ V2 pages
+→ PBDS token/component/pattern contract
+→ shared PBDS + interaction packages
+→ clean Portfolio V2 app
+→ public portfolio routes
 ```
 
-Page code may own page-specific composition, content, SEO, route behavior, and genuinely local business logic. It may not fork brand tokens or recreate a shared component that PBDS already owns.
+Page code may own page-specific composition, content, SEO, route behavior and genuinely local interaction composition. It may not:
 
-## 9. V1 preservation and migration rule
+- fork brand tokens;
+- recreate shared PBDS components;
+- create a second motion/interaction engine when the shared interaction package already owns the mechanic;
+- import legacy V1 presentation/site UI merely because it already exists.
 
-The current portfolio remains production authority until PBDS-5.
+For content migration, prefer a deliberate typed seam. Temporary duplication during a bounded migration is allowed only when its source/target and deletion point are explicit; do not create two permanent content authorities.
 
-Before PBDS-5:
+## 9. V1 preservation, parallel-build and cutover rule
 
-- do not migrate current production colors, typography, or components merely because PBDS V2 exists in Figma;
-- do not restructure the current application into a monorepo;
-- do not create a parallel live V2 application;
-- do not add a second production token system alongside V1;
-- do not replace V1 components piecemeal.
+The current V1 portfolio remains the public production authority until the V2 acceptance gate passes.
 
-At PBDS-5, migration begins with one bounded pilot consumer and then expands only after acceptance.
+Before cutover:
 
-Git owns history. When a PBDS replacement is accepted, superseded live implementation should be removed rather than retained indefinitely as a second active path.
+- build `apps/portfolio-v2` in parallel as a clean application;
+- keep it preview/non-production while PBDS-FREEZE and PBDS-5 acceptance are incomplete;
+- do not progressively mutate V1 into V2;
+- do not import V1 UI/runtime code into V2;
+- preserve production presentation/tool routes while the new public-site app is being built.
+
+The static publish boundary may temporarily compose outputs from more than one application, but route ownership must be explicit and deterministic. A route-ownership manifest/build rule must prevent collisions. During migration:
+
+- V2 owns only the explicitly accepted public-site route set;
+- the legacy application may continue to supply presentation/tool routes that V2 does not own;
+- no public route may have two competing production owners;
+- once a V2 route family is accepted, the superseded V1 public-site implementation for that family is removed;
+- after all public portfolio routes have moved, remaining presentation/tool routes are either retained as a bounded app/runtime or extracted in PBDS-6; V1 public-site architecture is retired.
+
+The production deployment remains one verified static artifact and one public site. This is **not** authorization for a second public portfolio, second design system, second domain or permanent dual-site architecture.
 
 ## 10. PBDS roadmap gates
 
@@ -273,15 +281,40 @@ A rendered or screenshot-QA'd visual is not canonical merely because it exists. 
 
 Prove the machine specification from a cold start. At least two independent fresh-agent runs must consume only the canonical bootstrap and reproduce the bounded PBDS specimen without relying on prior chat context or invention. Material divergence means PBDS-FREEZE remains open.
 
-### PBDS-5 — Portfolio V2 pilot
+### PBDS-INT — Shared Interaction Consolidation
 
-Implement a bounded representative pilot only after **PBDS-FREEZE-A and PBDS-FREEZE-B both pass**. Recommended pilot scope: homepage + representative case study + site shell + one complex proof/data section.
+Before the first interactive Portfolio V2 sections are accepted, inventory the current interaction families across portfolio + presentations and classify each as **PROMOTE SHARED / KEEP OUTPUT-LOCAL / RETIRE**.
 
-The pilot consumes PBDS rather than recreating it.
+Initial audit candidates include the existing motion reveal/metric primitives, Flow Signal/path particles, case-study RAF/canvas diagrams, globe implementations, PBDS orb/surface physics, and presentation interaction/runtime utilities.
+
+Only mechanics with at least two real consumers may enter the shared interaction package. Output adapters retain their own geometry, timing and presentation semantics. Do not build a generic animation framework merely to consolidate code.
+
+Acceptance requires at least one Portfolio V2 interaction and one presentation interaction to consume the same shared mechanic with no visual/behavioral regression and with reduced-motion/offscreen behavior preserved.
+
+### PBDS-5 — Portfolio V2 clean-app pilot + rollout
+
+Implementation begins only after **PBDS-FREEZE-A and PBDS-FREEZE-B both pass**.
+
+Pilot scope remains:
+
+- clean Portfolio V2 app scaffold;
+- site shell;
+- homepage;
+- Fusion92 / CORE CMS representative case study;
+- Modere complex proof/data section;
+- representative shared-interaction proof;
+- deterministic preview/build/deploy acceptance.
+
+After the pilot passes, continue the V2 app by template/page family rather than mutating V1. Portfolio V1 remains public until the accepted V2 route set is ready for deterministic production ownership.
+
+Two explicit new case-study deliverables are part of the Portfolio V2 rollout:
+
+- **Domestika / Awwwards case study** — source-backed portfolio case study using the existing career/GTV evidence; exact narrative and proof must come from canonical evidence rather than memory.
+- **Bytalos case study** — source-backed case study of the current Bytalos product/company work using canonical Bytalos business/product/design-system/repository evidence; no unsupported metrics or retrospective claims.
 
 ### PBDS-6 — cross-channel rollout
 
-After the architecture and pilot are accepted, extend the same PBDS system to presentations, one-pagers, social/LinkedIn, GTV/speaker collateral, and other approved surfaces.
+After the architecture and Portfolio V2 pilot are accepted, extend the same PBDS system to presentations, one-pagers, social/LinkedIn, GTV/speaker collateral, and other approved surfaces. This phase may also extract remaining presentation/tool routes into a cleaner app boundary if doing so materially reduces coupling; it is not required merely for directory aesthetics.
 
 ## 11. Accessibility
 
@@ -367,7 +400,9 @@ Current sequence:
 PBDS-HOST ✅
 → PBDS-FREEZE-A / Machine Specification
 → PBDS-FREEZE-B / Cold-Run Proof
-→ PBDS-5 / Portfolio V2 Pilot
+→ PBDS-INT / Shared Interaction Consolidation
+→ PBDS-5 / Clean Portfolio V2 App + Pilot + Rollout
+→ PBDS-6 / Cross-channel expansion
 ```
 
 No production website migration is part of PBDS-FREEZE-A or PBDS-FREEZE-B.
