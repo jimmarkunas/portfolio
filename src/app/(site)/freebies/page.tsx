@@ -72,7 +72,7 @@ export default function FreebiesPage() {
                             <span>Open toolkit on GitHub</span>
                             <ArrowUpRight className="ml-2 inline h-4 w-4" aria-hidden="true" />
                           </TrackedExternalLink>
-                        ) : asset.fileName ? (
+                        ) : "fileName" in asset && asset.fileName ? (
                           <FreebiesDownloadButton href={asset.href} title={asset.title} fileName={asset.fileName} />
                         ) : null}
                       </div>
