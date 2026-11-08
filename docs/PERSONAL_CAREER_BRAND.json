@@ -4,8 +4,8 @@
   "status": "IN_PROGRESS",
   "last_approved_date": "2026-10-02",
   "authority": {
-    "canonical_source": "Notion: Personal Career Brand",
-    "notion_url": "https://app.notion.com/p/2dc3c5a059268011b6f6e6fad2cbe7a3?pvs=204",
+    "canonical_source": "Notion: Product Requirements, Career Brand Canon (personal-career-brand/v1)",
+    "notion_url": "https://app.notion.com/p/4123c5a0592681aea884fca51ae7587a",
     "github_projection": "docs/PERSONAL_CAREER_BRAND.json",
     "rule": "Notion is authoritative. GitHub is a deterministic machine-readable projection and must not override Notion."
   },
